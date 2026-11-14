@@ -33,14 +33,29 @@ lake). Currency note: EUR figures use the dossier's assumed **≈ 185 ETB per EU
 - [nature.access] A small park next to the fish market charged Br50 (2020); monkeys at lakeside resorts may steal food. — Wikivoyage "Awasa", accessed 2026-11-14, blog (travel wiki), confidence: low
 - [other] Hawassa became capital of the new Sidama region in June 2020 and still hosts the former southern region's seat for two electoral cycles; population ~577,000 (2023 estimate). — Wikipedia "Hawassa", accessed 2026-11-14, intl-media (encyclopaedia), confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Blog market prices: tilapia US$2–3/kg (≈ Br322–483 ≈ €1.74–2.61), chicken US$3/kg (≈ €2.61), beef US$4–5/kg, rice US$0.80/kg, teff US$1.50/kg (≈ Br242 ≈ €1.31), injera pack US$0.50–1, 30 eggs US$2.50 (≈ €2.18), milk US$0.60/L (≈ €0.52). — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.living] The same blog puts a single person's groceries at US$90/month (≈ Br14,500 ≈ €78), half its Addis figure of US$180. — OpenShores, 2026-04-13, blog, confidence: low ✎ spot-check 2026-11-14: corrected (source gives US$50/month economy and US$90/month comfort, not a single US$90 figure)
+- [daily.transport] Blog fares: bajaj US$0.20–0.50 (≈ Br32–81 ≈ €0.17–0.44), minibus US$0.10–0.20, taxi in town US$1–2 (≈ €0.87–1.74), coach to Addis US$6–10 (≈ Br966–1,610 ≈ €5.2–8.7); it gives fuel at US$0.85/L (≈ €0.74). — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.living] National fuel tracker: petrol Br166/L (≈ €0.90), diesel Br179/L (≈ €0.97), kerosene Br318/L (≈ €1.72); national figure, local pump prices not checked. — DailyFuels, 2026-11-14, company, confidence: medium
+- [cost.living] Blog monthly bills: electricity US$5–15 (≈ Br805–2,415 ≈ €4.35–13), water US$2–5, cooking gas US$3–6, internet US$10–20 (≈ €8.7–17.4). — OpenShores, 2026-04-13, blog, confidence: low
+- [health.care] Blog: GP visit US$5–15 (≈ €4.35–13), specialist US$15–35 (≈ Br2,415–5,635 ≈ €13–30.5), private insurance US$20–60/month (≈ €17.4–52), common medicines US$2–8. — OpenShores, 2026-04-13, blog, confidence: low
+- [family.schools] Blog: local private school US$100–400/year (≈ Br16,100–64,400 ≈ €87–348); public school described as nearly free; no international school fees given. — OpenShores, 2026-04-13, blog, confidence: low
+- [social.food] Blog: local injera-and-fish meal US$1–2 (≈ €0.87–1.74), mid-range restaurant US$3–7, lakeside restaurant US$5–12 (≈ €4.35–10.4), local beer US$0.50–1, macchiato US$0.20–0.40. — OpenShores, 2026-04-13, blog, confidence: low
+- [social.sport] Blog: gym US$10–20/month (≈ Br1,610–3,220 ≈ €8.7–17.4), cinema US$1–3, lake boat trip US$3–8 (≈ €2.6–7). — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.negotiation] At the fish market, guides push their services at a "very high" asking price; hiring one is not required, and haggling with them is described as stressful (listing updated Feb 2020). — Wikivoyage "Awasa", accessed 2026-11-14, blog (travel wiki), confidence: low
+
 ## Gaps
+
 - No local-media rent survey in birr; only one blog with unexplained dollar ranges.
 - No dated women's-safety, crime or racism source for Hawassa; FCDO does not mention the city.
 - Expat.com "Moving to Hawassa" thread had no replies visible; related threads not read.
 - UNDP stories on Hawassa flooding (seen in search, pages 403) and the 2026 lakefront project (Fana, seen in search only) were not read.
 - Internet quality, water supply, schools for foreign children, diaspora presence and salaries not found.
+- Price top-up 2026-11-14 (web-search budget exhausted, known pages only): the livingcost.org Hawassa page returned 404. Not found — birr rents by neighbourhood, sale prices, advance/deposit custom, mobile data price, ride-hailing, and any source on rent bargaining or foreigner prices beyond fish-market guides.
 
 ## Sources read
+
 1. Coût de la vie à Hawassa — https://www.openshores.co/blog/ethiopie/hawassa/cout-de-la-vie-a-hawassa — blog — 2026-04-13, read 2026-11-14
 2. Hawassa — https://en.wikipedia.org/wiki/Hawassa — encyclopedia — accessed 2026-11-14
 3. Awasa — https://en.wikivoyage.org/wiki/Awasa — travel wiki — accessed 2026-11-14
@@ -52,3 +67,9 @@ lake). Currency note: EUR figures use the dossier's assumed **≈ 185 ETB per EU
 9. Ethiopia travel advice: regional risks — https://www.gov.uk/foreign-travel-advice/ethiopia/regional-risks — official — read 2026-11-14
 10. Ethiopia travel advice: health — https://www.gov.uk/foreign-travel-advice/ethiopia/health — official — read 2026-11-14
 11. Moving to Hawassa (forum thread) — https://www.expat.com/en/forum/africa/ethiopia/1080024-moving-to-hawassa.html — forum — ~2024, read 2026-11-14
+12. Ethiopia fuel prices — https://dailyfuels.com/ethiopia/ — company — updated 2026-11-14, read 2026-11-14
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Blog market prices: tilapia — supported
+- [cost.living] The same blog puts a single person's groceries — corrected

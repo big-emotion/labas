@@ -106,7 +106,37 @@ worth when published; older items are flagged by date.
 - [daily.transport] A 2010 Toyota Hilux double cab (manual) is listed at 8,300,000 birr (≈ €44,900) plus 2 % commission: second-hand vehicles are very expensive in Ethiopia relative to rents. — same group 2026-11-14, social-caption, confidence: medium
 - [cost.negotiation] 2 of 7 priced posts in the Addis housing group say "negotiable" (a Bole rental and a Bole sale); several posts are in Amharic and mix bank-loan and cash prices. — same group 2026-11-14 (n=7 priced out of 30), social-caption, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Local-media asking rents in early 2025: a 4-bed in Bole Bulbula listed at Br100,000/month (≈ €541), 3-bed units in Bole, Megenagna and CMC Br85,000 (≈ €459), basic villas at least Br150,000 (≈ €811), run-down old villas in Ayat at least Br60,000 (≈ €324). — Addis Fortune, 2025-02-23, local-media, confidence: medium
+- [cost.rent] The same report puts subsidised 4-bed condominiums near prime areas at Br35,000–40,000/month (≈ €189–216) and says middle earners make about Br8,000–15,000/month (≈ €43–81). — Addis Fortune, 2025-02-23, local-media, confidence: medium
+- [cost.rent] A relocation blog's 1-bed ranges by area: Bole US$350–500 (≈ Br56,400–80,500 ≈ €305–435), Kazanchis US$280–400 (≈ €244–348), CMC/Summit US$220–350 (≈ €191–305), periphery US$150–250 (≈ €131–218); Bole villas US$1,200–3,000 (≈ €1,044–2,610). No method stated. — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.rent] An Addis property agency quotes expat-grade rents of US$300–800 for a studio or 1-bed (≈ Br48,300–128,800 ≈ €261–696) and US$600–1,500 for a 2-bed (≈ €522–1,305); furnished units cost 20–30 % more; Bole serviced flats US$40–70 a day (≈ €35–61). — Ethiopian Properties blog, 2026-02-27, company, confidence: low
+- [cost.rent] A cost aggregator (partly crowdsourced, modelled) gives a 40 m² 1-bed in the centre at US$632/month (≈ Br101,800 ≈ €550), a cheap one at US$431 (≈ €375), and an 80 m² 3-bed at US$1,134 (≈ €987). — livingcost.org, updated 2026-06-21, company, confidence: low
+- [housing.search] Advance rent is the main upfront cost: an agency says many contracts require 6 months to 2 years paid in advance; a 2026 relocation blog says 6–12 months; a 2025 tenant paid three months ahead. — Ethiopian Properties blog 2026-01-23 / OpenShores 2026-04-13 / Addis Fortune 2025-02-23, company/blog/local-media, confidence: medium
+- [housing.search] Some lease deals include a non-refundable "goodwill" payment to the outgoing tenant or the agent to secure the flat. — Ethiopian Properties blog, 2026-01-23, company, confidence: low
+- [housing.search] Agency commission is described as half to a whole month's rent; a 2022 report said condominium brokers took 10–20 % of the amount paid; an old forum post (about 2011) said one month for a 12-month lease, half for 6 months. — Ethiopian Properties blog 2022-12-24 / The Reporter 2022-06-04 / expat.com forum, company/local-media/forum, confidence: low
+- [cost.negotiation] Rent is described as negotiable, especially on long leases; offering more months in advance is the usual lever. — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.negotiation] An agreed price is not always final: in 2025 a landlady raised an agreed Br60,000 rent to Br85,000 (≈ €324 → €459) on move-in day, after three months had been prepaid; tenants say they fear eviction if they push back. — Addis Fortune, 2025-02-23, local-media, confidence: medium
+- [cost.negotiation] There is a two-tier market: expat-area rents are "almost exclusively quoted in US Dollars", and owners are said to price for expatriates and high earners rather than local incomes. — Ethiopian Properties blog 2026-01-23 / Addis Fortune 2025-02-23, company/local-media, confidence: medium
+- [cost.negotiation] Rents and school fees quoted in dollars do not fall when the birr weakens; one guide advises getting the currency written into the contract. — The Rio Times, 2026-11-09, intl-media, confidence: medium
+- [cost.negotiation] At Merkato and Shiro Meda haggling is the norm; foreigners, especially of European ancestry, should expect higher opening prices, and a local friend helps get lower ones. — Wikivoyage "Addis Ababa", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [cost.negotiation] Hotels often open with a "faranji" (foreigner) price said to be often twenty times the local rate; bargaining works but rarely reaches the local price; state hotels and big chains have fixed foreigner rates. — Wikivoyage "Ethiopia", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [cost.negotiation] Official foreigner pricing exists: Unity Park charges non-Ethiopians US$20 (≈ Br3,220 ≈ €17.4) and the National Palace US$10–25; the Ethnological Museum lists Br250 (≈ €1.35) for foreigners (undated). — Wikivoyage "Addis Ababa", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [daily.transport] Ride-hailing apps (Ride, Feres, Little, Yango) compete hard and the wiki advises comparing prices across apps before booking; street taxis are best avoided without Amharic. — Wikivoyage "Addis Ababa", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [daily.transport] A 2026 blog puts a blue taxi trip at US$1–3 (≈ Br161–483 ≈ €0.87–2.61) and a Ride/ZayRide trip at US$2–6 (≈ €1.74–5.22); the aggregator gives US$3.81 for 8 km (≈ €3.31) and US$11.30 for a monthly pass (≈ €9.83). — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [daily.transport] The wiki says light-rail fares start at Br10 (≈ €0.05, undated), which conflicts with the Oct 2024 tariff of Br2–6 already noted. — Wikivoyage "Addis Ababa", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [cost.living] Kerosene is Br318/L (≈ €1.72); the petrol price in dollars is about 15 % higher than in the first week of 2026. — DailyFuels, 2026-11-14, company, confidence: medium
+- [cost.living] Blog staple prices: injera pack of 10 US$1–2 (≈ €0.87–1.74), teff US$1.50–2.50/kg (≈ €1.31–2.18), rice US$1/kg, chicken US$4/kg (≈ €3.48), 30 eggs US$3.50 (≈ Br564 ≈ €3.05), milk US$0.80/L, cooking oil US$2–3/L (≈ €1.74–2.61); a single person's groceries about US$180/month (≈ €157). — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.living] The aggregator gives higher supermarket-style prices: milk US$1.12/L (≈ €0.97), 500 g bread US$1.20, rice US$2.16/kg (≈ €1.88), 12 eggs US$1.75 (≈ €1.52), chicken breast US$11.10/kg (≈ Br1,790 ≈ €9.66). — livingcost.org, 2026-06-21, company, confidence: low
+- [cost.living] Monthly bills per the blog: electricity US$10–25 (≈ €8.7–21.8), water US$3–8, cooking gas US$5–10, home internet US$15–30 (≈ €13–26); the aggregator instead gives US$108 for one person's utilities (≈ €94) and US$95.70 for 50 Mbps internet (≈ €83). — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [health.care] Blog health prices: GP visit US$10–25 (≈ Br1,610–4,025 ≈ €8.7–21.8), specialist US$25–60, private insurance US$40–120/month (≈ €35–104), dental visit US$15–50; the aggregator's US$128 doctor's visit (≈ €111) is far higher. — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [family.schools] Blog fee ranges: local private school US$200–1,000/year (≈ €174–870), international schools US$5,000–20,000 (≈ €4,350–17,400), Lycée Guebre-Mariam US$3,000–8,000 (≈ €2,610–6,960); not from the schools themselves. The aggregator gives US$30,429 for an international primary year and US$127/month for preschool. — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [social.food] Eating out per the blog: local injera meal US$1.50–3 (≈ Br242–483 ≈ €1.31–2.61), mid-range restaurant US$6–12, international place in Bole US$12–25 (≈ €10.4–21.8), macchiato US$0.30–0.80, local beer US$0.80–1.50 (≈ €0.70–1.31). — OpenShores, 2026-04-13, blog, confidence: low
+- [social.culture] Cinema US$2–5 (≈ €1.74–4.35) and gym US$20–50/month (≈ €17.4–43.5) per the blog; the aggregator gives US$3.76 and US$44.10. — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [business.invest] An agency cites nominal price growth of 12–18 % a year on the Gerji–Bole (Jacros) axis and says foreign firms cannot own land but can take long leases. — Ethiopian Properties blog, 2026-02-27, company, confidence: low
+
 ## Gaps
+
 - Salaries: no dated local salary survey for Addis (professional, teacher, nurse) was found; only tax rules and a 2023 teacher anecdote.
 - Rent: no neighbourhood-by-neighbourhood survey in birr from a reliable 2026 source; Expatistan (Br78,247 for 85 m² "normal area") was seen only as a search snippet (page 403), not read.
 - Ride-hailing 2026 fares, Feres base fare (Addis Insight Mar 2025) and the APA fuel article were seen only in search results (pages not read or 403).
@@ -120,8 +150,12 @@ worth when published; older items are flagged by date.
 - Search budget ran out twice during this pass, so several leads (telebirr agent fees, gyms, coworking prices, nightlife prices) were not followed.
 <!-- social-pass gaps 2026-11-14 -->
 - No Addis newcomer account with real audience (confirmed in instagram-accounts.md). Bahir Dar: nothing found.
+- Price top-up 2026-11-14: the session's web-search budget ran out after one query, so this pass fetched known pages only. Numbeo (HTTP 429), the ICS website (DNS error), the Ethio Telecom broadband page (connection refused) and Addis Fortune tag pages (HTTP 502) could not be read.
+- Price top-up: not found — official electricity and water tariffs in birr, an Ethio Telecom fibre price list, 2026 Feres/Yango/inDrive fares, club entry and concert prices, official Lycée Guebre-Mariam and ICS fees, and any dated sale price per m² beyond the one social-media caption.
+- Price top-up: no source quantified a typical discount (percentage knocked off) on rent, taxis or market goods; the dollar-price figures for staples, health and schools come only from a blog and a modelled aggregator, and they conflict with each other.
 
 ## Sources read
+
 1. Ethiopia cost of living for expats 2026 — https://www.riotimesonline.com/ethiopia-cost-of-living-expats-2026/ — intl-media — 2026-11-09, read 2026-11-14
 2. Ethiopia travel advice (summary) — https://www.gov.uk/foreign-travel-advice/ethiopia — official — 2026-10-30, read 2026-11-14
 3. Ethiopia travel advice: safety and security — https://www.gov.uk/foreign-travel-advice/ethiopia/safety-and-security — official — read 2026-11-14
@@ -164,13 +198,31 @@ worth when published; older items are flagged by date.
 40. Foreign nationals face skyrocketing fees, unyielding regulations — https://addisfortune.news/?p=38050 — local-media — 2024-12-29, read 2026-11-14
 41. Ethiopia introduces new immigration fees, launches $10,000 golden visa — https://addisinsight.net/2026/03/11/ethiopia-introduces-new-immigration-fees-launches-10000-golden-visa/ — local-media — 2026-03-11, read 2026-11-14
 42. LGBT rights in Ethiopia — https://en.wikipedia.org/wiki/LGBT_rights_in_Ethiopia — encyclopedia — accessed 2026-11-14
+43. Cost of living in Addis Ababa — https://livingcost.org/cost/ethiopia/addis-ababa — company — updated 2026-06-21, read 2026-11-14
+44. Coût de la vie à Addis-Abeba en 2026 — https://www.openshores.co/blog/ethiopie/addis-abeba/cout-de-la-vie-a-addis-abeba — blog — 2026-04-13, read 2026-11-14
+45. The definitive 2026 guide to expatriate real estate in Addis Ababa — https://www.ethiopianproperties.com/?p=11676 — company — 2026-02-27, read 2026-11-14
+46. The evolving rental housing market of Addis Ababa — https://www.ethiopianproperties.com/?p=11651 — company — 2026-01-23, read 2026-11-14
+47. How to find house for rent in Addis Ababa easily — https://www.ethiopianproperties.com/?p=10408 — company — 2022-12-24, read 2026-11-14
+48. Renting a house or any type of property in Addis Ababa — https://www.ethiopianproperties.com/?p=4174 — company — 2018-02-12, read 2026-11-14 (no usable figures)
+49. Soaring rent crisis pushes residents to the brink — https://addisfortune.news/soaring-rent-crisis-pushes-residents-to-the-brink — local-media — 2025-02-23, read 2026-11-14
+50. City runs out of houses to rent, no solution in sight — https://www.thereporterethiopia.com/?p=24030 — local-media — 2022-06-04, read 2026-11-14
+51. Looking to rent 3 br house in ET in Sept (forum thread) — https://www.expat.com/en/forum/africa/ethiopia/addis-ababa/71264-looking-to-rent-3-br-house-in-et-in-sept.html — forum — about 2011 (relative dates only), read 2026-11-14
 
 - Social pass: Facebook "Addis Ababa Expats Housing for Rent/Sale" (580138222864976) — chronological feed, 30 posts, 2026-11-14
 - Social pass: Instagram @eventinaddis — 5 posts (pinned + latest), 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.rent] Furnished 1-bed in Bole asked US$700 — supported
 - [safety.general] FCDO reports rising mugging and crime — supported
 - [safety.general] FCDO (updated 30 Oct 2026) does not advise against Addis itself — supported
 - [safety.women] In a 2023 study, 65 % of women — unsupported
 - [rights.lgbt] Same-sex acts are illegal (1–15 years per FCDO) — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Kerosene is Br318/L — supported
+- [cost.negotiation] Official foreigner pricing exists — supported
+- [daily.transport] The wiki says light-rail fares — supported
+- [cost.negotiation] At Merkato and Shiro Meda haggling — supported
+- [cost.negotiation] Rents and school fees quoted in dollars — supported

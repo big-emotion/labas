@@ -35,13 +35,26 @@ the Addis–Djibouti line, hot and majority Muslim). Currency note: EUR figures 
 - [nature.access] Harar is about an hour away by shared minibus, which leaves when full. — Wikivoyage "Dire Dawa", accessed 2026-11-14, blog (travel wiki), confidence: low
 - [other] Population about 600,000 for the chartered city (2025 estimate), 277,000 in the city proper. — Wikipedia "Dire Dawa", accessed 2026-11-14, intl-media (encyclopaedia), confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] A cost aggregator (modelled, partly crowdsourced) gives a 40 m² 1-bed in the centre at US$582/month (≈ Br93,700 ≈ €506) and a cheap one at US$389 (≈ €338), roughly three times the blog's ranges above; its US$99.90 centre 3-bed looks like a data error. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [cost.living] Blog market prices: rice US$0.70/kg (≈ Br113 ≈ €0.61), teff US$1.30/kg (≈ €1.13), chicken US$3/kg (≈ Br483 ≈ €2.61), beef US$4.50/kg, 30 eggs US$2.50 (≈ €2.18), milk US$0.60/L (≈ €0.52); groceries about US$100/month (≈ €87). — OpenShores, 2026-04-13, blog, confidence: low
+- [daily.transport] Blog fares: bajaj US$0.20–0.50 (≈ Br32–81 ≈ €0.17–0.44), minibus US$0.10–0.20, taxi US$1–2 (≈ €0.87–1.74), bus to Harar US$1–2, train to Addis US$10–20 (≈ Br1,610–3,220 ≈ €8.7–17.4), flight to Addis US$50–80 (≈ €43.5–69.6). — OpenShores, 2026-04-13, blog, confidence: low
+- [cost.living] Blog monthly bills: electricity US$5–15 (≈ €4.35–13), water US$2–5, cooking gas US$3–6, internet US$10–20 (≈ Br1,610–3,220 ≈ €8.7–17.4). The aggregator gives US$103 for one person's utilities and US$90.30 for 50 Mbps internet (≈ €90 and €79). — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [health.care] Blog: GP visit US$5–15 (≈ Br805–2,415 ≈ €4.35–13), specialist US$15–30, local health insurance US$15–50/month (≈ €13–43.5); the aggregator's doctor's visit is US$131 (≈ €114), likely modelled. — OpenShores 2026-04-13 / livingcost.org 2026-06-21, blog/company, confidence: low
+- [social.food] Blog: local injera meal US$1–2 (≈ €0.87–1.74), mid-range restaurant US$3–7, macchiato US$0.20–0.35, local beer US$0.50–1 (≈ Br81–161 ≈ €0.44–0.87). — OpenShores, 2026-04-13, blog, confidence: low
+- [social.culture] Aggregator: cinema US$3.89 (≈ €3.38), gym US$43.40/month (≈ Br6,990 ≈ €37.8), 8 km taxi US$3.84; it lists petrol at US$0.61/L, well below the national pump price. — livingcost.org, 2026-06-21, company, confidence: low
+- [cost.living] National fuel tracker: petrol Br166/L (≈ €0.90), diesel Br179/L (≈ €0.97), kerosene Br318/L (≈ €1.72); national figure, local pump prices not checked. — DailyFuels, 2026-11-14, company, confidence: medium
+
 ## Gaps
+
 - No local-media rent or salary data; only one blog with unexplained dollar ranges.
 - No dated women's-safety, crime-in-town, LGBT-specific or racism source for Dire Dawa.
 - Current 2026 train fares not found (only the 2018 tariff); internet speed, schools, private clinics and diaspora presence not found.
 - Somali-Oromo tensions: no 2025–2026 report on unrest inside the city beyond the RVI study and the Oct 2025 police claim.
+- Price top-up 2026-11-14 (web-search budget exhausted, known pages only): not found — birr rents by neighbourhood, sale prices, advance/deposit custom, school fees, ride-hailing, mobile data price, and any source on bargaining or foreigner prices in Dire Dawa (Wikivoyage and OpenShores say nothing on negotiation).
 
 ## Sources read
+
 1. Coût de la vie à Dire Dawa — https://www.openshores.co/blog/ethiopie/dire-dawa/cout-de-la-vie-a-dire-dawa — blog — 2026-04-13, read 2026-11-14
 2. Urban contestation in Dire Dawa city — https://riftvalley.net/?p=7886 — academic — 2025, read 2026-11-14
 3. Dire Dawa Free Trade Zone — https://en.wikipedia.org/wiki/Dire_Dawa_Free_Trade_Zone — encyclopedia — accessed 2026-11-14
@@ -55,8 +68,16 @@ the Addis–Djibouti line, hot and majority Muslim). Currency note: EUR figures 
 11. Ethiopia travel advice (summary) — https://www.gov.uk/foreign-travel-advice/ethiopia — official — 2026-10-30, read 2026-11-14
 12. Ethiopia travel advice: regional risks — https://www.gov.uk/foreign-travel-advice/ethiopia/regional-risks — official — read 2026-11-14
 13. Ethiopia travel advice: health — https://www.gov.uk/foreign-travel-advice/ethiopia/health — official — read 2026-11-14
+14. Cost of living in Dire Dawa — https://livingcost.org/cost/ethiopia/dire-dawa — company — updated 2026-06-21, read 2026-11-14
+15. Ethiopia fuel prices — https://dailyfuels.com/ethiopia/ — company — updated 2026-11-14, read 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Police said in October 2025 they killed 43 OLA fighters — supported
 - [daily.water] Hotel owners said they pay over Br5,000 — supported
 - [cost.living] The same blog puts a single person's budget at US$209–403 — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] A cost aggregator gives a 40 m² 1-bed — supported
+- [daily.transport] Blog fares: bajaj — supported
