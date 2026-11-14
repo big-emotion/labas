@@ -31,12 +31,31 @@ Extra city (dossier heading "Takoradi (Sekondi-Takoradi) — added: oil & gas jo
 - [other] Several restaurants, supermarkets and shopping centres have opened in recent years (undated). — Expat.com Takoradi guide, 2025-12-12, blog, confidence: low
 - [other] Sekondi-Takoradi, capital of the Western Region, has about 800,000 inhabitants (undated). — Expat.com Takoradi guide, 2025-12-12, blog, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] meQasa lists 19 houses for sale in Takoradi: average asking price GHS 9.07 million (≈ €648,000), from GHS 280,000 to 38.7 million (≈ €20,000–2.76 million); small sample. Asking prices. — meQasa houses for sale in Takoradi, accessed 2026-11-14, company, confidence: low
+- [cost.rent] Livingcost gives a city-centre 1-bed at $235/month (≈ €201) and an apartment purchase price of $6,144/m² (≈ €5,265); partly crowdsourced. — Livingcost Sekondi-Takoradi, updated 2026-06-21, company, confidence: low
+- [cost.rent] Expat.com says agency fees are typically 10% of the annual rent, paid by the tenant, refundable deposits run 1–3 months, and two years upfront is the usual advance; paying yearly can cost 10–15% more (Ghana-wide). — Expat.com FR Takoradi guide, updated 2025-12-12, blog, confidence: low
+- [cost.rent] Expat.com says villas in secondary cities sell for about $80,000–200,000 (≈ €68,600–171,400), leasehold only for non-citizens. — Expat.com FR Takoradi guide, 2025-12-12, blog, confidence: low
+- [cost.negotiation] Expat.com says local market prices can be bargained; it says nothing on taxi haggling in Takoradi. — Expat.com FR Takoradi guide, 2025-12-12, blog, confidence: low
+- [cost.negotiation] Wikivoyage's Ghana page suggests opening at a third of the asking price in markets and says taxi drivers often quote foreigners 1.5–3 times the local fare, while trotro fares are fixed (national, undated). — Wikivoyage Ghana, accessed 2026-11-14, blog, confidence: low
+- [cost.living] CityCost (Nov 2026): white bread 500 g GHS 12.39 (≈ €0.89), rice GHS 19.83/kg (≈ €1.42), chicken fillets GHS 54.10/kg (≈ €3.86); its milk figure (GHS 7.86/L) looks implausible and is not used; AI- and user-generated. — CityCost Takoradi vs Cape Coast, data 2026-11-09, company, confidence: low
+- [cost.living] CityCost: budget restaurant meal GHS 102 (≈ €7.30), mid-range dinner for two GHS 606 (≈ €43), 0.5 L local draught beer GHS 22.36 (≈ €1.60). — CityCost Takoradi vs Cape Coast, 2026-11-09, company, confidence: low
+- [daily.transport] CityCost: taxi GHS 19.94 to start (≈ €1.42) plus GHS 15.22/km (≈ €1.09), one hour's waiting GHS 48.76 (≈ €3.48); petrol GHS 15.21/L. — CityCost Takoradi vs Cape Coast, 2026-11-09, company, confidence: low
+- [daily.transport] For the 1–15 Nov 2026 window Star Oil cut petrol to GHS 16.38/L (≈ €1.17) and raised diesel to GHS 18.45/L (≈ €1.32) (national). — Ghanamma, 2026-11-02, local-media, confidence: medium
+- [daily.transport] Accra–Takoradi VIP coach: GHS 150 executive (≈ €10.70), GHS 120 standard (≈ €8.60); car hire in Takoradi GHS 700–2,000+/day (≈ €50–143) depending on vehicle and driver. Undated. — Wikivoyage Sekondi-Takoradi, accessed 2026-11-14, blog, confidence: low
+- [daily.internet] CityCost: mobile plan with calls and 10 GB+ data GHS 230/month (≈ €16.40), home internet 50 Mbps+ GHS 495 (≈ €35), utilities for 85 m² GHS 861 (≈ €61.50). — CityCost Takoradi vs Cape Coast, 2026-11-09, company, confidence: low
+- [family.schools] CityCost lists an international primary school at GHS 250,300/year (≈ €17,880); Livingcost gives $8,390 (≈ €7,190); the figures conflict. — CityCost 2026-11-09 / Livingcost 2026-06-21, company, confidence: low
+- [health.care] Livingcost gives a doctor's visit at $30.30 (≈ €26); Expat.com puts a private consultation at GHS 100–300 (≈ €7–21) Ghana-wide. — Livingcost 2026-06-21, company / Expat.com FR Takoradi guide 2025-12-12, blog, confidence: low
+- [social.sport] Livingcost: gym $33.60/month (≈ €28.80), cinema ticket $10.60 (≈ €9.10); partly crowdsourced. — Livingcost Sekondi-Takoradi, 2026-06-21, company, confidence: low
+
 ## Gaps
 
 - GlobalCostData Takoradi page (dossier source) returned 403, so its USD 210 1-bed and budget figures could not be re-read.
 - No local-press rent, power, water-supply (Takoradi proper), internet or traffic items found; Alliance Française Takoradi page not opened (embassy page redirected).
 - No dated women's-safety, nightlife, food, religion, diaspora or returnee material specific to Takoradi.
 - Web search budget was exhausted before Takoradi-specific searches could run.
+- Price top-up: meQasa houses for rent in Takoradi showed 0 listings (only a vague "around GH₵500" comment, not used); no local market price survey, trotro/taxi fare report or school fee page found.
+- Price top-up: no Takoradi-specific negotiation advice or quantified discount found; Wikivoyage's Takoradi page has no bargaining remarks; search budget out.
 
 ## Sources read
 
@@ -53,7 +72,19 @@ Extra city (dossier heading "Takoradi (Sekondi-Takoradi) — added: oil & gas jo
 11. Ghana – Sécurité — France Diplomatie — https://www.diplomatie.gouv.fr/fr/information-par-pays/ghana/conseils-aux-voyageurs-securite — official — 2026-11-14
 12. Ghana travel advice: Safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/ghana/safety-and-security — official — 2026-11-14
 13. Ghana anti-gay bill explained 2026 — The Rio Times — https://www.riotimesonline.com/ghana-anti-gay-bill-explained-2026/ — intl-media — 2026-11-14
+14. Houses for sale in Takoradi — meQasa — https://meqasa.com/houses-for-sale-in-takoradi — company — 2026-11-14
+15. Houses for rent in Takoradi (0 results) — meQasa — https://meqasa.com/houses-for-rent-in-takoradi — company — 2026-11-14
+16. Takoradi vs Cape Coast cost comparison — CityCost — https://citycost.org/compare/takoradi-vs-cape-coast/ — company — 2026-11-14
+17. Cost of living in Sekondi-Takoradi — Livingcost — https://livingcost.org/cost/ghana/sekondi-takoradi — company — 2026-11-14
+18. Sekondi-Takoradi — Wikivoyage — https://en.wikivoyage.org/wiki/Sekondi-Takoradi — blog — 2026-11-14
+19. Ghana — Wikivoyage — https://en.wikivoyage.org/wiki/Ghana — blog — 2026-11-14
+20. Petrol drops to GH¢16.38, diesel rises to GH¢18.45 — Ghanamma — https://www.ghanamma.com/?p=241211 — local-media — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] FCDO cites reports of criminally motivated kidnappings — supported
 - [cost.salary] Les Afriques offshore oil-and-gas range — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [daily.transport] Accra–Takoradi VIP coach — supported

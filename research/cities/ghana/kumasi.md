@@ -58,6 +58,29 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 - [rights.racism] Afrobarometer: 74% tolerant of other nationalities, 92% of other ethnicities (national). — Afrobarometer AD461, 2021-07-01, academic, confidence: high
 - [other] Metro population about 3.6 million, roughly 270 km north-west of Accra (undated). — Expat.com Kumasi guide, 2025-12-12, blog, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] meQasa lists 48 houses for sale in Kumasi: average asking price GHS 5.0 million (≈ €357,000), from GHS 750,000 to 37.9 million (≈ €53,600–2.71 million); a typical unfurnished 3-bed is about GHS 1.24 million (≈ €88,800). Asking prices. — meQasa houses for sale in Kumasi, accessed 2026-11-14, company, confidence: low
+- [cost.rent] meQasa lists only 26 Kumasi apartments for rent: average asking rent GHS 6,188/month (≈ €442), from GHS 1,600 to 15,000 (≈ €114–1,070), mostly in Asafo, Ahodwo and Daban; well above The Africanvestor's typical 1-bed. Asking prices. — meQasa apartments for rent in Kumasi, accessed 2026-11-14, company, confidence: low
+- [cost.rent] Livingcost gives a city-centre apartment purchase price of $6,571/m² (≈ €5,630), twice its Accra figure, and $3,759/m² (≈ €3,220) for suburban houses; partly crowdsourced, treat with caution. — Livingcost Kumasi, updated 2026-06-21, company, confidence: low
+- [cost.rent] Expat.com says villas in secondary cities sell for about $80,000–200,000 (≈ €68,600–171,400), and non-citizens can only buy leasehold. — Expat.com FR Kumasi guide, updated 2025-12-12, blog, confidence: low
+- [cost.rent] Expat.com's Kumasi guide says two years' rent upfront is the usual practice, agency fees are typically 10% of the annual rent paid by the tenant, and refundable deposits run 1–3 months; paying yearly can cost 10–15% more. — Expat.com FR Kumasi guide, 2025-12-12, blog, confidence: low
+- [cost.negotiation] The Africanvestor says "many Kumasi listings are negotiable" and trimmed some asking rents in its estimates for that reason; it gives no typical discount. — The Africanvestor, updated 2026-09-21, company, confidence: medium
+- [cost.negotiation] Expat.com advises negotiating lease terms and says local market prices can be bargained (no figures). — Expat.com FR Kumasi guide, 2025-12-12, blog, confidence: low
+- [cost.negotiation] Wikivoyage's Ghana page suggests opening at a third of the asking price in markets and says taxi drivers often quote foreigners 1.5–3 times the local fare, while trotro fares are fixed (national, undated). — Wikivoyage Ghana, accessed 2026-11-14, blog, confidence: low
+- [cost.living] CityCost (Nov 2026): milk GHS 21.75/L (≈ €1.55), white bread 500 g GHS 20.08 (≈ €1.43), rice GHS 19.58/kg (≈ €1.40), chicken fillets GHS 53.50/kg (≈ €3.82), about half Accra's milk and rice prices on the same site; AI- and user-generated. — CityCost Accra vs Kumasi, data 2026-11-08, company, confidence: low
+- [cost.living] CityCost: budget restaurant meal GHS 39.93 (≈ €2.85), mid-range dinner for two GHS 407 (≈ €29), 0.5 L local draught beer GHS 11.46 (≈ €0.82). — CityCost Accra vs Kumasi, 2026-11-08, company, confidence: low
+- [cost.living] Livingcost (June 2026): lunch menu $4.30 (≈ €3.70), dinner for two $36.10 (≈ €31), 0.5 L pub beer $0.82 (≈ €0.70); partly crowdsourced. — Livingcost Kumasi, updated 2026-06-21, company, confidence: low
+- [daily.transport] CityCost: taxi GHS 10.34 to start (≈ €0.74) plus GHS 15.47/km (≈ €1.10); one-way public transport GHS 6.07 (≈ €0.43), monthly pass GHS 240 (≈ €17); petrol GHS 13.56/L. — CityCost Accra vs Kumasi, 2026-11-08, company, confidence: low
+- [daily.transport] For the 1–15 Nov 2026 window Star Oil cut petrol to GHS 16.38/L (≈ €1.17) and raised diesel to GHS 18.45/L (≈ €1.32); prices vary by company (national). — Ghanamma, 2026-11-02, local-media, confidence: medium
+- [daily.transport] Accra–Kumasi coach fares as of Feb 2026: GHS 120 luxury bus (≈ €8.60), GHS 100 regular touring bus (≈ €7.10). — Wikivoyage Kumasi, 2026-02, blog, confidence: low
+- [daily.internet] CityCost: mobile plan with calls and 10 GB+ data GHS 226/month (≈ €16), home internet 50 Mbps+ GHS 499/month (≈ €36). — CityCost Accra vs Kumasi, 2026-11-08, company, confidence: low
+- [social.sport] CityCost: gym GHS 346/month (≈ €24.70), cinema ticket GHS 151 (≈ €10.80). — CityCost Accra vs Kumasi, 2026-11-08, company, confidence: low
+- [social.sport] Livingcost: gym $22.50/month (≈ €19.30), cinema ticket $8.95 (≈ €7.70). — Livingcost Kumasi, 2026-06-21, company, confidence: low
+- [health.care] Livingcost gives a doctor's visit at $9.97 (≈ €8.50), partly crowdsourced. — Livingcost Kumasi, 2026-06-21, company, confidence: low
+- [health.care] Expat.com puts a private GP consultation at GHS 100–300 (≈ €7–21) (Ghana-wide). — Expat.com FR Kumasi guide, 2025-12-12, blog, confidence: low
+- [family.schools] CityCost lists an international primary school at GHS 63,800/year (≈ €4,560); Livingcost gives $5,705 (≈ €4,890); both well below Expat.com's $10,000–18,000 for Galaxy Kumasi. — CityCost 2026-11-08 / Livingcost 2026-06-21, company, confidence: low
+- [family.childcare] CityCost lists full-day private preschool at GHS 5,457/month (≈ €390), while Livingcost gives $98.10/month (≈ €84); the figures conflict. — CityCost 2026-11-08 / Livingcost 2026-06-21, company, confidence: low
+
 ## Gaps
 
 - Power: reports of a GRIDCo/ECG planned-outage programme in Kumasi (30 Oct–29 Nov 2026) surfaced in search but the Adom Online page failed to load; not recorded as an item.
@@ -67,6 +90,9 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 - No neighbourhood-level safety data; no dated source on traffic congestion around Kejetia/Adum.
 - No nightlife, food scene, religion or diaspora/returnee testimony specific to Kumasi found; ICS and Tumi school fees not found.
 - Web search budget ran out early in the Kumasi pass, so targeted Kumasi searches ("living in Kumasi", "Kumasi water", "Kumasi traffic") could not run.
+- Price top-up: web search budget ran out at the start of this pass, so "Kumasi négocier loyer", "Kejetia bargaining" and "Kumasi taxi fare" searches could not run; no Kumasi-specific trotro/taxi fare survey or quantified rent discount found.
+- Price top-up: meQasa houses for rent in Kumasi shows only 5 listings (average GHS 26,482), too thin to use; no Kumasi market price survey (Channel One barometer covers Accra only).
+- Price top-up: no Kumasi school fee page (ICS, Ridge, Galaxy) read; no utility bill or club/concert price found; Numbeo still 429.
 
 ## Sources read
 
@@ -90,9 +116,24 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 18. Ghanaians want stronger protection against harassment of women — NADJA — https://nadja.co/2024/12/03/ghanaians-demand-protection-women-girls/ — intl-media — 2026-11-14
 19. Ghana anti-gay bill explained 2026 — The Rio Times — https://www.riotimesonline.com/ghana-anti-gay-bill-explained-2026/ — intl-media — 2026-11-14
 20. AD461 — Afrobarometer — https://www.afrobarometer.org/publication/ad461-ghanaians-are-united-and-hospitable-intolerant-toward-same-sex-relationships/ — academic — 2026-11-14
+21. Houses for sale in Kumasi — meQasa — https://meqasa.com/houses-for-sale-in-kumasi — company — 2026-11-14
+22. Apartments for rent in Kumasi — meQasa — https://meqasa.com/apartments-for-rent-in-kumasi — company — 2026-11-14
+23. Houses for rent in Kumasi — meQasa — https://meqasa.com/houses-for-rent-in-kumasi — company — 2026-11-14
+24. Accra vs Kumasi cost comparison — CityCost — https://citycost.org/compare/accra-vs-kumasi/ — company — 2026-11-14
+25. Cost of living in Kumasi — Livingcost — https://livingcost.org/cost/ghana/kumasi — company — 2026-11-14
+26. Petrol drops to GH¢16.38, diesel rises to GH¢18.45 — Ghanamma — https://www.ghanamma.com/?p=241211 — local-media — 2026-11-14
+27. Kumasi — Wikivoyage — https://en.wikivoyage.org/wiki/Kumasi — blog — 2026-11-14
+28. Ghana — Wikivoyage — https://en.wikivoyage.org/wiki/Ghana — blog — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.rent] Studio / chamber-and-hall — supported
 - [cost.rent] 2-bed — supported
 - [cost.rent] Expat-facing units — supported
 - [safety.general] FCDO cites reports of criminally motivated kidnappings — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] meQasa lists 48 houses for sale in Kumasi — supported
+- [cost.living] Livingcost (June 2026): lunch menu — supported
+- [daily.transport] For the 1–15 Nov 2026 window Star Oil — supported

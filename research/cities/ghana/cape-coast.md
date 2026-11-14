@@ -32,6 +32,24 @@ Extra city (dossier heading "Cape Coast — added: diaspora heritage, university
 - [rights.lgbt] Same-sex relations are criminal under s.104; the Family Values Bill passed 29 May 2026 was not law on 3 Nov 2026 (national). — The Rio Times, 2026-11-03, intl-media, confidence: high
 - [other] Former colonial capital of about 170,000 inhabitants (undated). — Expat.com Cape Coast guide, 2025-12-12, blog, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Expat.com says agency fees are typically 10% of the annual rent, paid by the tenant, refundable deposits run 1–3 months, and two years upfront is the usual advance; paying yearly can cost 10–15% more (Ghana-wide, Cape Coast not named). — Expat.com FR Cape Coast guide, updated 2025-12-12, blog, confidence: low
+- [cost.rent] Expat.com says villas in secondary cities sell for about $80,000–200,000 (≈ €68,600–171,400), leasehold only for non-citizens; Cape Coast not named. — Expat.com FR Cape Coast guide, 2025-12-12, blog, confidence: low
+- [cost.negotiation] Cape Coast Castle has a two-tier price: Ghanaian adults GHS 20 (≈ €1.40), foreign adults GHS 80 (≈ €5.70), foreign students GHS 60 (≈ €4.30). — Wikivoyage Cape Coast, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Craft booths on Commercial Road are said to offer better prices than the tourist shops inside the castle. — Wikivoyage Cape Coast, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Expat.com advises negotiating lease terms and says local market prices can be bargained (no figures; Ghana-wide). — Expat.com FR Cape Coast guide, 2025-12-12, blog, confidence: low
+- [cost.negotiation] Wikivoyage's Ghana page suggests opening at a third of the asking price in markets and says taxi drivers often quote foreigners 1.5–3 times the local fare, while trotro fares are fixed (national, undated). — Wikivoyage Ghana, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Cape Coast drivers told Graphic that trotro fare changes come only from union (GPRTU) directives, not individual drivers; the Kotokuraba–UCC fare was unchanged in Jan 2026. — Graphic Online, 2026-01-24, local-media, confidence: medium
+- [cost.living] At Kotokuraba market in Jan 2026, kenkey still sold for GHS 5 (≈ €0.36) and a box of smoked fish for about GHS 900 (≈ €64, up from GHS 700); traders credited the cedi rather than fuel cuts for price moves. — Graphic Online, 2026-01-24, local-media, confidence: medium
+- [cost.living] CityCost (Nov 2026): milk GHS 41.62/L (≈ €2.97), white bread 500 g GHS 19.26 (≈ €1.38), rice GHS 36.44/kg (≈ €2.60), chicken fillets GHS 83.90/kg (≈ €5.99); AI- and user-generated. — CityCost Tema vs Cape Coast, data 2026-11-08, company, confidence: low
+- [cost.living] CityCost: 0.5 L local beer GHS 15 in a shop (≈ €1.07) or GHS 21.15 draught in a restaurant (≈ €1.51); cappuccino GHS 53.40 (≈ €3.81). — CityCost Tema vs Cape Coast, 2026-11-08, company, confidence: low
+- [daily.transport] CityCost: taxi GHS 20.50 to start (≈ €1.46) plus GHS 15.48/km (≈ €1.11); petrol GHS 15.22/L (≈ €1.09). — CityCost Tema vs Cape Coast, 2026-11-08, company, confidence: low
+- [daily.transport] For the 1–15 Nov 2026 window Star Oil cut petrol to GHS 16.38/L (≈ €1.17) and raised diesel to GHS 18.45/L (≈ €1.32) (national). — Ghanamma, 2026-11-02, local-media, confidence: medium
+- [daily.transport] Shared "pragya" tricycles from Pedu Junction to the centre cost GHS 3–3.5 per person (≈ €0.21–0.25), June 2025. — Wikivoyage Cape Coast, 2025-06, blog, confidence: low
+- [daily.transport] Inter-city fares: Ford van from Accra GHS 100 (≈ €7.10, 2025); Kumasi–Cape Coast GHS 85–95 depending on air conditioning (≈ €6.10–6.80, Dec 2025); Takoradi–Cape Coast trotro GHS 35–40 (≈ €2.50–2.90). — Wikivoyage Cape Coast, accessed 2026-11-14, blog, confidence: low
+- [daily.internet] CityCost: mobile plan with calls and 10 GB+ data GHS 226/month (≈ €16). — CityCost Tema vs Cape Coast, 2026-11-08, company, confidence: low
+- [health.care] Expat.com puts a private GP consultation at GHS 100–300 (≈ €7–21) (Ghana-wide). — Expat.com FR Cape Coast guide, 2025-12-12, blog, confidence: low
+
 ## Gaps
 
 - No dated safety source names Cape Coast: France Diplomatie and UK FCDO pages do not mention it; no city-specific women's-safety source found.
@@ -39,6 +57,8 @@ Extra city (dossier heading "Cape Coast — added: diaspora heritage, university
 - No power, internet, nightlife, food, religion or University of Cape Coast fee data read.
 - Alliance Française Cape Coast page not opened (embassy page redirected).
 - Web search budget was exhausted before Cape Coast-specific searches could run.
+- Price top-up: meQasa shows 0 houses for rent and 0 for sale in Cape Coast; Livingcost has no Cape Coast page (404); no sale price or local rent survey found.
+- Price top-up: no school fee, gym, cinema or utility bill figure from a named Cape Coast source (CityCost's cinema and preschool lines were not used as the city's venues are unverified); no quantified negotiation discount found; search budget out.
 
 ## Sources read
 
@@ -56,6 +76,18 @@ Extra city (dossier heading "Cape Coast — added: diaspora heritage, university
 12. Ghana travel advice: Safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/ghana/safety-and-security — official — 2026-11-14
 13. 'A soul mission': the African Americans moving to Ghana — Al Jazeera — https://www.aljazeera.com/features/2025/9/26/a-soul-mission-the-african-americans-moving-to-ghana — intl-media — 2026-11-14
 14. Ghana anti-gay bill explained 2026 — The Rio Times — https://www.riotimesonline.com/ghana-anti-gay-bill-explained-2026/ — intl-media — 2026-11-14
+15. Cape Coast — Wikivoyage — https://en.wikivoyage.org/wiki/Cape_Coast — blog — 2026-11-14
+16. Ghana — Wikivoyage — https://en.wikivoyage.org/wiki/Ghana — blog — 2026-11-14
+17. Fuel price drop meets market realities — Graphic Online (The Mirror) — https://graphiconline.com/lifestyle/life/fuel-price-drop-meets-market-realities.html — local-media — 2026-11-14
+18. Petrol drops to GH¢16.38, diesel rises to GH¢18.45 — Ghanamma — https://www.ghanamma.com/?p=241211 — local-media — 2026-11-14
+19. Houses for rent in Cape Coast (0 results) — meQasa — https://meqasa.com/houses-for-rent-in-cape-coast — company — 2026-11-14
+20. Houses for sale in Cape Coast (0 results) — meQasa — https://meqasa.com/houses-for-sale-in-cape-coast — company — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.salary] National minimum wage — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.negotiation] Cape Coast Castle has a two-tier price — supported
+- [daily.transport] Inter-city fares — supported

@@ -110,6 +110,45 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 <!-- social-pass 2026-11-14 -->
 - [social.food] Accra Foodies (Where Ghana Eats) mostly features Ghanaian street and home food (Fante kenkey, light soup with pumpkin, a millet drink called lamugee "for a hot afternoon"); commenters (n≈15) trade recipes and spellings, a sign that local food culture, not imported chains, drives the conversation. — @accrafoodies posts 2025-05 to 2025-10, social-caption + social-comment, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] meQasa lists 3,850 Accra apartments for rent with an average asking rent of GHS 44,852/month (≈ €3,200), from GHS 5,000 to 120,000 (≈ €360–8,570); listings cluster in East Legon (1,287), Cantonments (804) and Airport Area (652), so the average reflects the expat end. Asking prices. — meQasa apartments for rent in Accra, accessed 2026-11-14, company, confidence: low
+- [cost.rent] meQasa lists 5,380 houses for sale in Accra: average asking price GHS 14.3 million (≈ €1.02 million), cheapest GHS 150,000 (≈ €10,700). Asking prices. — meQasa houses for sale in Accra, accessed 2026-11-14, company, confidence: low
+- [cost.rent] meQasa's indicative asking price for an unfurnished 3-bed house: Airport Area GHS 8.18 million (≈ €585,000), Cantonments GHS 7.62 million (≈ €544,000), Osu GHS 6.99 million (≈ €499,000), Dzorwulu GHS 6.41 million (≈ €458,000), East Legon GHS 2.94 million (≈ €210,000). — meQasa houses for sale in Accra, accessed 2026-11-14, company, confidence: low
+- [cost.rent] CityCost gives apartment purchase prices of GHS 33,600/m² in the centre (≈ €2,400) and GHS 17,200/m² outside it (≈ €1,230); AI- and user-generated data. — CityCost Accra vs Kumasi, data 2026-11-09, company, confidence: low
+- [cost.rent] Livingcost gives a city-centre apartment purchase price of $3,284/m² (≈ €2,815), partly crowdsourced. — Livingcost Accra, updated 2026-06-21, company, confidence: low
+- [cost.rent] Expat.com says a villa in an Accra residential area sells for about $150,000–500,000 (≈ €129,000–429,000) and that non-citizens can only buy leasehold, not freehold. — Expat.com FR Kumasi/Takoradi guides (Ghana-wide section), updated 2025-12-12, blog, confidence: low
+- [cost.rent] Expat.com says agency fees are typically 10% of the annual rent, paid by the tenant, with a refundable deposit of 1–3 months; paying yearly rather than two years upfront can cost 10–15% more (Ghana-wide). — Expat.com FR Kumasi/Takoradi guides, 2025-12-12, blog, confidence: low
+- [cost.negotiation] On advance rent the Rio Times tells tenants: "Negotiate hard. The law is on your side"; landlords dealing with an employer sometimes accept six months, and agents' "goodwill payments" are often added on top in East Legon, Cantonments and Airport Residential. — The Rio Times, 2026-09-14 (mod. 2026-11-08), intl-media, confidence: medium
+- [cost.negotiation] Expat.com says the 1–2-year advance can be negotiated down to shorter periods, and that Uber, Bolt and Yango usually cost a little more than haggled street taxis. — Expat.com FR Accra guide, 2025-11-27, blog, confidence: low
+- [cost.negotiation] meQasa says most Accra apartments offer discounts for longer rentals (no percentage given). — meQasa apartments for rent in Accra, accessed 2026-11-14, company, confidence: low
+- [cost.negotiation] Wikivoyage advises agreeing a taxi fare before getting in and haggling hard, because drivers often ask foreigners three times the going rate or more; walking away to the next taxi usually works; airport stand fares are regulated while touts charge much more. Undated text. — Wikivoyage Accra, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Wikivoyage's Ghana page suggests opening at a third of the asking price in markets and says taxi drivers often quote foreigners 1.5–3 times the local fare, while trotro fares are fixed (national, undated). — Wikivoyage Ghana, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] inDrive operates in Accra and lets rider and driver agree the fare in the app; Bento advises checking the final agreed price before the trip. — Bento travel blog, 2026-10-07, blog, confidence: medium
+- [cost.negotiation] Heritage sites charge foreign adults a separate, usually higher rate: National Museum GHS 80 (≈ €5.70), Ussher Fort GHS 40 with guided tour (≈ €2.90); local rates not given. — Wikivoyage Accra, accessed 2026-11-14 (listing dates vary), blog, confidence: low
+- [cost.living] Channel One TV's April 2026 barometer of Accra markets: imported rice GHS 73.50 per 5 kg bag (≈ €5.25), local rice GHS 46.50 per olonka (≈ €3.30), palm oil GHS 36.25/L (≈ €2.60), eggs GHS 51.50 a crate (≈ €3.70), frozen chicken GHS 33.40/kg (≈ €2.40). — Citi Newsroom, 2026-04-28, local-media, confidence: medium
+- [cost.living] Same barometer: broiler chicken GHS 181.56 (≈ €13, unit not stated), beef GHS 80/kg (≈ €5.70), tilapia GHS 100 for four medium fish (≈ €7.10), cabbage GHS 20 a head (≈ €1.40). — Citi Newsroom, 2026-04-28, local-media, confidence: medium
+- [cost.living] A Graphic market survey found a crate of eggs at GHS 50–80 (≈ €3.60–5.70) depending on size and where it is bought; a shopper said many traders had not lowered retail prices (Makola is mentioned only for corn and cassava dough sellers). — Graphic Online, 2025-11-22, local-media, confidence: medium ✎ spot-check 2026-11-14: corrected
+- [cost.living] Expat Arrivals' February 2026 averages: loaf of white bread GHS 20 (≈ €1.40), milk GHS 40/L (≈ €2.90), a dozen eggs GHS 30 (≈ €2.10), rice GHS 35/kg (≈ €2.50), chicken breasts GHS 65/kg (≈ €4.60); city supermarkets cost more than local markets. — Expat Arrivals cost of living in Accra, 2026-02, blog, confidence: low
+- [cost.living] Expat Arrivals' February 2026 eating-out prices: three-course meal for two GHS 650 (≈ €46), Big Mac meal GHS 100 (≈ €7.10), cappuccino GHS 45 (≈ €3.20), 500 ml local draft beer GHS 15 (≈ €1.10). — Expat Arrivals cost of living in Accra, 2026-02, blog, confidence: low
+- [cost.living] Expat.com gives local meals at GHS 20–40 (≈ €1.40–2.90) and upscale dinners at GHS 100–200 per person (≈ €7–14). — Expat.com FR Accra guide, 2025-11-27, blog, confidence: low
+- [cost.living] CityCost (Nov 2026): budget restaurant meal GHS 101 (≈ €7.20), mid-range dinner for two GHS 613 (≈ €44), 0.5 L local draught beer GHS 22.29 (≈ €1.60), cinema ticket GHS 149 (≈ €10.60), gym GHS 525/month (≈ €37.50); AI- and user-generated. — CityCost Accra vs Kumasi, 2026-11-09, company, confidence: low
+- [social.sport] Expat.com puts gym memberships at $50–150/month (≈ €43–129) (Ghana-wide). — Expat.com FR Takoradi guide, 2025-12-12, blog, confidence: low
+- [daily.transport] For the 1–15 Nov 2026 window Star Oil cut petrol to GHS 16.38/L (≈ €1.17) and raised diesel to GHS 18.45/L (≈ €1.32); JoyBusiness's indicative pump prices were GHS 17.02 and 18.99, and prices vary by company (national). — Ghanamma, 2026-11-02, local-media, confidence: medium
+- [daily.transport] CityCost gives taxi fares of GHS 19.69 to start (≈ €1.40) plus GHS 15.37/km (≈ €1.10), and a one-way public transport ticket at GHS 17.16 (≈ €1.20), which conflicts with the official trotro minimum of GHS 5.50; AI- and user-generated. — CityCost Accra vs Kumasi, 2026-11-09, company, confidence: low
+- [daily.internet] Expat Arrivals (Feb 2026): mobile plan with calls and data GHS 200/month (≈ €14.30), uncapped home internet GHS 450/month (≈ €32). — Expat Arrivals cost of living in Accra, 2026-02, blog, confidence: low
+- [daily.power] Expat.com estimates electricity at $100–200/month (≈ €86–171) for a single person with air conditioning and $200–400 (≈ €171–343) for a large family house (Ghana-wide). — Expat.com FR Takoradi guide, 2025-12-12, blog, confidence: low
+- [health.care] Expat.com puts a private GP consultation at GHS 100–300 (≈ €7–21), below the Rio Times' GHS 300–1,000; a dental consultation costs $50–100 (≈ €43–86) (Ghana-wide). — Expat.com FR Takoradi guide, 2025-12-12, blog, confidence: low
+- [health.care] Livingcost gives a doctor's visit at $50.50 (≈ €43), partly crowdsourced. — Livingcost Accra, updated 2026-06-21, company, confidence: low
+- [family.schools] Expat.com's Ghana-wide fee table, higher than its Accra guide: Ghana International School $18,500–30,000/year (≈ €15,900–25,700), Lincoln Community School $20,000–32,000 (≈ €17,100–27,400), International School of Accra $19,000–28,000 (≈ €16,300–24,000), Vilac $15,000–25,000 (≈ €12,900–21,400), Galaxy $12,000–22,000 (≈ €10,300–18,900); non-refundable registration $1,500–3,000 (≈ €1,290–2,570). — Expat.com FR Takoradi/Kumasi guides, 2025-12-12, blog, confidence: low
+- [family.schools] Expat.com says local private schools cost $500–3,000/year (≈ €430–2,570) (Ghana-wide). — Expat.com FR Takoradi guide, 2025-12-12, blog, confidence: low
+- [family.childcare] CityCost lists full-day private preschool at GHS 5,510/month (≈ €394) and an international primary school at GHS 243,100/year (≈ €17,360); AI- and user-generated. — CityCost Accra vs Kumasi, 2026-11-09, company, confidence: low
+
+<!-- listings-pass 2026-11-14 -->
+- [cost.rent] A departing tenant offering a lease takeover says the owner asks 4,000 cedis/month (the poster's conversion: €320), furniture for sale separately. — "Expatriates in Ghana (Ghana Life)" (expatriatesghana) search "rent", post 2025-11-03, social-caption, confidence: low (dated)
+- [cost.rent] Expat-market asking rents in the same group, 2024: furnished studio USD 1,800/month or USD 80/night; agency lease USD 1,400/month with a 6-month minimum; walled family house USD 2,500/month "negotiable"; a newcomer's budget of up to 1,500 GHC/month (Jan 2024). — same group 2024-01 to 2024-07, social-caption, confidence: low (dated, USD left as stated)
+- [cost.negotiation] 2 of 13 priced posts found by the "rent" search say "negotiable"; most rents are quoted in US dollars with a 6-month or yearly advance. — same group, 2024–2025 posts, social-caption, confidence: low
+- [other] The 59K-member "Expatriates in Ghana" group posts few rentals (7 posts a day, mostly older); the search surfaced nothing from 2026. — read 2026-11-14
+
 ## Gaps
 
 - No 2026 dated price for street food (waakye, jollof, kenkey) or a restaurant meal in Accra; Numbeo returned HTTP 429.
@@ -122,6 +161,12 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 - ★ accraexpat has not posted since early 2023 (latest posts: Afrochella Dec 2022, souvenir magnets Feb 2023); a commenter reports its website down. Not a live source.
 - ★ accrafoodies has not posted since Oct 2025 (pinned/latest posts 2025-05 to 2025-10). Older than the brief's window; used for one low-confidence item only.
 - Kumasi: no social source found.
+- Price top-up: web search budget ran out after two searches, so targeted negotiation searches ("Accra négocier loyer", "Makola bargaining tips", "Accra prix étranger") could not run; no quantified discount on negotiated rent or agency fees found.
+- Price top-up: Numbeo returned HTTP 429 again; Expat Arrivals' canonical page returned 403 (a mirror was read).
+- Price top-up: no dated club-entry, concert-ticket or venue cinema price (Wikivoyage nightlife prices are years old and were not used; Detty Rave article gives no ticket price).
+- Price top-up: no Uber/Bolt/Yango fare table (Bolt's Accra page lists none); MTN data/fibre price page not found; no sample ECG or GWL bill.
+- Price top-up: LFIA tuition amounts not extractable (PDF has no fee table in its text); Lincoln Community School fee page returned 404.
+<!-- listings-pass gaps 2026-11-14 -->
 
 ## Sources read
 
@@ -168,11 +213,27 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 41. Right of Abode — Expatsi — https://expatsi.com/visas/ghana/right-of-abode — company — 2026-11-14
 42. French expats in Accra — apartments.com.gh — https://apartments.com.gh/blog/article/french-expats-in-accra-b135 — company — 2026-11-14
 43. Vivre au Ghana sans parler anglais — Openshores — https://www.openshores.co/blog/vivre-en-ghana-sans-parler-anglais — blog — 2026-11-14
+44. Apartments for rent in Accra — meQasa — https://meqasa.com/apartments-for-rent-in-accra — company — 2026-11-14
+45. Houses for sale in Accra — meQasa — https://meqasa.com/houses-for-sale-in-accra — company — 2026-11-14
+46. Accra vs Kumasi cost comparison — CityCost — https://citycost.org/compare/accra-vs-kumasi/ — company — 2026-11-14
+47. Cost of living in Accra — Livingcost — https://livingcost.org/cost/ghana/accra — company — 2026-11-14
+48. Cost of living in Accra — Expat Arrivals (mirror of expatarrivals.com) — https://k2.expatarrivals.com/node/5595 — blog — 2026-11-14
+49. Channel One TV market price barometer: tomatoes, cassava among high-priced staples — Citi Newsroom — https://www.citinewsroom.com/2026/04/channel-one-tv-market-price-barometer-tomatoes-cassava-among-high-priced-staples/ — local-media — 2026-11-14
+50. Channel One TV market price barometer April 2026: garden eggs, tilapia — Citi Newsroom — https://www.citinewsroom.com/2026/04/channel-one-tv-market-price-barometer-april-2026-garden-eggs-lead-produce-pressure-tilapia-prices-stay-stable/ — local-media — 2026-11-14
+51. Traders welcome pockets of price relief — Graphic Online — https://www.graphic.com.gh/news/general-news/ghana-news-traders-welcome-pockets-of-price-relief.html — local-media — 2026-11-14
+52. Petrol drops to GH¢16.38, diesel rises to GH¢18.45 — Ghanamma — https://www.ghanamma.com/?p=241211 — local-media — 2026-11-14
+53. Accra — Wikivoyage — https://en.wikivoyage.org/wiki/Accra — blog — 2026-11-14
+54. Ghana — Wikivoyage — https://en.wikivoyage.org/wiki/Ghana — blog — 2026-11-14
+55. Guide Kumasi (Ghana-wide fee, housing and school sections) — Expat.com (FR) — https://www.expat.com/fr/guide/afrique/ghana/kumasi/ — blog — 2026-11-14
+56. Guide Takoradi (Ghana-wide fee, housing and school sections) — Expat.com (FR) — https://www.expat.com/fr/guide/afrique/ghana/takoradi/ — blog — 2026-11-14
 
 - Social pass: Instagram @accraexpat — 5 posts, 2026-11-14 (inactive)
 - Social pass: Instagram @accrafoodies — 6 posts and visible comments, 2026-11-14
 
+- Social pass: Facebook "Expatriates in Ghana (Ghana Life)" (expatriatesghana) — search "rent", 21 posts, 2026-11-14
+
 ## Spot-check (2026-11-14)
+
 - [cost.rent] 1-bed in East Legon — supported
 - [cost.rent] Law caps advance rent — supported
 - [cost.rent] Crowdsourced citywide average — supported
@@ -185,3 +246,10 @@ Currency note: EUR equivalents use the dossier rates **1 EUR ≈ 14 GHS** and **
 - [rights.lgbt] FCDO: some same-sex acts — supported
 - [rights.lgbt] Afrobarometer 7% — supported
 - [rights.racism] Afrobarometer 92% — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] meQasa lists 3,850 Accra apartments — supported
+- [cost.living] Channel One TV's April 2026 barometer — supported
+- [cost.living] A Graphic market survey found a crate of eggs — corrected
+- [daily.transport] CityCost gives taxi fares — supported (euro conversions differ about 9% from the site's current rate)
