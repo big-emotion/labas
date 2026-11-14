@@ -7,6 +7,10 @@ Là-bas tells a reader "cette ville te correspond parce que…". This document d
 "parce que" may rest on: which facts about the **reader** count, which facts about a **city**
 count, how they meet, and where the site must stop claiming.
 
+**Read [§A](#a-two-levels-give-the-taste-first) first.** The criteria below are the engine,
+not the experience. The free quiz shows one city, warmly, in about five minutes; the criteria
+only appear when the reader asks "pourquoi ?", and in full in a later paid tier.
+
 **Inputs analysed:** the 21 scores of the 115 cities in `src/data/cities.json`, the
 current ranking (`src/lib/ranking.ts`, `questions.ts`), the 54 country dossiers in
 `research/countries/` (120 scored cities, 15 proposed dimensions each, 300
@@ -16,7 +20,8 @@ mining notes are summarised here, not committed.
 
 ## Contents
 
-0. [The short version](#0-the-short-version)
+A. [Two levels: give the taste first](#a-two-levels-give-the-taste-first) 0. [The short version (the engine)](#0-the-short-version-the-engine)
+
 1. [Benchmark](#1-benchmark)
 2. [The person side](#2-the-person-side)
 3. [The city side](#3-the-city-side)
@@ -27,7 +32,121 @@ mining notes are summarised here, not committed.
 
 ---
 
-## 0. The short version
+## A. Two levels: give the taste first
+
+### A.1 Who we are talking to, and what the first five minutes are for
+
+The reader is a member of the diaspora: often an economic actor, demanding, but not a
+specialist, and not looking for a report. Most diaspora readers only look at the country their
+family comes from, or at the former colonies of the country they live in: a French speaker in
+Paris rarely looks at Ghana, Tanzania, Ethiopia, Namibia or South Africa. Là-bas starts from
+the opposite assumption: **the reader would go wherever life suits them; what is missing is
+information.** Someone who believes turquoise water and white sand are only in Zanzibar has
+never been told about the coves of Grand-Bérébi, an hour from San-Pédro, or about Mombasa,
+Gambia or the Senegalese coast beyond Saly.
+
+So the first level has one job: **in about five minutes, show one city the reader had perhaps
+never considered, make them feel why it could be theirs, and make them want to know more.**
+Analysis comes after, and only if they want it.
+
+### A.2 The two levels
+
+|              | Level 1 — free, now                                                                                  | Level 2 — paid, later                                |
+| ------------ | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                     | Help a real decision                                 |
+| **Length**   | The current 10 questions, ~5 minutes                                                                 | The full question bank (§4.4) and the filters (§2.1) |
+| **Tone**     | Warm, playful, "tu", "on te comprend"                                                                | Precise, still plain French                          |
+| **Result**   | **One city**, a short portrait, two other leads (one deliberately outside the reader's usual sphere) | A ranked list with every criterion, source and date  |
+| **Criteria** | Hidden, behind "Pourquoi cette ville ?"                                                              | Shown in full                                        |
+| **Human**    | None                                                                                                 | Personal coaching (accompagnement)                   |
+
+The criteria, rubrics and sources in §2–§6 run underneath **both** levels. Level 1 does not
+get a lighter or less honest engine; it gets a lighter **presentation**.
+
+### A.3 The level-1 questions (decided 2026-11-14)
+
+The ten current questions stay, with the same answer values (so `src/lib/ranking.ts` and its
+tests stand), reworded in "tu" and made more playful. Questions 2, 7 and 8 carry the Big Five
+inspiration: they ask about how the reader likes to live, not about facts.
+
+| #   | Question                                 | Answers                                                                                                                                                    | Inspiration (internal, never shown) |
+| --- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| 1   | Là-bas, tu t'y vois comment ?            | M'installer pour de bon · Un pied ici, un pied là-bas · Tester quelques mois · Investir sans y vivre · D'abord des vacances                                | Life project                        |
+| 2   | Ton samedi soir idéal ?                  | Danser jusqu'au matin · Un bon dîner entre amis · Tranquille chez moi                                                                                      | Sociability (extraversion)          |
+| 3   | Ton budget sur place ?                   | Serré · Moyen · Le prix compte peu                                                                                                                         | Constraint                          |
+| 4   | Tu pars avec qui ?                       | Seul·e · En couple · Pour fonder une famille · Avec mes enfants                                                                                            | Constraint                          |
+| 5   | Et le travail ?                          | Salarié·e · J'entreprends · Télétravail · Création, culture · Santé, enseignement                                                                          | Life project                        |
+| 6   | Tu es à l'aise en…                       | Français · Anglais · Portugais · Arabe                                                                                                                     | Constraint (a weight, not a filter) |
+| 7   | Plutôt une ville qui…                    | Vibre jour et nuit · Reste à taille humaine · Prend son temps                                                                                              | Pace (extraversion, calm)           |
+| 8   | Le week-end, tu files où ?               | À la plage · En montagne, en forêt · Dans la savane ou le désert · Je reste en ville                                                                       | Openness to nature or city          |
+| 9   | Côté météo ?                             | Chaud toute l'année · Doux · Sec et ensoleillé                                                                                                             | Preference                          |
+| 10  | Ce qui compte le plus pour toi ? (3 max) | Me sentir en sécurité · Une vie abordable · La santé et l'école · Ma carrière · Retrouver d'autres repats · La mémoire de la diaspora · Voyager facilement | Priorities (need for security)      |
+
+The four temperament questions cut from the prototype (novelty, order, competition, stress)
+could come back as playful scenarios if testing shows the portrait feels thin; that is a later
+choice, not part of this design.
+
+### A.4 The result screen
+
+On the phone, in this order:
+
+1. **The city**, big: name, country, a photo, the tagline.
+2. **"Pourquoi toi et [ville]"**: two or three lines that pair something the reader said with
+   something the city is known for, written as **preferences, never traits** (repo rule:
+   never "tu es", never "ta personnalité"):
+   - "Tu aimes quand ça bouge le samedi soir : Nairobi aussi. On la dit parmi les villes
+     d'Afrique de l'Est où l'on sort le plus, et les gens y sont détendus et accueillants."
+   - "Tu veux la mer le week-end : à une heure de San-Pédro, les criques de Grand-Bérébi ont
+     l'eau turquoise et le sable blanc qu'on croit réservés à Zanzibar."
+3. **"Ce qui pourrait te surprendre"**: one line that breaks a cliché about the city or
+   region.
+4. **"À savoir"**: one honest line (the city's `watch`, sourced when it touches safety, racism,
+   LGBT rights or conflict). Level 1 stays warm, not blind.
+5. **Two other leads**, one of them marked **"Tu n'y aurais peut-être pas pensé"** (A.5).
+6. **"Pourquoi cette ville ?"**: opens the criteria behind the match, with sources and dates.
+   This is where §3 becomes visible.
+7. **"Aller plus loin"**: the door to level 2.
+
+### A.5 The discovery rule
+
+Without a rule, a French speaker gets French-speaking cities: language weighs 3 in the score.
+Level 1 therefore always shows, among its three cities, **at least one from outside the
+reader's usual sphere**:
+
+- **Sphere** = the countries where the reader's chosen language is the language of daily life.
+  Later, with roots (§2.4), also the country of origin.
+- **The discovery lead** = the best-ranked proposable city outside that sphere, computed with
+  the language weight removed. If it already sits in the top three, nothing changes.
+- **It says why it is there and what it asks of the reader**: "On y vit en anglais, mais tout
+  le reste te ressemble : la plage, une ville qui bouge, une vie abordable."
+- **It never overrides safety:** `unsafe` cities are never proposed, discovery included.
+
+### A.6 The two lines each city needs for level 1
+
+The criteria in §3 produce the "pourquoi toi" lines automatically: a reader's answer meets a
+city criterion at level 4 or 5. Two short editorial lines per city make them warm:
+
+| Field        | What it is                                                                                                                               | Rule                                                                                                                             |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `reputation` | "On dit de Nairobi que…": what the city is known for, in one sentence                                                                    | Introduced by "on dit", "on la connaît pour": a reputation, not a measurement. No claim about safety, racism or LGBT rights here |
+| `surprise`   | The cliché it breaks (Grand-Bérébi's water, Swakopmund, where the Namib dunes run down to the ocean, Kampala's young and creative scene) | A concrete, checkable fact (a place, an event), dated if it can change                                                           |
+
+A third line already exists: `watch` ("À savoir"). The fields are in [`schema.ts`](./schema.ts).
+
+### A.7 Tone
+
+- **Warm and close:** "tu", short sentences, the community's own words ("retour au pays",
+  "s'installer", "là-bas"). "Repat" is explained the first time it appears.
+- **Knowledgeable, not expert:** we know the continent and say so through concrete places,
+  never through jargon, scores or percentages on the first screen.
+- **On the reader's side:** we take the wish to go seriously and do not lecture. Difficulties
+  are named once, honestly, in "à savoir", not used to discourage.
+- **Preferences, not traits:** "tu aimes", "tu cherches", "tu as dit"; never "tu es
+  quelqu'un de…", "ton profil", "ta personnalité", "test".
+
+---
+
+## 0. The short version (the engine)
 
 - **Today's 21 scores mostly say one thing: "this is a big capital".** Across the 115 cities,
   career, flights, internet, investment and health-and-schools correlate at r = 0.67–0.86 with
@@ -190,8 +309,9 @@ rent) and emotional stability as "copes with cuts, traffic, insecurity". Extrave
 one reading tied to a city property: capitals as network-driven, small towns as
 "petit cercle".
 
-**Design.** Keep two self-reports and one existing question, each compared with a **described
-city property**, never with a trait:
+**Design.** Each temperament question is compared with a **described city property**, never
+with a trait. In level 1 (§A.3) these are the Saturday-night question and "Plutôt une ville
+qui…" (size and pace); the two tolerance questions below join them in level 2:
 
 | Question                                                                      | City property it meets                | Role   |
 | ----------------------------------------------------------------------------- | ------------------------------------- | ------ |
@@ -566,7 +686,10 @@ A city with no reliable figure must neither win nor lose because of it.
   updated; the reader never sees an advice colour older than its review date without
   "à revérifier".
 
-### 4.4 The adaptive quiz
+### 4.4 The level-2 questionnaire (paid tier)
+
+Level 1 asks the ten questions of §A.3 in a fixed order. The bank below is the level-2
+questionnaire, drafted in "vous"; it moves to "tu" if the paid tier keeps level 1's voice.
 
 **Keep the promise that every tap visibly changes something:** each answer re-ranks
 immediately, and the next question is the one most likely to change the current top three.
@@ -678,6 +801,10 @@ quiz, through a structured extraction:
 
 ### 4.6 The explanation contract
 
+Level 1 presents these elements as described in §A.4: the "parce que" lines become "Pourquoi
+toi et [ville]", written as preferences, and the criteria stay behind "Pourquoi cette ville ?".
+Level 2 shows them as below.
+
 For each proposed city:
 
 - **"Parce que…"** — two or three lines. Candidates are criteria with weight > 0, level ≥ 3.5
@@ -776,12 +903,19 @@ Diplomatie, FCDO (OGL), ILGA, JMP, UN WUP, Findex, B-READY and GLOBALCIT are fre
 
 ## 7. Decisions for the maintainer
 
+**Already decided (2026-11-14):** two levels, free then paid with coaching (§A.2); level 1 keeps
+the ten current questions, reworded in "tu" (§A.3); the portrait speaks of preferences, never
+of traits, so the repo rule stays as it is (§A.7); one city first, with a discovery lead
+outside the reader's usual sphere (§A.5).
+
+**Still open:**
+
 1. **Adopt the reshaped criteria set** (15 city + 1 country criteria; `food`, `novelty`,
    `competition` dropped; `beach`/`nature`/`wildSpaces` turned into landscape facts)?
    **Recommendation: yes.** It removes the "big capital" triple-counting and adds the four
    things the dossiers say separate cities (setup cost, power and water, schools, paperwork).
    Cost: the current quiz answers must be re-mapped and the 115 cities re-scored.
-2. **Offer the sensitive filters** (visa-free, criminalisation of homosexuality, later
+2. **Offer the sensitive filters in level 2** (visa-free, criminalisation of homosexuality, later
    religion via free text)? **Recommendation: yes, opt-in only**, worded as the reader's wish,
    with the count of removed cities shown and nothing stored. Leaving them out pushes the
    reader to discover a 5–10 year sentence (Senegal, 2026) after choosing.

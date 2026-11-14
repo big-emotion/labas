@@ -193,6 +193,12 @@ export interface City {
    * safety, racism, LGBT rights or conflict. */
   watch: { text: string; provenance: Provenance };
   described: { food?: string; neighbourhoods?: string };
+  /** Level 1: what the city is known for, introduced by "On dit de … que". A reputation, not
+   * a measurement; never about safety, racism or LGBT rights. */
+  reputation: string;
+  /** Level 1: the cliché it breaks ("les criques de Grand-Bérébi, à une heure"). A concrete,
+   * checkable place or event. */
+  surprise: { text: string; provenance?: Provenance };
 }
 
 // ---------------------------------------------------------------------------
@@ -291,6 +297,12 @@ export interface Match {
   reasons: Explanation[];
   /** Always exactly one: the most relevant drawback for this reader, else `city.watch`. */
   caveat: Explanation;
+  /** Level 1 "Pourquoi toi et [ville]": two or three lines pairing a stated preference with
+   * what the city is known for ("Tu aimes quand ça bouge : Nairobi aussi"). Never a trait. */
+  portrait: string[];
+  /** Level 1: true for the lead chosen outside the reader's usual sphere ("Tu n'y aurais
+   * peut-être pas pensé"), ranked with the language weight removed. */
+  discovery: boolean;
 }
 
 // ---------------------------------------------------------------------------
