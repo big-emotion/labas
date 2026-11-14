@@ -96,7 +96,39 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (imp
 - [cost.rent] Sale asking prices in Msasani: 1-bedroom flat of 82 m² USD 170,000; 3-bedroom of 160 m² USD 270,000, "flexible payment plan"; a 2,600 m² plot on Haile Selassie Road, Masaki offered for a 70/30 joint venture valued at USD 350,000. — same group 2026-11-14, social-caption, confidence: low
 - [cost.negotiation] None of the 9 priced posts in this Dar group says "negotiable"; prices are posted in dollars by agencies, as in Kigali. — same group 2026-11-14 (n=9 out of 33 posts), social-caption, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Sale asking prices per m²: Masaki TZS 4.8M–7.0M (≈ €1,644–2,397), Oyster Bay 4.5M–6.8M (≈ €1,541–2,329), Mikocheni 2.8M–4.0M (≈ €959–1,370), Sinza 1.8M–2.8M (≈ €616–959), Kigamboni 1.3M–2.3M (≈ €445–788), Mbagala/Chanika 1.0M–1.8M (≈ €342–616); citywide median about TZS 3M/m² (≈ €1,027). Asking-price evidence: the city has no public closed-sale database. — The Africanvestor "Dar es Salaam housing prices", updated 2026-09-21, company, confidence: medium
+- [cost.rent] Same publisher, total asking price per home: citywide median about TZS 475M (≈ €163k); Sinza TZS 180M–550M (≈ €62k–188k), Kigamboni 130M–650M (≈ €45k–223k), Masaki 750M–4.0bn (≈ €257k–1.37M). — The Africanvestor "Dar es Salaam housing prices", updated 2026-09-21, company, confidence: medium
+- [cost.rent] The same publisher's expat guide gives sale prices in dollars that run higher: Masaki and Oyster Bay US$2,500–4,500/m², Upanga and Mikocheni US$1,500–3,000, suburbs US$900–2,000. Conflicts with the TZS per-m² item above; not averaged. — The Africanvestor "Dar es Salaam expat guide", updated 2026-09-21, company, confidence: low
+- [cost.negotiation] Homes typically sell 8–12% below asking; the gap is about 3–7% for new prime flats and up to 12–18% for older luxury villas. — The Africanvestor "Dar es Salaam housing prices", updated 2026-09-21, company, confidence: medium
+- [cost.rent] Portal asking rents seen on 14 Nov 2026: furnished 3-bed in Masaki US$2,850–3,000/month, 2-bed in Mikocheni US$1,500, 2-bed in Kawe US$490, unfurnished 2-bed in Kimara Temboni US$264. Asking prices. — BeForward Homes Tanzania rentals, listings dated 2026-11-12 to 2026-11-14, company, confidence: medium
+- [cost.rent] A French-language expat blog quotes 2-bed rents of TZS 300k–400k in Kijitonyama (≈ €103–137), TZS 500k–700k unfurnished in Bahari Beach (≈ €171–240), about TZS 3M unfurnished in Mikocheni (≈ €1,027) or 5.5M furnished (≈ €1,884); Sinza starts around TZS 100k (≈ €34). — Cyril Jarnias blog, 2026-01-28, blog, confidence: low
+- [cost.negotiation] Brokers (madalali) still usually charge tenants one month's rent, though the government banned this in Nov 2021; viewers also pay a fee per house shown, "rarely below TZS10,000" (≈ €3.4) in Dar. — Minority Africa, 2023-08-30, intl-media, confidence: medium
+- [cost.negotiation] Some brokers reportedly raise the rent when the landlord is weak and set fees by how the would-be tenant is dressed; online groups let tenants deal with landlords directly. — Minority Africa, 2023-08-30, intl-media, confidence: low
+- [cost.negotiation] Negotiating levers suggested to newcomers: offer quarterly instead of 6–12 months upfront, or a 12–24 month commitment in exchange for lower rent; the broker's one-month commission is sometimes shared with the owner. — Cyril Jarnias blog, 2026-01-28, blog, confidence: low
+- [housing.search] On the mainland a lease carries stamp duty of 1% of the annual rent, to be stamped within 30 days. — The Rio Times, 2026-09-26, intl-media, confidence: medium
+- [cost.negotiation] Kariakoo traders often quote foreigners far above local prices, "sometimes three times the price"; airport taxis can be talked down, especially when paying in dollars. — Wikivoyage "Dar es Salaam", accessed 2026-11-14 (undated), blog, confidence: low
+- [cost.negotiation] Expat forum advice (about 2018): airport to Oyster Bay should not exceed TZS 50,000 (≈ €17) and is about TZS 25,000–35,000 (≈ €8.6–12) after bargaining; a newcomer who paid TZS 200,000 (≈ €68) was told it was a rip-off; quotes asked in English run higher. — Expat.com forum "Transportation in Dar", about 2018, forum, confidence: low
+- [cost.negotiation] Diplomatic post reports say drivers overcharge "often by more than double" if they can (2013); a bajaji costs about US$2 anywhere on the Msasani peninsula (2020). — Tales Mag Dar es Salaam post reports, 2013–2022, forum, confidence: low
+- [cost.negotiation] A guide notes tuk-tuk drivers may add a "skin tax" for white foreigners, which it calls reasonable; Bongoyo Island has a resident price and a separate foreigner price. — Wikivoyage "Tanzania", accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Uber stopped operating in Tanzania on 30 Jan 2026; Bolt dominates with 30,000+ drivers in eight cities, alongside inDrive and Farasi. The Expat.com items above still mention Uber. — The Chanzo, 2026-02-01, local-media, confidence: high
+- [daily.transport] The transport regulator LATRA capped ride-hailing commissions at 15% in March 2022, then raised the cap to 25% in December 2022. — The Chanzo, 2026-02-01, local-media, confidence: high
+- [cost.living] Petrol was capped at TZS 2,752/L (≈ €0.94) in Nov 2025 against TZS 4,083 (≈ €1.40) in Nov 2026, about 48% more in a year (own calculation). — The Rio Times, 2026-11-04, intl-media, confidence: high ⚠ spot-check 2026-11-14: unsupported — Rio Times article not found; October 2026 Dar petrol cap was TZS 4,057 per The Chanzo, and 4,083 matches a July Mtwara cap
+- [cost.living] Retail sugar rose from TZS 2,500/kg (≈ €0.86) to TZS 3,000–3,600 (≈ €1.03–1.23) in June 2026, with about Sh3,500 in Tabata and Sh3,600 in Manzese. — The Citizen, 2026-06-28, local-media, confidence: high
+- [cost.living] Wholesale rice in Dar went from TZS 2,400/kg (≈ €0.82) in Jan 2025 to 2,600 (≈ €0.89) in Jan 2026; maize was TZS 1,100 (≈ €0.38). Ministry of Agriculture data. — The Citizen, 2026-01-21, local-media, confidence: high
+- [cost.living] A cost-of-living estimator (June 2026) gives milk 1 L US$0.92, bread 500 g US$0.68, rice 1 kg US$1.07, 12 eggs US$1.92, chicken breast 1 kg US$4.92 and shop beer 500 ml US$0.88. Model estimates, not field prices. — livingcost.org Dar es Salaam, updated 2026-06-21, company, confidence: low
+- [cost.living] Same estimator: utilities about US$43/month for one person and US$68 for a family; 50 Mbps+ internet US$35.5; gym US$82.4/month; cinema ticket US$5.19; daycare US$570/month. — livingcost.org Dar es Salaam, updated 2026-06-21, company, confidence: low
+- [cost.living] Numbeo (495 entries, 30 contributors, to 24 Sep 2026) puts a single person's costs excluding rent at about TZS 1,238,800/month (≈ €424). — The Rio Times "Retire in Tanzania", 2026-09, intl-media, confidence: medium
+- [cost.living] Expat.com's national price list: cinema TZS 15,000 (≈ €5.1), gym TZS 100k–200k/month (≈ €34–68), bar beer TZS 3,000–5,000 (≈ €1.03–1.71), simple local meal TZS 10k–20k (≈ €3.4–6.8), cappuccino TZS 5k–8k (≈ €1.7–2.7). Its petrol figure (TZS 3,000) is out of date. — Expat.com Tanzania guide, updated 2025-11-07, blog, confidence: low
+- [cost.living] A full-time housekeeper costs about US$150–300/month. — Expat.com Dar es Salaam guide, updated 2025-12-16, blog, confidence: medium
+- [health.care] Private GP consultation TZS 50k–120k (≈ €17–41); specialist TZS 120k–250k (≈ €41–86). — The Africanvestor "Dar es Salaam expat guide", updated 2026-09-21, company, confidence: low
+- [family.schools] IST 2026–27 also lists early childhood at TZS 49.0M (≈ €16,781), Grades 6–8 at 83.2M (≈ €28,493), Grades 9–10 at 88.5M (≈ €30,308) and an annual capital fee of TZS 3.18M (≈ €1,089). — The Rio Times, 2026-11-09, intl-media, confidence: medium
+- [family.schools] HOPAC is put at US$11,000–15,000/year by one publisher, against US$5,000–8,000 in Expat.com (item above); not averaged. UDSM charges international students US$4,200–5,000 a year. — The Africanvestor expat guide 2026-09-21; Expat.com Dar guide 2025-12-16, company, confidence: low
+- [daily.power] Since 2 Oct 2026 an urban single-phase connection costs TZS 320,960 (≈ €110), financed in instalments through CRDB; rural connections are TZS 27,000 (≈ €9.2). — The Rio Times, 2026-10, intl-media, confidence: medium
+- [daily.money] ATM fees for foreign cards: none at Ecobank, GT Bank, KCB, I&M and DTB; US$5 at Absa, Stanbic and Bank of Africa; TZS 15,000 (≈ €5.1) for Mastercard at Exim, NMB and CRDB. Small US notes can get over 10% less at exchangers. — Wikivoyage "Tanzania", accessed 2026-11-14, blog, confidence: medium
+
 ## Gaps
+
 - No returnee or diaspora testimony from Dar was found (no blog, forum post or article by a Tanzanian or Afro-descendant who moved back); return.experience and community.returnee are empty.
 - Racism, colourism or treatment of Black diaspora newcomers: no dated source found.
 - French-speaking life: École française Arthur Rimbaud (said to be AEFE) could not be confirmed; no official page was opened. No francophone community groups found.
@@ -107,8 +139,10 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (imp
 - Search budget ran out mid-session; local-media searches on cost of groceries, rents in Kigamboni, and power-cut schedules for 2026 could not be done.
 <!-- social-pass gaps 2026-11-14 -->
 - ★ expatstanzania has not posted since mid-2026 and some posts are AI-generated; no daily-life detail (prices, areas, services) found. Zanzibar and Arusha: no social source read.
+- Price top-up (2026-11-14), searched, not found: official TANESCO domestic tariff per kWh (tanesco.co.tz failed with a certificate error; aggregators gave conflicting undated figures, not used); École française Arthur Rimbaud fees (directory page HTTP 403); Vodacom/Airtel/Yas bundle prices (operator page empty); 2026 per-km Bolt or LATRA fare; club entry and concert ticket prices (November listings carry none); November 2026 Numbeo grocery rows (HTTP 429); expatistan HTTP 403. Web-search budget ran out twice during this pass.
 
 ## Sources read
+
 1. Tanzania cost of living for expats 2026 — https://www.riotimesonline.com/tanzania-cost-of-living-expats-2026/ — intl-media — read 2026-11-14
 2. Dar es Salaam expat guide — https://www.expat.com/en/guide/africa/tanzania/dar-es-salaam/ — blog — read 2026-11-14
 3. Living in Tanzania expat guide — https://www.expat.com/en/guide/africa/tanzania/ — blog — read 2026-11-14 (also served at https://www.expat.com/en/guide/africa/tanzania/arusha/)
@@ -146,10 +180,34 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (imp
 
 - Social pass: Facebook "Dar es salaam expat housing" (177007432707726) — chronological feed, 33 posts, 2026-11-14
 - Social pass: Instagram @expatstanzania — 5 posts, 2026-11-14
+34. Cost of living in Dar es Salaam — https://livingcost.org/cost/tanzania/dar-es-salaam — company — read 2026-11-14
+35. What are housing prices like in Dar es Salaam (2026) — https://theafricanvestor.com/blogs/news/dar-es-salaam-housing-prices — company — read 2026-11-14
+36. Dar es Salaam expat guide — https://theafricanvestor.com/blogs/news/dar-es-salaam-expat-guide — company — read 2026-11-14
+37. How digital platforms are reshaping rental experiences in Tanzania — https://minorityafrica.org/i-wish-it-were-this-easy-for-everyone-out-there-how-digital-platforms-are-reshaping-rental-experiences-in-tanzania — intl-media — read 2026-11-14
+38. Finding housing in Tanzania — https://www.jarniascyril.com/expatriation/find-housing-tanzania-guide-prices-neighborhoods/ — blog — read 2026-11-14
+39. BeForward Homes, apartments for rent in Tanzania — https://homes.beforward.jp/search/rent/apartment/all/tanzania — company — read 2026-11-14
+40. Sugar prices increase across Tanzania — https://www.thecitizen.co.tz/tanzania/business/sugar-prices-increase-across-tanzania-due-to-supply-shortages-5511584 — local-media — read 2026-11-14
+41. Households feel the pinch as food inflation remains high — https://thecitizen.co.tz/tanzania/business/households-feel-the-pinch-as-food-inflation-remains-high-at-7percent-5333238 — local-media — read 2026-11-14
+42. Uber exits Tanzania amidst regulatory squeeze — https://thechanzo.com/2026/02/01/uber-exits-tanzania-amidst-regulatory-squeeze-and-fierce-competition/ — local-media — read 2026-11-14
+43. Wikivoyage, Tanzania — https://en.wikivoyage.org/wiki/Tanzania — blog — read 2026-11-14
+44. Transportation in Dar (forum) — https://www.expat.com/en/forum/africa/tanzania/dar-es-salaam/767601-transportation-in-dar.html — forum — read 2026-11-14
+45. Dar es Salaam post report Q&A — https://talesmag.com/real-post-report-city-question-answers/225/20 — forum — read 2026-11-14
+46. TANESCO–CRDB electricity connection scheme — https://www.riotimesonline.com/tanesco-crdb-electricity-connection-scheme-2026/ — intl-media — read 2026-11-14
+47. Retire in Tanzania: Zanzibar vs mainland — https://www.riotimesonline.com/retire-in-tanzania-foreigners-2026/ — intl-media — read 2026-11-14
+48. Getting around Dar — https://davidhmould.com/southern-africa/2025/8/26/getting-around-dar — blog — read 2026-11-14 (no fares)
+49. What to do in Dar es Salaam in November 2026 (re-read for ticket prices) — https://www.riotimesonline.com/what-to-do-in-dar-es-salaam-in-november-2026/ — intl-media — read 2026-11-14 (no entertainment prices)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] The UK warns of armed crime — corrected (Western Union, not ATM, for £5,000)
 - [safety.general] Election-day protests on 29 Oct 2025 — supported
 - [safety.general] The UK notes anti-foreigner rhetoric — supported
 - [safety.women] Women alone have been verbally harassed — supported
 - [rights.lgbt] Same-sex acts between men carry a minimum of 30 years — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Petrol was capped at TZS 2,752/L — unsupported
+- [cost.negotiation] Brokers (madalali) still usually charge tenants one month's rent — supported
+- [cost.negotiation] Some brokers reportedly raise the rent when the landlord is weak — supported
+- [cost.rent] Sale asking prices per m² — supported (Masaki and outer-area ranges differ slightly from the source's 4.5–7M and 1.1–2M; median TZS 3M matches)

@@ -26,14 +26,27 @@ Extra city (dossier: "other city, official capital"). Currency note: EUR equival
 - [other] Photographing the Parliament buildings is restricted and visits need written permission. — Wikivoyage "Dodoma", accessed 2026-11-14, blog, confidence: low
 - [climate.daily] Semi-arid: about 610 mm of rain a year, mostly December–April; the rest is dry; average lows dip to about 13°C in July. — Wikipedia "Dodoma", accessed 2026-11-14, academic, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Fuel caps from 7 Oct 2026 in Dodoma: petrol TZS 4,156/L (≈ €1.42), diesel 4,185 (≈ €1.43), kerosene 4,166, about TZS 99 above Dar es Salaam. — EWURA cap prices notice, effective 2026-10-07, official, confidence: high
+- [cost.living] Wholesale rice in Dodoma rose from TZS 2,100/kg (≈ €0.72) in Jan 2025 to 2,500 (≈ €0.86) in Jan 2026; beans fell from 3,300 (≈ €1.13) to 2,400 (≈ €0.82). — The Citizen (Ministry of Agriculture data), 2026-01-21, local-media, confidence: high
+- [cost.rent] A cost-of-living estimator (June 2026) gives a 1-bed in the centre at US$208/month, a cheap 1-bed at US$85, a 3-bed in the centre at US$381, and apartments to buy at about US$1,469/m². Model estimates, not listings. — livingcost.org Dodoma, updated 2026-06-21, company, confidence: low
+- [cost.living] Same estimator: milk 1 L US$0.85, bread 500 g US$0.76, rice 1 kg US$1.00, 12 eggs US$1.96, chicken breast 1 kg US$6.81; lunch menu US$3.64; dinner for two US$18.9. — livingcost.org Dodoma, updated 2026-06-21, company, confidence: low
+- [health.care] The estimator puts a doctor's visit at US$17.8, a gym at US$57.6/month and a cinema ticket at US$3.83. — livingcost.org Dodoma, updated 2026-06-21, company, confidence: low
+- [social.sport] The New Dodoma Hotel let non-guests use its gym for TZS 7,000 (≈ €2.4, listing Nov 2019) and pool for TZS 4,000 (≈ €1.37); Kilimanjaro beer there from TZS 2,000 (≈ €0.68). — Wikivoyage "Dodoma", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] A French-language expat blog says Dodoma rents average 30–40% below Dar and that many homes are let directly by owners, which makes negotiating easier. — Cyril Jarnias blog, 2026-01-28, blog, confidence: low
+- [daily.money] Equity, DTB and CRDB ATMs are listed without a withdrawal fee (listings Jun 2023). — Wikivoyage "Dodoma", accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No rent or cost-of-living survey for Dodoma (Numbeo blocked; The Africanvestor has no Dodoma page).
 - No local-media item on Dodoma housing pressure from civil-servant relocation, power cuts or internet.
 - Safety: no dated media or official source specific to Dodoma; a Wikivoyage report of muggings on Lion Rock was left out for that reason.
 - No expat, diaspora or returnee community information.
 - Search budget ran out before targeted "living in Dodoma" searches, so this file stays at 19 items.
+- Price top-up (2026-11-14), searched, not found: real Dodoma rent listings or sale prices (a Swahili-language rent search could not run, budget exhausted; BeForward Dodoma page did not load); SGR fares Dar–Dodoma (TRC fare table empty, Wikipedia gives none); taxi, bajaji and Bolt fares; school fees at Canon Andrea Mwaka; GP fees; electricity tariff; any Dodoma-specific bargaining advice.
 
 ## Sources read
+
 1. Wikipedia, Dodoma — https://en.wikipedia.org/wiki/Dodoma — academic — read 2026-11-14
 2. Wikivoyage, Dodoma — https://en.wikivoyage.org/wiki/Dodoma — blog — read 2026-11-14
 3. Water rationing, dry taps fuel Dar es Salaam residents' outcry (CAG figures for Dodoma) — https://thecitizen.co.tz/tanzania/news/national/water-rationing-dry-taps-fuel-dar-es-salaam-residents-outcry-5585712 — local-media — read 2026-11-14
@@ -42,3 +55,9 @@ Extra city (dossier: "other city, official capital"). Currency note: EUR equival
 6. Living in Tanzania expat guide — https://www.expat.com/en/guide/africa/tanzania/ — blog — read 2026-11-14
 7. UK FCDO Tanzania safety and security — https://www.gov.uk/foreign-travel-advice/tanzania/safety-and-security — official — read 2026-11-14
 8. France Diplomatie, Tanzanie — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/tanzanie/ — official — read 2026-11-14
+9. EWURA cap prices for petroleum products, October 2026 — https://www.ewura.go.tz/uploads/documents/en-1791322203-Petroleum%20Cap%20Prices%20for%20%20October%202026%20%20%20.pdf — official — read 2026-11-14
+10. Households feel the pinch as food inflation remains high — https://thecitizen.co.tz/tanzania/business/households-feel-the-pinch-as-food-inflation-remains-high-at-7percent-5333238 — local-media — read 2026-11-14
+11. Cost of living in Dodoma — https://livingcost.org/cost/tanzania/dodoma — company — read 2026-11-14
+12. Finding housing in Tanzania — https://www.jarniascyril.com/expatriation/find-housing-tanzania-guide-prices-neighborhoods/ — blog — read 2026-11-14
+13. Wikipedia, Tanzania Standard Gauge Railway — https://en.wikipedia.org/wiki/Tanzania_Standard_Gauge_Railway — academic — read 2026-11-14 (no fares)
+14. Tanzania Railways Corporation — https://www.trc.co.tz/ — official — read 2026-11-14 (fare table empty)

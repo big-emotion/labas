@@ -51,15 +51,36 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (Num
 - [nature.access] Residents with valid immigration status pay half the Ngorongoro daily fee: US$35.40 against US$70.80 for non-East African visitors; the crater costs US$295 per vehicle per trip. — The Rio Times, 2026-11-09, intl-media, confidence: medium
 - [rights.lgbt] National law applies: same-sex acts between men carry 30 years to life; public displays of affection can lead to arrest. — Wikipedia "LGBTQ rights in Tanzania" and UK FCDO, accessed 2026-11-14, academic, confidence: high
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Fuel caps from 7 Oct 2026 in Arusha: petrol TZS 4,186/L (≈ €1.43), diesel 4,215 (≈ €1.44), kerosene 4,196, about TZS 129 above Dar es Salaam because of inland transport. — EWURA cap prices notice, effective 2026-10-07, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — EWURA notice figures not reachable; Chanzo confirms only Dar petrol 4,057 (consistent with the +129 gap)
+- [cost.living] Wholesale rice in Arusha was the dearest of six markets surveyed: TZS 3,200/kg (≈ €1.10) in Jan 2025 and 3,300 (≈ €1.13) in Jan 2026; maize rose about TZS 100 and beans fell about 400. — The Citizen (Ministry of Agriculture data), 2026-01-21, local-media, confidence: high
+- [cost.living] A cost-of-living estimator (June 2026) gives milk 1 L US$1.05, bread 500 g US$0.64, rice 1 kg US$0.95, 12 eggs US$1.60, chicken breast 1 kg US$7.67 and shop beer 500 ml US$0.90. Model estimates. — livingcost.org Arusha, updated 2026-06-21, company, confidence: low
+- [cost.living] Same estimator: lunch menu US$3.73, dinner for two US$27.9, pub beer 500 ml US$1.06, cappuccino US$1.74. — livingcost.org Arusha, updated 2026-06-21, company, confidence: low
+- [cost.rent] Same estimator: 1-bed in the centre US$228/month, cheap 1-bed US$160, 3-bed in the centre US$418; apartments to buy about US$1,459/m² in the centre (its suburban house figure of US$6,687/m² looks implausible and is not used). — livingcost.org Arusha, updated 2026-06-21, company, confidence: low
+- [cost.rent] A French-language expat blog puts a 2-bed house with garden in Sombetini or Njiro at US$300–500/month and says Arusha, Dodoma and Mwanza rents average 30–40% below Dar. — Cyril Jarnias blog, 2026-01-28, blog, confidence: low
+- [cost.negotiation] Same blog: many Arusha homes are let directly by owners, "which facilitates negotiation"; brokers (dalali) generally take one month's rent as commission. — Cyril Jarnias blog, 2026-01-28, blog, confidence: low
+- [cost.negotiation] Bargaining is required at the local produce market, where prices range "from dirt-cheap to tourist-expensive"; the Maasai market is not inflated but leaves "a large scope for bargaining". — Wikivoyage "Arusha", accessed 2026-11-14 (undated), blog, confidence: low
+- [cost.negotiation] Touts who walk you to a guesthouse add US$5–10 to the price as their commission; a guide warns against paying over the market price for safaris. — Wikivoyage "Arusha", accessed 2026-11-14 (undated), blog, confidence: low
+- [cost.negotiation] A 2015 listing gives a fair taxi from the bus station as TZS 3,000 (≈ €1.03), "no more than 5,000", and from the centre TZS 5,000 (≈ €1.71), no more than 10,000. — Wikivoyage "Arusha", listing updated 2015-02, blog, confidence: low
+- [daily.transport] Uber stopped operating in Tanzania on 30 Jan 2026, so the Expat.com item above naming Uber in Arusha is out of date; Bolt runs in eight cities. — The Chanzo, 2026-02-01, local-media, confidence: high
+- [health.care] The estimator gives a doctor's visit at US$12.7. — livingcost.org Arusha, updated 2026-06-21, company, confidence: low
+- [social.sport] Gym membership about US$51.5/month (estimator). — livingcost.org Arusha, updated 2026-06-21, company, confidence: low
+- [social.culture] Cinema ticket about US$4.04 (estimator); a taxi to Century Cinema "shouldn't cost more than Tsh 4,000" (≈ €1.37). — livingcost.org 2026-06-21; Wikivoyage "Arusha" (undated), company, confidence: low
+- [family.childcare] Daycare or preschool about US$544/month; the estimator's international primary figure (US$8,806/year) sits below the Expat.com school fees above. — livingcost.org Arusha, updated 2026-06-21, company, confidence: low
+- [daily.money] The DTB ATM on Old Moshi Road charges no fee on Visa and Mastercard (listing Jul 2023). — Wikivoyage "Arusha", listing updated 2023-07, blog, confidence: low
+
 ## Gaps
+
 - No Arusha-specific data on power cuts, water rationing, women's safety, or racism/colourism.
 - No local-media (The Citizen, Daily News, Mwananchi) article specific to Arusha living costs was found before the search budget ran out.
 - No returnee, diaspora or francophone testimony found; return.experience and community.returnee are empty.
 - No 2026 rent survey exists per The Rio Times; Numbeo rests on 6 contributors.
 - Nightlife: Wikivoyage club listings are years old and were not used; safety claims in Wikivoyage (muggings on Old Moshi Rd, 2013–14 bombings) were left out for lack of a dated media or official source.
 - Startup or investment scene in Arusha: not found.
+- Price top-up (2026-11-14), searched, not found: sale prices in Njiro or other areas (portal pages did not load; search budget exhausted); Arusha deposit or agency-fee customs beyond national guides; electricity tariff (TANESCO page certificate error); mobile data bundles; Arusha school fees beyond Expat.com; GP fees from a named clinic; club entry and concert prices beyond the November events above; November 2026 fuel caps per town (only the October EWURA table was readable).
 
 ## Sources read
+
 1. Wikipedia, Arusha — https://en.wikipedia.org/wiki/Arusha — academic — read 2026-11-14
 2. Wikivoyage, Arusha — https://en.wikivoyage.org/wiki/Arusha — blog — read 2026-11-14
 3. Living in Tanzania expat guide — https://www.expat.com/en/guide/africa/tanzania/ — blog — read 2026-11-14 (served at https://www.expat.com/en/guide/africa/tanzania/arusha/)
@@ -75,3 +96,14 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (Num
 13. National power grid failure — https://thechanzo.com/2026/06/28/national-power-grid-failure-plunges-nation-into-darkness-for-hours/ — local-media — read 2026-11-14
 14. UK FCDO Tanzania safety and security — https://www.gov.uk/foreign-travel-advice/tanzania/safety-and-security — official — read 2026-11-14
 15. Wikipedia, LGBTQ rights in Tanzania — https://en.wikipedia.org/wiki/LGBTQ_rights_in_Tanzania — academic — read 2026-11-14
+16. EWURA cap prices for petroleum products, October 2026 — https://www.ewura.go.tz/uploads/documents/en-1791322203-Petroleum%20Cap%20Prices%20for%20%20October%202026%20%20%20.pdf — official — read 2026-11-14
+17. Households feel the pinch as food inflation remains high — https://thecitizen.co.tz/tanzania/business/households-feel-the-pinch-as-food-inflation-remains-high-at-7percent-5333238 — local-media — read 2026-11-14
+18. Cost of living in Arusha — https://livingcost.org/cost/tanzania/arusha — company — read 2026-11-14
+19. Finding housing in Tanzania — https://www.jarniascyril.com/expatriation/find-housing-tanzania-guide-prices-neighborhoods/ — blog — read 2026-11-14
+20. Uber exits Tanzania amidst regulatory squeeze — https://thechanzo.com/2026/02/01/uber-exits-tanzania-amidst-regulatory-squeeze-and-fierce-competition/ — local-media — read 2026-11-14
+21. Wikivoyage, Arusha (re-read for prices and bargaining) — https://en.wikivoyage.org/wiki/Arusha — blog — read 2026-11-14
+22. Sugar prices increase across Tanzania — https://www.thecitizen.co.tz/tanzania/business/sugar-prices-increase-across-tanzania-due-to-supply-shortages-5511584 — local-media — read 2026-11-14 (no Arusha figure)
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Fuel caps from 7 Oct 2026 in Arusha — unsupported

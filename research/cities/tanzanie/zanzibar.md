@@ -72,15 +72,38 @@ Scope: Zanzibar City / Stone Town on Unguja, plus the island areas residents com
 - [rights.lgbt] Zanzibar's penal code (toughened in 2004 after pressure from Islamic groups) punishes male same-sex acts with up to 14 years, female acts with up to 5 and same-sex unions with up to 7. — Wikipedia "LGBTQ rights in Tanzania", accessed 2026-11-14, academic, confidence: high
 - [other] VAT is 15% in Zanzibar (18% on banking, telecom, insurance and digital services) versus 18% on the mainland. — The Rio Times "Taxes in Tanzania for expats", 2026, intl-media, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Zanzibar's regulator caps petrol at TZS 3,740/L (≈ €1.28), diesel and kerosene at 3,840 (≈ €1.32), below the mainland caps; the notice is undated on the homepage (file name suggests September 2026). — ZURA homepage, accessed 2026-11-14, official, confidence: medium
+- [cost.living] Retail sugar reached TZS 3,000/kg (≈ €1.03) in some areas in June 2026, up from 2,800 (≈ €0.96). — The Citizen, 2026-06-28, local-media, confidence: high
+- [cost.living] Zanzibar cut VAT on imported sugar, rice and wheat flour from 25% to 6%, while freight for a 20-ft container from China or India rose from US$3,600 to US$4,600; rice and flour pay US$200/tonne duty. — The Citizen, 2026-09-14, local-media, confidence: high
+- [cost.living] Numbeo (8 contributors, 19 Jun 2026) shows milk at US$2.08/L in Zanzibar against US$0.84 in Dar; "island prices run higher for many goods". — The Rio Times "Retire in Tanzania", 2026-09, intl-media, confidence: low
+- [cost.living] A cost-of-living estimator (June 2026) gives milk 1 L US$1.77, bread 500 g US$0.64, rice 1 kg US$0.70, 12 eggs US$2.39 and shop beer 500 ml US$1.43; its chicken figure (US$2.31/kg) looks implausibly low. Model estimates. — livingcost.org Zanzibar, updated 2026-06-21, company, confidence: low
+- [cost.living] Same estimator: lunch menu US$4.14, dinner for two US$18.7, pub beer 500 ml US$1.83, cappuccino US$2.18; gym US$29.8/month; cinema US$9.44. — livingcost.org Zanzibar, updated 2026-06-21, company, confidence: low
+- [cost.living] Electricity, water and internet together run about US$80–150/month for one person and US$120–200 for a family. — Expat.com Zanzibar guide, updated 2025-12-09, blog, confidence: medium
+- [cost.rent] A French-language expat blog puts small Stone Town spaces at US$25–35/m² per month and a furnished studio or flat in Mbweni at about US$800/month. — Cyril Jarnias blog, 2026-01-28, blog, confidence: low
+- [cost.negotiation] Demand for rentals is lowest from March to May, when some landlords become more flexible; good furnished units let in 15–30 days while overpriced ones sit 90+ days. — The Africanvestor "Zanzibar rents", updated 2026-09-21, company, confidence: medium
+- [cost.negotiation] Taxis have a published fare list, yet "prices are negotiable"; private cars run 10–20% below official taxis; sellers bargain more readily when paid in dollars or euros. — Wikivoyage "Zanzibar", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Foreigners already pay "around 2½ times the local price" on the Dar ferry; hotels add a commission on airport pick-ups that a little bargaining beats. — Wikivoyage "Zanzibar", accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Taxi airport–Nungwi about TZS 65,000 (≈ €22); airport or Stone Town–Paje from TZS 50,000 (≈ €17); a shared taxi costs US$10 a person for any trip on the island. Undated guide prices. — Wikivoyage "Zanzibar", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Stone Town advice: always haggle with vendors, walk the curio market first because prices drop further in; budget rooms at TZS 45k–90k (≈ €15–31) are after bargaining, best in low season. — Wikivoyage "Zanzibar City", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Cloves in tourist tins near Forodhani can cost 3–5 times the Darajani price; a market guide suggests opening at 50–60% of the first quote and paying in shillings. — Nomado Travel "Zanzibar markets guide", 2026 (undated), blog, confidence: low
+- [social.food] Darajani prices: whole cloves 100 g TZS 3,000–5,000 (≈ €1.03–1.71), a cooked plate of rice, beans and fish TZS 2,000–4,000 (≈ €0.68–1.37), a good kanga pair TZS 8,000–20,000 (≈ €2.7–6.8); Zanzibar pizza at Forodhani TZS 3,000–6,000 (≈ €1.03–2.05). — Nomado Travel "Zanzibar markets guide", 2026 (undated), blog, confidence: low
+- [cost.negotiation] A resident blogger found Darajani vendors refusing to bargain on bread and eggs; fish and meat went for about 2/3–3/4 of asking in the afternoon, and volume discounts started near TZS 10,000 (≈ €3.4). — Discover Discomfort, 2019 (updated 2023-07-04), blog, confidence: low
+- [health.care] The estimator puts a doctor's visit at US$25.8; basic international health insurance runs US$100–200/month for one person, retiree cover with evacuation US$2,000–5,000/year. — livingcost.org 2026-06-21; Expat.com Zanzibar guide 2025-12-09, blog, confidence: low
+- [family.schools] The State University of Zanzibar charges international students from about US$2,500 a year. — Expat.com Zanzibar guide, updated 2025-12-09, blog, confidence: medium
+
 ## Gaps
+
 - No Zanzibar-specific minimum wage or salary data for locals was found.
 - No diaspora or returnee testimony (Zanzibari or Afro-descendant) was found; Expat Exchange "Living in Zanzibar" returned HTTP 403, and the Expat.com forum threads opened (2018–2023) had no practical figures.
 - Racism or colourism: no dated source. Alcohol rules and Ramadan opening hours: only general mentions.
 - Water supply hours in Zanzibar City (as opposed to North Unguja projects) not found; the IPP Media article returned 403.
 - Women's safety beyond the UK advisory: no dated local source.
 - Search budget ran out before searches on Zanzibar dress-code regulations, school fees and hospital options could run.
+- Price top-up (2026-11-14), searched, not found: ZECO electricity tariff per kWh; Fumba Town unit prices (project pages show no prices); agency-fee custom specific to Zanzibar; Bolt fares on the island; club entry, gym and concert prices from a dated local source; British School of Zanzibar fees; ISZ tuition by grade beyond the item above. BeForward Zanzibar listings did not load.
 
 ## Sources read
+
 1. Zanzibar expat guide — https://www.expat.com/en/guide/africa/tanzania/zanzibar/ — blog — read 2026-11-14
 2. Living in Tanzania expat guide — https://www.expat.com/en/guide/africa/tanzania/ — blog — read 2026-11-14
 3. Zanzibar rents (2026) — https://theafricanvestor.com/blogs/news/zanzibar-rents — company — read 2026-11-14
@@ -110,8 +133,22 @@ Scope: Zanzibar City / Stone Town on Unguja, plus the island areas residents com
 27. Healthcare in Tanzania for expats 2026 — https://www.riotimesonline.com/healthcare-tanzania-expats-2026/ — intl-media — read 2026-11-14
 28. Is Tanzania safe for expats 2026 — https://www.riotimesonline.com/is-tanzania-safe-expats-2026/ — intl-media — read 2026-11-14
 29. Taxes in Tanzania for expats 2026 — https://www.riotimesonline.com/taxes-tanzania-expats-2026/ — intl-media — read 2026-11-14
-
+30. ZURA homepage (fuel caps) — https://www.zura.go.tz/ — official — read 2026-11-14
+31. Sugar prices increase across Tanzania — https://www.thecitizen.co.tz/tanzania/business/sugar-prices-increase-across-tanzania-due-to-supply-shortages-5511584 — local-media — read 2026-11-14
+32. Why commodity prices are rising in Zanzibar — https://thecitizen.co.tz/tanzania/zanzibar/why-commodity-prices-are-rising-in-zanzibar-5594736 — local-media — read 2026-11-14
+33. Cost of living in Zanzibar — https://livingcost.org/cost/tanzania/zanzibar — company — read 2026-11-14
+34. Finding housing in Tanzania — https://www.jarniascyril.com/expatriation/find-housing-tanzania-guide-prices-neighborhoods/ — blog — read 2026-11-14
+35. Wikivoyage, Zanzibar — https://en.wikivoyage.org/wiki/Zanzibar — blog — read 2026-11-14
+36. Zanzibar markets guide — https://www.nomadotravel.app/en/guides/zanzibar-markets-guide — blog — read 2026-11-14
+37. Living in Zanzibar: seven things we didn't expect — https://discoverdiscomfort.com/living-in-zanzibar-things-we-didnt-expect/ — blog — read 2026-11-14
+38. Fumba Town curated homes — https://fumba.town/curated-homes/ — company — read 2026-11-14 (no prices)
 
 ## Spot-check (2026-11-14)
+
 - [rights.lgbt] Zanzibar's penal code — supported
 - [safety.women] Shorts or sleeveless tops — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Retail sugar reached TZS 3,000/kg — supported
+- [cost.living] Zanzibar cut VAT on imported sugar, rice and wheat flour — supported
