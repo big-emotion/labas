@@ -1,1 +1,972 @@
-[]
+[
+  {
+    "name": "Lagos",
+    "file": "lagos.jpg",
+    "title": "File:Lagos Island City Scape.jpg",
+    "author": "Jamie Tubers",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lagos_Island_City_Scape.jpg",
+    "alt": "Immeubles du centre de Lagos Island vus depuis l'hôtel de ville"
+  },
+  {
+    "name": "Dakar",
+    "file": "dakar.jpg",
+    "title": "File:La corniche Ouest de Dakar.jpg",
+    "author": "Mouhamadou86",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:La_corniche_Ouest_de_Dakar.jpg",
+    "alt": "La corniche Ouest de Dakar, route au bord de l'océan"
+  },
+  {
+    "name": "Douala",
+    "file": "douala.jpg",
+    "title": "File:Pont Wouri 1.jpg",
+    "author": "Steve Mvondo",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pont_Wouri_1.jpg",
+    "alt": "Le pont sur le fleuve Wouri à Douala"
+  },
+  {
+    "name": "Addis-Abeba",
+    "file": "addis-abeba.jpg",
+    "title": "File:Addis Ababa street scene (5).jpg",
+    "author": "Radosław Botev",
+    "license": "CC BY 3.0 pl",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Addis_Ababa_street_scene_(5).jpg",
+    "alt": "L'avenue Churchill à Addis-Abeba, avec immeubles, voitures et passants"
+  },
+  {
+    "name": "Kigali",
+    "file": "kigali.jpg",
+    "title": "File:Kigali2018Cropped.jpg",
+    "author": "Adrien K",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kigali2018Cropped.jpg",
+    "alt": "Le centre de Kigali et ses collines éclairées à la tombée de la nuit"
+  },
+  {
+    "name": "Durban",
+    "file": "durban.jpg",
+    "title": "File:Durban Beachfront (696917681).jpg",
+    "author": "Chris Bloom from Durban, South Africa",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Durban_Beachfront_(696917681).jpg",
+    "alt": "Le front de mer de Durban, sa jetée et ses immeubles face à la plage"
+  },
+  {
+    "name": "Le Caire",
+    "file": "le-caire.jpg",
+    "title": "File:Kairo 02.jpg",
+    "author": "Olaf Tausch",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kairo_02.jpg",
+    "alt": "Le Nil et le quartier de Garden City au Caire, vus depuis l'île de Gezira"
+  },
+  {
+    "name": "Tunis",
+    "file": "tunis.jpg",
+    "title": "File:TunisAveHabibBourguiba.jpg",
+    "author": "Dacoslett",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:TunisAveHabibBourguiba.jpg",
+    "alt": "L'avenue Habib-Bourguiba à Tunis, bordée d'arbres, vers le port"
+  },
+  {
+    "name": "Freetown",
+    "file": "freetown.jpg",
+    "title": "File:Freetown street (13992704238).jpg",
+    "author": "Erik Cleves Kristensen",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Freetown_street_(13992704238).jpg",
+    "alt": "Une rue commerçante animée de Freetown, avec étals et parasols"
+  },
+  {
+    "name": "Bissau",
+    "file": "bissau.jpg",
+    "title": "File:View of Bissau Velho, Bissau.jpg",
+    "author": "Jcornelius",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:View_of_Bissau_Velho,_Bissau.jpg",
+    "alt": "Le vieux quartier de Bissau, ses maisons coloniales et sa place"
+  },
+  {
+    "name": "Nouakchott",
+    "file": "nouakchott.jpg",
+    "title": "File:15-Nouakchott-eH-R0058185.jpg",
+    "author": "Laminesall96",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:15-Nouakchott-eH-R0058185.jpg",
+    "alt": "Le centre-ville de Nouakchott vu d'en haut, avec avenues et immeubles bas"
+  },
+  {
+    "name": "Malabo",
+    "file": "malabo.jpg",
+    "title": "File:Panoramic view of Malabo.jpg",
+    "author": "Amitsawant0812",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Malabo.jpg",
+    "alt": "Vue panoramique de quartiers récents de Malabo, entre verdure et avenues"
+  },
+  {
+    "name": "Djibouti",
+    "file": "djibouti.jpg",
+    "title": "File:Djibouti, Djibouti ville.jpg",
+    "author": "Clovis conchou",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Djibouti,_Djibouti_ville.jpg",
+    "alt": "Une place de Djibouti-ville avec ses taxis verts et blancs"
+  },
+  {
+    "name": "Antananarivo",
+    "file": "antananarivo.jpg",
+    "title": "File:Lac anosy Antananarivo 2019-10-02 .jpg",
+    "author": "Z thomas",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lac_anosy_Antananarivo_2019-10-02_.jpg",
+    "alt": "Le lac Anosy et la haute ville d'Antananarivo sur sa colline"
+  },
+  {
+    "name": "Lilongwe",
+    "file": "lilongwe.jpg",
+    "title": "File:Lilongwe City Centre.JPG",
+    "author": "Malawiana",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Lilongwe_City_Centre.JPG",
+    "alt": "Une galerie couverte de Centre House, dans le centre de Lilongwe"
+  },
+  {
+    "name": "Mbabane",
+    "file": "mbabane.jpg",
+    "title": "File:Mbabane, Kingdom.jpg",
+    "author": "Bakhile",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mbabane,_Kingdom.jpg",
+    "alt": "Le carrefour de la route Dr Sishayi à Mbabane, un jour de pluie"
+  },
+  {
+    "name": "Victoria",
+    "file": "victoria.jpg",
+    "title": "File:Victoria Clock Tower 1.jpg",
+    "author": "Vasilii Martynov",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Victoria_Clock_Tower_1.jpg",
+    "alt": "La tour de l'horloge au centre de Victoria, sous les montagnes de Mahé"
+  },
+  {
+    "name": "San-Pédro",
+    "file": "san-pedro.jpg",
+    "title": "File:Plage à San-Pédro en 2024 15.jpg",
+    "author": "Dadrik",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Plage_%C3%A0_San-P%C3%A9dro_en_2024_15.jpg",
+    "alt": "La plage du Rocher des amoureux à San-Pédro, bordée de palmiers"
+  },
+  {
+    "name": "Saly",
+    "file": "saly.jpg",
+    "title": "File:Plage de Saly (Sénégal).jpg",
+    "author": "Davric",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Plage_de_Saly_(S%C3%A9n%C3%A9gal).jpg",
+    "alt": "La plage de Saly, ses paillotes et ses palmiers face à la mer"
+  },
+  {
+    "name": "Bubaque",
+    "file": "bubaque.jpg",
+    "title": "File:Bubaque port.jpg",
+    "author": "Nammarci",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bubaque_port.jpg",
+    "alt": "Le port de Bubaque, avec un bateau amarré au quai"
+  },
+  {
+    "name": "Nouadhibou",
+    "file": "nouadhibou.jpg",
+    "title": "File:Nouadhibou,BlvdMedian.jpg",
+    "author": "Bertramz",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nouadhibou,BlvdMedian.jpg",
+    "alt": "Le boulevard Médian de Nouadhibou en fin de journée"
+  },
+  {
+    "name": "Kribi",
+    "file": "kribi.jpg",
+    "title": "File:Kribi.jpg",
+    "author": "ymea",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Kribi.jpg",
+    "alt": "Une plage de Kribi bordée de cocotiers et de pirogues"
+  },
+  {
+    "name": "Port-Gentil",
+    "file": "port-gentil.jpg",
+    "title": "File:POG-Street 1.jpg",
+    "author": "Brian Ecton",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:POG-Street_1.jpg",
+    "alt": "Une avenue de Port-Gentil bordée de maisons et de lampadaires"
+  },
+  {
+    "name": "Moundou",
+    "file": "moundou.jpg",
+    "title": "File:Rond point de Moundou.jpg",
+    "author": "Korom10",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Rond_point_de_Moundou.jpg",
+    "alt": "Le monument du rond-point de Moundou, entouré d'arbres"
+  },
+  {
+    "name": "Zanzibar",
+    "file": "zanzibar.jpg",
+    "title": "File:Puerto de Stone Town, Zanzíbar, Tanzania, 2024-05-31, DD 02.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Puerto_de_Stone_Town,_Zanz%C3%ADbar,_Tanzania,_2024-05-31,_DD_02.jpg",
+    "alt": "Le port de Stone Town à Zanzibar, ses façades et ses pontons"
+  },
+  {
+    "name": "Rubavu",
+    "file": "rubavu.jpg",
+    "title": "File:Gisenyi view at kivu lac.jpg",
+    "author": "Davyimage",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gisenyi_view_at_kivu_lac.jpg",
+    "alt": "Le lac Kivu et une colline de Rubavu sous un ciel bleu"
+  },
+  {
+    "name": "Massaoua",
+    "file": "massaoua.jpg",
+    "title": "File:Historic Center Massawa Panorama.JPG",
+    "author": "Reinhard Dietrich",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Historic_Center_Massawa_Panorama.JPG",
+    "alt": "Le centre historique de Massaoua face aux eaux turquoise de la mer Rouge"
+  },
+  {
+    "name": "Assouan",
+    "file": "assouan.jpg",
+    "title": "File:Aswan Nile R02.jpg",
+    "author": "Marc Ryckaert",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Aswan_Nile_R02.jpg",
+    "alt": "Le Nil à Assouan et l'hôtel Old Cataract sur la rive"
+  },
+  {
+    "name": "Sousse",
+    "file": "sousse.jpg",
+    "title": "File:Sousse, the Medina 1.jpg",
+    "author": "Poliphilo",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Sousse,_the_Medina_1.jpg",
+    "alt": "Une rue piétonne animée du centre de Sousse, bordée de palmiers"
+  },
+  {
+    "name": "Nosy Be",
+    "file": "nosy-be.jpg",
+    "title": "File:Ville de Nosy Be Hell ville.jpg",
+    "author": "Anai171",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ville_de_Nosy_Be_Hell_ville.jpg",
+    "alt": "La baie de Hell-Ville à Nosy Be, avec voiliers et collines vertes"
+  },
+  {
+    "name": "Blantyre",
+    "file": "blantyre.jpg",
+    "title": "File:Blantyre City.jpg",
+    "author": "SMuyila",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Blantyre_City.jpg",
+    "alt": "Une avenue du centre de Blantyre et ses immeubles de bureaux"
+  },
+  {
+    "name": "Manzini",
+    "file": "manzini.jpg",
+    "title": "File:Ex Tum's George Hotel Manzini Swaziland.jpg",
+    "author": "Entropy1963",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Ex_Tum%27s_George_Hotel_Manzini_Swaziland.jpg",
+    "alt": "La terrasse ombragée d'un hôtel du centre de Manzini"
+  },
+  {
+    "name": "Praslin",
+    "file": "praslin.jpg",
+    "title": "File:Anse Lazio Praslin Seychelles 1.jpg",
+    "author": "Radosław Botev",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Anse_Lazio_Praslin_Seychelles_1.jpg",
+    "alt": "La plage d'Anse Lazio à Praslin, sable blanc et eau turquoise"
+  },
+  {
+    "name": "Abidjan",
+    "file": "abidjan.jpg",
+    "title": "File:Le Plateau depuis le Pont ADO – Abidjan.jpg",
+    "author": "Edison McCullen",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Le_Plateau_depuis_le_Pont_ADO_%E2%80%93_Abidjan.jpg",
+    "alt": "Les tours du Plateau illuminées la nuit, reflétées dans la lagune Ébrié"
+  },
+  {
+    "name": "Cotonou",
+    "file": "cotonou.jpg",
+    "title": "File:Vue panoramique du quartier à Cadjéhoun à Cotonou au Bénin 01.jpg",
+    "author": "Adoscam",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Vue_panoramique_du_quartier_%C3%A0_Cadj%C3%A9houn_%C3%A0_Cotonou_au_B%C3%A9nin_01.jpg",
+    "alt": "Toits de tuiles et palmiers du quartier de Cadjéhoun, vus depuis un immeuble"
+  },
+  {
+    "name": "Luanda",
+    "file": "luanda.jpg",
+    "title": "File:Marginal Avenida 4 de Fevreiro Luanda March 2013 13 (cropped).JPG",
+    "author": "Fabio Vanin",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marginal_Avenida_4_de_Fevreiro_Luanda_March_2013_13_(cropped).JPG",
+    "alt": "Tours de la Marginal de Luanda et grues de chantier sous un ciel nuageux"
+  },
+  {
+    "name": "Dar es Salaam",
+    "file": "dar-es-salaam.jpg",
+    "title": "File:The waterfront of Dar es Salaam.JPG",
+    "author": "Chen Hualin",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:The_waterfront_of_Dar_es_Salaam.JPG",
+    "alt": "Le front de mer de Dar es Salaam et sa tour, vus depuis l'eau du port"
+  },
+  {
+    "name": "Johannesburg",
+    "file": "johannesburg.jpg",
+    "title": "File:Johannesburg skyline 2017.jpg",
+    "author": "Mark Hillary",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+    "alt": "Vue en hauteur du centre de Johannesburg, ses tours et ses voies ferrées"
+  },
+  {
+    "name": "Maputo",
+    "file": "maputo.jpg",
+    "title": "File:Avenida Samora Machel, Maputo.jpg",
+    "author": "Claus Wonnemann",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Avenida_Samora_Machel,_Maputo.jpg",
+    "alt": "L'avenue Samora Machel bordée de palmiers et d'immeubles, au centre de Maputo"
+  },
+  {
+    "name": "Casablanca",
+    "file": "casablanca.jpg",
+    "title": "File:Sunrise in Casablanca with Hassan II Mosque.jpg",
+    "author": "SpreeTom",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunrise_in_Casablanca_with_Hassan_II_Mosque.jpg",
+    "alt": "Les immeubles blancs de Casablanca au lever du jour, la mosquée Hassan II au loin"
+  },
+  {
+    "name": "Marrakech",
+    "file": "marrakech.jpg",
+    "title": "File:Jemaa el-Fnaa Marrakech at sunset.jpg",
+    "author": "Herokk",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jemaa_el-Fnaa_Marrakech_at_sunset.jpg",
+    "alt": "La place Jemaa el-Fna animée au coucher du soleil, le minaret de la Koutoubia au fond"
+  },
+  {
+    "name": "Monrovia",
+    "file": "monrovia.jpg",
+    "title": "File:2010 Broad Street in Monrovia Liberia 5261386145.jpg",
+    "author": "nickfraser",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2010_Broad_Street_in_Monrovia_Liberia_5261386145.jpg",
+    "alt": "Un carrefour de Broad Street à Monrovia, avec son monument et ses commerces"
+  },
+  {
+    "name": "Banjul",
+    "file": "banjul.jpg",
+    "title": "File:Banjul 001 atamari.JPG",
+    "author": "Atamari",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Banjul_001_atamari.JPG",
+    "alt": "Maisons basses et palmiers de Banjul, vus depuis le haut de l'Arch 22"
+  },
+  {
+    "name": "Brazzaville",
+    "file": "brazzaville.jpg",
+    "title": "File:Route au bord de la ville de Brazzaville Corniche Bokoba veroly.jpg",
+    "author": "Bokoba veroly",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Route_au_bord_de_la_ville_de_Brazzaville_Corniche_Bokoba_veroly.jpg",
+    "alt": "La corniche de Brazzaville longeant le fleuve Congo, bordée d'arbres"
+  },
+  {
+    "name": "São Tomé",
+    "file": "sao-tome.jpg",
+    "title": "File:Org 4cd8129a56d8fa1d 1582100284000.jpg",
+    "author": "wsrolim",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Org_4cd8129a56d8fa1d_1582100284000.jpg",
+    "alt": "La baie d'Ana Chaves et les maisons de São Tomé entourées de verdure"
+  },
+  {
+    "name": "Bujumbura",
+    "file": "bujumbura.jpg",
+    "title": "File:Cathédrale Regina Mundi de Bujumbura, 2024-2.jpg",
+    "author": "Edouard mhg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Cath%C3%A9drale_Regina_Mundi_de_Bujumbura,_2024-2.jpg",
+    "alt": "La cathédrale Regina Mundi de Bujumbura et son clocher sous un ciel bleu"
+  },
+  {
+    "name": "Lusaka",
+    "file": "lusaka.jpg",
+    "title": "File:Cairo Road - Hauptstraße im Stadtzentrum.jpg",
+    "author": "Mutinondo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cairo_Road_-_Hauptstra%C3%9Fe_im_Stadtzentrum.jpg",
+    "alt": "Boutiques et voitures garées sur Cairo Road, la grande rue commerçante de Lusaka"
+  },
+  {
+    "name": "Windhoek",
+    "file": "windhoek.jpg",
+    "title": "File:Windhoek-Skyline.jpg",
+    "author": "Bries",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:Windhoek-Skyline.jpg",
+    "alt": "Le centre de Windhoek et ses collines, avec l'église Christuskirche au loin"
+  },
+  {
+    "name": "Maseru",
+    "file": "maseru.jpg",
+    "title": "File:Maseru Kingsway Road seen from Oblate House to the east.jpg",
+    "author": "Ymblanter",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Maseru_Kingsway_Road_seen_from_Oblate_House_to_the_east.jpg",
+    "alt": "Kingsway Road, l'avenue principale de Maseru, avec ses voitures et ses arbres"
+  },
+  {
+    "name": "Abuja",
+    "file": "abuja.jpg",
+    "title": "File:Abuja city gate.jpg",
+    "author": "Fawaz.tairou",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Abuja_city_gate.jpg",
+    "alt": "La porte blanche à l'entrée d'Abuja, au bord d'une route bordée de verdure"
+  },
+  {
+    "name": "Kumasi",
+    "file": "kumasi.jpg",
+    "title": "File:Kronum Kumasi 2018-11-08 (130246).jpg",
+    "author": "Maven Egote",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kronum_Kumasi_2018-11-08_(130246).jpg",
+    "alt": "Les toits colorés du quartier de Kronum à Kumasi sous un grand ciel bleu"
+  },
+  {
+    "name": "Ouidah",
+    "file": "ouidah.jpg",
+    "title": "File:The city of Ouidah.jpg",
+    "author": "DEGAN Gabin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:The_city_of_Ouidah.jpg",
+    "alt": "L'arche « Cité historique de Ouidah » décorée de tableaux, à l'entrée de la ville"
+  },
+  {
+    "name": "Serrekunda",
+    "file": "serrekunda.jpg",
+    "title": "File:Serrekunda (14614132485).jpg",
+    "author": "Maarten van der Bent",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Serrekunda_(14614132485).jpg",
+    "alt": "Une rue commerçante de Serrekunda, avec taxis jaunes et étals sous parasols"
+  },
+  {
+    "name": "Lubumbashi",
+    "file": "lubumbashi.jpg",
+    "title": "File:Downtown Lubumbashi, Democratic Republic of the Congo - 20061130.jpg",
+    "author": "Oasisk.",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:Downtown_Lubumbashi,_Democratic_Republic_of_the_Congo_-_20061130.jpg",
+    "alt": "Une avenue du centre de Lubumbashi bordée d'immeubles à arcades et de passants"
+  },
+  {
+    "name": "Benguela",
+    "file": "benguela.jpg",
+    "title": "File:Igreja Benguela, Angola.jpg",
+    "author": "F H Mira",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Igreja_Benguela,_Angola.jpg",
+    "alt": "L'ancienne église jaune de Benguela éclairée par le soleil du soir"
+  },
+  {
+    "name": "Bata",
+    "file": "bata.jpg",
+    "title": "File:Spanish Cultural Centre - panoramio.jpg",
+    "author": "tadpolefarm",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Spanish_Cultural_Centre_-_panoramio.jpg",
+    "alt": "Le Centre culturel espagnol de Bata et son esplanade au crépuscule"
+  },
+  {
+    "name": "Mombasa",
+    "file": "mombasa.jpg",
+    "title": "File:Downtown Mombasa.jpg",
+    "author": "Victor Ochieng",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Downtown_Mombasa.jpg",
+    "alt": "Les tours et la rue animée du centre de Mombasa sous un ciel bleu"
+  },
+  {
+    "name": "Arusha",
+    "file": "arusha.jpg",
+    "title": "File:Arusha City view.jpg",
+    "author": "Halidtz",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Arusha_City_view.jpg",
+    "alt": "La ville d'Arusha vue en hauteur, avec le mont Meru en arrière-plan"
+  },
+  {
+    "name": "Gitega",
+    "file": "gitega.jpg",
+    "title": "File:Centre ville de Gitega.jpg",
+    "author": "NIHEREWENIMANA Richard",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Centre_ville_de_Gitega.jpg",
+    "alt": "Un rond-point du centre de Gitega entouré d'arbres et de palmiers"
+  },
+  {
+    "name": "Hargeisa",
+    "file": "hargeisa.jpg",
+    "title": "File:Hargeisa, 2024.jpg",
+    "author": "Mheidegger",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Hargeisa,_2024.jpg",
+    "alt": "Les rues et les maisons d'un quartier d'Hargeisa, vus depuis une colline"
+  },
+  {
+    "name": "Tanger",
+    "file": "tanger.jpg",
+    "title": "File:Tangier - 44699733295.jpg",
+    "author": "Mike McBey",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tangier_-_44699733295.jpg",
+    "alt": "La médina de Tanger et ses immeubles au-dessus du port de pêche"
+  },
+  {
+    "name": "Vilankulo",
+    "file": "vilankulo.jpg",
+    "title": "File:Vilankulos, RTW 2012 (8356568867).jpg",
+    "author": "Ana Raquel S. Hernandes from Sao Paulo, Brazil",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Vilankulos,_RTW_2012_(8356568867).jpg",
+    "alt": "La plage de Vilankulo à marée basse, une barque sur l'eau turquoise"
+  },
+  {
+    "name": "Livingstone",
+    "file": "livingstone.jpg",
+    "title": "File:Livingstone.Zambia.jpg",
+    "author": "YWAM Livingstone",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Livingstone.Zambia.jpg",
+    "alt": "La rue principale de Livingstone bordée d'arbres, vue depuis un étage"
+  },
+  {
+    "name": "Swakopmund",
+    "file": "swakopmund.jpg",
+    "title": "File:Swakopmund 10.jpg",
+    "author": "FrankBothe",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Swakopmund_10.jpg",
+    "alt": "Maisons de style colonial au bord d'une rue et d'une pelouse à Swakopmund"
+  },
+  {
+    "name": "Accra",
+    "file": "accra.jpg",
+    "title": "File:Accra Skyline.jpg",
+    "author": "Synth85",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Accra_Skyline.jpg",
+    "alt": "Les tours du centre d'Accra sous un ciel dégagé"
+  },
+  {
+    "name": "Kinshasa",
+    "file": "kinshasa.jpg",
+    "title": "File:2013 Boulevard du 30 Juin Kinshasa 8756682965.jpg",
+    "author": "Antoine Moens de Hase",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2013_Boulevard_du_30_Juin_Kinshasa_8756682965.jpg",
+    "alt": "Le boulevard du 30 Juin, grande avenue bordée d'immeubles à Kinshasa"
+  },
+  {
+    "name": "Nairobi",
+    "file": "nairobi.jpg",
+    "title": "File:Skyline of Nairobi city as seen from Uhuru Park.jpg",
+    "author": "DesiBoy101",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Skyline_of_Nairobi_city_as_seen_from_Uhuru_Park.jpg",
+    "alt": "Les tours du centre de Nairobi vues depuis la verdure d'Uhuru Park"
+  },
+  {
+    "name": "Kampala",
+    "file": "kampala.jpg",
+    "title": "File:Skyline of Kampala.jpg",
+    "author": "Flöschen",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Skyline_of_Kampala.jpg",
+    "alt": "Les tours du centre de Kampala, avec un taxi collectif au premier plan"
+  },
+  {
+    "name": "Le Cap",
+    "file": "le-cap.jpg",
+    "title": "File:Cape Town (ZA), Wale Street -- 2024 -- 3544.jpg",
+    "author": "Dietmar Rabich",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Wale_Street_--_2024_--_3544.jpg",
+    "alt": "Maisons colorées de Wale Street, dans le quartier de Bo-Kaap au Cap"
+  },
+  {
+    "name": "Port-Louis",
+    "file": "port-louis.jpg",
+    "title": "File:Port Louis Waterfront. (6719488523).jpg",
+    "author": "carrotmadman6 from Mauritius",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Port_Louis_Waterfront._(6719488523).jpg",
+    "alt": "Le front de mer du Caudan à Port-Louis, entre bassin et immeubles"
+  },
+  {
+    "name": "Alger",
+    "file": "alger.jpg",
+    "title": "File:Alger-Grande-Poste-1.jpg",
+    "author": "Ludovic Courtès",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Alger-Grande-Poste-1.jpg",
+    "alt": "La Grande Poste d'Alger, bâtiment blanc de style néo-mauresque"
+  },
+  {
+    "name": "Lomé",
+    "file": "lome.jpg",
+    "title": "File:Lomé Grand Marché with the Cathédrale du Sacré Coeur (33592985581).jpg",
+    "author": "Dan Sloan",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lom%C3%A9_Grand_March%C3%A9_with_the_Cath%C3%A9drale_du_Sacr%C3%A9_Coeur_(33592985581).jpg",
+    "alt": "Le grand marché de Lomé, avec la cathédrale du Sacré-Cœur derrière les étals"
+  },
+  {
+    "name": "Conakry",
+    "file": "conakry.jpg",
+    "title": "File:Un aperçu de la ville de conakry.jpg",
+    "author": "Alpha hmd",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Un_aper%C3%A7u_de_la_ville_de_conakry.jpg",
+    "alt": "Vue d'en haut sur les immeubles de Conakry, la mer et les îles au large"
+  },
+  {
+    "name": "Praia",
+    "file": "praia.jpg",
+    "title": "File:Praia-Plateau.jpg",
+    "author": "Ji-Elle",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Praia-Plateau.jpg",
+    "alt": "Le marché en plein air de Praia, sous les immeubles du quartier du Plateau"
+  },
+  {
+    "name": "Libreville",
+    "file": "libreville.jpg",
+    "title": "File:Boulevard du bord de mer Libreville .jpg",
+    "author": "Delrick Trevor",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Boulevard_du_bord_de_mer_Libreville_.jpg",
+    "alt": "Le boulevard du bord de mer, au centre de Libreville"
+  },
+  {
+    "name": "N'Djamena",
+    "file": "n-djamena.jpg",
+    "title": "File:Avenue Maldom bada (El nimery).jpg",
+    "author": "Korom10",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Avenue_Maldom_bada_(El_nimery).jpg",
+    "alt": "Une grande avenue de N'Djamena par beau temps"
+  },
+  {
+    "name": "Asmara",
+    "file": "asmara.jpg",
+    "title": "File:Asmara, harnet avenue 01.JPG",
+    "author": "Sailko",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Asmara,_harnet_avenue_01.JPG",
+    "alt": "Immeubles des années 1930 sur l'avenue Harnet, à Asmara"
+  },
+  {
+    "name": "Harare",
+    "file": "harare.jpg",
+    "title": "File:Harare - Harare3496.jpg",
+    "author": "lumoplank",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Harare_-_Harare3496.jpg",
+    "alt": "Jacarandas en fleurs formant une voûte au-dessus d'une avenue de Harare"
+  },
+  {
+    "name": "Gaborone",
+    "file": "gaborone.jpg",
+    "title": "File:Botswana, Gaborone Central Business District.jpg",
+    "author": "Jota @ BRAZIL",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Botswana,_Gaborone_Central_Business_District.jpg",
+    "alt": "Les immeubles neufs du quartier d'affaires de Gaborone"
+  },
+  {
+    "name": "Moroni",
+    "file": "moroni.jpg",
+    "title": "File:Moroni Friday Mosque Comoros.jpg",
+    "author": "Radosław Botev",
+    "license": "CC BY 3.0 pl",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Moroni_Friday_Mosque_Comoros.jpg",
+    "alt": "L'ancienne mosquée du Vendredi au bord du port de Moroni"
+  },
+  {
+    "name": "Grand-Bassam",
+    "file": "grand-bassam.jpg",
+    "title": "File:La montée du pont de la victoire coté quartier France.jpg",
+    "author": "Wilaxe",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:La_mont%C3%A9e_du_pont_de_la_victoire_cot%C3%A9_quartier_France.jpg",
+    "alt": "Une route longe la lagune à Grand-Bassam, côté quartier France"
+  },
+  {
+    "name": "Saint-Louis",
+    "file": "saint-louis.jpg",
+    "title": "File:Pont Faidherbe à Saint-Louis au Sénégal 01.jpg",
+    "author": "Fawaz.tairou",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pont_Faidherbe_%C3%A0_Saint-Louis_au_S%C3%A9n%C3%A9gal_01.jpg",
+    "alt": "Le pont Faidherbe sur le fleuve Sénégal, à Saint-Louis"
+  },
+  {
+    "name": "Kpalimé",
+    "file": "kpalime.jpg",
+    "title": "File:Kpalime mountain range.jpg",
+    "author": "Kulttuurinavigaattori",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kpalime_mountain_range.jpg",
+    "alt": "Une rue de Kpalimé bordée d'arbres, devant les collines verdoyantes"
+  },
+  {
+    "name": "Labé",
+    "file": "labe.jpg",
+    "title": "File:Ville de Labé.jpg",
+    "author": "Nicolas Martin",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ville_de_Lab%C3%A9.jpg",
+    "alt": "Une route descend vers la ville de Labé, entre toits et arbres"
+  },
+  {
+    "name": "Mindelo",
+    "file": "mindelo.jpg",
+    "title": "File:Mindelo (S Vicente, Cabo Verde).JPG",
+    "author": "Manuel de Sousa",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mindelo_(S_Vicente,_Cabo_Verde).JPG",
+    "alt": "La baie et la ville de Mindelo vues depuis le fortin"
+  },
+  {
+    "name": "Yaoundé",
+    "file": "yaounde.jpg",
+    "title": "File:Yaoundé view from central market (2014).JPG",
+    "author": "Bdx",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Yaound%C3%A9_view_from_central_market_(2014).JPG",
+    "alt": "Le centre de Yaoundé vu depuis le toit du marché central"
+  },
+  {
+    "name": "Pointe-Noire",
+    "file": "pointe-noire.jpg",
+    "title": "File:Wikimédia République du Congo - Pointe Noire. 01.jpg",
+    "author": "ArnoBOUJIKA",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Wikim%C3%A9dia_R%C3%A9publique_du_Congo_-_Pointe_Noire._01.jpg",
+    "alt": "Une avenue commerçante de Pointe-Noire, avec ses taxis bleus et jaunes"
+  },
+  {
+    "name": "Santo António",
+    "file": "santo-antonio.jpg",
+    "title": "File:Santo António, Capital of Príncipe.JPG",
+    "author": "Yellowcarpenter",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Santo_Ant%C3%B3nio,_Capital_of_Pr%C3%ADncipe.JPG",
+    "alt": "La baie et les maisons de Santo António, au pied de collines boisées"
+  },
+  {
+    "name": "Bahir Dar",
+    "file": "bahir-dar.jpg",
+    "title": "File:Blue Nile Bahir Dar.jpg",
+    "author": "Geertchaos",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Blue_Nile_Bahir_Dar.jpg",
+    "alt": "Le Nil Bleu et la ville de Bahir Dar au bord du lac Tana"
+  },
+  {
+    "name": "Jinja",
+    "file": "jinja.jpg",
+    "title": "File:Uganda Jinja Streetview.JPG",
+    "author": "Ilona1001",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Uganda_Jinja_Streetview.JPG",
+    "alt": "Une rue commerçante du centre de Jinja"
+  },
+  {
+    "name": "Tadjourah",
+    "file": "tadjourah.jpg",
+    "title": "File:Tadjourah,the White city(Djibouti)12.2020.jpg",
+    "author": "Miaz85",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tadjourah,the_White_city(Djibouti)12.2020.jpg",
+    "alt": "Les maisons blanches de Tadjourah au bord de l'eau, devant les montagnes"
+  },
+  {
+    "name": "Alexandrie",
+    "file": "alexandrie.jpg",
+    "title": "File:Egypt, Alexandria, The Corniche of Alexandria.jpg",
+    "author": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Egypt,_Alexandria,_The_Corniche_of_Alexandria.jpg",
+    "alt": "La corniche d'Alexandrie le long de la Méditerranée"
+  },
+  {
+    "name": "Oran",
+    "file": "oran.jpg",
+    "title": "File:ORAN City & Coast.jpg",
+    "author": "Benba.d.mourad",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:ORAN_City_%26_Coast.jpg",
+    "alt": "La ville d'Oran et son golfe, avec le fort de Santa Cruz au premier plan"
+  },
+  {
+    "name": "Grand Baie",
+    "file": "grand-baie.jpg",
+    "title": "File:Grand Baie, La Cuvette Beach.jpg",
+    "author": "ZoschH",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Grand_Baie,_La_Cuvette_Beach.jpg",
+    "alt": "La plage de sable blanc de La Cuvette, à Grand Baie"
+  },
+  {
+    "name": "Bulawayo",
+    "file": "bulawayo.jpg",
+    "title": "File:Bulawayo City Hall.jpg",
+    "author": "Scott.wheeler",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bulawayo_City_Hall.jpg",
+    "alt": "L'hôtel de ville de Bulawayo et ses jardins"
+  },
+  {
+    "name": "Maun",
+    "file": "maun.jpg",
+    "title": "File:Maun - Botswana.jpg",
+    "author": "Monamodi74",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Maun_-_Botswana.jpg",
+    "alt": "La rivière Thamalakane à Maun, sous un ciel de fin de journée"
+  },
+  {
+    "name": "Mutsamudu",
+    "file": "mutsamudu.jpg",
+    "title": "File:Mutsamudu port1.jpg",
+    "author": "Peioma",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mutsamudu_port1.jpg",
+    "alt": "La ville et le port de Mutsamudu, sur l'île d'Anjouan"
+  }
+]

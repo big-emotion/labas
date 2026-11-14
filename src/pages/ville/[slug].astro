@@ -325,6 +325,8 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
   .photo img {
     width: 100%;
     height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
     border-radius: 16px;
     display: block;
   }
