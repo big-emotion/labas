@@ -106,6 +106,51 @@ Black diaspora. Dropped: generic travel media, beauty, and non-African destinati
 - Food & lifestyle: **lagouteuse_** (food blogger), **edenthefoodie**, **mali_paw_b_di**
   (Mali culture & lifestyle), **nwetravel** (NWE's own travel account)
 
+## Second-hop seeds: jolitropisme, abidjan_le_rempart, allthingsafrica_, maghribantou
+
+| Account | Followers | Follows | What it is |
+|---|---|---|---|
+| [jolitropisme](https://www.instagram.com/jolitropisme/) | 17.3K | 1,215 | Nathalie, French-speaking "happy repat" in **Nairobi**: everyday life ("Nairobi's banalography"), travel & racism, Kinshasa, Cape Town, Namibia. Closest voice to Là-bas found so far |
+| [abidjan_le_rempart](https://www.instagram.com/abidjan_le_rempart/) | 47K | 485 | Aymard Landry, Abidjan-based guide and tour operator (@abidjan_le_rempart_tours) |
+| [allthingsafrica_](https://www.instagram.com/allthingsafrica_/) | 125K | 33 | Culture & heritage education ("know your roots"), founder @bissakins |
+| [maghribantou](https://www.instagram.com/maghribantou/) | 147K | 756 | Identity, origins & African diasporas (French-speaking storytelling) |
+
+Same five keyword filters, plus a city or "diaspora" filter where it made sense.
+
+**jolitropisme — the best lead for daily life in Nairobi** (filter "nairobi"): a ready-made
+map of the city's everyday scene — Alliance Française Nairobi (`afnairobi`), Farmers Market
+Nairobi (`farmersmarketnairobi`), Nairobi Supper Club, OKIA Cafe, Punchline Comedy Club,
+HaC Gallery, Kanga Studio, Unseen Nairobi and Matatour Nairobi (matatu culture tours),
+iN NAIROBI (`in.nairobi`, city guide), Nairobi Nexus (networking meet-ups), Sk8 City, Le Djembé
+(West African food in Nairobi). Also: **yasmin_tells** (travel + *relocation*),
+**_movewithus__** (Gaëlle, lifestyle, travel & business), **j.mwai** (Nairobi food guide),
+**discoveringkenya**, **discover_lamu**, **discoverzambia**, **rwandalicious_** (Discover
+Rwanda), **africancocktail** (Binja, Congolese founder & investor), **africanboheme**
+(slow living by the sea), **cocoliliafricaofficial**, **mai_ndiaye**, **ker_astou** (Senegal
+food), **thesmilesize** (Angola), **juannsabiye** (Burundi), **gondwanalodges** (Namibia).
+
+**abidjan_le_rempart — Abidjan from the inside** (filter "abidjan"): **liabynd** (LIA,
+*"Vivre à Abidjan"* — a daily-life account, top lead for Côte d'Ivoire), **abidjaninmotion**,
+**nights_abidjan**, **hayoplace_abidjan**, **laresidence.ci**. Travel: **ivanadjuf**
+(travel in Africa), **isaac.explore**, **the_s.k.y__** (Ivorian travel blogger),
+**trainandtravel_** (CI/FR), **naijanomads** (Nigerian travellers), **ghanapeople**,
+**littleafricatravel**, **theblacktravelclub**. Investing: **linvestisseurafricain**
+(L'Investisseur Africain).
+
+**allthingsafrica_ — complete list (33)**: mostly culture and knowledge accounts —
+beyondthenoiseafrica, theafricacentre, womensafrika, africanimaginary, archiveafrica,
+mowaaofficial (Museum of West African Art), bigfat_africandevelopment, worlddecolonizationforum,
+**joinkwanda** (Kwanda), **destination2030nigeria** (Nigeria Everywhere), **theforgeafrica**,
+**hferdjani** (Hannane Ferdjani, journalist), verydelphine, _yaramel, bissakins.
+
+**maghribantou** follows few practical accounts (identity and storytelling focus). Relevant:
+**repat.africa** (again), **afrique_diaspora**, **kionintra** (Kathia Idri, diasporas &
+leadership), verydelphine (again), rougeorangee (travel lab).
+
+**Network signal**: **verydelphine** now appears under four seeds (nwe, planbacktoafrica,
+allthingsafrica_, maghribantou) and **repat.africa** under maghribantou — they are the hubs
+of the diaspora-and-Africa scene on Instagram.
+
 ## What this says
 
 - The French-speaking *return* scene on Instagram is small and business-led (Repat Africa,
