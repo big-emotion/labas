@@ -66,7 +66,27 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 <!-- social-pass 2026-11-14 -->
 - [nature.access] Jolitropisme, a Cameroonian-Belgian creator based in Nairobi, describes Diani as easy to reach (train from Nairobi to Mombasa, then about 30 minutes by car) and growing fast with developers, while the Galu end stays quieter; she prefers Watamu, which is further from Mombasa. — @jolitropisme post 2026-11-01, social-caption, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Mombasa pump prices for 15 Nov–14 Dec 2026, unchanged by EPRA's 14 Nov review: petrol KES 223.81/litre (≈ €1.57), diesel KES 224.61 (≈ €1.57), kerosene KES 216.71 (≈ €1.52), about KES 3 below Nairobi. — Citizen Digital, 2026-11-14, local-media, confidence: high
+- [cost.rent] Rental asking prices in Nyali on Property24, page 1 on 14 Nov 2026 (2,197 Mombasa listings in all, period not always stated): 1-bed KES 34,000–35,000/month (≈ €238–245); 2-bed KES 48,000 (≈ €336); 3-bed flats from KES 42,500 to 145,000 (≈ €297–1,014); 4-bed KES 100,000 (≈ €699). A 3-bed townhouse in Mtwapa asks KES 55,000 (≈ €385). — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices)
+- [cost.rent] Sale asking prices for flats in Nyali on Property24: 51 m² studios KES 4.4–6.1 M (≈ €30,769–42,657); 1-bed of 88 m² KES 5.9 M (≈ €41,259, about KES 67,000/m²); 3-bed of 148 m² KES 8.75 M (≈ €61,189, about KES 59,000/m² ≈ €413/m²); 3-bed of 171 m² KES 11.5 M (≈ €80,420); 4-bed of 260 m² KES 19.5 M (≈ €136,364). The same portal shows Kilimani and Westlands flats at about KES 106,000–165,500/m². — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices)
+- [cost.rent] Other sale asking prices: in Mtwapa, a 1-bed of 55 m² KES 4.4 M (≈ €30,769) and a 2-bed of 97 m² KES 5.4 M (≈ €37,762); a Shanzu development KES 6.4–12.9 M (≈ €44,755–90,210); a 4-bed house of 300 m² listed as Nyali KES 55 M "negotiable" (≈ €384,615). — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices)
+- [cost.rent] Expat.com's Mombasa guide, priced in euros: 1-bed (2-room) flat in Nyali €350–600/month (≈ KES 50,050–85,800); 3-bed (4-room) flat in Nyali €550–1,100 (≈ KES 78,650–157,300); 4-room house in Bamburi €300–600 (≈ KES 42,900–85,800). — Expat.com Mombasa guide, updated 2025-12-15, blog, confidence: medium
+- [cost.rent] Same Mombasa guide says landlords ask one month's deposit plus the first month's rent, which conflicts with the 3-month deposit plus 1–2 months in advance in its Kenya-wide guide (item above). — Expat.com Mombasa guide, 2025-12-15, blog, confidence: low
+- [cost.living] Monthly budget including a Nyali rent: €980 (≈ KES 140,140) for one person, of which utilities €90 (≈ KES 12,870), groceries €220 (≈ KES 31,460) and transport €90. A family of four needs €2,530 (≈ KES 361,790) including €700 for two children's schooling. The same page's key-figures box says €850 and €2,350. — Expat.com Mombasa guide, 2025-12-15, blog, confidence: low
+- [cost.living] Modelled June 2026 prices in USD: milk $0.92/litre, bread (500 g) $0.52, rice $1.48/kg, eggs $1.82 per dozen, chicken breast $5.63/kg, lunch menu $2.30, beer in a pub $2.12; utilities for one person $33.80/month; gym $18/month; cinema $6.01. — livingcost.org Mombasa, updated 2026-06-21, company, confidence: low
+- [cost.salary] Senior staff earn about €700–2,200/month (≈ KES 100,100–314,600). — Expat.com Mombasa guide, 2025-12-15, blog, confidence: low
+- [family.schools] Annual fees quoted in euros: Braeburn Mombasa primary from about €3,000 to €5,500 (≈ KES 429,000–786,500); Aga Khan Academy €3,500–21,000 across levels, €13,000–21,000 in secondary (≈ KES 1.86–3.0 M); Coast Academy €2,200–4,500 (≈ KES 314,600–643,500). — Expat.com Mombasa guide, 2025-12-15, blog, confidence: low
+- [daily.transport] Local fares from 2018: tuk-tuk KES 50–100 (≈ €0.35–0.70), boda-boda about KES 50 (≈ €0.35), matatu from KES 20 for short hops; airport to centre by taxi KES 1,000–3,000 (≈ €7–21) or tuk-tuk KES 200. These predate the 2026 fare rises. — Wikivoyage Mombasa, accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Uber operates in Mombasa (one of three Kenyan cities); Bolt covers Mombasa plus Diani, Kilifi and Malindi on the coast. — Uber and Bolt city pages, accessed 2026-11-14, company, confidence: high
+- [daily.power] National domestic electricity base tariffs since July 2025: KES 12.14/kWh (≈ €0.085) up to 30 kWh, KES 16.50 (≈ €0.115) for 31–100 kWh, KES 18.57 (≈ €0.130) above 100 kWh, before levies, 16% VAT and monthly surcharges. — StimaTracker (KPLC tariff tracker), accessed 2026-11-14, company, confidence: medium
+- [daily.internet] Zuku's national home-fibre price list: 40 Mbps KES 2,999/month (≈ €21), 100 Mbps KES 4,399 (≈ €31), installation free; the page does not say which Mombasa estates are covered. — Zuku website, about late Oct 2026, company, confidence: low
+- [cost.negotiation] Sellers usually quote higher first prices to visible foreigners; asking in Swahili rather than English helps. At the Akamba handicraft cooperative, the tourist-facing side costs more than the wholesale side. — Wikivoyage Mombasa, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Taxis: negotiate and agree the fare before getting in, check the going rate with hotel staff, and try a driver on a short ride before hiring him for longer. Asking prices in English can mean paying "at least twice normal prices". — Wikivoyage Mombasa and Kenya, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Property sale prices are sometimes marked open to offers: 2 of about 21 Mombasa sale cards on Property24 (a Nyali house and a Mtwapa plot) say "negotiable". — Property24 Kenya, accessed 2026-11-14, company, confidence: low
+
 ## Gaps
+
 - No 2026 rent figures by Mombasa neighbourhood from a property portal (Kenya Property Centre and Jumuika returned 403); Numbeo has only 13 contributors.
 - No salary data for Mombasa.
 - No power-outage frequency for the Coast; only the July 2026 national blackout.
@@ -79,8 +99,12 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 - Racism or colourism towards diaspora: nothing found.
 <!-- social-pass gaps 2026-11-14 -->
 - ★ traverzeculture, kenya4you, digitalnomadskenya__ not read in this pass. jolitropisme's posts are reflective; no prices.
+<!-- price-topup gaps 2026-11-14 -->
+- Web search was unavailable for the price top-up (session budget used up), so only direct pages were fetched; Numbeo (429), Jiji (403) and the Aga Khan Academy fee page (no fees shown) could not be used.
+- Searched, not found: Mombasa staple prices in shillings (only modelled USD figures), GP consultation and clinic fees, water bills, mobile-data prices specific to the coast, club entry, concert tickets, current tuk-tuk, boda and ride-hailing fares (only 2018 figures), and any source on how much is knocked off rents or agency fees.
 
 ## Sources read
+
 1. Kenya travel advice: Safety and security — GOV.UK FCDO — https://www.gov.uk/foreign-travel-advice/kenya/safety-and-security — official — 2026-11-14
 2. Kenya travel advice: Entry requirements — GOV.UK FCDO — https://www.gov.uk/foreign-travel-advice/kenya/entry-requirements — official — via dossier verification log (not re-opened), 2026-11-14
 3. Travel advice and advisories: Kenya — Government of Canada — https://travel.gc.ca/destinations/kenya — official — 2026-11-14
@@ -108,12 +132,29 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 25. Mombasa families demand justice over 23 reported disappearances — The Star — https://www.the-star.co.ke/counties/coast/2026-11-11-coast-page-story-1-mombasa-families-demand-justice-over-23-reported-disappearances-1 — local-media — 2026-11-14
 26. Report: Kenya lacks standalone femicide law despite 10 pc rise — The Standard — https://www.standardmedia.co.ke/business/amp/national/article/2001539415/report-kenya-lacks-standalone-femicide-law-despite-10-pc-rise-in-killings — local-media — 2026-11-14
 27. Once abroad for opportunity, they're now catalysts at home — Business Daily — https://www.businessdailyafrica.com/bd/lifestyle/travel/once-abroad-for-opportunity-they-re-now-catalysts-at-home-5029420 — local-media — 2026-11-14
+28. Fuel prices remain unchanged in latest EPRA review — Citizen Digital — https://citizen.digital/article/fuel-prices-remain-unchanged-in-latest-epra-review-1-n393915 — local-media — 2026-11-14
+29. Property for sale in Mombasa — Property24 Kenya — https://www.property24.co.ke/property-for-sale-in-mombasa-c1887 — company — 2026-11-14
+30. Property to rent in Mombasa — Property24 Kenya — https://www.property24.co.ke/property-to-rent-in-mombasa-c1887 — company — 2026-11-14
+31. Vivre à Mombasa — Expat.com — https://www.expat.com/fr/guide/afrique/kenya/mombasa/ — blog — 2026-11-14
+32. Mombasa — Wikivoyage — https://en.wikivoyage.org/wiki/Mombasa — blog — 2026-11-14
+33. Kenya — Wikivoyage — https://en.wikivoyage.org/wiki/Kenya — blog — 2026-11-14
+34. Cost of living in Mombasa — livingcost.org — https://www.livingcost.org/cost/kenya/mombasa — company — 2026-11-14
+35. Electricity tariff tracker — StimaTracker — https://www.stimatracker.com/ — company — 2026-11-14
+36. Home internet packages — Zuku — https://zuku.co.ke/ — company — 2026-11-14
+37. Bolt cities in Kenya — Bolt — https://bolt.eu/en-ke/cities/ — company — 2026-11-14
+38. Uber cities in Kenya — Uber — https://www.uber.com/global/en/r/kenya/cities/ — company — 2026-11-14
 
 - Social pass: Facebook "UN Expat & Nairobi Diplomats Housing" (256714113352943) — chronological feed, 28 posts, 2026-11-14
 - Social pass: Instagram @jolitropisme — 6 latest posts and visible comments, 2026-11-14 (Kigali post filed under Rwanda)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] UK advice flags Old Town — supported
 - [daily.transport] Canada advises avoiding the Likoni ferry — supported
 - [safety.women] Canada notes rape has been reported — supported
 - [rights.lgbt] Same-sex acts carry up to 14 years — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Mombasa pump prices — supported
+- [daily.transport] Uber operates in Mombasa — supported

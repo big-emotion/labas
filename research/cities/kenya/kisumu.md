@@ -28,15 +28,31 @@ Extra city (suggested by the dossier as the cheaper lakeside third pole of weste
 - [other] Downtown and Lower Town are being revitalised (lakefront, pedestrian streets) and a Lake Victoria ring road is under construction, with no completion date given. — Wikipedia "Kisumu", accessed 2026-11-14, academic, confidence: low
 - [rights.lgbt] Same-sex acts carry up to 14 years in prison nationally; public and police harassment is common. — Government of Canada travel advice, 2026-11-02, official, confidence: high
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Sale asking prices on Property24, page 1 on 14 Nov 2026 (493 Kisumu listings, mostly land): a 3-bed house in Riat KES 10.5 M (≈ €73,427); a 4-bed house in Milimani KES 20 M (≈ €139,860); a townhouse in Konya KES 18.5 M (≈ €129,371). — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices)
+- [business.invest] Plot asking prices on the same page: 0.05 ha in Riat KES 2.5 M (≈ €17,483); 0.04 ha in Kiboswa KES 2.9 M (≈ €20,280); 0.15 ha in Kondele KES 8 M (≈ €55,944); 0.36 acre in the CBD KES 120 M (≈ €839,161), listed several times. — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices)
+- [cost.rent] The online rental market is thin: Property24 had only 24 Kisumu rentals, nearly all commercial; the one flat was a 2-bed in Dunga (Nyalenda B) at KES 26,500/month (≈ €185); CBD offices ask KES 12,000–40,000 (≈ €84–280) for 88–382 m². — Property24 Kenya, accessed 2026-11-14, company, confidence: low (asking prices)
+- [cost.rent] Modelled June 2026 rents in USD: 1-bed in the centre $140/month, cheaper areas $112; 3-bed in the centre $255. Barely a third of Nairobi's modelled $383 for a central 1-bed. — livingcost.org Kisumu, updated 2026-06-21, company, confidence: low
+- [cost.living] Modelled June 2026 prices in USD: milk $0.59/litre, bread (500 g) $0.54, rice $1.53/kg, eggs $1.67 per dozen, chicken breast $6.67/kg, tomatoes $0.90/kg; lunch menu $3.93; beer in a pub $1.94; utilities for one person $29.10/month; 50 Mbps internet $35.40; gym $19; cinema $7.79. — livingcost.org Kisumu, 2026-06-21, company, confidence: low
+- [daily.transport] Bolt operates in Kisumu; Uber's Kenya city list (Nairobi, Mombasa, Uasin Gishu) does not include it. — Bolt and Uber city pages, accessed 2026-11-14, company, confidence: high
+- [daily.transport] Nairobi–Kisumu: Easy Coach bus KES 1,400 (≈ €9.79, about 8 h), Modern Coast from KES 1,000 (≈ €6.99); Prestige Shuttle KES 1,000 on the Kisumu page but KES 1,200 (≈ €8.39) on the Nairobi page; a weekly train KES 600 or 2,000 (≈ €4.20 / €13.99, 12 h). From the airport: taxi KES 500–1,000 (≈ €3.50–7), matatu about KES 100 (2023). — Wikivoyage Kisumu and Nairobi, accessed 2026-11-14, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — train fares and the Prestige KES 1,200 figure not found on the cited Wikivoyage pages
+- [cost.living] Guest houses charge about KES 900–2,000 a night (≈ €6.29–13.99, listings updated 2021–2023); the guide notes hotels "ramp up their prices just because they are a hotel". — Wikivoyage Kisumu, accessed 2026-11-14, blog, confidence: low
+- [daily.power] National domestic electricity base tariffs since July 2025: KES 12.14/kWh (≈ €0.085) up to 30 kWh, KES 16.50 (≈ €0.115) for 31–100 kWh, KES 18.57 (≈ €0.130) above 100 kWh, before levies, VAT and monthly surcharges. — StimaTracker (KPLC tariff tracker), accessed 2026-11-14, company, confidence: medium
+- [cost.negotiation] No Kisumu-specific source; the national guide says to haggle (without over-haggling), that merchants raise prices for foreigners, and that asking in English can mean paying at least double. — Wikivoyage Kenya, accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No cost-of-living or rent data: Numbeo Kisumu returned 429, property portals returned 403, and no search budget was left for local press.
 - No source on hospitals (JOOTRH, Aga Khan Kisumu), water or power reliability, internet or ride-hailing in Kisumu.
 - Malaria risk near the lake: not sourced in this pass.
 - No dated source on women's safety, nightlife, food, diaspora or returnee life in Kisumu.
 - Election-period unrest: the only dated Kisumu item is the 2017 police-brutality memorial story; no 2022–2026 Kisumu-specific report was opened.
 - No French-language presence found.
+- Price top-up (2026-11-14): web search was unavailable (session budget used up); Numbeo Kisumu (429) and Jiji (403) could not be read.
+- Searched, not found: Kisumu pump prices (the EPRA articles list only Nairobi and Mombasa), staple prices in shillings, local boda-boda, tuk-tuk and Bolt fares, school fees, GP or clinic fees, water and internet bills, going-out prices, and any Kisumu source on negotiating rent or market prices.
 
 ## Sources read
+
 1. Kisumu — Wikipedia — https://en.wikipedia.org/wiki/Kisumu — academic — 2026-11-14
 2. Travel advice and advisories: Kenya — Government of Canada — https://travel.gc.ca/destinations/kenya — official — 2026-11-14
 3. Conseils aux voyageurs : Kenya — France Diplomatie — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/kenya/ — official — 2026-11-14
@@ -46,8 +62,23 @@ Extra city (suggested by the dossier as the cheaper lakeside third pole of weste
 7. Kisumu eyes festive season debut of synchronised drone light show — The Star — https://www.the-star.co.ke/counties/nyanza/2026-11-06-kisumu-eyes-festive-season-debut-of-synchronised-drone-light-show — local-media — 2026-11-14
 8. Matatu owners announce fare hike after fuel increase — The Star — https://www.the-star.co.ke/news/2026-04-15-matatu-owners-announce-fare-hike-after-fuel-increase — local-media — 2026-11-14
 9. Matatu fares increased by 50% — Citizen Digital — https://citizen.digital/article/matatu-fares-increased-by-50-operators-call-for-countrywide-strike-over-fuel-prices-n382771 — local-media — 2026-11-14
+10. Property for sale in Kisumu — Property24 Kenya — https://www.property24.co.ke/property-for-sale-in-kisumu-c1862 — company — 2026-11-14
+11. Property to rent in Kisumu — Property24 Kenya — https://www.property24.co.ke/property-to-rent-in-kisumu-c1862 — company — 2026-11-14
+12. Cost of living in Kisumu — livingcost.org — https://livingcost.org/cost/kenya/kisumu — company — 2026-11-14
+13. Kisumu — Wikivoyage — https://en.wikivoyage.org/wiki/Kisumu — blog — 2026-11-14
+14. Nairobi — Wikivoyage — https://en.wikivoyage.org/wiki/Nairobi — blog — 2026-11-14
+15. Kenya — Wikivoyage — https://en.wikivoyage.org/wiki/Kenya — blog — 2026-11-14
+16. Bolt cities in Kenya — Bolt — https://bolt.eu/en-ke/cities/ — company — 2026-11-14
+17. Uber cities in Kenya — Uber — https://www.uber.com/global/en/r/kenya/cities/ — company — 2026-11-14
+18. Electricity tariff tracker — StimaTracker — https://www.stimatracker.com/ — company — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Canada lists Kisumu among Kenya's high-crime cities — supported
 - [business.startup] A fireworks and drone-show company — supported (show still awaits county and KCAA approval)
 - [safety.general] A memorial park unveiled in July 2026 — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [daily.transport] Nairobi–Kisumu — unsupported
+- [daily.transport] Bolt operates in Kisumu — supported

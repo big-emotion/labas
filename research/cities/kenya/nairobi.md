@@ -104,7 +104,35 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 - [cost.negotiation] 3 of 14 priced posts in this upmarket group say "negotiable" or similar, all on rents; dollar pricing appears alongside shillings for furnished expat flats. — same group 2026-11-14, social-caption, confidence: medium
 - [daily.transport] A shuttle operator posting in the group lists fares to Nanyuki of KSh 900 by shuttle and KSh 800 by 14-seater matatu (≈ €6). — same group 2026-11-14, social-caption, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] EPRA's 14 Nov 2026 review left Nairobi pump prices unchanged for 15 Nov–14 Dec 2026: petrol KES 226.96/litre (≈ €1.59), diesel KES 227.76 (≈ €1.59), kerosene KES 219.87 (≈ €1.54), VAT at 8% included; petrol is up from KES 214.25 in May. — Citizen Digital and Kenyans.co.ke, 2026-11-14, local-media, confidence: high
+- [cost.rent] Sale asking prices for flats on Property24, page 1 on 14 Nov 2026: studio of 42 m² in Westlands KES 5.55 M (≈ €38,811, about KES 132,000/m²); 1-bed of 58 m² in Westlands KES 9.6 M (≈ €67,133, about KES 165,500/m² ≈ €1,157/m²); 1-bed of 67 m² in Lavington KES 7.0 M (≈ €48,951); 2-bed of 118 m² in Kilimani KES 12.5 M (≈ €87,413, about KES 106,000/m²); 3-bed of 145 m² in Lavington KES 17 M (≈ €118,881). — Property24 Kenya, listings accessed 2026-11-14, company, confidence: medium (asking prices)
+- [cost.rent] Top-end and off-plan asking prices on the same portal: 5-bed townhouses KES 120 M in Lavington (340 m², ≈ €839,000) and KES 165 M in Runda (600 m², ≈ €1.15 M); new 3–4-bed flats in Kileleshwa KES 20–27 M (≈ €139,860–188,811); a Kilimani development selling units at KES 5.5–11.5 M (≈ €38,462–80,420). — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices)
+- [cost.rent] Rental asking prices on Property24, 14 Nov 2026 (period not always stated): 3-bed houses of 180 m² in Karen KES 100,000–250,000/month (≈ €699–1,748); a 2-bed flat in Westlands KES 90,000 (≈ €629) and one in Spring Valley KES 140,000 (≈ €979); 3-bed of 154 m² in Kilimani KES 96,000 (≈ €671); furnished 2-bed in Peponi KES 220,000 (≈ €1,538); a furnished 2-bed in Westlands priced in dollars at USD 2,200/month. — Property24 Kenya, accessed 2026-11-14, company, confidence: medium (asking prices) ✎ spot-check 2026-11-14: corrected
+- [business.invest] HassConsult land values per acre in Dec 2025: Westlands KES 502.7 M (≈ €3.5 M); Parklands, Muthangari and Kilimani above KES 430 M (≈ €3.0 M); Riverside, Kileleshwa, Spring Valley and Lavington KES 275–369 M (≈ €1.9–2.6 M); Ridgeways, Lang'ata and Karen under KES 100 M (≈ €0.7 M). — Mwakilishi.com (HassConsult), 2026-01-27, local-media, confidence: medium
+- [cost.rent] Up-front rent customs conflict within the same publisher: the Nairobi city guide says the deposit equals one month's rent on a 12-month lease, while its Kenya guide says a 3-month deposit plus 1–2 months in advance (item above). — Expat.com Nairobi guide, updated 2025-12-12, blog, confidence: low
+- [cost.rent] Same Nairobi guide quotes 1-bed flats in Kilimani or Westlands at KES 70,000–100,000/month (≈ €490–699), 3-bed flats in central areas KES 150,000–200,000 (≈ €1,049–1,399) and 4–5-bed houses in Karen or Runda KES 300,000–450,000 (≈ €2,098–3,147). — Expat.com Nairobi guide, 2025-12-12, blog, confidence: medium
+- [cost.living] Staple and drink prices (Numbeo, Aug 2025, via guide): milk KES 150/litre (≈ €1.05), a dozen eggs KES 350 (≈ €2.45), chicken KES 650/kg (≈ €4.55), local beer KES 300 (≈ €2.10), cappuccino KES 350 (≈ €2.45), mid-range meal for two KES 4,000 (≈ €28). — Expat.com Kenya guide, 2025-11-07, blog, confidence: medium
+- [cost.living] Modelled June 2026 prices in USD: bread (500 g) $0.55, rice $2.00/kg, milk $0.87/litre, eggs $1.64 per dozen, chicken breast $6.19/kg, lunch menu $5.36; its milk figure is lower than Expat.com's KES 150. — livingcost.org Nairobi, updated 2026-06-21, company, confidence: low
+- [cost.living] Expat.com's single-person budget excluding rent totals KES 82,500/month (≈ €577): utilities KES 12,000 (≈ €84), groceries 25,000 (≈ €175), eating out 15,000, taxis and fuel 18,000, leisure and gym 10,000, mobile 2,500 (≈ €17). — Expat.com Kenya guide, 2025-11-07, blog, confidence: low
+- [cost.living] Going out: a cinema ticket about KES 1,000 (≈ €7) and a gym membership KES 5,000–10,000/month (≈ €35–70). — Expat.com Kenya guide, 2025-11-07, blog, confidence: medium
+- [social.nightlife] Club LA lists beer from KES 200 (≈ €1.40) with no entry fee; Mercury Lounge cocktails cost about USD 3–6. — Wikivoyage Nairobi, listings updated Dec 2025, blog, confidence: low
+- [social.food] Meal price bands per person with a soft drink: budget under KES 500 (≈ €3.50), mid-range KES 500–1,400 (≈ €3.50–9.79); a full meal at Java House KES 500–750 (≈ €3.50–5.24); at Carnivore, taxes and catering levies are added on top of menu prices. — Wikivoyage Nairobi, Dec 2025 and Aug 2026 updates, blog, confidence: low
+- [daily.transport] From JKIA to the centre: street taxi about KES 2,000 (≈ €14), Uber or Bolt from KES 900 (≈ €6.29), airport bus no. 34 KES 100 (2023 figure). — Wikivoyage Nairobi, accessed 2026-11-14, blog, confidence: low
+- [daily.transport] City matatu fares KES 50–150 (≈ €0.35–1.05) by distance and time of day; Uber, Bolt and Little rides start at about KES 300 (≈ €2.10). — Expat.com Nairobi guide, 2025-12-12, blog, confidence: medium
+- [daily.transport] Uber lists Nairobi among only three Kenyan cities (with Mombasa and Uasin Gishu); Bolt lists Nairobi among 17 Kenyan towns. — Uber and Bolt city pages, accessed 2026-11-14, company, confidence: high
+- [daily.power] Domestic electricity base tariffs since July 2025: KES 12.14/kWh (≈ €0.085) up to 30 kWh, KES 16.50 (≈ €0.115) for 31–100 kWh, KES 18.57 (≈ €0.130) above 100 kWh, before levies, 16% VAT and monthly fuel and forex surcharges. — StimaTracker (KPLC tariff tracker), accessed 2026-11-14, company, confidence: medium
+- [daily.internet] Zuku home fibre price list: 40 Mbps KES 2,999/month (≈ €21), 80 Mbps KES 3,999 (≈ €28), 100 Mbps KES 4,399 (≈ €31), 200 Mbps KES 9,999 (≈ €70), installation and modem free. — Zuku website, about late Oct 2026, company, confidence: medium
+- [daily.internet] Mobile data from 2023: Safaricom 5 GB KES 1,000 (≈ €7), Airtel 5 GB for a month KES 500 (≈ €3.50); a starter SIM costs KES 50–100. — Wikivoyage Kenya, 2023 figures, blog, confidence: low
+- [cost.negotiation] At the Maasai Market there are no fixed prices; the guide suggests paying about half to two-thirds of the first asking price. Kijabe Street leaves more room, and at Village Market "bargaining is necessary". — Wikivoyage Nairobi, accessed 2026-11-14 (market info 2024), blog, confidence: low
+- [cost.negotiation] Street taxis have no meter in practice: agree the fare before the trip, pay cash at the end, and know the going rate, because drivers charge more to a visibly lost foreigner. Ride-hailing apps show the fare up front. — Wikivoyage Nairobi and Kenya, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Asking a hawker or boda-boda rider for a price in English can mean paying "at least twice normal prices"; a few words of Swahili help. Haggling is also common in small shops. — Wikivoyage Kenya (accessed 2026-11-14) and Expat.com Nairobi guide (2025-12-12), blog, confidence: low
+- [cost.negotiation] Some prices are officially tiered by residence: Nairobi National Museum costs KES 200 for citizens, KES 600 for East African residents and KES 1,200 for non-residents (≈ €1.40 / €4.20 / €8.39); Karura Forest charges non-residents KES 600. — Wikivoyage Nairobi, listings updated Dec 2025, blog, confidence: medium
+- [family.schools] Nairobi International School is quoted at KES 184,000–440,000 per term (≈ €1,287–3,077); the same guide puts ISK at about USD 15,000 (primary) to USD 28,000 (secondary) a year, which conflicts with the Kenya guide's KES 3.18–4.89 M. — Expat.com Nairobi guide, 2025-12-12, blog, confidence: low
+- [health.care] Private health insurance about KES 8,000–15,000/month for one person (≈ €56–105) and KES 25,000–40,000 for a family (≈ €175–280); this conflicts with the KES 50,000–200,000 a year for family cover in the Kenya guide. — Expat.com Nairobi guide, 2025-12-12, blog, confidence: low
+
 ## Gaps
+
 - Web search budget ran out after about a dozen queries, so many categories could not be searched specifically (salaries, nightlife venues, ride-hailing app names and fares, Nairobi BRT status, Safaricom fibre prices).
 - No dated, sourced salary data for Nairobi (KNBS Economic Survey not reached; Numbeo blocked with 429).
 - No 2026 rent figures in shillings by neighbourhood from a property portal: BuyRentKenya and Kenya Property Centre returned 403; only percentage changes (HassConsult, Knight Frank) and the 2025 Expat.com ranges are available.
@@ -113,8 +141,11 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 - No French-speaking community source (Alliance Française, Nairobi Accueil) could be opened.
 - Kenyan diaspora policy and the returning-resident customs exemption were not found.
 - Returnee opinion piece in The Standard (2025-12-07) opened without body text, so it is not used.
+- Price top-up (2026-11-14): web search was unavailable (session budget used up), so only direct pages were fetched. Numbeo (429), Expatistan, Global Property Guide, Jiji, Safaricom (403), EPRA (connection refused), KNBS and KWS (certificate errors), Braeburn and ISK fee pages (404) could not be read.
+- Searched, not found: GP consultation and private-clinic fees, water bills, local (non-international) private school fees, club entry beyond one venue, concert tickets, Uber or Bolt per-km rates (the Bolt city page lists none), and any dated source on how much tenants knock off rent or agency fees.
 
 ## Sources read
+
 1. Kenya travel advice: Safety and security — GOV.UK FCDO — https://www.gov.uk/foreign-travel-advice/kenya/safety-and-security — official — 2026-11-14
 2. Kenya travel advice: Entry requirements — GOV.UK FCDO — https://www.gov.uk/foreign-travel-advice/kenya/entry-requirements — official — via dossier verification log (not re-opened), 2026-11-14
 3. Travel advice and advisories: Kenya — Government of Canada — https://travel.gc.ca/destinations/kenya — official — 2026-11-14
@@ -164,9 +195,32 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 47. LGBTQ rights in Kenya — Wikipedia — https://en.wikipedia.org/wiki/LGBTQ_rights_in_Kenya — academic — via dossier, 2026-11-14
 48. 2024 Kenya protests — Wikipedia — https://en.wikipedia.org/wiki/2024_Kenya_protests — academic — via dossier, 2026-11-14
 49. Economy of Kenya — Wikipedia — https://en.wikipedia.org/wiki/Economy_of_Kenya — academic — 2026-11-14
+50. Fuel prices remain unchanged in latest EPRA review — Citizen Digital — https://citizen.digital/article/fuel-prices-remain-unchanged-in-latest-epra-review-1-n393915 — local-media — 2026-11-14
+51. EPRA announces November–December fuel prices — Kenyans.co.ke — https://www.kenyans.co.ke/news/129383-epra-maintains-fuel-prices-unchanged-super-petrol-retail-ksh22696 — local-media — 2026-11-14
+52. Property for sale in Nairobi — Property24 Kenya — https://www.property24.co.ke/property-for-sale-in-nairobi-c1890 — company — 2026-11-14
+53. Property to rent in Nairobi — Property24 Kenya — https://www.property24.co.ke/property-to-rent-in-nairobi-c1890 — company — 2026-11-14
+54. Nairobi — Wikivoyage — https://en.wikivoyage.org/wiki/Nairobi — blog — 2026-11-14
+55. Kenya — Wikivoyage — https://en.wikivoyage.org/wiki/Kenya — blog — 2026-11-14
+56. Vivre à Nairobi — Expat.com — https://www.expat.com/fr/guide/afrique/kenya/nairobi/ — blog — 2026-11-14
+57. Cost of living in Nairobi — livingcost.org — https://livingcost.org/cost/kenya/nairobi — company — 2026-11-14
+58. Electricity tariff tracker — StimaTracker — https://www.stimatracker.com/ — company — 2026-11-14
+59. Home internet packages — Zuku — https://zuku.co.ke/ — company — 2026-11-14
+60. Bolt cities in Kenya — Bolt — https://bolt.eu/en-ke/cities/ — company — 2026-11-14
+61. Uber cities in Kenya — Uber — https://www.uber.com/global/en/r/kenya/cities/ — company — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] UK advice: violent crime — supported
 - [safety.general] Canada advises avoiding non-essential travel to Kibera — supported
 - [safety.women] A presidential working group counted 1,639 — supported
 - [rights.lgbt] Same-sex acts carry up to 14 years — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] EPRA's 14 Nov 2026 review — supported
+- [cost.rent] Sale asking prices for flats on Property24 — supported
+- [cost.rent] Rental asking prices on Property24 — corrected
+- [daily.power] Domestic electricity base tariffs — supported
+- [daily.internet] Zuku home fibre price list — supported
+- [cost.negotiation] Some prices are officially tiered by residence — supported
+- [daily.transport] Uber lists Nairobi among only three Kenyan cities — supported
