@@ -301,6 +301,20 @@ Legend: ★ = strongest lead for Là-bas (daily life, written for newcomers or r
 - **gabontourisme**, **gabao_child** (Gabon travel) — tourism
 - **gabonlust** (see above)
 
+### Building and housing for the diaspora (shared by the user)
+
+- ★ **christelle_lebrun_arch** — Christelle Lebrun, French-qualified architect (architecte DE),
+  36.8K, France-based with Benin and Senegal roots: *"Construire au pays sans regrets"*,
+  100+ diaspora clients, feasibility studies and design. Post of 2026-10-28
+  ([DfDQhnmDFcr](https://www.instagram.com/p/DfDQhnmDFcr/), 1.2K likes, 168 comments):
+  *"la grande maison familiale au pays est le pire placement que la diaspora continue de
+  faire"*. She describes houses extended with every remittance and never finished, parents
+  ageing alone in them, and children paying the guard and repairs from 5,000 km away. Her
+  advice is a rental building rather than the family house. Commercial (free masterclass leading
+  to paid services), but she names a real return-project failure pattern. **For Là-bas:** a
+  quiz on *moving* should not push "build a house" as the default return path; renting first
+  is a recurring piece of advice from people who work with returnees.
+
 ### Coverage after this pass
 
 | Country | Strong daily-life leads (★) | Verdict |
