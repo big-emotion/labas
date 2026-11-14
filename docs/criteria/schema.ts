@@ -27,12 +27,14 @@ export interface SourceRef {
 
 /**
  * How much a reader may trust a value. Shown on the city page, never hidden.
- * - `measured`: a published figure for this city or country (Numbeo rent, Ookla median).
+ * - `measured`: a published figure for this city or country (listing sample, Ookla median).
+ * - `survey`: what residents say in a representative survey (Afrobarometer), usually for the
+ *   region or country rather than the city — the page says "les habitants de … disent".
  * - `sourced`: an editor's 0–5 judgement applying the rubric to named, dated sources.
  * - `editorial`: an editor's judgement with no source specific to this place (typical for
  *   secondary cities). Always labelled "estimation" to the reader.
  */
-export type Confidence = "measured" | "sourced" | "editorial";
+export type Confidence = "measured" | "survey" | "sourced" | "editorial";
 
 export interface Provenance {
   sources: SourceRef[];
