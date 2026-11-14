@@ -146,6 +146,9 @@ city criterion at level 4 or 5. Two short editorial lines per city make them war
 
 A third line already exists: `watch` ("À savoir"). The fields are in [`schema.ts`](./schema.ts).
 
+The first ten cities are drafted in [`level1-city-lines.md`](./level1-city-lines.md), for tone
+review before the other 105.
+
 ### A.7 Tone
 
 - **Warm and close:** "tu", short sentences, the community's own words ("retour au pays",
@@ -1003,7 +1006,17 @@ the ten current questions, reworded in "tu" (§A.3); the portrait speaks of pref
 of traits, so the repo rule stays as it is (§A.7); one city first, with a discovery lead
 outside the reader's usual sphere (§A.5).
 
-**Still open:**
+**Adopted on the maintainer's word (2026-11-14), following the recommendations below:**
+the reshaped criteria set; the sensitive filters, opt-in and in level 2 only; the quiz ships
+before any free text, which will need explicit consent; `unsafe` derived from France
+Diplomatie, then the FCDO; no public launch before `safety`, `cost`, `healthcare` and
+`utilities` are sourced for every proposable city.
+
+**Still open:** whether Là-bas will ever carry ads or affiliate links (Ookla's open data is
+non-commercial only). Until that is answered, the internet criterion uses operator-advertised
+speeds and the Ookla figures stay out of the published data.
+
+The recommendations as they were made:
 
 1. **Adopt the reshaped criteria set** (16 city + 1 country criteria; `food`, `novelty`,
    `competition` dropped; `beach`/`nature`/`wildSpaces` turned into landscape facts)?
