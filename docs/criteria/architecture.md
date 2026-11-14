@@ -1,6 +1,7 @@
 # Criteria architecture — what Là-bas matches on, and why
 
-> Status: proposal, 2026-11-14. Nothing here is wired into `src/`. The type model is in
+> Status: built on 2026-11-15 (the sourced criteria, `/ville/<slug>`, `/methode`, the open
+> `/approfondir`). Written as a proposal on 2026-11-14; the sections below still give the reasons. The type model is in
 > [`schema.ts`](./schema.ts). Reader-facing labels are French; everything else is English.
 
 Là-bas tells a reader "cette ville te correspond parce que…". This document defines what that
