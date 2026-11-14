@@ -1,0 +1,4174 @@
+[
+  {
+    "name": "Afrique du Sud",
+    "paperwork": {
+      "level": 3,
+      "justification": "Entrée sans visa 90 jours, mais le permis de séjour se demande des mois à l'avance auprès de l'administration de l'immigration.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "South Africa travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/south-africa/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guide de l'expatriation en Afrique du Sud — Expat.com",
+          "url": "https://www.expat.com/fr/guide/afrique/afrique-du-sud/",
+          "published": "2025-12-23",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Sans visa jusqu'à 90 jours pour le tourisme. Depuis le 1er juillet 2026, déclaration de voyage en ligne obligatoire avant l'arrivée.",
+    "diasporaRoute": "Aucune trouvée. La nationalité par filiation demande un parent sud-africain.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Depuis l'arrêt de la Cour constitutionnelle du 6 mai 2025, un Sud-Africain ne perd plus sa nationalité en prenant une autre.",
+      "sources": [
+        {
+          "title": "South African nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_African_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales, mariage entre personnes de même sexe depuis 2006, discrimination interdite par la Constitution.",
+      "sources": [
+        {
+          "title": "ILGA World Database — South Africa",
+          "url": "https://database.ilga.org/south-africa-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "South Africa travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/south-africa/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "On paie surtout par carte et sans contact ; les banques sont bien implantées. Le dossier ne chiffre pas le paiement par téléphone.",
+    "described": {
+      "womenDaily": "Le FCDO signale des remarques insistantes et des agressions contre des voyageuses seules ; le taux de viols enregistrés reste élevé (environ 64 pour 100 000).",
+      "returneePerception": "",
+      "religion": "Pays majoritairement chrétien, avec une forte présence hindoue et musulmane à Durban."
+    },
+    "sources": [
+      {
+        "title": "Xenophobia in South Africa — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Xenophobia_in_South_Africa",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Crime in South Africa — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Crime_in_South_Africa",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Algérie",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa à demander au consulat avant le départ, sur papier. Les descendants d'Algériens peuvent obtenir la nationalité par le père ou la mère.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Algeria expat guide — Expat.com",
+          "url": "https://www.expat.com/en/guide/africa/algeria/",
+          "published": "2025-12-19",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Algerian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Algerian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, à demander au consulat avant le départ ; pas de visa électronique général. Délais de quelques jours à plusieurs mois.",
+    "diasporaRoute": "Nationalité par filiation, par le père ou la mère, depuis 2005. Un Algérien de l'étranger avec un passeport étranger peut entrer sans visa en prouvant sa nationalité.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Pas interdite par la loi et tolérée en pratique ; certains postes publics élevés exigent la seule nationalité algérienne (non vérifié). Qui entre avec le passeport algérien doit sortir avec.",
+      "sources": [
+        {
+          "title": "Algerian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Algerian_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Algeria: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/algeria/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Relations pénalisées : articles 338 et 333 du Code pénal, de 2 mois à 3 ans de prison.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Algeria",
+          "url": "https://database.ilga.org/algeria-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Algeria: Freedom in the World 2025 — Freedom House",
+          "url": "https://freedomhouse.org/country/algeria/freedom-world/2025",
+          "published": "2025",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Le Code de la famille suit le droit musulman : un tuteur masculin est requis pour le mariage. Les associations comptent 100 à 200 femmes tuées chaque année dans leur foyer.",
+      "returneePerception": "",
+      "religion": "Islam religion d'État ; 78 % des Algériens disent la religion « très importante » (Afrobarometer, 2015). Le prosélytisme non musulman est interdit."
+    },
+    "sources": [
+      {
+        "title": "World Report 2025: Algeria — Human Rights Watch",
+        "url": "https://www.hrw.org/world-report/2025/country-chapters/algeria",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Algeria — Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/algeria/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Algérie — Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/algerie/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Angola",
+    "paperwork": {
+      "level": 3,
+      "justification": "Entrée sans visa 30 jours pour le tourisme, mais tout travail ou séjour long exige un visa obtenu à l'avance, en 1 à 3 mois.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Angola — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/angola/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-10",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Angola travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/angola/entry-requirements",
+          "published": "2026-05-28",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Visa policy of Angola — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Angola",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Luanda expat guide — Expat.com",
+          "url": "https://www.expat.com/en/guide/africa/angola/luanda/",
+          "published": "2025-12-11",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 30,
+    "visaNote": "Sans visa jusqu'à 30 jours par séjour et 90 jours par an, pour le tourisme seulement. Au-delà, visa en ligne avant l'arrivée ; visa à l'arrivée à Luanda avec préautorisation en ligne, 120 USD.",
+    "diasporaRoute": "Aucune trouvée. L'enfant né à l'étranger d'un parent angolais est angolais de naissance.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la révision de la loi sur la nationalité de 1991.",
+      "sources": [
+        {
+          "title": "Angolan nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Angolan_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis le nouveau Code pénal du 9 février 2021 ; la discrimination au travail est interdite. Pas de mariage.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Angola",
+          "url": "https://database.ilga.org/angola-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Angola — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Angola",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Le FCDO signale des viols dans les lieux de sortie et les logements privés et conseille de ne pas circuler seule la nuit.",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Angola travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/angola/safety-and-security",
+        "published": "2026-05-28",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "World Report 2025: Angola — Human Rights Watch",
+        "url": "https://www.hrw.org/world-report/2025/country-chapters/angola",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Botswana",
+    "paperwork": {
+      "level": 3,
+      "justification": "Entrée sans visa 90 jours, mais le séjour long exige un contrat de travail ; l'employeur doit d'abord proposer le poste aux nationaux.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Botswana : Conseils aux voyageurs – Entrée / Séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/botswana/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guide Expat.com Botswana — Expat.com",
+          "url": "https://www.expat.com/fr/guide/afrique/botswana/",
+          "published": "2025-11-03",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Sans visa jusqu'à 3 mois, dans la limite de 90 jours par an. Au-delà, un permis de séjour lié à un contrat de travail.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe par un parent motswana, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Longtemps interdite aux adultes. La loi n° 23 de 2024 prévoit la double nationalité pour les adultes ; une loi sur la nationalité multiple était encore en discussion fin 2025. Entrée en vigueur non confirmée.",
+      "sources": [
+        {
+          "title": "Botswana: Citizenship Amendment Act, No. 23 of 2024 — Citizenship Rights in Africa Initiative",
+          "url": "https://citizenshiprightsafrica.org/botswana-citizenship-amendment-act-23-2024/",
+          "published": "2024-10-29",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Parliament Approves Citizenship Amendment Bill — Botswana Daily News",
+          "url": "https://dailynews.gov.bw/news-detail/89462",
+          "published": "2025-12-18",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis le jugement du 11 juin 2019, confirmé en appel le 29 novembre 2021. Pas de mariage.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Botswana",
+          "url": "https://database.ilga.org/botswana-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Botswana — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Botswana",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone existe, par exemple avec Orange Money. Sa part dans les paiements n'est pas chiffrée.",
+    "described": {
+      "womenDaily": "Le FCDO note un nombre élevé d'agressions sexuelles et conseille aux femmes de ne pas marcher seules la nuit.",
+      "returneePerception": "",
+      "religion": "Pays chrétien à environ 86,5 % (recensement 2022)."
+    },
+    "sources": [
+      {
+        "title": "Orange Botswana",
+        "url": "https://www.orange.co.bw/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Botswana travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/botswana/safety-and-security",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Botswana — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Botswana",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Burkina Faso",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa électronique obligatoire, mais la France n'a plus d'ambassade ni de consulat et les Français risquent l'arrestation.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "e-Visa Burkina Faso",
+          "url": "https://www.visaburkina.bf/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Conseils aux voyageurs : Burkina Faso — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/burkina-faso/",
+          "published": "2026-09-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : visa électronique sur visaburkina.bf pour moins de 90 jours. Certificat de fièvre jaune exigé. Gratuit pour les Africains depuis septembre 2025, pas pour les Français.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe par un parent burkinabè, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "La loi ne dit rien ; la double nationalité est en général admise.",
+      "sources": [
+        {
+          "title": "Nationality law of Burkina Faso — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Nationality_law_of_Burkina_Faso",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées depuis le Code des personnes et de la famille de septembre 2025 : 2 à 5 ans de prison et une amende ; les étrangers sont expulsés.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Burkina Faso",
+          "url": "https://database.ilga.org/burkina-faso-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Burkina Faso Criminalizes Same-Sex Conduct — Human Rights Watch",
+          "url": "https://www.hrw.org/news/2025/09/03/burkina-faso-criminalizes-same-sex-conduct",
+          "published": "2025-09-03",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Burkina Faso: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/burkina-faso/safety-and-security",
+          "published": "2026-10-26",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Afrobarometer (janvier 2026) relève que les femmes restent freinées pour accéder aux responsabilités et posséder des biens ou des terres.",
+      "returneePerception": "",
+      "religion": "Majorité musulmane (63,8 %), chrétiens 26,3 %, religions traditionnelles 9 % (recensement 2019)."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs : Burkina Faso — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/burkina-faso/",
+        "published": "2026-09-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Burkina Faso — Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/burkina-faso/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Burkina Faso — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Burkina_Faso",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Burundi",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa à l'arrivée à 90 USD après un formulaire en ligne ; règles et coûts du titre de séjour introuvables.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Burundi — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/burundi/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Burundi entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/burundi/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Commissariat Général des Migrations",
+          "url": "https://www.migration.gov.bi/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : demande en ligne sur le site des migrations, puis visa d'un mois au plus délivré à l'aéroport, 90 USD. Certificat de fièvre jaune obligatoire.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe surtout par le père ; par la mère seulement dans certains cas.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis le Code de la nationalité de 2000 ; ceux qui l'avaient perdue ont pu la retrouver.",
+      "sources": [
+        {
+          "title": "Burundian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Burundian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées depuis 2009 : jusqu'à 2 ans de prison et une amende. Mariage interdit par la Constitution.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Burundi",
+          "url": "https://database.ilga.org/burundi-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "World Report 2026: Burundi — Human Rights Watch",
+          "url": "https://www.hrw.org/world-report/2026/country-chapters/burundi",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Société très majoritairement chrétienne, avec des mosquées, notamment à Buyenzi."
+    },
+    "sources": [
+      {
+        "title": "Burundi safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/burundi/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Bénin",
+    "paperwork": {
+      "level": 5,
+      "justification": "Visa électronique avant le départ, mais une voie dédiée aux Afrodescendants (loi 2024-31) et une création d'entreprise en ligne.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Benin: A New Law on the Recognition of Nationality for People of African Descent — GLOBALCIT",
+          "url": "https://globalcit.eu/?p=23089",
+          "published": "2024",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "My Afro Origins — Government of Benin",
+          "url": "https://benin.bj/en/afro-descendants",
+          "published": "2025",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Visas et cartes de résident au Bénin : un nouveau cadre — Benin Web TV",
+          "url": "https://beninwebtv.bj/visas-et-cartes-de-resident-au-benin-un-nouveau-cadre-pour-encadrer-lentree-et-le-sejour-des-etrangers/",
+          "published": "2026-04-03",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "APIEx — Guide pratique de création d'entreprise",
+          "url": "https://monentreprise.bj/APIEX_Guide_pratique_v2_3e1993847e.pdf",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa électronique obligatoire avant le départ ; sans lui, l'entrée est refusée. Le visa de visite dure jusqu'à 90 jours, renouvelable une fois.",
+    "diasporaRoute": "Loi 2024-31 : nationalité béninoise pour les descendants adultes d'Africains déportés par la traite, sans autre nationalité africaine. Demande sur myafroorigins.bj depuis juillet 2025.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée par le code de 1965 et maintenue par le Code de la nationalité de 2022 ; un parent béninois, père ou mère, suffit.",
+      "sources": [
+        {
+          "title": "Bénin : Patrice Talon promulgue le code de la nationalité — Benin Web TV",
+          "url": "https://beninwebtv.bj/benin-patrice-talon-promulgue-le-code-de-la-nationalite/",
+          "published": "2022-12",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales ; aucune protection contre les discriminations. Peu acceptées en public selon le FCDO.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Benin",
+          "url": "https://database.ilga.org/benin-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Benin travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/benin/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Oui, très courant : 85,8 % de pénétration début 2025. MTN MoMo domine (61 % des comptes), devant Moov Money et Celtiis Cash.",
+    "described": {
+      "womenDaily": "Une étude nationale relève des violences de genre contre 45,9 % des femmes en 2022 ; 28,4 % des femmes ont été mariées avant 18 ans.",
+      "returneePerception": "Le gouvernement attire activement les Afrodescendants ; environ 50 personnes s'étaient installées par ce programme en janvier 2026. Des critiques y voient en partie du marketing.",
+      "religion": "Christianisme, islam et vodun coexistent ; le vodun est une religion vivante, fêtée le 10 janvier."
+    },
+    "sources": [
+      {
+        "title": "ARCEP Bénin — Tableau de bord SFM T1 2025",
+        "url": "https://arcep.bj/wp-content/uploads/2025/10/Tableau-de-Bord_T1_SFM_2025.pdf",
+        "published": "2025-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Examen du Bénin au CEDAW — ONU Genève",
+        "url": "https://www.ungeneva.org/ru/news-media/meeting-summary/2024/10/examen-du-benin-au-cedaw-en-depit-de-tres-importants-progres-des",
+        "published": "2024-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Director Spike Lee helps 50 people with African heritage migrate to Benin — Semafor",
+        "url": "https://www.semafor.com/article/01/16/2026/director-spike-lee-helps-50-people-with-african-heritage-migrate-to-benin",
+        "published": "2026-01-16",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Benin: Ciara's Beninese Citizenship – Marketing Ploys Can't Heal the Past — AllAfrica",
+        "url": "https://allafrica.com/stories/202511210007.html",
+        "published": "2025-11-21",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Cameroun",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa électronique pour un court séjour ; au-delà de 30 jours ou pour travailler, visa à obtenir au consulat en France.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs – Cameroun – Entrée/séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/cameroun/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-05",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, demandé en ligne sur evisacam.cm ; pas de visa à l'arrivée. Certificat de fièvre jaune exigé.",
+    "diasporaRoute": "Aucune trouvée. Un Français d'origine camerounaise entre comme étranger, avec un visa électronique.",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "Le Code de la nationalité de 1968 (art. 31) retire la nationalité à l'adulte qui en prend une autre ; règle appliquée de façon inégale selon un débat de 2024.",
+      "sources": [
+        {
+          "title": "Law No. 1968-LF-3 of 11 June 1968 — Cameroon Nationality Code — Refworld",
+          "url": "https://www.refworld.org/docid/3ae6b4db1c.html",
+          "published": "1968-06-11",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Double nationalité au Cameroun : un serpent de mer qui continue de diviser ? — Camer.be",
+          "url": "https://www.camer.be/85783/6:1/double-nationalite-au-cameroun-un-serpent-de-mer-qui-continue-de-diviser-cameroon.html",
+          "published": "2024-06-26",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées par l'article 347-1 du Code pénal : jusqu'à 5 ans de prison. Des couples ont été arrêtés et poursuivis.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Cameroon",
+          "url": "https://database.ilga.org/cameroon-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Foreign travel advice: Cameroon — Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/cameroon/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Très courant selon l'observation du dossier (MTN MoMo, Orange Money), mais aucune source datée.",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "Des membres de la diaspora se sentent citoyens de seconde zone faute de double nationalité.",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Dual nationality dilemma: Cameroonians abroad yearn for recognition — Mimi Mefo Info",
+        "url": "https://mimimefoinfos.com/dual-nationality-dilemma-cameroonians-abroad-yearn-for-recognition-and-investment-opportunities/amp/",
+        "published": "2024-01",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs – Cameroun – Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/cameroun/conseils-aux-voyageurs-securite",
+        "published": "2026-11-05",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Cap-Vert",
+    "paperwork": {
+      "level": 5,
+      "justification": "Entrée sans visa 30 jours avec préinscription en ligne ; nationalité sans durée de résidence pour qui a des ancêtres cap-verdiens.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Cabo Verde: visa exemption for EU citizens — EEAS",
+          "url": "https://www.eeas.europa.eu/node/56170_en",
+          "published": "2019-01",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Visa policy of Cape Verde — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Cape_Verde",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Cape Verdean nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cape_Verdean_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 30,
+    "visaNote": "Sans visa jusqu'à 30 jours depuis 2019. Préinscription EASE en ligne et taxe de sécurité aéroportuaire (3 400 CVE, hausse prévue à 4 400 CVE) obligatoires.",
+    "diasporaRoute": "Nationalité par filiation, possible dès un grand-parent cap-verdien ; naturalisation sans durée de résidence pour les personnes d'ascendance cap-verdienne. Aucune voie pour les Afrodescendants sans lien.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis 1992 ; seul le président doit n'avoir que la nationalité cap-verdienne.",
+      "sources": [
+        {
+          "title": "Cape Verdean nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cape_Verdean_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis 2004 ; discrimination au travail interdite depuis 2008. Pas de reconnaissance des couples.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Cabo Verde",
+          "url": "https://database.ilga.org/cape-verde-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Cape Verde — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Cape_Verde",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "France Diplomatie signale une hausse des agressions sexuelles, surtout contre des femmes seules (octobre 2026).",
+      "returneePerception": "Le gouvernement encourage le retour de sa diaspora, plus nombreuse que la population résidente ; aucun programme officiel nommé.",
+      "religion": "Majorité catholique (72,5 % en 2021) ; 15,6 % sans religion."
+    },
+    "sources": [
+      {
+        "title": "Cap-Vert – Conseils aux voyageurs – Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/cap-vert/conseils-aux-voyageurs-securite",
+        "published": "2026-10-13",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Cap-Vert : la diaspora — Africarrières",
+        "url": "https://africarrieres.com/cap-vert/fr/guide/decouvrir/diaspora",
+        "published": "2026-08-06",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Cape Verde — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Cape_Verde",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Centrafrique",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à obtenir à l'ambassade à Paris ; aucune procédure de titre de séjour trouvée ; voyage déconseillé hors de Bangui.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs – Entrée / séjour – République centrafricaine — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/republique-centrafricaine/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, demandé à l'ambassade de Centrafrique à Paris. Certificat de fièvre jaune contrôlé à l'arrivée.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe par un parent né centrafricain.",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "Le code de 1961 n'admet pas la double nationalité, sauf pour l'épouse étrangère d'un Centrafricain. Règle ancienne (source de 2010) à revérifier.",
+      "sources": [
+        {
+          "title": "Central African nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Central_African_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations privées légales, mais l'expression publique d'amour entre personnes de même sexe est punie de 6 mois à 2 ans de prison.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Central African Republic",
+          "url": "https://database.ilga.org/central-african-republic-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in the Central African Republic — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_the_Central_African_Republic",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Pays majoritairement chrétien (80 % au recensement de 2003), avec environ 10 % de musulmans. Chiffres anciens."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs – République centrafricaine — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/republique-centrafricaine/",
+        "published": "2026-09-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Central African Republic — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Central_African_Republic",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Comores",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa à l'arrivée à 30 euros pour 45 jours ; séjour d'un an possible avec un contrat de travail ou un projet d'investissement.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Comoros travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/comoros/entry-requirements",
+          "published": "2025-12-10",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Living in Comoros guide — Expat.com",
+          "url": "http://www.expat.com/en/guide/africa/comoros/",
+          "published": "2025-10-14",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa à l'arrivée, 30 euros, pour un séjour unique de 45 jours au plus. Passeport valable 6 mois après l'arrivée.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe par un parent né comorien.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Tolérée depuis la Constitution de 2001, mais le Code de la nationalité de 1979 en fait encore un motif de perte : les deux textes se contredisent.",
+      "sources": [
+        {
+          "title": "Comorian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Comorian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées pour les hommes et les femmes : Code pénal de 2020, article 300, 6 mois à 2 ans de prison et une amende. Condamnations en 2022 et 2024.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Comoros",
+          "url": "https://database.ilga.org/comoros-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in the Comoros — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_the_Comoros",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Comoros travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/comoros/safety-and-security",
+          "published": "2025-12-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Une tenue couvrante est attendue de tous. Plus de la moitié des personnes interrogées rejettent l'égalité au travail (Afrobarometer 2025).",
+      "returneePerception": "",
+      "religion": "Islam sunnite religion d'État depuis 2009 : tenue modeste, pas d'alcool en public, vie rythmée par le ramadan."
+    },
+    "sources": [
+      {
+        "title": "Comoros country page — Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/comoros/",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Comores (pays) — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Comores_(pays)",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Congo",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa à demander en ligne avant le départ, pas de visa à l'arrivée ; pour travailler, autorisation seulement si la compétence manque sur place.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs – Congo – Entrée/séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/congo/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-10-30",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Travailler en République du Congo : le guide complet — lepetitjournal.com",
+          "url": "https://lepetitjournal.com/republique-congo/emploi/travailler-congo-guide-complet-395950",
+          "published": "2024-11-05",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire avant le départ, demandé et payé en ligne auprès d'une ambassade ; aucun visa à l'arrivée. Durée de 15 à 91 jours, environ une semaine de délai. Fièvre jaune obligatoire.",
+    "diasporaRoute": "Aucune trouvée. Un parent congolais de naissance suffit, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la Constitution de 2002 ; la loi 32-2011 a supprimé l'obligation de renoncer à l'autre nationalité.",
+      "sources": [
+        {
+          "title": "Republic of the Congo nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Republic_of_the_Congo_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis 1940, avec un âge du consentement plus élevé (21 ans contre 18). Aucune protection ; extorsions policières signalées.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Congo",
+          "url": "https://database.ilga.org/congo-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in the Republic of the Congo — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_the_Republic_of_the_Congo",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone (MoMo) est en usage ; parts des opérateurs non trouvées.",
+    "described": {
+      "womenDaily": "87 % des Congolais disent que police et justice doivent faire plus contre la discrimination et le harcèlement des femmes (Afrobarometer, 2023).",
+      "returneePerception": "",
+      "religion": "France Diplomatie décrit la pratique religieuse comme « assez ouverte »."
+    },
+    "sources": [
+      {
+        "title": "Congo-Brazzaville country page — Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/congo-brazzaville/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Entreprendre en République du Congo : le guide pratique — lepetitjournal.com",
+        "url": "https://lepetitjournal.com/republique-congo/emploi/entreprendre-republique-congo-guide-pratique-419991",
+        "published": "2025-08-07",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs – Congo – Informations utiles — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/congo/conseils-aux-voyageurs-informations-utiles",
+        "published": "2026-10-30",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Côte d'Ivoire",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique avant le départ ; carte de séjour liée à un contrat de travail visé par le ministère ; entreprise créée en 24 heures au CEPICI.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs, Entrée / séjour — Côte d'Ivoire — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/cote-d-ivoire/conseils-aux-voyageurs-entree-sejour",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "CI e-Visa — OpenShores",
+          "url": "https://www.openshores.co/blog/cote-divoire/programmes/ci-evisa",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Quand ils retournent pour de bon au pays — Connection Ivoirienne",
+          "url": "https://connectionivoirienne.net/2025/08/21/quand-ils-retournent-pour-de-bon-au-pays-comment-la-diaspora-reprend-pied-en-cote-divoire/",
+          "published": "2025-08-21",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : visa électronique sur le portail SNEDAI, pour un séjour jusqu'à 90 jours selon des agences (tarif non vérifié).",
+    "diasporaRoute": "Aucune voie dédiée. L'État attire plutôt l'investissement de la diaspora (fonds d'appui annoncé en septembre 2025, forums, concours réservé).",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "L'article 48 du Code de la nationalité retire la nationalité à l'Ivoirien qui en prend une autre volontairement. Cas flou pour qui est français de naissance. Débat ouvert, pas de réforme.",
+      "sources": [
+        {
+          "title": "Loi n° 61-415 du 14 décembre 1961 portant code de la nationalité ivoirienne — ecoi.net",
+          "url": "https://www.ecoi.net/en/file/local/1178187/1504_1217418989_loi-n-61-416-du-14-decembre-1961-portant-code-de-la-nationalite-ivoirienne.pdf",
+          "published": "1961-12-14",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Non reconnaissance de la double nationalité en Côte d'Ivoire — Connection Ivoirienne",
+          "url": "https://connectionivoirienne.net/2025/12/18/non-reconnaissance-de-la-double-nationalite-en-cote-divoire-il-est-temps-de-sortir-de-lhypocrisie/",
+          "published": "2025-12-18",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales, mais sans protection contre les discriminations ; campagne de haine et agressions en 2024.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Côte d'Ivoire",
+          "url": "https://database.ilga.org/cote-d-ivoire-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Côte d'Ivoire: LGBTQ+ community is legally but not socially accepted — Global Voices",
+          "url": "https://globalvoices.org/2024/09/09/cote-divoire-lgbtq-community-is-legally-but-not-socially-accepted/",
+          "published": "2024-09-09",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Oui, partout, jusque dans les taxis partagés (wôrô-wôrô) : Wave, Orange Money, MTN MoMo, Moov. Près de 50 millions de comptes ouverts.",
+    "described": {
+      "womenDaily": "Le ministère de la Femme a recensé 9 607 cas de violences de genre en 2024 ; plus de 1 200 viols et agressions sexuelles enregistrés. Les femmes sont très présentes dans le commerce.",
+      "returneePerception": "Les rapatriés citent surtout le crédit bancaire difficile et les détournements d'argent dans la famille. Le mot « Bengiste » (revenu d'Europe) n'est pas documenté dans une source datée.",
+      "religion": "Islam 42,5 %, christianisme 39,8 % (recensement 2021) ; religion visible, mais ton plutôt laïque au quotidien."
+    },
+    "sources": [
+      {
+        "title": "Près de 50 millions de comptes mobile money — Digital Mag",
+        "url": "https://digitalmag.ci/fintech-pres-de-50-millions-de-comptes-mobile-money-ouverts-en-cote-divoire/?amp=1",
+        "published": "2026",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Wôrô-wôrô et mobile money — AllAfrica",
+        "url": "https://fr.allafrica.com/stories/202602020419.html",
+        "published": "2026-02",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Côte d'Ivoire 2024 — Amnesty International",
+        "url": "https://www.amnesty.org/en/countries/africa/cote-d-ivoire/report-cote-divoire/",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Violences faites aux femmes : le pays renforce sa lutte — AllAfrica",
+        "url": "https://fr.allafrica.com/stories/202511250249.html",
+        "published": "2025-11",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Djibouti",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique ou visa à l'arrivée ; permis de travail annuel payant ; procédure de carte de résident introuvable.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Djibouti travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/djibouti/entry-requirements",
+          "published": "2026-07-27",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guide Djibouti — Expat.com",
+          "url": "https://www.expat.com/fr/guide/afrique/djibouti/",
+          "published": "2025-11-04",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : visa électronique sur evisa.gouv.dj ou visa touristique à l'arrivée, payé en dollars. Tarifs non trouvés.",
+    "diasporaRoute": "Aucune trouvée. Un parent djiboutien de naissance suffit, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la révision de 2004 du Code de la nationalité, sauf pour le président.",
+      "sources": [
+        {
+          "title": "Djiboutian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Djiboutian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "unclear",
+      "note": "Le FCDO dit les relations « pas illégales », mais d'autres sources parlent de jusqu'à 3 ans de prison. Hostile en pratique.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Djibouti",
+          "url": "https://database.ilga.org/djibouti-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Djibouti travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/djibouti/safety-and-security",
+          "published": "2026-07-27",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Djibouti — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Djibouti",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "L'excision des filles de 14 ans et moins est passée de 43 % à 31 % entre 2012 et 2019 ; les femmes ont du mal à accéder à l'emploi.",
+      "returneePerception": "",
+      "religion": "Plus de 90 % de musulmans sunnites ; les fêtes de l'Aïd rythment l'année."
+    },
+    "sources": [
+      {
+        "title": "Djibouti: Freedom in the World 2025 — Freedom House",
+        "url": "https://freedomhouse.org/country/djibouti/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Djibouti Overview — World Bank",
+        "url": "https://www.worldbank.org/en/country/djibouti/overview",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Djibouti (ville) — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Djibouti_(ville)",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Eswatini",
+    "paperwork": {
+      "level": 3,
+      "justification": "Entrée sans visa 30 jours, prolongeable ; au-delà de 60 jours, permis de séjour. Procédure de permis de travail introuvable.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Eswatini — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/eswatini/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Visa policy of Eswatini — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Eswatini",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Eswatini travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/eswatini/entry-requirements",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 30,
+    "visaNote": "Sans visa jusqu'à 30 jours pour un séjour touristique. Passeport valable plus de 6 mois après la sortie.",
+    "diasporaRoute": "Aucune trouvée. La nationalité ne passe que par le père, et pas aux générations suivantes nées à l'étranger.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Peut être autorisée, en général pour les citoyens de naissance, pas pour les naturalisés.",
+      "sources": [
+        {
+          "title": "Swazi nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Swazi_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised-not-enforced",
+      "note": "Relations entre hommes illégales en droit coutumier, sans poursuites connues ; entre femmes non pénalisées. Aucune protection.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Eswatini",
+          "url": "https://database.ilga.org/eswatini-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Eswatini travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/eswatini/safety-and-security",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Eswatini — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Eswatini",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Freedom House 2025 note 1 sur 4 pour l'égalité des femmes, leur égalité économique et leur protection contre les violences conjugales. Une mère ne transmet pas sa nationalité.",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Eswatini: Freedom in the World 2025 — Freedom House",
+        "url": "https://freedomhouse.org/country/eswatini/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Times of Eswatini",
+        "url": "https://www.times.co.sz/",
+        "published": "2026-11-11",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Gabon",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa à demander en ligne avant le départ ; au-delà de 3 mois, autorisation spéciale ; permis de travail en 6 à 8 semaines avec un employeur.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs – Gabon – Entrée/Séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/gabon/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guide Port-Gentil — Expat.com",
+          "url": "https://www.expat.com/fr/guide/afrique/gabon/port-gentil/",
+          "published": "2025-12-04",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, demandé en ligne auprès de la DGDI. Passeport valable plus de 6 mois ; certificat de fièvre jaune contrôlé à l'arrivée.",
+    "diasporaRoute": "Aucune trouvée. Un parent gabonais d'origine suffit, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis 1962.",
+      "sources": [
+        {
+          "title": "Gabonese nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gabonese_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Pénalisées en 2019 puis dépénalisées en juillet 2020. La Constitution de 2024 réserve le mariage à un homme et une femme ; peu tolérées socialement.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Gabon",
+          "url": "https://database.ilga.org/gabon-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Gabon — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Gabon",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Conseils aux voyageurs – Gabon — Gouvernement du Canada",
+          "url": "https://voyage.gc.ca/destinations/gabon",
+          "published": "2026-10-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Près de la moitié des Gabonais pensent que l'égalité dans le foyer affaiblit l'autorité des hommes ; 72 % pensent qu'une plainte pour harcèlement serait crue (Afrobarometer, nov. 2026).",
+      "returneePerception": "",
+      "religion": "Environ 80 % de chrétiens et 11 % de musulmans (2021) ; la vie d'église est visible."
+    },
+    "sources": [
+      {
+        "title": "Gabon country page — Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/gabon/",
+        "published": "2026-11-06",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Gabon — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Gabon",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Gabon travel advice – Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/gabon/safety-and-security",
+        "published": "2025-12-10",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Gambie",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa gratuit de 15 jours délivré à l'arrivée, renouvelable ; permis de séjour exigé au-delà, frais et étapes introuvables.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Gambie — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/gambie/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Foreign travel advice: The Gambia — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/the-gambia",
+          "published": "2026-11-11",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa de court séjour gratuit délivré à l'arrivée aux Français, y compris aux frontières terrestres : 15 jours renouvelables. Taxe d'aéroport de 1 000 GMD ou 20 euros.",
+    "diasporaRoute": "Aucune en vigueur. Annoncée en 2010 pour les descendants d'Africains, jamais inscrite dans la loi. Nationalité par un parent gambien d'origine, père ou mère.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Autorisée depuis 2001 pour les Gambiens nés en Gambie ; les naturalisés doivent renoncer à leur autre nationalité.",
+      "sources": [
+        {
+          "title": "Gambian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gambian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées pour les hommes et les femmes : jusqu'à 14 ans de prison, la perpétuité pour l'« homosexualité aggravée ». Deux hommes condamnés à 5 ans en mars 2026.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Gambia",
+          "url": "https://database.ilga.org/gambia-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Freedom in the World 2025: The Gambia — Freedom House",
+          "url": "https://freedomhouse.org/country/gambia/freedom-world/2025",
+          "published": "2025",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in the Gambia — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_the_Gambia",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Oui, de plus en plus : Wave opère depuis 2022 et l'inclusion financière est passée de 19 % en 2019 à 82 % en 2025, surtout grâce au paiement par téléphone.",
+    "described": {
+      "womenDaily": "L'excision est interdite depuis 2015, mais 75 % des femmes de 15 à 49 ans l'ont subie ; la Cour suprême examine un recours contre l'interdiction.",
+      "returneePerception": "",
+      "religion": "Environ 95,7 % de musulmans (2024) ; la prière du vendredi et le ramadan rythment la semaine et l'année."
+    },
+    "sources": [
+      {
+        "title": "Gambie : Wave accélère l'inclusion financière grâce au mobile money — Financial Afrik",
+        "url": "https://www.financialafrik.com/2026/07/08/gambie-wave-accelere-linclusion-financiere-grace-au-mobile-money-selon-le-rapport-finscope-2025/",
+        "published": "2026-07-08",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Gambia's Supreme Court to decide on FGM ban — Human Rights Watch",
+        "url": "https://www.hrw.org/news/2026/02/02/gambias-supreme-court-to-decide-on-fgm-ban",
+        "published": "2026-02-02",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "The Gambia — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/The_Gambia",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Ghana",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique, puis permis de travail et de séjour séparés. Nationalité pour la diaspora historique suspendue depuis le 1er février 2026.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Le Ghana élargit l'utilisation de son e-visa à 48 points d'entrée — VisasNews",
+          "url": "https://visasnews.com/le-ghana-elargit-lutilisation-de-son-e-visa-a-48-points-dentree/",
+          "published": "2026-09",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Ghana Immigration Service releases updated fees — YEN",
+          "url": "https://yen.com.gh/ghana/300120-ghana-immigration-service-releases-updated-fees-residence-permits-others",
+          "published": "2026-02-22",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Ghana suspends citizenship applications for historical diasporans — Citi Newsroom",
+          "url": "https://citinewsroom.com/2026/02/ghana-suspends-citizenship-applications-for-historical-diasporans/",
+          "published": "2026-02-02",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire à obtenir avant le départ, par le portail de visa électronique du service d'immigration. Passeport valable 6 mois et preuve de vaccination contre la fièvre jaune.",
+    "diasporaRoute": "Droit de résidence (Right of Abode, loi de 2000) pour les descendants d'Africains réduits en esclavage ; les demandes de nationalité de la diaspora historique sont suspendues depuis le 1er février 2026, sans date de reprise.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis l'amendement constitutionnel de 1996 ; certains hauts postes restent fermés aux binationaux.",
+      "sources": [
+        {
+          "title": "Ghana moves to allow dual citizens in key public offices — GNA",
+          "url": "https://gna.org.gh/2026/02/ghana-moves-to-allow-dual-citizens-in-key-public-offices/",
+          "published": "2026-02",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées (Criminal Offences Act, art. 104). Une loi votée le 29 mai 2026 vise aussi la « promotion » ; sans signature présidentielle au 3 novembre 2026.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Ghana",
+          "url": "https://database.ilga.org/ghana-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Ghana travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/ghana/safety-and-security",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Ghana anti-gay bill explained 2026 — The Rio Times",
+          "url": "https://www.riotimesonline.com/ghana-anti-gay-bill-explained-2026/",
+          "published": "2026-11-03",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Oui, c'est le moyen de paiement par défaut (MTN MoMo, Telecel Cash) ; 73 % des clients l'utilisent chaque semaine selon une enquête KPMG citée en 2025.",
+    "described": {
+      "womenDaily": "16 % disent que les femmes subissent souvent du harcèlement sexuel dans l'espace public ; un quart seulement juge l'action des autorités suffisante (Afrobarometer, 2024).",
+      "returneePerception": "Les rapatriés se regroupent dans certains quartiers ; la hausse des loyers crée des frictions et un ressentiment envers un privilège perçu. Le mot « obroni » (étranger) n'est pas documenté pour eux.",
+      "religion": "Religion très visible : églises chrétiennes, quartiers musulmans (zongos) ; le dimanche est jour d'église."
+    },
+    "sources": [
+      {
+        "title": "'A soul mission': The African Americans moving to Ghana — Al Jazeera",
+        "url": "https://www.aljazeera.com/features/2025/9/26/a-soul-mission-the-african-americans-moving-to-ghana",
+        "published": "2025-09-26",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Ghanaians want stronger protection against harassment of women and girls — NADJA",
+        "url": "https://nadja.co/2024/12/03/ghanaians-demand-protection-women-girls/",
+        "published": "2024-12-03",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "MTN Ghana abolishes 1% E-Levy — Graphic Online",
+        "url": "https://www.graphic.com.gh/business/business-news/mtn-ghana-abolishes-1-e-levy-as-new-tax-reforms-take-effect.html",
+        "published": "2025-04",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Right of Abode — Expatsi",
+        "url": "https://expatsi.com/visas/ghana/right-of-abode",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Guinée",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa demandé en ligne puis délivré à l'aéroport après biométrie ; sans titre de séjour, un étranger peut être arrêté. Procédure non décrite.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Guinée – Entrée/séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/guinee/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : demande en ligne sur paf.gov.gn/visa, autorisation de l'ambassade, puis visa délivré à l'aéroport de Conakry après la biométrie. Certificat de fièvre jaune exigé.",
+    "diasporaRoute": "Aucune trouvée. Un parent guinéen suffit, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Selon un résumé du Code civil de 2019, interdite aux Guinéens de naissance ; la pratique serait plus tolérante. Texte à vérifier.",
+      "sources": [
+        {
+          "title": "Guinean nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Guinean_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées par l'article 274 du Code pénal (2016) : 6 mois à 3 ans de prison et une amende. Brigade des mœurs créée en 2023.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Guinea",
+          "url": "https://database.ilga.org/guinea-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guinea travel advice – Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/guinea/safety-and-security",
+          "published": "2026-08-12",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in Guinea — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Guinea",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone existe (Orange Money) ; part des adultes non trouvée.",
+    "described": {
+      "womenDaily": "L'excision se pratique encore en cachette, par exemple à Labé. France Diplomatie signale une forte pression sur les filles non excisées venues de France et déconseille aux femmes de marcher seules la nuit.",
+      "returneePerception": "La presse guinéenne raconte des retours et les investissements de la diaspora dans les villages d'origine ; aucun mot local trouvé.",
+      "religion": "Pays majoritairement musulman ; Grande Mosquée et cathédrale côte à côte à Conakry."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs Guinée – Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/guinee/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Mutilations génitales féminines à Labé — Guineenews",
+        "url": "https://guineenews.org/2026/10/31/mutilations-genitales-feminines-a-labe-quand-la-tradition-contourne-la-loi-et-les-campagnes-de-sensibilisation/",
+        "published": "2026-10-31",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Diaspora et localités d'origine 2ème partie — Guineenews",
+        "url": "https://guineenews.org/2026/04/10/diaspora-et-localites-dorigine-2-eme-partie-apports-defis-et-realites-les-confidences-dun-membre-de-la-diaspora/",
+        "published": "2026-04-10",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Guinée équatoriale",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique validé en 24 à 72 heures ; permis de séjour d'un an auprès du ministère de la Sécurité. Contrôles stricts à la frontière.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Equatorial Guinea travel advice — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/equatorial-guinea/print",
+          "published": "2026-01-08",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Visa policy of Equatorial Guinea — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Equatorial_Guinea",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, même en transit. Visa électronique depuis juillet 2023, arrivée par l'aéroport de Malabo, environ 75 USD (non vérifié). Fièvre jaune exigée.",
+    "diasporaRoute": "Aucune trouvée. Avec un parent né dans le pays, naturalisation après un an de résidence ; sinon 40 ans.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Admise depuis la loi 3/2011, mais on peut perdre la nationalité si l'autre est prise sans autorisation du gouvernement.",
+      "sources": [
+        {
+          "title": "Equatorial Guinean nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Equatorial_Guinean_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales, sans reconnaissance des couples ; société très conservatrice et arrestations signalées depuis 2023.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Equatorial Guinea",
+          "url": "https://database.ilga.org/equatorial-guinea-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Equatorial Guinea travel advice — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/equatorial-guinea/print",
+          "published": "2026-01-08",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Equatorial Guinea — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Equatorial_Guinea",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Pays très majoritairement chrétien (88,7 % en 2020), surtout catholique."
+    },
+    "sources": [
+      {
+        "title": "Equatorial Guinea — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Equatorial_Guinea",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Equatorial Guinea: Freedom in the World 2025 — Freedom House",
+        "url": "https://freedomhouse.org/country/equatorial-guinea/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Equatorial Guinea report — Amnesty International",
+        "url": "https://www.amnesty.org/en/location/africa/east-africa-the-horn-and-great-lakes/equatorial-guinea/report-equatorial-guinea/",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Guinée-Bissau",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à demander à l'ambassade à Paris ou dans un pays voisin ; titre de séjour introuvable ; transition militaire depuis novembre 2025.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Guinea-Bissau travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/guinea-bissau/entry-requirements",
+          "published": "2025-12-10",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "2025 Guinea-Bissau coup d'état — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/2025_Guinea-Bissau_coup_d%27%C3%A9tat",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, demandé à l'ambassade de Guinée-Bissau à Paris ou dans un pays voisin (règles écrites pour les Britanniques ; aucun visa électronique mentionné). Fièvre jaune exigée.",
+    "diasporaRoute": "Aucune trouvée.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Admise sans restriction depuis la loi de 2010 ; un candidat à la présidence ne peut pas être binational.",
+      "sources": [
+        {
+          "title": "Bissau-Guinean nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Bissau-Guinean_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "The nationality laws of the Lusophone states in Africa — Citizenship Rights in Africa Initiative",
+          "url": "https://citizenshiprightsafrica.org/en/the-nationality-laws-of-the-lusophone-states-in-africa/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis le Code pénal de 1993 ; aucune protection contre les discriminations.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Guinea-Bissau",
+          "url": "https://database.ilga.org/guinea-bissau-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guinea-Bissau travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/guinea-bissau/safety-and-security",
+          "published": "2025-12-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "70 % pensent qu'une femme doit décider seule de se marier, 46 % seulement qu'elle décide de la maternité ; 27 % des femmes de 20 à 24 ans ont eu un enfant avant 18 ans.",
+      "returneePerception": "",
+      "religion": "Islam 49,6 %, christianisme 37,8 %, religions traditionnelles 6,4 % (Afrobarometer 2025)."
+    },
+    "sources": [
+      {
+        "title": "AD1199 — Afrobarometer",
+        "url": "https://www.afrobarometer.org/publication/ad1199-os-guineenses-apoiam-a-permanencia-das-raparigas-gravidas-na-escola-a-educacao-sexual-e-a-autonomia-das-mulheres-nas-decisoes-sobre-o-casamento/",
+        "published": "2026-07-07",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Guinea-Bissau — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Guinea-Bissau",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Kenya",
+    "paperwork": {
+      "level": 3,
+      "justification": "Autorisation de voyage en ligne (eTA) ; permis de séjour en ligne en 2 à 6 mois, dont un permis nomade numérique créé en 2024.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Kenya travel advice: Entry requirements — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/kenya/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "S'installer au Kenya — Expat.com",
+          "url": "https://www.expat.com/fr/guide/afrique/kenya/",
+          "published": "2025-11-07",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Pas de visa, mais une autorisation électronique de voyage (eTA) payante à demander en ligne avant le départ : 32,50 USD, avec une assurance santé kényane obligatoire depuis le 5 octobre 2026. Comptée comme visa électronique.",
+    "diasporaRoute": "Aucune trouvée. Un parent kényan, père ou mère, suffit, où que l'enfant soit né.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la Constitution de 2010 pour les Kényans d'origine, sauf pour le président et quelques hautes fonctions.",
+      "sources": [
+        {
+          "title": "Kenyan nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kenyan_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées par l'article 162 du Code pénal : jusqu'à 14 ans de prison. Appel sur cet article en attente de décision.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Kenya",
+          "url": "https://database.ilga.org/kenya-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Kenya travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/kenya/safety-and-security",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Kenya — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Kenya",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Oui, la vie quotidienne passe par M-Pesa : factures, achats, crédit, épargne. Retirer de petites sommes chez un agent peut coûter environ 10 %.",
+    "described": {
+      "womenDaily": "Le FCDO signale vols à l'arraché et, plus rarement, agressions sexuelles ; il conseille une tenue couvrante hors des zones touristiques, surtout à Mombasa.",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "M-Pesa — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/M-Pesa",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Visa policy of Kenya — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Kenya",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs : Kenya — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/kenya/",
+        "published": "2026-10-29",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Lesotho",
+    "paperwork": {
+      "level": 3,
+      "justification": "Sans visa jusqu'à 14 jours ; au-delà, visa demandé par courriel puis titre long séjour sur place. Permis de travail introuvable.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Lésotho — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/lesotho/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-13",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 14,
+    "visaNote": "Sans visa jusqu'à 14 jours, avec une autorisation d'entrée délivrée à l'arrivée. Au-delà, visa demandé par courriel avant le voyage. L'entrée passe par l'Afrique du Sud.",
+    "diasporaRoute": "Aucune trouvée pour la diaspora africaine au sens large. Les Basotho ayant perdu leur nationalité doivent demander leur réintégration.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée par le 8e amendement à la Constitution (2018).",
+      "sources": [
+        {
+          "title": "Nationality law of Lesotho — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Nationality_law_of_Lesotho",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis le Code pénal de 2012 selon la plupart des sources ; la discrimination au travail est interdite depuis 2024. Le FCDO dit encore l'inverse.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Lesotho",
+          "url": "https://database.ilga.org/lesotho-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Lesotho travel advice — Government of Canada",
+          "url": "https://travel.gc.ca/destinations/lesotho",
+          "published": "2026-10-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in Lesotho — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Lesotho",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Le FCDO juge les violences de genre « très élevées » ; le Canada signale du harcèlement envers les femmes qui voyagent seules (2026).",
+      "returneePerception": "",
+      "religion": "Pays chrétien à environ 92 % (estimation 2020) ; la vie d'église compte."
+    },
+    "sources": [
+      {
+        "title": "Lesotho travel advice: safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/lesotho/safety-and-security",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Lesotho — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Lesotho",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Liberia",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa à demander à l'ambassade avant le départ ; permis de travail arrangé par l'employeur, jusqu'à 1 000 USD par an ; terre réservée aux citoyens.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Libéria — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/liberia/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Moving to Liberia as an Expat: The Complete Guide — Cyril Jarnias",
+          "url": "https://www.jarniascyril.com/expatriation/moving-to-liberia-as-an-expat-complete-guide/",
+          "published": "2026-01-26",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, demandé en personne ou par écrit à l'ambassade du Libéria ; en ligne seulement sans ambassade dans le pays de résidence. Fièvre jaune obligatoire.",
+    "diasporaRoute": "La Constitution réserve la nationalité aux personnes « d'ascendance noire » : un Afrodescendant peut se naturaliser après 2 ans de résidence, mais doit renoncer à ses autres nationalités.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Depuis 2022, les Libériens d'ascendance noire qui l'avaient perdue peuvent la reprendre ; les binationaux sont exclus de certaines fonctions. Un naturalisé doit renoncer aux autres.",
+      "sources": [
+        {
+          "title": "Liberian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Liberian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées (« sodomie volontaire », articles 14.74 et 14.79) : jusqu'à un an de prison. Une loi plus dure est bloquée en commission depuis 2024.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Liberia",
+          "url": "https://database.ilga.org/liberia-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Liberia travel advice: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/liberia/safety-and-security",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in Liberia — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Liberia",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone existe (Orange Money, MTN MoMo) ; part des adultes non trouvée.",
+    "described": {
+      "womenDaily": "Le FCDO signale des taux élevés de viols et d'agressions sexuelles. L'excision reste répandue dans 11 comtés sur 15 ; la loi pour l'interdire a été renvoyée en consultation en novembre 2025.",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Anti-FGM Bill Rejected – As Lawmakers Prioritize Anti-Gay Agenda — Women Voices Newspaper",
+        "url": "https://www.womenvoicesnewspaper.org/?p=20902",
+        "published": "2025-11-19",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Telecommunications in Liberia — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Telecommunications_in_Liberia",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Libye",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à obtenir avant le départ à l'ambassade de Libye à Paris ; aucune source sur les permis de séjour ou de travail.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Libye — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/libye/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-10-29",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, à obtenir avant l'arrivée auprès de l'ambassade de Libye à Paris. Entrée refusée avec un visa ou un tampon israélien.",
+    "diasporaRoute": "Aucune trouvée. Nationalité par le père seulement en pratique ; l'enfant d'une mère libyenne et d'un père étranger ne l'obtient pas.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Seulement avec l'autorisation de l'État ; prendre une autre nationalité sans accord peut faire perdre la nationalité libyenne (sources jusqu'à 2021).",
+      "sources": [
+        {
+          "title": "Libyan nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Libyan_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées : flagellation et jusqu'à 5 ans de prison. Au moins 9 arrestations à Tripoli en 2025.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Libya",
+          "url": "https://database.ilga.org/libya-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "World Report 2026: Libya — Human Rights Watch",
+          "url": "https://www.hrw.org/world-report/2026/country-chapters/libya",
+          "published": "2026",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Libya 2025 report — Amnesty International",
+          "url": "https://www.amnesty.org/en/location/middle-east-and-north-africa/north-africa/libya/report-libya/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Police des mœurs depuis novembre 2024 : voile obligatoire, mixité interdite, accord d'un tuteur masculin pour voyager. Pas de loi contre les violences conjugales.",
+      "returneePerception": "",
+      "religion": "Population presque entièrement musulmane sunnite ; alcool interdit par la loi."
+    },
+    "sources": [
+      {
+        "title": "World Report 2025: Libya — Human Rights Watch",
+        "url": "https://www.hrw.org/world-report/2025/country-chapters/libya",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Libye – Conseils aux voyageurs: Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/libye/conseils-aux-voyageurs-securite",
+        "published": "2026-10-29",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Libye – Conseils aux voyageurs: Informations utiles — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/libye/conseils-aux-voyageurs-informations-utiles",
+        "published": "2026-10-29",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Benghazi — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Benghazi",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Madagascar",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa à l'arrivée ; pour vivre sur place, visa long séjour au consulat puis carte de résident ; permis de travail en 60 jours environ.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Madagascar — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/madagascar/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-13",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Vivre à Madagascar : le guide de l'expatrié — Expat.com",
+          "url": "https://www.expat.com/fr/guide/afrique/madagascar/",
+          "published": "2026-01-12",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa délivré à la frontière : gratuit sous 15 jours (frais administratifs de 10 euros), 35 euros pour 30 jours, 40 euros pour 60 jours. Passeport valable 6 mois.",
+    "diasporaRoute": "Aucune trouvée. Depuis 2017, la mère transmet aussi la nationalité.",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "Un Malgache d'origine qui prend volontairement une autre nationalité perd la nationalité malgache (art. 42 du code de 1960). Une réforme est annoncée, sans loi à ce jour.",
+      "sources": [
+        {
+          "title": "Malagasy nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Malagasy_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Refondation – Élections présidentielles au premier semestre 2027 — Midi Madagasikara via AllAfrica",
+          "url": "https://fr.allafrica.com/stories/202511190218.html",
+          "published": "2025-11-19",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Relations légales depuis 1972, mais seulement à partir de 21 ans. Mariage interdit, aucune protection contre les discriminations.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Madagascar",
+          "url": "https://database.ilga.org/madagascar-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Madagascar: Safety and security — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/madagascar/safety-and-security",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Madagascar — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Madagascar",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Les services des opérateurs (MVola, Orange Money, Airtel Money) sont connus ; part des adultes non trouvée.",
+    "described": {
+      "womenDaily": "67 % pensent que les hommes doivent passer en premier pour l'emploi quand il manque (Afrobarometer, round 10).",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Madagascar — Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/madagascar/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs — Madagascar — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/madagascar/",
+        "published": "2026-11-13",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Malawi",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique ou à l'arrivée depuis 2026 ; permis de séjour et de travail demandés en ligne, exigences et frais non visibles.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Malawi — Conseils aux voyageurs — Entrée / séjour — France Diplomatie",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/malawi/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Department of Immigration and Citizenship Services",
+          "url": "https://www.immigration.gov.mw/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire depuis le 3 janvier 2026 : visa électronique sur evisa.gov.mw ou visa à l'arrivée à l'aéroport. 50 USD une entrée. 30 jours d'abord, prolongeables à 3 mois.",
+    "diasporaRoute": "Aucune trouvée. Un parent né au Malawi transmet la nationalité, mais pas à la génération suivante née à l'étranger.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis l'amendement de 2019 à la loi sur la citoyenneté, à condition de le déclarer.",
+      "sources": [
+        {
+          "title": "Malawian nationality law — Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Malawian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pénalisées : jusqu'à 14 ans de prison pour les hommes, 5 ans pour les femmes. La Cour constitutionnelle a maintenu ces articles le 28 juin 2024.",
+      "sources": [
+        {
+          "title": "ILGA World Database — Malawi",
+          "url": "https://database.ilga.org/malawi-lgbti",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "'Dark Day' in Malawi for Rights of LGBT People — Human Rights Watch",
+          "url": "https://www.hrw.org/news/2024/07/11/dark-day-malawi-rights-lgbt-people",
+          "published": "2024-07-11",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Malawi travel advice — UK FCDO",
+          "url": "https://www.gov.uk/foreign-travel-advice/malawi/print",
+          "published": "2026-10-20",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Airtel Money et TNM Mpamba sont souvent cités, mais leur usage n'a pas été vérifié dans une source datée.",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Société conservatrice et religieuse ; les Églises ont organisé des manifestations nationales en 2017."
+    },
+    "sources": [
+      {
+        "title": "LGBTQ rights in Malawi — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Malawi",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Mali",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à demander aux consulats de Paris ou Lyon, sans visa à l'arrivée ; aucune règle de carte de séjour trouvée ; relations tendues avec la France.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Mali – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/mali/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, délivré seulement par les consulats du Mali à Paris ou Lyon, sur rendez-vous, valable 30 jours. Pas de visa à l'arrivée. Certificat de fièvre jaune exigé.",
+    "diasporaRoute": "Aucune trouvée pour les afrodescendants. Un enfant né à l'étranger d'un parent malien est malien de naissance et peut demander ses papiers au consulat.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la loi n° 95-70 de 1995. La nationalité passe par le père comme par la mère.",
+      "sources": [
+        {
+          "title": "Malian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Malian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Le code pénal entré en vigueur le 13 décembre 2024 punit l'homosexualité et sa « promotion » de 2 à 7 ans de prison et d'une amende de 200 000 à 500 000 FCFA.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Mali (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Mali",
+          "published": "2024-12-13",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Mali travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/mali/safety-and-security",
+          "published": "2026-07-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Le dossier ne trouve pas de source fiable sur la vie quotidienne des femmes. Afrobarometer 2024 : 77 % des adultes veulent qu'une fille enceinte puisse continuer l'école.",
+      "returneePerception": "",
+      "religion": "Pays à grande majorité musulmane."
+    },
+    "sources": [
+      {
+        "title": "Mali – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/mali/",
+        "published": "2024",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs Mali (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/mali/",
+        "published": "2026-09-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Alliance of Sahel States (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Alliance_of_Sahel_States",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Maroc",
+    "paperwork": {
+      "level": 4,
+      "justification": "Entrée sans visa jusqu'à 90 jours ; carte de séjour en préfecture, renouvelée chaque année, obtenue en 1 à 3 mois.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Complete guide to moving to Morocco (getwherenext.com)",
+          "url": "https://getwherenext.com/blog/complete-guide-to-moving-to-morocco",
+          "published": "2026-02-28",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Pas de visa pour un séjour jusqu'à 90 jours. La règle a été lue sur une source écrite pour les Américains : à confirmer sur la page Entrée / séjour de France Diplomatie.",
+    "diasporaRoute": "Aucune trouvée pour les afrodescendants sans racines marocaines. Un enfant de père marocain est marocain ; par la mère, seulement pour les enfants nés depuis le 3 mars 2007.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis 1958. Depuis la loi 62-06 (2007), la mère transmet aussi la nationalité, mais pas aux enfants nés avant.",
+      "sources": [
+        {
+          "title": "Moroccan nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Moroccan_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "L'article 489 du code pénal punit les relations entre personnes de même sexe de 6 mois à 3 ans de prison.",
+      "sources": [
+        {
+          "title": "LGBT rights in Morocco (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Morocco",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "World Report 2025: Morocco and Western Sahara (HRW)",
+          "url": "https://www.hrw.org/world-report/2025/country-chapters/morocco-and-western-sahara",
+          "published": "2025-01",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Le harcèlement de rue est fréquent, surtout pour une femme seule (France Diplomatie, FCDO 2026). Le code de la famille donne aux femmes une part d'héritage plus petite.",
+      "returneePerception": "",
+      "religion": "Islam religion d'État. Les relations sexuelles hors mariage sont interdites pour les Marocains, ce qui concerne aussi les binationaux."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs Maroc – Sécurité (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/maroc/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Morocco travel advice: safety-and-security (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/morocco/safety-and-security",
+        "published": "2026-08-19",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Maurice",
+    "paperwork": {
+      "level": 5,
+      "justification": "Pas de visa sous 3 mois ; Premium Visa d'un an, gratuit et demandé en ligne pour qui travaille à distance.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Maurice – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/maurice/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Mauritius digital nomad visa (Wise)",
+          "url": "https://wise.com/gb/blog/mauritius-digital-nomad-visa",
+          "published": "2025-12-17",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Pas de visa pour moins de 3 mois ; la police aux frontières fixe la durée et peut la réduire. Billet retour exigé, preuve de fonds (100 USD par jour) possible.",
+    "diasporaRoute": "Aucune route pour les afrodescendants. Le Premium Visa (1 an renouvelable, revenus étrangers d'au moins 1 500 USD par mois) est la voie réaliste.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Autorisée depuis 1995 pour les Mauriciens d'origine, pas pour les naturalisés. La nationalité par filiation s'arrête à une génération.",
+      "sources": [
+        {
+          "title": "Mauritian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Mauritian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Dépénalisées le 4 octobre 2023 par la Cour suprême. Pas de mariage ni d'union civile.",
+      "sources": [
+        {
+          "title": "LGBT rights in Mauritius (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Mauritius",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Mauritius travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/mauritius/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Le FCDO signale des agressions sexuelles sur des touristes et conseille de ne pas marcher seule la nuit. Pas de rapport dédié trouvé.",
+      "returneePerception": "",
+      "religion": "Société pluri-religieuse : hindous, chrétiens, musulmans."
+    },
+    "sources": [
+      {
+        "title": "Economic Development Board Mauritius",
+        "url": "https://www.edbmauritius.org/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Mauritius: new conditions for Occupation Permit (Fragomen)",
+        "url": "https://www.fragomen.com/insights/mauritius-new-conditions-for-occupation-permit-young-professional-permit-and-permanent-residency-applications.html",
+        "published": "2025-09-12",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Mauritanie",
+    "paperwork": {
+      "level": 2,
+      "justification": "Autorisation en ligne puis visa à la frontière (55 €, 30 jours) ; démarches pour la carte de séjour introuvables.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Mauritanie – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/mauritanie/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-09",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Depuis le 5 janvier 2025 : autorisation en ligne sur anrpts.gov.mr avant le départ, puis visa biométrique à la frontière, 55 € pour 30 jours, une entrée.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe par le père ; par la mère, seulement sous conditions.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Admise depuis la loi 2010-023, mais un Mauritanien d'origine peut perdre sa nationalité s'il en prend une autre sans autorisation.",
+      "sources": [
+        {
+          "title": "Mauritanian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Mauritanian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal de 1983 (art. 308) : peine de mort en théorie pour les hommes musulmans, non appliquée depuis 1986 ; 3 mois à 2 ans de prison pour les femmes. Arrestations en 2020 et 2025.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Mauritania (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Mauritania",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Mauritania travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/mauritania/safety-and-security",
+          "published": "2026-10-19",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Les commerces n'acceptent pas la carte bancaire : on paie en espèces. L'application bancaire Bankily (Banque Populaire de Mauritanie) sert aux transferts et factures.",
+    "described": {
+      "womenDaily": "Risque d'agression dans les lieux isolés, à éviter seule la nuit. Tenue couvrante attendue. Une loi sur les violences faites aux femmes n'avait pas été votée selon HRW.",
+      "returneePerception": "",
+      "religion": "République islamique. Alcool et porc interdits à tous ; pendant le ramadan, ne pas manger ni boire en public le jour."
+    },
+    "sources": [
+      {
+        "title": "Bankily (Banque Populaire de Mauritanie)",
+        "url": "https://www.bankily.mr/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs – Informations utiles, Mauritanie (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/mauritanie/conseils-aux-voyageurs-informations-utiles",
+        "published": "2026-11-09",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Mauritania – Human Rights Watch",
+        "url": "https://www.hrw.org/africa/mauritania",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Mauritania – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/mauritania/",
+        "published": "2026-04-21",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Mozambique",
+    "paperwork": {
+      "level": 2,
+      "justification": "Autorisation en ligne d'environ 40 € pour 30 jours ; pour vivre ou travailler, visa à demander à l'ambassade à Paris.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Mozambique – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/mozambique/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-09",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Autorisation en ligne sur evisa.gov.mz, 5 à 7 jours avant le départ, environ 40 € pour 30 jours maximum. Visite familiale ou long séjour : visa avant le départ.",
+    "diasporaRoute": "Aucune trouvée. Une personne née à l'étranger d'un parent né au Mozambique est mozambicaine, mais doit confirmer ce choix dans l'année de sa majorité.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Admise dans la plupart des cas depuis la Constitution de 2004.",
+      "sources": [
+        {
+          "title": "Mozambican nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Mozambican_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Légales depuis le nouveau code pénal du 30 juin 2015. Pas de mariage ni de reconnaissance des couples.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Mozambique (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Mozambique",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Mozambique travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/mozambique/safety-and-security",
+          "published": "2026-08-20",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Afrobarometer : 68 % veulent que la violence conjugale soit traitée comme un crime. Pas de donnée trouvée sur le harcèlement de rue.",
+      "returneePerception": "",
+      "religion": "Pays majoritairement chrétien, avec une forte minorité musulmane surtout au nord."
+    },
+    "sources": [
+      {
+        "title": "Mozambique – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/mozambique/",
+        "published": "2026-07",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Mozambique 2025 (Amnesty International)",
+        "url": "https://www.amnesty.org/en/location/africa/southern-africa/mozambique/report-mozambique/",
+        "published": "2026",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Namibie",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa à l'arrivée ou en ligne depuis le 1er avril 2025 (1 600 N$) ; permis de travail ou d'investisseur en 3 à 4 mois environ.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Namibia travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/namibia/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Living in Namibia guide (Expat.com)",
+          "url": "https://www.expat.com/en/guide/africa/namibia/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Depuis le 1er avril 2025, visa exigé des Français par réciprocité : à l'arrivée ou en ligne, 1 600 N$, plusieurs entrées. Il ne permet pas de travailler.",
+    "diasporaRoute": "Aucune trouvée. Un enfant né à l'étranger d'un parent namibien est namibien.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Tolérée pour les Namibiens de naissance depuis des décisions de 2008 et 2011 ; les naturalisés doivent renoncer à l'autre nationalité.",
+      "sources": [
+        {
+          "title": "Namibian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Namibian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "La Haute Cour a annulé le délit de sodomie le 21 juin 2024 ; l'État a fait appel, issue non trouvée. Une loi de décembre 2024 interdit le mariage homosexuel.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Namibia (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Namibia",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Namibia travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/namibia/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par mobile de type M-Pesa est peu répandu ; les portefeuilles des banques dominent (dossier, non chiffré).",
+    "described": {
+      "womenDaily": "Une crise persistante de violences sexuelles et sexistes est décrite (The Brief, 2024-12-09), sans chiffres fiables. 72 % soutiennent l'égalité des femmes en politique (Afrobarometer).",
+      "returneePerception": "",
+      "religion": "Pays très chrétien (87,9 % en 2023), surtout luthérien."
+    },
+    "sources": [
+      {
+        "title": "Namibia (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Namibia",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "AD1045: In mostly Christian Namibia, same-sex rights face barriers (Afrobarometer)",
+        "url": "https://www.afrobarometer.org/publication/ad1045-in-mostly-christian-namibia-same-sex-rights-face-barriers-but-not-necessarily-from-religion/",
+        "published": "2025-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "PP108: Open in principle, closed at the paycheque (Afrobarometer)",
+        "url": "https://www.afrobarometer.org/publication/open-in-principle-closed-at-the-paycheque/",
+        "published": "2026-10-08",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Niger",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à demander avant le départ à l'ambassade à Paris (90 €), sans visa à l'arrivée ; séjour long non documenté ; refoulements signalés.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Niger – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/niger/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire avant le départ, auprès de l'ambassade du Niger à Paris : 90 € une entrée, 150 € plusieurs entrées. Pas de visa à l'arrivée.",
+    "diasporaRoute": "Aucune trouvée. Un enfant né d'un parent nigérien, où qu'il naisse, est nigérien.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la loi n° 2014-60. La mère transmet la nationalité à égalité depuis 1999.",
+      "sources": [
+        {
+          "title": "Nigerien nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Nigerien_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal en vigueur depuis le 11 juin 2026 : 5 à 10 ans de prison pour les actes, 10 à 20 ans pour une organisation ou un mariage, sans sursis.",
+      "sources": [
+        {
+          "title": "LGBT rights in Niger (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Niger",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Législation locale au Niger (Affaires étrangères belges)",
+          "url": "https://diplomatie.belgium.be/fr/pays/niger/voyager-au-niger-conseils-aux-voyageurs/legislation-locale-au-niger",
+          "published": "2026-10-14",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Pays à grande majorité musulmane."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs Niger (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/niger/",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Nigeria",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique depuis mai 2025 ; pour vivre, quota d'expatrié de l'employeur puis permis de séjour CERPAC demandé en ligne.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Nigeria travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/nigeria/entry-requirements",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire. Depuis le 1er mai 2025, visa électronique (13 catégories) qui remplace le visa à l'arrivée et ne se prolonge pas sur place.",
+    "diasporaRoute": "Toute personne née à l'étranger d'un parent nigérian est nigériane de naissance (Constitution, art. 25). Rien pour les petits-enfants ni pour les afrodescendants.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Permise aux Nigérians de naissance ; la restriction de l'article 28 vise ceux qui l'ont acquise par enregistrement ou naturalisation.",
+      "sources": [
+        {
+          "title": "Constitution 1999, section 25 (mirror)",
+          "url": "https://nigerian-constitution.com/chapter-3-section-25-citizenship-by-birth/",
+          "published": "1999",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Constitution 1999, section 28 (mirror)",
+          "url": "https://nigerian-constitution.com/chapter-3-section-28-dual-citizenship/",
+          "published": "1999",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Jusqu'à 14 ans de prison au niveau fédéral ; la charia de certains États du Nord prévoit la mort. Assister à un mariage homosexuel est aussi puni.",
+      "sources": [
+        {
+          "title": "Nigeria travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/nigeria/safety-and-security",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Nigeria: mass LGBTQ+ arrests (PinkNews)",
+          "url": "https://thepinknews.com/2023/11/01/nigeria-lgbtq-arrests-assumptions-activists",
+          "published": "2023-11-01",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "On paie très peu en espèces : virements, terminaux de paiement et portefeuilles comme OPay, PalmPay et Moniepoint.",
+    "described": {
+      "womenDaily": "Pas de source fiable sur le harcèlement de rue. L'association d'avocates FIDA a réclamé l'état d'urgence contre les vols « one chance » à Abuja en janvier 2026.",
+      "returneePerception": "Le retour au pays, « reverse japa », est décrit comme petit mais en hausse, avec une part de stigmate (Legit.ng 2025). En décembre, la diaspora rentre pour la fête (« Detty December »).",
+      "religion": "Nord surtout musulman, Sud surtout chrétien ; certains États du Nord appliquent la charia."
+    },
+    "sources": [
+      {
+        "title": "Reverse Japa trend (Legit.ng)",
+        "url": "https://www.legit.ng/people/family-relationship/1703522-reverse-japa-trend-nigerians-surprisingly-returning-home",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Returning Nigerians countering emigration (RTÉ)",
+        "url": "https://www.rte.ie/news/2025/1205/1547356-returning-nigerians",
+        "published": "2025-12-05",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Ouganda",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa demandé en ligne puis remis à l'arrivée (environ 50 USD) ; permis de travail payant, lié à un employeur ou à une activité.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Uganda travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/uganda/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Directorate of Citizenship and Immigration Control",
+          "url": "https://www.immigration.go.ug/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa électronique demandé sur visas.immigration.go.ug, remis à l'arrivée, environ 50 USD pour 3 mois (Expat.com, nov. 2025). Visa touristique d'Afrique de l'Est : 100 USD.",
+    "diasporaRoute": "Est ougandais de naissance qui a un parent ou un grand-parent ougandais de naissance, où qu'il soit né. Pas de programme pour les afrodescendants.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis 2005 ; demande à 200 USD pour un Ougandais d'origine (site officiel). Interdite à certains hauts responsables depuis 2009.",
+      "sources": [
+        {
+          "title": "Ugandan nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Ugandan_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Dual Citizenship – Government of Uganda (Immigration)",
+          "url": "https://www.immigration.go.ug/citizenship/dual",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Loi anti-homosexualité de 2023 : prison à vie, peine de mort pour l'homosexualité dite « aggravée », jusqu'à 20 ans pour la « promotion ».",
+      "sources": [
+        {
+          "title": "Anti-Homosexuality Act, 2023 (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Anti-Homosexuality_Act,_2023",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Uganda travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/uganda/safety-and-security",
+          "published": "2026-11-06",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Ouganda – Sécurité (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/ouganda/conseils-aux-voyageurs-securite",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "On paie surtout par téléphone, avec MTN et Airtel (dossier, sans chiffre daté).",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Pays très religieux : catholiques, anglicans, pentecôtistes et musulmans. Le pèlerinage des Martyrs, le 3 juin à Namugongo, est immense."
+    },
+    "sources": [
+      {
+        "title": "Kampala (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Kampala",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Ouganda – Conseils aux voyageurs (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/ouganda/",
+        "published": "2026-11-10",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "RD Congo",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa obligatoire et fièvre jaune ; au-delà de 6 mois, permis de séjour auprès de la DGM ; pour travailler, deux visas d'établissement distincts.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "République démocratique du Congo – Conseils aux voyageurs (PDF, France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/files/files/pdf/cav/R%C3%A9publique%20d%C3%A9mocratique%20du%20Congo%20-%20Minist%C3%A8re%20de%20l%27Europe%20et%20des%20Affaires%20%C3%A9trang%C3%A8res.pdf",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire (visa touristique pour moins de 6 mois), passeport valable 6 mois, certificat de fièvre jaune exigé.",
+    "diasporaRoute": "Aucune trouvée. Un statut spécial pour les Congolais de l'étranger est annoncé depuis février 2026, sans contenu publié.",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "Nationalité exclusive (Constitution, art. 10) : en prendre une autre fait perdre la congolaise. Dans les faits, elle est tolérée (Ifri, oct. 2026).",
+      "sources": [
+        {
+          "title": "Double nationalité en RDC : le gouvernement privilégie une approche graduelle (Actualite.cd)",
+          "url": "https://actualite.cd/2026/02/01/double-nationalite-en-rdc-le-gouvernement-privilegie-une-approche-graduelle-avec-des",
+          "published": "2026-02-01",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "La diaspora congolaise en France (Ifri)",
+          "url": "https://www.ifri.org/sites/default/files/2026-10/ifri_moufflet_lagrange_diaspora_congolaise_france_2026.pdf",
+          "published": "2026-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Jamais explicitement punies, mais le mariage est interdit et les lois sur l'outrage aux bonnes mœurs servent parfois contre les couples.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in the_Democratic_Republic_of_the_Congo (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_the_Democratic_Republic_of_the_Congo",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "France Diplomatie classe les agressions sexuelles parmi les crimes violents. Pas de source dédiée trouvée.",
+      "returneePerception": "Les Franco-Congolais qui rentrent sont souvent déçus et leurs projets échouent sans réseau local ; être d'origine congolaise ne suffit pas à être vu comme Congolais (Ifri, oct. 2026).",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Informations pratiques pour la RDC (Affaires étrangères belges)",
+        "url": "https://diplomatie.belgium.be/fr/pays/republique-democratique-du-congo/voyager-en-republique-democratique-du-congo-conseils-aux-voyageurs/informations-pratiques-pour-la-rdc",
+        "published": "2026-10-27",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Rwanda",
+    "paperwork": {
+      "level": 4,
+      "justification": "Visa gratuit de 30 jours à l'arrivée pour les Français ; permis de travail en 5 à 15 jours ouvrés ; route de nationalité pour les descendants.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Visa on Arrival (DGIE)",
+          "url": "https://migration.gov.rw/visa-on-arrival",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Permits (DGIE)",
+          "url": "https://migration.gov.rw/our-services/permit",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Rwanda expat guide (Expat.com)",
+          "url": "https://www.expat.com/fr/guide/afrique/rwanda/",
+          "published": "2025-10-27",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa à l'arrivée de 30 jours, gratuit pour les pays de la Francophonie, donc pour les Français (DGIE, page non datée).",
+    "diasporaRoute": "Route « nationalité d'origine » pour qui a un parent d'ascendance rwandaise : trois témoins de la famille, 5 000 FRW via Irembo, environ six mois.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Admise depuis la Constitution de 2003, confirmée en 2015 ; les descendants de Rwandais ont un droit constitutionnel à la nationalité.",
+      "sources": [
+        {
+          "title": "Rwandan nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Rwandan_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Citizenship services (DGIE)",
+          "url": "https://migration.gov.rw/our-services/citizenshipss",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Légales. La Constitution ne reconnaît que le mariage entre un homme et une femme ; pas de loi complète contre les discriminations.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Rwanda (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Rwanda",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Rwanda travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/rwanda/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone est la façon normale de payer (dossier, sans chiffre daté).",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Rwanda travel advice (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/rwanda",
+        "published": "2026-09-04",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Seychelles",
+    "paperwork": {
+      "level": 3,
+      "justification": "Permis de visiteur gratuit de 3 mois à l'arrivée ; vivre sur place coûte cher : permis de résidence d'environ 150 000 SCR ou travail lié à l'employeur.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Seychelles travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/seychelles/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Vivre aux Seychelles (Expat.com)",
+          "url": "https://www.expat.com/fr/guide/afrique/seychelles/",
+          "published": "2025-11-26",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Pas de visa : permis de visiteur gratuit de 3 mois à l'arrivée, prolongeable jusqu'à 12 mois. Autorisation de voyage payante à demander en ligne avant le départ.",
+    "diasporaRoute": "Aucune trouvée. Un enfant né à l'étranger d'un parent seychellois peut être enregistré après 2 ans de résidence.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Admise depuis 1993, à condition d'être déclarée à l'État.",
+      "sources": [
+        {
+          "title": "Seychellois nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Seychellois_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Légales depuis le 7 juin 2016 ; discrimination au travail interdite depuis 2006 ; pas de mariage ni d'union.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Seychelles (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Seychelles",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Seychelles travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/seychelles/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Afrobarometer (enquête 2022) : 93 % soutiennent les candidatures de femmes à égalité. Pas de donnée sur le harcèlement de rue.",
+      "returneePerception": "",
+      "religion": "Environ 75 % de chrétiens, surtout catholiques, avec des minorités hindoue et musulmane."
+    },
+    "sources": [
+      {
+        "title": "Seychelles (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Seychelles",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Seychelles – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/seychelles/",
+        "published": "2026-08-12",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Sierra Leone",
+    "paperwork": {
+      "level": 4,
+      "justification": "Visa à l'arrivée ou en ligne ; route de citoyenneté pour les afrodescendants qui prouvent leurs origines par ADN ; permis de séjour introuvable.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Sierra Leone travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/sierra-leone/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guidelines for African diaspora accession of passports/citizenship (Visit Sierra Leone)",
+          "url": "https://www.visitsierraleone.org/guidelines-for-african-diaspora-accession-of-passports-citizenship-from-the-government-of-sierra-leone/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Pour les Britanniques : visa à l'arrivée (80 USD en espèces) ou visa en ligne sur evisa.sl. Règle pour les Français non vérifiée. Fièvre jaune et inscription santé NPHA exigées.",
+    "diasporaRoute": "Citoyenneté pour les afrodescendants qui prouvent par test ADN une lignée sierra-léonaise, via un voyagiste agréé ; cérémonies en 2021. Statut actuel non vérifié.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la loi de 2006. La nationalité par filiation est réservée aux personnes « d'ascendance africaine noire » ; les mères la transmettent depuis 2017.",
+      "sources": [
+        {
+          "title": "Sierra_Leonean nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Sierra_Leonean_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised-not-enforced",
+      "note": "Les relations entre hommes sont punies jusqu'à la prison à vie (loi de 1861), loi rarement appliquée. Entre femmes, pas de délit.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Sierra_Leone (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Sierra_Leone",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Sierra Leone travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/sierra-leone/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone est courant : 8,2 millions de comptes fin 2023 (banque centrale) ; Orange Money et Afrimoney dominent (non vérifié).",
+    "described": {
+      "womenDaily": "Une loi de 2023 fixe 30 % de femmes aux postes publics et privés. L'excision touchait environ 9 femmes sur 10 (UNICEF 2014).",
+      "returneePerception": "Freetown, fondée en 1792 par d'anciens esclaves libérés, attire les Afro-Américains qui reviennent. Pas de source sur l'accueil au quotidien.",
+      "religion": "Environ 78,5 % de musulmans et 20,4 % de chrétiens (Pew 2020) ; les fêtes des deux religions font partie de la vie de Freetown."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs Sierra Leone (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/sierra-leone/",
+        "published": "2026-10-27",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "22 African Americans granted Sierra Leone citizenship (The EastAfrican)",
+        "url": "https://www.theeastafrican.co.ke/tea/rest-of-africa/22-african-americans-granted-sierra-leone-citizenship-3248484",
+        "published": "2021-01",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Sierra Leone Launches National Instant Payment System (We Are Tech Africa)",
+        "url": "https://wearetech.africa/en/fils-uk/news/finance/sierra-leone-launches-national-instant-payment-system",
+        "published": "2025-02-14",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Sierra Leone – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/sierra-leone/",
+        "published": "2026-05-15",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Somalie",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa en ligne avant le départ pour Mogadiscio, mais tout le centre et le sud sont en zone rouge ; séjour long non documenté.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Somalia travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/somalia/entry-requirements",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa électronique à demander à l'avance sur etas.gov.so (fuite de données signalée par le FCDO). Lettre d'invitation parfois exigée.",
+    "diasporaRoute": "Aucune trouvée. La nationalité passe surtout par le père ; un ancien Somalien peut la retrouver après 3 ans de résidence.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "La loi de 1962 l'interdit, la Constitution provisoire de 2012 l'autorise : les deux textes se contredisent. Les binationaux reçoivent peu d'aide consulaire.",
+      "sources": [
+        {
+          "title": "Somali nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Somali_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Somalia travel advice (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/somalia",
+          "published": "2026-06-04",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal fédéral, art. 409 : 3 mois à 3 ans de prison ; peine de mort selon la charia dans les zones d'al-Shabaab et au Jubaland.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Somalia (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Somalia",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "World Report 2025: Somalia (HRW)",
+          "url": "https://www.hrw.org/world-report/2025/country-chapters/somalia",
+          "published": "2025",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "On paie presque tout par téléphone, en dollars : EVC Plus de Hormuud compte environ 3 millions d'utilisateurs.",
+    "described": {
+      "womenDaily": "Selon l'UNICEF cité par HRW (2025), 99 % des femmes de 15 à 49 ans sont excisées. Tenue couvrante, hijab très répandu.",
+      "returneePerception": "",
+      "religion": "Islam. Pour un Somalien musulman, changer de religion ou en promouvoir une autre est illégal ; alcool interdit."
+    },
+    "sources": [
+      {
+        "title": "Hormuud Telecom (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Hormuud_Telecom",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Somalia travel advice: safety-and-security (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/somalia/safety-and-security",
+        "published": "2026-06-04",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Somalie (Somaliland)",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa d'un mois à l'arrivée à Hargeisa ; le visa électronique fédéral n'y est pas valable ; séjour long non documenté.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Somalia travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/somalia/entry-requirements",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa d'un mois, une entrée, acheté à l'arrivée à Hargeisa. Le visa électronique de Somalie ne permet pas d'entrer au Somaliland.",
+    "diasporaRoute": "Aucune trouvée.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Les habitants voyagent surtout avec un passeport somalien. Le Somaliland traite les binationaux d'origine somalienne comme ses ressortissants (FCDO).",
+      "sources": [
+        {
+          "title": "Somali nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Somali_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Somalia travel advice (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/somalia",
+          "published": "2026-06-04",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal de 1964 ; peines pouvant aller jusqu'à la mort selon des rapports, et violences de foule signalées.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Somaliland (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Somaliland",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone passe par ZAAD, de l'opérateur Telesom. À Hargeisa, les distributeurs donnent des dollars.",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Islam ; alcool interdit."
+    },
+    "sources": [
+      {
+        "title": "Somalia travel advice: safety-and-security (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/somalia/safety-and-security",
+        "published": "2026-06-04",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Soudan",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à demander à une ambassade, enregistrement à la police des étrangers sous 3 jours ; pays en guerre, aucun séjour long trouvé.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Sudan travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/sudan/entry-requirements",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire auprès d'une ambassade du Soudan ; enregistrement au service des étrangers dans les 3 jours, avec un tampon israélien, entrée refusée.",
+    "diasporaRoute": "Aucune trouvée. Un enfant de père soudanais est soudanais ; par la mère, possible depuis 2017-2018.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Autorisée depuis 1993, sauf avec la nationalité sud-soudanaise, retirée en 2011 à ceux qui l'ont prise.",
+      "sources": [
+        {
+          "title": "Sudanese nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Sudanese_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Article 148 : jusqu'à 5 ans de prison la première fois, 7 ans la deuxième, prison à vie la troisième. Mort et flagellation supprimées en 2020.",
+      "sources": [
+        {
+          "title": "LGBT rights in Sudan (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Sudan",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Sudan travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/sudan/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par l'application Bankak de la Bank of Khartoum est courant ; des fraudes ont été signalées fin 2026.",
+    "described": {
+      "womenDaily": "La loi sur l'ordre public a été abrogée en 2019, l'excision interdite en 2020, et depuis juillet 2020 une femme peut voyager sans autorisation d'un homme.",
+      "returneePerception": "",
+      "religion": "Pays majoritairement musulman. Relations hors mariage interdites ; les non-musulmans ne boivent qu'à l'abri des regards."
+    },
+    "sources": [
+      {
+        "title": "Ambassade de France au Soudan",
+        "url": "https://sd.diplomatie.gouv.fr/",
+        "published": "2026-08-27",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Sudan traders 'missing millions' as hackers target Bankak app (Radio Dabanga)",
+        "url": "https://www.dabangasudan.org/en/all-news/article/sudan-traders-missing-millions-as-hackers-target-bankak-app",
+        "published": "2026-11-12",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "DTM Sudan (IOM)",
+        "url": "https://dtm.iom.int/sudan",
+        "published": "2025-10-31",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Soudan du Sud",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa en ligne ou à l'ambassade ; prolongation sur place à Juba ; le FCDO signale des étrangers harcelés ou expulsés à l'aéroport.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "South Sudan travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/south-sudan/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Travel advice: South Sudan (Government of Canada)",
+          "url": "https://travel.gc.ca/destinations/south-sudan",
+          "published": "2026-09-28",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, en ligne sur evisa.gov.ss ou à une ambassade. Fièvre jaune exigée ; prolongation au ministère de l'Intérieur à Juba.",
+    "diasporaRoute": "Nationalité par filiation pour qui a un parent, grand-parent ou arrière-grand-parent né au Soudan du Sud (loi du 7 juillet 2011). Pas de visa diaspora.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis 2011 ; les binationaux peuvent recevoir peu d'aide consulaire (Canada, 2026).",
+      "sources": [
+        {
+          "title": "South_Sudanese nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/South_Sudanese_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Travel advice: South Sudan (Government of Canada)",
+          "url": "https://travel.gc.ca/destinations/south-sudan",
+          "published": "2026-09-28",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal de 2008, art. 248 : jusqu'à 10 ans de prison, une amende ou les deux. Pas d'application connue, mais harcèlement et arrestations signalés.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in South_Sudan (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_South_Sudan",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "South Sudan travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/south-sudan/safety-and-security",
+          "published": "2026-08-25",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Les femmes sont particulièrement visées aux barrages armés (FCDO, 2026) ; tenue sobre attendue (Canada, 2026).",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs Soudan du Sud (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/soudan-du-sud/",
+        "published": "2026-09-18",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "São Tomé-et-Príncipe",
+    "paperwork": {
+      "level": 4,
+      "justification": "Sans visa 15 jours, puis autorisation en ligne ; titre de séjour d'un an renouvelable avec un motif (travail, famille) ; portugais exigé pour rester.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Visa policy of São Tomé and Príncipe (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Visa_policy_of_S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "e-Visa portal (Serviço de Migração e Fronteiras)",
+          "url": "https://www.smf.st/evisa/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Living in São Tomé and Príncipe (Immigrant Invest)",
+          "url": "https://immigrantinvest.com/blog/living-sao-tome/",
+          "published": "2026-09-06",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 15,
+    "visaNote": "Sans visa 15 jours pour les passeports de l'UE (règle de 2015, peut-être ancienne). Au-delà, demande en ligne auprès du SMF : 7 jours ouvrés, frais payés à la frontière.",
+    "diasporaRoute": "Aucune pour les afrodescendants. Un enfant né à l'étranger de parents santoméens peut demander la nationalité à sa majorité. Citoyenneté par investissement dès 90 000 USD.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Admise pour les Santoméens de naissance (Constitution de 2003) ; un naturalisé doit en général renoncer à son autre nationalité.",
+      "sources": [
+        {
+          "title": "São Toméan nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9an_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "legal",
+      "note": "Légales depuis le code pénal de novembre 2012 ; discrimination au travail interdite depuis 2019. Pas de reconnaissance des couples.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in São Tomé and Príncipe (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "São Tomé and Príncipe travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/sao-tome-and-principe/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "Afrobarometer (Round 9) : 52 % disent que les violences faites aux femmes sont assez ou très courantes dans leur quartier.",
+      "returneePerception": "",
+      "religion": "Environ 81 % de chrétiens (2020)."
+    },
+    "sources": [
+      {
+        "title": "São Tomé and Príncipe – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/sao-tome-and-principe/",
+        "published": "2026-10-02",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "São Tomé and Príncipe (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "São Tomé and Príncipe travel advice: entry-requirements (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/sao-tome-and-principe/entry-requirements",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Sénégal",
+    "paperwork": {
+      "level": 4,
+      "justification": "Sans visa moins de 3 mois ; au-delà, carte de résident à demander sur place en préfecture.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Sénégal – Conseils aux voyageurs (PDF, France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/files/files/pdf/cav/S%C3%A9n%C3%A9gal%20-%20Minist%C3%A8re%20de%20l%27Europe%20et%20des%20Affaires%20%C3%A9trang%C3%A8res.pdf",
+          "published": "2026-10-27",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Pas de visa pour moins de 3 mois, passeport valable plus de 6 mois. Une réciprocité des visas annoncée fin 2024 n'a pas été appliquée à ce jour.",
+    "diasporaRoute": "Aucune pour les afrodescendants. Un enfant de parent sénégalais peut demander la nationalité ; le fonds FAISE prête aux entrepreneurs de la diaspora.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Flou : le code de 1961 permet de retirer la nationalité à qui en prend une autre, mais beaucoup de binationaux existent. Exclue pour être candidat à la présidence.",
+      "sources": [
+        {
+          "title": "La nationalité exclusive du candidat à la présidence de la République (Dakaractu)",
+          "url": "https://www.dakaractu.com/La-nationalite-exclusive-du-candidat-a-la-presidence-de-la-Republique-Une-question-posee-et-a-resoudre-Par-Serigne-Mbaye_a118349.html",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Loi n° 2026-08 (JO du 30 mars 2026) : 5 à 10 ans de prison et 2 à 10 millions FCFA d'amende ; « apologie » punie de 3 à 7 ans. Arrestations signalées.",
+      "sources": [
+        {
+          "title": "Homosexualité au Sénégal : la loi modifiant l'article 319 promulguée (Dakaractu)",
+          "url": "https://www.dakaractu.com/Homosexualite-au-Senegal-la-loi-modifiant-l-article-319-du-Code-penal-promulguee-et-publiee-au-Journal-",
+          "published": "2026-03-30",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Senegal travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/senegal/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "On paie partout par téléphone avec Wave et Orange Money, jusque dans le BRT ; Wave détient environ 80 % de la monnaie électronique (2026).",
+    "described": {
+      "womenDaily": "31,9 % des femmes interrogées ont subi au moins une violence en un an (ANSD, données 2023). Le harcèlement dans la rue et les transports est décrit comme courant.",
+      "returneePerception": "On parle de « repats ». Ceux qui rentrent font face aux attentes d'argent de la famille et à une réinsertion difficile (Université de Fribourg, 2023).",
+      "religion": "Pays très majoritairement musulman, organisé autour des confréries ; tenue sobre conseillée dans les lieux religieux."
+    },
+    "sources": [
+      {
+        "title": "Fintech unicorn Wave caves to regulators (Launch Base Africa)",
+        "url": "https://launchbaseafrica.com/2026/10/01/fintech-unicorn-wave-caves-to-regulators-as-bceao-refuses-to-blink-on-west-africas-payment-deadline/",
+        "published": "2026-10-01",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "AD1086 Les Sénégalais dénoncent la persistance des violences basées sur le genre (Afrobarometer)",
+        "url": "https://www.afrobarometer.org/wp-content/uploads/2025/11/AD1086-Senegalais-denoncent-la-persistance-des-violences-basees-sur-le-genre-Afrobarometer-28nov25.pdf",
+        "published": "2025-11-28",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Policy brief: return migration Senegal (Université de Fribourg)",
+        "url": "https://www.unifr.ch/sopa/de/assets/public/files/forschung/Projekte/230201_Policybrief_Senegal_final.pdf",
+        "published": "2023",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Repats sénégalais : quand l'appel de la patrie donne des ailes (Le Soleil)",
+        "url": "https://lesoleil.sn/actualites/societe-fait-divers/loeil-du-digital-repats-senegalais-quand-lappel-de-la-patrie-donne-des-ailes-1-2/",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Le FAISE octroie un financement de 750 millions (AllAfrica)",
+        "url": "https://fr.allafrica.com/stories/202512160496.html",
+        "published": "2025-12-16",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Tanzanie",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa en ligne ou à l'arrivée, plus une assurance d'État de 44 USD depuis octobre 2026 ; permis de séjour demandés en ligne (OWAIS), coûteux.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Tanzania travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/tanzania/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Living in Tanzania: the ultimate expat guide (Expat.com)",
+          "url": "https://www.expat.com/en/guide/africa/tanzania/",
+          "published": "2025-11-07",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : visa en ligne conseillé, visa à l'arrivée possible dans les grands ports. Depuis le 1er octobre 2026, assurance voyage d'État obligatoire, 44 USD.",
+    "diasporaRoute": "Aucune en vigueur. Une « Diaspora Tanzanite Card » pour les anciens Tanzaniens est en discussion, retirée du projet de loi le 31 janvier 2025.",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "Interdite aux adultes : à la majorité, il faut renoncer à l'autre nationalité ou perdre la tanzanienne (loi de 1995).",
+      "sources": [
+        {
+          "title": "Tanzanian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Tanzanian_nationality_law",
+          "published": "2025-08-25",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Parliament delays special status of Tanzanian diaspora (Mwananchi)",
+          "url": "https://mwananchi.co.tz/tanzania/diaspora/parliament-delays-special-status-of-tanzanian-diaspora-4906652",
+          "published": "2025-01-31",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Continent : 30 ans de prison au minimum, jusqu'à la prison à vie (art. 154). Zanzibar : jusqu'à 14 ans pour les hommes, 5 ans pour les femmes.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Tanzania (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Tanzania",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Tanzania travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/tanzania/safety-and-security",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone (M-Pesa, Tigo Pesa, Airtel Money) est très répandu.",
+    "described": {
+      "womenDaily": "Le FCDO signale du harcèlement verbal envers les femmes seules et des agressions sexuelles, y compris dans les hôtels de plage. Tenue sobre à Zanzibar et Pemba.",
+      "returneePerception": "",
+      "religion": "Zanzibar est musulman à environ 98 % ; tenue sobre et rythme du ramadan. Sur le continent, chrétiens et musulmans."
+    },
+    "sources": [
+      {
+        "title": "Conseils aux voyageurs : Tanzanie (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/tanzanie/",
+        "published": "2026-11-12",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Tchad",
+    "paperwork": {
+      "level": 2,
+      "justification": "Visa électronique depuis décembre 2024, déclaration à la police sous 72 h, permis pour sortir de N'Djamena ; titre de séjour non documenté.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Visa policy of Chad (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Chad",
+          "published": "2026-10-24",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire, en ligne sur evisa.td depuis le 11 décembre 2024 ; déclaration à la police dans les 72 heures.",
+    "diasporaRoute": "Aucune trouvée. La nationalité par filiation exige deux parents tchadiens ; avec un seul, seulement si l'enfant serait sinon apatride.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis le code de 1962, sauf pour être candidat à la présidence.",
+      "sources": [
+        {
+          "title": "Chadian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Chadian_nationality_law",
+          "published": "2025-12-19",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal en vigueur depuis le 1er août 2017, art. 354 : 3 mois à 2 ans de prison et 50 000 à 500 000 FCFA d'amende.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Chad (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Chad",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Chad travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/chad/safety-and-security",
+          "published": "2026-11-04",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone existe (Airtel Money, Moov Money), sans chiffre d'usage vérifié.",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "Nord surtout musulman, sud plus chrétien ; la religion pèse visiblement sur la vie quotidienne à N'Djamena."
+    },
+    "sources": [
+      {
+        "title": "France and Chad (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/en/information-by-country/tchad/france-and-chad",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Togo",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa en ligne obligatoire, plus de visa à l'arrivée depuis le 12 avril 2024 ; au-delà de 90 jours, visa long séjour puis carte de séjour à Lomé.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Togo – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/togo/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa en ligne sur voyage.gouv.tg au moins 5 jours avant le départ ; plus de visa à l'arrivée depuis le 12 avril 2024. Visas de 48 h ou 7 jours prolongeables jusqu'à un mois. Fièvre jaune exigée.",
+    "diasporaRoute": "Aucune trouvée. L'État a revu sa stratégie de mobilisation de la diaspora togolaise en avril 2026, sans titre de séjour dédié.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Interdite en droit, mais la règle de renonciation vise surtout les naturalisés. La nationalité passe par le père, et aussi par la mère selon des textes plus récents.",
+      "sources": [
+        {
+          "title": "Togolese nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Togolese_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Article 393 du code pénal de 2015 : 1 à 3 ans de prison et 1 à 3 millions FCFA d'amende.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Togo (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Togo",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Voyager au Togo – Législation locale (Affaires étrangères belges)",
+          "url": "https://diplomatie.belgium.be/fr/pays/togo/voyager-au-togo-conseils-aux-voyageurs/legislation-locale-au-togo",
+          "published": "2026-10-06",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone existe (Mixx de Yas, Flooz de Moov Africa), sans chiffre d'usage vérifié.",
+    "described": {
+      "womenDaily": "69 % des Togolais veulent que la police et la justice en fassent plus contre la discrimination et le harcèlement des femmes (Afrobarometer, 2026-07-22).",
+      "returneePerception": "",
+      "religion": "Recensement 2022 : 49,2 % de chrétiens, 18,6 % de musulmans, 17 % de religions traditionnelles (dont le vodun)."
+    },
+    "sources": [
+      {
+        "title": "Togo (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Togo",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Togo – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/togo/",
+        "published": "2026-08",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Togo First",
+        "url": "https://www.togofirst.com/fr",
+        "published": "2026-11-09",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Tunisie",
+    "paperwork": {
+      "level": 4,
+      "justification": "Sans visa moins de 3 mois ; au-delà, visa et carte de séjour au ministère de l'Intérieur, délai flou (30 jours ou 3 mois selon les sources).",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs : Tunisie (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/tunisie/",
+          "published": "2026-09-10",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guide expatriation Tunisie (Expat.com)",
+          "url": "https://www.expat.com/fr/guide/afrique/tunisie/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Pas de visa pour moins de 3 mois. Depuis le 1er janvier 2025, passeport valable au moins 3 mois à l'entrée ; la carte d'identité ne suffit plus.",
+    "diasporaRoute": "Aucune pour les afrodescendants. Un enfant de père ou de mère tunisien est tunisien.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis 1975 ; la mère transmet la nationalité comme le père depuis 2010.",
+      "sources": [
+        {
+          "title": "Tunisian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Tunisian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "L'article 230 du code pénal punit les relations entre personnes de même sexe jusqu'à 3 ans de prison (France Diplomatie, 2026).",
+      "sources": [
+        {
+          "title": "Tunisie : sécurité (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/tunisie/conseils-aux-voyageurs-securite",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Tunisia (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Tunisia",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "France Diplomatie signale une attention insistante, jusqu'au harcèlement, envers les Européennes seules ou accompagnées. 77 % veulent les mêmes chances électorales pour les femmes (Afrobarometer).",
+      "returneePerception": "",
+      "religion": "Pays majoritairement musulman ; le ramadan change nettement le rythme de la journée."
+    },
+    "sources": [
+      {
+        "title": "World Report 2025: Tunisia (HRW)",
+        "url": "https://www.hrw.org/world-report/2025/country-chapters/tunisia",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Tunisia – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/tunisia/",
+        "published": "2026-06-24",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Zambie",
+    "paperwork": {
+      "level": 4,
+      "justification": "Sans visa jusqu'à 90 jours par an ; permis de travail demandé par l'employeur, permis d'investisseur dès 150 000 USD, route retraite.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Nationals who do not require visa (Department of Immigration, Zambia)",
+          "url": "https://www.zambiaimmigration.gov.zm/nationals-who-dont-require-visa/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Permit types (Department of Immigration, Zambia)",
+          "url": "https://www.zambiaimmigration.gov.zm/permit-types/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 90,
+    "visaNote": "Pas de visa : jusqu'à 90 jours par période de 12 mois en touriste, 30 jours pour les affaires. Billet retour exigé à l'arrivée en avion.",
+    "diasporaRoute": "Aucune pour les afrodescendants. Une personne née à l'étranger d'un parent zambien est zambienne ; les anciens Zambiens peuvent retrouver la nationalité.",
+    "dualNationality": {
+      "allowed": "yes",
+      "note": "Autorisée depuis la révision constitutionnelle de 2016, par simple enregistrement ; le FCDO la confirme.",
+      "sources": [
+        {
+          "title": "Zambian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Zambian_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Zambia travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/zambia/entry-requirements",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal, art. 155 : de 15 ans de prison à la perpétuité, pour les hommes comme pour les femmes.",
+      "sources": [
+        {
+          "title": "LGBTQ rights in Zambia (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Zambia",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBT rights in Zambia (Equaldex)",
+          "url": "https://www.equaldex.com/region/zambia",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": "98 % de chrétiens (recensement 2022) ; le christianisme est religion d'État et l'église rythme la semaine."
+    },
+    "sources": [
+      {
+        "title": "Zambia (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Zambia",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Zambia – Human Rights Watch",
+        "url": "https://www.hrw.org/africa/zambia",
+        "published": "2026-11-01",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Zambia – Afrobarometer",
+        "url": "https://www.afrobarometer.org/countries/zambia/",
+        "published": "2026-09-30",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Zimbabwe",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa à l'arrivée ou en ligne pour 30 jours ; pour vivre, permis de travail ou d'investisseur à environ 500 USD, renouvelable.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Zimbabwe – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/zimbabwe/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-09-15",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Living in Zimbabwe (Expat.com)",
+          "url": "https://www.expat.com/en/guide/africa/zimbabwe/",
+          "published": "2025-10-28",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire : à l'arrivée, en général 30 jours, ou en ligne sur evisa.gov.zw (65,77 USD pour 30 jours selon Expat.com, oct. 2025).",
+    "diasporaRoute": "Aucune pour les afrodescendants. Est zimbabwéen de naissance qui a un parent ou un grand-parent zimbabwéen, si la naissance est enregistrée au Zimbabwe.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "La Constitution de 2013 l'admet pour les Zimbabwéens de naissance, mais la loi de 1984 qui l'interdit n'était pas alignée en 2018 ; le FCDO parle d'une situation incohérente.",
+      "sources": [
+        {
+          "title": "Zimbabwean nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Zimbabwean_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Zimbabwe travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/zimbabwe/safety-and-security",
+          "published": "2026-07-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Les relations entre hommes sont illégales, entre femmes depuis 2006 ; poursuites rares selon le FCDO. Peine non précisée dans le dossier.",
+      "sources": [
+        {
+          "title": "LGBT rights in Zimbabwe (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Zimbabwe",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Zimbabwe travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/zimbabwe/safety-and-security",
+          "published": "2026-07-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone passe surtout par EcoCash (Econet), qui avait 99,8 % du marché en 2017 (chiffre ancien).",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "EcoCash (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/EcoCash",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Égypte",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa à l'arrivée (30 USD) ou en ligne ; au-delà de 90 jours, visa de résidence renouvelable jusqu'à 5 ans, permis de travail lié à l'employeur.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Egypt travel advice: entry-requirements (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/egypt/entry-requirements",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Guide Égypte (Expat.com)",
+          "url": "https://www.expat.com/fr/guide/afrique/egypte/",
+          "published": "2025-12-15",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa à l'arrivée à 30 USD en espèces pour 30 jours (visa numérique à l'aéroport du Caire à 36 USD depuis le 1er août 2026), ou visa en ligne jusqu'à 3 mois. Entrée sans visa de 15 jours limitée au Sud-Sinaï.",
+    "diasporaRoute": "Aucune pour les afrodescendants. La nationalité passe par le père ou la mère ; une naturalisation par investissement existe (dépôt de 7 millions E£, puis 5 ans).",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Admise depuis 2004, en principe avec une autorisation de l'État ; sans autorisation, pas de sanction automatique.",
+      "sources": [
+        {
+          "title": "Egyptian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Egyptian_nationality_law",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Pas de délit explicite, mais des poursuites et des peines de prison au titre de la « débauche » (FCDO 2026, HRW 2026).",
+      "sources": [
+        {
+          "title": "Egypt travel advice: safety-and-security (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/egypt/safety-and-security",
+          "published": "2026-10-27",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "World Report 2026: Egypt (HRW)",
+          "url": "https://www.hrw.org/world-report/2026/country-chapters/egypt",
+          "published": "2026",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "LGBTQ rights in Egypt (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Egypt",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "",
+    "described": {
+      "womenDaily": "139e sur 148 au classement mondial de l'égalité femmes-hommes (WEF 2025). Le FCDO signale des agressions sexuelles ; le métro du Caire a des voitures réservées aux femmes.",
+      "returneePerception": "",
+      "religion": "Pays majoritairement musulman, avec une minorité copte visible."
+    },
+    "sources": [
+      {
+        "title": "Visa policy of Egypt (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Egypt",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Érythrée",
+    "paperwork": {
+      "level": 1,
+      "justification": "Visa à demander à l'ambassade à Paris (2 à 3 semaines), permis pour sortir d'Asmara ; aucune route de séjour long trouvée.",
+      "confidence": "sourced",
+      "sources": [
+        {
+          "title": "Conseils aux voyageurs Érythrée – Entrée / séjour (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/erythree/conseils-aux-voyageurs-entree-sejour",
+          "published": "2026-11-09",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa obligatoire avant le départ, auprès de l'ambassade d'Érythrée à Paris ; pas de visa à l'arrivée sauf accord préalable. Permis exigé pour aller à plus de 25 km d'Asmara.",
+    "diasporaRoute": "Aucune trouvée. Les personnes d'origine érythréenne sont traitées comme Érythréennes, avec impôt de 2 % sur la diaspora et service national possibles.",
+    "dualNationality": {
+      "allowed": "restricted",
+      "note": "Tolérée depuis 1992 pour les Érythréens d'origine ; les naturalisés doivent renoncer. Les binationaux sont vus comme Érythréens, sans aide consulaire.",
+      "sources": [
+        {
+          "title": "Eritrean nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Eritrean_nationality_law",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Eritrea travel advice (UK FCDO)",
+          "url": "https://www.gov.uk/foreign-travel-advice/eritrea",
+          "published": "2026-11",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Article 310 du code pénal de 2015 : 5 à 7 ans de prison, pour les hommes comme pour les femmes.",
+      "sources": [
+        {
+          "title": "Eritrea country profile (Human Dignity Trust)",
+          "url": "https://www.humandignitytrust.org/country-profile/eritrea/",
+          "published": "2026-01-11",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Conseils aux voyageurs Érythrée – Informations utiles (France Diplomatie)",
+          "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/erythree/conseils-aux-voyageurs-informations-utiles",
+          "published": "2026-11-09",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Pas de paiement par téléphone ni de carte bancaire, pas de distributeur : tout se paie en espèces.",
+    "described": {
+      "womenDaily": "Le FCDO signale du harcèlement verbal et physique. Selon HRW (2025), 41 % des filles sont mariées avant 18 ans et l'excision reste très répandue.",
+      "returneePerception": "Les personnes d'origine érythréenne qui reviennent sont traitées comme des nationaux : impôt sur la diaspora souvent perçu sous la contrainte, service national possible (BTI 2026, FCDO).",
+      "religion": "Environ 50 % de musulmans sunnites, 30 % d'orthodoxes, 13 % de catholiques ; les Églises non reconnues sont réprimées."
+    },
+    "sources": [
+      {
+        "title": "Présentation de l'Érythrée (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/erythree/presentation-de-l-erythree",
+        "published": "2026-10-23",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "World Report 2025: Eritrea (HRW)",
+        "url": "https://www.hrw.org/world-report/2025/country-chapters/eritrea",
+        "published": "2025-01",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "BTI 2026 Country Report: Eritrea (Bertelsmann)",
+        "url": "https://bti-project.org/en/reports/country-report/ERI",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Éthiopie",
+    "paperwork": {
+      "level": 3,
+      "justification": "Visa électronique sur evisa.gov.et ; carte d'identité spéciale pour les étrangers d'origine éthiopienne ; règles de séjour pour les autres non trouvées.",
+      "confidence": "editorial",
+      "sources": [
+        {
+          "title": "Ethiopian eVISA (Ethiopian Immigration and Citizenship Service)",
+          "url": "https://www.evisa.gov.et/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Ethiopian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Ethiopian_nationality_law",
+          "published": "2025-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "visaFreeDaysFrenchPassport": 0,
+    "visaNote": "Visa électronique sur evisa.gov.et ; des sites tiers citent 52 à 82 USD pour 30 jours. Règle exacte pour les Français non vérifiée.",
+    "diasporaRoute": "Carte d'identité spéciale (la « Yellow Card ») pour les étrangers d'origine éthiopienne : entrée sans visa, droit de vivre, travailler et posséder. Exclut ceux qui ont pris la nationalité érythréenne.",
+    "dualNationality": {
+      "allowed": "no",
+      "note": "Interdite : un binational est traité seulement comme Éthiopien tant qu'il n'a pas perdu cette nationalité.",
+      "sources": [
+        {
+          "title": "Ethiopian nationality law (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Ethiopian_nationality_law",
+          "published": "2025-10",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "sameSexRelations": {
+      "status": "criminalised",
+      "note": "Code pénal de 2004, art. 629 et 630 : au moins un an de prison, jusqu'à 10 ans ou plus dans certains cas. Descentes dans des hôtels d'Addis-Abeba en août 2023.",
+      "sources": [
+        {
+          "title": "LGBT rights in Ethiopia (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/LGBT_rights_in_Ethiopia",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "mobileMoney": "Le paiement par téléphone passe par telebirr (Ethio telecom, lancé en mai 2021), sans chiffre d'usage dans le dossier.",
+    "described": {
+      "womenDaily": "",
+      "returneePerception": "",
+      "religion": ""
+    },
+    "sources": [
+      {
+        "title": "Ethiopia travel advice (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/ethiopia",
+        "published": "2026-10-30",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs – Éthiopie (France Diplomatie)",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/ethiopie/",
+        "published": "2026-09-30",
+        "accessed": "2026-11-15"
+      }
+    ]
+  }
+]

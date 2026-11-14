@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CITIES, PRACTICAL_CRITERIA, CHARACTER_CRITERIA, ZONES } from "./cities";
+import { CITIES, CRITERIA, CRITERION_KEYS, ZONES } from "./cities";
 
 describe("the city catalogue", () => {
   it("covers all 54 countries of the continent with 115 cities", () => {
@@ -9,8 +9,9 @@ describe("the city catalogue", () => {
     expect(new Set(states).size).toBe(54);
   });
 
-  it("gives every city a unique name", () => {
+  it("gives every city a unique name and address", () => {
     expect(new Set(CITIES.map((city) => city.name)).size).toBe(CITIES.length);
+    expect(new Set(CITIES.map((city) => city.slug)).size).toBe(CITIES.length);
   });
 
   it("places every city on the African map", () => {
@@ -22,15 +23,55 @@ describe("the city catalogue", () => {
     }
   });
 
-  it("scores every criterion from 0 to 5", () => {
+  it("defines every criterion it scores, with a written rubric", () => {
+    expect(CRITERIA.map((c) => c.key).sort()).toEqual([...CRITERION_KEYS].sort());
+    for (const criterion of CRITERIA) {
+      expect(criterion.rubric["1"], criterion.key).toBeTruthy();
+      expect(criterion.rubric["3"], criterion.key).toBeTruthy();
+      expect(criterion.rubric["5"], criterion.key).toBeTruthy();
+    }
+  });
+
+  it("scores every criterion on the rubric, or says it does not know", () => {
     for (const city of CITIES) {
-      for (const criterion of [...PRACTICAL_CRITERIA, ...CHARACTER_CRITERIA]) {
-        const score = city.scores[criterion];
-        expect(Number.isInteger(score), `${city.name} ${criterion}`).toBe(true);
-        expect(score, `${city.name} ${criterion}`).toBeGreaterThanOrEqual(0);
-        expect(score, `${city.name} ${criterion}`).toBeLessThanOrEqual(5);
+      for (const key of CRITERION_KEYS) {
+        const score = city.scores[key];
+        expect(score, `${city.name} ${key}`).toBeDefined();
+        if (score.level !== null) {
+          expect(Number.isInteger(score.level), `${city.name} ${key}`).toBe(true);
+          expect(score.level, `${city.name} ${key}`).toBeGreaterThanOrEqual(0);
+          expect(score.level, `${city.name} ${key}`).toBeLessThanOrEqual(5);
+        }
+        expect(score.justification.length, `${city.name} ${key}`).toBeGreaterThan(5);
       }
     }
+  });
+
+  it("backs every score that is not an estimate with a dated source", () => {
+    for (const city of CITIES) {
+      for (const key of CRITERION_KEYS) {
+        const score = city.scores[key];
+        if (score.level === null || score.confidence === "editorial") continue;
+        expect(score.sources.length, `${city.name} ${key}`).toBeGreaterThan(0);
+        for (const source of score.sources) {
+          expect(source.url, `${city.name} ${key}`).toMatch(/^https?:\/\//);
+          expect(source.accessed, `${city.name} ${key}`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        }
+      }
+    }
+  });
+
+  it("sources the travel advice that decides whether a city is proposed", () => {
+    for (const city of CITIES) {
+      expect(city.facts.advisory.sources.length, city.name).toBeGreaterThan(0);
+    }
+    const unsafe = (name: string) => CITIES.find((city) => city.name === name)?.unsafe;
+    expect(unsafe("Bamako")).toBe(true);
+    expect(unsafe("Dakar")).toBe(false);
+  });
+
+  it("knows the national facts of every city's country", () => {
+    for (const city of CITIES) expect(city.countryFacts, city.name).toBeDefined();
   });
 
   it("files every city under a known zone and size", () => {

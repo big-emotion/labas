@@ -31,25 +31,34 @@ its audience is the French-speaking diaspora first.
 
 ---
 
-> ⚠️ **City scores are estimates, not survey results.**
+> ⚠️ **City scores are sourced, but not all of them, and not for ever.**
 >
-> The 0–5 scores in `src/data/cities.json` were written by hand for the first prototype. Before
-> public launch, every remark on safety, racism, LGBT rights or conflict needs a dated source,
-> and a method page must explain how scores are set. Cities flagged `unsafe` (conflict zones)
-> are ranked but never proposed.
+> Each of the 16 criteria is scored 0–5 on a written rubric (`src/data/criteria.json`, shown on
+> `/methode`), with a justification, a confidence level and dated sources. About one score in
+> five is still unknown and counts as a neutral 2.5. Editors' doubts are listed in
+> `docs/criteria/scores-review.md` and `docs/criteria/city-lines-review.md`; clear them before a
+> public launch. Cities that French or UK travel advice warns against are ranked but never
+> proposed, and the rule is derived from the stored advice, not set by hand.
 
 ---
 
 ## How it works
 
 ```
-src/data/cities.json       115 cities: coordinates, 21 scores, languages, climates, texts
-src/data/city-lines.json   per city: « On dit », « Ce qui pourrait te surprendre »,
-        │                  neighbourhoods, own « pourquoi toi » sentences, sources
-src/lib/ranking.ts         answers ──▶ criterion weights ──▶ weighted score per city (0–1)
-        │                  + reasons, drawbacks and « pourquoi toi » lines (portrait.ts)
-src/pages/index.astro      chips ──▶ rankCities() on every tap ──▶ map, pinned top three,
-                           « Tes trois villes » with details, every other city in score order
+src/data/cities.json        115 cities: who they are (coordinates, size, pitch, « à savoir »)
+src/data/criteria.json      the 16 criteria: plain-French label, meaning, rubric 1 / 3 / 5
+src/data/city-scores.json   per city: 16 scores (level, justification, confidence, sources)
+        │                   and facts (languages, climate, landscape, travel advice)
+src/data/countries.json     per country: paperwork, visa, dual nationality, same-sex law…
+src/data/city-lines.json    per city: « On dit », « Ce qui pourrait te surprendre »,
+        │                   neighbourhoods, own « pourquoi toi » sentences, sources
+src/data/photos.json        per city: a Wikimedia Commons photo (public/photos) and its credit
+src/lib/ranking.ts          answers ──▶ weights ──▶ weighted score (0–1), coverage, filters
+        │                   + reasons, drawbacks and « pourquoi toi » lines (portrait.ts)
+src/pages/index.astro       the free quiz: map, pinned top three, « Tes trois villes »
+src/pages/approfondir.astro the fuller questionnaire, one question at a time (adaptive.ts)
+src/pages/ville/[slug]      one page per city: every criterion with its sources
+src/pages/methode.astro     the rubric, the confidence levels, what is never scored
 ```
 
 Weights come from the prototype so its results stay recognisable. An unanswered question
@@ -80,6 +89,17 @@ npm install
 npm run dev        # http://localhost:4321
 ```
 
+## Legal notice
+
+`/mentions-legales` must name the host, but this public repository never does. Set the host at
+build time:
+
+```bash
+LEGAL_HOST_NAME="…" LEGAL_HOST_ADDRESS="…" npm run build
+```
+
+Without them the page describes the host's role instead of naming it.
+
 ## Development
 
 ```bash
@@ -103,9 +123,10 @@ npm run test:watch
 
 ## Roadmap
 
-1. Source the sensitive remarks and publish `/methode`, `/mentions-legales`, `/confidentialite`.
+1. Clear the review lists, then launch publicly.
 2. Shareable result link and a 1080 × 1920 story image.
-3. One page per city (`/ville/<slug>`), for search and for each Instagram post.
+3. Personal coaching behind « Aller plus loin » (the questionnaire is open to everyone for now).
+4. The free-text entry, with explicit consent (docs/criteria/architecture.md §7).
 
 ---
 

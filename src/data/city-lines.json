@@ -10,7 +10,7 @@
       },
       {
         "name": "Surulere",
-        "text": "Vieux quartier du continent, familles et petits commerces, autour de deux stades. Une chambre : environ 85 € par mois."
+        "text": "Quartier du continent connu pour ses deux stades et sa rue commerçante, Adeniran Ogunsanya, près du Théâtre national. Une chambre : environ 85 € par mois."
       },
       {
         "name": "Victoria Island",
@@ -29,6 +29,12 @@
         "accessed": "2026-11-14"
       },
       {
+        "title": "Lagos hotels report record occupancy as short-let prices surge during Detty December 2025 — Nigeria Housing Market",
+        "url": "https://www.nigeriahousingmarket.com/news/lagos-hotels-report-record-occupancy-as-short-let-prices-surge-during-detty-december-2025",
+        "published": "2025-12-18",
+        "accessed": "2026-11-14"
+      },
+      {
         "title": "Living in Lagos — Expat.com",
         "url": "https://www.expat.com/fr/guide/afrique/nigeria/lagos/",
         "published": "2025-12-16",
@@ -42,12 +48,17 @@
       {
         "title": "One-bedroom rents hit ₦20.9m in Lagos – Report (Edala, Lagos Residential Market Report 2025) — News Express",
         "url": "https://newsexpressngr.com/news/289926/one-bedroom-rents-hit-209m-in-lagos-report",
-        "published": "2025",
+        "published": "2026-01-03",
         "accessed": "2026-11-14"
       },
       {
         "title": "Wikipedia — Yaba, Lagos",
         "url": "https://en.wikipedia.org/wiki/Yaba,_Lagos",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Wikivoyage — Surulere",
+        "url": "https://en.wikivoyage.org/wiki/Surulere",
         "accessed": "2026-11-14"
       },
       {
@@ -136,11 +147,11 @@
     "neighbourhoods": [
       {
         "name": "Osu",
-        "text": "Le cœur des sorties : Oxford Street, bars et restaurants pleins le soir, et du bruit tard. Appartement : environ 290 à 860 € par mois."
+        "text": "Le cœur des sorties : Oxford Street, bars et restaurants pleins le soir, et du bruit tard. Appartement, taille non précisée : environ 290 à 860 € par mois."
       },
       {
         "name": "Labone",
-        "text": "Résidentiel et plus calme qu'Osu, mais plein de restaurants et de bars. Une chambre : environ 385 à 690 € par mois."
+        "text": "Résidentiel et plus calme qu'Osu, mais plein de restaurants et de bars. Une chambre : environ 385 à 1 030 € par mois selon les guides."
       },
       {
         "name": "East Legon",
@@ -148,7 +159,7 @@
       },
       {
         "name": "Spintex",
-        "text": "Long axe de bureaux et de commerces, résidences fermées, jeunes actifs. Une chambre : environ 210 à 570 € par mois."
+        "text": "Long axe de bureaux et de commerces, résidences gardées, jeunes actifs. Une chambre : environ 210 à 570 € par mois."
       }
     ],
     "why": {
@@ -276,11 +287,11 @@
     "neighbourhoods": [
       {
         "name": "Haie Vive et Cocotiers",
-        "text": "Le quartier des expatriés, près de l'ambassade de France et du lycée Montaigne, avec sa rue de bars. Deux pièces au centre : 230 à 460 € par mois."
+        "text": "Le quartier des expatriés, près de l'ambassade de France et du lycée Montaigne, avec sa rue de bars. Appartement moderne : environ 260 à 430 € par mois (2026)."
       },
       {
         "name": "Fidjrossè",
-        "text": "Quartier de plage à l'ouest, plein de bars et de restaurants, animé le week-end. Deux pièces meublées : environ 530 € par mois (2026)."
+        "text": "Quartier de plage à l'ouest, plein de bars et de restaurants, animé le week-end. Appartement : environ 170 à 340 € par mois selon la distance à la plage (2026)."
       },
       {
         "name": "Zogbo, Vêdoko, Sètovi",
@@ -397,7 +408,7 @@
     "neighbourhoods": [
       {
         "name": "Bonapriso",
-        "text": "Quartier aisé et plutôt calme, avec galeries, restaurants et boutiques. Deux pièces : environ 150 à 305 € par mois."
+        "text": "Quartier aisé et plutôt calme, avec galeries, restaurants et boutiques. Studio : environ 305 € par mois ; deux chambres de 90 m² : environ 760 € (annonces 2026)."
       },
       {
         "name": "Akwa",
@@ -405,7 +416,7 @@
       },
       {
         "name": "Bonamoussadi",
-        "text": "Grand quartier résidentiel du nord, plus récent, avec centres commerciaux, supermarchés et boîtes de nuit. Deux pièces : environ 150 à 305 € par mois."
+        "text": "Grand quartier résidentiel du nord, plus récent, avec centres commerciaux, supermarchés et boîtes de nuit. Studio neuf : environ 275 € par mois (annonces 2026)."
       },
       {
         "name": "Makepe, Kotto et Logpom",
@@ -499,6 +510,12 @@
         "accessed": "2026-11-14"
       },
       {
+        "title": "Angola travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/angola/safety-and-security",
+        "published": "2026-05-28",
+        "accessed": "2026-11-15"
+      },
+      {
         "title": "Living in Luanda — Expat.com",
         "url": "https://www.expat.com/en/guide/africa/angola/luanda/",
         "published": "2025-12-11",
@@ -519,11 +536,11 @@
     "neighbourhoods": [
       {
         "name": "Westlands",
-        "text": "Le quartier des sorties et des jeunes actifs. Deux pièces : environ 560 à 1 050 € par mois."
+        "text": "Le quartier des sorties et des jeunes actifs. Deux chambres : environ 560 à 1 050 € par mois."
       },
       {
         "name": "Kilimani",
-        "text": "Central, beaucoup d'appartements récents. Deux pièces : environ 420 à 840 € par mois."
+        "text": "Central, beaucoup d'appartements récents. Deux chambres : environ 420 à 840 € par mois."
       },
       {
         "name": "Lavington et Karen",
@@ -673,7 +690,7 @@
       },
       {
         "name": "Mikocheni",
-        "text": "Plus de bars de quartier qu'à Masaki, près d'une école internationale. Deux chambres non meublé : environ 1 030 € par mois."
+        "text": "Plus de bars de quartier qu'à Masaki, près d'une école internationale. Deux ou trois chambres : environ 685 à 1 540 € par mois."
       },
       {
         "name": "Mbezi Beach",
@@ -690,6 +707,12 @@
         "title": "Dar es Salaam expat guide — Expat.com",
         "url": "https://www.expat.com/en/guide/africa/tanzania/dar-es-salaam/",
         "published": "2025-12-16",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Living in Tanzania — Expat.com",
+        "url": "https://www.expat.com/en/guide/africa/tanzania/",
+        "published": "2025-11-07",
         "accessed": "2026-11-14"
       },
       {
@@ -792,7 +815,7 @@
       },
       {
         "name": "Kibagabaga",
-        "text": "Résidentiel et plus calme, entre habitants et étrangers, moins cher que Nyarutarama. Bon pour courir, peu de vie nocturne."
+        "text": "Résidentiel et plus calme, entre habitants et étrangers, moins cher que Nyarutarama. L'école internationale ISK y a son campus."
       },
       {
         "name": "Kicukiro",
@@ -882,7 +905,7 @@
       },
       {
         "name": "Sandton",
-        "text": "Le quartier des affaires, avec des résidences sécurisées. Deux pièces : environ 480 à 750 € par mois."
+        "text": "Le quartier des affaires, avec des résidences sécurisées. Deux pièces : environ 480 à 750 € par mois, charges souvent en plus."
       }
     ],
     "sources": [
@@ -922,6 +945,12 @@
         "url": "https://www.riotimesonline.com/cost-of-living-johannesburg-expats-2026/",
         "published": "2026-09-14",
         "accessed": "2026-11-14"
+      },
+      {
+        "title": "S'expatrier à Johannesburg — Expat.com",
+        "url": "https://www.expat.com/fr/guide/afrique/afrique-du-sud/johannesburg/",
+        "published": "2025-12-23",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -1009,11 +1038,11 @@
     "neighbourhoods": [
       {
         "name": "uMhlanga",
-        "text": "Village de bord de mer et quartier d'affaires, le préféré des expatriés et le plus cher. Une chambre meublée : environ 615 € par mois."
+        "text": "Village de bord de mer et quartier d'affaires, le préféré des expatriés et le plus cher. Une chambre meublée : environ 615 € par mois (annonce, novembre 2026)."
       },
       {
         "name": "Morningside et Florida Road",
-        "text": "Quartier aisé sur la colline, avec Florida Road pour sortir : restaurants, pubs, bistrots. Une chambre : environ 350 à 440 € par mois."
+        "text": "Quartier aisé sur la colline, avec Florida Road pour sortir : restaurants, pubs, bistrots. Une chambre : environ 350 à 440 € par mois (annonces, novembre 2026)."
       },
       {
         "name": "Westville",
@@ -1256,7 +1285,7 @@
   {
     "name": "Casablanca",
     "reputation": "On connaît Casablanca comme la grande ville moderne du Maroc : la mosquée Hassan II face à l'océan, la corniche d'Aïn Diab et le festival Jazzablanca.",
-    "surprise": "Dans la médina, près de Bab Marrakech, un « marché sénégalais » existe depuis 2012 : tailleurs, salons de coiffure, garba et attiéké. RFI y comptait plus de 200 commerces en 2026.",
+    "surprise": "Dans la médina, près de Bab Marrakech, un « marché sénégalais » s'est installé en 2012 : tailleurs, salons de coiffure, garba et attiéké. En mai 2026, RFI y comptait plus de 200 commerces, menacés par un projet d'avenue.",
     "neighbourhoods": [
       {
         "name": "Maârif",
@@ -1338,8 +1367,8 @@
         "text": "Vue sur la baie et loyers souvent plus bas, mais se garer y est difficile."
       },
       {
-        "name": "Dely Ibrahim",
-        "text": "Grands logements pour les familles, mais des bouchons au quotidien. 100 m² : environ 990 € par mois."
+        "name": "Ben Aknoun",
+        "text": "Quartier de ministères et d'ambassades, avec le lycée français et l'école américaine. Deux ou trois pièces : environ 990 € par mois demandés."
       },
       {
         "name": "Bab Ezzouar",
@@ -1359,10 +1388,15 @@
         "accessed": "2026-11-14"
       },
       {
-        "title": "Où vivent les étrangers ? Quartiers prisés des expatriés — Cyril Jarnias",
-        "url": "https://www.cyriljarnias.com/?p=41527",
-        "published": "2026-05-13",
-        "accessed": "2026-11-14"
+        "title": "Loyer à Alger : prix des F2 et F3 par commune — Algérie360",
+        "url": "https://www.algerie360.com/loyer-alger-prix-f2-f3-communes/",
+        "published": "2026-10-23",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Ben Aknoun — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Ben_Aknoun",
+        "accessed": "2026-11-15"
       },
       {
         "title": "Investir en immobilier à Alger : quels quartiers — ZoomAlgérie",
@@ -1397,37 +1431,42 @@
       },
       {
         "name": "Gammarth",
-        "text": "Au nord de La Marsa, résidences avec piscine et gardiennage. Quatre pièces : environ 660 à 1 050 € par mois (2026)."
+        "text": "Au nord de La Marsa, résidences avec piscine. Quatre pièces : environ 660 à 1 050 € par mois (2026)."
       }
     ],
     "sources": [
       {
         "title": "Tunis — Wikivoyage",
         "url": "https://en.wikivoyage.org/wiki/Tunis",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Tunis — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Tunis",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Le marché de la location, deuxième semestre 2024 (Tensiomètre) — Mubawab",
         "url": "https://blog.mubawab.tn/wp-content/uploads/2025/03/Tensiometre-Locatif-by-Mubawab-S2-2024.pdf",
         "published": "2025-03",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Se loger à Tunis : le guide complet — lepetitjournal.com",
         "url": "https://lepetitjournal.com/tunis/logement/se-loger-tunis-le-guide-complet-450738",
         "published": "2026-08-17",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Vivre à Tunis — Expat.com",
         "url": "https://www.expat.com/fr/guide/afrique/tunisie/tunis/",
         "published": "2025-12-10",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Furnished S+1 with pool in Gammarth — Expat.com",
+        "url": "https://www.expat.com/en/housing/africa/tunisia/tunis/40-flats-for-rent/810952-furnished-s-plus-1-with-pool-in-gammart",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -1490,15 +1529,15 @@
     "neighbourhoods": [
       {
         "name": "Tokoin",
-        "text": "Le quartier des ambassades, résidentiel et recherché. Villa : environ 1 220 à 2 290 € par mois."
+        "text": "Le quartier des ambassades, résidentiel. Villa : environ 1 220 à 2 290 € par mois selon un guide ; une villa de trois chambres affichée 457 € (2026)."
       },
       {
         "name": "Nyékonakpoè",
-        "text": "Quartier familial, près des écoles internationales. Villa : environ 760 à 1 520 € par mois."
+        "text": "Quartier familial, près des écoles internationales. Villa : environ 760 à 1 520 € par mois selon un guide."
       },
       {
         "name": "Adidogomé",
-        "text": "Quartier résidentiel calme, en plein développement. Villa : environ 610 à 1 220 € par mois."
+        "text": "Quartier résidentiel calme, en plein développement. Villa : environ 610 à 1 220 € par mois selon un guide."
       },
       {
         "name": "Bè",
@@ -1530,7 +1569,7 @@
       },
       {
         "name": "Hill Station",
-        "text": "Quartier aisé de l'ouest, sur les hauteurs."
+        "text": "Sur les hauteurs de l'ouest : vieilles maisons coloniales sur pilotis, vue sur la ville, et la route qui monte vers la forêt de Tacugama."
       },
       {
         "name": "Centre",
@@ -1561,6 +1600,12 @@
         "title": "How Much Does It Cost to Live in Freetown in 2026/2027? — Sierraloaded",
         "url": "https://sierraloaded.sl/lifestyle/how-much-does-it-cost-to-live-in-freetown/",
         "published": "2026-10-22",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Moving to Sierra Leone as an Expat: The Complete Guide",
+        "url": "https://www.jarniascyril.com/expatriation/moving-to-sierra-leone-as-an-expat-complete-guide/",
+        "published": "2026-01-26",
         "accessed": "2026-11-14"
       }
     ]
@@ -1644,29 +1689,29 @@
         "title": "Vivre à Conakry : guide complet — OpenShores",
         "url": "https://www.openshores.co/blog/guinee/conakry/vivre-a-conakry-guide-complet",
         "published": "2026-04-13",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Îles de Loos — Wikipédia",
         "url": "https://fr.wikipedia.org/wiki/%C3%8Eles_de_Loos",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Conakry — Wikipédia",
         "url": "https://fr.wikipedia.org/wiki/Conakry",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "S'installer en Guinée en tant qu'expatrié : le guide essentiel — Cyril Jarnias",
         "url": "https://www.cyriljarnias.com/?p=35200",
         "published": "2026-01-25",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Crise du logement à Conakry : entre spéculation immobilière et détresse sociale — Guineenews",
-        "url": "https://guineenews.org/2026/01/12/crise-du-logement-a-conakry-entre-speculation-immobiliere-et-",
+        "url": "https://guineenews.org/2026/01/12/crise-du-logement-a-conakry-entre-speculation-immobiliere-et-detresse-sociale/",
         "published": "2026-01-12",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -1694,6 +1739,11 @@
         "title": "Bissau — Wikivoyage (en)",
         "url": "https://en.wikivoyage.org/wiki/Bissau",
         "accessed": "2026-11-14"
+      },
+      {
+        "title": "Bubaque — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bubaque",
+        "accessed": "2026-11-14"
       }
     ]
   },
@@ -1713,11 +1763,11 @@
   {
     "name": "Praia",
     "reputation": "On connaît Praia comme le centre politique et économique du Cap-Vert, et la ville des Cabo Verde Music Awards.",
-    "surprise": "Il y pleut moins de 200 mm par an, surtout d'août à octobre. Le soir, au Quintal da Música, on dîne avec de la musique cap-verdienne jouée en live.",
+    "surprise": "Il y pleut à peine 180 à 210 mm par an, surtout d'août à octobre. Le soir, au Quintal da Música, on dîne avec de la musique cap-verdienne jouée en live.",
     "neighbourhoods": [
       {
         "name": "Plateau",
-        "text": "Le centre historique, sur la liste indicative de l'UNESCO depuis 2016. Logements à partir d'environ 265 € par mois."
+        "text": "Le centre historique, sur la liste indicative de l'UNESCO depuis 2016. Loyers à partir d'environ 265 € par mois, taille non précisée."
       },
       {
         "name": "Palmarejo",
@@ -1725,7 +1775,7 @@
       },
       {
         "name": "Achada Santo António",
-        "text": "Restaurants, ambassades et une bonne partie de la vie nocturne. Loyers proches de ceux de Palmarejo."
+        "text": "Restaurants, ambassades et une bonne partie de la vie nocturne. Loyers proches de ceux de Palmarejo, selon un habitant."
       },
       {
         "name": "Prainha",
@@ -1953,11 +2003,15 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Le cœur de la capitale, avec l'hôpital, les banques et les supermarchés. Deux pièces : environ 100 à 300 € par mois."
+        "text": "Le cœur de la capitale, avec l'hôpital, les banques et les supermarchés. Deux pièces : environ 100 à 300 € par mois (chiffres d'avril 2025)."
       },
       {
         "name": "Front de mer de la baie Ana Chaves",
-        "text": "Le bord de mer de la capitale, un des secteurs que citent les nouveaux arrivants étrangers."
+        "text": "Le bord de mer de la capitale, près de l'îlot das Cabras, un des secteurs que citent les nouveaux arrivants étrangers."
+      },
+      {
+        "name": "Riboque",
+        "text": "Quartier de la ville, berceau du club de football Vitória FC."
       }
     ],
     "sources": [
@@ -1988,7 +2042,7 @@
   {
     "name": "N'Djamena",
     "reputation": "On connaît N'Djamena comme la capitale au bord du Chari : juste en face, de l'autre côté du fleuve, c'est déjà le Cameroun.",
-    "surprise": "Au Musée national, tu peux voir le crâne de Toumaï, un fossile trouvé au Tchad et daté d'environ 7 millions d'années. En 2009, la ville était capitale de la culture islamique.",
+    "surprise": "Au Musée national, tu peux voir le crâne de Toumaï, un fossile trouvé au Tchad et daté de 6 à 7 millions d'années. En 2009, la ville était capitale de la culture islamique.",
     "neighbourhoods": [
       {
         "name": "Chagoua",
@@ -2032,7 +2086,7 @@
       },
       {
         "name": "Haramous",
-        "text": "Quartier haut de gamme près des ambassades et des écoles internationales, sans embouteillages. Villa de trois chambres : environ 1 295 € par mois."
+        "text": "Quartier haut de gamme près des ambassades et des écoles internationales, sans embouteillages. Villa de trois chambres : environ 1 295 € par mois (une annonce)."
       },
       {
         "name": "Les Hérons",
@@ -2040,7 +2094,7 @@
       },
       {
         "name": "Gabode",
-        "text": "Quartier résidentiel près de l'aéroport, construit pour les fonctionnaires, logements inégaux. Quatre chambres : environ 830 € par mois."
+        "text": "Quartier résidentiel près de l'aéroport, construit pour les fonctionnaires, logements inégaux. Quatre chambres : environ 830 € par mois, prix à discuter (annonce de 2026)."
       }
     ],
     "sources": [
@@ -2100,20 +2154,32 @@
     ],
     "sources": [
       {
-        "title": "Wikivoyage — Bujumbura",
+        "title": "Bujumbura — Wikivoyage",
         "url": "https://en.wikivoyage.org/wiki/Bujumbura",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
-        "title": "Wikipedia — Bujumbura",
+        "title": "Bujumbura — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Bujumbura",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
-        "title": "Iwacu — recherche « plage Bujumbura »",
-        "url": "https://www.iwacu-burundi.org/?s=plage+Bujumbura",
-        "published": "2026-08-20",
-        "accessed": "2026-11-14"
+        "title": "Beach Pro Tour Futures Bujumbura 2024 — Volleyball World",
+        "url": "https://en.volleyballworld.com/beachvolleyball/competitions/beach-pro-tour/2024/futures/bujumbura-bdi/",
+        "published": "2024-09",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Zuliani Nicolas and Lovsin Javornik win Bujumbura — Volleyball World",
+        "url": "https://en.volleyballworld.com/beachvolleyball/competitions/beach-pro-tour/2025/futures/bujumbura-bdi/news/zuliani-nicolas-and-lovsin-javornik-win-bujumbura-to-claim-first-beach-pro-tour-gold-medals",
+        "published": "2025-08",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Norway's Kjemperuds and Slovenia's Kotnik/Lovsin win Bujumbura Futures — Volleyball World",
+        "url": "https://en.volleyballworld.com/beachvolleyball/competitions/beach-pro-tour/2026/futures/bujumbura-bdi/news/norway-s-kjemperuds-and-slovenia-s-kotnik-lovsin-win-bujumbura-futures",
+        "published": "2026-08",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -2145,11 +2211,11 @@
       },
       {
         "name": "Ivandry",
-        "text": "Quartier résidentiel recherché par les expatriés, spacieux mais embouteillé aux heures de pointe. Deux pièces meublé : environ 600 € par mois."
+        "text": "Quartier résidentiel recherché par les expatriés. Annonces de novembre 2026 : deux pièces meublé environ 600 €, duplex de deux chambres environ 1 200 € par mois."
       },
       {
         "name": "Ambohibao",
-        "text": "Au nord, vers la route de l'aéroport, avec de grands jardins. Deux chambres non meublé : environ 265 € par mois."
+        "text": "Au nord, vers la route de l'aéroport. Deux chambres non meublé : environ 265 € par mois (une annonce, août 2026)."
       }
     ],
     "sources": [
@@ -2230,7 +2296,7 @@
   },
   {
     "name": "Harare",
-    "reputation": "On connaît Harare comme la « Sunshine City », surnom qu'elle doit à ses parcs, où les jacarandas fleurissent en octobre et novembre.",
+    "reputation": "On connaît Harare sous le surnom de « Sunshine City ». En octobre et novembre, les jacarandas y sont en fleurs.",
     "surprise": "Dans le bois de Mukuvisi, 263 ha en pleine ville, vivent zèbres et girafes. Et à 1 483 m, les matins de juillet tombent vers 7 °C : prévois un pull.",
     "neighbourhoods": [
       {
@@ -2282,18 +2348,28 @@
       {
         "name": "Area 47",
         "text": "Quartier résidentiel dense, avec des bars, des clubs et un stade."
+      },
+      {
+        "name": "Areas 10, 11 et 12",
+        "text": "Quartiers de maisons basses, où logent beaucoup de fonctionnaires. Maison privée : environ 300 à 1 270 € par mois (avril 2026)."
       }
     ],
     "sources": [
       {
         "title": "Lilongwe — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Lilongwe",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Lilongwe — Wikivoyage",
         "url": "https://en.wikivoyage.org/wiki/Lilongwe",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Public house rentals up 65% stir debate — Nation Online",
+        "url": "https://mwnation.com/public-house-rentals-up-65-stir-debate/",
+        "published": "2026-04-01",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -2304,15 +2380,15 @@
     "neighbourhoods": [
       {
         "name": "Klein Windhoek",
-        "text": "Quartier aisé, cité par les guides comme quartier d'expatriés. Trois pièces : environ 480 € par mois (moyenne 2024)."
+        "text": "Quartier aisé, cité par les guides comme quartier d'expatriés. Trois pièces : environ 480 € par mois en 2024 ; les annonces de 2026 sont souvent bien plus chères."
       },
       {
         "name": "Eros",
-        "text": "Quartier résidentiel recherché. Deux pièces : environ 650 à 825 € par mois (annonces 2026)."
+        "text": "Quartier résidentiel. Deux pièces : environ 650 à 825 € par mois (deux annonces lues en novembre 2026)."
       },
       {
         "name": "Centre-ville",
-        "text": "Le centre des affaires, avec des appartements en résidence. Deux pièces : environ 340 € par mois (moyenne 2024)."
+        "text": "Le quartier d'affaires, avec des appartements en résidence. Deux pièces : environ 340 € par mois en 2024 ; une chambre affichée environ 600 à 750 € en 2026."
       }
     ],
     "sources": [
@@ -2366,13 +2442,25 @@
       {
         "title": "Gaborone — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Gaborone",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Guide Expat.com Gaborone",
         "url": "https://www.expat.com/fr/guide/afrique/botswana/gaborone/",
         "published": "2025-11-03",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Gaborone post report — Tales Magazine",
+        "url": "https://talesmag.com/real-post-report/botswana/gaborone/3244",
+        "published": "2023-12-28",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Gaborone post report — Tales Magazine",
+        "url": "https://www.talesmag.com/real-post-report/botswana/gaborone/3340",
+        "published": "2024-08-07",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -2380,7 +2468,16 @@
     "name": "Mbabane",
     "reputation": "On connaît Mbabane comme une petite capitale de montagne, perchée à 1 243 m dans les hauts plateaux d'Eswatini.",
     "surprise": "À 8 km, tu peux aller voir le rocher de Sibebe, et la vallée d'Ezulwini est à 15 km. En juillet, la moyenne tombe à 11 °C, avec quelques jours de gel par an.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "Msunduza",
+        "text": "Un ancien township de Mbabane, plus dense que les quartiers résidentiels."
+      },
+      {
+        "name": "Vallée d'Ezulwini",
+        "text": "À environ 15 km : hôtels, casino, sanctuaire de Mlilwane et musée national. Maisons à l'achat à partir d'environ 160 000 € (2026)."
+      }
+    ],
     "sources": [
       {
         "title": "Mbabane — Wikipedia",
@@ -2406,24 +2503,38 @@
       {
         "name": "Centre-ville est",
         "text": "Petits commerces, marchés et vendeurs de rue, plus populaire et plus animé."
+      },
+      {
+        "name": "Maseru West",
+        "text": "Quartier résidentiel à l'ouest du centre. Logement d'une chambre : environ 180 à 450 € par mois (estimation 2026)."
+      },
+      {
+        "name": "Thetsane",
+        "text": "Au sud, près des usines textiles. Logement d'une chambre : environ 135 à 315 € par mois (estimation 2026)."
       }
     ],
     "sources": [
       {
         "title": "Maseru — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Maseru",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Music of Lesotho — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Music_of_Lesotho",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Lesotho Wine Festival returns for 13th edition — The Reporter",
         "url": "https://www.thereporter.co.ls/2026/08/26/lesotho-wine-festival-returns-for-13th-edition/",
         "published": "2026-08-26",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Lesotho cost of rent & housing — 360nations",
+        "url": "https://360nations.com/africa/lesotho/cost-rent-housing.html",
+        "published": "2026-02",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -2473,7 +2584,7 @@
   },
   {
     "name": "Victoria",
-    "reputation": "On connaît Victoria pour son carnaval international en avril et son Festival Kreol en octobre, avec le séga et le moutya, une danse inscrite par l'UNESCO en 2021.",
+    "reputation": "On connaît Victoria pour son Festival Kreol, qui a fêté ses 40 ans en octobre 2025, avec le séga et le moutya, une danse inscrite par l'UNESCO en 2021.",
     "surprise": "Ici, on fait même la fête sous l'eau : en novembre, le festival SUBIOS célèbre la mer et ses fonds. Et la plage de Beau Vallon est à environ 15 minutes de voiture du centre.",
     "neighbourhoods": [
       {
@@ -2490,7 +2601,7 @@
       },
       {
         "name": "Eden Island",
-        "text": "Île résidentielle où vit la plus grande communauté internationale. Loyers à partir de 2 000 € par mois."
+        "text": "Île résidentielle où vit la plus grande communauté internationale. Un deux-pièces : à partir de 2 000 € par mois."
       }
     ],
     "sources": [
@@ -2505,6 +2616,12 @@
         "url": "https://www.expat.com/en/guide/africa/seychelles/",
         "published": "2025-11-26",
         "accessed": "2026-11-14"
+      },
+      {
+        "title": "Seychelles marks 40 years of Kreol festival — Africanews",
+        "url": "https://www.africanews.com/2025/10/29/seychelles-marks-40-years-of-kreol-festival-with-vibrant-tribute-to-identity-and-heritage",
+        "published": "2025-10-29",
+        "accessed": "2026-11-15"
       },
       {
         "title": "Seychelles — Wikipedia",
@@ -2525,7 +2642,7 @@
     "neighbourhoods": [
       {
         "name": "Wuse II",
-        "text": "Le centre des sorties : restaurants, rooftops et jardins-lounges. Une chambre en centre-ville : environ 280 à 440 € par mois."
+        "text": "Le centre des sorties : restaurants, rooftops et jardins-lounges. Une chambre dans les quartiers centraux : jusqu'à environ 170 € par mois (2025), hors frais d'agence."
       },
       {
         "name": "Maitama",
@@ -2545,35 +2662,41 @@
         "title": "The truth about relocating to Abuja — Pulse Nigeria",
         "url": "https://www.pulse.ng/story/the-truth-about-relocating-to-abuja-not-just-peace-and-boredom-2025060117540334923",
         "published": "2025-06-01",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Cost of Living in Lagos vs. Abuja: An Expat's Comparison — Navigating Nigeria",
         "url": "https://navigatingnigeria.blogspot.com/2026/02/cost-of-living-in-lagos-vs-abuja-expats.html",
         "published": "2026-02-21",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "How Abuja's garden economy is transforming nightlife — Africa.com",
         "url": "https://africa.com/how-abujas-garden-economy-is-transforming-nightlife/",
         "published": "2026-02-22",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Living in Abuja — Expat.com",
         "url": "https://www.expat.com/en/guide/africa/nigeria/abuja/",
         "published": "2025-12-16",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Wikipedia — Maitama",
         "url": "https://en.wikipedia.org/wiki/Maitama",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Wikipedia — Gwarimpa Estate",
         "url": "https://en.wikipedia.org/wiki/Gwarimpa_Estate",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "High rent driving us out of Abuja – Residents — The Frontier",
+        "url": "https://thefrontierng.com/?p=72411",
+        "published": "2025-10-27",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -2592,7 +2715,7 @@
       },
       {
         "name": "Nouveau Bassam",
-        "text": "Le centre commerçant, avec le marché et des logements plus simples. Deux pièces : environ 230 à 530 € par mois."
+        "text": "Le centre commerçant, avec le marché et des logements plus simples. Deux pièces, prix pour toute la ville : environ 230 à 530 € par mois."
       }
     ],
     "sources": [
@@ -2621,6 +2744,12 @@
       {
         "title": "Vivre à Grand-Bassam, guide complet — OpenShores",
         "url": "https://www.openshores.co/blog/cote-divoire/grand-bassam/vivre-guide-complet",
+        "published": "2026-03-10",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Grand-Bassam : avantages et inconvénients — OpenShores",
+        "url": "https://www.openshores.co/blog/cote-divoire/grand-bassam/les-avantages-et-inconvenients",
         "published": "2026-03-10",
         "accessed": "2026-11-14"
       }
@@ -2676,7 +2805,7 @@
   {
     "name": "Kumasi",
     "reputation": "On connaît Kumasi comme la capitale du royaume ashanti : le palais de Manhyia, les fêtes ashanti et le tissu kente.",
-    "surprise": "Au centre, le marché de Kejetia passe pour l'un des plus grands d'Afrique de l'Ouest. Et le campus de l'université KNUST comptait plus de 85 000 étudiants en 2023.",
+    "surprise": "Au centre, le marché de Kejetia passe pour l'un des plus grands d'Afrique de l'Ouest. Et à l'est de la ville, le campus de l'université KNUST comptait plus de 85 000 étudiants en 2023.",
     "neighbourhoods": [
       {
         "name": "Adum et Kejetia",
@@ -2727,11 +2856,11 @@
     "neighbourhoods": [
       {
         "name": "L'île",
-        "text": "Le centre historique classé par l'UNESCO : maisons coloniales, quais et restaurants, tout à pied. Deux pièces meublées : 120 à 230 € par mois."
+        "text": "Le centre historique classé par l'UNESCO : maisons coloniales, quais et restaurants, tout à pied. Studio ou une chambre meublés : 120 à 230 € par mois."
       },
       {
         "name": "Sor",
-        "text": "Le côté continent, après le pont Faidherbe, avec le plus grand marché de la ville et des loyers plus bas. Deux pièces : 75 à 150 € par mois."
+        "text": "Le côté continent, après le pont Faidherbe, avec le plus grand marché de la ville et des loyers plus bas. Une chambre : 75 à 150 € par mois."
       },
       {
         "name": "Guet Ndar",
@@ -2845,7 +2974,7 @@
   {
     "name": "Ouidah",
     "reputation": "On connaît Ouidah comme la ville du vodun : le temple des Pythons fait face à la basilique, et le 10 janvier, tout le Bénin fête le vodun.",
-    "surprise": "Aux Vodun Days de janvier, plus de 435 000 personnes sont venues en 2025. On y vient aussi de Guadeloupe, de Martinique, du Brésil ou d'Haïti. Et la Route des Captifs relie le centre à la plage : 4 km à pied.",
+    "surprise": "Aux Vodun Days de janvier 2025, plus de 435 000 personnes sont venues ; en 2026, on venait aussi de Guadeloupe, de Martinique, du Brésil ou d'Haïti. Et la Route des Captifs relie le centre à la plage : 4 km à pied.",
     "neighbourhoods": [
       {
         "name": "Centre historique",
@@ -2901,7 +3030,16 @@
     "name": "Kpalimé",
     "reputation": "On connaît Kpalimé comme une petite ville calme au cœur de la région du café, au pied des montagnes et des forêts.",
     "surprise": "Le mont Agou, point culminant du Togo à 986 m, est tout près. Et à la cascade de Womé, pour 2 500 F CFA, tu peux te baigner.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "Centre-ville",
+        "text": "Autour de la cathédrale Saint-Esprit, bâtie en 1913, et du marché. On y fait tout à pied ou en moto-taxi. Loyers en ville : environ 150 à 460 € par mois."
+      },
+      {
+        "name": "Côté mont Kloto (Missahoé)",
+        "text": "Sur les hauteurs, plus frais, entre forêt et sentiers de randonnée, avec la maison de l'ancien gouverneur allemand. Il faut une voiture, idéalement un 4x4."
+      }
+    ],
     "sources": [
       {
         "title": "Guide Togo — Expat.com",
@@ -2949,7 +3087,16 @@
     "name": "Buchanan",
     "reputation": "On connaît Buchanan comme le port du minerai de fer du Liberia : un train de 250 km l'y apporte depuis les monts Nimba.",
     "surprise": "La ville est née en 1835 sous le nom de Bassa Cove, fondée par des colons noirs quakers. Une grande communauté fanti venue du Ghana y vit aujourd'hui. Et la côte garde des plages et des lagunes isolées.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "Centre-ville",
+        "text": "Petit centre en damier, près du port du minerai sur la baie de Waterhouse. On y trouve l'hôpital public et la mairie, ouverte en 2016. Aucun loyer publié."
+      },
+      {
+        "name": "Edina",
+        "text": "Ancienne ville de colons fondée en 1832, de l'autre côté de l'embouchure de la St John, à environ 6 km. Église baptiste du XIXe siècle et ruines de la maison du président Cheeseman."
+      }
+    ],
     "sources": [
       {
         "title": "Buchanan, Liberia — Wikipedia",
@@ -2965,6 +3112,29 @@
         "title": "Buchanan (Liberia) — Wikivoyage",
         "url": "https://en.wikivoyage.org/wiki/Buchanan_(Liberia)",
         "accessed": "2026-11-14"
+      },
+      {
+        "title": "ArcelorMittal Liberia intensifies rail safety awareness in communities along railway corridor — FrontPage Africa",
+        "url": "https://frontpageafricaonline.com/arcelormittal-liberia-intensifies-rail-safety-awareness-in-communities-along-railway-corridor/",
+        "published": "2026-11-12",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Buchanan City Mayor unveils modern new City Hall — FrontPage Africa",
+        "url": "https://frontpageafricaonline.com/buchanan-city-mayor-unveils-modern-new-city-hall/",
+        "published": "2016-04-03",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Government Hospital strives to improve health care in Buchanan City — FrontPage Africa",
+        "url": "https://frontpageafricaonline.com/government-hospital-strives-to-improve-health-care-in-buchanan-city-2/",
+        "published": "2016-06-02",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Edina, Liberia — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Edina,_Liberia",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -2972,12 +3142,33 @@
     "name": "Labé",
     "reputation": "On connaît Labé comme la capitale de la Moyenne-Guinée, au cœur du Fouta-Djalon, et la cité de Karamoko Alpha et de sa grande mosquée.",
     "surprise": "À 1 026 m d'altitude, les nuits de janvier descendent vers 12 °C : prévois une petite laine. Les chutes de la Saala et le mont Kolima sont tout près.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "Kouroula",
+        "text": "Le quartier de la gare routière, d'où partent les cars vers Conakry, le Sénégal et la Gambie."
+      },
+      {
+        "name": "Mairie et Mosquée",
+        "text": "Quartiers du centre, près du marché central et de la grande mosquée. Les terrains y atteignent désormais les prix du centre-ville (février 2026)."
+      }
+    ],
     "sources": [
       {
         "title": "Labé — Wikipédia",
         "url": "https://fr.wikipedia.org/wiki/Lab%C3%A9",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Labé : le foncier devient un luxe inaccessible — Guineenews",
+        "url": "https://guineenews.org/2026/02/22/labe-le-foncier-devient-un-luxe-inaccessible-avec-des-parcelles-a-5-milliards-gnf/",
+        "published": "2026-02-22",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Paralysie du transport à Labé — Guineenews",
+        "url": "https://guineenews.org/2026/09/09/paralysie-du-transport-a-labe-la-colere-contre-les-tracasseries-routieres-gagne-du-terrain/",
+        "published": "2026-09-09",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -3071,7 +3262,7 @@
       },
       {
         "name": "Chã de Alecrim",
-        "text": "Sur les hauteurs, la route qui monte depuis Laginha offre une belle vue sur la baie."
+        "text": "Sur les hauteurs, par la route qui monte depuis Laginha : on y vient pour la vue."
       }
     ],
     "why": {
@@ -3165,7 +3356,7 @@
       },
       {
         "name": "Centre-ville",
-        "text": "Le centre ancien autour de la cathédrale et de la gare, près des commerces et des restaurants. Deux pièces : environ 550 à 1 350 € par mois."
+        "text": "Le centre ancien autour de la cathédrale et de la gare, près des commerces et des restaurants. Une chambre : de 345 à 1 350 € par mois selon les guides."
       },
       {
         "name": "Kamalondo",
@@ -3173,7 +3364,7 @@
       },
       {
         "name": "Ruashi",
-        "text": "Grande banlieue du nord-est, plus calme et moins chère que le centre."
+        "text": "Grande commune du nord-est, citée par un guide parmi les quartiers où s'installent les étrangers."
       }
     ],
     "sources": [
@@ -3225,7 +3416,7 @@
       },
       {
         "name": "Omnisport",
-        "text": "Quartier récent, en plein développement, adapté aux familles, autour du stade Ahmadou-Ahidjo. Logement : environ 120 à 305 € par mois."
+        "text": "Quartier récent, en plein développement, adapté aux familles, autour du stade Ahmadou-Ahidjo. Loyers annoncés : environ 120 à 305 € par mois, sans taille de logement précisée."
       }
     ],
     "sources": [
@@ -3254,7 +3445,7 @@
       },
       {
         "title": "Les quartiers les plus prisés par les expatriés — Cyril Jarnias",
-        "url": "https://www.cyriljarnias.com/expatriation/installer-cameroun-expatrie-guide-complet/quartiers-expatries-cameroun-bastos-bonapriso-",
+        "url": "https://www.cyriljarnias.com/expatriation/installer-cameroun-expatrie-guide-complet/quartiers-expatries-cameroun-bastos-bonapriso-bonanjo/",
         "published": "2026-03-05",
         "accessed": "2026-11-14"
       }
@@ -3267,7 +3458,7 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville et Ngoye",
-        "text": "La vieille ville sous la cathédrale, le marché aux poissons et les grillades de Ngoye, près des plages. Logement : environ 150 à 460 € par mois."
+        "text": "La vieille ville sous la cathédrale, le marché aux poissons et les grillades de Ngoye, près des plages. Une chambre : environ 165 € par mois ; deux pièces : environ 365 € (blog, avril 2026)."
       },
       {
         "name": "Grand Batanga",
@@ -3282,35 +3473,41 @@
       {
         "title": "Kribi — Wikipédia",
         "url": "https://fr.wikipedia.org/wiki/Kribi",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Kribi — Wikivoyage",
         "url": "https://en.wikivoyage.org/wiki/Kribi",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Kribi — Wikivoyage (FR)",
         "url": "https://fr.wikivoyage.org/wiki/Kribi",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Les sites touristiques incontournables au Cameroun — Cyril Jarnias",
         "url": "https://www.cyriljarnias.com/expatriation/installer-cameroun-expatrie-guide-complet/sites-touristiques-incontournables-cameroun/",
         "published": "2026-03-05",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "La vie nocturne au Cameroun — Cyril Jarnias",
         "url": "https://www.cyriljarnias.com/expatriation/installer-cameroun-expatrie-guide-complet/vie-nocturne-cameroun-ou-sortir-soir/",
         "published": "2026-03-05",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Vivre à Kribi : guide complet — OpenShores",
         "url": "https://www.openshores.co/blog/cameroun/kribi/vivre-a-kribi-guide-complet",
         "published": "2026-04-12",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Coût de la vie à Kribi — OpenShores",
+        "url": "https://www.openshores.co/blog/cameroun/kribi/cout-de-la-vie-a-kribi",
+        "published": "2026-04-13",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -3321,7 +3518,7 @@
     "neighbourhoods": [
       {
         "name": "Centro et Praia Morena",
-        "text": "Le vieux centre colonial, qui se fait à pied : marché municipal, cinéma-théâtre et la plage de la ville. Une pièce au centre : environ 210 € par mois."
+        "text": "Le vieux centre colonial, qui se fait à pied : marché municipal, cinéma-théâtre et la plage de la ville. Une pièce au centre : environ 210 € par mois (site participatif)."
       },
       {
         "name": "Restinga do Lobito",
@@ -3394,7 +3591,7 @@
   {
     "name": "Port-Gentil",
     "reputation": "On connaît Port-Gentil comme la capitale économique du Gabon : c'est la ville du pétrole et de la seule raffinerie du pays.",
-    "surprise": "Aucune route ne la relie à Libreville : on y va en 30 minutes d'avion ou en 3 à 4 heures de bateau. Sur place, la plage de la Sogara est en ville et le cap Lopez à une demi-heure.",
+    "surprise": "Aucune route ne la relie à Libreville : on y va en 30 minutes d'avion ou en 2 h 30 à 4 heures de bateau. Sur place, la plage de la Sogara est en ville et le cap Lopez à une demi-heure.",
     "neighbourhoods": [
       {
         "name": "Centre-ville et Quartier ancien",
@@ -3402,7 +3599,7 @@
       },
       {
         "name": "Sogara",
-        "text": "Le quartier que préfèrent les expatriés, en résidences gardées, au bord de la mer, à 10-15 minutes du centre."
+        "text": "Le quartier que préfèrent les expatriés, en résidences gardées, avec une plage en ville."
       },
       {
         "name": "N'Tchengue",
@@ -3437,7 +3634,7 @@
   {
     "name": "Bata",
     "reputation": "On connaît Bata comme la « ville économique » de la Guinée équatoriale : son port en eau profonde exporte surtout du bois.",
-    "surprise": "Dans les terres, le parc de Monte Alén, le plus grand du pays, abrite gorilles, chimpanzés et éléphants de forêt. En ville, la promenade du front de mer s'étire sur une vingtaine de kilomètres.",
+    "surprise": "Dans les terres, le parc de Monte Alén, le plus grand du pays, abrite gorilles, chimpanzés et éléphants de forêt. En ville, une longue promenade, le Paseo Marítimo, longe le front de mer.",
     "neighbourhoods": [],
     "sources": [
       {
@@ -3471,19 +3668,19 @@
     "sources": [
       {
         "title": "Auto de Floripes é o ponto alto do mês da cultura no Príncipe — Téla Nón",
-        "url": "https://www.telanon.info/cultura/2026/08/18/54003/auto-de-floripes-e-o-ponto-alto-do-mes-da-cultura-n",
+        "url": "https://www.telanon.info/cultura/2026/08/18/54003/auto-de-floripes-e-o-ponto-alto-do-mes-da-cultura-no-principe/",
         "published": "2026-08-18",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Santo António, São Tomé and Príncipe — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Santo_António,_São_Tomé_and_Príncipe",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Príncipe — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Príncipe",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -3519,7 +3716,7 @@
     "neighbourhoods": [
       {
         "name": "Nyali",
-        "text": "Quartier aisé au nord de l'île : centres commerciaux, plages, écoles internationales. Deux pièces : environ 240 € par mois."
+        "text": "Quartier aisé au nord de l'île : centres commerciaux, plages, écoles internationales. Une chambre : environ 240 € par mois (annonces de novembre 2026)."
       },
       {
         "name": "Bamburi et Shanzu",
@@ -3527,7 +3724,7 @@
       },
       {
         "name": "Vieille ville et Tudor",
-        "text": "Sur l'île, près de Fort Jesus et des maisons swahilies ; Tudor est plus abordable. Deux pièces : environ 140 à 350 € par mois."
+        "text": "Sur l'île, près de Fort Jesus et des maisons swahilies ; Tudor est plus abordable. Une chambre au centre : environ 140 à 350 € par mois (peu de données)."
       },
       {
         "name": "Kizingo",
@@ -3699,7 +3896,7 @@
   },
   {
     "name": "Arusha",
-    "reputation": "On connaît Arusha comme la ville de départ des safaris : le Serengeti, le Ngorongoro et le Kilimandjaro sont à environ deux heures.",
+    "reputation": "On connaît Arusha comme la ville de départ des safaris : le Ngorongoro et le Kilimandjaro sont à environ deux heures, le Serengeti plus loin.",
     "surprise": "À 1 400 m d'altitude, les nuits de juin à septembre descendent vers 8 °C : prévois un pull. Et le parc national d'Arusha, avec le mont Meru et les lacs Momella, se fait dans la journée.",
     "neighbourhoods": [
       {
@@ -3760,22 +3957,59 @@
     "name": "Jinja",
     "reputation": "On connaît Jinja comme la ville de la source du Nil, au bord du lac Victoria.",
     "surprise": "Ici, on fait du rafting, du kayak et même du saut à l'élastique sur le Nil. Et en novembre, le festival Nyege Nyege fait danser les chutes de Kalagala, tout près.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "Centre de Jinja",
+        "text": "Main Street et Kiira Road : cafés avec wifi, artisanat, le grand marché central, et la source du Nil au bord de l'eau. Le centre se fait à pied."
+      },
+      {
+        "name": "Bugembe",
+        "text": "Ancienne petite ville sur la route d'Iganga, à environ 8 km du centre, siège du royaume du Busoga, avec son marché et beaucoup d'écoles."
+      },
+      {
+        "name": "Njeru",
+        "text": "De l'autre côté du Nil, par le pont ouvert en 2018 : une ville surtout résidentielle, avec la brasserie Nile Breweries."
+      },
+      {
+        "name": "Bujagali",
+        "text": "Au nord, à une dizaine de minutes en moto-taxi : le Nil, ses rapides, les bases de rafting et de kayak."
+      }
+    ],
     "sources": [
       {
         "title": "Wikipedia — Jinja, Uganda",
         "url": "https://en.wikipedia.org/wiki/Jinja,_Uganda",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Adrift Uganda",
         "url": "https://www.adrift.ug/",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Nyege Nyege — site officiel",
         "url": "https://nyegenyege.com/",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Jinja — Wikivoyage",
+        "url": "https://en.wikivoyage.org/wiki/Jinja",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Bugembe — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bugembe",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Njeru — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Njeru",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Bujagali Falls — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bujagali_Falls",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -3795,6 +4029,10 @@
       {
         "name": "Rubona",
         "text": "Quartier au sud de la ville, vers les sources chaudes de Nyamyumba et leur marché aux poissons."
+      },
+      {
+        "name": "Collines de l'est (Nengo, Nyundo)",
+        "text": "Des maisons de plus en plus nombreuses sur les collines derrière le centre, avec des balades sur les collines de Rubavu et de Nengo."
       }
     ],
     "sources": [
@@ -3840,7 +4078,20 @@
     "name": "Gitega",
     "reputation": "On connaît Gitega comme le cœur de l'ancien royaume du Burundi : Musée national, cour royale et sanctuaires des tambours sacrés.",
     "surprise": "Depuis 2019, c'est la capitale politique du pays, avec environ 135 000 habitants. À 1 504 m, les nuits tombent vers 15 à 17 °C. À 7 km, le sanctuaire des tambours de Gishora se visite.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "CNAR",
+        "text": "Le quartier aisé de la ville, fait de maisons. En 2019, une maison s'y louait environ 300 000 FBu par mois."
+      },
+      {
+        "name": "Nyamugari et Magarama",
+        "text": "Quartiers proches du centre. Les loyers y sont passés de 50 000 à 70 000 FBu par mois quand Gitega est devenue capitale, en 2019."
+      },
+      {
+        "name": "Shatanya",
+        "text": "Quartier résidentiel où les loyers ont aussi monté en 2019, d'environ 100 000 à 120 000 FBu par mois."
+      }
+    ],
     "sources": [
       {
         "title": "Gitega — Wikipedia",
@@ -3921,16 +4172,16 @@
   },
   {
     "name": "Hargeisa",
-    "reputation": "On connaît Hargeisa pour sa foire internationale du livre : chaque juillet depuis 2008, elle réunit environ 10 000 participants.",
+    "reputation": "On connaît Hargeisa pour sa foire internationale du livre : chaque juillet depuis 2008, elle dit réunir environ 10 000 participants.",
     "surprise": "À 1 334 m d'altitude, les nuits de janvier descendent vers 12 °C. Et aux portes de la ville, les abris de Laas Geel gardent des peintures rupestres du néolithique.",
     "neighbourhoods": [
       {
         "name": "Jigjiga Yar",
-        "text": "Maisons avec cour et eau courante. Maison de quatre chambres : jusqu'à environ 430 € par mois."
+        "text": "Maisons avec cour et eau courante. Maison de quatre chambres : jusqu'à environ 430 € par mois (2025)."
       },
       {
         "name": "Sinai",
-        "text": "Le secteur le moins cher : maison simple de quatre chambres, sans cour ni eau au robinet, environ 170 € par mois."
+        "text": "Le secteur le moins cher : maison simple de quatre chambres, sans cour ni eau au robinet, environ 170 € par mois (2025)."
       }
     ],
     "sources": [
@@ -4019,7 +4270,7 @@
   {
     "name": "Assouan",
     "reputation": "On connaît Assouan comme le cœur de la culture nubienne : des villages sur la rive ouest du Nil, une musique à elle, et un musée nubien ouvert en 1997.",
-    "surprise": "Il n'y pleut presque jamais : environ 2 mm par an. En février 2026, le festival international de la culture et des arts a fait défiler des voiliers sur le Nil, avec des troupes de neuf pays.",
+    "surprise": "Il n'y pleut presque jamais : quelques millimètres par an au plus. En février 2026, la 13e édition du festival international de la culture et des arts a fait défiler des voiliers sur le Nil, avec des troupes de neuf pays.",
     "neighbourhoods": [
       {
         "name": "La Corniche et le souk",
@@ -4088,7 +4339,7 @@
       },
       {
         "name": "Boukhalef",
-        "text": "Près des universités : les loyers les plus abordables, moins de services pour les étrangers. À partir d'environ 230 € par mois."
+        "text": "Près des universités : les loyers les plus abordables, moins de services pour les étrangers. À partir d'environ 230 € par mois, taille non précisée."
       }
     ],
     "why": {
@@ -4172,11 +4423,11 @@
       },
       {
         "name": "Sahloul",
-        "text": "Constructions neuves, quartier apprécié des familles. C'est le plus recherché pour louer un appartement dans le Sahel."
+        "text": "Constructions neuves, quartier apprécié des familles. Fin 2024, Sahloul 4 était le secteur le plus recherché du Sahel pour louer. Deux-pièces : environ 260 € par mois en moyenne."
       },
       {
         "name": "Hammam Sousse",
-        "text": "Plus calme que le centre, tout près de la plage."
+        "text": "Plus calme que le centre, tout près de la plage. Deux-pièces : environ 265 € par mois en moyenne (fin 2024)."
       },
       {
         "name": "Médina",
@@ -4226,6 +4477,11 @@
       }
     ],
     "sources": [
+      {
+        "title": "Vilankulo — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Vilankulo",
+        "accessed": "2026-11-14"
+      },
       {
         "title": "Bazaruto Archipelago — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Bazaruto_Archipelago",
@@ -4337,7 +4593,20 @@
     "name": "Livingstone",
     "reputation": "On connaît Livingstone comme la ville des chutes Victoria, la capitale touristique de la Zambie.",
     "surprise": "Le parc national Mosi-oa-Tunya s'étend entre la ville et le fleuve : girafes, rhinocéros blancs, zèbres. Pour voir les chutes à plein débit, viens en mars ou en avril.",
-    "neighbourhoods": [],
+    "neighbourhoods": [
+      {
+        "name": "Old Livingstone",
+        "text": "Le premier emplacement de la ville, au bord du fleuve Zambèze."
+      },
+      {
+        "name": "Constitution Hill",
+        "text": "Sur les hauteurs, le quartier où les colons européens se sont installés après 1900."
+      },
+      {
+        "name": "Maramba",
+        "text": "À l'est et au sud du centre, l'ancien quartier réservé aux Africains à l'époque coloniale."
+      }
+    ],
     "sources": [
       {
         "title": "Livingstone guide — Expat.com",
@@ -4347,7 +4616,8 @@
       },
       {
         "title": "Hichilema tells Livingstone rally more infrastructure, jobs coming to tourist capital — Mwebantu",
-        "url": "https://www.mwebantu.com/hichilema-tells-livingstone-rally-more-infrastructure-jobs-coming-to-tou",
+        "url": "https://www.mwebantu.com/hichilema-tells-livingstone-rally-more-infrastructure-jobs-coming-to-tourist-capital/",
+        "published": "2026-07-27",
         "accessed": "2026-11-14"
       },
       {
@@ -4412,18 +4682,28 @@
       {
         "name": "Chichiri et Ginnery Corner",
         "text": "Le quartier où se regroupent les universités de la ville."
+      },
+      {
+        "name": "Nyambadwe",
+        "text": "Quartier de maisons avec jardin. Maison privée : environ 300 à 1 265 € par mois (2026)."
       }
     ],
     "sources": [
       {
         "title": "Blantyre — Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Blantyre",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
         "title": "Blantyre — Wikivoyage",
         "url": "https://en.wikivoyage.org/wiki/Blantyre",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Public house rentals up 65% stir debate — The Nation",
+        "url": "https://mwnation.com/public-house-rentals-up-65-stir-debate/",
+        "published": "2026",
+        "accessed": "2026-11-15"
       }
     ]
   },
@@ -4478,7 +4758,7 @@
   },
   {
     "name": "Maun",
-    "reputation": "On connaît Maun comme le point de départ vers le delta de l'Okavango, classé à l'UNESCO en 2014.",
+    "reputation": "On connaît Maun comme la capitale touristique du Botswana, où beaucoup de sociétés de safari et d'avions-taxis ont leur siège. Le delta de l'Okavango est classé à l'UNESCO depuis 2014.",
     "surprise": "Officiellement, Maun est encore un village, avec environ 85 000 habitants. Et à pied depuis le centre, le Maun Education Park abrite girafes, zèbres et gnous.",
     "neighbourhoods": [],
     "sources": [
@@ -4578,20 +4858,20 @@
       {
         "title": "Wikipédia — Mutsamudu",
         "url": "https://fr.wikipedia.org/wiki/Mutsamudu",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       },
       {
-        "title": "Mayotte Hebdo — recherche « Mutsamudu » (article du 2026-07-28)",
-        "url": "https://www.mayottehebdo.com/?s=Mutsamudu",
+        "title": "Inscription historique de six médinas au patrimoine mondial de l'UNESCO — Mayotte Hebdo",
+        "url": "https://www.mayottehebdo.com/actualite/patrimoine/comores-inscription-historique-de-six-medinas-au-patrimoine-mondial-de-lunesco/",
         "published": "2026-07-28",
-        "accessed": "2026-11-14"
+        "accessed": "2026-11-15"
       }
     ]
   },
   {
     "name": "Praslin",
     "reputation": "On connaît Praslin pour la vallée de Mai, une forêt de cocos de mer classée par l'UNESCO, et pour ses plages comme Anse Lazio.",
-    "surprise": "Ici, pas de ville : environ 7 500 habitants en 2014, répartis en quelques villages. Mahé est à 15 minutes d'avion, ou à une heure de ferry.",
+    "surprise": "Ici, pas de ville : environ 7 500 habitants en 2014, répartis en quelques villages. Mahé est à 15 minutes d'avion, ou à 1 h 15 de ferry.",
     "neighbourhoods": [
       {
         "name": "Baie Sainte Anne",
@@ -4616,6 +4896,23 @@
         "title": "Vivre aux Seychelles (guide) — Expat.com",
         "url": "https://www.expat.com/fr/guide/afrique/seychelles/",
         "published": "2025-11-26",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Living in Seychelles (guide) — Expat.com",
+        "url": "https://www.expat.com/en/guide/africa/seychelles/",
+        "published": "2025-11-26",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Cat Cocos, horaires",
+        "url": "https://www.catcocos.com/schedule/",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Travel advice: Seychelles — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/seychelles",
+        "published": "2026-06-09",
         "accessed": "2026-11-14"
       },
       {

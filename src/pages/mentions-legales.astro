@@ -1,0 +1,55 @@
+---
+import Page from "../layouts/Page.astro";
+
+// The host's identity is a legal obligation, but this public repository must not name it:
+// it arrives through build-time configuration (README, "Legal notice"). Without it the notice
+// describes the host's role rather than inventing a name.
+const hostName = import.meta.env.LEGAL_HOST_NAME?.trim();
+const hostAddress = import.meta.env.LEGAL_HOST_ADDRESS?.trim();
+const host = hostName
+  ? `par ${hostAddress ? `${hostName}, ${hostAddress}` : hostName}`
+  : "sur des serveurs exploités pour le compte de l'éditeur";
+---
+
+<Page
+  title="Mentions légales"
+  description="Qui édite Là-bas, qui en est responsable et où le site est hébergé."
+>
+  <h1>Mentions légales</h1>
+  <p class="lead">Dernière mise à jour : 15 novembre 2026.</p>
+
+  <h2>Éditeur du site</h2>
+  <p>
+    Là-bas est édité par BIG EMOTION, SASU (société par actions simplifiée à associé unique) au
+    capital de 500 €.
+  </p>
+  <p>
+    Siège social : 14 rue Bausset, 75015 Paris, France. RCS Paris : 983 423 351. TVA
+    intracommunautaire : FR30983423351.
+  </p>
+  <p>
+    Contact : <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+  </p>
+
+  <h2>Directeur de la publication</h2>
+  <p>Jean-Noé Kollo, président de BIG EMOTION.</p>
+
+  <h2>Hébergement</h2>
+  <p>Le site est hébergé {host}.</p>
+
+  <h2>Contenus et photos</h2>
+  <p>
+    Les textes, les notes des villes et leur présentation appartiennent à BIG EMOTION. Chaque note
+    renvoie à ses sources, qui restent la propriété de leurs auteurs.
+  </p>
+  <p>
+    Les photos des villes viennent de Wikimedia Commons, sous licence libre. L'auteur et la licence
+    de chaque photo sont indiqués sur la page de la ville.
+  </p>
+
+  <h2>Ce que le site n'est pas</h2>
+  <p>
+    Là-bas propose des villes à découvrir. Ce n'est ni un conseil de voyage ni un avis de sécurité :
+    avant de partir, consulte les conseils aux voyageurs du ministère des Affaires étrangères.
+  </p>
+</Page>

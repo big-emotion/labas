@@ -1,0 +1,107 @@
+---
+import "../styles/global.css";
+import Wordmark from "../components/Wordmark.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#161a5c" />
+    <title>{title} · Là-bas</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="top">
+        <a href="/" class="home" aria-label="Là-bas, retour au quiz">
+          <Wordmark />
+        </a>
+        <a href="/" class="back">
+          Refaire le quiz
+        </a>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="bottom">
+        <nav aria-label="Pages du site">
+          <a href="/approfondir">Aller plus loin</a>
+          <a href="/methode">Notre méthode</a>
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/confidentialite">Confidentialité</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style>
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 max(16px, env(safe-area-inset-right)) 56px max(16px, env(safe-area-inset-left));
+    display: grid;
+    gap: 28px;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    border-bottom: 1px solid var(--night-lift);
+    font-size: 1.6rem;
+  }
+  .home {
+    color: var(--thread);
+    text-decoration: none;
+  }
+  .back,
+  .bottom a {
+    color: var(--saffron);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .bottom {
+    border-top: 1px solid var(--night-lift);
+    padding-top: 20px;
+  }
+  .bottom nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+  main :global(h1) {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.05;
+    margin: 0 0 12px;
+  }
+  main :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    margin: 28px 0 8px;
+  }
+  main :global(h3) {
+    font-size: 1.05rem;
+    margin: 18px 0 6px;
+  }
+  main :global(p),
+  main :global(li) {
+    max-width: 68ch;
+  }
+  main :global(a) {
+    color: var(--saffron);
+  }
+  main :global(.lead) {
+    color: var(--thread-dim);
+    font-size: 1.05rem;
+  }
+</style>
