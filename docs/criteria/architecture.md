@@ -126,10 +126,10 @@ reader's usual sphere**:
 The criteria in §3 produce the "pourquoi toi" lines automatically: a reader's answer meets a
 city criterion at level 4 or 5. Two short editorial lines per city make them warm:
 
-| Field        | What it is                                                                                                                               | Rule                                                                                                                             |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `reputation` | "On dit de Nairobi que…": what the city is known for, in one sentence                                                                    | Introduced by "on dit", "on la connaît pour": a reputation, not a measurement. No claim about safety, racism or LGBT rights here |
-| `surprise`   | The cliché it breaks (Grand-Bérébi's water, Swakopmund, where the Namib dunes run down to the ocean, Kampala's young and creative scene) | A concrete, checkable fact (a place, an event), dated if it can change                                                           |
+| Field        | What it is                                                                                                                                                                                        | Rule                                                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `reputation` | "On dit de Nairobi que…": what the city is known for, in one sentence                                                                                                                             | Introduced by "on dit", "on la connaît pour": a reputation, not a measurement. No claim about safety, racism or LGBT rights here |
+| `surprise`   | The cliché it breaks (Grand-Bérébi's water, Swakopmund, where the Namib dunes run down to the ocean, Kampala's young and creative scene; in Abidjan, a displayed rent is openly a starting point) | A concrete, checkable fact (a place, an event), dated if it can change                                                           |
 
 A third line already exists: `watch` ("À savoir"). The fields are in [`schema.ts`](./schema.ts).
 
@@ -163,7 +163,7 @@ A third line already exists: `watch` ("À savoir"). The fields are in [`schema.t
   group, secondary cities average 8.0 uncertain scores out of 15 against 4.8 for capitals. Food, returnee network, nightlife and startup scene are the weakest; career, safety
   and language the strongest. Every value therefore carries a source, a date and a confidence
   level, and a missing value stays missing.
-- **Proposed set:** 15 city criteria scored on a written 0–5 rubric, 1 country criterion,
+- **Proposed set:** 16 city criteria scored on a written 0–5 rubric, 1 country criterion,
   a handful of **facts** (language, climate, landscape, size, travel advice, visa, nationality,
   LGBT law, mobile money) that filter or explain but are never turned into a score, and a list
   of **described-only** topics (food, women's daily life, how returnees are seen, religion,
@@ -365,7 +365,7 @@ the 115 cities, many of them secondary.
   newcomers actually choose, plus daily basics. A higher score means cheaper.
 - **Does not mean:** what locals pay, or the cost of moving (see `setupCost`).
 - **Indicators and sources:** median asking rent sampled from local listings, dated, with the
-  number of listings (Expat-Dakar, CoinAfrique, Mubawab, meQasa, Property24, BuyRentKenya,
+  number of listings (public Facebook housing groups such as "Expat-Dakar" or "Expatriés Abidjan immobilier et loisirs", CoinAfrique, Mubawab, meQasa, Property24, BuyRentKenya,
   Nigeria Property Centre); Numbeo only when the city page shows enough contributors (Numbeo
   flags low-data cities). Mercer covers capitals only, and its last public ranking found is 2024. Jumia House no longer exists as a pan-African portal and must not be cited.
 - **Coverage:** good for capitals, poor for secondary cities (manual listing samples needed).
@@ -539,6 +539,40 @@ the 115 cities, many of them secondary.
 - **Rubric:** **1** small town, little traffic, quiet evenings · **3** a busy centre, calm
   neighbourhoods · **5** megacity: heavy traffic, crowds and noise day and night.
 
+#### `negotiation` — Marge de négociation _(target; added 2026-11-14 by the operator)_
+
+- **Means:** how far displayed prices are a starting point rather than the price paid — for
+  rent, taxis and markets — and how big the usual gap is. Many readers arrive with a European
+  habit of fixed, posted prices; this tells them what to expect and how to budget.
+- **Does not mean:** that a city is expensive or dishonest, nor a rule for "Africa". It varies
+  from city to city: on the same day (2026-11-14), 8 of 15 priced listings in an Abidjan
+  housing group said "négociable" or "à débattre", against 1 of 23 in a Cotonou group
+  (curation notes, `research/cities/_social/`, confidence medium and low).
+- **Direction: target, not "more is better".** Some readers enjoy bargaining, others find it
+  exhausting; the score is matched with the reader's answer (level-2 question Q41), and in
+  level 1 it only feeds the "à savoir" or "surprise" line.
+- **Indicators and sources:**
+  - share of priced listings marked "négociable", "à débattre", "discutable" in a dated sample
+    of local listings or public Facebook groups (sample size and date always stored);
+  - discounts offered in writing (Dakar broker list: 80,000 XOF "possible même à 70.000", about
+    12 % off; Douala: 7–10 % off for a longer or annual commitment);
+  - how transport is priced: metered taxis or ride-hailing apps with set fares (Yango, Bolt,
+    Uber, Heetch) versus fares agreed before each ride;
+  - fixed-price channels for daily shopping (supermarkets, mobile-money payments at posted
+    prices) versus markets;
+  - residents' and returnees' reports of a different price for newcomers or foreigners — only
+    with a dated source, and described, never scored.
+- **Rubric:** **1** prices are mostly fixed: posted rents respected, metered or app taxis,
+  little bargaining outside craft markets · **3** rent and market prices are commonly
+  negotiated, while shops and apps have fixed prices · **5** almost every price is a starting
+  point, rent and transport included, and the gap for a newcomer can be large.
+- **Effect on `cost`:** rents in `cost` are **asking prices** and are labelled as such. The
+  observed written discount is shown next to them ("souvent 5 à 10 % de moins après
+  discussion"), but it never lowers the `cost` score automatically: that would invent a paid
+  price nobody recorded.
+- **Scope:** city. Confidence is at best `measured` for the listing share and `sourced` for the
+  rest. Review every 6 months.
+
 ### 3.3 Country criterion (scored 0–5)
 
 #### `paperwork` — Démarches _(new, replaces part of `order`)_
@@ -574,7 +608,50 @@ the 115 cities, many of them secondary.
 | Racism and colourism toward Black or mixed-race residents                                                           | Described | City                        | Advisories, HRW (Tunisia 2024–26)                               | Always shown in "à savoir" where sourced   |
 | Political speech limits, internet shutdowns                                                                         | Described | Country                     | Advisories, Access Now                                          | "À savoir"                                 |
 
-### 3.5 What happens to the current 21 scores
+### 3.5 Remapping the curation tags
+
+The city-curation session (`research/cities/`, branch `research/city-curation`) files its
+notes under provisional tags and leaves the definitive taxonomy to this document. Each tag
+lands here:
+
+| Curation tag                               | Goes to                                                                          | Note                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------- | -------------------------------------- |
+| `cost.rent`                                | `cost` (figure), `setupCost` (months upfront, deposit)                           | Asking prices, labelled as such        |
+| `cost.living`                              | `cost`                                                                           |                                        |
+| `cost.salary`                              | `jobs` (context)                                                                 | Local wages explain, they do not score |
+| `cost.negotiation`                         | `negotiation`                                                                    |                                        |
+| `housing.areas`                            | `described.neighbourhoods`                                                       |                                        |
+| `housing.search`                           | `setupCost` (agency and visit fees), explanation                                 |                                        |
+| `work.jobs`                                | `jobs`, `sectors` fact                                                           |                                        |
+| `work.remote`                              | `internet`, `utilities`                                                          |                                        |
+| `business.startup`, `business.invest`      | `business`                                                                       |                                        |
+| `business.admin`                           | `paperwork` (country), `business`                                                |                                        |
+| `daily.power`, `daily.water`               | `utilities`                                                                      |                                        |
+| `daily.internet`                           | `internet`                                                                       |                                        |
+| `daily.transport`                          | `pace` (commute); `negotiation` (taxi fares)                                     | Air links go to `flights`              |
+| `daily.money`                              | mobile-money fact (country); `negotiation`                                       |                                        |
+| `health.care`                              | `healthcare`                                                                     |                                        |
+| `family.schools`, `family.childcare`       | `schools`                                                                        | Childcare is explanation only          |
+| `safety.general`                           | `safety`; advisory gate if it is about conflict                                  | Dated source required                  |
+| `safety.women`                             | `described.womenDaily`                                                           | Described, never scored; dated source  |
+| `social.nightlife`                         | `nightlife`                                                                      |                                        |
+| `social.culture`, `social.sport`           | `culture`                                                                        |                                        |
+| `social.food`                              | `described.food`                                                                 |                                        |
+| `social.religion`                          | `described.religion`                                                             |                                        |
+| `social.pace`                              | `pace`                                                                           |                                        |
+| `community.returnee`, `community.diaspora` | `returnees`                                                                      |                                        |
+| `community.expat`                          | explanation only                                                                 | Foreign workers, not returnees         |
+| `admin.visa`                               | visa fact, `paperwork`                                                           |                                        |
+| `admin.residency`                          | `paperwork`                                                                      |                                        |
+| `admin.nationality`                        | dual-nationality fact                                                            |                                        |
+| `climate.daily`                            | climate fact                                                                     |                                        |
+| `nature.access`                            | landscape fact (`settings`)                                                      |                                        |
+| `rights.lgbt`                              | same-sex-relations fact                                                          |                                        |
+| `rights.racism`                            | "à savoir" text                                                                  | Described, never scored; dated source  |
+| `return.experience`                        | `described.returneePerception`; material for level-1 `reputation` and `surprise` |                                        |
+| `other`                                    | editor triage                                                                    |                                        |
+
+### 3.6 What happens to the current 21 scores
 
 | Current score      | Decision          | Becomes                                        | Reason                                                                                      |
 | ------------------ | ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------- |
@@ -604,7 +681,7 @@ The dossiers' 15 dimensions map the same way: `startup` → `business`; `family`
 `healthcare` (+ `safety`); `healthcare` → `healthcare`; `francophone-friendliness` →
 language fact with its `use` level; `diaspora-network` → `returnees`; the others as above.
 
-**Added** with no prototype equivalent: `setupCost`, `utilities`, `schools` (as its own
+**Added** with no prototype equivalent: `setupCost`, `negotiation`, `utilities`, `schools` (as its own
 criterion), `paperwork`, the climate classes, travel-advice, visa, nationality, LGBT and
 mobile-money facts.
 
@@ -708,7 +785,7 @@ immediately, and the next question is the one most likely to change the current 
 Cost: about 40 questions × 5 answers × 115 cities ≈ 23,000 small evaluations per tap, well
 within a phone's budget. If it is too slow, keep only the top 30 cities in step 2.
 
-**Question bank** (40 questions; "vous", phone-sized answers; ID → criteria informed).
+**Question bank** (41 questions; "vous", phone-sized answers; ID → criteria informed).
 
 _Hard constraints_
 
@@ -779,6 +856,7 @@ _Priorities and what to give up_
 | Q38 | Combien pouvez-vous avancer pour vous installer (caution, loyers d'avance) ? | Moins de 2 000 € · 2 000 à 6 000 € · Plus                                                                   | setupCost                                               |
 | Q39 | Une ville déjà en tête ?                                                     | (champ de recherche) · Non                                                                                  | E (shown with its rank)                                 |
 | Q40 | Déjà vécu ou voyagé en Afrique ?                                             | Souvent · Une ou deux fois · Jamais                                                                         | E (wording of "à savoir": more detail for first-timers) |
+| Q41 | Négocier les prix (loyer, taxi, marché), pour vous c'est…                    | Un jeu · Ça va · Une corvée                                                                                 | negotiation T1.5                                        |
 
 Every question maps to at least one criterion or fact; questions marked only `E` never change
 the order, and the selection rule never asks them while a ranking question still scores above 4.
@@ -868,7 +946,11 @@ the dossiers criterion by criterion. Details at the bottom of `schema.ts`.
 5. **The neutral 2.5 for missing data** is a choice, not a fact. A secondary city with five
    unknowns sits in the middle of the list for reasons the reader cannot see unless coverage is
    shown. Coverage is therefore always shown.
-6. **Sensitive filters can look like profiling.** The LGBT and religion filters are opt-in,
+6. **Negotiation can slide into cliché.** "En Afrique, on négocie tout" is exactly the
+   generalisation the site should avoid. `negotiation` is scored per city from a dated sample,
+   the sample size is shown, and any claim of a separate price for newcomers or foreigners is
+   described with a source, never scored.
+7. **Sensitive filters can look like profiling.** The LGBT and religion filters are opt-in,
    phrased as the reader's wish, never inferred, never stored, and never sent.
 
 **Criteria resting on thin data for most cities**
@@ -910,7 +992,7 @@ outside the reader's usual sphere (§A.5).
 
 **Still open:**
 
-1. **Adopt the reshaped criteria set** (15 city + 1 country criteria; `food`, `novelty`,
+1. **Adopt the reshaped criteria set** (16 city + 1 country criteria; `food`, `novelty`,
    `competition` dropped; `beach`/`nature`/`wildSpaces` turned into landscape facts)?
    **Recommendation: yes.** It removes the "big capital" triple-counting and adds the four
    things the dossiers say separate cities (setup cost, power and water, schools, paperwork).

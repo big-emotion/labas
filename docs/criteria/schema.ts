@@ -55,8 +55,9 @@ export type RubricLevel = 0 | 1 | 2 | 3 | 4 | 5;
 
 /** Criteria scored per city on the 0–5 rubric. */
 export type CityCriterionKey =
-  | "cost" // Coût de la vie
+  | "cost" // Coût de la vie (asking prices)
   | "setupCost" // Coût pour s'installer
+  | "negotiation" // Marge de négociation — a target, not "more is better"
   | "safety" // Sécurité au quotidien
   | "utilities" // Courant et eau
   | "internet" // Internet
@@ -323,7 +324,7 @@ export interface Match {
 // 6. To facts: beach / nature / wildSpaces ≥ 3 → `settings` entries; languages gain a `use`.
 // 7. Dropped: food (→ `described.food`), novelty, competition, social (their signal is
 //    carried by pace and nightlife; see architecture.md §3.3).
-// 8. New with no prototype value (`null`): setupCost.
+// 8. New with no prototype value (`null`): setupCost, negotiation.
 // 9. `unsafe` becomes derived from `advisory` instead of hand-set.
 // The ranking keeps `rankCities` / `bestMatches` as its public interface, so the existing
 // tests keep running while scores move over one criterion at a time.
