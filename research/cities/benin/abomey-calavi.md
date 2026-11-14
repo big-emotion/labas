@@ -28,13 +28,27 @@ Extra city suggested by the dossier: Cotonou's northern suburb and university to
 - [climate.daily] 141 mm of rain fell near the university on the night of 29–30 June 2026; Cotonou and Calavi neighbourhoods flooded and commuters were stranded. — AllAfrica (fr), 2026-07-01, local-media, confidence: high
 - [climate.daily] Water covered the Djonou bridge at Godomey on the Calavi–Cotonou road in early July 2026; civil protection pumping continued where water still disrupted daily life. — La Nouvelle Tribune, 2026-07-18, local-media, confidence: high
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Unfurnished asking rents on a classifieds site: a 2-room flat in Abomey-Calavi at 40,000 XOF/month (≈ €61); a 2-bedroom flat with living room at Arconville 100,000 (≈ €152); a 3-bedroom flat with living room at Godomey Gare 250,000 (≈ €381). — Coinafrique "Appartements" page 1, listings posted Sep–Nov 2026, company, confidence: low (asking prices)
+- [cost.rent] Furnished 1-bedroom flat near the Arconville crossroads with air conditioning, washing machine and Wi-Fi at 520,000 XOF/month (≈ €793), "négociable"; electricity is on a prepaid meter paid by the tenant. — Expat.com immobilier Bénin, posted c. Oct 2026, company, confidence: medium (asking price)
+- [cost.rent] Sale asking price: a 5-bedroom R+1 villa on 370 m² with personal land title at Hêvié, 75,000,000 XOF (≈ €114,337), negotiable, plus a mandatory 5% buyer's fee to the agency. — Expat.com immobilier Bénin, posted c. late Oct 2026, company, confidence: medium (asking price)
+- [business.invest] Rental-income houses ("maisons locatives") are sold as investments at 26,000,000 XOF (≈ €39,637) in Womey and 35,000,000 (≈ €53,357) in Godomey-Salamey and Aidegnon. — Coinafrique "Appartements" page 1, listings posted Sep–Nov 2026, company, confidence: low (asking prices)
+- [business.invest] A 1,200 m² titled estate near the GDIZ industrial zone at Glo-Djigbé is listed at 50,000,000 XOF (≈ €76,225), about 41,700 XOF/m² (≈ €64/m²), "négociable": roughly three times the 8,000–15,000 XOF/m² the Beezy blog gives for Glo-Djigbé. — Expat.com immobilier Bénin, posted c. Oct 2026, company, confidence: low (asking price)
+- [cost.negotiation] Both Calavi listings on Expat.com (furnished rent and villa sale) carry a "négociable" flag, while none of the Calavi ads on Coinafrique state whether the price can move. — Expat.com / Coinafrique, read 2026-11-14, company, confidence: medium (count by the researcher)
+- [daily.transport] Petrol costs 750 XOF/litre (≈ €1.14) nationally on 9 Nov 2026. — GlobalPetrolPrices.com Benin, 2026-11-09, company, confidence: medium
+- [cost.living] The prepaid SBEE meters common in Calavi rentals bill a single rate of 125 XOF/kWh (≈ €0.19) plus 500 XOF (≈ €0.76) per subscribed kVA a month. — SBEE "Tarifications particuliers", read 2026-11-14, official, confidence: high
+
 ## Gaps
+
 - No independent survey of unfurnished family rents in Calavi, Godomey or Akassato; the only non-student figure is one furnished agency listing. The search budget ran out mid-session.
 - GlobalCostData's Abomey-Calavi page returned 403, so its rent estimate is not recorded.
 - No source on water supply, internet quality, schools other than the university, nightlife, food or diaspora presence in Calavi.
 - No women's-safety source specific to Calavi.
+<!-- price-topup gaps 2026-11-14 -->
+- Web-search budget exhausted before this pass; only direct fetches. Searched, not found: Calavi-specific transport fares to Cotonou, staple prices, school fees (beyond the university), clinic fees, going-out prices, and any source on how much rent or agency fees are usually knocked down. Coinafrique location tags are unreliable (Cotonou districts such as Fidjrossè and Cadjehoun are tagged Calavi), so those ads were left out.
 
 ## Sources read
+
 1. Location appartement meublé 4 pièces, Atrokpocodji, Abomey-Calavi — https://www.expat.com/fr/immobilier/afrique/benin/40-appartement-a-louer/815297-location-appartement-meuble-4-pieces-atrokpocodji-abomey-calavi.html — company — date read (2026-11-14)
 2. Student housing and hostel life in Benin — https://www.uni2study.com/articles/benin-student-housing-hostels — blog — date read (2026-11-14)
 3. UAC: opening of applications for allocation of university cubicles — https://beninwebtv.com/en/uac-opening-of-applications-for-allocation-of-university-cubicles/ — local-media — date read (2026-11-14)
@@ -50,7 +64,14 @@ Extra city suggested by the dossier: Cotonou's northern suburb and university to
 13. Conseils aux voyageurs Bénin – Sécurité — https://www.diplomatie.gouv.fr/fr/information-par-pays/benin/conseils-aux-voyageurs-securite — official — date read (2026-11-14)
 14. Inondations Cotonou / Abomey-Calavi, 29–30 juin 2026 — https://fr.allafrica.com/stories/202607010688.html — local-media — date read (2026-11-14)
 15. Vaste opération de pompage des eaux à Cotonou, Calavi et Ouidah — https://lanouvelletribune.info/2026/07/benin-vaste-operation-de-pompage-des-eaux-a-cotonou-calavi-et-ouidah-apres-les-pluies/ — local-media — date read (2026-11-14)
+16. Coinafrique Bénin, Appartements (page 1) — https://bj.coinafrique.com/categorie/appartements — company — date read (2026-11-14)
+17. Appartement meublé à Calavi — https://www.expat.com/fr/immobilier/afrique/benin/40-appartement-a-louer/813708-appartement-meuble-a-calavi.html — company — date read (2026-11-14)
+18. Villa à vendre au Bénin (Hêvié) — https://www.expat.com/fr/immobilier/afrique/benin/42-maisons-a-vendre/815129-villa-a-vendre-au-benin.html — company — date read (2026-11-14)
+19. Expat.com immobilier Bénin (listing index, page 1) — https://www.expat.com/fr/immobilier/afrique/benin/ — company — date read (2026-11-14)
+20. Benin gasoline prices — https://www.globalpetrolprices.com/Benin/gasoline_prices/ — company — date read (2026-11-14)
+21. SBEE Tarifications particuliers — https://sbee.bj/particuliers/tarifications/ — official — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Police arrested 182 people — supported
 - [safety.general] Mob justice: on the night of 16–17 Sep 2025 — supported

@@ -100,7 +100,42 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - [cost.negotiation] Only one priced post in 23 says "négociable" and one says the price was "revu" (lowered): in this group, negotiation is less advertised than in the Abidjan or Dakar groups, which does not mean it does not happen. — same group 2026-11-14, social-caption, confidence: low
 - [other] @cotonousociety posts give no prices and draw few comments; useful to show what exists, not what it costs. — read 2026-11-14
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Asking rents on the Expat.com Benin board (first page, read 14 Nov 2026): furnished 2-room flat in Fidjrossè-plage 350,000 XOF/month (≈ €534); sea-view 4-bedroom flat in Fidjrossè 550,000 (≈ €838); furnished 2-bedroom flats near the beach and airport 650,000–750,000 (≈ €991–1,143); furnished "very chic" 3-bedroom villa 1,000,000 (≈ €1,524); R+2 4-bedroom villa at Togbin-plage 1,350,000 (≈ €2,058); twin 4-bedroom villas on Fidjrossè-plage 2,300,000 (≈ €3,506). — Expat.com immobilier Bénin, listings posted Oct–Nov 2026, company, confidence: medium (asking prices)
+- [cost.rent] Short stays on the same board: furnished one- and two-bedroom flats at 25,000–35,000 XOF a night (≈ €38–53), all marked negotiable. — Expat.com immobilier Bénin, listings posted Oct–Nov 2026, company, confidence: medium (asking prices)
+- [cost.rent] Sale asking price at the top of the market: an 833 m² plot in the embassy zone listed at 1,000,000,000 XOF (≈ €1.52 M), about 1.2 M XOF/m² (≈ €1,830/m²), marked negotiable. — Expat.com immobilier Bénin, posted c. late Oct 2026, company, confidence: low (single asking price)
+- [cost.rent] Le Petit Journal gives a sale price of about €7,622 per m² of living space in urban Benin (exactly 5 M XOF/m²), "27% above France", citing combien-coute.net; the article does not name Cotonou or give the French price, and the figure sits far above every listing read. — Le Petit Journal Cotonou, 2024-06-13, intl-media, confidence: low ✎ spot-check 2026-11-14: corrected
+- [housing.search] An older Expat.com guide says written leases are uncommon and terms are agreed verbally with a receipt per payment; a démarcheur typically takes 10% of the rent at signing; deposits run from 3 months to 2 years of rent and can be hard to recover. OLD. — Expat.com guide "Se loger au Bénin", updated 2017-10-03, blog, confidence: low
+- [housing.search] The same guide puts buying a small single-storey house at 20 million XOF minimum (≈ €30,490), 35 million on average (≈ €53,357), nationwide. OLD. — Expat.com guide "Se loger au Bénin", updated 2017-10-03, blog, confidence: low
+- [cost.negotiation] On the Expat.com Benin property board, 15 of the 20 listings on the first page carried a "négociable" flag on 14 Nov 2026 (rents, nightly rates and plots alike), against 1 of 23 in the Facebook expat group read the same day: the online asking price is openly presented as a starting point on this platform. — Expat.com immobilier Bénin, read 2026-11-14, company, confidence: medium (count by the researcher)
+- [cost.negotiation] A relocation blog says landlords expect a discussion of the rent, that haggling is culturally expected in markets, and that not negotiating is a newcomer's mistake; it puts the deposit at 2–3 months' rent. No discount size given. — OpenShores "Vivre à Cotonou", 2026-04-13, blog, confidence: low
+- [cost.negotiation] Travel wiki: zémidjans have no meter and fares are negotiable; the minimum is 100 XOF (≈ €0.15), about 100 XOF per km, and a ride within central Cotonou "should not exceed 400 CFA" (≈ €0.61). — Wikivoyage "Cotonou", rev. 5423255 (markers to Jun 2026), blog, confidence: medium
+- [cost.negotiation] The same wiki says hotel and airport taxis charge at least double and up to 4–5 times the street rate, recommends the Gozem app partly to avoid haggling, and says to be ready to bargain at Dantokpa; the Centre Artisanal can feel like a tourist trap with pressure to buy. — Wikivoyage "Cotonou", rev. 5423255, blog, confidence: medium
+- [cost.negotiation] National travel wiki: shop goods, restaurant meals, hotels and bus tickets are fixed-price, most other prices are open to haggling, and foreigners are sometimes quoted double the final price; agree zem and bush-taxi fares before the ride and pay on arrival. — Wikivoyage "Benin", rev. 5394483 (rates as of Oct 2026), blog, confidence: medium
+- [cost.negotiation] An older Expat.com guide says taxi fares must be negotiated before departure, while intercity bus fares are fixed and "Bénin-Taxi", a government-initiated service, has regulated prices. OLD. — Expat.com guide "Moyens de transport au Bénin", updated 2017-10-03, blog, confidence: low
+- [cost.negotiation] EFE Montaigne fees are not negotiable: the only reductions are 10% per child for families with 3+ children not reimbursed by an employer, and a fixed 50% on a term for arrivals after or departures before the All Saints' break; late payment costs 5% per month and pupils are refused after 6 weeks. — EFE Montaigne règlement financier 2026-2027, 2026-10, official (school), confidence: high
+- [daily.transport] App and taxi fares: Gozem about 200 XOF (≈ €0.30) for a zem and 1,700 XOF (≈ €2.59) for a 10-minute car ride; shared fixed-route taxi 200 XOF from Dantokpa to Étoile Rouge; hired taxi about 3,000 XOF (≈ €4.57) for 30 minutes or 10,000–15,000 XOF (≈ €15–23) for a few hours. — Wikivoyage "Cotonou", rev. 5423255, blog, confidence: low
+- [daily.transport] Intercity: Cotonou–Parakou bus 5,500 XOF (≈ €8.38), Cotonou–Natitingou 7,500 (≈ €11.43), fixed fares; bush taxis about 5,000–10,000 XOF for a 3-hour trip (≈ €7.62–15.24); a hired car 30,000–40,000 XOF for the same. — Wikivoyage "Benin", rev. 5394483, blog, confidence: low
+- [daily.transport] Petrol price: 750 XOF/litre (≈ €1.14) on 9 Nov 2026, above the 620–650 XOF/L given by Africarrières in August 2026. — GlobalPetrolPrices.com Benin, 2026-11-09, company, confidence: medium
+- [daily.transport] A relocation blog lists Gozem/VTC rides at $1.50–4, classic taxi $2–5, city bus $0.30–0.50 and scooter rental $60–80 a month (USD as stated). — OpenShores "Coût de la vie à Cotonou", 2026-04-13, blog, confidence: low
+- [cost.living] SBEE household electricity tariffs: postpaid social tranche (under 20 kWh/30 days) 88 XOF/kWh (≈ €0.13), 0–250 kWh 125 XOF (≈ €0.19), above 250 kWh 148 XOF (≈ €0.23); prepaid single rate 125 XOF/kWh; plus 500 XOF (≈ €0.76) per subscribed kVA a month; taxes and effective date not shown. — SBEE "Tarifications particuliers", read 2026-11-14, official, confidence: high
+- [cost.living] SONEB household water: 198 XOF/m³ up to 5 m³ (≈ €0.30), 453 XOF for 6–50 m³ (≈ €0.69), 658 XOF above 50 m³ (≈ €1.00), all plus 18% VAT; meter fee 402 XOF/month for a standard meter; a domestic subscription costs 14,400–16,200 XOF (≈ €22–25), mostly a deposit. — SONEB "Tarification", read 2026-11-14, official, confidence: high
+- [daily.internet] Celtiis home fibre lists 50 Mbps at 14,900 XOF (≈ €22.71) and 100 Mbps at 24,900 (≈ €37.96), billing period not stated (payment can be spread "dès 500f/jr"); installation fee and commitment not shown. — Celtiis "Offres Celtiis Home", read 2026-11-14, company, confidence: high ✎ spot-check 2026-11-14: corrected
+- [daily.internet] Celtiis 30-day mobile data: 24.4 GB for 15,000 XOF (≈ €22.87) up to 47.2 GB for 29,000 (≈ €44.21), then throttled to 2 Mb/s; a 4G FlyBox router with 10 GB costs 17,900 XOF (≈ €27.29). — Celtiis "Gamme IllimiNet" and home page, read 2026-11-14, company, confidence: high
+- [family.schools] EFE Montaigne 2026–27 yearly tuition depends on nationality: French families pay 1,824,000 XOF (≈ €2,781) in nursery to 2,904,000 (≈ €4,427) in lycée; Beninese families 2,382,000 to 3,825,000 (≈ €3,631–5,831); other nationalities 2,865,000 to 4,542,000 (≈ €4,368–6,924). — EFE Montaigne "Tarifs 2026-2027", 2026-10, official (school), confidence: high
+- [family.schools] One-off EFE Montaigne fees: first-registration fee 500,000 XOF (≈ €762), or 350,000 (≈ €534) with a sibling already enrolled; re-registration 65,000 (≈ €99); entrance test 50,000 (≈ €76), free for French pupils; bac final-year exam 90,000 (≈ €137). — EFE Montaigne "Tarifs 2026-2027" and règlement financier, 2026-10, official (school), confidence: high
+- [family.schools] A relocation blog gives monthly fees of $80–200 for a private nursery and $100–300 for a private primary school (USD as stated); no named school. — OpenShores "Coût de la vie à Cotonou", 2026-04-13, blog, confidence: low
+- [health.care] A GP consultation in a private clinic costs at least 10,000 XOF (≈ €15.24). OLD. — Expat.com guide "Santé et assurances au Bénin", updated 2021-01-11, blog, confidence: low
+- [health.care] A relocation blog lists GP $10–20, specialist $25–50, basic blood tests $10–25, dentist $15–30 and international health insurance $50–100 a month (USD as stated). — OpenShores "Coût de la vie à Cotonou", 2026-04-13, blog, confidence: low
+- [cost.living] Staples (USD as stated): rice $0.80/kg, chicken $3.50/kg, baguette $0.25, milk $1.20/L, 12 eggs $1.80, 1.5 L water $0.40, 65 cl local beer $0.80; the blog says Dantokpa is 30–50% cheaper than supermarkets; no oil price. — OpenShores "Coût de la vie à Cotonou", 2026-04-13, blog, confidence: low
+- [social.nightlife] Bar and club prices named by venue: drinks 500–2,000 XOF (≈ €0.76–3.05) in popular bars, 1,500–5,000 XOF (≈ €2.29–7.62) at an expat bar in Haie Vive; club entry 1,000–2,000 XOF (≈ €1.52–3.05); Institut Français events 0–3,000 XOF. — Wikivoyage "Cotonou", rev. 5423255, blog, confidence: low
+- [social.nightlife] National benchmarks: about 250 XOF (≈ €0.38) for a small beer and 500 XOF (≈ €0.76) for a large one in local bars, against about 30,000 XOF (≈ €45.73) a bottle in nightclubs. — Wikivoyage "Benin", rev. 5394483, blog, confidence: low
+- [social.food] Restaurant spread by venue: pork maquis 500–1,200 XOF (≈ €0.76–1.83); mid-range mains 4,500–9,000 XOF (≈ €6.86–13.72); Thai or Russian restaurants 5,000–15,000 XOF a main (≈ €7.62–22.87); Hotel du Lac Sunday buffet 10,000 XOF (≈ €15.24). — Wikivoyage "Cotonou", rev. 5423255, blog, confidence: low
+- [social.sport] A relocation blog gives gym membership $20–40 a month, cinema $3–5, club entry $5–10 and an upscale restaurant meal $25–50 (USD as stated). — OpenShores "Coût de la vie à Cotonou", 2026-04-13, blog, confidence: low
+- [cost.living] Expat.com's Benin guide estimates monthly costs at about €850 for a single person and €2,350 for a family of four (no method given). — Expat.com guide Bénin index, read 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No 2026 independent rent survey by neighbourhood; figures are a 2024 media guide, commercial blogs/portals and one agency listing. Search budget ran out mid-session, so the live 2026 classifieds pass and Expat.com Akpakpa listing (404) were not completed.
 - Water supply reliability (SONEB cuts by district) not found.
 - Ride-hailing status in 2026 (Gozem/Yango) not confirmed.
@@ -111,8 +146,14 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - The social-media staging file research/cities/_social/benin.md was not merged (outside this task's method).
 <!-- social-pass gaps 2026-11-14 -->
 - ★ cotonousocialclub not read; Ouidah: nothing found on Instagram.
+<!-- price-topup gaps 2026-11-14 -->
+- The session's web-search budget was exhausted before this pass began, so only direct fetches of known pages were possible; "Cotonou négocier loyer", "Dantokpa marchander", "prix yovo" and Gozem fare searches could not be run.
+- Searched, not found: the size of a typical discount (no source gives a percentage off rent, agency fees or market prices); official Gozem/Yango fare grid (Gozem help centre 403, gozem.co has no fares); MTN data bundle prices (page shows only an image); cooking-oil price; supermarket vs market price list; a named local private school's fees (Ufuk Bénin site has none); private clinic fee schedule; CanalOlympia cinema ticket (certificate error); concert ticket prices.
+- Numbeo (HTTP 429) and Expatistan (403) did not load, so no crowd-sourced basket; Coinafrique gave only Calavi-area rentals.
+- The text of Benin's rent law (the "three months' advance" rule) was not read.
 
 ## Sources read
+
 1. Se loger à Cotonou : le guide complet — https://lepetitjournal.com/cotonou/installation/se-loger-cotonou-le-guide-complet-387561 — intl-media — date read (2026-11-14)
 2. Système scolaire au Bénin : guide complet — https://lepetitjournal.com/cotonou/education/systeme-scolaire-benin-guide-complet — intl-media — date read (2026-11-14)
 3. Conseils aux voyageurs Bénin – Sécurité — https://www.diplomatie.gouv.fr/fr/information-par-pays/benin/conseils-aux-voyageurs-securite — official — date read (2026-11-14)
@@ -159,11 +200,31 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 44. CPJ letter to the President of Benin — https://cpj.org/wp-content/uploads/2026/09/FR-CPJ-Letter-to-His-Excellency-the-President-of-Benin-September-1-2026.pdf — NGO — date read (2026-11-14)
 45. Les Béninois disent jouir des libertés civiles et politiques, mais… — https://www.afrobarometer.org/articles/les-beninois-disent-jouir-des-libertes-civile-et-politique-mais-ces-libertes-se-sont-fragilisees-cette-derniere-decennie/ — academic — date read (2026-11-14)
 46. Amnesty International, Benin coastal evictions report (AFR 14/7383/2023) — https://www.amnesty.org/ar/wp-content/uploads/2024/03/AFR1473832023ENGLISH.pdf — NGO — date read (2026-11-14)
+47. Benin gasoline prices — https://www.globalpetrolprices.com/Benin/gasoline_prices/ — company — date read (2026-11-14)
+48. SBEE Tarifications particuliers — https://sbee.bj/particuliers/tarifications/ — official — date read (2026-11-14)
+49. SONEB Tarification et calcul de coûts — https://web.soneb.bj/pg-tarification — official — date read (2026-11-14)
+50. Celtiis Home offers — https://www.celtiis.bj/offres-celtiis-home/ — company — date read (2026-11-14)
+51. Celtiis Gamme IllimiNet — https://www.celtiis.bj/forfaits/gamme-illiminet/ — company — date read (2026-11-14)
+52. Celtiis home page (FlyBox, Pocket MiFi) — https://www.celtiis.bj/ — company — date read (2026-11-14)
+53. EFE Montaigne Tarifs 2026-2027 (FCFA/EURO) — https://efemontaigne-cotonou.com/wp-content/uploads/2026/10/TARIFS-2026-2027-FCFA-EURO-v2.pdf — official — date read (2026-11-14)
+54. EFE Montaigne Règlement financier 2026-2027 — https://efemontaigne-cotonou.com/wp-content/uploads/2026/10/reglement_financier_2026_2027-V2.pdf — official — date read (2026-11-14)
+55. Wikivoyage: Cotonou — https://en.wikivoyage.org/wiki/Cotonou — blog — date read (2026-11-14)
+56. Wikivoyage: Benin — https://en.wikivoyage.org/wiki/Benin — blog — date read (2026-11-14)
+57. Expat.com immobilier Bénin (listing index, page 1) — https://www.expat.com/fr/immobilier/afrique/benin/ — company — date read (2026-11-14)
+58. Se loger au Bénin (updated 2017-10-03) — https://www.expat.com/fr/guide/afrique/benin/15979-se-loger-au-benin.html — blog — date read (2026-11-14)
+59. Moyens de transport au Bénin (updated 2017-10-03) — https://www.expat.com/fr/guide/afrique/benin/15974-moyens-de-transport-au-benin.html — blog — date read (2026-11-14)
+60. Santé et assurances au Bénin (updated 2021-01-11) — https://www.expat.com/fr/guide/afrique/benin/15977-sante-et-assurances-au-benin.html — blog — date read (2026-11-14)
+61. Expat.com guide Bénin index (budget estimate) — https://www.expat.com/fr/guide/afrique/benin/ — blog — date read (2026-11-14)
+62. Loisirs et activités au Bénin (read; only an association fee, not used) — https://www.expat.com/fr/guide/afrique/benin/15973-loisirs-et-activites-au-benin.html — blog — date read (2026-11-14)
+63. Les avantages et inconvénients de Cotonou (read; no negotiation content) — https://www.openshores.co/blog/benin/cotonou/les-avantages-et-inconvenients-de-cotonou — blog — date read (2026-11-14)
+64. Vivre sa retraite au Bénin (read; no price figures) — https://lepetitjournal.com/vivre-a-cotonou/vivre-sa-retraite-au-benin-le-guide-complet-394778 — intl-media — date read (2026-11-14)
+65. Wikivoyage (fr): Cotonou (read; only a 2015 hostel price) — https://fr.wikivoyage.org/wiki/Cotonou — blog — date read (2026-11-14)
 
 - Social pass: Facebook "Expatriés français au Bénin" (709820170569766) — chronological feed, 27 posts, 2026-11-14
 - Social pass: Instagram @cotonousociety — 5 posts (pinned + latest), 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.salary] Minimum wage (SMIG) is 52,000 — supported
 - [housing.search] Amnesty documented forced evictions — supported
 - [daily.transport] France Diplomatie advises not to use moto-taxis — supported
@@ -172,3 +233,13 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - [admin.visa] E-visa fees on evisa.bj — supported
 - [rights.lgbt] Same-sex activity is legal — supported
 - [community.expat] Forum users split on trust — unsupported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] Le Petit Journal gives a sale price — corrected
+- [daily.transport] Petrol price: 750 XOF/litre — supported
+- [cost.living] SBEE household electricity tariffs — supported (prepaid rate and kVA fee on sbee.bj; postpaid tranches only via a 2026 blog)
+- [cost.living] SONEB household water — supported
+- [cost.negotiation] Travel wiki: zémidjans have no meter — supported
+- [social.nightlife] Bar and club prices named by venue — supported
+- [daily.internet] Celtiis home fibre lists — corrected

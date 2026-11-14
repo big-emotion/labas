@@ -61,7 +61,24 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - [nature.access] The Route des Captifs is a 4 km walk from the centre to the beach; the Kpassè sacred forest holds centuries-old iroko trees. — benin.bj (official tourism), accessed 2026-11-14, official, confidence: medium
 - [rights.lgbt] Same-sex activity is legal in Benin but relationships are "not widely accepted"; public affection draws negative attention. — GOV.UK Benin safety page (undated, post-Dec 2025), official, confidence: high
 
+<!-- price-topup 2026-11-14 -->
+- [business.invest] Plot asking prices in town on a classifieds site: 500 m² at 7,500,000 XOF (≈ €11,434, about 15,000 XOF/m² or €23/m²); 338 m² at 5,500,000 (≈ €8,385, about 16,300 XOF/m²); plots near the new stadium at 3,800,000–4,000,000 XOF (≈ €5,793–6,098), surface not stated. — Coinafrique search "ouidah", listings posted Aug–Nov 2026, company, confidence: low (asking prices)
+- [business.invest] Coastal and tourist-zone land is priced by the hectare: 1 ha with land title at Avlékété 150,000,000 XOF (≈ €228,674, about 15,000 XOF/m²); 1 ha on the Route des Pêches 95,000,000 (≈ €144,827, about 9,500 XOF/m²); a 5,593 m² estate with personal land title at Gbènan Sud 100,000,000 (≈ €152,449, about 17,900 XOF/m²). — Coinafrique search "ouidah", listings posted May–Oct 2026, company, confidence: low (asking prices)
+- [business.invest] A plot on a titled estate at Pahou (Ouidah commune) is listed at 3,500,000 XOF (≈ €5,336), surface not stated; several other listings give no price ("sur demande") or prices that look like typos. — Coinafrique search "ouidah", listing posted c. Sep 2026, company, confidence: low (asking price)
+- [cost.rent] Out of about 40 Ouidah-area property ads on the classifieds site's first results page, only one is a rental (a flat at 20,000 XOF, ≈ €30, period not stated); the rest are land and house sales. — Coinafrique search "ouidah", read 2026-11-14, company, confidence: medium (count by the researcher)
+- [cost.living] More staples (USD as stated): 12 eggs $1.50, tomatoes $0.45/kg, bananas $0.30/kg, a pineapple $0.40, a coconut $0.20, fresh fruit juice $0.50; groceries $70 (economy) to $90 a month. — OpenShores "Coût de la vie à Ouidah", 2026-04-13, blog, confidence: low
+- [cost.living] Other monthly budget lines (USD as stated): health $45–55, phone and internet $10–20, leisure $20–40, transport $12–25; the blog puts a local meal at $2 in Ouidah against $3 in Cotonou. — OpenShores "Coût de la vie à Ouidah", 2026-04-13, blog, confidence: low
+- [cost.negotiation] The blog's only price tip is to buy fish directly from the fishermen; it gives no advice on haggling over rent, zems or market goods. — OpenShores "Coût de la vie à Ouidah" and "Vivre à Ouidah", 2026-04-13, blog, confidence: low
+- [cost.negotiation] National travel wiki: shop goods, restaurant meals, hotels and bus tickets are fixed-price, most other prices are open to haggling, and foreigners are sometimes quoted double the final price; agree zem (100–300 XOF, ≈ €0.15–0.46) and bush-taxi fares before the ride and pay on arrival. — Wikivoyage "Benin", rev. 5394483 (rates as of Oct 2026), blog, confidence: medium
+- [cost.negotiation] The official tourism guide recommends an accredited guide for sacred sites but publishes no guide rate or entry fee, so no official reference price was found to negotiate from. — benin.bj (official tourism), read 2026-11-14, official, confidence: medium
+- [social.food] Sodabi, the palm spirit made in the Ouidah area, costs about 2,000 XOF a litre (≈ €3.05); a small beer is about 250 XOF and a large one 500 XOF (≈ €0.38 / €0.76) in local bars, national benchmarks. — Wikivoyage "Benin", rev. 5394483, blog, confidence: low
+- [daily.transport] Petrol costs 750 XOF/litre (≈ €1.14) nationally on 9 Nov 2026. — GlobalPetrolPrices.com Benin, 2026-11-09, company, confidence: medium
+- [cost.living] SBEE household electricity (national): 125 XOF/kWh (≈ €0.19) for 0–250 kWh postpaid or prepaid, 148 XOF above 250 kWh, 88 XOF in the social tranche under 20 kWh, plus 500 XOF per subscribed kVA a month. — SBEE "Tarifications particuliers", read 2026-11-14, official, confidence: high
+- [daily.internet] National operator Celtiis lists home fibre at 14,900 XOF/month (≈ €22.71) for 50 Mbps and 30-day mobile data from 15,000 XOF (≈ €22.87) for 24.4 GB; Ouidah fibre coverage was not checked. — Celtiis offers pages, read 2026-11-14, company, confidence: medium
+- [social.culture] Vodun Days tickets will be sold on the festival shop, which is not yet open and shows no prices and announces the next edition for 2–9 January 2027. — boutique.vodundays.bj, read 2026-11-14, official, confidence: medium ✎ spot-check 2026-11-14: corrected
+
 ## Gaps
+
 - No independent (non-OpenShores) rent or price data for Ouidah; long-term rental listings were not found and the search budget ran out mid-session.
 - No Ouidah-specific power-cut, water or internet-speed data.
 - No named clinic, hospital or school in Ouidah found in any source.
@@ -69,8 +86,12 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - No dated media or NGO source on women's street safety in Ouidah; OpenShores' "safe for expat women" claim was left out because it is an unsourced commercial blog.
 - MIME opening date and Marina completion status in 2026 not confirmed.
 - Racism/colourism toward diaspora in Ouidah: nothing found.
+<!-- price-topup gaps 2026-11-14 -->
+- The session's web-search budget was exhausted before this pass, so only direct page fetches were possible ("Ouidah négocier loyer", "Ouidah prix guide", "Ouidah taxi" searches could not run).
+- Searched, not found: long-term rental listings (Expat.com has none for Ouidah; Coinafrique shows one), entry fees for the Python Temple, history museum and Fondation Zinsou villa (Zinsou practical-info page 404), guide rates, Vodun Days VIP pass prices, school fees, clinic consultation fees, cinema/gym/club prices, any source on foreigner pricing during the festival.
 
 ## Sources read
+
 1. Coût de la vie à Ouidah — https://www.openshores.co/blog/benin/ouidah/cout-de-la-vie-a-ouidah — blog — date read (2026-11-14)
 2. Vivre à Ouidah : guide complet — https://www.openshores.co/blog/benin/ouidah/vivre-a-ouidah-guide-complet — blog — date read (2026-11-14)
 3. Les avantages et inconvénients de Ouidah — https://www.openshores.co/blog/benin/ouidah/les-avantages-et-inconvenients-de-ouidah — blog — date read (2026-11-14)
@@ -104,7 +125,21 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 31. Vaste opération de pompage des eaux à Cotonou, Calavi et Ouidah — https://lanouvelletribune.info/2026/07/benin-vaste-operation-de-pompage-des-eaux-a-cotonou-calavi-et-ouidah-apres-les-pluies/ — local-media — date read (2026-11-14)
 32. Succès éclatant des Vodun Days 2026 (read; no figures used) — https://www.gouv.bj/article/3406/succes-eclatant-vodun-days-2026-le-benin-assume-son-statut-de-grande-nation-de-culture-et-de-traditions-ancestrales/ — official — date read (2026-11-14)
 33. My Afro Origins — Vodun Days celebration 2025 (read; no settlement information) — https://myafroorigins.bj/articles/vodun-days-celebration-2025/3 — official — date read (2026-11-14)
+34. Coinafrique search "ouidah" (page 1 of 10) — https://bj.coinafrique.com/search?keyword=ouidah — company — date read (2026-11-14)
+35. Wikivoyage: Benin — https://en.wikivoyage.org/wiki/Benin — blog — date read (2026-11-14)
+36. Wikivoyage: Ouidah (read; no prices) — https://en.wikivoyage.org/wiki/Ouidah — blog — date read (2026-11-14)
+37. Benin gasoline prices — https://www.globalpetrolprices.com/Benin/gasoline_prices/ — company — date read (2026-11-14)
+38. SBEE Tarifications particuliers — https://sbee.bj/particuliers/tarifications/ — official — date read (2026-11-14)
+39. Celtiis Home offers and Gamme IllimiNet — https://www.celtiis.bj/offres-celtiis-home/ ; https://www.celtiis.bj/forfaits/gamme-illiminet/ — company — date read (2026-11-14)
+40. Vodun Days boutique — https://boutique.vodundays.bj/ — official — date read (2026-11-14)
+41. Expat.com immobilier Bénin, Ouidah filter (read; no Ouidah listings) — https://www.expat.com/fr/immobilier/afrique/benin/ouidah/ — company — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [business.invest] Land risk: 234 people were evicted — supported
 - [safety.general] UK FCDO: very strong currents — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [social.culture] Vodun Days access is free — corrected
+- [social.food] Sodabi, the palm spirit — supported

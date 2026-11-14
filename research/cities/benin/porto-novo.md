@@ -28,13 +28,30 @@ Extra city suggested by the dossier: the official capital, about 30 km east of C
 - [nature.access] Porto-Novo Ville Verte (2015–2023, FFEM share €1.2 M alongside AFD) rehabilitated the lagoon waterfront; the evaluation found better access to the lagoon front, more street lighting and some neighbourhoods opened up, but no lasting rise in residents' incomes. — FFEM evaluation summary (Insuco), 2026-06-15, official, confidence: high
 - [nature.access] Brut profiled a market gardener whose work changed with the lagoon-bank programme, which also aims at flood protection. — Brut Afrique, 2025-09-09, intl-media, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] House asking prices on a classifieds site: a personal villa in Tokpota 13,000,000 XOF (≈ €19,818); a house in Gbôdjê 22,000,000 (≈ €33,539); a villa 27,000,000 (≈ €41,161); an unfinished R+1 villa at Missérété centre, a neighbouring commune listed under Porto-Novo, 30,000,000 (≈ €45,735). — Coinafrique search "porto-novo", listings posted May–Oct 2026, company, confidence: low (asking prices)
+- [business.invest] Plot asking prices: 3,500,000 XOF (≈ €5,336) at Zounkpa and 8,000,000 (≈ €12,196) at Djègan-Daho, up to 18,000,000–30,000,000 (≈ €27,441–45,735) for plots in town, 22,000,000 for one with a land title; surfaces are not stated. — Coinafrique search "porto-novo", listings posted Feb–Oct 2026, company, confidence: low (asking prices)
+- [cost.living] Staples (USD as stated): rice $0.70/kg, chicken $3.00/kg, fish $2.00/kg, milk $1.10/L, 12 eggs $1.50, baguette $0.20; the blog says the central market is cheaper than Cotonou but gives no supermarket prices. — OpenShores "Coût de la vie à Porto-Novo", 2026-04-13, blog, confidence: low
+- [daily.transport] Zem rides within town $0.30–0.80 and a minibus round trip to Cotonou about $2 (USD as stated). — OpenShores "Coût de la vie à Porto-Novo", 2026-04-13, blog, confidence: low
+- [daily.transport] A local ride app, A-TaSA, shows the fare before booking, per the travel wiki. — Wikivoyage "Porto-Novo", rev. 5423256, blog, confidence: low
+- [social.food] A typical meal with a soft drink costs under 600 XOF (≈ €0.91) on a budget and 700–3,000 XOF (≈ €1.07–4.57) mid-range. — Wikivoyage "Porto-Novo", rev. 5423256, blog, confidence: low
+- [social.food] The cost blog gives $5–10 for a mid-range restaurant meal and $0.50–1.50 for a coffee (USD as stated). — OpenShores "Coût de la vie à Porto-Novo", 2026-04-13, blog, confidence: low
+- [cost.living] A cleaner costs $40–60 a month (USD as stated). — OpenShores "Coût de la vie à Porto-Novo", 2026-04-13, blog, confidence: low
+- [cost.negotiation] Pirogue trips to the lake villages have no fixed price: the travel wiki says to ask around by the lagoon, about 50 m east of the bridge. — Wikivoyage "Porto-Novo", rev. 5423256, blog, confidence: low
+- [cost.negotiation] National travel wiki: fixed prices apply in shops, restaurants, hotels and on buses; most other prices are haggled and foreigners are sometimes quoted double the final price; agree zem fares (100–300 XOF, ≈ €0.15–0.46) before the ride. — Wikivoyage "Benin", rev. 5394483 (rates as of Oct 2026), blog, confidence: medium
+- [daily.transport] Petrol costs 750 XOF/litre (≈ €1.14) nationally on 9 Nov 2026. — GlobalPetrolPrices.com Benin, 2026-11-09, company, confidence: medium
+
 ## Gaps
+
 - No independent rent, salary or price data; everything numeric except the CNSS housing programme comes from OpenShores, whose pages contradict each other. The OpenShores best-cities page also lists "Bembèrèkè" (a northern town) as a Porto-Novo neighbourhood, which lowers trust.
 - AFD project page for Porto-Novo Ville Verte did not load (two URLs tried); the dossier's 9.2 M EUR figure was not re-verified.
 - No source found on schools, internet speed, water, women's safety, nightlife venues or the diaspora/returnee community in Porto-Novo. Proximity to the Nigerian border is not covered by any source read.
 - The search budget ran out mid-session, so local media (La Nouvelle Tribune, Bénin Web TV) were not searched for Porto-Novo-specific daily-life stories.
+<!-- price-topup gaps 2026-11-14 -->
+- Web-search budget exhausted before this pass; only direct fetches. Searched, not found: long-term rent listings with a clear monthly price (Coinafrique shows a "villa individuelle" at 180,000 XOF and a furnished 2-room at 25,000 XOF without stating the period, and its only "Porto-Novo" flat is in Akpakpa, Cotonou), Expat.com listings in Porto-Novo, school and clinic fees, going-out prices, A-TaSA fare levels, and any source on how much rent is negotiated down.
 
 ## Sources read
+
 1. Vivre à Porto-Novo : guide complet — https://www.openshores.co/blog/benin/porto-novo/vivre-a-porto-novo-guide-complet — blog — date read (2026-11-14)
 2. Coût de la vie à Porto-Novo — https://www.openshores.co/blog/benin/porto-novo/cout-de-la-vie-a-porto-novo — blog — date read (2026-11-14)
 3. Les avantages et inconvénients de Porto-Novo — https://www.openshores.co/blog/benin/porto-novo/les-avantages-et-inconvenients-de-porto-novo — blog — date read (2026-11-14)
@@ -48,3 +65,11 @@ Extra city suggested by the dossier: the official capital, about 30 km east of C
 11. Résumé d'évaluation Porto-Novo Ville Verte (PDF) — https://ffem.fr/sites/ffem/files/2026-06/fr_resume_devaluation_vf-002.pdf — official — date read (2026-11-14)
 12. Au Bénin, Porto-Novo ville verte change la vie des habitants — https://www.brut.media/afrique/videos/au-benin-porto-novo-ville-verte-change-la-vie-des-habitants — intl-media — date read (2026-11-14)
 13. AFD project page (did not contain the project) — https://www.afd.fr/fr/projets/porto-novo-ville-verte-amenager-et-proteger-les-berges-lagunaires — official — date read (2026-11-14)
+14. Coinafrique search "porto-novo" (page 1 of 10) — https://bj.coinafrique.com/search?keyword=porto-novo — company — date read (2026-11-14)
+15. Wikivoyage: Porto-Novo — https://en.wikivoyage.org/wiki/Porto-Novo — blog — date read (2026-11-14)
+16. Wikivoyage: Benin — https://en.wikivoyage.org/wiki/Benin — blog — date read (2026-11-14)
+17. Benin gasoline prices — https://www.globalpetrolprices.com/Benin/gasoline_prices/ — company — date read (2026-11-14)
+
+## Spot-check, price top-up (2026-11-14)
+
+- [social.food] A typical meal with a soft drink — supported
