@@ -1,0 +1,528 @@
+---
+import "../styles/global.css";
+import Wordmark from "../components/Wordmark.astro";
+import { CITIES } from "../lib/cities";
+import { QUESTIONS } from "../lib/questions";
+import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
+
+const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
+const description =
+  "Répondez à dix questions et découvrez les villes d'Afrique qui vous ressemblent, parmi 115 villes dans les 54 pays.";
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#161a5c" />
+    <title>Là-bas · Trouvez votre ville</title>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="side">
+        <Wordmark />
+        <h1>
+          Trouvez votre ville, <em>là-bas.</em>
+        </h1>
+        <p class="lead">
+          Pour la diaspora qui regarde vers le continent. 115 villes dans les 54 pays, placées à
+          leurs coordonnées réelles. Chaque réponse allume celles qui vous ressemblent.
+        </p>
+        <div class="map">
+          <svg
+            id="map"
+            viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+            role="img"
+            aria-label="Carte des 115 villes : les plus proches de vos réponses s'allument"
+          >
+            {dots.map((dot) => (
+              <circle
+                class="dot"
+                data-city={dot.name}
+                cx={dot.x.toFixed(1)}
+                cy={dot.y.toFixed(1)}
+                r="3"
+              >
+                <title>{dot.name}</title>
+              </circle>
+            ))}
+            <g id="highlights"></g>
+          </svg>
+        </div>
+        <ol class="podium" id="podium" aria-live="polite"></ol>
+      </aside>
+
+      <main class="main">
+        <form id="form" class="questions" aria-label="Vos réponses">
+          {QUESTIONS.map((question) => (
+            <fieldset class="question" data-question={question.id} data-max={question.max ?? 1}>
+              <legend>
+                {question.title}
+                {question.max && <span class="hint">Jusqu'à {question.max} choix</span>}
+              </legend>
+              <div class="chips">
+                {question.choices.map((choice) => (
+                  <button
+                    type="button"
+                    class="chip"
+                    aria-pressed="false"
+                    data-value={JSON.stringify(choice.value)}
+                  >
+                    {choice.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          ))}
+        </form>
+
+        <section class="results" aria-labelledby="results-title">
+          <h2 id="results-title">Vos trois villes</h2>
+          <p class="hint" id="results-hint">
+            Sans réponse, voici les villes qui plaisent au plus grand nombre.
+          </p>
+          <div id="cards" class="cards"></div>
+        </section>
+
+        <footer class="footer">
+          <p>
+            Les résultats sont des propositions, pas des verdicts. Les notes des villes sont des
+            estimations de l'équipe ; leurs sources seront publiées. Les zones de conflit ne sont
+            jamais proposées.
+          </p>
+          <p>Vos réponses restent dans votre navigateur : rien n'est enregistré ni envoyé.</p>
+        </footer>
+      </main>
+    </div>
+
+    <template id="card-template">
+      <article class="card">
+        <header class="card-head">
+          <span class="rank"></span>
+          <div>
+            <h3 class="card-name"></h3>
+            <p class="card-country"></p>
+          </div>
+          <span class="fit"></span>
+        </header>
+        <p class="card-tagline"></p>
+        <p class="card-pitch"></p>
+        <ul class="card-reasons"></ul>
+        <p class="card-watch">
+          <b>À savoir :</b> <span></span>
+        </p>
+      </article>
+    </template>
+
+    <script>
+      import { bestMatches, type Answers } from "../lib/ranking";
+
+      const SVG = "http://www.w3.org/2000/svg";
+      const form = document.getElementById("form") as HTMLFormElement;
+      const answers: Record<string, unknown> = {};
+
+      function readAnswers(): Answers {
+        for (const fieldset of form.querySelectorAll<HTMLFieldSetElement>(".question")) {
+          const id = fieldset.dataset.question as string;
+          const picked = [
+            ...fieldset.querySelectorAll<HTMLButtonElement>('[aria-pressed="true"]'),
+          ].map((chip) => JSON.parse(chip.dataset.value as string));
+          if (Number(fieldset.dataset.max) > 1) answers[id] = picked.length ? picked : undefined;
+          else answers[id] = picked[0];
+        }
+        return answers as Answers;
+      }
+
+      function pick(chip: HTMLButtonElement) {
+        const fieldset = chip.closest<HTMLFieldSetElement>(".question");
+        if (!fieldset) return;
+        const max = Number(fieldset.dataset.max);
+        const wasOn = chip.getAttribute("aria-pressed") === "true";
+        const chips = [...fieldset.querySelectorAll<HTMLButtonElement>(".chip")];
+        if (max === 1) chips.forEach((other) => other.setAttribute("aria-pressed", "false"));
+        else if (
+          !wasOn &&
+          chips.filter((c) => c.getAttribute("aria-pressed") === "true").length >= max
+        )
+          return;
+        // Tapping the pressed chip again clears the question.
+        chip.setAttribute("aria-pressed", String(!wasOn));
+      }
+
+      function renderMap(names: string[], scores: Map<string, number>) {
+        const values = [...scores.values()];
+        const best = Math.max(...values);
+        const worst = Math.min(...values);
+        const span = best - worst || 1;
+        for (const dot of document.querySelectorAll<SVGCircleElement>("#map .dot")) {
+          const name = dot.dataset.city as string;
+          const relative = ((scores.get(name) ?? worst) - worst) / span;
+          dot.setAttribute("r", (1.5 + relative * relative * 5).toFixed(1));
+          dot.classList.toggle("warm", relative > 0.75);
+          dot.classList.toggle("top", names.includes(name));
+        }
+        const highlights = document.getElementById("highlights") as unknown as SVGGElement;
+        highlights.replaceChildren();
+        for (const name of names) {
+          const dot = document.querySelector<SVGCircleElement>(
+            `#map .dot[data-city="${CSS.escape(name)}"]`,
+          );
+          if (!dot) continue;
+          const x = Number(dot.getAttribute("cx"));
+          const y = Number(dot.getAttribute("cy"));
+          const ring = document.createElementNS(SVG, "circle");
+          ring.setAttribute("class", "ring");
+          ring.setAttribute("cx", String(x));
+          ring.setAttribute("cy", String(y));
+          ring.setAttribute("r", "8");
+          const label = document.createElementNS(SVG, "text");
+          const onLeft = x > 270;
+          label.setAttribute("class", "label");
+          label.setAttribute("x", String(onLeft ? x - 12 : x + 12));
+          label.setAttribute("y", String(y + 4));
+          label.setAttribute("text-anchor", onLeft ? "end" : "start");
+          label.textContent = name;
+          highlights.append(ring, label);
+        }
+      }
+
+      function render() {
+        const current = readAnswers();
+        const answered = Object.values(current).some((value) => value !== undefined);
+        const matches = bestMatches(current, 3);
+        const scores = new Map(
+          bestMatches(current, Infinity).map((m) => [m.city.name, m.score] as [string, number]),
+        );
+        renderMap(
+          matches.map((m) => m.city.name),
+          scores,
+        );
+
+        const podium = document.getElementById("podium") as HTMLOListElement;
+        podium.replaceChildren(
+          ...matches.map((m) => {
+            const item = document.createElement("li");
+            const name = document.createElement("b");
+            name.textContent = m.city.name;
+            const score = document.createElement("span");
+            score.textContent = `${Math.round(m.score * 100)}\u202f%`;
+            item.append(name, score);
+            return item;
+          }),
+        );
+
+        (document.getElementById("results-hint") as HTMLElement).hidden = answered;
+        const template = document.getElementById("card-template") as HTMLTemplateElement;
+        const cards = matches.map((m, index) => {
+          const card = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+          const set = (selector: string, text: string) => {
+            (card.querySelector(selector) as HTMLElement).textContent = text;
+          };
+          set(".rank", String(index + 1));
+          set(".card-name", m.city.name);
+          set(".card-country", `${m.city.country} · ${m.city.languageLabel}`);
+          set(".fit", `${Math.round(m.score * 100)}\u202f%`);
+          set(".card-tagline", m.city.tagline);
+          set(".card-pitch", m.city.pitch);
+          set(".card-watch span", m.city.watch);
+          const reasons = card.querySelector(".card-reasons") as HTMLUListElement;
+          for (const reason of m.reasons) {
+            const item = document.createElement("li");
+            item.textContent = reason;
+            reasons.append(item);
+          }
+          for (const drawback of m.drawbacks) {
+            const item = document.createElement("li");
+            item.className = "drawback";
+            item.textContent = drawback;
+            reasons.append(item);
+          }
+          return card;
+        });
+        (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+      }
+
+      form.addEventListener("click", (event) => {
+        const chip = (event.target as HTMLElement).closest<HTMLButtonElement>(".chip");
+        if (!chip) return;
+        pick(chip);
+        render();
+      });
+      render();
+    </script>
+
+    <style>
+      .shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 20px max(16px, env(safe-area-inset-right)) 56px
+          max(16px, env(safe-area-inset-left));
+        display: grid;
+        gap: 28px;
+        padding-bottom: 96px;
+      }
+      .side {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        font-size: 1.8rem;
+      }
+      @media (min-width: 880px) {
+        .shell {
+          grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+          gap: 48px;
+          padding-top: 36px;
+        }
+        .side {
+          position: sticky;
+          top: 24px;
+        }
+        .podium {
+          position: static;
+          padding: 0;
+          background: none;
+          box-shadow: none;
+        }
+      }
+      h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 8vw, 3.4rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        margin: 0;
+        text-wrap: balance;
+      }
+      h1 em {
+        font-style: italic;
+        font-weight: 400;
+        color: var(--saffron);
+      }
+      .lead,
+      .hint,
+      .footer {
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+        margin: 0;
+      }
+      .map {
+        background-color: var(--night-deep);
+        background-image: radial-gradient(circle, rgba(241, 240, 255, 0.08) 1px, transparent 1.5px);
+        background-size: 12px 12px;
+        border-radius: 18px;
+      }
+      .map svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 52vh;
+      }
+      .map :global(.dot) {
+        fill: var(--thread-dim);
+        opacity: 0.4;
+        transition:
+          r 0.5s cubic-bezier(0.3, 1.4, 0.5, 1),
+          opacity 0.4s,
+          fill 0.4s;
+      }
+      .map :global(.dot.warm) {
+        fill: var(--coral);
+        opacity: 0.85;
+      }
+      .map :global(.dot.top) {
+        fill: var(--saffron);
+        opacity: 1;
+      }
+      .map :global(.ring) {
+        fill: none;
+        stroke: var(--saffron);
+        stroke-width: 2;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: ring 2.4s ease-out infinite;
+      }
+      .map :global(.label) {
+        font: 800 13px var(--font-body);
+        fill: var(--thread);
+        paint-order: stroke;
+        stroke: var(--night-deep);
+        stroke-width: 4px;
+      }
+      @keyframes ring {
+        from {
+          opacity: 0.9;
+          transform: scale(0.6);
+        }
+        to {
+          opacity: 0;
+          transform: scale(2.6);
+        }
+      }
+      /* On the phone the map scrolls away while the reader answers: the top three
+         stay pinned to the bottom of the screen so every tap still shows a change. */
+      .podium {
+        position: fixed;
+        z-index: 2;
+        inset: auto 0 0;
+        padding: 10px max(16px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
+          max(16px, env(safe-area-inset-left));
+        background: var(--night-deep);
+        box-shadow: 0 -8px 24px rgba(14, 17, 69, 0.8);
+        list-style: none;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.95rem;
+      }
+      .podium :global(li) {
+        display: flex;
+        gap: 8px;
+        align-items: baseline;
+        background: var(--night-lift);
+        border-radius: 999px;
+        padding: 6px 14px;
+      }
+      .podium :global(span) {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--saffron);
+      }
+      .main {
+        display: grid;
+        gap: 40px;
+        min-width: 0;
+      }
+      .questions {
+        display: grid;
+        gap: 22px;
+      }
+      .question {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+      }
+      legend {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.2rem;
+        line-height: 1.2;
+        padding: 0;
+        margin-bottom: 10px;
+      }
+      legend .hint {
+        display: block;
+        font-family: var(--font-body);
+        font-weight: 400;
+        font-size: 0.82rem;
+        margin-top: 2px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        background: var(--night-lift);
+        border: 2px solid transparent;
+        border-radius: 999px;
+        padding: 9px 15px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          background 0.15s,
+          border-color 0.15s;
+      }
+      .chip:hover {
+        border-color: rgba(255, 182, 39, 0.5);
+      }
+      .chip[aria-pressed="true"] {
+        background: var(--saffron);
+        border-color: var(--saffron);
+        color: var(--ink);
+        transform: translateY(-1px);
+      }
+      .results {
+        display: grid;
+        gap: 14px;
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        line-height: 1.05;
+        margin: 0;
+      }
+      .cards {
+        display: grid;
+        gap: 12px;
+      }
+      .cards :global(.card) {
+        background: var(--night-deep);
+        border-radius: 18px;
+        padding: 18px;
+        display: grid;
+        gap: 10px;
+      }
+      .cards :global(.card:first-child) {
+        border: 2px solid var(--saffron);
+      }
+      .cards :global(.card-head) {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+      }
+      .cards :global(.rank) {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: 1.8rem;
+        color: var(--saffron);
+      }
+      .cards :global(h3) {
+        font-family: var(--font-display);
+        font-size: 1.45rem;
+        margin: 0;
+        line-height: 1.1;
+      }
+      .cards :global(.card-country),
+      .cards :global(.card-tagline) {
+        margin: 0;
+        color: var(--thread-dim);
+        font-size: 0.85rem;
+      }
+      .cards :global(.card-tagline) {
+        font-family: var(--font-mono);
+        color: var(--saffron);
+      }
+      .cards :global(.fit) {
+        font-family: var(--font-mono);
+        color: var(--saffron);
+      }
+      .cards :global(.card-pitch),
+      .cards :global(.card-watch) {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+      .cards :global(.card-reasons) {
+        margin: 0;
+        padding-left: 1.1em;
+        font-size: 0.9rem;
+        display: grid;
+        gap: 2px;
+      }
+      .cards :global(.drawback) {
+        color: var(--coral);
+      }
+      .footer {
+        display: grid;
+        gap: 6px;
+        font-size: 0.82rem;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+---
+// The grave accent of « là » is drawn as a dotted flight path landing on a city.
+---
+
+<span class="wordmark" role="img" aria-label="Là-bas">
+  <span aria-hidden="true">l</span>
+  <span class="accented" aria-hidden="true">
+    a
+    <svg viewBox="0 0 100 70">
+      <path d="M4 6 C 40 2, 70 22, 80 50"></path>
+      <circle cx="82" cy="58" r="10"></circle>
+    </svg>
+  </span>
+  <span class="dash" aria-hidden="true">
+    -
+  </span>
+  <span aria-hidden="true">bas</span>
+</span>
+
+<style>
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: baseline;
+    white-space: nowrap;
+  }
+  .accented {
+    position: relative;
+    display: inline-block;
+  }
+  svg {
+    position: absolute;
+    left: -0.02em;
+    bottom: 0.58em;
+    width: 0.92em;
+    height: 0.62em;
+    overflow: visible;
+  }
+  path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-dasharray: 2 13;
+  }
+  circle {
+    fill: var(--saffron);
+  }
+  .dash {
+    color: var(--saffron);
+  }
+</style>

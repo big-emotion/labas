@@ -1,0 +1,59 @@
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/nunito-sans";
+@import "@fontsource/jetbrains-mono/400.css";
+
+/* One committed dark world: the night sky seen from a plane window, cities as lights.
+   Mobile first: one column below 880px, then the map stays beside the questions. */
+:root {
+  --night: #161a5c;
+  --night-deep: #0e1145;
+  --night-lift: #262c86;
+  --night-pressed: #343ca8;
+  --thread: #f1f0ff;
+  --thread-dim: #b4b8ea;
+  --saffron: #ffb627;
+  --coral: #ff8f7a;
+  --ink: #1d1b3a;
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-body: "Nunito Sans Variable", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--thread);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
