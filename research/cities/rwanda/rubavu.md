@@ -49,8 +49,20 @@
 - [other] Gisenyi sits on a lava plain from Nyiragongo; it escaped the 1977 and 2002 flows that destroyed 15–40 % of Goma. — en.wikipedia.org Gisenyi, accessed 2026-11-14, academic (secondary aggregator), confidence: medium
 - [other] After the May 2021 Nyiragongo eruption, repeated tremors up to magnitude 4.9 led some Gisenyi residents to flee east (27 May 2021). — en.wikipedia.org 2021 Nyiragongo eruption, events 2021-05, academic (secondary aggregator), confidence: medium
 - [other] Lake Kivu holds large dissolved methane and CO₂ volumes; Wikipedia cites a limnic-eruption risk of about once in 1,000 years for the basin's two million residents. — en.wikipedia.org Lake Kivu, accessed 2026-11-14, academic (secondary aggregator), confidence: low
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Fish sold at 4,300–4,800 RWF/kg (≈ €2.6–2.9) at a fish dealer's Rubavu branch, against 5,200–5,700 RWF/kg (≈ €3.2–3.5) in Kigali, in April 2026. — newtimes.co.rw, 2026-04-14, local-media, confidence: medium
+- [cost.rent] Rents outside Kigali, Rubavu named, run about 40–60 % below Kigali's; no Rubavu figure given. — africarrieres.com Rwanda cost-of-living guide, dated 06/08/2026, company, confidence: low
+- [cost.living] National staple sample, not Rubavu-specific: rice 800–1,200 RWF/kg (≈ €0.49–0.74), beans 600–1,000 RWF/kg, milk 600–800 RWF/L, 12 eggs 2,000–2,500 RWF (≈ €1.23–1.53), chicken 2,500–3,500 RWF/kg (≈ €1.53–2.15). — africarrieres.com, 06/08/2026, company, confidence: low
+- [cost.living] National monthly utility ranges, not Rubavu-specific: electricity 25,000–60,000 RWF (≈ €15–37), water 8,000–20,000 RWF (≈ €4.9–12.3), 12 kg gas 12,000–15,000 RWF (≈ €7.4–9.2). — africarrieres.com, 06/08/2026, company, confidence: low
+- [daily.transport] RURA's maximum pump prices: petrol 2,938 RWF/L (≈ €1.80) since 17 Apr 2026, diesel 2,927 RWF/L (≈ €1.80) since 6 Jun 2026; no Rubavu station price found. — the-star.co.ke 2026-06-06; openvan.camp updated 2026-11-08, intl-media + blog, confidence: medium
+- [daily.power] National residential electricity tariff since 1 Oct 2025: 89 RWF/kWh up to 20 kWh (≈ €0.055), 310 RWF for 20–50 kWh (≈ €0.19), 369 RWF above 50 kWh (≈ €0.23), before VAT. — ktpress.rw, 2025-09-17, local-media, confidence: high
+- [daily.internet] MTN prepaid data, national prices: 1.5 GB/24 h 500 RWF (≈ €0.31); 10 GB/7 days 1,500 RWF (≈ €0.92); 30 GB/30 days 10,000 RWF (≈ €6.1). — mtn.co.rw data bundles, undated page accessed 2026-11-14, company, confidence: medium
+- [daily.internet] MTN UrugoNet Fiber 50 Mbps costs 25,000 RWF (≈ €15.3) with free installation, 4G home routers 20,000–30,000 RWF; the page does not say whether fibre reaches Rubavu. — mtn.co.rw home internet, accessed 2026-11-14, company, confidence: low
+- [health.care] Private clinic consultation 10,000–25,000 RWF (≈ €6.1–15.3) as a national range; no Rubavu clinic price found. — africarrieres.com, 06/08/2026, company, confidence: low
+- [family.schools] National yearly fee ranges: private primary 300,000–1,500,000 RWF (≈ €184–920); private university 800,000–2,500,000 RWF (≈ €491–1,534). Relevant to Rubavu's ULK and UTB campuses but not specific to them. — africarrieres.com, 06/08/2026, company, confidence: low
 
 ## Gaps
+
 - No rent survey, listing or local price for Rubavu beyond Expat.com's single range; no everyday prices (market, transport in town, meals) dated 2025–2026.
 - No salary data, job-market source or business-climate article for Rubavu.
 - Power and internet reliability in Rubavu: not found. Water: WASAC notices don't mention Rubavu (absence of a notice is not evidence of good supply).
@@ -59,8 +71,10 @@
 - No diaspora, expat or returnee testimony; no Rubavu-based blog or local media page could be reached without search (KT Press tag page had nothing after 2024).
 - Smartraveller (Australia) and Visit Rwanda (Lake Kivu) timed out; US State Department returned 403.
 - Status of shelling after early 2025 is only summarised by Canada ("reported"); no dated 2026 incident in Rubavu was found.
+- Price top-up (2026-11-14), searched, not found: Rubavu rents by neighbourhood or sale prices (HouseInRwanda returned 403; New Times site search does not filter); moto-taxi fares in town and whether bargaining is the norm (Wikivoyage Gisenyi gives neither); market, restaurant, beer, gym or nightlife prices dated 2025–2026; any foreigner price. Most added items are national figures, labelled as such. Web search budget ran out early in this pass.
 
 ## Sources read
+
 1. Rwanda expat guide — https://www.expat.com/fr/guide/afrique/rwanda/ — company — updated 2025-10-27, read 2026-11-14
 2. Numbeo Gisenyi — https://www.numbeo.com/cost-of-living/in/Gisenyi — intl-media — no data, per dossier, 2026-11-14
 3. Consumer Price Index October 2026 — https://statistics.gov.rw/sites/default/files/documents/2026-11/CONSUMER%20PRICE%20INDEX%20%28CPI%29%20-%20%20OCTOBER%202026.pdf — official — 2026-11-10, read 2026-11-14
@@ -82,10 +96,24 @@
 19. 2023 Rwanda floods — Wikipedia — https://en.wikipedia.org/wiki/2023_Rwanda_floods — academic (secondary) — read 2026-11-14
 20. Visa on arrival — https://migration.gov.rw/visa-on-arrival — official — read 2026-11-14
 21. KT Press tag "Rubavu" — https://www.ktpress.rw/tag/rubavu/ — local-media — read 2026-11-14 (nothing after 2024)
+22. Rising fuel costs push up food prices across Kigali — https://www.newtimes.co.rw/article/34864/news/economy/rising-fuel-costs-push-up-food-prices-across-kigali/amp — local-media — 2026-04-14, read 2026-11-14
+23. Rwanda cost of living guide — https://africarrieres.com/rwanda/en/guide/decouvrir/cout-de-la-vie — company — dated 06/08/2026, read 2026-11-14
+24. Rwanda hikes diesel price by Sh64 per litre — https://www.the-star.co.ke/news/2026-06-06-rwanda-hikes-diesel-price-by-sh64-per-litre — intl-media — 2026-06-06, read 2026-11-14
+25. Fuel prices Rwanda — https://openvan.camp/en/tools/fuel-prices/rwanda — blog (aggregator) — updated 2026-11-08, read 2026-11-14
+26. New power tariffs — https://www.ktpress.rw/2025/09/new-power-tariffs-small-consumers-manufacturers-are-biggest-winners — local-media — 2025-09-17, read 2026-11-14
+27. MTN Rwanda data bundles — https://www.mtn.co.rw/data-bundles-2/ — company — undated, read 2026-11-14
+28. MTN Rwanda home internet — https://www.mtn.co.rw/deal-types/home-internet/?Deal%2BType=home-internet — company — undated, read 2026-11-14
+- Re-read for this top-up: Wikivoyage Gisenyi [4] (no moto, market or bargaining information).
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Canada advises a high degree of caution in Rubavu — supported
 - [safety.general] Canada calls the DRC border "unstable and unpredictable" — supported
 - [safety.general] On 27 Jan 2025, during the M23 capture of Goma, 5 people were killed — supported
 - [safety.general] A UN report cited by Wikipedia says the Rwandan army ran a command headquarters — supported
 - [safety.general] The UK FCDO does not name Rubavu (Rusizi within 10 km) — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Fish sold at 4,300–4,800 RWF/kg — supported
+- [cost.rent] Rents outside Kigali, Rubavu named — supported

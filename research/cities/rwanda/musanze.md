@@ -32,15 +32,26 @@
 - [nature.access] Gorilla permits listed at USD 750 per foreign visitor (≈ €634); a Bisoke climb USD 75 — Wikivoyage figures that conflict with the line below. — en.wikivoyage.org Musanze, accessed 2026-11-14, blog, confidence: low
 - [nature.access] A relocation-industry article put gorilla permits at around USD 1,500 per person (≈ €1,268) in 2020. — fidi.org, 2020-12-22, blog, confidence: low
 - [other] City population ~153,400 (2022 census), third-largest city; Musanze sector alone 47,720; district 476,522. — en.wikipedia.org Ruhengeri / Musanze; musanze.gov.rw, accessed 2026-11-14, official, confidence: medium
+<!-- price-topup 2026-11-14 -->
+- [cost.negotiation] "Prices are negotiable with the moto drivers" in town (2024 listing); no typical discount given. — en.wikivoyage.org Musanze, 2024, blog, confidence: low
+- [daily.transport] A 2026 travel guide gives the Kigali–Musanze bus at 2,821 RWF (≈ €1.73), "up from 1,930" after subsidy changes; this conflicts with the 3,821 RWF fare published by The New Times (line above). — travelwithhello.com Rwanda transport guide, 2026-05-28, blog, confidence: low
+- [daily.transport] Coach Musanze–Kampala: 12,000 RWF (≈ €7.4), undated listing. — en.wikivoyage.org Musanze, accessed 2026-11-14, blog, confidence: low
+- [daily.transport] RURA's maximum pump prices: petrol 2,938 RWF/L (≈ €1.80) since 17 Apr 2026, diesel 2,927 RWF/L (≈ €1.80) since 6 Jun 2026; no Musanze station price found. — the-star.co.ke 2026-06-06; openvan.camp updated 2026-11-08, intl-media + blog, confidence: medium
+- [daily.power] National residential electricity tariff since 1 Oct 2025: 89 RWF/kWh up to 20 kWh (≈ €0.055), 310 RWF for 20–50 kWh (≈ €0.19), 369 RWF above 50 kWh (≈ €0.23), before VAT. — ktpress.rw, 2025-09-17, local-media, confidence: high
+- [daily.internet] MTN prepaid data, national prices: 1.5 GB/24 h 500 RWF (≈ €0.31); 10 GB/7 days 1,500 RWF (≈ €0.92); 30 GB/30 days 10,000 RWF (≈ €6.1). — mtn.co.rw data bundles, undated page accessed 2026-11-14, company, confidence: medium
+- [health.care] Private clinic consultation 10,000–25,000 RWF (≈ €6.1–15.3) as a national range; no Musanze clinic price found. — africarrieres.com, 06/08/2026, company, confidence: low
 
 ## Gaps
+
 - No 2025–2026 rent listing or everyday price list for Musanze beyond Expat.com's range.
 - No current official gorilla-permit price opened (Visit Rwanda timed out); the two figures conflict.
 - No source on internet quality, health facilities (Ruhengeri hospital not documented) or salaries.
 - No women's-safety, LGBT or racism source specific to Musanze; no diaspora or returnee testimony.
 - District site is mostly Kinyarwanda headlines; details behind them were not read.
+- Price top-up (2026-11-14), searched, not found: Musanze rents by neighbourhood or sale prices, market and restaurant prices dated 2025–2026, school fees, and whether tourist-facing businesses charge a foreigner price beyond park permits. Added items are mostly national figures, labelled as such; web search budget ran out early.
 
 ## Sources read
+
 1. Rwanda expat guide — https://www.expat.com/fr/guide/afrique/rwanda/ — company — updated 2025-10-27, read 2026-11-14
 2. Consumer Price Index October 2026 — https://statistics.gov.rw/sites/default/files/documents/2026-11/CONSUMER%20PRICE%20INDEX%20%28CPI%29%20-%20%20OCTOBER%202026.pdf — official — 2026-11-10, read 2026-11-14
 3. Musanze — Wikivoyage — https://en.wikivoyage.org/wiki/Musanze — blog (wiki) — listings 2018–2024, read 2026-11-14
@@ -53,6 +64,20 @@
 10. Rwanda travel advice — https://travel.gc.ca/destinations/rwanda — official — updated 2026-09-09, read 2026-11-14
 11. Conseils aux voyageurs : Rwanda — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/rwanda/ — official — updated 2026-09-17, read 2026-11-14
 12. Pros and cons of expat life in Kigali — https://www.fidi.org/blog/pros-and-cons-expat-life-kigali — blog — 2020-12-22, read 2026-11-14
+13. Getting around Rwanda: transport guide — https://www.travelwithhello.com/blog/rwanda-transport-guide — blog — 2026-05-28, read 2026-11-14
+14. Rwanda hikes diesel price by Sh64 per litre — https://www.the-star.co.ke/news/2026-06-06-rwanda-hikes-diesel-price-by-sh64-per-litre — intl-media — 2026-06-06, read 2026-11-14
+15. Fuel prices Rwanda — https://openvan.camp/en/tools/fuel-prices/rwanda — blog (aggregator) — updated 2026-11-08, read 2026-11-14
+16. New power tariffs — https://www.ktpress.rw/2025/09/new-power-tariffs-small-consumers-manufacturers-are-biggest-winners — local-media — 2025-09-17, read 2026-11-14
+17. MTN Rwanda data bundles — https://www.mtn.co.rw/data-bundles-2/ — company — undated, read 2026-11-14
+18. Rwanda cost of living guide — https://africarrieres.com/rwanda/en/guide/decouvrir/cout-de-la-vie — company — dated 06/08/2026, read 2026-11-14
+- Re-read for this top-up: Wikivoyage Musanze [3].
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Canada advises a high degree of caution in the part of Volcanoes NP — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.negotiation] "Prices are negotiable with the moto drivers" — supported
+- [daily.transport] A 2026 travel guide gives the Kigali–Musanze bus at 2,821 RWF — supported
+- [daily.transport] Coach Musanze–Kampala: 12,000 RWF — supported

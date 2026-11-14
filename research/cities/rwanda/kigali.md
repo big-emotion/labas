@@ -138,8 +138,45 @@
 - [cost.negotiation] None of the 9 priced posts in the Kigali group says "negotiable": unlike the Abidjan or Dakar groups, Kigali listings present fixed prices, many of them in US dollars at the top end. — same group 2026-11-14, social-caption, confidence: low
 - [other] Many Kigali group posts are in Kinyarwanda (land sales, promotions), a sign the "expats" group is used by local sellers as much as by foreigners. — read 2026-11-14
 - [social.pace] A Nairobi-based diaspora creator says Kigali reminds her of slow mornings, long conversations and friends who still drag her out at night. — @jolitropisme post 2026-08-06 and comments (n≈5, from people who say they miss Kigali), social-caption + social-comment, confidence: low
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Rent tiers per month: premium 2–3-bed in Kiyovu or Kimihurura 800,000–2,500,000 RWF (≈ €491–1,534); mid-range 2–3-bed in Remera or Gikondo 300,000–800,000 RWF (≈ €184–491); budget studio or 1-bed 80,000–300,000 RWF (≈ €49–184); shared room 50,000–150,000 RWF (≈ €31–92). The same page's FAQ gives a different small-flat range (USD 200–400). — africarrieres.com Rwanda cost-of-living guide, dated 06/08/2026 (day/month order ambiguous), company, confidence: low
+- [cost.rent] Aggregator rents: 1-bed (40 m²) in the centre USD 609 (≈ €515), in a cheaper area USD 381 (≈ €322); 3-bed (80 m²) USD 1,100 (≈ €930) centre, USD 673 (≈ €569) cheaper area. — livingcost.org Kigali, updated 2026-06-21, company, confidence: low
+- [cost.rent] Purchase price in central Kigali: USD 1,200–2,500 per m² (≈ €1,014–2,113), higher in Kiyovu; foreigners can buy but it "can prove complex". — expat.com Rwanda guide, 2025-10-27, company, confidence: low
+- [cost.rent] Buying costs: notary and registration about 6 % of the price; annual property tax about 0.1–0.3 % of estimated value in Kigali. — expat.com Rwanda guide, 2025-10-27, company, confidence: low
+- [cost.rent] House asking prices on a property portal: Kibagabaga 400,000,000 RWF (≈ €245,400) on a 390 m² plot (about 1,026,000 RWF ≈ €629 per m² of plot); Kagarama–Muyange 320,000,000 RWF (≈ €196,300) on 340 m²; Kacyiru 300,000,000 RWF (≈ €184,000) on 945 m². Asking prices, seen only in search-result snippets (pages returned 403). — houseinrwanda.com listings, seen 2026-11-14, company, confidence: low
+- [cost.rent] Plot asking prices: Busanza 55,000,000 RWF (≈ €33,700) for 410 m² (≈ 134,000 RWF ≈ €82 per m²); Jabana 35,000,000 RWF (≈ €21,500) for 421 m² (≈ 83,000 RWF ≈ €51 per m²). Asking prices from search snippets only. — houseinrwanda.com listings, seen 2026-11-14, company, confidence: low
+- [cost.living] Kigali market prices in April 2026: beef 7,000 RWF/kg (≈ €4.3, up from 6,500); exotic chicken 4,000–4,500 RWF/kg (≈ €2.5–2.8); tilapia ~6,000 RWF/kg (≈ €3.7); fish 5,200–5,700 RWF/kg (≈ €3.2–3.5); Irish potatoes 700 RWF/kg retail (≈ €0.43); beans ~1,300 RWF (≈ €0.80). — newtimes.co.rw, 2026-04-14, local-media, confidence: medium
+- [cost.living] Staples after the 2026 fuel rise: cooking oil 20 L 55,000 RWF (≈ €33.7, up from 45,000); 25 kg Pakistani rice 30,000 RWF wholesale (≈ €18.4), Tanzanian rice 46,000 RWF (≈ €28.2); local maize flour 1,200 RWF/kg (≈ €0.74); cassava flour retail 1,000 RWF (≈ €0.61, up from 700). Vendors at Nyabugogo and Kimironko quoted. — newtimes.co.rw, 2026-04-14, local-media, confidence: medium
+- [cost.living] A national guide's staple sample: rice 800–1,200 RWF/kg (≈ €0.49–0.74), beans 600–1,000 RWF/kg, milk 600–800 RWF/L (≈ €0.37–0.49), 12 eggs 2,000–2,500 RWF (≈ €1.23–1.53), chicken 2,500–3,500 RWF/kg (≈ €1.53–2.15). Its chicken figure is below The New Times' April 2026 market price (line above). — africarrieres.com, 06/08/2026, company, confidence: low
+- [cost.living] Aggregator basket: 500 g bread USD 1.02 (≈ €0.86), 1 kg rice USD 1.26 (≈ €1.06), 12 eggs USD 1.65 (≈ €1.39), 1 L milk USD 0.75 (≈ €0.63), 1 kg chicken breast USD 4.97 (≈ €4.20). — livingcost.org Kigali, 2026-06-21, company, confidence: low
+- [cost.living] Monthly utilities in a national guide: electricity 25,000–60,000 RWF (≈ €15–37), water 8,000–20,000 RWF (≈ €4.9–12.3), 12 kg gas cylinder 12,000–15,000 RWF (≈ €7.4–9.2), fibre 35,000–80,000 RWF (≈ €21–49). — africarrieres.com, 06/08/2026, company, confidence: low
+- [daily.power] Residential electricity since 1 Oct 2025: 89 RWF/kWh for the first 20 kWh (≈ €0.055), 310 RWF for 20–50 kWh (≈ €0.19), 369 RWF above 50 kWh (≈ €0.23), excluding VAT and regulatory fee; the two upper bands rose 46 % and 48 %. — ktpress.rw, 2025-09-17 (REG tariff PDF returned 404), local-media, confidence: high ⚠ spot-check 2026-11-14: unsupported — the article gives the band prices and +46 %/+48 % but states neither a 1 Oct 2025 start date nor VAT treatment
+- [daily.internet] MTN prepaid data: 1.5 GB for 24 h 500 RWF (≈ €0.31); 10 GB for 7 days 1,500 RWF (≈ €0.92); 25 GB for 7 days 3,000 RWF (≈ €1.84); 30 GB for 30 days 10,000 RWF (≈ €6.1). — mtn.co.rw data bundles, undated page accessed 2026-11-14, company, confidence: medium
+- [daily.internet] MTN home internet: UrugoNet Fiber 50 Mbps 25,000 RWF (≈ €15.3) with free router and installation; 4G "plug and play" 20,000–30,000 RWF (≈ €12.3–18.4). Billing period not stated on the page. — mtn.co.rw home internet, undated page accessed 2026-11-14, company, confidence: medium
+- [daily.transport] Pump prices (RURA maximum): petrol 2,938 RWF/L (≈ €1.80) since 17 Apr 2026, up from 2,303; diesel 2,927 RWF/L (≈ €1.80) since 6 Jun 2026, up 722 RWF. These replace Expat.com's ~1,600 RWF (2025). — the-star.co.ke 2026-06-06; ktpress.rw 2026-05, intl-media + local-media, confidence: high
+- [daily.transport] A fuel tracker still showed 2,938/2,927 RWF on 8 Nov 2026, about 29 % (petrol) and 22 % (diesel) above the regional average. — openvan.camp, updated 2026-11-08, blog, confidence: medium
+- [daily.transport] App taxi fares in Oct 2026: Yego 1,800 RWF for the first km (≈ €1.10) then 180 RWF/km as printed; Move 1,800 RWF then 1,080 RWF/km (≈ €0.66), waiting 6,000 RWF/h (≈ €3.7) after 15 free minutes; GreenRide 1,500 RWF then 1,000 RWF/km. The Yego per-km figure looks like a typo. — newtimes.co.rw, 2026-10-27, local-media, confidence: medium
+- [daily.transport] Uber does not operate in Rwanda; the main apps are Move (cars, 24 h) and YEGO (taxis and some motos), with no demand surge on YEGO. Bolt, Yango and inDrive were not mentioned. — bento.travel ride-hailing page, checked 2026-08-24, blog, confidence: medium
+- [daily.transport] Crowdsourced taxi tariff: flag-fall €2.4 (≈ 3,900 RWF), about €1.8/km on average (≈ 2,900 RWF), waiting €3.3/h; this is far above the 500–700 RWF/km in the guide below. — combien-coute.net (Numbeo data), 2026-11-06, intl-media, confidence: low
+- [daily.transport] City taxi trips 2,000–8,000 RWF (≈ €1.2–4.9), flag-fall about 1,000 RWF and 500–700 RWF/km; airport to town 8,000–12,000 RWF (≈ €4.9–7.4) or about 1,000 RWF (≈ €0.61) by KBS bus; car hire 40,000–60,000 RWF/day self-drive (≈ €25–37), 60,000–90,000 RWF with driver. — travelwithhello.com Rwanda transport guide, 2026-05-28, blog, confidence: low
+- [cost.negotiation] Moto-taxi fares are "not fixed" and haggling is common; most drivers ask 500–1,000 RWF (≈ €0.31–0.61), airport 1,500–2,000 RWF (Feb 2024); a 1 km car-taxi ride came to 2,000 RWF "after haggling". — en.wikivoyage.org Kigali, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Market vendors expect "a bit of haggling (even over fruit and veg)", but the guide says you should not be charged double. — en.wikivoyage.org Kigali, accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Haggling is being engineered out: Yego's connected fare meter on moto-taxis shows a distance-based fare, paid by MoMo or tap card; a visiting Ugandan influencer was let down to find "digitally calculated fares" instead of bargaining. — liners.com/yegomoto 2026-11-10; newtimes.co.rw 2026-10-27, company + local-media, confidence: medium
+- [cost.negotiation] Airport is where the asking price drifts: many airport drivers skip the meter, so agree the fare first; walk-up quotes are reported far above app estimates. — travelwithhello.com 2026-05-28; bento.travel 2026-08-24, blog, confidence: low
+- [cost.negotiation] Expat.com advises visiting several homes and negotiating rent, especially for a long lease; no percentage given. — expat.com Rwanda guide, 2025-10-27, company, confidence: low
+- [cost.negotiation] Formal two-tier prices exist: the Presidential Palace Museum charges 6,000 RWF (≈ €3.7), 5,000 RWF for resident foreigners; the French school charges third-country pupils about 30 % more than French and Rwandan pupils (next item). — en.wikivoyage.org Kigali; efase.rw, accessed 2026-11-14, blog + company, confidence: medium
+- [family.schools] EFASE (French school, AEFE-partnered, PS to Terminale) 2026/27 yearly tuition for French and Rwandan pupils: nursery 3,934,861 RWF (≈ €2,414), primary 4,153,743 RWF (≈ €2,548), collège/lycée 6,228,944 RWF (≈ €3,821); third-country pupils 5,114,484 / 5,400,200 / 8,096,959 RWF (≈ €3,138 / 3,313 / 4,967). — efase.rw tarifs 2026-2027 PDF, uploaded 2026-08, company, confidence: high
+- [family.schools] EFASE extras: first registration 500,000 RWF (≈ €307) and file fee 50,000 RWF (≈ €31), both non-refundable; re-enrolment 200,000 RWF (≈ €123); school meals 2,900–3,200 RWF (≈ €1.8–2.0) each; supplies 100,000–200,000 RWF; tuition paid each term in advance. — efase.rw tarifs 2026-2027 PDF, company, confidence: high
+- [family.schools] Yearly fees in a national guide: private primary 300,000–1,500,000 RWF (≈ €184–920); "international school" 2,000,000–8,000,000 RWF (≈ €1,227–4,908), far below the ISK and EFASE figures. — africarrieres.com, 06/08/2026, company, confidence: low
+- [family.schools] Aggregator international primary school: USD 7,731/year (≈ €6,533). — livingcost.org Kigali, 2026-06-21, company, confidence: low
+- [health.care] Private clinic consultation 10,000–25,000 RWF (≈ €6.1–15.3); dental care 15,000–50,000 RWF (≈ €9.2–30.7). King Faisal Hospital publishes no fees online (toll-free 3939). — africarrieres.com 06/08/2026; kfh.rw/consultations accessed 2026-11-14, company, confidence: low
+- [social.food] Restaurant tiers: local eatery 1,500–3,000 RWF (≈ €0.92–1.84); mid-range 5,000–12,000 RWF (≈ €3.1–7.4); high-end 15,000–30,000 RWF (≈ €9.2–18.4); international fast food 3,000–6,000 RWF. — africarrieres.com, 06/08/2026, company, confidence: low
+- [social.nightlife] Local beer in a bar: 2,000 RWF (≈ €1.23) per Expat.com; 1,000–2,000 RWF (≈ €0.61–1.23) in local bars and 3,000–8,000 RWF (≈ €1.8–4.9) for imported drinks in upscale venues per Africarrières; 0.5 L pub beer USD 1.04 (≈ €0.88) per livingcost. — expat.com 2025-10-27; africarrieres.com 06/08/2026; livingcost.org 2026-06-21, company, confidence: low
+- [social.culture] Cinema ticket: 6,000 RWF (≈ €3.7) per Expat.com; USD 3.40 (≈ €2.9) per livingcost. — expat.com Rwanda guide 2025-10-27; livingcost.org 2026-06-21, company, confidence: low
+- [social.sport] Aggregator gym membership: USD 29.50/month (≈ €24.9), within Expat.com's 50,000–100,000 RWF range. — livingcost.org Kigali, 2026-06-21, company, confidence: low
 
 ## Gaps
+
 - Web search budget ran out early, so no Kigali-specific 2025–2026 returnee/diaspora testimony, blog or YouTube source was found; return.experience and community.returnee are empty.
 - No dated women's-safety source beyond the Canadian GBV helpline; no harassment survey or NGO report opened.
 - No source on racism, colourism or how Black diaspora returnees are received.
@@ -150,8 +187,11 @@
 - Nightlife sources conflict on closing time (1 am in 2026 vs 2 am in 2025).
 - No source on internet outages or fibre providers' prices by name.
 <!-- social-pass gaps 2026-11-14 -->
+- Price top-up (2026-11-14), searched, not found: agency commission for rentals (no source states a fee); typical discount obtained on rent or at Kimironko (no percentage anywhere); club entry and concert ticket prices; GP fee at King Faisal or La Croix du Sud (not published online); ISK and Green Hills fee pages (domains did not resolve); WASAC water tariff (timeout); CanalOlympia ticket price (certificate error); Numbeo item prices (HTTP 429). Web search budget ran out after six searches; Bolt, Yango and inDrive presence not confirmed.
+- Property sale prices rest on two asking-price sources (Expat.com's per-m² range and portal snippets); no transaction data or land-registry price index found.
 
 ## Sources read
+
 1. Rwanda expat guide — https://www.expat.com/fr/guide/afrique/rwanda/ — company — updated 2025-10-27, read 2026-11-14
 2. Kigali expat guide — https://www.expat.com/fr/guide/afrique/rwanda/kigali/ — company — updated 2025-11-24, read 2026-11-14
 3. Forum "Vivre à Kigali" — https://www.expat.com/fr/forum/afrique/rwanda/kigali/1116977-vivre-kigali.html — forum — ~2026-07, read 2026-11-14
@@ -198,7 +238,28 @@
 - Social pass: Instagram @livinginkigali — 6 posts (pinned + latest) and visible comments, 2026-11-14
 - Social pass: Instagram @jolitropisme — Kigali post 2026-08-06, read 2026-11-14
 
+42. Rwanda hikes diesel price by Sh64 per litre — https://www.the-star.co.ke/news/2026-06-06-rwanda-hikes-diesel-price-by-sh64-per-litre — intl-media — 2026-06-06, read 2026-11-14
+43. Why Rwanda pays more for oil when the Middle East burns — https://www.ktpress.rw/2026/05/why-rwanda-pays-more-for-oil-when-the-middle-east-burns/ — local-media — 2026-05, read 2026-11-14
+44. Fuel prices Rwanda — https://openvan.camp/en/tools/fuel-prices/rwanda — blog (aggregator) — updated 2026-11-08, read 2026-11-14
+45. Rising fuel costs push up food prices across Kigali — https://www.newtimes.co.rw/article/34864/news/economy/rising-fuel-costs-push-up-food-prices-across-kigali/amp — local-media — 2026-04-14, read 2026-11-14
+46. Kigali's evolving taxi market offers commuters more choice — https://www.newtimes.co.rw/article/39993/news/rwanda/kigalis-evolving-taxi-market-offers-commuters-more-choice/amp — local-media — 2026-10-27, read 2026-11-14
+47. New power tariffs: small consumers, manufacturers are biggest winners — https://www.ktpress.rw/2025/09/new-power-tariffs-small-consumers-manufacturers-are-biggest-winners — local-media — 2025-09-17, read 2026-11-14 (REG PDF https://www.reg.rw/fileadmin/user_upload/New_Tariff_effective_from_1st_October_2025__004_.pdf returned 404)
+48. Rwanda cost of living guide — https://africarrieres.com/rwanda/en/guide/decouvrir/cout-de-la-vie — company — dated 06/08/2026, read 2026-11-14
+49. Cost of living in Kigali — https://livingcost.org/cost/rwanda/kigali — company (aggregator) — updated 2026-06-21, read 2026-11-14
+50. Prix des taxis à Kigali — https://www.combien-coute.net/taxi/rwanda/kigali/ — intl-media (Numbeo data) — updated 2026-11-06, read 2026-11-14
+51. Getting around Rwanda: transport guide — https://www.travelwithhello.com/blog/rwanda-transport-guide — blog — 2026-05-28, read 2026-11-14
+52. Ride-hailing in Rwanda — https://www.bento.travel/rwanda/ride-hailing — blog — checked 2026-08-24, read 2026-11-14
+53. YEGOMOTO — https://liners.com/yegomoto — company (directory) — updated 2026-11-10, read 2026-11-14
+54. MTN Rwanda data bundles — https://www.mtn.co.rw/data-bundles-2/ — company — undated, read 2026-11-14
+55. MTN Rwanda home internet — https://www.mtn.co.rw/deal-types/home-internet/?Deal%2BType=home-internet — company — undated, read 2026-11-14
+56. EFASE tarifs 2026-2027 en FRW — https://efase.rw/wp-content/uploads/2026/08/TARIFS-2026-2027-en-FRWS-VF-1.pdf — company — uploaded 2026-08, read 2026-11-14
+57. EFASE frais de scolarité — https://efase.rw/frais-de-scolarite/ — company — read 2026-11-14 (AEFE-partnered status)
+58. King Faisal Hospital consultations — https://kfh.rw/consultations/ — company — read 2026-11-14 (no fees listed)
+59. HouseInRwanda sale listings (Kibagabaga 386, Kagarama-Muyange 78, Kacyiru 47, Busanza plot, Jabana plot) — https://www.houseinrwanda.com/property/sale/ — company — HTTP 403 on open; figures from search-result snippets, 2026-11-14
+- Re-read for this top-up: expat.com Rwanda guide [1], expat.com Kigali guide [2], Wikivoyage Kigali [24].
+
 ## Spot-check (2026-11-14)
+
 - [cost.rent] 1-bed in the city centre: 500,000–1,200,000 RWF — supported
 - [cost.rent] 3-bed apartment or house in expat areas — supported
 - [cost.rent] 2-bed in Kiyovu: USD 800–1,500/month — supported
@@ -207,3 +268,10 @@
 - [safety.general] FCDO warns building safety standards — supported
 - [safety.women] Canada lists a gender-based violence helpline, 3512 — supported
 - [rights.lgbt] The 2003 constitution recognises only marriage — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] Rent tiers per month: premium 2–3-bed — supported
+- [daily.power] Residential electricity since 1 Oct 2025 — unsupported (start date and VAT basis not in source; band prices match)
+- [daily.internet] MTN prepaid data: 1.5 GB — supported
+- [daily.transport] Pump prices (RURA maximum) — supported

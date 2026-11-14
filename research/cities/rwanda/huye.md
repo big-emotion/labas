@@ -28,15 +28,25 @@
 - [social.pace] The district's last-Saturday umuganda in August 2026 was devoted to fighting soil erosion. — huye.gov.rw, 2026-08-31, official, confidence: medium
 - [climate.daily] Highs ~24–26 °C, lows ~14 °C, ~1,244 mm of rain over ~161 days; July is the driest month (1961–1990 normals). — en.wikipedia.org Butare, accessed 2026-11-14, academic (secondary aggregator), confidence: medium
 - [other] Town population 62,823 (2022 census), seventh-largest town; Huye district 381,900 (2022). — en.wikipedia.org Butare / huye.gov.rw, accessed 2026-11-14, official, confidence: medium
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Rents outside Kigali, Huye named, run about 40–60 % below Kigali's; no Huye figure given. — africarrieres.com Rwanda cost-of-living guide, dated 06/08/2026, company, confidence: low
+- [family.schools] University fees per year: University of Rwanda 150,000–500,000 RWF (≈ €92–307), private universities 800,000–2,500,000 RWF (≈ €491–1,534). This conflicts with Expat.com's 500,000–1,500,000 RWF for UR (line above). — africarrieres.com, 06/08/2026, company, confidence: low
+- [daily.transport] RURA's maximum pump prices: petrol 2,938 RWF/L (≈ €1.80) since 17 Apr 2026, diesel 2,927 RWF/L (≈ €1.80) since 6 Jun 2026; no Huye station price found. — the-star.co.ke 2026-06-06; openvan.camp updated 2026-11-08, intl-media + blog, confidence: medium
+- [daily.power] National residential electricity tariff since 1 Oct 2025: 89 RWF/kWh up to 20 kWh (≈ €0.055), 310 RWF for 20–50 kWh (≈ €0.19), 369 RWF above 50 kWh (≈ €0.23), before VAT. — ktpress.rw, 2025-09-17, local-media, confidence: high
+- [daily.internet] MTN prepaid data, national prices: 1.5 GB/24 h 500 RWF (≈ €0.31); 10 GB/7 days 1,500 RWF (≈ €0.92); 30 GB/30 days 10,000 RWF (≈ €6.1). — mtn.co.rw data bundles, undated page accessed 2026-11-14, company, confidence: medium
+- [health.care] Private clinic consultation 10,000–25,000 RWF (≈ €6.1–15.3) as a national range; no Huye clinic or CHUB fee found. — africarrieres.com, 06/08/2026, company, confidence: low
 
 ## Gaps
+
 - No 2025–2026 rent or listing for Huye beyond one Expat.com range; no everyday price list.
 - No source on power, water or internet reliability in Huye (WASAC's 2026 notices don't mention it).
 - No salary or job-market source; no diaspora, returnee or student testimony.
 - No women's-safety, LGBT or racism source specific to Huye; safety rests on country-level advice.
 - Huye district site lists news headlines only (in Kinyarwanda), with no CBHI or service data.
+- Price top-up (2026-11-14), searched, not found: Huye rents or sale prices, student-room prices, moto-taxi fares in town, market or restaurant prices dated 2025–2026, and any note on how much bargaining knocks off (Wikivoyage only says "Be prepared to bargain", 2019). Added items are national figures, labelled as such; web search budget ran out early.
 
 ## Sources read
+
 1. Rwanda expat guide — https://www.expat.com/fr/guide/afrique/rwanda/ — company — updated 2025-10-27, read 2026-11-14
 2. Consumer Price Index October 2026 — https://statistics.gov.rw/sites/default/files/documents/2026-11/CONSUMER%20PRICE%20INDEX%20%28CPI%29%20-%20%20OCTOBER%202026.pdf — official — 2026-11-10, read 2026-11-14
 3. Butare — Wikivoyage — https://en.wikivoyage.org/wiki/Butare — blog (wiki) — listings 2023–2024, read 2026-11-14
@@ -44,6 +54,17 @@
 5. Huye District website — https://www.huye.gov.rw/ — official — news to 2026-11-13, read 2026-11-14
 6. Here are new transport fares from Kigali to provinces — https://www.newtimes.co.rw/article/34640/news/rwanda/here-are-new-transport-fares-from-kigali-to-provinces/amp — local-media — 2026-04-05, read 2026-11-14
 7. Rwanda: Safety and security — https://www.gov.uk/foreign-travel-advice/rwanda/safety-and-security — official — read 2026-11-14
+8. Rwanda cost of living guide — https://africarrieres.com/rwanda/en/guide/decouvrir/cout-de-la-vie — company — dated 06/08/2026, read 2026-11-14
+9. Rwanda hikes diesel price by Sh64 per litre — https://www.the-star.co.ke/news/2026-06-06-rwanda-hikes-diesel-price-by-sh64-per-litre — intl-media — 2026-06-06, read 2026-11-14
+10. Fuel prices Rwanda — https://openvan.camp/en/tools/fuel-prices/rwanda — blog (aggregator) — updated 2026-11-08, read 2026-11-14
+11. New power tariffs — https://www.ktpress.rw/2025/09/new-power-tariffs-small-consumers-manufacturers-are-biggest-winners — local-media — 2025-09-17, read 2026-11-14
+12. MTN Rwanda data bundles — https://www.mtn.co.rw/data-bundles-2/ — company — undated, read 2026-11-14
+- Re-read for this top-up: Wikivoyage Butare [3] (no new prices beyond those already listed).
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] No advisory singles out Huye; UK advice "Crime levels are relatively low" — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [family.schools] University fees per year: University of Rwanda — supported
