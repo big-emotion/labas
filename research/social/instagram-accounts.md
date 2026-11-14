@@ -212,6 +212,111 @@ theobservatorylagos); no Lagos daily-life account in these networks.
 **Investing (French-speaking)** — immopreneurs (real-estate, France), business.africa,
 afrobusinessandbooks, diezlemedia; from linvestisseurafricain's list.
 
+## Priority countries — direct search, then verified
+
+The user asked for proportional coverage of the four largest African economies (Nigeria,
+Egypt, South Africa, Morocco) and of Ethiopia, Kenya, Rwanda, Tanzania, Ghana, Benin and
+Gabon. Method: Instagram's own search box with several queries per country ("living in X",
+"X guide", "things to do in X", "X expat", "vivre au/à X", "relocate to X", "X bons plans"),
+then every candidate profile opened to check size, activity and bio. Follower counts as shown
+on 2026-11-14. **Dropped after checking**: accounts with no posts or a handful of followers
+(e.g. cairoexpats, livinginnairobi, livinginaccra, expatsinethiopia, thingstodoindar,
+diaspora_guide_addis_ababa_), shops that only borrow the words "living" or "lifestyle", and
+off-topic name clashes (Lagos Portugal, Dar = Arabic "house").
+
+Legend: ★ = strongest lead for Là-bas (daily life, written for newcomers or returnees).
+
+### Nigeria
+- ★ **zikokomoney** — Zikoko Money, 20.7K: *"how Nigerians earn, spend, save and invest"* — the cost-of-living voice
+- ★ **zikokomag** — Zikoko, 336K: everyday Nigerian life (also zikokoher, zikokoevents, zkkcitizen)
+- ★ **lostinlagos12** — Awari Lagos, 98.3K: city guide (dine, shop, events), with app
+- **lostinabuja12** — Awari Abuja, 19.1K: same for Abuja
+- **eat.drink.lagos** — 38.7K: food, *"eating through the struggle so you don't have to"*
+- **lagosschoolsguide** — 1.8K: *"making the school search simpler for Lagos families"*
+- **thingstodoinlagos**, **ttdlagos**, **abuja_guide** — what's-on accounts (not individually verified)
+- **expatmuminabuja** — British expat mum in Abuja, small (41) but has a blog, expatmuminabuja.com
+
+### Egypt
+- ★ **cairoscene** — CairoScene, 889K: *"the people, places and movements shaping Egypt today"*
+- ★ **cairobyyana** — 10.3K: a Russian living in Cairo, *"your guide to the Egyptian lifestyle"*
+- **cairocoffeeguide** — Cairo coffee-shop guide
+- **cairo.expat.diaries** — 604, in Arabic: an expat trying everything in Cairo — places, food, *transport*; mostly on TikTok
+- **vivreaucaire** — French-speaking, tiny (21) but run by a French-trained architect offering relocation advice
+
+### South Africa
+- ★ **capetownetc** — cape{town}etc, 158K: news, history, insider tips, events
+- ★ **movingtosouthafrica** — Hannah Pirnie, 1.1K: moved UK → Johannesburg, *"now I help others move & settle in"*
+- **capetown.guide** — 32.3K: official-style Cape Town guide (tourism-leaning)
+- **jhblive** — JHBLive, 2.9K: the best of Jozi
+- **joburgartguide** — 6.4K: Johannesburg art scene
+- **cornercoliving** — co-living in Cape Town (newcomer housing)
+
+### Morocco
+- ★ **vivre_au_maroc** — 58.2K: *"Vivre Maroc — la vraie vie"*, Franco-Moroccan ex-engineer, 10 years in Morocco
+- ★ **entreprendrevivremaroc** — 28.1K: 12 years in Morocco, *"installation, vie sur place, erreurs à éviter"*
+- ★ **the_rabati** — 9.3K: *"Living in Rabat, one recommendation at a time"*, therabati.com
+- **ffm_expat_maroc** — French family of four in Rabat, 449
+- **bons_plans_mamans_casablanca** — mums' bons plans in Casablanca
+- **moroccolives** (LIVES network, see above)
+
+### Ethiopia
+- ★ **eventinaddis** — Events in Addis 24/7, 10.8K: the city's what's-on hub. Its following list maps Addis daily life:
+  **linkupaddis**, **whereinaddis**, **ventureaddis**, **addisrupt_**, **creativehub_et**,
+  **shoplocalethiopia**, **addisopenaircinema**, **addisjazzfestival**, **alxethiopia** (tech
+  training), **mpesa.ethiopia**, **greatethrun** (Great Ethiopian Run), **shegergebeta** (local guide)
+- **ethiopian.diaspora.diaries** — 193: blog on culture and the Ethiopian diaspora
+- Gap: no "living in Addis" account with a real audience was found.
+
+### Kenya
+- ★ **jolitropisme**, ★ **traverzeculture**, **kenya4you**, **digitalnomadskenya__** (see above)
+- **eventguide_nairobi**, **nairobieventsguide** — events (not individually verified)
+
+### Rwanda
+- ★ **livinginkigali** — 18.3K: *"Kigali's cultural & lifestyle gateway — trusted by expats, visitors & newcomers"*. Follows the city's institutions: cityofkigali, rdbrwanda (Rwanda Development Board), rwandahealth, norrsken_eastafrica (tech hub), kigaliwellnesshub
+- **its_harrietyusuf** — Harriet, living in Kigali
+
+### Tanzania
+- ★ **expatstanzania** — 1.2K: *"making Tanzania feel like home — insider tips for life in Tanzania"*
+- **julietmrema** — 1.5K: slow living in Tanzania & Zanzibar
+- **une.maman.a.zanzibar** — French-speaking expat mum in Zanzibar, 179
+- **zanzibar.expat.consultancy**, **zess_zanzibar**, **tanzania_ties** — expat/immigration services (commercial)
+- **planbacktoafrica** (see above) — Zanzibar hospitality investor
+
+### Ghana
+- ★ **accraexpat** — accraexpat.com, 3K: *"the website of Ghana's expatriate community"*, events
+- ★ **accrafoodies** — Where Ghana Eats, 50.9K: honest food reviews
+- **thingstodoinaccra** — 1.2K
+- **orologistics** — Ghana tours, travel & *relocation*
+- **yasmin_tells**, **ghana.365**, **akosuashirley** (see above)
+
+### Benin
+- ★ **cotonousociety** — 4.3K: *"les plus belles adresses de Cotonou"* — experiences, culture, food
+- ★ **cotonousocialclub** — 1.8K: community dinners, game nights, afterworks, networking
+- **jeandedieubada** — Benin travel guide (see above)
+- **cotonou.city.guide**, **guides_unites_de_cotonou** — not individually verified
+
+### Gabon
+- ★ **ashley.walena** — 4.2K: *"Quitter Paris pour entreprendre à Libreville"* — the clearest returnee voice for Gabon
+- **thepilatesclub.lbv** (6.1K), **sourced.lbv** (1.6K), **beachclub_lbv** — Libreville lifestyle venues
+- **gabontourisme**, **gabao_child** (Gabon travel) — tourism
+- **gabonlust** (see above)
+
+### Coverage after this pass
+
+| Country | Strong daily-life leads (★) | Verdict |
+|---|---|---|
+| Nigeria | 3 | Good — Zikoko is the reference for money and everyday life |
+| Egypt | 2 | Good in English; thin in French |
+| South Africa | 2 | Good for Cape Town; Johannesburg thinner |
+| Morocco | 3 | Very good in French |
+| Ethiopia | 1 hub | Usable through eventinaddis's network; no newcomer account |
+| Kenya | 2 | Good (French and English) |
+| Rwanda | 1 | Good (livinginkigali) |
+| Tanzania | 1 | Thin; mostly commercial expat services |
+| Ghana | 2 | Good |
+| Benin | 2 | Good for Cotonou |
+| Gabon | 1 | One strong returnee voice |
+
 ## What this says
 
 - The French-speaking *return* scene on Instagram is small and business-led (Repat Africa,
