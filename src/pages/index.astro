@@ -100,11 +100,17 @@ const description =
 
         <footer class="footer">
           <p>
-            Les résultats sont des propositions, pas des verdicts. Les notes des villes sont des
-            estimations de l'équipe ; leurs sources seront publiées. Les zones de conflit ne sont
+            Les résultats sont des propositions, pas des verdicts. Chaque note de ville renvoie à
+            ses sources, sur la page de la ville. Les villes que les autorités déconseillent ne sont
             jamais proposées.
           </p>
           <p>Tes réponses restent dans ton navigateur : rien n'est enregistré ni envoyé.</p>
+          <nav class="links" aria-label="Pages du site">
+            <a href="/approfondir">Aller plus loin</a>
+            <a href="/methode">Notre méthode</a>
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/confidentialite">Confidentialité</a>
+          </nav>
         </footer>
       </main>
     </div>
@@ -123,6 +129,10 @@ const description =
           <span></span>
         </span>
         <p class="card-tagline"></p>
+        <figure class="photo" hidden>
+          <img alt="" width="1280" height="853" loading="lazy" />
+          <figcaption></figcaption>
+        </figure>
         <p class="card-pitch"></p>
         <div class="portrait-box" hidden>
           <h4 class="portrait-title"></h4>
@@ -197,16 +207,16 @@ const description =
           <h4>À savoir</h4>
           <p></p>
         </div>
-        <details class="field sources" data-field="sources">
-          <summary>Nos sources</summary>
-          <ul></ul>
-        </details>
+        <a class="field full" data-field="full">
+          Voir la fiche complète, critère par critère, avec ses sources
+        </a>
       </div>
     </template>
 
     <script>
       import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
       import { linesFor } from "../lib/lines";
+      import { photoFor } from "../lib/photos";
 
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
@@ -341,20 +351,8 @@ const description =
         show("reasons", m.reasons.length > 0);
         fillList(body.querySelector(".reasons") as HTMLElement, m.reasons);
         setText(body, '[data-field="watch"] p', m.city.watch);
-        const sources = lines?.sources ?? [];
-        show("sources", sources.length > 0);
-        (body.querySelector('[data-field="sources"] ul') as HTMLElement).replaceChildren(
-          ...sources.map((source) => {
-            const item = document.createElement("li");
-            const link = document.createElement("a");
-            link.href = source.url;
-            link.rel = "noopener noreferrer";
-            link.target = "_blank";
-            link.textContent = source.title;
-            item.append(link, document.createTextNode(`, consulté le ${source.accessed}`));
-            return item;
-          }),
-        );
+        (body.querySelector('[data-field="full"]') as HTMLAnchorElement).href =
+          `/ville/${m.city.slug}`;
         return body;
       }
 
@@ -373,6 +371,19 @@ const description =
         setBar(card, m.score);
         setText(card, ".card-tagline", m.city.tagline);
         setText(card, ".card-pitch", m.city.pitch);
+        const photo = photoFor(m.city.name);
+        if (index === 0 && photo) {
+          const figure = card.querySelector(".photo") as HTMLElement;
+          const image = figure.querySelector("img") as HTMLImageElement;
+          image.src = `/photos/${photo.file}`;
+          image.alt = photo.alt;
+          setText(
+            figure,
+            "figcaption",
+            `Photo : ${photo.author}, ${photo.license}, Wikimedia Commons`,
+          );
+          figure.hidden = false;
+        }
         // The city in first place shows its "pourquoi toi" without a tap.
         const box = card.querySelector(".portrait-box") as HTMLElement;
         box.hidden = index !== 0 || m.portrait.length === 0;
@@ -935,6 +946,30 @@ const description =
       }
       .more[hidden] {
         display: none;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+      }
+      .links a,
+      :global(.detail-body .full) {
+        color: var(--saffron);
+        font-weight: 700;
+      }
+      .results :global(.photo) {
+        margin: 0;
+      }
+      .results :global(.photo img) {
+        width: 100%;
+        height: auto;
+        border-radius: 14px;
+        display: block;
+      }
+      .results :global(.photo figcaption) {
+        font-size: 0.75rem;
+        color: var(--thread-dim);
+        margin-top: 4px;
       }
       .footer {
         display: grid;

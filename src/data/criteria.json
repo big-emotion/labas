@@ -1,0 +1,194 @@
+[
+  {
+    "key": "cost",
+    "label": "Coût de la vie",
+    "means": "Ce que coûte chaque mois un deux-pièces correct dans un quartier où s'installent les nouveaux venus, plus le quotidien. Plus la note est haute, moins c'est cher.",
+    "doesNotMean": "Ce que paient les habitants, ni le coût de l'installation.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Un deux-pièces dépasse 900 € par mois, ou le quotidien coûte presque autant qu'en Europe.",
+      "3": "Un deux-pièces coûte entre 300 et 600 €.",
+      "5": "Un deux-pièces coûte moins de 200 €, sur un marché ouvert aux nouveaux venus."
+    }
+  },
+  {
+    "key": "setupCost",
+    "label": "Coût pour s'installer",
+    "means": "L'argent à sortir avant le premier mois : loyers d'avance, caution, frais d'agence, équipement que la ville rend nécessaire (groupe électrogène, citerne).",
+    "doesNotMean": "Le coût de la vie chaque mois.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Un an de loyer d'avance ou plus, ou plus de 5 000 € avant d'emménager.",
+      "3": "Trois à six mois en tout (caution, avance, frais).",
+      "5": "Un loyer mensuel avec une caution d'un ou deux mois."
+    }
+  },
+  {
+    "key": "negotiation",
+    "label": "Marge de négociation",
+    "means": "À quel point le prix affiché est un point de départ, pour le loyer, le taxi et le marché.",
+    "doesNotMean": "Que la ville est chère ou malhonnête : certains aiment négocier, d'autres non.",
+    "direction": "target",
+    "rubric": {
+      "1": "Les prix sont surtout fixes : loyers respectés, taxis au compteur ou par application.",
+      "3": "Loyers et marchés se négocient couramment ; boutiques et applications ont des prix fixes.",
+      "5": "Presque tout prix est un point de départ, loyer et transport compris."
+    }
+  },
+  {
+    "key": "safety",
+    "label": "Sécurité au quotidien",
+    "means": "Le risque de vol, d'agression ou de harcèlement pour un habitant prudent, dans les quartiers où s'installent les nouveaux venus.",
+    "doesNotMean": "La guerre ou le terrorisme : une ville en zone déconseillée n'est jamais proposée.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Les conseils aux voyageurs citent la ville pour des vols à main armée ou des enlèvements, ou un couvre-feu.",
+      "3": "Vols et agressions dans certains quartiers, la prudence habituelle d'une grande ville.",
+      "5": "Aucun risque particulier signalé ; on marche le soir dans la plupart des quartiers."
+    }
+  },
+  {
+    "key": "utilities",
+    "label": "Courant et eau",
+    "means": "La fréquence des coupures de courant et d'eau, et ce qu'il faut pour faire avec.",
+    "doesNotMean": "L'accès au réseau : on peut être raccordé et subir des coupures.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Plusieurs heures de coupure presque chaque jour ; groupe et citerne indispensables.",
+      "3": "Des coupures chaque semaine ou en saison ; une solution de secours est sage.",
+      "5": "Coupures rares et courtes ; pas besoin de secours."
+    }
+  },
+  {
+    "key": "internet",
+    "label": "Internet",
+    "means": "Peut-on travailler en ligne depuis chez soi ?",
+    "doesNotMean": "La couverture mobile dans tout le pays.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Moins de 5 Mbit/s, données mobiles seulement.",
+      "3": "15 à 40 Mbit/s, la fibre dans certains quartiers.",
+      "5": "Plus de 80 Mbit/s, la fibre vendue partout par plusieurs opérateurs. Une coupure nationale récente plafonne la note à 3."
+    }
+  },
+  {
+    "key": "healthcare",
+    "label": "Soins",
+    "means": "Les soins qu'on trouve sans quitter le pays.",
+    "doesNotMean": "La santé publique de tout le pays.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Les cas graves sont évacués à l'étranger.",
+      "3": "Des cliniques privées pour l'essentiel ; spécialistes ou chirurgie dans la capitale.",
+      "5": "Un hôpital accrédité dans la ville et la plupart des spécialités."
+    }
+  },
+  {
+    "key": "schools",
+    "label": "Écoles",
+    "means": "Des places dans une école qui suit un programme qu'un enfant pourra poursuivre ailleurs (français, anglais ou international).",
+    "doesNotMean": "La qualité de l'école publique locale.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Une petite école partiellement reconnue, ou l'enseignement à distance seulement.",
+      "3": "Une école française ou anglaise reconnue.",
+      "5": "Plusieurs écoles, en français et en anglais, jusqu'au baccalauréat ou équivalent."
+    }
+  },
+  {
+    "key": "jobs",
+    "label": "Emploi",
+    "means": "Les chances de trouver un emploi qualifié sur place en arrivant.",
+    "doesNotMean": "Le taux de chômage local.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Presque aucun emploi qualifié ouvert aux nouveaux venus.",
+      "3": "Un ou deux secteurs recrutent (port, mines, administration, tourisme).",
+      "5": "Une place régionale qui recrute dans tous les secteurs."
+    }
+  },
+  {
+    "key": "business",
+    "label": "Entreprendre et investir",
+    "means": "La facilité de créer une entreprise ou d'investir.",
+    "doesNotMean": "La réussite garantie d'un projet.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Ni incubateur ni classement, propriété restreinte.",
+      "3": "Un incubateur et des financements locaux.",
+      "5": "Un pôle reconnu à l'échelle du continent."
+    }
+  },
+  {
+    "key": "flights",
+    "label": "Avions vers l'Europe",
+    "means": "La facilité d'aller et venir.",
+    "doesNotMean": "Le prix des billets.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Pas d'aéroport international à moins de trois heures.",
+      "3": "Une à trois villes européennes en vol direct, à moins d'1 h 30.",
+      "5": "Huit villes européennes ou plus en vol direct."
+    }
+  },
+  {
+    "key": "culture",
+    "label": "Vie culturelle",
+    "means": "Salles, festivals, musées, scène artistique.",
+    "doesNotMean": "La richesse de la culture des habitants, qui ne se note pas.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Peu de vie culturelle régulière.",
+      "3": "Des salles et au moins un festival connu dans le pays.",
+      "5": "Une scène reconnue sur le continent, toute l'année."
+    }
+  },
+  {
+    "key": "nightlife",
+    "label": "Sorties",
+    "means": "Ce qui se passe le soir : bars, concerts, clubs.",
+    "doesNotMean": "Un bon ou un mauvais point : on le compare à ton samedi soir idéal.",
+    "direction": "target",
+    "rubric": {
+      "1": "Alcool interdit ou presque rien d'ouvert après le dîner.",
+      "3": "Quelques bars et des concerts le week-end.",
+      "5": "Tous les soirs, avec une réputation dans la région."
+    }
+  },
+  {
+    "key": "history",
+    "label": "Histoire et mémoire",
+    "means": "L'histoire qu'on peut visiter, dont les lieux liés à la traite et à la diaspora.",
+    "doesNotMean": "L'importance historique d'un peuple.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Pas de site notable.",
+      "3": "Un site classé ou un musée important.",
+      "5": "Un site du patrimoine mondial dans la ville et des lieux de mémoire de la diaspora."
+    }
+  },
+  {
+    "key": "returnees",
+    "label": "Réseau de repats",
+    "means": "Un réseau actif de personnes revenues ou venues s'installer, qu'un nouveau venu peut rejoindre.",
+    "doesNotMean": "L'accueil fait aux repats, qui ne se note pas.",
+    "direction": "higher-is-better",
+    "rubric": {
+      "1": "Aucun réseau trouvé.",
+      "3": "Une association ou un groupe actif.",
+      "5": "Un lieu connu du retour, avec des rencontres régulières et un guichet public pour la diaspora."
+    }
+  },
+  {
+    "key": "pace",
+    "label": "Rythme de la ville",
+    "means": "Circulation, foule, bruit, vitesse de la vie quotidienne.",
+    "doesNotMean": "Un bon ou un mauvais point : on le compare à la ville que tu cherches.",
+    "direction": "target",
+    "rubric": {
+      "1": "Petite ville, peu de circulation, soirées calmes.",
+      "3": "Un centre animé, des quartiers calmes.",
+      "5": "Mégapole : embouteillages, foule et bruit jour et nuit."
+    }
+  }
+]

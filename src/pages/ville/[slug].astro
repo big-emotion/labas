@@ -1,0 +1,409 @@
+---
+import Page from "../../layouts/Page.astro";
+import { CITIES, CRITERIA, type City, type Confidence, type Source } from "../../lib/cities";
+import { linesFor } from "../../lib/lines";
+import { photoFor } from "../../lib/photos";
+
+export function getStaticPaths() {
+  return CITIES.map((city) => ({ params: { slug: city.slug }, props: { city } }));
+}
+
+interface Props {
+  city: City;
+}
+const { city } = Astro.props;
+const lines = linesFor(city.name);
+const photo = photoFor(city.name);
+const country = city.countryFacts;
+const advisory = city.facts.advisory;
+
+const CONFIDENCE: Record<Confidence, string> = {
+  measured: "Mesuré",
+  survey: "Enquête",
+  sourced: "Sourcé",
+  editorial: "Estimation",
+};
+const COLOURS = {
+  green: "vert (vigilance normale)",
+  yellow: "jaune (vigilance renforcée)",
+  orange: "orange (déconseillé sauf raison impérative)",
+  red: "rouge (formellement déconseillé)",
+};
+const FCDO = {
+  all: "déconseille tout voyage",
+  "all-but-essential": "déconseille tout voyage sauf nécessité",
+  none: "ne déconseille pas de s'y rendre",
+};
+const LANGUAGES = {
+  fr: "français",
+  en: "anglais",
+  pt: "portugais",
+  ar: "arabe",
+  es: "espagnol",
+  sw: "swahili",
+};
+const USE = {
+  daily: "au quotidien",
+  "work-and-admin": "au travail et dans les démarches",
+  limited: "peu utilisé",
+};
+const SETTINGS = {
+  ocean: "océan",
+  "lake-or-river": "lac ou fleuve",
+  mountains: "montagnes",
+  forest: "forêt",
+  savanna: "savane",
+  desert: "désert",
+};
+const CLIMATES = {
+  "hot-humid": "chaud et humide",
+  "hot-dry": "chaud et sec",
+  mild: "doux",
+  highland: "frais en altitude",
+};
+const LGBT = {
+  legal: "légales",
+  criminalised: "punies par la loi",
+  "criminalised-not-enforced": "punies par la loi, sans application connue",
+  unclear: "situation juridique incertaine",
+};
+const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}` : ""}`;
+---
+
+<Page
+  title={`${city.name}, ${city.country}`}
+  description={`${city.name} (${city.country}) : ${city.tagline}. Ce qu'il faut savoir pour y vivre, critère par critère, avec nos sources.`}
+>
+  <article class="city">
+    <p class="eyebrow">{city.country}</p>
+    <h1>{city.name}</h1>
+    <p class="tagline">{city.tagline}</p>
+
+    {city.unsafe && (
+      <p class="gate">
+        On ne propose pas cette ville en ce moment : les autorités françaises ou britanniques
+        déconseillent de s'y rendre
+        {advisory.date && ` (avis du ${advisory.date})`}.
+      </p>
+    )}
+
+    {photo && (
+      <figure class="photo">
+        <img
+          src={`/photos/${photo.file}`}
+          alt={photo.alt}
+          width="1280"
+          height="853"
+          loading="eager"
+        />
+        <figcaption>
+          Photo : {photo.author}, <a href={photo.licenseUrl}>{photo.license}</a>, via{" "}
+          <a href={photo.source}>Wikimedia Commons</a>.
+        </figcaption>
+      </figure>
+    )}
+
+    <p>{city.pitch}</p>
+
+    {lines?.reputation && (
+      <section>
+        <p class="eyebrow">On dit</p>
+        <p class="quote">{lines.reputation}</p>
+      </section>
+    )}
+    {lines?.surprise && (
+      <section>
+        <h2>Ce qui pourrait te surprendre</h2>
+        <p>{lines.surprise}</p>
+      </section>
+    )}
+
+    <section class="watch">
+      <h2>À savoir</h2>
+      <p>{city.watch}</p>
+    </section>
+
+    {lines && lines.neighbourhoods.length > 0 && (
+      <section>
+        <h2>Les quartiers</h2>
+        <ul class="places">
+          {lines.neighbourhoods.map((place) => (
+            <li>
+              <b>{place.name}</b> {place.text}
+            </li>
+          ))}
+        </ul>
+        <p class="small">Loyers affichés, souvent négociables.</p>
+      </section>
+    )}
+
+    <section>
+      <h2>La ville, critère par critère</h2>
+      <p class="small">
+        Notes de 0 à 5 selon <a href="/methode">notre grille</a>. Pour les critères marqués « cible
+        », une note haute n'est ni bonne ni mauvaise : on la compare à ce que tu cherches.
+      </p>
+      <ul class="scores">
+        {CRITERIA.map((criterion) => {
+          const score = city.scores[criterion.key];
+          return (
+            <li class="score">
+              <div class="score-head">
+                <a href={`/methode#${criterion.key}`} class="score-name">
+                  {criterion.label}
+                </a>
+                {criterion.direction === "target" && <span class="tag">cible</span>}
+                <span class="level">{score.level === null ? "?" : `${score.level}/5`}</span>
+              </div>
+              <span class="bar">
+                <span style={`width: ${((score.level ?? 0) / 5) * 100}%`} />
+              </span>
+              <p>{score.justification}</p>
+              <p class="small">
+                {score.level === null ? "Inconnu" : CONFIDENCE[score.confidence]}
+                {score.sources.length > 0 && " · "}
+                {score.sources.map((source, i) => (
+                  <>
+                    {i > 0 && " ; "}
+                    <a href={source.url} rel="noopener noreferrer">
+                      {sourceLabel(source)}
+                    </a>
+                  </>
+                ))}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Vivre à {city.name}</h2>
+      <ul class="facts">
+        <li>
+          <b>Langues :</b>{" "}
+          {city.facts.languages.map((l) => `${LANGUAGES[l.language]} ${USE[l.use]}`).join(", ") ||
+            city.languageLabel}
+        </li>
+        {city.facts.climates.length > 0 && (
+          <li>
+            <b>Climat :</b> {city.facts.climates.map((c) => CLIMATES[c]).join(", ")}
+          </li>
+        )}
+        {city.facts.settings.length > 0 && (
+          <li>
+            <b>Autour :</b> {city.facts.settings.map((s) => SETTINGS[s]).join(", ")}
+          </li>
+        )}
+        <li>
+          <b>Monnaie :</b> {city.currency}
+        </li>
+      </ul>
+    </section>
+
+    {country && (
+      <section>
+        <h2>Le pays : {country.name}</h2>
+        <ul class="facts">
+          <li>
+            <b>Entrer avec un passeport français :</b>{" "}
+            {country.visaFreeDaysFrenchPassport
+              ? `sans visa jusqu'à ${country.visaFreeDaysFrenchPassport} jours. `
+              : "visa nécessaire. "}
+            {country.visaNote}
+          </li>
+          <li>
+            <b>Démarches :</b> {country.paperwork.justification}
+          </li>
+          <li>
+            <b>Pour la diaspora :</b> {country.diasporaRoute}
+          </li>
+          {country.dualNationality.note && (
+            <li>
+              <b>Double nationalité :</b> {country.dualNationality.note}
+            </li>
+          )}
+          {country.mobileMoney && (
+            <li>
+              <b>Payer :</b> {country.mobileMoney}
+            </li>
+          )}
+          {country.sameSexRelations.status && (
+            <li>
+              <b>Relations entre personnes de même sexe :</b>{" "}
+              {LGBT[country.sameSexRelations.status]}. {country.sameSexRelations.note}
+            </li>
+          )}
+          {country.described.returneePerception && (
+            <li>
+              <b>Le regard sur ceux qui reviennent :</b> {country.described.returneePerception}
+            </li>
+          )}
+          {country.described.womenDaily && (
+            <li>
+              <b>Le quotidien des femmes :</b> {country.described.womenDaily}
+            </li>
+          )}
+        </ul>
+      </section>
+    )}
+
+    <section>
+      <h2>Conseils aux voyageurs</h2>
+      <p>
+        {advisory.franceDiplomatie
+          ? `France Diplomatie : zone ${COLOURS[advisory.franceDiplomatie]}. `
+          : "France Diplomatie : couleur de la zone non trouvée. "}
+        {advisory.fcdo && `Le Royaume-Uni ${FCDO[advisory.fcdo]}. `}
+        {advisory.date && `Avis du ${advisory.date}. `}
+        Vérifie toujours la page du ministère avant de partir.
+      </p>
+      <p class="small">
+        {advisory.sources.map((source, i) => (
+          <>
+            {i > 0 && " ; "}
+            <a href={source.url} rel="noopener noreferrer">
+              {sourceLabel(source)}
+            </a>
+          </>
+        ))}
+      </p>
+    </section>
+
+    {lines && lines.sources.length > 0 && (
+      <details class="small">
+        <summary>Sources des textes de cette page</summary>
+        <ul>
+          {lines.sources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer">
+                {sourceLabel(source)}
+              </a>
+              , consulté le {source.accessed}
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
+  </article>
+</Page>
+
+<style>
+  .city {
+    display: grid;
+    gap: 18px;
+  }
+  .city h1 {
+    margin: 0;
+  }
+  .city section h2 {
+    margin-top: 8px;
+  }
+  .eyebrow {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--saffron);
+  }
+  .tagline {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--saffron);
+  }
+  .gate {
+    background: var(--night-deep);
+    border: 2px solid var(--coral);
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin: 0;
+  }
+  .photo {
+    margin: 0;
+  }
+  .photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    display: block;
+  }
+  .photo figcaption,
+  .small {
+    font-size: 0.8rem;
+    color: var(--thread-dim);
+    margin: 6px 0 0;
+  }
+  .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin: 4px 0 0;
+  }
+  .watch {
+    border: 2px solid var(--coral);
+    border-radius: 14px;
+    padding: 4px 14px 12px;
+  }
+  .watch h2 {
+    color: var(--coral);
+  }
+  .places,
+  .scores,
+  .facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .places li,
+  .score {
+    background: var(--night-deep);
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+  .score p {
+    margin: 6px 0 0;
+  }
+  .score-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .score-name {
+    font-weight: 800;
+    color: var(--thread) !important;
+    text-decoration: none;
+    flex-grow: 1;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--thread-dim);
+  }
+  .level {
+    font-family: var(--font-mono);
+    color: var(--saffron);
+  }
+  .bar {
+    display: block;
+    height: 6px;
+    margin-top: 6px;
+    border-radius: 999px;
+    background: var(--night-lift);
+    overflow: hidden;
+  }
+  .bar span {
+    display: block;
+    height: 100%;
+    background: var(--saffron);
+  }
+  .facts li {
+    line-height: 1.5;
+  }
+  details summary {
+    cursor: pointer;
+  }
+</style>

@@ -1,0 +1,395 @@
+---
+import Page from "../layouts/Page.astro";
+import { DEEP_QUESTIONS } from "../lib/deep-questions";
+---
+
+<Page
+  title="Aller plus loin"
+  description="Le questionnaire complet : tes contraintes, tes envies, et toutes les villes avec leurs critères et leurs sources."
+>
+  <h1>Aller plus loin</h1>
+  <p class="lead">
+    Le questionnaire complet, une question à la fois. On te pose d'abord celle qui change le plus
+    ton classement. Tu peux passer une question ou revenir sur une réponse quand tu veux.
+  </p>
+
+  <section class="ask" aria-live="polite">
+    {DEEP_QUESTIONS.map((question) => (
+      <fieldset class="question" data-question={question.id} data-max={question.max ?? 1} hidden>
+        <legend>
+          {question.title}
+          {question.max && <span class="hint">Jusqu'à {question.max} choix</span>}
+        </legend>
+        <div class="chips">
+          {question.choices.map((choice) => (
+            <button type="button" class="chip" data-value={JSON.stringify(choice.value)}>
+              {choice.label}
+            </button>
+          ))}
+        </div>
+        <div class="ask-actions">
+          {question.max && (
+            <button type="button" class="next" data-action="confirm">
+              Valider
+            </button>
+          )}
+          <button type="button" class="skip" data-action="skip">
+            Passer
+          </button>
+        </div>
+      </fieldset>
+    ))}
+    <p id="done" class="done" hidden>
+      Tu as répondu à tout. Ton classement est ci-dessous ; tu peux encore changer une réponse.
+    </p>
+  </section>
+
+  <section class="answers" aria-labelledby="answers-title">
+    <h2 id="answers-title">Tes réponses</h2>
+    <p class="hint" id="answers-empty">
+      Pas encore de réponse.
+    </p>
+    <ul id="answers" class="answer-list"></ul>
+  </section>
+
+  <section aria-labelledby="ranking-title">
+    <h2 id="ranking-title">Ton classement</h2>
+    <p class="hint">
+      Toutes les villes, triées selon tes réponses. Le pourcentage dit à quel point une ville
+      correspond à ce que tu as dit, rien de plus.
+    </p>
+    <ul id="removed" class="removed"></ul>
+    <ol id="ranking" class="ranking"></ol>
+  </section>
+
+  <template id="row">
+    <li class="row">
+      <div class="row-head">
+        <span class="rank"></span>
+        <a class="name"></a>
+        <span class="fit"></span>
+      </div>
+      <span class="bar">
+        <span></span>
+      </span>
+      <p class="tagline"></p>
+      <ul class="pros"></ul>
+      <ul class="cons"></ul>
+      <p class="coverage" hidden>
+        Données incomplètes pour cette ville : on te montre ce que l'on sait.
+      </p>
+    </li>
+  </template>
+
+  <script>
+    import { nextQuestion } from "../lib/adaptive";
+    import { DEEP_QUESTIONS } from "../lib/deep-questions";
+    import { rankCities, type Answers } from "../lib/ranking";
+
+    const answers: Record<string, unknown> = {};
+    const asked: string[] = [];
+    let showAll = false;
+    const VISIBLE = 20;
+    const percent = (n: number) => `${Math.round(n * 100)}\u202f%`;
+
+    const fieldset = (id: string) =>
+      document.querySelector<HTMLFieldSetElement>(`.question[data-question="${id}"]`)!;
+
+    function labelOf(id: string, value: unknown): string {
+      const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
+      const values = Array.isArray(value) ? value : [value];
+      return values.map((v) => question.choices.find((c) => c.value === v)?.label ?? "").join(", ");
+    }
+
+    function showNext() {
+      const next = nextQuestion(answers as Answers, asked);
+      for (const element of document.querySelectorAll<HTMLElement>(".question")) {
+        element.hidden = element.dataset.question !== next;
+      }
+      (document.getElementById("done") as HTMLElement).hidden = next !== undefined;
+    }
+
+    function renderAnswers() {
+      const list = document.getElementById("answers") as HTMLElement;
+      const entries = Object.entries(answers).filter(([, value]) => value !== undefined);
+      (document.getElementById("answers-empty") as HTMLElement).hidden = entries.length > 0;
+      list.replaceChildren(
+        ...entries.map(([id, value]) => {
+          const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
+          const item = document.createElement("li");
+          const text = document.createElement("span");
+          text.textContent = `${question.title} ${labelOf(id, value)}`;
+          const change = document.createElement("button");
+          change.type = "button";
+          change.textContent = "Modifier";
+          change.addEventListener("click", () => {
+            delete answers[id];
+            asked.splice(asked.indexOf(id), 1);
+            for (const chip of fieldset(id).querySelectorAll(".chip")) {
+              chip.setAttribute("aria-pressed", "false");
+            }
+            for (const element of document.querySelectorAll<HTMLElement>(".question")) {
+              element.hidden = element.dataset.question !== id;
+            }
+            render(false);
+          });
+          item.append(text, change);
+          return item;
+        }),
+      );
+    }
+
+    function renderRanking() {
+      const ranked = rankCities(answers as Answers);
+      const removed = new Map<string, number>();
+      for (const m of ranked) {
+        if (m.excludedBecause)
+          removed.set(m.excludedBecause, (removed.get(m.excludedBecause) ?? 0) + 1);
+      }
+      (document.getElementById("removed") as HTMLElement).replaceChildren(
+        ...[...removed].map(([reason, count]) => {
+          const item = document.createElement("li");
+          item.textContent = `${count} ${count > 1 ? "villes retirées" : "ville retirée"} : ${reason.toLowerCase()}.`;
+          return item;
+        }),
+      );
+      const proposed = ranked.filter((m) => !m.excludedBecause);
+      const visible = showAll ? proposed : proposed.slice(0, VISIBLE);
+      const template = document.getElementById("row") as HTMLTemplateElement;
+      const rows = visible.map((m, index) => {
+        const row = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+        row.classList.toggle("unsafe", m.city.unsafe);
+        (row.querySelector(".rank") as HTMLElement).textContent = String(index + 1);
+        const link = row.querySelector(".name") as HTMLAnchorElement;
+        link.href = `/ville/${m.city.slug}`;
+        link.textContent = `${m.city.name} · ${m.city.country}`;
+        (row.querySelector(".fit") as HTMLElement).textContent = m.city.unsafe
+          ? ""
+          : percent(m.score);
+        (row.querySelector(".bar > span") as HTMLElement).style.width =
+          `${Math.round(m.score * 100)}%`;
+        (row.querySelector(".tagline") as HTMLElement).textContent = m.city.unsafe
+          ? "Déconseillée en ce moment par les autorités : on ne te la propose pas."
+          : m.city.tagline;
+        const fill = (selector: string, items: string[]) => {
+          (row.querySelector(selector) as HTMLElement).replaceChildren(
+            ...items.map((text) => {
+              const item = document.createElement("li");
+              item.textContent = text;
+              return item;
+            }),
+          );
+        };
+        fill(".pros", m.city.unsafe ? [] : m.reasons);
+        fill(".cons", m.city.unsafe ? [] : m.drawbacks);
+        (row.querySelector(".coverage") as HTMLElement).hidden = m.city.unsafe || m.coverage >= 0.7;
+        return row;
+      });
+      const list = document.getElementById("ranking") as HTMLElement;
+      list.replaceChildren(...rows);
+      if (!showAll && proposed.length > VISIBLE) {
+        const more = document.createElement("li");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "more";
+        button.textContent = `Voir les ${proposed.length} villes`;
+        button.addEventListener("click", () => {
+          showAll = true;
+          renderRanking();
+        });
+        more.append(button);
+        list.append(more);
+      }
+    }
+
+    function render(advance = true) {
+      renderAnswers();
+      renderRanking();
+      if (advance) showNext();
+    }
+
+    document.querySelector(".ask")!.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      const set = target.closest<HTMLFieldSetElement>(".question");
+      if (!set) return;
+      const id = set.dataset.question as string;
+      const max = Number(set.dataset.max);
+      const chip = target.closest<HTMLButtonElement>(".chip");
+      const action = target.closest<HTMLButtonElement>("[data-action]")?.dataset.action;
+      if (chip) {
+        const value = JSON.parse(chip.dataset.value as string);
+        if (max === 1) {
+          answers[id] = value;
+          if (!asked.includes(id)) asked.push(id);
+          render();
+          return;
+        }
+        const pressed = chip.getAttribute("aria-pressed") === "true";
+        const picked = (answers[id] as unknown[] | undefined) ?? [];
+        if (!pressed && picked.length >= max) return;
+        chip.setAttribute("aria-pressed", String(!pressed));
+        answers[id] = pressed ? picked.filter((v) => v !== value) : [...picked, value];
+        render(false);
+        return;
+      }
+      if (action) {
+        if (!asked.includes(id)) asked.push(id);
+        if (action === "skip") delete answers[id];
+        render();
+      }
+    });
+
+    render();
+  </script>
+</Page>
+
+<style>
+  .ask {
+    background: var(--night-deep);
+    border: 2px solid var(--saffron);
+    border-radius: 20px;
+    padding: 18px;
+  }
+  .question {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  legend {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .hint {
+    display: block;
+    color: var(--thread-dim);
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip,
+  .next,
+  .skip,
+  .more,
+  .answer-list :global(button) {
+    min-height: 44px;
+    border-radius: 999px;
+    padding: 9px 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .chip {
+    background: var(--night-lift);
+  }
+  .chip[aria-pressed="true"],
+  .next {
+    background: var(--saffron);
+    color: var(--ink);
+  }
+  .ask-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .skip,
+  .answer-list :global(button) {
+    background: transparent;
+    border-color: var(--thread-dim);
+  }
+  .done {
+    margin: 0;
+  }
+  .answer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .answer-list :global(li) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--night-lift);
+    padding-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  .removed {
+    color: var(--coral);
+    padding-left: 1.1em;
+  }
+  .ranking {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .ranking :global(.row) {
+    background: var(--night-deep);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: grid;
+    gap: 6px;
+  }
+  .ranking :global(.unsafe) {
+    color: var(--thread-faint);
+  }
+  .ranking :global(.row-head) {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .ranking :global(.rank),
+  .ranking :global(.fit) {
+    font-family: var(--font-mono);
+    color: var(--saffron);
+  }
+  .ranking :global(.name) {
+    font-weight: 800;
+    color: var(--thread);
+  }
+  .ranking :global(.bar) {
+    display: block;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--night-lift);
+    overflow: hidden;
+  }
+  .ranking :global(.bar > span) {
+    display: block;
+    height: 100%;
+    background: var(--saffron);
+  }
+  .ranking :global(.tagline),
+  .ranking :global(.coverage) {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--thread-dim);
+  }
+  .ranking :global(.pros),
+  .ranking :global(.cons) {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.9rem;
+  }
+  .ranking :global(.cons) {
+    color: var(--coral);
+  }
+  .more {
+    width: 100%;
+    background: var(--night-lift);
+  }
+</style>

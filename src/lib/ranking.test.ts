@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { livableLanguages } from "./cities";
 import { bestMatches, rankCities, type Answers } from "./ranking";
 
 function scoreOf(cityName: string, answers: Answers): number {
@@ -9,7 +10,7 @@ function scoreOf(cityName: string, answers: Answers): number {
 
 function averageCost(answers: Answers, count: number): number {
   const top = bestMatches(answers, count);
-  return top.reduce((sum, m) => sum + m.city.scores.cost, 0) / top.length;
+  return top.reduce((sum, m) => sum + (m.city.scores.cost.level ?? 2.5), 0) / top.length;
 }
 
 describe("ranking the cities", () => {
@@ -32,7 +33,7 @@ describe("ranking the cities", () => {
 
   it("puts a city where the reader can live in their language first", () => {
     const [first] = bestMatches({ language: "pt" }, 1);
-    expect(first.city.languages).toContain("pt");
+    expect(livableLanguages(first.city)).toContain("pt");
   });
 
   it("favours affordable cities on a tight budget", () => {
@@ -100,6 +101,27 @@ describe("ranking the cities", () => {
         expect(line.text).not.toMatch(/personnalité|ton profil|tu es (quelqu|un |une |plutôt)/i);
       }
     }
+  });
+
+  it("says how much of each match rests on known values", () => {
+    for (const m of rankCities({ priorities: ["diaspora"], job: "remote" })) {
+      expect(m.coverage).toBeGreaterThanOrEqual(0);
+      expect(m.coverage).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("removes a city a stated constraint rules out, and says why", () => {
+    const strict: Answers = { language: "fr", languageOnly: true };
+    const lagos = rankCities(strict).find((m) => m.city.name === "Lagos");
+    expect(lagos?.excludedBecause).toBe("On n'y vit pas en français");
+    for (const m of bestMatches(strict, 20)) expect(m.excludedBecause).toBeUndefined();
+  });
+
+  it("only leaves out countries that punish homosexuality when the reader asks", () => {
+    const criminalising = (answers: Answers) =>
+      rankCities(answers).filter((m) => m.excludedBecause === "Le pays punit l'homosexualité");
+    expect(criminalising({})).toHaveLength(0);
+    expect(criminalising({ excludeCriminalising: true }).length).toBeGreaterThan(0);
   });
 
   it("keeps at most three priorities", () => {

@@ -2,7 +2,7 @@ import type { Answers } from "./ranking";
 
 export interface Choice {
   label: string;
-  value: string | number;
+  value: string | number | boolean;
 }
 
 export interface Question {
