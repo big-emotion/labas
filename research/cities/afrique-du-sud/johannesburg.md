@@ -89,7 +89,26 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - [climate.daily] October–November is jacaranda season: streets in Melrose and other northern suburbs turn purple; a commenter calls it the best time of year in Joburg and the creator warns about bees. — @movingtosouthafrica post 2026-10-17, social-caption + social-comment, confidence: medium
 - [community.expat] Newcomer social life runs through walks and coffee meet-ups (e.g. a "Beyond Coffee" jacaranda walk) and the events listings of @johannesburginyourpocket. — @movingtosouthafrica posts Oct 2026, social-caption, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Sandton-area asking prices to buy (sample of first results page): 1-bed 46 m² flat in Morningside R699,000 (≈ €37,380, about R15,200/m² ≈ €813/m²); 2-bed 79 m² in Hyde Park R2,399,900 (≈ €128,337); 3-bed house in Bryanston R5,915,000 (≈ €316,310). Asking prices, not sales. — Property24 Sandton for-sale listings, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Property24 states the "current" average property price in Sandton is R5,622,427 (≈ €300,665), with 9,124 properties on the market; period and method not given. — Property24 Sandton property values, read 2026-11-14, company, confidence: low
+- [housing.search] Properties listed (all types, including commercial and vacant land) for sale in Sandton fell from 12,301 in May 2026 to 11,199 in October 2026 (about −9%), with the biggest drops in 2- and 3-bed stock. — Property24 Sandton property trends, read 2026-11-14, company, confidence: medium ✎ spot-check 2026-11-14: corrected
+- [cost.rent] Apartment purchase price in the city centre about US$1,060/m² (≈ R17,161 at 16.19 ZAR/USD ≈ €918). — livingcost.org Johannesburg, updated 2026-06-21, company (aggregator), confidence: low
+- [cost.living] Rice 1 kg about US$1.81 (≈ R29 ≈ €1.57); 0.5 L beer US$1.89 in a shop (≈ R31 ≈ €1.64) and US$2.44 in a pub (≈ R40 ≈ €2.11). — livingcost.org Johannesburg, 2026-06-21, company (aggregator), confidence: low
+- [cost.living] Cinema ticket about US$8.59 (≈ R139 ≈ €7.44). — livingcost.org Johannesburg, 2026-06-21, company (aggregator), confidence: low
+- [daily.transport] Petrol averaged R29.81/litre nationally on 9 Nov 2026 (≈ €1.59) — far above the ~R23 quoted by Expat.com (Dec 2025) and livingcost.org's US$1.42 (≈ R23, June 2026); figures not averaged. — GlobalPetrolPrices.com, 2026-11-09, company, confidence: medium
+- [daily.transport] An 8 km taxi ride costs about US$8.38 (≈ R136 ≈ €7.26). — livingcost.org Johannesburg, 2026-06-21, company (aggregator), confidence: low
+- [daily.transport] Gautrain airport trips carry a surcharge of R155–185 (≈ €8–10, 2025) on top of the normal fare; a Gautrain card costs R21 unless you tap a contactless bank card. — Wikivoyage "Johannesburg", accessed 2026-11-14 (prices marked 2025), blog (travel wiki), confidence: medium
+- [daily.transport] Zebra Cabs (GPS-equipped) charge about R11/km (≈ €0.59), undated. — Wikivoyage "Johannesburg", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [cost.negotiation] Phone-booked taxis are often not metered and haggling is usual: agree the price when you call; the guide says Uber prices and service beat taxis. — Wikivoyage "Johannesburg", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [cost.negotiation] Shop prices are fixed; street vendors and open markets accept bargaining (e.g. Rosebank Sunday Market), with a reminder that crafters often live off these sales. — Wikivoyage "South Africa" and "Johannesburg", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [cost.negotiation] Ride-hailing: Uber and Bolt show a fixed app price, while inDrive lets the passenger propose a fare that drivers accept or counter (entry marked July 2020). — Wikivoyage "South Africa", accessed 2026-11-14, blog (travel wiki), confidence: low
+- [cost.living] Tipping norms: about 10% in restaurants and taxis, around R5 or more to petrol attendants (≈ €0.27), a few rand to uniformed car guards. — Wikivoyage "South Africa", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [family.schools] International primary school about US$5,103/year (≈ R82,618 ≈ €4,418) — lower than Expat.com's R100,000–135,000 for the French lycée; not averaged. — livingcost.org Johannesburg, 2026-06-21, company (aggregator), confidence: low
+- [family.childcare] Daycare/preschool about US$244/month (≈ R3,950 ≈ €211). — livingcost.org Johannesburg, 2026-06-21, company (aggregator), confidence: low
+
 ## Gaps
+
 - Durban not covered by any ★ account; South Africa Facebook groups not searched.
 - Numbeo pages were rate-limited (HTTP 429) on 2026-11-14; Numbeo figures come from the dossier's same-day verification.
 - Gautrain 2026 fares: reports say no June 2026 increase, but the source pages (Rekord/Citizen, Joburg ETC) returned 403 — not verified.
@@ -100,8 +119,10 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - Yeoville's Congolese/Rockey Street market details seen only in search snippets (southafrica.net) — not used.
 - Load-shedding status 2026: no new source opened (dossier says none since 16 May 2025).
 - Food scene and women-specific testimonies (beyond FCDO and SAPS figures) not found.
+- Price top-up 2026-11-14: the session's WebSearch budget was exhausted, so only directly fetched pages were used. Searched, not found: a dated source on rent-negotiation margins and agency-fee customs (Rental Housing Act text on SAFLII returned 403; PayProp index gated behind a form); Uber/Bolt per-km tariffs (Bolt city page shows none); current Gautrain point-to-point fares (site redirects to login); cooking oil price; GP cash consultation price beyond Expat.com; mobile-data bundle prices; club entry and concert prices; local private-school fees; sold (not asking) property prices. Numbeo still HTTP 429.
 
 ## Sources read
+
 1. Afrique du Sud dossier — research/countries/afrique-du-sud.md — internal research — read 2026-11-14
 2. Cost of Living in Johannesburg — https://www.numbeo.com/cost-of-living/in/Johannesburg — company (crowdsourced) — HTTP 429 on 2026-11-14; figures as verified in the dossier log of the same day
 3. Vivre en Afrique du Sud / Johannesburg guide — https://www.expat.com/fr/guide/afrique/afrique-du-sud/johannesburg/ — company — read 2026-11-14 (updated 2025-12-23)
@@ -130,3 +151,18 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 26. Le petit journal Johannesburg — https://lepetitjournal.com/johannesburg — local-media — read 2026-11-14
 - Social pass: Instagram @capetownetc — 6 latest posts, 2026-11-14
 - Social pass: Instagram @movingtosouthafrica — 5 posts (pinned + latest) and visible comments, 2026-11-14
+27. South Africa gasoline prices — https://www.globalpetrolprices.com/South-Africa/gasoline_prices/ — company — read 2026-11-14 (updated 2026-11-09)
+28. Cost of living in Johannesburg — https://livingcost.org/cost/south-africa/johannesburg — company (aggregator) — read 2026-11-14 (updated 2026-06-21)
+29. South Africa — https://en.wikivoyage.org/wiki/South_Africa — blog (travel wiki) — read 2026-11-14
+30. Johannesburg — https://en.wikivoyage.org/wiki/Johannesburg — blog (travel wiki) — read 2026-11-14
+31. Property for sale in Sandton — https://www.property24.com/for-sale/sandton/gauteng/109 — company (property portal) — read 2026-11-14
+32. Sandton property values — https://www.property24.com/property-values/sandton/gauteng/109 — company — read 2026-11-14
+33. Sandton property trends — https://www.property24.com/sandton/property-trends/109 — company — read 2026-11-14
+
+## Spot-check, price top-up (2026-11-14)
+
+- [housing.search] Homes listed for sale in Sandton — corrected (figures include non-residential listings)
+- [cost.rent] Apartment purchase price in the city centre — supported
+- [cost.living] Rice 1 kg about US$1.81 — supported
+- [daily.transport] Petrol averaged R29.81/litre — supported
+- [daily.transport] Gautrain airport trips carry a surcharge — supported

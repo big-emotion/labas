@@ -29,15 +29,30 @@ Extra city suggested by the dossier (executive capital, embassies, Lycée Jules-
 - [nature.access] About 70,000 jacaranda trees ("Jacaranda City"); locals use the National Botanical Garden and Rietvlei Nature Reserve. — Wikipedia "Pretoria" (accessed 2026-11-14), intl-media (encyclopaedia); Expatica (2025-06-03), intl-media, confidence: medium
 - [climate.daily] At ~1,339 m: hot, rainy summers (Jan average max ~29 °C), dry mild winters with nights around 4.6 °C in July and recent lows of 2 to −5 °C; ~662 mm rain, almost all in summer. — Wikipedia "Pretoria", accessed 2026-11-14, intl-media (encyclopaedia), confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Sunnyside asking rents (142 listings): 1-bed 34 m² R5,753/month (≈ €308); 2-bed 60 m² R7,250 (≈ €388); a 12 m² room in a flat share R2,950 (≈ €158). — Property24 Sunnyside to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Hatfield asking rents (482 listings): 1-bed 36 m² R7,390/month (≈ €395); 2-bed 60 m² R10,950 (≈ €586); a 23 m² student studio near campus R5,590 (≈ €299). — Property24 Hatfield to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Sunnyside asking prices to buy (871 listings, all flats): 1-bed 40 m² R358,000 (≈ €19,144, about R8,950/m² ≈ €479/m²); 2-bed 47 m² R310,000 (≈ €16,578). Waterkloof: 1-bed 44 m² R1,280,000 (≈ €68,449, about R29,100/m² ≈ €1,556/m²); 2-bed 105 m² R2,785,000 (≈ €148,930). — Property24 Sunnyside and Waterkloof for-sale, read 2026-11-14, company (property portal), confidence: medium
+- [cost.negotiation] 4 of the first 22 Sunnyside sale listings carry a public "Reduced" tag (e.g. a 72 m² 2-bed now at R450,000 ≈ €24,064); none in Waterkloof, where one house is "Under Offer" — visible price cuts cluster at the cheap end. — Property24, read 2026-11-14, company, confidence: low
+- [cost.negotiation] Freedom Park charges R80 for South Africans (≈ €4) and R160 for international visitors (≈ €9): an official two-tier "foreigner price". — Wikivoyage "Pretoria", listing updated Nov 2025, blog (travel wiki), confidence: medium
+- [cost.living] Groceries: rice 1 kg US$1.96 (≈ R32 at 16.19 ZAR/USD ≈ €1.70), chicken breast 1 kg US$5.08 (≈ R82 ≈ €4.40), 12 eggs US$2.52 (≈ R41 ≈ €2.18), 1 L milk US$1.24 (≈ R20 ≈ €1.07). — livingcost.org Pretoria, updated 2026-06-21, company (aggregator), confidence: low
+- [cost.living] 0.5 L beer in a pub US$2.59 (≈ R42 ≈ €2.24); cinema US$7.34 (≈ R119 ≈ €6.35); gym US$33.90/month (≈ R549 ≈ €29). — livingcost.org Pretoria, 2026-06-21, company (aggregator), confidence: low
+- [daily.transport] Gautrain OR Tambo–Pretoria about R164 (≈ €9, undated); an 8 km taxi ride about US$9.15 (≈ R148 ≈ €7.92); petrol averaged R29.81/litre nationally on 9 Nov 2026 (≈ €1.59). — Wikivoyage "Pretoria" (accessed 2026-11-14), blog; livingcost.org (2026-06-21) and GlobalPetrolPrices.com (2026-11-09), company, confidence: low
+- [daily.internet] Home internet 50 Mbps+ about US$37.20/month (≈ R602 ≈ €32); utilities for one person US$94.40 (≈ R1,528 ≈ €82). — livingcost.org Pretoria, 2026-06-21, company (aggregator), confidence: low
+- [family.schools] International primary school about US$5,047/year (≈ R81,711 ≈ €4,370); daycare/preschool US$266/month (≈ R4,307 ≈ €230). — livingcost.org Pretoria, 2026-06-21, company (aggregator), confidence: low
+
 ## Gaps
+
 - Numbeo Pretoria cost-of-living page rate-limited (HTTP 429) — no crowdsourced price basket.
 - Tshwane water outages (Aug–Sep 2026, Soshanguve/Mabopane, Kalafong hospital) seen only in search snippets — not used.
 - Safety by neighbourhood: only promotional or undated expat guides found; no SAPS precinct data opened.
 - No source on African diaspora communities, French-speaking community size or returnee experience specific to Pretoria.
 - Healthcare (Steve Biko Academic Hospital, private hospitals) not researched in this pass.
 - Rent figures rest on one blog series (asking rents, not signed leases).
+- Price top-up 2026-11-14: the session's WebSearch budget was exhausted, so only directly fetched pages were used. Searched, not found: rent-negotiation margins and agency-fee customs; Tshwane 2026/27 electricity/water tariffs; A Re Yeng and minibus fares; Uber/Bolt rates; GP and private-clinic prices; mobile data; club entry; local private-school fees; Brooklyn/Menlyn listings (no Property24 link found). Numbeo still HTTP 429.
 
 ## Sources read
+
 1. Afrique du Sud dossier — research/countries/afrique-du-sud.md — internal research — read 2026-11-14
 2. Pretoria rents — https://theafricanvestor.com/blogs/news/pretoria-rents — blog — read 2026-11-14 (updated 2026-09-21)
 3. Tshwane power crisis: City hopes to restore all customers by Thursday evening — https://www.ewn.co.za/2026/10/01/tshwane-power-crisis-city-hopes-to-restore-all-customers-by-thursday-evening — local-media — read 2026-11-14
@@ -49,3 +64,14 @@ Extra city suggested by the dossier (executive capital, embassies, Lycée Jules-
 9. Best cities to live in South Africa — https://expatica.com/za/moving/location/best-cities-to-live-in-south-africa-1108181 — intl-media — read 2026-11-14 (updated 2025-06-03)
 10. Pretoria — https://en.wikipedia.org/wiki/Pretoria — intl-media (encyclopaedia) — read 2026-11-14
 11. Cost of Living in Pretoria — https://www.numbeo.com/cost-of-living/in/Pretoria — company (crowdsourced) — HTTP 429 on 2026-11-14, not used
+12. Cost of living in Pretoria — https://livingcost.org/cost/south-africa/pretoria — company (aggregator) — read 2026-11-14 (updated 2026-06-21)
+13. Pretoria — https://en.wikivoyage.org/wiki/Pretoria — blog (travel wiki) — read 2026-11-14
+14. South Africa gasoline prices — https://www.globalpetrolprices.com/South-Africa/gasoline_prices/ — company — read 2026-11-14 (updated 2026-11-09)
+15. Sunnyside to rent — https://www.property24.com/to-rent/sunnyside/pretoria/gauteng/41 — company (property portal) — read 2026-11-14
+16. Hatfield to rent — https://www.property24.com/to-rent/hatfield/pretoria/gauteng/304 — company — read 2026-11-14
+17. Sunnyside for sale — https://www.property24.com/for-sale/sunnyside/pretoria/gauteng/41 — company — read 2026-11-14
+18. Waterkloof for sale — https://www.property24.com/for-sale/waterkloof/pretoria/gauteng/3968 — company — read 2026-11-14
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.negotiation] Freedom Park charges R80 — supported

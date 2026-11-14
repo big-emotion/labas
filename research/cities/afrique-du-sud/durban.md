@@ -66,7 +66,24 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - [admin.visa] Critical Skills Work Visa described as points-based since Oct 2024 (100 points), valid up to 5 years (the dossier could not confirm this on the national page). — Expat.com, 2025-12-09, company, confidence: low
 - [admin.nationality] No diaspora or right-of-return route; descent needs a South African parent; naturalisation after 5 years of permanent residence plus 4 of the last 8 years resident; dual nationality protected since 6 May 2025. — Wikipedia "South African nationality law", accessed 2026-11-14, intl-media (encyclopaedia), confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Umhlanga asking rents: furnished 1-bed 45 m² in New Town Centre R11,500/month (≈ €615); furnished 43 m² studio at 1001 Oceans R18,000 (≈ €963); 2-bed 78 m² R12,500 (≈ €668); 3-bed 250 m² R28,000 (≈ €1,497). — Property24 Umhlanga to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Morningside asking rents: 1-bed 70 m² R6,500/month (≈ €348); 1-bed 85 m² R8,165 (≈ €437); 2-bed 104 m² R8,000 (≈ €428); 3-bed 110 m² R13,500 (≈ €722). — Property24 Morningside (Durban) to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Umhlanga asking prices to buy (3,366 listings): 2-bed 61 m² in Umhlanga Central R1,495,000 (≈ €79,947, about R24,500/m² ≈ €1,311/m²); 2-bed 93 m² in Umhlanga Ridgeside R3,900,000 (≈ €208,556); 3-bed house in La Lucia R4,200,000 (≈ €224,599). — Property24 Umhlanga for-sale, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Morningside asking prices to buy (571 listings): 1-bed 53 m² R795,000 (≈ €42,513, about R15,000/m² ≈ €802/m²); 1-bed 67 m² on Florida Road R980,000 (≈ €52,406); 2-bed 103 m² R1,450,000 (≈ €77,540). — Property24 Morningside (Durban) for-sale, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Average purchase price about US$897/m² for a city-centre apartment (≈ R14,522 at 16.19 ZAR/USD ≈ €777) and US$774/m² for a suburban house (≈ R12,531 ≈ €670). — livingcost.org Durban, updated 2026-06-21, company (aggregator), confidence: low
+- [cost.negotiation] Two Umhlanga flats on the first results page carry a public "Reduced" tag (1-bed R1,800,000 ≈ €96,257; 2-bed R2,395,000 ≈ €128,075); Morningside listings show "Under Offer" and "NO TRANSFER DUTY" labels but no cuts. — Property24, read 2026-11-14, company, confidence: low
+- [cost.negotiation] Victoria Street Market: "Haggle hard, beware of pickpockets." — Wikivoyage "Durban", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [cost.negotiation] Shop prices are fixed; street vendors and open markets accept bargaining; Uber is described as often cheaper than a metered taxi. — Wikivoyage "South Africa" and "Durban", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [daily.transport] From King Shaka airport, a taxi to Marine Parade or the centre "can cost well over R400" (≈ €21+), while the airport shuttle bus costs R80 per person (≈ €4). — Wikivoyage "Durban", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [daily.transport] An 8 km taxi ride costs about US$6.37 (≈ R103 ≈ €5.51); petrol averaged R29.81/litre nationally on 9 Nov 2026 (≈ €1.59), versus US$1.33 (≈ R22) on livingcost in June 2026 — not averaged. — livingcost.org Durban (2026-06-21) and GlobalPetrolPrices.com (2026-11-09), company, confidence: medium
+- [cost.living] Groceries: bread 0.5 kg US$1.00 (≈ R16 ≈ €0.87), rice 1 kg US$1.60 (≈ R26 ≈ €1.39), chicken breast 1 kg US$5.16 (≈ R84 ≈ €4.47). — livingcost.org Durban, 2026-06-21, company (aggregator), confidence: low
+- [cost.living] 0.5 L beer US$1.65 in a shop (≈ R27 ≈ €1.43) and US$2.45 in a pub (≈ R40 ≈ €2.12). — livingcost.org Durban, 2026-06-21, company (aggregator), confidence: low
+- [daily.power] Utilities for one person about US$90.30/month (≈ R1,462 ≈ €78); home internet 50 Mbps+ US$36.60 (≈ R593 ≈ €32). — livingcost.org Durban, 2026-06-21, company (aggregator), confidence: low
+- [family.childcare] Daycare/preschool about US$288/month (≈ R4,663 ≈ €249); international primary school US$6,393/year (≈ R103,503 ≈ €5,535). — livingcost.org Durban, 2026-06-21, company (aggregator), confidence: low
+
 ## Gaps
+
 - Go!Durban bus rapid transit launch (reported as planned for Dec 2026 after 15 years of delays): BusinessTech and IOL pages returned 403 — not verified.
 - Nagle Dam valve failure / water rationing (March 2026) and July 2026 sabotage outages: seen only in search snippets.
 - Beach E. coli readings after March 2026 (Citizen) — page 403.
@@ -75,8 +92,10 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - Electricity tariffs 2026 for eThekwini: snippets only ("biggest jump" among metros) — not used.
 - Floods since 2022: no 2026 flood item found.
 - Detailed nightlife beyond Florida Road: not found.
+- Price top-up 2026-11-14: the session's WebSearch budget was exhausted, so only directly fetched pages were used. Searched, not found: a dated source on rent-negotiation margins and agency-fee customs (Rental Housing Act on SAFLII 403); eThekwini 2026/27 electricity and water tariffs; Uber/Bolt per-km rates; GP cash consultation price; mobile data bundles; club entry and concert prices; cooking oil price and market vs supermarket comparison; current People Mover/Mynah fares (Wikivoyage figures undated, not used). Numbeo still HTTP 429.
 
 ## Sources read
+
 1. Afrique du Sud dossier — research/countries/afrique-du-sud.md — internal research — read 2026-11-14
 2. Cost of Living in Durban — https://www.numbeo.com/cost-of-living/in/Durban — company (crowdsourced) — HTTP 429 on 2026-11-14; figures as verified in the dossier log of the same day
 3. Vivre à Durban : le guide de l'expatrié — https://www.expat.com/fr/guide/afrique/afrique-du-sud/durban/ — company — read 2026-11-14 (updated 2025-12-09)
@@ -96,3 +115,15 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 17. Best cities to live in South Africa — https://expatica.com/za/moving/location/best-cities-to-live-in-south-africa-1108181 — intl-media — read 2026-11-14 (updated 2025-06-03)
 18. Durban — https://en.wikipedia.org/wiki/Durban — intl-media (encyclopaedia) — read 2026-11-14
 19. South African nationality law — https://en.wikipedia.org/wiki/South_African_nationality_law — intl-media (encyclopaedia) — read 2026-11-14
+20. Cost of living in Durban — https://livingcost.org/cost/south-africa/durban — company (aggregator) — read 2026-11-14 (updated 2026-06-21)
+21. Durban — https://en.wikivoyage.org/wiki/Durban — blog (travel wiki) — read 2026-11-14
+22. South Africa — https://en.wikivoyage.org/wiki/South_Africa — blog (travel wiki) — read 2026-11-14
+23. South Africa gasoline prices — https://www.globalpetrolprices.com/South-Africa/gasoline_prices/ — company — read 2026-11-14 (updated 2026-11-09)
+24. Umhlanga to rent — https://www.property24.com/to-rent/umhlanga/kwazulu-natal/185 — company (property portal) — read 2026-11-14
+25. Morningside (Durban) to rent — https://www.property24.com/to-rent/morningside/durban/kwazulu-natal/6021 — company — read 2026-11-14
+26. Umhlanga for sale — https://www.property24.com/for-sale/umhlanga/kwazulu-natal/185 — company — read 2026-11-14
+27. Morningside (Durban) for sale — https://www.property24.com/for-sale/morningside/durban/kwazulu-natal/6021 — company — read 2026-11-14
+
+## Spot-check, price top-up (2026-11-14)
+
+- [daily.transport] From King Shaka airport — supported

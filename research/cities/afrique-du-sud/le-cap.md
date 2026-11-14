@@ -73,7 +73,27 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - [cost.rent] Precast "wendy house" structures are sold in the group as housing: one room R6,500 (≈ €348), two rooms R10,000 (≈ €535), a toilet unit R4,000, transport included; a sign of the backyard-dwelling market in Cape Town's townships. — same group 2026-11-14, social-caption, confidence: medium
 - [cost.negotiation] None of the 15 priced posts says "negotiable": in this group prices are posted as fixed by small businesses. — same group 2026-11-14, social-caption, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Sea Point asking rents (238 listings): unfurnished 40 m² studio R16,000–17,000/month (≈ €856–909); furnished 1-bed 45 m² R19,000 (≈ €1,016); 2-bed 104 m² R30,000 (≈ €1,604); 2-bed 115 m² R48,000 (≈ €2,567). — Property24 Sea Point to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Observatory asking rents: 31 m² studio R12,500/month (≈ €668); 2-bed 75 m² R19,000 (≈ €1,016); 3-bed 90 m² R34,000 (≈ €1,818). — Property24 Observatory to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Woodstock asking rents: 1-bed 41 m² R12,500/month (≈ €668); a room in a 4-bed house share R6,500 (≈ €348); only 104 of 483 Woodstock rental listings are residential. — Property24 Woodstock to-rent, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] An 18 m² micro-studio in the City Centre is advertised at R9,950/month (≈ €532). — Property24 (promoted listing on the Observatory page), read 2026-11-14, company, confidence: low
+- [cost.rent] Sea Point asking prices to buy (236 listings): 1-bed 37 m² R3,750,000 (≈ €200,535, about R101,000/m² ≈ €5,420/m²); 1-bed 53 m² R4,500,000 (≈ €240,642); 2-bed 82 m² R8,750,000 (≈ €467,914). — Property24 Sea Point for-sale, read 2026-11-14, company (property portal), confidence: medium
+- [cost.rent] Average purchase price about US$2,325/m² for a city-centre apartment (≈ R37,642 at 16.19 ZAR/USD ≈ €2,013) and US$1,508/m² for a suburban house (≈ R24,415 ≈ €1,306) — far below Sea Point asking levels; not averaged. — livingcost.org Cape Town, updated 2026-06-21, company (aggregator), confidence: low
+- [cost.negotiation] On the first Sea Point pages, one 2-bed for sale (93 m², R7,500,000 ≈ €401,070) and one 3-bed rental (R45,000 ≈ €2,406) carry a public "Reduced" tag; most asking prices show no cut. — Property24 Sea Point, read 2026-11-14, company, confidence: low
+- [cost.negotiation] Open-market prices (e.g. Greenmarket Square) are described as "almost always very negotiable", often untagged; visitors with foreign accents are said to be quoted two to three times the local price. — Wikivoyage "Cape Town", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [cost.negotiation] At taxi ranks, ask the price first: the marshal may say "on the meter" or quote a fixed amount that can be negotiated; an airport metered-taxi fare "can be bargained down to R150" (≈ €8). — Wikivoyage "Cape Town", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [daily.transport] Airport to city centre (~21 km) costs about R150 by Bolt/Uber (≈ €8); metered taxis charge about R8–10/km; touts in "Official Airport Taxi" vests are unmetered and dearer. — Wikivoyage "Cape Town", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+- [daily.transport] An 8 km taxi ride costs about US$11 (≈ R178 ≈ €9.52); petrol averaged R29.81/litre nationally on 9 Nov 2026 (≈ €1.59), versus US$1.33 (≈ R22) on livingcost in June 2026 — not averaged. — livingcost.org Cape Town (2026-06-21) and GlobalPetrolPrices.com (2026-11-09), company, confidence: medium
+- [cost.living] Groceries: bread 0.5 kg US$1.20 (≈ R19 ≈ €1.04), rice 1 kg US$2.25 (≈ R36 ≈ €1.95), chicken breast 1 kg US$6.77 (≈ R110 ≈ €5.86), 12 eggs US$2.97 (≈ R48 ≈ €2.57). — livingcost.org Cape Town, 2026-06-21, company (aggregator), confidence: low
+- [cost.living] 0.5 L beer US$1.47 in a shop (≈ R24 ≈ €1.27) and US$3.03 in a pub (≈ R49 ≈ €2.62); cinema US$9.14 (≈ R148 ≈ €7.91); gym US$49.10/month (≈ R795 ≈ €42.51). — livingcost.org Cape Town, 2026-06-21, company (aggregator), confidence: low
+- [daily.power] Utilities for one person about US$72.40/month (≈ R1,172 ≈ €63); home internet 50 Mbps+ US$41.70 (≈ R675 ≈ €36). — livingcost.org Cape Town, 2026-06-21, company (aggregator), confidence: low
+- [family.schools] International primary school about US$6,197/year (≈ R100,329 ≈ €5,365); daycare/preschool US$272/month (≈ R4,404 ≈ €235). — livingcost.org Cape Town, 2026-06-21, company (aggregator), confidence: low
+- [nature.access] Table Mountain cable car: R450 return bought online (≈ €24), R490 at the station, R295 one way. — Wikivoyage "Cape Town", prices marked Nov 2025, blog (travel wiki), confidence: medium
+- [cost.living] Tipping norms: about 10% in restaurants and taxis, around R5 or more to petrol attendants, a few rand to uniformed car guards. — Wikivoyage "South Africa", accessed 2026-11-14 (undated text), blog (travel wiki), confidence: low
+
 ## Gaps
+
 - Suburb-level rents (Sea Point, Woodstock, Observatory, Southern Suburbs) for 2026: only weak SEO pages found; no PayProp/TPN suburb table.
 - Groote Schuur / Tygerberg 2026 waiting times: only 2023–2024 budget-cut coverage found.
 - Electricity: July 2026 Cape Town tariff increase reported at conflicting rates (6.6%–7.5%, one outlier 12.65%); pages not fetched — not used.
@@ -84,8 +104,10 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - Bo-Kaap Muslim community and Cape Malay food: only tourism pages, not fetched successfully.
 - No French-speaking African returnee or diaspora testimony from Cape Town found.
 <!-- listings-pass gaps 2026-11-14 -->
+- Price top-up 2026-11-14: the session's WebSearch budget was exhausted, so only directly fetched pages were used. Searched, not found: a dated source on rent-negotiation margins, deposits and agency-fee customs (Rental Housing Act on SAFLII 403; PayProp gated); 2026/27 City of Cape Town electricity and water tariffs; Uber/Bolt per-km rates; MyCiTi taxi/minibus fares; Kirstenbosch and SANParks resident vs foreign fees (pages without prices or 403); GP cash price beyond Expat.com; mobile data bundles; club entry, concert prices; cooking oil and milk at market vs supermarket. Numbeo still HTTP 429.
 
 ## Sources read
+
 1. Afrique du Sud dossier — research/countries/afrique-du-sud.md — internal research — read 2026-11-14
 2. Cost of Living in Cape Town — https://www.numbeo.com/cost-of-living/in/Cape-Town — company (crowdsourced) — HTTP 429 on 2026-11-14; figures as verified in the dossier log of the same day
 3. S'expatrier au Cap (national guide) — https://www.expat.com/fr/guide/afrique/afrique-du-sud/le-cap/ — company — read 2026-11-14 (updated 2025-12-23)
@@ -110,3 +132,18 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 22. South African nationality law — https://en.wikipedia.org/wiki/South_African_nationality_law — intl-media (encyclopaedia) — read 2026-11-14
 23. Remote work visa (digital nomad visa) FAQ — https://www.xpatweb.com/?p=41683 — company — read 2026-11-14
 - Social pass: Facebook "Living in Cape Town" (375195877251973) — chronological feed, 36 posts, 2026-11-14
+24. Cost of living in Cape Town — https://livingcost.org/cost/south-africa/cape-town — company (aggregator) — read 2026-11-14 (updated 2026-06-21)
+25. Cape Town — https://en.wikivoyage.org/wiki/Cape_Town — blog (travel wiki) — read 2026-11-14
+26. South Africa — https://en.wikivoyage.org/wiki/South_Africa — blog (travel wiki) — read 2026-11-14
+27. South Africa gasoline prices — https://www.globalpetrolprices.com/South-Africa/gasoline_prices/ — company — read 2026-11-14 (updated 2026-11-09)
+28. Sea Point to rent — https://www.property24.com/to-rent/sea-point/cape-town/western-cape/11021 — company (property portal) — read 2026-11-14
+29. Woodstock to rent — https://www.property24.com/to-rent/woodstock/cape-town/western-cape/10164 — company — read 2026-11-14
+30. Observatory to rent — https://www.property24.com/to-rent/observatory/cape-town/western-cape/10157 — company — read 2026-11-14
+31. Sea Point for sale — https://www.property24.com/for-sale/sea-point/cape-town/western-cape/11021 — company — read 2026-11-14
+
+## Spot-check, price top-up (2026-11-14)
+
+- [nature.access] Table Mountain cable car — supported
+- [cost.negotiation] Open-market prices (e.g. Greenmarket Square) — supported
+- [daily.transport] Airport to city centre (~21 km) — supported
+- [cost.rent] Average purchase price about US$2,325/m² — supported
