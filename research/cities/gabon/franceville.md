@@ -31,14 +31,28 @@ Extra city suggested by the dossier ("additional: third city, inland, mining and
 - [climate.daily] Subequatorial: rainy season roughly September–May with frequent storms, a cooler dry season June–August; altitude makes the heat a little milder than on the coast; about 1,860 mm of rain a year. — Wikipedia "Franceville" (EN/FR), accessed 2026-11-14, academic, confidence: medium
 - [nature.access] Poubara Falls and liana bridges about 15 km south; the Lékédi park wildlife reserve; Lopé National Park (UNESCO) and the Lastourville caves are named as nearby trips. — Wikipedia "Franceville" accessed 2026-11-14 / Expat.com Guide Gabon 2025-11-06, academic + company, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Regulated pump prices rose nationwide on 1 November 2026: super 735 XAF/litre (≈ €1.12, from 595) and diesel 705 (≈ €1.07, from 575); the 12.5 kg gas bottle stayed at 4,950 (≈ €7.55). — Koaci, 2026-11-02, intl-media, confidence: high
+- [daily.transport] Transgabonais fares Owendo–Franceville in 2022: express VIP 64,300 XAF (≈ €98), first class 56,300 (≈ €86), second 42,200 (≈ €64); omnibus first 47,200 (≈ €72), second 33,100 (≈ €50). These differ from the 15,000–35,000 range quoted elsewhere in this file. — Wikivoyage FR "Franceville", accessed 2026-11-14 (section updated Feb 2023), blog, confidence: low
+- [business.invest] The state's SNI put 100 serviced plots in Franceville and 100 in nearby Moanda on sale from 1 April 2026, with a land title; prices outside Essassa (5,500 XAF/m² near Libreville) are set by location and were not published. — Ministry of Housing speech, 2026-04-01, official, confidence: high
+- [family.schools] The French-curriculum Collège Henri-Sylvoz in Moanda charges €3,420–4,395 a year (≈ 2.24–2.88 million XAF), extras on top. — Expat.com Guide Gabon, 2025-11-06, company, confidence: low
+- [health.care] GP visits cost 15,000–25,000 XAF (≈ €23–38) and specialists 25,000–50,000 (≈ €38–76); national figures, not split by city. — Africarrières, 2026-08-07, company, confidence: low
+- [cost.negotiation] A travel wiki says to haggle on everything in Gabon, "surtout quand on est européen, étranger" (especially as a European or foreigner); not specific to Franceville and undated. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Taxis nationwide have no meter: agree the price of a full or half trip first, roughly 500–2,000 XAF (≈ €0.76–3.05); "clandos" on unpaved roads are negotiated too. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No search could be run (budget exhausted), so there is no local press on Franceville's power or water service, rents by neighbourhood, crime, nightlife, prices or returnees.
 - No resident testimony or forum thread specific to Franceville was found among fetched pages.
 - Internet quality, mobile-money agents, banks and ATMs: not found.
 - Women's safety, LGBT life, racism: no Franceville-specific dated source.
 - Uranium mining legacy at Mounana: Wikipedia says the reclamation is disputed, but no dated source on health or environmental effects was read.
+<!-- price-topup gaps 2026-11-14 -->
+- The shared web-search budget was exhausted before any Franceville price search; only pages fetched directly were used. Combien-coute has no Franceville figures (national averages only).
+- Not found: rents by neighbourhood, sale prices, staple and market prices, taxi and moto-taxi fares, current train and flight fares, school fees in Franceville itself, clinic prices, utilities and internet bills, going-out prices, agency fees, local negotiation customs.
 
 ## Sources read
+
 1. Franceville — Wikipedia — https://en.wikipedia.org/wiki/Franceville — academic — date read (2026-11-14)
 2. Franceville — Wikipédia — https://fr.wikipedia.org/wiki/Franceville — academic — date read (2026-11-14)
 3. Guide Gabon (Franceville section) — Expat.com — https://www.expat.com/fr/guide/afrique/gabon/franceville/ — company — date read (2026-11-14)
@@ -47,3 +61,13 @@ Extra city suggested by the dossier ("additional: third city, inland, mining and
 6. Conseils aux voyageurs – Gabon – Informations utiles — France Diplomatie — https://www.diplomatie.gouv.fr/fr/information-par-pays/gabon/conseils-aux-voyageurs-informations-utiles — official — date read (2026-11-14)
 7. Attention aux faux ! Seulement 11 écoles homologuées par la France au Gabon — Gabonreview — https://www.gabonreview.com/attention-aux-faux-seulement-11-ecoles-homologuees-par-la-france-au-gabon/ — local-media — date read (2026-11-14)
 8. Gabon : transports collectifs, la galère des Librevillois — Le360 Afrique — https://afrique.le360.ma/societe/gabon-transports-collectifs-la-galere-des-librevillois_JNZIEDTMCNHQZNVGIHWHFGCJHY — intl-media — date read (2026-11-14)
+9. Gabon : faire le plein coûte désormais beaucoup plus cher, l'essence grimpe à 735 FCFA — Koaci — https://www.koaci.com/article/2026/11/02/gabon/societe/gabon-faire-le-plein-coute-desormais-beaucoup-plus-cher-lessence-grimpe-a-735-fcfa_202200.html — intl-media — date read (2026-11-14)
+10. Franceville — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Franceville — blog — date read (2026-11-14)
+11. Lancement de la commercialisation de 2 500 parcelles (allocution du ministre du Logement, 1er avril 2026) — Ministère du Logement (PDF) — https://www.mays-mouissi.com/wp-content/uploads/2026/04/Discours-2-MM-Lancement-ventes-de-parcelles-SNI-Essassa.pdf — official — date read (2026-11-14)
+12. Guide Gabon — Expat.com — https://www.expat.com/fr/guide/afrique/gabon/ — company — date read (2026-11-14)
+13. Gabon — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Gabon — blog — date read (2026-11-14)
+14. Coût de la vie à Franceville — Combien-coute.net — https://www.combien-coute.net/cout-de-la-vie/gabon/franceville/ — company — date read (2026-11-14)
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.negotiation] Taxis nationwide have no meter — supported

@@ -62,15 +62,35 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 - [nature.access] Sogara beach in town, Cap Lopez about 30 minutes from the centre, and Loango National Park reachable via Omboué. — Expat.com Guide Port-Gentil, 2025-12-04, company, confidence: medium
 - [other] The city is a historic opposition stronghold: riots followed an opposition leader's death in 1990, and clashes after the 2009 election left three dead officially. — Wikipédia "Port-Gentil", accessed 2026-11-14, academic, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Regulated pump prices rose nationwide on 1 November 2026: super 735 XAF/litre (≈ €1.12, from 595) and diesel 705 (≈ €1.07, from 575); lamp oil 450 (≈ €0.69) and the 12.5 kg gas bottle 4,950 (≈ €7.55) unchanged. — Koaci, 2026-11-02, intl-media, confidence: high
+- [cost.living] The baguette's reference price is 125 XAF (≈ €0.19); in Libreville neighbourhood shops charge 150 (≈ €0.23) since the September 2026 flour rise. No Port-Gentil bread price was found. — Gabonreview, 2026-10-14, local-media, confidence: medium
+- [cost.living] Monthly utilities (electricity, water, internet) about 90,000 XAF (≈ €137) for one person and 120,000 (≈ €183) for a family of four. — Expat.com Guide Port-Gentil, 2025-12-04, company, confidence: medium
+- [cost.living] Eating-out budget: about 90,000 XAF a month (≈ €137) for 8–10 meals for one person, 180,000 (≈ €274) for 10–12 family meals. — Expat.com Guide Port-Gentil, 2025-12-04, company, confidence: medium
+- [family.schools] The guide's family budget sets 541,667 XAF a month (≈ €826) for two children's school fees, without naming the school. — Expat.com Guide Port-Gentil, 2025-12-04, company, confidence: low
+- [health.care] GP visits cost 15,000–25,000 XAF (≈ €23–38) and specialists 25,000–50,000 (≈ €38–76); these are national figures, not split by city. — Africarrières, 2026-08-07, company, confidence: low
+- [cost.rent] The Gabon-wide guide says good-standard housing for energy-sector expatriates in Port-Gentil costs about the same as in Libreville (no figures). — Expat.com Guide Gabon, 2025-11-06, company, confidence: low
+- [business.invest] The state's SNI put 200 serviced plots in Port-Gentil on sale from 1 April 2026, with a land title; the fixed 5,500 XAF/m² price applies only to Essassa near Libreville, and other sites are priced by location. — Ministry of Housing speech, 2026-04-01, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — PDF text unreadable; only a summary lists Port-Gentil with a question mark, and the 200-plot figure and title are not confirmed
+- [daily.transport] Boats from Libreville: Sonaga about 35,000 XAF one way (≈ €53) and Logimar 241 from 36,000 (≈ €55) in economy (entries dated Feb 2023, old). — Wikivoyage FR "Libreville", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] A travel wiki says to haggle on everything in Gabon, "surtout quand on est européen, étranger" (especially as a European or foreigner), and describes a European-level and a local price level; it is not specific to Port-Gentil and is undated. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Taxis nationwide have no meter: the price for a full or half trip is agreed first, roughly 500–2,000 XAF (≈ €0.76–3.05), and unofficial "clandos" on unpaved roads are also negotiated. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - The web-search budget ran out after the first Port-Gentil search, so no searches were run for rent by neighbourhood, crime reports, ferry operators and fares, flight prices, nightlife venues, returnees or the oil-job market in 2026.
 - No current (2024–2026) resident testimony: the only Port-Gentil forum threads with content are 8–14 years old.
 - Fixed-line and fibre internet: no source beyond the expat guide's "varies by place".
 - Hospitals: no public CHR quality data; no medical-evacuation details specific to the city.
 - Women's safety, LGBT life, racism or colourism, and how returnees are treated: no Port-Gentil-specific dated source found.
 - Admin, visa and nationality rules are national; see the Libreville file.
+<!-- price-topup gaps 2026-11-14 -->
+- The shared web-search budget ran out before any Port-Gentil price search; only pages fetched directly were used.
+- Rents by neighbourhood and sale prices: Expat.com's Port-Gentil property page showed only Libreville listings in November 2026; no local agency or portal found. Combien-coute's "Port-Gentil" page shows national averages identical to Libreville's, so it was not used.
+- Not found: market vs supermarket staple prices, current ferry and flight fares, taxi fares beyond the 400 XAF start, school fees for Victor-Hugo, clinic prices, fibre and mobile-data prices, nightlife and concert prices, ride-hailing (no app found), agency fees.
+- Negotiation: no Port-Gentil-specific source; the Wikivoyage FR Port-Gentil page has empty sections; Numbeo returned HTTP 429.
 
 ## Sources read
+
 1. Guide de l'expatrié à Port-Gentil — Expat.com — https://www.expat.com/fr/guide/afrique/gabon/port-gentil/ — company — date read (2026-11-14)
 2. Guide Gabon — Expat.com — https://www.expat.com/fr/guide/afrique/gabon/ — company — date read (2026-11-14)
 3. Coût de la vie au Gabon — Africarrières — https://africarrieres.com/gabon/fr/guide/decouvrir/cout-de-la-vie — company — date read (2026-11-14)
@@ -94,3 +114,15 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 21. Forum Port-Gentil (thread index) — Expat.com — https://www.expat.com/fr/forum/afrique/gabon/port-gentil/ — forum — date read (2026-11-14)
 22. Vie à Port-Gentil — Expat.com forum — https://www.expat.com/fr/forum/afrique/gabon/port-gentil/635318-vie-a-port-gentil.html — forum — date read (2026-11-14)
 23. Vivre à Port-Gentil — Expat.com forum — https://www.expat.com/fr/forum/afrique/gabon/port-gentil/194293-vivre-port-gentil.html — forum — date read (2026-11-14)
+24. Gabon : faire le plein coûte désormais beaucoup plus cher, l'essence grimpe à 735 FCFA — Koaci — https://www.koaci.com/article/2026/11/02/gabon/societe/gabon-faire-le-plein-coute-desormais-beaucoup-plus-cher-lessence-grimpe-a-735-fcfa_202200.html — intl-media — date read (2026-11-14)
+25. Vie chère : la hausse de la farine fait planer la menace sur le prix du pain — Gabonreview — https://www.gabonreview.com/vie-chere-la-hausse-de-la-farine-fait-planer-la-menace-sur-le-prix-du-pain/ — local-media — date read (2026-11-14)
+26. Lancement de la commercialisation de 2 500 parcelles (allocution du ministre du Logement, 1er avril 2026) — Ministère du Logement (PDF) — https://www.mays-mouissi.com/wp-content/uploads/2026/04/Discours-2-MM-Lancement-ventes-de-parcelles-SNI-Essassa.pdf — official — date read (2026-11-14)
+27. Libreville — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Libreville — blog — date read (2026-11-14)
+28. Gabon — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Gabon — blog — date read (2026-11-14)
+29. Port-Gentil — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Port-Gentil — blog — date read (2026-11-14)
+30. Immobilier Port-Gentil — Expat.com — https://www.expat.com/fr/immobilier/afrique/gabon/port-gentil/ — company — date read (2026-11-14)
+31. Coût de la vie à Port-Gentil — Combien-coute.net — https://www.combien-coute.net/cout-de-la-vie/gabon/port-gentil/ — company — date read (2026-11-14)
+
+## Spot-check, price top-up (2026-11-14)
+
+- [business.invest] The state's SNI put 200 serviced plots — unsupported

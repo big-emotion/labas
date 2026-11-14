@@ -123,7 +123,59 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 - [housing.areas] Louis, Glass and Akanda come up as the neighbourhoods where newcomers go out to eat and shop. — same comments 2026-11-10, social-comment, confidence: low
 - [social.culture] A post on Regab, the national beer, drew many comments (n≈15) about local pride ("Gabon d'abord") and drinking local; one commenter says he is Gabonese and does not drink at all. — @ashley.walena post 2026-10 and comments, social-caption + social-comment, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Regulated pump prices rose on 1 November 2026: super from 595 to 735 XAF/litre (≈ €0.91 → €1.12), diesel from 575 to 705 (≈ €0.88 → €1.07); lamp oil stayed at 450 (≈ €0.69) and the 12.5 kg gas bottle at 4,950 (≈ €7.55). This is the national grid. — Koaci, 2026-11-02, intl-media, confidence: high
+- [cost.living] A local outlet said diesel was held at 675 XAF/litre (≈ €1.03) in March 2026, which does not match the 575 XAF pre-rise price above. — Gabon Media Time, 2026-04-04, local-media, confidence: low
+- [cost.living] A cost-of-living guide lists super at 645 XAF (≈ €0.98) and diesel at 590 XAF (≈ €0.90) a litre, both marked "non confirmé" (unconfirmed). — Africarrières, 2026-08-07, company, confidence: low
+- [cost.living] The baguette reference price is 125 XAF (≈ €0.19): supermarkets and big bakeries keep it, but neighbourhood shops have sold it at 150 XAF (≈ €0.23) since flour went up. — Gabonreview, 2026-10-14, local-media, confidence: high
+- [cost.living] The bakers' union says a sack of wheat flour rose from 19,000 to 19,950 XAF (≈ €28.97 → €30.41) on 21 September 2026; the 1 kg retail packet went from 500 to 700 XAF (≈ €0.76 → €1.07). — Gabonreview, 2026-10-14, local-media, confidence: high
+- [cost.living] A guide prices the baguette at 200–250 XAF (≈ €0.30–0.38), above the 125–150 XAF reported by the press (figures kept apart). — Africarrières, 2026-08-07, company, confidence: low
+- [cost.living] Staples: palm oil 1,000–1,500 XAF/litre (≈ €1.52–2.29), sugar 700–900 XAF/kg (≈ €1.07–1.37), beef 3,500–5,000 XAF/kg (≈ €5.34–7.62), a dozen eggs 1,500–2,000 (≈ €2.29–3.05); no split between market and supermarket. — Africarrières, 2026-08-07, company, confidence: medium
+- [cost.living] An aggregator using Numbeo data (November 2026) gives milk 2,001 XAF/litre (≈ €3.05), a dozen eggs 2,532 (≈ €3.86), chicken 4,998 XAF/kg (≈ €7.62), rice 1,699 XAF/kg (≈ €2.59) and a 500 g loaf 748 (≈ €1.14). Its "Port-Gentil" page shows the same national averages. — Combien-coute.net, updated 2026-11-05, company, confidence: low
+- [cost.living] Monthly budget lines excluding rent: food and groceries about 200,000 XAF (≈ €305) for one person and 600,000 (≈ €915) for a family of four; leisure 100,000 (≈ €152) per person; domestic staff 100,000 (≈ €152). — Expat.com Guide Gabon (Numbeo Aug 2025), 2025-11-06, company, confidence: medium
+- [cost.living] The English guide gives groceries at $300–500 a month for one person and $600–1,000 for a family (≈ 180,000–300,000 / 360,000–600,000 XAF, ≈ €274–457 / €549–915 at 600 XAF/USD). — Expat.com Libreville guide (EN), 2025-12-04, company, confidence: low
+- [cost.rent] Expat.com listings in late 2026, asking rents for villas with a pool: Glass, 2 bedrooms, 1,000,000 XAF (≈ €1,524); Louis, 3 bedrooms, 1,700,000 (≈ €2,592); Sablière, 4-bedroom duplex, 1,700,000–2,000,000 (≈ €2,592–3,049); Okala, 4 bedrooms, 2,700,000 (≈ €4,116). — Expat.com Immobilier Libreville, accessed 2026-11-14, company, confidence: medium
+- [cost.rent] Other asking rents on the same portal: Ambowé 4-bedroom villa 2,000,000 XAF (≈ €3,049); Tahiti 3-bedroom flat 1,600,000 (≈ €2,439); 2-bedroom sea-view flat of 100 m² 700,000 (≈ €1,067); bas de Gué-Gué 3-bedroom flat 550,000–620,000 (≈ €838–945); Okala-Mikolongo 2-bedroom mini-villa of 200 m² 400,000 (≈ €610). — Expat.com Immobilier Libreville, accessed 2026-11-14, company, confidence: medium
+- [cost.rent] Sale asking prices on the portal: 2-room flat in the centre 90,000,000 XAF (≈ €137,204); 3-room ground-floor flat at Haut de Gué-Gué 130,000,000 (≈ €198,184); 3-room sea-view flat in the centre and 4-room villa at Amissa, each 160,000,000 (≈ €243,918); plot at Batterie IV 450,000,000 (≈ €686,021). Some listings show broken prices (20 or 49 XAF). — Expat.com Immobilier Libreville (à vendre), accessed 2026-11-14, company, confidence: low
+- [cost.rent] Purchase price per m² from Numbeo (Aug 2025): a flat in the centre about 1,300,000 XAF (≈ €1,982), range 1.0–1.7 million; outer areas about 1,000,000 (≈ €1,524), range 0.7–1.2 million. — Expat.com Guide Gabon, 2025-11-06, company, confidence: low
+- [cost.rent] The same Numbeo series in November 2026 shows €3,262/m² in the centre (≈ 2,139,889 XAF) and €2,438 in the suburbs (≈ 1,598,915); its history swings from €2,964 (June 2018) to €12,958 (April 2022), which points to a thin sample. — Combien-coute.net, 2026-11-05, company, confidence: low
+- [business.invest] The EU Delegation put its former office up for sale in March 2026: a 1,519 m² plot with buildings in Cocotiers, near Pont de Gué-Gué and the Bord de Mer, minimum bid 430,000,000 XAF (≈ €655,531), about 283,000 XAF (≈ €432) per m² of land. — EEAS sale notice, 2026-03-04, official, confidence: high
+- [business.invest] The state's SNI began selling 2,500 serviced plots on 1 April 2026 (1,500 at Essassa in Ntoum, 300 at Mangouba in Akanda, 200 at Nkok, 100 at Bikélé); Essassa is fixed at 5,500 XAF/m² (≈ €8.38), or 2,750,000 (≈ €4,192) for 500 m², with a land title; other sites are priced by location. — Ministry of Housing speech, 2026-04-01, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — PDF text unreadable; only the 5,500 XAF/m² and 2,750,000 for 500 m² figures were confirmed, not the per-site plot counts
+- [business.invest] The minister asked in the same speech for Essassa to be connected to power and water and for its road links to be finished, so the site was not yet serviced on launch day. — Ministry of Housing speech, 2026-04-01, official, confidence: medium
+- [business.invest] The Caisse des Dépôts sells 400–500 m² plots at Movingui-Okolassi (Ntoum, about 30 km from Libreville) at 2,220,000 and 2,720,000 XAF (≈ €3,384 / €4,147), notary fees included; the article's subheading gives a different upper figure. — Gabonreview, 2025-12-25, local-media, confidence: medium
+- [housing.search] Brokers' commissions are reported at 50 % to 100 % of a month's rent, plus 5,000 XAF (≈ €7.62) per visit; any rent above 200,000 XAF must have a lease endorsed by the competition and consumer office (DGCC). — Gabon Media Time, 2025-08-07, local-media, confidence: medium
+- [housing.search] Licensed agencies, used mainly by expatriates, charge a month's rent as commission, a one-month deposit and 6–10 months' rent in advance; informal brokers ask one month in advance plus one month's deposit (2023, old). — Le360 Afrique, 2023-12-06, intl-media, confidence: low
+- [housing.search] A TikTok account, "Je libère ma maison", posts landlords' listings across Greater Libreville (Akanda to Owendo) with no fee for owner or tenant; the article says a 200,000 XAF house usually costs 600,000 (≈ €915) to enter: deposit, first month and a month of agency fee. — Gabonreview, 2025-10-12, local-media, confidence: medium
+- [cost.negotiation] An informal broker interviewed in 2023 said his fee of half a month's rent "reste négociable" (is still negotiable); the article gives no sign that landlords' terms move. — Le360 Afrique, 2023-12-06, intl-media, confidence: low
+- [cost.negotiation] Only 2 of 17 Libreville rentals on Expat.com in November 2026 were flagged negotiable (two 4–5-bedroom villas at 1,600,000 and 2,700,000 XAF); the other asking prices were posted without that flag. — Expat.com Immobilier Libreville, accessed 2026-11-14, company, confidence: medium
+- [cost.negotiation] Companies posting staff to Gabon often negotiate housing directly with landlords and stand as guarantor. — Expat.com Guide Gabon, 2025-11-06, company, confidence: medium
+- [cost.negotiation] Taxi fares follow no applied rule, so each ride becomes "une négociation épuisante" (an exhausting negotiation); the press says the fare depends on the driver's mood or the passenger's urgency. — Le360 Afrique, 2026-10-18, intl-media, confidence: medium
+- [cost.negotiation] A travel wiki says bargaining is expected at markets and on crafts ("Soyez ferme!"), and to take time to talk the price over at markets (entries dated Feb 2023). — Wikivoyage FR "Libreville", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] The same wiki's Gabon page describes two price levels, one close to European prices and one local, and says to haggle on everything, "surtout quand on est européen, étranger" (especially as a European or foreigner); undated, listings from 2018–2023. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Fares by mode: urban bus 100–200 XAF, shared taxi 200–500 (≈ €0.30–0.76), moto-taxi 500–1,500 (≈ €0.76–2.29) where allowed. — Africarrières, 2026-08-07, company, confidence: medium
+- [daily.transport] Numbeo-based figures: public transport ticket 500 XAF, monthly pass 27,500 (≈ €41.92); taxi start 750 (≈ €1.14) then 674 per mile (≈ €1.03); an hour's waiting 10,000 (≈ €15.24). — Expat.com Guide Gabon (Numbeo Aug 2025), 2025-11-06, company, confidence: low
+- [daily.transport] The English guide quotes Sogatra metered taxis at 300 XAF/km by day and 600 at night (≈ €0.46 / €0.91), which predates the CNT merger. — Expat.com Libreville guide (EN), 2025-12-04, company, confidence: low
+- [daily.transport] A travel wiki gives a 200 XAF minimum drop per neighbourhood segment and a private "course" at 1,000–2,000 XAF (≈ €1.52–3.05), doubled in the evening; Gozem takes Airtel Money, Moov Money or card. — Wikivoyage FR "Libreville", accessed 2026-11-14 (entries 2023), blog, confidence: low
+- [daily.transport] A forum resident budgets taxis at up to 50,000–100,000 XAF a month for one person (≈ €76–152) and 600,000–800,000 (≈ €915–1,220) for a family of four with two teenagers. — Expat.com forum "Coût de la vie au Gabon en 2026", ≈2026-02, forum, confidence: low
+- [family.schools] Exam fees at Lycée Blaise Pascal, the only accredited French-exam centre in Libreville, rose for the 2025 session: brevet 150,000 → 250,000 XAF (≈ €229 → €381), early bac papers 200,000 → 500,000 (≈ €305 → €762), bac 500,000 → 800,000 (≈ €762 → €1,220). — Gabonreview, 2025-01-06, local-media, confidence: high
+- [family.schools] The French-language guide lists the International School of Gabon at €7,000–12,000 a year (≈ 4.59–7.87 million XAF); extras such as books, uniforms and trips are charged on top. — Expat.com Guide Gabon, 2025-11-06, company, confidence: low
+- [family.schools] A Numbeo-based aggregator puts private primary school at about 3,250,000 XAF a year (≈ €4,955), range €2,287–7,622. — Combien-coute.net, 2026-11, company, confidence: low
+- [family.schools] Private university tuition 1,500,000–4,000,000 XAF a year (≈ €2,287–6,098). — Africarrières, 2026-08-07, company, confidence: medium
+- [family.childcare] Private daycare about 100,000 XAF a month (≈ €152), Numbeo data. — Combien-coute.net, 2026-11-05, company, confidence: low
+- [health.care] The English guide budgets health care or insurance for a family at $300–500 a month (≈ 180,000–300,000 XAF, ≈ €274–457 at 600 XAF/USD). — Expat.com Libreville guide (EN), 2025-12-04, company, confidence: low
+- [daily.water] SEEG's own page still shows a general water tariff of 470.97 XAF per m³ including tax (≈ €0.72), dated October 2018 (old); tariffs are reviewed every quarter and social tariffs carry 5 % VAT. — SEEG "Nos tarifs", accessed 2026-11-14, company, confidence: low
+- [social.culture] Cinema ticket about 2,637 XAF (≈ €4.02), Numbeo data. — Combien-coute.net, 2026-11, company, confidence: low
+- [social.sport] Gym membership about 37,501 XAF a month (≈ €57), range €38–76. — Combien-coute.net, 2026-11-05, company, confidence: low
+- [social.nightlife] A 650 ml Regab costs 500–2,000 XAF (≈ €0.76–3.05) depending on the venue; at the New Cotton Club drinks start at 5,000 XAF (≈ €7.62) (Feb 2023, old). — Wikivoyage EN "Gabon" accessed 2026-11-14 / Wikivoyage FR "Libreville" 2023, blog, confidence: low
+- [social.food] Restaurant prices from 2023 listings: about 3,000 XAF (≈ €4.57) per person at a local eatery, Asian set menus from 8,000 (≈ €12.20) and buffet 14,000 (≈ €21.34), seafront menus from 19,000 (≈ €28.97); a brochette costs 250–500 XAF on the street and about 5,000 in a smart restaurant. — Wikivoyage FR "Libreville" / "Gabon", accessed 2026-11-14 (entries Feb 2023), blog, confidence: low
+
+<!-- listings-pass 2026-11-14 -->
+- [cost.rent] Monthly asking rents found by searching "loyer" in the public "Les Infos de Libreville" group, Jul–Nov 2026: studio-type "garçonnières" at Montagne-Sainte 160,000 XAF (≈ €244), Louis (near Hôtel Louis) 210,000 (≈ €320) and Glass (Western Union) 250,000 (≈ €381); another studio 185,000; single-storey flat in Akanda (Cap Santa Clara) 170,000 (≈ €259); house in Lalala with its own electricity meter 220,000 (≈ €335); flat in Angondjé (Amissa social housing) 310,000 (≈ €473); flats at Charbonnages (Bel Air) and elsewhere 350,000 (≈ €534); 3-room office in the centre (Nombakélé) 550,000 (≈ €838). — "Les Infos de Libreville" (1669735013241022) search "loyer", n=13 priced posts, dated 2026-07-15 to 2026-11-12, social-caption (agencies), confidence: medium (asking prices)
+- [housing.search] Terms repeated in nearly every Libreville ad: a 5,000 XAF visit fee (≈ €8), then one month's rent + one month's deposit + agency fees before moving in, a much shorter advance than in Douala, Kinshasa or Cotonou. — same group, Jul–Nov 2026, social-caption, confidence: medium
+- [cost.negotiation] None of the 13 priced Libreville posts says "négociable"; agencies post fixed rents with a fixed fee schedule. — same group, Jul–Nov 2026, social-caption, confidence: low
+
 ## Gaps
+
 - The workflow's web-search budget ran out after seven searches in this pass, so no searches were run for nightlife, food scene, women's safety, LGBT community life, coworking or remote work, or returnee blogs and YouTube channels. Most items come from pages fetched directly.
 - Rent by named neighbourhood with figures: only Lalala (Le360) and expat-zone generalities; no listing-site data (Numbeo blocked in the dossier pass; no local property portal read).
 - Racism, colourism and how returnees are perceived: no dated source found. The FCDO post-coup scrutiny item applies to foreigners in general.
@@ -135,8 +187,18 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 <!-- social-pass gaps 2026-11-14 -->
 - The "priority steps on arrival" video (2026-11-09) is not readable as text; one commenter's "10,000 F/month" reply could not be tied to a figure.
 - Port-Gentil: nothing found.
+<!-- price-topup gaps 2026-11-14 -->
+- The shared web-search budget ran out after five searches in the price top-up; the rest comes from pages fetched directly. Not searched: fibre and mobile-data bundle prices, cinema operator prices, club entry, concert tickets, ride-hailing fares.
+- Fibre and mobile-data prices: the Airtel Gabon site returned 403 and the Moov Africa Gabon site failed to load; only the Numbeo-based 40,000 XAF broadband figure is on record.
+- Gozem fares: the Gabon page and main site give no prices; Yango and inDrive fares not found (Yango not launched).
+- SEEG electricity price per kWh: the tariff page links PDF schedules (version 2020) that were not read.
+- Lycée Blaise Pascal 2026–27 tuition: the official site (lyceelbv.org) returned 403; the fee PDF found belongs to the Abidjan school of the same name and was not used. AISL and Ruban Vert fee pages not read.
+- Clinic prices, club entry, concert tickets: not found. Combien-coute's McDonald's price is a Numbeo placeholder (no McDonald's located in Gabon) and was not used.
+- Negotiation: no source quantifies a typical discount on rent, taxis or market goods; no dated press source on a "foreigner price" beyond the undated travel wiki. Financial Afrik's January 2026 piece on staple prices is paywalled.
+<!-- listings-pass gaps 2026-11-14 -->
 
 ## Sources read
+
 1. Guide Gabon — Expat.com — https://www.expat.com/fr/guide/afrique/gabon/ — company — date read (2026-11-14)
 2. Libreville expat guide (EN) — Expat.com — https://www.expat.com/en/guide/africa/gabon/libreville/ — company — date read (2026-11-14)
 3. Coût de la vie au Gabon — Africarrières — https://africarrieres.com/gabon/fr/guide/decouvrir/cout-de-la-vie — company — date read (2026-11-14)
@@ -181,4 +243,41 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 42. Retrait et paiement avec une mastercard gold — Expat.com forum — https://www.expat.com/fr/forum/afrique/gabon/libreville/1097352-retrait-et-paiement.html — forum — date read (2026-11-14)
 43. Les arnaques les plus fréquentes au Gabon — Expat.com forum — https://www.expat.com/fr/forum/afrique/gabon/1099786-les-arnaques-les-plus-frequentes-pour-les-expatries-au-gabon.html — forum — date read (2026-11-14)
 44. Revenir au Gabon — Expat.com forum — https://www.expat.com/fr/forum/afrique/gabon/1101699-revenir-au-gabon.html — forum — date read (2026-11-14)
+45. Gabon : faire le plein coûte désormais beaucoup plus cher, l'essence grimpe à 735 FCFA — Koaci — https://www.koaci.com/article/2026/11/02/gabon/societe/gabon-faire-le-plein-coute-desormais-beaucoup-plus-cher-lessence-grimpe-a-735-fcfa_202200.html — intl-media — date read (2026-11-14)
+46. Prix du gasoil : le Gabon dans le top 10 africain avec 675 FCFA le litre — Gabon Media Time — https://gabonmediatime.com/prix-du-gasoil-le-gabon-dans-le-top-10-africain-avec-675-fcfa-le-litre/ — local-media — date read (2026-11-14)
+47. Vie chère : la hausse de la farine fait planer la menace sur le prix du pain — Gabonreview — https://www.gabonreview.com/vie-chere-la-hausse-de-la-farine-fait-planer-la-menace-sur-le-prix-du-pain/ — local-media — date read (2026-11-14)
+48. Gabon : démarcheurs et agences immobilières non déclarées, le bail locatif en danger — Gabon Media Time — https://gabonmediatime.com/gabon-demarcheurs-et-agences-immobilieres-non-declarees-le-bail-locatif-en-danger/ — local-media — date read (2026-11-14)
+49. Gabon : le calvaire des locataires face à la dictature des démarcheurs — Gabon Media Time — https://gabonmediatime.com/gabon-le-calvaire-des-locataires-face-a-la-dictature-des-demarcheurs/ — local-media — date read (2026-11-14)
+50. «Je libère ma maison», le concept TikTok qui bouscule l'immobilier gabonais — Gabonreview — https://www.gabonreview.com/je-libere-ma-maison-le-concept-tiktok-qui-bouscule-limmobilier-gabonais/ — local-media — date read (2026-11-14)
+51. Gabon : vous êtes à la recherche d'une location immobilière ? Attention aux arnaques — Le360 Afrique — https://afrique.le360.ma/societe/gabon-vous-etes-a-la-recherche-dune-location-immobiliere-attentions-aux-arnaques_HDVOSTPI5ZGWFL37YRSAHIKEEM/ — intl-media — date read (2026-11-14)
+52. Immobilier Libreville (locations) — Expat.com — https://www.expat.com/fr/immobilier/afrique/gabon/libreville/ — company — date read (2026-11-14)
+53. Immobilier Libreville (à vendre) — Expat.com — https://www.expat.com/fr/immobilier/afrique/gabon/libreville/a-vendre.html — company — date read (2026-11-14)
+54. Coût de la vie à Libreville — Combien-coute.net — https://www.combien-coute.net/cout-de-la-vie/gabon/libreville/ — company — date read (2026-11-14)
+55. Prix au m² centre Libreville — Combien-coute.net — https://www.combien-coute.net/prixm2-centre/gabon/libreville/ — company — date read (2026-11-14)
+56. Salle de sport Libreville — Combien-coute.net — https://www.combien-coute.net/fitness/gabon/libreville/ — company — date read (2026-11-14)
+57. Crèche privée Libreville — Combien-coute.net — https://www.combien-coute.net/creche/gabon/libreville/ — company — date read (2026-11-14)
+58. Charges logement Gabon — Combien-coute.net — https://www.combien-coute.net/electricite/gabon/ — company — date read (2026-11-14)
+59. Avis de vente ancien bureau de l'Union européenne au Gabon (Libreville) — EEAS — https://www.eeas.europa.eu/node/461331_kk — official — date read (2026-11-14)
+60. Lancement de la commercialisation de 2 500 parcelles (allocution du ministre du Logement, 1er avril 2026) — Ministère du Logement (PDF) — https://www.mays-mouissi.com/wp-content/uploads/2026/04/Discours-2-MM-Lancement-ventes-de-parcelles-SNI-Essassa.pdf — official — date read (2026-11-14)
+61. Propriété foncière à Ntoum : la CDC propose des terrains à partir de 2,2 millions — Gabonreview — https://www.gabonreview.com/propriete-fonciere-a-ntoum-la-cdc-propose-des-terrains-a-partir-de-22-millions/ — local-media — date read (2026-11-14)
+62. Libreville : flambée des frais d'examens dans les écoles privées françaises — Gabonreview — https://www.gabonreview.com/libreville-flambee-des-frais-dexamens-dans-les-ecoles-privees-francaises/ — local-media — date read (2026-11-14)
+63. Nos tarifs — SEEG — https://www.seeg-gabon.com/relation_client/tarifs — company — date read (2026-11-14)
+64. Libreville — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Libreville — blog — date read (2026-11-14)
+65. Gabon — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Gabon — blog — date read (2026-11-14)
+66. Gabon — Wikivoyage (EN) — https://en.wikivoyage.org/wiki/Gabon — blog — date read (2026-11-14)
+67. Gabon : la flambée des prix met la centrale d'achat sous pression — Financial Afrik — https://www.financialafrik.com/2026/01/08/gabon-la-flambee-des-prix-met-la-centrale-dachat-sous-pression/ — intl-media — date read (2026-11-14), paywalled after the intro
 - Social pass: Instagram @ashley.walena — 6 latest posts and visible comments, 2026-11-14
+
+- Social pass: Facebook "Les Infos de Libreville" (1669735013241022) — search "loyer", 19 posts, 2026-11-14
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.living] Regulated pump prices — supported
+- [cost.living] The baguette reference price — supported
+- [cost.living] The bakers' union says a sack — supported
+- [family.schools] Exam fees at Lycée Blaise Pascal — supported
+- [housing.search] Brokers' commissions — supported
+- [business.invest] The Caisse des Dépôts sells — supported
+- [business.invest] The EU Delegation put its former office — supported
+- [cost.negotiation] Taxi fares follow no applied rule — supported
+- [business.invest] The state's SNI began selling — unsupported
