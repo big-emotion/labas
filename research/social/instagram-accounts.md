@@ -61,6 +61,51 @@ The list could only be partly filtered before Instagram closed the dialog. Kept:
 - **beautifully.flawed.one** — Abena, travelling Africa and the diaspora (Ghana)
 - **beyondthenoiseafrica**, **womensafrika**, **bigfat_africandevelopment**, **tourismocameroun**
 
+## Keyword pass: travel, investment, living, lifestyle, discover
+
+The same five filters were run on the following lists of **nwe**, **planbacktoafrica** (831
+follows) and **verydelphine** (963 follows). Kept: accounts about Africa or the African /
+Black diaspora. Dropped: generic travel media, beauty, and non-African destinations.
+
+**Followed by two or more seeds — the core of this network**
+- **verydelphine** (nwe, planbacktoafrica) — diaspora travel & investment
+- **planbacktoafrica** (nwe, verydelphine) — Africa hospitality investor, Zanzibar
+- **ashleyinafrika** (planbacktoafrica, verydelphine) — Ashley Cleveland, Africa investor
+- **panafricanlifestyle** (planbacktoafrica, verydelphine) — Pan African Lifestyle
+- **travelnoire** (planbacktoafrica, verydelphine) — Black travel media
+- **jeandedieubada** (nwe, verydelphine) — Travel guide, Bénin
+- **travelcameroon** (nwe, verydelphine) — Mbakwa Blake Ufon, Cameroon
+- **kemoy_martin**, **samifoodandco**, **beverlyadaeze**, **jetblacktravel** (nwe, verydelphine)
+
+**Investing and doing business on the continent**
+- **unlockingafrica** — Terser Adamu, Africa business & investing
+- **oliviazventures** — Olivia, entrepreneur & investor (Uganda / US)
+- **zipazanzibar** — Zanzibar Investment Promotion Authority (official)
+- **thewanderinginvestor** — The Wandering Investor
+- **businessafrica.media** — Business Africa Media
+
+**Living there / moving (rarest category)**
+- **jolitropisme** — Nathalie, "Travel & Life in Africa" (French-speaking)
+- **livingtheancestralway** — Abena Offeh-Gyimah
+- **laurita.vibe** — Laurita, living abroad
+- **panafricanlifestyle** — see above
+
+**Africa-based travel creators and agencies (useful for local, on-the-ground angles)**
+- West Africa: **abidjan_le_rempart** (Aymard Landry, Abidjan), **jeandedieubada** (Bénin),
+  **akosuashirley** (Ghana, trip planner), **wherenextella** (Ghana/Canada),
+  **ghana.365**, **videtteadjorlolo** (travel entrepreneur)
+- Central Africa: **leguidecongo** (Le Guide du Congo, both Congos), **congotraveldrc**,
+  **gabonlust** (Gabon), **rumbomalabo** (Equatorial Guinea), **travelcameroon**
+- East Africa: **explorewithtitus** (East Africa travel host), **abdillah.salim**
+  (Zanzibar guide), **travelhabesha** and **miriam_seble** (Ethiopia), **mykirezi**
+  (Discover Burundi), **burundionthemap**
+- Indian Ocean: **__mauritius__** (Mauritius · travel · discover)
+- Pan-African: **travelafrique**, **traveldigestafrica**, **awaytoafrica**, **_yaramel**
+  (Africa travel creator), **theirinjournal** (African culture + travel journal),
+  **melanintravelsmagic** (Africa & Caribbean curator), **mowokitours**, **ryamchouu_travels**
+- Food & lifestyle: **lagouteuse_** (food blogger), **edenthefoodie**, **mali_paw_b_di**
+  (Mali culture & lifestyle), **nwetravel** (NWE's own travel account)
+
 ## What this says
 
 - The French-speaking *return* scene on Instagram is small and business-led (Repat Africa,
