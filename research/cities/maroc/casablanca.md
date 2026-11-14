@@ -104,6 +104,14 @@
 - [social.culture] (national) A darija teacher interviewed on Entreprendre et Vivre au Maroc says the fear most often voiced by expats and entrepreneurs is insulting someone by mistake, and that many still do not speak darija after years in the country (commercial: sells lessons). — @darijaacademy_by_houda collab posts with @entreprendrevivremaroc 2026-11-08/12, social-caption, confidence: low
 - [return.experience] (national) After 12 years in Morocco, the creator of Entreprendre et Vivre au Maroc lists as real upsides the welcome, light, quality of life, closeness to Europe and a sometimes simpler daily life, and as things to plan for: administration, banks, housing, internet, driving, healthcare, pets, and a different pace and mindset. — @entreprendrevivremaroc post 2026-08 (≈ Aug 2026), social-caption, confidence: medium
 
+<!-- listings-pass 2026-11-14 -->
+- [cost.rent] Monthly asking rents in the public "Réseau des expatriés à Casablanca" group, Oct–Nov 2026: flat in Belvédère, semi-furnished 5,700 MAD (≈ €528); new studio in Californie (Arcadia Loft) 5,700 MAD; large studio in the city centre 5,500 MAD (≈ €509); flat near the 2 Mars area 6,000 MAD incl. building charges (≈ €556); 2-bedroom flat on Bd Abdelmoumen 6,500 MAD (≈ €602); furnished 1-room studio in Maârif 6,500 MAD; flat in Maârif 6,000–7,000 MAD; flat in Oasis 7,500 MAD incl. charges (≈ €694); furnished 2-bedroom of 106 m² at Casablanca Finance City 13,000 MAD (≈ €1,204). — "Réseau des expatriés à Casablanca" (448986789170521), chronological feed 2026-11-14, n=20 priced posts out of 40, social-caption, confidence: medium (asking prices)
+- [cost.rent] Dar Bouazza (coastal suburb): a house at 9,000 MAD/month (≈ €833) plus one month's agency fee, and a larger property at 23,000 MAD/month (≈ €2,130) "10 minutes from the mall". — same group, posts 2026-10-30 and 2026-11-06, social-caption, confidence: medium
+- [housing.search] A tenant's request in the same group sets a budget of 5,000 MAD/month (≈ €463) for a flat in Belvédère and asks to deal with owners directly, i.e. to avoid agency fees (usually one month's rent). — same group 2026-11-14, social-caption, confidence: medium
+- [cost.rent] Sale asking prices: new flats of 57–84 m² in Franceville "from 1,300,000 MAD" (≈ €120,000); 87 m² office on Bd Mohammed V at 1.2 M MAD; a titled parking space at 700,000 MAD (sic); shops in Palmier at 30,000 MAD/m² and in Belvédère at 23,000 MAD/m² (≈ €2,780 / €2,130 per m²). — same group Oct–Nov 2026, social-caption, confidence: low
+- [cost.salary] Rates posted for domestic help aimed at Casablanca mothers: housekeeping + cooking 4,000 MAD/month in a villa or 3,500 MAD in a flat in a residence (≈ €370 / €324). — "Pour les Mamans de Casablanca" post shared in the same group, Nov 2026, social-caption (agency), confidence: medium
+- [cost.negotiation] None of the 20 priced posts in the Casablanca group says "négociable": rents are posted as fixed, and the visible lever is avoiding agency fees by renting from owners. Whether rents are bargained in private is not visible here. — same group 2026-11-14, social-caption, confidence: low
+
 ## Gaps
 - Facebook groups for Morocco not yet searched (see PROGRESS.md).
 - Not read: ffm_expat_maroc, bons_plans_mamans_casablanca, moroccolives; no Marrakech- or Tanger-specific daily-life account found among ★ leads.
@@ -115,6 +123,7 @@
 - No city-specific salary survey beyond regional averages and job-board ranges.
 - No named private clinics with prices, and no AMO (public health insurance) rules for foreign residents from an official source.
 - Football culture (Raja/Wydad) and religious life (churches for sub-Saharan Christians, mosques) were not sourced.
+<!-- listings-pass gaps 2026-11-14 -->
 
 ## Sources read
 1. Cost of living in Casablanca for expats 2026 — https://www.riotimesonline.com/cost-of-living-casablanca-expats-2026/ — intl-media — date read (2026-11-14)
@@ -158,6 +167,8 @@
 - Social pass: Instagram @vivre_au_maroc — 7 posts (3 pinned + 4 latest) and visible comments, 2026-11-14
 - Social pass: Instagram @entreprendrevivremaroc — 4 posts, 2026-11-14
 - Social pass: Instagram @the_rabati — 4 posts, 2026-11-14
+
+- Social pass: Facebook "Réseau des expatriés à Casablanca" (448986789170521) — chronological feed, 40 posts, 2026-11-14
 
 ## Spot-check (2026-11-14)
 - [cost.rent] Furnished 1-bed in Hay Hassani — supported

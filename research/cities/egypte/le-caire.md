@@ -83,6 +83,11 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - [social.nightlife] International stand-up comedy is staged in Cairo (e.g. a Max Amini show, Nov 2026). — @cairobyyana post 2026-11-14, social-caption, confidence: medium
 - [nature.access] Ain Sokhna on the Red Sea is promoted as the weekend hotel escape from Cairo; comments are almost all requests for price details, which the creator does not give in the caption. — @cairobyyana post 2026-08-03, social-caption + social-comment, confidence: low
 
+<!-- listings-pass 2026-11-14 -->
+- [cost.negotiation] Asked about their worst experience in Egypt, members of "Foreigners in Egypt" answer first with scams and hidden prices; a Cairo commenter (who also offers paid driver and e-visa services) describes a price quoted at 100 EGP becoming 1,000 EGP at the Pyramids, in Khan el-Khalili and in taxis, plus tips asked after every small help, and advises agreeing the total before buying or riding and photographing it. A visitor-facing view, but it names the "foreigner price" that newcomers also meet. — thread in "Foreigners in Egypt" (1491912454586249) 2026-11-14 (n≈4 replies), social-comment, confidence: low
+- [daily.transport] Same thread: the advice for Cairo traffic and noise is to live in quieter Zamalek or Giza and use a car with a driver at a fixed price rather than drive. — same thread 2026-11-14, social-comment, confidence: low
+- [other] The 179K-member "Foreigners in Egypt" group posts almost no prices (1 priced post out of 36 read on 14 Nov 2026); it is used for questions and services, not housing ads. — read 2026-11-14
+
 ## Gaps
 - cairobyyana's recent posts are tourism-style reels with no prices and little daily-life detail; ★ cairoscene, cairo.expat.diaries and Egypt Facebook groups not read in this pass.
 - Nothing found for Alexandria or Aswan.
@@ -97,6 +102,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - Universal Health Insurance: Cairo is not yet covered per search results; eligibility of foreign residents not found.
 - Residence-permit fee schedule for 2026 (USD amounts) not confirmed from an official page; Ahram explainer returned 403.
 - Nature access (Wadi Degla, Al-Azhar Park) and sports-club membership costs: not found.
+<!-- listings-pass gaps 2026-11-14 -->
 
 ## Sources read
 1. Cost of Living in Cairo — Numbeo — https://www.numbeo.com/cost-of-living/in/Cairo-Egypt — company — HTTP 429 on 2026-11-14; figures taken from the dossier verification log
@@ -139,6 +145,8 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 38. Sudan's war refugees describe horrors in Egypt's jails (Reuters) — Al-Monitor — https://www.al-monitor.com/originals/2026/06/sudans-war-refugees-describe-horrors-egypts-jails-surging-deportations — intl-media — read 2026-11-14
 
 - Social pass: Instagram @cairobyyana — 5 posts (pinned + latest) and visible comments, 2026-11-14
+
+- Social pass: Facebook "Foreigners in Egypt" (1491912454586249) — chronological feed, 36 posts, 2026-11-14
 
 ## Spot-check (2026-11-14)
 - [safety.women] The 2020 Arab Barometer — supported

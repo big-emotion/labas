@@ -67,6 +67,12 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - [climate.daily] Cape Town summer UV is high while the south-easter wind keeps skin feeling cool, so people underestimate sun exposure; the local media piece advises sunscreen under make-up and reapplying every two hours. — @capetownetc post with a health brand 2026-11-10, social-caption, confidence: medium
 - [other] capetownetc's recent posts are almost all weekend-plan and venue promotions with very few comments; little daily-life testimony to extract. — read 2026-11-14
 
+<!-- listings-pass 2026-11-14 -->
+- [daily.internet] Home fibre/wireless resellers advertising daily in the "Living in Cape Town" group quote Vuma-network plans at R149/month (≈ €8) for the entry tier, R249 and R299 for faster unlimited tiers, up to R399 (≈ €21), with installation around R400–520 (≈ €21–28). Reseller ads, not the operator's own price list. — "Living in Cape Town" (375195877251973), chronological feed 2026-11-14 (n≈6 ads), social-caption, confidence: low
+- [cost.living] Everyday service prices in the same group: knotless braids R500 and "straight up" braids R300 at a home salon in Delft (≈ €27 / €16); a used iPhone 11 64 GB R2,500 (≈ €134); a recital ticket in Pinelands R180 (≈ €10). — same group 2026-11-14, social-caption, confidence: low
+- [cost.rent] Precast "wendy house" structures are sold in the group as housing: one room R6,500 (≈ €348), two rooms R10,000 (≈ €535), a toilet unit R4,000, transport included; a sign of the backyard-dwelling market in Cape Town's townships. — same group 2026-11-14, social-caption, confidence: medium
+- [cost.negotiation] None of the 15 priced posts says "negotiable": in this group prices are posted as fixed by small businesses. — same group 2026-11-14, social-caption, confidence: low
+
 ## Gaps
 - Suburb-level rents (Sea Point, Woodstock, Observatory, Southern Suburbs) for 2026: only weak SEO pages found; no PayProp/TPN suburb table.
 - Groote Schuur / Tygerberg 2026 waiting times: only 2023–2024 budget-cut coverage found.
@@ -77,6 +83,7 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 - Wildfire activity in 2026: none found (last major ones April 2021 and April 2025).
 - Bo-Kaap Muslim community and Cape Malay food: only tourism pages, not fetched successfully.
 - No French-speaking African returnee or diaspora testimony from Cape Town found.
+<!-- listings-pass gaps 2026-11-14 -->
 
 ## Sources read
 1. Afrique du Sud dossier — research/countries/afrique-du-sud.md — internal research — read 2026-11-14
@@ -102,3 +109,4 @@ Currency note: EUR conversions use the dossier rate of ~18.7 ZAR = 1 EUR (derive
 21. Cape Town — https://en.wikipedia.org/wiki/Cape_Town — intl-media (encyclopaedia) — read 2026-11-14
 22. South African nationality law — https://en.wikipedia.org/wiki/South_African_nationality_law — intl-media (encyclopaedia) — read 2026-11-14
 23. Remote work visa (digital nomad visa) FAQ — https://www.xpatweb.com/?p=41683 — company — read 2026-11-14
+- Social pass: Facebook "Living in Cape Town" (375195877251973) — chronological feed, 36 posts, 2026-11-14
