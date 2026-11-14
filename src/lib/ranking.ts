@@ -1,4 +1,5 @@
 import { CITIES, type City, type Climate, type Language, type PracticalCriterion } from "./cities";
+import { portraitFor, type PortraitLine } from "./portrait";
 
 /**
  * The ten questions of the one-screen form. Every answer is optional: an
@@ -28,6 +29,8 @@ export interface Match {
   reasons: string[];
   /** Up to three things that weigh against it for this reader. */
   drawbacks: string[];
+  /** "Pourquoi toi" lines: what the reader said, met by what the city offers. */
+  portrait: PortraitLine[];
 }
 
 const CRITERION_LABELS: Record<PracticalCriterion, string> = {
@@ -151,7 +154,7 @@ function partsFor(city: City, answers: Answers, weights: Weights): Part[] {
     const wanted = 1 + 4 * answers.saturday;
     const value = Math.max(0, MAX - Math.abs(wanted - city.scores.social));
     parts.push({
-      label: value >= 3 ? "Une ambiance à votre mesure" : "Une ambiance décalée par rapport à vous",
+      label: value >= 3 ? "Une ambiance à ta mesure" : "Une ambiance décalée par rapport à toi",
       value,
       weight: 2.5,
     });
@@ -161,8 +164,8 @@ function partsFor(city: City, answers: Answers, weights: Weights): Part[] {
     parts.push({
       label:
         value >= 3
-          ? "Le rythme de ville que vous cherchez"
-          : "Taille de ville éloignée de votre souhait",
+          ? "Le rythme de ville que tu cherches"
+          : "Taille de ville éloignée de ton souhait",
       value,
       weight: 2,
     });
@@ -172,7 +175,7 @@ function partsFor(city: City, answers: Answers, weights: Weights): Part[] {
     parts.push({
       label: spoken
         ? `On y vit en ${LANGUAGE_NAMES[answers.language]}`
-        : "Langue du quotidien différente de votre souhait",
+        : "Langue du quotidien différente de ton souhait",
       value: spoken ? MAX : 0,
       weight: 3,
     });
@@ -180,7 +183,7 @@ function partsFor(city: City, answers: Answers, weights: Weights): Part[] {
   if (answers.climate) {
     const suits = city.climates.includes(answers.climate);
     parts.push({
-      label: suits ? "Le climat que vous cherchez" : "Climat différent de votre souhait",
+      label: suits ? "Le climat que tu cherches" : "Climat différent de ton souhait",
       value: suits ? MAX : 0,
       weight: 2,
     });
@@ -202,7 +205,13 @@ function evaluate(city: City, answers: Answers, weights: Weights): Match {
     .sort((a, b) => b.weight * (MAX - b.value) - a.weight * (MAX - a.value))
     .slice(0, 3)
     .map((p) => p.label);
-  return { city, score: possible ? earned / possible : 0, reasons, drawbacks };
+  return {
+    city,
+    score: possible ? earned / possible : 0,
+    reasons,
+    drawbacks,
+    portrait: portraitFor(city, answers),
+  };
 }
 
 export function rankCities(answers: Answers): Match[] {

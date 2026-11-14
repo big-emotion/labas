@@ -59,7 +59,47 @@ describe("ranking the cities", () => {
 
   it("names what holds a city back", () => {
     const lagos = rankCities({ language: "fr" }).find((m) => m.city.name === "Lagos");
-    expect(lagos?.drawbacks).toContain("Langue du quotidien différente de votre souhait");
+    expect(lagos?.drawbacks).toContain("Langue du quotidien différente de ton souhait");
+  });
+
+  it("writes no portrait before the reader has answered", () => {
+    for (const m of rankCities({})) expect(m.portrait).toEqual([]);
+  });
+
+  it("ties each portrait line to what the reader said", () => {
+    const nightOwl = rankCities({ saturday: 1 }).find((m) => m.city.name === "Lagos");
+    expect(nightOwl?.portrait[0]).toMatchObject({ said: "Danser jusqu'au matin" });
+    expect(nightOwl?.portrait[0].text).toContain("Lagos");
+  });
+
+  it("prefers a city's own sentence over the generic one", () => {
+    const nairobi = rankCities({ saturday: 1 }).find((m) => m.city.name === "Nairobi");
+    expect(nairobi?.portrait[0].text).toBe(
+      "Tu aimes danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
+    );
+  });
+
+  it("only claims what the city's scores support", () => {
+    const homebody = rankCities({ saturday: 0 }).find((m) => m.city.name === "Lagos");
+    expect(homebody?.portrait).toEqual([]);
+  });
+
+  it("keeps the portrait to three lines about preferences, never traits", () => {
+    const busy: Answers = {
+      saturday: 1,
+      size: 3,
+      climate: "hot",
+      language: "en",
+      job: "remote",
+      landscape: "beach",
+      priorities: ["career", "diaspora", "flights"],
+    };
+    for (const m of rankCities(busy)) {
+      expect(m.portrait.length).toBeLessThanOrEqual(3);
+      for (const line of m.portrait) {
+        expect(line.text).not.toMatch(/personnalité|ton profil|tu es (quelqu|un |une |plutôt)/i);
+      }
+    }
   });
 
   it("keeps at most three priorities", () => {

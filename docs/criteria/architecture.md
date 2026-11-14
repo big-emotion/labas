@@ -51,14 +51,14 @@ Analysis comes after, and only if they want it.
 
 ### A.2 The two levels
 
-|              | Level 1 — free, now                                                                                                                                                       | Level 2 — paid, later                                |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                                                                                          | Help a real decision                                 |
-| **Length**   | The current 10 questions, ~5 minutes                                                                                                                                      | The full question bank (§4.4) and the filters (§2.1) |
-| **Tone**     | Warm, playful, "tu", "on te comprend"                                                                                                                                     | Precise, still plain French                          |
-| **Result**   | **One city** in focus with a short portrait, two other leads (one deliberately outside the reader's usual sphere), then **every city on the site**, sorted by resemblance | A ranked list with every criterion, source and date  |
-| **Criteria** | Hidden, behind "Pourquoi cette ville ?"                                                                                                                                   | Shown in full                                        |
-| **Human**    | None                                                                                                                                                                      | Personal coaching (accompagnement)                   |
+|              | Level 1 — free, now                                                                                                                         | Level 2 — paid, later                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                                                            | Help a real decision                                 |
+| **Length**   | The current 10 questions, ~5 minutes                                                                                                        | The full question bank (§4.4) and the filters (§2.1) |
+| **Tone**     | Warm, playful, "tu", "on te comprend"                                                                                                       | Precise, still plain French                          |
+| **Result**   | Three cities by score, the first framed with its portrait open, then every city on the site in score order; details behind "Voir le détail" | A ranked list with every criterion, source and date  |
+| **Criteria** | Hidden, behind "Pourquoi cette ville ?"                                                                                                     | Shown in full                                        |
+| **Human**    | None                                                                                                                                        | Personal coaching (accompagnement)                   |
 
 The criteria, rubrics and sources in §2–§6 run underneath **both** levels. Level 1 does not
 get a lighter or less honest engine; it gets a lighter **presentation**.
@@ -86,53 +86,45 @@ The four temperament questions cut from the prototype (novelty, order, competiti
 could come back as playful scenarios if testing shows the portrait feels thin; that is a later
 choice, not part of this design.
 
-### A.4 The result screen
+### A.4 The result screen (built 2026-11-15)
 
-On the phone, in this order:
+Approved on the [Nairobi canvas](https://claude.ai/artifact/X29JdBp9vj2exEiwa5VfRN) and built in
+`src/pages/index.astro`. **The only ordering rule is the score**: three cities from the same
+country stay three cities from the same country. On the phone, in this order:
 
-1. **The city**, big: name, country, a photo, the tagline.
-2. **"Pourquoi toi et [ville]"**: two or three lines that pair something the reader said with
-   something the city is known for, written as **preferences, never traits** (repo rule:
-   never "tu es", never "ta personnalité"):
-   - "Tu aimes quand ça bouge le samedi soir : Nairobi aussi. On la dit parmi les villes
-     d'Afrique de l'Est où l'on sort le plus, et les gens y sont détendus et accueillants."
-   - "Tu veux la mer le week-end : à une heure de San-Pédro, les criques de Grand-Bérébi ont
-     l'eau turquoise et le sable blanc qu'on croit réservés à Zanzibar."
-3. **"Ce qui pourrait te surprendre"**: one line that breaks a cliché about the city or
-   region.
-4. **"À savoir"**: one honest line (the city's `watch`, sourced when it touches safety, racism,
-   LGBT rights or conflict). Level 1 stays warm, not blind.
-5. **Two other leads**, one of them marked **"Tu n'y aurais peut-être pas pensé"** (A.5).
-6. **"Pourquoi cette ville ?"**: opens the criteria behind the match, with sources and dates.
-   This is where §3 becomes visible.
-7. **"Toutes les villes, de la plus proche à la plus lointaine de toi"**: the whole catalogue
-   (115 cities today), sorted by resemblance score (decided 2026-11-14). Each row: name,
-   country, a bar for the score (never a percentage, §4.6), the city's tagline, and the
-   "Tu n'y aurais peut-être pas pensé" badge where it applies. Tapping a row opens the same
-   card as the city in focus. On the phone, the first 20 rows show, then "Voir plus".
-   - Cities with too little data keep their place in the order and show "données
-     incomplètes" (§4.2).
-   - `unsafe` cities stay in the list at their rank, greyed, with the advice line in place of
-     the portrait ("Déconseillée en ce moment par le ministère des Affaires étrangères,
-     mise à jour du …") and no "Pourquoi toi" lines. They are never in focus or among the
-     three leads (§4.3).
-8. **"Aller plus loin"**: the door to level 2.
+1. **"Tes trois villes"**: the three best proposable cities by score.
+   - **The first**, framed in saffron and larger: rank, name, country and languages, the score
+     as a percentage with its bar, the tagline, the pitch, and **"Pourquoi toi et [ville]"**
+     open: up to three lines, each under the answer it comes from ("Tu as dit · Danser jusqu'au
+     matin"), written as preferences, never traits (§A.7).
+   - **The second and third**: the same header, tagline and pitch, smaller.
+   - **"Voir le détail"** on each card opens the same fields for every city: "Pourquoi toi"
+     (already visible on the first), "On dit", "Ce qui pourrait te surprendre", "Les quartiers"
+     (asking rents, "souvent négociables"), "Ses points forts pour toi", "À savoir" and "Nos
+     sources". A field with nothing to show stays hidden rather than showing a placeholder.
+2. **"Toutes les autres villes"**: every other city in score order, numbered from 4, with the
+   percentage, bar and tagline. Five rows show, then **"Voir plus de villes"** shows them all.
+   Each row opens the same detail. `unsafe` cities keep their place, greyed, with "Déconseillée
+   en ce moment par le ministère des Affaires étrangères…" and no detail; they are never among
+   the three.
+3. The pinned bar at the bottom of the phone screen still shows the three cities and their
+   percentages while the reader answers.
 
-### A.5 The discovery rule
+Not built yet: the city photo, "Aller plus loin" (level 2 does not exist), the link to a
+criteria page with dated sources (no `/methode` page yet), and the advisory date next to a
+greyed city (the data does not carry it until `unsafe` is derived from travel advice, §4.3).
 
-Without a rule, a French speaker gets French-speaking cities: language weighs 3 in the score.
-Level 1 therefore always shows, among its three cities, **at least one from outside the
-reader's usual sphere**:
+**How "Pourquoi toi" lines are made** (`src/lib/portrait.ts`): each answer proposes a sentence
+only when the city's scores back it (4 or 5 out of 5, or a direct match on size, climate or
+language); a city's own sentence in `src/data/city-lines.json` (`why`, keyed
+`questionId:value`) replaces the generic one; the three heaviest answers win.
 
-- **Sphere** = the countries where the reader's chosen language is the language of daily life.
-  Later, with roots (§2.4), also the country of origin.
-- **The discovery lead** = the best-ranked proposable city outside that sphere, computed with
-  the language weight removed. If it already sits in the top three, nothing changes.
-- **It says why it is there and what it asks of the reader**: "On y vit en anglais, mais tout
-  le reste te ressemble : la plage, une ville qui bouge, une vie abordable."
-- **It never overrides safety:** `unsafe` cities are never proposed, discovery included.
-- **In the full list** the discovery lead keeps its badge; no other city is moved out of score
-  order.
+### A.5 Discovery
+
+The "Tu n'y aurais peut-être pas pensé" lead proposed here earlier is **dropped**: the maintainer
+ruled on 2026-11-15 that the score is the only rule, so no city is lifted into the three. The
+discovery promise is carried by the content instead: the "surprise" line of every city, and a
+full list that shows the whole continent in score order.
 
 ### A.6 The two lines each city needs for level 1
 
@@ -146,12 +138,19 @@ city criterion at level 4 or 5. Two short editorial lines per city make them war
 
 A third line already exists: `watch` ("À savoir"). The fields are in [`schema.ts`](./schema.ts).
 
+The first ten cities were drafted in [`level1-city-lines.md`](./level1-city-lines.md) for tone
+review; the lines of every proposable city now live in `src/data/city-lines.json`, with
+neighbourhoods and sources. The writers' doubts (271 flags: blog-only rents, facts from one
+source, truncated links) are listed city by city in
+[`city-lines-review.md`](./city-lines-review.md); clear them before public launch.
+
 ### A.7 Tone
 
 - **Warm and close:** "tu", short sentences, the community's own words ("retour au pays",
   "s'installer", "là-bas"). "Repat" is explained the first time it appears.
 - **Knowledgeable, not expert:** we know the continent and say so through concrete places,
-  never through jargon, scores or percentages on the first screen.
+  never through jargon or criteria on the first screen. The resemblance
+  score is the one number shown, as a percentage (decided 2026-11-14).
 - **On the reader's side:** we take the wish to go seriously and do not lecture. Difficulties
   are named once, honestly, in "à savoir", not used to discourage.
 - **Preferences, not traits:** "tu aimes", "tu cherches", "tu as dit"; never "tu es
@@ -908,8 +907,9 @@ For each proposed city:
 - **Context line** (small text, when relevant): a country fact the reader should know even if
   they did not ask — visa, dual nationality for their origin country, criminalisation of
   homosexuality, the advice colour.
-- **Never** a percentage presented as a "match" of the person; the score is shown as a rank and
-  a bar, labelled "selon vos réponses".
+- **The score is shown as a percentage with a bar** (decided 2026-11-14, as on the current
+  site), always next to "selon tes réponses" and never described as a measure of the person.
+  The city in focus is framed in saffron, and so is its row in the full list.
 
 ---
 
@@ -945,7 +945,9 @@ the dossiers criterion by criterion. Details at the bottom of `schema.ts`.
 **Where the architecture could mislead**
 
 1. **A ranked list looks like a measurement.** A 0.82 next to Dakar reads as "82 % compatible".
-   Show rank and a bar, say "selon vos réponses", and link every score to its source.
+   The maintainer chose to keep the percentage (2026-11-14), so the safeguard is the wording:
+   always "selon tes réponses", never "compatible à" or "ta personnalité", and every score
+   linked to its sources behind "Pourquoi cette ville ?".
 2. **Capitals win by default.** Even after merges, capitals lead on jobs, flights, internet,
    healthcare, schools and business. A reader with no strong preferences will mostly see
    capitals. That is honest for those criteria, but the method page must say so, and `pace`
@@ -1000,10 +1002,20 @@ Diplomatie, FCDO (OGL), ILGA, JMP, UN WUP, Findex, B-READY and GLOBALCIT are fre
 
 **Already decided (2026-11-14):** two levels, free then paid with coaching (§A.2); level 1 keeps
 the ten current questions, reworded in "tu" (§A.3); the portrait speaks of preferences, never
-of traits, so the repo rule stays as it is (§A.7); one city first, with a discovery lead
-outside the reader's usual sphere (§A.5).
+of traits, so the repo rule stays as it is (§A.7); three cities by score, the first framed; the score is the only ordering
+rule (2026-11-15), so the discovery lead was dropped (§A.4, §A.5).
 
-**Still open:**
+**Adopted on the maintainer's word (2026-11-14), following the recommendations below:**
+the reshaped criteria set; the sensitive filters, opt-in and in level 2 only; the quiz ships
+before any free text, which will need explicit consent; `unsafe` derived from France
+Diplomatie, then the FCDO; no public launch before `safety`, `cost`, `healthcare` and
+`utilities` are sourced for every proposable city.
+
+**Still open:** whether Là-bas will ever carry ads or affiliate links (Ookla's open data is
+non-commercial only). Until that is answered, the internet criterion uses operator-advertised
+speeds and the Ookla figures stay out of the published data.
+
+The recommendations as they were made:
 
 1. **Adopt the reshaped criteria set** (16 city + 1 country criteria; `food`, `novelty`,
    `competition` dropped; `beach`/`nature`/`wildSpaces` turned into landscape facts)?
