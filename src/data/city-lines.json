@@ -1,0 +1,258 @@
+[
+  {
+    "name": "Nairobi",
+    "reputation": "On dit de Nairobi qu'on y sort parmi les plus volontiers d'Afrique de l'Est : à Westlands, bars, concerts et clubs s'enchaînent jusqu'au matin.",
+    "surprise": "Des girafes et des lions vivent dans un parc national aux portes de la ville. Et à 1 800 m d'altitude, tu n'auras pas besoin de clim, mais d'un pull en juillet.",
+    "neighbourhoods": [
+      {
+        "name": "Westlands",
+        "text": "Le quartier des sorties et des jeunes actifs. Deux pièces : environ 560 à 1 050 € par mois."
+      },
+      {
+        "name": "Kilimani",
+        "text": "Central, beaucoup d'appartements récents. Deux pièces : environ 420 à 840 € par mois."
+      },
+      {
+        "name": "Lavington et Karen",
+        "text": "Verts et calmes, prisés des familles, près des écoles internationales. Surtout des maisons."
+      }
+    ],
+    "why": {
+      "saturday:1": "Tu aimes danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
+      "job:remote": "Tu télétravailles : la fibre se trouve autour de 30 € par mois, dans la capitale tech de l'Afrique de l'Est."
+    },
+    "sources": [
+      {
+        "title": "Must-see nightlife in East Africa",
+        "url": "https://www.lonelyplanet.com/east-africa/nightlife",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Nairobi nightlife: satisfying the insatiable partygoer",
+        "url": "https://www.businessdailyafrica.com/bd/lifestyle/food-drinks/nairobi-nightlife-satisfying-the-insatiable-partygoer--4360600",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Cost of Living in Nairobi",
+        "url": "https://www.numbeo.com/cost-of-living/in/Nairobi",
+        "published": "2026-11-06",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Renting in Nairobi (Expat.com)",
+        "url": "https://www.expat.com/en/guide/africa/kenya/nairobi/",
+        "published": "2025-08",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "San-Pédro",
+    "reputation": "On connaît San-Pédro pour son port, le premier au monde pour l'export de cacao. On connaît beaucoup moins ses plages.",
+    "surprise": "À une heure de route, les criques de Grand-Béréby : rochers, cocotiers, sable clair et presque personne. Pas besoin d'aller jusqu'à Zanzibar.",
+    "neighbourhoods": [],
+    "why": {
+      "landscape:beach": "Tu veux la mer le week-end : les plages de Monogaga et de Grand-Béréby sont à moins d'une heure.",
+      "size:1": "Tu préfères le calme : San-Pédro vit bien plus lentement qu'Abidjan."
+    },
+    "sources": [
+      {
+        "title": "Distance Grand-Béréby – San-Pédro",
+        "url": "https://www.distancede.com/ci/distance-entre-grandbereby-et-sanpedro-cote-divoire/HistoiredeDistance/2623306.aspx",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Pointe Est beach, Grand-Béréby",
+        "url": "https://onlybeaches.com/api/v1/beaches/pointe-est-grand-bereby-beach-grand-bereby",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Kampala",
+    "reputation": "On dit de Kampala qu'elle aime faire la fête : à Kololo, les bars et les clubs restent pleins tard, et l'entrée coûte souvent moins de 3 €.",
+    "surprise": "L'Ouganda a l'une des populations les plus jeunes du monde : la moitié des habitants a moins de 18 ans environ. Ça se voit dans la rue, dans la musique et dans les projets qui naissent partout.",
+    "neighbourhoods": [],
+    "why": {
+      "size:3": "Tu veux une ville qui vibre : Kampala, ses collines et ses motos-taxis ne s'arrêtent presque jamais.",
+      "climate:mild": "Tu cherches la douceur : à 1 200 m, il fait 25 à 28 °C le jour et 16 °C la nuit, toute l'année."
+    },
+    "sources": [
+      {
+        "title": "Demographics of Uganda (GeoRank)",
+        "url": "https://georank.org/demographics/uganda/united-states",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "UNFPA Uganda",
+        "url": "https://uganda.unfpa.org/en/node/48273",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Swakopmund",
+    "reputation": "On connaît Swakopmund comme une petite ville tranquille au bord de l'Atlantique : une promenade, des cafés, et le désert au bout de la rue.",
+    "surprise": "Au sud, à Sandwich Harbour, des dunes d'environ 100 m plongent directement dans l'océan. On y va en 4x4 depuis Walvis Bay, à une demi-heure de route.",
+    "neighbourhoods": [],
+    "why": {
+      "landscape:wildSpaces": "Tu rêves de grands espaces : ici, le désert du Namib commence où la ville s'arrête.",
+      "size:1": "Tu préfères le calme : Swakopmund est une petite ville où l'on fait presque tout à pied."
+    },
+    "sources": [
+      {
+        "title": "Sandwich Harbour (Lonely Planet)",
+        "url": "https://www.lonelyplanet.com/pois/1346423",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Sandwich Harbour tour (Info-Namibia)",
+        "url": "https://www.info-namibia.com/activities-and-places-of-interest/walvis-bay/sandwich-harbour-tour",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Accra",
+    "reputation": "On dit d'Accra qu'elle est une capitale du retour : chaque décembre, plus de 125 000 visiteurs venus de l'étranger, beaucoup de la diaspora, s'y retrouvent pour les fêtes.",
+    "surprise": "Chaque été depuis 2011, le festival Chale Wote transforme les rues de Jamestown, le vieux quartier, en galerie à ciel ouvert : peinture, danse, musique.",
+    "neighbourhoods": [],
+    "why": {
+      "priorities:diaspora": "Tu veux retrouver d'autres repats : à Accra, la communauté du retour est l'une des plus visibles du continent.",
+      "saturday:1": "Tu aimes sortir : Osu et Labone vivent la nuit, et décembre y est une fête d'un mois."
+    },
+    "sources": [
+      {
+        "title": "Art festival electrifies Ghana's streets (Al Jazeera)",
+        "url": "https://www.aljazeera.com/gallery/2015/8/28/art-festival-electrifies-ghanas-streets",
+        "published": "2015-08-28",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Accra's Chale Wote festival turns streets into galleries",
+        "url": "https://africa.com/lifestyle/accras-chale-wote-festival-turns-streets-into-galleries",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Addis-Abeba",
+    "reputation": "On connaît Addis-Abeba comme la capitale diplomatique de l'Afrique : l'Union africaine y a son siège.",
+    "surprise": "À 2 355 m, c'est la plus haute capitale d'Afrique, et il y fait doux toute l'année. Le soir, l'éthio-jazz se joue en live, par exemple à l'African Jazz Village.",
+    "neighbourhoods": [],
+    "why": {
+      "climate:mild": "Tu cherches la douceur : ni canicule ni clim, l'altitude s'en charge.",
+      "job:crea": "Tu vis pour la culture : Addis a sa propre musique, l'éthio-jazz, et des clubs où l'écouter."
+    },
+    "sources": [
+      {
+        "title": "Addis Ababa (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Addis_Ababa",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "The live music scene in Ethiopia (Music In Africa)",
+        "url": "https://musicinafrica.net/magazine/live-music-scene-ethiopia",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Mindelo",
+    "reputation": "On dit de Mindelo qu'elle est la capitale culturelle du Cap-Vert : c'est la ville de Cesária Évora et du carnaval le plus célèbre du pays.",
+    "surprise": "Il n'y pleut presque jamais : moins de 100 mm par an et près de 3 000 heures de soleil. En août, à la pleine lune, le festival de Baía das Gatas fait danser l'île depuis 1984.",
+    "neighbourhoods": [],
+    "why": {
+      "climate:dry": "Tu veux du soleil : Mindelo en a près de 3 000 heures par an, avec un vent qui rafraîchit.",
+      "job:crea": "Tu vis pour la culture : ici est née la morna de Cesária Évora, inscrite au patrimoine de l'UNESCO."
+    },
+    "sources": [
+      {
+        "title": "Mindelo (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Mindelo",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Morna (music) (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Morna_(music)",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Baía das Gatas Festival (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Baía_das_Gatas_Festival",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Kigali",
+    "reputation": "On dit de Kigali qu'elle est l'une des villes les plus propres d'Afrique : les sacs plastiques y sont interdits depuis 2008.",
+    "surprise": "Le dernier samedi du mois, la ville s'arrête le matin pour l'umuganda : une matinée de travaux collectifs où chacun participe.",
+    "neighbourhoods": [],
+    "why": {
+      "climate:mild": "Tu cherches la douceur : entre 15 et 27 °C toute l'année, sur des collines vertes."
+    },
+    "sources": [
+      {
+        "title": "Umuganda: Rwanda's audacity of hope to end plastic pollution (UNDP)",
+        "url": "https://www.undp.org/blog/umuganda-rwandas-audacity-hope-end-plastic-pollution",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Kigali, cleanest city (ONE)",
+        "url": "https://www.one.org/stories/kigali-cleanest-city/",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Rwanda travel advice (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/rwanda",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Saint-Louis",
+    "reputation": "On connaît Saint-Louis pour son île classée par l'UNESCO, ses maisons coloniales et son festival de jazz, qui revient chaque printemps depuis plus de trente ans.",
+    "surprise": "À quelques minutes, la Langue de Barbarie, une bande de sable entre le fleuve et l'océan, et pas loin, le parc du Djoudj, un immense refuge d'oiseaux.",
+    "neighbourhoods": [],
+    "why": {
+      "size:1": "Tu préfères le calme : Saint-Louis vit à un rythme lent, loin de l'agitation de Dakar."
+    },
+    "sources": [
+      {
+        "title": "Les avantages et inconvénients de Saint-Louis (OpenShores)",
+        "url": "https://www.openshores.co/blog/senegal/saint-louis/les-avantages-et-inconvenients-de-saint-louis",
+        "published": "2026-03-10",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Festival de jazz 2025 (Au Sénégal)",
+        "url": "https://au-senegal.com/festival-de-jazz-2025-le-programme-et-les-tetes-d-affiche-de-la-33e-edition,17506.html",
+        "published": "2025",
+        "accessed": "2026-11-14"
+      }
+    ]
+  },
+  {
+    "name": "Tanger",
+    "reputation": "On dit de Tanger qu'elle regarde l'Europe : seuls 14 km de mer la séparent de l'Espagne.",
+    "surprise": "L'Europe est à une heure de bateau : une dizaine de ferries par jour relient Tanger à Tarifa. Et ici, la Méditerranée rencontre l'Atlantique.",
+    "neighbourhoods": [],
+    "why": {
+      "priorities:flights": "Tu veux pouvoir rentrer souvent : de Tanger, l'Espagne est à une heure de ferry.",
+      "landscape:beach": "Tu veux la mer : à Tanger, tu as le choix entre deux, la Méditerranée et l'Atlantique."
+    },
+    "sources": [
+      {
+        "title": "Combien de temps faut-il pour traverser le détroit de Gibraltar ? (DFDS)",
+        "url": "https://www.dfds.com/fr-ma/ferries-passagers/blog/combien-de-temps-faut-il-pour-traverser-le-detroit-de-gibraltar",
+        "accessed": "2026-11-14"
+      },
+      {
+        "title": "Ferry Tanger – Tarifa (Ferryhopper)",
+        "url": "https://www.ferryhopper.com/fr/ferry-routes/direct/tanger-tarifa",
+        "accessed": "2026-11-14"
+      }
+    ]
+  }
+]

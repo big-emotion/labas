@@ -7,7 +7,7 @@ import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
 
 const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
 const description =
-  "Répondez à dix questions et découvrez les villes d'Afrique qui vous ressemblent, parmi 115 villes dans les 54 pays.";
+  "Réponds à dix questions et découvre les villes d'Afrique qui te ressemblent, parmi 115 villes dans les 54 pays.";
 ---
 
 <html lang="fr">
@@ -17,25 +17,25 @@ const description =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#161a5c" />
-    <title>Là-bas · Trouvez votre ville</title>
+    <title>Là-bas · Trouve ta ville</title>
   </head>
   <body>
     <div class="shell">
       <aside class="side">
         <Wordmark />
         <h1>
-          Trouvez votre ville, <em>là-bas.</em>
+          Trouve ta ville, <em>là-bas.</em>
         </h1>
         <p class="lead">
           Pour la diaspora qui regarde vers le continent. 115 villes dans les 54 pays, placées à
-          leurs coordonnées réelles. Chaque réponse allume celles qui vous ressemblent.
+          leurs coordonnées réelles. Chaque réponse allume celles qui te ressemblent.
         </p>
         <div class="map">
           <svg
             id="map"
             viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
             role="img"
-            aria-label="Carte des 115 villes : les plus proches de vos réponses s'allument"
+            aria-label="Carte des 115 villes : les plus proches de tes réponses s'allument"
           >
             {dots.map((dot) => (
               <circle
@@ -55,7 +55,7 @@ const description =
       </aside>
 
       <main class="main">
-        <form id="form" class="questions" aria-label="Vos réponses">
+        <form id="form" class="questions" aria-label="Tes réponses">
           {QUESTIONS.map((question) => (
             <fieldset class="question" data-question={question.id} data-max={question.max ?? 1}>
               <legend>
@@ -79,11 +79,23 @@ const description =
         </form>
 
         <section class="results" aria-labelledby="results-title">
-          <h2 id="results-title">Vos trois villes</h2>
+          <h2 id="results-title">Tes trois villes</h2>
           <p class="hint" id="results-hint">
             Sans réponse, voici les villes qui plaisent au plus grand nombre.
           </p>
+          <p class="hint" id="results-sub" hidden>
+            Selon tes réponses, de la plus proche à la moins proche.
+          </p>
           <div id="cards" class="cards"></div>
+        </section>
+
+        <section class="others" aria-labelledby="others-title">
+          <h2 id="others-title">Toutes les autres villes</h2>
+          <p class="hint">Les 115 villes, triées selon tes réponses.</p>
+          <ol id="rows" class="rows"></ol>
+          <button type="button" id="more" class="more">
+            Voir plus de villes
+          </button>
         </section>
 
         <footer class="footer">
@@ -92,7 +104,7 @@ const description =
             estimations de l'équipe ; leurs sources seront publiées. Les zones de conflit ne sont
             jamais proposées.
           </p>
-          <p>Vos réponses restent dans votre navigateur : rien n'est enregistré ni envoyé.</p>
+          <p>Tes réponses restent dans ton navigateur : rien n'est enregistré ni envoyé.</p>
         </footer>
       </main>
     </div>
@@ -107,17 +119,94 @@ const description =
           </div>
           <span class="fit"></span>
         </header>
+        <span class="bar">
+          <span></span>
+        </span>
         <p class="card-tagline"></p>
         <p class="card-pitch"></p>
-        <ul class="card-reasons"></ul>
-        <p class="card-watch">
-          <b>À savoir :</b> <span></span>
-        </p>
+        <div class="portrait-box" hidden>
+          <h4 class="portrait-title"></h4>
+          <ul class="portrait"></ul>
+        </div>
+        <details class="detail">
+          <summary>
+            <span class="when-closed">Voir le détail</span>
+            <span class="when-open">Masquer le détail</span>
+          </summary>
+        </details>
       </article>
     </template>
 
+    <template id="row-template">
+      <li class="row">
+        <details class="detail">
+          <summary class="row-head">
+            <span class="rank"></span>
+            <span class="row-name">
+              <b></b> <span class="row-country"></span>
+            </span>
+            <span class="fit"></span>
+            <span class="row-tagline"></span>
+            <span class="bar">
+              <span></span>
+            </span>
+          </summary>
+        </details>
+      </li>
+    </template>
+
+    <template id="unsafe-template">
+      <li class="row unsafe">
+        <div class="row-head">
+          <span class="rank"></span>
+          <span class="row-name">
+            <b></b> <span class="row-country"></span>
+          </span>
+          <span class="row-note">
+            Déconseillée en ce moment par le ministère des Affaires étrangères. Elle garde sa place
+            dans la liste, mais on ne te la propose pas.
+          </span>
+        </div>
+      </li>
+    </template>
+
+    <template id="detail-template">
+      <div class="detail-body">
+        <div class="field" data-field="portrait">
+          <h4 class="portrait-title"></h4>
+          <ul class="portrait"></ul>
+        </div>
+        <div class="field" data-field="reputation">
+          <span class="eyebrow">On dit</span>
+          <p class="quote"></p>
+        </div>
+        <div class="field" data-field="surprise">
+          <h4>Ce qui pourrait te surprendre</h4>
+          <p></p>
+        </div>
+        <div class="field" data-field="neighbourhoods">
+          <h4>Les quartiers</h4>
+          <ul class="places"></ul>
+          <p class="small">Loyers affichés, souvent négociables.</p>
+        </div>
+        <div class="field" data-field="reasons">
+          <h4>Ses points forts pour toi</h4>
+          <ul class="reasons"></ul>
+        </div>
+        <div class="field watch" data-field="watch">
+          <h4>À savoir</h4>
+          <p></p>
+        </div>
+        <details class="field sources" data-field="sources">
+          <summary>Nos sources</summary>
+          <ul></ul>
+        </details>
+      </div>
+    </template>
+
     <script>
-      import { bestMatches, type Answers } from "../lib/ranking";
+      import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
+      import { linesFor } from "../lib/lines";
 
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
@@ -188,12 +277,132 @@ const description =
         }
       }
 
+      const percent = (score: number) => `${Math.round(score * 100)}\u202f%`;
+      const VISIBLE_ROWS = 5;
+      let showAll = false;
+
+      function clone(id: string): HTMLElement {
+        const template = document.getElementById(id) as HTMLTemplateElement;
+        return template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+      }
+
+      function setText(root: HTMLElement, selector: string, text: string) {
+        (root.querySelector(selector) as HTMLElement).textContent = text;
+      }
+
+      function fillList(list: HTMLElement, items: string[]) {
+        list.replaceChildren(
+          ...items.map((text) => {
+            const item = document.createElement("li");
+            item.textContent = text;
+            return item;
+          }),
+        );
+      }
+
+      function fillPortrait(box: HTMLElement, m: Match) {
+        setText(box, ".portrait-title", `Pourquoi toi et ${m.city.name}`);
+        (box.querySelector(".portrait") as HTMLElement).replaceChildren(
+          ...m.portrait.map((line) => {
+            const item = document.createElement("li");
+            const said = document.createElement("span");
+            said.className = "said";
+            said.textContent = `Tu as dit · ${line.said}`;
+            item.append(said, document.createTextNode(line.text));
+            return item;
+          }),
+        );
+      }
+
+      // The same fields for every city, whether it is in the top three or further down.
+      function detailFor(m: Match, withPortrait: boolean): HTMLElement {
+        const body = clone("detail-template");
+        const lines = linesFor(m.city.name);
+        const show = (field: string, visible: boolean) => {
+          (body.querySelector(`[data-field="${field}"]`) as HTMLElement).hidden = !visible;
+        };
+        show("portrait", withPortrait && m.portrait.length > 0);
+        if (withPortrait) fillPortrait(body.querySelector('[data-field="portrait"]')!, m);
+        show("reputation", Boolean(lines?.reputation));
+        setText(body, '[data-field="reputation"] p', lines?.reputation ?? "");
+        show("surprise", Boolean(lines?.surprise));
+        setText(body, '[data-field="surprise"] p', lines?.surprise ?? "");
+        const places = lines?.neighbourhoods ?? [];
+        show("neighbourhoods", places.length > 0);
+        (body.querySelector(".places") as HTMLElement).replaceChildren(
+          ...places.map((place) => {
+            const item = document.createElement("li");
+            const name = document.createElement("b");
+            name.textContent = place.name;
+            item.append(name, document.createTextNode(` ${place.text}`));
+            return item;
+          }),
+        );
+        show("reasons", m.reasons.length > 0);
+        fillList(body.querySelector(".reasons") as HTMLElement, m.reasons);
+        setText(body, '[data-field="watch"] p', m.city.watch);
+        const sources = lines?.sources ?? [];
+        show("sources", sources.length > 0);
+        (body.querySelector('[data-field="sources"] ul') as HTMLElement).replaceChildren(
+          ...sources.map((source) => {
+            const item = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = source.url;
+            link.rel = "noopener noreferrer";
+            link.target = "_blank";
+            link.textContent = source.title;
+            item.append(link, document.createTextNode(`, consulté le ${source.accessed}`));
+            return item;
+          }),
+        );
+        return body;
+      }
+
+      function setBar(root: HTMLElement, score: number) {
+        (root.querySelector(".bar > span") as HTMLElement).style.width =
+          `${Math.round(score * 100)}%`;
+      }
+
+      function cardFor(m: Match, index: number): HTMLElement {
+        const card = clone("card-template");
+        if (index === 0) card.classList.add("first");
+        setText(card, ".rank", String(index + 1));
+        setText(card, ".card-name", m.city.name);
+        setText(card, ".card-country", `${m.city.country} · ${m.city.languageLabel}`);
+        setText(card, ".fit", percent(m.score));
+        setBar(card, m.score);
+        setText(card, ".card-tagline", m.city.tagline);
+        setText(card, ".card-pitch", m.city.pitch);
+        // The city in first place shows its "pourquoi toi" without a tap.
+        const box = card.querySelector(".portrait-box") as HTMLElement;
+        box.hidden = index !== 0 || m.portrait.length === 0;
+        if (index === 0) fillPortrait(box, m);
+        card.querySelector(".detail")!.append(detailFor(m, index !== 0));
+        return card;
+      }
+
+      function rowFor(m: Match, position: number): HTMLElement {
+        const row = clone(m.city.unsafe ? "unsafe-template" : "row-template");
+        setText(row, ".rank", String(position));
+        setText(row, ".row-name b", m.city.name);
+        setText(row, ".row-country", `· ${m.city.country}`);
+        if (m.city.unsafe) return row;
+        setText(row, ".fit", percent(m.score));
+        setText(row, ".row-tagline", m.city.tagline);
+        setBar(row, m.score);
+        row.querySelector(".detail")!.append(detailFor(m, true));
+        return row;
+      }
+
       function render() {
         const current = readAnswers();
         const answered = Object.values(current).some((value) => value !== undefined);
+        const ranked = rankCities(current);
         const matches = bestMatches(current, 3);
         const scores = new Map(
-          bestMatches(current, Infinity).map((m) => [m.city.name, m.score] as [string, number]),
+          ranked
+            .filter((m) => !m.city.unsafe)
+            .map((m) => [m.city.name, m.score] as [string, number]),
         );
         renderMap(
           matches.map((m) => m.city.name),
@@ -207,42 +416,30 @@ const description =
             const name = document.createElement("b");
             name.textContent = m.city.name;
             const score = document.createElement("span");
-            score.textContent = `${Math.round(m.score * 100)}\u202f%`;
+            score.textContent = percent(m.score);
             item.append(name, score);
             return item;
           }),
         );
 
         (document.getElementById("results-hint") as HTMLElement).hidden = answered;
-        const template = document.getElementById("card-template") as HTMLTemplateElement;
-        const cards = matches.map((m, index) => {
-          const card = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
-          const set = (selector: string, text: string) => {
-            (card.querySelector(selector) as HTMLElement).textContent = text;
-          };
-          set(".rank", String(index + 1));
-          set(".card-name", m.city.name);
-          set(".card-country", `${m.city.country} · ${m.city.languageLabel}`);
-          set(".fit", `${Math.round(m.score * 100)}\u202f%`);
-          set(".card-tagline", m.city.tagline);
-          set(".card-pitch", m.city.pitch);
-          set(".card-watch span", m.city.watch);
-          const reasons = card.querySelector(".card-reasons") as HTMLUListElement;
-          for (const reason of m.reasons) {
-            const item = document.createElement("li");
-            item.textContent = reason;
-            reasons.append(item);
-          }
-          for (const drawback of m.drawbacks) {
-            const item = document.createElement("li");
-            item.className = "drawback";
-            item.textContent = drawback;
-            reasons.append(item);
-          }
-          return card;
-        });
-        (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+        (document.getElementById("results-sub") as HTMLElement).hidden = !answered;
+        (document.getElementById("cards") as HTMLElement).replaceChildren(...matches.map(cardFor));
+
+        // Every other city, in score order; conflict zones keep their place, greyed.
+        const shown = new Set(matches.map((m) => m.city.name));
+        const rest = ranked.filter((m) => !shown.has(m.city.name));
+        const visible = showAll ? rest : rest.slice(0, VISIBLE_ROWS);
+        (document.getElementById("rows") as HTMLElement).replaceChildren(
+          ...visible.map((m, i) => rowFor(m, i + 4)),
+        );
+        (document.getElementById("more") as HTMLElement).hidden = showAll;
       }
+
+      document.getElementById("more")!.addEventListener("click", () => {
+        showAll = true;
+        render();
+      });
 
       form.addEventListener("click", (event) => {
         const chip = (event.target as HTMLElement).closest<HTMLButtonElement>(".chip");
@@ -457,66 +654,287 @@ const description =
         line-height: 1.05;
         margin: 0;
       }
-      .cards {
+      .cards,
+      .rows {
         display: grid;
         gap: 12px;
       }
-      .cards :global(.card) {
+      .rows {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 0;
+      }
+      .others {
+        display: grid;
+        gap: 10px;
+        padding-top: 24px;
+        border-top: 1px solid var(--night-lift);
+      }
+      .results :global(.card) {
         background: var(--night-deep);
+        border: 1px solid var(--night-lift);
         border-radius: 18px;
         padding: 18px;
         display: grid;
         gap: 10px;
       }
-      .cards :global(.card:first-child) {
+      /* The city in first place: framed in saffron, bigger, with its "pourquoi toi" open. */
+      .results :global(.card.first) {
         border: 2px solid var(--saffron);
+        gap: 14px;
       }
-      .cards :global(.card-head) {
+      .results :global(.card-head),
+      .rows :global(.row-head) {
         display: grid;
         grid-template-columns: auto minmax(0, 1fr) auto;
-        gap: 12px;
+        column-gap: 12px;
         align-items: center;
       }
-      .cards :global(.rank) {
+      .results :global(.rank) {
         font-family: var(--font-display);
         font-weight: 900;
         font-size: 1.8rem;
+        line-height: 1;
         color: var(--saffron);
       }
-      .cards :global(h3) {
+      .results :global(.first .rank),
+      .results :global(.first h3) {
+        font-size: clamp(2.2rem, 10vw, 2.8rem);
+      }
+      .results :global(h3) {
         font-family: var(--font-display);
         font-size: 1.45rem;
         margin: 0;
-        line-height: 1.1;
+        line-height: 1.05;
       }
-      .cards :global(.card-country),
-      .cards :global(.card-tagline) {
+      .results :global(.card-country),
+      .results :global(.card-tagline) {
         margin: 0;
         color: var(--thread-dim);
         font-size: 0.85rem;
       }
-      .cards :global(.card-tagline) {
+      .results :global(.card-tagline),
+      .rows :global(.row-tagline) {
+        font-family: var(--font-mono);
+        color: var(--saffron);
+        font-size: 0.85rem;
+      }
+      .results :global(.fit),
+      .rows :global(.fit) {
         font-family: var(--font-mono);
         color: var(--saffron);
       }
-      .cards :global(.fit) {
-        font-family: var(--font-mono);
-        color: var(--saffron);
-      }
-      .cards :global(.card-pitch),
-      .cards :global(.card-watch) {
+      .results :global(.card-pitch) {
         margin: 0;
         font-size: 0.95rem;
       }
-      .cards :global(.card-reasons) {
+      .results :global(.bar),
+      .rows :global(.bar) {
+        display: block;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--night-lift);
+        overflow: hidden;
+      }
+      .results :global(.bar > span),
+      .rows :global(.bar > span) {
+        display: block;
+        height: 100%;
+        background: var(--saffron);
+        border-radius: 999px;
+      }
+      .results :global(.portrait-box) {
+        background: var(--night-lift);
+        border-radius: 14px;
+        padding: 14px;
+        display: grid;
+        gap: 10px;
+      }
+      .results :global(h4),
+      .rows :global(h4) {
         margin: 0;
-        padding-left: 1.1em;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .results :global(.portrait-title),
+      .rows :global(.portrait-title) {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+      }
+      .results :global(.portrait),
+      .rows :global(.portrait) {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+      .results :global(.portrait li),
+      .rows :global(.portrait li) {
         display: grid;
         gap: 2px;
+        padding-left: 12px;
+        border-left: 3px solid var(--saffron);
       }
-      .cards :global(.drawback) {
+      .results :global(.said),
+      .rows :global(.said) {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--thread-dim);
+      }
+      .results :global(details.detail > summary) {
+        justify-self: start;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 2px solid var(--thread);
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 0.92rem;
+        cursor: pointer;
+        list-style: none;
+      }
+      :global(details.detail > summary::-webkit-details-marker) {
+        display: none;
+      }
+      :global(details.detail:not([open]) .when-open),
+      :global(details.detail[open] .when-closed) {
+        display: none;
+      }
+      .results :global(details.detail) {
+        display: grid;
+        gap: 14px;
+      }
+      :global(.detail-body) {
+        display: grid;
+        gap: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--night-pressed);
+        font-size: 0.95rem;
+      }
+      :global(.detail-body .field) {
+        display: grid;
+        gap: 6px;
+      }
+      :global(.detail-body p) {
+        margin: 0;
+      }
+      :global(.detail-body .eyebrow) {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--saffron);
+      }
+      :global(.detail-body .quote) {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1.1rem;
+        line-height: 1.35;
+      }
+      :global(.detail-body .places) {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+      }
+      :global(.detail-body .places li) {
+        background: var(--night);
+        border-radius: 10px;
+        padding: 8px 12px;
+      }
+      :global(.detail-body .small),
+      :global(.detail-body .sources) {
+        font-size: 0.8rem;
+        color: var(--thread-dim);
+      }
+      :global(.detail-body .reasons) {
+        margin: 0;
+        padding-left: 1.1em;
+      }
+      :global(.detail-body .watch) {
+        border: 2px solid var(--coral);
+        border-radius: 14px;
+        padding: 12px 14px;
+      }
+      :global(.detail-body .watch h4) {
         color: var(--coral);
+      }
+      :global(.detail-body .sources summary) {
+        cursor: pointer;
+      }
+      :global(.detail-body .sources ul) {
+        margin: 6px 0 0;
+        padding-left: 1.1em;
+      }
+      :global(.detail-body a) {
+        color: var(--saffron);
+      }
+      .rows :global(.row) {
+        border-bottom: 1px solid var(--night-lift);
+        padding: 12px 0;
+      }
+      .rows :global(.row-head) {
+        grid-template-columns: 32px minmax(0, 1fr) auto;
+        row-gap: 6px;
+      }
+      .rows :global(summary.row-head) {
+        cursor: pointer;
+        list-style: none;
+        min-height: 44px;
+      }
+      .rows :global(.rank) {
+        font-family: var(--font-mono);
+        color: var(--saffron);
+        font-size: 0.9rem;
+      }
+      .rows :global(.row-country) {
+        color: var(--thread-dim);
+      }
+      .rows :global(.row-tagline),
+      .rows :global(.bar),
+      .rows :global(.row-note) {
+        grid-column: 2 / -1;
+      }
+      .rows :global(.row-tagline) {
+        color: var(--thread-dim);
+        font-family: var(--font-body);
+      }
+      .rows :global(.detail-body) {
+        margin-top: 12px;
+        background: var(--night-deep);
+        border: 0;
+        border-radius: 14px;
+        padding: 14px;
+      }
+      .rows :global(.unsafe) {
+        color: var(--thread-faint);
+      }
+      .rows :global(.unsafe .row-head) {
+        background: var(--night-deep);
+        border-radius: 12px;
+        padding: 12px;
+      }
+      .rows :global(.row-note) {
+        font-size: 0.85rem;
+        line-height: 1.45;
+      }
+      .more {
+        justify-self: stretch;
+        min-height: 48px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--night-lift);
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .more[hidden] {
+        display: none;
       }
       .footer {
         display: grid;

@@ -13,13 +13,15 @@ export interface Question {
   max?: number;
 }
 
+// Worded in « tu » and kept playful (docs/criteria/architecture.md §A.3); the answer values
+// are the prototype's, so the ranking and its tests stand.
 export const QUESTIONS: Question[] = [
   {
     id: "project",
-    title: "Comment vous voyez-vous là-bas ?",
+    title: "Là-bas, tu t'y vois comment ?",
     choices: [
       { label: "M'installer pour de bon", value: "installer" },
-      { label: "Un pied là-bas, un pied ici", value: "pied" },
+      { label: "Un pied ici, un pied là-bas", value: "pied" },
       { label: "Tester quelques mois", value: "tester" },
       { label: "Investir sans y vivre", value: "investir" },
       { label: "D'abord des vacances", value: "decouvrir" },
@@ -27,16 +29,16 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "saturday",
-    title: "Votre samedi soir idéal ?",
+    title: "Ton samedi soir idéal ?",
     choices: [
-      { label: "Musique jusqu'au matin", value: 1 },
-      { label: "Un dîner entre amis", value: 0.5 },
-      { label: "Au calme chez moi", value: 0 },
+      { label: "Danser jusqu'au matin", value: 1 },
+      { label: "Un bon dîner entre amis", value: 0.5 },
+      { label: "Tranquille chez moi", value: 0 },
     ],
   },
   {
     id: "budget",
-    title: "Votre budget sur place ?",
+    title: "Ton budget sur place ?",
     choices: [
       { label: "Serré", value: "serre" },
       { label: "Moyen", value: "moyen" },
@@ -45,20 +47,20 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "family",
-    title: "Côté famille ?",
+    title: "Tu pars avec qui ?",
     choices: [
-      { label: "Célibataire", value: "celib" },
+      { label: "Seul·e", value: "celib" },
       { label: "En couple", value: "couple" },
-      { label: "Fonder une famille là-bas", value: "fonder" },
-      { label: "Parent, les enfants d'abord", value: "parents" },
+      { label: "Pour fonder une famille", value: "fonder" },
+      { label: "Avec mes enfants", value: "parents" },
     ],
   },
   {
     id: "job",
-    title: "Votre travail ?",
+    title: "Et le travail ?",
     choices: [
-      { label: "Salarié ou cadre", value: "cadre" },
-      { label: "Entrepreneur", value: "entre" },
+      { label: "Salarié·e", value: "cadre" },
+      { label: "J'entreprends", value: "entre" },
       { label: "Télétravail", value: "remote" },
       { label: "Création, culture", value: "crea" },
       { label: "Santé, enseignement", value: "soin" },
@@ -66,7 +68,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "language",
-    title: "Votre langue sur place ?",
+    title: "Tu es à l'aise en…",
     choices: [
       { label: "Français", value: "fr" },
       { label: "Anglais", value: "en" },
@@ -76,26 +78,26 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "size",
-    title: "Quelle taille de ville ?",
+    title: "Plutôt une ville qui…",
     choices: [
-      { label: "Très grande", value: 3 },
-      { label: "À taille humaine", value: 2 },
-      { label: "Petite et tranquille", value: 1 },
+      { label: "Vibre jour et nuit", value: 3 },
+      { label: "Reste à taille humaine", value: 2 },
+      { label: "Prend son temps", value: 1 },
     ],
   },
   {
     id: "landscape",
-    title: "Quel paysage autour ?",
+    title: "Le week-end, tu files où ?",
     choices: [
-      { label: "Océan", value: "beach" },
-      { label: "Montagnes, forêts", value: "nature" },
-      { label: "Savane, désert", value: "wildSpaces" },
-      { label: "La ville me suffit", value: "urban" },
+      { label: "À la plage", value: "beach" },
+      { label: "En montagne, en forêt", value: "nature" },
+      { label: "Dans la savane ou le désert", value: "wildSpaces" },
+      { label: "Je reste en ville", value: "urban" },
     ],
   },
   {
     id: "climate",
-    title: "Quel climat ?",
+    title: "Côté météo ?",
     choices: [
       { label: "Chaud toute l'année", value: "hot" },
       { label: "Doux", value: "mild" },
@@ -104,14 +106,14 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "priorities",
-    title: "Sur quoi ne transigez-vous pas ?",
+    title: "Ce qui compte le plus pour toi ?",
     max: 3,
     choices: [
-      { label: "La sécurité", value: "safety" },
-      { label: "Le coût de la vie", value: "cost" },
-      { label: "La santé et les écoles", value: "healthAndSchools" },
-      { label: "La carrière", value: "career" },
-      { label: "Une communauté de repats", value: "diaspora" },
+      { label: "Me sentir en sécurité", value: "safety" },
+      { label: "Une vie abordable", value: "cost" },
+      { label: "La santé et l'école", value: "healthAndSchools" },
+      { label: "Ma carrière", value: "career" },
+      { label: "Retrouver d'autres repats", value: "diaspora" },
       { label: "La mémoire de la diaspora", value: "memory" },
       { label: "Voyager facilement", value: "flights" },
     ],
