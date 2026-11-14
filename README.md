@@ -43,15 +43,19 @@ its audience is the French-speaking diaspora first.
 ## How it works
 
 ```
-src/data/cities.json   115 cities: coordinates, 21 scores, languages, climates, texts
-        │
-src/lib/ranking.ts     answers ──▶ criterion weights ──▶ weighted score per city (0–1)
-        │                          + reasons and drawbacks in plain French
-src/pages/index.astro  chips ──▶ rankCities() on every tap ──▶ map, pinned top three, cards
+src/data/cities.json       115 cities: coordinates, 21 scores, languages, climates, texts
+src/data/city-lines.json   per city: « On dit », « Ce qui pourrait te surprendre »,
+        │                  neighbourhoods, own « pourquoi toi » sentences, sources
+src/lib/ranking.ts         answers ──▶ criterion weights ──▶ weighted score per city (0–1)
+        │                  + reasons, drawbacks and « pourquoi toi » lines (portrait.ts)
+src/pages/index.astro      chips ──▶ rankCities() on every tap ──▶ map, pinned top three,
+                           « Tes trois villes » with details, every other city in score order
 ```
 
 Weights come from the prototype so its results stay recognisable. An unanswered question
-drops out of the score; tapping a pressed chip clears it.
+drops out of the score; tapping a pressed chip clears it. The page speaks to the reader with
+« tu ». The only ordering rule is the score. The design behind all this, and what comes next,
+is in [`docs/criteria/architecture.md`](docs/criteria/architecture.md).
 
 ### Questions left out of the one-screen form
 

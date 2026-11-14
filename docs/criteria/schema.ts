@@ -301,9 +301,6 @@ export interface Match {
   /** Level 1 "Pourquoi toi et [ville]": two or three lines pairing a stated preference with
    * what the city is known for ("Tu aimes quand ça bouge : Nairobi aussi"). Never a trait. */
   portrait: string[];
-  /** Level 1: true for the lead chosen outside the reader's usual sphere ("Tu n'y aurais
-   * peut-être pas pensé"), ranked with the language weight removed. */
-  discovery: boolean;
 }
 
 // ---------------------------------------------------------------------------
