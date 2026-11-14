@@ -78,7 +78,8 @@ function candidates(city: City, answers: Answers): Candidate[] {
 
   if (answers.language && city.languages.includes(answers.language)) {
     const lang = LANGUAGE_NAMES[answers.language];
-    add(`language:${answers.language}`, 3, `Tu parles ${lang} : à ${name}, on vit en ${lang}.`);
+    // Language is a constraint, not a pleasure: it comes after the lines that make people want to go.
+    add(`language:${answers.language}`, 1, `Tu parles ${lang} : à ${name}, on vit en ${lang}.`);
   }
 
   if (answers.size && answers.size === city.size) {

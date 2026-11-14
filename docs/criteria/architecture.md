@@ -140,7 +140,9 @@ A third line already exists: `watch` ("À savoir"). The fields are in [`schema.t
 
 The first ten cities were drafted in [`level1-city-lines.md`](./level1-city-lines.md) for tone
 review; the lines of every proposable city now live in `src/data/city-lines.json`, with
-neighbourhoods and sources.
+neighbourhoods and sources. The writers' doubts (271 flags: blog-only rents, facts from one
+source, truncated links) are listed city by city in
+[`city-lines-review.md`](./city-lines-review.md); clear them before public launch.
 
 ### A.7 Tone
 
