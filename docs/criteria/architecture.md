@@ -51,14 +51,14 @@ Analysis comes after, and only if they want it.
 
 ### A.2 The two levels
 
-|              | Level 1 — free, now                                                                                  | Level 2 — paid, later                                |
-| ------------ | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                     | Help a real decision                                 |
-| **Length**   | The current 10 questions, ~5 minutes                                                                 | The full question bank (§4.4) and the filters (§2.1) |
-| **Tone**     | Warm, playful, "tu", "on te comprend"                                                                | Precise, still plain French                          |
-| **Result**   | **One city**, a short portrait, two other leads (one deliberately outside the reader's usual sphere) | A ranked list with every criterion, source and date  |
-| **Criteria** | Hidden, behind "Pourquoi cette ville ?"                                                              | Shown in full                                        |
-| **Human**    | None                                                                                                 | Personal coaching (accompagnement)                   |
+|              | Level 1 — free, now                                                                                                                                                       | Level 2 — paid, later                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                                                                                          | Help a real decision                                 |
+| **Length**   | The current 10 questions, ~5 minutes                                                                                                                                      | The full question bank (§4.4) and the filters (§2.1) |
+| **Tone**     | Warm, playful, "tu", "on te comprend"                                                                                                                                     | Precise, still plain French                          |
+| **Result**   | **One city** in focus with a short portrait, two other leads (one deliberately outside the reader's usual sphere), then **every city on the site**, sorted by resemblance | A ranked list with every criterion, source and date  |
+| **Criteria** | Hidden, behind "Pourquoi cette ville ?"                                                                                                                                   | Shown in full                                        |
+| **Human**    | None                                                                                                                                                                      | Personal coaching (accompagnement)                   |
 
 The criteria, rubrics and sources in §2–§6 run underneath **both** levels. Level 1 does not
 get a lighter or less honest engine; it gets a lighter **presentation**.
@@ -105,7 +105,18 @@ On the phone, in this order:
 5. **Two other leads**, one of them marked **"Tu n'y aurais peut-être pas pensé"** (A.5).
 6. **"Pourquoi cette ville ?"**: opens the criteria behind the match, with sources and dates.
    This is where §3 becomes visible.
-7. **"Aller plus loin"**: the door to level 2.
+7. **"Toutes les villes, de la plus proche à la plus lointaine de toi"**: the whole catalogue
+   (115 cities today), sorted by resemblance score (decided 2026-11-14). Each row: name,
+   country, a bar for the score (never a percentage, §4.6), the city's tagline, and the
+   "Tu n'y aurais peut-être pas pensé" badge where it applies. Tapping a row opens the same
+   card as the city in focus. On the phone, the first 20 rows show, then "Voir plus".
+   - Cities with too little data keep their place in the order and show "données
+     incomplètes" (§4.2).
+   - `unsafe` cities stay in the list at their rank, greyed, with the advice line in place of
+     the portrait ("Déconseillée en ce moment par le ministère des Affaires étrangères,
+     mise à jour du …") and no "Pourquoi toi" lines. They are never in focus or among the
+     three leads (§4.3).
+8. **"Aller plus loin"**: the door to level 2.
 
 ### A.5 The discovery rule
 
@@ -120,6 +131,8 @@ reader's usual sphere**:
 - **It says why it is there and what it asks of the reader**: "On y vit en anglais, mais tout
   le reste te ressemble : la plage, une ville qui bouge, une vie abordable."
 - **It never overrides safety:** `unsafe` cities are never proposed, discovery included.
+- **In the full list** the discovery lead keeps its badge; no other city is moved out of score
+  order.
 
 ### A.6 The two lines each city needs for level 1
 
