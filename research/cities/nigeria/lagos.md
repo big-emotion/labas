@@ -105,7 +105,37 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 1,500 NGN** (mid
 - [cost.salary] (national) Same report: pay rises are absorbed by food, transport, rent and power costs, so living standards often stay flat. Commenters (n≈5) agree; one says an unchanged income over two years no longer covers travel or eating out. — @zikokomoney post 2026-09-30 (instagram.com/p/Dd6yD2pDs3Z) and comments, social-caption + social-comment, confidence: medium/low
 - [cost.living] (national) Under a post on Gen Z salaries, a commenter itemises how ₦700k/month barely covers food, fuel, transport, data and subscriptions; others react to a 41-year-old with two children on ₦200k (≈ €133). — comments under @zikokomoney post 2026-10-08 (instagram.com/p/DeO1TjFDtgF, n≈8), social-comment, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [daily.transport] Petrol at NNPC stations in Lagos: ₦1,355/litre (≈ €0.90) on 4–5 Nov 2026, down ₦5; independent marketers charged ₦1,365–1,370 (≈ €0.91) depending on location. — Legit.ng, 2026-11-05, local-media, confidence: high
+- [daily.transport] Reuters put petrol at about ₦1,400/litre (≈ €0.93) in Lagos and Abuja in late Sept 2026, up from ~₦1,200 a month earlier; diesel was above ₦2,000 (≈ €1.33). — TimesLIVE (Reuters), 2026-09-22, intl-media, confidence: high
+- [business.invest] Average land prices per m² in 2026 (Lagos Realty report): Ikoyi ~₦2.45 M (≈ €1,630), Victoria Island ₦2.1 M (≈ €1,400), Lekki Phase 1 ₦1.5 M (≈ €1,000), Ikate ₦955,000 (≈ €637); Lekki Phase 1 was ₦421,000 in 2022. — Nairametrics, 2026-08-15, local-media, confidence: medium
+- [business.invest] Average apartment sale prices in Ikate, 2026 (same report): 1-bed ₦120 M (≈ €80,000), 2-bed ₦205 M (≈ €136,700), 3-bed ₦255 M (≈ €170,000); the 2-bed was ₦90 M in 2022. — Nairametrics, 2026-07-10, local-media, confidence: medium
+- [business.invest] A property portal's indicative sale averages: 2-bed flat in Yaba ₦140 M (≈ €93,300), 4-bed terrace in Lekki ₦350 M (≈ €233,300), 4-bed terrace in Ajah ₦160 M (≈ €106,700), 3-bed luxury flat in Ikoyi ₦850 M (≈ €566,700). Asking-price ranges, not deals. — Nigeria Housing Market, updated 2026-01-19, company, confidence: low
+- [business.invest] The same portal gives land at ~₦25,000/m² in Ikorodu (≈ €17), ₦120,000 in Ibeju-Lekki (≈ €80), ₦950,000 in Lekki Phase 1 (≈ €633; conflicts with the ₦1.5 M above) and ₦3.2 M on Banana Island (≈ €2,130); it advises budgeting 10–15 % extra for Governor's Consent or survey fees. — Nigeria Housing Market, updated 2026-01-19, company, confidence: low
+- [cost.living] Crowdsourced grocery prices (USD as stated): milk 1 L $3.10, bread 0.5 kg $1.41, rice 1 kg $1.55, a dozen eggs $1.95, chicken breast 1 kg $3.81; cheap lunch menu $3.44. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [social.nightlife] Same aggregator (USD as stated): beer 0.5 L in a bar $1.01 ($0.57 in a shop), cinema ticket $4.97, dinner for two $50, gym $26.50/month. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.transport] Ride-hailing short trips cost ₦2,000–5,000 (≈ €1.33–3.33), more at peak traffic; a public-transport trip ₦500–1,000 (≈ €0.33–0.67). — Grey blog, updated 2026-10-13, company, confidence: low
+- [daily.transport] The Blue Line rail fare is ₦375 (≈ €0.25), Cowry card only; BRT trips run roughly ₦300–1,000+ (≈ €0.20–0.67) by distance, no cash; a Cowry card costs ₦500–1,000. — Wikivoyage Lagos, read 2026-11-14, blog, confidence: low
+- [daily.internet] MTN's 30-day data bundles at the time of reading: 20 GB ₦7,500 (≈ €5), 75 GB ₦18,000 (≈ €12), 250 GB ₦55,000 (≈ €37). National prices. — MTN Nigeria price page, read 2026-11-14, company, confidence: medium
+- [work.remote] Coworking in Lagos costs ₦60,000–150,000/month (≈ €40–100). — Grey blog, updated 2026-10-13, company, confidence: low
+- [family.schools] Private secondary day fees per year, 2025: Greensprings ~₦3.8 M (≈ €2,530), Grange ~₦4.5 M (≈ €3,000), Lekki British ~₦4.6 M (≈ €3,070), BIS Lagos ~₦6.1 M (≈ €4,070), Meadow Hall ₦5.5–6.3 M, Atlantic Hall ~₦6.7 M, Corona Lekki ~₦8 M (≈ €5,330). — Nairametrics, 2025-05-29, local-media, confidence: medium
+- [family.schools] Top of the range: American International School of Lagos ₦15.8–26.9 M/year (≈ €10,500–17,900); Charterhouse Lagos ₦21.7 M for Years 7–8 plus a ₦2 M (≈ €1,330) non-refundable application fee. — Nairametrics, 2025-05-29, local-media, confidence: medium
+- [family.childcare] Crowdsourced kindergarten cost: $104/month; international primary school $2,984/year (USD as stated; far below the school fees above). — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.power] Crowdsourced utilities (electricity, water, etc.) for one person: $34.60/month, $51.70 for a family; home internet 50 Mbps+ $27/month (USD as stated). — livingcost.org, updated 2026-06-21, company, confidence: low
+- [cost.negotiation] Rent is negotiable but no guide gives a typical discount; one suggests offering three years upfront to lower the annual rate and asking for a generator or air conditioners to be included. — Navigating Nigeria blog, 2026-02-21, blog, confidence: low
+- [cost.negotiation] Expat-area rents are often quoted in US dollars but paid in naira: agree whether the price is fixed in dollars or naira and at which rate; expat-focused agents cost more. — Navigating Nigeria blog, 2026-02-21, blog, confidence: low
+- [cost.negotiation] A calculator site claims many landlords knock 5–10 % off for two years paid upfront, and that the agency fee can often be halved (10 % to 5 %) when dealing with an individual landlord; some Lagos agents ask 15 %. — calculators-ng (Rent Calculator Nigeria), read 2026-11-14, company, confidence: low
+- [cost.negotiation] Renewal is the main lever: no agent or agreement fee is due, and a fintech guide advises opening talks several months before rent is due; first-time agreement/legal fees run ₦50,000–150,000 (≈ €33–100). — Kuda blog, 2026-02-20, company, confidence: low
+- [cost.negotiation] Old yellow cabs: agree the fare before getting in, pay cash on arrival. Okada fares can be roughly halved from the first ask, and quotes are higher for foreigners, so a Nigerian friend gets a better price. — Wikivoyage Lagos, read 2026-11-14, blog, confidence: low
+- [cost.negotiation] Nationwide rule of thumb: market haggling is expected and the real price is about half the first ask; bread, supermarkets and restaurants are fixed-price, and walking away after agreeing a price is seen as very rude. — Wikivoyage Nigeria, read 2026-11-14, blog, confidence: low
+- [housing.search] Never pay an "inspection" or viewing fee before seeing the property; genuine agents take their commission after the lease is signed. — Pulse Nigeria, 2025-02-13, local-media, confidence: medium
+
+<!-- listings-pass 2026-11-14 -->
+- [cost.rent] Sale asking prices on the Lekki side, found by searching "Lekki" in a public expat group, Sep–Nov 2026: 4-bedroom semi-detached duplex in Ikota Villa GRA ₦460 M (≈ €307,000); a property in the Chevron area ₦400 M (≈ €267,000); a house in VGC ₦2.8 billion (≈ €1.87 M); shop space in a Sangotedo mall at ₦2–2.5 M per m² (≈ €1,330–1,670/m²); a Victoria Island plot quoted at USD 18 M "or naira equivalent". — "Expats in Lagos, Abuja, Port Harcourt and Nigeria Connect" (376987530891894) search "Lekki", n=12 priced posts out of 22, social-caption (agencies), confidence: low (asking prices)
+- [cost.negotiation] None of the 12 priced Lagos sale posts says "negotiable"; agency posts lead with land title type (C of O, governor's consent) rather than price flexibility. — same group, Sep–Nov 2026, social-caption, confidence: low
+
 ## Gaps
+
 - "Nigerians In Diaspora" (public, 68K): searches for "moving back" and "relocate back to Lagos" returned property distress-sale ads, motivational copy-paste stories (one about a return to Rwanda) and nothing about daily life in Lagos or Abuja. Not used.
 - Not read this pass: zikokomag, eat.drink.lagos, lagosschoolsguide, NIDOE, THE NIGERIANS, Expats in Nigeria. Zikoko Money, Lost in Lagos/Abuja and the expat group's rent search were read first because they carried the most city-specific signal.
 - No dated, independent survey of women's street harassment in Lagos (only DSVA case counts); a LAMATA public-transport harassment study exists but only its contents page surfaced.
@@ -116,8 +146,12 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 1,500 NGN** (mid
 - Salary data is from company blogs with unclear methods; no official Lagos wage statistics found.
 - Racism/colourism: no dated media, NGO or academic source found for Lagos. A single 2023–26 expat blog testimony (Talesmag, 2026-08-29) reports widespread prejudice, slurs, and different workplace standards for white and Black staff, and answers "No" on LGBT-friendliness; left out of Items because a blog alone does not meet the sourcing rule for these topics.
 - Facebook/WhatsApp returnee groups not checked (no login, per rules).
+- Price top-up (2026-11-14): electricity tariff per kWh not found (Ikeja Electric tariff page returned 403); no water-bill figure; no GP fee outside the premium hospitals; no club entry, concert ticket or cooking-oil price from a dated source; Numbeo returned 429; Bolt's Lagos page shows no fare grid.
+- Negotiation: no dated source quantifies how much tenants actually obtain off asking rents or agency fees; the only percentages (5–10 %, fee halved) come from a calculator site. No Lagos-specific market-bargaining percentage beyond the nationwide Wikivoyage rule of thumb. Web-search budget ran out mid-pass, so searches on "Lagos taxi price negotiation" and "prix étranger" were not run.
+<!-- listings-pass gaps 2026-11-14 -->
 
 ## Sources read
+
 1. "One-bedroom rents hit ₦20.9m in Lagos – Report" (Edala, Lagos Residential Market Report 2025) — https://newsexpressngr.com/news/289926/one-bedroom-rents-hit-209m-in-lagos-report — local-media — date read (2026-11-14)
 2. Cost of Living in Lagos (2026 Practical Budget Guide) — https://www.nigeriahousingmarket.com/guides/cost-of-living-in-lagos — company — date read (2026-11-14)
 3. Living in Lagos (Expat.com guide, updated 2025-12-16) — https://www.expat.com/fr/guide/afrique/nigeria/lagos/ — blog — date read (2026-11-14)
@@ -163,8 +197,41 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 1,500 NGN** (mid
 - Social pass: Facebook "Expats in Lagos, Abuja, Port Harcourt and Nigeria Connect" (376987530891894) — search "rent", 6 results, 2026-11-14
 - Social pass: Facebook "Nigerians In Diaspora" (nigeriansindiaspora) — searches "relocate back to Lagos", "moving back", 5 results, 2026-11-14
 
+39. NNPCL cuts petrol price, depots release rates — https://www.legit.ng/business-economy/money/1739698-nnpcl-reduce-petrol-prices-depots-release-rates/ — local-media — date read (2026-11-14)
+40. NNPC, Mobil, other filling stations release new petrol prices — https://www.legit.ng/business-economy/energy/1739753-nnpc-mobil-filling-stations-release-petrol-prices-costs-rise/ — local-media — date read (2026-11-14)
+41. Fuel price surge deepens Nigeria's cost-of-living crisis (Reuters) — https://www.timeslive.co.za/news/africa/2026-09-22-fuel-price-surge-deepens-nigerias-cost-of-living-crisis-ahead-of-2027-elections/ — intl-media — date read (2026-11-14)
+42. Lagos Island land prices soar, Ikoyi hits ₦2.5 million per sqm — https://nairametrics.com/2026/08/15/lagos-island-land-prices-soar-ikoyi-hits-n2-5-million-per-sqm/ — local-media — date read (2026-11-14)
+43. Ikate two-bedroom apartment prices hit ₦205 million — https://nairametrics.com/2026/07/10/ikate-two-bedroom-apartment-prices-hit-n205-million-as-off-plan-demand-grows/ — local-media — date read (2026-11-14)
+44. Lagos Property Prices 2026 — https://www.nigeriahousingmarket.com/lagos/property-prices — company — date read (2026-11-14)
+45. Cost of living in Lagos — https://livingcost.org/cost/nigeria/lagos — company — date read (2026-11-14)
+46. Lagos — Wikivoyage — https://en.wikivoyage.org/wiki/Lagos — blog (wiki) — date read (2026-11-14)
+47. Nigeria — Wikivoyage — https://en.wikivoyage.org/wiki/Nigeria — blog (wiki) — date read (2026-11-14)
+48. MTN Nigeria data plans — https://www.mtn.ng/data/ — company — date read (2026-11-14)
+49. Most expensive private secondary schools in Lagos (full article of source 28) — https://nairametrics.com/2025/05/29/meet-owners-and-promoters-of-the-most-expensive-private-secondary-schools-in-lagos/ — local-media — date read (2026-11-14)
+50. How to find a rental apartment in Lagos: a complete guide for expats — https://navigatingnigeria.blogspot.com/2026/02/how-to-find-rental-apartment-in-lagos.html — blog — date read (2026-11-14)
+51. Rent Calculator Nigeria — total move-in cost — https://calculators-ng.pages.dev/real-estate/rent-calculator-nigeria/ — company — date read (2026-11-14)
+52. Your 2026 debt-free guide to paying rent in Lagos — https://www.kuda.com/blog/debt-free-rent-guide-lagos/ — company — date read (2026-11-14)
+53. How to know if a house agent in Lagos is trying to scam you — https://www.pulse.ng/story/how-to-know-if-a-house-agent-in-lagos-is-trying-to-scam-you-2025021312104997876 — local-media — date read (2026-11-14)
+54. The rental market nightmare: practical tips for renting in high-demand Lagos areas — https://www.discoverlagos.ng/post/the-rental-market-nightmare-practical-tips-for-renting-in-high-demand-lagos-areas — blog — date read (2026-11-14), not used (its "₦2.5–5 M monthly" 2-bed figure looks like a unit error)
+55. Renting mini flats in Lagos — https://www.pulse.ng/story/renting-mini-flats-in-lagos-2025072412404347602 — local-media — date read (2026-11-14), no figures, not used
+
+- Social pass: Facebook "Expats in Lagos, Abuja, Port Harcourt and Nigeria Connect" (376987530891894) — search "Lekki", 22 posts, 2026-11-14
+
 ## Spot-check (2026-11-14)
+
 - [cost.rent] Average 1-bed rent, Ikoyi / Edala figures — supported
 - [safety.general] FCDO: violent crime — supported
 - [safety.general] Lagos police reported a resurgence of "one chance" — supported
 - [safety.women] FCDO's Nigeria page gives no women-specific advice — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [daily.transport] Petrol at NNPC stations in Lagos: ₦1,355 — supported
+- [daily.transport] Reuters put petrol at about ₦1,400 — supported
+- [business.invest] Average land prices per m² in 2026 — supported
+- [business.invest] Average apartment sale prices in Ikate — supported
+- [family.schools] Private secondary day fees per year, 2025 — supported
+- [family.schools] Top of the range: American International School — supported
+- [daily.internet] MTN's 30-day data bundles — supported
+- [daily.transport] The Blue Line rail fare is ₦375 — supported
+- [housing.search] Never pay an "inspection" or viewing fee — supported

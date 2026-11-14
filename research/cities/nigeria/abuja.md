@@ -90,7 +90,23 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 1,500 NGN** (mid
 - [cost.rent] A business owner's request posted in the same group budgets ₦10–15M a year (≈ €6,700–10,000) for an electronics shop or showroom in Maitama or another busy commercial area. — same group 2026-06-15, social-caption, confidence: low
 - [other] The search for "rent" in this group returns almost only agent listings: the group works as a property noticeboard more than a place to ask questions. — same group, read 2026-11-14, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [daily.transport] Petrol at NNPC stations in Abuja (incl. Kubwa Expressway and Gwarinpa): ₦1,325/litre (≈ €0.88) on 4 Nov 2026, down from ₦1,370–1,405. — Legit.ng, 2026-11-05, local-media, confidence: high
+- [daily.transport] Reuters put petrol at about ₦1,400/litre (≈ €0.93) in Abuja and Lagos in late Sept 2026, up from ~₦1,200 a month before; diesel above ₦2,000 (≈ €1.33). — TimesLIVE (Reuters), 2026-09-22, intl-media, confidence: high
+- [daily.transport] Ride-hailing trips cost ₦1,500–3,500 (≈ €1–2.33); public buses or keke ₦200–500 (≈ €0.13–0.33). — Grey blog, updated 2026-10-13, company, confidence: low
+- [cost.living] Crowdsourced grocery prices (USD as stated): milk 1 L $2.08, bread 0.5 kg $1.12, rice 1 kg $1.81, a dozen eggs $2.01, chicken breast 1 kg $5.48. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [social.nightlife] Same aggregator (USD as stated): lunch menu $2.62, dinner for two $33, beer 0.5 L in a bar $0.88, cinema ticket $5.28, gym $30.30/month. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.transport] Same aggregator (USD as stated): an 8 km taxi ride $6.31, a public-transport ticket $0.56, a monthly pass $30.80. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.power] Same aggregator (USD as stated): utilities for one person $60.80/month ($91.50 for a family), home internet 50 Mbps+ $27.50 — nearly double its Lagos utilities figure. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [family.childcare] Same aggregator (USD as stated): kindergarten $115/month; international primary school $2,528/year (well below the AISA figures above). — livingcost.org, updated 2026-06-21, company, confidence: low
+- [business.invest] Same aggregator (USD as stated): city-centre apartment ~$1,280 per m² to buy, suburban house ~$955 per m². Crowdsourced asking levels, not transactions. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.internet] MTN's 30-day data bundles at the time of reading: 20 GB ₦7,500 (≈ €5), 75 GB ₦18,000 (≈ €12), 250 GB ₦55,000 (≈ €37). National prices. — MTN Nigeria price page, read 2026-11-14, company, confidence: medium
+- [cost.negotiation] Agree the fare before getting into a street cab, and prefer the official green cabs; unofficial cabs "could be traps". — Wikivoyage Abuja, read 2026-11-14 (listings mostly 2017–2024), blog, confidence: low
+- [cost.negotiation] Nationwide rule of thumb: market haggling is expected and the real price is about half the first ask; bread, supermarkets and restaurants are fixed-price, and backing out after agreeing is seen as very rude. — Wikivoyage Nigeria, read 2026-11-14, blog, confidence: low
+- [cost.negotiation] A calculator site says some Lagos and Abuja agents ask up to 15 % (10 % is standard), that the fee can often be halved when renting directly from a landlord, and that many landlords give 5–10 % off for two years upfront. — calculators-ng (Rent Calculator Nigeria), read 2026-11-14, company, confidence: low
+
 ## Gaps
+
 - No dated women's-safety source beyond the "one chance" coverage; FCDO has no women-specific advice. An Expat.com forum thread on safe areas for women exists but forum content alone cannot carry a safety item.
 - Development-sector job losses after the 2025 US aid freeze: search snippets mention layoffs at Abuja NGOs, but no article was opened, so no item.
 - Abuja Light Rail fares and frequency in 2026: not found (only 2024 relaunch coverage).
@@ -98,8 +114,11 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 1,500 NGN** (mid
 - Returnee and diaspora groups specific to Abuja: not found; RTÉ and Legit returnee pieces focus on Lagos or Nigeria generally.
 - Childcare/crèche costs, sport and food scene: not found from a dated source.
 - Nigeria Property Centre 2-bed index pages returned 403; their Sept 2026 citywide median (₦7.2 M) was seen only in a search snippet and is left out.
+- Price top-up (2026-11-14): no dated Abuja sale prices by district (Nigeria Housing Market's Abuja page returned only navigation); no GP or clinic consultation fee (Cedarcrest, Nisa do not publish); no AEDC tariff per kWh, water bill, club entry or concert price found; Numbeo returned 429; Wikivoyage Abuja food and cab prices are 2017–2024 and were left out.
+- Negotiation: no Abuja-specific source on how much rent or agency fees come down, or on a foreigner price in markets; web-search budget ran out mid-pass, so "Abuja negotiate rent" and "Abuja taxi fare negotiation" searches were not run.
 
 ## Sources read
+
 1. "High rent driving us out of Abuja – Residents" — https://thefrontierng.com/?p=72411 — local-media — date read (2026-11-14)
 2. Living in Abuja: the ultimate expat guide (updated 2025-12-16) — https://www.expat.com/en/guide/africa/nigeria/abuja/ — blog — date read (2026-11-14)
 3. Cost of living in Nigeria for digital nomads: Lagos vs Abuja vs smaller cities — https://grey.co/blog/cost-of-living-in-nigeria-for-digital-nomads-lagos-vs-abuja-vs-smaller-cities — company — date read (2026-11-14)
@@ -135,8 +154,17 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 1,500 NGN** (mid
 33. Constitution s.25 and s.28 — https://nigerian-constitution.com/chapter-3-section-25-citizenship-by-birth/ and https://nigerian-constitution.com/chapter-3-section-28-dual-citizenship/ — official (mirror) — via dossier S16/S17, not re-opened (2026-11-14)
 34. NiMet forecasts dust haze and thunderstorms across Nigeria — https://nairametrics.com/2026/01/19/nimet-forecasts-dust-haze-and-thunderstorms-across-nigeria/ — local-media — date read (2026-11-14)
 35. Tolerance for diversity poll (Afrobarometer Round 8) — https://www.noi-polls.com/post/tolerance-for-diversity-poll-nigerians-show-high-tolerance-for-diversity-but-low-trust-in-fellow-c — academic — via dossier S45, not re-opened (2026-11-14)
+36. NNPCL cuts petrol price to ₦1,325 in Abuja — https://www.legit.ng/business-economy/money/1739698-nnpcl-reduce-petrol-prices-depots-release-rates/ — local-media — date read (2026-11-14)
+37. Fuel price surge deepens Nigeria's cost-of-living crisis (Reuters) — https://www.timeslive.co.za/news/africa/2026-09-22-fuel-price-surge-deepens-nigerias-cost-of-living-crisis-ahead-of-2027-elections/ — intl-media — date read (2026-11-14)
+38. Cost of living in Abuja — https://livingcost.org/cost/nigeria/abuja — company — date read (2026-11-14)
+39. Abuja — Wikivoyage — https://en.wikivoyage.org/wiki/Abuja — blog (wiki) — date read (2026-11-14)
+40. Nigeria — Wikivoyage — https://en.wikivoyage.org/wiki/Nigeria — blog (wiki) — date read (2026-11-14)
+41. MTN Nigeria data plans — https://www.mtn.ng/data/ — company — date read (2026-11-14)
+42. Rent Calculator Nigeria — total move-in cost — https://calculators-ng.pages.dev/real-estate/rent-calculator-nigeria/ — company — date read (2026-11-14)
+43. Abuja Property Prices 2026 — https://www.nigeriahousingmarket.com/abuja/property-prices — company — date read (2026-11-14), body not served, not used
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] FCDO says kidnapping occurs in "the outer suburbs of Abuja" — supported
 - [safety.general] Kidnappers abducted at least 16 people in Peze — supported
 - [safety.general] In Jan 2026 the Bar Association's Abuja branch warned — supported

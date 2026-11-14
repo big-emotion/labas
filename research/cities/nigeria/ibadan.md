@@ -27,15 +27,28 @@ Extra city (dossier heading "additional — cheap, close to Lagos, university ci
 - [safety.general] In July 2026 an alleged phone robbery at a POS stand in Ojoo, Ibadan, escalated into a mob killing and reprisal attacks; at least two dead, six shops burnt, and police warned against "jungle justice". — Premium Times, 2026-07-09, local-media, confidence: high
 - [rights.lgbt] National law applies: same-sex sexual activity is illegal with up to 14 years in prison. — UK FCDO safety page, current 2026-11-14, official, confidence: high
 
+<!-- price-topup 2026-11-14 -->
+- [cost.living] Crowdsourced grocery prices (USD as stated): milk 1 L $1.99, bread 0.5 kg $1.00, rice 1 kg $1.24, a dozen eggs $1.54, chicken breast 1 kg $3.65; lunch menu $1.77. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [social.nightlife] Same aggregator (USD as stated): beer 0.5 L in a bar $0.65, dinner for two $29.70, cinema ticket $2.24, gym $25.30/month. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.transport] Same aggregator (USD as stated): an 8 km taxi ride $8.27, a local transport ticket $0.29, a monthly pass $30.40. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.power] Same aggregator (USD as stated): utilities for one person $10.90/month ($16.80 for a family), home internet 50 Mbps+ $17.20. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [family.childcare] Same aggregator (USD as stated): kindergarten $41.80/month; international primary school $1,576/year. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [business.invest] Same aggregator (USD as stated): city-centre apartment ~$853 per m² to buy; 1-bed rent $332–343/month, well above the Gazette survey rents above. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.internet] MTN's 30-day data bundles at the time of reading: 20 GB ₦7,500 (≈ €5), 75 GB ₦18,000 (≈ €12). National prices. — MTN Nigeria price page, read 2026-11-14, company, confidence: medium
+- [cost.negotiation] Nationwide rule of thumb: market haggling is expected and the real price is about half the first ask; bread, supermarkets and restaurants are fixed-price, and backing out after agreeing is seen as very rude. — Wikivoyage Nigeria, read 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No dated 2026 rent survey for Ibadan found; the only itemised survey is from Aug 2024, and guide figures for Bodija/Jericho are unsourced.
 - Ibadan Electricity (IBEDC) supply complaints (Bodija Band A shortfalls) surfaced only in search snippets; the Guardian article returned 403, so left out.
 - Lagos–Ibadan standard-gauge train fares and timetable: only third-party guides found, conflicting; left out.
 - International schools, French-language options, expat community, nightlife, food, religion and climate: no dated source found in this pass.
 - Salaries specific to Ibadan: not found.
 - Returnee or diaspora experiences specific to Ibadan: not found.
+- Price top-up (2026-11-14): no Ibadan pump price, sale prices by district (Nigeria Housing Market Ibadan page 404), school or clinic fees, or IBEDC tariff found. Wikivoyage Ibadan prices (food, clubs, minibus) date from 2020–2023 and the train fare is undated, so all were left out. No Ibadan-specific source on rent or market negotiation; web-search budget ran out mid-pass, so those searches were not run.
 
 ## Sources read
+
 1. Nigeria Rent Prices Rise: Top Cities for Renters in 2026 — https://www.nigeriahousingmarket.com/guides/nigeria-rent-prices-rise-2026-report — company — via dossier S13, not re-opened (2026-11-14)
 2. Latest Ibadan rent survey (room and parlour, self-contain) — https://gazettengr.com/latest-ibadan-rent-survey-room-and-parlour-apartment-in-kuola-n910000-n800000-in-oluyole-akala-estate-n700000-ologuneru-n750000-one-room-self-contain-n620000/ — local-media — date read (2026-11-14)
 3. Cost of Living in Ibadan 2026 — https://livingcostindex.com/regions/ibadan-ng-oy/ — company — via dossier S39, not re-opened (2026-11-14)
@@ -51,7 +64,12 @@ Extra city (dossier heading "additional — cheap, close to Lagos, university ci
 13. Conseils aux voyageurs : Nigeria — France Diplomatie — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/nigeria/ — official — via dossier S3, not re-opened
 14. How mob killing over alleged robbery sparks deadly reprisal attacks in Oyo — https://www.premiumtimesng.com/news/top-news/894112-how-mob-killing-over-alleged-robbery-sparks-deadly-reprisal-attacks-in-oyo.html — local-media — date read (2026-11-14)
 15. Nigeria travel advice: Safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/nigeria/safety-and-security — official — date read (2026-11-14)
+16. Cost of living in Ibadan — https://livingcost.org/cost/nigeria/ibadan — company — date read (2026-11-14)
+17. Ibadan — Wikivoyage — https://en.wikivoyage.org/wiki/Ibadan — blog (wiki) — date read (2026-11-14), prices 2020–2023, not used
+18. Nigeria — Wikivoyage — https://en.wikivoyage.org/wiki/Nigeria — blog (wiki) — date read (2026-11-14)
+19. MTN Nigeria data plans — https://www.mtn.ng/data/ — company — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] On 15 May 2026 gunmen abducted 39 students — supported
 - [safety.general] In July 2026 an alleged phone robbery at a POS stand — supported

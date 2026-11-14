@@ -37,14 +37,30 @@ Extra city (dossier heading "additional — calmer south-eastern capital, Igbo d
 - [nature.access] Day trips named: Awhum Waterfall and Monastery, Iva Valley coal mines. — Outravel and Tour, 2025-09-15, blog, confidence: low
 - [rights.lgbt] National law applies: same-sex sexual activity is illegal, up to 14 years in prison. — UK FCDO safety page, current 2026-11-14, official, confidence: high
 
+<!-- price-topup 2026-11-14 -->
+- [cost.negotiation] A renter told ICIR he "was begging" a landlord to cut ₦700,000 (≈ €467) of agent, caution and management charges on a ₦600,000 rent (2023); the landlord refused. ICIR reports no successful reduction. — ICIR, 2025-12-15, local-media, confidence: low
+- [cost.negotiation] Professional bodies say legal fees should be 3–5 % of rent and agent fees no more than 10 %, while ICIR found agents charging 15–20 % — the official scale is a useful argument when bargaining. — ICIR, 2025-12-15, local-media, confidence: medium
+- [cost.rent] An agent quoted ICIR standard commissions from ₦50,000 for a single room to ₦250,000 for a 3-bed (≈ €33–167); one renter spent over ₦200,000 (≈ €133) on transport and ₦2,000 inspection fees during a five-month search in 2025. — ICIR, 2025-12-15, local-media, confidence: medium
+- [cost.negotiation] A digital-nomad guide says landlords in smaller cities such as Enugu are "more flexible" and agents less pushy than in Lagos, without figures. — Grey blog, updated 2026-10-13, company, confidence: low
+- [cost.negotiation] Nationwide rule of thumb: market haggling is expected and the real price is about half the first ask; bread, supermarkets and restaurants are fixed-price, and backing out after agreeing is seen as very rude. — Wikivoyage Nigeria, read 2026-11-14, blog, confidence: low
+- [cost.living] Crowdsourced grocery prices (USD as stated): milk 1 L $0.84, bread 0.5 kg $0.77, eggs x12 $0.68, chicken breast 1 kg $3.53; its rice figure ($0.29/kg) looks implausible. Thin data. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [social.nightlife] Same aggregator (USD as stated): beer 0.5 L in a bar $0.67, dinner for two $16.50, cinema ticket $2.31, gym $11.40/month. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.transport] Same aggregator (USD as stated): an 8 km taxi ride $9.81, a bus ticket $1, a monthly pass $15.40, petrol $0.70/litre. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [family.childcare] Same aggregator (USD as stated): kindergarten $37.80/month; international primary school $900/year. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [business.invest] Same aggregator (USD as stated): city-centre apartment ~$1,176 per m² to buy; 1-bed rent $178–371/month, far above the ICIR rents above. — livingcost.org, updated 2026-06-21, company, confidence: low
+- [daily.internet] MTN's 30-day data bundles at the time of reading: 20 GB ₦7,500 (≈ €5), 75 GB ₦18,000 (≈ €12). National prices. — MTN Nigeria price page, read 2026-11-14, company, confidence: medium
+
 ## Gaps
+
 - No dated 2026 rent survey; the ICIR investigation (Dec 2025) is the best dated source. Guide figures are unsourced.
 - Sit-at-home status in Nov 2026: conflicting reports (a March 2026 AIT report of residents staying indoors surfaced only in a snippet); no current confirmation.
 - Internet speeds, schools (international or French), salaries, nightlife and religion: no dated source found.
 - Diaspora returnee experiences specific to Enugu: not found despite searching (only the London flight item).
 - Water supply status in 2026 at household level: not found (only 2023 inauguration coverage).
+- Price top-up (2026-11-14): no Enugu pump price (Legit.ng November reports cover Lagos and Abuja only), no sale prices by district (Nigeria Housing Market Enugu page 404), no school fees, clinic fees, bus fare on the new CNG buses or water bill found. Web-search budget ran out mid-pass, so "Enugu négocier loyer" / market-bargaining searches were not run.
 
 ## Sources read
+
 1. Nigeria Rent Prices Rise: Top Cities for Renters in 2026 — https://www.nigeriahousingmarket.com/guides/nigeria-rent-prices-rise-2026-report — company — via dossier S13, not re-opened (2026-11-14)
 2. In Enugu, cut-throat fees by agents, lawyers, landlords deepen housing crisis — https://www.icirnigeria.org/?p=267191 — local-media — date read (2026-11-14)
 3. Living in Enugu: A Complete Guide for Newcomers — https://outravelandtour.com/living-in-enugu-a-complete-guide-for-newcomers — blog — date read (2026-11-14)
@@ -59,6 +75,15 @@ Extra city (dossier heading "additional — calmer south-eastern capital, Igbo d
 12. Enugu police bust interstate kidnap gang — https://saharareporters.com/2026/08/14/enugu-police-bust-interstate-kidnap-gang-arrest-14-suspects-over-n30million-98700-ransom — local-media — date read (2026-11-14)
 13. Sit-at-home cancellation: hope rises as economic activities rebound in Anambra, Ebonyi, Enugu — https://gazettengr.com/sit-at-home-cancellation-hope-rises-as-economic-activities-rebound-in-anambra-ebonyi-enugu/ — local-media — date read (2026-11-14)
 14. Nigeria travel advice: Safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/nigeria/safety-and-security — official — date read (2026-11-14)
+15. Cost of living in Enugu — https://livingcost.org/cost/nigeria/enugu — company — date read (2026-11-14)
+16. Nigeria — Wikivoyage — https://en.wikivoyage.org/wiki/Nigeria — blog (wiki) — date read (2026-11-14)
+17. MTN Nigeria data plans — https://www.mtn.ng/data/ — company — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Police broke up a kidnapping gang in Aug 2026 — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.negotiation] A renter told ICIR he "was begging" a landlord — supported
+- [cost.rent] An agent quoted ICIR standard commissions from ₦50,000 — supported
