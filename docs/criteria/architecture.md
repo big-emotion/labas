@@ -107,7 +107,7 @@ On the phone, in this order:
    This is where §3 becomes visible.
 7. **"Toutes les villes, de la plus proche à la plus lointaine de toi"**: the whole catalogue
    (115 cities today), sorted by resemblance score (decided 2026-11-14). Each row: name,
-   country, a bar for the score (never a percentage, §4.6), the city's tagline, and the
+   country, the score as a percentage with its bar (§4.6), the city's tagline, and the
    "Tu n'y aurais peut-être pas pensé" badge where it applies. Tapping a row opens the same
    card as the city in focus. On the phone, the first 20 rows show, then "Voir plus".
    - Cities with too little data keep their place in the order and show "données
@@ -117,6 +117,12 @@ On the phone, in this order:
      mise à jour du …") and no "Pourquoi toi" lines. They are never in focus or among the
      three leads (§4.3).
 8. **"Aller plus loin"**: the door to level 2.
+
+**Three framed blocks (mockup approved 2026-11-14,
+[Nairobi canvas](https://claude.ai/artifact/X29JdBp9vj2exEiwa5VfRN)):** the city in focus sits in
+a saffron frame ("01 · Ta ville là-bas"); the two leads sit in a full-width darker band ("02 ·
+Autres pistes"); the full list follows ("03 · Toutes les villes"). The proposal of one city
+per country among the three is still to confirm.
 
 ### A.5 The discovery rule
 
@@ -154,7 +160,8 @@ review before the other 105.
 - **Warm and close:** "tu", short sentences, the community's own words ("retour au pays",
   "s'installer", "là-bas"). "Repat" is explained the first time it appears.
 - **Knowledgeable, not expert:** we know the continent and say so through concrete places,
-  never through jargon, scores or percentages on the first screen.
+  never through jargon or criteria on the first screen. The resemblance
+  score is the one number shown, as a percentage (decided 2026-11-14).
 - **On the reader's side:** we take the wish to go seriously and do not lecture. Difficulties
   are named once, honestly, in "à savoir", not used to discourage.
 - **Preferences, not traits:** "tu aimes", "tu cherches", "tu as dit"; never "tu es
@@ -911,8 +918,9 @@ For each proposed city:
 - **Context line** (small text, when relevant): a country fact the reader should know even if
   they did not ask — visa, dual nationality for their origin country, criminalisation of
   homosexuality, the advice colour.
-- **Never** a percentage presented as a "match" of the person; the score is shown as a rank and
-  a bar, labelled "selon vos réponses".
+- **The score is shown as a percentage with a bar** (decided 2026-11-14, as on the current
+  site), always next to "selon tes réponses" and never described as a measure of the person.
+  The city in focus is framed in saffron, and so is its row in the full list.
 
 ---
 
@@ -948,7 +956,9 @@ the dossiers criterion by criterion. Details at the bottom of `schema.ts`.
 **Where the architecture could mislead**
 
 1. **A ranked list looks like a measurement.** A 0.82 next to Dakar reads as "82 % compatible".
-   Show rank and a bar, say "selon vos réponses", and link every score to its source.
+   The maintainer chose to keep the percentage (2026-11-14), so the safeguard is the wording:
+   always "selon tes réponses", never "compatible à" or "ta personnalité", and every score
+   linked to its sources behind "Pourquoi cette ville ?".
 2. **Capitals win by default.** Even after merges, capitals lead on jobs, flights, internet,
    healthcare, schools and business. A reader with no strong preferences will mostly see
    capitals. That is honest for those criteria, but the method page must say so, and `pace`
