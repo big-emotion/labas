@@ -11,25 +11,32 @@
 | 1 | nigeria | abuja | 81 | 40 | 35 | yes | 0 | No dated women's-safety source beyond the "one chance" coverage; FCDO has no women-specifi… | 2026-11-14 |
 | 1 | nigeria | enugu (extra) | 30 | 15 | 14 | searched, none | 0 | No dated 2026 rent survey; the ICIR investigation (Dec 2025) is the best dated source. Gui… | 2026-11-14 |
 | 1 | nigeria | ibadan (extra) | 20 | 15 | 15 | searched, none | 0 | No dated 2026 rent survey for Ibadan found; the only itemised survey is from Aug 2024, and… | 2026-11-14 |
-| 3 | cote-d-ivoire | abidjan | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | cote-d-ivoire | grand-bassam | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | cote-d-ivoire | san-pedro | — | 30 | — | no | — | file missing | 2026-11-14 |
+| 3 | cote-d-ivoire | abidjan | 108 | 30 | 48 | yes | 0 | Web-search budget for this session ran out after six queries; the rest of the pass relied … | 2026-11-14 |
+| 3 | cote-d-ivoire | grand-bassam | 36 | 30 | 18 | searched, none | 0 | Web-search budget ran out early in this session; Grand-Bassam was covered by direct fetche… | 2026-11-14 |
+| 3 | cote-d-ivoire | san-pedro | 40 | 30 | 22 | searched, none | 0 | Web-search budget ran out early in this session; San-Pédro was covered by direct fetches (… | 2026-11-14 |
+| 3 | cote-d-ivoire | bouake (extra) | 22 | 15 | 16 | searched, none | 0 | No relocation-blog page dedicated to Bouaké exists on OpenShores (URL guessed, not found);… | 2026-11-14 |
+| 3 | cote-d-ivoire | yamoussoukro (extra) | 25 | 15 | 12 | searched, none | 0 | Web-search budget ran out early; covered by direct fetches only. Rent figures come from on… | 2026-11-14 |
 | 2 | ghana | accra | 101 | 30 | 45 | yes | 0 | No 2026 dated price for street food (waakye, jollof, kenkey) or a restaurant meal in Accra… | 2026-11-14 |
 | 2 | ghana | kumasi | 51 | 30 | 20 | searched, none | 0 | Power: reports of a GRIDCo/ECG planned-outage programme in Kumasi (30 Oct–29 Nov 2026) sur… | 2026-11-14 |
 | 2 | ghana | cape-coast (extra) | 25 | 15 | 14 | searched, none | 0 | No dated safety source names Cape Coast: France Diplomatie and UK FCDO pages do not mentio… | 2026-11-14 |
 | 2 | ghana | takoradi (extra) | 24 | 15 | 13 | searched, none | 0 | GlobalCostData Takoradi page (dossier source) returned 403, so its USD 210 1-bed and budge… | 2026-11-14 |
-| 3 | senegal | dakar | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | senegal | saint-louis | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | senegal | saly | — | 30 | — | no | — | file missing | 2026-11-14 |
+| 3 | senegal | dakar | 94 | 30 | 37 | yes | 0 | **Searches were capped mid-task** (session web-search budget exhausted after ~10 queries);… | 2026-11-14 |
+| 3 | senegal | saint-louis | 40 | 30 | 14 | searched, none | 0 | **The session's web-search budget ran out early**; city-specific searches ("vivre à Saint-… | 2026-11-14 |
+| 3 | senegal | saly | 56 | 30 | 12 | searched, none | 0 | **The session's web-search budget ran out early**; Saly-specific searches (expat forums, "… | 2026-11-14 |
+| 3 | senegal | thies (extra) | 21 | 15 | 11 | searched, none | 0 | **The session's web-search budget ran out early**; no Thiès-specific search ("vivre à Thiè… | 2026-11-14 |
+| 3 | senegal | ziguinchor (extra) | 27 | 15 | 11 | searched, none | 0 | **The session's web-search budget ran out early**; no Ziguinchor-specific search ("vivre à… | 2026-11-14 |
 | 2 | benin | cotonou | 91 | 30 | 48 | yes | 1 | No 2026 independent rent survey by neighbourhood; figures are a 2024 media guide, commerci… | 2026-11-14 |
 | 2 | benin | ouidah | 54 | 30 | 33 | searched, none | 0 | No independent (non-OpenShores) rent or price data for Ouidah; long-term rental listings w… | 2026-11-14 |
 | 2 | benin | abomey-calavi (extra) | 21 | 15 | 15 | searched, none | 0 | No independent survey of unfurnished family rents in Calavi, Godomey or Akassato; the only… | 2026-11-14 |
 | 2 | benin | porto-novo (extra) | 21 | 15 | 13 | searched, none | 0 | No independent rent, salary or price data; everything numeric except the CNSS housing prog… | 2026-11-14 |
-| 3 | rd-congo | kinshasa | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | rd-congo | lubumbashi | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | cameroun | douala | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | cameroun | yaounde | — | 30 | — | no | — | file missing | 2026-11-14 |
-| 3 | cameroun | kribi | — | 30 | — | no | — | file missing | 2026-11-14 |
+| 3 | rd-congo | kinshasa | 99 | 30 | 43 | yes | 0 | **Foreigner / diaspora price**: no source found on a "prix mundele" or diaspora mark-up in… | 2026-11-14 |
+| 3 | rd-congo | lubumbashi | 64 | 30 | 27 | searched, none | 0 | **Negotiation in daily life**: no source on haggling margins in Lubumbashi markets, taxis … | 2026-11-14 |
+| 3 | rd-congo | kolwezi (extra) | 19 | 15 | 12 | searched, none | 0 | **Prices**: no readable source for rents, food, transport fares, schools or salaries in Ko… | 2026-11-14 |
+| 3 | cameroun | douala | 98 | 30 | 45 | yes | 0 | Web search ran out after three queries: no searches for "Douala négocier loyer", Eneo déle… | 2026-11-14 |
+| 3 | cameroun | yaounde | 77 | 30 | 30 | yes | 0 | Web search exhausted: no searches for "Yaoundé négocier loyer", Camwater water cuts by nei… | 2026-11-14 |
+| 3 | cameroun | kribi | 47 | 30 | 16 | searched, none | 0 | No Kribi-specific search could run (budget exhausted): no local press on power or water se… | 2026-11-14 |
+| 3 | cameroun | bafoussam (extra) | 21 | 15 | 11 | searched, none | 0 | No Bafoussam search could run (budget exhausted): no local press on power or water service… | 2026-11-14 |
+| 3 | cameroun | limbe-buea (extra) | 24 | 15 | 14 | searched, none | 0 | No Limbe or Buea search could run (budget exhausted): no 2024–2026 press on attacks, curfe… | 2026-11-14 |
 | 4 | angola | luanda | — | 15 | — | no | — | file missing | 2026-11-14 |
 | 4 | angola | benguela | — | 15 | — | no | — | file missing | 2026-11-14 |
 | 2 | kenya | nairobi | 95 | 30 | 49 | yes | 0 | Web search budget ran out after about a dozen queries, so many categories could not be sea… | 2026-11-14 |

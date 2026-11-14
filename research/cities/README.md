@@ -88,9 +88,40 @@ What the social pass taught us about the method:
   accrafoodies since 2025, lomelives since 2021, djiboutilives empty, expatstanzania mid-2026).
 - **Comments carry the signal captions lack**: the cost of a generator day in Lagos, which
   Casablanca district got power back when, what newcomers to Libreville should do about a car.
-- **Facebook group search mostly returns agency listings**, not residents' questions. It gave
-  dated asking rents (Abuja, Abidjan) and very few testimonies. Large diaspora groups returned
-  spam and copy-pasted motivational stories.
+- **Facebook groups are classifieds boards, and that is useful.** They hold few residents'
+  questions (large diaspora groups returned spam and copy-pasted stories), but they hold
+  hundreds of dated asking prices.
+
+**Listings pass (serial, read-only, Facebook).** Added on the user's request: every price signal
+counts (rents, sale prices, used cars, household goods, services, domestic-help wages), and
+**negotiation is a criterion of its own** (`cost.negotiation`). For one active public housing or
+classifieds group per country, the chronological feed (≈ 30–40 latest posts) was read and each
+priced post recorded with its date, neighbourhood, upfront terms and whether it says
+"négociable / à débattre / negotiable / negociável". Listings are **asking prices**, never
+averaged and never presented as what people pay.
+
+What the listings pass shows about negotiation (14 Nov 2026, share of priced posts that say so):
+
+| Market | Negotiable in the ad | How it shows |
+|---|---|---|
+| Brazzaville / Pointe-Noire | 17 of 26 | "à débattre légèrement" is the default; "NON NÉGOCIABLE" has to be stated |
+| Abidjan | 8 of 15 | rents and even more sales ("à débattre fort") |
+| Mauritius (north) | 5 of 14 | "négociable", "or nearest offer" |
+| Luanda | 4 of 14 | discount written in: 20 % off for a year paid upfront |
+| Kinshasa | 3 of 13 | "DISCUTABLE" on cars, "négociable légèrement" on flats |
+| Dakar | 2 of 8 | broker writes "80,000, possible même à 70,000" |
+| Douala | 1 of 14 + discounts | "négociable à 280,000" for a longer lease |
+| Casablanca, Tunis, Cape Town, Windhoek, Kigali, Dar es Salaam, Libreville | 0 | fixed prices; the lever is avoiding agency fees, or prices in US dollars |
+
+Upfront terms are as telling as rents: from 1 month + 1 month deposit (Libreville) to 5 months
+(Abidjan, Kinshasa "4+1"), 8 + 2 (Douala), about 9 months (Abomey-Calavi) and 10–12 months for a
+single room (Douala), plus visit fees of 3,000–20,000 in local currency.
+
+Not covered by the listings pass: countries with no active public group in Phase 1
+(e.g. Togo, Sierra Leone, Liberia, Mauritania, Chad, Burundi, Eritrea, Lesotho, Eswatini,
+Comoros, Seychelles, Somalia), groups that are private (Mozambique, Accra marketplace), groups
+whose rent posts date from 2019 (Cabo Verde), and unsafe countries, which were skipped on
+purpose.
 
 ## Coverage
 
