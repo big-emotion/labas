@@ -151,6 +151,67 @@ leadership), verydelphine (again), rougeorangee (travel lab).
 allthingsafrica_, maghribantou) and **repat.africa** under maghribantou — they are the hubs
 of the diaspora-and-Africa scene on Instagram.
 
+## Third hop: daily-life and return accounts, country by country
+
+Seeds: yasmin_tells, liabynd, abidjaninmotion, nights_abidjan, Ivorian travel bloggers
+(the_s.k.y__, trainandtravel_, isaac.explore), linvestisseurafricain, and **sobaagency**
+(suggested by the user). Filters: vivre, vie, living, guide, bon plan, relocat, retour /
+return, expat, city names.
+
+### The seeds
+
+| Account | Followers | What it is |
+|---|---|---|
+| **liabynd** | 1.4K | LIA, *"Vivre à Abidjan — Abidjan est doux, mais personne ne t'a préparé à la réalité d'y vivre"*. Practical guide, lifestyle, bons plans. Exactly Là-bas's tone |
+| **yasmin_tells** | 7.2K | Travel + relocation, "what you need to know as it is lived in West Africa" (UK / Sierra Leone / Senegal) |
+| **abidjaninmotion** | 136K | Christelle, Abidjan bons plans: restaurants, spots, travel & lifestyle |
+| **linvestisseurafricain** | 57.6K | Helps the diaspora invest in Africa and "réussir le retour"; highlights Ethiopia, Rwanda, Kenya |
+| **sobaagency** | 18.4K | France → Kenya, YouTube creator (Congolese), human stories; highlights Kenya, Abidjan |
+| the_s.k.y__ | 3.3K | Franck Ntah, Ivorian travel blogger ("l'Afrique de l'Ouest est mon pays") |
+| isaac.explore | 17.7K | Ivorian travel & culture reels |
+| trainandtravel_ | 1.8K | NGO training women as volunteer guides in Abidjan |
+| nights_abidjan | 122 | Small Abidjan nightlife page; follows 9 — no further leads |
+
+### Accounts that cover daily life or return, by country
+
+**Return to Africa (pan-African, French-speaking) — new and directly relevant**
+- **joyfulreturn** — Joyful Return, 10.8K: *"des histoires vraies de retour en Afrique"*, YouTube portraits
+- **akwaback.channel** — Akwaback, *"le média qui brise les idées reçues sur la repatriation"*, one guest and tips per episode
+- **linvestisseurafricain**, **repat.africa** (see above)
+
+**Sénégal** — **newindakar** (25.7K, *"Recos et tips sur la vie à Dakar"*, IRL community,
+walking club) · **dakarlives** (295K, culture & city guide) · **bonplandakar** ·
+**dakar_womens_group** (The Dakar Women's Group) · **seneguide.officiel** (SénéGuide) ·
+**clubvie_senegal** · **sokhamon_dakar** (lieu de vie) · **lekkrek** (food, by Dakar Lives)
+
+**Côte d'Ivoire** — **liabynd** · **abidjaninmotion** · **abidjan_lives** (LIVES network) ·
+**leguide225** (94K, Ivorian destinations, nightlife, news) · **girlsdateabidjan** (women's
+social club) · **abidjanrestaurantweek** · **laquizzine** (quiz nights)
+
+**Kenya** — **jolitropisme** (see above) · **traverzeculture** (Kenya relocation &
+healthcare) · **kenya4you** (21.4K, *"Séjour & expatriation au Kenya"*, French-speaking;
+also sells flats and Airbnb sublet schemes — commercial) · **digitalnomadskenya__** (remote
+jobs, meet-ups) · **maggie_hon** (Kenyan travel & lifestyle)
+
+**Sierra Leone** — **brunchinfreetown** (The Freetown Brunch Club) · **serayandsalone**
+(Sierra Leonean diaspora blogger) · **hellosierraleone** · **sierraloaded** (news) ·
+**visitsierraleone** · **easysolar.sl** (solar power — a daily-life infrastructure signal)
+
+**Togo, Mali, Morocco, Djibouti** — the **LIVES network** (`lives.africa`): **lomelives**,
+**bamakolives**, **moroccolives**, **djiboutilives**, alongside dakarlives and abidjan_lives.
+One brand, one format, six cities: the closest thing to a city-by-city culture guide on
+Instagram.
+
+**Nigeria** — only culture institutions surfaced (artxlagos, designweeklagosofficial,
+theobservatorylagos); no Lagos daily-life account in these networks.
+
+**DRC / Congo** — **kinplusfrancais** (Kin+, Kinshasa media).
+
+**Cameroon** — **camerounaises_in_tech**.
+
+**Investing (French-speaking)** — immopreneurs (real-estate, France), business.africa,
+afrobusinessandbooks, diezlemedia; from linvestisseurafricain's list.
+
 ## What this says
 
 - The French-speaking *return* scene on Instagram is small and business-led (Repat Africa,
