@@ -59,8 +59,22 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - [nature.access] Montaza Palace gardens cover 150 ha; beaches named for residents are Maamoura, Montaza and Stanley. — Expat.com Alexandria guide, updated 2025-11-28, blog, confidence: medium
 - [rights.lgbt] LGBT people are prosecuted under "debauchery" laws nationwide; public acceptance is low. — UK FCDO safety page, updated 2026-10-27, official, confidence: high
 - [rights.racism] Amnesty's Feb 2026 report lists Alexandria among the governorates where plain-clothes police arbitrarily arrested refugees from Sudan, South Sudan and other countries (late Dec 2025 to 5 Feb 2026). — Amnesty International, 2026-02-16, intl-media, confidence: high
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] First Alexandria Rent Index (Q2 2026, new lets of unfurnished flats citywide): median rent E£6,900/month (≈ €117), or E£60/m²/month (≈ €1.0). Neighbourhood medians are only in a chart that could not be read. — Marsad Omran (Built Environment Observatory), 2026-08-11, academic, confidence: medium
+- [housing.search] Smouha apartments for sale: average asking E£46,395/m² (≈ €786) over 762 listings, e.g. 120 m² in Taawenyat Smouha for E£4.5M (≈ €76,271) and 198 m² on Tout Ankh Amoun St for E£7.1M (≈ €120,339); off-plan compound units with instalments reach about E£58,000/m² (≈ €983). Asking prices, undated listings. — Aqarmap, accessed 2026-11-14, company, confidence: medium
+- [cost.living] Staples, national averages (not Alexandria-specific): packaged rice E£33.6/kg (≈ €0.57), sunflower oil E£108.4/kg (≈ €1.84), white chicken E£87.1/kg (≈ €1.48), white eggs E£123.3 per carton (≈ €2.09), milk E£46.4/litre (≈ €0.79). — Arab Finance citing IDSC, 2026-11-08 and 2026-11-10, local-media, confidence: medium
+- [cost.living] Modelled Alexandria grocery prices (USD only): milk $0.85/litre, bread $0.71 per 500 g, rice $0.64/kg, eggs $1.23 a dozen, chicken breast $4.26/kg. — livingcost.org Alexandria, updated 2026-06-21, company, confidence: low
+- [cost.living] Expat.com monthly budgets: groceries E£4,000 for one person (≈ €68) and E£12,000 for a family of four (≈ €203); gym E£678/month (≈ €11.5); utilities for one E£1,483 (≈ €25); healthcare and insurance for a family E£2,500 (≈ €42). — Expat.com Alexandria guide, updated 2025-11-28, blog, confidence: low
+- [social.nightlife] Modelled going-out prices (USD only): beer in a bar $1.35 per 0.5 l, cappuccino $1.27, dinner for two $15.40, fast-food meal $4.57. — livingcost.org Alexandria, updated 2026-06-21, company, confidence: low
+- [social.sport] Sports-club joining fees: Sporting Club E£450,000 (≈ €7,627), Ittihad (Smouha branch) E£170,000 plus tax (≈ €2,881), Olympic Club and Wadi Degla Alexandria E£120,000 each (≈ €2,034); non-member day ticket at Sporting or Smouha E£50 (≈ €0.85). The page gives two conflicting Smouha Club figures. — projectsegy.com, updated 2026-02-07, blog, confidence: low
+- [daily.power] Household electricity from August 2026 (national, average +12%): E£0.68/kWh for the first 50 kWh up to E£2.89/kWh above 1,000 kWh (≈ €0.012–0.049). — Enterprise, 2026-08-02, local-media, confidence: medium
+- [daily.internet] Home internet after the May 2026 rise (national): 140 GB E£287.28/month (≈ €4.87), 400 GB E£779.76 (≈ €13.2); prepaid recharge cards up about 15%. — Zawia3, May 2026, local-media, confidence: medium
+- [daily.transport] Fuel since 10 Mar 2026 (national): 92-octane E£22.25/litre (≈ €0.38), 95-octane E£24 (≈ €0.41), diesel E£20.50 (≈ €0.35). — Africanews, 2026-03-10, intl-media, confidence: high
+- [cost.negotiation] Alexandria taxis do not use meters: agree the fare before getting in. Drivers target anyone not from Alexandria, foreign or Egyptian; avoid drivers already carrying a passenger. Borg El Arab airport to downtown costs at least E£400 (≈ €6.8). — Wikivoyage "Alexandria", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Two-tier pricing: several sites charge foreigners about 4–5× the Egyptian rate, e.g. Bibliotheca Alexandrina E£150 vs E£10 for Egyptians; Nabi Daniel's second-hand booksellers are "prices negotiable". Arab nationals pay the foreigner rate at antiquities sites since 1 Jan 2026. — Wikivoyage "Alexandria", accessed 2026-11-14 / SceneNow, 2025-07-10, blog, confidence: low
 
 ## Gaps
+
 - Numbeo (Alexandria) could not be re-read: HTTP 429. Figures are the dossier's logged values.
 - No Alexandria-specific 2025–2026 power-cut data; only the 2024 national cuts and a May 2025 storm.
 - No dated, sourced nightlife coverage for 2025–2026; travel-guide snippets only (Cap d'Or, Corniche cafés), not read.
@@ -70,8 +84,12 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - No sub-Saharan diaspora or returnee networks found; no francophone association equivalent to Caire Accueil found.
 - Université Senghor fees and intake: only aggregator snippets with conflicting figures; not used.
 - Expat Exchange forum pages returned 403, so no recent resident testimony.
+- Price top-up (2026-11-14): Lycée Français d'Alexandrie fees not found (lfalex.org admissions page dates from 2021; web-search budget ran out before another search).
+- Price top-up: GP consultation and private-clinic fees not found; Uber/Bolt/inDrive 2026 fares not found (only a 2019 Uber table).
+- Price top-up: Alexandria Rent Index neighbourhood medians sit in an unreadable chart; no rent-negotiation percentage found; club entry and concert prices not found.
 
 ## Sources read
+
 1. Cost of Living in Alexandria — Numbeo — https://www.numbeo.com/cost-of-living/in/Alexandria — company — HTTP 429 on 2026-11-14; figures taken from the dossier verification log
 2. Living in Alexandria — Expat.com — http://www.expat.com/en/guide/africa/egypt/alexandria/ — blog — read 2026-11-14
 3. Vivre à Alexandrie : guide complet — OpenShores — https://www.openshores.co/blog/egypte/alexandrie/vivre-a-alexandrie-guide-complet — company — read 2026-11-14
@@ -93,6 +111,25 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 19. Alexandria beaches (beach privatisation investigation) — ARIJ — https://arij.net/investigations/beach-privatization-Egypt/en/alexandria-beaches.html — local-media — read 2026-11-14
 20. Egypt: refugees in hiding amid crackdown — Amnesty International — https://www.amnesty.org/en/latest/news/2026/02/egypt-refugees-in-hiding-amid-crackdown-involving-arbitrary-arrests-and-unlawful-deportations/ — intl-media — read 2026-11-14
 21. Egypt travel advice — UK FCDO — https://www.gov.uk/foreign-travel-advice/egypt — official — read 2026-11-14
+22. Alexandria Rent Index, 2026 Q2 — Marsad Omran — https://marsadomran.info/?p=4473 — academic — read 2026-11-14
+23. Apartments for sale in Smouha — Aqarmap — https://aqarmap.com.eg/ar/for-sale/apartment/alexandria/smouha/ — company — read 2026-11-14
+24. أسعار السلع الأساسية والخضراوات اليوم الأحد 8 نوفمبر 2026 — Arab Finance — https://www.arabfinance.com/ar/news/newdetails/أسعار-السلع-الأساسية-والخضراوات-اليوم-الأحد-8-نوفمبر-2026 — local-media — read 2026-11-14
+25. أسعار اللحوم والدواجن والبيض اليوم الثلاثاء 10 نوفمبر 2026 — Arab Finance — https://arabfinance.com/ar/news/newdetails/أسعار-اللحوم-والدواجن-والبيض-اليوم-الثلاثاء-10-نوفمبر-2026 — local-media — read 2026-11-14
+26. Cost of living in Alexandria — livingcost.org — https://livingcost.org/cost/egypt/alexandria — company — read 2026-11-14
+27. Alexandria clubs subscription prices — projectsegy.com — https://projectsegy.com/alexandria-clubs-subscription-prices/ — blog — read 2026-11-14
+28. Household electricity tariffs hiked by an average of 12% — Enterprise — https://enterpriseam.com/egypt/2026/08/02/household-electricity-tariffs-hiked-by-an-average-of-12/ — local-media — read 2026-11-14
+29. Egypt raises internet prices up to 15% — Zawia3 — https://zawia3.com/en/internet-speed/ — local-media — read 2026-11-14
+30. Egypt raises fuel prices by up to 30 percent — Africanews — https://www.africanews.com/2026/03/10/egypt-raises-fuel-prices-by-up-to-30-percent/ — intl-media — read 2026-11-14
+31. Alexandria — Wikivoyage — https://en.wikivoyage.org/wiki/Alexandria — blog — read 2026-11-14
+32. Entry fees for Arab tourists to rise at Egyptian sites in 2026 — SceneNow — https://scenenow.com/Buzz/Entry-Fees-for-Arab-Tourists-to-Rise-at-Egyptian-Sites-in-2026 — local-media — read 2026-11-14
+33. Lycée Français d'Alexandrie, admissions — https://lfalex.org/admissions-inscriptions/ — official — read 2026-11-14 (2021 notice, no fees)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] FCDO lists terrorist shootings — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] First Alexandria Rent Index — supported
+- [cost.negotiation] Alexandria taxis do not use meters — supported
+- [cost.negotiation] Two-tier pricing — supported

@@ -54,8 +54,25 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - [rights.racism] Amnesty documented mass arrests of Sudanese refugees in Aswan city and border areas, transfer to a Shallal detention site, and at least 14 refugees arrested in Aswan public hospitals while injured. — Amnesty International, 2024-06-19, intl-media, confidence: high
 - [rights.racism] HRW: over 770,000 people fled Sudan to Egypt since April 2023 and thousands were deported in 2025. — HRW World Report 2026, 2026, intl-media, confidence: high
 - [other] Nubians displaced by the High Dam (1960–70) still press for return to ancestral lands; the 2014 constitution grants it, but recent decrees made many Nubian lands military zones. — Egyptian Streets, 2025-04-14, local-media, confidence: high
+<!-- price-topup 2026-11-14 -->
+- [housing.search] Only 4 apartments listed for sale on Aqarmap; average asking E£15,524/m² (≈ €263), e.g. 160 m² in El Akkad for E£2.5M (≈ €42,373) and 120 m² in the Al Safwa compound for E£2.1M (≈ €35,593); one 200 m² city flat asks E£7M (≈ €118,644). Asking prices, too few listings to be representative. — Aqarmap, accessed 2026-11-14, company, confidence: low
+- [cost.rent] Aqarmap shows 6 rentals; the only one with a clear monthly price is a 120 m² flat in Aswan City at E£9,000/month (≈ €153), well above Expat.com's ranges; the furnished ones are short lets around E£500/day (≈ €8.5). Asking prices. — Aqarmap, accessed 2026-11-14, company, confidence: low
+- [cost.living] Staples, national averages (not Aswan-specific): packaged rice E£33.6/kg (≈ €0.57), sunflower oil E£108.4/kg (≈ €1.84), white chicken E£87.1/kg (≈ €1.48), white eggs E£123.3 per carton (≈ €2.09), milk E£46.4/litre (≈ €0.79). — Arab Finance citing IDSC, 2026-11-08 and 2026-11-10, local-media, confidence: medium
+- [cost.living] Modelled Aswan grocery prices (USD only), roughly half Cairo's: milk $0.45/litre, bread $0.29 per 500 g, rice $0.29/kg, eggs $0.75 a dozen, chicken breast $2.14/kg. The same page's rent rows are inconsistent (a "cheap" 1-bed above the central one). — livingcost.org Aswan, updated 2026-06-21, company, confidence: low
+- [cost.living] Groceries cost E£2,000–3,500/month for one person (≈ €34–59) and E£5,000–8,000 for a family of four (≈ €85–136); shopping is mostly in souks and small grocers rather than supermarkets. — Expat.com Aswan guide, updated 2025-12-01, blog, confidence: low
+- [social.food] Mid-range riverside restaurant E£150–400 per person (≈ €2.5–6.8). — Expat.com Aswan guide, updated 2025-12-01, blog, confidence: low
+- [social.food] At the top end, high tea at the Old Cataract hotel costs E£2,750–3,250 (≈ €47–55), with a E£1,500 (≈ €25) minimum spend. — Wikivoyage "Aswan", listing updated 2026, blog, confidence: low
+- [health.care] Healthcare and insurance for a family of four is budgeted at E£1,000–2,000/month (≈ €17–34); no consultation fee is given. — Expat.com Aswan guide, updated 2025-12-01, blog, confidence: low
+- [cost.negotiation] In the souk, bargaining is normal and final prices often land around 40–60% of the first asking price; modern shops have fixed prices. — Expat.com Aswan guide, updated 2025-12-01, blog, confidence: low
+- [cost.negotiation] Ferry and felucca operators overcharge visitors: check the posted fare, haggle hard on feluccas; a Botanical Garden motorboat quoted at E£200 for two was bargained to about E£100; horse-carriage drivers avoid fixing a price upfront. Figures from 2018–2021. — Wikivoyage "Aswan", accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Foreigner price on public ferries: E£5 for foreigners vs E£1 for Egyptians (Nov 2018); souk pressure is described as lower than in Luxor. — Wikivoyage "Aswan", accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Uber drivers in Aswan reportedly message a higher price before arriving; inDrive, paid in cash at a fare you propose, is suggested instead. — Wikivoyage "Aswan", accessed 2026-11-14, blog, confidence: low
+- [daily.power] Household electricity from August 2026 (national, average +12%): E£0.68/kWh for the first 50 kWh up to E£2.89/kWh above 1,000 kWh (≈ €0.012–0.049). — Enterprise, 2026-08-02, local-media, confidence: medium
+- [daily.internet] Home internet after the May 2026 rise (national): 140 GB E£287.28/month (≈ €4.87), 400 GB E£779.76 (≈ €13.2); prepaid recharge cards up about 15%. — Zawia3, May 2026, local-media, confidence: medium
+- [daily.transport] Fuel since 10 Mar 2026 (national): 92-octane E£22.25/litre (≈ €0.38), 95-octane E£24 (≈ €0.41), diesel E£20.50 (≈ €0.35). — Africanews, 2026-03-10, intl-media, confidence: high
 
 ## Gaps
+
 - No reliable rent data: Numbeo has none and Expat.com's figures are unconfirmed; no listings found for Aswan.
 - No 2025–2026 Aswan power-cut data (only 2024).
 - No Aswan-specific crime or harassment data.
@@ -65,8 +82,12 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - No 2025–2026 scorpion data (only 2021).
 - No resident or returnee testimonies (Expat Exchange returned 403; Expat.com forum thread had no visible answers).
 - Ride-hailing availability not confirmed beyond "limited presence".
+- Price top-up (2026-11-14): GP consultation and private-clinic fees not found; school fees beyond Expat.com's language-school range not found.
+- Price top-up: going-out prices (beer, cinema, gym, clubs) not found except modelled USD figures, not used beyond groceries.
+- Price top-up: no rent-negotiation figure or agency-fee custom specific to Aswan; sale and rent listings too few (4 and 6 on Aqarmap). Web-search budget ran out mid-pass.
 
 ## Sources read
+
 1. Cost of Living in Aswan — Numbeo — https://www.numbeo.com/cost-of-living/in/Aswan-Egypt — company — HTTP 429 on 2026-11-14; figures taken from the dossier verification log
 2. Living in Aswan — Expat.com — http://www.expat.com/en/guide/africa/egypt/aswan/ — blog — read 2026-11-14
 3. Aswan — Wikipedia — https://en.wikipedia.org/wiki/Aswan — academic — read 2026-11-14
@@ -84,7 +105,17 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 15. Sudan refugees bring off-season tourism to Egypt's Aswan — Africanews — https://www.africanews.com/2023/09/15/sudan-refugees-bring-off-season-tourism-to-egypts-aswan/ — intl-media — read 2026-11-14
 16. Egypt: end mass arrests and forced returns of Sudanese refugees — Amnesty International — https://www.amnesty.org/en/latest/news/2024/06/egypt-authorities-must-end-campaign-of-mass-arrests-and-forced-returns-of-sudanese-refugees/ — intl-media — read 2026-11-14
 17. World Report 2026: Egypt — Human Rights Watch — https://www.hrw.org/world-report/2026/country-chapters/egypt — intl-media — read 2026-11-14
+18. Apartments for sale in Aswan — Aqarmap — https://aqarmap.com.eg/ar/for-sale/apartment/aswan/ — company — read 2026-11-14
+19. Apartments for rent in Aswan — Aqarmap — https://aqarmap.com.eg/ar/for-rent/apartment/aswan/ — company — read 2026-11-14
+20. أسعار السلع الأساسية والخضراوات اليوم الأحد 8 نوفمبر 2026 — Arab Finance — https://www.arabfinance.com/ar/news/newdetails/أسعار-السلع-الأساسية-والخضراوات-اليوم-الأحد-8-نوفمبر-2026 — local-media — read 2026-11-14
+21. أسعار اللحوم والدواجن والبيض اليوم الثلاثاء 10 نوفمبر 2026 — Arab Finance — https://arabfinance.com/ar/news/newdetails/أسعار-اللحوم-والدواجن-والبيض-اليوم-الثلاثاء-10-نوفمبر-2026 — local-media — read 2026-11-14
+22. Cost of living in Aswan — livingcost.org — https://livingcost.org/cost/egypt/aswan — company — read 2026-11-14
+23. Aswan — Wikivoyage — https://en.wikivoyage.org/wiki/Aswan — blog — read 2026-11-14
+24. Household electricity tariffs hiked by an average of 12% — Enterprise — https://enterpriseam.com/egypt/2026/08/02/household-electricity-tariffs-hiked-by-an-average-of-12/ — local-media — read 2026-11-14
+25. Egypt raises internet prices up to 15% — Zawia3 — https://zawia3.com/en/internet-speed/ — local-media — read 2026-11-14
+26. Egypt raises fuel prices by up to 30 percent — Africanews — https://www.africanews.com/2026/03/10/egypt-raises-fuel-prices-by-up-to-30-percent/ — intl-media — read 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [rights.racism] Amnesty documented mass arrests — supported
 - [rights.racism] HRW: over 770,000 — supported
