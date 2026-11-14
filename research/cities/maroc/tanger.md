@@ -74,7 +74,24 @@
 - [return.experience] A study of 84 French- and Belgian-born descendants of Moroccans (Eurac Research, Oct 2026) found they favour Casablanca, Rabat, Tanger or Agadir over their parents' towns, for careers and lifestyle. — bladi.net, 2026-10-12, local-media, confidence: medium
 - [other] Expat.com's Tangier forum carries several threads about suspected romance or marriage scams; the guide gives no detail. — expat.com Tangier guide, 2025-12-05, forum, confidence: low ⚠ spot-check 2026-11-14: unsupported — scam/safety claim rests only on forum threads
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Apartment sale prices per m² (ReaConsult, "2026 data"): Mnar/Rmilat 12,700–15,900 MAD (≈ €1,176–1,472), California/Nzaha 12,000–15,000, Malabata 11,500–15,000, Ibéria/Marshan 10,500–13,500 (≈ €972–1,250), Centre/Bd Pasteur 9,600–13,000 (≈ €889–1,204). The page does not say whether these are asking or transaction prices. — reaconsult.ma, 2026, company, confidence: medium
+- [cost.rent] Cheapest apartment sale ranges per m² (ReaConsult 2026): Free zone/Gzenaya 5,000–7,500 MAD (≈ €463–694) and Boukhalef 5,000–7,000 (≈ €463–648). — reaconsult.ma, 2026, company, confidence: medium
+- [cost.rent] Agenz's 2026 price reference for Tanger-Assilah: 8,029 MAD/m² for apartments (≈ €743) and 11,762 MAD/m² for villas (≈ €1,089). — agenz.ma, 2026, company, confidence: medium
+- [cost.living] Supermarket staples (Mar 2026): milk 8–12 MAD/L (≈ €0.74–1.11), butter 24–38 MAD/250 g, pasta 8–16 MAD/500 g, olive oil 80–150 MAD/L (≈ €7.4–13.9); market potatoes 3–6 MAD/kg and oranges 4–8 MAD/kg. — openshores.co, 2026-03-10, blog, confidence: low
+- [social.food] Expat-oriented restaurants in Malabata cost 200–500 MAD a meal (≈ €18.5–46.3) and Spanish tapas places 100–250 MAD; a bottle of Moroccan wine is 70–130 MAD in shops (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] Taxi fares (Mar 2026): short petit-taxi trip 10–25 MAD (≈ €0.9–2.3), to the Tanger Free Zone (20 km) 60–100 MAD, grand taxi to the airport 70–120 MAD (≈ €6.5–11.1). — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] A travel wiki lists airport grand-taxi fares by day/night: city centre 100/150 MAD (≈ €9.3/13.9), train station 120/180, Tanger Med port 300/450; pre-booking inDrive costs 50–100 MAD and is "often cheaper". These differ from OpenShores' 70–120 MAD and are kept separate. — en.wikivoyage.org (Tangier), accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Car costs (Mar 2026): a full tank 700–950 MAD (≈ €65–88), insurance 3,000–6,000 MAD a year, maintenance 300–600 MAD a month. National petrol price 15.36 MAD/L (≈ €1.42) on 9 Nov 2026. — openshores.co 2026-03-10 / globalpetrolprices.com 2026-11-09, blog + company, confidence: medium
+- [family.schools] Lycée Regnault (AEFE) yearly tuition 2026–27: French pupils 44,000 MAD nursery (≈ €4,074), 42,000 primary, 46,000 collège, 48,800 lycée (≈ €4,519); Moroccan and third-country pupils 50,000, 51,000, 56,000 and 60,000 MAD (≈ €5,556 for lycée). — berchet-regnault.com admissions page, 2026, official, confidence: high
+- [family.schools] Lycée Regnault's first-registration fee is 30,000 MAD (≈ €2,778) for all nationalities and levels, or 25,000 MAD (≈ €2,315) for the first nursery year. — berchet-regnault.com admissions page, 2026, official, confidence: high
+- [cost.negotiation] A travel wiki says bargaining is essential in the medina as there are no fixed prices, advises negotiating in dirhams rather than euros, and notes locals often get lower prices than tourists. — en.wikivoyage.org (Tangier), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Two-tier café pricing: café au lait about 5 MAD in locals' cafés versus 10 MAD in tourist cafés (≈ €0.46 vs €0.93). — en.wikivoyage.org (Tangier), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Budget hotels are negotiable: one listed at about 600 MAD a night is described as negotiable to 450 MAD (≈ 25% off), another as "easily talked down". — en.wikivoyage.org (Tangier), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Shared grand taxis from the port cost about 30 MAD per seat (Nov 2022) and up to double late at night; unmetered petit taxis need a price agreed before boarding. — en.wikivoyage.org (Tangier), accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No Tanger-specific women's-safety source; only national advisories.
 - No power-cut or water-cut reporting found for Tanger.
 - No fares for the new CTM-Transdev bus network.
@@ -83,8 +100,11 @@
 - No Tanger-specific internet speeds; no remote-work or coworking spaces named.
 - No sourced detail on the levante/chergui winds' effect on daily life.
 - No returnee testimony specific to Tanger (only the Eurac study's preference).
+- Price top-up (2026-11-14): web search budget was exhausted, so only directly fetched pages were used; Numbeo returned HTTP 429.
+- Searched, not found: gym, cinema (Cinémathèque de Tanger page shows no ticket price), beer bar prices, club entry, rice and bread prices, Careem/Yango presence, local private school fees, deposit/agency-fee custom from a 2025–26 source, a dated figure for rent discounts after negotiation.
 
 ## Sources read
+
 1. Tangier expat guide — http://www.expat.com/en/guide/africa/morocco/tangier/ — intl-media — date read (2026-11-14)
 2. Coût de la vie à Tanger — https://www.openshores.co/blog/maroc/tanger/cout-de-la-vie-a-tanger — blog — date read (2026-11-14)
 3. Prix immobilier Tanger 2026 — https://reaconsult.ma/prix-immobilier-tanger-2026 — company — date read (2026-11-14)
@@ -114,9 +134,22 @@
 27. Tangier bars (snippet only) — https://www.fodors.com/world/africa-and-middle-east/morocco/tangier-and-the-mediterranean/things-to-do/nightlife — intl-media — date read (2026-11-14)
 28. Tangier travel guide (snippet only) — https://www.traveldojo.com/tangier/ — intl-media — date read (2026-11-14)
 29. Climat Tanger (snippet only) — https://www.climatsetvoyages.com/climat/maroc/tanger — blog — date read (2026-11-14)
-
+30. Prix immobilier Maroc (référentiel) — https://agenz.ma/fr/prix-immobilier-maroc — company — date read (2026-11-14)
+31. Tangier (travel wiki) — https://en.wikivoyage.org/wiki/Tangier — blog — date read (2026-11-14)
+32. Admissions, Cité scolaire Berchet-Regnault (droits de scolarité 2026-2027) — https://berchet-regnault.com/admissions/ — official — date read (2026-11-14)
+33. Morocco gasoline prices — https://www.globalpetrolprices.com/Morocco/gasoline_prices/ — company — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [rights.lgbt] In Nov 2022 a trans woman — supported
 - [rights.lgbt] Same-sex relations — supported
 - [other] Expat.com's Tangier forum — unsupported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] Apartment sale prices per m² (ReaConsult, "2026 data") — supported
+- [cost.rent] Cheapest apartment sale ranges per m² (ReaConsult 2026) — supported
+- [cost.living] Supermarket staples (Mar 2026) — supported
+- [social.food] Expat-oriented restaurants in Malabata — supported
+- [daily.transport] Taxi fares (Mar 2026) — supported
+- [daily.transport] Car costs (Mar 2026) — supported

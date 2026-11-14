@@ -112,7 +112,35 @@
 - [cost.salary] Rates posted for domestic help aimed at Casablanca mothers: housekeeping + cooking 4,000 MAD/month in a villa or 3,500 MAD in a flat in a residence (≈ €370 / €324). — "Pour les Mamans de Casablanca" post shared in the same group, Nov 2026, social-caption (agency), confidence: medium
 - [cost.negotiation] None of the 20 priced posts in the Casablanca group says "négociable": rents are posted as fixed, and the visible lever is avoiding agency fees by renting from owners. Whether rents are bargained in private is not visible here. — same group 2026-11-14, social-caption, confidence: low
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Apartment sale reference prices per m² (ReaConsult, Apr 2026): Anfa Supérieur/Aïn Diab 22,000–28,000 MAD (≈ €2,037–2,593), CFC 19,500–26,500, Gauthier 17,000–21,800 (≈ €1,574–2,019), Maârif/Palmier 14,000–18,400, Bourgogne/Oasis 14,000–18,000 (≈ €1,296–1,704). The guide warns that agency figures are asking prices, not transaction prices. — reaconsult.ma, 2026-04, company, confidence: medium
+- [cost.rent] Cheaper apartment sale ranges per m² (ReaConsult, Apr 2026): Californie/Sidi Maarouf 10,000–15,000 MAD (≈ €926–1,389), Aïn Sebaâ 8,600–12,000, Hay Hassani/Oulfa 8,500–11,500 (≈ €787–1,065), Sidi Moumen/Moulay Rachid 6,300–8,500 (≈ €583–787). — reaconsult.ma, 2026-04, company, confidence: medium
+- [cost.rent] ReaConsult's own 2025–26 barometer page gives lower sale figures for Gauthier (14,000–18,000 MAD/m², ≈ €1,296–1,667) and Maârif (13,000–17,000) than its April 2026 guide; the barometer draws on listing portals, so these are asking prices. — reaconsult.ma barometer, 2026 (undated), company, confidence: low
+- [cost.rent] Agenz's 2026 price reference puts the citywide average at 12,503 MAD/m² for apartments (≈ €1,158) and 16,458 MAD/m² for villas (≈ €1,524); it does not say whether these are asking or transaction prices. — agenz.ma, 2026, company, confidence: medium
+- [cost.rent] Unfurnished asking rents by size (excl. charges, Mar 2026): Maârif 2-bed 5,500–8,000 MAD (≈ €509–741) and 3-bed 8,000–14,000; Gauthier 2-bed 5,000–7,500 (≈ €463–694); Anfa 3-bed 10,000–18,000 (≈ €926–1,667); Aïn Diab sea-view 3-bed 10,000–16,000. Building charges add 500–800 MAD in Maârif. — openshores.co, 2026-03-10, blog, confidence: low
+- [housing.search] Agency listings for Casablanca rentals commonly state the fee as one month's rent excluding VAT, paid by the tenant, with a deposit of one or two months. Seen via search summary of listing pages. — immobilier.trovit.ma listings, accessed 2026-11-14, company, confidence: low
+- [business.invest] Buying costs about 7% on top of the price: registration duty 4% (3% for low-value housing), notary 0.5–1.5%, land-registry certificates 100 MAD each, file fees 1,000–1,500 MAD (Jul 2022 figures). — expat.com Accommodation in Casablanca, 2022-07-14, intl-media, confidence: low
+- [cost.living] Staples (Mar 2026): baguette 1.20 MAD (≈ €0.11), milk 6–8 MAD/L, 12 farm eggs 20–28 MAD (≈ €1.85–2.59), whole chicken 22–28 MAD/kg, olive oil 50–80 MAD/L (≈ €4.6–7.4), butter 18–25 MAD/250 g. These differ from the Rio Times supermarket figures above and are kept separate. — openshores.co, 2026-03-10, blog, confidence: low
+- [cost.living] Rice costs about 18.03 MAD/kg (≈ €1.67) in the Rio Times basket (Sep 2026). — riotimesonline.com, 2026-09-14, intl-media, confidence: medium
+- [cost.living] Monthly food for one person by shopping style (Mar 2026): local market plus basics 1,500–2,200 MAD (≈ €139–204), standard supermarket 2,000–3,000 (≈ €185–278), with imported products 3,000–5,000 (≈ €278–463). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.food] Eating out (Mar 2026): harira with msemen 15–25 MAD (≈ €1.4–2.3), gargote tajine 60–100 MAD, mid-range three courses 150–250 MAD (≈ €14–23), espresso 10–15 MAD, café crème 15–25 MAD. — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] Petit-taxi trips (Mar 2026): within Maârif 10–18 MAD (≈ €0.9–1.7), Maârif–CFC 20–35 MAD, city centre–Aïn Diab 25–40 MAD (≈ €2.3–3.7). The same source gives the tram 10-trip carnet at 50 MAD and the monthly pass at 200 MAD (Rio Times says 230). — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] Careem and inDrive fixed fares run about 20–50% above a petit taxi on short trips; on inDrive the passenger proposes a fare and drivers accept or counter. — openshores.co 2026-03-10 / en.wikivoyage.org (Casablanca) accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Airport (Mohammed V) to the city by grand taxi: 280 MAD (≈ €26) as of Nov 2022. — en.wikivoyage.org (Casablanca), accessed 2026-11-14, blog, confidence: low
+- [daily.transport] National petrol price: 15.36 MAD/L (≈ €1.42) on 9 Nov 2026. OpenShores' 11.50–12.50 MAD/L (Mar 2026) is far lower and conflicts with both this and the Rio Times figure. — globalpetrolprices.com, 2026-11-09, company, confidence: medium
+- [family.schools] Lycée Lyautey (AEFE, directly run) yearly tuition 2026–27: French pupils 43,000 MAD pre-school (≈ €3,981), 40,800 primary, 44,500 collège, 48,200 lycée (≈ €4,463); Moroccan and third-country pupils 53,400, 50,100, 54,800 and 60,700 MAD (≈ €5,620 for lycée). — lyceelyautey.org règlement financier 2026-27, 2026-02, official, confidence: high
+- [family.schools] On top, a one-off first-registration fee of 30,000 MAD (≈ €2,778) for all nationalities, valid across the AEFE directly-run schools in Morocco; 50% off for a second child enrolled at the same time and waived from the third. Tuition is billed 40/30/30% per term. — lyceelyautey.org règlement financier 2026-27, 2026-02, official, confidence: high
+- [health.care] Private consultations (Mar 2026): GP 150–250 MAD (≈ €14–23), specialist 250–450 MAD (≈ €23–42), dentist 150–300 MAD, full blood panel 250–500 MAD. — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.internet] OpenShores gives home internet at 150–250 MAD/month (≈ €14–23), well below Rio Times' 418 MAD for 60 Mbps+; a relocation blog puts unlimited 4G mobile plans at 100–150 MAD/month (national). — openshores.co 2026-03-10 / getwherenext.com 2026-02-28, blog, confidence: low
+- [social.culture] Cinema (Megarama) ticket 55–80 MAD (≈ €5.1–7.4); traditional hammam 25–60 MAD, spa hammam 200–500 MAD (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.sport] Gym 350–600 MAD/month (≈ €32–56); premium sports club 700–1,200 MAD/month (≈ €65–111) (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.nightlife] Pubs cost around 100 MAD (≈ €9) per head, about half during happy hour (19:00–23:00). — en.wikivoyage.org (Casablanca), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] At the Derb Ghallef market, a travel wiki warns that without good Arabic and "a strong backbone" you will pay well over the going rate. — en.wikivoyage.org (Casablanca), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Souk bargaining is expected nationally: one guide says tourist opening prices are typically 3–5 times the real price; another suggests aiming for about 50% off the asking price. — getwherenext.com 2026-02-28 / en.wikivoyage.org (Morocco) accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Petit taxis are meant to be metered: Expat.com (2020) says the fare cannot be negotiated and night rides cost up to 50% more, while a travel wiki says unmetered rides can be bargained, ideally to an exact-change amount. Conflicting; no Casablanca-specific figure. — expat.com transports guide 2020-05-19 / en.wikivoyage.org (Morocco) accessed 2026-11-14, intl-media + blog, confidence: low
+
 ## Gaps
+
 - Facebook groups for Morocco not yet searched (see PROGRESS.md).
 - Not read: ffm_expat_maroc, bons_plans_mamans_casablanca, moroccolives; no Marrakech- or Tanger-specific daily-life account found among ★ leads.
 - No Casablanca-specific power-cut reporting found on the web; electricity appears only as tariffs. (The social pass found one storm blackout, 11 Nov 2026 — see items.)
@@ -124,8 +152,11 @@
 - No named private clinics with prices, and no AMO (public health insurance) rules for foreign residents from an official source.
 - Football culture (Raja/Wydad) and religious life (churches for sub-Saharan Christians, mosques) were not sourced.
 <!-- listings-pass gaps 2026-11-14 -->
+- Price top-up (2026-11-14): web search budget ran out after one query, so the pass used directly fetched pages only. Numbeo returned HTTP 429 (no crowdsourced cinema/beer/gym check).
+- Searched, not found: a dated source on how much rent is knocked off in negotiation in Casablanca, local beer shop price, club entry, concert ticket, Yango presence, electricity/water bills from SRM for a typical flat, mobile-data offers by operator, local (non-AEFE) private school fees, clinic day-rate prices.
 
 ## Sources read
+
 1. Cost of living in Casablanca for expats 2026 — https://www.riotimesonline.com/cost-of-living-casablanca-expats-2026/ — intl-media — date read (2026-11-14)
 2. Casablanca expat guide — http://www.expat.com/en/guide/africa/morocco/casablanca/ — intl-media — date read (2026-11-14)
 3. Guide prix immobilier par quartier, Casablanca 2026 — https://reaconsult.ma/tendances-et-conseils-en-immobilier/prix-immobilier-casablanca-quartier-2026 — company — date read (2026-11-14)
@@ -170,9 +201,26 @@
 
 - Social pass: Facebook "Réseau des expatriés à Casablanca" (448986789170521) — chronological feed, 40 posts, 2026-11-14
 
+37. Coût de la vie à Casablanca 2026 — https://www.openshores.co/blog/maroc/casablanca/cout-de-la-vie-a-casablanca — blog — date read (2026-11-14)
+38. Prix immobilier Maroc (référentiel) — https://agenz.ma/fr/prix-immobilier-maroc — company — date read (2026-11-14)
+39. Règlement financier 2026-2027, Lycée Lyautey — https://lyceelyautey.org/wp-content/uploads/2026/02/2026-2027-Reglement-financier-des-scolaires.pdf — official — date read (2026-11-14)
+40. Morocco gasoline prices — https://www.globalpetrolprices.com/Morocco/gasoline_prices/ — company — date read (2026-11-14)
+41. Casablanca (travel wiki) — https://en.wikivoyage.org/wiki/Casablanca — blog — date read (2026-11-14)
+42. Morocco (travel wiki) — https://en.wikivoyage.org/wiki/Morocco — blog — date read (2026-11-14)
+43. Accommodation in Casablanca — https://www.expat.com/en/guide/africa/morocco/casablanca/8921-accommodation-in-casablanca.html — intl-media — date read (2026-11-14)
+44. Transports in Morocco — https://www.expat.com/en/guide/africa/morocco/8905-transports-in-morocco.html — intl-media — date read (2026-11-14)
+45. Location studio agence Casablanca (listing pages, search summary only) — https://immobilier.trovit.ma/location-studio-agence-casablanca/98 — company — date read (2026-11-14)
+
 ## Spot-check (2026-11-14)
+
 - [cost.rent] Furnished 1-bed in Hay Hassani — supported
 - [cost.rent] Furnished 1-bed in Maârif — supported
 - [safety.women] A national survey of 1,528 — supported
 - [rights.racism] Migrant women in Casablanca report — supported
 - [safety.general] Gen Z 212 protests: a motorway blockade — supported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] Apartment sale reference prices per m² (ReaConsult, Apr 2026) — supported
+- [cost.rent] ReaConsult's own 2025–26 barometer page gives lower sale figures — supported
+- [daily.transport] National petrol price: 15.36 MAD/L — supported

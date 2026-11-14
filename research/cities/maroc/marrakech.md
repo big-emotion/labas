@@ -68,7 +68,30 @@
 - [other] The 8 Sep 2023 M6.8 earthquake struck about 70 km south-west of Marrakech; France Diplomatie advises knowing what to do in a quake in the Marrakech region. FCDO says it killed almost 3,000 people. — diplomatie.gouv.fr 2026-09-15 / gov.uk FCDO, official, confidence: high
 - [other] Authorities reported Marrakech reconstruction at about 85% (≈ 2,620 homes) in Sep 2025; about 4% of affected households had not started, mainly over heirs' disputes; rent aid 2,500 MAD/month (≈ €231). — fr.hespress.com, 2025-09-07, local-media, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Apartment sale prices per m² (ReaConsult barometer 2025–26, drawn from listing portals, so asking prices): Hivernage 16,000–24,000 MAD (≈ €1,481–2,222), Guéliz 13,000–20,000 (≈ €1,204–1,852), Palmeraie 14,000–20,000, Targa/Route de l'Ourika 8,000–12,000 (≈ €741–1,111). — reaconsult.ma barometer, 2026 (undated), company, confidence: medium
+- [cost.rent] Agenz's 2026 price reference gives a citywide average of 8,885 MAD/m² for apartments (≈ €823) and 10,138 MAD/m² for villas (≈ €939). — agenz.ma, 2026, company, confidence: medium
+- [cost.rent] Sale prices for riads (Mar 2026): a modest renovated medina riad from about 1,200,000 MAD (≈ €111,000); a prestige riad with pool can exceed 10,000,000 MAD. — openshores.co, 2026-03-10 (upd. 2026-04), blog, confidence: low
+- [cost.rent] Asking rents by district (Mar 2026): Guéliz studio 3,000–4,500 MAD (≈ €278–417), 1-bed 4,000–7,000, 2-bed 6,500–11,000 (≈ €602–1,019); Hivernage 1-bed 6,000–9,000 (≈ €556–833); medina 2-bed riad 8,000–11,000; Palmeraie villa with pool 18,000–30,000 (≈ €1,667–2,778). — openshores.co, 2026-03-10, blog, confidence: low
+- [housing.search] Rental agencies usually charge one month's rent as commission; listings run on Avito.ma, Facebook groups and word of mouth via neighbourhood shopkeepers (Jul 2022). — expat.com Accommodation in Marrakesh, 2022-07-11, intl-media, confidence: low
+- [cost.negotiation] Expat.com says rent is negotiable and advises renegotiating face to face with the owner, without a typical discount; it adds that a medina riad purchase may be paid in instalments agreed with the owner (Jul 2022). — expat.com Accommodation in Marrakesh, 2022-07-11, intl-media, confidence: low
+- [cost.living] Souk prices (Mar 2026): bread 5–8 MAD/kg (≈ €0.46–0.74), chicken 25–35 MAD/kg, 12 eggs 15–22 MAD, local olive oil 40–60 MAD/L (≈ €3.7–5.6); supermarket milk 8–12 MAD/L and imported beer 22–35 MAD per 33 cl (≈ €2.0–3.2). — openshores.co, 2026-03-10, blog, confidence: low
+- [cost.living] Groceries for two: 1,500–2,500 MAD/month (≈ €139–231) shopping mostly at markets, 2,500–4,000 (≈ €231–370) mixing markets and supermarkets; the souk is called the cheapest option. — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] Petit-taxi meter: 1.70 MAD start before 20:00 and 2.40 MAD after, with a minimum of 7 MAD by day and 10 MAD at night (≈ €0.65/0.93); Guéliz to the medina about 10–15 MAD. — en.wikivoyage.org (Marrakesh), accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Taxi fares (Mar 2026): short city trip 10–20 MAD (≈ €0.9–1.9), Guéliz–Palmeraie 30–50 MAD, grand taxi between districts or to the airport 20–70 MAD; petrol about 13.50 MAD/L. The national price was 15.36 MAD/L (≈ €1.42) on 9 Nov 2026. — openshores.co 2026-03-10 / globalpetrolprices.com 2026-11-09, blog + company, confidence: low
+- [daily.transport] Airport: petit taxis at the terminal charge a fixed 200 MAD (≈ €18.5) versus about 60 MAD if hailed from the car-park area; grand taxi to the medina about 150 MAD; airport bus L19 30 MAD one way, 50 return. — en.wikivoyage.org (Marrakesh), accessed 2026-11-14, blog, confidence: low
+- [daily.transport] Ride-hailing: one relocation blog says Careem and inDrive cost about the same as or slightly more than a metered taxi; a travel wiki lists Uber with a 50 MAD minimum in town and 200 MAD to the airport, while the national wiki page says Uber left Morocco in 2018 (conflicting). — getwherenext.com 2026-02-28 / en.wikivoyage.org (Marrakesh, Morocco) accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Taxis in tourist spots often refuse the meter: from the train station to Jemaa el-Fna the usual asking price is 50–70 MAD against about 13 MAD metered by day; the wiki calls 20 MAD a good deal and suggests offering about 50% above the metered fare up front. — en.wikivoyage.org (Marrakesh), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Souk opening prices for tourists are typically 3–5 times the real price, per one guide; a travel wiki gives reference prices (cooking tagine about 40 MAD, djellaba 90–300 MAD) and says even hostels can be haggled. — getwherenext.com 2026-02-28 / en.wikivoyage.org (Marrakesh) accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Monuments run an official two-tier price: Saadian Tombs 100 MAD for foreigners versus 30 MAD for Moroccans and residents (≈ €9.3 vs €2.8); Ben Youssef Madrasa 50 versus 20 MAD (Moroccans). How residency is proven at the gate is not stated. — en.wikivoyage.org (Marrakesh), accessed 2026-11-14, blog, confidence: low
+- [cost.negotiation] Price tricks reported in the medina: orange juice sold at 10 MAD for a 4 MAD glass, and Jemaa el-Fna stalls adding "free" items billed at 5 MAD each; the advice is to confirm the price before ordering. — en.wikivoyage.org (Marrakesh), accessed 2026-11-14, blog, confidence: low
+- [health.care] Private GP consultation 200–350 MAD (≈ €18.5–32.4), specialist 350–600 MAD (≈ €32.4–55.6) (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.power] Electricity and water for a 70 m² flat 350–700 MAD/month (≈ €32–65), rising to 800–1,500 MAD (≈ €74–139) with summer air conditioning; fibre internet 250–400 MAD/month (≈ €23–37) (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.sport] Gym membership 300–700 MAD/month (≈ €28–65) (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.culture] UGC cinema ticket 60–90 MAD (≈ €5.6–8.3); a local hammam costs about 12 MAD entry and 50 MAD for a scrub, against 170–1,400 MAD at a tourist spa. — openshores.co 2026-03-10 / en.wikivoyage.org (Marrakesh) accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No Marrakech-specific information on sub-Saharan or Afro-descendant communities (markets, churches, associations) was found; the "Bab Marrakech" Senegalese market is in Casablanca, not Marrakech.
 - No dated, city-specific source on racism or colourism in Marrakech.
 - No current water-restriction status (2025–26) and no power-cut reporting.
@@ -77,8 +100,11 @@
 - No returnee/diaspora testimony specific to Marrakech; the Eurac study's preferred cities (Casablanca, Rabat, Tanger, Agadir) do not name Marrakech.
 - The new post-AFCON bus fare was not found.
 - An independent count of still-cracked medina riads after the 2023 quake was not found.
+- Price top-up (2026-11-14): web search budget was exhausted, so only directly fetched pages were used; Numbeo returned HTTP 429.
+- Searched, not found: Lycée Victor Hugo 2026–27 fees (the règlement financier PDF at lvhma.org is a scanned image and could not be read), local private school fees, deposit/advance custom in 2025–26, a dated figure for how much rent is knocked off, club entry and concert prices, local beer bar price, Yango presence, mobile data offers.
 
 ## Sources read
+
 1. Marrakech expat guide — http://www.expat.com/en/guide/africa/morocco/marrakech/ — intl-media — date read (2026-11-14)
 2. Moving to Morocco 2026 — https://getwherenext.com/blog/complete-guide-to-moving-to-morocco — blog — date read (2026-11-14)
 3. Le logement est devenu un luxe inaccessible à Marrakech — https://www.bladi.net/logement-est-devenu-luxe-inaccessible-marrakech,116435.html — local-media — date read (2026-11-14)
@@ -100,9 +126,21 @@
 19. Tanger, Marrakech, Casablanca : les jeunes commencent à étouffer sous le coût du logement — https://www.bladi.net/tanger-marrakech-casablanca-jeunes-commencent-etouffer-cout-logement,123012.html — local-media — date read (2026-11-14)
 20. Maroc : le salaire minimum augmente, nouveaux montants 2026 — https://www.bladi.net/maroc-salaire-minimum-augmente-nouveaux-montants-2026,118715.html — local-media — date read (2026-11-14)
 21. Internet au Maroc : des avancées timides — https://fr.hespress.com/412218-412218.html — local-media — date read (2026-11-14)
-
+22. Coût de la vie à Marrakech : budget mensuel 2026 — https://www.openshores.co/blog/maroc/marrakech/cout-de-la-vie-a-marrakech — blog — date read (2026-11-14)
+23. Prix immobilier Maroc (référentiel) — https://agenz.ma/fr/prix-immobilier-maroc — company — date read (2026-11-14)
+24. Marrakesh (travel wiki) — https://en.wikivoyage.org/wiki/Marrakesh — blog — date read (2026-11-14)
+25. Morocco (travel wiki) — https://en.wikivoyage.org/wiki/Morocco — blog — date read (2026-11-14)
+26. Accommodation in Marrakesh — https://www.expat.com/en/guide/africa/morocco/marrakech/8932-accommodation-in-marrakesh.html — intl-media — date read (2026-11-14)
+27. Morocco gasoline prices — https://www.globalpetrolprices.com/Morocco/gasoline_prices/ — company — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] The 2011 bomb attack — supported
 - [rights.lgbt] In 2016 two girls — supported
 - [community.expat] Expat.com forum threads — unsupported
+
+## Spot-check, price top-up (2026-11-14)
+
+- [cost.rent] Apartment sale prices per m² (ReaConsult barometer 2025–26) — supported
+- [cost.rent] Sale prices for riads (Mar 2026) — supported
+- [cost.rent] Asking rents by district (Mar 2026) — supported

@@ -46,15 +46,35 @@
 - [social.pace] The Rabati, an English-language page about "everyday life in Rabat", sells the city as unhurried; a commenter says the slow pace of the page matches the Rabat they lived in. — @the_rabati posts 2025-12-13 and early 2026, social-caption + social-comment, confidence: low
 - [community.expat] Board-game evenings where locals and expats meet are run jointly by The Rabati and Soulplay in a Rabat café (Nov 2026). — @rabat_explored collab post 2026-11-10, social-caption, confidence: medium
 
+<!-- price-topup 2026-11-14 -->
+- [cost.rent] Apartment sale prices per m² (ReaConsult barometer 2025–26, drawn from listing portals, so asking prices): Souissi 16,000–21,000 MAD (≈ €1,481–1,944), Hay Riad 14,000–18,000, Agdal 12,500–16,500 (≈ €1,157–1,528), Hassan/Centre 11,500–15,000, Témara 6,500–9,000 (≈ €602–833). — reaconsult.ma barometer, 2026 (undated), company, confidence: medium
+- [cost.rent] Agenz's 2026 price reference: 12,392 MAD/m² for apartments (≈ €1,147) and 13,066 MAD/m² for villas (≈ €1,210). — agenz.ma, 2026, company, confidence: medium
+- [cost.rent] Asking rents by size (Mar 2026): Agdal studio 3,000–4,500 MAD (≈ €278–417), 2-bed 4,500–7,000, 3-bed 8,000–14,000 (≈ €741–1,296); Hay Riad 3-bed 8,500–15,000; Hassan/centre 2-bed 3,500–6,000 (≈ €324–556); Souissi 3-bed villa with garden 15,000–25,000. — openshores.co, 2026-03-10, blog, confidence: low
+- [cost.negotiation] Expat.com's Rabat housing page (May 2020) says the price has to be negotiated with the landlord and that agencies may charge up to one month's rent; it gives no typical discount. — expat.com Accommodation in Rabat, 2020-05-20, intl-media, confidence: low
+- [cost.living] Staples (Mar 2026): bread (350 g) 1.20 MAD (≈ €0.11), milk 6–8 MAD/L, 12 eggs 18–26 MAD (≈ €1.67–2.41), chicken 22–28 MAD/kg. Monthly food per person: local market 1,200–1,800 MAD (≈ €111–167), supermarket with some imports 1,800–2,800 (≈ €167–259). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.food] Eating out (Mar 2026): gargote tajine with salad and bread 40–70 MAD (≈ €3.7–6.5), full mid-range meal in Agdal 120–220 MAD (≈ €11–20), espresso 8–12 MAD. — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] Petit taxi for 3–5 km 10–18 MAD (≈ €0.9–1.7); Rabat-Salé airport to Agdal 60–100 MAD; tram monthly pass 195–220 MAD (Expat.com says about 250); 2nd-class train to Casablanca 35–50 MAD (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [daily.transport] OpenShores gives unleaded petrol at 11.50–12.50 MAD/L (Mar 2026), which conflicts with the national 15.36 MAD/L (≈ €1.42) recorded on 9 Nov 2026. — openshores.co 2026-03-10 / globalpetrolprices.com 2026-11-09, blog + company, confidence: low
+- [cost.negotiation] At the airport, white grand taxis quote 100–200 MAD while a metered petit taxi should be nearer 30 MAD (some refuse the meter); a travel wiki says Uber runs 20–30% above regular taxis. — en.wikivoyage.org (Rabat), accessed 2026-11-14, blog, confidence: low
+- [health.care] Private consultations (Mar 2026): GP 150–220 MAD (≈ €14–20), specialist 220–400, paediatrician 200–350, standard blood test 200–400 MAD. — openshores.co, 2026-03-10, blog, confidence: low
+- [family.schools] Lycée Descartes (AEFE) yearly tuition 2026–27: French pupils 44,000 MAD nursery (≈ €4,074), 41,000 primary, 45,000 collège, 49,200 lycée (≈ €4,556); Moroccan and third-country pupils 54,200, 50,100, 55,000 and 61,500 MAD (≈ €5,694 for lycée); prep classes (CPGE) 77,700 MAD for all. — lycee-descartes.ac.ma fees page, 2026, official, confidence: high
+- [social.sport] Gym 300–600 MAD/month (≈ €28–56), premium club 600–1,000 MAD; cinema ticket 55–75 MAD (≈ €5.1–6.9) (Mar 2026). — openshores.co, 2026-03-10, blog, confidence: low
+- [social.nightlife] Bar prices listed on a travel wiki (undated listings): a pint about 50 MAD (≈ €4.6), a draught 31 MAD, a small beer 17 MAD in a cheaper bar. — en.wikivoyage.org (Rabat), accessed 2026-11-14, blog, confidence: low
+- [daily.internet] Phone plus home internet about 280 MAD/month (≈ €26) in a sample budget; a prepaid SIM with unlimited data about 250 MAD. — openshores.co 2026-03-10 / en.wikivoyage.org (Rabat) accessed 2026-11-14, blog, confidence: low
+
 ## Gaps
+
 - No Rabat-specific clinic names or prices; no daily water or power reporting.
 - No dated source on sub-Saharan community life in Rabat was opened (a Le360 July 2025 piece on sub-Saharan shopkeepers and Hespress 2025 Arabic articles on clashes in Rabat were seen only as titles).
 - No nightlife source.
 - No bus network information (Expat.com omits buses).
 - The 2024 Rabat hammam restriction (3 days a week) was seen only in a search summary and is left out.
 - Fewer than 40 items by design (extra city, minimum 15).
+- Price top-up (2026-11-14): web search budget was exhausted, so only directly fetched pages were used; Numbeo returned HTTP 429.
+- Searched, not found: Lycée Descartes first-registration fee (the decision PDF is a scanned image), electricity/water bills, rice and oil prices, club entry, concert prices, souk bargaining specific to Rabat, a 2025–26 source on deposits and rent discounts.
 
 ## Sources read
+
 1. Rabat expat guide — http://www.expat.com/en/guide/africa/morocco/rabat/ — intl-media — date read (2026-11-14)
 2. À Rabat, le loyer finit par manger le salaire — https://www.bladi.net/rabat-loyer-finit-manger-salaire,123049.html — local-media — date read (2026-11-14)
 3. Baromètre prix villes — https://reaconsult.ma/rapport/barometre-prix-villes — company — date read (2026-11-14)
@@ -70,8 +90,14 @@
 13. World Report 2026: Morocco and Western Sahara — https://www.hrw.org/world-report/2026/country-chapters/morocco-and-western-sahara — intl-media (NGO) — date read (2026-11-14)
 14. Arab Barometer: 43% of Moroccans consider anti-Black racism a problem — https://www.moroccoworldnews.com/2022/11/39960/arab-barometer-43-of-moroccans-consider-anti-black-racism-a-problem/ — local-media — date read (2026-11-14)
 15. Le Maroc les attire, mais leur salaire et l'avenir de leurs enfants les retiennent en Europe — https://www.bladi.net/maroc-attire-salaire-avenir-enfants-retiennent-europe,124314.html — local-media — date read (2026-11-14)
-
+16. Coût de la vie à Rabat 2026 — https://www.openshores.co/blog/maroc/rabat/cout-de-la-vie-a-rabat — blog — date read (2026-11-14)
+17. Prix immobilier Maroc (référentiel) — https://agenz.ma/fr/prix-immobilier-maroc — company — date read (2026-11-14)
+18. Les frais de scolarité, Lycée Descartes — https://www.lycee-descartes.ac.ma/les-frais-de-scolarite/ — official — date read (2026-11-14)
+19. Rabat (travel wiki) — https://en.wikivoyage.org/wiki/Rabat — blog — date read (2026-11-14)
+20. Accommodation in Rabat — https://www.expat.com/en/guide/africa/morocco/rabat/8918-accommodation-in-rabat.html — intl-media — date read (2026-11-14)
+21. Morocco gasoline prices — https://www.globalpetrolprices.com/Morocco/gasoline_prices/ — company — date read (2026-11-14)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Gen Z 212 protests: police dispersed — corrected
 - [rights.racism] Arab Barometer wave 7 — supported
