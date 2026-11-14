@@ -29,6 +29,7 @@ Extra city suggested by the dossier ("additional: West region hub, cooler highla
 - [other] Population figures vary: 347,517 (2008 census, urban), about 1.15 million for the urban community (2023 estimate). — Wikipedia "Bafoussam" (EN), accessed 2026-11-14, academic, confidence: low
 
 ## Gaps
+
 - No Bafoussam search could run (budget exhausted): no local press on power or water service, internet, rents by neighbourhood, crime, nightlife prices or returnees.
 - No resident or returnee testimony found, although the dossier expects many diaspora members to have roots in the West region.
 - Combien-coute.net prices look copied from Douala; no genuine local price survey found.
@@ -37,6 +38,7 @@ Extra city suggested by the dossier ("additional: West region hub, cooler highla
 - Negotiation practices specific to Bafoussam: not found.
 
 ## Sources read
+
 1. Prix des loyers au Cameroun 2026 — infospratiques.cm — https://infospratiques.cm/?p=346 — local-media — 2026-11-14
 2. Coût de la vie au Cameroun 2026 — infospratiques.cm — https://infospratiques.cm/cout-vie-cameroun/ — local-media — 2026-11-14
 3. Prix du terrain au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-terrain-cameroun/ — local-media — 2026-11-14
@@ -50,5 +52,6 @@ Extra city suggested by the dossier ("additional: West region hub, cooler highla
 11. Conseils aux voyageurs, Sécurité — France Diplomatie — https://www.diplomatie.gouv.fr/fr/information-par-pays/cameroun/conseils-aux-voyageurs-securite — official — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] France classes parts of the West region — supported
 - [cost.living] Fuel is sold — supported

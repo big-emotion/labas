@@ -108,6 +108,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 - [return.experience] A Belgian of Cameroonian origin preparing his return describes the move as financially hard and plans short missions first; the thread holds no outcome after the move. — Expat.com forum "Ma préparation pour mon retour au Cameroun", ≈2025-12, forum, confidence: low
 
 ## Gaps
+
 - Web search ran out after three queries: no searches for "Douala négocier loyer", Eneo délestage reports by neighbourhood, Camwater cuts, Yango/Gozem fares, women's safety, returnee testimonies or diaspora associations.
 - Numbeo (Douala) returned HTTP 429 on every attempt; its figures appear only through combien-coute.net's mirror and the dossier's verification log.
 - No dated source on load-shedding frequency or water cuts by neighbourhood; only blogs saying cuts are frequent.
@@ -118,6 +119,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 - Ride-hailing fares, gym and club entry prices specific to Douala venues: not found.
 
 ## Sources read
+
 1. Prix des loyers au Cameroun 2026 — infospratiques.cm — https://infospratiques.cm/?p=346 — local-media — 2026-11-14
 2. Coût de la vie au Cameroun 2026 : budget mensuel détaillé — infospratiques.cm — https://infospratiques.cm/cout-vie-cameroun/ — local-media — 2026-11-14
 3. Prix du terrain au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-terrain-cameroun/ — local-media — 2026-11-14
@@ -165,6 +167,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 45. Social pass: Facebook "Douala Expat Group" (361777410684463) — https://www.facebook.com/groups/361777410684463 — social-caption — chronological feed, 29 posts, read 2026-11-14 (staged in research/cities/_social/cameroun.md)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] The FCDO names Nkololun — supported
 - [rights.lgbt] On 8 Feb 2021 two trans women — supported
 - [rights.lgbt] France lists prison terms — supported

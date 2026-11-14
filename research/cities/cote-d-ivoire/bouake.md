@@ -30,11 +30,13 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - [other] Population 832,371 in the sous-préfecture (second city), department 931,851. — OpenShores "Plus grandes villes de Côte d'Ivoire", 2026-10-15, blog, confidence: medium
 
 ## Gaps
+
 - No relocation-blog page dedicated to Bouaké exists on OpenShores (URL guessed, not found); web-search budget ran out, so no forum, local-media rent or listing data was found. An Expat.com forum thread on renting a room (2016) had no prices.
 - Nothing on taxi/moto-taxi fares inside town, bargaining in markets, utilities bills, school fees or health consultation costs.
 - No dated source on urban crime or women's safety inside the city; nothing on diaspora or returnees.
 
 ## Sources read
+
 1. Ville la moins chère de Côte d'Ivoire — OpenShores — https://www.openshores.co/blog/ville-la-moins-chere-de-cote-divoire — blog — read 2026-11-14
 2. Grandes villes de Côte d'Ivoire 2026: top 5 où s'installer — OpenShores — https://www.openshores.co/blog/les-meilleures-villes-de-cote-divoire-pour-immigrer — blog — read 2026-11-14
 3. Plus grandes villes de Côte d'Ivoire : classement 2026 — OpenShores — https://www.openshores.co/blog/plus-grandes-villes-cote-divoire — blog — read 2026-11-14
@@ -53,4 +55,5 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 16. Sécurité générale en Côte d'Ivoire — Belgian MFA — https://diplomatie.belgium.be/fr/pays/cote-divoire/voyager-en-cote-divoire-conseils-aux-voyageurs/securite-generale-en-cote-divoire — official — read 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Belgium (updated 10 Nov 2026) reports continuing road ambushes — supported

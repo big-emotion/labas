@@ -32,6 +32,7 @@ Extra cities suggested by the dossier under one heading ("additional: anglophone
 - [other] Population: Limbe 84,223 (2005 census); Buea's page gives both about 300,000 (2013) and 47,300 (2025), a contradiction. — Wikipedia "Limbe, Cameroon" / "Buea", accessed 2026-11-14, academic, confidence: low
 
 ## Gaps
+
 - No Limbe or Buea search could run (budget exhausted): no 2024–2026 press on attacks, curfews, "ghost town" Mondays or school disruption in Buea and Limbe specifically; Wikipedia's crisis article as fetched stops around 2021.
 - The 2019 SONARA refinery fire and the refinery's current status: not covered by the sources read.
 - No rents by neighbourhood, utility reliability, internet quality or healthcare facilities found for either town.
@@ -39,6 +40,7 @@ Extra cities suggested by the dossier under one heading ("additional: anglophone
 - Women's safety, LGBT life and racism: no town-specific dated source.
 
 ## Sources read
+
 1. Prix des loyers au Cameroun 2026 — infospratiques.cm — https://infospratiques.cm/?p=346 — local-media — 2026-11-14
 2. Prix du terrain au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-terrain-cameroun/ — local-media — 2026-11-14
 3. Prix du carburant au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-carburant-cameroun/ — local-media — 2026-11-14
@@ -55,6 +57,7 @@ Extra cities suggested by the dossier under one heading ("additional: anglophone
 14. Foreign travel advice Cameroon, safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/cameroon/safety-and-security — official — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] The FCDO reports kidnappings — corrected
 - [safety.general] The Anglophone conflict — corrected
 - [safety.general] France classes the South-West — supported

@@ -104,6 +104,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - [other] Expat-Dakar (96K members, 90+ posts a day) works as a classifieds board: departures sales, cars, furniture and broker rental lists, rarely questions. — read 2026-11-14
 
 ## Gaps
+
 - **Searches were capped mid-task** (session web-search budget exhausted after ~10 queries); the rest of the work used direct fetches of known URLs, so coverage is narrower than planned.
 - Lycée Jean Mermoz 2026–27 tuition amounts: not found (fee PDF not readable / not located).
 - Official taxi tariff grid, moto-taxi (Jakarta) prices in Dakar: not found.
@@ -119,6 +120,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - dakarlives, bonplandakar, dakar_womens_group and the other Senegal Facebook groups not read; Saint-Louis and Saly: nothing found.
 
 ## Sources read
+
 1. Combien coûte un logement à Dakar ? Les loyers par quartier en 2026 — https://au-senegal.com/combien-coute-un-logement-a-dakar-les-loyers-par-quartier-en-2026,18149.html — local-media — 2026-11-14
 2. Coût de la vie à Dakar en 2026 : quel budget faut-il réellement prévoir ? — https://www.au-senegal.com/cout-de-la-vie-a-dakar-en-2026-quel-budget-faut-il-reellement-prevoir,18481.html — local-media — 2026-11-14
 3. Immobilier à Dakar : les loyers du luxe baissent — https://au-senegal.com/immobilier-a-dakar-les-loyers-du-luxe-baissent-le-logement-reste-un-defi,18553.html — local-media — 2026-11-14
@@ -159,6 +161,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - Social pass: Instagram @newindakar — 6 posts (pinned + latest) and visible comments, 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] FCDO: robbery, burglary and assault — supported
 - [safety.women] 31% of Senegalese say women — supported
 - [safety.women] National survey: 31.9% of women — supported

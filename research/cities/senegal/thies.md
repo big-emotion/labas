@@ -29,6 +29,7 @@ Extra city suggested by the dossier (Senegal's third agglomeration, on the futur
 - [rights.lgbt] National law of 30 March 2026: 5–10 years for same-sex relations and new offences for "promotion, support or funding"; enforced with arrests. — GOV.UK FCDO, accessed 2026-11-14, official, confidence: high
 
 ## Gaps
+
 - **The session's web-search budget ran out early**; no Thiès-specific search ("vivre à Thiès", "Thiès loyer", local media) could be run. Items come from fetched URLs only.
 - OpenShores' Thiès landing page has no city data (only generic national scores).
 - Rents by neighbourhood, power/water cuts, health facilities (regional hospital, clinics), safety, social life, religion, diaspora/returnee presence: not found.
@@ -36,6 +37,7 @@ Extra city suggested by the dossier (Senegal's third agglomeration, on the futur
 - Numbeo Thiès not attempted after repeated HTTP 429 on Numbeo.
 
 ## Sources read
+
 1. Coût de la vie au Sénégal — OpenShores — https://www.openshores.co/blog/cout-de-la-vie-en-senegal — company — 2026-11-14
 2. Ville la moins chère du Sénégal — OpenShores — https://www.openshores.co/blog/ville-la-moins-chere-de-senegal — company — 2026-11-14
 3. OpenShores Thiès landing page (no city data) — https://openshores.co/blog/senegal/thies/cout-de-la-vie-a-thies — company — 2026-11-14

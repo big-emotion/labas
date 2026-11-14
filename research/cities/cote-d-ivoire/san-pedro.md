@@ -48,6 +48,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - [other] Residents' priorities voiced in the April 2025 consultations: more paved roads, water towers and hand pumps, more health centres, secondary schools (Tabou has only two) and fishing ports. — AIP, 2025-05-04, official, confidence: medium
 
 ## Gaps
+
 - Web-search budget ran out early in this session; San-Pédro was covered by direct fetches (OpenShores, AllAfrica, AIP site search, Koaci, advisories). Planned searches ("vivre à San-Pédro", "San-Pédro loyer quartier", forums, Facebook/expat posts) were not run.
 - No local-media or listing-based rent figure; no sale prices; no restaurant, beer or going-out prices.
 - Nothing found on bargaining or "foreigner prices" in San-Pédro.
@@ -56,6 +57,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - No information on Yango or other ride-hailing in town; flight prices to Abidjan not found.
 
 ## Sources read
+
 1. San Pedro : avantages et inconvénients — OpenShores — https://www.openshores.co/blog/cote-divoire/san-pedro/les-avantages-et-inconvenients — blog — read 2026-11-14
 2. Vivre à San Pedro, guide complet — OpenShores — https://www.openshores.co/blog/cote-divoire/san-pedro/vivre-guide-complet — blog — read 2026-11-14
 3. Grandes villes de Côte d'Ivoire 2026: top 5 où s'installer — OpenShores — https://www.openshores.co/blog/les-meilleures-villes-de-cote-divoire-pour-immigrer — blog — read 2026-11-14
@@ -80,6 +82,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 22. Foreign travel advice, safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/cote-d-ivoire/safety-and-security — official — read 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Canada lists areas within 25 km of the Liberian border — supported
 - [safety.general] UK FCDO reports armed robbers attacking private cars — supported
 - [safety.general] Late June 2024 rains killed five people — supported

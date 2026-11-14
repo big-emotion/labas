@@ -35,6 +35,7 @@ Extra city suggested by the dossier (Casamance capital, greener and cheaper, tie
 - [rights.lgbt] National law of 30 March 2026: 5–10 years for same-sex relations and new offences for "promotion, support or funding"; enforced with arrests. — GOV.UK FCDO, accessed 2026-11-14, official, confidence: high
 
 ## Gaps
+
 - **The session's web-search budget ran out early**; no Ziguinchor-specific search ("vivre à Ziguinchor", ferry Aline Sitoé Diatta fares, local rents, returnee testimonies) could be run.
 - The AllAfrica 2025-09-12 peace-accord article (dossier source 43) returned 403 and was not read.
 - Ferry and flight prices to Dakar, rents by neighbourhood, power/water/internet quality, hospital and clinic details, market prices, nightlife and religion: not found.
@@ -42,6 +43,7 @@ Extra city suggested by the dossier (Casamance capital, greener and cheaper, tie
 - Most CoinAfrique listings are about a year old; recent asking prices are scarce.
 
 ## Sources read
+
 1. Coût de la vie au Sénégal — OpenShores — https://www.openshores.co/blog/cout-de-la-vie-en-senegal — company — 2026-11-14
 2. Ville la moins chère du Sénégal — OpenShores — https://www.openshores.co/blog/ville-la-moins-chere-de-senegal — company — 2026-11-14
 3. CoinAfrique Sénégal, search "ziguinchor" — https://sn.coinafrique.com/search?keyword=ziguinchor — company — 2026-11-14
@@ -55,6 +57,7 @@ Extra city suggested by the dossier (Casamance capital, greener and cheaper, tie
 11. La liste des écoles programme français au Sénégal — lepetitjournal.com — https://lepetitjournal.com/dakar/education/la-liste-des-ecoles-programme-francais-au-senegal-221636 — intl-media — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] In April 2025 armed groups infiltrated the Djignaki area — supported
 - [safety.general] A Konrad-Adenauer-backed study — supported
 - [safety.women] A series of assaults on women in Kafountine — supported

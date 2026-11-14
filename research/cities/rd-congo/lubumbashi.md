@@ -72,6 +72,7 @@ Currency note: housing, schools and services are priced in **USD**, small purcha
 - [rights.lgbt] Same-sex acts are legal, marriage is restricted to opposite-sex couples (Constitution art. 40, 2006), and indecency laws have been used against same-sex couples (US State Dept 2021). — Wikipedia "LGBTQ rights in the DRC", accessed 2026-11-14, academic, confidence: medium
 
 ## Gaps
+
 - **Negotiation in daily life**: no source on haggling margins in Lubumbashi markets, taxis or rents, nor on a foreigner/diaspora price; only "négociable" listings and unregulated fares were found.
 - No rental listings for Lubumbashi on MediaCongo (only two sales); no local property portal found.
 - No 2026 bus/taxi fares in CDF for in-city routes (latest found: 2022).
@@ -81,6 +82,7 @@ Currency note: housing, schools and services are priced in **USD**, small purcha
 - Women's daily safety specific to the city, racism/colourism: not searched (search budget exhausted).
 
 ## Sources read
+
 1. Vivre à Lubumbashi (FR) — https://www.expat.com/fr/guide/afrique/republique-democratique-du-congo/lubumbashi/ — blog — 2026-11-14
 2. Living in Lubumbashi (EN) — https://www.expat.com/en/guide/africa/democratic-republic-of-congo/lubumbashi/ — blog — 2026-11-14
 3. Coût de la vie à Lubumbashi — https://www.openshores.co/blog/rd-congo/lubumbashi/cout-de-la-vie-a-lubumbashi — company — 2026-11-14
@@ -110,6 +112,7 @@ Currency note: housing, schools and services are priced in **USD**, small purcha
 27. Kadea — https://kadea.co/ — company — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.rent] 1-bed in the centre €550–1,350 — supported
 - [cost.rent] A second guide gives much lower figures — corrected
 - [safety.general] Belgium (27 Oct 2026): security is "volatile" — supported

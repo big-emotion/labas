@@ -44,6 +44,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - [other] Population 124,567 (2021 census figure cited by the blog). — OpenShores "Plus grandes villes de Côte d'Ivoire", 2026-10-15, blog, confidence: medium
 
 ## Gaps
+
 - Web-search budget ran out early in this session; Grand-Bassam was covered by direct fetches only (OpenShores, Expat.com, AIP site search, Africa.com, official advisories).
 - No resident-forum or local-media rent figure; the only rents are one relocation blog's grid and one asking-price listing.
 - Nothing found on power cuts, water supply or internet speed specific to the town.
@@ -52,6 +53,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - No information on bargaining habits in local markets, or on taxi fares inside town.
 
 ## Sources read
+
 1. Grand-Bassam : avantages et inconvénients — OpenShores — https://www.openshores.co/blog/cote-divoire/grand-bassam/les-avantages-et-inconvenients — blog — read 2026-11-14
 2. Vivre à Grand-Bassam, guide complet — OpenShores — https://www.openshores.co/blog/cote-divoire/grand-bassam/vivre-guide-complet — blog — read 2026-11-14
 3. Plus grandes villes de Côte d'Ivoire : classement 2026 — OpenShores — https://www.openshores.co/blog/plus-grandes-villes-cote-divoire — blog — read 2026-11-14
@@ -72,6 +74,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 18. Foreign travel advice, safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/cote-d-ivoire/safety-and-security — official — read 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Canada names Grand-Bassam — supported
 - [safety.general] UK FCDO: very strong coastal currents — supported
 - [safety.general] About 7 tonnes of crude oil leaked — supported

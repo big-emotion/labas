@@ -55,6 +55,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 - [other] Population figures conflict: 70,565 at the 2005 census, 80,957 (2012 infobox) and an estimated 55,401 elsewhere on the same page. — Wikipedia "Kribi" (EN) / Wikipédia (FR), accessed 2026-11-14, academic, confidence: low
 
 ## Gaps
+
 - No Kribi-specific search could run (budget exhausted): no local press on power or water service, internet providers, crime, rents by neighbourhood, schools, hospitals, or returnees.
 - No Numbeo, combien-coute.net or Expat.com listing page for Kribi; no agency listings read.
 - Health facilities in Kribi (district hospital, clinics): not named in any source read.
@@ -64,6 +65,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 - Kribi airport status: not found.
 
 ## Sources read
+
 1. Prix des loyers au Cameroun 2026 — infospratiques.cm — https://infospratiques.cm/?p=346 — local-media — 2026-11-14
 2. Prix du terrain au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-terrain-cameroun/ — local-media — 2026-11-14
 3. Prix du carburant au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-carburant-cameroun/ — local-media — 2026-11-14

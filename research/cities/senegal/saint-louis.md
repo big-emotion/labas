@@ -48,6 +48,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - [rights.lgbt] National law of 30 March 2026: 5–10 years for same-sex relations and new offences for "promotion, support or funding"; enforced with arrests. — GOV.UK FCDO, accessed 2026-11-14; France Diplomatie, 2026-10-27, official, confidence: high
 
 ## Gaps
+
 - **The session's web-search budget ran out early**; city-specific searches ("vivre à Saint-Louis", "Saint-Louis loyer", expat forums, returnee blogs) could not be run. Items rest heavily on one commercial publisher.
 - Numbeo Saint-Louis: HTTP 429, not read.
 - No local-media source on Saint-Louis rents, power or water cuts, or internet (fibre availability) was found.
@@ -57,6 +58,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - Negotiation on rent or market prices specific to Saint-Louis: not found.
 
 ## Sources read
+
 1. Les avantages et inconvénients de Saint-Louis — OpenShores — https://www.openshores.co/blog/senegal/saint-louis/les-avantages-et-inconvenients-de-saint-louis — company — 2026-11-14
 2. Coût de la vie à Saint-Louis — OpenShores — https://openshores.co/blog/senegal/saint-louis/cout-de-la-vie-a-saint-louis — company — 2026-11-14
 3. Coût de la vie au Sénégal — OpenShores — https://www.openshores.co/blog/cout-de-la-vie-en-senegal — company — 2026-11-14

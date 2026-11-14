@@ -109,6 +109,7 @@ Currency note: Kinshasa runs on two currencies. Rent, schools, clinics and super
 - [cost.rent] A commercial plot "with 5 houses" is offered for sale at 150,000 USD (location given in Lingala, not identifiable). — same group 2026-11-14, social-caption, confidence: low
 
 ## Gaps
+
 - **Foreigner / diaspora price**: no source found on a "prix mundele" or diaspora mark-up in markets, taxis or rents; search budget ran out before a dedicated query.
 - **Typical discount**: no source says how much is usually knocked off a rent or a taxi fare (percentages); only that prices are negotiable or exceed the official grid.
 - Numbeo (cost-of-living rows, salary) returned HTTP 429 on every attempt; not used in this file.
@@ -122,6 +123,7 @@ Currency note: Kinshasa runs on two currencies. Rent, schools, clinics and super
 - Lubumbashi: nothing found. Only the Kinshasa Expats Marketplace group was read.
 
 ## Sources read
+
 1. Vivre à Kinshasa : le guide de l'expatrié — https://www.expat.com/fr/guide/afrique/republique-democratique-du-congo/kinshasa/ — blog — 2026-11-14
 2. Coût de la vie en RDC (dr-congo) — https://africarrieres.com/dr-congo/fr/guide/decouvrir/cost-of-living — company — 2026-11-14
 3. Coût de la vie en RDC (rd-congo) — https://africarrieres.com/rd-congo/fr/guide/decouvrir/cout-de-la-vie — company — 2026-11-14
@@ -168,6 +170,7 @@ Currency note: Kinshasa runs on two currencies. Rent, schools, clinics and super
 - Social pass: Instagram @kinplusfrancais — 5 latest posts and visible comments, 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.rent] Expat-standard 1-bed in the centre — supported
 - [cost.rent] By neighbourhood (expat market) — supported
 - [cost.rent] Residential communes (Gombe, Limete, Ngaliema) — supported

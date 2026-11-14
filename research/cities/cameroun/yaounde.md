@@ -87,6 +87,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 - [return.experience] A forum member asked in late 2025 whether to postpone a trip to Yaoundé; a long-time contributor said tensions "between Cameroonians" persisted since the last elections, and a Cameroonian member advised waiting. — Expat.com forum "Venir au Cameroun à l'heure actuelle", ≈2025-12, forum, confidence: low
 
 ## Gaps
+
 - Web search exhausted: no searches for "Yaoundé négocier loyer", Camwater water cuts by neighbourhood, Eneo load-shedding, Yango fares, women's safety, diaspora/returnee associations or testimonies.
 - Numbeo returned HTTP 429; Numbeo-based figures appear only via combien-coute.net and look low for expat housing (the dossier already flagged this).
 - Water supply: no dated source on cuts; only an indirect encyclopedia reference.
@@ -96,6 +97,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 - No school fee sheet read directly from Fustel-de-Coulanges or AISOY.
 
 ## Sources read
+
 1. Prix des loyers au Cameroun 2026 — infospratiques.cm — https://infospratiques.cm/?p=346 — local-media — 2026-11-14
 2. Prix du terrain au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-terrain-cameroun/ — local-media — 2026-11-14
 3. Prix du ciment au Cameroun — infospratiques.cm — https://infospratiques.cm/prix-ciment-cameroun/ — local-media — 2026-11-14
@@ -128,6 +130,7 @@ Currency note: EUR equivalents use the dossier's rate **€1 ≈ 656 XAF** (Fran
 30. Social pass: Facebook "Douala Expat Group" (361777410684463) — https://www.facebook.com/groups/361777410684463 — social-caption — read 2026-11-14 (staged in research/cities/_social/cameroun.md)
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] The FCDO names Briqueterie — supported
 - [rights.lgbt] Same-sex acts are criminalised — supported
 - [cost.negotiation] Displayed rents — supported

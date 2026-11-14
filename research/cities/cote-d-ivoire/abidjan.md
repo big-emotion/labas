@@ -118,6 +118,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - [other] Searches for "loyer", "quartier" and "école" in two public Abidjan expat groups return mostly agency listings and land or building sales (e.g. Bonoua), not residents' questions and answers. — groups 839995369407448 and 1790777411082478, read 2026-11-14
 
 ## Gaps
+
 - Web-search budget for this session ran out after six queries; the rest of the pass relied on direct fetches of known sites (dossier URLs, OpenShores, I am Beezy, AIP, Expat.com). Many planned searches ("prix taxi négociation", "prix étranger", cinema/club/gym prices, fibre box prices) were not run.
 - No source found on a "foreigner/diaspora price" in markets or taxis; no figures for how much is typically knocked off market prices.
 - No dated price for cinema tickets, club entry or gym memberships; no fixed-line fibre/box tariffs.
@@ -127,6 +128,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 <!-- social-pass gaps 2026-11-14 -->
 
 ## Sources read
+
 1. Cost of living Abidjan expats 2026 — https://www.riotimesonline.com/cost-of-living-abidjan-expats-2026/ — intl-media — read 2026-11-14
 2. Ville la moins chère de Côte d'Ivoire — OpenShores — https://www.openshores.co/blog/ville-la-moins-chere-de-cote-divoire — blog — read 2026-11-14
 3. Vivre à Marcory, guide complet — OpenShores — https://openshores.co/blog/cote-divoire/abidjan-marcory/vivre-guide-complet — blog — read 2026-11-14
@@ -178,6 +180,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - Social pass: Facebook "Les Expatriés Abidjan Officiel" (1790777411082478) — search "école", 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [cost.rent] Cocody, 3 rooms / Yopougon / Riviera Golf / Marcory Zone 4 / Plateau-Abobo (Rio Times) — supported
 - [safety.general] UK FCDO: armed burglaries and street hold-ups — supported
 - [safety.general] Canada (updated 2 Nov 2026): violent crime — supported

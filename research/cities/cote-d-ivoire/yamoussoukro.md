@@ -33,12 +33,14 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - [other] Population 340,234 in the sous-préfecture, 422,072 in the autonomous district (2021 census cited). — OpenShores "Plus grandes villes de Côte d'Ivoire", 2026-10-15, blog, confidence: medium
 
 ## Gaps
+
 - Web-search budget ran out early; covered by direct fetches only. Rent figures come from one relocation blog and a 2015 guide; no listings or local-media rents.
 - Nothing found on bargaining, taxi fares, utility bills, school fees or health consultation prices in Yamoussoukro.
 - No dated, city-specific safety or women's-safety source; no data on power cuts beyond a blog claim.
 - No source on diaspora or returnees settling there.
 
 ## Sources read
+
 1. Ville la moins chère de Côte d'Ivoire — OpenShores — https://www.openshores.co/blog/ville-la-moins-chere-de-cote-divoire — blog — read 2026-11-14
 2. Yamoussoukro : avantages et inconvénients — OpenShores — https://www.openshores.co/blog/cote-divoire/yamoussoukro/les-avantages-et-inconvenients — blog — read 2026-11-14
 3. Vivre à Yamoussoukro, guide complet — OpenShores — https://www.openshores.co/blog/cote-divoire/yamoussoukro/vivre-guide-complet — blog — read 2026-11-14

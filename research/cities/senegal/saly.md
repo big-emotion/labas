@@ -64,6 +64,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - [rights.lgbt] National law of 30 March 2026: 5–10 years for same-sex relations and new offences for "promotion, support or funding"; enforced with arrests. — GOV.UK FCDO, accessed 2026-11-14; France Diplomatie, 2026-10-27, official, confidence: high
 
 ## Gaps
+
 - **The session's web-search budget ran out early**; Saly-specific searches (expat forums, "vivre à Saly", "Saly loyer négocier", returnee testimonies) could not be run, so the file leans on one commercial publisher plus two press articles.
 - Numbeo and Expat-Dakar property pages were not readable (429 / 403).
 - Saly-specific internet quality, water-cut frequency, crime statistics: not found.
@@ -72,6 +73,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 - The Dakaractu article carries no explicit date; dated c. 2025-03-03 from page footer and comments.
 
 ## Sources read
+
 1. Les avantages et inconvénients de Saly — OpenShores — https://www.openshores.co/blog/senegal/saly/les-avantages-et-inconvenients-de-saly — company — 2026-11-14
 2. Coût de la vie à Saly — OpenShores — https://openshores.co/blog/senegal/saly/cout-de-la-vie-a-saly — company — 2026-11-14
 3. Coût de la vie au Sénégal — OpenShores — https://www.openshores.co/blog/cout-de-la-vie-en-senegal — company — 2026-11-14
@@ -86,5 +88,6 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 655.957 XOF** (fix
 12. AD1086 Les Sénégalais dénoncent la persistance des VBG — Afrobarometer — https://www.afrobarometer.org/wp-content/uploads/2025/11/AD1086-Senegalais-denoncent-la-persistance-des-violences-basees-sur-le-genre-Afrobarometer-28nov25.pdf — academic — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] A German resident was attacked in daylight — supported
 - [safety.general] Groups of Jakarta motorbikes — supported

@@ -27,6 +27,7 @@ Extra city suggested by the dossier ("extra city, low confidence"): a mining and
 - [nature.access] Lake Nzilo, created by damming the Lualaba river, supplies hydropower and water to the mines. — Wikipedia "Kolwezi", accessed 2026-11-14, academic, confidence: medium
 
 ## Gaps
+
 - **Prices**: no readable source for rents, food, transport fares, schools or salaries in Kolwezi. GlobalCostData (modelled estimates) returned HTTP 403 and UNjobnet's Kolwezi page returned HTTP 429; neither could be read, so their figures are not used.
 - **Negotiation**: nothing found specific to Kolwezi.
 - No property listings for Kolwezi on MediaCongo's first page; no local agency found.
@@ -35,6 +36,7 @@ Extra city suggested by the dossier ("extra city, low confidence"): a mining and
 - Item count (19) is above the 15 minimum but thin on daily life; most material is about mining impacts and gang crime.
 
 ## Sources read
+
 1. Kolwezi — https://en.wikipedia.org/wiki/Kolwezi — academic (reference work, Wikipedia) — 2026-11-14
 2. Ville la moins chère de RD Congo — https://www.openshores.co/blog/ville-la-moins-chere-de-rd-congo — company — 2026-11-14
 3. Sud du pays – Des habitants de Kolwezi inquiets des conséquences de l'activité minière sur le centre-ville (RFI) — https://fr.allafrica.com/stories/202602090281.html — intl-media — 2026-11-14
@@ -49,6 +51,7 @@ Extra city suggested by the dossier ("extra city, low confidence"): a mining and
 12. Kadea — https://kadea.co/ — company — 2026-11-14
 
 ## Spot-check (2026-11-14)
+
 - [safety.general] Gangs called "Biongozi" — supported
 - [safety.general] In June 2026, fights between youth gangs ("shegués") — supported
 - [safety.general] Historical marker: in May 1978 — supported
