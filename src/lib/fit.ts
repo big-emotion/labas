@@ -114,6 +114,16 @@ const SETTINGS: Record<string, string[]> = {
   wildSpaces: ["savanna", "desert"],
 };
 
+/**
+ * Two kinds of criteria. Tastes (pace, nightlife, bargaining) want a city close to a point:
+ * too lively is as wrong as too quiet. Everything else is a floor: an answer asks for "enough"
+ * safety or schools, and a city above that floor gains nothing more, so the safest, best
+ * equipped cities do not win every profile.
+ */
+const TASTES: Axis[] = ["pace", "nightlife", "bargaining"];
+/** How high the floor sits for a pull's target: 1 asks for the top quarter of cities. */
+const floorOf = (target: number) => 0.15 + 0.6 * target;
+
 export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Closeness[] {
   // Several answers can pull the same axis: their targets average, their weights add up.
   const merged = new Map<Axis, { sum: number; weight: number }>();
@@ -129,7 +139,13 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
     if (weight <= 0) continue;
     const position = fingerprint(city, axis);
     // A missing value neither wins nor loses (§4.2).
-    const value = position === null ? 0.5 : 1 - Math.abs(sum / weight - position);
+    const target = sum / weight;
+    const value =
+      position === null
+        ? 0.5
+        : TASTES.includes(axis)
+          ? 1 - Math.abs(target - position)
+          : Math.min(1, 1 - (floorOf(target) - position));
     parts.push({ value, weight, known: position !== null, axis });
   }
   for (const fact of facts) {

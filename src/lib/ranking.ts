@@ -117,45 +117,119 @@ const pull = (axis: Axis, target: number, weight: number): Pull => ({ axis, targ
 // Each answer is a set of pulls: where it wants the city on an axis (0 to 1, relative to the
 // 115 cities), and how much that counts. A reading of the answer, written down so it can be
 // argued with: "Danser jusqu'au matin" wants a city at the lively end of nightlife.
+// Each answer is read against every one of the 16 criteria (docs/criteria/weights.md): a pull
+// says where the answer wants the city (0 to 1, relative to the 115 cities) and how much that
+// counts; a criterion left out is unrelated to the answer on purpose. Everyday basics (safety,
+// power, water and care) count wherever a European-based reader would check them first.
 const PROJECT: Record<NonNullable<Answers["project"]>, Pull[]> = {
   installer: [
-    pull("safety", 0.9, 1),
-    pull("comfort", 0.8, 1),
-    pull("returnees", 0.6, 0.5),
-    pull("paperwork", 0.8, 1),
+    pull("safety", 0.9, 2),
+    pull("comfort", 0.85, 2),
+    pull("paperwork", 0.85, 1.5),
+    pull("jobs", 0.7, 1),
+    pull("returnees", 0.7, 1),
+    pull("internet", 0.7, 0.5),
+    pull("schools", 0.6, 0.5),
+    pull("flights", 0.6, 0.5),
+    pull("cheap", 0.6, 0.5),
+    pull("easySetup", 0.6, 0.5),
   ],
-  pied: [pull("flights", 0.85, 2.5), pull("internet", 0.8, 1)],
-  tester: [pull("easySetup", 0.85, 2), pull("returnees", 0.8, 1), pull("cheap", 0.7, 1)],
-  investir: [pull("business", 0.85, 2.5), pull("jobs", 0.7, 1), pull("paperwork", 0.8, 1)],
-  decouvrir: [pull("culture", 0.8, 1), pull("history", 0.8, 1)],
+  pied: [
+    pull("flights", 0.95, 3),
+    pull("internet", 0.85, 1.5),
+    pull("safety", 0.8, 1),
+    pull("comfort", 0.75, 1),
+    pull("paperwork", 0.8, 1),
+    pull("easySetup", 0.7, 0.5),
+    pull("returnees", 0.7, 0.5),
+  ],
+  tester: [
+    pull("easySetup", 0.9, 2),
+    pull("safety", 0.8, 1.5),
+    pull("returnees", 0.8, 1.5),
+    pull("cheap", 0.7, 1),
+    pull("comfort", 0.75, 1),
+    pull("internet", 0.75, 1),
+    pull("paperwork", 0.75, 1),
+    pull("flights", 0.7, 0.5),
+  ],
+  investir: [
+    pull("business", 0.95, 3),
+    pull("paperwork", 0.85, 2),
+    pull("jobs", 0.7, 1),
+    pull("safety", 0.75, 1),
+    pull("flights", 0.7, 1),
+    pull("internet", 0.7, 0.5),
+  ],
+  decouvrir: [
+    pull("safety", 0.9, 2),
+    pull("comfort", 0.8, 1.5),
+    pull("culture", 0.8, 1.5),
+    pull("history", 0.8, 1.5),
+    pull("flights", 0.8, 1.5),
+    pull("nightlife", 0.65, 0.5),
+    pull("cheap", 0.6, 0.5),
+  ],
 };
 const SATURDAY: Record<Step, Pull[]> = {
-  1: [pull("nightlife", 1, 2.5), pull("pace", 0.8, 1)],
-  0.5: [pull("nightlife", 0.55, 2)],
-  0: [pull("nightlife", 0.1, 2.5), pull("pace", 0.2, 1)],
+  1: [
+    pull("nightlife", 1, 3),
+    pull("pace", 0.8, 1),
+    pull("culture", 0.7, 0.5),
+    pull("safety", 0.7, 0.5),
+  ],
+  0.5: [pull("nightlife", 0.55, 2), pull("culture", 0.6, 0.5)],
+  0: [pull("nightlife", 0.1, 2.5), pull("pace", 0.2, 1.5), pull("safety", 0.8, 0.5)],
 };
 const BUDGET: Record<NonNullable<Answers["budget"]>, Pull[]> = {
-  serre: [pull("cheap", 1, 3), pull("easySetup", 0.8, 1)],
-  moyen: [pull("cheap", 0.6, 1.5)],
-  large: [pull("comfort", 0.8, 1)],
+  serre: [pull("cheap", 1, 3), pull("easySetup", 0.85, 1.5), pull("bargaining", 0.6, 0.5)],
+  moyen: [pull("cheap", 0.65, 1.5), pull("easySetup", 0.6, 0.5)],
+  large: [pull("comfort", 0.85, 1), pull("safety", 0.8, 0.5)],
 };
 const FAMILY: Record<NonNullable<Answers["family"]>, Pull[]> = {
-  celib: [pull("nightlife", 0.7, 0.5), pull("returnees", 0.7, 0.5)],
-  couple: [],
-  fonder: [pull("schools", 0.9, 2), pull("safety", 0.9, 1.5), pull("comfort", 0.8, 1)],
-  parents: [pull("schools", 0.85, 3), pull("safety", 0.85, 2), pull("comfort", 0.8, 1)],
+  celib: [pull("returnees", 0.7, 1), pull("nightlife", 0.7, 0.5), pull("culture", 0.65, 0.5)],
+  couple: [pull("safety", 0.75, 0.5), pull("culture", 0.65, 0.5), pull("nightlife", 0.6, 0.5)],
+  fonder: [
+    pull("schools", 0.9, 2.5),
+    pull("safety", 0.9, 2),
+    pull("comfort", 0.85, 2),
+    pull("cheap", 0.6, 0.5),
+    pull("pace", 0.45, 0.5),
+  ],
+  parents: [
+    pull("schools", 1, 3),
+    pull("safety", 0.95, 2.5),
+    pull("comfort", 0.9, 2),
+    pull("pace", 0.4, 0.5),
+  ],
 };
 const JOB: Record<NonNullable<Answers["job"]>, Pull[]> = {
-  cadre: [pull("jobs", 0.85, 2.5)],
-  entre: [pull("business", 0.85, 2.5), pull("paperwork", 0.7, 0.5)],
-  remote: [pull("internet", 0.85, 3), pull("flights", 0.7, 1)],
-  crea: [pull("culture", 0.85, 2.5), pull("nightlife", 0.7, 0.5)],
-  soin: [pull("comfort", 0.8, 1), pull("cheap", 0.6, 1)],
+  cadre: [pull("jobs", 0.95, 3), pull("internet", 0.6, 0.5), pull("flights", 0.6, 0.5)],
+  entre: [
+    pull("business", 0.95, 3),
+    pull("paperwork", 0.8, 1.5),
+    pull("internet", 0.7, 1),
+    pull("jobs", 0.6, 0.5),
+    pull("bargaining", 0.6, 0.5),
+  ],
+  remote: [
+    pull("internet", 1, 3),
+    pull("comfort", 0.85, 2),
+    pull("flights", 0.7, 1),
+    pull("cheap", 0.6, 0.5),
+  ],
+  crea: [pull("culture", 1, 3), pull("nightlife", 0.7, 1), pull("history", 0.65, 0.5)],
+  soin: [
+    pull("jobs", 0.7, 1),
+    pull("comfort", 0.75, 1),
+    pull("schools", 0.7, 1),
+    pull("cheap", 0.6, 0.5),
+  ],
 };
 const SIZE: Record<City["size"], Pull[]> = {
-  3: [pull("pace", 1, 2.5)],
+  3: [pull("pace", 0.95, 2.5), pull("nightlife", 0.7, 0.5)],
   2: [pull("pace", 0.5, 2.5)],
-  1: [pull("pace", 0.1, 2.5)],
+  1: [pull("pace", 0.1, 2.5), pull("nightlife", 0.3, 0.5)],
 };
 const GREW_UP: Record<NonNullable<Answers["grewUp"]>, Pull[]> = {
   city: [pull("pace", 0.8, 1)],
@@ -163,33 +237,47 @@ const GREW_UP: Record<NonNullable<Answers["grewUp"]>, Pull[]> = {
   country: [pull("pace", 0.15, 1)],
 };
 const PRIORITY: Record<Priority, Pull[]> = {
-  safety: [pull("safety", 1, 2.5)],
-  cost: [pull("cheap", 1, 2.5)],
-  healthAndSchools: [pull("comfort", 1, 1.5), pull("schools", 1, 1.5)],
-  career: [pull("jobs", 1, 2.5)],
-  diaspora: [pull("returnees", 1, 2.5)],
-  memory: [pull("history", 1, 2.5)],
-  flights: [pull("flights", 1, 2.5)],
+  safety: [pull("safety", 1, 3)],
+  cost: [pull("cheap", 1, 3), pull("easySetup", 0.8, 1)],
+  healthAndSchools: [pull("comfort", 1, 2), pull("schools", 1, 2)],
+  career: [pull("jobs", 1, 3), pull("business", 0.7, 1)],
+  diaspora: [pull("returnees", 1, 3)],
+  memory: [pull("history", 1, 3), pull("culture", 0.7, 0.5)],
+  flights: [pull("flights", 1, 3)],
 };
-// A profession meets the sectors that hire in a city (sourced facts), plus a nudge on an axis.
+// A profession meets the sectors that hire in a city (sourced facts), plus pulls on criteria.
 const PROFESSION: Record<
   NonNullable<Answers["profession"]>,
   { sectors: string[]; pulls: Pull[] }
 > = {
-  tech: { sectors: ["tech"], pulls: [pull("internet", 0.9, 1), pull("business", 0.8, 1)] },
+  tech: {
+    sectors: ["tech"],
+    pulls: [pull("internet", 0.9, 1.5), pull("business", 0.8, 1), pull("comfort", 0.75, 0.5)],
+  },
   trade: {
     sectors: ["port-trade"],
-    pulls: [pull("business", 0.8, 1), pull("bargaining", 0.8, 0.5)],
+    pulls: [pull("business", 0.8, 1), pull("bargaining", 0.8, 0.5), pull("flights", 0.6, 0.5)],
   },
-  health: { sectors: ["admin-ngo"], pulls: [pull("comfort", 0.8, 1)] },
-  teaching: { sectors: ["admin-ngo"], pulls: [pull("schools", 0.8, 1)] },
-  culture: { sectors: ["tourism"], pulls: [pull("culture", 0.85, 1.5)] },
-  admin: { sectors: ["admin-ngo"], pulls: [pull("jobs", 0.8, 1)] },
-  craft: { sectors: ["port-trade", "tourism", "agriculture"], pulls: [pull("cheap", 0.7, 1)] },
-  student: { sectors: [], pulls: [pull("cheap", 0.9, 1.5), pull("culture", 0.7, 1)] },
+  health: { sectors: ["admin-ngo"], pulls: [pull("comfort", 0.8, 1), pull("jobs", 0.7, 0.5)] },
+  teaching: { sectors: ["admin-ngo"], pulls: [pull("schools", 0.8, 1), pull("jobs", 0.7, 0.5)] },
+  culture: { sectors: ["tourism"], pulls: [pull("culture", 1, 1.5), pull("nightlife", 0.65, 0.5)] },
+  admin: { sectors: ["admin-ngo"], pulls: [pull("jobs", 0.8, 1), pull("paperwork", 0.7, 0.5)] },
+  craft: {
+    sectors: ["port-trade", "tourism", "agriculture"],
+    pulls: [pull("cheap", 0.7, 1), pull("bargaining", 0.7, 0.5)],
+  },
+  student: {
+    sectors: [],
+    pulls: [pull("cheap", 0.9, 1.5), pull("culture", 0.7, 1), pull("nightlife", 0.65, 0.5)],
+  },
   retired: {
     sectors: [],
-    pulls: [pull("comfort", 0.9, 1.5), pull("pace", 0.3, 1), pull("safety", 0.9, 1)],
+    pulls: [
+      pull("comfort", 0.9, 2),
+      pull("safety", 0.9, 1.5),
+      pull("pace", 0.3, 1),
+      pull("flights", 0.7, 0.5),
+    ],
   },
 };
 const STEP_PULLS = {
@@ -252,7 +340,9 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   const landscapes = landscapesOf(answers);
   const natural = landscapes.filter((l) => l !== "urban");
   if (natural.length) facts.push({ kind: "settings", values: natural, weight: 2.5 });
-  if (landscapes.includes("urban")) add([pull("culture", 0.8, 1.5), pull("pace", 0.7, 0.5)]);
+  if (landscapes.includes("urban")) {
+    add([pull("culture", 0.8, 1.5), pull("pace", 0.7, 0.5), pull("nightlife", 0.65, 0.5)]);
+  }
   if (answers.climate) facts.push({ kind: "climates", values: [answers.climate], weight: 2 });
   // Roots bring the family's region closer; looking elsewhere never pushes it away.
   if (answers.origin && answers.origin !== "ameriques" && answers.roots === "rediscover") {
