@@ -356,7 +356,7 @@ const SETUP: Record<NonNullable<Answers["setupBudget"]>, Pull[]> = {
 };
 const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   returnees: [pull("returnees", 0.85, 2)],
-  locals: [pull("returnees", 0.3, 0.5)],
+  locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
 const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {

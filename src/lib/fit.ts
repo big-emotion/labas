@@ -145,14 +145,41 @@ const SETTINGS: Record<string, string[]> = {
 };
 
 /**
- * Two kinds of criteria. Tastes (pace, nightlife, bargaining) want a city close to a point:
- * too lively is as wrong as too quiet. Everything else is a floor: an answer asks for "enough"
+ * Two kinds of criteria. Tastes (pace, nightlife, bargaining, returnees) want a city close to a
+ * point: too lively is as wrong as too quiet, and a reader who wants to live among locals is as
+ * badly served by a returnee enclave as a returnee is by a town none of them chose. Everything else is a floor: an answer asks for "enough"
  * safety or schools, and a city above that floor gains nothing more, so the safest, best
  * equipped cities do not win every profile.
  */
-const TASTES: Axis[] = ["pace", "nightlife", "bargaining"];
+const TASTES: Axis[] = ["pace", "nightlife", "bargaining", "returnees"];
 /** How high the floor sits for a pull's target: 1 asks for the top quarter of cities. */
 const floorOf = (target: number) => 0.15 + 0.6 * target;
+
+const closenessAt = (axis: Axis, target: number, position: number) =>
+  TASTES.includes(axis)
+    ? 1 - Math.abs(target - position)
+    : Math.min(1, 1 - (floorOf(target) - position));
+
+/**
+ * A missing value neither wins nor loses (§4.2): it scores what the cities with a value score
+ * on average for the same pull. A flat 0.5 would sit below most cities once floors saturate,
+ * so thinly documented towns would lose to well-documented capitals on data, not on fit.
+ */
+const typicalCache = new Map<string, number>();
+function typicalCloseness(axis: Axis, target: number): number {
+  const key = `${axis}:${target}`;
+  let typical = typicalCache.get(key);
+  if (typical === undefined) {
+    const known = CITIES.map((city) => fingerprint(city, axis)).filter(
+      (position): position is number => position !== null,
+    );
+    typical = known.length
+      ? known.reduce((sum, position) => sum + closenessAt(axis, target, position), 0) / known.length
+      : NEUTRAL;
+    typicalCache.set(key, typical);
+  }
+  return typical;
+}
 
 export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Closeness[] {
   // Several answers can pull the same axis: their targets average, their weights add up.
@@ -168,14 +195,9 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
   for (const [axis, { sum, weight }] of merged) {
     if (weight <= 0) continue;
     const position = fingerprint(city, axis);
-    // A missing value neither wins nor loses (§4.2).
     const target = sum / weight;
     const value =
-      position === null
-        ? 0.5
-        : TASTES.includes(axis)
-          ? 1 - Math.abs(target - position)
-          : Math.min(1, 1 - (floorOf(target) - position));
+      position === null ? typicalCloseness(axis, target) : closenessAt(axis, target, position);
     parts.push({ value, weight, known: position !== null, axis });
   }
   for (const fact of facts) {

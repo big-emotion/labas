@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
 import { bestMatches, rankCities, type Answers } from "./ranking";
+import { closenessOf, fingerprint, type Pull } from "./fit";
 
 // A deterministic stream of random numbers, so the audit gives the same result every run.
 function randomStream(seed: number) {
@@ -99,9 +100,15 @@ describe("the city a profile lands on", () => {
   it("has a combination of answers that puts each city first", () => {
     const unreachable: string[] = [];
     for (const city of proposable) {
-      // Climb answer by answer towards the profile that favours this city most.
+      // Climb answer by answer towards the profile that favours this city most. The quiz always
+      // opens on the project, so the climb starts from its best answer: an empty profile ties
+      // every city at zero, a false summit no single answer can leave.
       let answers: Record<string, unknown> = {};
-      let best = lead(answers as Answers, city.name);
+      let best = -Infinity;
+      for (const value of OPTIONS.project) {
+        const gain = lead({ project: value } as Answers, city.name);
+        if (gain > best) [best, answers] = [gain, { project: value }];
+      }
       for (let pass = 0; pass < 2; pass++) {
         for (const [id, values] of Object.entries(OPTIONS)) {
           for (const value of [undefined, ...values]) {
@@ -208,8 +215,28 @@ describe("what the reader's life today brings to the match", () => {
     );
   });
 
+  it("leans those who want to live among locals towards cities few returnees settle in", () => {
+    const locals: Answers = { belonging: "locals" };
+    // Saint-Louis draws few returnees, Ouidah many (city-scores.json, returnees).
+    expect(scoreOf(locals, "Saint-Louis")).toBeGreaterThan(scoreOf(locals, "Ouidah"));
+  });
+
   it("keeps a frequent traveller close to flights and a good connection", () => {
     const nomad: Answers = { currentCity: "nomad" };
     expect(scoreOf(nomad, "Nairobi")).toBeGreaterThan(scoreOf(nomad, "Bubaque"));
+  });
+});
+
+describe("a value no source gives", () => {
+  it("scores what a typical city scores on the same pull, neither winning nor losing", () => {
+    const pulls: Pull[] = [{ axis: "easySetup", target: 0.9, weight: 1 }];
+    const unknown = CITIES.find((city) => fingerprint(city, "easySetup") === null)!;
+    const known = CITIES.filter((city) => fingerprint(city, "easySetup") !== null);
+    const typical =
+      known.map((city) => closenessOf(city, pulls, [])[0].value).reduce((a, b) => a + b, 0) /
+      known.length;
+    const [part] = closenessOf(unknown, pulls, []);
+    expect(part.known).toBe(false);
+    expect(part.value).toBeCloseTo(typical, 6);
   });
 });
