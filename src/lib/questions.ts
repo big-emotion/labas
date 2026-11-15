@@ -53,7 +53,7 @@ export const QUESTIONS: Question[] = [
     id: "project",
     group: HISTORY,
     title: "Là-bas, vous vous y voyez comment ?",
-    hint: "Pas besoin d'un projet arrêté : chaque ville dira aussi ce qu'elle vaut pour y vivre.",
+    hint: "Selon votre projet, on regarde surtout la sécurité, les démarches, les vols ou le coût pour s'installer.",
     choices: [
       { label: "M'installer pour de bon", value: "installer", sub: "Y construire ma vie" },
       { label: "Un pied ici, un pied là-bas", value: "pied", sub: "Des allers-retours réguliers" },
@@ -66,7 +66,7 @@ export const QUESTIONS: Question[] = [
     id: "origin",
     group: HISTORY,
     title: "D'où vient votre famille ?",
-    hint: "Facultatif. Sert à repérer les régions où vous avez des repères. Rien n'est enregistré.",
+    hint: "Facultatif. Pour vous proposer des villes proches de vos repères et vous éviter les pays où le racisme est documenté.",
     max: 3,
     choices: [
       { label: "Afrique de l'Ouest", value: "ouest" },
@@ -81,8 +81,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "countries",
     group: HISTORY,
-    title: "Et le pays ?",
-    hint: "Le pays de votre famille compte fort si vous voulez vous sentir chez vous.",
+    title: "De quel pays vient votre famille ?",
+    hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
     max: 3,
     when: (answers) => africanOrigins(answers).length > 0,
     choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
@@ -90,8 +90,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "kin",
     group: HISTORY,
-    title: "Vous sentir parmi les vôtres, ça compte ?",
-    hint: "Origine, culture, religion : ce qui fait qu'on se sent chez soi.",
+    title: "Vivre près de vos origines, de votre culture, de votre religion, ça compte pour vous ?",
+    hint: "Si oui, on privilégie les villes proches de la région de votre famille.",
     choices: [
       { label: "Beaucoup", value: "much" },
       { label: "Un peu", value: "some" },
@@ -102,7 +102,7 @@ export const QUESTIONS: Question[] = [
     id: "faith",
     group: HISTORY,
     title: "Votre religion ?",
-    hint: "Pour savoir si votre foi est largement partagée dans le pays (Pew Research Center, 2020).",
+    hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
     when: kinMatters,
     choices: [
       { label: "Islam", value: "muslim" },
@@ -116,7 +116,7 @@ export const QUESTIONS: Question[] = [
     id: "saturday",
     group: TEMPERAMENT,
     title: "Votre samedi soir idéal ?",
-    hint: "Votre envie de monde, comparée à l'énergie de chaque ville.",
+    hint: "Pour savoir si vous cherchez une ville animée ou plutôt calme.",
     choices: [
       { label: "Du monde, de la musique, on rentre tard", value: 1 },
       { label: "Un dîner avec quelques amis", value: 0.5 },
@@ -126,8 +126,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "adventure",
     group: TEMPERAMENT,
-    title: "Partir loin de ce que vous connaissez, ça vous tente ?",
-    hint: "Votre goût du dépaysement, comparé à ce que chaque ville a de nouveau pour vous.",
+    title: "Découvrir une région d'Afrique que vous ne connaissez pas, ça vous tente ?",
+    hint: "Si oui, on vous propose aussi des villes loin de la région de votre famille.",
     choices: [
       { label: "Oui, c'est ce que je cherche", value: "seeking" },
       { label: "Pourquoi pas", value: "open" },
@@ -137,8 +137,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "order",
     group: TEMPERAMENT,
-    title: "Les règles et l'organisation, pour vous ?",
-    hint: "Votre besoin de cadre, comparé à l'ordre et à la prévisibilité de chaque ville.",
+    title: "Au quotidien, avez-vous besoin que tout soit organisé ?",
+    hint: "Pour savoir si vous préférez une ville où les démarches sont simples et prévisibles.",
     choices: [
       {
         label: "J'ai besoin que tout soit carré",
@@ -152,19 +152,19 @@ export const QUESTIONS: Question[] = [
   {
     id: "together",
     group: TEMPERAMENT,
-    title: "Dans la vie, vous avancez comment ?",
-    hint: "Comparé à l'esprit de chaque ville : plutôt compétition, ou plutôt entraide.",
+    title: "Pour avancer, vous comptez plutôt sur vous ou sur les autres ?",
+    hint: "Pour savoir si vous cherchez une ville d'affaires et de compétition, ou une ville solidaire.",
     choices: [
-      { label: "Je trace ma route", value: 0, sub: "Que le meilleur gagne" },
+      { label: "Sur moi", value: 0, sub: "Que le meilleur gagne" },
       { label: "Ça dépend des situations", value: 0.5 },
-      { label: "Avec les autres, l'entraide d'abord", value: 1 },
+      { label: "Sur les autres", value: 1, sub: "L'entraide d'abord" },
     ],
   },
   {
     id: "friction",
     group: TEMPERAMENT,
-    title: "Coupures, démarches, imprévus…",
-    hint: "Ce que vous encaissez, comparé à l'intensité de chaque ville.",
+    title: "Coupures de courant, démarches lentes, imprévus : comment le vivez-vous ?",
+    hint: "Si cela vous pèse, on écarte les villes où ces problèmes sont fréquents.",
     choices: [
       { label: "Ça m'amuse presque, je m'adapte", value: 1 },
       { label: "Ça m'agace, mais je gère", value: 0.5 },
@@ -175,7 +175,7 @@ export const QUESTIONS: Question[] = [
     id: "profession",
     group: PROJECT,
     title: "Votre métier ?",
-    hint: "Toutes les villes n'offrent pas les mêmes débouchés selon le métier.",
+    hint: "Pour privilégier les villes où votre métier recrute.",
     choices: [
       { label: "Finance", value: "finance" },
       { label: "Droit", value: "law" },
@@ -195,7 +195,7 @@ export const QUESTIONS: Question[] = [
     id: "budget",
     group: PROJECT,
     title: "Votre budget sur place ?",
-    hint: "Pour comparer avec ce que coûtent un logement et la vie courante.",
+    hint: "Pour privilégier les villes où le logement et la vie courante tiennent dans votre budget.",
     choices: [
       { label: "Serré", value: "serre" },
       { label: "Moyen", value: "moyen" },
@@ -206,7 +206,7 @@ export const QUESTIONS: Question[] = [
     id: "family",
     group: PROJECT,
     title: "Vous partez avec qui ?",
-    hint: "Les écoles, les soins et le rythme comptent plus avec des enfants.",
+    hint: "Avec des enfants, les écoles, les soins et la sécurité pèsent davantage.",
     choices: [
       { label: "Seul·e", value: "celib" },
       { label: "En couple", value: "couple" },
@@ -217,8 +217,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "passports",
     group: PROJECT,
-    title: "Votre passeport ?",
-    hint: "Pour savoir où vous entrez sans visa, et où vous circulez librement.",
+    title: "Quel passeport avez-vous ?",
+    hint: "Pour privilégier les pays où vous entrez sans visa ou circulez librement.",
     max: 2,
     choices: [
       { label: "Français ou européen", value: "eu" },
@@ -231,8 +231,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "languages",
     group: DAILY,
-    title: "Vous êtes à l'aise en…",
-    hint: "La langue de tous les jours compte plus que tout le reste.",
+    title: "Dans quelles langues êtes-vous à l'aise au quotidien ?",
+    hint: "Pour vous proposer des villes où l'on vit dans l'une de ces langues.",
     max: 6,
     choices: [
       { label: "Français", value: "fr" },
@@ -246,34 +246,34 @@ export const QUESTIONS: Question[] = [
   {
     id: "size",
     group: DAILY,
-    title: "Plutôt une ville qui…",
-    hint: "La taille et le rythme de la ville.",
+    title: "Quelle taille de ville ?",
+    hint: "Pour savoir si vous préférez l'animation d'une grande ville ou le calme d'une petite.",
     choices: [
-      { label: "Vibre jour et nuit", value: 3 },
-      { label: "Reste à taille humaine", value: 2 },
-      { label: "Prend son temps", value: 1 },
+      { label: "Une grande ville qui vibre jour et nuit", value: 3 },
+      { label: "Une ville à taille humaine", value: 2 },
+      { label: "Une petite ville qui prend son temps", value: 1 },
     ],
   },
   {
     id: "landscapes",
     group: DAILY,
-    title: "Le week-end, vous filez où ?",
-    hint: "Mer, île, fleuve, montagne ou désert : le paysage autour de la ville.",
+    title: "Quel paysage autour de vous ?",
+    hint: "Une préférence : le paysage que vous aimeriez avoir tout près de chez vous.",
     max: 3,
     choices: [
-      { label: "À la plage", value: "beach" },
-      { label: "Sur une île", value: "island" },
-      { label: "Au bord d'un fleuve ou d'un lac", value: "water" },
-      { label: "En montagne, en forêt", value: "nature" },
-      { label: "Dans la savane ou le désert", value: "wildSpaces" },
-      { label: "Je reste en ville", value: "urban" },
+      { label: "La mer", value: "beach" },
+      { label: "Une île", value: "island" },
+      { label: "Un fleuve ou un lac", value: "water" },
+      { label: "La montagne ou la forêt", value: "nature" },
+      { label: "La savane ou le désert", value: "wildSpaces" },
+      { label: "Peu importe, la ville me suffit", value: "urban" },
     ],
   },
   {
     id: "priorities",
     group: DAILY,
     title: "Ce qui compte le plus pour vous ?",
-    hint: "Jusqu'à trois priorités. Elles pèsent lourd dans le score.",
+    hint: "Jusqu'à trois choix. Ils pèsent lourd dans le résultat.",
     max: 3,
     choices: [
       { label: "Me sentir en sécurité", value: "safety" },

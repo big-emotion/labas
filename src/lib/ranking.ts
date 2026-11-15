@@ -518,10 +518,14 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
         : 0;
     facts.push({ kind: "homeCountry", values: countries, weight: Math.max(2, roots + kin) });
   }
-  // A reader of sub-Saharan or Caribbean family (or Sudanese, filed under North Africa) is
-  // never sent where anti-Black racism is documented, adventure or not: being badly received
-  // is a failure of the quiz, not a taste (operator, 2026-11-15).
-  const black = origins.some((o) => o !== "nord") || (answers.countries ?? []).includes("Soudan");
+  // A reader is never sent where anti-Black racism is documented, adventure or not: being badly
+  // received is a failure of the quiz, not a taste (operator, 2026-11-15). Only a family from
+  // North Africa alone lifts it; a reader who keeps their origin to themselves stays protected.
+  const northOnly =
+    origins.length > 0 &&
+    origins.every((o) => o === "nord") &&
+    !(answers.countries ?? []).includes("Soudan");
+  const black = !northOnly;
   if (black) facts.push({ kind: "reception", weight: RECEPTION_WEIGHT });
   // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
   const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
