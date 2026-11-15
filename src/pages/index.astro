@@ -4,12 +4,13 @@ import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
+import { FILTER_MENU } from "../lib/filters";
 import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
 import borders from "../data/africa-borders.json";
 
 const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
 const description =
-  "Réponds à dix questions et découvre les villes d'Afrique qui te ressemblent, parmi 115 villes dans les 54 pays.";
+  "Répondez à dix questions et découvrez les villes d'Afrique qui vous ressemblent, parmi 115 villes dans les 54 pays.";
 ---
 
 <html lang="fr">
@@ -19,7 +20,7 @@ const description =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#161a5c" />
-    <title>Là-bas · Trouve ta ville</title>
+    <title>Là-bas · Quelle ville d'Afrique vous ressemble ?</title>
     <Analytics />
   </head>
   <body>
@@ -27,48 +28,49 @@ const description =
       <aside class="side">
         <Wordmark />
         <h1>
-          Trouve ta ville, <em>là-bas.</em>
+          Quelle ville d'Afrique <em>vous ressemble ?</em>
         </h1>
-        <p class="lead">Pour la diaspora qui regarde vers le continent.</p>
-        <div class="map">
-          <svg
-            id="map"
-            viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
-            role="img"
-            aria-label="Carte de l'Afrique : plus une ville te ressemble, plus son point est gros et coloré"
-          >
-            <g class="land" aria-hidden="true">
-              {borders.map((country) => (
-                <path d={country.d} />
+        <p class="lead">
+          Pour les diasporas qui regardent vers le continent. Vacances, allers-retours ou
+          installation : dites qui vous êtes, découvrez en quoi une ville vous ressemble.
+        </p>
+        <div class="maprow">
+          <div class="map">
+            <svg
+              id="map"
+              viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+              role="img"
+              aria-label="Carte de l'Afrique : plus une ville vous ressemble, plus son point est gros et coloré"
+            >
+              <g class="land" aria-hidden="true">
+                {borders.map((country) => (
+                  <path d={country.d} />
+                ))}
+              </g>
+              {dots.map((dot) => (
+                <circle
+                  class="dot"
+                  data-city={dot.name}
+                  cx={dot.x.toFixed(1)}
+                  cy={dot.y.toFixed(1)}
+                  r="3"
+                >
+                  <title>{dot.name}</title>
+                </circle>
               ))}
-            </g>
-            {dots.map((dot) => (
-              <circle
-                class="dot"
-                data-city={dot.name}
-                cx={dot.x.toFixed(1)}
-                cy={dot.y.toFixed(1)}
-                r="3"
-              >
-                <title>{dot.name}</title>
-              </circle>
-            ))}
-            <g id="highlights"></g>
-          </svg>
+              <g id="highlights"></g>
+            </svg>
+          </div>
+          <p class="map-legend" id="legend"></p>
         </div>
-        <p class="map-legend" id="legend"></p>
       </aside>
 
       <main class="main">
         <div class="progress">
-          <span id="counter" class="counter">
-            Question 1 sur {QUESTIONS.length}
-          </span>
-          <span class="track">
-            <span id="progress"></span>
-          </span>
+          <span id="stitches" class="stitches" aria-hidden="true"></span>
+          <p id="counter" class="counter"></p>
         </div>
-        <form id="form" class="questions" aria-label="Tes réponses">
+        <form id="form" class="questions" aria-label="Vos réponses">
           {QUESTIONS.map((question, index) => (
             <fieldset
               class="question"
@@ -76,33 +78,35 @@ const description =
               data-max={question.max ?? 1}
               hidden={index > 0}
             >
-              <legend>
-                {question.title}
-                {question.max && <span class="hint">Jusqu'à {question.max} choix</span>}
-              </legend>
-              <div class="chips">
+              <legend>{question.title}</legend>
+              <p class="why">{question.hint}</p>
+              <span class={question.max ? "mode multi" : "mode"}>
+                {question.max ? "Plusieurs réponses possibles" : "Une seule réponse"}
+              </span>
+              <div class={question.choices.length > 7 ? "chips compact" : "chips"}>
                 {question.choices.map((choice) => (
                   <button
                     type="button"
-                    class="chip"
+                    class={question.max ? "chip multi" : "chip"}
                     aria-pressed="false"
                     data-value={JSON.stringify(choice.value)}
+                    data-zone={choice.zone}
                   >
-                    {choice.label}
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="label">
+                      {choice.label}
+                      {choice.sub && <small>{choice.sub}</small>}
+                    </span>
                   </button>
                 ))}
               </div>
               <div class="steps">
-                <button type="button" class="back" data-step="back" disabled={index === 0}>
-                  ← Retour
+                <button type="button" class="back" data-step="back">
+                  Question précédente
                 </button>
-                {question.max ? (
-                  <button type="button" class="next" data-step="next">
-                    Valider
-                  </button>
-                ) : (
-                  <button type="button" class="skip" data-step="next">
-                    Passer
+                {question.max && (
+                  <button type="button" class="next" data-step="next" disabled>
+                    Continuer
                   </button>
                 )}
               </div>
@@ -110,34 +114,68 @@ const description =
           ))}
           <div id="ready" class="ready" hidden>
             <h2>C'est prêt.</h2>
-            <p>Trois villes te ressemblent plus que les autres. Découvre pourquoi.</p>
+            <p>Trois villes vous ressemblent plus que les autres. Découvrez pourquoi.</p>
             <button type="button" id="reveal" class="primary">
               Voir mes villes
             </button>
-            <a href="/approfondir" class="secondary">
-              Affiner avec le questionnaire complet
-            </a>
             <button type="button" class="back" data-step="back">
-              ← Changer une réponse
+              Question précédente
             </button>
           </div>
         </form>
 
         <div id="outcome" class="outcome" hidden>
+          <dialog id="filter-sheet" class="sheet" aria-labelledby="sheet-title">
+            <form method="dialog" class="sheet-body">
+              <h2 id="sheet-title"></h2>
+              <p class="sheet-hint" id="sheet-hint"></p>
+              <div class="sheet-options" id="sheet-options"></div>
+              <button type="submit" class="primary">
+                Voir mes villes
+              </button>
+            </form>
+          </dialog>
+
           <section class="results" aria-labelledby="results-title">
-            <h2 id="results-title">Tes trois villes</h2>
-            <p class="hint" id="results-hint">
-              Sans réponse, voici les villes qui plaisent au plus grand nombre.
+            <h2 id="results-title">Vos villes</h2>
+            <p class="hint">
+              Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.
             </p>
-            <p class="hint" id="results-sub" hidden>
-              Selon tes réponses, de la plus proche à la moins proche.
-            </p>
+            <div id="temperament" class="temperament" hidden>
+              <p class="eyebrow">Votre tempérament</p>
+              <p class="archetype" id="archetype"></p>
+              <p id="archetype-text"></p>
+              <ul class="traits" id="traits"></ul>
+              <p class="small">
+                Lecture rapide inspirée du Big Five, une question par trait. Ce n'est pas un test de
+                personnalité.
+              </p>
+            </div>
             <div id="cards" class="cards"></div>
           </section>
 
           <section class="others" aria-labelledby="others-title">
             <h2 id="others-title">Toutes les autres villes</h2>
-            <p class="hint">Les 115 villes, triées selon tes réponses.</p>
+            <p class="hint" id="others-hint">
+              Les 115 villes, triées selon vos réponses.
+            </p>
+            <div class="filters" aria-label="Filtrer vos villes">
+              <div class="filter-chips">
+                {FILTER_MENU.map((entry) => (
+                  <button
+                    type="button"
+                    class="filter-chip"
+                    data-filter={entry.key}
+                    aria-pressed="false"
+                  >
+                    {entry.label}
+                  </button>
+                ))}
+              </div>
+              <p class="hint" id="filter-note">
+                Les filtres retirent des villes ; l'ordre ne change jamais.
+              </p>
+            </div>
             <ol id="rows" class="rows"></ol>
             <button type="button" id="more" class="more">
               Voir plus de villes
@@ -147,8 +185,8 @@ const description =
           <section class="further">
             <h2>Envie d'aller plus loin ?</h2>
             <p>
-              Le questionnaire complet : tes contraintes (école, soins, visa), ce qui te pèse et ce
-              qui te plaît, pour un classement plus fin.
+              Le questionnaire complet : vos contraintes (école, soins, visa), ce qui vous pèse et
+              ce qui vous plaît, pour un classement plus fin.
             </p>
             <a href="/approfondir">Affiner avec le questionnaire complet</a>
           </section>
@@ -157,10 +195,10 @@ const description =
         <footer class="footer">
           <p>
             Les résultats sont des propositions, pas des verdicts. Chaque note de ville renvoie à
-            ses sources, sur la page de la ville. Les villes que les autorités déconseillent ne sont
-            jamais proposées.
+            ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est
+            donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.
           </p>
-          <p>Tes réponses restent dans ton navigateur : rien n'est enregistré ni envoyé.</p>
+          <p>Vos réponses restent dans votre navigateur : rien n'est enregistré ni envoyé.</p>
           <nav class="links" aria-label="Pages du site">
             <a href="/approfondir">Aller plus loin</a>
             <a href="/methode">Notre méthode</a>
@@ -179,21 +217,31 @@ const description =
             <h3 class="card-name"></h3>
             <p class="card-country"></p>
           </div>
-          <span class="fit"></span>
+          <span class="fit">
+            <b></b>
+            <small>proche de vous</small>
+          </span>
         </header>
-        <span class="bar">
-          <span></span>
-        </span>
-        <p class="card-tagline"></p>
+        <p class="split"></p>
         <figure class="photo" hidden>
           <img alt="" width="1280" height="853" loading="lazy" />
           <figcaption></figcaption>
         </figure>
         <p class="card-pitch"></p>
-        <div class="portrait-box" hidden>
-          <h4 class="portrait-title"></h4>
-          <ul class="portrait"></ul>
+        <div class="rated" data-block="why">
+          <h4>Pourquoi vous</h4>
+          <ul></ul>
         </div>
+        <div class="rated against" data-block="against">
+          <h4>Ce qui joue contre elle</h4>
+          <ul></ul>
+        </div>
+        <div class="rated" data-block="living">
+          <h4>Si vous y viviez</h4>
+          <ul></ul>
+        </div>
+        <ul class="facts"></ul>
+        <p class="same"></p>
         <details class="detail">
           <summary>
             <span class="when-closed">Voir le détail</span>
@@ -221,21 +269,6 @@ const description =
       </li>
     </template>
 
-    <template id="unsafe-template">
-      <li class="row unsafe">
-        <div class="row-head">
-          <span class="rank"></span>
-          <span class="row-name">
-            <b></b> <span class="row-country"></span>
-          </span>
-          <span class="row-note">
-            Déconseillée en ce moment par le ministère des Affaires étrangères. Elle garde sa place
-            dans la liste, mais on ne te la propose pas.
-          </span>
-        </div>
-      </li>
-    </template>
-
     <template id="detail-template">
       <div class="detail-body">
         <div class="field" data-field="portrait">
@@ -247,7 +280,7 @@ const description =
           <p class="quote"></p>
         </div>
         <div class="field" data-field="surprise">
-          <h4>Ce qui pourrait te surprendre</h4>
+          <h4>Ce qui pourrait vous surprendre</h4>
           <p></p>
         </div>
         <div class="field" data-field="neighbourhoods">
@@ -256,11 +289,15 @@ const description =
           <p class="small">Loyers affichés, souvent négociables.</p>
         </div>
         <div class="field" data-field="reasons">
-          <h4>Ses points forts pour toi</h4>
+          <h4>Ses points forts pour vous</h4>
           <ul class="reasons"></ul>
         </div>
         <div class="field watch" data-field="watch">
           <h4>À savoir</h4>
+          <p></p>
+        </div>
+        <div class="field watch" data-field="advisory">
+          <h4>L'avis des autorités</h4>
           <p></p>
         </div>
         <a class="field full" data-field="full">
@@ -270,9 +307,21 @@ const description =
     </template>
 
     <script>
-      import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
+      import { rankCities, type Answers, type Match, type Rated } from "../lib/ranking";
+      import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
+      import { archetypeOf } from "../lib/temperament";
+      import { costLabel, livingLines, regionName, sameCountry } from "../lib/card";
+      import { QUESTIONS } from "../lib/questions";
+      import {
+        applyFilters,
+        FILTER_MENU,
+        filtersFrom,
+        type FilterOption,
+        type Filters,
+      } from "../lib/filters";
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { linesFor } from "../lib/lines";
+      import { advisoryNote } from "../lib/advisory";
       import { photoFor } from "../lib/photos";
       import { answerEvent } from "../lib/analytics";
 
@@ -311,6 +360,13 @@ const description =
           chips.filter((c) => c.getAttribute("aria-pressed") === "true").length >= max
         )
           return;
+        // « Je préfère ne pas dire » excludes the other answers, and they exclude it.
+        if (max > 1 && !wasOn) {
+          const silent = chip.dataset.value === "null";
+          for (const other of chips)
+            if ((other.dataset.value === "null") !== silent)
+              other.setAttribute("aria-pressed", "false");
+        }
         // Tapping the pressed chip again clears the question.
         chip.setAttribute("aria-pressed", String(!wasOn));
       }
@@ -355,6 +411,7 @@ const description =
         );
       }
 
+      const CITIES_COUNT = 115;
       const percent = (score: number) => `${Math.round(score * 100)}\u202f%`;
       const VISIBLE_ROWS = 5;
       let showAll = false;
@@ -379,13 +436,13 @@ const description =
       }
 
       function fillPortrait(box: HTMLElement, m: Match) {
-        setText(box, ".portrait-title", `Pourquoi toi et ${m.city.name}`);
+        setText(box, ".portrait-title", `Pourquoi vous et ${m.city.name}`);
         (box.querySelector(".portrait") as HTMLElement).replaceChildren(
           ...m.portrait.map((line) => {
             const item = document.createElement("li");
             const said = document.createElement("span");
             said.className = "said";
-            said.textContent = `Tu as dit · ${line.said}`;
+            said.textContent = `Vous avez dit · ${line.said}`;
             item.append(said, document.createTextNode(line.text));
             return item;
           }),
@@ -416,9 +473,16 @@ const description =
             return item;
           }),
         );
-        show("reasons", m.reasons.length > 0);
-        fillList(body.querySelector(".reasons") as HTMLElement, m.reasons);
+        // Cards already rate the reasons; rows show them here.
+        show("reasons", withPortrait && m.reasons.length > 0);
+        fillList(
+          body.querySelector(".reasons") as HTMLElement,
+          m.reasons.map((r) => r.label),
+        );
         setText(body, '[data-field="watch"] p', m.city.watch);
+        const advice = advisoryNote(m.city);
+        show("advisory", Boolean(advice));
+        setText(body, '[data-field="advisory"] p', advice ?? "");
         (body.querySelector('[data-field="full"]') as HTMLAnchorElement).href =
           `/ville/${m.city.slug}`;
         return body;
@@ -429,15 +493,39 @@ const description =
           `${Math.round(score * 100)}%`;
       }
 
-      function cardFor(m: Match, index: number): HTMLElement {
+      function fillRated(block: HTMLElement, lines: Rated[]) {
+        block.hidden = lines.length === 0;
+        block.querySelector("ul")!.replaceChildren(
+          ...lines.map((line) => {
+            const item = document.createElement("li");
+            const label = document.createElement("span");
+            label.textContent = line.label;
+            const pips = document.createElement("span");
+            pips.className = "pips";
+            pips.setAttribute("aria-label", `${line.level} sur 5`);
+            for (let i = 1; i <= 5; i++) {
+              const pip = document.createElement("i");
+              if (i <= line.level) pip.className = "on";
+              pips.append(pip);
+            }
+            item.append(label, pips);
+            return item;
+          }),
+        );
+      }
+
+      // Every card has the same fields; only the first one shows its photo.
+      function cardFor(m: Match, index: number, ranked: Match[]): HTMLElement {
         const card = clone("card-template");
         if (index === 0) card.classList.add("first");
         setText(card, ".rank", String(index + 1));
         setText(card, ".card-name", m.city.name);
-        setText(card, ".card-country", `${m.city.country} · ${m.city.languageLabel}`);
-        setText(card, ".fit", percent(m.score));
-        setBar(card, m.score);
-        setText(card, ".card-tagline", m.city.tagline);
+        setText(card, ".card-country", `${m.city.country} · ${regionName(m.city.zone)}`);
+        setText(card, ".fit b", percent(m.score));
+        const split = card.querySelector(".split") as HTMLElement;
+        split.hidden = m.temperament === null;
+        if (m.temperament !== null)
+          split.innerHTML = `Tempérament <b>${percent(m.temperament)}</b> · Vie pratique <b>${percent(m.practical)}</b>`;
         setText(card, ".card-pitch", m.city.pitch);
         const photo = photoFor(m.city.name);
         if (index === 0 && photo) {
@@ -452,20 +540,31 @@ const description =
           );
           figure.hidden = false;
         }
-        // The city in first place shows its "pourquoi toi" without a tap.
-        const box = card.querySelector(".portrait-box") as HTMLElement;
-        box.hidden = index !== 0 || m.portrait.length === 0;
-        if (index === 0) fillPortrait(box, m);
-        card.querySelector(".detail")!.append(detailFor(m, index !== 0));
+        fillRated(card.querySelector('[data-block="why"]')!, m.reasons);
+        fillRated(card.querySelector('[data-block="against"]')!, m.drawbacks);
+        fillRated(card.querySelector('[data-block="living"]')!, livingLines(m.city));
+        const facts = [m.city.languageLabel, m.city.currency, costLabel(m.city.scores.cost.level)];
+        fillList(
+          card.querySelector(".facts") as HTMLElement,
+          facts.filter((f): f is string => Boolean(f)),
+        );
+        const others = sameCountry(ranked, m.city);
+        setText(
+          card,
+          ".same",
+          others.length
+            ? `Aussi dans le pays : ${others.map((o) => `${o.name} ${percent(o.score)}`).join(", ")}`
+            : "",
+        );
+        card.querySelector(".detail")!.append(detailFor(m, false));
         return card;
       }
 
       function rowFor(m: Match, position: number): HTMLElement {
-        const row = clone(m.city.unsafe ? "unsafe-template" : "row-template");
+        const row = clone("row-template");
         setText(row, ".rank", String(position));
         setText(row, ".row-name b", m.city.name);
         setText(row, ".row-country", `· ${m.city.country}`);
-        if (m.city.unsafe) return row;
         setText(row, ".fit", percent(m.score));
         setText(row, ".row-tagline", m.city.tagline);
         setBar(row, m.score);
@@ -475,14 +574,11 @@ const description =
 
       function render() {
         const current = readAnswers();
-        const answered = Object.values(current).some((value) => value !== undefined);
         const ranked = rankCities(current);
-        const matches = bestMatches(current, 3);
-        const scores = new Map(
-          ranked
-            .filter((m) => !m.city.unsafe)
-            .map((m) => [m.city.name, m.score] as [string, number]),
-        );
+        // Filters only remove cities; the order stays the score's.
+        const kept = applyFilters(ranked, filtersFrom(picked));
+        const matches = kept.filter((m) => !m.excludedBecause).slice(0, 3);
+        const scores = new Map(ranked.map((m) => [m.city.name, m.score] as [string, number]));
         // Before the first answer nothing is ranked yet: every dot stays the same and no city
         // is named, so the quiz does not look decided before it starts.
         // The map shows nothing before the first answer, colours every city by its score while the
@@ -491,16 +587,36 @@ const description =
         const missing = answersBeforeLight(count);
         renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
         (document.getElementById("legend") as HTMLElement).textContent = missing
-          ? `Encore ${missing} ${missing > 1 ? "réponses" : "réponse"} avant que la carte s'allume.`
-          : "Plus un point est chaud, plus la ville correspond à tes réponses. Les noms des trois premières apparaissent avec ton résultat.";
+          ? `${CITIES_COUNT} villes en lice. Chaque réponse fait grossir celles qui vous correspondent.`
+          : `En tête pour l'instant : ${matches.map((m) => m.city.name).join(", ")}`;
 
-        (document.getElementById("results-hint") as HTMLElement).hidden = answered;
-        (document.getElementById("results-sub") as HTMLElement).hidden = !answered;
-        (document.getElementById("cards") as HTMLElement).replaceChildren(...matches.map(cardFor));
+        const archetype = archetypeOf(current);
+        (document.getElementById("temperament") as HTMLElement).hidden = !archetype;
+        if (archetype) {
+          setText(document.body, "#archetype", archetype.name);
+          setText(document.body, "#archetype-text", archetype.text);
+          (document.getElementById("traits") as HTMLElement).replaceChildren(
+            ...archetype.traits.map((trait) => {
+              const item = document.createElement("li");
+              item.innerHTML = `<span>${trait.name}<small>${trait.range}</small></span><span class="meter"><i style="width:${Math.max(8, Math.round(trait.value * 100))}%"></i></span>`;
+              return item;
+            }),
+          );
+        }
+        (document.getElementById("cards") as HTMLElement).replaceChildren(
+          ...matches.map((m, i) => cardFor(m, i, ranked)),
+        );
 
         // Every other city, in score order; conflict zones keep their place, greyed.
         const shown = new Set(matches.map((m) => m.city.name));
-        const rest = ranked.filter((m) => !shown.has(m.city.name));
+        const rest = kept.filter((m) => !shown.has(m.city.name));
+        const removed = ranked.length - kept.length;
+        (document.getElementById("filter-note") as HTMLElement).textContent = removed
+          ? `${removed} ${removed > 1 ? "villes masquées" : "ville masquée"} par vos filtres. L'ordre ne change pas : seul votre score le décide.`
+          : "Les filtres retirent des villes ; l'ordre ne change jamais.";
+        (document.getElementById("others-hint") as HTMLElement).textContent = removed
+          ? `Les ${kept.length} villes qui passent vos filtres, triées selon vos réponses.`
+          : "Les 115 villes, triées selon vos réponses.";
         const visible = showAll ? rest : rest.slice(0, VISIBLE_ROWS);
         (document.getElementById("rows") as HTMLElement).replaceChildren(
           ...visible.map((m, i) => rowFor(m, i + 4)),
@@ -513,50 +629,98 @@ const description =
         render();
       });
 
-      // One question at a time: answering moves on, and every tap still re-ranks the map and
-      // the pinned top three (architecture.md §A.3, quiz mockup of 2026-11-15).
-      const steps = [...form.querySelectorAll<HTMLFieldSetElement>(".question")];
-      let step = 0;
+      // One question at a time, chosen by what would reshuffle the top three the most; the quiz
+      // settles after 8 to 12 answers (adaptive.ts, quiz mockup V2 of 2026-11-15).
+      const fieldsets = new Map(
+        [...form.querySelectorAll<HTMLFieldSetElement>(".question")].map((f) => [
+          f.dataset.question as string,
+          f,
+        ]),
+      );
+      const asked: string[] = [];
+      let current: string | undefined = "project";
       let revealed = false;
+      let timer: ReturnType<typeof setTimeout> | undefined;
 
-      function show(next: number) {
-        step = Math.max(0, Math.min(steps.length, next));
-        revealed = step >= steps.length;
+      function showQuestion(id: string | undefined) {
+        clearTimeout(timer);
+        current = id;
+        revealed = id === undefined;
         // On the phone the title gives way to the map once the reader has started.
-        document.body.classList.toggle("started", step > 0);
-        steps.forEach((fieldset, index) => (fieldset.hidden = index !== step));
-        (document.getElementById("ready") as HTMLElement).hidden = step < steps.length;
-        const done = Math.min(step, steps.length);
-        (document.getElementById("counter") as HTMLElement).textContent =
-          step < steps.length ? `Question ${step + 1} sur ${steps.length}` : "Terminé";
-        (document.getElementById("progress") as HTMLElement).style.width =
-          `${Math.round((done / steps.length) * 100)}%`;
-        steps[step]?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+        document.body.classList.toggle("started", asked.length > 0);
+        fieldsets.forEach((fieldset, key) => (fieldset.hidden = key !== id));
+        // « Et le pays ? » only offers the countries of the regions just picked.
+        const regions = [readAnswers().origin ?? []].flat();
+        for (const chip of fieldsets.get("countries")?.querySelectorAll<HTMLElement>(".chip") ??
+          []) {
+          chip.hidden = Boolean(chip.dataset.zone) && !regions.includes(chip.dataset.zone as never);
+          if (chip.hidden) chip.setAttribute("aria-pressed", "false");
+        }
+        (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
+        // « Votre tempérament · question 7 sur 18 »: the total only moves when a conditional
+        // question comes in or drops out.
+        const list = freeQuestions(readAnswers());
+        const position = id ? asked.length + 1 : list.length;
+        const question = QUESTIONS.find((q) => q.id === id);
+        (document.getElementById("counter") as HTMLElement).innerHTML = question
+          ? `<b>${question.group}</b> · question ${position} sur ${list.length}`
+          : "<b>C'est prêt</b>";
+        (document.getElementById("stitches") as HTMLElement).replaceChildren(
+          ...list.map((_, i) => {
+            const stitch = document.createElement("i");
+            if (i < asked.length) stitch.className = "done";
+            return stitch;
+          }),
+        );
+        const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
+        if (back) back.hidden = asked.length === 0;
+        if (id) syncContinue(fieldsets.get(id)!);
+        if (id)
+          fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
         render();
+      }
+
+      // « Continuer » stays off until something is picked.
+      function syncContinue(fieldset: HTMLFieldSetElement) {
+        const next = fieldset.querySelector<HTMLButtonElement>(".next");
+        if (next) next.disabled = !fieldset.querySelector('.chip[aria-pressed="true"]');
+      }
+
+      function advance() {
+        if (current) asked.push(current);
+        showQuestion(nextFreeQuestion(readAnswers(), asked));
+      }
+
+      function goBack() {
+        const last = asked.pop();
+        if (last) showQuestion(last);
       }
 
       form.addEventListener("click", (event) => {
         const target = event.target as HTMLElement;
         const move = target.closest<HTMLButtonElement>("[data-step]")?.dataset.step;
         if (move) {
-          show(move === "back" ? step - 1 : step + 1);
+          if (move === "back") goBack();
+          else advance();
           return;
         }
         const chip = target.closest<HTMLButtonElement>(".chip");
         if (!chip) return;
         pick(chip);
         render();
-        const fieldset = chip.closest<HTMLFieldSetElement>(".question");
-        if (chip.getAttribute("aria-pressed") === "true" && fieldset) {
+        const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
+        syncContinue(fieldset);
+        if (chip.getAttribute("aria-pressed") === "true") {
           const event = answerEvent(
             fieldset.dataset.question as string,
             JSON.parse(chip.dataset.value as string),
           );
           if (event) window.plausible?.(event.name, { props: event.props });
         }
-        // A single-choice answer moves on by itself; several choices wait for « Valider ».
-        if (Number(fieldset?.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
-          show(step + 1);
+        // A single answer lights up, then the next question comes half a second later.
+        if (Number(fieldset.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
+          clearTimeout(timer);
+          timer = setTimeout(advance, 500);
         }
       });
 
@@ -566,7 +730,62 @@ const description =
         outcome.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
-      show(0);
+      // Filters on the result: one sheet per filter, options toggled live.
+      const picked: Partial<Record<keyof Filters, FilterOption["value"][]>> = {};
+      const sheet = document.getElementById("filter-sheet") as HTMLDialogElement;
+
+      function syncFilterChips() {
+        for (const chip of document.querySelectorAll<HTMLButtonElement>(".filter-chip")) {
+          const key = chip.dataset.filter as keyof Filters;
+          chip.setAttribute("aria-pressed", String(Boolean(picked[key]?.length)));
+        }
+      }
+
+      function openSheet(key: keyof Filters) {
+        const entry = FILTER_MENU.find((f) => f.key === key)!;
+        (document.getElementById("sheet-title") as HTMLElement).textContent = entry.label;
+        (document.getElementById("sheet-hint") as HTMLElement).textContent = entry.hint;
+        (document.getElementById("sheet-options") as HTMLElement).replaceChildren(
+          ...entry.options.map((option) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "option";
+            button.textContent = option.label;
+            button.dataset.value = JSON.stringify(option.value);
+            const on = () => (picked[key] ?? []).includes(option.value);
+            button.setAttribute("aria-pressed", String(on()));
+            button.addEventListener("click", () => {
+              const values = picked[key] ?? [];
+              picked[key] = on()
+                ? values.filter((v) => v !== option.value)
+                : entry.single
+                  ? [option.value]
+                  : [...values, option.value];
+              for (const other of button.parentElement!.querySelectorAll<HTMLButtonElement>(
+                ".option",
+              ))
+                other.setAttribute(
+                  "aria-pressed",
+                  String((picked[key] ?? []).includes(JSON.parse(other.dataset.value!))),
+                );
+              syncFilterChips();
+              render();
+            });
+            return button;
+          }),
+        );
+        sheet.showModal();
+      }
+
+      for (const chip of document.querySelectorAll<HTMLButtonElement>(".filter-chip")) {
+        chip.addEventListener("click", () => openSheet(chip.dataset.filter as keyof Filters));
+      }
+      // A tap on the dimmed backdrop closes the sheet.
+      sheet.addEventListener("click", (event) => {
+        if (event.target === sheet) sheet.close();
+      });
+
+      showQuestion("project");
     </script>
 
     <style>
@@ -714,32 +933,92 @@ const description =
         font-size: 0.82rem;
         margin-top: 2px;
       }
+      .why {
+        margin: 0 0 10px;
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+      }
+      .mode {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 3px 11px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        background: var(--night-lift);
+        color: var(--thread-dim);
+      }
+      .mode.multi {
+        background: var(--saffron);
+        color: var(--ink);
+      }
+      /* One answer per line, a round box for one choice and a square one for several. */
       .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: grid;
+        gap: 9px;
+      }
+      .chips.compact {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
       }
       .chip {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        min-height: 48px;
+        text-align: left;
         background: var(--night-lift);
         border: 2px solid transparent;
-        border-radius: 999px;
-        padding: 9px 15px;
-        font-size: 0.92rem;
-        font-weight: 600;
+        border-radius: 14px;
+        padding: 11px 15px;
+        font-size: 1rem;
         cursor: pointer;
-        transition:
-          transform 0.15s,
-          background 0.15s,
-          border-color 0.15s;
+      }
+      .chip[hidden] {
+        display: none;
       }
       .chip:hover {
         border-color: rgba(255, 182, 39, 0.5);
       }
+      .chip .box {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 2px solid var(--thread-dim);
+      }
+      .chip.multi .box {
+        border-radius: 7px;
+      }
+      .chip .label {
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .chip small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.85rem;
+        color: var(--thread-dim);
+      }
       .chip[aria-pressed="true"] {
+        border-color: var(--saffron);
+        background: var(--night-pressed);
+      }
+      .chip[aria-pressed="true"] .box {
         background: var(--saffron);
         border-color: var(--saffron);
-        color: var(--ink);
-        transform: translateY(-1px);
+        box-shadow: inset 0 0 0 4px var(--night-pressed);
+      }
+      .chips.compact .chip {
+        grid-template-columns: 18px 1fr;
+        gap: 8px;
+        padding: 9px 10px;
+        font-size: 0.92rem;
+      }
+      .chips.compact .chip .box {
+        width: 18px;
+        height: 18px;
       }
       .results {
         display: grid;
@@ -776,7 +1055,7 @@ const description =
         display: grid;
         gap: 10px;
       }
-      /* The city in first place: framed in saffron, bigger, with its "pourquoi toi" open. */
+      /* The city in first place: framed in saffron, bigger, with its "pourquoi vous" open. */
       .results :global(.card.first) {
         border: 2px solid var(--saffron);
         gap: 14px;
@@ -840,6 +1119,9 @@ const description =
         height: 100%;
         background: var(--saffron);
         border-radius: 999px;
+      }
+      .results :global(.portrait-box[hidden]) {
+        display: none;
       }
       .results :global(.portrait-box) {
         background: var(--night-lift);
@@ -1009,18 +1291,6 @@ const description =
         border-radius: 14px;
         padding: 14px;
       }
-      .rows :global(.unsafe) {
-        color: var(--thread-faint);
-      }
-      .rows :global(.unsafe .row-head) {
-        background: var(--night-deep);
-        border-radius: 12px;
-        padding: 12px;
-      }
-      .rows :global(.row-note) {
-        font-size: 0.85rem;
-        line-height: 1.45;
-      }
       .more {
         justify-self: stretch;
         min-height: 48px;
@@ -1061,8 +1331,12 @@ const description =
         :global(body.started) .lead {
           display: none;
         }
-        :global(body.started) .map svg {
-          max-height: 34vh;
+        /* On the phone the map shrinks to a thumbnail beside « En tête pour l'instant ». */
+        .maprow {
+          display: grid;
+          grid-template-columns: 128px minmax(0, 1fr);
+          gap: 14px;
+          align-items: center;
         }
       }
       .map-legend {
@@ -1070,35 +1344,120 @@ const description =
         color: var(--thread-dim);
         font-size: 0.85rem;
       }
-      .progress {
+      .filters {
         display: grid;
         gap: 8px;
+        margin-bottom: 20px;
+      }
+      .filter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .filter-chip {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .filter-chip[aria-pressed="true"] {
+        background: var(--saffron);
+        border-color: var(--saffron);
+        color: var(--ink);
+      }
+      .sheet {
+        margin: auto auto 0;
+        width: 100%;
+        max-width: 560px;
+        max-height: 85vh;
+        border: 0;
+        border-radius: 22px 22px 0 0;
+        padding: 0;
+        background: var(--thread);
+        color: var(--ink);
+      }
+      .sheet::backdrop {
+        background: rgb(8 10 40 / 0.55);
+      }
+      .sheet-body {
+        display: grid;
+        gap: 12px;
+        padding: 20px 20px max(24px, env(safe-area-inset-bottom));
+      }
+      .sheet h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+      }
+      .sheet-hint {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .sheet-options {
+        display: grid;
+        gap: 8px;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+      /* Built by the script, so outside Astro's scoped styles. */
+      .sheet-options :global(.option) {
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: 14px;
+        border: 2px solid var(--thread-faint);
+        background: transparent;
+        color: var(--ink);
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+      }
+      .sheet-options :global(.option[aria-pressed="true"]) {
+        background: var(--night);
+        border-color: var(--night);
+        color: var(--thread);
+      }
+      .sheet .primary {
+        min-height: 52px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--night);
+        color: var(--thread);
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .progress {
+        display: grid;
+        gap: 10px;
+      }
+      .stitches {
+        display: flex;
+        gap: 3px;
+      }
+      .stitches :global(i) {
+        flex: 1;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--night-lift);
+      }
+      .stitches :global(i.done) {
+        background: var(--saffron);
       }
       .counter {
-        font-family: var(--font-mono);
-        font-size: 0.85rem;
+        margin: 0;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         color: var(--thread-dim);
       }
-      .track {
-        display: block;
-        height: 6px;
-        border-radius: 999px;
-        background: var(--night-lift);
-        overflow: hidden;
-      }
-      .track span {
-        display: block;
-        width: 0;
-        height: 100%;
-        background: var(--saffron);
-        transition: width 0.3s;
+      .counter :global(b) {
+        color: var(--saffron);
       }
       .question legend {
         font-size: clamp(1.6rem, 6vw, 2.2rem);
-      }
-      .question .chip {
-        min-height: 48px;
-        font-size: 1rem;
       }
       .steps {
         display: flex;
@@ -1107,7 +1466,6 @@ const description =
         margin-top: 16px;
       }
       .back,
-      .skip,
       .next,
       .primary,
       .secondary {
@@ -1121,14 +1479,17 @@ const description =
         background: transparent;
         color: var(--thread-dim);
         padding: 0 4px;
+        font-weight: 400;
+        text-decoration: underline;
+        text-underline-offset: 4px;
       }
-      .back:disabled {
+      .back[hidden] {
         visibility: hidden;
+        display: inline;
       }
-      .skip {
-        border: 2px solid var(--thread-dim);
-        background: transparent;
-        padding: 0 18px;
+      .next:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
       }
       .next,
       .primary {
@@ -1165,6 +1526,7 @@ const description =
         justify-content: center;
         min-height: 50px;
         border: 2px solid var(--thread);
+        background: transparent;
         color: var(--thread);
         text-decoration: none;
       }
@@ -1227,6 +1589,136 @@ const description =
         display: grid;
         gap: 6px;
         font-size: 0.82rem;
+      }
+      /* Result cards: same fields for each city, reasons rated 1 to 5. */
+      .results :global(.card .fit) {
+        text-align: right;
+      }
+      .results :global(.card .fit b) {
+        display: block;
+        font-size: 1.8rem;
+        line-height: 1;
+      }
+      .results :global(.card .fit small) {
+        display: block;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--thread-dim);
+      }
+      .results :global(.split),
+      .results :global(.same) {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--thread-dim);
+      }
+      .results :global(.split b) {
+        color: var(--thread);
+      }
+      .results :global(.rated h4) {
+        margin: 0 0 6px;
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--thread-dim);
+      }
+      .results :global(.rated ul) {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+      }
+      .results :global(.rated li) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .results :global(.rated[hidden]) {
+        display: none;
+      }
+      .results :global(.pips) {
+        display: inline-flex;
+        gap: 3px;
+        flex: none;
+      }
+      .results :global(.pips i) {
+        width: 11px;
+        height: 11px;
+        border-radius: 3px;
+        background: var(--night-lift);
+      }
+      .results :global(.pips i.on) {
+        background: var(--saffron);
+      }
+      .results :global(.against .pips i.on) {
+        background: var(--coral);
+      }
+      .results :global(.facts) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .results :global(.facts li) {
+        background: var(--night-lift);
+        border-radius: 999px;
+        padding: 4px 11px;
+        font-size: 0.82rem;
+      }
+      .temperament {
+        background: var(--night-deep);
+        border-radius: 20px;
+        padding: 18px;
+        display: grid;
+        gap: 10px;
+      }
+      .temperament[hidden] {
+        display: none;
+      }
+      .temperament p {
+        margin: 0;
+      }
+      .archetype {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 2rem;
+        line-height: 1;
+        color: var(--saffron);
+      }
+      .traits {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 8px;
+      }
+      .traits :global(li) {
+        display: grid;
+        grid-template-columns: minmax(0, 10em) 1fr;
+        gap: 10px;
+        align-items: center;
+        font-size: 0.92rem;
+      }
+      .traits :global(small) {
+        display: block;
+        color: var(--thread-dim);
+        font-size: 0.78rem;
+      }
+      .traits :global(.meter) {
+        height: 8px;
+        border-radius: 4px;
+        background: var(--night-lift);
+        overflow: hidden;
+      }
+      .traits :global(.meter i) {
+        display: block;
+        height: 100%;
+        background: var(--saffron);
       }
     </style>
   </body>

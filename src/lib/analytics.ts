@@ -14,10 +14,18 @@ export function plausibleScriptSrc(config: { domain?: string; host?: string }): 
   return `${host}/js/script.js`;
 }
 
-// Only the ten level-1 questions are measured. The fuller questionnaire holds filters about
-// health and about laws against homosexuality: those never leave the browser.
+// Only the free-quiz questions are measured. Origin, family country, feeling at home and faith
+// are sensitive data (GDPR art. 9) and never leave the browser, nor do the fuller
+// questionnaire's filters about health and about laws against homosexuality.
 const MEASURED = new Set<string>(QUESTIONS.map((question) => question.id));
-const NEVER_SENT = new Set(["excludeCriminalising", "specialistCare"]);
+const NEVER_SENT = new Set([
+  "origin",
+  "countries",
+  "kin",
+  "faith",
+  "excludeCriminalising",
+  "specialistCare",
+]);
 
 export interface AnswerEvent {
   name: "Réponse";

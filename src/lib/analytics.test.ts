@@ -33,6 +33,13 @@ describe("the one anonymous event sent per quiz answer", () => {
     expect(answerEvent("saturday", 0.5)?.props.answer).toBe("0.5");
   });
 
+  it("never sends origin, family country, feeling at home or faith (sensitive data, GDPR art. 9)", () => {
+    expect(answerEvent("origin", ["ouest"])).toBeNull();
+    expect(answerEvent("countries", ["Sénégal"])).toBeNull();
+    expect(answerEvent("kin", "much")).toBeNull();
+    expect(answerEvent("faith", "muslim")).toBeNull();
+  });
+
   it("never sends the opt-in filter on laws against homosexuality or a health need", () => {
     expect(answerEvent("excludeCriminalising", true)).toBeNull();
     expect(answerEvent("specialistCare", true)).toBeNull();

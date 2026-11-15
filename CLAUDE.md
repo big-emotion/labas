@@ -5,19 +5,28 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 
 ## Rules
 
-- **Reader-facing text is French**, plain and everyday; docs, comments and commits are English.
+- **Reader-facing text is French**, plain and everyday, addressed with « vous » (decided
+  2026-11-15; tests reject « tu »); docs, comments and commits are English.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
-  change something: while the reader answers, the map colours every city by its score but names
-  none; the top three are named only with the result (decided 2026-11-15).
+  change something: from the third answer the map colours every city by its score and names
+  the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
+  quiz asks every question (« question 7 sur 18 »), opening on the project; then each answer
+  picks the next question, the one most likely to change the top five (operator 2026-11-15).
+- **Reception first**: a reader of sub-Saharan or Caribbean family is never sent where anti-Black
+  racism is documented, whatever their taste for adventure (operator 2026-11-15).
 - **Test first** (Vitest, `src/**/*.test.ts`), through the public functions `rankCities` and
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
-  as measured, never claim a question "measures" a personality trait, and add a dated source
-  with any safety, racism, LGBT-rights or conflict remark. `unsafe` cities are never proposed.
+  as measured, present the temperament chapter only as « inspirée du Big Five, ce n'est pas un test de
+  personnalité » and its archetype as preferences in « tu », never as « tu es », and add a dated source
+  with any safety, racism, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
+  FCDO) is shown with each city as dated information and never removes or greys a city
+  (operator, 2026-11-15: it is written for visitors who have never been there).
 - **Privacy**: answers are computed and kept in the browser. The only thing sent is one
-  anonymous, cookieless Plausible event per level-1 answer (`src/lib/analytics.ts`, only when
-  `PUBLIC_PLAUSIBLE_DOMAIN` is set); health and LGBT filters are never sent. Fonts are
-  self-hosted; do not add Google Fonts, trackers with cookies, or third-party embeds.
+  anonymous, cookieless Plausible event per free-quiz answer (`src/lib/analytics.ts`, only when
+  `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
+  LGBT filters are never sent. Fonts are self-hosted; do not add Google Fonts, trackers with
+  cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 
 ## Commands

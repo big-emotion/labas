@@ -968,5 +968,155 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "source": "https://commons.wikimedia.org/wiki/File:Mutsamudu_port1.jpg",
     "alt": "La ville et le port de Mutsamudu, sur l'île d'Anjouan"
+  },
+  {
+    "name": "Bamako",
+    "file": "bamako.jpg",
+    "title": "File:Bamako ACI 2000 Aeriel.jpg",
+    "author": "Mark Fischer",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bamako_ACI_2000_Aeriel.jpg",
+    "alt": "Le quartier ACI 2000 de Bamako vu du ciel, avec ses immeubles et ses rues"
+  },
+  {
+    "name": "Ouagadougou",
+    "file": "ouagadougou.jpg",
+    "title": "File:Ouagadougou street in 2004 3.jpg",
+    "author": "Syced",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Ouagadougou_street_in_2004_3.jpg",
+    "alt": "Une rue de Ouagadougou bordée de boutiques, avec des motos et des voitures"
+  },
+  {
+    "name": "Niamey",
+    "file": "niamey.jpg",
+    "title": "File:Niamey River Front.jpg",
+    "author": "Noah Maxwell",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Niamey_River_Front.jpg",
+    "alt": "Une pirogue peinte au bord du fleuve Niger, avec le pont et la ville de Niamey au fond"
+  },
+  {
+    "name": "Bangui",
+    "file": "bangui.jpg",
+    "title": "File:Bangui City Centre.jpg",
+    "author": "Alllexxxis",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bangui_City_Centre.jpg",
+    "alt": "Le rond-point du centre de Bangui, avec la rivière Oubangui à l'horizon"
+  },
+  {
+    "name": "Mogadiscio",
+    "file": "mogadiscio.jpg",
+    "title": "File:Lido Beach 2023.jpg",
+    "author": "Dan Sloan",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lido_Beach_2023.jpg",
+    "alt": "La plage du Lido à Mogadiscio, avec des baigneurs et des abris de toile"
+  },
+  {
+    "name": "Juba",
+    "file": "juba.jpg",
+    "title": "File:Sudan Juba bridge.jpg",
+    "author": "DEMOSH",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sudan_Juba_bridge.jpg",
+    "alt": "Le pont métallique sur le Nil Blanc à Juba"
+  },
+  {
+    "name": "Tripoli",
+    "file": "tripoli.jpg",
+    "title": "File:Medina Tripoli Libya 2008.jpg",
+    "author": "Victor Korniyenko",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Medina_Tripoli_Libya_2008.jpg",
+    "alt": "Une ruelle couverte de la médina de Tripoli, bordée de boutiques"
+  },
+  {
+    "name": "Khartoum",
+    "file": "khartoum.jpg",
+    "title": "File:Khartoum sudan.jpg",
+    "author": "Abdalla muhammed noor",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Khartoum_sudan.jpg",
+    "alt": "Le Nil à Khartoum, avec des bateaux et le pont Al-Mak Nimir au loin"
+  },
+  {
+    "name": "Ségou",
+    "file": "segou.jpg",
+    "title": "File:A ferry for sailing across the river Niger is segou.jpg",
+    "author": "Lyfengine",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:A_ferry_for_sailing_across_the_river_Niger_is_segou.jpg",
+    "alt": "Un bac et des pirogues sur la rive du fleuve Niger à Ségou"
+  },
+  {
+    "name": "Bobo-Dioulasso",
+    "file": "bobo-dioulasso.jpg",
+    "title": "File:Bobo-Dioulasso (12568251584).jpg",
+    "author": "Maarten van der Bent",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bobo-Dioulasso_(12568251584).jpg",
+    "alt": "L'entrée du marché central de Bobo-Dioulasso, animée de passants et de motos"
+  },
+  {
+    "name": "Agadez",
+    "file": "agadez.jpg",
+    "title": "File:Niger, Agadez (28), grand mosque, old city.jpg",
+    "author": "Vincent van Zeijst",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Niger,_Agadez_(28),_grand_mosque,_old_city.jpg",
+    "alt": "Le minaret en terre de la grande mosquée au-dessus de la vieille ville d'Agadez"
+  },
+  {
+    "name": "Berbérati",
+    "file": "berberati.jpg",
+    "title": "File:Église Évangélique Baptiste de Berberati-centre.jpg",
+    "author": "Symphorien Bouassi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:%C3%89glise_%C3%89vang%C3%A9lique_Baptiste_de_Berberati-centre.jpg",
+    "alt": "Une église jaune entourée de palmiers dans le centre de Berbérati"
+  },
+  {
+    "name": "Wau",
+    "file": "wau.jpg",
+    "title": "File:St. Mary Cathedral Catholic Diocese of Wau (cropped).jpg",
+    "author": "James Bol Bol Duer",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:St._Mary_Cathedral_Catholic_Diocese_of_Wau_(cropped).jpg",
+    "alt": "La cathédrale Sainte-Marie de Wau, en brique, derrière les arbres"
+  },
+  {
+    "name": "Benghazi",
+    "file": "benghazi.jpg",
+    "title": "File:Benghazi. Omar Mukhtar Street.jpg",
+    "author": "Siculo73",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Benghazi._Omar_Mukhtar_Street.jpg",
+    "alt": "La rue Omar Mukhtar à Benghazi, bordée d'arcades blanches"
+  },
+  {
+    "name": "Port-Soudan",
+    "file": "port-soudan.jpg",
+    "title": "File:PortSudan center harbour.jpg",
+    "author": "Bertramz",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:PortSudan_center_harbour.jpg",
+    "alt": "Les toits du centre de Port-Soudan, avec les grues du port au fond"
   }
 ]
