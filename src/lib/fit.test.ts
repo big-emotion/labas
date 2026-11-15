@@ -357,6 +357,20 @@ describe("feeling at home among one's own", () => {
     expect(parts("Nouakchott")).toBeLessThan(parts("Dakar"));
   });
 
+  it("feels at home wherever one side of a mixed family comes from", () => {
+    const mixed = { ...westAfrican, origin: ["ouest", "nord"] } as Answers;
+    const { pulls, facts } = profileOf(mixed);
+    const kin = (name: string) =>
+      closenessOf(
+        CITIES.find((c) => c.name === name)!,
+        pulls,
+        facts,
+      ).find((p) => p.fact === "kin")!.value;
+    expect(kin("Dakar")).toBe(1);
+    expect(kin("Casablanca")).toBe(1);
+    expect(kin("Nairobi")).toBeLessThan(1);
+  });
+
   it("does not weigh origin when feeling at home does not matter to the reader", () => {
     const indifferent = { ...westAfrican, kin: "none" } as Answers;
     const withoutOrigin = { ...indifferent, origin: undefined } as Answers;

@@ -343,6 +343,13 @@ const description =
           chips.filter((c) => c.getAttribute("aria-pressed") === "true").length >= max
         )
           return;
+        // « Je préfère ne pas dire » excludes the other answers, and they exclude it.
+        if (max > 1 && !wasOn) {
+          const silent = chip.dataset.value === "null";
+          for (const other of chips)
+            if ((other.dataset.value === "null") !== silent)
+              other.setAttribute("aria-pressed", "false");
+        }
         // Tapping the pressed chip again clears the question.
         chip.setAttribute("aria-pressed", String(!wasOn));
       }

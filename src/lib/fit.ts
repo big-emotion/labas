@@ -36,18 +36,18 @@ export type FactPull =
   | { kind: "languages"; values: string[]; weight: number }
   | { kind: "settings"; values: string[]; weight: number }
   | { kind: "climates"; values: string[]; weight: number }
-  | { kind: "zone"; value: string; weight: number }
+  | { kind: "zone"; values: string[]; weight: number }
   | { kind: "sectors"; values: string[]; weight: number }
   | { kind: "professions"; values: string[]; weight: number }
   | { kind: "upscale"; values: string[]; weight: number }
   /** The city's region close to the family's. */
-  | { kind: "kin"; origin: string; weight: number }
+  | { kind: "kin"; origins: string[]; weight: number }
   /** The passports the reader holds: how easily each one gets into the city's country. */
   | { kind: "entry"; values: string[]; weight: number }
   /** The reader's faith: the share of the country that shares it. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
   /** The reverse, for readers after the unknown. */
-  | { kind: "elsewhere"; origin: string; weight: number };
+  | { kind: "elsewhere"; origins: string[]; weight: number };
 
 export interface Pull {
   axis: Axis;
@@ -296,7 +296,7 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       const wanted = fact.values.flatMap((v) => CLIMATE_CLASSES[v] ?? []);
       match = city.facts.climates.some((c) => wanted.includes(c));
     } else if (fact.kind === "zone") {
-      match = city.zone === fact.value;
+      match = fact.values.includes(city.zone);
     } else if (fact.kind === "sectors") {
       match = city.facts.sectors.some((s) => fact.values.includes(s));
     } else if (fact.kind === "professions") {
@@ -327,10 +327,16 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       });
       continue;
     } else if (fact.kind === "kin" || fact.kind === "elsewhere") {
-      // Documented anti-Black racism halves how at home a reader of sub-Saharan or Caribbean
-      // family can expect to feel, whatever the map says (UN, Amnesty, HRW: countries.json).
-      const exposed = city.countryFacts?.racism?.kind === "anti-black" && fact.origin !== "nord";
-      const affinity = (AFFINITY[fact.origin]?.[city.zone] ?? NEUTRAL) * (exposed ? 0.5 : 1);
+      // A mixed family is at home wherever one of its sides is. Documented anti-Black racism
+      // halves how at home a reader of sub-Saharan or Caribbean family can expect to feel,
+      // whatever the map says (UN, Amnesty, HRW: countries.json).
+      const antiBlack = city.countryFacts?.racism?.kind === "anti-black";
+      const affinity = Math.max(
+        ...fact.origins.map(
+          (origin) =>
+            (AFFINITY[origin]?.[city.zone] ?? NEUTRAL) * (antiBlack && origin !== "nord" ? 0.5 : 1),
+        ),
+      );
       parts.push({
         // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
         // much an adventure for a reader from Dakar as Tunis is.

@@ -143,6 +143,7 @@ export const QUESTIONS: Question[] = [
     id: "origin",
     group: ROOTS,
     title: "D'où vient ta famille ?",
+    max: 3,
     choices: [
       { label: "Afrique de l'Ouest", value: "ouest" },
       { label: "Afrique centrale", value: "centre" },

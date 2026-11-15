@@ -23,6 +23,8 @@ export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban" | 
  * Every answer is optional: an unanswered question drops out of the score. The free quiz and
  * the fuller questionnaire (/approfondir) fill the same profile.
  */
+type Origin = City["zone"] | "ameriques";
+
 export interface Answers {
   project?: "installer" | "pied" | "tester" | "investir" | "decouvrir";
   budget?: "serre" | "moyen" | "large";
@@ -42,8 +44,11 @@ export interface Answers {
   saturday?: Step;
   /** Non-negotiables; only the first three count. */
   priorities?: Priority[];
-  /** Where the family comes from: an African zone, or the Americas and the Caribbean. */
-  origin?: City["zone"] | "ameriques";
+  /**
+   * Where the family comes from: African zones, or the Americas and the Caribbean. Several for a
+   * mixed family; a single value is still accepted.
+   */
+  origin?: Origin | Origin[];
   /** Passports held: French or EU, or one giving free movement in an African zone. */
   passports?: ("eu" | "ecowas" | "cemac" | "eac" | "other")[];
   /** How much feeling at home among one's own matters: origin, culture, religion. */
@@ -445,19 +450,20 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     add([pull("culture", 0.8, 1.5), pull("pace", 0.7, 0.5), pull("nightlife", 0.65, 0.5)]);
   }
   if (answers.climate) facts.push({ kind: "climates", values: [answers.climate], weight: 2 });
-  // Roots bring the family's region closer; looking elsewhere never pushes it away.
-  if (answers.origin && answers.origin !== "ameriques" && answers.roots === "rediscover") {
-    facts.push({ kind: "zone", value: answers.origin, weight: 3 });
-  } else if (answers.origin && answers.origin !== "ameriques" && answers.roots === "both") {
-    facts.push({ kind: "zone", value: answers.origin, weight: 1.5 });
+  // Roots bring the family's regions closer.
+  const origins = originsOf(answers);
+  const africanOrigins = origins.filter((o) => o !== "ameriques");
+  if (africanOrigins.length && (answers.roots === "rediscover" || answers.roots === "both")) {
+    const weight = answers.roots === "rediscover" ? 3 : 1.5;
+    facts.push({ kind: "zone", values: africanOrigins, weight });
   }
 
   const passports = (answers.passports ?? []).filter((p) => p !== "other");
   if (passports.length) facts.push({ kind: "entry", values: passports, weight: 1.5 });
   // Feeling at home weighs with how little the reader wants the unknown (§ belonging).
-  if (answers.origin && answers.kin && answers.kin !== "none") {
+  if (origins.length && answers.kin && answers.kin !== "none") {
     const weight = KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
-    facts.push({ kind: "kin", origin: answers.origin, weight });
+    facts.push({ kind: "kin", origins, weight });
   }
   // Faith counts the same way; a reader without one is not sent towards secular countries.
   const faith = answers.faith;
@@ -471,8 +477,8 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   }
   // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
   const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
-  if (answers.origin && away > 0) {
-    facts.push({ kind: "elsewhere", origin: answers.origin, weight: away });
+  if (origins.length && away > 0) {
+    facts.push({ kind: "elsewhere", origins, weight: away });
   }
 
   const renounced = new Set<Axis>(
@@ -483,6 +489,11 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   // "Je fais avec": outages and paperwork stop counting, whatever other answers asked for.
   if (answers.friction === 1) for (const axis of COPED_WITH) renounced.add(axis);
   return { pulls: pulls.filter((p) => !renounced.has(p.axis)), facts };
+}
+
+function originsOf(answers: Answers): Origin[] {
+  const origin = answers.origin;
+  return (Array.isArray(origin) ? origin : origin ? [origin] : []).filter(Boolean);
 }
 
 function languagesOf(answers: Answers): string[] {
