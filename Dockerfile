@@ -8,8 +8,11 @@ COPY . .
 # Audience measurement is baked in at build time; left empty, the site loads no script.
 ARG PUBLIC_PLAUSIBLE_DOMAIN=""
 ARG PUBLIC_PLAUSIBLE_HOST=""
+# The newsletter's hosted Mailjet sign-up page; left empty, no newsletter line is shown.
+ARG PUBLIC_MAILJET_FORM_URL=""
 ENV PUBLIC_PLAUSIBLE_DOMAIN=$PUBLIC_PLAUSIBLE_DOMAIN \
-    PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST
+    PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST \
+    PUBLIC_MAILJET_FORM_URL=$PUBLIC_MAILJET_FORM_URL
 RUN npm run build
 
 FROM nginx:1.27-alpine

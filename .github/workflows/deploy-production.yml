@@ -45,6 +45,7 @@ jobs:
           docker build -t labas:deploy \
             --build-arg PUBLIC_PLAUSIBLE_DOMAIN="${{ vars.PLAUSIBLE_DOMAIN }}" \
             --build-arg PUBLIC_PLAUSIBLE_HOST="${{ vars.PLAUSIBLE_HOST }}" \
+            --build-arg PUBLIC_MAILJET_FORM_URL="${{ vars.MAILJET_FORM_URL }}" \
             .
 
       - name: Export image as compressed tarball

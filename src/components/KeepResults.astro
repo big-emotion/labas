@@ -1,0 +1,89 @@
+---
+// The hosted sign-up page of the newsletter (Mailjet). Without it, no newsletter line is shown:
+// readers give their address on Mailjet's page, never on Là-bas (operator, 2026-11-15).
+const newsletter = (import.meta.env.PUBLIC_MAILJET_FORM_URL as string | undefined)?.trim();
+---
+
+<div class="keep" data-keep>
+  <h3>Garder vos résultats</h3>
+  <div class="keep-actions">
+    <button type="button" data-keep-way="partage">
+      Partager
+    </button>
+    <button type="button" data-keep-way="impression">
+      Imprimer ou PDF
+    </button>
+    <a href="mailto:" data-keep-way="e-mail">
+      Recevoir par e-mail
+    </a>
+  </div>
+  <p class="keep-note" data-keep-note aria-live="polite"></p>
+  {newsletter && (
+    <p class="keep-letter">
+      <a href={newsletter} target="_blank" rel="noopener noreferrer" data-letter>
+        Recevoir les nouvelles de Là-bas
+      </a>
+      : de temps en temps, une lettre sur les villes et les départs. L'inscription se fait sur la
+      page de Mailjet, notre outil d'envoi.
+    </p>
+  )}
+</div>
+
+<style>
+  .keep {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 18px;
+    background: var(--night-deep);
+    border: 1px solid var(--night-lift);
+  }
+  h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+  .keep-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .keep-actions > * {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 2px solid var(--thread-dim);
+    background: transparent;
+    color: var(--thread);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .keep-actions > :first-child {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--ink);
+  }
+  .keep-note:empty {
+    display: none;
+  }
+  .keep-note,
+  .keep-letter {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--thread-dim);
+  }
+  .keep-letter a {
+    color: var(--saffron);
+    font-weight: 700;
+  }
+  @media print {
+    .keep {
+      display: none;
+    }
+  }
+</style>

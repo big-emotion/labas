@@ -58,3 +58,30 @@ button {
     transition: none !important;
   }
 }
+
+/* « Imprimer ou PDF »: only the result marked data-print, on white paper. The tokens are
+   repainted for paper here, so components keep using them. */
+@media print {
+  :root {
+    --night: #ffffff;
+    --night-deep: #ffffff;
+    --night-lift: #c9cbe0;
+    --night-pressed: #c9cbe0;
+    --thread: #14163f;
+    --thread-dim: #3c3f6b;
+    --thread-faint: #5a5d86;
+    --saffron: #8a5a00;
+    color-scheme: light;
+  }
+  body * {
+    visibility: hidden;
+  }
+  [data-print],
+  [data-print] * {
+    visibility: visible;
+  }
+  [data-print] {
+    position: absolute;
+    inset: 0 0 auto 0;
+  }
+}

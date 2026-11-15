@@ -4,16 +4,34 @@ import Page from "../layouts/Page.astro";
 
 <Page
   title="Confidentialité"
-  description="Vos réponses restent dans votre navigateur : Là-bas ne stocke rien et ne compte les réponses que de façon anonyme, sans cookie."
+  description="Vos réponses restent dans votre navigateur : Là-bas ne les reçoit jamais et ne compte les réponses que de façon anonyme, sans cookie."
 >
   <h1>Confidentialité</h1>
   <p class="lead">Dernière mise à jour : 15 novembre 2026.</p>
 
   <h2>Vos réponses restent chez vous</h2>
   <p>
-    Le classement des villes est calculé dans votre navigateur. Vos réponses ne sont ni
-    enregistrées, ni partagées, ni reliées à vous. Quand vous fermez la page, elles disparaissent.
-    Seul un compteur anonyme par réponse est envoyé, comme expliqué ci-dessous.
+    Le classement des villes est calculé dans votre navigateur. Vos réponses ne nous sont jamais
+    envoyées et ne sont reliées à personne. Votre navigateur les garde (stockage local) pour que le
+    questionnaire complet reprenne là où vous vous êtes arrêté ; le bouton « Tout reprendre à zéro »
+    du questionnaire complet les efface, comme l'effacement des données du site dans votre
+    navigateur. Seul un compteur anonyme par réponse est envoyé, comme expliqué ci-dessous.
+  </p>
+
+  <h2>Partager ou garder vos résultats</h2>
+  <p>
+    « Partager », « Imprimer » et « Recevoir par e-mail » passent par votre téléphone, votre
+    imprimante ou votre propre messagerie : Là-bas ne reçoit rien. Le texte partagé contient vos
+    villes et leurs pourcentages, jamais vos réponses.
+  </p>
+
+  <h2>La lettre d'information</h2>
+  <p>
+    Si vous voulez recevoir les nouvelles de Là-bas, l'inscription se fait sur la page de Mailjet,
+    notre outil d'envoi (Sinch Mailjet, données hébergées dans l'Union européenne). Nous recevons
+    votre adresse e-mail et rien d'autre : ni vos réponses, ni vos villes. Une confirmation vous est
+    demandée par e-mail avant tout envoi, et chaque lettre contient un lien pour vous désinscrire.
+    Vos réponses au quiz ne sont jamais reliées à votre adresse.
   </p>
 
   <h2>Pas de traceurs, une mesure d'audience sans cookie</h2>
@@ -22,12 +40,13 @@ import Page from "../layouts/Page.astro";
     polices et les photos sont hébergées sur le site lui-même.
   </p>
   <p>
-    Pour savoir quelles questions comptent pour nos lecteurs, nous comptons les visites et les
-    réponses au quiz avec Plausible, un outil libre hébergé sur notre propre serveur. Chaque réponse
-    envoie un compteur anonyme (« telle question, telle réponse »), sans cookie, sans identifiant et
-    sans lien entre vos réponses. Nous ne pouvons pas savoir qui a répondu quoi. Vos réponses sur
-    votre origine, le pays de votre famille, vos attaches, votre religion, la santé et les lois
-    contre l'homosexualité ne sont jamais envoyées.
+    Pour savoir quelles questions comptent pour nos lecteurs et où le quiz les perd, nous comptons
+    les visites, les réponses au quiz et quelques étapes (question atteinte, résultats affichés,
+    résultats partagés) avec Plausible, un outil libre hébergé sur notre propre serveur. Chaque
+    réponse envoie un compteur anonyme (« telle question, telle réponse »), sans cookie, sans
+    identifiant et sans lien entre vos réponses. Nous ne pouvons pas savoir qui a répondu quoi. Vos
+    réponses sur votre origine, le pays de votre famille, vos attaches, votre religion, la santé et
+    les lois contre l'homosexualité ne sont jamais envoyées.
   </p>
 
   <h2>Ce que l'hébergeur peut voir</h2>
