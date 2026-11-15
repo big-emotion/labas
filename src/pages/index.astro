@@ -54,10 +54,7 @@ const description =
             <g id="highlights"></g>
           </svg>
         </div>
-        <p class="map-legend" id="legend" hidden>
-          Plus un point est chaud, plus la ville correspond à tes réponses. Les noms des trois
-          premières apparaissent avec ton résultat.
-        </p>
+        <p class="map-legend" id="legend"></p>
       </aside>
 
       <main class="main">
@@ -272,7 +269,7 @@ const description =
 
     <script>
       import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
-      import { dotTier, placeLabels } from "../lib/map";
+      import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { linesFor } from "../lib/lines";
       import { photoFor } from "../lib/photos";
 
@@ -480,8 +477,12 @@ const description =
         // is named, so the quiz does not look decided before it starts.
         // The map shows nothing before the first answer, colours every city by its score while the
         // reader answers, and names the top three only with the result.
-        renderMap(revealed ? matches.map((m) => m.city.name) : [], answered ? scores : new Map());
-        (document.getElementById("legend") as HTMLElement).hidden = !answered;
+        const count = Object.values(current).filter((value) => value !== undefined).length;
+        const missing = answersBeforeLight(count);
+        renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
+        (document.getElementById("legend") as HTMLElement).textContent = missing
+          ? `Encore ${missing} ${missing > 1 ? "réponses" : "réponse"} avant que la carte s'allume.`
+          : "Plus un point est chaud, plus la ville correspond à tes réponses. Les noms des trois premières apparaissent avec ton résultat.";
 
         (document.getElementById("results-hint") as HTMLElement).hidden = answered;
         (document.getElementById("results-sub") as HTMLElement).hidden = !answered;
@@ -1051,9 +1052,6 @@ const description =
         margin: 0;
         color: var(--thread-dim);
         font-size: 0.85rem;
-      }
-      .map-legend[hidden] {
-        display: none;
       }
       .progress {
         display: grid;
