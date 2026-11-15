@@ -117,7 +117,9 @@ describe("the city a profile lands on", () => {
       if (best <= 0) unreachable.push(`${city.name} (${best.toFixed(3)})`);
     }
     expect(unreachable, unreachable.join(", ")).toEqual([]);
-  }, 120_000);
+    // About a minute on a laptop and twice that on CI since the temperament facts joined the
+    // matching: a search over answer combinations, not something a reader waits for.
+  }, 240_000);
 
   // Readers the site is made for, described the way they would answer (operator, 2026-11-15).
   // Random answers do not look like anyone, so concentration is judged on these instead.
