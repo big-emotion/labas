@@ -5,7 +5,8 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 
 ## Rules
 
-- **Reader-facing text is French**, plain and everyday; docs, comments and commits are English.
+- **Reader-facing text is French**, plain and everyday, addressed with « vous » (decided
+  2026-11-15; tests reject « tu »); docs, comments and commits are English.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
   change something: from the third answer the map colours every city by its score and names
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free

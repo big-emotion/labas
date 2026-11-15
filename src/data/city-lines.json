@@ -2,7 +2,7 @@
   {
     "name": "Lagos",
     "reputation": "On connaît Lagos pour son « Detty December » : un mois de concerts et de fêtes, et des hôtels presque complets dès le début du mois.",
-    "surprise": "À Lekki, une passerelle de 401 m te fait marcher au-dessus des arbres, en pleine ville. Et à Ikeja, la New Afrika Shrine accueille des concerts le jeudi et le dimanche.",
+    "surprise": "À Lekki, une passerelle de 401 m vous fait marcher au-dessus des arbres, en pleine ville. Et à Ikeja, la New Afrika Shrine accueille des concerts le jeudi et le dimanche.",
     "neighbourhoods": [
       {
         "name": "Yaba",
@@ -211,8 +211,8 @@
       }
     ],
     "why": {
-      "priorities:diaspora": "Tu veux retrouver d'autres repats : à Accra, la communauté du retour est l'une des plus visibles du continent.",
-      "saturday:1": "Tu aimes sortir : Osu et Labone vivent la nuit, et décembre y est une fête d'un mois."
+      "priorities:diaspora": "Vous voulez retrouver d'autres repats : à Accra, la communauté du retour est l'une des plus visibles du continent.",
+      "saturday:1": "Vous aimez sortir : Osu et Labone vivent la nuit, et décembre y est une fête d'un mois."
     },
     "sources": [
       {
@@ -421,7 +421,7 @@
   {
     "name": "Kinshasa",
     "reputation": "On connaît Kinshasa comme la capitale de la rumba congolaise : l'UNESCO l'a nommée « ville de musique » en 2015.",
-    "surprise": "Depuis 2009, le festival Connexion Kin fait de Limete une scène d'art. Et en face, de l'autre côté du fleuve Congo, tu vois une autre capitale : Brazzaville.",
+    "surprise": "Depuis 2009, le festival Connexion Kin fait de Limete une scène d'art. Et en face, de l'autre côté du fleuve Congo, vous voyez une autre capitale : Brazzaville.",
     "neighbourhoods": [
       {
         "name": "Gombe",
@@ -500,7 +500,7 @@
   {
     "name": "Douala",
     "reputation": "On dit de Douala que la nuit s'y passe à Akwa, le vieux quartier festif, à Bonapriso pour les sorties chic, et à Bonamoussadi pour les bars populaires.",
-    "surprise": "Il y tombe environ 3 600 mm de pluie par an, surtout de juin à octobre : garde un parapluie. Et l'art contemporain s'y visite gratuitement, à doual'art ou à l'espace Bolo, à Akwa.",
+    "surprise": "Il y tombe environ 3 600 mm de pluie par an, surtout de juin à octobre : gardez un parapluie. Et l'art contemporain s'y visite gratuitement, à doual'art ou à l'espace Bolo, à Akwa.",
     "neighbourhoods": [
       {
         "name": "Bonapriso",
@@ -660,7 +660,7 @@
   {
     "name": "Nairobi",
     "reputation": "On dit de Nairobi qu'on y sort parmi les plus volontiers d'Afrique de l'Est : à Westlands, bars, concerts et clubs s'enchaînent jusqu'au matin.",
-    "surprise": "Des girafes et des lions vivent dans un parc national aux portes de la ville. Et à 1 800 m d'altitude, tu n'auras pas besoin de clim, mais d'un pull en juillet.",
+    "surprise": "Des girafes et des lions vivent dans un parc national aux portes de la ville. Et à 1 800 m d'altitude, vous n'aurez pas besoin de clim, mais d'un pull en juillet.",
     "neighbourhoods": [
       {
         "name": "Westlands",
@@ -688,8 +688,8 @@
       }
     ],
     "why": {
-      "saturday:1": "Tu aimes danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
-      "job:remote": "Tu télétravailles : la fibre se trouve autour de 30 € par mois, dans la capitale tech de l'Afrique de l'Est."
+      "saturday:1": "Vous aimez danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
+      "job:remote": "Vous télétravaillez : la fibre se trouve autour de 30 € par mois, dans la capitale tech de l'Afrique de l'Est."
     },
     "sources": [
       {
@@ -792,8 +792,8 @@
       }
     ],
     "why": {
-      "climate:mild": "Tu cherches la douceur : ni canicule ni clim, l'altitude s'en charge.",
-      "job:crea": "Tu vis pour la culture : Addis a sa propre musique, l'éthio-jazz, et des clubs où l'écouter."
+      "climate:mild": "Vous cherchez la douceur : ni canicule ni clim, l'altitude s'en charge.",
+      "job:crea": "Vous vivez pour la culture : Addis a sa propre musique, l'éthio-jazz, et des clubs où l'écouter."
     },
     "sources": [
       {
@@ -945,8 +945,8 @@
       }
     ],
     "why": {
-      "size:3": "Tu veux une ville qui vibre : Kampala, ses collines et ses motos-taxis ne s'arrêtent presque jamais.",
-      "climate:mild": "Tu cherches la douceur : à 1 200 m, il fait 25 à 28 °C le jour et 16 °C la nuit, toute l'année."
+      "size:3": "Vous voulez une ville qui vibre : Kampala, ses collines et ses motos-taxis ne s'arrêtent presque jamais.",
+      "climate:mild": "Vous cherchez la douceur : à 1 200 m, il fait 25 à 28 °C le jour et 16 °C la nuit, toute l'année."
     },
     "sources": [
       {
@@ -1031,7 +1031,7 @@
       }
     ],
     "why": {
-      "climate:mild": "Tu cherches la douceur : entre 15 et 27 °C toute l'année, sur des collines vertes."
+      "climate:mild": "Vous cherchez la douceur : entre 15 et 27 °C toute l'année, sur des collines vertes."
     },
     "sources": [
       {
@@ -1177,7 +1177,7 @@
   {
     "name": "Le Cap",
     "reputation": "On dit du Cap qu'il vit dehors : randonnée, surf, et le braai, le barbecue du dimanche entre amis.",
-    "surprise": "L'hiver, de juin à septembre, il fait à peine 18 °C l'après-midi, avec pluie et coups de vent : prévois un pull. Et les vignes de Stellenbosch se font dans la journée.",
+    "surprise": "L'hiver, de juin à septembre, il fait à peine 18 °C l'après-midi, avec pluie et coups de vent : prévoyez un pull. Et les vignes de Stellenbosch se font dans la journée.",
     "neighbourhoods": [
       {
         "name": "Sea Point",
@@ -1270,7 +1270,7 @@
   {
     "name": "Durban",
     "reputation": "On connaît Durban pour le bunny chow, un curry servi dans un pain creusé, et pour sa longue plage du Golden Mile.",
-    "surprise": "Ici, l'hiver est doux, sec et sans gel, autour de 17 °C. Et à deux ou trois heures de route, tu marches dans les montagnes du Drakensberg.",
+    "surprise": "Ici, l'hiver est doux, sec et sans gel, autour de 17 °C. Et à deux ou trois heures de route, vous marchez dans les montagnes du Drakensberg.",
     "neighbourhoods": [
       {
         "name": "uMhlanga",
@@ -1747,7 +1747,7 @@
   {
     "name": "Tunis",
     "reputation": "On connaît Tunis pour sa médina et son musée du Bardo, avec la mer à quelques stations de train, à Carthage et La Marsa.",
-    "surprise": "Un petit train, le TGM, file du centre jusqu'à la plage de La Marsa. Prévois la chaleur en été : 34,5 °C en moyenne l'après-midi en août, et un record de 49 °C en juillet 2023.",
+    "surprise": "Un petit train, le TGM, file du centre jusqu'à la plage de La Marsa. Prévoyez la chaleur en été : 34,5 °C en moyenne l'après-midi en août, et un record de 49 °C en juillet 2023.",
     "neighbourhoods": [
       {
         "name": "La Marsa",
@@ -2449,7 +2449,7 @@
   {
     "name": "Malabo",
     "reputation": "On dit de Malabo qu'elle vit au rythme du pétrole : sur l'île de Bioko, c'est le centre du pétrole, du gaz et des affaires du pays.",
-    "surprise": "Ici, la vie de tous les jours se passe en espagnol. Depuis la ville, tu vois le Pico Basilé, 3 012 m. Au sud de l'île, sur les plages d'Ureka, les tortues pondent de novembre à février.",
+    "surprise": "Ici, la vie de tous les jours se passe en espagnol. Depuis la ville, vous voyez le Pico Basilé, 3 012 m. Au sud de l'île, sur les plages d'Ureka, les tortues pondent de novembre à février.",
     "neighbourhoods": [
       {
         "name": "Santa Isabel (vieille ville)",
@@ -2562,7 +2562,7 @@
   {
     "name": "N'Djamena",
     "reputation": "On connaît N'Djamena comme la capitale au bord du Chari : juste en face, de l'autre côté du fleuve, c'est déjà le Cameroun.",
-    "surprise": "Au Musée national, tu peux voir le crâne de Toumaï, un fossile trouvé au Tchad et daté de 6 à 7 millions d'années. En 2009, la ville était capitale de la culture islamique.",
+    "surprise": "Au Musée national, vous pouvez voir le crâne de Toumaï, un fossile trouvé au Tchad et daté de 6 à 7 millions d'années. En 2009, la ville était capitale de la culture islamique.",
     "neighbourhoods": [
       {
         "name": "Chagoua",
@@ -2759,7 +2759,7 @@
   {
     "name": "Antananarivo",
     "reputation": "On connaît Antananarivo pour sa scène artistique, la plus grande du pays : salles de concert, cinémas, centres culturels et écoles de danse.",
-    "surprise": "À 1 280 m d'altitude, juillet tourne autour de 15 °C : prends un pull. Et ici, le sport populaire, c'est le rugby, au stade de Mahamasina.",
+    "surprise": "À 1 280 m d'altitude, juillet tourne autour de 15 °C : prenez un pull. Et ici, le sport populaire, c'est le rugby, au stade de Mahamasina.",
     "neighbourhoods": [
       {
         "name": "Isoraka",
@@ -2835,7 +2835,7 @@
   {
     "name": "Lusaka",
     "reputation": "On connaît Lusaka pour ses sorties en musique : rien qu'en novembre 2026, un festival de jazz, des soirées amapiano et une remise de prix musicaux.",
-    "surprise": "À une trentaine de kilomètres, le parc national de Lusaka abrite rhinocéros et girafes. Et en juillet, la moyenne tombe à 15 °C : prévois un pull.",
+    "surprise": "À une trentaine de kilomètres, le parc national de Lusaka abrite rhinocéros et girafes. Et en juillet, la moyenne tombe à 15 °C : prévoyez un pull.",
     "neighbourhoods": [
       {
         "name": "Kabulonga et Roma",
@@ -2885,7 +2885,7 @@
   {
     "name": "Harare",
     "reputation": "On connaît Harare sous le surnom de « Sunshine City ». En octobre et novembre, les jacarandas y sont en fleurs.",
-    "surprise": "Dans le bois de Mukuvisi, 263 ha en pleine ville, vivent zèbres et girafes. Et à 1 483 m, les matins de juillet tombent vers 7 °C : prévois un pull.",
+    "surprise": "Dans le bois de Mukuvisi, 263 ha en pleine ville, vivent zèbres et girafes. Et à 1 483 m, les matins de juillet tombent vers 7 °C : prévoyez un pull.",
     "neighbourhoods": [
       {
         "name": "Borrowdale",
@@ -2992,7 +2992,7 @@
   {
     "name": "Windhoek",
     "reputation": "On connaît Windhoek comme une capitale à plusieurs langues : l'afrikaans et l'allemand s'y parlent au quotidien, l'anglais reste celui de l'État.",
-    "surprise": "Ici, plus de 300 jours de soleil par an et seulement 378 mm de pluie. Mais en juillet, la moyenne tombe à 13,7 °C, et il a déjà gelé : prévois un pull.",
+    "surprise": "Ici, plus de 300 jours de soleil par an et seulement 378 mm de pluie. Mais en juillet, la moyenne tombe à 13,7 °C, et il a déjà gelé : prévoyez un pull.",
     "neighbourhoods": [
       {
         "name": "Klein Windhoek",
@@ -3047,7 +3047,7 @@
   {
     "name": "Gaborone",
     "reputation": "On dit de Gaborone que c'est une capitale tranquille et étalée, où l'on vit en voiture, avec ses clubs de golf et de tennis.",
-    "surprise": "En juin et juillet, les nuits descendent vers 4 °C : il te faudra un chauffage. Et chaque année, fin mars ou début avril, le festival Maitisong anime la ville depuis 1987.",
+    "surprise": "En juin et juillet, les nuits descendent vers 4 °C : il vous faudra un chauffage. Et chaque année, fin mars ou début avril, le festival Maitisong anime la ville depuis 1987.",
     "neighbourhoods": [
       {
         "name": "Phakalane",
@@ -3111,7 +3111,7 @@
   {
     "name": "Mbabane",
     "reputation": "On connaît Mbabane comme une petite capitale de montagne, perchée à 1 243 m dans les hauts plateaux d'Eswatini.",
-    "surprise": "À 8 km, tu peux aller voir le rocher de Sibebe, et la vallée d'Ezulwini est à 15 km. En juillet, la moyenne tombe à 11 °C, avec quelques jours de gel par an.",
+    "surprise": "À 8 km, vous pouvez aller voir le rocher de Sibebe, et la vallée d'Ezulwini est à 15 km. En juillet, la moyenne tombe à 11 °C, avec quelques jours de gel par an.",
     "neighbourhoods": [
       {
         "name": "Msunduza",
@@ -3506,8 +3506,8 @@
       }
     ],
     "why": {
-      "landscape:beach": "Tu veux la mer le week-end : les plages de Monogaga et de Grand-Béréby sont à moins d'une heure.",
-      "size:1": "Tu préfères le calme : San-Pédro vit bien plus lentement qu'Abidjan."
+      "landscape:beach": "Vous voulez la mer le week-end : les plages de Monogaga et de Grand-Béréby sont à moins d'une heure.",
+      "size:1": "Vous préférez le calme : San-Pédro vit bien plus lentement qu'Abidjan."
     },
     "sources": [
       {
@@ -3636,7 +3636,7 @@
       }
     ],
     "why": {
-      "size:1": "Tu préfères le calme : Saint-Louis vit à un rythme lent, loin de l'agitation de Dakar."
+      "size:1": "Vous préférez le calme : Saint-Louis vit à un rythme lent, loin de l'agitation de Dakar."
     },
     "sources": [
       {
@@ -3821,7 +3821,7 @@
   {
     "name": "Kpalimé",
     "reputation": "On connaît Kpalimé comme une petite ville calme au cœur de la région du café, au pied des montagnes et des forêts.",
-    "surprise": "Le mont Agou, point culminant du Togo à 986 m, est tout près. Et à la cascade de Womé, pour 2 500 F CFA, tu peux te baigner.",
+    "surprise": "Le mont Agou, point culminant du Togo à 986 m, est tout près. Et à la cascade de Womé, pour 2 500 F CFA, vous pouvez vous baigner.",
     "neighbourhoods": [
       {
         "name": "Centre-ville",
@@ -3949,7 +3949,7 @@
   {
     "name": "Labé",
     "reputation": "On connaît Labé comme la capitale de la Moyenne-Guinée, au cœur du Fouta-Djalon, et la cité de Karamoko Alpha et de sa grande mosquée.",
-    "surprise": "À 1 026 m d'altitude, les nuits de janvier descendent vers 12 °C : prévois une petite laine. Les chutes de la Saala et le mont Kolima sont tout près.",
+    "surprise": "À 1 026 m d'altitude, les nuits de janvier descendent vers 12 °C : prévoyez une petite laine. Les chutes de la Saala et le mont Kolima sont tout près.",
     "neighbourhoods": [
       {
         "name": "Kouroula",
@@ -4110,8 +4110,8 @@
       }
     ],
     "why": {
-      "climate:dry": "Tu veux du soleil : Mindelo en a près de 3 000 heures par an, avec un vent qui rafraîchit.",
-      "job:crea": "Tu vis pour la culture : ici est née la morna de Cesária Évora, inscrite au patrimoine de l'UNESCO."
+      "climate:dry": "Vous voulez du soleil : Mindelo en a près de 3 000 heures par an, avec un vent qui rafraîchit.",
+      "job:crea": "Vous vivez pour la culture : ici est née la morna de Cesária Évora, inscrite au patrimoine de l'UNESCO."
     },
     "sources": [
       {
@@ -4204,7 +4204,7 @@
   {
     "name": "Lubumbashi",
     "reputation": "On connaît Lubumbashi comme la ville du TP Mazembe, cinq fois champion d'Afrique, et des soirées de rumba et de soukous joués en live.",
-    "surprise": "À 1 208 m d'altitude, les nuits de juin et juillet descendent vers 8 °C : prends une veste. Et tous les deux ans, la ville accueille sa Biennale d'art.",
+    "surprise": "À 1 208 m d'altitude, les nuits de juin et juillet descendent vers 8 °C : prenez une veste. Et tous les deux ans, la ville accueille sa Biennale d'art.",
     "neighbourhoods": [
       {
         "name": "Golf",
@@ -4342,7 +4342,7 @@
   {
     "name": "Kribi",
     "reputation": "On connaît Kribi pour ses plages et ses fruits de mer, comme les crevettes à la kribienne.",
-    "surprise": "À 7 km au sud, les chutes de la Lobé tombent directement dans l'océan Atlantique. Des pirogues t'emmènent jusqu'à leur pied.",
+    "surprise": "À 7 km au sud, les chutes de la Lobé tombent directement dans l'océan Atlantique. Des pirogues vous emmènent jusqu'à leur pied.",
     "neighbourhoods": [
       {
         "name": "Centre-ville et Ngoye",
@@ -4869,7 +4869,7 @@
   {
     "name": "Arusha",
     "reputation": "On connaît Arusha comme la ville de départ des safaris : le Ngorongoro et le Kilimandjaro sont à environ deux heures, le Serengeti plus loin.",
-    "surprise": "À 1 400 m d'altitude, les nuits de juin à septembre descendent vers 8 °C : prévois un pull. Et le parc national d'Arusha, avec le mont Meru et les lacs Momella, se fait dans la journée.",
+    "surprise": "À 1 400 m d'altitude, les nuits de juin à septembre descendent vers 8 °C : prévoyez un pull. Et le parc national d'Arusha, avec le mont Meru et les lacs Momella, se fait dans la journée.",
     "neighbourhoods": [
       {
         "name": "Centre-ville",
@@ -5264,7 +5264,7 @@
   {
     "name": "Alexandrie",
     "reputation": "On connaît Alexandrie pour sa corniche sur la Méditerranée et sa grande bibliothèque, la Bibliotheca Alexandrina. Elle a été capitale méditerranéenne de la culture en 2025.",
-    "surprise": "L'hiver, les nuits de janvier descendent vers 5 °C et des tempêtes amènent parfois de la grêle. Pense au manteau.",
+    "surprise": "L'hiver, les nuits de janvier descendent vers 5 °C et des tempêtes amènent parfois de la grêle. Pensez au manteau.",
     "neighbourhoods": [
       {
         "name": "Smouha",
@@ -5443,8 +5443,8 @@
       }
     ],
     "why": {
-      "priorities:flights": "Tu veux pouvoir rentrer souvent : de Tanger, l'Espagne est à une heure de ferry.",
-      "landscape:beach": "Tu veux la mer : à Tanger, tu as le choix entre deux, la Méditerranée et l'Atlantique."
+      "priorities:flights": "Vous voulez pouvoir rentrer souvent : de Tanger, l'Espagne est à une heure de ferry.",
+      "landscape:beach": "Vous voulez la mer : à Tanger, vous avez le choix entre deux, la Méditerranée et l'Atlantique."
     },
     "sources": [
       {
@@ -5764,7 +5764,7 @@
   {
     "name": "Livingstone",
     "reputation": "On connaît Livingstone comme la ville des chutes Victoria, la capitale touristique de la Zambie.",
-    "surprise": "Le parc national Mosi-oa-Tunya s'étend entre la ville et le fleuve : girafes, rhinocéros blancs, zèbres. Pour voir les chutes à plein débit, viens en mars ou en avril.",
+    "surprise": "Le parc national Mosi-oa-Tunya s'étend entre la ville et le fleuve : girafes, rhinocéros blancs, zèbres. Pour voir les chutes à plein débit, venez en mars ou en avril.",
     "neighbourhoods": [
       {
         "name": "Old Livingstone",
@@ -5819,7 +5819,7 @@
   {
     "name": "Bulawayo",
     "reputation": "On connaît Bulawayo pour les collines du Matobo, au sud de la ville, et pour son festival des arts Intwasa, chaque septembre.",
-    "surprise": "À 1 358 m d'altitude, il y fait en moyenne 19 °C, et mai-juin sont les mois les plus frais : prévois un pull. Les ruines de Khami, classées par l'UNESCO, sont tout près.",
+    "surprise": "À 1 358 m d'altitude, il y fait en moyenne 19 °C, et mai-juin sont les mois les plus frais : prévoyez un pull. Les ruines de Khami, classées par l'UNESCO, sont tout près.",
     "neighbourhoods": [
       {
         "name": "Hillside",
@@ -5954,8 +5954,8 @@
       }
     ],
     "why": {
-      "landscape:wildSpaces": "Tu rêves de grands espaces : ici, le désert du Namib commence où la ville s'arrête.",
-      "size:1": "Tu préfères le calme : Swakopmund est une petite ville où l'on fait presque tout à pied."
+      "landscape:wildSpaces": "Vous rêvez de grands espaces : ici, le désert du Namib commence où la ville s'arrête.",
+      "size:1": "Vous préférez le calme : Swakopmund est une petite ville où l'on fait presque tout à pied."
     },
     "sources": [
       {
@@ -6060,7 +6060,7 @@
   {
     "name": "Teyateyaneng",
     "reputation": "On connaît Teyateyaneng, qu'on appelle « TY », pour ses fabriques de tapis et de tapisseries.",
-    "surprise": "À 1 693 m d'altitude, les nuits de juillet descendent vers 0 °C : prévois une couette. Et tout près, des grottes gardent des peintures rupestres des Khoïsan.",
+    "surprise": "À 1 693 m d'altitude, les nuits de juillet descendent vers 0 °C : prévoyez une couette. Et tout près, des grottes gardent des peintures rupestres des Khoïsan.",
     "neighbourhoods": [],
     "sources": [
       {
@@ -6079,7 +6079,7 @@
   {
     "name": "Mutsamudu",
     "reputation": "On connaît Mutsamudu pour sa médina aux ruelles étroites, parfois couvertes, autour de dix-sept mosquées.",
-    "surprise": "Depuis juillet 2026, sa médina est inscrite au patrimoine mondial de l'UNESCO. Pour monter à la citadelle, bâtie à la fin du XVIIIe siècle, compte 280 marches.",
+    "surprise": "Depuis juillet 2026, sa médina est inscrite au patrimoine mondial de l'UNESCO. Pour monter à la citadelle, bâtie à la fin du XVIIIe siècle, comptez 280 marches.",
     "neighbourhoods": [
       {
         "name": "Médina",

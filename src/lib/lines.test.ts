@@ -3,7 +3,9 @@ import { CITIES } from "./cities";
 import { linesFor } from "./lines";
 
 // Wording the site never uses about the reader (docs/criteria/architecture.md §A.7).
-const TRAIT_WORDS = /personnalité|ton profil|tu es (quelqu|un |une |plutôt)|\bvous\b|\bvotre\b/i;
+// Since 2026-11-15 the site says « vous »: no « tu », and never a trait about the reader.
+const TRAIT_WORDS =
+  /personnalité|votre profil|vous êtes (quelqu|un |une |plutôt)|(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu;
 const proposable = CITIES;
 
 describe("the level-1 lines of each city", () => {
@@ -32,7 +34,7 @@ describe("the level-1 lines of each city", () => {
     }
   });
 
-  it("speaks to the reader with « tu » and never names a trait", () => {
+  it("speaks to the reader with « vous » and never names a trait", () => {
     for (const city of proposable) {
       const lines = linesFor(city.name);
       const texts = [

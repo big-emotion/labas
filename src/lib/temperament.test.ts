@@ -15,10 +15,10 @@ describe("the reader's temperament", () => {
     expect(archetypeOf({ saturday: 1, adventure: "seeking" })).toBeUndefined();
   });
 
-  it("names the closest of five archetypes, in « tu » and as preferences", () => {
+  it("names the closest of five archetypes, in « vous » and as preferences", () => {
     const social = archetypeOf(all(1, "open", 0.5, 1, 0.5))!;
     expect(social.name).toBe("Lien");
-    expect(social.text).toMatch(/^Tu aimes/);
+    expect(social.text).toMatch(/^Vous aimez/);
     expect(archetypeOf(all(0, "familiar", 1, 1, 0))!.name).toBe("Refuge");
     expect(archetypeOf(all(1, "open", 0, 0, 1))!.name).toBe("Conquête");
   });

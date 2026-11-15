@@ -12,11 +12,13 @@ const NEUTRAL = new Set([
 ]);
 
 describe("the question bank", () => {
-  it("speaks to the reader with « tu », never « vous »", () => {
+  it("speaks to the reader with « vous », never « tu »", () => {
     for (const question of QUESTIONS) {
       const texts = [question.title, ...question.choices.map((choice) => choice.label)];
       for (const text of texts)
-        expect(text, question.id).not.toMatch(/\bvous\b|\bvotre\b|\bvos\b/i);
+        expect(text, question.id).not.toMatch(
+          /(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu,
+        );
     }
   });
 
@@ -42,10 +44,10 @@ describe("the question bank", () => {
       "priorities",
     ]);
     expect([...new Set(QUESTIONS.map((q) => q.group))]).toEqual([
-      "Ton histoire avec l'Afrique",
-      "Ton tempérament",
-      "Ton projet de vie",
-      "Ton quotidien",
+      "Votre histoire avec l'Afrique",
+      "Votre tempérament",
+      "Votre projet de vie",
+      "Votre quotidien",
     ]);
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));

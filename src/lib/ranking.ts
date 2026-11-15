@@ -146,7 +146,7 @@ export interface Match {
   temperament: number | null;
   /** 0 to 1 on every other answer. */
   practical: number;
-  /** "Pourquoi toi" lines: what the reader said, met by what the city offers. */
+  /** "Pourquoi vous" lines: what the reader said, met by what the city offers. */
   portrait: PortraitLine[];
 }
 
@@ -567,41 +567,42 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     const spoken = livableLanguages(city).filter((l) => languagesOf(answers).includes(l));
     return good
       ? `On y vit en ${spoken.map((l) => LANGUAGE_NAMES[l]).join(" et ")}`
-      : "Langue du quotidien différente de ton souhait";
+      : "Langue du quotidien différente de votre souhait";
   }
   if (part.fact === "settings")
-    return good ? "Le paysage que tu cherches, tout près" : "Paysage différent de ton souhait";
+    return good ? "Le paysage que vous cherchez, tout près" : "Paysage différent de votre souhait";
   if (part.fact === "climates")
-    return good ? "Le climat que tu cherches" : "Climat différent de ton souhait";
-  if (part.fact === "zone") return good ? "Dans la région de ta famille" : undefined;
-  if (part.fact === "sectors") return good ? "Ton secteur y recrute" : "Ton secteur y recrute peu";
+    return good ? "Le climat que vous cherchez" : "Climat différent de votre souhait";
+  if (part.fact === "zone") return good ? "Dans la région de votre famille" : undefined;
+  if (part.fact === "sectors")
+    return good ? "Votre secteur y recrute" : "Votre secteur y recrute peu";
   if (part.fact === "professions")
-    return good ? "Ton métier y recrute" : "Ton métier y recrute peu";
+    return good ? "Votre métier y recrute" : "Votre métier y recrute peu";
   if (part.fact === "entry")
-    return good ? "Facile d'y entrer avec ton passeport" : "Un visa à demander à l'ambassade";
+    return good ? "Facile d'y entrer avec votre passeport" : "Un visa à demander à l'ambassade";
   if (part.fact === "faith")
-    return good ? "Ta foi y est largement partagée" : "Ta foi y est minoritaire";
-  if (part.fact === "homeCountry") return good ? "Le pays de ta famille" : undefined;
+    return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
+  if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
   if (part.fact === "kin")
-    return good ? "Près de chez les tiens" : "Loin de la région de ta famille";
+    return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
   if (part.fact === "elsewhere")
-    return good ? "Un ailleurs à découvrir, loin de ce que tu connais" : undefined;
-  if (part.fact === "upscale") return good ? "Des quartiers comme le tien" : undefined;
+    return good ? "Un ailleurs à découvrir, loin de ce que vous connaissez" : undefined;
+  if (part.fact === "upscale") return good ? "Des quartiers comme le vôtre" : undefined;
   switch (part.axis) {
     case "pace":
       return good
-        ? "Le rythme de ville que tu cherches"
-        : "Un rythme éloigné de ce que tu cherches";
+        ? "Le rythme de ville que vous cherchez"
+        : "Un rythme éloigné de ce que vous cherchez";
     case "nightlife":
-      return good ? "Une ambiance à ta mesure" : "Une ambiance décalée par rapport à toi";
+      return good ? "Une ambiance à votre mesure" : "Une ambiance décalée par rapport à vous";
     case "cheap":
-      return good ? "Une vie à ton budget" : "Plus cher que ton budget";
+      return good ? "Une vie à votre budget" : "Plus cher que votre budget";
     case "comfort":
       return good ? "Courant, eau et soins à la hauteur" : "Courant, eau et soins en retrait";
     case "bargaining":
       return good
-        ? "Des prix comme tu les aimes"
-        : "Des prix qui se négocient plus ou moins que tu ne le voudrais";
+        ? "Des prix comme vous les aimez"
+        : "Des prix qui se négocient plus ou moins que vous ne le voudriez";
     case "welcome":
       return good
         ? "Des habitants ouverts aux nouveaux venus (enquête Afrobaromètre)"
@@ -612,14 +613,14 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
         : "Une ville où l'on se déplace surtout en voiture";
     case "leisure":
       return good
-        ? "Ton quotidien à portée : sport, cafés, culture"
+        ? "Votre quotidien à portée : sport, cafés, culture"
         : "Moins de lieux du quotidien à portée";
     case "paperwork":
       return good ? "Démarches simples" : "Démarches plus lourdes";
     case "remote":
       return good
-        ? "Loin de l'agitation, comme tu le veux"
-        : "Plus fréquentée que tu ne le voudrais";
+        ? "Loin de l'agitation, comme vous le voulez"
+        : "Plus fréquentée que vous ne le voudriez";
     default: {
       const key = part.axis ? CRITERION_OF[part.axis] : undefined;
       if (!key) return undefined;

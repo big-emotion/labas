@@ -22,27 +22,27 @@ export interface Archetype {
 const ARCHETYPES: { name: string; text: string; at: number[] }[] = [
   {
     name: "Conquête",
-    text: "Tu aimes les villes qui vont vite, où tout se négocie et où l'on vient pour réussir.",
+    text: "Vous aimez les villes qui vont vite, où tout se négocie et où l'on vient pour réussir.",
     at: [1, 0.5, 0, 0, 1],
   },
   {
     name: "Lien",
-    text: "Tu aimes les villes chaleureuses, où l'on sort et où l'on se lie vite.",
+    text: "Vous aimez les villes chaleureuses, où l'on sort et où l'on se lie vite.",
     at: [1, 0.5, 0.5, 1, 0.5],
   },
   {
     name: "Fondation",
-    text: "Tu aimes les villes lisibles, où les choses fonctionnent comme prévu.",
+    text: "Vous aimez les villes lisibles, où les choses fonctionnent comme prévu.",
     at: [0.5, 0.5, 1, 0.5, 0.5],
   },
   {
     name: "Exploration",
-    text: "Tu aimes les villes qui te surprennent et t'apprennent quelque chose.",
+    text: "Vous aimez les villes qui vous surprennent et vous apprennent quelque chose.",
     at: [0.5, 1, 0, 0.5, 1],
   },
   {
     name: "Refuge",
-    text: "Tu aimes le calme, des repères solides et une vraie communauté autour de toi.",
+    text: "Vous aimez le calme, des repères solides et une vraie communauté autour de vous.",
     at: [0, 0, 1, 1, 0],
   },
 ];

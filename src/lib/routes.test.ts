@@ -3,9 +3,9 @@ import { CITIES } from "./cities";
 import { QUESTIONS } from "./questions";
 import { jobOf, routesFor, weekFor } from "./routes";
 
-// « rendez-vous » is a noun, not a « vous » addressed to the reader.
+// Since 2026-11-15 the site says « vous »: no « tu », and never a trait about the reader.
 const TRAIT_WORDS =
-  /personnalité|ton profil|tu es (quelqu|un |une |plutôt)|(?<![-\w])vous\b|\bvotre\b/i;
+  /personnalité|votre profil|vous êtes (quelqu|un |une |plutôt)|(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu;
 // Routes were written for the cities proposed before 2026-11-15; those travel advice used to
 // hide have none yet, and their page simply shows no route.
 const proposable = CITIES.filter((city) => routesFor(city.name));
@@ -61,7 +61,7 @@ describe("the typical weeks and discovery routes of each city", () => {
     }
   });
 
-  it("speaks to the reader with « tu » and never names a trait", () => {
+  it("speaks to the reader with « vous » and never names a trait", () => {
     for (const city of proposable) {
       const routes = routesFor(city.name);
       const texts = [
@@ -69,7 +69,9 @@ describe("the typical weeks and discovery routes of each city", () => {
         ...(routes?.discovery.day ?? []),
         ...(routes?.discovery.week ?? []),
       ];
-      for (const text of texts) expect(text, city.name).not.toMatch(TRAIT_WORDS);
+      // « Ta Mar » is a restaurant in Bissau, not a « ta » addressed to the reader.
+      for (const text of texts)
+        expect(text.replaceAll("Ta Mar", ""), city.name).not.toMatch(TRAIT_WORDS);
     }
   });
 
