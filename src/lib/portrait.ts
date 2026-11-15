@@ -17,7 +17,14 @@ interface Candidate {
 }
 
 const MAX_LINES = 3;
-const LANGUAGE_NAMES = { fr: "français", en: "anglais", pt: "portugais", ar: "arabe" } as const;
+const LANGUAGE_NAMES = {
+  fr: "français",
+  en: "anglais",
+  pt: "portugais",
+  ar: "arabe",
+  es: "espagnol",
+  sw: "swahili",
+} as const;
 
 // Each sentence pairs a stated preference with a fact the sourced scores support (4 or 5 out
 // of 5, or a direct match on a fact). The rule from §A.7: the reader's taste, never a trait.
@@ -94,10 +101,12 @@ function candidates(city: City, answers: Answers): Candidate[] {
     );
   }
 
-  if (answers.language && livableLanguages(city).includes(answers.language)) {
-    const lang = LANGUAGE_NAMES[answers.language];
+  const languages = answers.languages ?? (answers.language ? [answers.language] : []);
+  const spoken = languages.find((l) => livableLanguages(city).includes(l));
+  if (spoken) {
+    const lang = LANGUAGE_NAMES[spoken];
     // Language is a constraint, not a pleasure: it comes after the lines that make people want to go.
-    add(`language:${answers.language}`, 1, `Tu parles ${lang} : à ${name}, on vit en ${lang}.`);
+    add(`language:${spoken}`, 1, `Tu parles ${lang} : à ${name}, on vit en ${lang}.`);
   }
 
   if (answers.size && answers.size === city.size) {
@@ -124,8 +133,12 @@ function candidates(city: City, answers: Answers): Candidate[] {
     add(`climate:${answers.climate}`, 2, byClimate[answers.climate]);
   }
 
-  if (answers.landscape) {
+  const landscapes = answers.landscapes ?? (answers.landscape ? [answers.landscape] : []);
+  for (const landscape of landscapes) {
     const byLandscape = {
+      water: settings.includes("lake-or-river")
+        ? `Tu aimes l'eau : ${name} vit au bord d'un fleuve ou d'un lac.`
+        : null,
       beach: settings.includes("ocean")
         ? `Tu veux la mer : à ${name}, la plage est tout près.`
         : null,
@@ -137,7 +150,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
         : null,
       urban: high("culture") ? `La ville te suffit : ${name} a une vraie vie culturelle.` : null,
     };
-    add(`landscape:${answers.landscape}`, 3, byLandscape[answers.landscape]);
+    add(`landscape:${landscape}`, 3, byLandscape[landscape]);
   }
 
   if (answers.job) {
