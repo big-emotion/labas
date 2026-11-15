@@ -122,7 +122,8 @@ export interface LanguageUse {
 }
 
 export type Climate = "hot-humid" | "hot-dry" | "mild" | "highland";
-export type Setting = "ocean" | "lake-or-river" | "mountains" | "forest" | "savanna" | "desert";
+export type Setting =
+  "ocean" | "lake-or-river" | "mountains" | "forest" | "savanna" | "desert" | "island";
 
 /** Travel-advice colour for the city's area, as published (not interpreted). */
 export type AdvisoryLevel = "green" | "yellow" | "orange" | "red";

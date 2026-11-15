@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
+import Analytics from "../components/Analytics.astro";
 
 interface Props {
   title: string;
@@ -20,6 +21,7 @@ const { title, description, noindex = false } = Astro.props;
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#161a5c" />
     <title>{title} · Là-bas</title>
+    <Analytics />
   </head>
   <body>
     <div class="page">

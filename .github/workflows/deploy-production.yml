@@ -1,0 +1,92 @@
+name: Deploy production
+
+# Same shape as big-emotion.com on the same VPS: CI builds the image, ships it as a tarball and
+# restarts the container behind Traefik. The VPS never builds anything. Production ships on a
+# v* tag only; workflow_dispatch redeploys or rolls back to a known-good ref. See docs/deploy.md.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to build and deploy"
+        required: false
+        default: main
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://labas.africa
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: make check
+
+      - name: Build Docker image
+        run: |
+          docker build -t labas:deploy \
+            --build-arg PUBLIC_PLAUSIBLE_DOMAIN="${{ vars.PLAUSIBLE_DOMAIN }}" \
+            --build-arg PUBLIC_PLAUSIBLE_HOST="${{ vars.PLAUSIBLE_HOST }}" \
+            .
+
+      - name: Export image as compressed tarball
+        run: docker save labas:deploy | gzip > /tmp/labas.tar.gz
+
+      # Pinned known_hosts — never StrictHostKeyChecking=no.
+      - name: Configure deploy SSH key
+        run: |
+          mkdir -p ~/.ssh
+          umask 077
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "${{ vars.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/deploy_key ~/.ssh/known_hosts
+
+      # The compose ships from this checkout so image and compose always match the deployed ref.
+      - name: Ship image and compose to the VPS
+        run: |
+          scp -i ~/.ssh/deploy_key -P ${{ vars.DEPLOY_PORT }} \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            /tmp/labas.tar.gz deploy/docker-compose.yml \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/home/${{ vars.DEPLOY_USER }}/labas/"
+
+      - name: Load image and restart the container
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ vars.DEPLOY_PORT }} \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
+            "cd ~/labas && \
+             docker load < labas.tar.gz && \
+             docker tag labas:deploy labas:live && \
+             docker compose -f docker-compose.yml up -d --no-deps --pull never labas && \
+             rm -f labas.tar.gz"
+
+      # Retries for a minute: on a first deploy Traefik is still getting the Let's Encrypt
+      # certificate when the container starts, and curl fails with exit 60 meanwhile.
+      - name: Smoke check
+        run: |
+          for attempt in $(seq 1 12); do
+            status=$(curl -sS -o /dev/null -w '%{http_code}' https://labas.africa/ || true)
+            if [ "$status" = "200" ]; then exit 0; fi
+            echo "attempt $attempt: got '$status', retrying in 5 s"
+            sleep 5
+          done
+          echo "https://labas.africa/ did not answer 200 within a minute" >&2
+          exit 1

@@ -2,12 +2,11 @@
 import Page from "../layouts/Page.astro";
 import { CITIES, CRITERIA, CRITERION_KEYS } from "../lib/cities";
 
-const proposable = CITIES.filter((city) => !city.unsafe);
 const scores = CITIES.flatMap((city) => CRITERION_KEYS.map((key) => city.scores[key]));
 const unknown = scores.filter((score) => score.level === null).length;
 const estimates = scores.filter((s) => s.level !== null && s.confidence === "editorial").length;
 const percentOf = (n: number) => Math.round((100 * n) / scores.length);
-const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
+const advisedAgainst = CITIES.filter((city) => city.advisedAgainst).length;
 ---
 
 <Page
@@ -16,15 +15,15 @@ const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
 >
   <h1>Notre méthode</h1>
   <p class="lead">
-    Là-bas compare ce que tu nous dis aimer avec ce que l'on sait de {CITIES.length} villes, dans
-    les 54 pays du continent. Voici comment, et où sont nos limites.
+    Là-bas compare ce que vous nous dites aimer avec ce que l'on sait de {CITIES.length} villes,
+    dans les 54 pays du continent. Voici comment, et où sont nos limites.
   </p>
 
   <h2>Un jeu, pas un test</h2>
   <p>
-    Les questions comparent tes préférences avec la description des villes. Elles ne disent rien de
-    qui tu es, et le site ne mesure aucun trait de personnalité. Le pourcentage indique à quel point
-    une ville correspond à tes réponses, rien de plus.
+    Les questions comparent vos préférences avec la description des villes. Elles ne disent rien de
+    qui vous êtes, et le site ne mesure aucun trait de personnalité. Le pourcentage indique à quel
+    point une ville correspond à vos réponses, rien de plus.
   </p>
 
   <h2>Seize critères, une grille écrite</h2>
@@ -83,16 +82,18 @@ const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
     Aujourd'hui, {percentOf(unknown)} % des notes sont inconnues et {percentOf(estimates)} % sont
     des estimations. Une note inconnue compte comme une note moyenne (2,5) : elle ne fait ni gagner
     ni perdre une ville, et elle n'est jamais citée comme raison. Quand une ville repose sur trop
-    d'inconnues pour tes réponses, sa fiche le dit.
+    d'inconnues pour vos réponses, sa fiche le dit.
   </p>
 
-  <h2>Les villes que l'on ne propose pas</h2>
+  <h2>Les conseils aux voyageurs</h2>
   <p>
-    Quand le ministère des Affaires étrangères classe la zone d'une ville en orange ou en rouge, ou
-    que le Royaume-Uni déconseille de s'y rendre, la ville reste dans la liste, grisée, mais on ne
-    te la propose jamais. Cette règle s'applique seule, à partir de l'avis daté : aujourd'hui, cela
-    concerne {gated.length} villes ({gated.join(", ")}). {proposable.length} villes peuvent donc
-    t'être proposées.
+    Pour chaque ville, on donne l'avis du ministère des Affaires étrangères et celui du Royaume-Uni,
+    avec leur date. Cet avis ne retire aucune ville et ne change pas son score : il est écrit pour
+    des voyageurs qui ne connaissent pas la ville, alors que des gens y vivent, y travaillent et y
+    reviennent. Aujourd'hui, les autorités déconseillent {advisedAgainst} villes sur
+    {CITIES.length}. Pour celles-là, on vous dit de demander à des gens qui y vivent quelles
+    précautions prendre. La sécurité au quotidien reste un critère noté, avec ses sources, comme les
+    autres.
   </p>
 
   <h2>Ce que l'on ne note jamais</h2>
@@ -107,7 +108,7 @@ const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
   <ul>
     <li>
       Les grandes capitales mènent sur l'emploi, les avions, internet et les soins. Pour faire
-      ressortir une ville plus petite, dis-le : rythme calme, budget serré.
+      ressortir une ville plus petite, dites-le : rythme calme, budget serré.
     </li>
     <li>
       Beaucoup de chiffres valent pour une région ou pour tout le pays. La justification le précise
@@ -119,11 +120,12 @@ const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
       d'aujourd'hui, et leur tracé ne prend pas parti dans les différends.
     </li>
     <li>
-      Les avis aux voyageurs changent vite. Avant de partir, consulte toujours la page du ministère.
+      Les avis aux voyageurs changent vite. Avant de partir, consultez toujours la page du
+      ministère.
     </li>
   </ul>
   <p>
-    Une erreur, une source plus récente ? Écris-nous :
+    Une erreur, une source plus récente ? Écrivez-nous :
     <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
   </p>
 </Page>

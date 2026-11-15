@@ -66,7 +66,92 @@
         "url": "https://en.wikipedia.org/wiki/Crime_in_South_Africa",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le 24 septembre, jour du Patrimoine, beaucoup de familles et de voisins se retrouvent autour d'un braai, un barbecue partagé où chacun apporte quelque chose.",
+          "sources": [
+            {
+              "title": "South Africa celebrates its diversity with National Braai Day (NPR)",
+              "url": "https://www.publicradioeast.org/2021-09-24/south-africa-celebrates-its-diversity-with-national-braai-day",
+              "published": "2021-09-24",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "L'ubuntu, l'idée qu'une personne existe à travers les autres, se vit dans le repas partagé : une assiette de shisa nyama qui passe de main en main au coin d'une rue de township.",
+          "sources": [
+            {
+              "title": "Unpacking the essence of ubuntu and our shared South African identity (IOL)",
+              "url": "https://iol.co.za/heritage-day/2025-09-24-unpacking-the-essence-of-ubuntu-and-our-shared-south-african-identity/",
+              "published": "2025-09-24",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 51,
+        "toleranceForeigners": 58,
+        "toleranceOtherReligion": 86,
+        "toleranceOtherEthnicity": 85,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, South Africa",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/03/Summary-of-results-South-Africa-Afrobarometer-Round-9-7mar24.pdf",
+            "published": "2024-03-07",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 1.6,
+      "christian": 85.3,
+      "other": 10.0,
+      "none": 3.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "xenophobia",
+      "label": "Violences xénophobes contre les étrangers africains (ONU, 2022)",
+      "summary": "En juillet 2022, des experts de l'ONU ont averti que l'Afrique du Sud était « au bord d'une violence xénophobe explosive » contre les étrangers africains, et Human Rights Watch a documenté en 2023 des violences parfois mortelles contre des ressortissants étrangers, liées notamment au mouvement Operation Dudula.",
+      "sources": [
+        {
+          "title": "UN News, South Africa 'on the precipice of explosive xenophobic violence', UN experts warn (July 2022)",
+          "url": "https://news.un.org/en/story/2022/07/1122612",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Human Rights Watch, Xenophobia Rears its Ugly Head in South Africa (28 September 2023)",
+          "url": "https://www.hrw.org/news/2023/09/28/xenophobia-rears-its-ugly-head-south-africa",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Algérie",
@@ -148,7 +233,67 @@
         "published": "2026-09-15",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La touiza (twiza) est une entraide de voisinage : on se réunit sans être payé pour moissonner, bâtir une maison ou aider une famille, puis on partage un repas.",
+          "sources": [
+            {
+              "title": "Laghouat : la touiza, une tradition séculaire qui tombe peu à peu dans l'oubli (Algérie 360°)",
+              "url": "https://www.algerie360.com/laghouat-la-touiza-une-tradition-seculaire-qui-tombe-peu-a-peu-dans-loubli",
+              "published": "2018-07-09",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Gourine R., L'économie sociale et solidaire ou la modernité de la tradition (HAL)",
+              "url": "https://ideas.repec.org/p/hal/journl/halshs-00763524.html",
+              "published": "2009",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 98.4,
+      "christian": 0.3,
+      "other": 0,
+      "none": 1.3,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "anti-black",
+      "label": "Profilage racial de migrants subsahariens (Amnesty International, 2017)",
+      "summary": "Amnesty International a décrit en octobre 2017 un « profilage racial de masse » ayant mené à l'expulsion de plus de 2 000 migrants subsahariens vers le Niger et le Mali, et Human Rights Watch a documenté en octobre 2020 de nouvelles rafles de migrants, surtout subsahariens, abandonnés à la frontière du Niger.",
+      "sources": [
+        {
+          "title": "Amnesty International, Algeria: Mass racial profiling used to deport more than 2,000 sub-Saharan migrants (October 2017)",
+          "url": "https://www.amnesty.org/en/latest/news/2017/10/algeria-mass-racial-profiling-used-to-deport-more-than-2000-sub-saharan-migrants/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Human Rights Watch, Algeria: Migrants, Asylum Seekers Forced Out (9 October 2020)",
+          "url": "https://www.hrw.org/news/2020/10/09/algeria-migrants-asylum-seekers-forced-out",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Angola",
@@ -231,7 +376,98 @@
         "published": "2025",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "À Luanda, des couples de tous âges se retrouvent chaque mercredi sur l'Ilha pour danser la kizomba, une danse classée patrimoine national.",
+          "sources": [
+            {
+              "title": "Kizomba warms up Luanda's nights, uniting generations and nationalities (Ver Angola)",
+              "url": "https://www.verangola.net/va/en/052024/Culture/39941/Kizomba-warms-up-Luanda%27s-nights-uniting-generations-and-nationalities.htm",
+              "published": "2024-05-13",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le dimanche soir, la « Kizomba na Rua » réunit des habitants sur la Marginal de Luanda pour danser ensemble dans la rue.",
+          "sources": [
+            {
+              "title": "A weekend in Luanda, Angola: Africa's Manhattan waits to be discovered (Euronews)",
+              "url": "https://www.euronews.com/2021/05/27/a-weekend-in-luanda-angola-africa-s-manhattan-waits-to-be-discovered",
+              "published": "2021-05-27",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 47,
+        "toleranceForeigners": 75,
+        "toleranceOtherReligion": 86,
+        "toleranceOtherEthnicity": 84,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Angola, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6717/variable/V299",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Angola",
+            "url": "https://www.afrobarometer.org/publication/angola-ronda-9-sumario-de-resultados/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.3,
+      "christian": 93,
+      "other": 0.6,
+      "none": 6.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "xenophobia",
+      "label": "Expulsions massives et violentes de Congolais (ONU, 2018)",
+      "summary": "En octobre 2018, plus de 330 000 Congolais ont été expulsés ou ont fui la province de Lunda Norte ; la Haute-Commissaire de l'ONU aux droits de l'homme a signalé un usage excessif de la force et Human Rights Watch des meurtres et des pillages commis pendant ces expulsions.",
+      "sources": [
+        {
+          "title": "UN News, Over 330,000 Congolese migrants at risk after mass deportations from Angola – UN rights chief (26 October 2018)",
+          "url": "https://news.un.org/en/story/2018/10/1024212",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Human Rights Watch, Angola: Stop Mass Expulsions of Refugees (15 November 2018)",
+          "url": "https://www.hrw.org/news/2018/11/15/angola-stop-mass-expulsions-refugees",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Botswana",
@@ -313,7 +549,81 @@
         "url": "https://en.wikipedia.org/wiki/Botswana",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le kgotla est l'assemblée du village : chacun peut y prendre la parole devant le chef, et les décisions se prennent par consensus. Les ministres y rencontrent encore les habitants.",
+          "sources": [
+            {
+              "title": "Kgotla (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Kgotla",
+              "published": null,
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Botswana Daily News – kgotla as forum for community discourse",
+              "url": "https://dailynews.gov.bw/news-detail/53007",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le letsema rassemble les voisins pour labourer ou récolter ensemble les champs, une tradition encore entretenue par les Bakwena.",
+          "sources": [
+            {
+              "title": "Botswana: Bakwena Uphold Letsema Tradition (allAfrica / Daily News)",
+              "url": "https://allafrica.com/stories/202609180701.html",
+              "published": "2026-09-18",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 34,
+        "toleranceForeigners": 71,
+        "toleranceOtherReligion": 86,
+        "toleranceOtherEthnicity": 86,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Botswana",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2023/03/R9-BOT-Summary-of-Results-Afrobarometer-16mar23.pdf",
+            "published": "2023-03-16",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.3,
+      "christian": 82.3,
+      "other": 2.6,
+      "none": 14.7,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Burkina Faso",
@@ -395,7 +705,75 @@
         "url": "https://en.wikipedia.org/wiki/Burkina_Faso",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Les grins de thé sont des groupes d'amis, surtout des jeunes hommes, qui se retrouvent chaque jour dans le quartier pour préparer le thé et discuter.",
+          "sources": [
+            {
+              "title": "Lefebvre, « Une hétérotopie de la parole subalterne : les grins de thé à Ouagadougou », Annales de géographie n° 729-730",
+              "url": "https://www.revues.armand-colin.com/geographie/annales-geographie/annales-geographie-ndeg729-730-62019/heterotopie-parole-subalterne-grins-the-ouagadougou-burkina-faso",
+              "published": "2019",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le rakiré, la parenté à plaisanterie, autorise des moqueries entre groupes alliés : cette blague codée sert à désamorcer les conflits et à rapprocher les inconnus.",
+          "sources": [
+            {
+              "title": "ECOFEST : le cousinage à plaisanterie, gage de cohésion sociale (Wakat Séra)",
+              "url": "https://www.wakatsera.com/ecofest-le-cousinage-a-plaisanterie-gage-de-cohesion-sociale/",
+              "published": "2025-12-07",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 79,
+        "toleranceForeigners": 92,
+        "toleranceOtherReligion": 94,
+        "toleranceOtherEthnicity": 96,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Burkina Faso",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/03/Resume-des-resultats-Burkina-Faso-Afrobarometer-R9-4mars24.pdf",
+            "published": "2024-03-04",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 67.4,
+      "christian": 28,
+      "other": 4,
+      "none": 0.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Burundi",
@@ -464,7 +842,70 @@
         "url": "https://www.gov.uk/foreign-travel-advice/burundi/safety-and-security",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Les bashingantahe sont des notables choisis sur chaque colline pour régler les différends par la parole et réconcilier les familles, une institution d'avant la colonisation.",
+          "sources": [
+            {
+              "title": "Université d'Anvers, Centre des Grands Lacs – Les Bashingantahe",
+              "url": "https://www.uantwerpen.be/en/projects/centre-des-grands-lacs-afrique/droit-pouvoir-paix-burundi/pouvoir-judiciaire/les-bashingantahe/",
+              "published": null,
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Post-conflict Burundi and the role of Ubushingantahe council (AFJN)",
+              "url": "https://afjn.org/post-conflict-burundi-and-the-role-of-ubushingantahe-council/",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": null,
+        "toleranceForeigners": 90,
+        "toleranceOtherReligion": 97,
+        "toleranceOtherEthnicity": 98,
+        "round": "R6 2014",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 74 – Good neighbours: Africans express high levels of tolerance for many, but not for all",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/migrated/files/publications/Dispatches/ab_r6_dispatchno74_tolerance_in_africa_eng1.pdf",
+            "published": "2016-03-01",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 3,
+      "christian": 95,
+      "other": 0.8,
+      "none": 1.3,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Bénin",
@@ -560,7 +1001,70 @@
         "published": "2025-11-21",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le 10 janvier, la fête des religions endogènes (Vodun) réunit adeptes, voisins et visiteurs ; à Ouidah, les Vodun Days ouvrent danses et défilés de masques au public.",
+          "sources": [
+            {
+              "title": "Benin showcases culture with voodoo festival (Dawn / AFP)",
+              "url": "https://www.dawn.com/news/1966310",
+              "published": "2026-01",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Le Bénin célèbre la fête du Vodoun (Afrik.com)",
+              "url": "https://www.afrik.com/le-benin-celebre-la-fete-du-vodoun",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 71,
+        "toleranceForeigners": 92,
+        "toleranceOtherReligion": 96,
+        "toleranceOtherEthnicity": 97,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Bénin",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2022/07/BEN_R9_Resume-des-resultats_Afrobarometer-10avril2022_Revu-09Jan23.pdf",
+            "published": "2023-01-09",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 31.4,
+      "christian": 53.2,
+      "other": 10.5,
+      "none": 4.9,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Cameroun",
@@ -633,7 +1137,76 @@
         "published": "2026-11-05",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Les « réunions » et tontines (njangi, ndjangui) rassemblent chaque mois amis, collègues ou ressortissants d'un même village : on épargne ensemble et on s'aide en cas de deuil.",
+          "sources": [
+            {
+              "title": "Cameroun : ndjangui, tontine, ndjanga… l'épargne solidaire des petites bourses se porte bien (Le360 Afrique)",
+              "url": "https://afrique.le360.ma/societe/cameroun-ndjangui-tontine-ndjanga-lepargne-solidaire-des-petites-bourses-se-porte-bien_T3XTF4UDDJHGBAV23TNDFX24LE/",
+              "published": "2024-03-16",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Cameroun : les Djousa'a, réunions et tontines féminines, entre solidarité et défis (allAfrica)",
+              "url": "https://fr.allafrica.com/stories/202503170258.html",
+              "published": "2025-03-17",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 54,
+        "toleranceForeigners": 89,
+        "toleranceOtherReligion": 94,
+        "toleranceOtherEthnicity": 96,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Cameroun, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6722/variable/V301",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Cameroun",
+            "url": "https://www.afrobarometer.org/publication/cameroun-round-9-resume-des-resultats/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 25.2,
+      "christian": 69.8,
+      "other": 2.9,
+      "none": 2.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Cap-Vert",
@@ -714,7 +1287,70 @@
         "url": "https://en.wikipedia.org/wiki/Cape_Verde",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La morabeza désigne la manière cap-verdienne de recevoir : prendre le temps, ouvrir la porte et faire une place à l'invité, avec des nuances d'une île à l'autre.",
+          "sources": [
+            {
+              "title": "Cape Verde: the spirit of morabeza (KCRW)",
+              "url": "https://www.kcrw.com/music/articles/cape-verde-the-spirit-of-morabeza",
+              "published": null,
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Le Cap-Vert au rythme créole : morabeza, cachupa et musique d'île (Generation Voyage)",
+              "url": "https://generationvoyage.fr/cap-vert-local/",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 63,
+        "toleranceForeigners": 98,
+        "toleranceOtherReligion": 96,
+        "toleranceOtherEthnicity": 96,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Cabo Verde",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2023/09/R9.SOR_.Cabo-Verde_ma-bh-26sept23.pdf",
+            "published": "2023-09-26",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.3,
+      "christian": 78.3,
+      "other": 0.8,
+      "none": 20.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Centrafrique",
@@ -779,7 +1415,44 @@
         "url": "https://en.wikipedia.org/wiki/Central_African_Republic",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "À Bangui, les familles venues des régions s'installent souvent par affinité dans un même quartier, le kodro, qui recrée en ville l'entraide du village.",
+          "sources": [
+            {
+              "title": "Bangui (Encyclopædia Universalis)",
+              "url": "https://www.universalis.fr/encyclopedie/bangui/",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 6.2,
+      "christian": 90.7,
+      "other": 2.6,
+      "none": 0.5,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Comores",
@@ -856,7 +1529,50 @@
         "url": "https://fr.wikipedia.org/wiki/Comores_(pays)",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le grand mariage (anda) mobilise tout un village ou un quartier pendant des jours : danses dans les rues, repas offerts à la communauté, surtout en juillet et août.",
+          "sources": [
+            {
+              "title": "Comores : le grand-mariage, rite d'une vie qui rythme juillet et août (Le Soleil)",
+              "url": "https://lesoleil.sn/actualites/societe-fait-divers/comores-le-grand-mariage-rite-dune-vie-qui-rythme-juillet-et-aout/",
+              "published": "2025-08-06",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Grand mariage (Encyclopædia Britannica)",
+              "url": "https://www.britannica.com/topic/grand-mariage",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 98.3,
+      "christian": 0.5,
+      "other": 1.1,
+      "none": 0.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Congo",
@@ -933,7 +1649,70 @@
         "published": "2026-10-30",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le mbongui est l'espace de parole au cœur du village kongo, où l'on se réunit pour discuter, raconter et régler les différends ; un festival de conte porte son nom.",
+          "sources": [
+            {
+              "title": "Et pourtant la culture du « Mbongui » sans calculs a ses atouts ! (Les Dépêches de Brazzaville)",
+              "url": "https://adiac-congo.com/content/et-pourtant-la-culture-du-mbongui-sans-calculs-ses-atouts-25180",
+              "published": "2014",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Congo-Brazzaville : la 26e édition du festival international du conte lancée à Pointe-Noire (allAfrica)",
+              "url": "https://fr.allafrica.com/stories/202606080724.html",
+              "published": "2026-06-08",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 74,
+        "toleranceForeigners": 88,
+        "toleranceOtherReligion": 93,
+        "toleranceOtherEthnicity": 94,
+        "round": "R9 2023",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Congo-Brazzaville",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/02/Resume-des-resultats-R9-Congo-Brazzaville_Afrobarometer-15feb24.pdf",
+            "published": "2024-02-15",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 1.5,
+      "christian": 92.2,
+      "other": 1.1,
+      "none": 5.2,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Côte d'Ivoire",
@@ -1029,7 +1808,75 @@
         "published": "2025-11",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le maquis, petit restaurant en plein air où l'on mange grillades et attiéké, est un lieu de rencontre ouvert à tous dans les quartiers d'Abidjan.",
+          "sources": [
+            {
+              "title": "In the maquis eateries of Abidjan, change is coming… but not to the menu (Malay Mail / AFP)",
+              "url": "https://www.malaymail.com/news/eat/drink/2022/03/29/in-the-maquis-eateries-of-abidjan-change-is-coming...-but-not-to-the-menu/2050205",
+              "published": "2022-03-29",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le toukpê, la parenté à plaisanterie, permet à des groupes alliés de se taquiner librement : la blague sert à désamorcer les tensions entre voisins.",
+          "sources": [
+            {
+              "title": "ECOFEST : le cousinage à plaisanterie, gage de cohésion sociale (Wakat Séra)",
+              "url": "https://www.wakatsera.com/ecofest-le-cousinage-a-plaisanterie-gage-de-cohesion-sociale/",
+              "published": "2025-12-07",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 66,
+        "toleranceForeigners": 88,
+        "toleranceOtherReligion": 94,
+        "toleranceOtherEthnicity": 95,
+        "round": "R9 2021",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Côte d'Ivoire",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2022/07/CDI_R9_Resume-des-resultats-Afrobarometer-9jan23.pdf",
+            "published": "2023-01-09",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 46.3,
+      "christian": 44.9,
+      "other": 3.2,
+      "none": 5.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Djibouti",
@@ -1111,7 +1958,50 @@
         "url": "https://fr.wikipedia.org/wiki/Djibouti_(ville)",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'après-midi, beaucoup d'hommes se retrouvent entre amis pour mâcher le khat ; ces séances servent aussi à parler affaires, famille et nouvelles.",
+          "sources": [
+            {
+              "title": "Does Khat Consumption Affect Work Performance? A Micro-Perspective from Djibouti (HAL)",
+              "url": "https://hal-univ-pau.archives-ouvertes.fr/hal-03375659v1",
+              "published": "2021",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Narcotic khat dominates Djibouti life (Hiiraan Online)",
+              "url": "https://www.hiiraan.com/news4/2007/Aug/4108/narcotic_khat_dominates_djibouti_life.aspx",
+              "published": "2007-08",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 97.7,
+      "christian": 1.1,
+      "other": 0,
+      "none": 1.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Eswatini",
@@ -1192,7 +2082,76 @@
         "published": "2026-11-11",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Chaque fin d'août, l'Umhlanga réunit des milliers de jeunes femmes qui apportent des roseaux à la reine mère ; la cérémonie est ouverte au public.",
+          "sources": [
+            {
+              "title": "Eswatini – Cultural life (Encyclopædia Britannica)",
+              "url": "https://www.britannica.com/place/Eswatini/Cultural-life",
+              "published": null,
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Reed delivery at Ludzidzini, 2026 Umhlanga Ceremony (Eswatini Observer)",
+              "url": "https://www.eswatiniobserver.com/?p=13733",
+              "published": "2026-09-01",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 38,
+        "toleranceForeigners": 78,
+        "toleranceOtherReligion": 76,
+        "toleranceOtherEthnicity": 76,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Eswatini, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6725/variable/V296",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Eswatini",
+            "url": "https://www.afrobarometer.org/publication/eswatini-round-9-summary-of-results/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.1,
+      "christian": 93.2,
+      "other": 0.4,
+      "none": 6.2,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Gabon",
@@ -1275,7 +2234,70 @@
         "published": "2025-12-10",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le corps de garde (abáá chez les Fang) est la maison commune à l'entrée du village : les hommes s'y retrouvent pour parler, jouer au songo et accueillir les voyageurs.",
+          "sources": [
+            {
+              "title": "Le corps de garde et espace de communication chez les Fang d'Afrique centrale (mémoire, Memoire Online)",
+              "url": "https://www.memoireonline.com/08/15/9238/m_Lab-corps-de-garde-et-espace-de-communication-chez-les-Fang-dAfrique-centrale-Une-prefi20.html",
+              "published": "2015-08",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 58,
+        "toleranceForeigners": 85,
+        "toleranceOtherReligion": 92,
+        "toleranceOtherEthnicity": 97,
+        "round": "R9 2021",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Gabon, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6729/variable/V295",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Gabon",
+            "url": "https://www.afrobarometer.org/publication/resume-des-resultats-enquete-dafrobarometer-round-9-en-gabon-2021/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 8.6,
+      "christian": 83.7,
+      "other": 1.9,
+      "none": 5.8,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Gambie",
@@ -1358,7 +2380,76 @@
         "url": "https://en.wikipedia.org/wiki/The_Gambia",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'attaya est un thé vert préparé en trois tournées, de la plus forte à la plus sucrée ; préparé dans la rue ou au marché, il réunit amis et passants pendant une heure.",
+          "sources": [
+            {
+              "title": "Attaya tea (Access Gambia)",
+              "url": "https://accessgambia.com/information/attaya-tea.html",
+              "published": null,
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Senegalese tea culture (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Senegalese_tea_culture",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 77,
+        "toleranceForeigners": 83,
+        "toleranceOtherReligion": 77,
+        "toleranceOtherEthnicity": 95,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Gambie, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6730/variable/V292",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Gambie",
+            "url": "https://www.afrobarometer.org/publication/gambia-round-9-summary-of-results/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 97,
+      "christian": 2.9,
+      "other": 0,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Ghana",
@@ -1454,7 +2545,75 @@
         "url": "https://expatsi.com/visas/ghana/right-of-abode",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Les funérailles sont de grands rassemblements de week-end, du vendredi au dimanche : voisins, collègues et parents viennent soutenir la famille et partager musique et repas.",
+          "sources": [
+            {
+              "title": "Four funerals, a wedding and some partying (Graphic Online)",
+              "url": "https://www.graphic.com.gh/features/opinion/ghana-news-four-funerals-a-wedding-and-some-partying.html",
+              "published": "2024-08-06",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "« Akwaaba » (bienvenue en akan) accueille le visiteur ; à la maison, on l'invite à s'asseoir et on lui offre de l'eau avant de parler du motif de sa visite.",
+          "sources": [
+            {
+              "title": "In Ghana, Akwaaba isn't just a mere formality (The Guardian Nigeria)",
+              "url": "https://guardian.ng/?p=205331",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 50,
+        "toleranceForeigners": 84,
+        "toleranceOtherReligion": 94,
+        "toleranceOtherEthnicity": 95,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Ghana",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2022/10/Summary-of-results-Ghana-Afrobarometer-R9-21oct2022-1.pdf",
+            "published": "2022-10-21",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 19.9,
+      "christian": 71.3,
+      "other": 7.8,
+      "none": 1.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Guinée",
@@ -1532,7 +2691,70 @@
         "published": "2026-04-10",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Dans les quartiers de Conakry, des groupes de jeunes se retrouvent chaque après-midi autour du thé, assis en cercle, pour discuter et suivre les matchs.",
+          "sources": [
+            {
+              "title": "Qatar 2022 : en Guinée, on refait le match autour d'un bon verre de thé (Le360 Afrique)",
+              "url": "https://afrique.le360.ma/sports/qatar-2022-en-guinee-on-refait-le-match-autour-dun-bon-verre-de-the_MVF6L5VHUFCCTG55X75ZOZ6DUQ/",
+              "published": "2022-12-01",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Enabel – étude sur la jeunesse et la migration en Guinée",
+              "url": "https://www.enabel.be/app/uploads/2026/07/Apolline_GCE_V4.pdf",
+              "published": "2026-07",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 93,
+        "toleranceForeigners": 93,
+        "toleranceOtherReligion": 78,
+        "toleranceOtherEthnicity": 93,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "Afrobarometer Round 9 – Summary of results, Guinée",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2023/04/GUI_AB_R9_Resume-des-resultats_9Feb23.pdf",
+            "published": "2023-02-09",
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 86.8,
+      "christian": 11.7,
+      "other": 0,
+      "none": 1.3,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Guinée équatoriale",
@@ -1613,7 +2835,44 @@
         "url": "https://www.amnesty.org/en/location/africa/east-africa-the-horn-and-great-lakes/equatorial-guinea/report-equatorial-guinea/",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'abaá, « maison de la parole » des Fang, se dresse au centre du village : on la bâtit en commun, on y discute et on y règle les litiges.",
+          "sources": [
+            {
+              "title": "Abaá (Wikipedia en español)",
+              "url": "https://es.wikipedia.org/wiki/Aba%C3%A1",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 4,
+      "christian": 88.7,
+      "other": 2.1,
+      "none": 5,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Guinée-Bissau",
@@ -1689,7 +2948,44 @@
         "url": "https://en.wikipedia.org/wiki/Guinea-Bissau",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Les mandjuandadi sont des associations de femmes du même âge qui se réunissent pour chanter, s'entraider et fêter ensemble les grands moments de la vie.",
+          "sources": [
+            {
+              "title": "Cá G., sociabilité dans les groupes de mandjuandadi (UNILAB)",
+              "url": "https://repositorio.unilab.edu.br/jspui/bitstream/123456789/3484/1/2023_arti_geselaca.pdf",
+              "published": "2023",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 56,
+      "christian": 21.7,
+      "other": 10.7,
+      "none": 11.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Kenya",
@@ -1769,7 +3065,76 @@
         "published": "2026-10-29",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La harambee (« tirons ensemble ») réunit voisins et proches pour collecter de l'argent ou des biens : frais de scolarité, mariage, soins ou funérailles.",
+          "sources": [
+            {
+              "title": "The inspirational story behind the word 'harambee' (TRT Afrika)",
+              "url": "https://www.trtafrika.com/english/article/18186497",
+              "published": "2024-07-23",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Harambee (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Harambee",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 69,
+        "toleranceForeigners": 77,
+        "toleranceOtherReligion": 93,
+        "toleranceOtherEthnicity": 93,
+        "round": "R9 2021",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Kenya, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6733/variable/V323",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Kenya",
+            "url": "https://www.afrobarometer.org/publication/kenya-round-9-summary-of-results/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 10.9,
+      "christian": 85.7,
+      "other": 1.8,
+      "none": 1.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Lesotho",
@@ -1839,7 +3204,76 @@
         "url": "https://en.wikipedia.org/wiki/Lesotho",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le letsema réunit les villageois pour les gros travaux, labour ou récolte ; il survit surtout aux mariages et aux funérailles, où chacun vient aider.",
+          "sources": [
+            {
+              "title": "Nomination: Letsema, villagers coming together to accomplish heavy tasks communally (UNESCO ICH)",
+              "url": "https://ich.unesco.org/en/video/16259",
+              "published": null,
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Mountain Voices – Lesotho: community activities (Panos oral testimony)",
+              "url": "https://mountainvoices.org/L_th_Community_Activities.asp.html",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 45,
+        "toleranceForeigners": 71,
+        "toleranceOtherReligion": 84,
+        "toleranceOtherEthnicity": 78,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Lesotho, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6734/variable/V312",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Lesotho",
+            "url": "https://www.afrobarometer.org/publication/lesotho-round-9-summary-of-results/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.2,
+      "christian": 97.3,
+      "other": 0.7,
+      "none": 1.7,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Liberia",
@@ -1915,7 +3349,76 @@
         "url": "https://en.wikipedia.org/wiki/Telecommunications_in_Liberia",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La palava hut est un abri où les anciens réunissent le village pour discuter et réconcilier ; elle sert aujourd'hui aux audiences de paix après la guerre.",
+          "sources": [
+            {
+              "title": "KAIPTC Policy Brief – The Palava Hut in Liberia",
+              "url": "https://africacenter.org/wp-content/uploads/2023/03/KAIPTC-Policy-Brief-The-Palava-Hut-in-Liberia.pdf",
+              "published": "2023-03",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Peacebuilding, Reconciliation, and Social Cohesion Project (UNDP Liberia)",
+              "url": "https://www.undp.org/liberia/projects/peacebuilding-reconciliation-and-social-cohesion-project",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 57,
+        "toleranceForeigners": 85,
+        "toleranceOtherReligion": 87,
+        "toleranceOtherEthnicity": 91,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Liberia, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6735/variable/V298",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Liberia",
+            "url": "https://www.afrobarometer.org/publication/liberia-round-9-summary-of-results/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 12.7,
+      "christian": 85.2,
+      "other": 1,
+      "none": 1.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Libye",
@@ -1998,7 +3501,77 @@
         "url": "https://en.wikipedia.org/wiki/Benghazi",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le shahi al-alla, thé servi mousseux en plusieurs tournées, réunit la famille le vendredi et pendant l'Aïd, souvent chez les grands-parents, et accueille les invités.",
+          "sources": [
+            {
+              "title": "Libya's traditional tea foam (Libya Observer)",
+              "url": "https://libyaobserver.ly/culture/libyas-traditional-tea-foam",
+              "published": "2017-07-02",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Libyan tea (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Libyan_tea",
+              "published": null,
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 99,
+      "christian": 0.5,
+      "other": 0.3,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "anti-black",
+      "label": "Incitation à la discrimination raciale contre les migrants noirs (Commission internationale de juristes, 2025)",
+      "summary": "En mars 2023, la mission d'enquête de l'ONU a conclu à des crimes contre l'humanité contre des migrants détenus, dont l'esclavage, et avait relevé en 2021 un traitement plus dur des Africains subsahariens ; en mars-avril 2025, l'ONU et la Commission internationale de juristes ont alerté sur une campagne de haine visant les migrants, surtout les personnes noires.",
+      "sources": [
+        {
+          "title": "OHCHR, Libya: Urgent action needed to remedy deteriorating human rights situation, UN Fact-Finding Mission warns in final report (27 March 2023)",
+          "url": "https://www.ohchr.org/en/press-releases/2023/03/libya-urgent-action-needed-remedy-deteriorating-human-rights-situation-un",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "UN News, Libya: Crimes against humanity committed since 2016 (March 2023)",
+          "url": "https://news.un.org/en/story/2023/03/1135052",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "UNSMIL statement on misinformation and hate speech against refugees and migrants (March 2025)",
+          "url": "https://unsmil.unmissions.org/en/node/56416",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "International Commission of Jurists, Libya: immediately halt collective expulsions, arrests, violence and hate speech against migrants (April 2025)",
+          "url": "https://www.icj.org/libya-immediately-halt-collective-expulsions-arrests-violence-and-hate-speech-against-migrants-refugees-and-asylum-seekers/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Madagascar",
@@ -2080,7 +3653,76 @@
         "published": "2026-11-13",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le fihavanana, lien de parenté élargi aux voisins, organise l'entraide : travaux des champs, funérailles, prêts entre familles d'un même village.",
+          "sources": [
+            {
+              "title": "Le fihavanana à Madagascar : lien social et économique des communautés rurales (Revue Tiers Monde n° 195)",
+              "url": "https://ideas.repec.org/a/cai/rtmarc/rtm_195_0507.html",
+              "published": "2008",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Celebrating Fihavanana: the roots of giving traditions and practices in Madagascar (TrustAfrica)",
+              "url": "https://trustafrica.org/wp-content/uploads/2024/07/6.-Celebrating-Fihavanana-The-Roots-of-Giving-Traditions-and-Practices-in-Madagascar.pdf",
+              "published": "2024-07",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 64,
+        "toleranceForeigners": 72,
+        "toleranceOtherReligion": 91,
+        "toleranceOtherEthnicity": 87,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Madagascar, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6736/variable/V300",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Madagascar",
+            "url": "https://www.afrobarometer.org/publication/madagascar-round-9-resume-des-resultats/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 1.2,
+      "christian": 74.2,
+      "other": 2.2,
+      "none": 22.3,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Malawi",
@@ -2151,7 +3793,76 @@
         "url": "https://en.wikipedia.org/wiki/LGBTQ_rights_in_Malawi",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le bawo, jeu de graines sur un plateau de bois, rassemble des hommes de tous âges à l'ombre des manguiers : on joue, on regarde et on discute.",
+          "sources": [
+            {
+              "title": "Bawo (CorpsAfrica, Volunteer Voices)",
+              "url": "https://www.corpsafrica.org/volunteer-voices/bawo/",
+              "published": "2016-09-08",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "JICA Malawi – rapport de volontaire sur le bao",
+              "url": "https://www.jica.go.jp/overseas/malawi/information/topics/2025/1567658_57990.html",
+              "published": "2025",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 65,
+        "toleranceForeigners": 78,
+        "toleranceOtherReligion": 90,
+        "toleranceOtherEthnicity": 90,
+        "round": "R9 2022",
+        "sources": [
+          {
+            "title": "World Bank Microdata Library – Afrobarometer R9 Malawi, variables Q86C/Q87A/Q87B/Q87D (unweighted counts)",
+            "url": "https://microdata.worldbank.org/catalog/6737/variable/V304",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Round 9 – Summary of results page, Malawi",
+            "url": "https://www.afrobarometer.org/publication/malawi-round-9-summary-of-results/",
+            "published": null,
+            "accessed": "2026-11-15"
+          },
+          {
+            "title": "Afrobarometer Dispatch No. 871 – Social cohesion: African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-01",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 11.6,
+      "christian": 87.4,
+      "other": 0,
+      "none": 0.9,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Mali",
@@ -2224,7 +3935,69 @@
         "url": "https://en.wikipedia.org/wiki/Alliance_of_Sahel_States",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le grin réunit chaque soir des amis du quartier autour du thé à la menthe : on y parle de l'actualité et des soucis de chacun, et un voisin de passage peut s'asseoir.",
+          "sources": [
+            {
+              "title": "Le360 Afrique — Mali : le Grin, cette cour de récréation des grandes personnes où le thé coule à flots",
+              "url": "https://afrique.le360.ma/societe/mali-le-grin-cette-cour-de-recreation-des-grandes-personnes-ou-le-the-coule-a-flots_N4TXK5KB4BFQDGGB6BRVZZZLZ4/",
+              "published": "2023 (date exacte non relevée)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "La parenté à plaisanterie (sanankuya) autorise des moqueries rituelles entre familles et groupes alliés ; elle sert à désamorcer les tensions entre inconnus.",
+          "sources": [
+            {
+              "title": "Wikipedia (fr) — Parent%C3%A9 %C3%A0 plaisanterie",
+              "url": "https://fr.wikipedia.org/wiki/Parent%C3%A9_%C3%A0_plaisanterie",
+              "published": "2026-03-17 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 87,
+        "toleranceForeigners": 86,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain juillet 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 94.1,
+      "christian": 2.6,
+      "other": 0.8,
+      "none": 2.5,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Maroc",
@@ -2291,7 +4064,86 @@
         "published": "2026-08-19",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le thé à la menthe, versé de haut pour faire mousser, est servi à tout invité dès son arrivée, à la maison comme dans les boutiques.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Maghrebi mint tea",
+              "url": "https://en.wikipedia.org/wiki/Maghrebi_mint_tea",
+              "published": "2026-11-10 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le couscous du vendredi rassemble la famille élargie autour d'un plat commun ; ce savoir-faire partagé au Maghreb est inscrit à l'UNESCO depuis 2020.",
+          "sources": [
+            {
+              "title": "Wikipedia (fr) — Couscous",
+              "url": "https://fr.wikipedia.org/wiki/Couscous",
+              "published": "2026-11-05 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 48,
+        "toleranceForeigners": 78,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain août-sept. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 99.7,
+      "christian": 0,
+      "other": 0.1,
+      "none": 0.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "anti-black",
+      "label": "Violence racialisée contre les migrants africains (experts de l'ONU, 2022)",
+      "summary": "Le 24 juin 2022, au moins 23 personnes selon le Maroc et au moins 37 selon Amnesty International, venues d'Afrique subsaharienne, sont mortes à la frontière de Melilla ; en novembre 2022, des experts de l'ONU sur le racisme ont parlé d'une violence « racialisée » contre les migrants africains.",
+      "sources": [
+        {
+          "title": "Amnesty International, Morocco/Spain: Stalled and inadequate inquiries 'smack of cover-up', six months after 37 deaths at Melilla border (December 2022)",
+          "url": "https://www.amnesty.org/en/latest/news/2022/12/morocco-spain-stalled-and-inadequate-inquiries-smack-of-cover-up-six-months-after-37-deaths-at-melilla-border/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Africanews, UN experts condemn 'stark dehumanisation' of African migrants to Europe (1 November 2022), reporting the statement of the UN Special Rapporteur on racism and the Working Group of Experts on People of African Descent",
+          "url": "https://www.africanews.com/2022/11/01/un-experts-condemn-stark-dehumanisation-of-african-migrants-to-europe/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Maurice",
@@ -2362,7 +4214,69 @@
         "published": "2025-09-12",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le geet-gawai réunit avant un mariage les femmes de la famille et les voisines, qui chantent en bhojpuri chez les futurs mariés ; la pratique est inscrite à l'UNESCO depuis 2016.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Geet-Gawai",
+              "url": "https://en.wikipedia.org/wiki/Geet-Gawai",
+              "published": "2025-11-22 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le séga, musique et danse nées chez les descendants d'esclaves, anime les fêtes de plage et de quartier où l'on danse au son de la ravanne.",
+          "sources": [
+            {
+              "title": "Wikipedia (fr) — S%C3%A9ga",
+              "url": "https://fr.wikipedia.org/wiki/S%C3%A9ga",
+              "published": "2026-10-10 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 64,
+        "toleranceForeigners": 73,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain mars 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 17.5,
+      "christian": 32.9,
+      "other": 48.9,
+      "none": 0.8,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Mauritanie",
@@ -2439,7 +4353,75 @@
         "published": "2026-04-21",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le thé à la menthe, servi en plusieurs verres et versé de haut, accompagne les visites ; les repas se prennent traditionnellement autour d'un plat commun.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Mauritanian cuisine",
+              "url": "https://en.wikipedia.org/wiki/Mauritanian_cuisine",
+              "published": "2026-03-06 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 56,
+        "toleranceForeigners": 79,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain nov. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 99.2,
+      "christian": 0.2,
+      "other": 0.5,
+      "none": 0.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "anti-black",
+      "label": "Traitements racistes de migrants africains (Human Rights Watch, 2025)",
+      "summary": "En 2018, le CERD s'est inquiété de la discrimination et de la marginalisation des Haratines et des communautés noires africaines (Halpulaar, Soninké, Wolof) et de la persistance de l'esclavage ; en août 2025, Human Rights Watch a documenté torture, traitements racistes et expulsions collectives de migrants d'Afrique de l'Ouest et du Centre entre 2020 et 2025.",
+      "sources": [
+        {
+          "title": "UN CERD, Concluding observations on Mauritania, CERD/C/MRT/CO/8-14 (2018)",
+          "url": "https://www.ecoi.net/en/file/local/1441952/1930_1535549473_g1814283-1.pdf",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Human Rights Watch, Mauritania: Years of Migration Control Abuses (27 August 2025)",
+          "url": "https://www.hrw.org/news/2025/08/27/mauritania-years-of-migration-control-abuses",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Mozambique",
@@ -2506,7 +4488,58 @@
         "published": "2026",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le xitique est une épargne tournante : un groupe d'amis, de voisins ou de parents cotise chaque mois et chacun reçoit la cagnotte à son tour, un lien qui dépasse l'argent.",
+          "sources": [
+            {
+              "title": "Trindade, C. C. — Além do económico: reflexões sobre os significados do xitiki, Revista Temáticas (UNICAMP)",
+              "url": "https://econtents.bc.unicamp.br/inpec/index.php/tematicas/article/view/11711",
+              "published": "2018",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 47,
+        "toleranceForeigners": 74,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain oct.-nov. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 19.4,
+      "christian": 61.3,
+      "other": 4.9,
+      "none": 14.3,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Namibie",
@@ -2581,7 +4614,64 @@
         "published": "2026-10-08",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Au marché de Single Quarters, à Katutura (Windhoek), on mange le kapana, viande grillée devant soi, debout entre inconnus : un lieu de rendez-vous du week-end.",
+          "sources": [
+            {
+              "title": "The Namibian — Fire, Meat and Flirting – Welcome to Single Quarters",
+              "url": "https://www.namibian.com.na/fire-meat-and-flirting-welcome-to-single-quarters/",
+              "published": "non daté (date non relevée)",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Wikipedia (en) — Kapana (grilled meat)",
+              "url": "https://en.wikipedia.org/wiki/Kapana_(grilled_meat)",
+              "published": "2026-08-12 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 57,
+        "toleranceForeigners": 80,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain oct.-nov. 2021)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 0.1,
+      "christian": 90.5,
+      "other": 3.6,
+      "none": 5.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Niger",
@@ -2641,7 +4731,58 @@
         "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/niger/",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La fada réunit chaque soir des jeunes du quartier autour du thé préparé sur le charbon ; on y échange, on s'entraide et l'on garde un œil sur la rue.",
+          "sources": [
+            {
+              "title": "Le360 Afrique — Les fada, espace de sociabilité pour les jeunes Nigériens",
+              "url": "https://afrique.le360.ma/autres-pays/societe/2022/01/09/36627-les-fada-espace-de-sociabilite-pour-les-jeunes-nigeriens-36627",
+              "published": "2022-01-09",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 82,
+        "toleranceForeigners": 78,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain juin 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 98.1,
+      "christian": 0.6,
+      "other": 0,
+      "none": 1.2,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Nigeria",
@@ -2714,7 +4855,80 @@
         "published": "2025-12-05",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'aso ebi est un tissu commun que famille et amis portent lors d'un mariage ou de funérailles pour montrer leur solidarité ; les invités l'achètent souvent à l'hôte.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Aso ebi",
+              "url": "https://en.wikipedia.org/wiki/Aso_ebi",
+              "published": "2026-11-06 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Les owanbe sont de grandes fêtes yoruba, ouvertes et bruyantes, où les cercles d'amis et de voisins se mêlent autour de la musique et du repas.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Owanbe",
+              "url": "https://en.wikipedia.org/wiki/Owanbe",
+              "published": "2026-11-03 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Chez les Igbo, offrir et partager la noix de kola ouvre la visite d'un invité : c'est le premier geste d'accueil.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Kola nut",
+              "url": "https://en.wikipedia.org/wiki/Kola_nut",
+              "published": "2026-11-10 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 48,
+        "toleranceForeigners": 85,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain mars 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 56.1,
+      "christian": 43.4,
+      "other": 0.2,
+      "none": 0.4,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Ouganda",
@@ -2795,7 +5009,69 @@
         "published": "2026-11-10",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'empaako est un nom d'affection donné à chaque enfant dans l'ouest du pays ; on l'emploie pour saluer, ce qui crée tout de suite un lien. Inscrit à l'UNESCO en 2013.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Empaako",
+              "url": "https://en.wikipedia.org/wiki/Empaako",
+              "published": "2026-08-12 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le kwanjula, cérémonie ganda de présentation, voit la famille du fiancé reçue par celle de la fiancée, avec dons et repas devant tout le voisinage.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Kwanjula",
+              "url": "https://en.wikipedia.org/wiki/Kwanjula",
+              "published": "2026-07-11 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 61,
+        "toleranceForeigners": 74,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain janv. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 11.4,
+      "christian": 87.7,
+      "other": 0.7,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "RD Congo",
@@ -2857,7 +5133,55 @@
         "published": "2026-10-27",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le matanga est le deuil ouvert : parents, voisins et amis veillent plusieurs jours chez la famille ou dans une salle, avec musique et repas partagés.",
+          "sources": [
+            {
+              "title": "Cambridge University Press, Africa — Funerary comedies in contemporary Kinshasa: social difference, urban communities and the emergence of a cultural form",
+              "url": "https://research.birmingham.ac.uk/portal/en/publications/funerary-comedies-in-contemporary-kinshasa(3bb64162-4e5a-43c5-aa9c-fd7845bb00af)/export.html",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Dans les nganda, bars de quartier, on boit et l'on danse la rumba congolaise, inscrite à l'UNESCO en 2021.",
+          "sources": [
+            {
+              "title": "Wikipedia (fr) — Rumba congolaise",
+              "url": "https://fr.wikipedia.org/wiki/Rumba_congolaise",
+              "published": "2026-05-01 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 1.3,
+      "christian": 96.3,
+      "other": 1.3,
+      "none": 1.2,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Rwanda",
@@ -2932,7 +5256,55 @@
         "published": "2026-09-04",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'umuganda est le travail collectif du dernier samedi du mois, de 8 h à 11 h, suivi d'une réunion du quartier ; il est obligatoire par la loi.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Umuganda",
+              "url": "https://en.wikipedia.org/wiki/Umuganda",
+              "published": "2026-11-07 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "L'ubudehe, ancienne pratique d'entraide entre voisins, sert aujourd'hui de cadre où le quartier analyse ses besoins et décide ensemble.",
+          "sources": [
+            {
+              "title": "The New Times — Breaking the poverty cycle with « Ubudehe »",
+              "url": "https://www.newtimes.co.rw/article/49777/breaking-the-poverty-cycle-with-aubudehea",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 1.8,
+      "christian": 97,
+      "other": 0.1,
+      "none": 1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Seychelles",
@@ -3002,7 +5374,64 @@
         "published": "2026-08-12",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le moutya se danse le soir autour d'un feu, au son de tambours en peau de chèvre ; né chez les esclaves, il est inscrit à l'UNESCO depuis décembre 2021.",
+          "sources": [
+            {
+              "title": "Nation (Seychelles) — 'Moutya' added to Unesco list of intangible cultural heritage",
+              "url": "https://nation.sc/articles/11777/moutya-added-to-unesco-list-of-intangible-cultural-heritage",
+              "published": "2021-12-16",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Wikipedia (fr) — Moutya",
+              "url": "https://fr.wikipedia.org/wiki/Moutya",
+              "published": "2026-09-10 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 52,
+        "toleranceForeigners": 85,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain déc. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.9,
+      "christian": 94,
+      "other": 2.8,
+      "none": 2.4,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Sierra Leone",
@@ -3084,7 +5513,58 @@
         "published": "2026-05-15",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'ataya base est un abri de rue où des jeunes préparent le thé vert et débattent de foot, de politique et du prix du riz : le café du quartier.",
+          "sources": [
+            {
+              "title": "Mano Reporters — reportage sur les ataya bases de Freetown",
+              "url": "https://manoreporters.com/?p=3433",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 55,
+        "toleranceForeigners": 86,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain juin-juil. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 80.1,
+      "christian": 19.8,
+      "other": 0,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Somalie",
@@ -3155,7 +5635,44 @@
         "published": "2026-06-04",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'ayuuto (ou hagbad) est une épargne tournante sans intérêt, tenue surtout par des voisines qui se font confiance ; c'est aussi un lieu de soutien moral.",
+          "sources": [
+            {
+              "title": "Al Jazeera — Ayuuto: The Somali female money lending manual on braving crisis",
+              "url": "https://www.aljazeera.com/features/2022/4/8/ayuuto-the-somali-female-social-lending-manual-on-braving-crisis",
+              "published": "2022-04-08",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 99.8,
+      "christian": 0,
+      "other": 0,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Somalie (Somaliland)",
@@ -3215,7 +5732,61 @@
         "published": "2026-06-04",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "L'ayuuto (ou hagbad) est une épargne tournante sans intérêt, tenue surtout par des voisines qui se font confiance ; c'est aussi un lieu de soutien moral.",
+          "sources": [
+            {
+              "title": "Al Jazeera — Ayuuto: The Somali female money lending manual on braving crisis",
+              "url": "https://www.aljazeera.com/features/2022/4/8/ayuuto-the-somali-female-social-lending-manual-on-braving-crisis",
+              "published": "2022-04-08",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Radio Ergo — IDP women in Somaliland build new lives through savings and loan scheme",
+              "url": "https://radioergo.org/en/2019/12/idp-women-in-somaliland-build-new-lives-through-savings-and-loan-scheme/",
+              "published": "2019-12",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Chaque été, la Foire internationale du livre de Hargeisa réunit écrivains, poètes et habitants autour de lectures et de débats ouverts au public.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Hargeisa International Book Fair",
+              "url": "https://en.wikipedia.org/wiki/Hargeisa_International_Book_Fair",
+              "published": "2026-11-04 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 99.8,
+      "christian": 0,
+      "other": 0,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'. Figures for Somalia as a whole.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Soudan",
@@ -3286,7 +5857,69 @@
         "published": "2025-10-31",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Les « sitt al-shai », vendeuses de thé et de café de rue, tiennent des coins où se retrouvent voisins et passants de tous milieux.",
+          "sources": [
+            {
+              "title": "Sudan Tribune — FEATURE: Women in Khartoum's informal job market face struggle for rights",
+              "url": "https://sudantribune.com/article/45781",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Des jarres d'eau en terre (zir) sont posées devant les maisons et le long des routes pour les passants : on appelle cela un sabil.",
+          "sources": [
+            {
+              "title": "Sudan Survey (LMU Munich) — Sudanese Habits and Traditions: The presence of the zir",
+              "url": "https://www.sudansurvey.gwi.uni-muenchen.de/?p=6453",
+              "published": "2025-11",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 30,
+        "toleranceForeigners": 65,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain nov.-déc. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 98.9,
+      "christian": 0.5,
+      "other": 0,
+      "none": 0.6,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Soudan du Sud",
@@ -3358,7 +5991,50 @@
         "published": "2026-09-18",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "À Juba, les vendeuses de thé installées au bord des routes tiennent des lieux de pause et de conversation, une tradition transmise depuis des générations.",
+          "sources": [
+            {
+              "title": "Nations unies, maintien de la paix — article sur la culture du thé au Soudan du Sud",
+              "url": "https://peacekeeping.un.org/en/node/8483",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Radio Tamazuj — Mixed reactions to new Juba restrictions on tea selling",
+              "url": "https://www.radiotamazuj.org/en/news/article/mixed-reactions-to-new-juba-restrictions-on-tea-selling",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 6.2,
+      "christian": 60.5,
+      "other": 32.8,
+      "none": 0.4,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "São Tomé-et-Príncipe",
@@ -3438,7 +6114,58 @@
         "url": "https://www.gov.uk/foreign-travel-advice/sao-tome-and-principe/entry-requirements",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le tchiloli est un théâtre dansé joué en plein air par des troupes de village ; tout le voisinage vient le regarder pendant des heures.",
+          "sources": [
+            {
+              "title": "Wikipedia (fr) — Tchiloli",
+              "url": "https://fr.wikipedia.org/wiki/Tchiloli",
+              "published": "2026-11-12 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 26,
+        "toleranceForeigners": 85,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain déc. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0,
+      "christian": 84.4,
+      "other": 5.8,
+      "none": 9.7,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Sénégal",
@@ -3522,7 +6249,86 @@
         "published": "2025-12-16",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La teranga, du wolof « teer », accueillir, se vit en gestes : saluer longuement, inviter à partager le repas, offrir le thé.",
+          "sources": [
+            {
+              "title": "Le Petit Journal Dakar — La teranga, l'hospitalité sénégalaise",
+              "url": "https://lepetitjournal.com/dakar/comprendre-senegal/la-teranga-lhospitalite-senegalaise-249604",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Au-Sénégal — Que signifie réellement la téranga ?",
+              "url": "https://au-senegal.com/que-signifie-reellement-la-teranga-voyage-au-coeur-d-une-valeur-qui-fait-la-reputation-du-senegal,18437.html",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "L'attaya, thé préparé en trois services, prend des heures : c'est le temps de la conversation entre voisins et amis.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Senegalese tea culture",
+              "url": "https://en.wikipedia.org/wiki/Senegalese_tea_culture",
+              "published": "2026-01-21 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le ceebu jën se mange dans un grand bol commun ; il est inscrit à l'UNESCO depuis 2021.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Thieboudienne",
+              "url": "https://en.wikipedia.org/wiki/Thieboudienne",
+              "published": "2026-11-13 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 70,
+        "toleranceForeigners": 84,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain mai-juin 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 97.6,
+      "christian": 2.4,
+      "other": 0,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Tanzanie",
@@ -3594,7 +6400,64 @@
         "published": "2026-11-12",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Sur la côte swahilie et à Zanzibar, les baraza, bancs de pierre le long des maisons, accueillent les voisins pour le café, le jeu de bao et les nouvelles.",
+          "sources": [
+            {
+              "title": "Loimeier, R. — Sit local, think global: The Baraza in Zanzibar, Journal for Islamic Studies",
+              "url": "https://publications.goettingen-research-online.de/ID-10456",
+              "published": "2007",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Rezaei, N. — étude sur les baraza de Stone Town, Journal of World Sociopolitical Studies",
+              "url": "https://wsps.ut.ac.ir/article_75458.html",
+              "published": "2019",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 86,
+        "toleranceForeigners": 74,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain sept.-oct. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 29.9,
+      "christian": 64.7,
+      "other": 2,
+      "none": 3.5,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Tchad",
@@ -3656,7 +6519,44 @@
         "published": "2026-11-04",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le repas principal se prend le soir sur une natte, autour d'un grand plat commun ; hommes et femmes mangent souvent à part.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Chadian cuisine",
+              "url": "https://en.wikipedia.org/wiki/Chadian_cuisine",
+              "published": "2026-10-04 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 56.4,
+      "christian": 38.9,
+      "other": 1.6,
+      "none": 3.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Togo",
@@ -3728,7 +6628,58 @@
         "published": "2026-11-09",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Dans les quartiers zongo de Lomé, les commerçants venus du Sahel reçoivent les nouveaux arrivants et les logent : l'accueil y fonde le réseau marchand.",
+          "sources": [
+            {
+              "title": "Agier, M. — Commerce et sociabilité. Les négociants soudanais du quartier zongo de Lomé, ORSTOM",
+              "url": "https://horizon.documentation.ird.fr/exl-doc/pleins_textes/pleins_textes_5/pt5/travaux_d/15988.pdf",
+              "published": "1983",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 69,
+        "toleranceForeigners": 93,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain mars 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 16.1,
+      "christian": 56.9,
+      "other": 19,
+      "none": 8,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Tunisie",
@@ -3800,7 +6751,91 @@
         "published": "2026-06-24",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le café de quartier, où un express coûte peu, réunit chaque jour hommes de tous âges et milieux pour discuter ; beaucoup restent surtout masculins.",
+          "sources": [
+            {
+              "title": "Christian Science Monitor — Taste of Tunisia: Cafe culture is democratic, and uplifting",
+              "url": "https://csmonitor.com/World/Middle-East/2019/1002/Taste-of-Tunisia-Cafe-culture-is-democratic-and-uplifting",
+              "published": "2019-10-02",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "Le couscous partagé en famille, souvent le vendredi, fait partie d'un savoir-faire maghrébin inscrit à l'UNESCO en 2020.",
+          "sources": [
+            {
+              "title": "Wikipedia (fr) — Couscous",
+              "url": "https://fr.wikipedia.org/wiki/Couscous",
+              "published": "2026-11-05 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 37,
+        "toleranceForeigners": 73,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain févr.-mars 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 99.3,
+      "christian": 0.2,
+      "other": 0,
+      "none": 0.4,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "anti-black",
+      "label": "Propos racistes et violences contre les Africains noirs (ONU, 2023)",
+      "summary": "Après le discours présidentiel du 21 février 2023, le Comité de l'ONU pour l'élimination de la discrimination raciale (CERD) a dénoncé le 31 mars 2023 des propos racistes et des violences contre les Africains noirs, migrants et Tunisiens, avec expulsions de logement et arrestations arbitraires ; le CERD a de nouveau examiné ces faits en novembre 2025.",
+      "sources": [
+        {
+          "title": "UN News, Tunisia must curb racist rhetoric and halt rights violations of Black Africans: CERD (April 2023)",
+          "url": "https://news.un.org/en/story/2023/04/1135347",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "UN News, Tunisia: UN experts urge swift action to uphold migrants' rights (18 July 2023)",
+          "url": "https://news.un.org/en/story/2023/07/1138832",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "UN Geneva, meeting summary: examen de la Tunisie au CERD (November 2025)",
+          "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2025/11/examen-de-la-tunisie-au-cerd-la-situation-des-migrants-des",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Zambie",
@@ -3880,7 +6915,58 @@
         "published": "2026-09-30",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Le Kuomboka réunit chaque année des milliers de Lozi qui suivent la barque royale quittant la plaine inondée du Zambèze : une grande fête collective.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Kuomboka",
+              "url": "https://en.wikipedia.org/wiki/Kuomboka",
+              "published": "2026-04-27 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 52,
+        "toleranceForeigners": 73,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain août-sept. 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "free",
+    "religion": {
+      "muslim": 0.5,
+      "christian": 98.3,
+      "other": 1.1,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Zimbabwe",
@@ -3952,7 +7038,58 @@
         "url": "https://en.wikipedia.org/wiki/EcoCash",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La nhimbe (ilima en ndebele) réunit les voisins une journée pour travailler le champ d'une famille, qui offre le repas ; on y règle aussi des différends.",
+          "sources": [
+            {
+              "title": "ACCORD, African Journal on Conflict Resolution — Nhimbe practice in Zimbabwe revisited",
+              "url": "https://www.accord.org.za/ajcr-issues/nhimbe-practice-in-zimbabwe-revisited-not-only-a-method-of-socio-economic-assistance-but-also-a-communal-mechanism-for-conflict-prevention-and-peacebuilding/",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 59,
+        "toleranceForeigners": 82,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain mars-avril 2022)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 0.5,
+      "christian": 87.2,
+      "other": 1.7,
+      "none": 10.5,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Égypte",
@@ -4023,7 +7160,62 @@
         "url": "https://en.wikipedia.org/wiki/Visa_policy_of_Egypt",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "Pendant le ramadan, les « tables du Miséricordieux » (mawa'id al-rahman) offrent dans la rue un repas de rupture du jeûne à tout passant.",
+          "sources": [
+            {
+              "title": "The National — Egypt's charity iftar banquets in high demand",
+              "url": "https://thenationalnews.com/mena/egypt/2023/04/13/egypts-charity-iftar-banquets-in-high-demand",
+              "published": "2023-04-13",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Ahram Online — Egyptians come together to maintain Ramadan charity banquets amid increased costs",
+              "url": "https://english.ahram.org.eg/NewsContent/1/2/463887/Egypt/Society/Egyptians-come-together-to-maintain-Ramadan-charit.aspx",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 95.2,
+      "christian": 4.8,
+      "other": 0,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    },
+    "racism": {
+      "kind": "anti-black",
+      "label": "Contrôles policiers visant les personnes noires (Amnesty International, 2024)",
+      "summary": "En juin 2024, Amnesty International a documenté des arrestations massives et des renvois forcés de réfugiés soudanais, après des contrôles policiers visant des personnes noires dans les rues du Caire et de Gizeh.",
+      "sources": [
+        {
+          "title": "Amnesty International, Egypt: Authorities must end campaign of mass arrests and forced returns of Sudanese refugees (19 June 2024)",
+          "url": "https://www.amnesty.org/en/latest/news/2024/06/egypt-authorities-must-end-campaign-of-mass-arrests-and-forced-returns-of-sudanese-refugees/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Érythrée",
@@ -4102,7 +7294,55 @@
         "url": "https://bti-project.org/en/reports/country-report/ERI",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La cérémonie du café, torréfié puis versé de la jebena en trois tours, réunit chaque jour voisins, parents et visiteurs.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Coffee ceremony of Ethiopia and Eritrea",
+              "url": "https://en.wikipedia.org/wiki/Coffee_ceremony_of_Ethiopia_and_Eritrea",
+              "published": "2026-11-02 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "À Asmara, la passeggiata est une promenade du soir sur l'avenue Harnet, vers 18 h, où l'on se croise entre les cafés.",
+          "sources": [
+            {
+              "title": "Wanderlust — Have the ultimate urban experience in this African city",
+              "url": "https://www.wanderlust.co.uk/content/experience-asmara-eritrea/",
+              "published": "date non relevée",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": null
+    },
+    "entryFrenchPassport": "embassy",
+    "religion": {
+      "muslim": 51.7,
+      "christian": 46.7,
+      "other": 0.6,
+      "none": 1.1,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   },
   {
     "name": "Éthiopie",
@@ -4169,6 +7409,74 @@
         "published": "2026-09-30",
         "accessed": "2026-11-15"
       }
-    ]
+    ],
+    "welcome": {
+      "practices": [
+        {
+          "text": "La cérémonie du café, torréfié devant les invités puis servi en trois tours, réunit chaque jour voisins, parents et visiteurs.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Coffee ceremony of Ethiopia and Eritrea",
+              "url": "https://en.wikipedia.org/wiki/Coffee_ceremony_of_Ethiopia_and_Eritrea",
+              "published": "2026-11-02 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        },
+        {
+          "text": "L'iddir est une association de quartier qui prend en charge les funérailles et soutient les familles endeuillées ; l'equb est une épargne tournante.",
+          "sources": [
+            {
+              "title": "Wikipedia (en) — Eder (finance)",
+              "url": "https://en.wikipedia.org/wiki/Eder_(finance)",
+              "published": "2025-05-23 (dernière révision)",
+              "accessed": "2026-11-15"
+            },
+            {
+              "title": "Wikipedia (en) — Equb",
+              "url": "https://en.wikipedia.org/wiki/Equb",
+              "published": "2025-12-07 (dernière révision)",
+              "accessed": "2026-11-15"
+            }
+          ]
+        }
+      ],
+      "afrobarometer": {
+        "trustNeighbours": 63,
+        "toleranceForeigners": 81,
+        "toleranceOtherReligion": null,
+        "toleranceOtherEthnicity": null,
+        "round": "R9 2021/2023 (terrain mai-juin 2023)",
+        "sources": [
+          {
+            "title": "Afrobarometer Dispatch No. 871 — Social cohesion: An African collage of tolerance and cautious trust",
+            "url": "https://www.afrobarometer.org/wp-content/uploads/2024/10/AD871-PAP18_Social-cohesion-African-collage-of-tolerance-and-cautious-trust-Afrobarometer-1oct24.pdf",
+            "published": "2024-10-02",
+            "accessed": "2026-11-15"
+          }
+        ]
+      }
+    },
+    "entryFrenchPassport": "online",
+    "religion": {
+      "muslim": 36.2,
+      "christian": 61.6,
+      "other": 2.1,
+      "none": 0,
+      "year": 2020,
+      "note": "Pew 2020 counts traditional religions inside 'other'.",
+      "sources": [
+        {
+          "title": "Pew Research Center, Religious Composition by Country, 2010-2020 (How the Global Religious Landscape Changed From 2010 to 2020, June 2025)",
+          "url": "https://www.pewresearch.org/religion/feature/religious-composition-by-country-2010-2020/",
+          "accessed": "2026-11-15"
+        },
+        {
+          "title": "Pew Research Center, The Global Religious Landscape (2012), Table: Religious Composition by Country, in Percentages (2010 data)",
+          "url": "https://www.pewresearch.org/religion/2012/12/18/table-religious-composition-by-country-in-percentages/",
+          "accessed": "2026-11-15"
+        }
+      ]
+    }
   }
 ]

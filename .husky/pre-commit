@@ -1,0 +1,2 @@
+./scripts/check-infra-disclosure.sh
+npx lint-staged
