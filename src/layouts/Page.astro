@@ -5,8 +5,10 @@ import Wordmark from "../components/Wordmark.astro";
 interface Props {
   title: string;
   description: string;
+  /** Keep a page out of search engines (prototypes). */
+  noindex?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
 <html lang="fr">
@@ -15,6 +17,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#161a5c" />
     <title>{title} · Là-bas</title>
   </head>
