@@ -47,15 +47,31 @@ export interface Answers {
   /** Looking for one's roots, somewhere new, or both. */
   roots?: "rediscover" | "discover" | "both";
   profession?:
+    | "finance"
+    | "law"
+    | "consulting"
     | "tech"
-    | "trade"
     | "health"
     | "teaching"
-    | "culture"
+    | "ngo"
     | "admin"
+    | "trade"
+    | "culture"
     | "craft"
     | "student"
     | "retired";
+  /** Where the reader lives today: their life to keep, or to leave. */
+  currentCity?: "capital" | "bigcity" | "town" | "country" | "nomad";
+  /** Over there: the same rhythm as today, calmer, or more intense. */
+  rhythm?: "same" | "calmer" | "more";
+  /** How the reader gets around today. */
+  mobility?: "walk" | "transit" | "bike" | "car";
+  /** The reader's daily habits. */
+  habits?: ("gym" | "cafes" | "culture" | "markets" | "nights" | "nature")[];
+  /** The reader's neighbourhood today. */
+  neighbourhood?: "central" | "residential" | "upscale" | "popular";
+  /** With people: being invited and knowing the neighbours, keeping one's peace, or both. */
+  people?: "invited" | "quiet" | "both";
   /** Where the reader grew up: a hint at the pace that suits them. */
   grewUp?: "city" | "town" | "country";
 
@@ -245,33 +261,43 @@ const PRIORITY: Record<Priority, Pull[]> = {
   memory: [pull("history", 1, 3), pull("culture", 0.7, 0.5)],
   flights: [pull("flights", 1, 3)],
 };
-// A profession meets the sectors that hire in a city (sourced facts), plus pulls on criteria.
+// A profession meets the fields that hire in a city (src/data/city-life.json), plus pulls.
 const PROFESSION: Record<
   NonNullable<Answers["profession"]>,
-  { sectors: string[]; pulls: Pull[] }
+  { fields: string[]; pulls: Pull[] }
 > = {
+  finance: { fields: ["finance"], pulls: [pull("business", 0.8, 1), pull("flights", 0.7, 0.5)] },
+  law: { fields: ["law", "consulting-project"], pulls: [pull("business", 0.7, 1)] },
+  consulting: {
+    fields: ["consulting-project", "ngo-international"],
+    pulls: [pull("business", 0.7, 1), pull("flights", 0.7, 0.5)],
+  },
   tech: {
-    sectors: ["tech"],
+    fields: ["tech"],
     pulls: [pull("internet", 0.9, 1.5), pull("business", 0.8, 1), pull("comfort", 0.75, 0.5)],
   },
+  health: { fields: ["health"], pulls: [pull("comfort", 0.8, 1)] },
+  teaching: { fields: ["education"], pulls: [pull("schools", 0.8, 1)] },
+  ngo: { fields: ["ngo-international"], pulls: [pull("flights", 0.7, 0.5)] },
+  admin: { fields: ["public-admin", "ngo-international"], pulls: [pull("paperwork", 0.7, 0.5)] },
   trade: {
-    sectors: ["port-trade"],
-    pulls: [pull("business", 0.8, 1), pull("bargaining", 0.8, 0.5), pull("flights", 0.6, 0.5)],
+    fields: ["trade", "logistics-port"],
+    pulls: [pull("business", 0.8, 1), pull("bargaining", 0.8, 0.5)],
   },
-  health: { sectors: ["admin-ngo"], pulls: [pull("comfort", 0.8, 1), pull("jobs", 0.7, 0.5)] },
-  teaching: { sectors: ["admin-ngo"], pulls: [pull("schools", 0.8, 1), pull("jobs", 0.7, 0.5)] },
-  culture: { sectors: ["tourism"], pulls: [pull("culture", 1, 1.5), pull("nightlife", 0.65, 0.5)] },
-  admin: { sectors: ["admin-ngo"], pulls: [pull("jobs", 0.8, 1), pull("paperwork", 0.7, 0.5)] },
+  culture: {
+    fields: ["media-arts", "tourism-hospitality"],
+    pulls: [pull("culture", 1, 1.5), pull("nightlife", 0.65, 0.5)],
+  },
   craft: {
-    sectors: ["port-trade", "tourism", "agriculture"],
+    fields: ["construction-realestate", "agriculture-agrifood", "trade"],
     pulls: [pull("cheap", 0.7, 1), pull("bargaining", 0.7, 0.5)],
   },
   student: {
-    sectors: [],
+    fields: [],
     pulls: [pull("cheap", 0.9, 1.5), pull("culture", 0.7, 1), pull("nightlife", 0.65, 0.5)],
   },
   retired: {
-    sectors: [],
+    fields: [],
     pulls: [
       pull("comfort", 0.9, 2),
       pull("safety", 0.9, 1.5),
@@ -279,6 +305,39 @@ const PROFESSION: Record<
       pull("flights", 0.7, 0.5),
     ],
   },
+};
+// Life today: what a reader would find again over there, unless they want a change of rhythm.
+const CURRENT_CITY: Record<NonNullable<Answers["currentCity"]>, Pull[]> = {
+  capital: [pull("pace", 0.8, 1.5), pull("walkable", 0.8, 1.5), pull("leisure", 0.8, 1.5)],
+  bigcity: [pull("pace", 0.65, 1.5), pull("walkable", 0.7, 1), pull("leisure", 0.7, 1)],
+  town: [pull("pace", 0.4, 1.5), pull("walkable", 0.5, 0.5)],
+  country: [pull("pace", 0.15, 1.5)],
+  nomad: [pull("flights", 0.9, 2), pull("internet", 0.9, 1.5), pull("easySetup", 0.8, 1)],
+};
+const MOBILITY: Record<NonNullable<Answers["mobility"]>, Pull[]> = {
+  walk: [pull("walkable", 0.9, 2)],
+  transit: [pull("walkable", 0.75, 1.5)],
+  bike: [pull("walkable", 0.6, 1), pull("pace", 0.4, 0.5)],
+  car: [],
+};
+const HABITS: Record<NonNullable<Answers["habits"]>[number], Pull[]> = {
+  gym: [pull("leisure", 0.8, 1)],
+  cafes: [pull("leisure", 0.8, 1), pull("nightlife", 0.6, 0.5)],
+  culture: [pull("culture", 0.9, 1.5), pull("leisure", 0.7, 0.5)],
+  markets: [pull("walkable", 0.7, 1), pull("bargaining", 0.6, 0.5)],
+  nights: [pull("nightlife", 0.9, 1.5)],
+  nature: [],
+};
+const NEIGHBOURHOOD: Record<NonNullable<Answers["neighbourhood"]>, Pull[]> = {
+  central: [pull("walkable", 0.85, 1), pull("pace", 0.7, 1)],
+  residential: [pull("pace", 0.4, 1)],
+  upscale: [pull("comfort", 0.8, 1)],
+  popular: [pull("cheap", 0.7, 1), pull("bargaining", 0.7, 0.5)],
+};
+const PEOPLE: Record<NonNullable<Answers["people"]>, Pull[]> = {
+  invited: [pull("welcome", 0.9, 2.5)],
+  quiet: [pull("pace", 0.4, 0.5)],
+  both: [pull("welcome", 0.7, 1)],
 };
 const STEP_PULLS = {
   crowds: (s: Step) => [pull("pace", 0.1 + 0.9 * s, 2)],
@@ -324,10 +383,33 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES))
     add(PRIORITY[priority]);
   if (answers.profession) {
-    const { sectors, pulls: more } = PROFESSION[answers.profession];
+    const { fields, pulls: more } = PROFESSION[answers.profession];
     add(more);
-    if (sectors.length) facts.push({ kind: "sectors", values: sectors, weight: 1.5 });
+    if (fields.length) facts.push({ kind: "professions", values: fields, weight: 2.5 });
   }
+  if (answers.currentCity) {
+    // Keeping the same rhythm doubles down on today's life; a change moves the pace target.
+    const shift = answers.rhythm === "calmer" ? -0.4 : answers.rhythm === "more" ? 0.3 : 0;
+    const boost = answers.rhythm === "same" ? 1.5 : answers.rhythm ? 0.6 : 1;
+    add(
+      CURRENT_CITY[answers.currentCity].map((p) => ({
+        ...p,
+        target: p.axis === "pace" ? Math.min(1, Math.max(0.05, p.target + shift)) : p.target,
+        weight: p.weight * boost,
+      })),
+    );
+  } else if (answers.rhythm === "calmer") {
+    add([pull("pace", 0.25, 1.5)]);
+  } else if (answers.rhythm === "more") {
+    add([pull("pace", 0.85, 1.5)]);
+  }
+  if (answers.mobility) add(MOBILITY[answers.mobility]);
+  for (const habit of answers.habits ?? []) add(HABITS[habit]);
+  if (answers.habits?.includes("nature"))
+    facts.push({ kind: "settings", values: ["nature"], weight: 1.5 });
+  if (answers.neighbourhood) add(NEIGHBOURHOOD[answers.neighbourhood]);
+  if (answers.neighbourhood === "upscale") facts.push({ kind: "upscale", values: [], weight: 2 });
+  if (answers.people) add(PEOPLE[answers.people]);
   if (answers.crowds !== undefined) add(STEP_PULLS.crowds(answers.crowds));
   if (answers.friction !== undefined) add(STEP_PULLS.friction(answers.friction));
   if (answers.bargaining !== undefined) add(STEP_PULLS.bargaining(answers.bargaining));
@@ -392,6 +474,9 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     return good ? "Le climat que tu cherches" : "Climat différent de ton souhait";
   if (part.fact === "zone") return good ? "Dans la région de ta famille" : undefined;
   if (part.fact === "sectors") return good ? "Ton secteur y recrute" : "Ton secteur y recrute peu";
+  if (part.fact === "professions")
+    return good ? "Ton métier y recrute" : "Ton métier y recrute peu";
+  if (part.fact === "upscale") return good ? "Des quartiers comme le tien" : undefined;
   switch (part.axis) {
     case "pace":
       return good
@@ -407,6 +492,18 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
       return good
         ? "Des prix comme tu les aimes"
         : "Des prix qui se négocient plus ou moins que tu ne le voudrais";
+    case "welcome":
+      return good
+        ? "Des habitants ouverts aux nouveaux venus (enquête Afrobaromètre)"
+        : "Une ouverture aux nouveaux venus plus réservée (enquête Afrobaromètre)";
+    case "walkable":
+      return good
+        ? "Beaucoup de choses à faire à pied"
+        : "Une ville où l'on se déplace surtout en voiture";
+    case "leisure":
+      return good
+        ? "Ton quotidien à portée : sport, cafés, culture"
+        : "Moins de lieux du quotidien à portée";
     case "paperwork":
       return good ? "Démarches simples" : "Démarches plus lourdes";
     default: {

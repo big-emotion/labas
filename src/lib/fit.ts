@@ -1,4 +1,5 @@
 import { CITIES, livableLanguages, type City, type CriterionKey } from "./cities";
+import { linesFor } from "./lines";
 
 /**
  * How Là-bas matches a reader with a city: not "which city is best", but "which city looks like
@@ -24,7 +25,10 @@ export type Axis =
   | "history"
   | "returnees"
   | "bargaining"
-  | "paperwork";
+  | "paperwork"
+  | "welcome"
+  | "walkable"
+  | "leisure";
 
 /** Facts are matched, not measured: a city has the sea or it does not. */
 export type FactPull =
@@ -32,7 +36,9 @@ export type FactPull =
   | { kind: "settings"; values: string[]; weight: number }
   | { kind: "climates"; values: string[]; weight: number }
   | { kind: "zone"; value: string; weight: number }
-  | { kind: "sectors"; values: string[]; weight: number };
+  | { kind: "sectors"; values: string[]; weight: number }
+  | { kind: "professions"; values: string[]; weight: number }
+  | { kind: "upscale"; values: string[]; weight: number };
 
 export interface Pull {
   axis: Axis;
@@ -42,7 +48,10 @@ export interface Pull {
 }
 
 /** What an axis reads from the sourced scores; comfort averages power, water and care. */
-const SOURCES: Record<Exclude<Axis, "paperwork">, CriterionKey[]> = {
+const SOURCES: Record<
+  Exclude<Axis, "paperwork" | "welcome" | "walkable" | "leisure">,
+  CriterionKey[]
+> = {
   pace: ["pace"],
   nightlife: ["nightlife"],
   cheap: ["cost"],
@@ -62,8 +71,29 @@ const SOURCES: Record<Exclude<Axis, "paperwork">, CriterionKey[]> = {
 
 const NEUTRAL = 0.5;
 
+const log = (n: number) => Math.log1p(n);
+
 function rawLevel(city: City, axis: Axis): number | null {
   if (axis === "paperwork") return city.countryFacts?.paperwork.level ?? null;
+  if (axis === "welcome") {
+    // What residents say (Afrobarometer): trust in others and openness to foreign neighbours.
+    const survey = city.countryFacts?.welcome?.afrobarometer;
+    const values = [survey?.trustNeighbours, survey?.toleranceForeigners].filter(
+      (v): v is number => typeof v === "number",
+    );
+    return values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
+  }
+  const places = city.life.places;
+  if (axis === "walkable") {
+    return places
+      ? log(places.shops) + log(places.transit) + log(places.cafe + places.resto)
+      : null;
+  }
+  if (axis === "leisure") {
+    return places
+      ? log(places.gym) + log(places.cafe + places.resto) + log(places.books + places.culture)
+      : null;
+  }
   const levels = SOURCES[axis]
     .map((key) => city.scores[key].level)
     .filter((level): level is number => level !== null);
@@ -85,7 +115,7 @@ function percentiles(axis: Axis): Map<string, number | null> {
   return new Map(known.map((k) => [k.name, k.level === null ? null : rank(k.level)]));
 }
 
-const AXES = [...Object.keys(SOURCES), "paperwork"] as Axis[];
+const AXES = [...Object.keys(SOURCES), "paperwork", "welcome", "walkable", "leisure"] as Axis[];
 const FINGERPRINTS = new Map(AXES.map((axis) => [axis, percentiles(axis)]));
 
 /** Where a city sits on an axis, 0 to 1, or null when no source says. */
@@ -162,6 +192,26 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       match = city.zone === fact.value;
     } else if (fact.kind === "sectors") {
       match = city.facts.sectors.some((s) => fact.values.includes(s));
+    } else if (fact.kind === "professions") {
+      // A field that hires a lot counts fully; one that offers a few posts counts a third.
+      const strength = Math.max(
+        0,
+        ...city.life.professions
+          .filter((p) => fact.values.includes(p.field))
+          .map((p) => p.strength),
+      );
+      parts.push({ value: strength / 3, weight: fact.weight, known: true, fact: fact.kind });
+      continue;
+    } else if (fact.kind === "upscale") {
+      const areas = linesFor(city.name)?.neighbourhoods ?? [];
+      const known = areas.some((a) => a.standing);
+      parts.push({
+        value: known ? (areas.some((a) => a.standing === "upscale") ? 1 : 0) : 0.5,
+        weight: fact.weight,
+        known,
+        fact: fact.kind,
+      });
+      continue;
     }
     parts.push({ value: match ? 1 : 0, weight: fact.weight, known: true, fact: fact.kind });
   }

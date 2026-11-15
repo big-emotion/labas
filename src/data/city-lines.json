@@ -6,19 +6,35 @@
     "neighbourhoods": [
       {
         "name": "Yaba",
-        "text": "Le quartier de la tech et des étudiants, autour du CcHub et de l'université. Une chambre : environ 120 € par mois."
+        "text": "Le quartier de la tech et des étudiants, autour du CcHub et de l'université. Une chambre : environ 120 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Surulere",
-        "text": "Quartier du continent connu pour ses deux stades et sa rue commerçante, Adeniran Ogunsanya, près du Théâtre national. Une chambre : environ 85 € par mois."
+        "text": "Quartier du continent connu pour ses deux stades et sa rue commerçante, Adeniran Ogunsanya, près du Théâtre national. Une chambre : environ 85 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Victoria Island",
-        "text": "Le centre des affaires, avec bars, boîtes et rooftops. Une chambre : environ 415 € par mois."
+        "text": "Le centre des affaires, avec bars, boîtes et rooftops. Une chambre : environ 415 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Lekki Phase 1",
-        "text": "Prix entre l'île et le continent, avec écoles internationales et centres commerciaux. Une chambre : environ 250 € par mois."
+        "text": "Prix entre l'île et le continent, avec écoles internationales et centres commerciaux. Une chambre : environ 250 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -80,19 +96,35 @@
     "neighbourhoods": [
       {
         "name": "Cocody Riviera",
-        "text": "Quartier résidentiel des familles, avec de grandes villas près du lycée français. Deux pièces : environ 270 à 530 € par mois."
+        "text": "Quartier résidentiel des familles, avec de grandes villas près du lycée français. Deux pièces : environ 270 à 530 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Marcory Zone 4",
-        "text": "Animée, surtout du jeudi au dimanche : bars, restaurants, musique tard le soir. Deux pièces : environ 380 à 760 € par mois."
+        "text": "Animée, surtout du jeudi au dimanche : bars, restaurants, musique tard le soir. Deux pièces : environ 380 à 760 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Treichville",
-        "text": "Un des quartiers les plus vivants, surtout la nuit, autour de la rue 12. Deux pièces : environ 150 à 300 € par mois."
+        "text": "Un des quartiers les plus vivants, surtout la nuit, autour de la rue 12. Deux pièces : environ 150 à 300 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Le Plateau",
-        "text": "Le quartier des affaires et des tours : on y travaille plus qu'on n'y vit, et il est calme le week-end."
+        "text": "Le quartier des affaires et des tours : on y travaille plus qu'on n'y vit, et il est calme le week-end.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": false
       }
     ],
     "sources": [
@@ -147,19 +179,35 @@
     "neighbourhoods": [
       {
         "name": "Osu",
-        "text": "Le cœur des sorties : Oxford Street, bars et restaurants pleins le soir, et du bruit tard. Appartement, taille non précisée : environ 290 à 860 € par mois."
+        "text": "Le cœur des sorties : Oxford Street, bars et restaurants pleins le soir, et du bruit tard. Appartement, taille non précisée : environ 290 à 860 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Labone",
-        "text": "Résidentiel et plus calme qu'Osu, mais plein de restaurants et de bars. Une chambre : environ 385 à 1 030 € par mois selon les guides."
+        "text": "Résidentiel et plus calme qu'Osu, mais plein de restaurants et de bars. Une chambre : environ 385 à 1 030 € par mois selon les guides.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "East Legon",
-        "text": "Quartier récent, écoles internationales, centres commerciaux, bon pour une famille. Une chambre : environ 360 à 1 000 € par mois."
+        "text": "Quartier récent, écoles internationales, centres commerciaux, bon pour une famille. Une chambre : environ 360 à 1 000 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Spintex",
-        "text": "Long axe de bureaux et de commerces, résidences gardées, jeunes actifs. Une chambre : environ 210 à 570 € par mois."
+        "text": "Long axe de bureaux et de commerces, résidences gardées, jeunes actifs. Une chambre : environ 210 à 570 € par mois.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": false,
+        "lively": null
       }
     ],
     "why": {
@@ -222,19 +270,35 @@
     "neighbourhoods": [
       {
         "name": "Almadies et Ngor",
-        "text": "Au bout de la presqu'île, face à la mer, avec ses restaurants de poisson. Budget élevé. Deux pièces meublé : environ 380 à 610 € par mois."
+        "text": "Au bout de la presqu'île, face à la mer, avec ses restaurants de poisson. Budget élevé. Deux pièces meublé : environ 380 à 610 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Mermoz et Sacré-Cœur",
-        "text": "Familial, calme et bien desservi par les transports. Deux pièces : environ 275 à 425 € par mois."
+        "text": "Familial, calme et bien desservi par les transports. Deux pièces : environ 275 à 425 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Point E et Fann",
-        "text": "Fann, calme avec villas et jardins ; Point E, quartier étudiant près de l'université, avec bars et restaurants."
+        "text": "Fann, calme avec villas et jardins ; Point E, quartier étudiant près de l'université, avec bars et restaurants.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Ouakam",
-        "text": "Ancien village de pêcheurs lébous, près des plages de la Corniche, apprécié des étudiants. Deux pièces : environ 185 à 335 € par mois."
+        "text": "Ancien village de pêcheurs lébous, près des plages de la Corniche, apprécié des étudiants. Deux pièces : environ 185 à 335 € par mois.",
+        "setting": "seaside",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -287,19 +351,35 @@
     "neighbourhoods": [
       {
         "name": "Haie Vive et Cocotiers",
-        "text": "Le quartier des expatriés, près de l'ambassade de France et du lycée Montaigne, avec sa rue de bars. Appartement moderne : environ 260 à 430 € par mois (2026)."
+        "text": "Le quartier des expatriés, près de l'ambassade de France et du lycée Montaigne, avec sa rue de bars. Appartement moderne : environ 260 à 430 € par mois (2026).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Fidjrossè",
-        "text": "Quartier de plage à l'ouest, plein de bars et de restaurants, animé le week-end. Appartement : environ 170 à 340 € par mois selon la distance à la plage (2026)."
+        "text": "Quartier de plage à l'ouest, plein de bars et de restaurants, animé le week-end. Appartement : environ 170 à 340 € par mois selon la distance à la plage (2026).",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Zogbo, Vêdoko, Sètovi",
-        "text": "Autour du stade de l'Amitié, le coin des étudiants qui aiment sortir, avec bars et restaurants animés le week-end."
+        "text": "Autour du stade de l'Amitié, le coin des étudiants qui aiment sortir, avec bars et restaurants animés le week-end.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Akpakpa",
-        "text": "Vieux quartier résidentiel sur la rive est de la lagune, présenté comme un bon compromis entre prix et cadre de vie."
+        "text": "Vieux quartier résidentiel sur la rive est de la lagune, présenté comme un bon compromis entre prix et cadre de vie.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -345,19 +425,35 @@
     "neighbourhoods": [
       {
         "name": "Gombe",
-        "text": "Le centre des affaires et des ambassades, arboré, avec une promenade au bord du fleuve. Appartements : environ 1 290 à 4 300 € par mois."
+        "text": "Le centre des affaires et des ambassades, arboré, avec une promenade au bord du fleuve. Appartements : environ 1 290 à 4 300 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Ngaliema",
-        "text": "Grande commune résidentielle de l'ouest, avec vue sur le fleuve, prisée des familles. Quatre pièces près de l'UPN : environ 775 € par mois."
+        "text": "Grande commune résidentielle de l'ouest, avec vue sur le fleuve, prisée des familles. Quatre pièces près de l'UPN : environ 775 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Lemba",
-        "text": "Colline de l'université de Kinshasa, quartier populaire et étudiant. Trois pièces neuves : environ 430 € par mois (annonce, avril 2026)."
+        "text": "Colline de l'université de Kinshasa, quartier populaire et étudiant. Trois pièces neuves : environ 430 € par mois (annonce, avril 2026).",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Matonge (Kalamu)",
-        "text": "L'un des grands quartiers de sortie de la ville, plein de bars et de studios d'enregistrement. Très dense."
+        "text": "L'un des grands quartiers de sortie de la ville, plein de bars et de studios d'enregistrement. Très dense.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -408,19 +504,35 @@
     "neighbourhoods": [
       {
         "name": "Bonapriso",
-        "text": "Quartier aisé et plutôt calme, avec galeries, restaurants et boutiques. Studio : environ 305 € par mois ; deux chambres de 90 m² : environ 760 € (annonces 2026)."
+        "text": "Quartier aisé et plutôt calme, avec galeries, restaurants et boutiques. Studio : environ 305 € par mois ; deux chambres de 90 m² : environ 760 € (annonces 2026).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Akwa",
-        "text": "Le centre des affaires et le cœur historique de la vie nocturne : animé, bruyant, encombré. Deux pièces : environ 90 à 150 € par mois."
+        "text": "Le centre des affaires et le cœur historique de la vie nocturne : animé, bruyant, encombré. Deux pièces : environ 90 à 150 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Bonamoussadi",
-        "text": "Grand quartier résidentiel du nord, plus récent, avec centres commerciaux, supermarchés et boîtes de nuit. Studio neuf : environ 275 € par mois (annonces 2026)."
+        "text": "Grand quartier résidentiel du nord, plus récent, avec centres commerciaux, supermarchés et boîtes de nuit. Studio neuf : environ 275 € par mois (annonces 2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Makepe, Kotto et Logpom",
-        "text": "Rues calmes de villas et d'immeubles neufs, parmi les loyers les plus bas de la ville. Trois pièces de 80 m² à Makepe : environ 410 € par mois."
+        "text": "Rues calmes de villas et d'immeubles neufs, parmi les loyers les plus bas de la ville. Trois pièces de 80 m² à Makepe : environ 410 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -478,19 +590,35 @@
     "neighbourhoods": [
       {
         "name": "Talatona",
-        "text": "Quartier moderne au sud : résidences gardées, centres commerciaux, écoles internationales. Deux chambres : environ 2 150 à 3 440 € par mois."
+        "text": "Quartier moderne au sud : résidences gardées, centres commerciaux, écoles internationales. Deux chambres : environ 2 150 à 3 440 € par mois.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Ilha do Cabo",
-        "text": "Langue de sable face au centre : hôtels, bars, clubs et plages, on y vient le week-end. Deux chambres : environ 1 550 à 2 580 € par mois."
+        "text": "Langue de sable face au centre : hôtels, bars, clubs et plages, on y vient le week-end. Deux chambres : environ 1 550 à 2 580 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Miramar",
-        "text": "Quartier des ambassades, avec vue sur l'océan, restaurants et toits-terrasses. Deux chambres : environ 1 720 à 3 010 € par mois."
+        "text": "Quartier des ambassades, avec vue sur l'océan, restaurants et toits-terrasses. Deux chambres : environ 1 720 à 3 010 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Alvalade et Maianga",
-        "text": "Quartiers centraux, plus abordables, avec des cliniques à proximité. Deux chambres à Alvalade : environ 1 290 à 2 580 € par mois."
+        "text": "Quartiers centraux, plus abordables, avec des cliniques à proximité. Deux chambres à Alvalade : environ 1 290 à 2 580 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -536,15 +664,27 @@
     "neighbourhoods": [
       {
         "name": "Westlands",
-        "text": "Le quartier des sorties et des jeunes actifs. Deux chambres : environ 560 à 1 050 € par mois."
+        "text": "Le quartier des sorties et des jeunes actifs. Deux chambres : environ 560 à 1 050 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Kilimani",
-        "text": "Central, beaucoup d'appartements récents. Deux chambres : environ 420 à 840 € par mois."
+        "text": "Central, beaucoup d'appartements récents. Deux chambres : environ 420 à 840 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Lavington et Karen",
-        "text": "Verts et calmes, prisés des familles, près des écoles internationales. Surtout des maisons."
+        "text": "Verts et calmes, prisés des familles, près des écoles internationales. Surtout des maisons.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "why": {
@@ -620,19 +760,35 @@
     "neighbourhoods": [
       {
         "name": "Bole",
-        "text": "Le quartier de l'aéroport : commerces, restaurants et cafés tout près, très pratique au quotidien. Une chambre meublée : environ 610 € par mois."
+        "text": "Le quartier de l'aéroport : commerces, restaurants et cafés tout près, très pratique au quotidien. Une chambre meublée : environ 610 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Old Airport",
-        "text": "Quartier résidentiel aisé, où vivent beaucoup de familles de l'école internationale. Moins de restaurants qu'à Bole."
+        "text": "Quartier résidentiel aisé, où vivent beaucoup de familles de l'école internationale. Moins de restaurants qu'à Bole.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "CMC et Ayat",
-        "text": "Quartiers récents à l'est, résidences et villas, reliés au centre par le tramway. Deux chambres : environ 305 à 480 € par mois."
+        "text": "Quartiers récents à l'est, résidences et villas, reliés au centre par le tramway. Deux chambres : environ 305 à 480 € par mois.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Piassa et Arat Kilo",
-        "text": "Le vieux centre : immeubles anciens, cafés, plus vieux théâtre de la ville, cathédrale de la Trinité."
+        "text": "Le vieux centre : immeubles anciens, cafés, plus vieux théâtre de la ville, cathédrale de la Trinité.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       }
     ],
     "why": {
@@ -682,19 +838,35 @@
     "neighbourhoods": [
       {
         "name": "Masaki et Oyster Bay",
-        "text": "Quartiers aisés de la presqu'île, ambassades et expatriés, bars et sorties. Bon appartement : environ 860 à 2 060 € par mois."
+        "text": "Quartiers aisés de la presqu'île, ambassades et expatriés, bars et sorties. Bon appartement : environ 860 à 2 060 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Msasani",
-        "text": "Sur la presqu'île, familles et célibataires, petites rues animées. Loyers : environ 140 à 860 € par mois."
+        "text": "Sur la presqu'île, familles et célibataires, petites rues animées. Loyers : environ 140 à 860 € par mois.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Mikocheni",
-        "text": "Plus de bars de quartier qu'à Masaki, près d'une école internationale. Deux ou trois chambres : environ 685 à 1 540 € par mois."
+        "text": "Plus de bars de quartier qu'à Masaki, près d'une école internationale. Deux ou trois chambres : environ 685 à 1 540 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Mbezi Beach",
-        "text": "À une vingtaine de km au nord, plus grandes maisons, près de la plage ; la voiture aide. Trois chambres : environ 720 € par mois."
+        "text": "À une vingtaine de km au nord, plus grandes maisons, près de la plage ; la voiture aide. Trois chambres : environ 720 € par mois.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -741,19 +913,35 @@
     "neighbourhoods": [
       {
         "name": "Kololo",
-        "text": "Colline résidentielle chic près du centre, avec ambassades, hôtels et bars. Appartement haut de gamme : environ 550 à 1 100 € par mois."
+        "text": "Colline résidentielle chic près du centre, avec ambassades, hôtels et bars. Appartement haut de gamme : environ 550 à 1 100 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Bugolobi et Mbuya",
-        "text": "Quartiers résidentiels développés, maisons sur les pentes, bons pour une famille. Deux ou trois chambres : environ 330 à 880 € par mois."
+        "text": "Quartiers résidentiels développés, maisons sur les pentes, bons pour une famille. Deux ou trois chambres : environ 330 à 880 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Muyenga et Kabalagala",
-        "text": "Muyenga a la vue sur le lac Victoria ; en bas, Kabalagala est connu pour ses bars et ses clubs. Deux ou trois chambres : environ 330 à 880 € par mois."
+        "text": "Muyenga a la vue sur le lac Victoria ; en bas, Kabalagala est connu pour ses bars et ses clubs. Deux ou trois chambres : environ 330 à 880 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Ntinda et Bukoto",
-        "text": "Quartiers résidentiels au nord-est, cliniques et bars de quartier. Petit logement : environ 150 à 400 € par mois."
+        "text": "Quartiers résidentiels au nord-est, cliniques et bars de quartier. Petit logement : environ 150 à 400 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       }
     ],
     "why": {
@@ -811,19 +999,35 @@
     "neighbourhoods": [
       {
         "name": "Kimihurura",
-        "text": "Animé et bien organisé, avec le Parlement et des sorties le soir ; prisé des jeunes actifs. Deux chambres : environ 505 à 845 € par mois."
+        "text": "Animé et bien organisé, avec le Parlement et des sorties le soir ; prisé des jeunes actifs. Deux chambres : environ 505 à 845 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Kibagabaga",
-        "text": "Résidentiel et plus calme, entre habitants et étrangers, moins cher que Nyarutarama. L'école internationale ISK y a son campus."
+        "text": "Résidentiel et plus calme, entre habitants et étrangers, moins cher que Nyarutarama. L'école internationale ISK y a son campus.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Kicukiro",
-        "text": "Surtout rwandais, calme, avec vue sur les collines, près de l'aéroport : pour les familles qui veulent de l'espace."
+        "text": "Surtout rwandais, calme, avec vue sur les collines, près de l'aéroport : pour les familles qui veulent de l'espace.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Nyamirambo",
-        "text": "Le quartier le plus peuplé, vivant et ouvert tard, avec de nombreuses mosquées, dont la mosquée verte des années 1930."
+        "text": "Le quartier le plus peuplé, vivant et ouvert tard, avec de nombreuses mosquées, dont la mosquée verte des années 1930.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       }
     ],
     "why": {
@@ -893,19 +1097,35 @@
     "neighbourhoods": [
       {
         "name": "Rosebank",
-        "text": "Centre commercial, galeries d'art et bars sur les toits : animé le jour comme le soir. Deux pièces : environ 455 à 695 € par mois."
+        "text": "Centre commercial, galeries d'art et bars sur les toits : animé le jour comme le soir. Deux pièces : environ 455 à 695 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Parkhurst",
-        "text": "Ambiance de village autour de la 4e Avenue, ses cafés et ses restaurants, appréciée des familles. Deux pièces : environ 430 à 640 € par mois."
+        "text": "Ambiance de village autour de la 4e Avenue, ses cafés et ses restaurants, appréciée des familles. Deux pièces : environ 430 à 640 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Melville",
-        "text": "Quartier étudiant et bohème près des universités, avec cafés, restaurants et bars sur la 7e Rue."
+        "text": "Quartier étudiant et bohème près des universités, avec cafés, restaurants et bars sur la 7e Rue.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Sandton",
-        "text": "Le quartier des affaires, avec des résidences sécurisées. Deux pièces : environ 480 à 750 € par mois, charges souvent en plus."
+        "text": "Le quartier des affaires, avec des résidences sécurisées. Deux pièces : environ 480 à 750 € par mois, charges souvent en plus.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -961,19 +1181,35 @@
     "neighbourhoods": [
       {
         "name": "Sea Point",
-        "text": "Front de mer animé, avec une promenade pour marcher et courir. Studio : environ 860 à 910 € par mois."
+        "text": "Front de mer animé, avec une promenade pour marcher et courir. Studio : environ 860 à 910 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Gardens",
-        "text": "Au pied de la montagne de la Table, le quartier des créatifs, avec les restaurants et boutiques de Kloof Street."
+        "text": "Au pied de la montagne de la Table, le quartier des créatifs, avec les restaurants et boutiques de Kloof Street.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Woodstock",
-        "text": "Vieux quartier près du centre, aux entrepôts devenus restaurants et bureaux. Une chambre : environ 670 € par mois."
+        "text": "Vieux quartier près du centre, aux entrepôts devenus restaurants et bureaux. Une chambre : environ 670 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Observatory",
-        "text": "Quartier étudiant et alternatif, avec bars et concerts sur Lower Main Road. Studio : environ 670 € par mois."
+        "text": "Quartier étudiant et alternatif, avec bars et concerts sur Lower Main Road. Studio : environ 670 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -1038,19 +1274,35 @@
     "neighbourhoods": [
       {
         "name": "uMhlanga",
-        "text": "Village de bord de mer et quartier d'affaires, le préféré des expatriés et le plus cher. Une chambre meublée : environ 615 € par mois (annonce, novembre 2026)."
+        "text": "Village de bord de mer et quartier d'affaires, le préféré des expatriés et le plus cher. Une chambre meublée : environ 615 € par mois (annonce, novembre 2026).",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Morningside et Florida Road",
-        "text": "Quartier aisé sur la colline, avec Florida Road pour sortir : restaurants, pubs, bistrots. Une chambre : environ 350 à 440 € par mois (annonces, novembre 2026)."
+        "text": "Quartier aisé sur la colline, avec Florida Road pour sortir : restaurants, pubs, bistrots. Une chambre : environ 350 à 440 € par mois (annonces, novembre 2026).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Westville",
-        "text": "Banlieue verte et calme, avec de bonnes écoles, appréciée des familles."
+        "text": "Banlieue verte et calme, avec de bonnes écoles, appréciée des familles.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Durban North",
-        "text": "Quartier résidentiel aisé, près de la plage et moins cher qu'uMhlanga."
+        "text": "Quartier résidentiel aisé, près de la plage et moins cher qu'uMhlanga.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -1094,19 +1346,35 @@
     "neighbourhoods": [
       {
         "name": "Polana Cimento",
-        "text": "Quartier central et aisé, aux immeubles hauts, où l'on vit à pied. Logement de jeune actif : environ 590 à 1 250 € par mois."
+        "text": "Quartier central et aisé, aux immeubles hauts, où l'on vit à pied. Logement de jeune actif : environ 590 à 1 250 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Sommerschield",
-        "text": "Le quartier des ambassades, aisé et résidentiel. Deux chambres : environ 1 580 à 2 370 € par mois."
+        "text": "Le quartier des ambassades, aisé et résidentiel. Deux chambres : environ 1 580 à 2 370 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Bairro Central et Alto Maé",
-        "text": "Au centre, près de l'université Eduardo Mondlane, les logements d'une chambre les moins chers de la ville."
+        "text": "Au centre, près de l'université Eduardo Mondlane, les logements d'une chambre les moins chers de la ville.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Costa do Sol",
-        "text": "Au bord de la mer, à 5 km au nord du centre, avec plage et résidences récentes. Deux chambres : environ 790 à 1 710 € par mois."
+        "text": "Au bord de la mer, à 5 km au nord du centre, avec plage et résidences récentes. Deux chambres : environ 790 à 1 710 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -1146,19 +1414,35 @@
     "neighbourhoods": [
       {
         "name": "Centre : Caudan, place d'Armes, Chinatown",
-        "text": "Le quartier des affaires, animé le jour et tranquille le soir. Deux pièces : environ 465 € par mois."
+        "text": "Le quartier des affaires, animé le jour et tranquille le soir. Deux pièces : environ 465 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Champ de Mars et Tranquebar",
-        "text": "Logements de gamme moyenne pour cadres et familles, dans des immeubles anciens en rénovation."
+        "text": "Logements de gamme moyenne pour cadres et familles, dans des immeubles anciens en rénovation.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Plaine Verte et Vallée Pitot",
-        "text": "Parmi les quartiers les plus abordables, surtout habités par des Mauriciens. Deux chambres : environ 190 € par mois."
+        "text": "Parmi les quartiers les plus abordables, surtout habités par des Mauriciens. Deux chambres : environ 190 € par mois.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Moka",
-        "text": "De l'autre côté de la montagne : quartier planifié et familial, sans accès direct à la mer, à 20-40 minutes des plages."
+        "text": "De l'autre côté de la montagne : quartier planifié et familial, sans accès direct à la mer, à 20-40 minutes des plages.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -1210,19 +1494,35 @@
     "neighbourhoods": [
       {
         "name": "Zamalek",
-        "text": "Île verte sur le Nil, qu'on parcourt à pied, avec galeries et restaurants. Trois pièces meublées vue Nil : environ 760 à 1 860 € par mois."
+        "text": "Île verte sur le Nil, qu'on parcourt à pied, avec galeries et restaurants. Trois pièces meublées vue Nil : environ 760 à 1 860 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Maadi",
-        "text": "Quartier arboré au sud du centre, cœur historique des expatriés, avec cafés et supermarchés à Degla. Deux pièces : environ 170 à 270 € par mois."
+        "text": "Quartier arboré au sud du centre, cœur historique des expatriés, avec cafés et supermarchés à Degla. Deux pièces : environ 170 à 270 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Héliopolis",
-        "text": "Cité-jardin de 1905 près de l'aéroport. La place Korba, rue Baghdad, est le coin des cafés et des boutiques."
+        "text": "Cité-jardin de 1905 près de l'aéroport. La place Korba, rue Baghdad, est le coin des cafés et des boutiques.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "New Cairo",
-        "text": "Ville nouvelle à l'est, en résidences fermées, où l'on se déplace en voiture. Loin du centre historique."
+        "text": "Ville nouvelle à l'est, en résidences fermées, où l'on se déplace en voiture. Loin du centre historique.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -1289,19 +1589,35 @@
     "neighbourhoods": [
       {
         "name": "Maârif",
-        "text": "Le quartier des sorties et du shopping : restaurants, cafés, boutiques, bien desservi. Deux chambres non meublé : environ 510 à 740 € par mois."
+        "text": "Le quartier des sorties et du shopping : restaurants, cafés, boutiques, bien desservi. Deux chambres non meublé : environ 510 à 740 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Gauthier",
-        "text": "Plus calme et plus culturel que Maârif, résidentiel, proche du centre et des écoles internationales. Deux chambres : environ 465 à 695 € par mois."
+        "text": "Plus calme et plus culturel que Maârif, résidentiel, proche du centre et des écoles internationales. Deux chambres : environ 465 à 695 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Bourgogne",
-        "text": "Central et dense, avec de grandes avenues arborées, près de la mosquée Hassan II. Deux pièces meublé : environ 280 à 555 € par mois."
+        "text": "Central et dense, avec de grandes avenues arborées, près de la mosquée Hassan II. Deux pièces meublé : environ 280 à 555 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Aïn Diab",
-        "text": "Au bord de l'océan : plage, corniche, restaurants, bars et hôtels. Deux pièces meublé : environ 1 110 à 2 315 € par mois."
+        "text": "Au bord de l'océan : plage, corniche, restaurants, bars et hôtels. Deux pièces meublé : environ 1 110 à 2 315 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       }
     ],
     "sources": [
@@ -1360,19 +1676,35 @@
     "neighbourhoods": [
       {
         "name": "Hydra et El Biar",
-        "text": "Sur les hauteurs, les quartiers où vivent le plus d'étrangers, avec plus de la moitié des ambassades."
+        "text": "Sur les hauteurs, les quartiers où vivent le plus d'étrangers, avec plus de la moitié des ambassades.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Telemly",
-        "text": "Vue sur la baie et loyers souvent plus bas, mais se garer y est difficile."
+        "text": "Vue sur la baie et loyers souvent plus bas, mais se garer y est difficile.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Ben Aknoun",
-        "text": "Quartier de ministères et d'ambassades, avec le lycée français et l'école américaine. Deux ou trois pièces : environ 990 € par mois demandés."
+        "text": "Quartier de ministères et d'ambassades, avec le lycée français et l'école américaine. Deux ou trois pièces : environ 990 € par mois demandés.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Bab Ezzouar",
-        "text": "Bureaux, universités et transports, avec un grand centre commercial où l'on sort le soir."
+        "text": "Bureaux, universités et transports, avec un grand centre commercial où l'on sort le soir.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": null,
+        "lively": true
       }
     ],
     "sources": [
@@ -1419,19 +1751,35 @@
     "neighbourhoods": [
       {
         "name": "La Marsa",
-        "text": "Banlieue nord au bord de la mer, la plus recherchée en location, avec bars de plage. Deux pièces : environ 570 € par mois (moyenne 2024)."
+        "text": "Banlieue nord au bord de la mer, la plus recherchée en location, avec bars de plage. Deux pièces : environ 570 € par mois (moyenne 2024).",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Les Berges du Lac",
-        "text": "Quartier récent au bord du lac, le plus cher à louer. Deux pièces : environ 620 € par mois (moyenne 2024)."
+        "text": "Quartier récent au bord du lac, le plus cher à louer. Deux pièces : environ 620 € par mois (moyenne 2024).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Ennasr 2",
-        "text": "Quartier du nord parmi les plus recherchés, aux loyers moyens. Deux pièces : environ 320 € par mois (moyenne 2024)."
+        "text": "Quartier du nord parmi les plus recherchés, aux loyers moyens. Deux pièces : environ 320 € par mois (moyenne 2024).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Gammarth",
-        "text": "Au nord de La Marsa, résidences avec piscine. Quatre pièces : environ 660 à 1 050 € par mois (2026)."
+        "text": "Au nord de La Marsa, résidences avec piscine. Quatre pièces : environ 660 à 1 050 € par mois (2026).",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -1477,19 +1825,35 @@
     "neighbourhoods": [
       {
         "name": "Guéliz",
-        "text": "La ville moderne : commerces, banques, restaurants. Le quartier le plus simple pour arriver. Deux pièces : environ 370 à 650 € par mois."
+        "text": "La ville moderne : commerces, banques, restaurants. Le quartier le plus simple pour arriver. Deux pièces : environ 370 à 650 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Hivernage",
-        "text": "Calme et chic, entre grands hôtels et villas, près de la médina. Deux pièces : environ 560 à 830 € par mois."
+        "text": "Calme et chic, entre grands hôtels et villas, près de la médina. Deux pièces : environ 560 à 830 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Médina",
-        "text": "Le cœur historique : ruelles, souks et riads. Riad simple de trois pièces : environ 740 à 1 020 € par mois."
+        "text": "Le cœur historique : ruelles, souks et riads. Riad simple de trois pièces : environ 740 à 1 020 € par mois.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Targa",
-        "text": "À l'ouest, villas et résidences près du jardin Majorelle, appréciées des familles."
+        "text": "À l'ouest, villas et résidences près du jardin Majorelle, appréciées des familles.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -1529,19 +1893,35 @@
     "neighbourhoods": [
       {
         "name": "Tokoin",
-        "text": "Le quartier des ambassades, résidentiel. Villa : environ 1 220 à 2 290 € par mois selon un guide ; une villa de trois chambres affichée 457 € (2026)."
+        "text": "Le quartier des ambassades, résidentiel. Villa : environ 1 220 à 2 290 € par mois selon un guide ; une villa de trois chambres affichée 457 € (2026).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Nyékonakpoè",
-        "text": "Quartier familial, près des écoles internationales. Villa : environ 760 à 1 520 € par mois selon un guide."
+        "text": "Quartier familial, près des écoles internationales. Villa : environ 760 à 1 520 € par mois selon un guide.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Adidogomé",
-        "text": "Quartier résidentiel calme, en plein développement. Villa : environ 610 à 1 220 € par mois selon un guide."
+        "text": "Quartier résidentiel calme, en plein développement. Villa : environ 610 à 1 220 € par mois selon un guide.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Bè",
-        "text": "Central et très vivant, mais plus bruyant. Moins cher que les quartiers résidentiels."
+        "text": "Central et très vivant, mais plus bruyant. Moins cher que les quartiers résidentiels.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -1565,19 +1945,35 @@
     "neighbourhoods": [
       {
         "name": "Aberdeen et Lumley",
-        "text": "À l'ouest, plus aisé : hôtels, plage de Lumley et sorties. Une pièce simple : environ 16 à 33 € par mois, payés à l'année."
+        "text": "À l'ouest, plus aisé : hôtels, plage de Lumley et sorties. Une pièce simple : environ 16 à 33 € par mois, payés à l'année.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Hill Station",
-        "text": "Sur les hauteurs de l'ouest : vieilles maisons coloniales sur pilotis, vue sur la ville, et la route qui monte vers la forêt de Tacugama."
+        "text": "Sur les hauteurs de l'ouest : vieilles maisons coloniales sur pilotis, vue sur la ville, et la route qui monte vers la forêt de Tacugama.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Centre",
-        "text": "Le quartier des affaires, des ministères et des ambassades. Une pièce simple : environ 7 à 16 € par mois, payés à l'année."
+        "text": "Le quartier des affaires, des ministères et des ambassades. Une pièce simple : environ 7 à 16 € par mois, payés à l'année.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Lakka et Tokeh",
-        "text": "Plages au sud de la péninsule, où l'on part le week-end. Plus loin du centre : les trajets sont longs."
+        "text": "Plages au sud de la péninsule, où l'on part le week-end. Plus loin du centre : les trajets sont longs.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -1617,19 +2013,35 @@
     "neighbourhoods": [
       {
         "name": "Mamba Point",
-        "text": "L'ancien quartier diplomatique, avec les ambassades. Un logement : environ 515 à 1 030 € par mois (2026)."
+        "text": "L'ancien quartier diplomatique, avec les ambassades. Un logement : environ 515 à 1 030 € par mois (2026).",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Sinkor",
-        "text": "Le centre moderne près de la plage : restaurants et supermarchés sur Tubman Boulevard. Un logement : environ 345 à 685 € par mois."
+        "text": "Le centre moderne près de la plage : restaurants et supermarchés sur Tubman Boulevard. Un logement : environ 345 à 685 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Congo Town",
-        "text": "Quartier calme et résidentiel, avec l'école américaine. Un logement : environ 255 à 515 € par mois (2026)."
+        "text": "Quartier calme et résidentiel, avec l'école américaine. Un logement : environ 255 à 515 € par mois (2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Paynesville",
-        "text": "Grande banlieue moins chère, avec de grands marchés. Un logement : environ 170 à 345 € par mois (2026)."
+        "text": "Grande banlieue moins chère, avec de grands marchés. Un logement : environ 170 à 345 € par mois (2026).",
+        "setting": "outskirts",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -1669,19 +2081,35 @@
     "neighbourhoods": [
       {
         "name": "Kipé",
-        "text": "En bord de mer, avec des restaurants ; prisé du personnel des ambassades et des ONG."
+        "text": "En bord de mer, avec des restaurants ; prisé du personnel des ambassades et des ONG.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Ratoma",
-        "text": "Centres commerciaux et écoles internationales. Petit deux-chambres : environ 250 à 300 € par mois."
+        "text": "Centres commerciaux et écoles internationales. Petit deux-chambres : environ 250 à 300 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Camayenne",
-        "text": "Le quartier des ambassades, avec des résidences sécurisées."
+        "text": "Le quartier des ambassades, avec des résidences sécurisées.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Kaloum",
-        "text": "Le centre administratif, peu résidentiel, avec beaucoup de circulation. Petit deux-chambres : environ 250 à 300 € par mois."
+        "text": "Le centre administratif, peu résidentiel, avec beaucoup de circulation. Petit deux-chambres : environ 250 à 300 € par mois.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -1722,11 +2150,19 @@
     "neighbourhoods": [
       {
         "name": "Bissau Velho",
-        "text": "Le vieux centre colonial, avec plusieurs restaurants. C'est le quartier le mieux desservi en eau, selon une source non datée."
+        "text": "Le vieux centre colonial, avec plusieurs restaurants. C'est le quartier le mieux desservi en eau, selon une source non datée.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Bandim",
-        "text": "Autour du marché de Bandim, le principal de la ville, avec un supermarché juste en face."
+        "text": "Autour du marché de Bandim, le principal de la ville, avec un supermarché juste en face.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -1767,19 +2203,35 @@
     "neighbourhoods": [
       {
         "name": "Plateau",
-        "text": "Le centre historique, sur la liste indicative de l'UNESCO depuis 2016. Loyers à partir d'environ 265 € par mois, taille non précisée."
+        "text": "Le centre historique, sur la liste indicative de l'UNESCO depuis 2016. Loyers à partir d'environ 265 € par mois, taille non précisée.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Palmarejo",
-        "text": "Sur une colline à 1-1,5 km de la mer, à 15 minutes à pied de la plage de Quebra Canela. Deux chambres : environ 440 à 615 € par mois."
+        "text": "Sur une colline à 1-1,5 km de la mer, à 15 minutes à pied de la plage de Quebra Canela. Deux chambres : environ 440 à 615 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Achada Santo António",
-        "text": "Restaurants, ambassades et une bonne partie de la vie nocturne. Loyers proches de ceux de Palmarejo, selon un habitant."
+        "text": "Restaurants, ambassades et une bonne partie de la vie nocturne. Loyers proches de ceux de Palmarejo, selon un habitant.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Prainha",
-        "text": "Les grands hôtels et une plage. Villa avec vue sur la mer : environ 705 à 1 320 € par mois."
+        "text": "Les grands hôtels et une plage. Villa avec vue sur la mer : environ 705 à 1 320 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -1814,15 +2266,27 @@
     "neighbourhoods": [
       {
         "name": "Tevragh Zeina",
-        "text": "Quartier résidentiel du nord, avec de nombreuses ambassades. Deux chambres de bon niveau : environ 490 à 780 € par mois."
+        "text": "Quartier résidentiel du nord, avec de nombreuses ambassades. Deux chambres de bon niveau : environ 490 à 780 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Ksar et Ilot K",
-        "text": "Quartiers recherchés par les jeunes actifs. Logement : environ 220 à 490 € par mois."
+        "text": "Quartiers recherchés par les jeunes actifs. Logement : environ 220 à 490 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Arafat et Dar Naïm",
-        "text": "Quartiers familiaux, parmi les moins chers. Maison de 2 ou 3 chambres : environ 290 à 560 € par mois."
+        "text": "Quartiers familiaux, parmi les moins chers. Maison de 2 ou 3 chambres : environ 290 à 560 € par mois.",
+        "setting": "outskirts",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -1851,19 +2315,35 @@
     "neighbourhoods": [
       {
         "name": "Poto-Poto",
-        "text": "Quartier animé, avec ses marchés, ses sorties le soir et son école de peinture. Deux pièces : environ 69 à 152 € par mois."
+        "text": "Quartier animé, avec ses marchés, ses sorties le soir et son école de peinture. Deux pièces : environ 69 à 152 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Bacongo",
-        "text": "Quartier de familles, où se trouve le lycée français. Deux pièces : environ 76 à 183 € par mois."
+        "text": "Quartier de familles, où se trouve le lycée français. Deux pièces : environ 76 à 183 € par mois.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Plateau des Quinze Ans",
-        "text": "Central et vivant, beaucoup d'expatriés y habitent. Trois pièces meublé : environ 1 140 € par mois après négociation."
+        "text": "Central et vivant, beaucoup d'expatriés y habitent. Trois pièces meublé : environ 1 140 € par mois après négociation.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "La Corniche",
-        "text": "Le long du fleuve, plus calme que le centre, et très recherchée."
+        "text": "Le long du fleuve, plus calme que le centre, et très recherchée.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": false
       }
     ],
     "sources": [
@@ -1904,19 +2384,35 @@
     "neighbourhoods": [
       {
         "name": "Quartier Louis",
-        "text": "Quartier établi et animé, le plus fourni en restaurants, bars lounge et boîtes. Parmi les plus chers de la ville."
+        "text": "Quartier établi et animé, le plus fourni en restaurants, bars lounge et boîtes. Parmi les plus chers de la ville.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Glass",
-        "text": "Vieux quartier commerçant, moins cher que Louis, proche du centre et de l'aéroport."
+        "text": "Vieux quartier commerçant, moins cher que Louis, proche du centre et de l'aéroport.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Batterie IV",
-        "text": "Quartier résidentiel recherché par les familles, notamment autour de l'école Ruban Vert."
+        "text": "Quartier résidentiel recherché par les familles, notamment autour de l'école Ruban Vert.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Nzeng-Ayong",
-        "text": "Grand quartier populaire sur la voie express, parmi les plus abordables de la ville."
+        "text": "Grand quartier populaire sur la voie express, parmi les plus abordables de la ville.",
+        "setting": "outskirts",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -1957,15 +2453,27 @@
     "neighbourhoods": [
       {
         "name": "Santa Isabel (vieille ville)",
-        "text": "Le centre ancien : rues coloniales, cathédrale, vue sur le port, et la plupart des restaurants et des cafés."
+        "text": "Le centre ancien : rues coloniales, cathédrale, vue sur le port, et la plupart des restaurants et des cafés.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Sipopo",
-        "text": "À l'est de la ville, la zone des grands hôtels et des résidences fermées, construite pour un sommet de l'Union africaine en 2011."
+        "text": "À l'est de la ville, la zone des grands hôtels et des résidences fermées, construite pour un sommet de l'Union africaine en 2011.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Ela Nguema",
-        "text": "Quartier relié au centre par bus, autour de l'église San Fernando."
+        "text": "Quartier relié au centre par bus, autour de l'église San Fernando.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2003,15 +2511,27 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Le cœur de la capitale, avec l'hôpital, les banques et les supermarchés. Deux pièces : environ 100 à 300 € par mois (chiffres d'avril 2025)."
+        "text": "Le cœur de la capitale, avec l'hôpital, les banques et les supermarchés. Deux pièces : environ 100 à 300 € par mois (chiffres d'avril 2025).",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Front de mer de la baie Ana Chaves",
-        "text": "Le bord de mer de la capitale, près de l'îlot das Cabras, un des secteurs que citent les nouveaux arrivants étrangers."
+        "text": "Le bord de mer de la capitale, près de l'îlot das Cabras, un des secteurs que citent les nouveaux arrivants étrangers.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Riboque",
-        "text": "Quartier de la ville, berceau du club de football Vitória FC."
+        "text": "Quartier de la ville, berceau du club de football Vitória FC.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2046,15 +2566,27 @@
     "neighbourhoods": [
       {
         "name": "Chagoua",
-        "text": "Quartier résidentiel connu des classes moyennes et des expatriés, avec l'hôpital Notre-Dame des Apôtres."
+        "text": "Quartier résidentiel connu des classes moyennes et des expatriés, avec l'hôpital Notre-Dame des Apôtres.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Moursal",
-        "text": "Quartier résidentiel connu des classes moyennes et des expatriés."
+        "text": "Quartier résidentiel connu des classes moyennes et des expatriés.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Paris Congo",
-        "text": "Quartier résidentiel connu des classes moyennes et des expatriés."
+        "text": "Quartier résidentiel connu des classes moyennes et des expatriés.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2082,19 +2614,35 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Proche des services, avec des baux souvent en dollars ou en euros. Deux chambres : environ 730 à 1 220 € par mois."
+        "text": "Proche des services, avec des baux souvent en dollars ou en euros. Deux chambres : environ 730 à 1 220 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Haramous",
-        "text": "Quartier haut de gamme près des ambassades et des écoles internationales, sans embouteillages. Villa de trois chambres : environ 1 295 € par mois (une annonce)."
+        "text": "Quartier haut de gamme près des ambassades et des écoles internationales, sans embouteillages. Villa de trois chambres : environ 1 295 € par mois (une annonce).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Les Hérons",
-        "text": "Quartier de villas familiales. Villa de trois chambres : environ 1 465 à 2 195 € par mois."
+        "text": "Quartier de villas familiales. Villa de trois chambres : environ 1 465 à 2 195 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Gabode",
-        "text": "Quartier résidentiel près de l'aéroport, construit pour les fonctionnaires, logements inégaux. Quatre chambres : environ 830 € par mois, prix à discuter (annonce de 2026)."
+        "text": "Quartier résidentiel près de l'aéroport, construit pour les fonctionnaires, logements inégaux. Quatre chambres : environ 830 € par mois, prix à discuter (annonce de 2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2141,15 +2689,27 @@
     "neighbourhoods": [
       {
         "name": "Rohero",
-        "text": "Quartier central, avec restaurants, cathédrale et stade."
+        "text": "Quartier central, avec restaurants, cathédrale et stade.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Kiriri",
-        "text": "Sur la colline, avec vue sur la ville."
+        "text": "Sur la colline, avec vue sur la ville.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": false,
+        "lively": null
       },
       {
         "name": "Avenue de la Plage et Kinindo",
-        "text": "Au bord du lac, avec des restaurants et des hôtels."
+        "text": "Au bord du lac, avec des restaurants et des hôtels.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2203,19 +2763,35 @@
     "neighbourhoods": [
       {
         "name": "Isoraka",
-        "text": "Quartier résidentiel aux maisons coloniales, connu pour sa vie nocturne."
+        "text": "Quartier résidentiel aux maisons coloniales, connu pour sa vie nocturne.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Analakely",
-        "text": "Le centre commerçant et son marché, où les prix sont bien plus bas que dans les supermarchés de produits importés."
+        "text": "Le centre commerçant et son marché, où les prix sont bien plus bas que dans les supermarchés de produits importés.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Ivandry",
-        "text": "Quartier résidentiel recherché par les expatriés. Annonces de novembre 2026 : deux pièces meublé environ 600 €, duplex de deux chambres environ 1 200 € par mois."
+        "text": "Quartier résidentiel recherché par les expatriés. Annonces de novembre 2026 : deux pièces meublé environ 600 €, duplex de deux chambres environ 1 200 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       },
       {
         "name": "Ambohibao",
-        "text": "Au nord, vers la route de l'aéroport. Deux chambres non meublé : environ 265 € par mois (une annonce, août 2026)."
+        "text": "Au nord, vers la route de l'aéroport. Deux chambres non meublé : environ 265 € par mois (une annonce, août 2026).",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2263,15 +2839,27 @@
     "neighbourhoods": [
       {
         "name": "Kabulonga et Roma",
-        "text": "Quartiers fermés près des ambassades. Deux ou trois pièces : environ 740 à 1 840 € par mois (2025)."
+        "text": "Quartiers fermés près des ambassades. Deux ou trois pièces : environ 740 à 1 840 € par mois (2025).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Woodlands",
-        "text": "Quartier plus calme, aux grands terrains, le quartier historique des élites et des expatriés."
+        "text": "Quartier plus calme, aux grands terrains, le quartier historique des élites et des expatriés.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Rhodes Park et Ibex Hill",
-        "text": "Résidences modernes et sécurisées, avec bars et restaurants à Rhodes Park."
+        "text": "Résidences modernes et sécurisées, avec bars et restaurants à Rhodes Park.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       }
     ],
     "sources": [
@@ -2301,15 +2889,27 @@
     "neighbourhoods": [
       {
         "name": "Borrowdale",
-        "text": "Banlieue nord aisée, grandes maisons et le plus de boutiques de luxe. Maison de 4 chambres avec piscine : environ 1 890 € par mois."
+        "text": "Banlieue nord aisée, grandes maisons et le plus de boutiques de luxe. Maison de 4 chambres avec piscine : environ 1 890 € par mois.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       },
       {
         "name": "Avondale",
-        "text": "Banlieue proche du centre, rénovée et recherchée, avec son marché d'artisans. Quatre pièces avec jardin : environ 1 460 € par mois."
+        "text": "Banlieue proche du centre, rénovée et recherchée, avec son marché d'artisans. Quatre pièces avec jardin : environ 1 460 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Mount Pleasant",
-        "text": "Quartier résidentiel du nord, choisi par les familles expatriées. Maison : environ 1 030 à 2 410 € par mois (2025)."
+        "text": "Quartier résidentiel du nord, choisi par les familles expatriées. Maison : environ 1 030 à 2 410 € par mois (2025).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -2339,19 +2939,35 @@
     "neighbourhoods": [
       {
         "name": "Old Town",
-        "text": "La vieille ville : marchés, gares routières, cafés et restaurants. Le quartier le plus vivant au quotidien."
+        "text": "La vieille ville : marchés, gares routières, cafés et restaurants. Le quartier le plus vivant au quotidien.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "City Centre et Capital Hill",
-        "text": "La nouvelle ville : hôtels, ambassades et ministères, plus calme et plus aérée."
+        "text": "La nouvelle ville : hôtels, ambassades et ministères, plus calme et plus aérée.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Area 47",
-        "text": "Quartier résidentiel dense, avec des bars, des clubs et un stade."
+        "text": "Quartier résidentiel dense, avec des bars, des clubs et un stade.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Areas 10, 11 et 12",
-        "text": "Quartiers de maisons basses, où logent beaucoup de fonctionnaires. Maison privée : environ 300 à 1 270 € par mois (avril 2026)."
+        "text": "Quartiers de maisons basses, où logent beaucoup de fonctionnaires. Maison privée : environ 300 à 1 270 € par mois (avril 2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -2380,15 +2996,27 @@
     "neighbourhoods": [
       {
         "name": "Klein Windhoek",
-        "text": "Quartier aisé, cité par les guides comme quartier d'expatriés. Trois pièces : environ 480 € par mois en 2024 ; les annonces de 2026 sont souvent bien plus chères."
+        "text": "Quartier aisé, cité par les guides comme quartier d'expatriés. Trois pièces : environ 480 € par mois en 2024 ; les annonces de 2026 sont souvent bien plus chères.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Eros",
-        "text": "Quartier résidentiel. Deux pièces : environ 650 à 825 € par mois (deux annonces lues en novembre 2026)."
+        "text": "Quartier résidentiel. Deux pièces : environ 650 à 825 € par mois (deux annonces lues en novembre 2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Centre-ville",
-        "text": "Le quartier d'affaires, avec des appartements en résidence. Deux pièces : environ 340 € par mois en 2024 ; une chambre affichée environ 600 à 750 € en 2026."
+        "text": "Le quartier d'affaires, avec des appartements en résidence. Deux pièces : environ 340 € par mois en 2024 ; une chambre affichée environ 600 à 750 € en 2026.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -2423,19 +3051,35 @@
     "neighbourhoods": [
       {
         "name": "Phakalane",
-        "text": "Banlieue aisée à environ 13 km au nord, avec son golf, appréciée des familles. Villa sur le golf : environ 1 000 à 2 000 € par mois."
+        "text": "Banlieue aisée à environ 13 km au nord, avec son golf, appréciée des familles. Villa sur le golf : environ 1 000 à 2 000 € par mois.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Gaborone West",
-        "text": "Quartier de maisons apprécié des familles. Maison de 3 chambres : environ 535 à 1 000 € par mois."
+        "text": "Quartier de maisons apprécié des familles. Maison de 3 chambres : environ 535 à 1 000 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Broadhurst",
-        "text": "Bon équilibre entre accès facile et calme. Maison de 3 chambres : environ 400 à 670 € par mois."
+        "text": "Bon équilibre entre accès facile et calme. Maison de 3 chambres : environ 400 à 670 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Village et Extension",
-        "text": "Quartiers centraux, plus d'appartements que de maisons familiales. Deux chambres : environ 335 à 535 € par mois."
+        "text": "Quartiers centraux, plus d'appartements que de maisons familiales. Deux chambres : environ 335 à 535 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -2471,11 +3115,19 @@
     "neighbourhoods": [
       {
         "name": "Msunduza",
-        "text": "Un ancien township de Mbabane, plus dense que les quartiers résidentiels."
+        "text": "Un ancien township de Mbabane, plus dense que les quartiers résidentiels.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Vallée d'Ezulwini",
-        "text": "À environ 15 km : hôtels, casino, sanctuaire de Mlilwane et musée national. Maisons à l'achat à partir d'environ 160 000 € (2026)."
+        "text": "À environ 15 km : hôtels, casino, sanctuaire de Mlilwane et musée national. Maisons à l'achat à partir d'environ 160 000 € (2026).",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -2498,19 +3150,35 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville ouest (Kingsway)",
-        "text": "Bureaux, grands magasins et banques le long de l'avenue principale."
+        "text": "Bureaux, grands magasins et banques le long de l'avenue principale.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Centre-ville est",
-        "text": "Petits commerces, marchés et vendeurs de rue, plus populaire et plus animé."
+        "text": "Petits commerces, marchés et vendeurs de rue, plus populaire et plus animé.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Maseru West",
-        "text": "Quartier résidentiel à l'ouest du centre. Logement d'une chambre : environ 180 à 450 € par mois (estimation 2026)."
+        "text": "Quartier résidentiel à l'ouest du centre. Logement d'une chambre : environ 180 à 450 € par mois (estimation 2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Thetsane",
-        "text": "Au sud, près des usines textiles. Logement d'une chambre : environ 135 à 315 € par mois (estimation 2026)."
+        "text": "Au sud, près des usines textiles. Logement d'une chambre : environ 135 à 315 € par mois (estimation 2026).",
+        "setting": "outskirts",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2545,11 +3213,19 @@
     "neighbourhoods": [
       {
         "name": "Badjanani et Mtsangani",
-        "text": "La vieille médina classée par l'UNESCO ; Mtsangani donne sur la plage et le vieux port."
+        "text": "La vieille médina classée par l'UNESCO ; Mtsangani donne sur la plage et le vieux port.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Maluzini",
-        "text": "À cinq minutes du centre, des résidences avec vue sur la mer."
+        "text": "À cinq minutes du centre, des résidences avec vue sur la mer.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2589,19 +3265,35 @@
     "neighbourhoods": [
       {
         "name": "Centre (English River)",
-        "text": "Le cœur de la petite capitale, avec le marché ouvert du lundi au samedi. Trois pièces : environ 900 à 1 800 € par mois."
+        "text": "Le cœur de la petite capitale, avec le marché ouvert du lundi au samedi. Trois pièces : environ 900 à 1 800 € par mois.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Mont Fleuri, Roche Caïman, Mont Buxton",
-        "text": "Quartiers de maisons familiales, sans accès à la plage. Trois pièces : environ 800 à 1 600 € par mois."
+        "text": "Quartiers de maisons familiales, sans accès à la plage. Trois pièces : environ 800 à 1 600 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Beau Vallon",
-        "text": "Le quartier de plage, à 15 minutes de voiture, avec son marché du mercredi soir. Trois pièces : environ 900 à 2 000 € par mois."
+        "text": "Le quartier de plage, à 15 minutes de voiture, avec son marché du mercredi soir. Trois pièces : environ 900 à 2 000 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": true
       },
       {
         "name": "Eden Island",
-        "text": "Île résidentielle où vit la plus grande communauté internationale. Un deux-pièces : à partir de 2 000 € par mois."
+        "text": "Île résidentielle où vit la plus grande communauté internationale. Un deux-pièces : à partir de 2 000 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -2642,19 +3334,35 @@
     "neighbourhoods": [
       {
         "name": "Wuse II",
-        "text": "Le centre des sorties : restaurants, rooftops et jardins-lounges. Une chambre dans les quartiers centraux : jusqu'à environ 170 € par mois (2025), hors frais d'agence."
+        "text": "Le centre des sorties : restaurants, rooftops et jardins-lounges. Une chambre dans les quartiers centraux : jusqu'à environ 170 € par mois (2025), hors frais d'agence.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Maitama",
-        "text": "Le quartier le plus prestigieux, entre ambassades et sièges d'agences publiques."
+        "text": "Le quartier le plus prestigieux, entre ambassades et sièges d'agences publiques.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Jabi",
-        "text": "Quartier récent autour du lac de Jabi et de son centre commercial, plus calme que Wuse II."
+        "text": "Quartier récent autour du lac de Jabi et de son centre commercial, plus calme que Wuse II.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Gwarinpa",
-        "text": "Le plus grand lotissement du Nigeria, familial et plus abordable."
+        "text": "Le plus grand lotissement du Nigeria, familial et plus abordable.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -2707,15 +3415,27 @@
     "neighbourhoods": [
       {
         "name": "Quartier France",
-        "text": "La vieille ville classée, maisons coloniales et ateliers d'artistes, entre lagune et mer. Maison rénovée : environ 460 à 1 370 € par mois."
+        "text": "La vieille ville classée, maisons coloniales et ateliers d'artistes, entre lagune et mer. Maison rénovée : environ 460 à 1 370 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Route de la plage (Azuretti, Modeste)",
-        "text": "Villas et restaurants de plage, calme en semaine, animé le week-end. Villa : environ 1 070 à 3 050 € par mois."
+        "text": "Villas et restaurants de plage, calme en semaine, animé le week-end. Villa : environ 1 070 à 3 050 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": true
       },
       {
         "name": "Nouveau Bassam",
-        "text": "Le centre commerçant, avec le marché et des logements plus simples. Deux pièces, prix pour toute la ville : environ 230 à 530 € par mois."
+        "text": "Le centre commerçant, avec le marché et des logements plus simples. Deux pièces, prix pour toute la ville : environ 230 à 530 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -2762,15 +3482,27 @@
     "neighbourhoods": [
       {
         "name": "Balmer",
-        "text": "Le quartier le plus résidentiel : rues goudronnées, résidences gardées, cadres et expatriés. Deux pièces en ville : environ 120 à 305 € par mois."
+        "text": "Le quartier le plus résidentiel : rues goudronnées, résidences gardées, cadres et expatriés. Deux pièces en ville : environ 120 à 305 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Cité et centre-ville",
-        "text": "Le cœur commerçant : banques, boutiques, maquis et le marché le plus animé de la ville."
+        "text": "Le cœur commerçant : banques, boutiques, maquis et le marché le plus animé de la ville.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "La Baleine et Bois Joly",
-        "text": "Au nord, au bord de la mer : la grande plage de la Baleine et ses paillotes, Bois Joly plus boisé et plus calme."
+        "text": "Au nord, au bord de la mer : la grande plage de la Baleine et ses paillotes, Bois Joly plus boisé et plus calme.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": null
       }
     ],
     "why": {
@@ -2809,19 +3541,35 @@
     "neighbourhoods": [
       {
         "name": "Adum et Kejetia",
-        "text": "Le centre commerçant, au bord du marché de Kejetia : animé, central, très demandé à la location."
+        "text": "Le centre commerçant, au bord du marché de Kejetia : animé, central, très demandé à la location.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Ahodwo et Daban",
-        "text": "Quartiers aisés, routes en bon état et grandes maisons, prisés des familles pour les écoles. Trois pièces : environ 250 à 430 € par mois."
+        "text": "Quartiers aisés, routes en bon état et grandes maisons, prisés des familles pour les écoles. Trois pièces : environ 250 à 430 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Asokwa et Patasi",
-        "text": "Quartiers de milieu de gamme, avec commerces et restaurants. Petit appartement : environ 90 à 210 € par mois (2026)."
+        "text": "Quartiers de milieu de gamme, avec commerces et restaurants. Petit appartement : environ 90 à 210 € par mois (2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Bomso et Ayeduase",
-        "text": "Quartiers étudiants animés près de l'université KNUST, où les logements partent vite."
+        "text": "Quartiers étudiants animés près de l'université KNUST, où les logements partent vite.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -2856,19 +3604,35 @@
     "neighbourhoods": [
       {
         "name": "L'île",
-        "text": "Le centre historique classé par l'UNESCO : maisons coloniales, quais et restaurants, tout à pied. Studio ou une chambre meublés : 120 à 230 € par mois."
+        "text": "Le centre historique classé par l'UNESCO : maisons coloniales, quais et restaurants, tout à pied. Studio ou une chambre meublés : 120 à 230 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Sor",
-        "text": "Le côté continent, après le pont Faidherbe, avec le plus grand marché de la ville et des loyers plus bas. Une chambre : 75 à 150 € par mois."
+        "text": "Le côté continent, après le pont Faidherbe, avec le plus grand marché de la ville et des loyers plus bas. Une chambre : 75 à 150 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Guet Ndar",
-        "text": "Le quartier des pêcheurs, sur la Langue de Barbarie : très dense et bruyant, entre pirogues, poisson qui sèche et charrettes."
+        "text": "Le quartier des pêcheurs, sur la Langue de Barbarie : très dense et bruyant, entre pirogues, poisson qui sèche et charrettes.",
+        "setting": "seaside",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Hydrobase",
-        "text": "La bande d'hôtels sur la Langue de Barbarie, avec la grande plage de baignade de la ville."
+        "text": "La bande d'hôtels sur la Langue de Barbarie, avec la grande plage de baignade de la ville.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": null
       }
     ],
     "why": {
@@ -2912,19 +3676,35 @@
     "neighbourhoods": [
       {
         "name": "Saly Portudal",
-        "text": "Le cœur de la station : hôtels, golf et petit port. Deux pièces en résidence avec piscine : environ 185 à 305 € par mois."
+        "text": "Le cœur de la station : hôtels, golf et petit port. Deux pièces en résidence avec piscine : environ 185 à 305 € par mois.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Saly Niakhniakhal",
-        "text": "Un des villages d'origine autour de la station, aux logements plus simples. Maison de deux ou trois pièces : environ 60 à 135 € par mois."
+        "text": "Un des villages d'origine autour de la station, aux logements plus simples. Maison de deux ou trois pièces : environ 60 à 135 € par mois.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Mbour",
-        "text": "La ville voisine, port de pêche et de commerce. Deux pièces : environ 120 à 380 € par mois."
+        "text": "La ville voisine, port de pêche et de commerce. Deux pièces : environ 120 à 380 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Ngaparou et La Somone",
-        "text": "Stations plus petites et plus calmes, que préfèrent beaucoup de vacanciers sénégalais."
+        "text": "Stations plus petites et plus calmes, que préfèrent beaucoup de vacanciers sénégalais.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": null,
+        "lively": false
       }
     ],
     "sources": [
@@ -2978,15 +3758,27 @@
     "neighbourhoods": [
       {
         "name": "Centre historique",
-        "text": "Petite ville calme qui se visite à pied : la basilique, le temple des Pythons, des maisons afro-brésiliennes et deux marchés quotidiens."
+        "text": "Petite ville calme qui se visite à pied : la basilique, le temple des Pythons, des maisons afro-brésiliennes et deux marchés quotidiens.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Quartier de la plage (Djègbadji)",
-        "text": "Au bout de la Route des Captifs, face à l'océan : mémoriaux, salines, et de nouveaux projets d'hôtels."
+        "text": "Au bout de la Route des Captifs, face à l'océan : mémoriaux, salines, et de nouveaux projets d'hôtels.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Avlékété et Pahou",
-        "text": "Villages au bord des lagunes, maisons avec cour, marché chaque semaine à Pahou. Très calme, loin du centre."
+        "text": "Villages au bord des lagunes, maisons avec cour, marché chaque semaine à Pahou. Très calme, loin du centre.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -3033,11 +3825,19 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Autour de la cathédrale Saint-Esprit, bâtie en 1913, et du marché. On y fait tout à pied ou en moto-taxi. Loyers en ville : environ 150 à 460 € par mois."
+        "text": "Autour de la cathédrale Saint-Esprit, bâtie en 1913, et du marché. On y fait tout à pied ou en moto-taxi. Loyers en ville : environ 150 à 460 € par mois.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Côté mont Kloto (Missahoé)",
-        "text": "Sur les hauteurs, plus frais, entre forêt et sentiers de randonnée, avec la maison de l'ancien gouverneur allemand. Il faut une voiture, idéalement un 4x4."
+        "text": "Sur les hauteurs, plus frais, entre forêt et sentiers de randonnée, avec la maison de l'ancien gouverneur allemand. Il faut une voiture, idéalement un 4x4.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -3090,11 +3890,19 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Petit centre en damier, près du port du minerai sur la baie de Waterhouse. On y trouve l'hôpital public et la mairie, ouverte en 2016. Aucun loyer publié."
+        "text": "Petit centre en damier, près du port du minerai sur la baie de Waterhouse. On y trouve l'hôpital public et la mairie, ouverte en 2016. Aucun loyer publié.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Edina",
-        "text": "Ancienne ville de colons fondée en 1832, de l'autre côté de l'embouchure de la St John, à environ 6 km. Église baptiste du XIXe siècle et ruines de la maison du président Cheeseman."
+        "text": "Ancienne ville de colons fondée en 1832, de l'autre côté de l'embouchure de la St John, à environ 6 km. Église baptiste du XIXe siècle et ruines de la maison du président Cheeseman.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -3145,11 +3953,19 @@
     "neighbourhoods": [
       {
         "name": "Kouroula",
-        "text": "Le quartier de la gare routière, d'où partent les cars vers Conakry, le Sénégal et la Gambie."
+        "text": "Le quartier de la gare routière, d'où partent les cars vers Conakry, le Sénégal et la Gambie.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Mairie et Mosquée",
-        "text": "Quartiers du centre, près du marché central et de la grande mosquée. Les terrains y atteignent désormais les prix du centre-ville (février 2026)."
+        "text": "Quartiers du centre, près du marché central et de la grande mosquée. Les terrains y atteignent désormais les prix du centre-ville (février 2026).",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -3208,19 +4024,35 @@
     "neighbourhoods": [
       {
         "name": "Centre (London Corner, Sayerr Jobe Avenue)",
-        "text": "Le cœur commerçant, très animé, où vivent peu d'étrangers. Logement correct : environ 120 à 300 € par mois."
+        "text": "Le cœur commerçant, très animé, où vivent peu d'étrangers. Logement correct : environ 120 à 300 € par mois.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Kololi",
-        "text": "Le « Strip » : restaurants, hôtels, touristes, de l'animation tous les soirs. Studio dès 243 €, grand appartement jusqu'à 608 € par mois."
+        "text": "Le « Strip » : restaurants, hôtels, touristes, de l'animation tous les soirs. Studio dès 243 €, grand appartement jusqu'à 608 € par mois.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Kotu",
-        "text": "Près de la mer, plus tranquille que Kololi. Logement : environ 300 à 610 € par mois."
+        "text": "Près de la mer, plus tranquille que Kololi. Logement : environ 300 à 610 € par mois.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Fajara et Bakau",
-        "text": "Ambassades, club de golf, plages de Cape Point. Maison de 3 ou 4 chambres à Fajara : environ 490 à 970 € par mois."
+        "text": "Ambassades, club de golf, plages de Cape Point. Maison de 3 ou 4 chambres à Fajara : environ 490 à 970 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -3254,15 +4086,27 @@
     "neighbourhoods": [
       {
         "name": "Centre",
-        "text": "Le centre historique, avec l'Alliance française rue de Lisboa. Deux chambres : environ 310 à 485 € par mois."
+        "text": "Le centre historique, avec l'Alliance française rue de Lisboa. Deux chambres : environ 310 à 485 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Laginha",
-        "text": "Au bord de la plage de Laginha, à environ 20 minutes à pied du centre en passant par le port."
+        "text": "Au bord de la plage de Laginha, à environ 20 minutes à pied du centre en passant par le port.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Chã de Alecrim",
-        "text": "Sur les hauteurs, par la route qui monte depuis Laginha : on y vient pour la vue."
+        "text": "Sur les hauteurs, par la route qui monte depuis Laginha : on y vient pour la vue.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": false,
+        "lively": null
       }
     ],
     "why": {
@@ -3316,15 +4160,27 @@
     "neighbourhoods": [
       {
         "name": "Keran",
-        "text": "Le centre : banques, douane, marché central et marché de seconde main."
+        "text": "Le centre : banques, douane, marché central et marché de seconde main.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Cansado",
-        "text": "À 10 km au sud, quartier bâti pour les employés de la SNIM, avec des courts de tennis. Le principal quartier résidentiel."
+        "text": "À 10 km au sud, quartier bâti pour les employés de la SNIM, avec des courts de tennis. Le principal quartier résidentiel.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": false,
+        "lively": null
       },
       {
         "name": "Numerowatt",
-        "text": "Au nord, le quartier le plus peuplé, et celui qui grandit le plus vite."
+        "text": "Au nord, le quartier le plus peuplé, et celui qui grandit le plus vite.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -3352,19 +4208,35 @@
     "neighbourhoods": [
       {
         "name": "Golf",
-        "text": "Le quartier préféré des étrangers, en résidences gardées, avec bars et concerts de rumba. Maison de trois chambres : dès 2 700 € par mois environ."
+        "text": "Le quartier préféré des étrangers, en résidences gardées, avec bars et concerts de rumba. Maison de trois chambres : dès 2 700 € par mois environ.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Centre-ville",
-        "text": "Le centre ancien autour de la cathédrale et de la gare, près des commerces et des restaurants. Une chambre : de 345 à 1 350 € par mois selon les guides."
+        "text": "Le centre ancien autour de la cathédrale et de la gare, près des commerces et des restaurants. Une chambre : de 345 à 1 350 € par mois selon les guides.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Kamalondo",
-        "text": "L'ancien quartier africain, au sud du centre, où se trouve le stade du TP Mazembe."
+        "text": "L'ancien quartier africain, au sud du centre, où se trouve le stade du TP Mazembe.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Ruashi",
-        "text": "Grande commune du nord-est, citée par un guide parmi les quartiers où s'installent les étrangers."
+        "text": "Grande commune du nord-est, citée par un guide parmi les quartiers où s'installent les étrangers.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -3404,19 +4276,35 @@
     "neighbourhoods": [
       {
         "name": "Bastos",
-        "text": "Quartier calme et vert des ambassades, avec villas et jardins. Une chambre : environ 535 à 760 € par mois."
+        "text": "Quartier calme et vert des ambassades, avec villas et jardins. Une chambre : environ 535 à 760 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Nlongkak",
-        "text": "À côté de Bastos, calme et vert, apprécié du personnel des organisations internationales, et moins cher que Bastos."
+        "text": "À côté de Bastos, calme et vert, apprécié du personnel des organisations internationales, et moins cher que Bastos.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Essos",
-        "text": "Grand quartier populaire et très animé, avec ses snack-bars, ses restaurants camerounais et ses marchés."
+        "text": "Grand quartier populaire et très animé, avec ses snack-bars, ses restaurants camerounais et ses marchés.",
+        "setting": "central",
+        "standing": "popular",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Omnisport",
-        "text": "Quartier récent, en plein développement, adapté aux familles, autour du stade Ahmadou-Ahidjo. Loyers annoncés : environ 120 à 305 € par mois, sans taille de logement précisée."
+        "text": "Quartier récent, en plein développement, adapté aux familles, autour du stade Ahmadou-Ahidjo. Loyers annoncés : environ 120 à 305 € par mois, sans taille de logement précisée.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -3458,15 +4346,27 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville et Ngoye",
-        "text": "La vieille ville sous la cathédrale, le marché aux poissons et les grillades de Ngoye, près des plages. Une chambre : environ 165 € par mois ; deux pièces : environ 365 € (blog, avril 2026)."
+        "text": "La vieille ville sous la cathédrale, le marché aux poissons et les grillades de Ngoye, près des plages. Une chambre : environ 165 € par mois ; deux pièces : environ 365 € (blog, avril 2026).",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Grand Batanga",
-        "text": "Villages au sud, plus calmes, avec de grandes maisons souvent face à la mer. Villa en bord de mer : environ 120 à 380 € par mois."
+        "text": "Villages au sud, plus calmes, avec de grandes maisons souvent face à la mer. Villa en bord de mer : environ 120 à 380 € par mois.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Londji",
-        "text": "Village de pêcheurs au nord, sur une baie bordée de mangroves, à environ 15 km du centre."
+        "text": "Village de pêcheurs au nord, sur une baie bordée de mangroves, à environ 15 km du centre.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -3518,11 +4418,19 @@
     "neighbourhoods": [
       {
         "name": "Centro et Praia Morena",
-        "text": "Le vieux centre colonial, qui se fait à pied : marché municipal, cinéma-théâtre et la plage de la ville. Une pièce au centre : environ 210 € par mois (site participatif)."
+        "text": "Le vieux centre colonial, qui se fait à pied : marché municipal, cinéma-théâtre et la plage de la ville. Une pièce au centre : environ 210 € par mois (site participatif).",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Restinga do Lobito",
-        "text": "À Lobito, à 33 km : une presqu'île de plages, d'hôtels et de restaurants. Maison avec jardin : environ 860 à 1 720 € par mois."
+        "text": "À Lobito, à 33 km : une presqu'île de plages, d'hôtels et de restaurants. Maison avec jardin : environ 860 à 1 720 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       }
     ],
     "sources": [
@@ -3563,15 +4471,27 @@
     "neighbourhoods": [
       {
         "name": "Lumumba (centre-ville)",
-        "text": "Le plus ancien quartier, centre des bureaux et des commerces. Pratique pour le travail et les restaurants."
+        "text": "Le plus ancien quartier, centre des bureaux et des commerces. Pratique pour le travail et les restaurants.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Ngoyo",
-        "text": "Quartier résidentiel plus calme, loin de l'agitation du centre."
+        "text": "Quartier résidentiel plus calme, loin de l'agitation du centre.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Tchimbamba",
-        "text": "Quartier résidentiel calme, apprécié pour y vivre au quotidien."
+        "text": "Quartier résidentiel calme, apprécié pour y vivre au quotidien.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": false
       }
     ],
     "sources": [
@@ -3595,15 +4515,27 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville et Quartier ancien",
-        "text": "Banques, hôtels, commerces et casino près du port, et de vieilles maisons coloniales en bois sur pilotis. Deux pièces : environ 915 € par mois."
+        "text": "Banques, hôtels, commerces et casino près du port, et de vieilles maisons coloniales en bois sur pilotis. Deux pièces : environ 915 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Sogara",
-        "text": "Le quartier que préfèrent les expatriés, en résidences gardées, avec une plage en ville."
+        "text": "Le quartier que préfèrent les expatriés, en résidences gardées, avec une plage en ville.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "N'Tchengue",
-        "text": "Quartiers résidentiels plus récents, logements variés, pistes de sable vers l'extérieur. Deux pièces hors centre : environ 380 € par mois."
+        "text": "Quartiers résidentiels plus récents, logements variés, pistes de sable vers l'extérieur. Deux pièces hors centre : environ 380 € par mois.",
+        "setting": "outskirts",
+        "standing": "middle",
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -3716,19 +4648,35 @@
     "neighbourhoods": [
       {
         "name": "Nyali",
-        "text": "Quartier aisé au nord de l'île : centres commerciaux, plages, écoles internationales. Une chambre : environ 240 € par mois (annonces de novembre 2026)."
+        "text": "Quartier aisé au nord de l'île : centres commerciaux, plages, écoles internationales. Une chambre : environ 240 € par mois (annonces de novembre 2026).",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Bamburi et Shanzu",
-        "text": "Plages du nord : sorties animées à Bamburi, Shanzu plus calme et familial. Maison de quatre pièces : environ 300 à 600 € par mois."
+        "text": "Plages du nord : sorties animées à Bamburi, Shanzu plus calme et familial. Maison de quatre pièces : environ 300 à 600 € par mois.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Vieille ville et Tudor",
-        "text": "Sur l'île, près de Fort Jesus et des maisons swahilies ; Tudor est plus abordable. Une chambre au centre : environ 140 à 350 € par mois (peu de données)."
+        "text": "Sur l'île, près de Fort Jesus et des maisons swahilies ; Tudor est plus abordable. Une chambre au centre : environ 140 à 350 € par mois (peu de données).",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Kizingo",
-        "text": "Le quartier résidentiel le plus prisé de l'île, avec la State House, les tribunaux et des écoles internationales."
+        "text": "Le quartier résidentiel le plus prisé de l'île, avec la State House, les tribunaux et des écoles internationales.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": false
       }
     ],
     "sources": [
@@ -3796,11 +4744,19 @@
     "neighbourhoods": [
       {
         "name": "Bord du lac",
-        "text": "Hôtels et cafés le long du lac Tana : une bière au coucher du soleil, de la musique azmari le soir."
+        "text": "Hôtels et cafés le long du lac Tana : une bière au coucher du soleil, de la musique azmari le soir.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Centre et marché",
-        "text": "Le centre commerçant, autour de l'église Saint-Georges et du grand marché, plein le samedi, calme le dimanche."
+        "text": "Le centre commerçant, autour de l'église Saint-Georges et du grand marché, plein le samedi, calme le dimanche.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       }
     ],
     "sources": [
@@ -3828,19 +4784,35 @@
     "neighbourhoods": [
       {
         "name": "Stone Town",
-        "text": "Ruelles trop étroites pour les voitures, bancs de pierre devant les maisons, ferry tout près. Trois pièces : environ 340 à 860 € par mois."
+        "text": "Ruelles trop étroites pour les voitures, bancs de pierre devant les maisons, ferry tout près. Trois pièces : environ 340 à 860 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Paje et Jambiani",
-        "text": "Côte est, plus calme : plages, kitesurf et espaces de coworking, prisés des télétravailleurs."
+        "text": "Côte est, plus calme : plages, kitesurf et espaces de coworking, prisés des télétravailleurs.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Nungwi et Kendwa",
-        "text": "Les plages du nord, avec sorties, centres de plongée et hôtels. Les loyers les plus chers de l'île."
+        "text": "Les plages du nord, avec sorties, centres de plongée et hôtels. Les loyers les plus chers de l'île.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Fumba Town",
-        "text": "Ville nouvelle privée au sud de l'aéroport : plus de 1 500 habitants fin 2025, venus de plus de 50 pays."
+        "text": "Ville nouvelle privée au sud de l'aéroport : plus de 1 500 habitants fin 2025, venus de plus de 50 pays.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -3901,19 +4873,35 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Autour de la tour de l'horloge : marchés, cafés, hôpital. Deux pièces : environ 255 € par mois."
+        "text": "Autour de la tour de l'horloge : marchés, cafés, hôpital. Deux pièces : environ 255 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Njiro",
-        "text": "Quartier résidentiel avec cinéma, supermarché et grillades de nyama choma, apprécié des expatriés. Deux chambres : environ 275 à 685 € par mois."
+        "text": "Quartier résidentiel avec cinéma, supermarché et grillades de nyama choma, apprécié des expatriés. Deux chambres : environ 275 à 685 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Kaloleni et Themi Hill",
-        "text": "Quartiers résidentiels où vivent souvent ceux qui travaillent dans le tourisme ou les ONG. Deux chambres : environ 275 à 685 € par mois."
+        "text": "Quartiers résidentiels où vivent souvent ceux qui travaillent dans le tourisme ou les ONG. Deux chambres : environ 275 à 685 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Usa River",
-        "text": "À l'est, vers le Kilimandjaro : un village hors de la ville, avec des résidences fermées au calme de la campagne."
+        "text": "À l'est, vers le Kilimandjaro : un village hors de la ville, avec des résidences fermées au calme de la campagne.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -3960,19 +4948,35 @@
     "neighbourhoods": [
       {
         "name": "Centre de Jinja",
-        "text": "Main Street et Kiira Road : cafés avec wifi, artisanat, le grand marché central, et la source du Nil au bord de l'eau. Le centre se fait à pied."
+        "text": "Main Street et Kiira Road : cafés avec wifi, artisanat, le grand marché central, et la source du Nil au bord de l'eau. Le centre se fait à pied.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Bugembe",
-        "text": "Ancienne petite ville sur la route d'Iganga, à environ 8 km du centre, siège du royaume du Busoga, avec son marché et beaucoup d'écoles."
+        "text": "Ancienne petite ville sur la route d'Iganga, à environ 8 km du centre, siège du royaume du Busoga, avec son marché et beaucoup d'écoles.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Njeru",
-        "text": "De l'autre côté du Nil, par le pont ouvert en 2018 : une ville surtout résidentielle, avec la brasserie Nile Breweries."
+        "text": "De l'autre côté du Nil, par le pont ouvert en 2018 : une ville surtout résidentielle, avec la brasserie Nile Breweries.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Bujagali",
-        "text": "Au nord, à une dizaine de minutes en moto-taxi : le Nil, ses rapides, les bases de rafting et de kayak."
+        "text": "Au nord, à une dizaine de minutes en moto-taxi : le Nil, ses rapides, les bases de rafting et de kayak.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": false,
+        "lively": null
       }
     ],
     "sources": [
@@ -4020,19 +5024,35 @@
     "neighbourhoods": [
       {
         "name": "Bord du lac",
-        "text": "Ancienne station balnéaire : villas anciennes, hôtels, bars face au lac. Logement à Rubavu : environ 300 à 590 € par mois."
+        "text": "Ancienne station balnéaire : villas anciennes, hôtels, bars face au lac. Logement à Rubavu : environ 300 à 590 € par mois.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": true
       },
       {
         "name": "Centre et marché",
-        "text": "Le centre commerçant, plus animé que le bord du lac, tourné vers le commerce avec Goma."
+        "text": "Le centre commerçant, plus animé que le bord du lac, tourné vers le commerce avec Goma.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Rubona",
-        "text": "Quartier au sud de la ville, vers les sources chaudes de Nyamyumba et leur marché aux poissons."
+        "text": "Quartier au sud de la ville, vers les sources chaudes de Nyamyumba et leur marché aux poissons.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Collines de l'est (Nengo, Nyundo)",
-        "text": "Des maisons de plus en plus nombreuses sur les collines derrière le centre, avec des balades sur les collines de Rubavu et de Nengo."
+        "text": "Des maisons de plus en plus nombreuses sur les collines derrière le centre, avec des balades sur les collines de Rubavu et de Nengo.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -4081,15 +5101,27 @@
     "neighbourhoods": [
       {
         "name": "CNAR",
-        "text": "Le quartier aisé de la ville, fait de maisons. En 2019, une maison s'y louait environ 300 000 FBu par mois."
+        "text": "Le quartier aisé de la ville, fait de maisons. En 2019, une maison s'y louait environ 300 000 FBu par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Nyamugari et Magarama",
-        "text": "Quartiers proches du centre. Les loyers y sont passés de 50 000 à 70 000 FBu par mois quand Gitega est devenue capitale, en 2019."
+        "text": "Quartiers proches du centre. Les loyers y sont passés de 50 000 à 70 000 FBu par mois quand Gitega est devenue capitale, en 2019.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Shatanya",
-        "text": "Quartier résidentiel où les loyers ont aussi monté en 2019, d'environ 100 000 à 120 000 FBu par mois."
+        "text": "Quartier résidentiel où les loyers ont aussi monté en 2019, d'environ 100 000 à 120 000 FBu par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4141,15 +5173,27 @@
     "neighbourhoods": [
       {
         "name": "Batsi (vieille ville)",
-        "text": "Sur une île reliée à la terre par une digue : maisons en corail, mosquée Sheikh Hanafi, et le restaurant de poisson grillé."
+        "text": "Sur une île reliée à la terre par une digue : maisons en corail, mosquée Sheikh Hanafi, et le restaurant de poisson grillé.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Taulud",
-        "text": "L'autre île, celle des hôtels climatisés et de l'ancien palais impérial. Pas de plage."
+        "text": "L'autre île, celle des hôtels climatisés et de l'ancien palais impérial. Pas de plage.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Gurgusum",
-        "text": "La plage, à environ 14 km au nord, avec deux hôtels. Il faut un taxi ou une voiture."
+        "text": "La plage, à environ 14 km au nord, avec deux hôtels. Il faut un taxi ou une voiture.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -4177,11 +5221,19 @@
     "neighbourhoods": [
       {
         "name": "Jigjiga Yar",
-        "text": "Maisons avec cour et eau courante. Maison de quatre chambres : jusqu'à environ 430 € par mois (2025)."
+        "text": "Maisons avec cour et eau courante. Maison de quatre chambres : jusqu'à environ 430 € par mois (2025).",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Sinai",
-        "text": "Le secteur le moins cher : maison simple de quatre chambres, sans cour ni eau au robinet, environ 170 € par mois (2025)."
+        "text": "Le secteur le moins cher : maison simple de quatre chambres, sans cour ni eau au robinet, environ 170 € par mois (2025).",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4216,19 +5268,35 @@
     "neighbourhoods": [
       {
         "name": "Smouha",
-        "text": "Quartier aisé du centre, apprécié des expatriés, près des écoles internationales. Quatre pièces (210 m²) : environ 420 € par mois."
+        "text": "Quartier aisé du centre, apprécié des expatriés, près des écoles internationales. Quatre pièces (210 m²) : environ 420 € par mois.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "San Stefano et Gleem",
-        "text": "San Stefano, chic avec vue sur la mer ; Gleem, plus traditionnel et abordable, près de la corniche."
+        "text": "San Stefano, chic avec vue sur la mer ; Gleem, plus traditionnel et abordable, près de la corniche.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Montaza et Maamoura",
-        "text": "À l'est, plus calme et familial, près des jardins du palais de Montaza et des plages."
+        "text": "À l'est, plus calme et familial, près des jardins du palais de Montaza et des plages.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Raml et le centre historique",
-        "text": "Cafés et restaurants autour de la gare de Raml. Deux pièces en centre-ville : environ 120 € par mois."
+        "text": "Cafés et restaurants autour de la gare de Raml. Deux pièces en centre-ville : environ 120 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -4274,19 +5342,35 @@
     "neighbourhoods": [
       {
         "name": "La Corniche et le souk",
-        "text": "Le centre au bord du Nil : vue, restaurants, marchés, tout à pied. Une chambre meublée : environ 34 à 76 € par mois."
+        "text": "Le centre au bord du Nil : vue, restaurants, marchés, tout à pied. Une chambre meublée : environ 34 à 76 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Al-Aqqad",
-        "text": "Quartier de classe moyenne, immeubles récents, avec des familles égyptiennes et quelques familles étrangères."
+        "text": "Quartier de classe moyenne, immeubles récents, avec des familles égyptiennes et quelques familles étrangères.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Île Éléphantine",
-        "text": "Île calme avec des villages nubiens, près des sites anciens. On rejoint la ville en bateau."
+        "text": "Île calme avec des villages nubiens, près des sites anciens. On rejoint la ville en bateau.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Gharb Soheil",
-        "text": "Village nubien sur la rive ouest, avec des maisons d'hôtes. Très calme, on traverse le Nil en bac."
+        "text": "Village nubien sur la rive ouest, avec des maisons d'hôtes. Très calme, on traverse le Nil en bac.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -4327,19 +5411,35 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville et boulevard Pasteur",
-        "text": "Le cœur de la ville moderne : commerces, banques et services à pied. Deux pièces : environ 325 à 510 € par mois."
+        "text": "Le cœur de la ville moderne : commerces, banques et services à pied. Deux pièces : environ 325 à 510 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Marshan",
-        "text": "Plateau résidentiel calme, avec vue sur le détroit de Gibraltar. Deux pièces : environ 370 à 650 € par mois."
+        "text": "Plateau résidentiel calme, avec vue sur le détroit de Gibraltar. Deux pièces : environ 370 à 650 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Malabata",
-        "text": "Quartier moderne de résidences gardées, parfois avec piscine, prisé des cadres. Deux chambres : environ 555 à 925 € par mois."
+        "text": "Quartier moderne de résidences gardées, parfois avec piscine, prisé des cadres. Deux chambres : environ 555 à 925 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Boukhalef",
-        "text": "Près des universités : les loyers les plus abordables, moins de services pour les étrangers. À partir d'environ 230 € par mois, taille non précisée."
+        "text": "Près des universités : les loyers les plus abordables, moins de services pour les étrangers. À partir d'environ 230 € par mois, taille non précisée.",
+        "setting": "outskirts",
+        "standing": "popular",
+        "walkable": false,
+        "lively": null
       }
     ],
     "why": {
@@ -4383,19 +5483,35 @@
     "neighbourhoods": [
       {
         "name": "Canastel et Front de Mer",
-        "text": "Quartiers aisés avec vue sur la mer : immeubles récents, villas et hôtels."
+        "text": "Quartiers aisés avec vue sur la mer : immeubles récents, villas et hôtels.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Akid Lotfi",
-        "text": "Quartier moderne, plus accessible que le front de mer."
+        "text": "Quartier moderne, plus accessible que le front de mer.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Medina Jedida",
-        "text": "Quartier historique, autour de son grand marché."
+        "text": "Quartier historique, autour de son grand marché.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Sidi El Houari",
-        "text": "Le vieux quartier historique, avec le palais du Bey."
+        "text": "Le vieux quartier historique, avec le palais du Bey.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4419,19 +5535,35 @@
     "neighbourhoods": [
       {
         "name": "Corniche et Boujaffar",
-        "text": "Le front de mer, avec des immeubles récents, près de la plage et des cafés."
+        "text": "Le front de mer, avec des immeubles récents, près de la plage et des cafés.",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Sahloul",
-        "text": "Constructions neuves, quartier apprécié des familles. Fin 2024, Sahloul 4 était le secteur le plus recherché du Sahel pour louer. Deux-pièces : environ 260 € par mois en moyenne."
+        "text": "Constructions neuves, quartier apprécié des familles. Fin 2024, Sahloul 4 était le secteur le plus recherché du Sahel pour louer. Deux-pièces : environ 260 € par mois en moyenne.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Hammam Sousse",
-        "text": "Plus calme que le centre, tout près de la plage. Deux-pièces : environ 265 € par mois en moyenne (fin 2024)."
+        "text": "Plus calme que le centre, tout près de la plage. Deux-pièces : environ 265 € par mois en moyenne (fin 2024).",
+        "setting": "seaside",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Médina",
-        "text": "Le vieux centre, authentique et vivant ; les maisons demandent souvent des travaux."
+        "text": "Le vieux centre, authentique et vivant ; les maisons demandent souvent des travaux.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -4461,19 +5593,35 @@
     "neighbourhoods": [
       {
         "name": "Centre et la Marginal",
-        "text": "Le long de la plage : grands hôtels, lodges et clubs de plongée, maisons dans des parcelles fermées par des murs."
+        "text": "Le long de la plage : grands hôtels, lodges et clubs de plongée, maisons dans des parcelles fermées par des murs.",
+        "setting": "seaside",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Vilankulo nord",
-        "text": "Résidences en face de l'hôpital et de l'école, à deux minutes à pied de la plage, près des commerces."
+        "text": "Résidences en face de l'hôpital et de l'école, à deux minutes à pied de la plage, près des commerces.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Côté aéroport",
-        "text": "Grandes parcelles fermées. Maison meublée de trois suites : environ 1 665 € par mois, eau, électricité et personnel compris."
+        "text": "Grandes parcelles fermées. Maison meublée de trois suites : environ 1 665 € par mois, eau, électricité et personnel compris.",
+        "setting": "outskirts",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "South Beach",
-        "text": "Au sud du centre, à quelques minutes : lodges et auberges pour routards."
+        "text": "Au sud du centre, à quelques minutes : lodges et auberges pour routards.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4516,19 +5664,35 @@
     "neighbourhoods": [
       {
         "name": "Centre et La Croisette",
-        "text": "Centre animé, boutiques et restaurants à pied, sorties le soir. Deux pièces : environ 475 € par mois."
+        "text": "Centre animé, boutiques et restaurants à pied, sorties le soir. Deux pièces : environ 475 € par mois.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Péreybère",
-        "text": "Ancien village de pêcheurs, moins touristique, à l'abri du vent, avec une plage publique, des restaurants et des pubs."
+        "text": "Ancien village de pêcheurs, moins touristique, à l'abri du vent, avec une plage publique, des restaurants et des pubs.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       },
       {
         "name": "Trou aux Biches",
-        "text": "Petite station familiale, moins commerciale que Grand Baie, avec sa longue plage et un supermarché."
+        "text": "Petite station familiale, moins commerciale que Grand Baie, avec sa longue plage et un supermarché.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": false
       },
       {
         "name": "Calodyne",
-        "text": "Petit et calme, près de la plage, à 15 minutes de Grand Baie : pour le calme sans être isolé."
+        "text": "Petit et calme, près de la plage, à 15 minutes de Grand Baie : pour le calme sans être isolé.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -4574,11 +5738,19 @@
     "neighbourhoods": [
       {
         "name": "Hell-Ville (Andoany)",
-        "text": "La ville principale et le port, environ 30 000 habitants : commerces, marché et vie de tous les jours."
+        "text": "La ville principale et le port, environ 30 000 habitants : commerces, marché et vie de tous les jours.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Ambatoloaka",
-        "text": "Le village touristique : plage, bars, casino, et le départ de la plupart des excursions."
+        "text": "Le village touristique : plage, bars, casino, et le départ de la plupart des excursions.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": true
       }
     ],
     "sources": [
@@ -4596,15 +5768,27 @@
     "neighbourhoods": [
       {
         "name": "Old Livingstone",
-        "text": "Le premier emplacement de la ville, au bord du fleuve Zambèze."
+        "text": "Le premier emplacement de la ville, au bord du fleuve Zambèze.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Constitution Hill",
-        "text": "Sur les hauteurs, le quartier où les colons européens se sont installés après 1900."
+        "text": "Sur les hauteurs, le quartier où les colons européens se sont installés après 1900.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Maramba",
-        "text": "À l'est et au sud du centre, l'ancien quartier réservé aux Africains à l'époque coloniale."
+        "text": "À l'est et au sud du centre, l'ancien quartier réservé aux Africains à l'époque coloniale.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4639,15 +5823,27 @@
     "neighbourhoods": [
       {
         "name": "Hillside",
-        "text": "Banlieue résidentielle de maisons avec jardin, près des Hillside Dams. Maison de trois ou quatre chambres : environ 690 à 2 150 € par mois."
+        "text": "Banlieue résidentielle de maisons avec jardin, près des Hillside Dams. Maison de trois ou quatre chambres : environ 690 à 2 150 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Kenilworth",
-        "text": "Banlieue résidentielle près de l'hippodrome d'Ascot. Trois pièces : environ 560 € par mois."
+        "text": "Banlieue résidentielle près de l'hippodrome d'Ascot. Trois pièces : environ 560 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       },
       {
         "name": "Matsheumhlope",
-        "text": "Banlieue résidentielle de maisons familiales. Maison de trois chambres : environ 860 € par mois."
+        "text": "Banlieue résidentielle de maisons familiales. Maison de trois chambres : environ 860 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -4677,15 +5873,27 @@
     "neighbourhoods": [
       {
         "name": "Limbe",
-        "text": "Ancienne ville voisine, rattachée à Blantyre en 1956, au centre plein de boutiques."
+        "text": "Ancienne ville voisine, rattachée à Blantyre en 1956, au centre plein de boutiques.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Chichiri et Ginnery Corner",
-        "text": "Le quartier où se regroupent les universités de la ville."
+        "text": "Le quartier où se regroupent les universités de la ville.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Nyambadwe",
-        "text": "Quartier de maisons avec jardin. Maison privée : environ 300 à 1 265 € par mois (2026)."
+        "text": "Quartier de maisons avec jardin. Maison privée : environ 300 à 1 265 € par mois (2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": false,
+        "lively": false
       }
     ],
     "sources": [
@@ -4714,19 +5922,35 @@
     "neighbourhoods": [
       {
         "name": "Centre-ville",
-        "text": "Le centre de cette petite ville au bord de l'Atlantique. Trois pièces : environ 750 € par mois."
+        "text": "Le centre de cette petite ville au bord de l'Atlantique. Trois pièces : environ 750 € par mois.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Vineta",
-        "text": "Un des quartiers résidentiels où vit la plupart des habitants. Trois pièces meublé : environ 1 250 € par mois."
+        "text": "Un des quartiers résidentiels où vit la plupart des habitants. Trois pièces meublé : environ 1 250 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Kramersdorf",
-        "text": "Quartier résidentiel de maisons et de maisons de ville. Maison de ville de trois chambres : environ 840 € par mois."
+        "text": "Quartier résidentiel de maisons et de maisons de ville. Maison de ville de trois chambres : environ 840 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       },
       {
         "name": "Ocean View",
-        "text": "Quartier résidentiel de la ville. Maison de ville de deux chambres : environ 1 000 € par mois."
+        "text": "Quartier résidentiel de la ville. Maison de ville de deux chambres : environ 1 000 € par mois.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": false
       }
     ],
     "why": {
@@ -4786,15 +6010,27 @@
     "neighbourhoods": [
       {
         "name": "Coates Valley, Extension 6 et Madonsa",
-        "text": "À l'est du centre, des quartiers résidentiels aisés ou de classe moyenne."
+        "text": "À l'est du centre, des quartiers résidentiels aisés ou de classe moyenne.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Helemesi Estates",
-        "text": "Au nord, un quartier de classe moyenne construit au début des années 1990."
+        "text": "Au nord, un quartier de classe moyenne construit au début des années 1990.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       },
       {
         "name": "Ngwane Park",
-        "text": "Au sud, un quartier populaire et de classe moyenne."
+        "text": "Au sud, un quartier populaire et de classe moyenne.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4847,11 +6083,19 @@
     "neighbourhoods": [
       {
         "name": "Médina",
-        "text": "Le vieux centre, ruelles étroites et mosquées, inscrit au patrimoine mondial de l'UNESCO."
+        "text": "Le vieux centre, ruelles étroites et mosquées, inscrit au patrimoine mondial de l'UNESCO.",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Patsy",
-        "text": "Le quartier des administrations et du campus universitaire."
+        "text": "Le quartier des administrations et du campus universitaire.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [
@@ -4875,15 +6119,27 @@
     "neighbourhoods": [
       {
         "name": "Baie Sainte Anne",
-        "text": "Le plus gros village de l'île, environ 2 500 habitants. Villas et appartements : environ 800 à 1 800 € par mois (2025)."
+        "text": "Le plus gros village de l'île, environ 2 500 habitants. Villas et appartements : environ 800 à 1 800 € par mois (2025).",
+        "setting": "central",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Anse Volbert (Côte d'Or)",
-        "text": "Un des principaux villages de l'île, en bord de plage. Deux pièces : environ 510 à 910 € par mois (2026)."
+        "text": "Un des principaux villages de l'île, en bord de plage. Deux pièces : environ 510 à 910 € par mois (2026).",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": true,
+        "lively": null
       },
       {
         "name": "Grand' Anse",
-        "text": "Un des deux districts de l'île, avec son village. Deux pièces : environ 410 à 640 € par mois (2026)."
+        "text": "Un des deux districts de l'île, avec son village. Deux pièces : environ 410 à 640 € par mois (2026).",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
       }
     ],
     "sources": [

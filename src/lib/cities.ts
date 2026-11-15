@@ -2,6 +2,7 @@ import catalogue from "../data/cities.json";
 import criteriaCatalogue from "../data/criteria.json";
 import scoreCatalogue from "../data/city-scores.json";
 import countryCatalogue from "../data/countries.json";
+import lifeCatalogue from "../data/city-life.json";
 
 /**
  * A city joins three files: who it is (cities.json), how it scores on each criterion with its
@@ -93,6 +94,26 @@ export interface CountryFacts {
   mobileMoney: string;
   described: { womenDaily: string; returneePerception: string; religion: string };
   sources: Source[];
+  /** Documented practices of hospitality, and what residents say in Afrobarometer. */
+  welcome?: {
+    practices: { text: string; sources: Source[] }[];
+    afrobarometer: {
+      trustNeighbours: number | null;
+      toleranceForeigners: number | null;
+      round: string;
+      sources: Source[];
+    } | null;
+  };
+}
+
+/** Professions that hire in a city, and counts of daily-life places around its centre. */
+export interface CityLife {
+  professions: { field: string; strength: number; evidence: string; sources: Source[] }[];
+  /** OpenStreetMap counts within 3 km of the centre; null until counted. */
+  places: Record<
+    "gym" | "cafe" | "resto" | "books" | "shops" | "transit" | "culture" | "parks",
+    number
+  > | null;
 }
 
 export const ZONES = {
@@ -131,6 +152,7 @@ export interface City extends Identity {
   scores: Record<CriterionKey, Score>;
   facts: Facts;
   countryFacts: CountryFacts | undefined;
+  life: CityLife;
   /**
    * Ranked but never proposed. Derived from travel advice, never hand-set (§4.3): France
    * Diplomatie colours the city's zone orange or red, or the UK advises against all or all but
@@ -166,6 +188,9 @@ export function isUnsafe(advisory: Advisory): boolean {
 const SCORED = new Map(
   (scoreCatalogue as unknown as ScoredEntry[]).map((entry) => [entry.name, entry]),
 );
+const LIFE = new Map(
+  (lifeCatalogue as unknown as (CityLife & { name: string })[]).map((entry) => [entry.name, entry]),
+);
 const COUNTRIES = new Map(
   (countryCatalogue as unknown as CountryFacts[]).map((country) => [country.name, country]),
 );
@@ -179,6 +204,7 @@ export const CITIES: City[] = (catalogue as unknown as Identity[]).map((identity
     scores: scored.scores,
     facts: scored.facts,
     countryFacts: COUNTRIES.get(identity.country),
+    life: LIFE.get(identity.name) ?? { professions: [], places: null },
     unsafe: isUnsafe(scored.facts.advisory),
   };
 });

@@ -20,21 +20,31 @@ const SPACE: Record<string, unknown[]> = {
   roots: ["rediscover", "discover", "both"],
   origin: ["ouest", "centre", "est", "sud", "nord", "ameriques"],
   profession: [
+    "finance",
+    "law",
+    "consulting",
     "tech",
-    "trade",
     "health",
     "teaching",
-    "culture",
+    "ngo",
     "admin",
+    "trade",
+    "culture",
     "craft",
     "student",
     "retired",
   ],
+  currentCity: ["capital", "bigcity", "town", "country", "nomad"],
+  rhythm: ["same", "calmer", "more"],
+  mobility: ["walk", "transit", "bike", "car"],
+  neighbourhood: ["central", "residential", "upscale", "popular"],
+  people: ["invited", "quiet", "both"],
 };
 const MULTI: Record<string, unknown[]> = {
   languages: ["fr", "en", "pt", "ar"],
   landscapes: ["beach", "water", "nature", "wildSpaces", "urban"],
   priorities: ["safety", "cost", "healthAndSchools", "career", "diaspora", "memory", "flights"],
+  habits: ["gym", "cafes", "culture", "markets", "nights", "nature"],
 };
 
 function randomProfile(random: () => number): Answers {
@@ -74,6 +84,15 @@ describe("the city a profile lands on", () => {
       ["memory"],
       ["flights"],
       ["cost", "memory"],
+    ],
+    habits: [
+      ["gym"],
+      ["cafes"],
+      ["culture"],
+      ["markets"],
+      ["nights"],
+      ["nature"],
+      ["markets", "culture"],
     ],
   };
 
@@ -158,5 +177,39 @@ describe("the city a profile lands on", () => {
         m.city.name,
       ).toBe(true);
     }
+  });
+});
+
+describe("what the reader's life today brings to the match", () => {
+  const scoreOf = (answers: Answers, name: string) =>
+    rankCities(answers).find((m) => m.city.name === name)!.score;
+
+  it("brings those who like being invited towards countries whose residents trust and welcome", () => {
+    const invited: Answers = { people: "invited" };
+    // Afrobarometer Round 9: Benin among the most open, South Africa the least open to foreigners.
+    expect(scoreOf(invited, "Cotonou")).toBeGreaterThan(scoreOf(invited, "Johannesburg"));
+  });
+
+  it("matches a profession with the cities where it hires", () => {
+    const banker: Answers = { profession: "finance" };
+    expect(scoreOf(banker, "Johannesburg")).toBeGreaterThan(scoreOf(banker, "Saint-Louis"));
+  });
+
+  it("points someone from an upscale area to cities that have one", () => {
+    const chic: Answers = { neighbourhood: "upscale" };
+    expect(scoreOf(chic, "Abidjan")).toBeGreaterThan(scoreOf(chic, "Bo"));
+  });
+
+  it("lets a capital-dweller who wants a calmer life lean towards calmer cities", () => {
+    const same: Answers = { currentCity: "capital", rhythm: "same" };
+    const calmer: Answers = { currentCity: "capital", rhythm: "calmer" };
+    expect(scoreOf(calmer, "Saint-Louis") - scoreOf(calmer, "Lagos")).toBeGreaterThan(
+      scoreOf(same, "Saint-Louis") - scoreOf(same, "Lagos"),
+    );
+  });
+
+  it("keeps a frequent traveller close to flights and a good connection", () => {
+    const nomad: Answers = { currentCity: "nomad" };
+    expect(scoreOf(nomad, "Nairobi")).toBeGreaterThan(scoreOf(nomad, "Bubaque"));
   });
 });
