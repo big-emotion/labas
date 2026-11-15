@@ -104,7 +104,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
     );
   }
 
-  const languages = answers.languages ?? (answers.language ? [answers.language] : []);
+  const languages = answers.languages ?? [];
   const spoken = languages.find((l) => livableLanguages(city).includes(l));
   if (spoken) {
     const lang = LANGUAGE_NAMES[spoken];
@@ -136,7 +136,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
     add(`climate:${answers.climate}`, 2, byClimate[answers.climate]);
   }
 
-  const landscapes = answers.landscapes ?? (answers.landscape ? [answers.landscape] : []);
+  const landscapes = answers.landscapes ?? [];
   for (const landscape of landscapes) {
     const byLandscape = {
       water: settings.includes("lake-or-river")

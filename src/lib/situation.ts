@@ -56,14 +56,14 @@ const BUDGET: Rule<NonNullable<Answers["budget"]>>[] = [
   { pattern: /budget moyen/, value: "moyen" },
 ];
 
-const LANGUAGE: Rule<NonNullable<Answers["language"]>>[] = [
+const LANGUAGE: Rule<NonNullable<Answers["languages"]>[number]>[] = [
   { pattern: /français|francophone/, value: "fr" },
   { pattern: /anglais|anglophone/, value: "en" },
   { pattern: /portugais|lusophone/, value: "pt" },
   { pattern: /arabe|arabophone/, value: "ar" },
 ];
 
-const LANDSCAPE: Rule<NonNullable<Answers["landscape"]>>[] = [
+const LANDSCAPE: Rule<NonNullable<Answers["landscapes"]>[number]>[] = [
   { pattern: /plage|la mer\b|océan|bord de mer/, value: "beach" },
   { pattern: /montagne|forêt|randonn/, value: "nature" },
   { pattern: /savane|désert|safari/, value: "wildSpaces" },
@@ -119,6 +119,11 @@ function firstMentioned<V>(text: string, rules: Rule<V>[]) {
   return hits.sort((a, b) => a.at - b.at)[0] ?? null;
 }
 
+/** The questionnaire takes several languages and landscapes; the text gives the first one named. */
+function asList<V>(hit: { value: V; phrase: string; at: number } | null) {
+  return hit && { ...hit, value: [hit.value] };
+}
+
 export function readSituation(raw: string): { answers: Answers; understood: Understood[] } {
   const text = raw.toLowerCase();
   const answers: Answers = {};
@@ -130,8 +135,8 @@ export function readSituation(raw: string): { answers: Answers; understood: Unde
     ["family", find(text, FAMILY)],
     ["job", find(text, JOB)],
     ["budget", find(text, BUDGET)],
-    ["language", firstMentioned(text, LANGUAGE)],
-    ["landscape", firstMentioned(text, LANDSCAPE)],
+    ["languages", asList(firstMentioned(text, LANGUAGE))],
+    ["landscapes", asList(firstMentioned(text, LANDSCAPE))],
     ["climate", find(text, CLIMATE)],
     ["saturday", find(text, SATURDAY)],
     ["size", find(text, SIZE)],
