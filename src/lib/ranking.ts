@@ -221,9 +221,9 @@ const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
 };
 
 /** Turns answers into pulls on axes and facts to match. */
-function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] } {
-  // Safety matters to everyone a little, so a reader with few answers still gets a sane order.
-  const pulls: Pull[] = [pull("safety", 0.75, 0.5)];
+export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] } {
+  // No default pull: with no answer every city is equal, and only answers rank them.
+  const pulls: Pull[] = [];
   const facts: FactPull[] = [];
   const add = (more: Pull[] | undefined) => more && pulls.push(...more);
   if (answers.project) add(PROJECT[answers.project]);
