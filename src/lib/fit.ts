@@ -28,7 +28,8 @@ export type Axis =
   | "paperwork"
   | "welcome"
   | "walkable"
-  | "leisure";
+  | "leisure"
+  | "remote";
 
 /** Facts are matched, not measured: a city has the sea or it does not. */
 export type FactPull =
@@ -49,7 +50,7 @@ export interface Pull {
 
 /** What an axis reads from the sourced scores; comfort averages power, water and care. */
 const SOURCES: Record<
-  Exclude<Axis, "paperwork" | "welcome" | "walkable" | "leisure">,
+  Exclude<Axis, "paperwork" | "welcome" | "walkable" | "leisure" | "remote">,
   CriterionKey[]
 > = {
   pace: ["pace"],
@@ -83,6 +84,12 @@ function rawLevel(city: City, axis: Axis): number | null {
     );
     return values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
   }
+  if (axis === "remote") {
+    // Far from the hubs: the fewer direct flights, the further away. Some readers want exactly
+    // that, and no "at least this many flights" answer can say it for them.
+    const flights = city.scores.flights.level;
+    return flights === null ? null : -flights;
+  }
   const places = city.life.places;
   if (axis === "walkable") {
     return places
@@ -115,7 +122,14 @@ function percentiles(axis: Axis): Map<string, number | null> {
   return new Map(known.map((k) => [k.name, k.level === null ? null : rank(k.level)]));
 }
 
-const AXES = [...Object.keys(SOURCES), "paperwork", "welcome", "walkable", "leisure"] as Axis[];
+const AXES = [
+  ...Object.keys(SOURCES),
+  "paperwork",
+  "welcome",
+  "walkable",
+  "leisure",
+  "remote",
+] as Axis[];
 const FINGERPRINTS = new Map(AXES.map((axis) => [axis, percentiles(axis)]));
 
 /** Where a city sits on an axis, 0 to 1, or null when no source says. */
@@ -142,6 +156,7 @@ const SETTINGS: Record<string, string[]> = {
   water: ["lake-or-river", "ocean"],
   nature: ["mountains", "forest"],
   wildSpaces: ["savanna", "desert"],
+  island: ["island"],
 };
 
 /**

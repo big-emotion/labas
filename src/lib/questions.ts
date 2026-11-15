@@ -92,6 +92,7 @@ export const QUESTIONS: Question[] = [
       { label: "À la plage", value: "beach" },
       { label: "En montagne, en forêt", value: "nature" },
       { label: "Dans la savane ou le désert", value: "wildSpaces" },
+      { label: "Sur une île", value: "island" },
       { label: "Je reste en ville", value: "urban" },
     ],
   },

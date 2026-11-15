@@ -17,7 +17,7 @@ export type Priority =
 type Step = 0 | 0.5 | 1;
 
 type QuizLanguage = Exclude<Language, "es" | "sw"> | "es" | "sw";
-export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban";
+export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban" | "island";
 
 /**
  * Every answer is optional: an unanswered question drops out of the score. The free quiz and
@@ -62,8 +62,8 @@ export interface Answers {
     | "retired";
   /** Where the reader lives today: their life to keep, or to leave. */
   currentCity?: "capital" | "bigcity" | "town" | "country" | "nomad";
-  /** Over there: the same rhythm as today, calmer, or more intense. */
-  rhythm?: "same" | "calmer" | "more";
+  /** Over there: the same rhythm as today, calmer, more intense, or cut off from it all. */
+  rhythm?: "same" | "calmer" | "more" | "unplug";
   /** How the reader gets around today. */
   mobility?: "walk" | "transit" | "bike" | "car";
   /** The reader's daily habits. */
@@ -359,6 +359,7 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
+const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
 const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
   culture: "culture",
   internet: "internet",
@@ -389,7 +390,12 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   }
   if (answers.currentCity) {
     // Keeping the same rhythm doubles down on today's life; a change moves the pace target.
-    const shift = answers.rhythm === "calmer" ? -0.4 : answers.rhythm === "more" ? 0.3 : 0;
+    const shift =
+      answers.rhythm === "calmer" || answers.rhythm === "unplug"
+        ? -0.4
+        : answers.rhythm === "more"
+          ? 0.3
+          : 0;
     const boost = answers.rhythm === "same" ? 1.5 : answers.rhythm ? 0.6 : 1;
     add(
       CURRENT_CITY[answers.currentCity].map((p) => ({
@@ -402,6 +408,9 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     add([pull("pace", 0.25, 1.5)]);
   } else if (answers.rhythm === "more") {
     add([pull("pace", 0.85, 1.5)]);
+  }
+  if (answers.rhythm === "unplug") {
+    add([pull("remote", 0.85, 2.5), pull("pace", 0.05, 1.5), pull("nightlife", 0.05, 1)]);
   }
   if (answers.mobility) add(MOBILITY[answers.mobility]);
   for (const habit of answers.habits ?? []) add(HABITS[habit]);
@@ -433,7 +442,13 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     facts.push({ kind: "zone", value: answers.origin, weight: 1.5 });
   }
 
-  const renounced = new Set((answers.renounce ?? []).map((key) => RENOUNCE_AXIS[key]));
+  const renounced = new Set<Axis>(
+    (answers.renounce ?? [])
+      .map((key) => RENOUNCE_AXIS[key])
+      .filter((axis): axis is Axis => Boolean(axis)),
+  );
+  // "Je fais avec": outages and paperwork stop counting, whatever other answers asked for.
+  if (answers.friction === 1) for (const axis of COPED_WITH) renounced.add(axis);
   return { pulls: pulls.filter((p) => !renounced.has(p.axis)), facts };
 }
 
@@ -506,6 +521,10 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
         : "Moins de lieux du quotidien à portée";
     case "paperwork":
       return good ? "Démarches simples" : "Démarches plus lourdes";
+    case "remote":
+      return good
+        ? "Loin de l'agitation, comme tu le veux"
+        : "Plus fréquentée que tu ne le voudrais";
     default: {
       const key = part.axis ? CRITERION_OF[part.axis] : undefined;
       if (!key) return undefined;

@@ -148,6 +148,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
       wildSpaces: settings.some((s) => s === "savanna" || s === "desert")
         ? `Tu rêves de grands espaces : ils sont à portée de route depuis ${name}.`
         : null,
+      island: settings.includes("island") ? `Tu rêves d'une île : ${name} en est une.` : null,
       urban: high("culture") ? `La ville te suffit : ${name} a une vraie vie culturelle.` : null,
     };
     add(`landscape:${landscape}`, 3, byLandscape[landscape]);

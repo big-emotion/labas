@@ -36,14 +36,16 @@ const SPACE: Record<string, unknown[]> = {
     "retired",
   ],
   currentCity: ["capital", "bigcity", "town", "country", "nomad"],
-  rhythm: ["same", "calmer", "more"],
+  rhythm: ["same", "calmer", "more", "unplug"],
   mobility: ["walk", "transit", "bike", "car"],
   neighbourhood: ["central", "residential", "upscale", "popular"],
   people: ["invited", "quiet", "both"],
+  belonging: ["returnees", "locals", "both"],
+  friction: [0, 0.5, 1],
 };
 const MULTI: Record<string, unknown[]> = {
   languages: ["fr", "en", "pt", "ar"],
-  landscapes: ["beach", "water", "nature", "wildSpaces", "urban"],
+  landscapes: ["beach", "water", "nature", "wildSpaces", "urban", "island"],
   priorities: ["safety", "cost", "healthAndSchools", "career", "diaspora", "memory", "flights"],
   habits: ["gym", "cafes", "culture", "markets", "nights", "nature"],
 };
@@ -74,8 +76,16 @@ describe("the city a profile lands on", () => {
   };
   const OPTIONS: Record<string, unknown[]> = {
     ...SPACE,
-    languages: [["fr"], ["en"], ["pt"], ["ar"], ["fr", "en"]],
-    landscapes: [["beach"], ["water"], ["nature"], ["wildSpaces"], ["urban"], ["beach", "nature"]],
+    languages: [["fr"], ["en"], ["pt"], ["ar"], ["es"], ["sw"], ["fr", "en"]],
+    landscapes: [
+      ["beach"],
+      ["water"],
+      ["nature"],
+      ["wildSpaces"],
+      ["urban"],
+      ["island"],
+      ["beach", "nature"],
+    ],
     priorities: [
       ["safety"],
       ["cost"],
@@ -97,36 +107,34 @@ describe("the city a profile lands on", () => {
     ],
   };
 
+  // People live in each of these cities and like it there: if no answers put a city first,
+  // the measure is missing what they like about it, not the city.
   it("has a combination of answers that puts each city first", () => {
     const unreachable: string[] = [];
     for (const city of proposable) {
-      // Climb answer by answer towards the profile that favours this city most. The quiz always
-      // opens on the project, so the climb starts from its best answer: an empty profile ties
-      // every city at zero, a false summit no single answer can leave.
-      let answers: Record<string, unknown> = {};
       let best = -Infinity;
-      for (const value of OPTIONS.project) {
-        const gain = lead({ project: value } as Answers, city.name);
-        if (gain > best) [best, answers] = [gain, { project: value }];
-      }
-      for (let pass = 0; pass < 2; pass++) {
-        for (const [id, values] of Object.entries(OPTIONS)) {
-          for (const value of [undefined, ...values]) {
-            const tried = { ...answers, [id]: value };
-            const gain = lead(tried as Answers, city.name);
-            if (gain > best + 1e-9) {
-              best = gain;
-              answers = tried;
+      // The quiz always opens on the project; climb from each of its answers, question by
+      // question, keeping whichever answer widens this city's lead the most.
+      for (const project of OPTIONS.project) {
+        let answers: Record<string, unknown> = { project };
+        let lead_ = lead(answers as Answers, city.name);
+        for (let pass = 0; pass < 3; pass++) {
+          for (const [id, values] of Object.entries(OPTIONS)) {
+            if (id === "project") continue;
+            for (const value of [undefined, ...values]) {
+              const tried = { ...answers, [id]: value };
+              const gain = lead(tried as Answers, city.name);
+              if (gain > lead_ + 1e-9) [lead_, answers] = [gain, tried];
             }
           }
         }
+        best = Math.max(best, lead_);
+        if (best > 0) break;
       }
-      if (best <= 0) unreachable.push(city.name);
+      if (best <= 0) unreachable.push(`${city.name} (${best.toFixed(3)})`);
     }
-    expect(unreachable.length, unreachable.join(", ")).toBeLessThanOrEqual(
-      Math.round(proposable.length * 0.15),
-    );
-  });
+    expect(unreachable, unreachable.join(", ")).toEqual([]);
+  }, 120_000);
 
   it("spreads French speakers across many cities rather than a few", () => {
     const random = randomStream(7);
@@ -174,6 +182,15 @@ describe("the city a profile lands on", () => {
     ).toContain("Abidjan");
   });
 
+  it("sends someone who dreams of island life to islands", () => {
+    for (const m of bestMatches({ landscapes: ["island"] }, 10))
+      expect(m.city.facts.settings, m.city.name).toContain("island");
+  });
+
+  it("gives someone after a small town small towns", () => {
+    for (const m of bestMatches({ size: 1 }, 10)) expect(m.city.size, m.city.name).toBe(1);
+  });
+
   it("counts every language the reader can live in", () => {
     const both = bestMatches({ languages: ["fr", "en"] }, 10);
     const spoken = (m: (typeof both)[number]) =>
@@ -219,6 +236,18 @@ describe("what the reader's life today brings to the match", () => {
     const locals: Answers = { belonging: "locals" };
     // Saint-Louis draws few returnees, Ouidah many (city-scores.json, returnees).
     expect(scoreOf(locals, "Saint-Louis")).toBeGreaterThan(scoreOf(locals, "Ouidah"));
+  });
+
+  it("does not hold outages and paperwork against a city when the reader copes with them", () => {
+    const gap = (answers: Answers) => scoreOf(answers, "Bubaque") - scoreOf(answers, "Kpalimé");
+    expect(gap({ project: "installer", friction: 1 })).toBeGreaterThan(
+      gap({ project: "installer" }),
+    );
+  });
+
+  it("takes someone who wants to unplug far from the busy hubs", () => {
+    const unplug: Answers = { rhythm: "unplug" };
+    expect(scoreOf(unplug, "Bubaque")).toBeGreaterThan(scoreOf(unplug, "Mindelo"));
   });
 
   it("keeps a frequent traveller close to flights and a good connection", () => {

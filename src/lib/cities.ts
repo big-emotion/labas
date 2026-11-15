@@ -59,7 +59,8 @@ export interface CriterionDefinition {
 export const CRITERIA = criteriaCatalogue as CriterionDefinition[];
 
 export type Language = "fr" | "en" | "pt" | "ar" | "es" | "sw";
-export type Setting = "ocean" | "lake-or-river" | "mountains" | "forest" | "savanna" | "desert";
+export type Setting =
+  "ocean" | "lake-or-river" | "mountains" | "forest" | "savanna" | "desert" | "island";
 export type ClimateClass = "hot-humid" | "hot-dry" | "mild" | "highland";
 export type AdvisoryColour = "green" | "yellow" | "orange" | "red";
 
