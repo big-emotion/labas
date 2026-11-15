@@ -54,7 +54,6 @@ const description =
             <g id="highlights"></g>
           </svg>
         </div>
-        <ol class="podium" id="podium" aria-live="polite"></ol>
       </aside>
 
       <main class="main">
@@ -120,6 +119,14 @@ const description =
             </button>
           </div>
         </form>
+
+        <section class="now" aria-labelledby="now-title">
+          <h3 id="now-title">Pour l'instant, tes trois villes</h3>
+          <ol class="podium" id="podium" aria-live="polite"></ol>
+          <p class="hint">
+            Plus une ville te ressemble, plus son point est gros et coloré sur la carte.
+          </p>
+        </section>
 
         <div id="outcome" class="outcome" hidden>
           <section class="results" aria-labelledby="results-title">
@@ -582,12 +589,6 @@ const description =
           position: sticky;
           top: 24px;
         }
-        .podium {
-          position: static;
-          padding: 0;
-          background: none;
-          box-shadow: none;
-        }
       }
       h1 {
         font-family: var(--font-display);
@@ -671,6 +672,53 @@ const description =
         flex-wrap: wrap;
         gap: 8px;
         font-size: 0.95rem;
+      }
+      .now h3,
+      .now .hint {
+        display: none;
+      }
+      /* On a computer the map stays beside the questions: the question sits in a saffron
+         frame and the top three come right under it (quiz mockup, 2026-11-15). */
+      @media (min-width: 880px) {
+        .now {
+          display: grid;
+          gap: 10px;
+        }
+        .now h3 {
+          display: block;
+          margin: 0;
+          font-size: 1rem;
+          color: var(--thread-dim);
+        }
+        .now .hint {
+          display: block;
+          margin: 4px 0 0;
+        }
+        .podium {
+          position: static;
+          padding: 0;
+          background: none;
+          box-shadow: none;
+          font-size: 1.05rem;
+        }
+        .question:not([hidden]) {
+          background: var(--night-deep);
+          border: 2px solid var(--saffron);
+          border-radius: 22px;
+          padding: 30px 32px;
+        }
+        .question legend {
+          float: left;
+          width: 100%;
+          font-size: 2.4rem;
+          margin-bottom: 20px;
+        }
+        .question .chips {
+          clear: both;
+        }
+        .main {
+          padding-top: 24px;
+        }
       }
       .podium :global(li) {
         display: flex;
