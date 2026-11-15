@@ -1,10 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { QUESTIONS } from "./questions";
+import { DEEP_QUESTIONS } from "./deep-questions";
 import { readSituation } from "./situation";
 
-const VALID: Record<string, Set<unknown>> = Object.fromEntries(
-  QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))]),
-);
+// Every answer the engine reads: the questionnaire's, plus the three single-answer forms the
+// prototype still produces and profileOf still accepts (job, language, landscape).
+const VALID: Record<string, Set<unknown>> = {
+  ...Object.fromEntries(DEEP_QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))])),
+  job: new Set(["cadre", "entre", "remote", "crea", "soin"]),
+  language: new Set(["fr", "en", "pt", "ar", "es", "sw"]),
+  landscape: new Set(["beach", "water", "nature", "wildSpaces", "urban", "island"]),
+};
 
 describe("reading a free-text situation into quiz answers", () => {
   it("understands a family that wants the sea and a modest budget", () => {
