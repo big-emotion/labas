@@ -44,6 +44,11 @@ export type FactPull =
   | { kind: "kin"; origins: string[]; weight: number }
   /** The passports the reader holds: how easily each one gets into the city's country. */
   | { kind: "entry"; values: string[]; weight: number }
+  /**
+   * How a Black reader can expect to be received: documented anti-Black racism counts against a
+   * country whatever the reader's taste for adventure, xenophobic violence half as much.
+   */
+  | { kind: "reception"; weight: number }
   /** The family's own countries. */
   | { kind: "homeCountry"; values: string[]; weight: number }
   /** The reader's faith: the share of the country that shares it. */
@@ -299,6 +304,15 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       match = city.facts.climates.some((c) => wanted.includes(c));
     } else if (fact.kind === "zone") {
       match = fact.values.includes(city.zone);
+    } else if (fact.kind === "reception") {
+      const racism = city.countryFacts?.racism?.kind;
+      parts.push({
+        value: racism === "anti-black" ? 0 : racism === "xenophobia" ? 0.5 : 1,
+        weight: fact.weight,
+        known: true,
+        fact: fact.kind,
+      });
+      continue;
     } else if (fact.kind === "homeCountry") {
       match = fact.values.includes(city.country);
     } else if (fact.kind === "sectors") {
