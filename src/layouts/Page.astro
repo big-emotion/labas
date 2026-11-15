@@ -7,10 +7,8 @@ import ShareMeta from "../components/ShareMeta.astro";
 interface Props {
   title: string;
   description: string;
-  /** Keep a page out of search engines (prototypes). */
-  noindex?: boolean;
 }
-const { title, description, noindex = false } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <html lang="fr">
@@ -19,7 +17,6 @@ const { title, description, noindex = false } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <ShareMeta title={`${title} · Là-bas`} description={description} />
-    {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#161a5c" />
     <title>{title} · Là-bas</title>
     <Analytics />
