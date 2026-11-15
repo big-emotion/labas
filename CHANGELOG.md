@@ -6,6 +6,14 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-15
+
+### Fixed
+
+- Phones read the app description (for « add to home screen ») with its proper type.
+- The « raconte » prototype now gives several languages and landscapes like the questionnaire;
+  the old single-answer forms are gone from the engine.
+
 ## [0.5.0] - 2026-11-15
 
 ### Added
@@ -109,6 +117,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.5.0...HEAD
+[0.5.1]: https://github.com/big-emotion/labas/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/big-emotion/labas/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/big-emotion/labas/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/big-emotion/labas/compare/v0.2.1...v0.3.0
