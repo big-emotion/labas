@@ -6,6 +6,26 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-15
+
+### Added
+
+- A picture when a link is shared on WhatsApp, Facebook, LinkedIn or X: the question and the map
+  for the home page, and for each city its credited photo with « Vivre à … », or the map with the
+  city ringed when it has no photo.
+- Search engines get a sitemap of the 120 public pages, a canonical address per page and a
+  description of the site; the prototype stays out.
+- Là-bas can be added to a phone's home screen with its own icon.
+
+### Changed
+
+- City pages are titled « Vivre à Dakar, Sénégal ». The home description no longer promises ten
+  questions.
+
+### Fixed
+
+- `/ville/dakar` (no final slash) redirected through plain http before reaching https.
+
 ## [0.3.0] - 2026-11-15
 
 ### Added
@@ -74,6 +94,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.3.0...HEAD
+[0.4.0]: https://github.com/big-emotion/labas/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/big-emotion/labas/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/big-emotion/labas/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/big-emotion/labas/compare/v0.1.4...v0.2.0
