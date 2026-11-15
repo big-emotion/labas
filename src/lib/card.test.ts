@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
-import { livingLines, sameCountry } from "./card";
+import { costLabel, livingLines, regionName, sameCountry } from "./card";
 import { rankCities } from "./ranking";
 
 const city = (name: string) => CITIES.find((c) => c.name === name)!;
@@ -27,5 +27,13 @@ describe("what a city card says about living there", () => {
     const others = sameCountry(ranked, city("Dakar"));
     expect(others.map((o) => o.name).sort()).toEqual(["Saint-Louis", "Saly"]);
     expect(others[0].score).toBeGreaterThanOrEqual(others[1].score);
+  });
+});
+
+describe("the short facts on a city card", () => {
+  it("names the region and says the cost of living in words", () => {
+    expect(regionName("ouest")).toBe("Afrique de l'Ouest");
+    expect(costLabel(5)).toBe("Coût de vie très abordable");
+    expect(costLabel(null)).toBeUndefined();
   });
 });

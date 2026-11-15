@@ -87,7 +87,9 @@ describe("ranking the cities", () => {
 
   it("ties each portrait line to what the reader said", () => {
     const nightOwl = rankCities({ saturday: 1 }).find((m) => m.city.name === "Lagos");
-    expect(nightOwl?.portrait[0]).toMatchObject({ said: "Du monde, de la musique, on rentre tard" });
+    expect(nightOwl?.portrait[0]).toMatchObject({
+      said: "Du monde, de la musique, on rentre tard",
+    });
     expect(nightOwl?.portrait[0].text).toContain("Lagos");
   });
 

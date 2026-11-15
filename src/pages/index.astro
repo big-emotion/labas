@@ -32,44 +32,41 @@ const description =
           Pour les diasporas qui regardent vers le continent. Vacances, allers-retours ou
           installation : dites qui vous êtes, découvrez en quoi une ville vous ressemble.
         </p>
-        <div class="map">
-          <svg
-            id="map"
-            viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
-            role="img"
-            aria-label="Carte de l'Afrique : plus une ville te ressemble, plus son point est gros et coloré"
-          >
-            <g class="land" aria-hidden="true">
-              {borders.map((country) => (
-                <path d={country.d} />
+        <div class="maprow">
+          <div class="map">
+            <svg
+              id="map"
+              viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+              role="img"
+              aria-label="Carte de l'Afrique : plus une ville te ressemble, plus son point est gros et coloré"
+            >
+              <g class="land" aria-hidden="true">
+                {borders.map((country) => (
+                  <path d={country.d} />
+                ))}
+              </g>
+              {dots.map((dot) => (
+                <circle
+                  class="dot"
+                  data-city={dot.name}
+                  cx={dot.x.toFixed(1)}
+                  cy={dot.y.toFixed(1)}
+                  r="3"
+                >
+                  <title>{dot.name}</title>
+                </circle>
               ))}
-            </g>
-            {dots.map((dot) => (
-              <circle
-                class="dot"
-                data-city={dot.name}
-                cx={dot.x.toFixed(1)}
-                cy={dot.y.toFixed(1)}
-                r="3"
-              >
-                <title>{dot.name}</title>
-              </circle>
-            ))}
-            <g id="highlights"></g>
-          </svg>
+              <g id="highlights"></g>
+            </svg>
+          </div>
+          <p class="map-legend" id="legend"></p>
         </div>
-        <p class="map-legend" id="legend"></p>
       </aside>
 
       <main class="main">
         <div class="progress">
-          <span id="counter" class="counter">
-            Ça se dessine
-          </span>
-          <span class="track">
-            <span id="progress"></span>
-          </span>
-          <span class="gauge-hint">Ton résultat se précise à chaque réponse.</span>
+          <span id="stitches" class="stitches" aria-hidden="true"></span>
+          <p id="counter" class="counter"></p>
         </div>
         <form id="form" class="questions" aria-label="Tes réponses">
           {QUESTIONS.map((question, index) => (
@@ -79,35 +76,35 @@ const description =
               data-max={question.max ?? 1}
               hidden={index > 0}
             >
-              <legend>
-                <span class="group">{question.group}</span>
-                {question.title}
-                {question.max && <span class="hint">Plusieurs choix possibles</span>}
-              </legend>
-              <div class="chips">
+              <legend>{question.title}</legend>
+              <p class="why">{question.hint}</p>
+              <span class={question.max ? "mode multi" : "mode"}>
+                {question.max ? "Plusieurs réponses possibles" : "Une seule réponse"}
+              </span>
+              <div class={question.choices.length > 7 ? "chips compact" : "chips"}>
                 {question.choices.map((choice) => (
                   <button
                     type="button"
-                    class="chip"
+                    class={question.max ? "chip multi" : "chip"}
                     aria-pressed="false"
                     data-value={JSON.stringify(choice.value)}
                     data-zone={choice.zone}
                   >
-                    {choice.label}
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="label">
+                      {choice.label}
+                      {choice.sub && <small>{choice.sub}</small>}
+                    </span>
                   </button>
                 ))}
               </div>
               <div class="steps">
                 <button type="button" class="back" data-step="back">
-                  ← Retour
+                  Question précédente
                 </button>
-                {question.max ? (
-                  <button type="button" class="next" data-step="next">
-                    Valider
-                  </button>
-                ) : (
-                  <button type="button" class="skip" data-step="next">
-                    Passer
+                {question.max && (
+                  <button type="button" class="next" data-step="next" disabled>
+                    Continuer
                   </button>
                 )}
               </div>
@@ -119,34 +116,13 @@ const description =
             <button type="button" id="reveal" class="primary">
               Voir mes villes
             </button>
-            <button type="button" id="refine" class="secondary">
-              Affiner encore (questions de plus)
-            </button>
             <button type="button" class="back" data-step="back">
-              ← Changer une réponse
+              Question précédente
             </button>
           </div>
         </form>
 
         <div id="outcome" class="outcome" hidden>
-          <section class="filters" aria-label="Filtrer tes villes">
-            <div class="filter-chips">
-              {FILTER_MENU.map((entry) => (
-                <button
-                  type="button"
-                  class="filter-chip"
-                  data-filter={entry.key}
-                  aria-pressed="false"
-                >
-                  {entry.label}
-                </button>
-              ))}
-            </div>
-            <p class="hint" id="filter-note">
-              Les filtres retirent des villes ; l'ordre ne change jamais.
-            </p>
-          </section>
-
           <dialog id="filter-sheet" class="sheet" aria-labelledby="sheet-title">
             <form method="dialog" class="sheet-body">
               <h2 id="sheet-title"></h2>
@@ -159,13 +135,20 @@ const description =
           </dialog>
 
           <section class="results" aria-labelledby="results-title">
-            <h2 id="results-title">Tes trois villes</h2>
-            <p class="hint" id="results-hint">
-              Sans réponse, voici les villes qui plaisent au plus grand nombre.
+            <h2 id="results-title">Tes villes</h2>
+            <p class="hint">
+              Des propositions, classées selon tes réponses. Chaque pourcentage est expliqué.
             </p>
-            <p class="hint" id="results-sub" hidden>
-              Selon tes réponses, de la plus proche à la moins proche.
-            </p>
+            <div id="temperament" class="temperament" hidden>
+              <p class="eyebrow">Ton tempérament</p>
+              <p class="archetype" id="archetype"></p>
+              <p id="archetype-text"></p>
+              <ul class="traits" id="traits"></ul>
+              <p class="small">
+                Lecture rapide inspirée du Big Five, une question par trait. Ce n'est pas un test de
+                personnalité.
+              </p>
+            </div>
             <div id="cards" class="cards"></div>
           </section>
 
@@ -174,6 +157,23 @@ const description =
             <p class="hint" id="others-hint">
               Les 115 villes, triées selon tes réponses.
             </p>
+            <div class="filters" aria-label="Filtrer tes villes">
+              <div class="filter-chips">
+                {FILTER_MENU.map((entry) => (
+                  <button
+                    type="button"
+                    class="filter-chip"
+                    data-filter={entry.key}
+                    aria-pressed="false"
+                  >
+                    {entry.label}
+                  </button>
+                ))}
+              </div>
+              <p class="hint" id="filter-note">
+                Les filtres retirent des villes ; l'ordre ne change jamais.
+              </p>
+            </div>
             <ol id="rows" class="rows"></ol>
             <button type="button" id="more" class="more">
               Voir plus de villes
@@ -215,21 +215,31 @@ const description =
             <h3 class="card-name"></h3>
             <p class="card-country"></p>
           </div>
-          <span class="fit"></span>
+          <span class="fit">
+            <b></b>
+            <small>proche de toi</small>
+          </span>
         </header>
-        <span class="bar">
-          <span></span>
-        </span>
-        <p class="card-tagline"></p>
+        <p class="split"></p>
         <figure class="photo" hidden>
           <img alt="" width="1280" height="853" loading="lazy" />
           <figcaption></figcaption>
         </figure>
         <p class="card-pitch"></p>
-        <div class="portrait-box" hidden>
-          <h4 class="portrait-title"></h4>
-          <ul class="portrait"></ul>
+        <div class="rated" data-block="why">
+          <h4>Pourquoi toi</h4>
+          <ul></ul>
         </div>
+        <div class="rated against" data-block="against">
+          <h4>Ce qui joue contre elle</h4>
+          <ul></ul>
+        </div>
+        <div class="rated" data-block="living">
+          <h4>Si tu y vivais</h4>
+          <ul></ul>
+        </div>
+        <ul class="facts"></ul>
+        <p class="same"></p>
         <details class="detail">
           <summary>
             <span class="when-closed">Voir le détail</span>
@@ -295,8 +305,11 @@ const description =
     </template>
 
     <script>
-      import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
-      import { gauge, isSettled, nextFreeQuestion } from "../lib/adaptive";
+      import { rankCities, type Answers, type Match, type Rated } from "../lib/ranking";
+      import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
+      import { archetypeOf } from "../lib/temperament";
+      import { costLabel, livingLines, regionName, sameCountry } from "../lib/card";
+      import { QUESTIONS } from "../lib/questions";
       import {
         applyFilters,
         FILTER_MENU,
@@ -388,6 +401,7 @@ const description =
         );
       }
 
+      const CITIES_COUNT = 115;
       const percent = (score: number) => `${Math.round(score * 100)}\u202f%`;
       const VISIBLE_ROWS = 5;
       let showAll = false;
@@ -449,7 +463,8 @@ const description =
             return item;
           }),
         );
-        show("reasons", m.reasons.length > 0);
+        // Cards already rate the reasons; rows show them here.
+        show("reasons", withPortrait && m.reasons.length > 0);
         fillList(
           body.querySelector(".reasons") as HTMLElement,
           m.reasons.map((r) => r.label),
@@ -468,15 +483,39 @@ const description =
           `${Math.round(score * 100)}%`;
       }
 
-      function cardFor(m: Match, index: number): HTMLElement {
+      function fillRated(block: HTMLElement, lines: Rated[]) {
+        block.hidden = lines.length === 0;
+        block.querySelector("ul")!.replaceChildren(
+          ...lines.map((line) => {
+            const item = document.createElement("li");
+            const label = document.createElement("span");
+            label.textContent = line.label;
+            const pips = document.createElement("span");
+            pips.className = "pips";
+            pips.setAttribute("aria-label", `${line.level} sur 5`);
+            for (let i = 1; i <= 5; i++) {
+              const pip = document.createElement("i");
+              if (i <= line.level) pip.className = "on";
+              pips.append(pip);
+            }
+            item.append(label, pips);
+            return item;
+          }),
+        );
+      }
+
+      // Every card has the same fields; only the first one shows its photo.
+      function cardFor(m: Match, index: number, ranked: Match[]): HTMLElement {
         const card = clone("card-template");
         if (index === 0) card.classList.add("first");
         setText(card, ".rank", String(index + 1));
         setText(card, ".card-name", m.city.name);
-        setText(card, ".card-country", `${m.city.country} · ${m.city.languageLabel}`);
-        setText(card, ".fit", percent(m.score));
-        setBar(card, m.score);
-        setText(card, ".card-tagline", m.city.tagline);
+        setText(card, ".card-country", `${m.city.country} · ${regionName(m.city.zone)}`);
+        setText(card, ".fit b", percent(m.score));
+        const split = card.querySelector(".split") as HTMLElement;
+        split.hidden = m.temperament === null;
+        if (m.temperament !== null)
+          split.innerHTML = `Tempérament <b>${percent(m.temperament)}</b> · Vie pratique <b>${percent(m.practical)}</b>`;
         setText(card, ".card-pitch", m.city.pitch);
         const photo = photoFor(m.city.name);
         if (index === 0 && photo) {
@@ -491,11 +530,23 @@ const description =
           );
           figure.hidden = false;
         }
-        // The city in first place shows its "pourquoi toi" without a tap.
-        const box = card.querySelector(".portrait-box") as HTMLElement;
-        box.hidden = index !== 0 || m.portrait.length === 0;
-        if (index === 0) fillPortrait(box, m);
-        card.querySelector(".detail")!.append(detailFor(m, index !== 0));
+        fillRated(card.querySelector('[data-block="why"]')!, m.reasons);
+        fillRated(card.querySelector('[data-block="against"]')!, m.drawbacks);
+        fillRated(card.querySelector('[data-block="living"]')!, livingLines(m.city));
+        const facts = [m.city.languageLabel, m.city.currency, costLabel(m.city.scores.cost.level)];
+        fillList(
+          card.querySelector(".facts") as HTMLElement,
+          facts.filter((f): f is string => Boolean(f)),
+        );
+        const others = sameCountry(ranked, m.city);
+        setText(
+          card,
+          ".same",
+          others.length
+            ? `Aussi dans le pays : ${others.map((o) => `${o.name} ${percent(o.score)}`).join(", ")}`
+            : "",
+        );
+        card.querySelector(".detail")!.append(detailFor(m, false));
         return card;
       }
 
@@ -513,7 +564,6 @@ const description =
 
       function render() {
         const current = readAnswers();
-        const answered = Object.values(current).some((value) => value !== undefined);
         const ranked = rankCities(current);
         // Filters only remove cities; the order stays the score's.
         const kept = applyFilters(ranked, filtersFrom(picked));
@@ -527,12 +577,25 @@ const description =
         const missing = answersBeforeLight(count);
         renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
         (document.getElementById("legend") as HTMLElement).textContent = missing
-          ? `Encore ${missing} ${missing > 1 ? "réponses" : "réponse"} avant que la carte s'allume.`
-          : "Plus un point est chaud, plus la ville correspond à tes réponses. Les noms des trois premières apparaissent avec ton résultat.";
+          ? `${CITIES_COUNT} villes en lice. Chaque réponse fait grossir celles qui te correspondent.`
+          : `En tête pour l'instant : ${matches.map((m) => m.city.name).join(", ")}`;
 
-        (document.getElementById("results-hint") as HTMLElement).hidden = answered;
-        (document.getElementById("results-sub") as HTMLElement).hidden = !answered;
-        (document.getElementById("cards") as HTMLElement).replaceChildren(...matches.map(cardFor));
+        const archetype = archetypeOf(current);
+        (document.getElementById("temperament") as HTMLElement).hidden = !archetype;
+        if (archetype) {
+          setText(document.body, "#archetype", archetype.name);
+          setText(document.body, "#archetype-text", archetype.text);
+          (document.getElementById("traits") as HTMLElement).replaceChildren(
+            ...archetype.traits.map((trait) => {
+              const item = document.createElement("li");
+              item.innerHTML = `<span>${trait.name}<small>${trait.range}</small></span><span class="meter"><i style="width:${Math.max(8, Math.round(trait.value * 100))}%"></i></span>`;
+              return item;
+            }),
+          );
+        }
+        (document.getElementById("cards") as HTMLElement).replaceChildren(
+          ...matches.map((m, i) => cardFor(m, i, ranked)),
+        );
 
         // Every other city, in score order; conflict zones keep their place, greyed.
         const shown = new Set(matches.map((m) => m.city.name));
@@ -565,12 +628,12 @@ const description =
         ]),
       );
       const asked: string[] = [];
-      const tops: string[][] = [];
       let current: string | undefined = "project";
       let revealed = false;
-      let refining = false;
+      let timer: ReturnType<typeof setTimeout> | undefined;
 
       function showQuestion(id: string | undefined) {
+        clearTimeout(timer);
         current = id;
         revealed = id === undefined;
         // On the phone the title gives way to the map once the reader has started.
@@ -584,32 +647,42 @@ const description =
           if (chip.hidden) chip.setAttribute("aria-pressed", "false");
         }
         (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
-        const filled = gauge(asked.length, id === undefined);
-        (document.getElementById("counter") as HTMLElement).textContent =
-          filled >= 1 ? "Prêt" : filled >= 0.6 ? "Presque" : "Ça se dessine";
-        (document.getElementById("progress") as HTMLElement).style.width =
-          `${Math.round(filled * 100)}%`;
+        // « Ton tempérament · question 7 sur 18 »: the total only moves when a conditional
+        // question comes in or drops out.
+        const list = freeQuestions(readAnswers());
+        const position = id ? asked.length + 1 : list.length;
+        const question = QUESTIONS.find((q) => q.id === id);
+        (document.getElementById("counter") as HTMLElement).innerHTML = question
+          ? `<b>${question.group}</b> · question ${position} sur ${list.length}`
+          : "<b>C'est prêt</b>";
+        (document.getElementById("stitches") as HTMLElement).replaceChildren(
+          ...list.map((_, i) => {
+            const stitch = document.createElement("i");
+            if (i < asked.length) stitch.className = "done";
+            return stitch;
+          }),
+        );
         const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
-        if (back) back.disabled = asked.length === 0;
+        if (back) back.hidden = asked.length === 0;
+        if (id) syncContinue(fieldsets.get(id)!);
         if (id)
           fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
         render();
       }
 
+      // « Continuer » stays off until something is picked.
+      function syncContinue(fieldset: HTMLFieldSetElement) {
+        const next = fieldset.querySelector<HTMLButtonElement>(".next");
+        if (next) next.disabled = !fieldset.querySelector('.chip[aria-pressed="true"]');
+      }
+
       function advance() {
-        if (current) {
-          asked.push(current);
-          tops.push(bestMatches(readAnswers(), 3).map((m) => m.city.name));
-        }
-        const next = nextFreeQuestion(readAnswers(), asked);
-        const settled = !next || (!refining && isSettled(asked.length, tops));
-        showQuestion(settled ? undefined : next);
+        if (current) asked.push(current);
+        showQuestion(nextFreeQuestion(readAnswers(), asked));
       }
 
       function goBack() {
         const last = asked.pop();
-        tops.pop();
-        refining = false;
         if (last) showQuestion(last);
       }
 
@@ -625,10 +698,12 @@ const description =
         if (!chip) return;
         pick(chip);
         render();
-        const fieldset = chip.closest<HTMLFieldSetElement>(".question");
-        // A single-choice answer moves on by itself; several choices wait for « Valider ».
-        if (Number(fieldset?.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
-          advance();
+        const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
+        syncContinue(fieldset);
+        // A single answer lights up, then the next question comes half a second later.
+        if (Number(fieldset.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
+          clearTimeout(timer);
+          timer = setTimeout(advance, 500);
         }
       });
 
@@ -636,11 +711,6 @@ const description =
         const outcome = document.getElementById("outcome") as HTMLElement;
         outcome.hidden = false;
         outcome.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-
-      document.getElementById("refine")!.addEventListener("click", () => {
-        refining = true;
-        advance();
       });
 
       // Filters on the result: one sheet per filter, options toggled live.
@@ -846,32 +916,92 @@ const description =
         font-size: 0.82rem;
         margin-top: 2px;
       }
+      .why {
+        margin: 0 0 10px;
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+      }
+      .mode {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 3px 11px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        background: var(--night-lift);
+        color: var(--thread-dim);
+      }
+      .mode.multi {
+        background: var(--saffron);
+        color: var(--ink);
+      }
+      /* One answer per line, a round box for one choice and a square one for several. */
       .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: grid;
+        gap: 9px;
+      }
+      .chips.compact {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
       }
       .chip {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        min-height: 48px;
+        text-align: left;
         background: var(--night-lift);
         border: 2px solid transparent;
-        border-radius: 999px;
-        padding: 9px 15px;
-        font-size: 0.92rem;
-        font-weight: 600;
+        border-radius: 14px;
+        padding: 11px 15px;
+        font-size: 1rem;
         cursor: pointer;
-        transition:
-          transform 0.15s,
-          background 0.15s,
-          border-color 0.15s;
+      }
+      .chip[hidden] {
+        display: none;
       }
       .chip:hover {
         border-color: rgba(255, 182, 39, 0.5);
       }
+      .chip .box {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 2px solid var(--thread-dim);
+      }
+      .chip.multi .box {
+        border-radius: 7px;
+      }
+      .chip .label {
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .chip small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.85rem;
+        color: var(--thread-dim);
+      }
       .chip[aria-pressed="true"] {
+        border-color: var(--saffron);
+        background: var(--night-pressed);
+      }
+      .chip[aria-pressed="true"] .box {
         background: var(--saffron);
         border-color: var(--saffron);
-        color: var(--ink);
-        transform: translateY(-1px);
+        box-shadow: inset 0 0 0 4px var(--night-pressed);
+      }
+      .chips.compact .chip {
+        grid-template-columns: 18px 1fr;
+        gap: 8px;
+        padding: 9px 10px;
+        font-size: 0.92rem;
+      }
+      .chips.compact .chip .box {
+        width: 18px;
+        height: 18px;
       }
       .results {
         display: grid;
@@ -1184,27 +1314,18 @@ const description =
         :global(body.started) .lead {
           display: none;
         }
-        :global(body.started) .map svg {
-          max-height: 34vh;
+        /* On the phone the map shrinks to a thumbnail beside « En tête pour l'instant ». */
+        .maprow {
+          display: grid;
+          grid-template-columns: 128px minmax(0, 1fr);
+          gap: 14px;
+          align-items: center;
         }
       }
       .map-legend {
         margin: 0;
         color: var(--thread-dim);
         font-size: 0.85rem;
-      }
-      .group {
-        display: block;
-        font-family: var(--font-mono);
-        font-size: 0.72rem;
-        letter-spacing: 0.1em;
-        color: var(--saffron);
-        margin-bottom: 6px;
-      }
-      .gauge-hint {
-        grid-column: 1 / -1;
-        font-size: 0.8rem;
-        color: var(--thread-dim);
       }
       .filters {
         display: grid;
@@ -1293,33 +1414,33 @@ const description =
       }
       .progress {
         display: grid;
-        gap: 8px;
+        gap: 10px;
+      }
+      .stitches {
+        display: flex;
+        gap: 3px;
+      }
+      .stitches :global(i) {
+        flex: 1;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--night-lift);
+      }
+      .stitches :global(i.done) {
+        background: var(--saffron);
       }
       .counter {
-        font-family: var(--font-mono);
-        font-size: 0.85rem;
+        margin: 0;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         color: var(--thread-dim);
       }
-      .track {
-        display: block;
-        height: 6px;
-        border-radius: 999px;
-        background: var(--night-lift);
-        overflow: hidden;
-      }
-      .track span {
-        display: block;
-        width: 0;
-        height: 100%;
-        background: var(--saffron);
-        transition: width 0.3s;
+      .counter :global(b) {
+        color: var(--saffron);
       }
       .question legend {
         font-size: clamp(1.6rem, 6vw, 2.2rem);
-      }
-      .question .chip {
-        min-height: 48px;
-        font-size: 1rem;
       }
       .steps {
         display: flex;
@@ -1328,7 +1449,6 @@ const description =
         margin-top: 16px;
       }
       .back,
-      .skip,
       .next,
       .primary,
       .secondary {
@@ -1342,14 +1462,17 @@ const description =
         background: transparent;
         color: var(--thread-dim);
         padding: 0 4px;
+        font-weight: 400;
+        text-decoration: underline;
+        text-underline-offset: 4px;
       }
-      .back:disabled {
+      .back[hidden] {
         visibility: hidden;
+        display: inline;
       }
-      .skip {
-        border: 2px solid var(--thread-dim);
-        background: transparent;
-        padding: 0 18px;
+      .next:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
       }
       .next,
       .primary {
@@ -1449,6 +1572,136 @@ const description =
         display: grid;
         gap: 6px;
         font-size: 0.82rem;
+      }
+      /* Result cards: same fields for each city, reasons rated 1 to 5. */
+      .results :global(.card .fit) {
+        text-align: right;
+      }
+      .results :global(.card .fit b) {
+        display: block;
+        font-size: 1.8rem;
+        line-height: 1;
+      }
+      .results :global(.card .fit small) {
+        display: block;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--thread-dim);
+      }
+      .results :global(.split),
+      .results :global(.same) {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--thread-dim);
+      }
+      .results :global(.split b) {
+        color: var(--thread);
+      }
+      .results :global(.rated h4) {
+        margin: 0 0 6px;
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--thread-dim);
+      }
+      .results :global(.rated ul) {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+      }
+      .results :global(.rated li) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .results :global(.rated[hidden]) {
+        display: none;
+      }
+      .results :global(.pips) {
+        display: inline-flex;
+        gap: 3px;
+        flex: none;
+      }
+      .results :global(.pips i) {
+        width: 11px;
+        height: 11px;
+        border-radius: 3px;
+        background: var(--night-lift);
+      }
+      .results :global(.pips i.on) {
+        background: var(--saffron);
+      }
+      .results :global(.against .pips i.on) {
+        background: var(--coral);
+      }
+      .results :global(.facts) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .results :global(.facts li) {
+        background: var(--night-lift);
+        border-radius: 999px;
+        padding: 4px 11px;
+        font-size: 0.82rem;
+      }
+      .temperament {
+        background: var(--night-deep);
+        border-radius: 20px;
+        padding: 18px;
+        display: grid;
+        gap: 10px;
+      }
+      .temperament[hidden] {
+        display: none;
+      }
+      .temperament p {
+        margin: 0;
+      }
+      .archetype {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 2rem;
+        line-height: 1;
+        color: var(--saffron);
+      }
+      .traits {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 8px;
+      }
+      .traits :global(li) {
+        display: grid;
+        grid-template-columns: minmax(0, 10em) 1fr;
+        gap: 10px;
+        align-items: center;
+        font-size: 0.92rem;
+      }
+      .traits :global(small) {
+        display: block;
+        color: var(--thread-dim);
+        font-size: 0.78rem;
+      }
+      .traits :global(.meter) {
+        height: 8px;
+        border-radius: 4px;
+        background: var(--night-lift);
+        overflow: hidden;
+      }
+      .traits :global(.meter i) {
+        display: block;
+        height: 100%;
+        background: var(--saffron);
       }
     </style>
   </body>

@@ -29,3 +29,25 @@ export function sameCountry(ranked: Match[], city: City): { name: string; score:
     .filter((m) => m.city.country === city.country && m.city.name !== city.name)
     .map((m) => ({ name: m.city.name, score: m.score }));
 }
+
+const REGIONS: Record<City["zone"], string> = {
+  ouest: "Afrique de l'Ouest",
+  centre: "Afrique centrale",
+  est: "Afrique de l'Est",
+  sud: "Afrique australe",
+  nord: "Afrique du Nord",
+};
+
+export const regionName = (zone: City["zone"]) => REGIONS[zone];
+
+/** The `cost` score in words: 5 is cheapest (architecture.md, `cost`). */
+const COSTS = [
+  "Coût de vie très élevé",
+  "Coût de vie très élevé",
+  "Coût de vie élevé",
+  "Coût de vie intermédiaire",
+  "Coût de vie abordable",
+  "Coût de vie très abordable",
+];
+
+export const costLabel = (level: number | null) => (level === null ? undefined : COSTS[level]);
