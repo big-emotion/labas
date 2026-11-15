@@ -242,6 +242,9 @@ const description =
         </div>
         <ul class="facts"></ul>
         <p class="same"></p>
+        <a class="go" hidden>
+          Y aller
+        </a>
         <details class="detail">
           <summary>
             <span class="when-closed">Voir le détail</span>
@@ -324,6 +327,7 @@ const description =
       import { advisoryNote } from "../lib/advisory";
       import { photoFor } from "../lib/photos";
       import { answerEvent } from "../lib/analytics";
+      import { goingThere } from "../lib/going";
 
       // Defined by components/Analytics.astro only when audience measurement is configured.
       declare global {
@@ -556,6 +560,11 @@ const description =
             ? `Aussi dans le pays : ${others.map((o) => `${o.name} ${percent(o.score)}`).join(", ")}`
             : "",
         );
+        if (goingThere(m.city)) {
+          const go = card.querySelector(".go") as HTMLAnchorElement;
+          go.href = `/ville/${m.city.slug}/#y-aller`;
+          go.hidden = false;
+        }
         card.querySelector(".detail")!.append(detailFor(m, false));
         return card;
       }
@@ -1611,6 +1620,18 @@ const description =
         margin: 0;
         font-size: 0.9rem;
         color: var(--thread-dim);
+      }
+      .results :global(.go:not([hidden])) {
+        justify-self: start;
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: var(--saffron);
+        color: var(--ink);
+        font-weight: 700;
+        text-decoration: none;
       }
       .results :global(.split b) {
         color: var(--thread);
