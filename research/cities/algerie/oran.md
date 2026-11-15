@@ -32,7 +32,6 @@ Currency note: the dossier gives no EUR rate (only ≈ 146 DZD per USD, Dec 2025
 - [family.schools] LIAD runs an EPIAD (primary) and a LIAD site in Oran since 2017 (French curriculum, AEFE). — LIAD site, accessed 2026-11-14, official, confidence: high
 - [family.schools] Other private schools named in Oran: École La Persévérance (Francophone national programme) and Elite Kingdom Cambridge International School; no fees given. — Cyril Jarnias "Écoles internationales", 2026, blog, confidence: low
 - [family.childcare] Survey: private nursery 7,546 DZD/month (≈ €50), private primary school 437,032 DZD/year (≈ €2,875). — combien-coute.net Oran, 2026-11, company, confidence: low
-- [safety.general] France rates Oran green ("vigilance normale"), security satisfactory with basic precautions; avoid deserted places after dark and demonstrations. — France Diplomatie "Sécurité", 2026-09-15, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — zones are in a map image; the France Diplomatie text page does not state Oran's colour
 - [safety.general] FCDO warns of pickpocketing, robbery and petty theft in larger cities and of scarce taxis after dark (national). — FCDO "Safety and security", parent page updated 2026-09-25, official, confidence: high
 - [safety.women] Family Code requires a male guardian for marriage; sexual harassment is punishable but common at work; 48 femicides counted in 2024 (national). — Freedom House "Freedom in the World 2025", 2025, academic, confidence: high
 - [social.nightlife] A blogger says Oran's nightlife centres on the Corniche, with clubs and bars including Sun House in Aïn El Turk (open until 4 am), and raï music at its core; La Bastille market is lively during Ramadan. — Cyril Jarnias "Vie nocturne en Algérie", 2026, blog, confidence: low
@@ -58,6 +57,7 @@ Currency note: the dossier gives no EUR rate (only ≈ 146 DZD per USD, Dec 2025
 - No testimony from returnees or expats living in Oran; no forum read.
 - No Oran-specific women's-safety or harassment source; the blog claim that Oran is the safest big city rests on statistics it attributes to the Interior Ministry, not verified, so not itemised.
 - No international-school fees for Oran; LIAD fee PDF not read.
+- Removed [safety.general] "France rates Oran green (vigilance normale)": re-checked on 2026-11-15, the France Diplomatie country page (updated 2026-09-10) holds the zones only in a map image and no text page states Oran's colour; the only text hit was a search snippet, unverified. The Belgian foreign ministry page (updated 2026-11-12) names Oran among northern cities where it advises air travel and avoiding being alone in taxis, but gives no level, so it does not replace the claim.
 
 ## Sources read
 
@@ -88,10 +88,10 @@ Currency note: the dossier gives no EUR rate (only ≈ 146 DZD per USD, Dec 2025
 25. Religious Practices for Expats in Algeria — Cyril Jarnias — https://www.jarniascyril.com/expatriation/guide-installation-algeria-expatriate/guide-religious-practices-expatriates-algeria/ — blog — 2026-11-14
 26. Managing Homesickness in Algeria — Cyril Jarnias — https://www.jarniascyril.com/expatriation/guide-installation-algeria-expatriate/manage-homesickness-algeria-expats-returnees/ — blog — 2026-11-14
 27. Algerian nationality law — Wikipedia — https://en.wikipedia.org/wiki/Algerian_nationality_law — academic — 2026-11-14
+28. Sécurité générale en Algérie — Belgian foreign ministry (diplomatie.belgium.be) — https://diplomatie.belgium.be/fr/pays/algerie/voyager-en-algerie-conseils-aux-voyageurs/securite-generale-en-algerie — official — 2026-11-15
 
 ## Spot-check (2026-11-14)
 
-- [safety.general] France rates Oran green — unsupported
 - [safety.general] FCDO warns of pickpocketing (Oran) — supported
 - [safety.women] Family Code requires a male guardian — supported
 - [rights.lgbt] Same-sex sexual acts are illegal — supported

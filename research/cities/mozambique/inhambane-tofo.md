@@ -33,14 +33,25 @@ Extra city suggested by the dossier ("Inhambane / Tofo (suggested addition)"). I
 - [climate.daily] Tropical savanna climate, about 950 mm of rain a year, record high 39.8 °C. — Wikipedia "Inhambane", accessed 2026-11-14, academic, confidence: medium
 - [climate.daily] Cyclone Dineo (15 Feb 2017) brought up to 200 mm of rain to Inhambane province; about 20,000 homes were destroyed nationwide. — Wikipedia "Cyclone Dineo", accessed 2026-11-14, academic, confidence: medium
 - [nature.access] Tofo is known for whale sharks and manta rays (Manta Reef, Gallaria); Tofinho, 2 km south, is a powerful reef break for experienced surfers. — Wikipedia "Inhambane" / Wikivoyage, accessed 2026-11-14, academic, confidence: medium
+<!-- quality-pass 2026-11-15 -->
+- [daily.power] Cyclone Gezani (Feb 2026) cut power to 132,000 EDM customers in Inhambane province; 115,000 were reconnected by 16 Feb and supply was back to normal in Inhambane and Maxixe cities. — 360 Mozambique, 2026-02-16, local-media, confidence: high
+- [climate.daily] The same storm partly or fully destroyed 1,262 homes in the province (preliminary disaster-agency count). — 360 Mozambique, 2026-02-16, local-media, confidence: high
+- [daily.transport] Oct 2025 fares: Maputo–Tofo minibus 1,250 MZN (≈ €16.4) or coach 2,000 MZN (≈ €26.3); chapa Inhambane–Tofo 25 MZN (≈ €0.33) plus 25 MZN for a big bag; taxi Inhambane–Tofo about 1,100 MZN (≈ €14.5). — Wikivoyage "Tofo Beach", accessed 2026-11-15, blog, confidence: medium
+- [cost.negotiation] A fair price for prawns bought from fishermen is about 100 MZN/kg (≈ €1.3) and crayfish about 150 MZN/kg (≈ €2.0); check the scale with a 1 kg water bottle. On chapas the driver decides what counts as a big bag, so carry exact change. — Wikivoyage "Tofo Beach", accessed 2026-11-15, blog, confidence: low
+- [cost.living] Portuguese or Gitonga lessons at a Tofo school cost 1,000 MZN an hour (≈ €13.2), updated May 2026. — Wikivoyage "Tofo Beach", accessed 2026-11-15, blog, confidence: low
+- [cost.living] A Tofo dive centre lists fun dives from 1,800 MZN with gear (≈ €23.7) or 1,500 MZN with your own (≈ €19.7), plus 300 MZN for far reefs; another lists single dives from R370 and a PADI Open Water course at R3,100 (undated). — Diversity Scuba via search summary / Wikivoyage "Tofo Beach", accessed 2026-11-15, company, confidence: low
+- [health.care] MPs visiting Inhambane Provincial Hospital, the province's largest, in July 2026 said a shortage of health staff remains one of its greatest difficulties. — Club of Mozambique, 2026-07-10, local-media, confidence: medium
+- [safety.general] Police counted 113 aggravated homicides of elderly people in Inhambane province in Jan–May 2025 (85 a year earlier), mostly after witchcraft accusations by relatives; districts named: Zavala, Maxixe, Massinga, Inharrime (not Inhambane city or Tofo). — Club of Mozambique, 2025-06-16, local-media, confidence: high
+- [daily.money] A hostel-booking guide says there are a few ATMs in Inhambane and occasionally in Tofo, not always working, so bring enough meticais in cash. — Hostelworld Tofo guide (via search summary; page dates itself Oct 2026), blog, confidence: low
 
 ## Gaps
 
 - No long-term rent figure for Inhambane city or Tofo from a portal or survey (CASA SAPO Inhambane returned 429).
 - Nomad Watch's Tofo figures are labelled an unsourced AI estimate and were not used; its Inhambane figures give no method.
-- Power cuts, water supply, ATMs, mobile money, provincial hospital and school options: not found.
-- Women's safety, nightlife, religion, diaspora/returnee testimonies: not found.
+- Water supply, mobile money, school options: searched, not found. Power: only the Feb 2026 cyclone outage found, no routine outage data.
+- Women's safety: a travel guide warns women not to walk the unlit beach path between lodges alone at night and says bag-snatching on the beach is common, but no dated official, media or NGO source was found, so it is not recorded as an item. Nightlife, religion, diaspora/returnee testimonies: not found.
 - Salaries and local job market outside tourism: not found.
+- Damage to the Inhambane–Maxixe ferry pier from Cyclone Gezani: seen only in a search summary; the source pages returned 403.
 
 ## Sources read
 
@@ -60,6 +71,14 @@ Extra city suggested by the dossier ("Inhambane / Tofo (suggested addition)"). I
 14. Nomad Watch Tofo costs (AI estimate, not used) — https://nomad.watch/cities/MZ/tofo/costs — company — 2026-11-14
 15. Nomad Watch Inhambane vs Tofo (no method, not used) — https://nomad.watch/compare/MZ/inhambane/vs/MZ/tofo — company — 2026-11-14
 16. CASA SAPO Inhambane rentals (429) — https://casa.sapo.mz/alugar/inhambane/ — company — 2026-11-14
+17. Inhambane: EDM reports 17,000 customers still without electricity after Cyclone Gezani — https://360mozambique.com/oil-gas/energy/inhambane-edm-reports-17000-customers-still-without-electricity-after-cyclone-gezani/ — local-media — 2026-11-15
+18. Wikivoyage Tofo Beach — https://en.wikivoyage.org/wiki/Tofo_Beach — blog — 2026-11-15
+19. Diversity Scuba (search summary only) — https://accommodation.safarinow.com/destinations/tofinho/PopularAttractions/Diversity-Scuba.aspx — company — 2026-11-15
+20. Members of parliament inspect Inhambane health facilities and point out shortage of professionals — https://clubofmozambique.com/news/mozambique-members-of-parliament-inspect-inhambane-health-facilities-and-point-out-shortage-of-professionals/ — local-media — 2026-11-15
+21. 113 elderly people murdered in Inhambane province in first five months of 2025 — https://clubofmozambique.com/news/mozambique-113-elderly-people-murdered-in-inhambane-province-in-first-five-months-of-2025-police/ — local-media — 2026-11-15
+22. Hostelworld Tofo guide (search summary only) — https://www.hostelworld.com/blog/?p=1311732 — blog — 2026-11-15
+23. Mozambique port city braces for impact of Cyclone Gezani (403) — https://www.polity.org.za/article/mozambique-port-city-braces-for-impact-of-cyclone-gezani-2026-02-13 — intl-media — 2026-11-15
+24. APA News, Cyclone Gezani in Inhambane (403) — https://fr.apanews.net/disasters/mozambique-le-cyclone-gezani-a-cause-des-ravages-a-inhambane/ — intl-media — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

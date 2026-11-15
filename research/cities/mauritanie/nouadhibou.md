@@ -37,7 +37,7 @@ Currency note: the country dossier states no exchange rate, so EUR equivalents u
 - [social.food] Herders sell fresh camel milk at the town entrance, often in the evening; there is a fish and vegetable market near the port and a second-hand ("chep-chep") market in Keran. — Wikivoyage "Nouadhibou", undated (accessed 2026-11-14), blog, confidence: low
 - [social.nightlife] Alcohol is legally a narcotic nationwide and its consumption is severely punished. — France Diplomatie "Informations utiles", 2026-11-09, official, confidence: high
 - [community.diaspora] Since 2006 the city has been a departure point for boats to the Canary Islands; as of 2024 over 80% of arrivals there came from Mauritania, many of them Malians. — Wikipedia "Nouadhibou" (en and fr), undated (accessed 2026-11-14), academic, confidence: medium
-- [community.diaspora] UNHCR counted about 2,600 refugees and asylum seekers in Nouadhibou in May 2025, down from about 4,000 in late 2024. — Human Rights Watch report, 2025-08-27, academic, confidence: high ⚠ spot-check 2026-11-14: unsupported — figure not found in the HRW report text read
+- [community.diaspora] UNHCR counted 4,292 registered refugees and asylum seekers in the Dakhlet-Nouadhibou region at 30 September 2025, against 12,917 in Nouakchott. — UNHCR Mauritania regional table, 2025-09-30, official, confidence: high ✔ re-sourced 2026-11-15
 - [rights.racism] Nouadhibou has a police-run immigration detention centre at the regional police directorate, still operating in July 2025; an EU-funded reception centre for people intercepted at sea was due to open in September 2025. — Human Rights Watch report, 2025-08-27, academic, confidence: high
 - [rights.racism] HRW found abuses against migrants concentrated in Nouakchott, Nouadhibou and the desert near the Western Sahara border, including a 2020 account of women raped after interception; local police told HRW they generally do not search for people with expired visas. — Human Rights Watch report, 2025-08-27, academic, confidence: high
 - [rights.lgbt] Same-sex acts are criminal nationwide (penal code art. 308) and there is no anti-discrimination law. — Wikipedia "LGBTQ rights in Mauritania"; UK FCDO 2026-10-19, academic/official, confidence: high
@@ -55,6 +55,7 @@ Currency note: the country dossier states no exchange rate, so EUR equivalents u
 - Crime and women's safety inside the city: no dated official or press source; Wikivoyage's remarks (women staying indoors after dark, possible mines near the tracks) were left out because the page is undated.
 - Local press and social-media groups: not reached after the search budget ran out.
 - Diaspora/returnee testimony: none found.
+- Removed 2026-11-15: the HRW-sourced figure of about 2,600 refugees and asylum seekers in Nouadhibou (May 2025); it was not in the HRW report text. Replaced by the UNHCR regional count (4,292 at 30 September 2025); the May 2025 figure and the fall from about 4,000 were not confirmed.
 
 ## Sources read
 
@@ -77,6 +78,7 @@ Currency note: the country dossier states no exchange rate, so EUR equivalents u
 17. "They Accused Me of Trying to Go to Europe" — Human Rights Watch — https://www.hrw.org/report/2025/08/27/they-accused-me-of-trying-to-go-to-europe/migration-control-abuses-and-eu — academic (NGO) — 2026-11-14
 18. LGBTQ rights in Mauritania — Wikipedia — https://en.wikipedia.org/wiki/LGBTQ_rights_in_Mauritania — academic — 2026-11-14
 19. Forum Mauritanie (index, checked for Nouadhibou threads; none) — Expat.com — https://www.expat.com/fr/forum/afrique/mauritanie/ — forum — 2026-11-14
+20. Registered refugees and asylum seekers per region as of 30 Sep 2025 — UNHCR Mauritania — https://data.unhcr.org/en/documents/details/119390 — official — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

@@ -70,7 +70,7 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 - [family.schools] The guide's family budget sets 541,667 XAF a month (≈ €826) for two children's school fees, without naming the school. — Expat.com Guide Port-Gentil, 2025-12-04, company, confidence: low
 - [health.care] GP visits cost 15,000–25,000 XAF (≈ €23–38) and specialists 25,000–50,000 (≈ €38–76); these are national figures, not split by city. — Africarrières, 2026-08-07, company, confidence: low
 - [cost.rent] The Gabon-wide guide says good-standard housing for energy-sector expatriates in Port-Gentil costs about the same as in Libreville (no figures). — Expat.com Guide Gabon, 2025-11-06, company, confidence: low
-- [business.invest] The state's SNI put 200 serviced plots in Port-Gentil on sale from 1 April 2026, with a land title; the fixed 5,500 XAF/m² price applies only to Essassa near Libreville, and other sites are priced by location. — Ministry of Housing speech, 2026-04-01, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — PDF text unreadable; only a summary lists Port-Gentil with a question mark, and the 200-plot figure and title are not confirmed
+- [business.invest] The state's SNI put 200 residential plots in Port-Gentil on sale from 1 April 2026, part of a 2,500-plot national launch; the only price published is for Essassa near Libreville (5,500 XAF/m², ≈ €8.38), so the Port-Gentil price is unknown. — Gabonmediatime, 2026-04-02, local-media, confidence: high ✔ re-sourced 2026-11-15
 - [daily.transport] Boats from Libreville: Sonaga about 35,000 XAF one way (≈ €53) and Logimar 241 from 36,000 (≈ €55) in economy (entries dated Feb 2023, old). — Wikivoyage FR "Libreville", accessed 2026-11-14, blog, confidence: low
 - [cost.negotiation] A travel wiki says to haggle on everything in Gabon, "surtout quand on est européen, étranger" (especially as a European or foreigner), and describes a European-level and a local price level; it is not specific to Port-Gentil and is undated. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
 - [cost.negotiation] Taxis nationwide have no meter: the price for a full or half trip is agreed first, roughly 500–2,000 XAF (≈ €0.76–3.05), and unofficial "clandos" on unpaved roads are also negotiated. — Wikivoyage FR "Gabon", accessed 2026-11-14, blog, confidence: low
@@ -88,6 +88,7 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 - Rents by neighbourhood and sale prices: Expat.com's Port-Gentil property page showed only Libreville listings in November 2026; no local agency or portal found. Combien-coute's "Port-Gentil" page shows national averages identical to Libreville's, so it was not used.
 - Not found: market vs supermarket staple prices, current ferry and flight fares, taxi fares beyond the 400 XAF start, school fees for Victor-Hugo, clinic prices, fibre and mobile-data prices, nightlife and concert prices, ride-hailing (no app found), agency fees.
 - Negotiation: no Port-Gentil-specific source; the Wikivoyage FR Port-Gentil page has empty sections; Numbeo returned HTTP 429.
+- Removed 2026-11-15 from the SNI Port-Gentil plot item: the "land title included" claim and the Port-Gentil pricing rule; no readable source states either, and no Port-Gentil plot price was published.
 
 ## Sources read
 
@@ -122,6 +123,8 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 29. Port-Gentil — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Port-Gentil — blog — date read (2026-11-14)
 30. Immobilier Port-Gentil — Expat.com — https://www.expat.com/fr/immobilier/afrique/gabon/port-gentil/ — company — date read (2026-11-14)
 31. Coût de la vie à Port-Gentil — Combien-coute.net — https://www.combien-coute.net/cout-de-la-vie/gabon/port-gentil/ — company — date read (2026-11-14)
+32. Gabon : le gouvernement lance la commercialisation de 2 500 parcelles viabilisées par la SNI — Gabonmediatime — https://gabonmediatime.com/gabon-le-gouvernement-lance-la-commercialisation-de-2-500-parcelles-viabilisees-par-la-sni/ — local-media — 2026-04-02, date read (2026-11-15)
+33. Habitat : la SNI lance la commercialisation de 2 500 parcelles à travers le Gabon — Gabonreview — https://www.gabonreview.com/habitat-la-sni-lance-la-commercialisation-de-2-500-parcelles-a-travers-le-gabon/ — local-media — 2026-04-01, date read (2026-11-15)
 
 ## Spot-check, price top-up (2026-11-14)
 

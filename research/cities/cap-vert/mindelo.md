@@ -23,7 +23,6 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 110.265 CVE** (fix
 - [cost.negotiation] A forum reply warns that some Mindelo sellers quote European-level prices because many buyers come from Europe, and advises bidding well below the asking price. — Expat.com forum "Buying a flat in Mindelo", c. 2024, forum, confidence: low
 - [cost.negotiation] The same thread says purchase fees and taxes are low and to be suspicious if anyone quotes more than 4–5%; the seller pays the agent's fee, already in the asking price. Another reply calls 20% reasonable, so the thread disagrees. — Expat.com forum, c. 2024, forum, confidence: low
 - [cost.negotiation] A central hostel (Chave Douro, CVE 1,000 a night) is listed as open to bargaining for stays of several days. — Wikivoyage Mindelo, accessed 2026-11-14, blog, confidence: low
-- [housing.areas] A prospective buyer liked Laginha (walk to the centre and the Santo Antão ferry, early-morning swimming, felt safe); found the centre quiet after work hours; judged Santa Filomena and Lazareto too far; disliked Monte Calmo because reaching it at night means crossing the market area. — Expat.com forum "Buying a flat in Mindelo", c. 2024, forum, confidence: low ⚠ spot-check 2026-11-14: unsupported — safety remark (felt safe, night crossing) rests only on a forum comment
 - [housing.areas] Replies in the same thread point to the road up from Laginha towards Chã de Alecrim for views; Alto Solarino and Alto Miramar were also considered. — Expat.com forum, c. 2024, forum, confidence: low
 - [housing.areas] A property lawyer names Mindelo among the cities hit by land speculation, without figures. — A Nação (opinion), 2026-11-14, local-media, confidence: medium
 - [housing.search] On São Vicente most rentals are reportedly held by private owners rather than agencies, and a forum user says you "have to be there in person" to find one. — Expat.com forum "Finding an apartment/house to rent", c. 2024, forum, confidence: low
@@ -67,6 +66,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR = 110.265 CVE** (fix
 - Not found: power-cut or water-cut frequency for São Vicente; Electra tariffs; current Santo Antão ferry fare from the operator (CV Interilhas site returned nothing).
 - Not found: a dated (non-forum) source comparing Mindelo's safety with Praia's; whether taxi fares are negotiated in practice in Mindelo.
 - Not found: diaspora or returnee testimonies, a marina/yachting community source (Noonsite 403), local media on rents (Mindel Insite search returned headlines only).
+- Removed 2026-11-15: the [housing.areas] item on Laginha and Monte Calmo (felt safe, night crossing of the market area) rested only on a forum comment; re-search found no dated official, media, NGO or academic source naming either district (generic Mindelo night-caution advice only, already covered under safety.general).
 
 ## Sources read
 

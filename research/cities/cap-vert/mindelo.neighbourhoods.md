@@ -2,7 +2,7 @@
 
 > Built 2026-11-14 from the city file and targeted searches. Research material, not published text. Every named place has a source; nothing is invented. Prices are dated asking prices, not what people pay.
 
-Rate used throughout: **1 EUR = 110.265 CVE** (fixed euro peg, dossier [D]). USD figures are converted at US$1 ≈ 97 CVE, as in the city file. `[C tag]` = an item in `research/cities/cap-vert/mindelo.md`; `[D]` = the dossier `research/countries/cap-vert.md`; numbers in brackets point to "Sources read" below. Weekly figures divide monthly ones by 4.33 and yearly ones by 52. Research depth: the session's shared web-search budget ran out during this pass, so places come mainly from Wikivoyage and Wikipedia pages opened directly; Wikivoyage's Mindelo listings are undated and probably older [1].
+Rate used throughout: **1 EUR = 110.265 CVE** (fixed euro peg, dossier [D]). USD figures are converted at US$1 ≈ 97 CVE, as in the city file. `[C tag]` = an item in `research/cities/cap-vert/mindelo.md`; `[D]` = the dossier `research/countries/cap-vert.md`; numbers in brackets point to "Sources read" below. Weekly figures divide monthly ones by 4.33 and yearly ones by 52. Research depth: the session's shared web-search budget ran out during this pass, so places come mainly from Wikivoyage and Wikipedia pages opened directly; Wikivoyage's Mindelo listings are undated and probably older [1]. A second pass (2026-11-15) added places from government project lists, the transport regulator, Wikipedia neighbourhood pages, trade press and dated blogs [15]–[36].
 
 Frames that apply to every neighbourhood:
 - France Diplomatie (updated 2026-10-13) advises not walking alone outside busy central areas of São Vicente's towns, reports several violent burglaries on sailing boats with Mindelo named, and its national warning on rising armed robberies applies [C safety.general]. Sexual assaults are rising nationwide, lone women the main victims [C safety.women]. No official source compares Mindelo's safety with Praia's or rates neighbourhoods [C safety.general].
@@ -11,6 +11,8 @@ Frames that apply to every neighbourhood:
 - Water comes from the Porto Grande desalination plant, billed by Electra [C daily.water]; the power grid is marked not reliable by an aggregator citing the World Bank (low) [C daily.power].
 - Jobs are thin: commerce, fishing, shipping, boating and some tourism [C work.jobs]; São Vicente had the highest unemployment rate in the 2010 census (14.8%) [C cost.salary].
 - The city is compact: the centre had 1,553 residents in 2010, Laginha is 1.2 km and Chã de Alecrim 1.5 km from it [3][4][5]; a taxi "around town" is about CVE 150 (Wikivoyage, undated) [C daily.transport].
+- City bus: the regulator ARME kept Transcor's single-ticket fare in Mindelo at CVE 42 including VAT (≈ €0.38) from 2025-12-24 (Boletim Oficial, 2026-01-02, official, high) [33]. A transit app lists ten lines, C1 to C10, all starting at Praça Dr. Regala (Moovit, accessed 2026-11-15, company, medium) [21].
+- Floods: a storm in August 2025 killed nine people, flooded whole neighbourhoods and put São Vicente under a six-month state of calamity (Lusa, 2025-08-14, intl-media, high) [15].
 
 ## Neighbourhoods
 
@@ -28,6 +30,16 @@ Frames that apply to every neighbourhood:
   - Pro-Cathedral of Our Lady of the Light (Catholic, 1862) — Wikipedia [3]
   - Pizzeria O Cocktail, Avenida 5 de Julho (pizzas from CVE 400; live morna Thursday to Sunday) — Wikivoyage [1]
   - Mindelo Marina (the archipelago's only marina) — yacht.de 2026-06-23 [7]
+  - [market] Praça Estrela market, in the south of the centre: about 145 stalls selling clothes, electronics and shoes; the August 2025 flood reached about 1.3 m there — Lusa (via AMAN), 2025-08-14, intl-media, high [15]; square location Wikipedia [3]
+  - [café] Casa Café Mindelo: guesthouse, café and bar in a restored 1870 colonial building facing Porto Grande bay, open early to late, live music in the evenings — ArrivalGuides dining page, updated 2024-03-13, company, medium [16]
+  - [restaurant] Nautilus, Avenida Marginal (restaurant-bar in the former Clube Náutico; listed hours 09:00–23:00, to 23:55 Thursday to Saturday; live music) — Wanderlog, reviews Apr–Jul 2026, company, medium [17]; Passaporte no Bolso, 2026-08-22, blog, low [18]
+  - [price] A July 2026 review cites a CVE 2,100 lunch at Nautilus (≈ €19) — Wanderlog review, 2026-07-17, social-comment, low [17]
+  - [bar] La Bodeguita de Mindelo, end of Travessa do Cadamostro (Caribbean food about CVE 600, ≈ €5.40; guitar sessions) — Wikivoyage, undated, blog, low [1]
+  - [shop] Art D'Cretcheu, Rua Libertadores de África: fair-trade crafts shop selling work from all nine islands — ArrivalGuides, undated, company, low [19]
+  - [shop] Capvertdesign+Artesanato, Rua da Luz 10–12: photography books, homeware and traditional instruments — ArrivalGuides, undated, company, low [19]
+  - [culture] Centro Nacional de Artesanato e Design (CNAD), the former house of Senator Vera Cruz; the government listed restoring the old building and adding a new one (2024) — Wikipedia [3]; Governo em Ação em São Vicente, June 2024, official, medium [20]
+  - [transport] Praça Dr. Regala: start of all ten city bus lines — Moovit, accessed 2026-11-15, company, medium [21]
+  - [shop] A Meu Super convenience store (Sonae franchise, about 100 m², Continente-brand goods) opened in Mindelo; address not given — Forbes África Lusófona, 2021-10-30, intl-media, medium [34]
 - Fits: Q7 "Vibre jour et nuit" (by Mindelo's measure); Q2 "Danser jusqu'au matin" and "Un bon dîner entre amis"; Q5 "Création, culture" and "J'entreprends"; Q6 "Français" (the Alliance is the main francophone place in the islands) [C social.culture]; Q10 "La mémoire de la diaspora" (Cesária Évora's city) [D].
 
 ### Laginha (Matiota)
@@ -38,16 +50,21 @@ Frames that apply to every neighbourhood:
 - Places:
   - Praia da Laginha (town beach) — Wikipedia [3][4]; Wikivoyage [1]
   - Prime Coworking Mindelo and "some well-connected cafés" in the Laginha area — Jarnias blog, low [6]; address not confirmed
-  - Fortim d'El Rei (hilltop fort, Mindelo landmark) — Wikipedia [3]; exact location relative to Laginha not stated
-  - Farol de D. Luis (lighthouse) — Wikipedia [3]; location not stated
+  - [hotel] Four Points by Sheraton São Vicente Resort, above Laginha beach with a skybridge to the sand: 127 rooms, Bayview restaurant, Ocean Lounge, fitness centre and spa; whether non-guests can use them is not stated — Hospitality Net, 2026-03-30, company, high [22]
+  - [restaurant] Caravela Mindelo, overlooking Laginha beach: informal Cape Verdean food by day, part of the evening scene — Passaporte no Bolso, 2026-08-22, blog, low [18]
+  - [bar] Visitor tips describe Caravela as a beach restaurant by day and a club Thursday to Saturday, with a daytime terrace — Airbnb place tips, 2014 and 2022, social-comment, low [23]
+  - [beach] Laginha practicalities: sunbeds and umbrellas about €2–5 (≈ CVE 220–550), drinks at beachfront cafés €1.50–3 (≈ CVE 165–330), cheaper lunch a few streets inland; calm, sheltered water, quietest in the morning — Take Your Backpack, updated 2026-10-22, blog, low [24]
 - Fits: Q5 "Télétravail" (coworking, beach before work); Q4 "Seul·e" and "En couple"; Q8 "À la plage"; Q7 "Prend son temps".
 
 ### Alto Miramar and Chã de Alecrim (hills above Laginha)
 - Feel: Alto Miramar sits directly north-east of the centre, main streets Rua Unidade Africana and Rua da Paz, 524 residents in 2010 [9]; Chã de Alecrim, 1.5 km north of the centre, is larger (5,126 residents in 2010) and borders Matiota/Laginha [5]. Forum replies point to the road up from Laginha towards Chã de Alecrim for views and mention Alto Miramar as an option (c. 2024, low) [C housing.areas].
 - Rent: hillside villa with garden US$600–900 (≈ CVE 58,200–87,300, €528–792); family flat CVE 30,000–50,000 (≈ €272–453) (Expat.com guide, 2025-11-03) [C cost.rent].
-- Getting around: walk down to the centre or Laginha, or taxi about CVE 150 [C daily.transport].
+- Getting around: walk down to the centre or Laginha, or taxi about CVE 150 [C daily.transport]; bus line C1 runs from Praça Dr. Regala to Chã de Alecrim (CVE 42) [21][33].
 - Watch: nothing area-specific sourced.
-- Places: none located inside these two neighbourhoods could be sourced; residents use the centre and Laginha places above (see Gaps).
+- Places (few; daily shopping still means the centre and Laginha, see Gaps):
+  - [sport] Campo de Chã de Alecrim, the neighbourhood football pitch; the government listed laying artificial turf on it — Governo em Ação em São Vicente, June 2024, official, medium [20]
+  - [transport] Bus line C1 Praça Dr. Regala–Chã de Alecrim — Moovit, accessed 2026-11-15, company, medium [21]
+  - [landmark] Fortim d'El-Rei, an 1852 fort on the hill north of the centre in the Fortinho neighbourhood; used for civil purposes from 1930, then fell into disrepair — Wikipedia, accessed 2026-11-15, academic, medium [25]
 - Fits: Q4 "Avec mes enfants" and "Pour fonder une famille" (gardens, larger homes); Q2 "Tranquille chez moi"; Q7 "Prend son temps"; Q3 "Moyen".
 
 ### Alto São Nicolau
@@ -57,15 +74,36 @@ Frames that apply to every neighbourhood:
 - Watch: nothing area-specific sourced.
 - Places:
   - Restaurant Anchote, Rua Irmãs do Amor de Deus (mains CVE 500–2,100, live music Saturday nights with a CVE 100 surcharge) — Wikivoyage [1]
-- Fits: Q3 "Serré" to "Moyen"; Q2 "Un bon dîner entre amis" (Anchote's Saturday music). Thinly sourced; treat as a lead.
+  - [status] The same restaurant appears as "Archote", Alto São Nicolau, marked "temporarily closed", newest shown review 2019 — Wanderlog, accessed 2026-11-15, company, low [36]. Treat Anchote as possibly closed; the routes below now give Nautilus as the alternative.
+- Fits: Q3 "Serré" to "Moyen"; Q2 "Un bon dîner entre amis" only if Anchote has reopened. Thinly sourced; treat as a lead.
+
+### Ribeira Bote and Fonte Cónego (east of the centre)
+- Feel: Ribeira Bote borders the centre, with Fonte Cónego to its north; 3,956 residents in 2010 [28]. Fonte Cónego lies directly east of the centre, 236 residents in 2010 [27]. A 2017 architecture dissertation on the Ilha d'Madeira settlement inside Ribeira Bote says the area has long been labelled conflict-prone in Mindelo's history, but has a strong cultural identity; it describes fast, unplanned growth and a lack of public space and facilities (Universidade Lusófona master's dissertation, 2017, academic, medium) [29].
+- Rent: no figure; the cheapest sourced city rent is a studio from CVE 15,000 (≈ €136) [C cost.rent].
+- Getting around: on foot to the centre (adjacent) [28]; taxi about CVE 150 [C daily.transport].
+- Watch: the 2017 "conflict-prone" label is a historical reputation from an academic study, not a crime measure; no official or media source rates the area's safety today. France Diplomatie's advice to stay in busy central areas applies [C safety.general].
+- Places:
+  - [worship] Church of Nossa Senhora Auxiliadora (Catholic), Ribeira Bote — Wikipedia, accessed 2026-11-15, academic, medium [28]
+  - [landmark] Hospital Velho, the old hospital building, Ribeira Bote — Wikipedia, accessed 2026-11-15, academic, medium [28]
+  - [sport] Sport Club Ribeira Bote clubhouse; the government contributed to its rehabilitation — Governo em Ação em São Vicente, June 2024, official, medium [20]
+  - [culture] Mandingas da Ribeira Bote, the neighbourhood's traditional carnival group — Expresso das Ilhas, 2022-01-31, local-media, medium [35]
+  - [school] Liceu Velho (Escola Jorge Barbosa), now a University of Cape Verde campus, is the main feature of Fonte Cónego — Wikipedia "Fonte Cónego", accessed 2026-11-15, academic, medium [27]; the "City center" article lists the same building among central sites [3], so it sits on the boundary
+- Fits: Q3 "Serré"; Q10 "La mémoire de la diaspora" and Q5 "Création, culture" (carnival group); for someone who speaks Portuguese or Creole.
 
 ### Outskirts: Monte Sossego, Santa Filomena, Lazareto
 - Feel: Monte Sossego and Chã de Monte Sossego are statistical localities of Mindelo [3]; Lazareto hosts the industrial zone (footwear, garments, fish processing) [10]. A prospective buyer judged Santa Filomena and Lazareto too far from the centre (forum, c. 2024, low) [C housing.areas].
 - Rent: no figure by neighbourhood; the cheapest sourced rent is a studio from CVE 15,000 (≈ €136) [C cost.rent].
-- Getting around: buses on some routes, otherwise taxi [C daily.transport].
+- Getting around: buses on some routes, otherwise taxi [C daily.transport]; lines include C5 to Ribeirinha de Areia Branca, C6 to Covada de Bruxa and C9 to the cemetery, CVE 42 a ride [21][33].
 - Watch: the same buyer's remark about crossing the market area at night to reach Monte Calmo is a forum comment only and failed spot-check, so it is not used [C housing.areas].
-- Places: none sourced (see Gaps).
-- Fits: Q3 "Serré", for someone with transport and Portuguese or Creole.
+- Places (mostly public services, by locality):
+  - [clinic] Centro de Saúde de Monte Sossego, a health centre listed as under construction — Governo em Ação: Saúde, 2026-04-03, official, medium [30]
+  - [police] A police unit in Monte Sossego was listed as planned — Governo em Ação em São Vicente, June 2024, official, medium [20]
+  - [school] Liceu Ludgero Lima, the main public secondary school, Rua Jonas Wanon, Chã de Cemitério (south-east of the centre); its rehabilitation was listed in 2024 — Wikipedia, accessed 2026-11-15, academic, medium [31]; Governo em Ação em São Vicente, June 2024, official, medium [20]
+  - [clinic] Medicentro, private outpatient clinic, Rua Alberto Leite, Madeiralzinho — Aetna International provider list, as of May 2024, company, medium [32]
+  - [school] Escola Básica / Sede do Agrupamento de Ribeirinha (primary school and cluster head office), listed for rehabilitation — Governo em Ação em São Vicente, June 2024, official, medium [20]
+  - [transport] Bus lines C5 Ribeirinha de Areia Branca, C6 Covada de Bruxa, C7 Pedra Rolanda, C8 Campinho, C9 Cemitério–Atrás Cemitério, C10 Chã de Marinha — Moovit, accessed 2026-11-15, company, medium [21]
+  - [upgrade] Fernando Pó, Alto da Bomba and Covoada de Bruxa are named in the government's "Programa Outros Bairros" neighbourhood-upgrade list — Governo em Ação em São Vicente, June 2024, official, low (status column unclear) [20]
+- Fits: Q3 "Serré", for someone with transport and Portuguese or Creole; Q4 "Avec mes enfants" only with the public school system and a car.
 
 ## Living: typical weeks
 
@@ -76,21 +114,21 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
 - Week:
   - Mon: early swim at Laginha [C housing.areas]; work from home (Ookla benchmark 80/50 Mbps, aggregator) [C daily.internet].
   - Tue: Prime Coworking Mindelo (address to confirm) [6]; lunch at the Praça Nova kiosk (≈ CVE 200) [1].
-  - Wed: market morning at the Mercado Municipal and fish market, then Fragata Central [1][7].
+  - Wed: market morning at the Mercado Municipal and fish market, then Fragata Central [1][7]; household goods and phone cables at the Praça Estrela stalls [15].
   - Thu: home office; evening live morna at O Cocktail (Thursday to Sunday) [1].
   - Fri: French conversation or the library at the Alliance française [8].
   - Sat: see Saturday-night options.
   - Sun: Mass at the Pro-Cathedral or a walk to the Torre de Belém and the marina [3][7].
 - Saturday night:
   - "Danser jusqu'au matin": bars of Rua Santo António (cheap grog and ponche), La Bodeguita (guitar sessions), Café Lisboa (1970s–80s rock) [1][C social.nightlife].
-  - "Un bon dîner entre amis": Anchote with Saturday live music (CVE 500–2,100, +100) [1].
+  - "Un bon dîner entre amis": Nautilus on the Avenida Marginal, live music, open to 23:55 on Saturdays [17]; Anchote's Saturday music (CVE 500–2,100, +100) only if it has reopened [1][36].
   - "Tranquille chez moi": home in Laginha.
 - Weekend outing:
   - "À la plage": Baía das Gatas, 8 km east (aluguer vans are the usual transport; fare not found) [10][11]; or São Pedro beach by the airport, known for windsurfing [10].
   - "En montagne, en forêt": Monte Verde, 744 m, about 6 km east, inside the 3.12 km² Monte Verde Natural Park [12]; or Santo Antão by ferry (see the week below) [13].
   - "Dans la savane ou le désert": not realistic from Mindelo.
   - "Je reste en ville": Centro Nacional de Artesanato e Design and the Cultural Centre of Mindelo (former customs house) [3].
-- Rough weekly spend: rent 36,100 / 4.33 = 8,337 (modelled 1-bed centre) [C cost.rent] + utilities 12,200 / 4.33 = 2,818 + internet 2,940 / 4.33 = 679 [C cost.living] + 5 kiosk lunches × 200 = 1,000 [C cost.living] + groceries 2,350 + 5 cappuccinos × 127 = 635 + 4 taxis × 150 = 600 [C daily.transport] + Saturday pizza 400 + 2 beers × 242 = 884 [C cost.living] + gym 2,095 / 4.33 = 484 [C cost.living] = **≈ CVE 17,800 a week (≈ €161)**. Coworking fees not counted (no fetched source).
+- Rough weekly spend: rent 36,100 / 4.33 = 8,337 (modelled 1-bed centre) [C cost.rent] + utilities 12,200 / 4.33 = 2,818 + internet 2,940 / 4.33 = 679 [C cost.living] + 5 kiosk lunches × 200 = 1,000 [C cost.living] + groceries 2,350 + 5 cappuccinos × 127 = 635 + 4 taxis × 150 = 600 [C daily.transport] (the same trips by bus: 4 × 42 = 168 [33]) + Saturday pizza 400 + 2 beers × 242 = 884 [C cost.living] + gym 2,095 / 4.33 = 484 [C cost.living] = **≈ CVE 17,800 a week (≈ €161)**. Coworking fees not counted (no fetched source).
 
 ### 2. Q1 "M'installer pour de bon" + Q5 "Salarié·e" + Q4 "En couple"
 - Base: **City centre** — the port, shipping, commerce and the university faculties are the employers [C work.jobs][C family.schools]; walking to work.
@@ -101,17 +139,17 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
   - Thu: live morna at O Cocktail [1].
   - Fri: dinner at Gaudi, beside the Mercado Municipal (French with an African touch; no price) [1].
   - Sat: market morning [1]; see Saturday-night options.
-  - Sun: Laginha beach [3].
+  - Sun: Laginha beach, two sunbeds about €4–10 (≈ CVE 440–1,100) [3][24]; lunch at Caravela overlooking the beach [18].
 - Saturday night:
   - "Danser jusqu'au matin": Rua Santo António bars, La Bodeguita, Café Lisboa [1].
-  - "Un bon dîner entre amis": Anchote (Saturday music) or Pica Pau (lobster; no price) [1].
+  - "Un bon dîner entre amis": Nautilus (live music) [17] or Pica Pau (lobster; no price) [1]; Anchote possibly closed [36].
   - "Tranquille chez moi": home; sunset drink on the cruise terminal roof terrace [7].
 - Weekend outing:
   - "À la plage": Baía das Gatas or São Pedro [10][11].
   - "En montagne, en forêt": Santo Antão, Paúl valley hike (4–5 h) via the ferry [13].
   - "Dans la savane ou le désert": not realistic from Mindelo.
   - "Je reste en ville": a match at Estádio Municipal Adérito Sena (CS Mindelense, Académica, Batuque, Derby) [3][C social.sport].
-- Rough weekly spend for two: rent 43,700 / 4.33 = 10,092 (2-bed downtown midpoint, US$450) [C cost.rent] + utilities 2,818 + internet 679 + 10 lunch menus × 833 = 8,330 (modelled) [C cost.living] + groceries × 2 = 4,700 + 6 taxis × 150 = 900 + Saturday at Anchote 2 × 1,300 (midpoint) + 2 × 100 surcharge = 2,800 [C cost.living] = **≈ CVE 30,300 a week (≈ €275)**. Modelled median net salary is about CVE 20,200 a month (≈ €183) [C cost.salary], so two local salaries would not cover this.
+- Rough weekly spend for two: rent 43,700 / 4.33 = 10,092 (2-bed downtown midpoint, US$450) [C cost.rent] + utilities 2,818 + internet 679 + 10 lunch menus × 833 = 8,330 (modelled) [C cost.living] + groceries × 2 = 4,700 + 6 taxis × 150 = 900 + Saturday dinner at Nautilus 2 × 2,100 = 4,200 (one July 2026 lunch receipt quoted in a review, low) [17] = **≈ CVE 31,700 a week (≈ €288)**. Modelled median net salary is about CVE 20,200 a month (≈ €183) [C cost.salary], so two local salaries would not cover this.
 
 ### 3. Q1 "M'installer pour de bon" + Q5 "J'entreprends"
 - Base: **City centre (Rua de Lisboa)** — the commercial street, cafés and the harbour; land and building purchases are a common route (many buyers build or renovate) [C housing.search].
@@ -125,7 +163,7 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
   - Sun: Laginha [3].
 - Saturday night:
   - "Danser jusqu'au matin": La Bodeguita, Café Lisboa [1].
-  - "Un bon dîner entre amis": Anchote [1].
+  - "Un bon dîner entre amis": Nautilus [17] or Casa Café Mindelo (evening live music) [16].
   - "Tranquille chez moi": home.
 - Weekend outing:
   - "À la plage": Baía das Gatas [11].
@@ -137,7 +175,7 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
 ### 4. Q1 "M'installer pour de bon" + Q4 "Avec mes enfants"
 - Base: **Alto Miramar / Chã de Alecrim** — hillside homes with gardens, walking distance to Laginha [9][5][C cost.rent].
 - Week:
-  - Mon–Fri: school run; no international or French school was found in Mindelo; options are private Portuguese-language schools (CVE 50,000–150,000 a year) or public school for residents with permits, plus French distance learning (CNED €400–1,000 a year) [C family.schools][Praia C family.schools]; Escola Jorge Barbosa and Liceu Ludgero Lima are the main secondary schools [3].
+  - Mon–Fri: school run; no international or French school was found in Mindelo; options are private Portuguese-language schools (CVE 50,000–150,000 a year) or public school for residents with permits, plus French distance learning (CNED €400–1,000 a year) [C family.schools][Praia C family.schools]; Escola Jorge Barbosa and Liceu Ludgero Lima are the main secondary schools [3]; Liceu Ludgero Lima is on Rua Jonas Wanon in Chã de Cemitério, south-east of the centre, across town from the hills, so a taxi or bus (line C9 to the cemetery, CVE 42) [31][21][33]. Private outpatient care: Medicentro in Madeiralzinho [32].
   - Wed afternoon: children's French activities or the library at the Alliance française [8].
   - Thu: GP visit if needed (private GP CVE 2,000–3,000) [C health.care]; Baptista de Sousa Hospital for anything serious [C health.care].
   - Fri: early-evening swim at Laginha (no lifeguard, no sea rescue) [C nature.access].
@@ -145,7 +183,7 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
   - Sun: Mass at the Pro-Cathedral [3]; lunch at the Praça Nova kiosk [1].
 - Saturday night:
   - "Danser jusqu'au matin": not realistic with young children without a sitter (no Mindelo source on childcare found).
-  - "Un bon dîner entre amis": Anchote, early [1].
+  - "Un bon dîner entre amis": Casa Café Mindelo or Nautilus, early [16][17].
   - "Tranquille chez moi": home with a view.
 - Weekend outing:
   - "À la plage": Baía das Gatas [11].
@@ -158,7 +196,7 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
 - Before landing: EASE and the CVE 3,400 airport fee; EU 30 days visa-free, ECOWAS 90; visa on arrival cancelled for 96 countries since 2026-01-01 [C admin.visa]. Direct flights to Mindelo from Lisbon, Porto, Paris-CDG, seasonal Paris-Orly and Nantes, Luxembourg, Zurich [C daily.transport].
 - Where to stay first: **City centre** — Chave Douro, Avenida 5 de Julho (basic rooms CVE 1,000, open to bargaining for several days), Residencial Maravilha (CVE 4,500 double with breakfast) or Casa Colonial, Rua 24 de Setembro (€40) [1].
 - Week:
-  - Day 1: airport taxi CVE 800 (1,000 evening) [C daily.transport]; SIM (CVMóvel or Unitel T+, about CVE 1,000 for 7 GB in July 2022, national) [Praia C daily.internet]; ATM cash [Praia C daily.money].
+  - Day 1: airport taxi CVE 800 (1,000 evening) [C daily.transport]; city buses afterwards cost CVE 42 a ride from Praça Dr. Regala [21][33]; SIM (CVMóvel or Unitel T+, about CVE 1,000 for 7 GB in July 2022, national) [Praia C daily.internet]; ATM cash [Praia C daily.money].
   - Day 2: walk the centre and Laginha to compare; ask at cafés and the market about rooms to rent, since most rentals are held by private owners and found in person [C housing.search].
   - Day 3: viewings in the centre and Laginha [C housing.search].
   - Day 4: viewings in Alto Miramar / Chã de Alecrim [C housing.areas]; deposit and lease terms nationally: one or two months' deposit, one-year leases [Praia C housing.search].
@@ -181,17 +219,17 @@ Prices are mostly the Expat.com guide (2025-11-03, national), livingcost.org's m
 Q1 "D'abord des vacances". Entry with EASE pre-registration and airport fee [D].
 
 ### One day
-- Morning: Mercado Municipal (1878) and the fish market by the Torre de Belém replica [1][3]; Praça Amílcar Cabral, Palácio do Povo on Rua Libertadores de África, the Cesária Évora mural on a harbour warehouse [3][7]; Centro Nacional de Artesanato e Design (fee not found) [3].
+- Morning: Mercado Municipal (1878) and the fish market by the Torre de Belém replica [1][3]; Praça Amílcar Cabral, Palácio do Povo on Rua Libertadores de África, the Cesária Évora mural on a harbour warehouse [3][7]; Centro Nacional de Artesanato e Design (fee not found) [3]; crafts at Art D'Cretcheu on Rua Libertadores de África or Capvertdesign on Rua da Luz [19].
 - Midday: cachupa at the Praça Nova kiosk (≈ CVE 200) [1].
-- Afternoon: walk about 20 minutes north past the port to Praia da Laginha for a swim (unsupervised) [C nature.access]; coffee at Café Dalia or Café Confiança on the way back [1].
-- Evening: sunset drink on the cruise-terminal roof terrace [7]; dinner and live morna at O Cocktail (Thursday to Sunday) or Anchote on Saturday [1]; taxi home about CVE 150 [C daily.transport].
+- Afternoon: walk about 20 minutes north past the port to Praia da Laginha for a swim (unsupervised; sunbed about €2–5) [C nature.access][24]; coffee at Café Dalia or Café Confiança on the way back [1], or at Casa Café Mindelo facing the bay [16].
+- Evening: sunset drink on the cruise-terminal roof terrace [7]; dinner and live morna at O Cocktail (Thursday to Sunday) [1] or live music at Nautilus on the Marginal [17]; taxi home about CVE 150 [C daily.transport].
 
 ### One week
 - Day 1: the centre as above [1][3].
 - Day 2, trip out: Santo Antão. Interilhas ferry to Porto Novo, about 1 hour; fare CVE 800 one way and departures 07:00 / 15:00 in May 2021 (Wikivoyage Santo Antão), while Wikivoyage Mindelo lists CVE 300 and the 2025 Expat.com guide "from CVE 1,500", so check at the harbour [13][1][C daily.transport]; aluguer Porto Novo–Paúl CVE 400–500; Paúl valley hike 4–5 hours [13]. Ferry schedules are reshuffled at short notice (CV Interilhas, 2026-11-14) [C daily.transport].
 - Day 3: second Santo Antão day if staying over, or Ponta do Sol–Fontainhas coastal hike (5–6 hours) [13].
 - Day 4: Monte Verde, 744 m, 6 km east, the island's highest and wettest point [12][C nature.access].
-- Day 5, daily life: an early morning at the Mercado Municipal and fish market as shops open, then the Alliance française library and the Liceu and university quarter, to see the city working rather than performing [1][3][8].
+- Day 5, daily life: an early morning at the Mercado Municipal and fish market as shops open, then the Praça Estrela stalls [15], the Alliance française library and the Liceu and university quarter, to see the city working rather than performing [1][3][8]; in the afternoon a CVE 42 bus ride on line C1 up to Chã de Alecrim and back, to see the residential hills [21][33]; the Nossa Senhora Auxiliadora church in Ribeira Bote is a short walk east of the centre [28].
 - Day 6: Baía das Gatas, 8 km east (site of the August full-moon music festival since 1984) [11]; or São Pedro beach by the airport [10].
 - Day 7: Sunday Mass at the Pro-Cathedral of Our Lady of the Light [3]; a football match at Estádio Municipal Adérito Sena if one is on (fixtures not found) [3]; last evening in the Rua Santo António bars [1].
 - Calendar: Carnival in February is the country's best known; the Mindelact theatre festival also runs in the city (dates not found) [C social.culture].
@@ -200,11 +238,16 @@ Q1 "D'abord des vacances". Entry with EASE pre-registration and airport fee [D].
 
 - Search budget ran out during this pass; Noonsite, CruisersWiki, Petit Futé and Coworker.com returned 403 or redirect loops; Stamped Nomad's Mindelo page returned 410.
 - Nomad Watch's Mindelo guide (updated 2026-03-22) names a gym, a café and a coworking hub with prices, but states it is AI-generated without sources, so nothing from it was used.
-- Not found: any named place inside Alto Miramar, Chã de Alecrim, Monte Sossego, Santa Filomena or Lazareto (supermarket, school, clinic, church).
+- Not found in the first pass: any named place inside Alto Miramar, Chã de Alecrim, Monte Sossego, Santa Filomena or Lazareto (supermarket, school, clinic, church). The second pass found public facilities in Chã de Alecrim and Monte Sossego only (see below).
 - Not found: a French or international school in Mindelo; named private clinics; gyms; coworking addresses and prices from a fetched page.
-- Not found: a fetched address for Fragata (a search snippet from Petit Futé said "opposite the Portuguese consulate"; not opened, not used); the Meu Super store opened in Mindelo (Forbes África Lusófona headline, date unknown).
+- Not found: a fetched address for Fragata (a search snippet from Petit Futé said "opposite the Portuguese consulate"; not opened, not used); the Meu Super store opened in Mindelo (now dated 2021-10-30 [34], address still not given).
 - Not found: aluguer fares to Baía das Gatas, Calhau, São Pedro or Monte Verde; entry fees for the Centro Nacional de Artesanato e Design; football fixtures.
 - Not found: Mindelo-specific grocery prices, mobile money, current SIM prices, a Mindelo office for the NIF.
+- Second pass (2026-11-15), still not found: a supermarket, café or church inside Alto Miramar or Chã de Alecrim; any named place in Lazareto or Santa Filomena; a non-Catholic place of worship (no mosque, Nazarene or Adventist church surfaced); the street addresses of Meu Super, Coworking Mindelo and Prime Coworking (only AI-generated or unsourced guides name them).
+- Seen only in search snippets, not opened, not used: a BCN bank branch reopening in Monte Sossego (Câmara Municipal de São Vicente page, 503 twice); Casa Tchicau "in Alto Solarino" (Kupi, 403); "A Cave" club in Alto São Nicolau; Terra Lodge terrace in Alto de Santo António; Kalimba Beach Club at Laginha (Petit Futé, 403, reportedly closed); Residencial Laginha and Laginha Beach Guest House (booking pages); Universidade do Mindelo on Rua Patrice Lumumba; the Mindelo TechPark site (inaugurated 2025-05-06; Inforpress page returned 500).
+- Correction: Farol de D. Luís is on Ilhéu dos Pássaros, an islet, not in Laginha [26]; its rehabilitation was listed as under way in 2024 [20]. Fortim d'El-Rei is in Fortinho, on the hill north of the centre [25], now under the hills section.
+- Status unclear: Anchote / Archote (Alto São Nicolau) is marked "temporarily closed" with no review after 2019 [36]; the Monte Sossego health centre was "em execução" in April 2026, with no opening date [30]; the 2024 government list's status column for the Outros Bairros upgrades could not be read reliably [20].
+- Not found: Transcor timetables, monthly pass prices, and which line serves Laginha or Monte Sossego.
 
 ## Sources read
 
@@ -222,8 +265,30 @@ Q1 "D'abord des vacances". Entry with EASE pre-registration and airport fee [D].
 12. Monte Verde (Cape Verde) — Wikipedia — https://en.wikipedia.org/wiki/Monte_Verde_(Cape_Verde) — encyclopedia — 2026-11-14
 13. Santo Antão — Wikivoyage — https://en.wikivoyage.org/wiki/Santo_Ant%C3%A3o — travel guide (ferry data May 2021) — 2026-11-14
 14. Cap-Vert research dossier — research/countries/cap-vert.md — internal — 2026-11-14
+15. Cabo Verde: First sale after storm ensures rice on the table — Lusa business news (relayed by AMAN Alliance), 2025-08-14 — https://www.aman-alliance.org/Home/ContentDetail/93620 — intl-media — 2026-11-15
+16. Cape Verde dining (Casa Café Mindelo) — ArrivalGuides, updated 2024-03-13 — https://www.arrivalguides.com/en/Travelguides/Africa/Cape%20Verde/Capeverde/dining — company — 2026-11-15
+17. Nautilus Mindelo – restaurante, cocktails bar, live music (ex Clube Náutico) — Wanderlog, reviews Apr–Jul 2026 — https://wanderlog.com/place/details/2802434 — company (reviews: social-comment) — 2026-11-15
+18. Mindelo, São Vicente: What to See, Do, Where to Eat — Passaporte no Bolso, 2026-08-22 — https://passaportenobolso.com/en/mindelo-travel-guide/ — blog — 2026-11-15
+19. Art D'Cretcheu and Capvertdesign+Artesanato — ArrivalGuides shopping listings, undated — https://www.arrivalguides.com/en/Travelguide/CAPEVERDE/shopping/art-d-cretcheu-sao-vicente-117025 and https://www.arrivalguides.com/en/Travelguide/CAPEVERDE/shopping/capvertdesign-artesanato-sao-vicente-117008 — company — 2026-11-15
+20. Governo em Ação em São Vicente — Governo de Cabo Verde, June 2024 (file dated 2024-06-26, uploaded July 2024) — https://www.governo.cv/wp-content/uploads/2024/07/governo-de-cabo-verde-governo-em-acao-em-sao-vicente.pdf — official — 2026-11-15
+21. Autocarros Mindelo – lines and stops — Moovit — https://moovitapp.com/index/en/public_transit-lines-Cabo_Verde-5795-1438812 — company — 2026-11-15
+22. Marriott International makes its entry into Cape Verde with the opening of Four Points by Sheraton São Vicente Resort — Hospitality Net, 30 March (page shows no year; trade coverage dates the opening news 2026-03-30, and a Portuguese report gives first guests on 2026-01-28) — https://www.hospitalitynet.org/announcement/41014231/ — company — 2026-11-15
+23. Caravela Mindelo / Caravela Laginha — Airbnb place tips, 2014–2025 — https://www.airbnb.com/things-to-do/places/468941 — social-comment — 2026-11-15
+24. Visit Praia da Laginha — Take Your Backpack, updated 2026-10-22 — https://www.takeyourbackpack.com/backpacking-in-cabo-verde/visit-praia-da-laginha/ — blog — 2026-11-15
+25. Fortim d'El-Rei — Wikipedia — https://en.wikipedia.org/wiki/Fortim_d%27El-Rei — encyclopedia — 2026-11-15
+26. List of buildings and structures in São Vicente, Cape Verde — Wikipedia — https://en.wikipedia.org/wiki/List_of_buildings_and_structures_in_S%C3%A3o_Vicente,_Cape_Verde — encyclopedia — 2026-11-15
+27. Fonte Cónego — Wikipedia — https://en.wikipedia.org/wiki/Fonte_C%C3%B3nego — encyclopedia — 2026-11-15
+28. Ribeira Bote — Wikipedia — https://en.wikipedia.org/wiki/Ribeira_Bote — encyclopedia — 2026-11-15
+29. Entre regeneração e integração social: requalificação do bairro Ilha d'Madeira em Ribeira Bote — master's dissertation (architecture), Universidade Lusófona, 2017 — https://recil.ulusofona.pt/items/11d9c031-3a3a-4265-a3c4-fcdaaf236e64 — academic — 2026-11-15
+30. Governo em Ação: Saúde — Governo de Cabo Verde, 2026-04-03 — https://www.governo.cv/wp-content/uploads/2026/04/saude.pdf — official — 2026-11-15
+31. Liceu Ludgero Lima — Wikipedia — https://en.wikipedia.org/wiki/Liceu_Ludgero_Lima — encyclopedia — 2026-11-15
+32. Network of Participating Providers, Cape Verde — Aetna International, as of May 2024 — https://aetnainternational.com/content/dam/aetna/pdfs/aetna-international/lds/Providers-Cape-Verde.pdf — company — 2026-11-15
+33. Deliberação n.º 72/CA/2025 (single-ticket urban bus fare, Mindelo) — ARME, Boletim Oficial II Série n.º 1, 2026-01-02 (decided 2025-12-24) — https://boe.incv.cv/Bulletins/DownloadAct?id=89181 — official — 2026-11-15
+34. Rede portuguesa reforça operação em Cabo Verde com abertura de nova loja — Forbes África Lusófona, 2021-10-30 — https://forbesafricalusofona.com/?p=22626 — intl-media — 2026-11-15
+35. Ribeira Bote topic page (Mandingas headline, 2022-01-31) — Expresso das Ilhas — https://expressodasilhas.cv/topico/ribeira-bote — local-media — 2026-11-15
+36. Archote, Alto São Nicolau — Wanderlog — https://wanderlog.com/place/details/10200987/archote — company — 2026-11-15
 
-Opened but not usable: Nomad Watch Mindelo guide (AI-generated, unsourced), Stamped Nomad Mindelo (410), Noonsite provisions page and CruisersWiki São Vicente (403), Petit Futé shopping page (403), Coworker.com (redirect loop), Wikipedia "Monte Sossego" (404).
+Opened but not usable: Nomad Watch Mindelo guide (AI-generated, unsourced), Stamped Nomad Mindelo (410), Noonsite provisions page and CruisersWiki São Vicente (403), Petit Futé shopping page (403), Coworker.com (redirect loop), Wikipedia "Monte Sossego" (404). Second pass: Wikipedia "Madeiralzinho" (404), Petit Futé bar-café page and Kupi Casa Tchicau (403), Câmara Municipal de São Vicente BCN page (503), Inforpress TechPark and health-fair articles (500), gcatholic.org Cape Verde cathedrals (lists the Pro-Cathedral only).
 
 ## Check (2026-11-14)
 - Anchote, Rua Irmãs do Amor de Deus (CVE 500–2,100, +100 Saturday) — supported

@@ -54,7 +54,7 @@
 - [social.pace] Businesses often close in the afternoon heat and reopen in the evening. — expat.com Marrakech guide, 2025-12-08, intl-media, confidence: medium
 - [community.expat] Estimated 10,000–15,000 expats (French, Spanish, Italian, British, German); a blog calls it Morocco's largest expat community at 15,000+. — expat.com 2025-12-08 / getwherenext.com 2026-02-28, intl-media + blog, confidence: low
 - [community.expat] A blog describes a distinct artistic and creative expat community where creatives integrate fairly easily. — openshores.co, 2026-03-10, blog, confidence: low
-- [community.expat] Expat.com forum threads in the Marrakech section discuss romance and marriage scams; the guide does not analyse them. — expat.com Marrakech guide, 2025-12-08, forum, confidence: low ⚠ spot-check 2026-11-14: unsupported — scam/safety claim rests only on forum threads
+- [safety.scam] Canada's official advisory for Morocco urges caution when travelling for romance, especially where the relationship began online; this is a national warning, not specific to Marrakech. — travel.gc.ca (Morocco travel advice, updated 2026-05-26), official, confidence: medium ✔ re-sourced 2026-11-15
 - [admin.residency] Carte de séjour for retirees: passport copies, proof of accommodation, bank statements, police clearance, medical certificate; usually valid one year, renewable. — expat.com Marrakech guide, 2025-12-08, intl-media, confidence: medium
 - [admin.residency] A blog says residence-card renewals and work permits move more slowly in Marrakech than in Casablanca or Rabat and recommends a local adviser for complex cases. — openshores.co, 2026-03-10, blog, confidence: low
 - [admin.nationality] Dual nationality has been allowed since 1958; nationality through a Moroccan mother applies only to children born after 3 Mar 2007. — en.wikipedia.org (Moroccan nationality law), accessed 2026-11-14, academic, confidence: medium
@@ -132,6 +132,7 @@
 25. Morocco (travel wiki) — https://en.wikivoyage.org/wiki/Morocco — blog — date read (2026-11-14)
 26. Accommodation in Marrakesh — https://www.expat.com/en/guide/africa/morocco/marrakech/8932-accommodation-in-marrakesh.html — intl-media — date read (2026-11-14)
 27. Morocco gasoline prices — https://www.globalpetrolprices.com/Morocco/gasoline_prices/ — company — date read (2026-11-14)
+28. Morocco travel advice — https://travel.gc.ca/destinations/morocco — official — date read (2026-11-15)
 
 ## Spot-check (2026-11-14)
 

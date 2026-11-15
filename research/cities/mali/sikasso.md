@@ -35,7 +35,7 @@
 - [family.schools] In July 2024, 60 schools in the Sikasso region had been closed by insecurity and only five remained shut; the education director said many closures followed rumours of attacks. — Studio Tamani, 2024-07-24, local-media, confidence: medium
 - [family.schools] Private primary school listed at about €11,217/year (≈ 7.36 million XOF) and private daycare at €352/month by a crowd-sourced aggregator; these figures look out of line with local incomes and need checking. — Combien-coute.net, 2026-11, company, confidence: low
 - [safety.general] France formally advises against travel to all of Mali, whatever the reason. Sikasso is not singled out. — France Diplomatie, updated 2026-09-10, official, confidence: high
-- [safety.general] The UK advises against all travel to the whole of Mali and says violent crime is high "especially in the capital Bamako and southern regions"; kidnappings rose in southern and western Mali in 2025. — UK FCDO, updated 2026-07-10, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — rise in 2025 kidnappings not found on the fetched FCDO pages
+- [safety.general] The UK advises against all travel to the whole of Mali and says violent crime is high "especially in the capital Bamako and southern regions"; kidnappings rose in southern and western Mali in 2025. — UK FCDO, updated 2026-07-10, official, confidence: high ✔ re-sourced 2026-11-15
 - [safety.general] During the fuel blockade, an ambush between Kolondieba and Kadiana (Sikasso region) burned over 50 tankers around 17 October 2025, an attack near Sikasso destroyed over 40 tankers on 21 October 2025, and JNIM claimed another attack at Fachoribougou on the Zégoua–Sikasso road on 6 November 2025. — Wikipedia "Mali fuel blockade" (citing Bellingcat 2025-12-03 and others), intl-media (digest), confidence: medium
 - [safety.general] JNIM took control of Loulouni in the Sikasso region during the blockade. — Wikipedia "Mali fuel blockade", intl-media (digest), confidence: low
 - [safety.general] After the 25 April 2026 attacks, the road between Bamako and Sikasso came under JNIM blockade, and on 6 May 2026 JNIM burned fruit trucks travelling from Bougouni to Bamako. — Wikipedia "2026 Mali offensives" (citing TRAC 2026-05-06), intl-media (digest), confidence: medium
@@ -67,7 +67,7 @@
 
 1. Conseils aux voyageurs – Mali (Sécurité) — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/mali/ — official — read 2026-11-14
 2. Conseils aux voyageurs – Mali (Entrée / séjour) — https://www.diplomatie.gouv.fr/fr/information-par-pays/mali/conseils-aux-voyageurs-entree-sejour — official — via dossier verification log, 2026-11-14
-3. Mali safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/mali/safety-and-security — official — read 2026-11-14
+3. Mali safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/mali/safety-and-security — official — read 2026-11-14, re-read 2026-11-15 (violent-crime and 2025 kidnapping wording confirmed)
 4. Mali fuel blockade — Wikipedia — https://en.wikipedia.org/wiki/Mali_fuel_blockade — intl-media digest — read 2026-11-14
 5. 2026 Mali offensives — Wikipedia — https://en.wikipedia.org/wiki/2026_Mali_offensives — intl-media digest — read 2026-11-14
 6. Sikasso — Wikipédia (fr) — https://fr.wikipedia.org/wiki/Sikasso — reference — read 2026-11-14

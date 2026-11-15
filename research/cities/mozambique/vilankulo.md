@@ -35,15 +35,34 @@ Currency note: EUR equivalents use the dossier rate **76 MZN ≈ €1** (France 
 - [nature.access] The Bazaruto Archipelago, a national park since 1971, lies off the town; it holds about 120 dugongs, the largest remaining population in Mozambique. — Wikipedia "Bazaruto Archipelago", accessed 2026-11-14, academic, confidence: medium
 - [nature.access] Game-fishing season runs early October to end of January. — Wikivoyage "Vilanculos", accessed 2026-11-14, blog, confidence: low
 - [admin.visa] Same national rules as Maputo: 30-day e-visa about €40 for French nationals; long stays through the embassy in Paris. — France Diplomatie "Entrée / séjour", updated 2026-11-09, official, confidence: high
+<!-- quality-pass 2026-11-15 -->
+- [cost.living] A local lodging blog puts a casual beachfront café meal at 300–500 MZN (≈ €3.9–6.6) and an upscale restaurant at 800–1,500 MZN per person (≈ €10.5–19.7); a 5–10% tip is customary. — Vilanculos Rooms blog, 2025-02-20, blog, confidence: low
+- [daily.transport] Same blog: a chapa ride about 30 MZN (≈ €0.39); a private taxi for a short trip in town about 500 MZN (≈ €6.6). — Vilanculos Rooms blog, 2025-02-20, blog, confidence: low
+- [cost.living] Same blog: Bazaruto day trip from about 3,000 MZN per person (≈ €39), snorkelling or island tours from 1,500 MZN (≈ €20), a dive about 2,000 MZN (≈ €26), a hostel dorm bed from 700 MZN (≈ €9.2), a mid-range guesthouse room 3,000–6,000 MZN (≈ €39–79) a night. — Vilanculos Rooms blog, 2025-02-20, blog, confidence: low
+- [cost.living] Municipal waste collection is charged by contract: 30 MZN/month for a household (≈ €0.39), 250 MZN for a restaurant (≈ €3.3), 600 MZN for a hotel or resort (≈ €7.9); figures confirmed Dec 2018. — UN-Habitat / Vilankulo town profile, confirmed 2018-12, academic, confidence: medium
+- [other] The town centre is kept fairly clean but suburbs are hard for collectors to reach; waste goes to an open dump in the 5° Congresso borough whose conversion to a landfill stalled for lack of funds (2018). — UN-Habitat / Vilankulo town profile, 2018-12, academic, confidence: medium
+- [social.pace] The town's strategic plan counts 46,691 residents over 78.8 km², about 18% of the district, with 43% under 15. — UN-Habitat / Vilankulo Town Strategic Development Plan 2016–2025, 2018-12, academic, confidence: medium
+- [daily.power] About 1,000 families in Belane, Vilankulo district, got grid electricity for the first time on 19 July 2026; 10 of the 14 bairros planned for phase 2 of "Energia para Todos" in the district were still waiting. National household grid access: 55.2%. — AIM, 2026-07-21, local-media, confidence: high
+- [daily.water] District water coverage was 84.26% (235 rural water points), yet many households still walked long distances; a 13 million MZN (≈ €171,000) plan added solar systems and hand pumps in Mapinhane. — Club of Mozambique, 2023-05-10, local-media, confidence: medium
+- [daily.water] FIPAAS opened a World Bank-listed tender on 27 Oct 2026 (closing 17 Nov 2026) to design and supervise new water-supply works, a faecal-sludge plant and public toilets for Vilankulo, Mapinhane and Pambarra. — allbusiness.africa tender FIPAAS/UWSP/CON-02/26, 2026-10-27, company, confidence: high
+- [daily.money] Three banks in town (listed as Barclays, BCI and Millennium BIM) have ATMs that take Visa but not always Mastercard; banks open 08:00–15:00 on weekdays; small shops and markets take cash only. — accommodationmozambique.co.za "Vilanculos FAQ" (titled 2026, undated), company, confidence: low
+- [health.care] Vilankulo District Hospital serves over 150,000 people and was damaged by several cyclones (Dineo, Filipo, Guambe among them); the health minister said in May 2025 that World Bank-backed rehabilitation would start soon, with no date. — 360 Mozambique, 2025-05-08, local-media, confidence: medium
+- [health.care] A private hospital unit in the Vilankulo–Inhassoro corridor offers emergency stabilisation, advanced-life-support ambulances and a trauma unit, and holds an international quality certification; no prices given. — Club of Mozambique, 2026-07-01, local-media, confidence: medium
+- [business.invest] A new district courthouse opened on 12 Sep 2026; the article says land and title disputes have historically unsettled developers in the district. — The Rio Times, 2026-09-13, intl-media, confidence: medium
+- [work.jobs] Bazaruto National Park lost about 12 million MZN (≈ €158,000) in tourism revenue between late 2024 and early 2025 as tourists stayed away during post-election tension; 5 million MZN went to island communities in May 2025. — 360 Mozambique, 2025-05-28, local-media, confidence: medium
+- [climate.daily] Tropical storm Filipo (March 2024) wrecked the seafront: craters, protective trees lost, houses at risk and small food businesses out of work; by 30 June 2024 the municipality had raised only 40,000 MZN (≈ €526) for repairs. — Club of Mozambique, 2024-07-09, local-media, confidence: high
+- [safety.general] Provincial prosecutors named Inhassoro, Vilankulo, Massinga and Zavala as the districts with the most homicides, mainly of elderly people accused of witchcraft (2020, old). — Club of Mozambique, 2020-07-16, local-media, confidence: medium
+- [cost.negotiation] Tuk-tuk fares are not fixed: travel guides advise agreeing the price with the driver before setting off and carrying small notes, cash only (undated). — afktravel / traveldojo via search summary, accessed 2026-11-15, blog, confidence: low
 
 ## Gaps
 
-- No long-term rent survey, Numbeo page or local-media report for Vilankulo; rents come only from one agency's high-end listings.
-- Groceries, restaurant meals, beer, taxi/tuk-tuk/chapa fares in town: not found (Wikivoyage's Eat section is empty).
-- Power cuts, water supply, ATMs/banks, mobile money: not found.
-- Health facilities beyond the existence of a hospital, schools (any international or private school): not found.
-- Women's safety, nightlife, religion, diaspora/returnee experience: not found.
-- Negotiation: no Vilankulo-specific source on bargaining over rent, dhow trips or markets.
+- No long-term rent survey, Numbeo page or local-media report for Vilankulo; rents come only from one agency's high-end listings. Aggregator rents (expatlife.ai: 6,000–18,000 MZN a month by area) returned 403 and could not be checked.
+- Groceries and beer prices: still not found. Restaurant, chapa and taxi prices now come from one lodging blog only.
+- Power cuts in town: searched; only grid-extension news found, no outage reports. Water in town: only district-level coverage (2023) found. Mobile money: not found.
+- Schools (any international or private school): searched in English and Portuguese, none found. Hospital services list and staffing: not found.
+- Women's safety: searched; no dated official, media or NGO source specific to Vilankulo. Nightlife, religion, diaspora/returnee experience: not found.
+- Negotiation over rent and dhow trips: searched, nothing dated found; operator packages only.
+- Bazaruto park fees after the 1 April 2026 national revision: not published online per a safari guide; not found.
 - Nomad Watch shows Vilankulos cost figures (e.g. 1-bed US$236/month) with no stated sources or method; not used as items.
 - African Parks' Bazaruto page (park fees, community programmes) returned 403.
 
@@ -71,6 +90,22 @@ Currency note: EUR equivalents use the dossier rate **76 MZN ≈ €1** (France 
 20. Nomad Watch Vilankulos (unsourced, not used for items) — https://nomad.watch/cities/MZ/vilankulos — company — 2026-11-14
 21. Club of Mozambique tag page Vilankulo (404) — https://clubofmozambique.com/news/tag/vilankulo/ — local-media — 2026-11-14
 22. African Parks Bazaruto (403) — https://www.africanparks.org/the-parks/bazaruto — official — 2026-11-14
+23. A guide to Mozambique's currency, costs and budgeting — https://vilanculosrooms.blogspot.com/2025/02/a-guide-to-mozambiques-currency-costs.html — blog — 2026-11-15
+24. UN-Habitat, Vilankulo town profile (PDF) — https://unhabitat.org/sites/default/files/2022/07/vilankulo_en.pdf — academic — 2026-11-15
+25. Belane recebe energia eléctrica e aproxima Vilankulo da meta universal — https://aimnews.org/2026/07/21/belane-recebe-energia-electrica-e-aproxima-vilankulo-da-meta-universal/ — local-media — 2026-11-15
+26. 13 million meticais to be invested in water supply in Vilankulo district — https://clubofmozambique.com/news/mozambique-13-million-meticais-to-be-invested-in-water-supply-in-vilankulo-district/ — local-media — 2026-11-15
+27. Tender, water supply and sanitation for Vilanculos, Pambarra and Mapinhane — https://allbusiness.africa/tenders/consultancy-services-for-detailed-engineering-design-supervision-and-environmental-and-social-instruments-for-water-supply-and-sanitation-infrastructure-for-vilanculos-pambarra-and-mapinhane — company — 2026-11-15
+28. Vilanculos FAQ — https://www.accommodationmozambique.co.za/inhambane/vilanculos/faq — company — 2026-11-15
+29. Inhambane government secures World Bank support to rehabilitate Vilankulo District Hospital — https://360mozambique.com/business/infrastructure/inhambane-government-secures-world-bank-support-to-rehabilitate-vilankulo-district-hospital/ — local-media — 2026-11-15
+30. Inhambane reinforces health response capacity with private investment — https://clubofmozambique.com/news/mozambique-inhambane-reinforces-health-response-capacity-with-private-investment/ — local-media — 2026-11-15
+31. New Vilanculo court and investor confidence — https://www.riotimesonline.com/new-vilanculo-court-investor-confidence-2026/ — intl-media — 2026-11-15
+32. Post-election tension: Bazaruto recorded a loss of 190 thousand dollars in tourism revenue — https://360mozambique.com/business/tourism/post-election-tension-bazaruto-recorded-a-loss-of-190-thousand-dollars-in-tourism-revenue/ — local-media — 2026-11-15
+33. Vilankulo municipality lacks funds to restore its coastal zone after storm Filipo — https://clubofmozambique.com/news/mozambique-vilankulo-municipality-lacks-funds-to-restore-its-coastal-zone-after-storm-filipo/ — local-media — 2026-11-15
+34. Justice administration bodies concerned with wave of homicides in Inhambane province — https://clubofmozambique.com/news/justice-administration-bodies-concerned-with-wave-of-homicides-in-inhambane-province/ — local-media — 2026-11-15
+35. Guide to budget travel in Vilanculos (search summary only) — https://afktravel.com/61650/guide-to-budget-travel-in-vilanculos/ — blog — 2026-11-15
+36. Vilankulo travel guide (search summary only) — https://www.traveldojo.com/vilankulo/ — blog — 2026-11-15
+37. Mozambique travel update May/June 2026 (no Vilankulo prices, not used) — https://umhambi.blogspot.com/2026/05/mozambique-travel-update-mayjune-2026.html — blog — 2026-11-15
+38. expatlife.ai Vilankulo neighbourhoods (403) — https://expatlife.ai/mozambique/cities/vilankulo/neighborhoods/town-center-vilankulo — company — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

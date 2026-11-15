@@ -13,10 +13,9 @@
 - [daily.power] A Ségou resident said in January 2026 that electricity supply had dropped from 12 to 6 hours a day, with no official explanation. — Studio Tamani, 2026-01-06, local-media, confidence: medium
 - [daily.transport] In November 2025, the queue at Ségou's few open filling stations stretched for "kilometres", and most stations had no fuel at all. — RFI via AllAfrica, 2025-11-19, intl-media, confidence: high
 - [daily.transport] Some fuel reached Ségou in November–December 2025 after the blockade began on 3 September 2025. — Wikipedia "Mali fuel blockade" (citing Critical Threats and others), intl-media (digest), confidence: medium
-- [daily.transport] Fuel-tanker attacks were reported between Niono and Ségou in September 2025; the digest's only source for this is a social-media post. — Wikipedia "Mali fuel blockade", 2025-09, intl-media (digest), confidence: low ⚠ spot-check 2026-11-14: unsupported — conflict item whose only source is a social-media post
 - [daily.transport] In Macina (Ségou region), filling stations reopened on 19 July 2026 with petrol and diesel, described as a first since the crisis began in the area. — Studio Tamani, 2026-07-20, local-media, confidence: medium
 - [safety.general] France formally advises against travel to all of Mali "quel que soit le motif" and asks French nationals to leave temporarily. — France Diplomatie, updated 2026-09-10, official, confidence: high
-- [safety.general] The UK advises against all travel to the whole of Mali and mentions intercommunal security incidents in the Mopti and Ségou regions, sometimes involving terrorist groups, plus landmines used by groups in the centre. — UK FCDO, updated 2026-07-10, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — Mopti/Ségou intercommunal incidents not found on the fetched FCDO pages
+- [safety.general] The UK advises against all travel to the whole of Mali and says security incidents between communities continue, "most notably in Mopti and Segou regions", with terrorist groups sometimes joining in, and that groups in the centre, north and north-east use landmines. — UK FCDO, updated 2026-07-10, official, confidence: high ✔ re-sourced 2026-11-15
 - [safety.general] The Ségou governor imposed a 21:00–06:00 curfew from 4 June 2025 (30 days, renewable) after "numerous" attacks, including in the Ségou region; only security vehicles and ambulances on mission could move. — Studio Tamani, 2025-06-04, local-media, confidence: high
 - [safety.general] The Ségou region curfew, in place since June 2025, was renewed for 4 November–3 December 2025 at 23:00–05:00. — Studio Tamani, 2025-11-05, local-media, confidence: high
 - [safety.general] On 1 July 2025, coordinated attacks hit Niono and Molodo (Ségou region) among other towns, causing panic and closing several services. — Studio Tamani, 2025-07-02, local-media, confidence: high
@@ -34,6 +33,7 @@
 - No 2026 curfew renewal for Ségou found after December 2025.
 - No Ségou-specific fuel price in 2026.
 - Web search budget ran out after three queries; only Studio Tamani, RFI/AFP, Wikipedia digests and official advisories were read.
+- Removed 2026-11-15: item on fuel-tanker attacks between Niono and Ségou in September 2025. Its only source was a social-media post; re-search found Sept 2025 convoy attacks near Bougouni, Diédiéni–Kolokani and Kaniéra–Lakamané (Janes, Africanews 2025-09-18) but none on the Niono–Ségou road.
 - Lifestyle categories intentionally not curated (city flagged unsafe).
 
 ## Sources read
@@ -54,6 +54,9 @@
 14. Macina : fin du blocus à Tongolo coura — Studio Tamani — https://www.studiotamani.org/209337-macina-fin-du-blocus-a-tongolo-coura — local-media — lead read in site search results, 2026-11-14
 15. Sensibilisation aux dangers des engins explosifs à Ségou — Studio Tamani — https://www.studiotamani.org/209684-sensibilisation-aux-dangers-des-engins-explosifs-a-segou — local-media — read 2026-11-14
 16. Des avis sont partagés sur l'instauration du couvre-feu dans plusieurs localités — Studio Tamani — https://www.studiotamani.org/190116-des-avis-sont-partages-sur-linstauration-du-couvre-feu-dans-plusieurs-localites — local-media — read 2026-11-14
+
+17. Mali safety and security — UK FCDO (re-read: Mopti/Segou wording, page updated 2026-07-10) — https://www.gov.uk/foreign-travel-advice/mali/safety-and-security — official — read 2026-11-15
+18. Mali: military escorts vehicles after militants attack fuel trucks — Africanews, 2025-09-18 — https://www.africanews.com/2025/09/18/mali-military-escorts-vehicles-after-militants-attack-fuel-trucks/ — intl-media — read 2026-11-15
 
 ## Spot-check (2026-11-14)
 

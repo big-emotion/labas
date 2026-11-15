@@ -38,17 +38,34 @@ Currency note: the lilangeni (E, SZL) is pegged 1:1 to the South African rand. T
 - [social.religion] Christian radio station Voice of the Church is based in Manzini, and the Roman Catholic diocese is named after the city. — Wikipedia "Manzini" and "Mbabane", accessed 2026-11-14, academic, confidence: medium
 - [climate.daily] Warmer than Mbabane: humid subtropical, mean daily max about 25.7 °C (28.5 °C in January, 22.4 °C in June), June minimum about 8.9 °C; ~923 mm rain, February wettest, June almost dry (8 mm). — Wikipedia "Manzini", accessed 2026-11-14, academic, confidence: medium
 - [nature.access] Malkerns, home of the big MoMo Xperience and Farmers Market events at its country club, and the Ezulwini Valley lie between Manzini and Mbabane on the MR3. — Times of Eswatini 2026-03-27 / Wikipedia "Mbabane", local-media/academic, confidence: medium
+<!-- quality-pass 2026-11-15 -->
+- [cost.rent] Asking rents on one agency page (suburbs not shown): in Manzini a 1-bed house E2,420/month (≈ €129) and 3-bed houses at E10,000 (≈ €535, "available immediately") and E25,000 (≈ €1,337, "price reduced"); in Matsapha a 3-bed house E10,000 (≈ €535). Only four Manzini homes were listed, against eleven in Mbabane. — RE/MAX Swaziland rentals page, undated listings, accessed 2026-11-15, company, confidence: medium
+- [cost.rent] An estate agency put the bulk of rental demand in Manzini, Matsapha, Mbabane and Ezulwini at E4,000–8,000/month (≈ €214–428), and cited the Malkerns Square scheme (55 one- to three-bed units) at E5,150–9,350 (≈ €275–500); figures are from 2019. — Seeff, 2019-11-28, company, confidence: low
+- [housing.search] Asking sale prices for Manzini houses: eight 3-bed listings from E872,000 to E3.8 million (≈ €46,600–203,200), most between E1.38 and 2.5 million (≈ €73,800–133,700); one 4-bed at E1.55 million (≈ €82,900). Noticeably cheaper than Mbabane on the same page. — RE/MAX Swaziland for-sale page, accessed 2026-11-15, company, confidence: medium
+- [housing.search] Building plots: Manzini E175,000–640,000 (≈ €9,400–34,200) for most listings, with two larger ones at E3 million; Matsapha plots E450,000–550,000 (≈ €24,100–29,400). — RE/MAX Swaziland for-sale page, accessed 2026-11-15, company, confidence: medium
+- [cost.negotiation] Light bargaining is accepted at craft markets such as Manzini Market, while craft shops and centres keep fixed prices; tipping about 10% for table service, none for minibus drivers. — Tripomatic "Eswatini", undated (accessed 2026-11-15), blog, confidence: low
+- [community.expat] The same 2019 agency note links rental demand around Manzini–Matsapha to South African staff on infrastructure projects and to weekday workers from Johannesburg, Pretoria and Mbombela, and says non-citizens could not buy homes (rule not checked). — Seeff, 2019-11-28, company, confidence: low
+- [health.care] From 1 June 2026, Manzini Government Hospital charges E10 per consultation on weekday working hours and E20 after hours, weekends and holidays (≈ €0.53 / €1.07), plus fees for X-ray, CT, ultrasound and lab tests, paid before treatment with an ID; people aged 60 and over stay free. — Eswatini Observer, 2026-06-02, local-media, confidence: high
+- [daily.water] The Manzini Region water and sanitation project (AfDB-funded, started March 2024) was 92% built in mid-2026 and is to serve about 35,000 people in Nhlambeni, Manzini South, Manzini North, Mthongwaneni and Mafutseni; Mafutseni residents said tanker water is expensive and sometimes comes only once a week. — African Development Bank via AllAfrica, 2026-07-02, intl-media, confidence: high
+- [daily.water] The project includes a 25 million L/day treatment plant, 21 million L of storage, over 350 km of pipes and up to 14 water kiosks; nationally 80.4% have basic drinking-water access but only 38.2% safely managed water. — African Development Bank via AllAfrica, 2026-07-02, intl-media, confidence: high
+- [daily.water] Under a 2024 agreement with the water utility, the municipality now announces road closures for pipe repairs; burst pipes and leaks were reported at central spots (Ngwane/Martin streets near Manzini Mall, Tikhuba/Kelly streets, Mazibuko Street in Zakhele) and on Fairview Road. — Manzini City Council, 2025-02-19, official, confidence: medium
+- [daily.power] EEC's February 2026 load-management schedule lists "possible" 4-hour cuts (06–10, 10–14, 14–18, 18–22) on Manzini feeders: Manzini 1 (Ngwane Park, KaShali, Sidzakeni, Zakhele, Lwandle) and Moses Hlophe (Ticantfwini, Madonsa, St Michaels), plus a Matsapha feeder. — EEC load management schedule Feb 2026, official, confidence: high
+- [daily.internet] A careers guide says Manzini and Mbabane generally have adequate broadband, while rural connectivity stays limited; no speed or price figures. — Africarrieres "Diaspora" guide, 2026, company, confidence: low
+- [safety.women] UNFPA reports intimate-partner violence affecting 57.5% of women in the Manzini region, the highest of any region (Shiselweni 48.7%); nationally about one woman in two reports partner abuse. Survey year not shown on the page. — UNFPA Eswatini, accessed 2026-11-15, official, confidence: medium
+- [safety.women] Police data for January–March 2026: the Manzini region logged the most GBV cases in the country and 5 of the 22 GBV-related deaths. — Eswatini Observer, 2026-06-18, local-media, confidence: high
+- [safety.women] Manzini Magistrate's Court is the country's main rape-case backlog: in April–June 2026 it carried 273 cases forward, received 50, finalised 63 and still had 260 pending. — Eswatini Observer, 2026-07-19, local-media, confidence: high
+- [safety.general] Three Manzini women (living in Fairview, KaShali and Ngwane Park) lost about E133,550 (≈ €7,140) in total to fake bottle-store partnerships and fake overseas house-cleaning job offers between late 2025 and 2026. — Eswatini Observer, 2026-08-31, local-media, confidence: high
 
 ## Gaps
 
-- No property portal or agency listings for Manzini rents or sale prices by suburb (Coates Valley, Madonsa, Fairview, Ngwane Park) could be reached; titimela room rents not stated.
-- Numbeo unavailable (HTTP 429); all everyday prices are livingcost.org models.
-- Negotiation at Manzini Market, agency fees, foreigner pricing: nothing sourced beyond Wikivoyage's fixed-kombi-fare note.
-- RFM Hospital services and fees, private clinics, consultation costs: not found.
-- School fees in Manzini (Nazarene, St Michael's, Salesian, etc.): not found.
-- Water supply and power cuts specific to Manzini: no articles found via site search.
-- Nightlife venues and prices in Manzini itself: not found (SibaneSami pool-party article gave no town or prices).
-- Women's safety specific to Manzini, racism/colourism, diaspora/expat/returnee groups: no dated source found.
+- Town-level asking rents and sale prices now exist (RE/MAX, only four Manzini rentals), but nothing by suburb (Coates Valley, Madonsa, Fairview, Ngwane Park); titimela room rents still not stated. Searched "Manzini flat to rent emalangeni Coates Valley Fairview" and "Manzini room rent": hits were Empangeni's Fairview, guesthouses and Airbnb.
+- Numbeo not used; everyday prices are livingcost.org models.
+- Negotiation: only a general travel-guide rule for craft markets; nothing on haggling over produce at Manzini Market, rent negotiation, agency fees, deposits or foreigner pricing.
+- RFM Hospital fees and private-ward status (a 2024 relaunch plan appears only in a search excerpt), private clinics: not found.
+- School fees in Manzini (Nazarene, St Michael's, Salesian): not found; searched "Eswatini school fees 2026 Manzini Salesian St Michael's" — only a 2025 note that secondary fees would be standardised in 2026, without amounts (article returned 404).
+- Water: the regional project and town repairs are documented, but no 2026 cut schedule for the town itself. Power: exposure on the Feb 2026 schedule, but how often cuts actually occurred is unknown.
+- Nightlife venues and prices in Manzini itself: not found.
+- Women's safety at the bus rank or downtown at night specifically: no dated 2026 source (an undated older gang-rape report at the rank was not used). Racism/colourism and diaspora/returnee groups in Manzini: no dated source found.
 
 ## Sources read
 
@@ -73,6 +90,20 @@ Currency note: the lilangeni (E, SZL) is pegged 1:1 to the South African rand. T
 19. Eswatini travel advice: Safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/eswatini/safety-and-security — official — date read (2026-11-14)
 20. Eswatini travel advice: Health — UK FCDO — https://www.gov.uk/foreign-travel-advice/eswatini/health — official — date read (2026-11-14)
 21. Bikini Pool Party return at SibaneSami Hotel (no town or prices) — https://times.co.sz/48357/lifestyle/bikini-pool-party-return-at-sibanesami-hotel/ — local-media — date read (2026-11-14)
+22. RE/MAX Swaziland, property to rent — http://www.remax.co.za/property-to-rent-swaziland/swaziland/ — company — date read (2026-11-15)
+23. RE/MAX Swaziland, property for sale — http://www.remax.co.za/property-for-sale-swaziland/swaziland/ — company — date read (2026-11-15)
+24. Expats residing in Eswatini pushing rental rates up (2019-11-28) — https://www.seeff.com/news/expats-residing-in-eswatini-pushing-rental-rates-up/ — company — date read (2026-11-15)
+25. Tripomatic, Eswatini — https://tripomatic.com/en/destinations/eswatini — blog — date read (2026-11-15)
+26. Manzini Government Hospital introduces E10 consultation fee (2026-06-02) — https://www.eswatiniobserver.com/?p=11526 — local-media — date read (2026-11-15)
+27. An emotional wait for water nears its end for communities in Eswatini's Manzini region (2026-07-02) — https://allafrica.com/stories/202607030512.html — intl-media — date read (2026-11-15)
+28. Positive impact of Municipality, EWSC partnership begins to show (2025-02-19) — https://manzinicity.co.sz/positive-impact-of-municipality-ewsc-partnership-begins-to-show/ — official — date read (2026-11-15)
+29. EEC Load Management Schedule February 2026 — https://www.eec.co.sz/media/loadmanagement/docs/EEC_LOAD_MANAGEMENT_SCHEDULE_FEB_2026.pdf — official — date read (2026-11-15)
+30. Africarrieres, Eswatini diaspora guide (2026) — https://africarrieres.com/eswatini/en/guide/decouvrir/diaspora — company — date read (2026-11-15)
+31. UNFPA Eswatini, Ending gender-based violence — https://eswatini.unfpa.org/en/topics/ending-gender-based-violence-and-all-harmful-practices — official — date read (2026-11-15)
+32. 1 994 GBV cases, 22 deaths in three months (2026-06-18) — https://www.eswatiniobserver.com/?p=11960 — local-media — date read (2026-11-15)
+33. Manzini leads in rape cases (2026-07-19) — https://www.eswatiniobserver.com/?p=12791 — local-media — date read (2026-11-15)
+34. 3 women scammed E133 000 (2026-08-31) — https://www.eswatiniobserver.com/?p=13730 — local-media — date read (2026-11-15)
+35. Femicide and GBV murders article (2026-07-08; checked for Manzini share, no new item) — https://www.eswatiniobserver.com/?p=12482 — local-media — date read (2026-11-15)
 
 ## Spot-check (2026-11-14)
 
