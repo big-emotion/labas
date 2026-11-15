@@ -31,8 +31,7 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   one per quick-quiz answer plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
   LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
-  answers. The newsletter is a link to Mailjet's hosted sign-up page (`PUBLIC_MAILJET_FORM_URL`,
-  operator 2026-11-15): the site itself never asks for an e-mail address. Fonts are self-hosted;
+  answers. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { GOALS, keptEvent, questionEvent, stepEvent } from "./analytics";
+import { GOALS, finishedEvent } from "./analytics";
 import { nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS } from "./deep-questions";
 import { loadAnswers, mailtoFor, resultsText, saveAnswers } from "./keep";
@@ -64,18 +64,9 @@ describe("keeping or sharing the result", () => {
   });
 });
 
-describe("audience steps, so the drop-off shows question by question", () => {
+describe("the audience funnel", () => {
   it("names only goals declared in Plausible", () => {
-    const events = [
-      questionEvent(3),
-      stepEvent("Résultats"),
-      stepEvent("Questionnaire complet commencé"),
-      stepEvent("Questionnaire complet terminé"),
-      stepEvent("Y aller", { ville: "Dakar" }),
-      stepEvent("Lettre d'information"),
-      keptEvent("partage"),
-    ];
-    for (const event of events) expect(GOALS).toContain(event.name);
-    expect(questionEvent(3).props).toEqual({ rang: "03" });
+    for (const name of ["Questionnaire 1 terminé", "Questionnaire complet terminé"] as const)
+      expect(GOALS).toContain(finishedEvent(name).name);
   });
 });

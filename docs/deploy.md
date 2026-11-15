@@ -62,10 +62,6 @@ Optional, once the site is added in Plausible: `gh variable set PLAUSIBLE_DOMAIN
 event the site sends shows in Plausible only once it is declared as a goal (Settings → Goals →
 Add goal → Custom event), one per name listed in `GOALS` (`src/lib/analytics.ts`).
 
-Optional, for the newsletter: create a subscription widget in Mailjet (double opt-in on), copy
-its hosted page address, then `gh variable set MAILJET_FORM_URL --body <that address>`. Without
-it, the « Recevoir les nouvelles de Là-bas » line is not shown.
-
 **4. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
 The smoke check fails the job unless `https://labas.africa/` answers 200.
 

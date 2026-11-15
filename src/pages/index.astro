@@ -331,7 +331,7 @@ const description =
       import { linesFor } from "../lib/lines";
       import { advisoryNote } from "../lib/advisory";
       import { photoFor } from "../lib/photos";
-      import { answerEvent, questionEvent, stepEvent } from "../lib/analytics";
+      import { answerEvent, finishedEvent } from "../lib/analytics";
       import { goingThere } from "../lib/going";
       import { resultsText, saveAnswers } from "../lib/keep";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
@@ -584,11 +584,6 @@ const description =
       // The three cities on screen, for « Garder vos résultats ».
       let onScreen: Match[] = [];
       wireKeep(() => resultsText(onScreen));
-      document.getElementById("cards")!.addEventListener("click", (event) => {
-        const go = (event.target as HTMLElement).closest<HTMLAnchorElement>(".go");
-        const city = go?.closest(".card")?.querySelector(".card-name")?.textContent;
-        if (city) track(stepEvent("Y aller", { ville: city }));
-      });
 
       function render() {
         const current = readAnswers();
@@ -659,6 +654,7 @@ const description =
       const asked: string[] = [];
       let current: string | undefined = "project";
       let revealed = false;
+      let finished = false;
       let timer: ReturnType<typeof setTimeout> | undefined;
 
       function showQuestion(id: string | undefined) {
@@ -696,7 +692,11 @@ const description =
         if (id) syncContinue(fieldsets.get(id)!);
         if (id)
           fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
-        if (id) track(questionEvent(position));
+        // Counted once per visit, when the last question is answered.
+        if (!id && !finished) {
+          finished = true;
+          track(finishedEvent("Questionnaire 1 terminé"));
+        }
         render();
       }
 
@@ -749,7 +749,6 @@ const description =
       document.getElementById("reveal")!.addEventListener("click", () => {
         const outcome = document.getElementById("outcome") as HTMLElement;
         outcome.hidden = false;
-        track(stepEvent("Résultats"));
         outcome.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 

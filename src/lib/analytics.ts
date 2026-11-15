@@ -33,43 +33,26 @@ export interface AnswerEvent {
 }
 
 /**
- * The goals to declare in Plausible (Settings → Goals → Custom event), one per name: an event
- * whose goal is missing is received but never shown. « Réponse » was the only one until
- * 2026-11-15, so nobody could see where readers stop (beta feedback).
+ * The goals to declare in Plausible (Settings → Goals → Custom event): an event whose goal is
+ * missing is received but never shown. A minimal funnel, as a beta tester who does audience work
+ * suggested (2026-11-15): someone answers, finishes the quick quiz, then the full questionnaire.
+ * Where readers stop inside the quiz already shows in the « Réponse » breakdown by question.
  */
 export const GOALS = [
   "Réponse",
-  "Question vue",
-  "Résultats",
-  "Résultats gardés",
-  "Questionnaire complet commencé",
+  "Questionnaire 1 terminé",
   "Questionnaire complet terminé",
-  "Y aller",
-  "Lettre d'information",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
 export interface SiteEvent {
   name: Goal;
-  props?: Record<string, string>;
 }
 
-/** The quick-quiz question shown, by rank: the drop-off reads question by question. */
-export function questionEvent(rank: number): SiteEvent {
-  // Padded so Plausible's breakdown sorts « 02 » before « 10 ».
-  return { name: "Question vue", props: { rang: String(rank).padStart(2, "0") } };
-}
-
-export function stepEvent(
-  name: Exclude<Goal, "Réponse" | "Question vue" | "Résultats gardés">,
-  props?: Record<string, string>,
+export function finishedEvent(
+  name: "Questionnaire 1 terminé" | "Questionnaire complet terminé",
 ): SiteEvent {
-  return props ? { name, props } : { name };
-}
-
-/** How the reader kept the result: shared, printed or mailed to themselves. */
-export function keptEvent(way: "partage" | "copie" | "impression" | "e-mail"): SiteEvent {
-  return { name: "Résultats gardés", props: { moyen: way } };
+  return { name };
 }
 
 export function answerEvent(question: string, value: unknown): AnswerEvent | null {

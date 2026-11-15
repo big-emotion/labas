@@ -92,7 +92,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { nextQuestion } from "../lib/adaptive";
     import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { rankCities, type Answers } from "../lib/ranking";
-    import { stepEvent } from "../lib/analytics";
+    import { finishedEvent } from "../lib/analytics";
     import { forgetAnswers, loadAnswers, resultsText, saveAnswers } from "../lib/keep";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
 
@@ -121,8 +121,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
           .slice(0, 5),
       ),
     );
-    // Each step counted once per visit: the full questionnaire started, then finished.
-    let started = false;
+    // Counted once per visit.
     let finished = false;
     let showAll = false;
     const VISIBLE = 20;
@@ -145,7 +144,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       (document.getElementById("done") as HTMLElement).hidden = next !== undefined;
       if (next === undefined && asked.length > resumed && !finished) {
         finished = true;
-        track(stepEvent("Questionnaire complet terminé"));
+        track(finishedEvent("Questionnaire complet terminé"));
       }
     }
 
@@ -258,10 +257,6 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       const max = Number(set.dataset.max);
       const chip = target.closest<HTMLButtonElement>(".chip");
       const action = target.closest<HTMLButtonElement>("[data-action]")?.dataset.action;
-      if (chip && !started) {
-        started = true;
-        track(stepEvent("Questionnaire complet commencé"));
-      }
       if (chip) {
         const value = JSON.parse(chip.dataset.value as string);
         if (max === 1) {
