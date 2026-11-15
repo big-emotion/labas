@@ -1,8 +1,9 @@
 import { DEEP_QUESTIONS } from "./deep-questions";
 import { QUESTIONS, type Question } from "./questions";
-import { bestMatches, type Answers } from "./ranking";
+import { bestMatches, topCities, type Answers } from "./ranking";
 
 const TOP = 3;
+const FIVE = 5;
 
 /**
  * The next question: the one whose answers would reshuffle the current top three the most
@@ -42,7 +43,26 @@ export function freeQuestions(answers: Answers): Question[] {
   return QUESTIONS.filter((q) => q.when?.(answers) ?? true);
 }
 
-/** The next question of the free quiz: the bank's next one not yet asked. */
+/**
+ * The next question of the free quiz: the open one whose answers would bring, on average, the
+ * most new cities into the top five. The most decisive questions come first, and each answer
+ * changes which one comes next (operator, 2026-11-15). Ties keep the bank's order.
+ */
 export function nextFreeQuestion(answers: Answers, asked: string[]): string | undefined {
-  return freeQuestions(answers).find((q) => !asked.includes(q.id))?.id;
+  const open = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+  // With no answer every city ties and any question looks decisive: open on the project.
+  if (!asked.includes("project")) return "project";
+  const before = new Set(topCities(answers, FIVE));
+  let best: string | undefined;
+  let bestMoved = -1;
+  for (const question of open) {
+    const offered = question.choices.filter((c) => c.value !== null);
+    const moved =
+      offered.reduce((sum, c) => {
+        const tried = { ...answers, [question.id]: question.max ? [c.value] : c.value } as Answers;
+        return sum + topCities(tried, FIVE).filter((name) => !before.has(name)).length;
+      }, 0) / Math.max(1, offered.length);
+    if (moved > bestMoved) [best, bestMoved] = [question.id, moved];
+  }
+  return best;
 }

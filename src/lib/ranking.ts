@@ -401,6 +401,7 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
+const RECEPTION_WEIGHT = 8;
 const KIN_WEIGHT = { much: 8, some: 3.5 } as const;
 const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
 const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
@@ -517,6 +518,11 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
         : 0;
     facts.push({ kind: "homeCountry", values: countries, weight: Math.max(2, roots + kin) });
   }
+  // A reader of sub-Saharan or Caribbean family (or Sudanese, filed under North Africa) is
+  // never sent where anti-Black racism is documented, adventure or not: being badly received
+  // is a failure of the quiz, not a taste (operator, 2026-11-15).
+  const black = origins.some((o) => o !== "nord") || (answers.countries ?? []).includes("Soudan");
+  if (black) facts.push({ kind: "reception", weight: RECEPTION_WEIGHT });
   // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
   const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
   if (origins.length && away > 0) {
@@ -582,6 +588,12 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     return good ? "Facile d'y entrer avec votre passeport" : "Un visa à demander à l'ambassade";
   if (part.fact === "faith")
     return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
+  if (part.fact === "reception")
+    return good
+      ? undefined
+      : part.value === 0
+        ? "Racisme anti-noir documenté (ONU, ONG)"
+        : "Violences xénophobes documentées (ONU, ONG)";
   if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
   if (part.fact === "kin")
     return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
@@ -731,6 +743,19 @@ export function rankCities(answers: Answers): Match[] {
     practical: profileOf(practicalAnswers),
   };
   return CITIES.map((city) => evaluate(city, answers, profiles)).sort((a, b) => b.score - a.score);
+}
+
+/**
+ * The names of the first cities, as bestMatches orders them, without building reasons or the
+ * temperament part: cheap enough to try every answer of every open question on a phone.
+ */
+export function topCities(answers: Answers, count: number): string[] {
+  const profile = profileOf(answers);
+  return CITIES.map((city) => ({ city, score: closeness(city, profile) ?? 0 }))
+    .sort((a, b) => b.score - a.score)
+    .filter(({ city }) => !exclusionFor(city, answers))
+    .slice(0, count)
+    .map(({ city }) => city.name);
 }
 
 /**
