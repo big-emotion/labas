@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
+import ShareMeta from "../components/ShareMeta.astro";
 
 interface Props {
   title: string;
@@ -16,8 +17,8 @@ const { title, description, noindex = false } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
+    <ShareMeta title={`${title} · Là-bas`} description={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#161a5c" />
     <title>{title} · Là-bas</title>
