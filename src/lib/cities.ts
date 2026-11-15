@@ -81,6 +81,12 @@ export interface Facts {
 }
 
 export interface CountryFacts {
+  /** Religious composition, percent (Pew Research Center, 2020). */
+  religion?: { muslim: number; christian: number; other: number; none: number; year: number };
+  /** Racism or xenophobia documented by the UN or a major human-rights organisation. */
+  racism?: { kind: "anti-black" | "xenophobia"; summary: string };
+  /** How a French or EU passport gets in: no visa, online or on arrival, or at an embassy. */
+  entryFrenchPassport?: "free" | "online" | "embassy";
   name: string;
   paperwork: Score;
   visaFreeDaysFrenchPassport: number | null;

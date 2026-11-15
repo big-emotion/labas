@@ -42,6 +42,9 @@ const SPACE: Record<string, unknown[]> = {
   people: ["invited", "quiet", "both"],
   belonging: ["returnees", "locals", "both"],
   friction: [0, 0.5, 1],
+  kin: ["much", "some", "none"],
+  adventure: ["familiar", "open", "seeking"],
+  faith: ["muslim", "christian", "other", "none"],
 };
 const MULTI: Record<string, unknown[]> = {
   languages: ["fr", "en", "pt", "ar"],
@@ -145,6 +148,14 @@ describe("the city a profile lands on", () => {
       const [first] = bestMatches(profile, 1);
       wins.set(first.city.name, (wins.get(first.city.name) ?? 0) + 1);
     }
+    console.log(
+      "SPREAD",
+      [...wins]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8)
+        .map(([n, c]) => `${n} ${((c / RUNS) * 100).toFixed(1)}%`)
+        .join(", "),
+    );
     for (const [name, count] of wins) expect(count / RUNS, name).toBeLessThan(0.08);
   });
 
@@ -267,5 +278,79 @@ describe("a value no source gives", () => {
     const [part] = closenessOf(unknown, pulls, []);
     expect(part.known).toBe(false);
     expect(part.value).toBeCloseTo(typical, 6);
+  });
+});
+
+describe("feeling at home among one's own", () => {
+  const zones = (answers: Answers, n = 3) => bestMatches(answers, n).map((m) => m.city.zone);
+  // A French reader with Senegalese and Guinean parents, who already knows Dakar and Abidjan.
+  const westAfrican: Answers = {
+    project: "installer",
+    languages: ["fr"],
+    origin: "ouest",
+    kin: "much",
+    adventure: "familiar",
+  };
+
+  it("keeps a West African reader who wants to feel at home in sub-Saharan Africa", () => {
+    expect(zones(westAfrican, 5)).not.toContain("nord");
+  });
+
+  it("brings that reader closest to their family's region", () => {
+    expect(zones(westAfrican).filter((z) => z === "ouest").length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("brings a reader of North African origin to North Africa", () => {
+    expect(zones({ ...westAfrican, origin: "nord" })).toEqual(["nord", "nord", "nord"]);
+  });
+
+  it("lets an adventurous reader go further from the family's region", () => {
+    const home = zones(westAfrican, 10).filter((z) => z === "ouest").length;
+    const away = zones({ ...westAfrican, adventure: "seeking" }, 10).filter(
+      (z) => z === "ouest",
+    ).length;
+    expect(away).toBeLessThan(home);
+  });
+
+  it("sends an adventurous reader out of the family's region, not only to its opposite", () => {
+    const away = zones({ ...westAfrican, adventure: "seeking" }, 5);
+    expect(away.filter((z) => z !== "ouest" && z !== "nord").length).toBeGreaterThan(0);
+  });
+
+  it("brings a reader closer to where their faith is widely shared, when that matters", () => {
+    const score = (answers: Answers, name: string) =>
+      rankCities(answers).find((m) => m.city.name === name)!.score;
+    const muslim: Answers = { kin: "much", faith: "muslim" };
+    const christian: Answers = { kin: "much", faith: "christian" };
+    expect(score(muslim, "Dakar")).toBeGreaterThan(score(muslim, "Accra"));
+    expect(score(christian, "Accra")).toBeGreaterThan(score(christian, "Dakar"));
+    const indifferent: Answers = { kin: "none", faith: "muslim" };
+    expect(score(indifferent, "Dakar")).toBe(score(indifferent, "Accra"));
+  });
+
+  it("does not weigh origin when feeling at home does not matter to the reader", () => {
+    const indifferent = { ...westAfrican, kin: "none" } as Answers;
+    const withoutOrigin = { ...indifferent, origin: undefined } as Answers;
+    expect(zones(indifferent, 10)).toEqual(zones(withoutOrigin, 10));
+  });
+});
+
+describe("the reader's passport", () => {
+  const scoreOf = (answers: Answers, name: string) =>
+    rankCities(answers).find((m) => m.city.name === name)!.score;
+
+  it("favours countries a European passport enters without a visa", () => {
+    const eu: Answers = { passports: ["eu"] };
+    expect(scoreOf(eu, "Tunis")).toBeGreaterThan(scoreOf(eu, "Alger"));
+  });
+
+  it("favours the free-movement zone of an African passport", () => {
+    const ecowas: Answers = { passports: ["ecowas"] };
+    expect(scoreOf(ecowas, "Accra")).toBeGreaterThan(scoreOf(ecowas, "Nairobi"));
+  });
+
+  it("counts the easier of two passports", () => {
+    const both: Answers = { passports: ["eu", "ecowas"] };
+    expect(scoreOf(both, "Accra")).toBeCloseTo(scoreOf(both, "Dakar"), 6);
   });
 });

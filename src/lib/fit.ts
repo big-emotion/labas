@@ -39,7 +39,15 @@ export type FactPull =
   | { kind: "zone"; value: string; weight: number }
   | { kind: "sectors"; values: string[]; weight: number }
   | { kind: "professions"; values: string[]; weight: number }
-  | { kind: "upscale"; values: string[]; weight: number };
+  | { kind: "upscale"; values: string[]; weight: number }
+  /** The city's region close to the family's. */
+  | { kind: "kin"; origin: string; weight: number }
+  /** The passports the reader holds: how easily each one gets into the city's country. */
+  | { kind: "entry"; values: string[]; weight: number }
+  /** The reader's faith: the share of the country that shares it. */
+  | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
+  /** The reverse, for readers after the unknown. */
+  | { kind: "elsewhere"; origin: string; weight: number };
 
 export interface Pull {
   axis: Axis;
@@ -196,6 +204,68 @@ function typicalCloseness(axis: Axis, target: number): number {
   return typical;
 }
 
+const EU_ENTRY = { free: 1, online: 0.6, embassy: 0.2 } as const;
+/**
+ * Free-movement zones, by member country. ECOWAS lists its members after Mali, Burkina Faso and
+ * Niger left in January 2025; it announced it would keep recognising their passports until
+ * further notice, so they stay in (to recheck). Outside its zone an African passport is scored
+ * as unknown: several countries now let all Africans in without a visa, case by case.
+ */
+const FREE_MOVEMENT: Record<string, string[]> = {
+  ecowas: [
+    "Bénin",
+    "Cap-Vert",
+    "Côte d'Ivoire",
+    "Gambie",
+    "Ghana",
+    "Guinée",
+    "Guinée-Bissau",
+    "Liberia",
+    "Nigeria",
+    "Sénégal",
+    "Sierra Leone",
+    "Togo",
+    "Mali",
+    "Burkina Faso",
+    "Niger",
+  ],
+  cemac: ["Cameroun", "Centrafrique", "Congo", "Gabon", "Guinée équatoriale", "Tchad"],
+  eac: [
+    "Burundi",
+    "RD Congo",
+    "Kenya",
+    "Rwanda",
+    "Somalie",
+    "Soudan du Sud",
+    "Tanzanie",
+    "Ouganda",
+  ],
+};
+
+function entryEase(city: City, passport: string): number {
+  if (passport === "eu") {
+    const entry = city.countryFacts?.entryFrenchPassport;
+    return entry ? EU_ENTRY[entry] : NEUTRAL;
+  }
+  const zone = FREE_MOVEMENT[passport];
+  return zone?.includes(city.country) ? 1 : NEUTRAL;
+}
+
+/**
+ * How close a city's region feels to the family's region, 0 to 1. Neighbouring regions share
+ * languages, religions and history; North Africa and sub-Saharan Africa share the least, which
+ * is what readers of either origin describe when they imagine living there. Readers from the
+ * Caribbean and the Americas are closest to the Atlantic coast their ancestors left from.
+ */
+const AFFINITY: Record<string, Record<string, number>> = {
+  ouest: { ouest: 1, centre: 0.6, est: 0.35, sud: 0.35, nord: 0 },
+  centre: { centre: 1, ouest: 0.6, est: 0.5, sud: 0.5, nord: 0 },
+  est: { est: 1, centre: 0.5, sud: 0.5, ouest: 0.35, nord: 0.1 },
+  sud: { sud: 1, centre: 0.5, est: 0.5, ouest: 0.35, nord: 0 },
+  nord: { nord: 1, ouest: 0.1, centre: 0.05, est: 0.1, sud: 0.05 },
+  ameriques: { ouest: 0.8, centre: 0.7, sud: 0.55, est: 0.5, nord: 0.1 },
+};
+
 export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Closeness[] {
   // Several answers can pull the same axis: their targets average, their weights add up.
   const merged = new Map<Axis, { sum: number; weight: number }>();
@@ -238,6 +308,34 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
           .map((p) => p.strength),
       );
       parts.push({ value: strength / 3, weight: fact.weight, known: true, fact: fact.kind });
+      continue;
+    } else if (fact.kind === "faith") {
+      const religion = city.countryFacts?.religion;
+      parts.push({
+        value: religion ? religion[fact.value] / 100 : NEUTRAL,
+        weight: fact.weight,
+        known: Boolean(religion),
+        fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "entry") {
+      parts.push({
+        value: Math.max(...fact.values.map((passport) => entryEase(city, passport))),
+        weight: fact.weight,
+        known: true,
+        fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "kin" || fact.kind === "elsewhere") {
+      const affinity = AFFINITY[fact.origin]?.[city.zone] ?? NEUTRAL;
+      parts.push({
+        // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
+        // much an adventure for a reader from Dakar as Tunis is.
+        value: fact.kind === "kin" ? affinity : affinity < 1 ? 1 : 0,
+        weight: fact.weight,
+        known: true,
+        fact: fact.kind,
+      });
       continue;
     } else if (fact.kind === "upscale") {
       const areas = linesFor(city.name)?.neighbourhoods ?? [];

@@ -44,6 +44,14 @@ export interface Answers {
   priorities?: Priority[];
   /** Where the family comes from: an African zone, or the Americas and the Caribbean. */
   origin?: City["zone"] | "ameriques";
+  /** Passports held: French or EU, or one giving free movement in an African zone. */
+  passports?: ("eu" | "ecowas" | "cemac" | "eac" | "other")[];
+  /** How much feeling at home among one's own matters: origin, culture, religion. */
+  kin?: "much" | "some" | "none";
+  /** The reader's faith, only weighed when feeling at home matters. */
+  faith?: "muslim" | "christian" | "other" | "none" | "private";
+  /** Going far from what one knows: rather not, why not, or that is the point. */
+  adventure?: "familiar" | "open" | "seeking";
   /** Looking for one's roots, somewhere new, or both. */
   roots?: "rediscover" | "discover" | "both";
   profession?:
@@ -359,6 +367,8 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
+const KIN_WEIGHT = { much: 5, some: 2.5 } as const;
+const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
 const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
 const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
   culture: "culture",
@@ -442,6 +452,27 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     facts.push({ kind: "zone", value: answers.origin, weight: 1.5 });
   }
 
+  const passports = (answers.passports ?? []).filter((p) => p !== "other");
+  if (passports.length) facts.push({ kind: "entry", values: passports, weight: 1.5 });
+  // Feeling at home weighs with how little the reader wants the unknown (§ belonging).
+  if (answers.origin && answers.kin && answers.kin !== "none") {
+    const weight = KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "familiar"];
+    facts.push({ kind: "kin", origin: answers.origin, weight });
+  }
+  // Faith counts the same way; a reader without one is not sent towards secular countries.
+  const faith = answers.faith;
+  if (
+    answers.kin &&
+    answers.kin !== "none" &&
+    (faith === "muslim" || faith === "christian" || faith === "other")
+  ) {
+    const weight = 0.6 * KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "familiar"];
+    facts.push({ kind: "faith", value: faith, weight });
+  }
+  if (answers.origin && answers.adventure === "seeking") {
+    facts.push({ kind: "elsewhere", origin: answers.origin, weight: 1.5 });
+  }
+
   const renounced = new Set<Axis>(
     (answers.renounce ?? [])
       .map((key) => RENOUNCE_AXIS[key])
@@ -491,6 +522,14 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
   if (part.fact === "sectors") return good ? "Ton secteur y recrute" : "Ton secteur y recrute peu";
   if (part.fact === "professions")
     return good ? "Ton métier y recrute" : "Ton métier y recrute peu";
+  if (part.fact === "entry")
+    return good ? "Facile d'y entrer avec ton passeport" : "Un visa à demander à l'ambassade";
+  if (part.fact === "faith")
+    return good ? "Ta foi y est largement partagée" : "Ta foi y est minoritaire";
+  if (part.fact === "kin")
+    return good ? "Près de chez les tiens" : "Loin de la région de ta famille";
+  if (part.fact === "elsewhere")
+    return good ? "Un ailleurs à découvrir, loin de ce que tu connais" : undefined;
   if (part.fact === "upscale") return good ? "Des quartiers comme le tien" : undefined;
   switch (part.axis) {
     case "pace":
