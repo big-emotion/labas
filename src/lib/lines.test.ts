@@ -8,7 +8,7 @@ const TRAIT_WORDS =
   /personnalité|votre profil|vous êtes (quelqu|un |une |plutôt)|(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu;
 const proposable = CITIES;
 
-describe("the level-1 lines of each city", () => {
+describe("the quick-quiz lines of each city", () => {
   it("gives every proposable city a reputation and a surprise", () => {
     for (const city of proposable) {
       const lines = linesFor(city.name);

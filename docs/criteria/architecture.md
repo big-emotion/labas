@@ -8,9 +8,14 @@ Là-bas tells a reader "cette ville te correspond parce que…". This document d
 "parce que" may rest on: which facts about the **reader** count, which facts about a **city**
 count, how they meet, and where the site must stop claiming.
 
+**Beta, everything open (operator, 2026-11-15).** There is no free and paid split today: the
+site has a **quick quiz** (`/`) and a much longer **deep questionnaire** (`/approfondir`), both
+open to everyone. A paid part (coaching) is a V2 idea and nothing of it is built. Below, "level
+1" means the quick quiz and "level 2" the deep questionnaire.
+
 **Read [§A](#a-two-levels-give-the-taste-first) first.** The criteria below are the engine,
-not the experience. The free quiz shows one city, warmly, in about five minutes; the criteria
-only appear when the reader asks "pourquoi ?", and in full in a later paid tier.
+not the experience. The quick quiz shows one city, warmly, in about five minutes; the criteria
+only appear when the reader asks "pourquoi ?", and in full in the deep questionnaire.
 
 **Inputs analysed:** the 21 scores of the 115 cities in `src/data/cities.json`, the
 current ranking (`src/lib/ranking.ts`, `questions.ts`), the 54 country dossiers in
@@ -52,7 +57,7 @@ Analysis comes after, and only if they want it.
 
 ### A.2 The two levels
 
-|              | Level 1 — free, now                                                                                                                         | Level 2 — paid, later                                |
+|              | Level 1 — quick quiz                                                                                                                        | Level 2 — deep questionnaire                         |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                                                            | Help a real decision                                 |
 | **Length**   | The current 10 questions, ~5 minutes                                                                                                        | The full question bank (§4.4) and the filters (§2.1) |
@@ -779,10 +784,10 @@ verdict would repeat the outsider's view the site exists to correct.
   precautions to take (`src/lib/advisory.ts`). It is never the first thing said about a city.
 - The method page states the rule and how many cities it concerns today.
 
-### 4.4 The level-2 questionnaire (paid tier)
+### 4.4 The level-2 questionnaire (deep questionnaire, open during the beta)
 
 Level 1 asks the ten questions of §A.3 in a fixed order. The bank below is the level-2
-questionnaire, drafted in "vous"; it moves to "tu" if the paid tier keeps level 1's voice.
+questionnaire, drafted in "vous", the voice of the whole site since 2026-11-15.
 
 **Keep the promise that every tap visibly changes something:** each answer re-ranks
 immediately, and the next question is the one most likely to change the current top three.
@@ -1004,7 +1009,8 @@ Diplomatie, FCDO (OGL), ILGA, JMP, UN WUP, Findex, B-READY and GLOBALCIT are fre
 
 ## 7. Decisions for the maintainer
 
-**Already decided (2026-11-14):** two levels, free then paid with coaching (§A.2); level 1 keeps
+**Already decided (2026-11-14):** two levels, free then paid with coaching (§A.2) — _superseded
+2026-11-15: during the beta both are open and free; a paid part is V2_; level 1 keeps
 the ten current questions, reworded in "tu" (§A.3); the portrait speaks of preferences, never
 of traits, so the repo rule stays as it is (§A.7); three cities by score, the first framed; the score is the only ordering
 rule (2026-11-15), so the discovery lead was dropped (§A.4, §A.5).

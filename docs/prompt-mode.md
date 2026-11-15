@@ -54,4 +54,4 @@ Hard rules carried over from the repo:
 
 1. Do we want B at all, or is A plus editable chips enough for level 1?
 2. If B: which model licence is acceptable (Apache-2.0 Qwen vs Llama community licence)?
-3. Should the free text also feed the paid level-2 questionnaire (§4.4), or stay a level-1 entry?
+3. Should the free text also feed the deep questionnaire (§4.4), or stay a quick-quiz entry?

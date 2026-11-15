@@ -56,7 +56,7 @@ src/data/africa-borders.json Natural Earth 1:50m borders (public domain), projec
 src/data/photos.json        per city: a Wikimedia Commons photo (public/photos) and its credit
 src/lib/ranking.ts          answers ──▶ weights ──▶ weighted score (0–1), coverage, filters
         │                   + reasons, drawbacks and « pourquoi toi » lines (portrait.ts)
-src/pages/index.astro       the free quiz, one question at a time: a bordered map coloured by score,
+src/pages/index.astro       the quick quiz, one question at a time: a bordered map coloured by score,
                             « C'est prêt », « Tes trois villes »
 src/pages/approfondir.astro the fuller questionnaire, one question at a time (adaptive.ts)
 src/pages/ville/[slug]      one page per city: every criterion with its sources

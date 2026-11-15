@@ -51,7 +51,7 @@ const worksThere = (answers: Answers) =>
 
 const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
 
-// The free quiz of the approved V3 mockup (canvas « Là-bas — quiz », 2026-11-15): four chapters
+// The quick quiz of the approved V3 mockup (canvas « Là-bas — quiz », 2026-11-15): four chapters
 // in a fixed order, so the reader always sees « question 7 sur 18 ». Worded in « vous ». The
 // temperament chapter is a quick reading inspired by the Big Five, one question per trait.
 export const QUESTIONS: Question[] = [

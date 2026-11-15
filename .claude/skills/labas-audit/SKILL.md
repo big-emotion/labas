@@ -100,7 +100,7 @@ disclosure, lint, typecheck, format, tests, build). Record the test count.
    source's own words with its name and year, and at least one https source.
 4. Travel advice is dated and shown as information, never removes a city
    (`src/lib/advisory.ts`, `bestMatches`).
-5. Level-1 lines (`src/data/city-lines.json`): every city has a reputation introduced as
+5. Quick-quiz lines (`src/data/city-lines.json`): every city has a reputation introduced as
    hearsay, a surprise and dated sources (`lines.test.ts`).
 6. Photos (`src/data/photos.json`): free licence, author, Commons source for each; count the
    cities without one.

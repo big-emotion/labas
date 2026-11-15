@@ -1,7 +1,7 @@
 import catalogue from "../data/city-lines.json";
 
 /**
- * The warm, hand-written layer of the free quiz (docs/criteria/architecture.md §A.6), kept
+ * The warm, hand-written layer of the quick quiz (docs/criteria/architecture.md §A.6), kept
  * apart from `cities.json` so editors can write it without touching the scores.
  */
 export interface Source {
