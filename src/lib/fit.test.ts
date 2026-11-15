@@ -522,10 +522,10 @@ describe("feeling at home among one's own", () => {
     expect(bestMatches(played, 3).map((m) => m.city.country)).toContain("Soudan");
   });
 
-  it("does not weigh origin when feeling at home does not matter to the reader", () => {
+  it("does not weigh the family's region when feeling at home does not matter to the reader", () => {
+    // Origin still protects against documented racism; it no longer pulls towards the region.
     const indifferent = { ...westAfrican, kin: "none" } as Answers;
-    const withoutOrigin = { ...indifferent, origin: undefined } as Answers;
-    expect(zones(indifferent, 10)).toEqual(zones(withoutOrigin, 10));
+    expect(profileOf(indifferent).facts.map((f) => f.kind)).not.toContain("kin");
   });
 });
 
@@ -546,5 +546,53 @@ describe("the reader's passport", () => {
   it("counts the easier of two passports", () => {
     const both: Answers = { passports: ["eu", "ecowas"] };
     expect(scoreOf(both, "Accra")).toBeCloseTo(scoreOf(both, "Dakar"), 6);
+  });
+});
+
+describe("never sending a reader where they would be badly received", () => {
+  // Countries where the UN or a major rights organisation documents anti-Black racism.
+  const hostile = new Set(
+    CITIES.filter((c) => c.countryFacts?.racism?.kind === "anti-black").map((c) => c.country),
+  );
+  const countriesOf = (answers: Answers, n = 5) =>
+    bestMatches(answers, n).map((m) => m.city.country);
+
+  it("keeps an adventurous reader of West African family out of them", () => {
+    const adventurous = {
+      project: "tester",
+      languages: ["fr", "ar"],
+      origin: ["ouest"],
+      kin: "none",
+      adventure: "seeking",
+      saturday: 1,
+      landscapes: ["beach"],
+    } as Answers;
+    for (const country of countriesOf(adventurous))
+      expect(hostile.has(country), country).toBe(false);
+  });
+
+  it("keeps a Caribbean reader after the sea out of them", () => {
+    const martinican = {
+      project: "tester",
+      languages: ["fr"],
+      origin: ["ameriques"],
+      kin: "some",
+      adventure: "seeking",
+      landscapes: ["beach", "island"],
+      profession: "tech",
+    } as Answers;
+    for (const country of countriesOf(martinican))
+      expect(hostile.has(country), country).toBe(false);
+  });
+
+  it("still offers North Africa to a reader of North African family", () => {
+    const maghrebi = { languages: ["fr", "ar"], origin: ["nord"], kin: "much" } as Answers;
+    expect(countriesOf(maghrebi, 3).some((c) => hostile.has(c))).toBe(true);
+  });
+
+  it("says why on the card", () => {
+    const reader = { origin: ["ouest"], languages: ["ar"] } as Answers;
+    const tunis = rankCities(reader).find((m) => m.city.name === "Tunis")!;
+    expect(tunis.drawbacks.map((d) => d.label)).toContain("Racisme anti-noir documenté (ONU, ONG)");
   });
 });

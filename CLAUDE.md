@@ -9,8 +9,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
   change something: from the third answer the map colours every city by its score and names
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
-  quiz asks its questions in a fixed order of four chapters so the reader sees « question 7
-  sur 18 »; adaptive picking is kept for /approfondir only.
+  quiz asks every question (« question 7 sur 18 »), opening on the project; then each answer
+  picks the next question, the one most likely to change the top five (operator 2026-11-15).
+- **Reception first**: a reader of sub-Saharan or Caribbean family is never sent where anti-Black
+  racism is documented, whatever their taste for adventure (operator 2026-11-15).
 - **Test first** (Vitest, `src/**/*.test.ts`), through the public functions `rankCities` and
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
