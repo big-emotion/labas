@@ -1,11 +1,9 @@
 import { DEEP_QUESTIONS } from "./deep-questions";
 import { QUESTIONS, type Question } from "./questions";
-import { bestMatches, type Answers } from "./ranking";
+import { bestMatches, topCities, type Answers } from "./ranking";
 
 const TOP = 3;
-/** The free quiz asks at least this many questions, and at most the second. */
-export const MIN_ASKED = 8;
-export const MAX_ASKED = 12;
+const FIVE = 5;
 
 /**
  * The next question: the one whose answers would reshuffle the current top three the most
@@ -40,48 +38,31 @@ export function nextQuestion(answers: Answers, asked: string[]): string | undefi
   return pickNext(DEEP_QUESTIONS, answers, asked);
 }
 
-/**
- * Questions the free quiz always asks first, in this order. They decide where a reader can feel
- * at home (language, family region, how much that matters, appetite for the unknown, faith) and
- * rarely reshuffle the top three on their own, so the adaptive rule alone would skip them.
- */
-const CORE: { id: string; when?: (answers: Answers) => boolean }[] = [
-  { id: "project" },
-  { id: "languages" },
-  { id: "origin" },
-  {
-    id: "countries",
-    when: (answers) =>
-      (Array.isArray(answers.origin) ? answers.origin : [answers.origin]).some(
-        (o) => o && o !== "ameriques",
-      ),
-  },
-  { id: "kin" },
-  { id: "adventure", when: (answers) => answers.kin === "much" || answers.kin === "some" },
-  { id: "faith", when: (answers) => answers.kin === "much" || answers.kin === "some" },
-];
+/** The free-quiz questions this reader will see, in order: those whose condition holds. */
+export function freeQuestions(answers: Answers): Question[] {
+  return QUESTIONS.filter((q) => q.when?.(answers) ?? true);
+}
 
-/** The next question of the free quiz, from the bank of 23. */
+/**
+ * The next question of the free quiz: the open one whose answers would bring, on average, the
+ * most new cities into the top five. The most decisive questions come first, and each answer
+ * changes which one comes next (operator, 2026-11-15). Ties keep the bank's order.
+ */
 export function nextFreeQuestion(answers: Answers, asked: string[]): string | undefined {
-  const core = CORE.find((q) => !asked.includes(q.id) && (q.when?.(answers) ?? true));
-  if (core) return core.id;
-  return pickNext(QUESTIONS, answers, asked);
-}
-
-/**
- * Whether the free quiz has enough to show a result: after 8 answers, once the top three has
- * stayed the same over the last three answers; at 12 answers in any case. `tops` holds the top
- * three after each answer, oldest first.
- */
-export function isSettled(asked: number, tops: string[][]): boolean {
-  if (asked >= MAX_ASKED) return true;
-  if (asked < MIN_ASKED || tops.length < 3) return false;
-  const [a, b, c] = tops.slice(-3).map((top) => top.join("|"));
-  return a === b && b === c;
-}
-
-/** How full the « ton résultat se précise » gauge is, 0 to 1. */
-export function gauge(asked: number, settled: boolean): number {
-  if (settled) return 1;
-  return Math.min(0.9, (asked / MIN_ASKED) * 0.9);
+  const open = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+  // With no answer every city ties and any question looks decisive: open on the project.
+  if (!asked.includes("project")) return "project";
+  const before = new Set(topCities(answers, FIVE));
+  let best: string | undefined;
+  let bestMoved = -1;
+  for (const question of open) {
+    const offered = question.choices.filter((c) => c.value !== null);
+    const moved =
+      offered.reduce((sum, c) => {
+        const tried = { ...answers, [question.id]: question.max ? [c.value] : c.value } as Answers;
+        return sum + topCities(tried, FIVE).filter((name) => !before.has(name)).length;
+      }, 0) / Math.max(1, offered.length);
+    if (moved > bestMoved) [best, bestMoved] = [question.id, moved];
+  }
+  return best;
 }

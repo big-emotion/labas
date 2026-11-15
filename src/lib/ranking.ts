@@ -105,6 +105,10 @@ export interface Answers {
   crowds?: Step;
   /** Power cuts, paperwork, the unexpected: 1 copes, 0.5 weighs on, 0 wants to avoid. */
   friction?: Step;
+  /** Rules and organisation: 1 needs everything clear, 0 improvises (conscientiousness). */
+  order?: Step;
+  /** 1 moves forward with others, 0 makes their own way (agreeableness). */
+  together?: Step;
   /** Bargaining over prices: 1 a game, 0.5 fine, 0 a chore. */
   bargaining?: Step;
   /** Trips back to Europe a year: 0 one or fewer, 0.5 two or three, 1 every month. */
@@ -117,6 +121,15 @@ export interface Answers {
   renounce?: CriterionKey[];
 }
 
+export interface Rated {
+  label: string;
+  /** 1 to 5, the closeness behind the line. */
+  level: number;
+}
+
+/** The answers read as temperament (inspired by the Big Five, one question per trait). */
+export const TEMPERAMENT_KEYS = ["saturday", "adventure", "order", "together", "friction"] as const;
+
 export interface Match {
   city: City;
   /** 0 to 1: how close the city's fingerprint is to what the reader said. */
@@ -125,11 +138,15 @@ export interface Match {
   coverage: number;
   /** Why a filter of the fuller questionnaire keeps this city out, in plain French. */
   excludedBecause?: string;
-  /** Up to five plain-language reasons the city fits. */
-  reasons: string[];
-  /** Up to three things that weigh against it for this reader. */
-  drawbacks: string[];
-  /** "Pourquoi toi" lines: what the reader said, met by what the city offers. */
+  /** Up to five plain-language reasons the city fits, each rated 1 to 5. */
+  reasons: Rated[];
+  /** Up to three things that weigh against it for this reader, each rated 1 to 5. */
+  drawbacks: Rated[];
+  /** 0 to 1 on the five temperament answers alone; null before any of them. */
+  temperament: number | null;
+  /** 0 to 1 on every other answer. */
+  practical: number;
+  /** "Pourquoi vous" lines: what the reader said, met by what the city offers. */
   portrait: PortraitLine[];
 }
 
@@ -354,6 +371,16 @@ const PEOPLE: Record<NonNullable<Answers["people"]>, Pull[]> = {
   quiet: [pull("pace", 0.4, 0.5)],
   both: [pull("welcome", 0.7, 1)],
 };
+const ORDER: Record<Step, Pull[]> = {
+  1: [pull("paperwork", 0.85, 1.5), pull("comfort", 0.8, 1), pull("safety", 0.8, 1)],
+  0.5: [pull("paperwork", 0.6, 1)],
+  0: [pull("bargaining", 0.8, 1.5)],
+};
+const TOGETHER: Record<Step, Pull[]> = {
+  1: [pull("welcome", 0.85, 2)],
+  0.5: [pull("welcome", 0.6, 1)],
+  0: [pull("business", 0.85, 1.5), pull("jobs", 0.8, 1)],
+};
 const STEP_PULLS = {
   crowds: (s: Step) => [pull("pace", 0.1 + 0.9 * s, 2)],
   friction: (s: Step) => [
@@ -374,6 +401,7 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
+const RECEPTION_WEIGHT = 8;
 const KIN_WEIGHT = { much: 8, some: 3.5 } as const;
 const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
 const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
@@ -438,6 +466,8 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (answers.people) add(PEOPLE[answers.people]);
   if (answers.crowds !== undefined) add(STEP_PULLS.crowds(answers.crowds));
   if (answers.friction !== undefined) add(STEP_PULLS.friction(answers.friction));
+  if (answers.order !== undefined) add(ORDER[answers.order]);
+  if (answers.together !== undefined) add(TOGETHER[answers.together]);
   if (answers.bargaining !== undefined) add(STEP_PULLS.bargaining(answers.bargaining));
   if (answers.tripsHome !== undefined) add(STEP_PULLS.tripsHome(answers.tripsHome));
   if (answers.setupBudget) add(SETUP[answers.setupBudget]);
@@ -488,6 +518,11 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
         : 0;
     facts.push({ kind: "homeCountry", values: countries, weight: Math.max(2, roots + kin) });
   }
+  // A reader of sub-Saharan or Caribbean family (or Sudanese, filed under North Africa) is
+  // never sent where anti-Black racism is documented, adventure or not: being badly received
+  // is a failure of the quiz, not a taste (operator, 2026-11-15).
+  const black = origins.some((o) => o !== "nord") || (answers.countries ?? []).includes("Soudan");
+  if (black) facts.push({ kind: "reception", weight: RECEPTION_WEIGHT });
   // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
   const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
   if (origins.length && away > 0) {
@@ -538,41 +573,44 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     const spoken = livableLanguages(city).filter((l) => languagesOf(answers).includes(l));
     return good
       ? `On y vit en ${spoken.map((l) => LANGUAGE_NAMES[l]).join(" et ")}`
-      : "Langue du quotidien différente de ton souhait";
+      : "Langue du quotidien différente de votre souhait";
   }
   if (part.fact === "settings")
-    return good ? "Le paysage que tu cherches, tout près" : "Paysage différent de ton souhait";
+    return good ? "Le paysage que vous cherchez, tout près" : "Paysage différent de votre souhait";
   if (part.fact === "climates")
-    return good ? "Le climat que tu cherches" : "Climat différent de ton souhait";
-  if (part.fact === "zone") return good ? "Dans la région de ta famille" : undefined;
-  if (part.fact === "sectors") return good ? "Ton secteur y recrute" : "Ton secteur y recrute peu";
+    return good ? "Le climat que vous cherchez" : "Climat différent de votre souhait";
+  if (part.fact === "zone") return good ? "Dans la région de votre famille" : undefined;
+  if (part.fact === "sectors")
+    return good ? "Votre secteur y recrute" : "Votre secteur y recrute peu";
   if (part.fact === "professions")
-    return good ? "Ton métier y recrute" : "Ton métier y recrute peu";
+    return good ? "Votre métier y recrute" : "Votre métier y recrute peu";
   if (part.fact === "entry")
-    return good ? "Facile d'y entrer avec ton passeport" : "Un visa à demander à l'ambassade";
+    return good ? "Facile d'y entrer avec votre passeport" : "Un visa à demander à l'ambassade";
   if (part.fact === "faith")
-    return good ? "Ta foi y est largement partagée" : "Ta foi y est minoritaire";
-  if (part.fact === "homeCountry") return good ? "Le pays de ta famille" : undefined;
+    return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
+  // Only what the sources say, in their words (operator, 2026-11-15).
+  if (part.fact === "reception") return good ? undefined : city.countryFacts?.racism?.label;
+  if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
   if (part.fact === "kin")
-    return good ? "Près de chez les tiens" : "Loin de la région de ta famille";
+    return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
   if (part.fact === "elsewhere")
-    return good ? "Un ailleurs à découvrir, loin de ce que tu connais" : undefined;
-  if (part.fact === "upscale") return good ? "Des quartiers comme le tien" : undefined;
+    return good ? "Un ailleurs à découvrir, loin de ce que vous connaissez" : undefined;
+  if (part.fact === "upscale") return good ? "Des quartiers comme le vôtre" : undefined;
   switch (part.axis) {
     case "pace":
       return good
-        ? "Le rythme de ville que tu cherches"
-        : "Un rythme éloigné de ce que tu cherches";
+        ? "Le rythme de ville que vous cherchez"
+        : "Un rythme éloigné de ce que vous cherchez";
     case "nightlife":
-      return good ? "Une ambiance à ta mesure" : "Une ambiance décalée par rapport à toi";
+      return good ? "Une ambiance à votre mesure" : "Une ambiance décalée par rapport à vous";
     case "cheap":
-      return good ? "Une vie à ton budget" : "Plus cher que ton budget";
+      return good ? "Une vie à votre budget" : "Plus cher que votre budget";
     case "comfort":
       return good ? "Courant, eau et soins à la hauteur" : "Courant, eau et soins en retrait";
     case "bargaining":
       return good
-        ? "Des prix comme tu les aimes"
-        : "Des prix qui se négocient plus ou moins que tu ne le voudrais";
+        ? "Des prix comme vous les aimez"
+        : "Des prix qui se négocient plus ou moins que vous ne le voudriez";
     case "welcome":
       return good
         ? "Des habitants ouverts aux nouveaux venus (enquête Afrobaromètre)"
@@ -583,14 +621,14 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
         : "Une ville où l'on se déplace surtout en voiture";
     case "leisure":
       return good
-        ? "Ton quotidien à portée : sport, cafés, culture"
+        ? "Votre quotidien à portée : sport, cafés, culture"
         : "Moins de lieux du quotidien à portée";
     case "paperwork":
       return good ? "Démarches simples" : "Démarches plus lourdes";
     case "remote":
       return good
-        ? "Loin de l'agitation, comme tu le veux"
-        : "Plus fréquentée que tu ne le voudrais";
+        ? "Loin de l'agitation, comme vous le voulez"
+        : "Plus fréquentée que vous ne le voudriez";
     default: {
       const key = part.axis ? CRITERION_OF[part.axis] : undefined;
       if (!key) return undefined;
@@ -632,22 +670,41 @@ function exclusionFor(city: City, answers: Answers): string | undefined {
   return undefined;
 }
 
-function evaluate(city: City, answers: Answers, profile: ReturnType<typeof profileOf>): Match {
+type Profile = ReturnType<typeof profileOf>;
+
+const levelOf = (value: number) => Math.round(1 + 4 * value);
+
+/** The weighted closeness of a city to some pulls and facts; null when nothing was asked. */
+function closeness(city: City, profile: Profile): number | null {
+  const parts = closenessOf(city, profile.pulls, profile.facts);
+  const total = parts.reduce((sum, p) => sum + p.weight, 0);
+  return total ? parts.reduce((sum, p) => sum + p.weight * p.value, 0) / total : null;
+}
+
+function evaluate(
+  city: City,
+  answers: Answers,
+  profiles: { all: Profile; temperament: Profile | null; practical: Profile },
+): Match {
+  const profile = profiles.all;
   const parts = closenessOf(city, profile.pulls, profile.facts);
   const total = parts.reduce((sum, p) => sum + p.weight, 0);
   const earned = parts.reduce((sum, p) => sum + p.weight * p.value, 0);
   const known = parts.filter((p) => p.known).reduce((sum, p) => sum + p.weight, 0);
   // A missing value is never cited for or against a city.
   const cited = parts.filter((p) => p.known);
-  const words = (list: Closeness[], good: boolean) =>
-    list.map((p) => labelOf(p, city, answers, good)).filter((l): l is string => Boolean(l));
-  const reasons = words(
+  const rated = (list: Closeness[], good: boolean): Rated[] =>
+    list.flatMap((p) => {
+      const label = labelOf(p, city, answers, good);
+      return label ? [{ label, level: levelOf(p.value) }] : [];
+    });
+  const reasons = rated(
     cited
       .filter((p) => p.weight >= 1 && p.value >= 0.75)
       .sort((a, b) => b.weight * b.value - a.weight * a.value),
     true,
   ).slice(0, 5);
-  const drawbacks = words(
+  const drawbacks = rated(
     cited
       .filter((p) => p.weight >= 2 && p.value <= 0.35)
       .sort((a, b) => b.weight * (1 - b.value) - a.weight * (1 - a.value)),
@@ -660,13 +717,41 @@ function evaluate(city: City, answers: Answers, profile: ReturnType<typeof profi
     excludedBecause: exclusionFor(city, answers),
     reasons,
     drawbacks,
+    temperament: profiles.temperament ? closeness(city, profiles.temperament) : null,
+    practical: closeness(city, profiles.practical) ?? 0,
     portrait: portraitFor(city, answers),
   };
 }
 
 export function rankCities(answers: Answers): Match[] {
+  // The same matching, run on the temperament answers alone and on all the others, gives the
+  // two parts of the score shown on a card.
+  const temperamentAnswers: Answers = { origin: answers.origin };
+  const practicalAnswers: Answers = { ...answers };
+  for (const key of TEMPERAMENT_KEYS) {
+    (temperamentAnswers as Record<string, unknown>)[key] = answers[key];
+    delete (practicalAnswers as Record<string, unknown>)[key];
+  }
+  const asked = TEMPERAMENT_KEYS.some((key) => answers[key] !== undefined);
+  const profiles = {
+    all: profileOf(answers),
+    temperament: asked ? profileOf(temperamentAnswers) : null,
+    practical: profileOf(practicalAnswers),
+  };
+  return CITIES.map((city) => evaluate(city, answers, profiles)).sort((a, b) => b.score - a.score);
+}
+
+/**
+ * The names of the first cities, as bestMatches orders them, without building reasons or the
+ * temperament part: cheap enough to try every answer of every open question on a phone.
+ */
+export function topCities(answers: Answers, count: number): string[] {
   const profile = profileOf(answers);
-  return CITIES.map((city) => evaluate(city, answers, profile)).sort((a, b) => b.score - a.score);
+  return CITIES.map((city) => ({ city, score: closeness(city, profile) ?? 0 }))
+    .sort((a, b) => b.score - a.score)
+    .filter(({ city }) => !exclusionFor(city, answers))
+    .slice(0, count)
+    .map(({ city }) => city.name);
 }
 
 /**

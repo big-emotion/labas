@@ -12,21 +12,51 @@ const NEUTRAL = new Set([
 ]);
 
 describe("the question bank", () => {
-  it("speaks to the reader with « tu », never « vous »", () => {
+  it("speaks to the reader with « vous », never « tu »", () => {
     for (const question of QUESTIONS) {
       const texts = [question.title, ...question.choices.map((choice) => choice.label)];
       for (const text of texts)
-        expect(text, question.id).not.toMatch(/\bvous\b|\bvotre\b|\bvos\b/i);
+        expect(text, question.id).not.toMatch(
+          /(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu,
+        );
     }
   });
 
-  it("holds the 24 questions of the approved mockup, each once, with unique answers", () => {
-    expect(QUESTIONS).toHaveLength(24);
-    expect(new Set(QUESTIONS.map((q) => q.id)).size).toBe(24);
+  it("asks the 18 questions of the approved mockup in chapter order", () => {
+    expect(QUESTIONS.map((q) => q.id)).toEqual([
+      "project",
+      "origin",
+      "countries",
+      "kin",
+      "faith",
+      "saturday",
+      "adventure",
+      "order",
+      "together",
+      "friction",
+      "profession",
+      "budget",
+      "family",
+      "passports",
+      "languages",
+      "size",
+      "landscapes",
+      "priorities",
+    ]);
+    expect([...new Set(QUESTIONS.map((q) => q.group))]).toEqual([
+      "Votre histoire avec l'Afrique",
+      "Votre tempérament",
+      "Votre projet de vie",
+      "Votre quotidien",
+    ]);
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));
       expect(new Set(values).size, question.id).toBe(values.length);
     }
+  });
+
+  it("says in one line what each question is for", () => {
+    for (const question of QUESTIONS) expect(question.hint, question.id).toBeTruthy();
   });
 
   it("opens on the life project", () => {

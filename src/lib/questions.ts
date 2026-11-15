@@ -7,13 +7,17 @@ export interface Choice {
   value: string | number | boolean | null;
   /** The region a choice belongs to: only choices of regions already picked are shown. */
   zone?: string;
+  /** A short line under the answer, when it helps. */
+  sub?: string;
 }
 
 export interface Question {
   id: keyof Answers;
-  /** The family the question belongs to, shown above it. */
+  /** The chapter the question belongs to, shown above it. */
   group: string;
   title: string;
+  /** One line saying what the question is for. */
+  hint?: string;
   choices: Choice[];
   /** Several answers allowed, up to this many. */
   max?: number;
@@ -33,112 +37,145 @@ const COUNTRY_CHOICES: Choice[] = [
   .sort(([a], [b]) => a.localeCompare(b, "fr"))
   .map(([country, zone]) => ({ label: country, value: country, zone }));
 
-const PROJECT = "TON PROJET";
-const TODAY = "TA VIE AUJOURD'HUI";
-const ROOTS = "TES RACINES";
-const TASTES = "TES GOÛTS";
-const MATTERS = "CE QUI COMPTE";
+const HISTORY = "Votre histoire avec l'Afrique";
+const TEMPERAMENT = "Votre tempérament";
+const PROJECT = "Votre projet de vie";
+const DAILY = "Votre quotidien";
 
-// The bank of the approved mockup (canvas « Là-bas — quiz », board « La banque de questions »,
-// 2026-11-15). Each reader sees 8 to 12 of them, chosen one by one (adaptive.ts). Worded in
-// « tu » and kept playful (docs/criteria/architecture.md §A.3).
+/** Feeling at home matters to the reader: only then are faith and its weight asked. */
+const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
+
+// The free quiz of the approved V3 mockup (canvas « Là-bas — quiz », 2026-11-15): four chapters
+// in a fixed order, so the reader always sees « question 7 sur 18 ». Worded in « vous ». The
+// temperament chapter is a quick reading inspired by the Big Five, one question per trait.
 export const QUESTIONS: Question[] = [
   {
     id: "project",
-    group: PROJECT,
-    title: "Là-bas, tu t'y vois comment ?",
+    group: HISTORY,
+    title: "Là-bas, vous vous y voyez comment ?",
+    hint: "Pas besoin d'un projet arrêté : chaque ville dira aussi ce qu'elle vaut pour y vivre.",
     choices: [
-      { label: "M'installer pour de bon", value: "installer" },
-      { label: "Un pied ici, un pied là-bas", value: "pied" },
-      { label: "Tester quelques mois", value: "tester" },
+      { label: "M'installer pour de bon", value: "installer", sub: "Y construire ma vie" },
+      { label: "Un pied ici, un pied là-bas", value: "pied", sub: "Des allers-retours réguliers" },
+      { label: "Tester quelques mois", value: "tester", sub: "Voir si la vie sur place me va" },
       { label: "Investir sans y vivre", value: "investir" },
-      { label: "D'abord des vacances", value: "decouvrir" },
+      { label: "D'abord des vacances", value: "decouvrir", sub: "Et je verrai ensuite" },
     ],
   },
   {
-    id: "family",
-    group: PROJECT,
-    title: "Tu pars avec qui ?",
-    choices: [
-      { label: "Seul·e", value: "celib" },
-      { label: "En couple", value: "couple" },
-      { label: "Pour fonder une famille", value: "fonder" },
-      { label: "Avec mes enfants", value: "parents" },
-    ],
-  },
-  {
-    id: "budget",
-    group: PROJECT,
-    title: "Ton budget sur place ?",
-    choices: [
-      { label: "Serré", value: "serre" },
-      { label: "Moyen", value: "moyen" },
-      { label: "Le prix compte peu", value: "large" },
-    ],
-  },
-  {
-    id: "currentCity",
-    group: TODAY,
-    title: "Tu vis où aujourd'hui ?",
-    choices: [
-      { label: "Une grande capitale (Paris, Bruxelles…)", value: "capital" },
-      { label: "Une grande ville", value: "bigcity" },
-      { label: "Une petite ville", value: "town" },
-      { label: "À la campagne", value: "country" },
-      { label: "Je bouge tout le temps", value: "nomad" },
-    ],
-  },
-  {
-    id: "rhythm",
-    group: TODAY,
-    title: "Là-bas, ton rythme :",
-    choices: [
-      { label: "Le même qu'aujourd'hui", value: "same" },
-      { label: "Plus calme", value: "calmer" },
-      { label: "Plus intense", value: "more" },
-      { label: "Couper avec tout", value: "unplug" },
-    ],
-  },
-  {
-    id: "mobility",
-    group: TODAY,
-    title: "Comment tu te déplaces au quotidien ?",
-    choices: [
-      { label: "À pied", value: "walk" },
-      { label: "En transports", value: "transit" },
-      { label: "À vélo", value: "bike" },
-      { label: "En voiture", value: "car" },
-    ],
-  },
-  {
-    id: "habits",
-    group: TODAY,
-    title: "Ton quotidien, c'est plutôt…",
+    id: "origin",
+    group: HISTORY,
+    title: "D'où vient votre famille ?",
+    hint: "Facultatif. Sert à repérer les régions où vous avez des repères. Rien n'est enregistré.",
     max: 3,
     choices: [
-      { label: "Salle de sport", value: "gym" },
-      { label: "Cafés et restaurants", value: "cafes" },
-      { label: "Livres et expos", value: "culture" },
-      { label: "Marchés et petits commerces", value: "markets" },
-      { label: "Sorties le soir", value: "nights" },
-      { label: "Nature le week-end", value: "nature" },
+      { label: "Afrique de l'Ouest", value: "ouest" },
+      { label: "Afrique centrale", value: "centre" },
+      { label: "Afrique de l'Est", value: "est" },
+      { label: "Afrique australe", value: "sud" },
+      { label: "Afrique du Nord", value: "nord" },
+      { label: "Caraïbes, Amériques", value: "ameriques" },
+      { label: "Je préfère ne pas dire", value: null },
     ],
   },
   {
-    id: "neighbourhood",
-    group: TODAY,
-    title: "Ton quartier aujourd'hui :",
+    id: "countries",
+    group: HISTORY,
+    title: "Et le pays ?",
+    hint: "Le pays de votre famille compte fort si vous voulez vous sentir chez vous.",
+    max: 3,
+    when: (answers) => africanOrigins(answers).length > 0,
+    choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
+  },
+  {
+    id: "kin",
+    group: HISTORY,
+    title: "Vous sentir parmi les vôtres, ça compte ?",
+    hint: "Origine, culture, religion : ce qui fait qu'on se sent chez soi.",
     choices: [
-      { label: "Central et animé", value: "central" },
-      { label: "Résidentiel et calme", value: "residential" },
-      { label: "Plutôt chic", value: "upscale" },
-      { label: "Populaire et vivant", value: "popular" },
+      { label: "Beaucoup", value: "much" },
+      { label: "Un peu", value: "some" },
+      { label: "Pas vraiment", value: "none" },
+    ],
+  },
+  {
+    id: "faith",
+    group: HISTORY,
+    title: "Votre religion ?",
+    hint: "Pour savoir si votre foi est largement partagée dans le pays (Pew Research Center, 2020).",
+    when: kinMatters,
+    choices: [
+      { label: "Islam", value: "muslim" },
+      { label: "Christianisme", value: "christian" },
+      { label: "Une autre", value: "other" },
+      { label: "Aucune", value: "none" },
+      { label: "Je préfère ne pas dire", value: null },
+    ],
+  },
+  {
+    id: "saturday",
+    group: TEMPERAMENT,
+    title: "Votre samedi soir idéal ?",
+    hint: "Votre envie de monde, comparée à l'énergie de chaque ville.",
+    choices: [
+      { label: "Du monde, de la musique, on rentre tard", value: 1 },
+      { label: "Un dîner avec quelques amis", value: 0.5 },
+      { label: "Chez moi, au calme", value: 0 },
+    ],
+  },
+  {
+    id: "adventure",
+    group: TEMPERAMENT,
+    title: "Partir loin de ce que vous connaissez, ça vous tente ?",
+    hint: "Votre goût du dépaysement, comparé à ce que chaque ville a de nouveau pour vous.",
+    choices: [
+      { label: "Oui, c'est ce que je cherche", value: "seeking" },
+      { label: "Pourquoi pas", value: "open" },
+      { label: "Je préfère rester en terrain connu", value: "familiar" },
+    ],
+  },
+  {
+    id: "order",
+    group: TEMPERAMENT,
+    title: "Les règles et l'organisation, pour vous ?",
+    hint: "Votre besoin de cadre, comparé à l'ordre et à la prévisibilité de chaque ville.",
+    choices: [
+      {
+        label: "J'ai besoin que tout soit carré",
+        value: 1,
+        sub: "Des démarches claires, des horaires tenus",
+      },
+      { label: "Un minimum de cadre me suffit", value: 0.5 },
+      { label: "J'improvise, tout se négocie", value: 0, sub: "Je m'adapte au jour le jour" },
+    ],
+  },
+  {
+    id: "together",
+    group: TEMPERAMENT,
+    title: "Dans la vie, vous avancez comment ?",
+    hint: "Comparé à l'esprit de chaque ville : plutôt compétition, ou plutôt entraide.",
+    choices: [
+      { label: "Je trace ma route", value: 0, sub: "Que le meilleur gagne" },
+      { label: "Ça dépend des situations", value: 0.5 },
+      { label: "Avec les autres, l'entraide d'abord", value: 1 },
+    ],
+  },
+  {
+    id: "friction",
+    group: TEMPERAMENT,
+    title: "Coupures, démarches, imprévus…",
+    hint: "Ce que vous encaissez, comparé à l'intensité de chaque ville.",
+    choices: [
+      { label: "Ça m'amuse presque, je m'adapte", value: 1 },
+      { label: "Ça m'agace, mais je gère", value: 0.5 },
+      { label: "Ça m'épuise vite", value: 0 },
     ],
   },
   {
     id: "profession",
-    group: TODAY,
-    title: "Ton métier ?",
+    group: PROJECT,
+    title: "Votre métier ?",
+    hint: "Toutes les villes n'offrent pas les mêmes débouchés selon le métier.",
     choices: [
       { label: "Finance", value: "finance" },
       { label: "Droit", value: "law" },
@@ -155,75 +192,47 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "origin",
-    group: ROOTS,
-    title: "D'où vient ta famille ?",
-    max: 3,
+    id: "budget",
+    group: PROJECT,
+    title: "Votre budget sur place ?",
+    hint: "Pour comparer avec ce que coûtent un logement et la vie courante.",
     choices: [
-      { label: "Afrique de l'Ouest", value: "ouest" },
-      { label: "Afrique centrale", value: "centre" },
-      { label: "Afrique de l'Est", value: "est" },
-      { label: "Afrique australe", value: "sud" },
-      { label: "Afrique du Nord", value: "nord" },
-      { label: "Caraïbes, Amériques", value: "ameriques" },
-      { label: "Je préfère ne pas dire", value: null },
+      { label: "Serré", value: "serre" },
+      { label: "Moyen", value: "moyen" },
+      { label: "Le prix compte peu", value: "large" },
     ],
   },
   {
-    id: "countries",
-    group: ROOTS,
-    title: "Et le pays ?",
-    max: 3,
-    when: (answers) => africanOrigins(answers).length > 0,
-    choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
-  },
-  {
-    id: "roots",
-    group: ROOTS,
-    title: "Tu cherches plutôt à…",
+    id: "family",
+    group: PROJECT,
+    title: "Vous partez avec qui ?",
+    hint: "Les écoles, les soins et le rythme comptent plus avec des enfants.",
     choices: [
-      { label: "Retrouver mes racines", value: "rediscover" },
-      { label: "Découvrir ailleurs", value: "discover" },
-      { label: "Les deux", value: "both" },
+      { label: "Seul·e", value: "celib" },
+      { label: "En couple", value: "couple" },
+      { label: "Pour fonder une famille", value: "fonder" },
+      { label: "Avec mes enfants", value: "parents" },
     ],
   },
   {
-    id: "kin",
-    group: ROOTS,
-    title: "Te sentir parmi les tiens, ça compte ?",
+    id: "passports",
+    group: PROJECT,
+    title: "Votre passeport ?",
+    hint: "Pour savoir où vous entrez sans visa, et où vous circulez librement.",
+    max: 2,
     choices: [
-      { label: "Beaucoup", value: "much" },
-      { label: "Un peu", value: "some" },
-      { label: "Pas vraiment", value: "none" },
-    ],
-  },
-  {
-    id: "adventure",
-    group: ROOTS,
-    title: "Partir loin de ce que tu connais, ça te tente ?",
-    choices: [
-      { label: "Oui, c'est ce que je cherche", value: "seeking" },
-      { label: "Pourquoi pas", value: "open" },
-      { label: "Je préfère rester en terrain connu", value: "familiar" },
-    ],
-  },
-  {
-    id: "faith",
-    group: ROOTS,
-    title: "Ta religion ?",
-    when: (answers) => answers.kin === "much" || answers.kin === "some",
-    choices: [
-      { label: "Islam", value: "muslim" },
-      { label: "Christianisme", value: "christian" },
-      { label: "Une autre", value: "other" },
-      { label: "Aucune", value: "none" },
-      { label: "Je préfère ne pas dire", value: null },
+      { label: "Français ou européen", value: "eu" },
+      { label: "D'un pays de la CEDEAO", value: "ecowas" },
+      { label: "De la CEMAC", value: "cemac" },
+      { label: "De la Communauté d'Afrique de l'Est", value: "eac" },
+      { label: "Un autre", value: "other" },
     ],
   },
   {
     id: "languages",
-    group: ROOTS,
-    title: "Tu es à l'aise en…",
+    group: DAILY,
+    title: "Vous êtes à l'aise en…",
+    hint: "La langue de tous les jours compte plus que tout le reste.",
     max: 6,
     choices: [
       { label: "Français", value: "fr" },
@@ -235,32 +244,21 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "passports",
-    group: ROOTS,
-    title: "Ton passeport ?",
-    max: 2,
+    id: "size",
+    group: DAILY,
+    title: "Plutôt une ville qui…",
+    hint: "La taille et le rythme de la ville.",
     choices: [
-      { label: "Français ou européen", value: "eu" },
-      { label: "D'un pays de la CEDEAO", value: "ecowas" },
-      { label: "De la CEMAC", value: "cemac" },
-      { label: "De la Communauté d'Afrique de l'Est", value: "eac" },
-      { label: "Un autre", value: "other" },
-    ],
-  },
-  {
-    id: "saturday",
-    group: TASTES,
-    title: "Ton samedi soir idéal ?",
-    choices: [
-      { label: "Danser jusqu'au matin", value: 1 },
-      { label: "Un bon dîner entre amis", value: 0.5 },
-      { label: "Tranquille chez moi", value: 0 },
+      { label: "Vibre jour et nuit", value: 3 },
+      { label: "Reste à taille humaine", value: 2 },
+      { label: "Prend son temps", value: 1 },
     ],
   },
   {
     id: "landscapes",
-    group: TASTES,
-    title: "Le week-end, tu files où ?",
+    group: DAILY,
+    title: "Le week-end, vous filez où ?",
+    hint: "Mer, île, fleuve, montagne ou désert : le paysage autour de la ville.",
     max: 3,
     choices: [
       { label: "À la plage", value: "beach" },
@@ -272,49 +270,10 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "climate",
-    group: TASTES,
-    title: "Côté météo ?",
-    choices: [
-      { label: "Chaud toute l'année", value: "hot" },
-      { label: "Doux", value: "mild" },
-      { label: "Sec et ensoleillé", value: "dry" },
-    ],
-  },
-  {
-    id: "people",
-    group: TASTES,
-    title: "Avec les gens, tu aimes…",
-    choices: [
-      { label: "Être invité, connaître mes voisins", value: "invited" },
-      { label: "Garder ma tranquillité", value: "quiet" },
-      { label: "Un peu des deux", value: "both" },
-    ],
-  },
-  {
-    id: "belonging",
-    group: TASTES,
-    title: "Là-bas, tu veux vivre…",
-    choices: [
-      { label: "Parmi les gens du coin", value: "locals" },
-      { label: "Avec d'autres repats", value: "returnees" },
-      { label: "Un peu des deux", value: "both" },
-    ],
-  },
-  {
-    id: "friction",
-    group: MATTERS,
-    title: "Coupures, démarches, imprévus…",
-    choices: [
-      { label: "Je fais avec", value: 1 },
-      { label: "Ça me pèse", value: 0.5 },
-      { label: "Je veux l'éviter", value: 0 },
-    ],
-  },
-  {
     id: "priorities",
-    group: MATTERS,
-    title: "Ce qui compte le plus pour toi ?",
+    group: DAILY,
+    title: "Ce qui compte le plus pour vous ?",
+    hint: "Jusqu'à trois priorités. Elles pèsent lourd dans le score.",
     max: 3,
     choices: [
       { label: "Me sentir en sécurité", value: "safety" },

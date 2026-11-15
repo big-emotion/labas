@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { livableLanguages } from "./cities";
-import { bestMatches, rankCities, type Answers } from "./ranking";
+import { bestMatches, rankCities, topCities, type Answers } from "./ranking";
 
 function scoreOf(cityName: string, answers: Answers): number {
   const match = rankCities(answers).find((m) => m.city.name === cityName);
@@ -71,12 +71,14 @@ describe("ranking the cities", () => {
 
   it("explains a match in plain words", () => {
     const luanda = rankCities({ language: "pt" }).find((m) => m.city.name === "Luanda");
-    expect(luanda?.reasons).toContain("On y vit en portugais");
+    expect(luanda?.reasons.map((r) => r.label)).toContain("On y vit en portugais");
   });
 
   it("names what holds a city back", () => {
     const lagos = rankCities({ language: "fr" }).find((m) => m.city.name === "Lagos");
-    expect(lagos?.drawbacks).toContain("Langue du quotidien différente de ton souhait");
+    expect(lagos?.drawbacks.map((r) => r.label)).toContain(
+      "Langue du quotidien différente de votre souhait",
+    );
   });
 
   it("writes no portrait before the reader has answered", () => {
@@ -85,14 +87,16 @@ describe("ranking the cities", () => {
 
   it("ties each portrait line to what the reader said", () => {
     const nightOwl = rankCities({ saturday: 1 }).find((m) => m.city.name === "Lagos");
-    expect(nightOwl?.portrait[0]).toMatchObject({ said: "Danser jusqu'au matin" });
+    expect(nightOwl?.portrait[0]).toMatchObject({
+      said: "Du monde, de la musique, on rentre tard",
+    });
     expect(nightOwl?.portrait[0].text).toContain("Lagos");
   });
 
   it("prefers a city's own sentence over the generic one", () => {
     const nairobi = rankCities({ saturday: 1 }).find((m) => m.city.name === "Nairobi");
     expect(nairobi?.portrait[0].text).toBe(
-      "Tu aimes danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
+      "Vous aimez danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
     );
   });
 
@@ -114,7 +118,9 @@ describe("ranking the cities", () => {
     for (const m of rankCities(busy)) {
       expect(m.portrait.length).toBeLessThanOrEqual(3);
       for (const line of m.portrait) {
-        expect(line.text).not.toMatch(/personnalité|ton profil|tu es (quelqu|un |une |plutôt)/i);
+        expect(line.text).not.toMatch(
+          /personnalité|votre profil|vous êtes (quelqu|un |une |plutôt)|(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu,
+        );
       }
     }
   });
@@ -146,5 +152,12 @@ describe("ranking the cities", () => {
     expect(rankCities(four).map((m) => m.city.name)).toEqual(
       rankCities(three).map((m) => m.city.name),
     );
+  });
+});
+
+describe("the quick top used to choose the next question", () => {
+  it("names the same cities as the full ranking", () => {
+    const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };
+    expect(topCities(answers, 5)).toEqual(bestMatches(answers, 5).map((m) => m.city.name));
   });
 });

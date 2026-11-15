@@ -110,7 +110,7 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     )}
     {lines?.surprise && (
       <section>
-        <h2>Ce qui pourrait te surprendre</h2>
+        <h2>Ce qui pourrait vous surprendre</h2>
         <p>{lines.surprise}</p>
       </section>
     )}
@@ -138,7 +138,7 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
       <section>
         <h2>Une semaine type là-bas</h2>
         <p class="small">
-          Des lieux réels, tirés de nos sources. Choisis la semaine qui te ressemble le plus.
+          Des lieux réels, tirés de nos sources. Choisissez la semaine qui vous ressemble le plus.
         </p>
         {routes.weeks.map((week, i) => (
           <details class="route" open={i === 0}>
@@ -187,7 +187,7 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
       <h2>La ville, critère par critère</h2>
       <p class="small">
         Notes de 0 à 5 selon <a href="/methode">notre grille</a>. Pour les critères marqués « cible
-        », une note haute n'est ni bonne ni mauvaise : on la compare à ce que tu cherches.
+        », une note haute n'est ni bonne ni mauvaise : on la compare à ce que vous cherchez.
       </p>
       <ul class="scores">
         {CRITERIA.map((criterion) => {
@@ -302,7 +302,7 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
           : "France Diplomatie : couleur de la zone non trouvée. "}
         {advisory.fcdo && `Le Royaume-Uni ${FCDO[advisory.fcdo]}. `}
         {advisory.date && `Avis du ${advisory.date}. `}
-        Vérifie toujours la page du ministère avant de partir.
+        Vérifiez toujours la page du ministère avant de partir.
       </p>
       {city.advisedAgainst && <p>{ADVICE_FRAMING}</p>}
       <p class="small">

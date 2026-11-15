@@ -77,8 +77,8 @@ export interface FilterMenuEntry {
 export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "known",
-    label: "Villes que tu connais déjà",
-    hint: "Retire les villes où tu as déjà vécu ou passé du temps.",
+    label: "Villes que vous connaissez déjà",
+    hint: "Retirez les villes où vous avez déjà vécu ou passé du temps.",
     options: CITIES.map((c) => c.name)
       .sort((a, b) => a.localeCompare(b, "fr"))
       .map((name) => ({ label: name, value: name })),
@@ -86,7 +86,7 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "sizes",
     label: "Taille de la ville",
-    hint: "Garde seulement les villes de la taille que tu veux.",
+    hint: "Gardez seulement les villes de la taille que vous voulez.",
     options: [
       { label: "Grande ville", value: 3 },
       { label: "Ville moyenne", value: 2 },
@@ -96,7 +96,7 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "languages",
     label: "Langue",
-    hint: "Garde les villes où l'on vit dans l'une de ces langues.",
+    hint: "Gardez les villes où l'on vit dans l'une de ces langues.",
     options: [
       { label: "Français", value: "fr" },
       { label: "Anglais", value: "en" },
@@ -109,7 +109,7 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "budget",
     label: "Budget",
-    hint: "Garde les villes où la vie tient dans ce budget. Une ville dont le coût n'a pas été mesuré reste dans la liste.",
+    hint: "Gardez les villes où la vie tient dans ce budget. Une ville dont le coût n'a pas été mesuré reste dans la liste.",
     single: true,
     options: [
       { label: "Serré", value: "serre" },
@@ -120,7 +120,7 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "water",
     label: "Mer ou île",
-    hint: "Garde les villes au bord de la mer, ou sur une île.",
+    hint: "Gardez les villes au bord de la mer, ou sur une île.",
     options: [
       { label: "Au bord de la mer", value: "sea" },
       { label: "Sur une île", value: "island" },
@@ -129,7 +129,7 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "regions",
     label: "Région",
-    hint: "Garde les villes de ces régions d'Afrique.",
+    hint: "Gardez les villes de ces régions d'Afrique.",
     options: [
       { label: "Afrique de l'Ouest", value: "ouest" },
       { label: "Afrique centrale", value: "centre" },
@@ -150,7 +150,7 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "excludeCriminalising",
     label: "Lois sur l'homosexualité",
-    hint: "Retire les pays qui punissent les relations entre personnes de même sexe (ILGA, 2026).",
+    hint: "Retirez les pays qui punissent les relations entre personnes de même sexe (ILGA, 2026).",
     single: true,
     options: [{ label: "Retirer ces pays", value: true }],
   },

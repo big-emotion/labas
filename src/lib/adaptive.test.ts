@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { gauge, isSettled, nextFreeQuestion, nextQuestion } from "./adaptive";
+import { freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
 import { QUESTIONS } from "./questions";
-import { bestMatches, type Answers } from "./ranking";
+import { topCities, type Answers } from "./ranking";
 import { DEEP_QUESTIONS } from "./deep-questions";
 
 describe("choosing the next question", () => {
@@ -27,61 +27,66 @@ describe("the free quiz, one question at a time", () => {
   function play(pick: number) {
     const answers: Record<string, unknown> = {};
     const asked: string[] = [];
-    const tops: string[][] = [];
-    for (;;) {
-      const id = nextFreeQuestion(answers as Answers, asked);
-      if (!id || isSettled(asked.length, tops)) break;
+    for (let id = nextFreeQuestion({}, []); id; id = nextFreeQuestion(answers as Answers, asked)) {
       const question = QUESTIONS.find((q) => q.id === id)!;
-      const choice = question.choices[pick % question.choices.length];
+      const offered = question.choices.filter((c) => c.value !== null);
+      const choice = offered[pick % offered.length];
       answers[id] = question.max ? [choice.value] : choice.value;
       asked.push(id);
-      tops.push(bestMatches(answers as Answers, 3).map((m) => m.city.name));
     }
-    return { answers, asked };
+    return { answers: answers as Answers, asked };
   }
 
-  it("opens on the life project", () => {
+  it("asks every question this reader can see, each once", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const { answers, asked } = play(pick);
+      expect([...asked].sort()).toEqual(
+        freeQuestions(answers)
+          .map((q) => q.id)
+          .sort(),
+      );
+    }
+  });
+
+  it("asks next the open question whose answers change the top five the most", () => {
+    const answers = { project: "installer", languages: ["fr"] } as Answers;
+    const asked = ["project", "languages"];
+    const before = new Set(topCities(answers, 5));
+    const moved = (id: string) => {
+      const question = QUESTIONS.find((q) => q.id === id)!;
+      const offered = question.choices.filter((c) => c.value !== null);
+      const counts = offered.map((c) => {
+        const tried = { ...answers, [id]: question.max ? [c.value] : c.value } as Answers;
+        return topCities(tried, 5).filter((name) => !before.has(name)).length;
+      });
+      return counts.reduce((a, b) => a + b, 0) / counts.length;
+    };
+    const open = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+    const best = Math.max(...open.map((q) => moved(q.id)));
+    expect(moved(nextFreeQuestion(answers, asked)!)).toBe(best);
+  });
+
+  it("opens on the life project: with no answer every city ties, so nothing else can be weighed", () => {
     expect(nextFreeQuestion({}, [])).toBe("project");
   });
 
-  it("asks about faith only when feeling at home among one's own matters", () => {
+  it("lets each answer choose the next question", () => {
+    const orders = [0, 1, 2, 3].map((pick) => play(pick).asked.join(","));
+    expect(new Set(orders).size).toBeGreaterThan(1);
+  });
+
+  it("asks a conditional question only once its condition holds", () => {
     for (const pick of [0, 1, 2, 3]) {
-      const { answers, asked } = play(pick);
-      if (asked.includes("faith")) expect(["much", "some"]).toContain(answers.kin);
-    }
-  });
-
-  it("always asks first what the match cannot do without", () => {
-    for (const pick of [0, 1, 2]) {
       const { asked } = play(pick);
-      expect(asked.slice(0, 3), `pick ${pick}`).toEqual(["project", "languages", "origin"]);
-      // The family's country comes next when an African region was picked.
-      const kin = asked.indexOf("kin");
-      expect(kin === 3 || (kin === 4 && asked[3] === "countries"), asked.join(",")).toBe(true);
+      if (asked.includes("faith"))
+        expect(asked.indexOf("faith")).toBeGreaterThan(asked.indexOf("kin"));
+      if (asked.includes("countries"))
+        expect(asked.indexOf("countries")).toBeGreaterThan(asked.indexOf("origin"));
     }
   });
 
-  it("asks about adventure and faith right after, when feeling at home matters", () => {
-    const { asked, answers } = play(0);
-    expect(answers.kin).toBe("much");
-    const kin = asked.indexOf("kin");
-    expect(asked[kin + 1]).toBe("adventure");
-    expect(asked[kin + 2]).toBe("faith");
-  });
-
-  it("settles after 8 to 12 questions, never asking one twice", () => {
-    for (const pick of [0, 1, 2, 3, 4]) {
-      const { asked } = play(pick);
-      expect(asked.length, `pick ${pick}`).toBeGreaterThanOrEqual(8);
-      expect(asked.length, `pick ${pick}`).toBeLessThanOrEqual(12);
-      expect(new Set(asked).size).toBe(asked.length);
-    }
-  });
-
-  it("fills the gauge as answers come in, and fills it once settled", () => {
-    expect(gauge(0, false)).toBe(0);
-    expect(gauge(4, false)).toBeGreaterThan(gauge(2, false));
-    expect(gauge(9, false)).toBeLessThan(1);
-    expect(gauge(9, true)).toBe(1);
+  it("stops after the last question", () => {
+    const { answers, asked } = play(0);
+    expect(nextFreeQuestion(answers, asked)).toBeUndefined();
   });
 });

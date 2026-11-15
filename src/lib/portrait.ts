@@ -1,9 +1,9 @@
 import { livableLanguages, type City, type CriterionKey } from "./cities";
 import { linesFor } from "./lines";
-import { QUESTIONS } from "./questions";
+import { DEEP_QUESTIONS } from "./deep-questions";
 import type { Answers, Priority } from "./ranking";
 
-/** One "Pourquoi toi" line: the answer the reader gave, and what the city offers for it. */
+/** One "Pourquoi vous" line: the answer the reader gave, and what the city offers for it. */
 export interface PortraitLine {
   said: string;
   text: string;
@@ -32,36 +32,37 @@ const PRIORITY_LINES: Record<Priority, { criterion: CriterionKey; line: (c: stri
   safety: {
     criterion: "safety",
     line: (c) =>
-      `La sécurité compte pour toi : ${c} a la réputation d'une ville sûre au quotidien.`,
+      `La sécurité compte pour vous : ${c} a la réputation d'une ville sûre au quotidien.`,
   },
   cost: {
     criterion: "cost",
-    line: (c) => `Une vie abordable compte pour toi : à ${c}, elle le reste.`,
+    line: (c) => `Une vie abordable compte pour vous : à ${c}, elle le reste.`,
   },
   healthAndSchools: {
     criterion: "healthcare",
-    line: (c) => `La santé et l'école comptent pour toi : ${c} est bien équipée.`,
+    line: (c) => `La santé et l'école comptent pour vous : ${c} est bien équipée.`,
   },
   career: {
     criterion: "jobs",
-    line: (c) => `Tu penses carrière : ${c} offre de vraies opportunités.`,
+    line: (c) => `Vous pensez carrière : ${c} offre de vraies opportunités.`,
   },
   diaspora: {
     criterion: "returnees",
-    line: (c) => `Tu veux retrouver d'autres repats : la communauté du retour est active à ${c}.`,
+    line: (c) =>
+      `Vous voulez retrouver d'autres repats : la communauté du retour est active à ${c}.`,
   },
   memory: {
     criterion: "history",
-    line: (c) => `La mémoire de la diaspora compte pour toi : ${c} en garde des lieux forts.`,
+    line: (c) => `La mémoire de la diaspora compte pour vous : ${c} en garde des lieux forts.`,
   },
   flights: {
     criterion: "flights",
-    line: (c) => `Tu veux voyager facilement : ${c} est bien reliée à l'Europe.`,
+    line: (c) => `Vous voulez voyager facilement : ${c} est bien reliée à l'Europe.`,
   },
 };
 
 function chipLabel(questionId: keyof Answers, value: unknown): string {
-  const question = QUESTIONS.find((q) => q.id === questionId);
+  const question = DEEP_QUESTIONS.find((q) => q.id === questionId);
   const choice = question?.choices.find((c) => c.value === value);
   return choice?.label ?? "";
 }
@@ -80,7 +81,9 @@ function candidates(city: City, answers: Answers): Candidate[] {
     add(
       "saturday:1",
       2.5,
-      high("nightlife") ? `Tu aimes danser jusqu'au matin : ${name} aussi, on y sort tard.` : null,
+      high("nightlife")
+        ? `Vous aimez danser jusqu'au matin : ${name} aussi, on y sort tard.`
+        : null,
     );
   if (answers.saturday === 0.5) {
     const n = level("nightlife");
@@ -88,7 +91,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
       "saturday:0.5",
       2.5,
       n >= 2 && n <= 4
-        ? `Tu préfères un bon dîner entre amis : à ${name}, les soirées restent conviviales.`
+        ? `Vous préférez un bon dîner entre amis : à ${name}, les soirées restent conviviales.`
         : null,
     );
   }
@@ -97,7 +100,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
     add(
       "saturday:0",
       2.5,
-      n >= 0 && n <= 2 ? `Tu aimes le calme le soir : ${name} est une ville tranquille.` : null,
+      n >= 0 && n <= 2 ? `Vous aimez le calme le soir : ${name} est une ville tranquille.` : null,
     );
   }
 
@@ -106,14 +109,14 @@ function candidates(city: City, answers: Answers): Candidate[] {
   if (spoken) {
     const lang = LANGUAGE_NAMES[spoken];
     // Language is a constraint, not a pleasure: it comes after the lines that make people want to go.
-    add(`language:${spoken}`, 1, `Tu parles ${lang} : à ${name}, on vit en ${lang}.`);
+    add(`language:${spoken}`, 1, `Vous parlez ${lang} : à ${name}, on vit en ${lang}.`);
   }
 
   if (answers.size && answers.size === city.size) {
     const bySize = {
-      3: `Tu veux une ville qui vibre : ${name} ne s'arrête presque jamais.`,
-      2: `Tu veux une ville à taille humaine : c'est le cas de ${name}.`,
-      1: `Tu préfères une ville qui prend son temps : ${name} vit à un rythme tranquille.`,
+      3: `Vous voulez une ville qui vibre : ${name} ne s'arrête presque jamais.`,
+      2: `Vous voulez une ville à taille humaine : c'est le cas de ${name}.`,
+      1: `Vous préférez une ville qui prend son temps : ${name} vit à un rythme tranquille.`,
     };
     add(`size:${answers.size}`, 2, bySize[answers.size]);
   }
@@ -121,13 +124,13 @@ function candidates(city: City, answers: Answers): Candidate[] {
   if (answers.climate) {
     const byClimate = {
       hot: climates.some((c) => c === "hot-humid" || c === "hot-dry")
-        ? `Tu veux la chaleur toute l'année : à ${name}, tu l'auras.`
+        ? `Vous voulez la chaleur toute l'année : à ${name}, vous l'aurez.`
         : null,
       mild: climates.some((c) => c === "mild" || c === "highland")
-        ? `Tu cherches la douceur : à ${name}, le climat est doux.`
+        ? `Vous cherchez la douceur : à ${name}, le climat est doux.`
         : null,
       dry: climates.includes("hot-dry")
-        ? `Tu veux du soleil et du sec : ${name} est servie.`
+        ? `Vous voulez du soleil et du sec : ${name} est servie.`
         : null,
     };
     add(`climate:${answers.climate}`, 2, byClimate[answers.climate]);
@@ -137,19 +140,19 @@ function candidates(city: City, answers: Answers): Candidate[] {
   for (const landscape of landscapes) {
     const byLandscape = {
       water: settings.includes("lake-or-river")
-        ? `Tu aimes l'eau : ${name} vit au bord d'un fleuve ou d'un lac.`
+        ? `Vous aimez l'eau : ${name} vit au bord d'un fleuve ou d'un lac.`
         : null,
       beach: settings.includes("ocean")
-        ? `Tu veux la mer : à ${name}, la plage est tout près.`
+        ? `Vous voulez la mer : à ${name}, la plage est tout près.`
         : null,
       nature: settings.some((s) => s === "mountains" || s === "forest" || s === "lake-or-river")
-        ? `Tu aimes la nature : autour de ${name}, elle est toute proche.`
+        ? `Vous aimez la nature : autour de ${name}, elle est toute proche.`
         : null,
       wildSpaces: settings.some((s) => s === "savanna" || s === "desert")
-        ? `Tu rêves de grands espaces : ils sont à portée de route depuis ${name}.`
+        ? `Vous rêvez de grands espaces : ils sont à portée de route depuis ${name}.`
         : null,
-      island: settings.includes("island") ? `Tu rêves d'une île : ${name} en est une.` : null,
-      urban: high("culture") ? `La ville te suffit : ${name} a une vraie vie culturelle.` : null,
+      island: settings.includes("island") ? `Vous rêvez d'une île : ${name} en est une.` : null,
+      urban: high("culture") ? `La ville vous suffit : ${name} a une vraie vie culturelle.` : null,
     };
     add(`landscape:${landscape}`, 3, byLandscape[landscape]);
   }
@@ -157,17 +160,17 @@ function candidates(city: City, answers: Answers): Candidate[] {
   if (answers.job) {
     const byJob = {
       cadre: high("jobs")
-        ? `Tu cherches un emploi sur place : ${name} offre de vraies opportunités.`
+        ? `Vous cherchez un emploi sur place : ${name} offre de vraies opportunités.`
         : null,
       entre: high("business")
-        ? `Tu veux entreprendre : ${name} est une ville où l'on crée des entreprises.`
+        ? `Vous voulez entreprendre : ${name} est une ville où l'on crée des entreprises.`
         : null,
-      remote: high("internet") ? `Tu télétravailles : à ${name}, la connexion suit.` : null,
+      remote: high("internet") ? `Vous télétravaillez : à ${name}, la connexion suit.` : null,
       crea: high("culture")
-        ? `Tu vis pour la culture : ${name} a une scène créative vivante.`
+        ? `Vous vivez pour la culture : ${name} a une scène créative vivante.`
         : null,
       soin: high("healthcare")
-        ? `Tu travailles dans la santé ou l'enseignement : ${name} a des hôpitaux où exercer.`
+        ? `Vous travaillez dans la santé ou l'enseignement : ${name} a des hôpitaux où exercer.`
         : null,
     };
     add(`job:${answers.job}`, 2.5, byJob[answers.job]);
@@ -177,7 +180,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
     add(
       "budget:serre",
       3,
-      high("cost") ? `Ton budget est serré : la vie à ${name} reste abordable.` : null,
+      high("cost") ? `Votre budget est serré : la vie à ${name} reste abordable.` : null,
     );
 
   if (answers.family === "parents" || answers.family === "fonder")
@@ -185,7 +188,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
       `family:${answers.family}`,
       2.5,
       high("schools") && level("healthcare") >= 3
-        ? `Tu pars en famille : ${name} a de bonnes écoles et des soins à portée.`
+        ? `Vous partez en famille : ${name} a de bonnes écoles et des soins à portée.`
         : null,
     );
 
@@ -200,14 +203,14 @@ function candidates(city: City, answers: Answers): Candidate[] {
       "project:tester",
       1.5,
       high("returnees")
-        ? `Tu veux tester quelques mois : à ${name}, d'autres repats sont déjà passés par là.`
+        ? `Vous voulez tester quelques mois : à ${name}, d'autres repats sont déjà passés par là.`
         : null,
     );
   if (answers.project === "investir")
     add(
       "project:investir",
       3,
-      high("business") ? `Tu veux investir : ${name} attire les investisseurs.` : null,
+      high("business") ? `Vous voulez investir : ${name} attire les investisseurs.` : null,
     );
 
   for (const priority of (answers.priorities ?? []).slice(0, 3)) {
@@ -218,7 +221,7 @@ function candidates(city: City, answers: Answers): Candidate[] {
 }
 
 /**
- * Two or three lines for "Pourquoi toi et [ville]". A city's own sentence (city-lines.json)
+ * Two or three lines for "Pourquoi vous et [ville]". A city's own sentence (city-lines.json)
  * wins over the generic one; with no answer, there is no portrait.
  */
 export function portraitFor(city: City, answers: Answers): PortraitLine[] {

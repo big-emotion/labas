@@ -25,7 +25,7 @@ export interface CityLines {
     walkable?: boolean | null;
     lively?: boolean | null;
   }[];
-  /** A city's own "pourquoi toi" sentence for an answer, keyed "questionId:value". */
+  /** A city's own "pourquoi vous" sentence for an answer, keyed "questionId:value". */
   why?: Record<string, string>;
   sources: Source[];
 }
