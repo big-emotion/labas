@@ -1,6 +1,6 @@
 import { livableLanguages, type City, type CriterionKey } from "./cities";
 import { linesFor } from "./lines";
-import { QUESTIONS } from "./questions";
+import { DEEP_QUESTIONS } from "./deep-questions";
 import type { Answers, Priority } from "./ranking";
 
 /** One "Pourquoi toi" line: the answer the reader gave, and what the city offers for it. */
@@ -61,7 +61,7 @@ const PRIORITY_LINES: Record<Priority, { criterion: CriterionKey; line: (c: stri
 };
 
 function chipLabel(questionId: keyof Answers, value: unknown): string {
-  const question = QUESTIONS.find((q) => q.id === questionId);
+  const question = DEEP_QUESTIONS.find((q) => q.id === questionId);
   const choice = question?.choices.find((c) => c.value === value);
   return choice?.label ?? "";
 }

@@ -71,12 +71,14 @@ describe("ranking the cities", () => {
 
   it("explains a match in plain words", () => {
     const luanda = rankCities({ language: "pt" }).find((m) => m.city.name === "Luanda");
-    expect(luanda?.reasons).toContain("On y vit en portugais");
+    expect(luanda?.reasons.map((r) => r.label)).toContain("On y vit en portugais");
   });
 
   it("names what holds a city back", () => {
     const lagos = rankCities({ language: "fr" }).find((m) => m.city.name === "Lagos");
-    expect(lagos?.drawbacks).toContain("Langue du quotidien différente de ton souhait");
+    expect(lagos?.drawbacks.map((r) => r.label)).toContain(
+      "Langue du quotidien différente de ton souhait",
+    );
   });
 
   it("writes no portrait before the reader has answered", () => {
@@ -85,7 +87,9 @@ describe("ranking the cities", () => {
 
   it("ties each portrait line to what the reader said", () => {
     const nightOwl = rankCities({ saturday: 1 }).find((m) => m.city.name === "Lagos");
-    expect(nightOwl?.portrait[0]).toMatchObject({ said: "Danser jusqu'au matin" });
+    expect(nightOwl?.portrait[0]).toMatchObject({
+      said: "Du monde, de la musique, on rentre tard",
+    });
     expect(nightOwl?.portrait[0].text).toContain("Lagos");
   });
 
