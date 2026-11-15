@@ -5,6 +5,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 
 ## Rules
 
+- **Beta, everything open** (operator, 2026-11-15): a quick quiz (`/`) and a deep
+  questionnaire (`/approfondir`), both free. A paid part is a V2 idea, not built; never write
+  « gratuit » or « payant » on the site.
+
 - **Reader-facing text is French**, plain and everyday, addressed with « vous » (decided
   2026-11-15; tests reject « tu »); docs, comments and commits are English.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
@@ -23,7 +27,7 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   FCDO) is shown with each city as dated information and never removes or greys a city
   (operator, 2026-11-15: it is written for visitors who have never been there).
 - **Privacy**: answers are computed and kept in the browser. The only thing sent is one
-  anonymous, cookieless Plausible event per free-quiz answer (`src/lib/analytics.ts`, only when
+  anonymous, cookieless Plausible event per quick-quiz answer (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
   LGBT filters are never sent. Fonts are self-hosted; do not add Google Fonts, trackers with
   cookies, or third-party embeds.

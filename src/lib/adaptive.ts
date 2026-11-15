@@ -38,13 +38,13 @@ export function nextQuestion(answers: Answers, asked: string[]): string | undefi
   return pickNext(DEEP_QUESTIONS, answers, asked);
 }
 
-/** The free-quiz questions this reader will see, in order: those whose condition holds. */
+/** The quick-quiz questions this reader will see, in order: those whose condition holds. */
 export function freeQuestions(answers: Answers): Question[] {
   return QUESTIONS.filter((q) => q.when?.(answers) ?? true);
 }
 
 /**
- * The next question of the free quiz: the open one whose answers would bring, on average, the
+ * The next question of the quick quiz: the open one whose answers would bring, on average, the
  * most new cities into the top five. The most decisive questions come first, and each answer
  * changes which one comes next (operator, 2026-11-15). Ties keep the bank's order.
  */

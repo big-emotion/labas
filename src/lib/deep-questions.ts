@@ -1,7 +1,7 @@
 import { QUESTIONS, type Question } from "./questions";
 
 /**
- * The fuller questionnaire of /approfondir: the free quiz's bank, then the filters and stated
+ * The fuller questionnaire of /approfondir: the quick quiz's bank, then the filters and stated
  * tolerances of docs/criteria/architecture.md §2 and §4.4. Kept to what the sourced data can
  * answer today; the rest of the §4.4 bank waits for its data.
  */

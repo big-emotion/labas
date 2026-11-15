@@ -11,7 +11,7 @@ const TRAIT_WORDS =
 const proposable = CITIES.filter((city) => routesFor(city.name));
 const VALID: Record<string, Set<unknown>> = Object.fromEntries([
   ...QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))]),
-  // The free quiz no longer asks « Et le travail ? »: jobOf reads it from the profession.
+  // The quick quiz no longer asks « Et le travail ? »: jobOf reads it from the profession.
   ["job", new Set(["remote", "cadre", "entre"])],
 ]);
 

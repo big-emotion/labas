@@ -14,7 +14,7 @@ export function plausibleScriptSrc(config: { domain?: string; host?: string }): 
   return `${host}/js/script.js`;
 }
 
-// Only the free-quiz questions are measured. Origin, family country, feeling at home and faith
+// Only the quick-quiz questions are measured. Origin, family country, feeling at home and faith
 // are sensitive data (GDPR art. 9) and never leave the browser, nor do the fuller
 // questionnaire's filters about health and about laws against homosexuality.
 const MEASURED = new Set<string>(QUESTIONS.map((question) => question.id));
