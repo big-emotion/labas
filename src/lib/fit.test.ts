@@ -89,9 +89,12 @@ describe("the city a profile lands on", () => {
 
   // People live in each of these cities and like it there: if no answers put a city first,
   // the measure is missing what they like about it, not the city.
-  it("has a combination of answers that puts each city first", () => {
+  it("has a combination of answers that puts each city first", async () => {
     const unreachable: string[] = [];
     for (const city of proposable) {
+      // The climb is long: yield between cities so the test runner can still talk to its
+      // worker (a synchronous half-minute made CI time out on « onTaskUpdate »).
+      await new Promise((resolve) => setTimeout(resolve, 0));
       let best = -Infinity;
       // The quiz always opens on the project; climb from each of its answers, question by
       // question, keeping whichever answer widens this city's lead the most.
