@@ -78,11 +78,15 @@ jobs:
              docker compose -f docker-compose.yml up -d --no-deps --pull never labas && \
              rm -f labas.tar.gz"
 
+      # Retries for a minute: on a first deploy Traefik is still getting the Let's Encrypt
+      # certificate when the container starts, and curl fails with exit 60 meanwhile.
       - name: Smoke check
         run: |
-          sleep 10
-          status=$(curl -fsS -o /dev/null -w '%{http_code}' https://labas.africa/)
-          if [ "$status" != "200" ]; then
-            echo "expected 200 from https://labas.africa/, got $status" >&2
-            exit 1
-          fi
+          for attempt in $(seq 1 12); do
+            status=$(curl -sS -o /dev/null -w '%{http_code}' https://labas.africa/ || true)
+            if [ "$status" = "200" ]; then exit 0; fi
+            echo "attempt $attempt: got '$status', retrying in 5 s"
+            sleep 5
+          done
+          echo "https://labas.africa/ did not answer 200 within a minute" >&2
+          exit 1
