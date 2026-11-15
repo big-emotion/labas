@@ -2,6 +2,7 @@
 import { ADVICE_FRAMING } from "../../lib/advisory";
 import Page from "../../layouts/Page.astro";
 import { CITIES, CRITERIA, type City, type Confidence, type Source } from "../../lib/cities";
+import { goingThere } from "../../lib/going";
 import { linesFor } from "../../lib/lines";
 import { photoFor } from "../../lib/photos";
 import { routesFor } from "../../lib/routes";
@@ -18,6 +19,7 @@ const lines = linesFor(city.name);
 const photo = photoFor(city.name);
 // Unsafe cities get no route: the site never invites someone to go there.
 const routes = routesFor(city.name);
+const going = goingThere(city);
 const country = city.countryFacts;
 const advisory = city.facts.advisory;
 
@@ -317,6 +319,24 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
       </p>
     </section>
 
+    {going && (
+      <section id="y-aller">
+        <h2>Y aller</h2>
+        <ul>
+          {going.map((link) => (
+            <li>
+              <a href={link.url} rel="noopener noreferrer">
+                {link.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="small">
+          Ces liens mènent vers d'autres sites. Là-bas ne touche aucune commission.
+        </p>
+      </section>
+    )}
+
     {lines && lines.sources.length > 0 && (
       <details class="small">
         <summary>Sources des textes de cette page</summary>
@@ -394,6 +414,11 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     font-size: 0.8rem;
     color: var(--thread-dim);
     margin: 6px 0 0;
+  }
+  /* Each way there is a tap target of at least 44px on a phone. */
+  #y-aller li a {
+    display: inline-block;
+    padding: 10px 0;
   }
   .quote {
     font-family: var(--font-display);
