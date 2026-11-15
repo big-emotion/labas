@@ -313,13 +313,14 @@ const description =
       }
 
       function renderMap(names: string[], scores: Map<string, number>) {
-        const values = [...scores.values()];
+        const values = scores.size ? [...scores.values()] : [0];
         const best = Math.max(...values);
         const worst = Math.min(...values);
         const span = best - worst || 1;
         for (const dot of document.querySelectorAll<SVGCircleElement>("#map .dot")) {
           const name = dot.dataset.city as string;
-          const relative = scores.has(name) ? (scores.get(name)! - worst) / span : 0;
+          const relative =
+            scores.size === 0 ? 0.5 : scores.has(name) ? (scores.get(name)! - worst) / span : 0;
           dot.setAttribute("r", (1.5 + relative * relative * 5).toFixed(1));
           dot.setAttribute(
             "class",
@@ -479,10 +480,10 @@ const description =
             .filter((m) => !m.city.unsafe)
             .map((m) => [m.city.name, m.score] as [string, number]),
         );
-        renderMap(
-          matches.map((m) => m.city.name),
-          scores,
-        );
+        // Before the first answer nothing is ranked yet: every dot stays the same and no city
+        // is named, so the quiz does not look decided before it starts.
+        renderMap(answered ? matches.map((m) => m.city.name) : [], answered ? scores : new Map());
+        (document.querySelector(".now") as HTMLElement).hidden = !answered;
 
         const podium = document.getElementById("podium") as HTMLOListElement;
         podium.replaceChildren(
@@ -672,6 +673,9 @@ const description =
         flex-wrap: wrap;
         gap: 8px;
         font-size: 0.95rem;
+      }
+      .now[hidden] {
+        display: none;
       }
       .now h3,
       .now .hint {
