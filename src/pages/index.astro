@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
+import Analytics from "../components/Analytics.astro";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
 import { FILTER_MENU } from "../lib/filters";
@@ -20,6 +21,7 @@ const description =
     <meta name="description" content={description} />
     <meta name="theme-color" content="#161a5c" />
     <title>Là-bas · Quelle ville d'Afrique vous ressemble ?</title>
+    <Analytics />
   </head>
   <body>
     <div class="shell">
@@ -321,6 +323,14 @@ const description =
       import { linesFor } from "../lib/lines";
       import { advisoryNote } from "../lib/advisory";
       import { photoFor } from "../lib/photos";
+      import { answerEvent } from "../lib/analytics";
+
+      // Defined by components/Analytics.astro only when audience measurement is configured.
+      declare global {
+        interface Window {
+          plausible?: (name: string, options: { props: Record<string, string> }) => void;
+        }
+      }
 
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
@@ -700,6 +710,13 @@ const description =
         render();
         const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
         syncContinue(fieldset);
+        if (chip.getAttribute("aria-pressed") === "true") {
+          const event = answerEvent(
+            fieldset.dataset.question as string,
+            JSON.parse(chip.dataset.value as string),
+          );
+          if (event) window.plausible?.(event.name, { props: event.props });
+        }
         // A single answer lights up, then the next question comes half a second later.
         if (Number(fieldset.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
           clearTimeout(timer);

@@ -1,0 +1,21 @@
+---
+import { plausibleScriptSrc } from "../lib/analytics";
+
+// Set at build time; without PUBLIC_PLAUSIBLE_DOMAIN the site loads no script at all.
+const domain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined;
+const src = plausibleScriptSrc({ domain, host: import.meta.env.PUBLIC_PLAUSIBLE_HOST });
+---
+
+{src && (
+  <>
+    <script is:inline defer data-domain={domain} src={src} />
+    <script is:inline>
+      window.plausible =
+        window.plausible ||
+        function (...args) {
+          // Plausible replays this queue with apply(), so an array works like `arguments`.
+          (window.plausible.q = window.plausible.q || []).push(args);
+        };
+    </script>
+  </>
+)}
