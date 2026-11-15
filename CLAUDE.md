@@ -22,7 +22,7 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
   as measured, present the temperament chapter only as « inspirée du Big Five, ce n'est pas un test de
-  personnalité » and its archetype as preferences in « tu », never as « tu es », and add a dated source
+  personnalité » and its archetype as preferences in « vous », never as « vous êtes », and add a dated source
   with any safety, racism, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
   FCDO) is shown with each city as dated information and never removes or greys a city
   (operator, 2026-11-15: it is written for visitors who have never been there).

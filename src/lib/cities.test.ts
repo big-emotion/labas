@@ -89,3 +89,12 @@ describe("the city catalogue", () => {
     }
   });
 });
+
+describe("the sources behind the scores", () => {
+  it("links every source over https", () => {
+    for (const city of CITIES)
+      for (const [key, score] of Object.entries(city.scores))
+        for (const source of score.sources)
+          expect(source.url, `${city.name} ${key}`).toMatch(/^https:\/\//);
+  });
+});
