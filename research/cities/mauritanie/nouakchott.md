@@ -80,7 +80,6 @@ Currency note: the country dossier states no exchange rate, so EUR equivalents u
 - [social.culture] Shopping: Marché Capitale and Marché Sixième for local goods, a camel market on the Boutilimit road, and a large shopping area in Sebkha (Cinquième). — Wikivoyage "Nouakchott" and Wikipedia "Nouakchott", undated (accessed 2026-11-14), blog/academic, confidence: medium
 - [social.food] Fresh fish is sold straight from painted canoes at the fishing wharf in the evening. — Wikivoyage "Nouakchott", undated (accessed 2026-11-14), blog, confidence: medium
 - [social.religion] During Ramadan, do not eat, drink, smoke or chew gum in public in daytime, even in a car; shop hours change and driving gets more erratic around dusk. — UK FCDO, last updated 2026-10-19, official, confidence: high
-- [community.diaspora] The interior minister said in September 2024 that Nouakchott hosted 130,000 migrants. — Human Rights Watch report, 2025-08-27, academic, confidence: medium ⚠ spot-check 2026-11-14: unsupported — figure not found in the HRW report text read
 - [community.expat] A forum member says there is a large community of Moroccan–Mauritanian mixed couples. — Expat.com forum "Travailler et m'installer en Mauritanie", ca. 2024, forum, confidence: low
 - [return.experience] A forum poster of Mauritanian origin, living in Paris for about 30 years, describes preparing to move back; the thread holds no account of the return itself. — Expat.com forum, ca. 2024, forum, confidence: low
 - [admin.visa] Since 2025-01-05, French and EU nationals need an e-visa authorisation from anrpts.gov.mr before boarding, then a €55 single-entry 30-day visa with biometrics at the border; overstays cost the same to regularise. — France Diplomatie "Entrée/séjour", 2026-11-09, official, confidence: high
@@ -108,6 +107,7 @@ Currency note: the country dossier states no exchange rate, so EUR equivalents u
 - Nightlife beyond the alcohol ban, sport, gyms by name, cinema venues: not found.
 - Fuel prices conflict across sources (Routard vs combien-coute); GlobalPetrolPrices shows no Mauritania data.
 - AI-generated cost sites (nomad.watch) were read but not used for Nouakchott.
+- Removed 2026-11-15: the claim that the interior minister said in September 2024 that Nouakchott hosted 130,000 migrants. It is not in the HRW report, and no other source ties that figure to the minister or to Nouakchott: Al Jazeera (2025-11-07) attributes 130,000 entries nationwide in 2022 to a government spokesman, while APA (March 2025) dates the same figure to 2024.
 
 ## Sources read
 
@@ -151,6 +151,8 @@ Currency note: the country dossier states no exchange rate, so EUR equivalents u
 38. Où trouver des locations à Nouakchott ? — Expat.com — https://www.expat.com/fr/forum/afrique/mauritanie/1062544-ou-trouver-des-locations-a-nouakchott.html — forum — 2026-11-14
 39. Travailler et m'installer en Mauritanie — Expat.com — https://www.expat.com/fr/forum/afrique/mauritanie/1058828-travailler-et-minstaller-en-mauritanie.html — forum — 2026-11-14
 40. Offres immobilières Nouakchott — Expat.com — https://www.expat.com/fr/forum/afrique/mauritanie/1062673-offres-immobilieres-nouakchott.html — forum — 2026-11-14 (no prices; not cited in items)
+
+41. Inside Mauritania's mass deportation campaign targeting African migrants — Al Jazeera — https://www.aljazeera.com/features/2025/11/7/inside-mauritania-mass-deportation-campaign-targeting-african-migrants — intl-media — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

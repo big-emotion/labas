@@ -69,18 +69,38 @@ Currency note: EUR equivalents use the dossier rate **76 MZN ≈ €1** (implied
 - [nature.access] A local ferry runs to Inhaca Island on Sun, Tue, Thu and Sat at 07:30, returning about 15:00. — Wikivoyage "Maputo", accessed 2026-11-14, blog, confidence: low
 - [rights.lgbt] No law against same-sex activity; attitudes in Maputo are more liberal than in remote rural areas. — UK FCDO, accessed 2026-11-14 (advice updated 2026-08-20), official, confidence: high
 - [rights.lgbt] Workplace protection on sexual orientation lapsed when Labour Law 13/2023 took effect in Feb 2024; LAMBDA has sought NGO registration since 2008. Maputo polls showed same-sex-marriage support at 37% (2013) and 47% (2017). — Wikipedia "LGBTQ rights in Mozambique", accessed 2026-11-14, academic, confidence: medium
+<!-- quality-pass 2026-11-15 -->
+- [cost.living] Average household electricity price 8.12 MZN/kWh (≈ €0.11); business 5.12 MZN/kWh (≈ €0.07). National average, not EDM's official block tariff. — GlobalPetrolPrices "Mozambique electricity prices", data March 2026, company, confidence: medium
+- [daily.power] A faulty underground cable cut power to about 62,000 EDM customers from about 18:00 on 12 Nov 2025 in Central A/B/C, Polana A/B, Sommerschield, Mafalala, Malhangalene, Alto Maé and the Baixa; about 1,600 were still without power the next day. — Club of Mozambique, 2025-11-13, local-media, confidence: high
+- [cost.living] Water in Maputo, Matola and Boane went from 51 to 64.80 MZN per m³ (≈ €0.67 → €0.85) under the 2024 tariff resolutions. — Club of Mozambique, 2024-05-23, local-media, confidence: high
+- [daily.water] A pump failure at the Umbeluzi treatment plant cut production about 5% in Nov 2025 and lowered pressure in Matola, Machava, Tsalala and Matola-Rio; no restoration date was given. — Club of Mozambique, 2025-11-25, local-media, confidence: high
+- [cost.living] An 11 kg cooking-gas bottle costs about 942 MZN (≈ €12.4) and lasts about a month; a bag of charcoal about 700 MZN (≈ €9.2) and lasts about two weeks. — Zitamar News, 2025-11-07, local-media, confidence: medium
+- [family.schools] Lycée Gustave Eiffel 2026/27 standard family rate ("tarif bleu"), per year in euros: pre-school €6,970 (≈ 529,700 MZN), primary €7,254 (≈ 551,300 MZN), collège €9,531 (≈ 724,400 MZN), lycée €11,807 (≈ 897,300 MZN), billed in three terms. — LFIGE "Cotisations 2026-2027" (parents' association, AEFE-approved), published 2026-03, company, confidence: high
+- [family.schools] Same schedule: one-off first-enrolment fee €2,271 (≈ 172,600 MZN; €885 for the youngest classes), €500 re-enrolment, €500 deposit; families paying themselves can get a lower rate (€4,694–10,101 a year) if the pupil is Mozambican or the family has been at the school 5 years; employer-paid pupils (embassies, international organisations, foreign firms) pay €10,455–17,709. This explains the "10,455–17,709 MZN" figure seen in a directory: it is euros. — LFIGE "Cotisations 2026-2027", published 2026-03, company, confidence: high
+- [family.schools] The school's head gives 588 pupils at the 2026 start of year (the site's statistics block still says 570); third and later children get 20% off tuition except on the employer-paid rate. — lyceemaputo.org home page and fee PDF, accessed 2026-11-15, company, confidence: medium
+- [daily.transport] Yango launched classes priced from 60 MZN (economy, ≈ €0.79) and 70 MZN (comfort, ≈ €0.92) as starting fares, plus three-wheel "txopela" rides from 50 MZN in Matola; no per-km rate published. — Forbes África Lusófona, 2024-08-04, intl-media, confidence: medium
+- [cost.negotiation] Licensed taxis still used a municipal rate of 100 MZN/km (≈ €1.32) set years earlier; the taxi association asked for 150 MZN/km and a single price list because drivers otherwise set their own prices. — Club of Mozambique, 2022-06-21, local-media, confidence: low
+- [cost.negotiation] At the Zimpeto wholesale market a 10 kg bag of onions cost 550–600 MZN (≈ €7.2–7.9); buyers said tampered scales could deliver as little as 7 kg. Old prices. — Club of Mozambique, 2022-12-12, local-media, confidence: low
+- [daily.transport] Car tolls (light vehicles) cut from 15 May 2025: Maputo toll on the EN4 and the ring road including Costa do Sol 40 → 30 MZN (≈ €0.39), Maputo–KaTembe bridge 125 → 100 MZN (≈ €1.32). — AIM, 2025-05-15, local-media, confidence: high
+- [safety.women] INE data for Maputo city in 2025: 2,025 victims of domestic and related violence (+20.3% on 2024), 72.3% of them women; KaMavota district recorded the most domestic-violence cases (295). — RTP (Lusa), 2026, intl-media, confidence: high
+- [safety.women] Same INE report: crimes against sexual freedom in Maputo city rose about 39% to 178 cases in 2025; over 86% of victims were children and 98.9% female. — RTP (Lusa), 2026, intl-media, confidence: high
+- [social.pace] INE estimates Maputo city's 2025 population at 1,139,476 (584,385 women, 555,091 men). — RTP (Lusa), 2026, intl-media, confidence: high
+- [community.returnee] A careers guide for the diaspora says Mozambican citizens need no visa to come back, dual nationals should confirm their status with a consulate first, and returnees should check gaps in social-security contributions and consider voluntary payments. — Africarrières "Diaspora", updated 2026-08-06, blog, confidence: low
+- [community.returnee] The same guide budgets US$1,000–1,500/month (≈ €830–1,245) for one person at a moderate standard, says Maputo rents have risen sharply, and recommends a mobile hotspot as internet backup. — Africarrières "Diaspora", updated 2026-08-06, blog, confidence: low
 
 ## Gaps
 
-- Numbeo returned 429, so no fresh check of groceries, gym, cinema, preschool or salary lines.
-- Electricity (EDM) tariff per kWh, outage frequency and generator use: the one search returned only Portuguese (EU) results; not found.
-- Mobile-data and fibre package prices (Vodacom, Tmcel, Movitel), M-Pesa / e-Mola fees: search budget ran out before these.
-- Yango/Bolt fares per km: only aggregator estimates found, not used.
-- Private clinic consultation prices: no current figure found; Club of Mozambique's HCM price article returned 404.
-- Lycée Gustave Eiffel fees: a directory snippet showed 10,455–17,709 "MZN" for 2026/27, implausibly low and probably mislabelled; not used.
-- Women's street harassment data after 2019, colourism or treatment of diaspora returnees: not found.
-- Returnee / diaspora testimonies, Facebook groups, coworking, startup scene (Ideialab etc.): not reached.
-- Rental deposits and months paid in advance: not stated in any source read.
+- Numbeo returned 429 again on 2026-11-15, so no fresh check of groceries, gym, cinema, preschool or salary lines.
+- Electricity: EDM's official block tariff (social and domestic tiers) not found; only a national average price. Outage frequency: only single incidents found, no statistics.
+- Mobile-data and fibre package prices (Vodacom, Tmcel, Movitel): searched again; the Vodacom site shows plan names without prices and no other source gave MZN prices. M-Pesa / e-Mola fees: the fee table sits behind Vodacom's simulator; not found.
+- Yango/Bolt fares per km: only starting fares (2024) found.
+- Private clinic consultation prices: still no current figure; Club of Mozambique's Maputo Central Hospital price article returned 404 again.
+- AISM (American international school) official 2026/27 fee schedule: not found; the directory figures stay unconfirmed.
+- Grocery basket in 2026 (bread, rice, oil, sugar): searched; only 2022–2023 Zimpeto prices found.
+- Gym membership prices: searched, nothing found.
+- Women's street harassment data after 2019, and harassment on chapas: searched, not found (2025 data found is domestic and sexual violence, not street harassment). Colourism or treatment of diaspora returnees: not found.
+- First-person returnee testimonies, Facebook groups, coworking, startup scene (Ideialab etc.): searched once in English and Portuguese, found only a guide and older academic work.
+- Rental deposits and months paid in advance: searched; results covered Portuguese law only, nothing for Maputo.
 
 ## Sources read
 
@@ -127,6 +147,26 @@ Currency note: EUR equivalents use the dossier rate **76 MZN ≈ €1** (implied
 41. Mozambican nationality law — https://en.wikipedia.org/wiki/Mozambican_nationality_law — academic — 2026-11-14
 42. LGBTQ rights in Mozambique — https://en.wikipedia.org/wiki/LGBTQ_rights_in_Mozambique — academic — 2026-11-14
 43. Maputo National Park — https://en.wikipedia.org/wiki/Maputo_National_Park — academic — 2026-11-14
+44. Mozambique electricity prices — https://www.globalpetrolprices.com/Mozambique/electricity_prices/ — company — 2026-11-15
+45. EDM to restore electricity to Maputo neighbourhoods 24 hours after major power outage — https://clubofmozambique.com/news/mozambique-edm-to-restore-electricity-to-maputo-neighbourhoods-24-hours-after-major-power-outage-watch/ — local-media — 2026-11-15
+46. Mozambique water rate hike — https://clubofmozambique.com/news/mozambique-water-rate-hike/ — local-media — 2026-11-15
+47. Water supply restricted in Maputo province — https://clubofmozambique.com/news/mozambique-water-supply-restricted-in-maputo-province-297251/ — local-media — 2026-11-15
+48. 24-hour water supply in Maputo, Matola and Boane (2020, background only) — https://clubofmozambique.com/news/mozambique-24-hour-water-supply-in-maputo-matola-and-boane-municipalities-adem/ — local-media — 2026-11-15
+49. Making cooking go greener — https://www.zitamar.com/making-cooking-go-greener/ — local-media — 2026-11-15
+50. LFIGE, Tarifs du LFIGE — https://www.lyceemaputo.org/tarifs-du-lfige/ — company — 2026-11-15
+51. LFIGE, Cotisations 2026-2027 (PDF, image scan read visually) — https://www.lyceemaputo.org/wp-content/uploads/2026/03/COTISATIONS-2026-2027_FR.pdf — company — 2026-11-15
+52. LFIGE home page — https://www.lyceemaputo.org/ — company — 2026-11-15
+53. A revolucionar a mobilidade urbana em Moçambique (Yango) — https://forbesafricalusofona.com/?p=106507 — intl-media — 2026-11-15
+54. Taxi drivers want to charge 50 meticais more per kilometre in Maputo city — https://clubofmozambique.com/news/taxi-drivers-want-to-charge-50-meticais-more-per-kilometre-in-maputo-city-219237 — local-media — 2026-11-15
+55. Cost of living forces families in Maputo to cut food purchases — https://clubofmozambique.com/news/mozambique-cost-of-living-forces-families-in-maputo-to-cut-food-purchases/ — local-media — 2026-11-15
+56. Mozambicans tighten belts as prices keep rising (2022, not used) — https://clubofmozambique.com/news/mozambicans-tighten-belts-as-prices-keep-rising-photos/ — local-media — 2026-11-15
+57. Novas tarifas nas portagens a partir desta quinta-feira — https://aimnews.org/2025/05/15/novas-tarifas-nas-portagens-a-partir-desta-quinta-feira — local-media — 2026-11-15
+58. Violência doméstica aumentou 20% na cidade de Maputo em 2025 — https://www.rtp.pt/noticias/mundo/violencia-domestica-aumentou-20-na-cidade-de-maputo-em-2025_n1776237 — intl-media — 2026-11-15
+59. Africarrières, Mozambique diaspora guide — https://africarrieres.com/mozambique/fr/guide/decouvrir/diaspora — blog — 2026-11-15
+60. Vodacom Mozambique home page (plan names, no prices) — https://www.vm.co.mz/ — company — 2026-11-15
+61. Vodacom M-Pesa page (fees only in simulator) — https://www.vm.co.mz/m-pesa — company — 2026-11-15
+62. Maputo Central Hospital clinic raises prices (404) — https://clubofmozambique.com/news/maputo-central-hospital-clinic-raises-prices-mozambique — local-media — 2026-11-15
+63. Numbeo Maputo (429 again) — https://www.numbeo.com/cost-of-living/in/Maputo — company — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

@@ -23,7 +23,6 @@ Extra city suggested by the dossier (Sal island resort town). Currency note: EUR
 - [cost.negotiation] Taxis are unmetered across the country, so fares are agreed before the ride. — Expat.com guide, 2025-11-03, company, confidence: low
 - [housing.areas] A property lawyer writes that tourism has pushed up land and rent prices on Sal, homes were converted into short-term rentals, and teachers, doctors and police were pushed out of Santa Maria into informal neighbourhoods without sanitation. — A Nação (opinion, Gertrudes do Rosário Morais), 2026-11-14, local-media, confidence: medium
 - [housing.areas] A forum resident says affordable housing in Espargos is "a dive", with the cheapest housing in the poorest neighbourhoods; the Casa Para Todos public programme had only a few hundred units per island for thousands of applicants. — Expat.com forum "Affordable social housing … in Santa Maria?", c. 2023, forum, confidence: low
-- [housing.areas] A forum reply says almost all large apartment complexes on Sal have unarmed guards at the gates and on patrol, who also keep street sellers away. — Expat.com forum "Secure Estate/Compound – Rental (Island of Sal)", c. 2023, forum, confidence: low ⚠ spot-check 2026-11-14: unsupported — security remark rests only on a forum comment
 - [housing.search] On Sal and Boa Vista several large foreign property managers reportedly control most rentals. — Expat.com forum "Finding an apartment/house to rent", c. 2024, forum, confidence: low
 - [housing.search] Two estate agencies are mentioned in Santa Maria; Ocean Properties is described as the larger. A forum user warns against an unnamed solicitor in Espargos. — Expat.com forum "English speaking solicitor in Sal", c. 2025-12, forum, confidence: low
 - [work.jobs] Tourism, centred on Santa Maria, replaced salt and fishing as Sal's main income; Sal held 48.2% of the country's hotel beds in 2017. — Wikipedia "Sal, Cape Verde" and "Santa Maria, Cape Verde", accessed 2026-11-14, academic, confidence: medium
@@ -61,6 +60,7 @@ Extra city suggested by the dossier (Sal island resort town). Currency note: EUR
 - Not found: named clinic and consultation prices on Sal; CVIS fees from the school itself.
 - Not found: dated source on immigration attitudes on Sal (the dossier's "hostile immigration" claim is a forum anecdote and was not re-recorded), racism or colourism.
 - livingcost.org has no Santa Maria page (404); Wikivoyage has no Santa Maria page.
+- Removed 2026-11-15: the [housing.areas] item that Sal apartment complexes have unarmed gate and patrol guards rested only on a forum comment; re-search found only forum posts and developer listings, no dated official, media, NGO or academic source.
 
 ## Sources read
 

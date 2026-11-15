@@ -29,14 +29,24 @@
 - [climate.daily] In May 2024 the Murembwe river flooded the Kanyenkoko district, displacing hundreds of families; the port was hit by major floods in 2023 and 2024. — en.wikipedia.org Rumonge / iwacu-burundi.org 2026-11-13, academic + local-media, confidence: medium
 - [nature.access] More than 50 km of Lake Tanganyika shoreline, hot springs, nature reserves and beaches that local observers call under-used. — iwacu-burundi.org, 2026-06-17, local-media, confidence: medium
 - [other] Since Aug 2025 Rumonge is a commune (absorbing Burambi and Buyengero) with an estimated 809,769 inhabitants over 806 km², per the commune; the town had about 36,000 people at the 2008 census. — iwacu-burundi.org 2026-06-17 / en.wikipedia.org Rumonge, local-media, confidence: medium
+<!-- quality-pass 2026-11-15 -->
+- [cost.living] Fish at Rumonge market roughly doubled in June 2026: a heap of mukeke from 20,000 to 50,000 FBu (≈ €6.0 → €15.1), a heap of fresh ndagala from 5,000 to 10,000 FBu (≈ €1.5 → €3.0), dried ndagala from 80,000 to 150,000 FBu/kg (≈ €24 → €45); low-income buyers switch to Lake Victoria fish, and the large species go to Bujumbura hotels. — iwacu-burundi.org, 2026-06-12, local-media, confidence: high
+- [cost.living] Market prices vs government-fixed prices (Apr 2025): unrefined palm oil 8,500 FBu/L against an official 5,000 (≈ €2.6 vs €1.5); sugar 10,000 FBu/kg against 6,000 (≈ €3.0 vs €1.8), sold under the counter; cooking salt 4,000 against 2,000; meat with bone 22,000 FBu/kg (≈ €6.6), as fixed; cassava flour 1,700–2,500 FBu/kg (≈ €0.51–0.76). — iwacu-burundi.org, 2025-04-09, local-media, confidence: high
+- [cost.negotiation] Traders answer price caps with "supply and demand"; a consumer association asks shoppers to report speculators and wants traders and consumers to agree a profit margin per product. — iwacu-burundi.org, 2025-04-09, local-media, confidence: medium
+- [daily.transport] The official Bujumbura–Rumonge bus fare has been 6,000 FBu (≈ €1.8) since a May 2022 decree; a provincial governor later summoned carriers who were charging more. Seen as search excerpts; no newer official fare found. — abpinfo.bi, 2022 / undated, official (state news agency), confidence: low
+- [daily.power] The local radio station says power cuts stop its broadcasts for two to three hours or longer and that its generators break down often (Sept 2026). — iwacu-burundi.org, 2026-09-21, local-media, confidence: high
+- [daily.water] Regideso's PROSECEAU water-intake works for Rumonge and Nyanza-Lac were reviewed in Jan 2026 and pushed to speed up in July–Aug 2026 in response to the drinking-water shortage. — regideso.bi news, 2026-01-28 to 2026-08, official, confidence: medium
+- [community.returnee] Sept 2026: refugees returning from exile ask for land, seeds and roofing materials; some can no longer afford rent in town and others stay with friends or relatives; land disputes between returnees and residents are long-running, and public health centres often lack drugs even for those with insurance cards. — iwacu-burundi.org, 2026-09-11, local-media, confidence: high
+- [housing.search] Rumonge has more than 4,000 land and property files before the Truth and Reconciliation Commission, the most of any commune, rooted in the 1972 exodus when others occupied land left behind; anyone buying land should check its history. — iwacu-burundi.org, 2026-07-20, local-media, confidence: high
+- [cost.living] Cross-check: the national statistics office's Bujumbura reference price for dried ndagala was 120,000 FBu/kg in Q1 2026 (≈ €36), consistent with the high Rumonge prices already listed. — INSBU Référentiel des prix, published 2026-06, official, confidence: high
 
 ## Gaps
 
-- No housing rent or sale price for the town; no staple-basket price except fish and palm oil; no restaurant, beer or salary data beyond market trades.
+- Still no housing rent or sale price for the town; searched Iwacu "Rumonge prix" (149 results: fish, palm oil, bread, no rents). No restaurant, beer or salary data beyond market trades.
 - No internet, mobile-money or bank information; no school information.
-- No Rumonge–Bujumbura bus fare or travel time.
-- Nothing on nightlife, religion, women's safety, racism, diaspora, returnees or expats.
-- The ndagala price (140,000–160,000 FBu/kg) looks very high and could not be cross-checked against another source.
+- Travel time to Bujumbura and a current (2026) bus fare: not found; only the 2022 official fare.
+- Nothing on nightlife, religion, women's safety (searched Iwacu "violences basées sur le genre": only a 2014 Rumonge item and a 2026 Nyanza one), racism or expats.
+- The 140,000–160,000 FBu/kg ndagala figure is now supported in order of magnitude by Iwacu (150,000, Jun 2026) and INSBU (120,000 in Bujumbura, Q1 2026).
 
 ## Sources read
 
@@ -51,6 +61,15 @@
 9. Burundi travel advice — UK FCDO — https://www.gov.uk/foreign-travel-advice/burundi — official — updated 2026-05-21, read 2026-11-14
 10. Burundi — Conseils aux voyageurs — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/burundi/ — official — updated 2026-11-02, read 2026-11-14
 11. EUR to BIF — xe.com — https://www.xe.com/currencyconverter/convert/?Amount=1&From=EUR&To=BIF — company — 2026-11-14, read 2026-11-14
+12. Région Sud/Rumonge : Flambée des prix du poisson — https://www.iwacu-burundi.org/region-sud-rumonge-flambee-des-prix-du-poisson/ — local-media — 2026-06-12, read 2026-11-15
+13. Région Sud/Rumonge : Les prix fixés ne sont pas respectés — https://www.iwacu-burundi.org/region-sud-rumonge-les-prix-fixes-ne-sont-pas-respectes/ — local-media — 2025-04-09, read 2026-11-15
+14. ABP transport fares notices — https://english.abpinfo.bi/?p=5862 and https://english.abpinfo.bi/?p=7649 — official (state news agency) — 2022 / undated, search excerpts only (certificate expired)
+15. Coupures du courant électrique, les médias privés en veille — https://www.iwacu-burundi.org/coupures-du-courant-electrique-les-medias-prives-en-veille-manque-de-carburant-coupures-intempestives-du-courant-electrique-ces-dernieres-semaines-les-medias-burundais-surtout-prives-son/ — local-media — 2026-09-21, read 2026-11-15
+16. REGIDESO news (PROSECEAU Rumonge and Nyanza-Lac) — https://regideso.bi/ — official — 2026, read 2026-11-15
+17. Région Sud/Rumonge : des rapatriés dans le besoin — https://www.iwacu-burundi.org/region-sud-rumonge-des-rapatries-dans-le-besoin/ — local-media — 2026-09-11, read 2026-11-15
+18. Région Sud/Rumonge : Appel aux états généraux sur la problématique foncière — https://www.iwacu-burundi.org/region-sud-rumonge-appel-aux-etats-generaux-sur-la-problematique-fonciere/ — local-media — 2026-07-20, read 2026-11-15
+19. Le référentiel des prix du Burundi, premier trimestre 2026 — INSBU — https://api.insbu.bi/storage/documents/01KVZGV8AC776WC3A8A4DF2GJK.pdf — official — published 2026-06, read 2026-11-15
+20. Iwacu site searches "Rumonge prix", "Rumonge électricité", "Rumonge" — https://www.iwacu-burundi.org/?s=Rumonge+prix — local-media — read 2026-11-15
 
 ## Spot-check (2026-11-14)
 

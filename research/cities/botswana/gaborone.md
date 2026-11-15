@@ -6,7 +6,7 @@ Currency note: EUR figures use the dossier's indicative rate **15 BWP = 1 EUR** 
 
 ## Items
 
-- [cost.rent] 1-bed flat: £257.73/month in the centre (≈ BWP 4,600, ≈ €307) and £153.35 outside it (≈ BWP 2,740, ≈ €182). — Wise "Cost of living in Gaborone", 2026 (no exact date), company, confidence: medium ⚠ spot-check 2026-11-14: unsupported — Wise URL returns 404, figures not verifiable
+- [cost.rent] 1-bed flat: £258/month in the centre (≈ BWP 4,600, ≈ €307) and £153 outside it (≈ BWP 2,740, ≈ €182). — Wise "Cost of living in Gaborone", re-opened 2026-11-15 (page undated, URL now loads and shows these averages), company, confidence: medium ✔ re-sourced 2026-11-15
 - [cost.rent] 3-bed flat: £398.58/month in the centre (≈ BWP 7,115, ≈ €474) and £259.12 outside (≈ BWP 4,625, ≈ €308). — Wise, 2026, company, confidence: medium
 - [cost.rent] 2-bed flat in Village or Extension: BWP 5,000–8,000/month (≈ €335–535). — Expat.com Gaborone guide, updated 2025-11-03, blog, confidence: medium
 - [cost.rent] 2-bed flat in a secure complex: BWP 4,500–7,000/month (≈ €300–465); furnished units cost 20–30% more. — Expat.com Gaborone guide, 2025-11-03, blog, confidence: medium
@@ -101,7 +101,7 @@ Currency note: EUR figures use the dossier's indicative rate **15 BWP = 1 EUR** 
 - [family.childcare] Most embassy families use two or three preschools with reasonable fees, but their hours may not fit full-time work. — Tales Magazine post report, 2024-08-07, blog, confidence: low
 - [safety.general] The UK says violent crime is rising in Gaborone, Francistown and Maun; restaurants have been robbed at peak hours and armed gangs burgle houses. — UK FCDO safety page, undated, accessed 2026-11-14, official, confidence: high
 - [safety.general] France puts the country under heightened vigilance: incidents are fairly rare, but violent acts including bag snatching have been recorded in Gaborone, Francistown and Maun. — France Diplomatie, 2026-09-15, official, confidence: high
-- [safety.general] Embassy respondents report a two-year rise in car break-ins, smash-and-grabs and home invasions, still far below South African levels (consistent with the FCDO warning). — Tales Magazine post reports, 2023-12-28 and 2024-08-07, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — only source is a social post report
+- [safety.general] Gaborone West police report three to four car break-ins a week, mostly on weekday evenings around Molapo Crossing and Westgate Mall, targeting laptops and phones left in cars. — Mmegi, 2026-04-14, local-media, confidence: high ✔ re-sourced 2026-11-15
 - [safety.women] The UK notes a high number of sexual assaults and advises women to avoid walking alone at night. — UK FCDO safety page, accessed 2026-11-14, official, confidence: high
 - [social.nightlife] Tounel, a Phakalane club opened in 2024, has free entry but a strict bottle policy, with VIP packages from P4,000 (≈ €267). — Mmegi, 2024-06-25, local-media, confidence: medium
 - [social.nightlife] Club covers range from P20 to P100 (≈ €1.30–6.70), many with dress codes; the Gaborone Yacht Club charges P10 entry. — Wikivoyage "Gaborone", undated, blog, confidence: low
@@ -122,7 +122,7 @@ Currency note: EUR figures use the dossier's indicative rate **15 BWP = 1 EUR** 
 - [business.admin] Setting up a company: CIPA registration plus a trade licence from the local council, about USD 500–2,000 in base admin costs. — Expat.com Botswana guide, 2025-11-03, blog, confidence: low
 - [rights.racism] In June 2026, clashes between locals and Zimbabweans at a bar in Mogoditshane (Greater Gaborone) left one Zimbabwean man in hospital; police warned it could turn deadly. — Mmegi, 2026-06-16, local-media, confidence: high
 - [rights.racism] About 98% of recorded irregular migrants (2021–2023) were Zimbabwean; daily deportations happen, and the president proposed permits to regularise them. — BBC via MyJoyOnline, 2024-11-08, intl-media, confidence: medium
-- [rights.racism] Embassy respondents describe notable prejudice against Zimbabwean and South Asian workers, with violence rare (dated 2023 and 2024; matches the Mmegi report above). — Tales Magazine post reports, 2023-12-28 and 2024-08-07, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — only source is a social post report
+- [rights.racism] An opinion piece describes public anger toward people of Indian, Chinese and white descent over perceived control of retail, procurement and tourism, and says it is hardly aimed at black foreigners. — Mmegi opinion, 2020-05-29, local-media, confidence: low ✔ re-sourced 2026-11-15
 - [rights.lgbt] Same-sex activity was decriminalised by the High Court on 2019-06-11, upheld on appeal on 2021-11-29; the provisions were formally deleted in March 2026. No same-sex marriage or adoption. — Wikipedia "LGBTQ rights in Botswana", accessed 2026-11-14, intl-media, confidence: high
 - [rights.lgbt] Workplace discrimination based on orientation has been banned since 2010; legal gender change has been possible since 2017. — Wikipedia "LGBTQ rights in Botswana", accessed 2026-11-14, intl-media, confidence: high
 - [rights.lgbt] Acceptance is rising: 50% would welcome or not mind a gay neighbour in 2021, up from 43% in 2016 (Afrobarometer). — Wikipedia "LGBTQ rights in Botswana", accessed 2026-11-14, intl-media, confidence: medium
@@ -145,6 +145,7 @@ Currency note: EUR figures use the dossier's indicative rate **15 BWP = 1 EUR** 
 - No 2026 school fee schedule from a school website (Maru-a-Pula fee page returned 404).
 - Neighbourhood-level crime data: not found. Wikivoyage names pickpocket areas but is undated, so it was left out.
 - No francophone African diaspora or returnee testimony; no Alliance Française page re-read.
+- Removed at 2026-11-15 re-source: nothing deleted; the Tales Magazine embassy claims on car break-ins and prejudice were replaced by dated Mmegi items. The Mmegi racism source is a 2020 opinion piece; no 2025-2026 source on prejudice against South Asian workers was found.
 - Dual nationality: the 2024 amendment and the 2025 multiple-citizenship bill cited in the dossier were not re-opened; Expat.com contradicts them.
 - A reported 2025 public-health emergency over medicine shortages could not be confirmed from a fetched source.
 - Club names, entry fees and beer prices from 2025–2026 local media: only one Mmegi item (2024).
@@ -189,13 +190,16 @@ Currency note: EUR figures use the dossier's indicative rate **15 BWP = 1 EUR** 
 35. LGBTQ rights in Botswana — https://en.wikipedia.org/wiki/LGBTQ_rights_in_Botswana — intl-media — 2026-11-14
 36. Health in Botswana — https://en.wikipedia.org/wiki/Health_in_Botswana — intl-media — 2026-11-14
 37. Gaborone — https://en.wikipedia.org/wiki/Gaborone — intl-media — 2026-11-14
+38. Gaborone West police warn motorists over rising car break-ins — https://www.mmegi.bw/news/gaborone-west-police-warn-motorists-over-rising-car-break-ins/news — local-media — 2026-11-15
+39. Time to address growing racial tensions over economy — https://mmegi.bw/ampArticle/188936 — local-media — 2026-11-15
+40. Cost of living in Gaborone (Wise, re-opened) — https://wise.com/gb/cost-of-living/botswana/gaborone — company — 2026-11-15
 
 - Social pass: Facebook "GABORONE NORTH RESIDENTS" (1559309612156357) — chronological feed, 29 posts, 2026-11-14
 
 ## Spot-check (2026-11-14)
 
 - [cost.rent] 3-bed family house in Gaborone West — corrected
-- [cost.rent] 1-bed flat: £257.73 — unsupported
+- [cost.rent] 1-bed flat: £257.73 — unsupported at 2026-11-14 (Wise URL 404); re-sourced 2026-11-15 (see Items)
 - [cost.rent] 2-bed flat in Village or Extension — supported
 - [safety.general] The UK says violent crime is rising — supported
 - [safety.women] The UK notes a high number of sexual assaults — supported
@@ -205,4 +209,4 @@ Currency note: EUR figures use the dossier's indicative rate **15 BWP = 1 EUR** 
 - [rights.lgbt] Same-sex activity was decriminalised — supported
 - [rights.lgbt] Acceptance is rising — supported
 - [safety.general] Embassy respondents — unsupported
-- [rights.racism] Embassy respondents — unsupported
+- [rights.racism] Embassy respondents — unsupported at 2026-11-14; replaced 2026-11-15 (see Items)

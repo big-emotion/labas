@@ -72,7 +72,7 @@
 - [rights.racism] Around the AFCON final (Jan 2026), gendarmes reportedly intercepted about 140 migrants on the Larache–Tanger motorway. Snippet only. — h24info.ma / fr.hespress.com, 2026-01, local-media, confidence: low
 - [rights.racism] Arab Barometer wave 7 (2021–22): 43% of Moroccans see anti-Black discrimination as a problem (national). — moroccoworldnews.com, 2022-11-01, local-media, confidence: medium
 - [return.experience] A study of 84 French- and Belgian-born descendants of Moroccans (Eurac Research, Oct 2026) found they favour Casablanca, Rabat, Tanger or Agadir over their parents' towns, for careers and lifestyle. — bladi.net, 2026-10-12, local-media, confidence: medium
-- [other] Expat.com's Tangier forum carries several threads about suspected romance or marriage scams; the guide gives no detail. — expat.com Tangier guide, 2025-12-05, forum, confidence: low ⚠ spot-check 2026-11-14: unsupported — scam/safety claim rests only on forum threads
+- [safety.scam] Canada's official advisory for Morocco urges caution when travelling for romance, especially where the relationship began online; this is a national warning, not specific to Tangier. — travel.gc.ca (Morocco travel advice, updated 2026-05-26), official, confidence: medium ✔ re-sourced 2026-11-15
 
 <!-- price-topup 2026-11-14 -->
 - [cost.rent] Apartment sale prices per m² (ReaConsult, "2026 data"): Mnar/Rmilat 12,700–15,900 MAD (≈ €1,176–1,472), California/Nzaha 12,000–15,000, Malabata 11,500–15,000, Ibéria/Marshan 10,500–13,500 (≈ €972–1,250), Centre/Bd Pasteur 9,600–13,000 (≈ €889–1,204). The page does not say whether these are asking or transaction prices. — reaconsult.ma, 2026, company, confidence: medium
@@ -138,6 +138,7 @@
 31. Tangier (travel wiki) — https://en.wikivoyage.org/wiki/Tangier — blog — date read (2026-11-14)
 32. Admissions, Cité scolaire Berchet-Regnault (droits de scolarité 2026-2027) — https://berchet-regnault.com/admissions/ — official — date read (2026-11-14)
 33. Morocco gasoline prices — https://www.globalpetrolprices.com/Morocco/gasoline_prices/ — company — date read (2026-11-14)
+34. Morocco travel advice — https://travel.gc.ca/destinations/morocco — official — date read (2026-11-15)
 
 ## Spot-check (2026-11-14)
 

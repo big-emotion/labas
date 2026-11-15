@@ -61,13 +61,11 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 52.5 MUR** (impl
 - [family.childcare] The 2026/27 budget gives public-sector employees 26 weeks of fully paid maternity leave from 1 Jan 2027. — Le Mauricien, 2026-11-14, local-media, confidence: high
 - [safety.general] France rates the whole country at normal vigilance but says assaults, though rare, have risen since 2025 and can be violent and random; beaches, parks, town centres and outskirts at night and public car parks are named risk spots; burglaries are frequent. — France Diplomatie, updated 2026-09-15, official, confidence: high
 - [safety.general] FCDO names Port Louis among petty-crime hotspots and advises against walking alone at night in the backstreets of the business district. — UK FCDO safety page, accessed 2026-11-14 (events to 2026-10-19), official, confidence: high
-- [safety.general] Perception data: Port-Louis safety index 48.8; walking alone at night rated low (32.6), daytime high (70.5); drug problems (67.6) and corruption (65.7) rated high. 29 contributors. — Numbeo Crime Port Louis, 2026-06-19 (via dossier log), company, confidence: low ⚠ spot-check 2026-11-14: unsupported — Numbeo page returned HTTP 429, figures could not be re-verified
 - [safety.general] After a police shooting on 9 Oct 2026, unrest led to road closures and an island-wide evening curfew (announced at 20:30–6:00) from 12 to 18 Oct, lifted at 4:30 on 19 Oct. — UK FCDO, accessed 2026-11-14; Le Mauricien 2026-10-13, official/local-media, confidence: high
 - [safety.general] Aftermath: young people were tried after the October disturbances, two police officers were injured in violence at St-Hubert, and an IPCC inquiry into the Camp-Levieux shooting entered its decisive phase in Nov 2026. — Defimedia 2026-11-12; Le Mauricien 2026-11-11, local-media, confidence: high
 - [safety.general] Road deaths in the same week of Nov 2026: a motorcyclist at Ferney, a pedestrian at Sébastopol; FCDO says accidents are common and motorbikes often run without lights. — Defimedia 2026-11-11/12; UK FCDO, local-media/official, confidence: high
 - [safety.general] Drugs: zero tolerance; about twenty French nationals are jailed for trafficking with sentences up to 20 years, without reduction. — France Diplomatie, 2026-09-15, official, confidence: high
 - [safety.women] FCDO reports some sexual assaults on tourists and advises not walking alone at night on beaches or in poorly lit areas; it gives no advice specific to women. — UK FCDO, accessed 2026-11-14, official, confidence: medium
-- [safety.women] A police officer publicly denounced a WhatsApp group sharing intimate photos of women and said he was receiving threats. — Le Mauricien, 2026-11-12, local-media, confidence: medium ⚠ spot-check 2026-11-14: unsupported — only a homepage headline cited, no article found by search
 - [social.culture] The Caudan Waterfront has shops, restaurants and the country's largest casino; several cinemas show mostly French and English films; the Champ de Mars racecourse is described as the second-oldest horse-racing track in the world. — Wikipedia "Port Louis", accessed 2026-11-14, academic, confidence: medium
 - [social.religion] Hindu temples are the most common places of worship, alongside Catholic, Anglican, Russian Orthodox and Assemblies of God churches and mosques. — Wikipedia "Port Louis", accessed 2026-11-14, academic, confidence: medium
 - [climate.daily] Hot season highs around 31 °C and cool-season highs around 27 °C; wettest months December–April; annual rain about 711 mm. — Wikipedia "Port Louis", accessed 2026-11-14, academic, confidence: medium
@@ -94,6 +92,8 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 52.5 MUR** (impl
 - No official 2026 Metro fare table; the Rs 32–52 range and the Rs 55 ministerial figure differ.
 - Hospital list beyond Jeetoo, and fees of named private schools in Port-Louis: not found.
 - Expat.com listing pages for Port-Louis returned 404/410 (removed).
+- Removed 2026-11-15 after spot-check: the Numbeo Port Louis safety-perception item (indices, contributors), because Numbeo still returned HTTP 429 and no other dated source for the same figures was found.
+- Removed 2026-11-15 after spot-check: the item on a police officer denouncing a WhatsApp group sharing intimate photos of women, because the only citation was a Le Mauricien homepage headline and a new search found no article for it (only unrelated intimate-image cases).
 
 ## Sources read
 

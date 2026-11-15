@@ -65,7 +65,6 @@ Currency note: the loti (LSL, "M") is pegged 1:1 to the rand. EUR equivalents us
 - [safety.women] The UK calls gender-based violence "very high", across all areas; Canada says women alone may face harassment and verbal abuse. — GOV.UK FCDO, accessed 2026-11-14; Government of Canada, 2026-10-15, official, confidence: high
 - [safety.women] Police recorded 897 rape cases nationally in 2025 (380 involving children, 517 adults). — LENA, 2026-06-02, official, confidence: high
 - [social.nightlife] The Senate endorsed amendments to the Liquor Licensing regulations to extend nightclub hours; LENA words it "from 7:00 p.m. to 6:00 a.m." (exact current closing time unclear). — LENA, 2025-11-06, official, confidence: medium
-- [social.nightlife] An expat blogger (2010) found few safe nightclub options; crowd-sourced nightlife rating today is "bad". — Talesmag 2010-06-06; nomads.com 2026-11-14, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — only blog and crowd-sourced rating cited for a safety-related claim
 - [social.culture] The 13th Lesotho Wine Festival took place in Maseru on 10 Oct 2026: 240+ wines from 45+ producers, live music, crafts; non-profit, running since 2012. — The Reporter, 2026-08-26, local-media, confidence: high
 - [social.culture] Pioneer Mall (opened Nov 2009) had a four-screen cinema that has since closed; Maseru Mall and City Square Centre are the other malls named. — Wikipedia "Maseru", accessed 2026-11-14, intl-media, confidence: medium
 - [social.sport] Setsoto Stadium (20,000–25,000 seats); 12 of the 16 Premier League clubs are Maseru-based; Lehakoe national sports centre has tennis courts, pools and gyms. — Wikipedia "Maseru", accessed 2026-11-14, intl-media, confidence: medium
@@ -96,6 +95,7 @@ Currency note: the loti (LSL, "M") is pegged 1:1 to the rand. EUR equivalents us
 - **Utilities tariffs**: LEWA publishes LEC electricity (2025-26) and WASCO water (2023-24) tariffs as PDFs, but the figures were not readable via page fetch.
 - **Vodacom prices / M-Pesa**: Vodacom Lesotho site did not render.
 - **Racism / treatment of Black diaspora**: no dated official, media or academic source found; only crowd-sourced ratings, so no item recorded.
+- **Nightclub safety (removed 2026-11-15)**: item "few safe nightclub options" deleted; it rested only on a 2010 expat blog and a crowd-sourced rating, and a re-search found only general official night-time crime warnings (no source on clubs or bars), which cannot back a venue-safety claim.
 - **Restaurant, cinema, club entry and gym prices** beyond aggregator averages: not found.
 - **French/EU visa rules and work/residence permit process**: not confirmed by an official source.
 
@@ -160,4 +160,3 @@ Currency note: the loti (LSL, "M") is pegged 1:1 to the rand. EUR equivalents us
 - [rights.lgbt] Male same-sex activity legal since 2012 — supported
 - [rights.lgbt] Sources conflict — supported
 - [cost.living] Pump prices after the May 2026 rise — supported
-- [social.nightlife] An expat blogger (2010) — unsupported

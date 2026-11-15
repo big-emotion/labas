@@ -131,6 +131,11 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 - [family.schools] Nairobi International School is quoted at KES 184,000–440,000 per term (≈ €1,287–3,077); the same guide puts ISK at about USD 15,000 (primary) to USD 28,000 (secondary) a year, which conflicts with the Kenya guide's KES 3.18–4.89 M. — Expat.com Nairobi guide, 2025-12-12, blog, confidence: low
 - [health.care] Private health insurance about KES 8,000–15,000/month for one person (≈ €56–105) and KES 25,000–40,000 for a family (≈ €175–280); this conflicts with the KES 50,000–200,000 a year for family cover in the Kenya guide. — Expat.com Nairobi guide, 2025-12-12, blog, confidence: low
 
+<!-- social-pass-2 2026-11-15 -->
+- [community.diaspora] Traverze Culture, a relocation business run by an African-American (Gullah Geechee) founder for eight years, sells a 15-day "investigative experience" before a move to Kenya; its clients shown in 2026 are mostly African-American families and retirees, and one family received the keys to a permanent home after the process. — @traverzeculture posts 2026-04 to 2026-11, social-caption (commercial), confidence: medium
+- [health.care] The same business reports a retiree client who had a heart attack during his relocation and was treated at The Nairobi Hospital, and who stayed in Kenya to retire; it sells "healthcare navigation" (hospital orientation, insurance checks, emergency plan) to newcomers and residents. A testimony relayed by a company, not a measurement. — @traverzeculture posts 2026-10 and 2026-11, social-caption (commercial), confidence: low
+- [admin.residency] Completing immigration biometrics is presented as a milestone of the retirement relocation process in Kenya. — @traverzeculture post 2026-10, social-caption, confidence: low
+
 ## Gaps
 
 - Web search budget ran out after about a dozen queries, so many categories could not be searched specifically (salaries, nightlife venues, ride-hailing app names and fares, Nairobi BRT status, Safaricom fibre prices).
@@ -143,6 +148,8 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 - Returnee opinion piece in The Standard (2025-12-07) opened without body text, so it is not used.
 - Price top-up (2026-11-14): web search was unavailable (session budget used up), so only direct pages were fetched. Numbeo (429), Expatistan, Global Property Guide, Jiji, Safaricom (403), EPRA (connection refused), KNBS and KWS (certificate errors), Braeburn and ISK fee pages (404) could not be read.
 - Searched, not found: GP consultation and private-clinic fees, water bills, local (non-international) private school fees, club entry beyond one venue, concert tickets, Uber or Bolt per-km rates (the Bolt city page lists none), and any dated source on how much tenants knock off rent or agency fees.
+<!-- social-pass-2 gaps 2026-11-15 -->
+- @dakarlives (Senegal) read the same day: recent posts are JOJ Dakar 2026 ceremony and tribute reels with emoji comments; nothing on daily life, no item.
 
 ## Sources read
 
@@ -207,6 +214,9 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 143 KES** (impli
 59. Home internet packages — Zuku — https://zuku.co.ke/ — company — 2026-11-14
 60. Bolt cities in Kenya — Bolt — https://bolt.eu/en-ke/cities/ — company — 2026-11-14
 61. Uber cities in Kenya — Uber — https://www.uber.com/global/en/r/kenya/cities/ — company — 2026-11-14
+
+- Social pass: Instagram @traverzeculture — 5 posts (pinned + latest), 2026-11-15
+- Social pass: Instagram @dakarlives — 5 latest posts, 2026-11-15 (no usable item)
 
 ## Spot-check (2026-11-14)
 
