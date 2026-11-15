@@ -117,6 +117,11 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - [cost.negotiation] In "ANNONCE EXPAT", a 4-room flat at II Plateaux Vallon (Club House) is listed at 800,000 XOF/month "négociable" with 5 months' conditions, and a 4-room duplex villa with pool in Riviera M'Badon at 2,000,000 XOF "(Négociable)"; new 4-room flats in Riviera M'Badon with generator and lift at 1,000,000 XOF (≈ €1,524). — "ANNONCE EXPAT" (675408035959936) search "loyer", posts 2026-09-13 to 2026-11-14, social-caption, confidence: medium
 - [other] Searches for "loyer", "quartier" and "école" in two public Abidjan expat groups return mostly agency listings and land or building sales (e.g. Bonoua), not residents' questions and answers. — groups 839995369407448 and 1790777411082478, read 2026-11-14
 
+<!-- social-pass-2 2026-11-15 -->
+- [social.food] Upmarket restaurant prices reported by Abidjan In Motion (136K followers), Oct 2026: grilled African snails 12,000 XOF (≈ €18), roast lamb neck 23,000 XOF (≈ €35), braised beef shank 24,000 XOF (≈ €37), langouste gyozas 12,000 XOF at Lulu Abidjan. — @abidjaninmotion post 2026-10-20 (≈), social-caption (creator review), confidence: medium
+- [social.food] Same creator: an entrecôte plate with fries, mash and salad at La Canteen, Vallons (II Plateaux) costs 19,500 XOF (≈ €30); she rates it 7/10 for fatty meat and praises the service. — @abidjaninmotion post 2026-09-28 (≈), social-caption, confidence: medium
+- [social.food] Artisan bakeries are a talking point: a weekday-only bakery in Cocody Danga (next to the Nid de Cocody) draws comments asking for the address. — @abidjaninmotion post 2026-08-28, social-caption + social-comment, confidence: low
+
 ## Gaps
 
 - Web-search budget for this session ran out after six queries; the rest of the pass relied on direct fetches of known sites (dossier URLs, OpenShores, I am Beezy, AIP, Expat.com). Many planned searches ("prix taxi négociation", "prix étranger", cinema/club/gym prices, fibre box prices) were not run.
@@ -126,6 +131,7 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - No 2026 dated source on street harassment or on racism/colourism; nothing on diaspora returnee "Bengiste" perception.
 - The social-media staging file research/cities/_social/cote-d-ivoire.md (Facebook group listings, "négociable" counts) was not merged; it is outside this task's web method.
 <!-- social-pass gaps 2026-11-14 -->
+<!-- social-pass-2 gaps 2026-11-15 -->
 
 ## Sources read
 
@@ -178,6 +184,8 @@ Currency note: EUR equivalents use the fixed peg stated in the dossier, **1 EUR 
 - Social pass: Instagram @liabynd — 6 posts (pinned + latest) and visible comments, 2026-11-14
 - Social pass: Facebook "Carrefour des expatriés à Abidjan" (839995369407448) — searches "loyer", "quartier", 2026-11-14
 - Social pass: Facebook "Les Expatriés Abidjan Officiel" (1790777411082478) — search "école", 2026-11-14
+
+- Social pass: Instagram @abidjaninmotion — 5 latest posts and visible comments, 2026-11-15
 
 ## Spot-check (2026-11-14)
 

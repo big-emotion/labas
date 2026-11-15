@@ -35,12 +35,15 @@ Extra city (suggested by the dossier as the cheaper lakeside third pole of weste
 - [cost.rent] Modelled June 2026 rents in USD: 1-bed in the centre $140/month, cheaper areas $112; 3-bed in the centre $255. Barely a third of Nairobi's modelled $383 for a central 1-bed. — livingcost.org Kisumu, updated 2026-06-21, company, confidence: low
 - [cost.living] Modelled June 2026 prices in USD: milk $0.59/litre, bread (500 g) $0.54, rice $1.53/kg, eggs $1.67 per dozen, chicken breast $6.67/kg, tomatoes $0.90/kg; lunch menu $3.93; beer in a pub $1.94; utilities for one person $29.10/month; 50 Mbps internet $35.40; gym $19; cinema $7.79. — livingcost.org Kisumu, 2026-06-21, company, confidence: low
 - [daily.transport] Bolt operates in Kisumu; Uber's Kenya city list (Nairobi, Mombasa, Uasin Gishu) does not include it. — Bolt and Uber city pages, accessed 2026-11-14, company, confidence: high
-- [daily.transport] Nairobi–Kisumu: Easy Coach bus KES 1,400 (≈ €9.79, about 8 h), Modern Coast from KES 1,000 (≈ €6.99); Prestige Shuttle KES 1,000 on the Kisumu page but KES 1,200 (≈ €8.39) on the Nairobi page; a weekly train KES 600 or 2,000 (≈ €4.20 / €13.99, 12 h). From the airport: taxi KES 500–1,000 (≈ €3.50–7), matatu about KES 100 (2023). — Wikivoyage Kisumu and Nairobi, accessed 2026-11-14, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — train fares and the Prestige KES 1,200 figure not found on the cited Wikivoyage pages
+- [daily.transport] Nairobi–Kisumu by road: Easy Coach bus KES 1,400 (≈ €9.79, about 8 h), Modern Coast from KES 1,000 (≈ €6.99), Prestige Shuttle van KES 1,000 (≈ €6.99, about 6 h); from the airport a taxi costs KES 500–1,000 (≈ €3.50–6.99) and a matatu about KES 100 (2023 prices). — Wikivoyage Kisumu, accessed 2026-11-15, blog, confidence: low ✔ re-sourced 2026-11-15
+- [daily.transport] The Nairobi–Kisumu Safari night train ran as a festive service from 19 Dec 2025 to 12 Jan 2026: economy KES 900 (≈ €6.29), first class KES 2,400 (≈ €16.78), about 13 h; no continuation after January was announced. — The Star, 2025-12-18, local-media, confidence: medium
 - [cost.living] Guest houses charge about KES 900–2,000 a night (≈ €6.29–13.99, listings updated 2021–2023); the guide notes hotels "ramp up their prices just because they are a hotel". — Wikivoyage Kisumu, accessed 2026-11-14, blog, confidence: low
 - [daily.power] National domestic electricity base tariffs since July 2025: KES 12.14/kWh (≈ €0.085) up to 30 kWh, KES 16.50 (≈ €0.115) for 31–100 kWh, KES 18.57 (≈ €0.130) above 100 kWh, before levies, VAT and monthly surcharges. — StimaTracker (KPLC tariff tracker), accessed 2026-11-14, company, confidence: medium
 - [cost.negotiation] No Kisumu-specific source; the national guide says to haggle (without over-haggling), that merchants raise prices for foreigners, and that asking in English can mean paying at least double. — Wikivoyage Kenya, accessed 2026-11-14, blog, confidence: low
 
 ## Gaps
+
+- Removed 2026-11-15: the Prestige Shuttle KES 1,200 figure and the old weekly-train fares of KES 600 / 2,000; neither appears on the cited Wikivoyage pages. Current train fares were re-sourced from The Star instead. No 2026 train fare outside the festive window was found.
 
 - No cost-of-living or rent data: Numbeo Kisumu returned 429, property portals returned 403, and no search budget was left for local press.
 - No source on hospitals (JOOTRH, Aga Khan Kisumu), water or power reliability, internet or ride-hailing in Kisumu.
@@ -71,6 +74,7 @@ Extra city (suggested by the dossier as the cheaper lakeside third pole of weste
 16. Bolt cities in Kenya — Bolt — https://bolt.eu/en-ke/cities/ — company — 2026-11-14
 17. Uber cities in Kenya — Uber — https://www.uber.com/global/en/r/kenya/cities/ — company — 2026-11-14
 18. Electricity tariff tracker — StimaTracker — https://www.stimatracker.com/ — company — 2026-11-14
+19. Kisumu train resumes festive season operations — The Star — https://www.the-star.co.ke/news/2025-12-18-kisumu-train-resumes-festive-season-operations — local-media — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

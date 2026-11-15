@@ -63,7 +63,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - [social.nightlife] Alcohol is legal only in licensed bars and restaurants, private homes or some tourist resorts; drinking elsewhere can lead to arrest. — UK FCDO safety page, updated 2026-10-27, official, confidence: high
 - [social.culture] The Cairo Opera House and the Grand Egyptian Museum host francophone and international shows (e.g. a GEM gala, 5 Nov 2026). — lepetitjournal.com Le Caire, Nov 2026 (as logged in the dossier), intl-media, confidence: medium
 - [social.religion] During Ramadan, eating, drinking or smoking in public in daylight is forbidden; driving gets erratic around dusk. Converting or encouraging others to convert is illegal. — UK FCDO safety page, updated 2026-10-27, official, confidence: high
-- [community.diaspora] A German-Sudanese writer living in Maadi describes a warm welcome in Egyptian homes mixed with colourist microaggressions; she says a Somali friend was constantly harassed downtown and left Cairo. — Meeting of Minds UK, 2021-02-05, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — single personal blog testimony (not re-verifiable); private author name removed
+- [community.diaspora] Sudanese women in Cairo report being shouted at in the street with colour-based slurs, and some say Egyptians on microbuses will not sit beside them; an older piece, so it shows a pattern rather than today's frequency. — CairoScene, 2017-06-05, local-media, confidence: medium ✔ re-sourced 2026-11-15
 - [community.expat] Caire Accueil: volunteer, non-political, non-religious association for "francophones de toutes origines"; 180 member families; cooking workshops, neighbourhood walks, children's events, WhatsApp help groups. — lepetitjournal.com, 2023-09-11 (updated 2025-07-02), intl-media, confidence: high
 - [admin.visa] Visa on arrival US$30 cash, up to 30 days; at Cairo airport a card-only digital visa costs US$36 since 1 Aug 2026; tourist e-visa up to 3 months. Extensions at passport and immigration offices. — UK FCDO entry requirements, accessed 2026-11-14, official, confidence: high
 - [admin.residency] Amnesty reports residence-permit renewal appointments delayed up to three years for refugees, some given 2027–2028 dates; irregular foreigners must regularise via an Egyptian sponsor and a US$1,000 payment. — Amnesty International, 2026-02-16, intl-media, confidence: high
@@ -91,10 +91,10 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - [housing.search] Sale prices, Q1 2025: El Sheikh Zayed about E£114,000/m² (≈ €1,932), New Zayed about E£111,000/m² (≈ €1,881), New Cairo apartments about E£102,245/m² (≈ €1,733), Sheikh Zayed villas about E£236,400/m² (≈ €4,007). Mostly new compound projects; average down payment 8.5% with instalments over 7.7 years. — Knight Frank Cairo Residential Market Review, 2025-05-18, company, confidence: medium
 - [housing.search] Aqarmap's Greater Cairo apartment-for-sale page shows an average asking price of E£24,838/m² (≈ €421) over 94,719 listings, e.g. First Settlement 163 m² for E£5.0M (≈ €84,746) and Madinaty 78 m² for E£4.65M (≈ €78,814). Asking prices; conflicts sharply with Knight Frank's compound averages, likely because older stock is included. — Aqarmap, accessed 2026-11-14, company, confidence: low
 - [housing.search] Foreigners may own up to two residential properties, each up to 4,000 m². — House Solution Egypt, foreigner rental guide, updated 2026-09-11, company, confidence: medium
-- [cost.rent] National context: average rents rose about 250% between Q1 2023 and Q1 2024 (Market Watch), and the house price-to-income ratio reached 15.11 in 2024, up from 6.6 in 2016. — Egyptian Streets, 2025-01-08, local-media, confidence: medium ⚠ spot-check 2026-11-14: unsupported — the 250% rise (Market Watch) was not found in the source; only the 15.11 and 6.6 ratios were confirmed
+- [cost.rent] National context: rents rose about 250% on average between Q1 2023 and Q1 2024 according to Property Finder's Market Watch, and the house price-to-income ratio reached 15.11 in 2024, up from 6.6 in 2016. The 250% figure is relayed by the article; the Market Watch rent table itself was not seen. — Egyptian Streets, 2025-01-08, local-media, confidence: medium ✔ re-sourced 2026-11-15
 - [cost.negotiation] Annual rent increases asked by owners range from 2–5% to 10–20%; renters advise negotiating building maintenance fees upfront, and some sign three-year contracts to lock the rent. — Egyptian Streets, 2025-01-08, local-media, confidence: medium
 - [cost.negotiation] An agency says long leases give tenants stronger bargaining power while short-term lets leave little; agree the currency (EGP or USD) in writing and, for USD rents, the exchange-rate source and date. The agency fee (up to one month) should cover search, viewings and negotiation. — House Solution Egypt, foreigner rental guide, updated 2026-09-11, company, confidence: medium
-- [cost.living] Staples, national averages: packaged rice E£33.6/kg (≈ €0.57), flour E£29.7/kg (≈ €0.50), sugar E£36.5/kg (≈ €0.62), pasta E£33.7/kg (≈ €0.57), sunflower oil E£108.4/kg (≈ €1.84), tomatoes E£23/kg (≈ €0.39), onions E£22.6/kg (≈ €0.38). Not city-specific; retail or wholesale not stated. — Arab Finance citing IDSC (cabinet information centre), 2026-11-08, local-media, confidence: medium ⚠ spot-check 2026-11-14: unsupported — no Arab Finance/IDSC report for 2026-11-08 located; nearby reports give rice at E£33.8-36.4/kg
+- [cost.living] Staples, national averages: packaged rice E£33.6/kg (≈ €0.57), flour E£29.7/kg (≈ €0.50), sugar E£36.5/kg (≈ €0.62), pasta E£33.7/kg (≈ €0.57), sunflower oil E£108.4/kg (≈ €1.84), tomatoes E£23/kg (≈ €0.39), onions E£22.6/kg (≈ €0.38). Not city-specific; retail or wholesale not stated. — Arab Finance citing IDSC (cabinet information centre), 2026-11-08, local-media, confidence: medium ✔ re-sourced 2026-11-15
 - [cost.living] Protein and dairy, national averages: white chicken E£87.1/kg (≈ €1.48), white eggs E£123.3 per carton (≈ €2.09), beef E£437.2/kg (≈ €7.41), tilapia E£87.7/kg (≈ €1.49), milk E£46.4/litre (≈ €0.79). — Arab Finance citing IDSC, 2026-11-10, local-media, confidence: medium
 - [cost.living] Modelled Cairo grocery prices (USD only): milk $0.92/litre, bread $0.66 per 500 g, eggs $1.35 a dozen, chicken breast $4.66/kg, supermarket beer $1.43 per 0.5 l. — livingcost.org Cairo, updated 2026-06-21, company, confidence: low
 - [cost.living] Agency budget for a family of four: groceries E£15,000–25,000/month (≈ €254–424), eating out four times a week E£6,000–10,000 (≈ €102–169), Uber and taxis E£3,000–6,000 (≈ €51–102), fibre E£600–900 (≈ €10–15). — House Solution Egypt, 2026 expat guide, updated 2026-09-11, company, confidence: low
@@ -120,6 +120,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - Cairo-specific power-cut schedule for summer 2026: not found; only national reporting.
 - Koshari and street-food prices: only travel-blog figures in search snippets, not read.
 - Sub-Saharan diaspora associations and returnee networks in Cairo: not found.
+- Removed 2026-11-15: a single personal-blog testimony (German-Sudanese writer, Maadi, 2021) on welcome and colourism, because no second source corroborated it; replaced by a dated CairoScene item on street slurs, which does not cover the Maadi welcome or the Somali friend's experience.
 - Universal Health Insurance: Cairo is not yet covered per search results; eligibility of foreign residents not found.
 - Residence-permit fee schedule for 2026 (USD amounts) not confirmed from an official page; Ahram explainer returned 403.
 - Nature access (Wadi Degla, Al-Azhar Park) and sports-club membership costs: not found.
@@ -184,6 +185,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 49. Grand Egyptian Museum ticket prices rise on November 1 — Curly Tales — https://curlytales.com/middle-east/trending/planning-a-trip-to-the-grand-egyptian-museum-ticket-prices-rise-on-november/ — intl-media — read 2026-11-14
 50. Entry fees for Arab tourists to rise at Egyptian sites in 2026 — SceneNow — https://scenenow.com/Buzz/Entry-Fees-for-Arab-Tourists-to-Rise-at-Egyptian-Sites-in-2026 — local-media — read 2026-11-14
 51. The complete guide to renting an apartment in Maadi (2025/2026) — House Solution Egypt — https://housesolutionegypt.com/blog/quick-apartment-hunting-tips — company — read 2026-11-14 (furnished asking rents only, no new item)
+52. "They Call Us Black and Filthy": Sudanese refugees in Egypt — CairoScene — https://cairoscene.com/in-depth/they-call-us-black-and-filthy-sudanese-refugees-in-egypt-trapped-between-racism-and-violence — local-media — read 2026-11-15
 
 - Social pass: Instagram @cairobyyana — 5 posts (pinned + latest) and visible comments, 2026-11-14
 
@@ -199,13 +201,13 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 59 EGP** (implie
 - [rights.racism] Reuters: over 5,500 — supported
 - [safety.general] 23 journalists were jailed — supported
 - [other] Women content creators — supported
-- [community.diaspora] A German-Sudanese writer — unsupported
+- [community.diaspora] Sudanese women in Cairo report being shouted at in the street with colour-based slurs, and some say Egyptians on microbuses will not sit beside them; an older piece, so it shows a pattern rather than today's frequency. — CairoScene, 2017-06-05, local-media, confidence: medium ✔ re-sourced 2026-11-15
 
 ## Spot-check, price top-up (2026-11-14)
 
 - [housing.search] Sale prices, Q1 2025 — supported (Zayed prices and 7.7-year instalments confirmed; 8.5% down payment not seen in excerpt)
-- [cost.rent] National context — unsupported
-- [cost.living] Staples, national averages — unsupported
+- [cost.rent] National context: rents rose about 250% on average between Q1 2023 and Q1 2024 according to Property Finder's Market Watch, and the house price-to-income ratio reached 15.11 in 2024, up from 6.6 in 2016. The 250% figure is relayed by the article; the Market Watch rent table itself was not seen. — Egyptian Streets, 2025-01-08, local-media, confidence: medium ✔ re-sourced 2026-11-15
+- [cost.living] Staples, national averages — unsupported ✔ re-sourced 2026-11-15
 - [daily.power] Household electricity — supported
 - [daily.internet] Home internet — supported
 - [cost.negotiation] Resident discount, Grand Egyptian Museum — supported

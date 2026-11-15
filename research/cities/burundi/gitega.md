@@ -36,14 +36,35 @@
 - [climate.daily] 1,504 m altitude; mean highs about 26–28 °C, lows about 15–17 °C; about 1,259 mm of rain a year, heaviest Oct–Dec and Mar–Apr, driest Jun–Aug (1991–2020 normals). — en.wikipedia.org Gitega, accessed 2026-11-14, academic (secondary aggregator), confidence: medium
 - [nature.access] Ruvubu National Park, the country's largest, lies about 26 km east. — en.wikipedia.org Gitega, accessed 2026-11-14, academic (secondary aggregator), confidence: medium
 - [other] Population 135,467 (2020), the country's fourth city; political capital since Parliament's vote of 16 Jan 2019, with institutions to move over three years. — en.wikipedia.org Gitega, accessed 2026-11-14, academic (secondary aggregator), confidence: medium
+<!-- quality-pass 2026-11-15 -->
+- [cost.living] Charcoal, the main cooking fuel: a sack at Shatanya market went from 70,000 to 85,000 FBu (≈ €21 → €26) in about a month (Feb 2026); residents say cooking now costs some households more than food, and gas cookers are not available locally. — iwacu-burundi.org, 2026-02-06, local-media, confidence: high
+- [cost.salary] Residents of the commune say earnings of about 5,000 FBu a day (≈ €1.5) do not cover a midday meal; a 4 m plank went from 4,000 to 20,000 FBu (≈ €1.2 → €6.0) and varnish from 12,000 to 20,000 FBu over a few years. — iwacu-burundi.org, 2025-06-16, local-media, confidence: medium
+- [daily.power] Rukoba, a hill neighbourhood now inside Gitega's urban commune, has never had mains power although it sits next to the Zege substation; Regideso blames a lack of transformers and poles. Residents use candles, paraffin lamps and torches, and only the better-off have solar panels; shops close early and cannot chill drinks. — iwacu-burundi.org, 2026-06-19, local-media, confidence: high
+- [daily.power] Other unconnected areas named in 2025: Jimbi hill, several cells of Rango quarter, Nyabututsi sub-quarter and the Zege site. — iwacu-burundi.org, 2025-06-16, local-media, confidence: medium
+- [daily.water] Drinking water is insufficient with regular household shortages (May 2026); studies to rehabilitate the urban network are under way and the commune proposes treating Ruvubu river water for the outskirts. — iwacu-burundi.org, 2026-05-12, local-media, confidence: medium
+- [daily.water] The Zege site, home to more than 90 Batwa households, shares one public tap that can stay dry for over a week; taps on Jimbi hill are often dry too. — iwacu-burundi.org, 2025-06-16, local-media, confidence: medium
+- [daily.transport] Gitega has no structured urban bus network, unlike Bujumbura, which residents say makes daily trips hard for workers and students. — iwacu-burundi.org, 2026-05-12, local-media, confidence: medium
+- [daily.transport] Bujumbura → Gitega by bus: 9,000 FBu (≈ €2.7) with Doucement Express from the Cotebu bus park, leaving when full, about 2 h 25; Volcano Express also runs the route. Traveller's account, trip undated (post updated Jul 2026). — nomadicbackpacker.com, 2025-07-31 (updated 2026-07-09), blog, confidence: medium
+- [daily.transport] After a fuel price cut in Feb 2024 the official Bujumbura–Gitega fare was set at 9,300 FBu (≈ €2.8); fares have since risen during shortages. Seen only as a search excerpt (the agency's site has an expired certificate). — abpinfo.bi, 2024, official (state news agency), confidence: low
+- [cost.negotiation] Moto-taxi drivers pay a communal tax of 7,000 FBu a year; on damaged hill tracks they pay helpers to push bikes, and hiring a moto from town to carry a patient to hospital costs double the usual fare. — iwacu-burundi.org, 2025-06-16, local-media, confidence: medium
+- [nature.access] The Gishuha hot springs charge 2,000 FBu for Burundians and 10,000 FBu for foreigners (≈ €0.6 / €3.0) — an official two-tier price; visitors are often put off by transport costs. — iwacu-burundi.org, 2026-05-12, local-media, confidence: high
+- [health.care] The reference hospital is the Hôpital Régional de Gitega on Avenue de l'Enseignement, Musinzira; the commune also has the Itaba communal hospital, now a district hospital, and health centres planned on Jimbi and Mugutu hills. — hopital-gitega.bi / iwacu-burundi.org 2026-05-12, official + local-media, confidence: medium
+- [health.care] Residents call care expensive and insufficient and say health-insurance cards are sold fraudulently (May 2026); in 2025 they said free care for under-fives and pregnant women was not always applied, so parents bought medicines themselves. — iwacu-burundi.org, 2026-05-12 / 2025-06-16, local-media, confidence: medium
+- [family.schools] The commune is short of more than 765 teachers, with four or five pupils per bench in some classrooms; boarding schools are planned at Giheta and Nyabugogo within two to three years. — iwacu-burundi.org, 2026-05-12, local-media, confidence: medium
+- [family.schools] An English-medium private school, Gitega International Academy, has a campus at Karera 2; it does not publish fees. — cyriljarnias.com "Les meilleures écoles internationales au Burundi", 2026-03-08, company, confidence: low
+- [social.pace] Since the anti-fire measures, the central market packs up from 16:00 and is locked behind barriers at 17:00; nearby shops, depots and bars are made to keep the same hours, and bars may not open before noon, per a bar manager. — iwacu-burundi.org, 2026-09-04, local-media, confidence: high
+- [safety.women] Gender-based violence is reported in the commune, e.g. a woman evicted from the marital home with her children; residents accuse some local mediators of corruption in land and family disputes (one is said to have asked 500,000 FBu ≈ €151 to rule), which hits women's access to justice. — iwacu-burundi.org, 2026-05-12, local-media, confidence: medium
+- [business.startup] Women's savings cooperatives are common (one on Jimbi hill: 53 members, about 4,000 FBu saved per member per month), but members cannot get bank loans without land to pledge, and some husbands stop wives from joining. — iwacu-burundi.org, 2025-06-16, local-media, confidence: medium
+- [other] The Truth and Reconciliation Commission held hearings in Gitega on 16–17 Oct 2026 on ethnic and regional exclusion from colonial times to 2008; many participants want the Arusha Accord's ethnic quotas kept. — iwacu-burundi.org, 2026-10-23, local-media, confidence: high
 
 ## Gaps
 
-- No rent figure newer than 2019; no sale prices; no property listing site found (web search unavailable).
-- No staple-basket prices beyond meat and beer; no restaurant meal price; no salary data.
-- No electricity or internet reporting specific to Gitega; no named reference hospital.
-- No transport fares (town moto-taxi or Bujumbura–Gitega bus) found.
-- Nothing on women's safety, racism, diaspora or returnee life, expat community or nightlife beyond small bars.
+- Rents: still nothing newer than 2019; searched "Gitega loyer prix maison 2025 Iwacu" and Iwacu's site search "Gitega loyer" (56 results, none with 2025–26 rents). No sale prices or listing site.
+- No restaurant meal price; staple prices only for meat, beer and charcoal. No salary survey.
+- Electricity: neighbourhood connection gaps documented, but no outage frequency for connected areas; no internet reporting specific to Gitega.
+- Hospital consultation fees at the regional hospital: not found (searched "Hôpital régional de Gitega 2026 patients frais": only 2006 HRW reports).
+- In-town moto-taxi fare: not found.
+- Racism, diaspora or returnee life, expat community: nothing found; nightlife beyond small bars still undocumented.
 - Fate of the École internationale de Gitega after July 2026 unknown.
 
 ## Sources read
@@ -68,6 +89,17 @@
 18. Burundi safety and security — UK FCDO — https://www.gov.uk/foreign-travel-advice/burundi/safety-and-security — official — read 2026-11-14
 19. Burundi — Conseils aux voyageurs — https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/burundi/ — official — updated 2026-11-02, read 2026-11-14
 20. EUR to BIF — xe.com — https://www.xe.com/currencyconverter/convert/?Amount=1&From=EUR&To=BIF — company — 2026-11-14, read 2026-11-14
+21. Région Centre/Gitega : Le prix du charbon de bois flambe — https://www.iwacu-burundi.org/region-centre-gitega-le-prix-du-charbon-de-bois-flambe/ — local-media — 2026-02-06, read 2026-11-15
+22. Région Centre/Gitega : Sous les câbles de la Regideso, le quartier Rukoba est pourtant éclairé par des lucioles — https://www.iwacu-burundi.org/region-centre-gitega-sous-les-cables-de-la-regideso-le-quartier-rukoba-est-pourtant-eclaire-par-des-lucioles/ — local-media — 2026-06-19, read 2026-11-15
+23. Au coeur du pays/Commune Gitega-Nouvelle législature : la longue liste des attentes des jeunes et des femmes — https://www.iwacu-burundi.org/au-coeur-du-pays-commune-gitega-nouvelle-legislature-la-longue-liste-des-attentes-des-jeunes-et-des-femmes/ — local-media — 2025-06-16, read 2026-11-15
+24. Au Coeur du Pays/Commune Gitega : Entre résilience citoyenne et défis persistants du développement — https://www.iwacu-burundi.org/au-coeur-du-pays-commune-gitega-entre-resilience-citoyenne-et-defis-persistants-du-developpement/ — local-media — 2026-05-12, read 2026-11-15
+25. Région Centre/Gitega : Le marché de Gitega entre bouclage anti-incendie et asphyxie des commerçants riverains — https://www.iwacu-burundi.org/region-centre-gitega-le-marche-de-gitega-entre-bouclage-anti-incendie-et-asphyxie-des-commercants-riverains/ — local-media — 2026-09-04, read 2026-11-15
+26. Région Centre/Gitega : Des décennies de discrimination systémique — https://www.iwacu-burundi.org/region-centre-gitega-des-decennies-de-discrimination-systemique/ — local-media — 2026-10-23, read 2026-11-15
+27. How to get from Bujumbura to Gitega by bus — https://www.nomadicbackpacker.com/how-to-get-from-bujumbura-to-gitega-by-bus.html — blog — 2025-07-31, updated 2026-07-09, read 2026-11-15
+28. ABP transport fares notice — https://english.abpinfo.bi/?p=5862 — official (state news agency) — 2024, search excerpt only (certificate expired)
+29. Hôpital Régional de Gitega — https://www.hopital-gitega.bi/Accueil/pub/27 — official — undated, search excerpt, read 2026-11-15
+30. Les meilleures écoles internationales au Burundi — https://www.cyriljarnias.com/?p=39325 — company — 2026-03-08, read 2026-11-15
+31. Iwacu site searches "Gitega loyer", "Gitega électricité", "Gitega femmes", "Gitega hôpital", "Gitega taxi-moto" — https://www.iwacu-burundi.org/?s=Gitega+loyer — local-media — read 2026-11-15
 
 ## Spot-check (2026-11-14)
 

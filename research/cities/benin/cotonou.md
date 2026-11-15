@@ -70,7 +70,6 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - [social.pace] A French resident admired the day-to-day, low-stress attitude but found it hard to adopt as a planner; passing people without greeting reads as indifference (OLD). — Expat.com magazine, 2016-12-26, blog, confidence: low
 - [social.pace] Newcomers on the forum around 2015 said appointments and delivery times run slower than promised. — Expat.com forum "Nouveau à Cotonou", c. 2015, forum, confidence: low
 - [community.expat] A 2020 resident described a small expat community with game nights and pool parties, good for young families and thin for singles. — Talesmag expat report, 2020-02-17, blog, confidence: low (OLD)
-- [community.expat] Forum users split on trust: some warn of scams aimed at isolated expats and of "prix yovo" (prices for white people), others call the generalisation unfair. — Expat.com forum, c. 2017, forum, confidence: low ⚠ spot-check 2026-11-14: unsupported — racism/scam claim sourced only to a forum thread
 - [community.diaspora] A large Nigerian community: some came for calm and cheaper beach-side flats; one reported a two-bedroom at 20,000 XOF (≈ €30) a month in 2023 (anecdote). — Zikoko, 2023-06-16, intl-media, confidence: low
 - [community.returnee] On 27 Dec 2025 ten Afro-descendants received Beninese nationality certificates at a ceremony in Cotonou; the justice ministry reported about 50 naturalised and roughly 100 new applications a day. — Reuters via TimesLive, 2026-01-14, intl-media, confidence: high
 - [community.returnee] A historian warns that wealthy returnees could buy prime land or build gated enclaves, turning memory "into merchandise". — The Conversation via AllAfrica, 2025-11-20, academic, confidence: medium
@@ -144,6 +143,7 @@ Currency note: EUR equivalents use the fixed peg **1 EUR = 655.957 XOF** (the do
 - No Cotonou-specific street-harassment survey; no 2023–2026 source on colourism or treatment of diaspora returnees beyond anecdote.
 - Sport facilities, religion in daily life and pace-of-life items lack 2025–2026 sources.
 - The social-media staging file research/cities/_social/benin.md was not merged (outside this task's method).
+- Removed 2026-11-15: the [community.expat] item on scams aimed at expats and "prix yovo" pricing. It rested only on a c. 2017 Expat.com forum thread; re-searches (EN and FR) found no dated official, media, NGO or academic source for a racially based two-tier pricing claim. General scam risk stays covered by the [safety.general] items (France Diplomatie 2026-09-15, GOV.UK).
 <!-- social-pass gaps 2026-11-14 -->
 - ★ cotonousocialclub not read; Ouidah: nothing found on Instagram.
 <!-- price-topup gaps 2026-11-14 -->

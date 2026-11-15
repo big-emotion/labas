@@ -140,7 +140,7 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 - [cost.rent] Purchase price per m² from Numbeo (Aug 2025): a flat in the centre about 1,300,000 XAF (≈ €1,982), range 1.0–1.7 million; outer areas about 1,000,000 (≈ €1,524), range 0.7–1.2 million. — Expat.com Guide Gabon, 2025-11-06, company, confidence: low
 - [cost.rent] The same Numbeo series in November 2026 shows €3,262/m² in the centre (≈ 2,139,889 XAF) and €2,438 in the suburbs (≈ 1,598,915); its history swings from €2,964 (June 2018) to €12,958 (April 2022), which points to a thin sample. — Combien-coute.net, 2026-11-05, company, confidence: low
 - [business.invest] The EU Delegation put its former office up for sale in March 2026: a 1,519 m² plot with buildings in Cocotiers, near Pont de Gué-Gué and the Bord de Mer, minimum bid 430,000,000 XAF (≈ €655,531), about 283,000 XAF (≈ €432) per m² of land. — EEAS sale notice, 2026-03-04, official, confidence: high
-- [business.invest] The state's SNI began selling 2,500 serviced plots on 1 April 2026 (1,500 at Essassa in Ntoum, 300 at Mangouba in Akanda, 200 at Nkok, 100 at Bikélé); Essassa is fixed at 5,500 XAF/m² (≈ €8.38), or 2,750,000 (≈ €4,192) for 500 m², with a land title; other sites are priced by location. — Ministry of Housing speech, 2026-04-01, official, confidence: high ⚠ spot-check 2026-11-14: unsupported — PDF text unreadable; only the 5,500 XAF/m² and 2,750,000 for 500 m² figures were confirmed, not the per-site plot counts
+- [business.invest] The state's SNI began selling 2,500 residential plots on 1 April 2026 (1,500 at Essassa, 300 in Akanda, 200 at Nkok, 200 at Port-Gentil, 100 each at Bikélé, Franceville and Moanda); at Essassa a standard 500 m² plot costs 5,500 XAF/m² (≈ €8.38), so 2,750,000 XAF (≈ €4,192). — Gabonmediatime, 2026-04-02, local-media, confidence: high ✔ re-sourced 2026-11-15
 - [business.invest] The minister asked in the same speech for Essassa to be connected to power and water and for its road links to be finished, so the site was not yet serviced on launch day. — Ministry of Housing speech, 2026-04-01, official, confidence: medium
 - [business.invest] The Caisse des Dépôts sells 400–500 m² plots at Movingui-Okolassi (Ntoum, about 30 km from Libreville) at 2,220,000 and 2,720,000 XAF (≈ €3,384 / €4,147), notary fees included; the article's subheading gives a different upper figure. — Gabonreview, 2025-12-25, local-media, confidence: medium
 - [housing.search] Brokers' commissions are reported at 50 % to 100 % of a month's rent, plus 5,000 XAF (≈ €7.62) per visit; any rent above 200,000 XAF must have a lease endorsed by the competition and consumer office (DGCC). — Gabon Media Time, 2025-08-07, local-media, confidence: medium
@@ -196,6 +196,7 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 - Clinic prices, club entry, concert tickets: not found. Combien-coute's McDonald's price is a Numbeo placeholder (no McDonald's located in Gabon) and was not used.
 - Negotiation: no source quantifies a typical discount on rent, taxis or market goods; no dated press source on a "foreigner price" beyond the undated travel wiki. Financial Afrik's January 2026 piece on staple prices is paywalled.
 <!-- listings-pass gaps 2026-11-14 -->
+- Removed 2026-11-15 from the SNI plot-sale item: the "land title included" claim and "other sites priced by location" (neither Gabonmediatime, Gabonreview nor Infos Gabon states them; the ministry speech PDF is unreadable), and the Mangouba site name (the press says Akanda, 300 plots).
 
 ## Sources read
 
@@ -266,6 +267,8 @@ Currency note: EUR equivalents use the dossier's fixed peg **655.957 XAF = 1 EUR
 65. Gabon — Wikivoyage (FR) — https://fr.wikivoyage.org/wiki/Gabon — blog — date read (2026-11-14)
 66. Gabon — Wikivoyage (EN) — https://en.wikivoyage.org/wiki/Gabon — blog — date read (2026-11-14)
 67. Gabon : la flambée des prix met la centrale d'achat sous pression — Financial Afrik — https://www.financialafrik.com/2026/01/08/gabon-la-flambee-des-prix-met-la-centrale-dachat-sous-pression/ — intl-media — date read (2026-11-14), paywalled after the intro
+68. Gabon : le gouvernement lance la commercialisation de 2 500 parcelles viabilisées par la SNI — Gabonmediatime — https://gabonmediatime.com/gabon-le-gouvernement-lance-la-commercialisation-de-2-500-parcelles-viabilisees-par-la-sni/ — local-media — 2026-04-02, date read (2026-11-15)
+69. Habitat : la SNI lance la commercialisation de 2 500 parcelles à travers le Gabon — Gabonreview — https://www.gabonreview.com/habitat-la-sni-lance-la-commercialisation-de-2-500-parcelles-a-travers-le-gabon/ — local-media — 2026-04-01, date read (2026-11-15)
 - Social pass: Instagram @ashley.walena — 6 latest posts and visible comments, 2026-11-14
 
 - Social pass: Facebook "Les Infos de Libreville" (1669735013241022) — search "loyer", 19 posts, 2026-11-14

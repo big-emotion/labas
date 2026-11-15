@@ -35,13 +35,24 @@ Extra city suggested by the dossier ("Beira (suggested addition)"). Currency not
 - [climate.daily] Coastal protection is in an advanced state of decay; the municipal recovery plan puts the need at about US$90.85M (≈ €75.6M). — ICLEI Africa (Portuguese version, via search summary), 2025, academic, confidence: medium
 - [nature.access] Savanna Beach, 20–30 km away, is reached by chapa and a small boat; Rio Maria beach (10–15 km) has no facilities. — Wikivoyage "Beira", accessed 2026-11-14, blog, confidence: low
 - [other] The city has been run by the opposition MDM; Albano Carige took office as mayor in 2021 and was re-elected in 2024. — Wikipedia (pt) "Beira (Moçambique)", accessed 2026-11-14, academic, confidence: medium
+<!-- quality-pass 2026-11-15 -->
+- [cost.rent] Crowd-sourced figures (July 2023): 1-bed flat in the centre US$400/month (≈ €332), outside the centre US$133 (≈ €111). Old and thin data. — TravelTables "Beira cost of living", updated 2023-07, company, confidence: low
+- [cost.living] Same source (July 2023): cheap restaurant meal US$7.33 (≈ €6.1), 0.5 L draught beer US$1.20 (≈ €1.0), 1 kg rice US$0.67 (≈ €0.56), 12 eggs US$1.07 (≈ €0.89), 1 kg chicken breast US$5.99 (≈ €5.0), 0.5 kg loaf US$0.53 (≈ €0.44). — TravelTables "Beira cost of living", updated 2023-07, company, confidence: low
+- [daily.power] A fire at the Munhava substation on 17 June 2023 cut power to more than 160,000 EDM customers in bairros including Chaimite, Maquinino, Esturro, Macurungo, Matacuane, Palmeiras, Manga Loforte and the industrial zone. — Club of Mozambique, 2023-06-17, local-media, confidence: high
+- [daily.power] EDM had already named the Munhava substation in Beira as a point that would stay under strain even after planned grid upgrades (2020, old). — Club of Mozambique (AIM, Notícias), 2020-10-28, local-media, confidence: medium
+- [daily.transport] In March 2025 about two dozen city-centre filling stations had no petrol and only two stations, both over 15 km out, had fuel; taxi and chapa operators threatened to stop. — Club of Mozambique (Lusa), 2025-03-25, local-media, confidence: high
+- [cost.negotiation] Chapa fares are set by the municipal assembly, not bargained: a 2022 rise of 5 MZN per 10 km (e.g. Baixa–Macuti 10 → 15 MZN, ≈ €0.13 → €0.20) was approved in June, and its delay triggered a drivers' strike in July. — Club of Mozambique, 2022-07-11, local-media, confidence: medium
+- [safety.general] In March 2024 a Pakistani trader was abducted in Beira and freed after more than 24 hours; police said the kidnappers had mistaken him for his boss and that it was the city's first kidnapping or abduction in almost two years. — Club of Mozambique, 2024-03-12, local-media, confidence: medium
+- [daily.water] Water coverage in Beira and Dondo is put at 76%; power cuts lower pressure in some areas, and FIPAG bought four generators for the pumping stations. Article date not confirmed (dated 2025 in one search summary). — Club of Mozambique via search summary, accessed 2026-11-15, local-media, confidence: low
+- [health.care] A diaspora careers guide says private clinics in Maputo and Beira give better care than the public sector but cost more, and advises health insurance. — Africarrières "Diaspora", updated 2026-08-06, blog, confidence: low
 
 ## Gaps
 
-- No Beira rental listings or rent survey (CASA SAPO Sofala: 0 results; Pam Golding Beira search and Airbnb monthly prices not readable).
-- Groceries, restaurant meals, beer, taxi/tuk-tuk fares, school fees, clinic prices: not found.
-- Power cuts, internet quality, water supply after 2019: not found.
-- Women's safety, religion, diaspora/returnee experience, LGBT climate outside Maputo: not found.
+- No Beira rental listings or rent survey (CASA SAPO Sofala: 0 results; Pam Golding Beira search and Airbnb monthly prices not readable). Searched "arrendamento Ponta-Gêa Macuti" again: no priced long-term listing. Numbeo Beira returned 429.
+- Restaurant meals and groceries now rest on 2023 TravelTables data only. Taxi/tuk-tuk fares, school fees (Escola Portuguesa da Beira fee search returned only Macau), clinic prices: not found.
+- Power cuts after 2023, internet quality: not found. Current water supply hours: not found; the Club of Mozambique water articles returned 404.
+- Women's safety, religion, diaspora/returnee experience, LGBT climate outside Maputo: searched kidnapping and crime; nothing on women's safety specific to Beira.
+- Kidnapping figures for Beira after March 2024: not found.
 - The ICLEI Beira PDFs could not be parsed (compressed); figures come from the search summary of the Portuguese version.
 
 ## Sources read
@@ -63,6 +74,16 @@ Extra city suggested by the dossier ("Beira (suggested addition)"). Currency not
 15. France Diplomatie, Santé — https://www.diplomatie.gouv.fr/fr/information-par-pays/mozambique/conseils-aux-voyageurs-sante — official — 2026-11-14
 16. UK FCDO safety and security — https://www.gov.uk/foreign-travel-advice/mozambique/safety-and-security — official — 2026-11-14
 17. CASA SAPO Sofala rentals (0 results) — https://casa.sapo.mz/alugar/sofala/ — company — 2026-11-14
+18. TravelTables, Beira cost of living — https://traveltables.com/country/mozambique/city/beira/cost-of-living — company — 2026-11-15
+19. Parts of Beira without power due to substation fire — https://clubofmozambique.com/news/mozambique-parts-of-beira-without-power-due-to-substation-fire/ — local-media — 2026-11-15
+20. EDM calls for urgent intervention in substations — https://clubofmozambique.com/news/mozambique-edm-calls-for-urgent-intervention-in-substations-aim-report-175364/ — local-media — 2026-11-15
+21. Fuel shortages in Beira leave the city worried, baffled — https://clubofmozambique.com/news/mozambique-fuel-shortages-in-beira-leave-the-city-worried-baffled/ — local-media — 2026-11-15
+22. Beira minibus drivers go on strike — https://clubofmozambique.com/news/mozambique-beira-minibus-drivers-go-on-strike-aim-220550/ — local-media — 2026-11-15
+23. "They mistook him for his boss": Pakistani trader abducted in Beira — https://clubofmozambique.com/news/they-mistook-him-for-his-boss-pakistani-trader-abducted-in-beira-released-after-24-hours-police-255551/ — local-media — 2026-11-15
+24. Club of Mozambique, Beira–Dondo water (search summary only; page 404) — https://clubofmozambique.com/?p=8013 — local-media — 2026-11-15
+25. Africarrières, Mozambique diaspora guide — https://africarrieres.com/mozambique/fr/guide/decouvrir/diaspora — blog — 2026-11-15
+26. Vandalizações deixam seis mil casas sem eletricidade no centro de Moçambique (Marínguè and Macossa, not Beira; not used) — https://observador.pt/2025/09/23/vandalizacoes-deixam-seis-mil-casas-sem-eletricidade-no-centro-de-mocambique/ — intl-media — 2026-11-15
+27. Numbeo Beira (429) — https://www.numbeo.com/cost-of-living/in/Beira — company — 2026-11-15
 
 ## Spot-check (2026-11-14)
 

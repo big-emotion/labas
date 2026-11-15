@@ -82,7 +82,7 @@
 - [health.care] Malaria, dengue and chikungunya cases are recorded all year; insurance covering hospitalisation and repatriation is required in practice, as care may be refused without it. — France Diplomatie "Santé", 2026-09-15, official, confidence: high
 - [health.care] A diplomat reports no dentist for routine cleanings and that most serious issues would mean medical evacuation; another notes tuberculosis is prevalent. — Talesmag post reports, 2025-02-22 and 2025-08-11, blog, confidence: low
 - [health.care] Parliament approved an Islamic Development Bank loan for the country's first national oncology centre. — ADI, 2026-11-13, local-media, confidence: high
-- [family.schools] QSI (American curriculum, Haramous): 13,400 USD kindergarten, 14,600 elementary, 16,200 middle/high school for 2024–25 (≈ €11,620 / 12,660 / 14,045). — Expat.com Djibouti guide, 2025-11-04 / QSI Djibouti website accessed 2026-11-14, company, confidence: high ⚠ spot-check 2026-11-14: unsupported — QSI page mentions 2024–25 fees but shows no amounts
+- [family.schools] QSI (American curriculum, Haramous) charges 13,400 USD for preschool, 14,600 USD for elementary and 16,200 USD for middle/high school for 2024–25 (≈ €11,620 / 12,660 / 14,045); the school's own site lists no amounts, so treat these as second-hand and possibly outdated. — Expat.com Djibouti guide, 2025-11-04, company, confidence: medium ✔ re-sourced 2026-11-15
 - [family.schools] Diplomatic families describe QSI as small (about 70 pupils, pre-K to grade 12) with mixed teacher quality and a disorganised administration; some expat children go to the French school. — Talesmag post report, 2025-08-11, blog, confidence: low
 - [family.schools] Other schools: International School of Africa (English) and International School of Djibouti (bilingual French–English); local public schools teach in French. — Expat.com Djibouti guide, 2025-11-04, company, confidence: medium
 - [family.schools] Aggregator: private nursery 59,575 DJF/month (≈ €290); private primary school 1,562,984 DJF/year (≈ €7,625). — combien-coute.net, updated 2026-11-14, company, confidence: low
@@ -101,7 +101,6 @@
 - [social.food] Diplomats report fresh greens, seafood and dairy are scarce or expensive and restaurants are limited, overpriced and slow; shopping is at Casino, Al Gamil and the base stores. — Talesmag post reports, 2025-02-22 and 2025-08-11, blog, confidence: low
 - [social.religion] During Ramadan, do not eat, drink or smoke in public in daytime, including in your car; many restaurants close until sunset and working hours shrink. — UK FCDO 2026-07-27 / Wikivoyage accessed 2026-11-14, official, confidence: high
 - [social.religion] Khat arrives by air from Ethiopia and reaches the Central Market around 13:00; it is cheap and part of afternoon social life. — Wikivoyage "Djibouti", accessed 2026-11-14, blog, confidence: low
-- [social.pace] A diplomat says making local friends is hard because of socioeconomic and cultural gaps and notes "simmering tension between the Afars and the Somalis". — Talesmag post report, 2025-02-22, blog, confidence: low ⚠ spot-check 2026-11-14: unsupported — only source is an anonymous user-submitted post report
 - [community.expat] The Expat.com Djibouti forum has 2,728 members and 68 discussions; the military and diplomatic communities run their own networks. — Expat.com Djibouti guide, 2025-11-04, company, confidence: medium
 - [community.expat] One diplomatic family says morale was high and would have stayed a third year; another says morale was very low and the city is poor for young children. — Talesmag post reports, 2025-08-11 and 2025-02-22, blog, confidence: low
 - [admin.visa] Tourist e-visa: government fee 26.65 USD (≈ €23), 14- or 90-day single entry, about 10 working days. — Expat.com Djibouti guide, 2025-11-04, company, confidence: medium
@@ -128,6 +127,7 @@
 - No diaspora/returnee testimony, association or Facebook/WhatsApp group was found; no source on a diaspora price at markets.
 - No market-bargaining norms (how much is knocked off) beyond taxis and rent.
 - Ride-hailing apps (Velox, VGO Taxi) appear only on Wikivoyage, unverified.
+- Removed 2026-11-15: the [social.pace] item on a diplomat finding local friendships hard and Afar–Somali tension. Its only source was an anonymous user-submitted post report, and the BTI 2026 report (Afar–Issa conflict mainly in Ethiopia, spillover risk) does not support the claim as worded.
 <!-- social-pass gaps 2026-11-14 -->
 - @djiboutilives (LIVES network) exists but has 0 posts and 0 followers. No other Djibouti daily-life account was listed in instagram-accounts.md. 
 - Facebook "DJIBOUTI EXPATS" (2658064357581618): the chronological feed on 14 Nov 2026 showed small-shop promotions (items at 500–2,500 FDJ, a beauty treatment at 20,000 DJF) and land ads from a Somaliland agency, but no rental listing. Not used for items.
@@ -176,6 +176,8 @@
 
 - Social pass: Facebook "DJIBOUTI EXPATS" (2658064357581618) — chronological feed, 2026-11-14
 - Social pass: Instagram @djiboutilives — empty profile, 2026-11-14
+- QSI Djibouti admissions page — https://djibouti.qsi.org/admissions — company — 2026-11-15 (no tuition amounts)
+- BTI 2026 Djibouti country report — https://bti-project.org/en/reports/country-report/DJI — academic — 2026-11-15 (Afar–Issa conflict mainly Ethiopia, spillover risk)
 
 ## Spot-check (2026-11-14)
 
@@ -184,6 +186,6 @@
 - [safety.women] Freedom House scores protection of personal social freedoms — supported
 - [other] Freedom House rates Djibouti "Not Free" — supported
 - [daily.internet] Djibouti Telecom monthly prepaid fixed-line plan — supported
-- [family.schools] QSI (American curriculum, Haramous) — unsupported
+- [family.schools] QSI (American curriculum, Haramous) — unsupported (resolved 2026-11-15: re-sourced to Expat.com guide)
 - [housing.areas] Balbala, the southern suburb — supported
-- [social.pace] A diplomat says making local friends is hard — unsupported
+- [social.pace] A diplomat says making local friends is hard — unsupported (resolved 2026-11-15: item removed, see Gaps)

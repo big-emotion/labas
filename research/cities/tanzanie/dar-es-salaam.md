@@ -113,7 +113,7 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (imp
 - [cost.negotiation] A guide notes tuk-tuk drivers may add a "skin tax" for white foreigners, which it calls reasonable; Bongoyo Island has a resident price and a separate foreigner price. — Wikivoyage "Tanzania", accessed 2026-11-14, blog, confidence: low
 - [daily.transport] Uber stopped operating in Tanzania on 30 Jan 2026; Bolt dominates with 30,000+ drivers in eight cities, alongside inDrive and Farasi. The Expat.com items above still mention Uber. — The Chanzo, 2026-02-01, local-media, confidence: high
 - [daily.transport] The transport regulator LATRA capped ride-hailing commissions at 15% in March 2022, then raised the cap to 25% in December 2022. — The Chanzo, 2026-02-01, local-media, confidence: high
-- [cost.living] Petrol was capped at TZS 2,752/L (≈ €0.94) in Nov 2025 against TZS 4,083 (≈ €1.40) in Nov 2026, about 48% more in a year (own calculation). — The Rio Times, 2026-11-04, intl-media, confidence: high ⚠ spot-check 2026-11-14: unsupported — Rio Times article not found; October 2026 Dar petrol cap was TZS 4,057 per The Chanzo, and 4,083 matches a July Mtwara cap
+- [cost.living] The Dar es Salaam petrol cap was TZS 2,752/L (≈ €0.94) in Nov 2025 against TZS 4,083 (≈ €1.40) in Nov 2026, about 48% more in a year (own calculation). — EWURA cap prices 2025-11-05 (official) and Daily News, cap effective 2026-11-04 (local-media), confidence: medium ✔ re-sourced 2026-11-15
 - [cost.living] Retail sugar rose from TZS 2,500/kg (≈ €0.86) to TZS 3,000–3,600 (≈ €1.03–1.23) in June 2026, with about Sh3,500 in Tabata and Sh3,600 in Manzese. — The Citizen, 2026-06-28, local-media, confidence: high
 - [cost.living] Wholesale rice in Dar went from TZS 2,400/kg (≈ €0.82) in Jan 2025 to 2,600 (≈ €0.89) in Jan 2026; maize was TZS 1,100 (≈ €0.38). Ministry of Agriculture data. — The Citizen, 2026-01-21, local-media, confidence: high
 - [cost.living] A cost-of-living estimator (June 2026) gives milk 1 L US$0.92, bread 500 g US$0.68, rice 1 kg US$1.07, 12 eggs US$1.92, chicken breast 1 kg US$4.92 and shop beer 500 ml US$0.88. Model estimates, not field prices. — livingcost.org Dar es Salaam, updated 2026-06-21, company, confidence: low
@@ -196,6 +196,9 @@ Currency note: EUR equivalents use the dossier rate **1 EUR ≈ 2,920 TZS** (imp
 47. Retire in Tanzania: Zanzibar vs mainland — https://www.riotimesonline.com/retire-in-tanzania-foreigners-2026/ — intl-media — read 2026-11-14
 48. Getting around Dar — https://davidhmould.com/southern-africa/2025/8/26/getting-around-dar — blog — read 2026-11-14 (no fares)
 49. What to do in Dar es Salaam in November 2026 (re-read for ticket prices) — https://www.riotimesonline.com/what-to-do-in-dar-es-salaam-in-november-2026/ — intl-media — read 2026-11-14 (no entertainment prices)
+50. EWURA cap prices for petroleum products, November 2025 — https://www.ewura.go.tz/uploads/documents/en-1762290568-Cap%20Prices%20for%20petroleum%20products%20for%20the%20November%202025%20.pdf — official — read 2026-11-15
+51. Tanzania pledges to provide subsidies to protect consumers affected by rising fuel prices — https://dailynews.co.tz/?p=168951 — local-media — read 2026-11-15 (Nov 2026 cap, Dar petrol 4,083)
+52. EWURA cap prices for petroleum products, October 2026 — https://www.ewura.go.tz/uploads/documents/en-1791322203-Petroleum%20Cap%20Prices%20for%20%20October%202026%20%20%20.pdf — official — read 2026-11-15 (Dar petrol 4,057)
 
 ## Spot-check (2026-11-14)
 
