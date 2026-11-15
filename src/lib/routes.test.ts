@@ -1,0 +1,95 @@
+import { describe, expect, it } from "vitest";
+import { CITIES } from "./cities";
+import { QUESTIONS } from "./questions";
+import { routesFor, weekFor } from "./routes";
+
+// « rendez-vous » is a noun, not a « vous » addressed to the reader.
+const TRAIT_WORDS =
+  /personnalité|ton profil|tu es (quelqu|un |une |plutôt)|(?<![-\w])vous\b|\bvotre\b/i;
+const proposable = CITIES.filter((city) => !city.unsafe);
+const VALID: Record<string, Set<unknown>> = Object.fromEntries(
+  QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))]),
+);
+
+describe("the typical weeks and discovery routes of each city", () => {
+  it("gives every proposable city five typical weeks and a discovery day and week", () => {
+    for (const city of proposable) {
+      const routes = routesFor(city.name);
+      expect(routes, city.name).toBeDefined();
+      expect(routes?.weeks.length, city.name).toBe(5);
+      expect(routes?.discovery.day.length, city.name).toBe(4);
+      expect(routes?.discovery.week.length, city.name).toBe(7);
+    }
+  });
+
+  it("keys every typical week to real quiz answers", () => {
+    for (const city of proposable) {
+      for (const week of routesFor(city.name)?.weeks ?? []) {
+        const keys = Object.entries(week.for);
+        expect(keys.length, `${city.name}: ${week.title}`).toBeGreaterThan(0);
+        for (const [question, value] of keys) {
+          expect(VALID[question]?.has(value), `${city.name}: ${question}=${String(value)}`).toBe(
+            true,
+          );
+        }
+      }
+    }
+  });
+
+  it("fills seven days and names a base neighbourhood for every week", () => {
+    for (const city of proposable) {
+      for (const week of routesFor(city.name)?.weeks ?? []) {
+        expect(week.base, city.name).toBeTruthy();
+        expect(week.days.length, `${city.name}: ${week.title}`).toBe(7);
+        for (const day of week.days) expect(day.trim().length, city.name).toBeGreaterThan(10);
+      }
+    }
+  });
+
+  it("backs every city's routes with dated sources", () => {
+    for (const city of proposable) {
+      const sources = routesFor(city.name)?.sources ?? [];
+      expect(sources.length, city.name).toBeGreaterThan(0);
+      for (const source of sources) {
+        expect(source.url, city.name).toMatch(/^https:\/\//);
+        expect(source.accessed, city.name).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
+    }
+  });
+
+  it("speaks to the reader with « tu » and never names a trait", () => {
+    for (const city of proposable) {
+      const routes = routesFor(city.name);
+      const texts = [
+        ...(routes?.weeks ?? []).flatMap((w) => [w.title, w.base, ...w.days, w.budget ?? ""]),
+        ...(routes?.discovery.day ?? []),
+        ...(routes?.discovery.week ?? []),
+      ];
+      for (const text of texts) expect(text, city.name).not.toMatch(TRAIT_WORDS);
+    }
+  });
+
+  it("knows nothing about a city that is not in the catalogue", () => {
+    expect(routesFor("Atlantide")).toBeUndefined();
+  });
+});
+
+describe("picking the typical week that fits the reader's answers", () => {
+  const city = "Dakar";
+
+  it("picks the remote-work week for someone who works remotely", () => {
+    expect(weekFor(city, { job: "remote" })?.for.job).toBe("remote");
+  });
+
+  it("picks the family week for someone moving with children", () => {
+    expect(weekFor(city, { family: "parents", job: "cadre" })?.for.family).toBe("parents");
+  });
+
+  it("picks the trial week for someone who wants to test a few months", () => {
+    expect(weekFor(city, { project: "tester" })?.for.project).toBe("tester");
+  });
+
+  it("falls back to the first week when no answer matches", () => {
+    expect(weekFor(city, {})).toEqual(routesFor(city)?.weeks[0]);
+  });
+});
