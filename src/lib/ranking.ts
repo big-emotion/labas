@@ -588,12 +588,8 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     return good ? "Facile d'y entrer avec votre passeport" : "Un visa à demander à l'ambassade";
   if (part.fact === "faith")
     return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
-  if (part.fact === "reception")
-    return good
-      ? undefined
-      : part.value === 0
-        ? "Racisme anti-noir documenté (ONU, ONG)"
-        : "Violences xénophobes documentées (ONU, ONG)";
+  // Only what the sources say, in their words (operator, 2026-11-15).
+  if (part.fact === "reception") return good ? undefined : city.countryFacts?.racism?.label;
   if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
   if (part.fact === "kin")
     return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
