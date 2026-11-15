@@ -32,6 +32,12 @@ describe("the temperament of each city, neighbourhood by neighbourhood", () => {
     const calm: Answers = { saturday: 0 };
     expect(temperamentPart("Kigali", calm)).toBeGreaterThan(temperamentPart("Abidjan", calm));
     expect(temperamentPart("Abidjan", calm)).toBeGreaterThan(0);
+    // On the neighbourhoods alone too, not only through the city's nightlife score: ratings
+    // share one scale across cities (docs/criteria/temperament-cities.md).
+    expect(temperamentFit("Kigali", "saturday", 0)).toBeGreaterThan(
+      temperamentFit("Abidjan", "saturday", 0)!,
+    );
+    expect(temperamentFit("Abidjan", "saturday", 0)).toBeGreaterThan(0);
   });
 
   it("fits a reader who goes out late to Abidjan more than to Kigali", () => {

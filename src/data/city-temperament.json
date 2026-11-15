@@ -1,312 +1,312 @@
 [
   {
     "name": "Lagos",
-    "areas": 6,
+    "areas": 11,
     "editorial": false,
-    "saturday": [0, 3, 3],
-    "adventure": [3, 2, 1],
-    "order": [2, 3, 1],
-    "together": [1, 4, 1],
-    "friction": [0, 0, 6]
+    "saturday": [3, 6, 2],
+    "adventure": [3, 5, 3],
+    "order": [4, 7, 0],
+    "together": [1, 9, 1],
+    "friction": [0, 0, 11]
   },
   {
     "name": "Abidjan",
-    "areas": 7,
+    "areas": 13,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [3, 2, 2],
-    "order": [2, 2, 3],
-    "together": [1, 4, 2],
-    "friction": [0, 3, 4]
+    "saturday": [2, 8, 3],
+    "adventure": [3, 2, 8],
+    "order": [7, 6, 0],
+    "together": [1, 9, 3],
+    "friction": [0, 9, 4]
   },
   {
     "name": "Accra",
-    "areas": 7,
+    "areas": 11,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [3, 3, 1],
-    "order": [1, 4, 2],
-    "together": [1, 5, 1],
-    "friction": [0, 5, 2]
+    "saturday": [2, 7, 2],
+    "adventure": [3, 4, 4],
+    "order": [4, 7, 0],
+    "together": [1, 8, 2],
+    "friction": [0, 6, 5]
   },
   {
     "name": "Dakar",
-    "areas": 7,
+    "areas": 11,
     "editorial": false,
-    "saturday": [1, 5, 1],
-    "adventure": [2, 4, 1],
-    "order": [2, 4, 1],
-    "together": [1, 3, 3],
-    "friction": [0, 4, 3]
+    "saturday": [2, 7, 2],
+    "adventure": [2, 6, 3],
+    "order": [3, 8, 0],
+    "together": [1, 6, 4],
+    "friction": [0, 9, 2]
   },
   {
     "name": "Cotonou",
-    "areas": 6,
+    "areas": 8,
     "editorial": false,
-    "saturday": [1, 1, 4],
-    "adventure": [1, 2, 3],
-    "order": [1, 5, 0],
-    "together": [0, 4, 2],
-    "friction": [0, 0, 6]
+    "saturday": [2, 4, 2],
+    "adventure": [1, 2, 5],
+    "order": [2, 6, 0],
+    "together": [1, 5, 2],
+    "friction": [0, 5, 3]
   },
   {
     "name": "Kinshasa",
-    "areas": 6,
+    "areas": 10,
     "editorial": false,
-    "saturday": [1, 3, 2],
-    "adventure": [2, 2, 2],
-    "order": [3, 3, 0],
-    "together": [1, 4, 1],
-    "friction": [0, 1, 5]
+    "saturday": [2, 7, 1],
+    "adventure": [2, 4, 4],
+    "order": [6, 4, 0],
+    "together": [1, 8, 1],
+    "friction": [0, 1, 9]
   },
   {
     "name": "Douala",
-    "areas": 6,
+    "areas": 9,
     "editorial": false,
-    "saturday": [2, 2, 2],
-    "adventure": [1, 3, 2],
-    "order": [3, 3, 0],
-    "together": [1, 5, 0],
-    "friction": [0, 1, 5]
+    "saturday": [2, 5, 2],
+    "adventure": [1, 3, 5],
+    "order": [4, 5, 0],
+    "together": [1, 8, 0],
+    "friction": [0, 2, 7]
   },
   {
     "name": "Luanda",
-    "areas": 7,
+    "areas": 11,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [3, 2, 2],
-    "order": [1, 4, 2],
-    "together": [1, 6, 0],
-    "friction": [0, 0, 7]
+    "saturday": [2, 8, 1],
+    "adventure": [3, 2, 6],
+    "order": [5, 4, 2],
+    "together": [1, 10, 0],
+    "friction": [0, 4, 7]
   },
   {
     "name": "Nairobi",
-    "areas": 7,
+    "areas": 12,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [5, 2, 0],
-    "order": [0, 5, 2],
-    "together": [3, 3, 1],
-    "friction": [0, 4, 3]
+    "saturday": [3, 7, 2],
+    "adventure": [6, 4, 2],
+    "order": [2, 7, 3],
+    "together": [5, 5, 2],
+    "friction": [0, 8, 4]
   },
   {
     "name": "Addis-Abeba",
-    "areas": 5,
+    "areas": 8,
     "editorial": false,
-    "saturday": [2, 1, 2],
-    "adventure": [2, 2, 1],
-    "order": [2, 3, 0],
-    "together": [1, 2, 2],
-    "friction": [0, 2, 3]
+    "saturday": [2, 4, 2],
+    "adventure": [2, 4, 2],
+    "order": [3, 5, 0],
+    "together": [1, 6, 1],
+    "friction": [0, 2, 6]
   },
   {
     "name": "Dar es Salaam",
-    "areas": 7,
+    "areas": 10,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [2, 3, 2],
-    "order": [2, 4, 1],
-    "together": [1, 5, 1],
-    "friction": [0, 0, 7]
+    "saturday": [1, 7, 2],
+    "adventure": [2, 3, 5],
+    "order": [4, 6, 0],
+    "together": [1, 8, 1],
+    "friction": [0, 4, 6]
   },
   {
     "name": "Kampala",
-    "areas": 7,
+    "areas": 10,
     "editorial": false,
-    "saturday": [3, 2, 2],
-    "adventure": [2, 3, 2],
-    "order": [1, 3, 3],
-    "together": [0, 5, 2],
-    "friction": [0, 1, 6]
+    "saturday": [4, 4, 2],
+    "adventure": [2, 4, 4],
+    "order": [2, 8, 0],
+    "together": [1, 8, 1],
+    "friction": [0, 4, 6]
   },
   {
     "name": "Kigali",
-    "areas": 9,
+    "areas": 11,
     "editorial": false,
-    "saturday": [2, 4, 3],
-    "adventure": [4, 3, 2],
-    "order": [0, 5, 4],
-    "together": [3, 3, 3],
-    "friction": [0, 7, 2]
+    "saturday": [3, 8, 0],
+    "adventure": [4, 4, 3],
+    "order": [0, 7, 4],
+    "together": [4, 5, 2],
+    "friction": [4, 7, 0]
   },
   {
     "name": "Johannesburg",
-    "areas": 7,
+    "areas": 9,
     "editorial": false,
-    "saturday": [1, 2, 4],
-    "adventure": [4, 2, 1],
-    "order": [1, 2, 4],
-    "together": [2, 3, 2],
-    "friction": [0, 5, 2]
+    "saturday": [1, 6, 2],
+    "adventure": [4, 3, 2],
+    "order": [2, 3, 4],
+    "together": [2, 5, 2],
+    "friction": [0, 7, 2]
   },
   {
     "name": "Le Cap",
-    "areas": 6,
+    "areas": 10,
     "editorial": false,
-    "saturday": [1, 2, 3],
-    "adventure": [4, 2, 0],
-    "order": [0, 3, 3],
-    "together": [0, 4, 2],
-    "friction": [0, 5, 1]
+    "saturday": [0, 8, 2],
+    "adventure": [5, 2, 3],
+    "order": [0, 6, 4],
+    "together": [0, 9, 1],
+    "friction": [5, 4, 1]
   },
   {
     "name": "Durban",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [3, 2, 1],
-    "adventure": [2, 3, 1],
-    "order": [0, 3, 3],
-    "together": [0, 6, 0],
-    "friction": [3, 2, 1]
+    "saturday": [4, 3, 0],
+    "adventure": [3, 3, 1],
+    "order": [0, 2, 5],
+    "together": [0, 7, 0],
+    "friction": [3, 4, 0]
   },
   {
     "name": "Maputo",
-    "areas": 5,
+    "areas": 8,
     "editorial": false,
-    "saturday": [0, 3, 2],
-    "adventure": [3, 1, 1],
-    "order": [2, 3, 0],
-    "together": [0, 4, 1],
-    "friction": [0, 2, 3]
+    "saturday": [2, 4, 2],
+    "adventure": [3, 3, 2],
+    "order": [2, 6, 0],
+    "together": [1, 6, 1],
+    "friction": [0, 7, 1]
   },
   {
     "name": "Port-Louis",
     "areas": 7,
     "editorial": false,
-    "saturday": [3, 4, 0],
+    "saturday": [5, 2, 0],
     "adventure": [1, 5, 1],
-    "order": [0, 4, 3],
+    "order": [0, 1, 6],
     "together": [1, 6, 0],
-    "friction": [1, 5, 1]
+    "friction": [6, 1, 0]
   },
   {
     "name": "Le Caire",
-    "areas": 7,
+    "areas": 10,
     "editorial": false,
-    "saturday": [1, 3, 3],
-    "adventure": [3, 4, 0],
-    "order": [1, 5, 1],
-    "together": [1, 4, 2],
-    "friction": [0, 6, 1]
+    "saturday": [2, 5, 3],
+    "adventure": [3, 6, 1],
+    "order": [2, 6, 2],
+    "together": [1, 8, 1],
+    "friction": [0, 9, 1]
   },
   {
     "name": "Casablanca",
-    "areas": 7,
+    "areas": 9,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [3, 3, 1],
-    "order": [0, 4, 3],
-    "together": [1, 6, 0],
-    "friction": [0, 5, 2]
+    "saturday": [2, 5, 2],
+    "adventure": [3, 3, 3],
+    "order": [0, 7, 2],
+    "together": [1, 7, 1],
+    "friction": [0, 9, 0]
   },
   {
     "name": "Alger",
-    "areas": 8,
+    "areas": 11,
     "editorial": false,
-    "saturday": [2, 4, 2],
-    "adventure": [3, 3, 2],
-    "order": [0, 5, 3],
-    "together": [1, 4, 3],
-    "friction": [2, 4, 2]
+    "saturday": [5, 6, 0],
+    "adventure": [3, 3, 5],
+    "order": [0, 9, 2],
+    "together": [1, 8, 2],
+    "friction": [2, 9, 0]
   },
   {
     "name": "Tunis",
-    "areas": 7,
+    "areas": 8,
     "editorial": false,
-    "saturday": [2, 3, 2],
-    "adventure": [4, 2, 1],
-    "order": [0, 4, 3],
-    "together": [1, 5, 1],
-    "friction": [0, 6, 1]
+    "saturday": [4, 3, 1],
+    "adventure": [4, 2, 2],
+    "order": [0, 6, 2],
+    "together": [1, 7, 0],
+    "friction": [0, 8, 0]
   },
   {
     "name": "Marrakech",
     "areas": 6,
     "editorial": false,
-    "saturday": [1, 4, 1],
+    "saturday": [2, 3, 1],
     "adventure": [4, 0, 2],
     "order": [1, 1, 4],
     "together": [2, 4, 0],
-    "friction": [2, 3, 1]
+    "friction": [2, 4, 0]
   },
   {
     "name": "Lomé",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [2, 1, 3],
-    "adventure": [2, 2, 2],
-    "order": [1, 5, 0],
-    "together": [0, 4, 2],
-    "friction": [0, 0, 6]
+    "saturday": [2, 4, 1],
+    "adventure": [1, 4, 2],
+    "order": [1, 6, 0],
+    "together": [1, 5, 1],
+    "friction": [0, 7, 0]
   },
   {
     "name": "Freetown",
-    "areas": 8,
+    "areas": 10,
     "editorial": false,
-    "saturday": [1, 6, 1],
-    "adventure": [3, 2, 3],
-    "order": [2, 6, 0],
-    "together": [1, 5, 2],
-    "friction": [0, 1, 7]
+    "saturday": [6, 3, 1],
+    "adventure": [2, 4, 4],
+    "order": [3, 7, 0],
+    "together": [1, 8, 1],
+    "friction": [0, 0, 10]
   },
   {
     "name": "Monrovia",
-    "areas": 6,
+    "areas": 10,
     "editorial": false,
-    "saturday": [2, 3, 1],
-    "adventure": [3, 2, 1],
-    "order": [2, 4, 0],
-    "together": [2, 3, 1],
-    "friction": [0, 3, 3]
+    "saturday": [7, 3, 0],
+    "adventure": [2, 3, 5],
+    "order": [6, 4, 0],
+    "together": [2, 7, 1],
+    "friction": [0, 3, 7]
   },
   {
     "name": "Conakry",
-    "areas": 6,
+    "areas": 10,
     "editorial": false,
-    "saturday": [0, 5, 1],
-    "adventure": [2, 3, 1],
-    "order": [3, 3, 0],
-    "together": [2, 4, 0],
-    "friction": [0, 0, 6]
+    "saturday": [3, 6, 1],
+    "adventure": [2, 3, 5],
+    "order": [7, 3, 0],
+    "together": [2, 8, 0],
+    "friction": [0, 0, 10]
   },
   {
     "name": "Bissau",
-    "areas": 6,
+    "areas": 8,
     "editorial": false,
-    "saturday": [1, 3, 2],
-    "adventure": [0, 5, 1],
-    "order": [2, 4, 0],
-    "together": [0, 4, 2],
-    "friction": [0, 1, 5]
+    "saturday": [3, 5, 0],
+    "adventure": [0, 6, 2],
+    "order": [4, 4, 0],
+    "together": [0, 6, 2],
+    "friction": [0, 2, 6]
   },
   {
     "name": "Banjul",
     "areas": 4,
     "editorial": false,
-    "saturday": [1, 2, 1],
+    "saturday": [1, 3, 0],
     "adventure": [2, 1, 1],
-    "order": [1, 2, 1],
+    "order": [1, 3, 0],
     "together": [0, 4, 0],
     "friction": [0, 2, 2]
   },
   {
     "name": "Praia",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [0, 4, 2],
-    "adventure": [3, 2, 1],
-    "order": [1, 3, 2],
-    "together": [2, 3, 1],
-    "friction": [0, 5, 1]
+    "saturday": [3, 4, 0],
+    "adventure": [3, 2, 2],
+    "order": [0, 5, 2],
+    "together": [2, 4, 1],
+    "friction": [0, 7, 0]
   },
   {
     "name": "Nouakchott",
     "areas": 6,
     "editorial": false,
-    "saturday": [3, 3, 0],
-    "adventure": [2, 1, 3],
+    "saturday": [4, 2, 0],
+    "adventure": [0, 3, 3],
     "order": [3, 3, 0],
-    "together": [1, 4, 1],
+    "together": [0, 6, 0],
     "friction": [0, 0, 6]
   },
   {
@@ -316,7 +316,7 @@
     "saturday": [0, 1, 0],
     "adventure": [0, 0, 1],
     "order": [1, 0, 0],
-    "together": [0, 0, 1],
+    "together": [0, 1, 0],
     "friction": [0, 0, 1]
   },
   {
@@ -341,31 +341,31 @@
   },
   {
     "name": "Brazzaville",
-    "areas": 6,
+    "areas": 8,
     "editorial": false,
-    "saturday": [1, 1, 4],
-    "adventure": [2, 2, 2],
-    "order": [1, 5, 0],
-    "together": [1, 2, 3],
-    "friction": [0, 4, 2]
+    "saturday": [3, 4, 1],
+    "adventure": [1, 3, 4],
+    "order": [3, 5, 0],
+    "together": [1, 4, 3],
+    "friction": [0, 5, 3]
   },
   {
     "name": "Libreville",
-    "areas": 7,
+    "areas": 9,
     "editorial": false,
-    "saturday": [1, 3, 3],
-    "adventure": [3, 2, 2],
-    "order": [2, 3, 2],
-    "together": [1, 5, 1],
-    "friction": [0, 2, 5]
+    "saturday": [2, 6, 1],
+    "adventure": [3, 2, 4],
+    "order": [4, 5, 0],
+    "together": [1, 7, 1],
+    "friction": [0, 4, 5]
   },
   {
     "name": "Malabo",
     "areas": 5,
     "editorial": false,
-    "saturday": [0, 5, 0],
+    "saturday": [2, 3, 0],
     "adventure": [2, 2, 1],
-    "order": [0, 4, 1],
+    "order": [0, 5, 0],
     "together": [1, 3, 1],
     "friction": [0, 5, 0]
   },
@@ -373,11 +373,11 @@
     "name": "São Tomé",
     "areas": 7,
     "editorial": false,
-    "saturday": [3, 4, 0],
-    "adventure": [0, 5, 2],
+    "saturday": [5, 2, 0],
+    "adventure": [0, 4, 3],
     "order": [1, 6, 0],
     "together": [0, 6, 1],
-    "friction": [0, 1, 6]
+    "friction": [0, 0, 7]
   },
   {
     "name": "N'Djamena",
@@ -385,7 +385,7 @@
     "editorial": false,
     "saturday": [1, 4, 2],
     "adventure": [1, 2, 4],
-    "order": [4, 3, 0],
+    "order": [5, 2, 0],
     "together": [1, 2, 4],
     "friction": [0, 1, 6]
   },
@@ -403,21 +403,21 @@
     "name": "Djibouti",
     "areas": 7,
     "editorial": false,
-    "saturday": [3, 3, 1],
+    "saturday": [3, 4, 0],
     "adventure": [3, 3, 1],
-    "order": [1, 4, 2],
-    "together": [3, 4, 0],
-    "friction": [0, 5, 2]
+    "order": [1, 6, 0],
+    "together": [2, 5, 0],
+    "friction": [0, 6, 1]
   },
   {
     "name": "Bujumbura",
-    "areas": 6,
+    "areas": 8,
     "editorial": false,
-    "saturday": [1, 3, 2],
-    "adventure": [2, 2, 2],
-    "order": [2, 3, 1],
-    "together": [1, 2, 3],
-    "friction": [0, 1, 5]
+    "saturday": [5, 2, 1],
+    "adventure": [1, 3, 4],
+    "order": [2, 6, 0],
+    "together": [1, 5, 2],
+    "friction": [0, 1, 7]
   },
   {
     "name": "Asmara",
@@ -426,7 +426,7 @@
     "saturday": [5, 2, 0],
     "adventure": [0, 2, 5],
     "order": [0, 7, 0],
-    "together": [1, 3, 3],
+    "together": [1, 6, 0],
     "friction": [0, 0, 7]
   },
   {
@@ -471,160 +471,160 @@
   },
   {
     "name": "Antananarivo",
-    "areas": 7,
+    "areas": 9,
     "editorial": false,
-    "saturday": [4, 2, 1],
-    "adventure": [2, 4, 1],
-    "order": [2, 5, 0],
-    "together": [2, 5, 0],
-    "friction": [0, 1, 6]
+    "saturday": [5, 4, 0],
+    "adventure": [2, 4, 3],
+    "order": [4, 5, 0],
+    "together": [2, 7, 0],
+    "friction": [0, 1, 8]
   },
   {
     "name": "Lusaka",
-    "areas": 7,
+    "areas": 11,
     "editorial": false,
-    "saturday": [1, 5, 1],
-    "adventure": [5, 1, 1],
-    "order": [0, 3, 4],
-    "together": [2, 4, 1],
-    "friction": [0, 6, 1]
+    "saturday": [2, 8, 1],
+    "adventure": [6, 1, 4],
+    "order": [3, 4, 4],
+    "together": [2, 8, 1],
+    "friction": [0, 7, 4]
   },
   {
     "name": "Harare",
-    "areas": 7,
+    "areas": 10,
     "editorial": false,
-    "saturday": [3, 3, 1],
-    "adventure": [4, 2, 1],
-    "order": [1, 4, 2],
-    "together": [1, 5, 1],
-    "friction": [0, 3, 4]
+    "saturday": [3, 6, 1],
+    "adventure": [4, 3, 3],
+    "order": [3, 5, 2],
+    "together": [1, 8, 1],
+    "friction": [0, 3, 7]
   },
   {
     "name": "Lilongwe",
-    "areas": 4,
+    "areas": 7,
     "editorial": false,
-    "saturday": [1, 2, 1],
-    "adventure": [1, 1, 2],
-    "order": [0, 3, 1],
-    "together": [1, 3, 0],
-    "friction": [0, 1, 3]
+    "saturday": [4, 3, 0],
+    "adventure": [1, 1, 5],
+    "order": [2, 5, 0],
+    "together": [1, 6, 0],
+    "friction": [0, 1, 6]
   },
   {
     "name": "Windhoek",
-    "areas": 7,
+    "areas": 9,
     "editorial": false,
-    "saturday": [3, 3, 1],
-    "adventure": [3, 3, 1],
-    "order": [1, 1, 5],
-    "together": [2, 2, 3],
-    "friction": [4, 2, 1]
+    "saturday": [5, 4, 0],
+    "adventure": [5, 2, 2],
+    "order": [1, 1, 7],
+    "together": [2, 6, 1],
+    "friction": [7, 1, 1]
   },
   {
     "name": "Gaborone",
-    "areas": 7,
+    "areas": 9,
     "editorial": false,
-    "saturday": [1, 6, 0],
-    "adventure": [4, 3, 0],
-    "order": [0, 2, 5],
-    "together": [2, 4, 1],
-    "friction": [0, 6, 1]
+    "saturday": [2, 7, 0],
+    "adventure": [4, 3, 2],
+    "order": [0, 3, 6],
+    "together": [2, 6, 1],
+    "friction": [0, 9, 0]
   },
   {
     "name": "Mbabane",
     "areas": 8,
     "editorial": false,
-    "saturday": [4, 3, 1],
+    "saturday": [5, 3, 0],
     "adventure": [1, 6, 1],
     "order": [0, 6, 2],
-    "together": [2, 4, 2],
-    "friction": [0, 7, 1]
+    "together": [2, 5, 1],
+    "friction": [0, 8, 0]
   },
   {
     "name": "Maseru",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [2, 4, 0],
-    "adventure": [2, 2, 2],
-    "order": [0, 4, 2],
-    "together": [1, 3, 2],
-    "friction": [1, 4, 1]
+    "saturday": [5, 2, 0],
+    "adventure": [2, 2, 3],
+    "order": [0, 5, 2],
+    "together": [0, 5, 2],
+    "friction": [2, 3, 2]
   },
   {
     "name": "Moroni",
-    "areas": 8,
+    "areas": 9,
     "editorial": false,
-    "saturday": [4, 3, 1],
-    "adventure": [0, 3, 5],
-    "order": [3, 5, 0],
-    "together": [0, 5, 3],
-    "friction": [0, 4, 4]
+    "saturday": [7, 2, 0],
+    "adventure": [0, 3, 6],
+    "order": [4, 5, 0],
+    "together": [0, 7, 2],
+    "friction": [0, 0, 9]
   },
   {
     "name": "Victoria",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [3, 1, 2],
-    "adventure": [2, 3, 1],
-    "order": [0, 1, 5],
-    "together": [1, 4, 1],
-    "friction": [1, 5, 0]
+    "saturday": [4, 3, 0],
+    "adventure": [2, 5, 0],
+    "order": [0, 1, 6],
+    "together": [1, 6, 0],
+    "friction": [7, 0, 0]
   },
   {
     "name": "Abuja",
-    "areas": 6,
+    "areas": 10,
     "editorial": false,
-    "saturday": [0, 5, 1],
-    "adventure": [2, 4, 0],
-    "order": [0, 3, 3],
-    "together": [2, 3, 1],
-    "friction": [0, 6, 0]
+    "saturday": [5, 4, 1],
+    "adventure": [2, 4, 4],
+    "order": [4, 5, 1],
+    "together": [2, 8, 0],
+    "friction": [0, 6, 4]
   },
   {
     "name": "Grand-Bassam",
-    "areas": 3,
+    "areas": 5,
     "editorial": false,
-    "saturday": [0, 2, 1],
-    "adventure": [0, 2, 1],
-    "order": [1, 2, 0],
-    "together": [0, 2, 1],
-    "friction": [0, 1, 2]
+    "saturday": [2, 3, 0],
+    "adventure": [0, 3, 2],
+    "order": [1, 4, 0],
+    "together": [0, 4, 1],
+    "friction": [0, 5, 0]
   },
   {
     "name": "San-Pédro",
-    "areas": 4,
+    "areas": 6,
     "editorial": false,
-    "saturday": [0, 3, 1],
-    "adventure": [0, 2, 2],
-    "order": [0, 3, 1],
-    "together": [1, 3, 0],
-    "friction": [0, 0, 4]
+    "saturday": [2, 4, 0],
+    "adventure": [0, 2, 4],
+    "order": [1, 5, 0],
+    "together": [0, 6, 0],
+    "friction": [0, 0, 6]
   },
   {
     "name": "Kumasi",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [3, 2, 1],
-    "adventure": [2, 3, 1],
-    "order": [1, 3, 2],
-    "together": [0, 5, 1],
-    "friction": [0, 5, 1]
+    "saturday": [4, 3, 0],
+    "adventure": [0, 5, 2],
+    "order": [2, 5, 0],
+    "together": [0, 6, 1],
+    "friction": [0, 6, 1]
   },
   {
     "name": "Saint-Louis",
-    "areas": 4,
+    "areas": 5,
     "editorial": false,
-    "saturday": [1, 3, 0],
-    "adventure": [1, 1, 2],
-    "order": [2, 2, 0],
-    "together": [1, 2, 1],
-    "friction": [0, 0, 4]
+    "saturday": [3, 2, 0],
+    "adventure": [0, 2, 3],
+    "order": [1, 4, 0],
+    "together": [1, 3, 1],
+    "friction": [0, 0, 5]
   },
   {
     "name": "Saly",
     "areas": 4,
     "editorial": false,
     "saturday": [3, 1, 0],
-    "adventure": [1, 1, 2],
+    "adventure": [1, 2, 1],
     "order": [2, 2, 0],
     "together": [0, 2, 2],
     "friction": [0, 0, 4]
@@ -633,7 +633,7 @@
     "name": "Ouidah",
     "areas": 4,
     "editorial": false,
-    "saturday": [3, 1, 0],
+    "saturday": [4, 0, 0],
     "adventure": [0, 1, 3],
     "order": [2, 2, 0],
     "together": [0, 3, 1],
@@ -641,21 +641,21 @@
   },
   {
     "name": "Kpalimé",
-    "areas": 3,
+    "areas": 4,
     "editorial": false,
-    "saturday": [1, 2, 0],
-    "adventure": [0, 1, 2],
-    "order": [1, 2, 0],
-    "together": [0, 3, 0],
-    "friction": [0, 2, 1]
+    "saturday": [3, 1, 0],
+    "adventure": [0, 0, 4],
+    "order": [1, 3, 0],
+    "together": [0, 4, 0],
+    "friction": [0, 3, 1]
   },
   {
     "name": "Bo",
     "areas": 4,
     "editorial": false,
     "saturday": [2, 2, 0],
-    "adventure": [0, 1, 3],
-    "order": [2, 2, 0],
+    "adventure": [0, 0, 4],
+    "order": [3, 1, 0],
     "together": [1, 3, 0],
     "friction": [0, 0, 4]
   },
@@ -663,60 +663,60 @@
     "name": "Buchanan",
     "areas": 10,
     "editorial": false,
-    "saturday": [5, 4, 1],
-    "adventure": [0, 4, 6],
-    "order": [5, 5, 0],
+    "saturday": [9, 1, 0],
+    "adventure": [0, 0, 10],
+    "order": [10, 0, 0],
     "together": [0, 7, 3],
     "friction": [0, 0, 10]
   },
   {
     "name": "Labé",
-    "areas": 4,
+    "areas": 6,
     "editorial": false,
-    "saturday": [1, 3, 0],
-    "adventure": [0, 0, 4],
-    "order": [4, 0, 0],
-    "together": [0, 4, 0],
-    "friction": [0, 0, 4]
+    "saturday": [6, 0, 0],
+    "adventure": [0, 0, 6],
+    "order": [6, 0, 0],
+    "together": [0, 6, 0],
+    "friction": [0, 0, 6]
   },
   {
     "name": "Bubaque",
     "areas": 4,
     "editorial": false,
-    "saturday": [2, 1, 1],
-    "adventure": [1, 0, 3],
+    "saturday": [2, 2, 0],
+    "adventure": [0, 1, 3],
     "order": [3, 1, 0],
     "together": [1, 2, 1],
-    "friction": [0, 1, 3]
+    "friction": [0, 0, 4]
   },
   {
     "name": "Serrekunda",
     "areas": 7,
     "editorial": false,
-    "saturday": [1, 4, 2],
+    "saturday": [2, 4, 1],
     "adventure": [3, 2, 2],
-    "order": [2, 4, 1],
+    "order": [2, 5, 0],
     "together": [1, 4, 2],
-    "friction": [0, 0, 7]
+    "friction": [0, 5, 2]
   },
   {
     "name": "Mindelo",
-    "areas": 6,
+    "areas": 7,
     "editorial": false,
-    "saturday": [1, 4, 1],
-    "adventure": [1, 3, 2],
-    "order": [1, 5, 0],
-    "together": [0, 5, 1],
-    "friction": [0, 5, 1]
+    "saturday": [5, 2, 0],
+    "adventure": [0, 3, 4],
+    "order": [1, 6, 0],
+    "together": [0, 6, 1],
+    "friction": [0, 7, 0]
   },
   {
     "name": "Nouadhibou",
     "areas": 3,
     "editorial": false,
-    "saturday": [1, 2, 0],
+    "saturday": [2, 1, 0],
     "adventure": [0, 2, 1],
     "order": [1, 2, 0],
-    "together": [1, 2, 0],
+    "together": [0, 3, 0],
     "friction": [0, 3, 0]
   },
   {
@@ -736,7 +736,7 @@
     "saturday": [0, 1, 0],
     "adventure": [0, 0, 1],
     "order": [0, 1, 0],
-    "together": [0, 0, 1],
+    "together": [0, 1, 0],
     "friction": [0, 0, 1]
   },
   {
@@ -751,69 +751,69 @@
   },
   {
     "name": "Lubumbashi",
-    "areas": 5,
+    "areas": 8,
     "editorial": false,
-    "saturday": [1, 2, 2],
-    "adventure": [1, 2, 2],
-    "order": [2, 3, 0],
-    "together": [1, 3, 1],
-    "friction": [0, 0, 5]
+    "saturday": [3, 5, 0],
+    "adventure": [1, 3, 4],
+    "order": [5, 3, 0],
+    "together": [1, 6, 1],
+    "friction": [0, 0, 8]
   },
   {
     "name": "Yaoundé",
-    "areas": 6,
+    "areas": 13,
     "editorial": false,
-    "saturday": [1, 4, 1],
-    "adventure": [1, 3, 2],
-    "order": [1, 5, 0],
-    "together": [1, 3, 2],
-    "friction": [0, 6, 0]
+    "saturday": [5, 6, 2],
+    "adventure": [1, 4, 8],
+    "order": [5, 8, 0],
+    "together": [1, 9, 3],
+    "friction": [0, 12, 1]
   },
   {
     "name": "Kribi",
     "areas": 4,
     "editorial": false,
-    "saturday": [1, 2, 1],
+    "saturday": [2, 2, 0],
     "adventure": [0, 3, 1],
     "order": [2, 2, 0],
     "together": [1, 1, 2],
-    "friction": [0, 0, 4]
-  },
-  {
-    "name": "Benguela",
-    "areas": 4,
-    "editorial": false,
-    "saturday": [0, 3, 1],
-    "adventure": [1, 2, 1],
-    "order": [1, 3, 0],
-    "together": [1, 2, 1],
     "friction": [0, 2, 2]
   },
   {
-    "name": "Pointe-Noire",
-    "areas": 6,
+    "name": "Benguela",
+    "areas": 5,
     "editorial": false,
-    "saturday": [2, 4, 0],
-    "adventure": [1, 3, 2],
-    "order": [2, 4, 0],
-    "together": [1, 4, 1],
-    "friction": [0, 5, 1]
+    "saturday": [2, 3, 0],
+    "adventure": [0, 3, 2],
+    "order": [2, 3, 0],
+    "together": [1, 4, 0],
+    "friction": [0, 3, 2]
+  },
+  {
+    "name": "Pointe-Noire",
+    "areas": 8,
+    "editorial": false,
+    "saturday": [3, 5, 0],
+    "adventure": [1, 3, 4],
+    "order": [4, 4, 0],
+    "together": [1, 6, 1],
+    "friction": [0, 7, 1]
   },
   {
     "name": "Port-Gentil",
-    "areas": 4,
+    "areas": 6,
     "editorial": false,
-    "saturday": [2, 2, 0],
-    "adventure": [1, 2, 1],
-    "order": [1, 2, 1],
-    "together": [1, 3, 0],
-    "friction": [0, 1, 3]
+    "saturday": [5, 1, 0],
+    "adventure": [1, 2, 3],
+    "order": [3, 3, 0],
+    "together": [0, 6, 0],
+    "friction": [0, 3, 3]
   },
   {
     "name": "Bata",
     "areas": 6,
     "editorial": false,
-    "saturday": [1, 4, 1],
+    "saturday": [4, 1, 1],
     "adventure": [0, 2, 4],
     "order": [1, 5, 0],
     "together": [0, 6, 0],
@@ -823,7 +823,7 @@
     "name": "Santo António",
     "areas": 5,
     "editorial": false,
-    "saturday": [3, 2, 0],
+    "saturday": [5, 0, 0],
     "adventure": [0, 1, 4],
     "order": [0, 5, 0],
     "together": [1, 3, 1],
@@ -831,19 +831,19 @@
   },
   {
     "name": "Moundou",
-    "areas": 5,
+    "areas": 9,
     "editorial": false,
-    "saturday": [0, 4, 1],
-    "adventure": [0, 0, 5],
-    "order": [1, 4, 0],
-    "together": [0, 3, 2],
-    "friction": [0, 1, 4]
+    "saturday": [5, 4, 0],
+    "adventure": [0, 0, 9],
+    "order": [8, 1, 0],
+    "together": [0, 7, 2],
+    "friction": [0, 1, 8]
   },
   {
     "name": "Berbérati",
     "areas": 1,
     "editorial": true,
-    "saturday": [0, 1, 0],
+    "saturday": [1, 0, 0],
     "adventure": [0, 0, 1],
     "order": [1, 0, 0],
     "together": [0, 1, 0],
@@ -851,21 +851,21 @@
   },
   {
     "name": "Mombasa",
-    "areas": 6,
+    "areas": 9,
     "editorial": false,
-    "saturday": [1, 3, 2],
-    "adventure": [3, 2, 1],
-    "order": [2, 2, 2],
-    "together": [1, 5, 0],
-    "friction": [0, 5, 1]
+    "saturday": [3, 4, 2],
+    "adventure": [3, 3, 3],
+    "order": [3, 6, 0],
+    "together": [1, 8, 0],
+    "friction": [0, 6, 3]
   },
   {
     "name": "Bahir Dar",
     "areas": 4,
     "editorial": false,
-    "saturday": [0, 3, 1],
+    "saturday": [2, 2, 0],
     "adventure": [0, 1, 3],
-    "order": [1, 3, 0],
+    "order": [0, 4, 0],
     "together": [0, 4, 0],
     "friction": [0, 0, 4]
   },
@@ -875,7 +875,7 @@
     "editorial": false,
     "saturday": [2, 3, 1],
     "adventure": [2, 3, 1],
-    "order": [1, 4, 1],
+    "order": [0, 5, 1],
     "together": [1, 4, 1],
     "friction": [0, 0, 6]
   },
@@ -883,9 +883,9 @@
     "name": "Arusha",
     "areas": 4,
     "editorial": false,
-    "saturday": [2, 1, 1],
-    "adventure": [2, 2, 0],
-    "order": [0, 3, 1],
+    "saturday": [2, 2, 0],
+    "adventure": [1, 3, 0],
+    "order": [0, 4, 0],
     "together": [0, 4, 0],
     "friction": [0, 4, 0]
   },
@@ -907,53 +907,53 @@
     "adventure": [0, 1, 3],
     "order": [0, 4, 0],
     "together": [0, 2, 2],
-    "friction": [0, 3, 1]
+    "friction": [0, 4, 0]
   },
   {
     "name": "Gitega",
-    "areas": 6,
+    "areas": 12,
     "editorial": false,
-    "saturday": [3, 3, 0],
-    "adventure": [0, 1, 5],
-    "order": [3, 3, 0],
-    "together": [1, 4, 1],
-    "friction": [0, 0, 6]
+    "saturday": [11, 1, 0],
+    "adventure": [0, 0, 12],
+    "order": [5, 7, 0],
+    "together": [0, 11, 1],
+    "friction": [0, 0, 12]
   },
   {
     "name": "Tadjourah",
     "areas": 4,
     "editorial": false,
-    "saturday": [3, 1, 0],
+    "saturday": [4, 0, 0],
     "adventure": [0, 2, 2],
     "order": [0, 4, 0],
     "together": [2, 1, 1],
-    "friction": [0, 0, 4]
+    "friction": [0, 4, 0]
   },
   {
     "name": "Massaoua",
-    "areas": 4,
+    "areas": 6,
     "editorial": false,
-    "saturday": [1, 3, 0],
-    "adventure": [0, 1, 3],
-    "order": [1, 3, 0],
-    "together": [1, 2, 1],
-    "friction": [0, 0, 4]
+    "saturday": [4, 2, 0],
+    "adventure": [0, 2, 4],
+    "order": [0, 6, 0],
+    "together": [1, 4, 1],
+    "friction": [0, 0, 6]
   },
   {
     "name": "Hargeisa",
-    "areas": 6,
+    "areas": 12,
     "editorial": false,
-    "saturday": [3, 3, 0],
-    "adventure": [0, 4, 2],
-    "order": [3, 3, 0],
-    "together": [1, 5, 0],
-    "friction": [0, 1, 5]
+    "saturday": [9, 3, 0],
+    "adventure": [0, 4, 8],
+    "order": [3, 9, 0],
+    "together": [1, 11, 0],
+    "friction": [0, 0, 12]
   },
   {
     "name": "Wau",
     "areas": 1,
     "editorial": true,
-    "saturday": [0, 1, 0],
+    "saturday": [1, 0, 0],
     "adventure": [0, 0, 1],
     "order": [1, 0, 0],
     "together": [0, 1, 0],
@@ -961,53 +961,53 @@
   },
   {
     "name": "Alexandrie",
-    "areas": 6,
+    "areas": 8,
     "editorial": false,
-    "saturday": [2, 3, 1],
-    "adventure": [2, 4, 0],
-    "order": [0, 5, 1],
-    "together": [0, 5, 1],
-    "friction": [0, 5, 1]
+    "saturday": [3, 5, 0],
+    "adventure": [1, 5, 2],
+    "order": [0, 8, 0],
+    "together": [0, 7, 1],
+    "friction": [0, 8, 0]
   },
   {
     "name": "Assouan",
     "areas": 5,
     "editorial": false,
     "saturday": [4, 1, 0],
-    "adventure": [0, 2, 3],
-    "order": [2, 3, 0],
-    "together": [1, 2, 2],
-    "friction": [0, 0, 5]
+    "adventure": [0, 1, 4],
+    "order": [1, 4, 0],
+    "together": [0, 3, 2],
+    "friction": [0, 5, 0]
   },
   {
     "name": "Tanger",
-    "areas": 6,
+    "areas": 10,
     "editorial": false,
-    "saturday": [1, 4, 1],
-    "adventure": [3, 2, 1],
-    "order": [1, 2, 3],
-    "together": [1, 4, 1],
-    "friction": [2, 4, 0]
+    "saturday": [6, 4, 0],
+    "adventure": [3, 2, 5],
+    "order": [1, 8, 1],
+    "together": [2, 7, 1],
+    "friction": [3, 7, 0]
   },
   {
     "name": "Oran",
-    "areas": 6,
+    "areas": 9,
     "editorial": false,
-    "saturday": [1, 3, 2],
-    "adventure": [1, 4, 1],
-    "order": [0, 5, 1],
-    "together": [1, 4, 1],
-    "friction": [2, 3, 1]
+    "saturday": [4, 4, 1],
+    "adventure": [0, 5, 4],
+    "order": [0, 9, 0],
+    "together": [0, 8, 1],
+    "friction": [5, 4, 0]
   },
   {
     "name": "Sousse",
-    "areas": 5,
+    "areas": 7,
     "editorial": false,
-    "saturday": [1, 3, 1],
-    "adventure": [3, 2, 0],
-    "order": [0, 3, 2],
-    "together": [0, 4, 1],
-    "friction": [0, 5, 0]
+    "saturday": [4, 1, 2],
+    "adventure": [3, 3, 1],
+    "order": [0, 6, 1],
+    "together": [1, 5, 1],
+    "friction": [0, 7, 0]
   },
   {
     "name": "Benghazi",
@@ -1033,11 +1033,11 @@
     "name": "Vilankulo",
     "areas": 4,
     "editorial": false,
-    "saturday": [2, 2, 0],
+    "saturday": [3, 1, 0],
     "adventure": [0, 4, 0],
     "order": [0, 4, 0],
     "together": [1, 3, 0],
-    "friction": [0, 3, 1]
+    "friction": [0, 4, 0]
   },
   {
     "name": "Grand Baie",
@@ -1045,95 +1045,95 @@
     "editorial": false,
     "saturday": [2, 2, 1],
     "adventure": [3, 2, 0],
-    "order": [0, 2, 3],
+    "order": [0, 0, 5],
     "together": [0, 5, 0],
-    "friction": [0, 5, 0]
+    "friction": [5, 0, 0]
   },
   {
     "name": "Nosy Be",
     "areas": 5,
     "editorial": false,
     "saturday": [2, 2, 1],
-    "adventure": [3, 0, 2],
-    "order": [2, 3, 0],
+    "adventure": [0, 4, 1],
+    "order": [1, 4, 0],
     "together": [2, 2, 1],
-    "friction": [0, 0, 5]
+    "friction": [0, 5, 0]
   },
   {
     "name": "Livingstone",
-    "areas": 4,
-    "editorial": false,
-    "saturday": [1, 3, 0],
-    "adventure": [1, 1, 2],
-    "order": [1, 3, 0],
-    "together": [1, 2, 1],
-    "friction": [0, 4, 0]
-  },
-  {
-    "name": "Bulawayo",
-    "areas": 5,
-    "editorial": false,
-    "saturday": [1, 4, 0],
-    "adventure": [0, 4, 1],
-    "order": [1, 1, 3],
-    "together": [1, 3, 1],
-    "friction": [0, 2, 3]
-  },
-  {
-    "name": "Blantyre",
-    "areas": 6,
-    "editorial": false,
-    "saturday": [1, 4, 1],
-    "adventure": [0, 5, 1],
-    "order": [2, 4, 0],
-    "together": [1, 4, 1],
-    "friction": [0, 1, 5]
-  },
-  {
-    "name": "Swakopmund",
     "areas": 5,
     "editorial": false,
     "saturday": [3, 2, 0],
-    "adventure": [3, 1, 1],
-    "order": [0, 1, 4],
-    "together": [1, 2, 2],
-    "friction": [4, 1, 0]
+    "adventure": [0, 2, 3],
+    "order": [0, 5, 0],
+    "together": [1, 3, 1],
+    "friction": [0, 5, 0]
+  },
+  {
+    "name": "Bulawayo",
+    "areas": 7,
+    "editorial": false,
+    "saturday": [3, 4, 0],
+    "adventure": [0, 5, 2],
+    "order": [0, 4, 3],
+    "together": [1, 5, 1],
+    "friction": [0, 2, 5]
+  },
+  {
+    "name": "Blantyre",
+    "areas": 7,
+    "editorial": false,
+    "saturday": [3, 4, 0],
+    "adventure": [0, 5, 2],
+    "order": [1, 6, 0],
+    "together": [1, 6, 0],
+    "friction": [0, 1, 6]
+  },
+  {
+    "name": "Swakopmund",
+    "areas": 6,
+    "editorial": false,
+    "saturday": [5, 1, 0],
+    "adventure": [3, 1, 2],
+    "order": [1, 1, 4],
+    "together": [0, 4, 2],
+    "friction": [4, 1, 1]
   },
   {
     "name": "Maun",
     "areas": 3,
     "editorial": false,
-    "saturday": [0, 3, 0],
-    "adventure": [1, 2, 0],
+    "saturday": [1, 2, 0],
+    "adventure": [0, 2, 1],
     "order": [0, 3, 0],
     "together": [0, 3, 0],
     "friction": [0, 0, 3]
   },
   {
     "name": "Manzini",
-    "areas": 7,
+    "areas": 10,
     "editorial": false,
-    "saturday": [4, 3, 0],
-    "adventure": [2, 4, 1],
-    "order": [0, 5, 2],
-    "together": [3, 2, 2],
-    "friction": [0, 6, 1]
+    "saturday": [8, 2, 0],
+    "adventure": [0, 7, 3],
+    "order": [2, 7, 1],
+    "together": [2, 7, 1],
+    "friction": [0, 9, 1]
   },
   {
     "name": "Teyateyaneng",
     "areas": 5,
     "editorial": false,
-    "saturday": [1, 3, 1],
+    "saturday": [1, 4, 0],
     "adventure": [0, 1, 4],
     "order": [0, 5, 0],
-    "together": [0, 1, 4],
+    "together": [0, 2, 3],
     "friction": [0, 5, 0]
   },
   {
     "name": "Mutsamudu",
     "areas": 6,
     "editorial": false,
-    "saturday": [2, 4, 0],
+    "saturday": [5, 1, 0],
     "adventure": [0, 1, 5],
     "order": [5, 1, 0],
     "together": [1, 3, 2],
@@ -1143,10 +1143,10 @@
     "name": "Praslin",
     "areas": 4,
     "editorial": false,
-    "saturday": [1, 2, 1],
+    "saturday": [1, 3, 0],
     "adventure": [2, 2, 0],
-    "order": [0, 1, 3],
-    "together": [2, 1, 1],
+    "order": [0, 0, 4],
+    "together": [2, 2, 0],
     "friction": [0, 4, 0]
   }
 ]
