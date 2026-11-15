@@ -16,3 +16,18 @@ jobs:
           cache: npm
       - run: npm ci
       - run: make check
+
+  # The production image must build before a tag can ship it (docs/deploy.md).
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t labas:ci .
+      - name: nginx accepts its configuration
+        run: docker run --rm labas:ci nginx -t
+      - name: the image serves the home page
+        run: |
+          docker run -d --name labas -p 8080:80 labas:ci
+          sleep 2
+          curl -fsS http://localhost:8080/ | grep -q "<title>"
+          curl -fsS -o /dev/null http://localhost:8080/ville/dakar/
