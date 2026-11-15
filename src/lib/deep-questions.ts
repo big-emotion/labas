@@ -1,4 +1,5 @@
 import { QUESTIONS, type Question } from "./questions";
+import type { Answers } from "./ranking";
 
 /**
  * The fuller questionnaire of /approfondir: the quick quiz's bank, then the filters and stated
@@ -196,8 +197,114 @@ const FURTHER: Omit<Question, "group">[] = [
   },
 ];
 
+const settling = (a: Answers) => Boolean(a.project) && a.project !== "decouvrir";
+const holiday = (a: Answers) => a.project === "decouvrir";
+
+/**
+ * Asked only to the readers they fit, before the general questions: the project and the
+ * temperament answers decide (docs/criteria/adaptive-questions.md, validated 2026-11-15).
+ */
+const PROFILE: Omit<Question, "group">[] = [
+  {
+    id: "nightOut",
+    title: "Vos soirées là-bas, plutôt…",
+    when: (a) => holiday(a) && a.saturday === 1,
+    choices: [
+      { label: "Clubs et concerts jusqu'à l'aube", value: "clubs" },
+      { label: "Maquis et bars où l'on danse", value: "maquis" },
+      { label: "Un verre au bord de l'eau, au coucher du soleil", value: "waterside" },
+    ],
+  },
+  {
+    id: "quietStay",
+    title: "Des vacances au calme, c'est…",
+    when: (a) => holiday(a) && a.saturday === 0,
+    choices: [
+      { label: "La plage, et c'est tout", value: "beach" },
+      { label: "Marcher, randonner, respirer", value: "walks" },
+      { label: "Visiter des villes d'histoire, sans se presser", value: "history" },
+    ],
+  },
+  {
+    id: "daytime",
+    title: "Le jour, vous avez envie de…",
+    max: 2,
+    when: holiday,
+    choices: [
+      { label: "Musées, histoire, architecture", value: "history" },
+      { label: "Marchés, artisans, vie de quartier", value: "markets" },
+      { label: "Plage et baignade", value: "beach" },
+      { label: "Excursions dans la nature", value: "nature" },
+    ],
+  },
+  {
+    id: "offTrack",
+    title: "Sortir des sentiers battus, jusqu'où ?",
+    when: (a) => holiday(a) && a.adventure === "seeking",
+    choices: [
+      { label: "Là où peu de visiteurs vont", value: "far" },
+      { label: "Un peu, avec un point de chute confortable", value: "some" },
+      { label: "Pas trop loin du confort", value: "near" },
+    ],
+  },
+  {
+    id: "afterWork",
+    title: "En semaine, après le travail ?",
+    when: (a) => settling(a) && a.saturday !== undefined && a.saturday >= 0.5,
+    choices: [
+      { label: "Afterworks et rooftops", value: "rooftops" },
+      { label: "Sport et plein air", value: "outdoors" },
+      { label: "Rentrer chez moi au calme", value: "home" },
+    ],
+  },
+  {
+    id: "friends",
+    title: "Pour vous faire des amis là-bas ?",
+    when: (a) => settling(a) && a.together === 1,
+    choices: [
+      { label: "Associations et bénévolat", value: "associations" },
+      { label: "La diaspora et d'autres repats", value: "diaspora" },
+      { label: "Les voisins, la vie de quartier", value: "neighbours" },
+    ],
+  },
+  {
+    id: "mustWork",
+    title: "Ce qui doit marcher sans faute ?",
+    max: 2,
+    when: (a) => settling(a) && a.friction === 0,
+    choices: [
+      { label: "Le courant et l'eau", value: "utilities" },
+      { label: "Internet", value: "internet" },
+      { label: "Les démarches", value: "paperwork" },
+      { label: "Les soins", value: "care" },
+    ],
+  },
+  {
+    id: "ambition",
+    title: "Là-bas, vous venez surtout pour…",
+    when: (a) => (a.project === "installer" || a.project === "investir") && a.together === 0,
+    choices: [
+      { label: "Faire grandir une affaire", value: "business" },
+      { label: "Accélérer ma carrière", value: "career" },
+      { label: "Me construire un réseau", value: "network" },
+    ],
+  },
+  {
+    id: "evenings",
+    title: "Le soir, chez vous, il vous faut…",
+    when: (a) => a.project === "installer" && a.saturday === 0 && a.order === 1,
+    choices: [
+      { label: "Un quartier résidentiel et calme", value: "residential" },
+      { label: "De l'espace, un jardin", value: "space" },
+      { label: "La mer ou la nature tout près", value: "nature" },
+    ],
+  },
+];
+export const PROFILE_QUESTIONS: Question[] = PROFILE.map((q) => ({ ...q, group: "VOTRE PROFIL" }));
+
 export const DEEP_QUESTIONS: Question[] = [
   ...QUESTIONS,
+  ...PROFILE_QUESTIONS,
   ...FURTHER.filter((q) => !QUESTIONS.some((free) => free.id === q.id)).map((q) => ({
     ...q,
     group: "POUR AFFINER",

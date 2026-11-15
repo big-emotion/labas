@@ -1,4 +1,4 @@
-import { DEEP_QUESTIONS } from "./deep-questions";
+import { DEEP_QUESTIONS, PROFILE_QUESTIONS } from "./deep-questions";
 import { QUESTIONS, type Question } from "./questions";
 import { bestMatches, topCities, type Answers } from "./ranking";
 
@@ -14,7 +14,12 @@ function pickNext(bank: Question[], answers: Answers, asked: string[]): string |
   const open = bank.filter((q) => !asked.includes(q.id) && (q.when?.(answers) ?? true));
   if (open.length === 0) return undefined;
   if (!asked.includes("project") && open.some((q) => q.id === "project")) return "project";
+  // The questions that fit this reader's profile come before the general ones.
+  const fitting = open.filter((q) => PROFILE_QUESTIONS.includes(q));
+  return mostDecisive(fitting.length ? fitting : open, answers);
+}
 
+function mostDecisive(open: Question[], answers: Answers): string | undefined {
   let best: string | undefined;
   let bestSpread = -1;
   for (const question of open) {
