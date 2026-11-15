@@ -6,6 +6,23 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-15
+
+### Security
+
+- The site serves HSTS, a Content-Security-Policy (no inline script), frame protection and a
+  Permissions-Policy.
+- Test tooling upgraded (vitest 5), clearing two critical advisories.
+
+### Added
+
+- Audience measurement with Plausible: cookieless, one anonymous count per quick-quiz answer;
+  origin, family country, feeling at home and faith are never sent.
+
+### Fixed
+
+- Every source behind a score links over https.
+
 ## [0.2.0] - 2026-11-15
 
 ### Added
@@ -47,7 +64,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/big-emotion/labas/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/big-emotion/labas/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/big-emotion/labas/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/big-emotion/labas/compare/v0.1.2...v0.1.3
