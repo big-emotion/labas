@@ -21,7 +21,7 @@ type QuizLanguage = Exclude<Language, "es" | "sw"> | "es" | "sw";
 export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban" | "island";
 
 /**
- * Every answer is optional: an unanswered question drops out of the score. The free quiz and
+ * Every answer is optional: an unanswered question drops out of the score. The quick quiz and
  * the fuller questionnaire (/approfondir) fill the same profile.
  */
 type Origin = City["zone"] | "ameriques";

@@ -31,6 +31,14 @@ jobs:
           sleep 2
           curl -fsS http://localhost:8080/ | grep -q "<title>"
           curl -fsS -o /dev/null http://localhost:8080/ville/dakar/
+      - name: the image serves the security headers
+        run: |
+          headers=$(curl -fsSI http://localhost:8080/)
+          for h in strict-transport-security content-security-policy x-frame-options \
+                   x-content-type-options referrer-policy permissions-policy; do
+            echo "$headers" | grep -qi "^$h:" || { echo "missing $h"; exit 1; }
+          done
+          echo "$headers" | grep -i "^content-security-policy:" | grep -q "script-src 'self'"
 
   # The repository is public and agents push to it: scan the whole history for secrets.
   # The gitleaks binary, not its Action, which needs a paid licence for organisation accounts.

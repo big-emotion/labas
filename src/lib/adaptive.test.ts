@@ -22,7 +22,7 @@ describe("choosing the next question", () => {
   });
 });
 
-describe("the free quiz, one question at a time", () => {
+describe("the quick quiz, one question at a time", () => {
   // Plays the quiz as a reader who always takes the answer at `pick` (wrapping around).
   function play(pick: number) {
     const answers: Record<string, unknown> = {};

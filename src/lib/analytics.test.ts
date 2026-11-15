@@ -45,7 +45,7 @@ describe("the one anonymous event sent per quiz answer", () => {
     expect(answerEvent("specialistCare", true)).toBeNull();
   });
 
-  it("only sends answers to the ten level-1 questions", () => {
+  it("only sends answers to the quick-quiz questions", () => {
     expect(answerEvent("visaFreeOnly", true)).toBeNull();
     expect(answerEvent("anything", "x")).toBeNull();
   });

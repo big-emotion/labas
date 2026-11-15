@@ -1,7 +1,7 @@
 # Level-1 city lines — ten test cities
 
 > Status: draft for tone review, 2026-11-14. These are the two editorial lines each city needs
-> for the free quiz ([architecture §A.6](./architecture.md#a6-the-two-lines-each-city-needs-for-level-1)),
+> for the quick quiz ([architecture §A.6](./architecture.md#a6-the-two-lines-each-city-needs-for-level-1)),
 > written for ten test cities before the other 105. Nothing is wired into `src/` yet.
 
 For each city:

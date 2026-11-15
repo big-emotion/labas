@@ -1,0 +1,149 @@
+---
+import Page from "../layouts/Page.astro";
+---
+
+<Page
+  title="Raconte ta situation"
+  description="Prototype : décris ta situation avec tes mots, Là-bas en tire tes réponses au quiz."
+  noindex
+>
+  <h1>Raconte ta situation</h1>
+  <p class="lead">
+    Écris en quelques phrases ce que tu cherches. On en tire tes réponses, tu les corriges, et on te
+    montre les villes qui te ressemblent. Ton texte reste dans ton navigateur.
+  </p>
+
+  <form id="situation">
+    <label for="text" class="small">
+      Ta situation
+    </label>
+    <textarea
+      id="text"
+      rows="5"
+      placeholder="Par exemple : on a deux enfants, je suis infirmière, on veut la mer et pas trop cher, on parle français."
+    ></textarea>
+    <button type="submit" class="go">
+      Voir ce que j'ai compris
+    </button>
+  </form>
+
+  <section id="understood" hidden>
+    <h2>Ce que j'ai compris</h2>
+    <p class="small">Touche une réponse pour la retirer si je me suis trompé.</p>
+    <ul id="chips" class="chips"></ul>
+    <h2>Tes trois villes</h2>
+    <ol id="cities" class="cities"></ol>
+    <p class="small">
+      Prototype : pour affiner, <a href="/">réponds au quiz</a>.
+    </p>
+  </section>
+
+  <script>
+    import { QUESTIONS } from "../lib/questions";
+    import { bestMatches, type Answers } from "../lib/ranking";
+    import { readSituation } from "../lib/situation";
+
+    const form = document.getElementById("situation") as HTMLFormElement;
+    const text = document.getElementById("text") as HTMLTextAreaElement;
+    const section = document.getElementById("understood") as HTMLElement;
+    const chips = document.getElementById("chips") as HTMLUListElement;
+    const cities = document.getElementById("cities") as HTMLOListElement;
+    let answers: Answers = {};
+
+    function labelOf(question: string, value: unknown): string {
+      const q = QUESTIONS.find((item) => item.id === question);
+      const choice = q?.choices.find((c) => c.value === value);
+      return choice ? choice.label : String(value);
+    }
+
+    function render() {
+      chips.replaceChildren();
+      for (const [question, value] of Object.entries(answers)) {
+        for (const one of Array.isArray(value) ? value : [value]) {
+          const li = document.createElement("li");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "chip";
+          button.textContent = labelOf(question, one);
+          button.addEventListener("click", () => {
+            const current = (answers as Record<string, unknown>)[question];
+            if (Array.isArray(current)) {
+              const rest = current.filter((item) => item !== one);
+              (answers as Record<string, unknown>)[question] = rest.length ? rest : undefined;
+            } else delete (answers as Record<string, unknown>)[question];
+            render();
+          });
+          li.append(button);
+          chips.append(li);
+        }
+      }
+      cities.replaceChildren();
+      for (const match of bestMatches(answers, 3)) {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `/ville/${match.city.slug}/`;
+        link.textContent = `${match.city.name}, ${match.city.country}`;
+        li.append(link);
+        cities.append(li);
+      }
+      section.hidden = false;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      answers = readSituation(text.value).answers;
+      render();
+    });
+  </script>
+
+  <style>
+    #situation {
+      display: grid;
+      gap: 10px;
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font: inherit;
+      color: var(--thread);
+      background: var(--night-deep);
+      border: 2px solid var(--night-lift);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .go,
+    .chip {
+      min-height: 44px;
+      font: inherit;
+      border-radius: 999px;
+      border: 2px solid var(--saffron);
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .go {
+      background: var(--saffron);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .chip {
+      background: var(--night-deep);
+      color: var(--thread);
+    }
+    .chips {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cities {
+      display: grid;
+      gap: 6px;
+    }
+    .small {
+      font-size: 0.8rem;
+      color: var(--thread-dim);
+    }
+  </style>
+</Page>

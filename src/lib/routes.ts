@@ -4,7 +4,7 @@ import type { Answers } from "./ranking";
 
 /**
  * A typical week and a discovery route per city, written from the sourced neighbourhood sheets
- * in research/cities/<country>/<city>.neighbourhoods.md. Each week is keyed to level-1 quiz
+ * in research/cities/<country>/<city>.neighbourhoods.md. Each week is keyed to quick-quiz
  * answers so the site can show the one that fits the reader.
  */
 export interface TypicalWeek {
@@ -36,7 +36,7 @@ export function routesFor(cityName: string): CityRoutes | undefined {
 }
 
 /**
- * The way of working a typical week is written for. The free quiz now asks for the profession
+ * The way of working a typical week is written for. The quick quiz now asks for the profession
  * and today's life rather than « Et le travail ? », so the weeks keep their keys and the answer
  * is read from those.
  */
