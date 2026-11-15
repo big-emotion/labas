@@ -6,8 +6,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 ## Rules
 
 - **Reader-facing text is French**, plain and everyday; docs, comments and commits are English.
-- **Mobile first**: design and check at 430 px, then 768, then 1440. On the phone the top three
-  stay pinned to the bottom of the screen; keep every tap visibly changing something.
+- **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
+  change something: while the reader answers, the map colours every city by its score but names
+  none; the top three are named only with the result (decided 2026-11-15).
 - **Test first** (Vitest, `src/**/*.test.ts`), through the public functions `rankCities` and
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them

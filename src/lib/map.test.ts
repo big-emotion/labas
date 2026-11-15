@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dotTier, placeLabels } from "./map";
+import { answersBeforeLight, dotTier, placeLabels } from "./map";
 
 describe("the city map", () => {
   it("colours a city warmer the more it resembles the reader", () => {
@@ -25,5 +25,14 @@ describe("the city map", () => {
     const [west] = placeLabels([{ name: "Dakar", x: 45, y: 124 }]);
     expect(east.anchor).toBe("end");
     expect(west.anchor).toBe("start");
+  });
+});
+
+describe("when the map lights up", () => {
+  it("waits for enough answers before colouring any city", () => {
+    expect(answersBeforeLight(0)).toBe(3);
+    expect(answersBeforeLight(1)).toBe(2);
+    expect(answersBeforeLight(3)).toBe(0);
+    expect(answersBeforeLight(7)).toBe(0);
   });
 });

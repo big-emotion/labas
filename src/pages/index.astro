@@ -54,6 +54,7 @@ const description =
             <g id="highlights"></g>
           </svg>
         </div>
+        <p class="map-legend" id="legend"></p>
       </aside>
 
       <main class="main">
@@ -119,14 +120,6 @@ const description =
             </button>
           </div>
         </form>
-
-        <section class="now" aria-labelledby="now-title">
-          <h3 id="now-title">Pour l'instant, tes trois villes</h3>
-          <ol class="podium" id="podium" aria-live="polite"></ol>
-          <p class="hint">
-            Plus une ville te ressemble, plus son point est gros et coloré sur la carte.
-          </p>
-        </section>
 
         <div id="outcome" class="outcome" hidden>
           <section class="results" aria-labelledby="results-title">
@@ -276,7 +269,7 @@ const description =
 
     <script>
       import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
-      import { dotTier, placeLabels } from "../lib/map";
+      import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { linesFor } from "../lib/lines";
       import { photoFor } from "../lib/photos";
 
@@ -320,7 +313,7 @@ const description =
         for (const dot of document.querySelectorAll<SVGCircleElement>("#map .dot")) {
           const name = dot.dataset.city as string;
           const relative =
-            scores.size === 0 ? 0.5 : scores.has(name) ? (scores.get(name)! - worst) / span : 0;
+            scores.size === 0 ? 0 : scores.has(name) ? (scores.get(name)! - worst) / span : 0;
           dot.setAttribute("r", (1.5 + relative * relative * 5).toFixed(1));
           dot.setAttribute(
             "class",
@@ -482,21 +475,14 @@ const description =
         );
         // Before the first answer nothing is ranked yet: every dot stays the same and no city
         // is named, so the quiz does not look decided before it starts.
-        renderMap(answered ? matches.map((m) => m.city.name) : [], answered ? scores : new Map());
-        (document.querySelector(".now") as HTMLElement).hidden = !answered;
-
-        const podium = document.getElementById("podium") as HTMLOListElement;
-        podium.replaceChildren(
-          ...matches.map((m) => {
-            const item = document.createElement("li");
-            const name = document.createElement("b");
-            name.textContent = m.city.name;
-            const score = document.createElement("span");
-            score.textContent = percent(m.score);
-            item.append(name, score);
-            return item;
-          }),
-        );
+        // The map shows nothing before the first answer, colours every city by its score while the
+        // reader answers, and names the top three only with the result.
+        const count = Object.values(current).filter((value) => value !== undefined).length;
+        const missing = answersBeforeLight(count);
+        renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
+        (document.getElementById("legend") as HTMLElement).textContent = missing
+          ? `Encore ${missing} ${missing > 1 ? "réponses" : "réponse"} avant que la carte s'allume.`
+          : "Plus un point est chaud, plus la ville correspond à tes réponses. Les noms des trois premières apparaissent avec ton résultat.";
 
         (document.getElementById("results-hint") as HTMLElement).hidden = answered;
         (document.getElementById("results-sub") as HTMLElement).hidden = !answered;
@@ -521,9 +507,11 @@ const description =
       // the pinned top three (architecture.md §A.3, quiz mockup of 2026-11-15).
       const steps = [...form.querySelectorAll<HTMLFieldSetElement>(".question")];
       let step = 0;
+      let revealed = false;
 
       function show(next: number) {
         step = Math.max(0, Math.min(steps.length, next));
+        revealed = step >= steps.length;
         // On the phone the title gives way to the map once the reader has started.
         document.body.classList.toggle("started", step > 0);
         steps.forEach((fieldset, index) => (fieldset.hidden = index !== step));
@@ -534,6 +522,7 @@ const description =
         (document.getElementById("progress") as HTMLElement).style.width =
           `${Math.round((done / steps.length) * 100)}%`;
         steps[step]?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+        render();
       }
 
       form.addEventListener("click", (event) => {
@@ -561,7 +550,6 @@ const description =
       });
 
       show(0);
-      render();
     </script>
 
     <style>
@@ -657,54 +645,9 @@ const description =
           transform: scale(2.6);
         }
       }
-      /* On the phone the map scrolls away while the reader answers: the top three
-         stay pinned to the bottom of the screen so every tap still shows a change. */
-      .podium {
-        position: fixed;
-        z-index: 2;
-        inset: auto 0 0;
-        padding: 10px max(16px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
-          max(16px, env(safe-area-inset-left));
-        background: var(--night-deep);
-        box-shadow: 0 -8px 24px rgba(14, 17, 69, 0.8);
-        list-style: none;
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        font-size: 0.95rem;
-      }
-      .now[hidden] {
-        display: none;
-      }
-      .now h3,
-      .now .hint {
-        display: none;
-      }
       /* On a computer the map stays beside the questions: the question sits in a saffron
-         frame and the top three come right under it (quiz mockup, 2026-11-15). */
+         frame (quiz mockup, 2026-11-15). */
       @media (min-width: 880px) {
-        .now {
-          display: grid;
-          gap: 10px;
-        }
-        .now h3 {
-          display: block;
-          margin: 0;
-          font-size: 1rem;
-          color: var(--thread-dim);
-        }
-        .now .hint {
-          display: block;
-          margin: 4px 0 0;
-        }
-        .podium {
-          position: static;
-          padding: 0;
-          background: none;
-          box-shadow: none;
-          font-size: 1.05rem;
-        }
         .question:not([hidden]) {
           background: var(--night-deep);
           border: 2px solid var(--saffron);
@@ -723,19 +666,6 @@ const description =
         .main {
           padding-top: 24px;
         }
-      }
-      .podium :global(li) {
-        display: flex;
-        gap: 8px;
-        align-items: baseline;
-        background: var(--night-lift);
-        border-radius: 999px;
-        padding: 6px 14px;
-      }
-      .podium :global(span) {
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        color: var(--saffron);
       }
       .main {
         display: grid;
@@ -1117,6 +1047,11 @@ const description =
         :global(body.started) .map svg {
           max-height: 34vh;
         }
+      }
+      .map-legend {
+        margin: 0;
+        color: var(--thread-dim);
+        font-size: 0.85rem;
       }
       .progress {
         display: grid;

@@ -48,3 +48,13 @@ export function placeLabels(points: { name: string; x: number; y: number }[]): L
       return { ...point, labelY, anchor };
     });
 }
+
+/**
+ * One answer says too little to rank 115 cities: the first one alone puts North Africa on top
+ * because it only weighs safety and cost. The map stays neutral until enough answers agree.
+ */
+export const ANSWERS_TO_LIGHT = 3;
+
+export function answersBeforeLight(answered: number): number {
+  return Math.max(0, ANSWERS_TO_LIGHT - answered);
+}
