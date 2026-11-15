@@ -9,6 +9,7 @@ import {
 import { TRAITS } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
+import { profileEffects, type ProfileAnswers } from "./profile-pulls";
 
 /** The non-negotiables offered by the quiz (their values predate the sourced criteria). */
 export type Priority =
@@ -26,7 +27,7 @@ export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban" | 
  */
 type Origin = City["zone"] | "ameriques";
 
-export interface Answers {
+export interface Answers extends ProfileAnswers {
   project?: "installer" | "pied" | "tester" | "investir" | "decouvrir";
   budget?: "serre" | "moyen" | "large";
   family?: "celib" | "couple" | "fonder" | "parents";
@@ -482,6 +483,9 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (answers.tripsHome !== undefined) add(STEP_PULLS.tripsHome(answers.tripsHome));
   if (answers.setupBudget) add(SETUP[answers.setupBudget]);
   if (answers.belonging) add(BELONGING[answers.belonging]);
+  const profile = profileEffects(answers);
+  add(profile.pulls);
+  facts.push(...profile.facts);
 
   const languages = languagesOf(answers);
   if (languages.length) facts.push({ kind: "languages", values: languages, weight: 6 });
