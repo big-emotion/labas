@@ -4,6 +4,7 @@ import Wordmark from "../components/Wordmark.astro";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
 import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
+import borders from "../data/africa-borders.json";
 
 const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
 const description =
@@ -32,8 +33,13 @@ const description =
             id="map"
             viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
             role="img"
-            aria-label="Carte des 115 villes : les plus proches de tes réponses s'allument"
+            aria-label="Carte de l'Afrique : plus une ville te ressemble, plus son point est gros et coloré"
           >
+            <g class="land" aria-hidden="true">
+              {borders.map((country) => (
+                <path d={country.d} />
+              ))}
+            </g>
             {dots.map((dot) => (
               <circle
                 class="dot"
@@ -52,9 +58,22 @@ const description =
       </aside>
 
       <main class="main">
+        <div class="progress">
+          <span id="counter" class="counter">
+            Question 1 sur {QUESTIONS.length}
+          </span>
+          <span class="track">
+            <span id="progress"></span>
+          </span>
+        </div>
         <form id="form" class="questions" aria-label="Tes réponses">
-          {QUESTIONS.map((question) => (
-            <fieldset class="question" data-question={question.id} data-max={question.max ?? 1}>
+          {QUESTIONS.map((question, index) => (
+            <fieldset
+              class="question"
+              data-question={question.id}
+              data-max={question.max ?? 1}
+              hidden={index > 0}
+            >
               <legend>
                 {question.title}
                 {question.max && <span class="hint">Jusqu'à {question.max} choix</span>}
@@ -71,29 +90,67 @@ const description =
                   </button>
                 ))}
               </div>
+              <div class="steps">
+                <button type="button" class="back" data-step="back" disabled={index === 0}>
+                  ← Retour
+                </button>
+                {question.max ? (
+                  <button type="button" class="next" data-step="next">
+                    Valider
+                  </button>
+                ) : (
+                  <button type="button" class="skip" data-step="next">
+                    Passer
+                  </button>
+                )}
+              </div>
             </fieldset>
           ))}
+          <div id="ready" class="ready" hidden>
+            <h2>C'est prêt.</h2>
+            <p>Trois villes te ressemblent plus que les autres. Découvre pourquoi.</p>
+            <button type="button" id="reveal" class="primary">
+              Voir mes villes
+            </button>
+            <a href="/approfondir" class="secondary">
+              Affiner avec le questionnaire complet
+            </a>
+            <button type="button" class="back" data-step="back">
+              ← Changer une réponse
+            </button>
+          </div>
         </form>
 
-        <section class="results" aria-labelledby="results-title">
-          <h2 id="results-title">Tes trois villes</h2>
-          <p class="hint" id="results-hint">
-            Sans réponse, voici les villes qui plaisent au plus grand nombre.
-          </p>
-          <p class="hint" id="results-sub" hidden>
-            Selon tes réponses, de la plus proche à la moins proche.
-          </p>
-          <div id="cards" class="cards"></div>
-        </section>
+        <div id="outcome" class="outcome" hidden>
+          <section class="results" aria-labelledby="results-title">
+            <h2 id="results-title">Tes trois villes</h2>
+            <p class="hint" id="results-hint">
+              Sans réponse, voici les villes qui plaisent au plus grand nombre.
+            </p>
+            <p class="hint" id="results-sub" hidden>
+              Selon tes réponses, de la plus proche à la moins proche.
+            </p>
+            <div id="cards" class="cards"></div>
+          </section>
 
-        <section class="others" aria-labelledby="others-title">
-          <h2 id="others-title">Toutes les autres villes</h2>
-          <p class="hint">Les 115 villes, triées selon tes réponses.</p>
-          <ol id="rows" class="rows"></ol>
-          <button type="button" id="more" class="more">
-            Voir plus de villes
-          </button>
-        </section>
+          <section class="others" aria-labelledby="others-title">
+            <h2 id="others-title">Toutes les autres villes</h2>
+            <p class="hint">Les 115 villes, triées selon tes réponses.</p>
+            <ol id="rows" class="rows"></ol>
+            <button type="button" id="more" class="more">
+              Voir plus de villes
+            </button>
+          </section>
+
+          <section class="further">
+            <h2>Envie d'aller plus loin ?</h2>
+            <p>
+              Le questionnaire complet : tes contraintes (école, soins, visa), ce qui te pèse et ce
+              qui te plaît, pour un classement plus fin.
+            </p>
+            <a href="/approfondir">Affiner avec le questionnaire complet</a>
+          </section>
+        </div>
 
         <footer class="footer">
           <p>
@@ -212,6 +269,7 @@ const description =
 
     <script>
       import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
+      import { dotTier, placeLabels } from "../lib/map";
       import { linesFor } from "../lib/lines";
       import { photoFor } from "../lib/photos";
 
@@ -254,34 +312,36 @@ const description =
         const span = best - worst || 1;
         for (const dot of document.querySelectorAll<SVGCircleElement>("#map .dot")) {
           const name = dot.dataset.city as string;
-          const relative = ((scores.get(name) ?? worst) - worst) / span;
+          const relative = scores.has(name) ? (scores.get(name)! - worst) / span : 0;
           dot.setAttribute("r", (1.5 + relative * relative * 5).toFixed(1));
-          dot.classList.toggle("warm", relative > 0.75);
-          dot.classList.toggle("top", names.includes(name));
+          dot.setAttribute(
+            "class",
+            `dot ${dotTier(relative)}${names.includes(name) ? " top" : ""}`,
+          );
         }
         const highlights = document.getElementById("highlights") as unknown as SVGGElement;
-        highlights.replaceChildren();
-        for (const name of names) {
+        const points = names.map((name) => {
           const dot = document.querySelector<SVGCircleElement>(
             `#map .dot[data-city="${CSS.escape(name)}"]`,
-          );
-          if (!dot) continue;
-          const x = Number(dot.getAttribute("cx"));
-          const y = Number(dot.getAttribute("cy"));
-          const ring = document.createElementNS(SVG, "circle");
-          ring.setAttribute("class", "ring");
-          ring.setAttribute("cx", String(x));
-          ring.setAttribute("cy", String(y));
-          ring.setAttribute("r", "8");
-          const label = document.createElementNS(SVG, "text");
-          const onLeft = x > 270;
-          label.setAttribute("class", "label");
-          label.setAttribute("x", String(onLeft ? x - 12 : x + 12));
-          label.setAttribute("y", String(y + 4));
-          label.setAttribute("text-anchor", onLeft ? "end" : "start");
-          label.textContent = name;
-          highlights.append(ring, label);
-        }
+          )!;
+          return { name, x: Number(dot.getAttribute("cx")), y: Number(dot.getAttribute("cy")) };
+        });
+        highlights.replaceChildren(
+          ...placeLabels(points).flatMap((label) => {
+            const ring = document.createElementNS(SVG, "circle");
+            ring.setAttribute("class", "ring");
+            ring.setAttribute("cx", String(label.x));
+            ring.setAttribute("cy", String(label.y));
+            ring.setAttribute("r", "8");
+            const text = document.createElementNS(SVG, "text");
+            text.setAttribute("class", "label");
+            text.setAttribute("x", String(label.anchor === "end" ? label.x - 12 : label.x + 12));
+            text.setAttribute("y", String(label.labelY));
+            text.setAttribute("text-anchor", label.anchor);
+            text.textContent = label.name;
+            return [ring, text];
+          }),
+        );
       }
 
       const percent = (score: number) => `${Math.round(score * 100)}\u202f%`;
@@ -449,12 +509,50 @@ const description =
         render();
       });
 
+      // One question at a time: answering moves on, and every tap still re-ranks the map and
+      // the pinned top three (architecture.md §A.3, quiz mockup of 2026-11-15).
+      const steps = [...form.querySelectorAll<HTMLFieldSetElement>(".question")];
+      let step = 0;
+
+      function show(next: number) {
+        step = Math.max(0, Math.min(steps.length, next));
+        // On the phone the title gives way to the map once the reader has started.
+        document.body.classList.toggle("started", step > 0);
+        steps.forEach((fieldset, index) => (fieldset.hidden = index !== step));
+        (document.getElementById("ready") as HTMLElement).hidden = step < steps.length;
+        const done = Math.min(step, steps.length);
+        (document.getElementById("counter") as HTMLElement).textContent =
+          step < steps.length ? `Question ${step + 1} sur ${steps.length}` : "Terminé";
+        (document.getElementById("progress") as HTMLElement).style.width =
+          `${Math.round((done / steps.length) * 100)}%`;
+        steps[step]?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+      }
+
       form.addEventListener("click", (event) => {
-        const chip = (event.target as HTMLElement).closest<HTMLButtonElement>(".chip");
+        const target = event.target as HTMLElement;
+        const move = target.closest<HTMLButtonElement>("[data-step]")?.dataset.step;
+        if (move) {
+          show(move === "back" ? step - 1 : step + 1);
+          return;
+        }
+        const chip = target.closest<HTMLButtonElement>(".chip");
         if (!chip) return;
         pick(chip);
         render();
+        const fieldset = chip.closest<HTMLFieldSetElement>(".question");
+        // A single-choice answer moves on by itself; several choices wait for « Valider ».
+        if (Number(fieldset?.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
+          show(step + 1);
+        }
       });
+
+      document.getElementById("reveal")!.addEventListener("click", () => {
+        const outcome = document.getElementById("outcome") as HTMLElement;
+        outcome.hidden = false;
+        outcome.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      show(0);
       render();
     </script>
 
@@ -531,14 +629,6 @@ const description =
           r 0.5s cubic-bezier(0.3, 1.4, 0.5, 1),
           opacity 0.4s,
           fill 0.4s;
-      }
-      .map :global(.dot.warm) {
-        fill: var(--coral);
-        opacity: 0.85;
-      }
-      .map :global(.dot.top) {
-        fill: var(--saffron);
-        opacity: 1;
       }
       .map :global(.ring) {
         fill: none;
@@ -943,6 +1033,165 @@ const description =
       }
       .more[hidden] {
         display: none;
+      }
+      .map :global(.land) {
+        fill: var(--night-lift);
+        stroke: var(--night);
+        stroke-width: 0.7;
+        stroke-linejoin: round;
+      }
+      .map :global(.dot.faint) {
+        fill: var(--thread-dim);
+        opacity: 0.32;
+      }
+      .map :global(.dot.lilac) {
+        fill: var(--thread-dim);
+        opacity: 0.8;
+      }
+      .map :global(.dot.coral) {
+        fill: var(--coral);
+        opacity: 0.95;
+      }
+      .map :global(.dot.saffron),
+      .map :global(.dot.top) {
+        fill: var(--saffron);
+        opacity: 1;
+      }
+      @media (max-width: 879px) {
+        :global(body.started) .side h1,
+        :global(body.started) .lead {
+          display: none;
+        }
+        :global(body.started) .map svg {
+          max-height: 34vh;
+        }
+      }
+      .progress {
+        display: grid;
+        gap: 8px;
+      }
+      .counter {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--thread-dim);
+      }
+      .track {
+        display: block;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--night-lift);
+        overflow: hidden;
+      }
+      .track span {
+        display: block;
+        width: 0;
+        height: 100%;
+        background: var(--saffron);
+        transition: width 0.3s;
+      }
+      .question legend {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+      }
+      .question .chip {
+        min-height: 48px;
+        font-size: 1rem;
+      }
+      .steps {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+      }
+      .back,
+      .skip,
+      .next,
+      .primary,
+      .secondary {
+        min-height: 44px;
+        border-radius: 999px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .back {
+        border: 0;
+        background: transparent;
+        color: var(--thread-dim);
+        padding: 0 4px;
+      }
+      .back:disabled {
+        visibility: hidden;
+      }
+      .skip {
+        border: 2px solid var(--thread-dim);
+        background: transparent;
+        padding: 0 18px;
+      }
+      .next,
+      .primary {
+        border: 0;
+        background: var(--saffron);
+        color: var(--ink);
+        padding: 0 22px;
+      }
+      .ready {
+        display: grid;
+        gap: 12px;
+        background: var(--night-deep);
+        border: 2px solid var(--saffron);
+        border-radius: 20px;
+        padding: 22px;
+      }
+      .ready[hidden],
+      .outcome[hidden] {
+        display: none;
+      }
+      .ready h2 {
+        margin: 0;
+      }
+      .ready p {
+        margin: 0;
+      }
+      .primary {
+        min-height: 54px;
+        font-size: 1.05rem;
+      }
+      .secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        border: 2px solid var(--thread);
+        color: var(--thread);
+        text-decoration: none;
+      }
+      .outcome {
+        display: grid;
+        gap: 40px;
+      }
+      .further {
+        display: grid;
+        gap: 12px;
+        background: var(--saffron);
+        color: var(--ink);
+        border-radius: 20px;
+        padding: 24px;
+      }
+      .further h2 {
+        margin: 0;
+      }
+      .further p {
+        margin: 0;
+      }
+      .further a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--saffron);
+        font-weight: 800;
+        text-decoration: none;
       }
       .links {
         display: flex;
