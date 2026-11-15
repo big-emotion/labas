@@ -39,6 +39,11 @@ jobs:
             echo "$headers" | grep -qi "^$h:" || { echo "missing $h"; exit 1; }
           done
           echo "$headers" | grep -i "^content-security-policy:" | grep -q "script-src 'self'"
+      - name: the image serves the app manifest and redirects folders on the same scheme
+        run: |
+          curl -fsSI http://localhost:8080/manifest.webmanifest | grep -qi "^content-type: application/manifest+json"
+          location=$(curl -sSI http://localhost:8080/ville/dakar | grep -i "^location:")
+          echo "$location" | grep -q " /ville/dakar/" || { echo "absolute redirect: $location"; exit 1; }
 
   # The repository is public and agents push to it: scan the whole history for secrets.
   # The gitleaks binary, not its Action, which needs a paid licence for organisation accounts.

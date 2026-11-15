@@ -48,7 +48,7 @@ describe("ranking the cities", () => {
   });
 
   it("puts a city where the reader can live in their language first", () => {
-    const [first] = bestMatches({ language: "pt" }, 1);
+    const [first] = bestMatches({ languages: ["pt"] }, 1);
     expect(livableLanguages(first.city)).toContain("pt");
   });
 
@@ -70,12 +70,12 @@ describe("ranking the cities", () => {
   });
 
   it("explains a match in plain words", () => {
-    const luanda = rankCities({ language: "pt" }).find((m) => m.city.name === "Luanda");
+    const luanda = rankCities({ languages: ["pt"] }).find((m) => m.city.name === "Luanda");
     expect(luanda?.reasons.map((r) => r.label)).toContain("On y vit en portugais");
   });
 
   it("names what holds a city back", () => {
-    const lagos = rankCities({ language: "fr" }).find((m) => m.city.name === "Lagos");
+    const lagos = rankCities({ languages: ["fr"] }).find((m) => m.city.name === "Lagos");
     expect(lagos?.drawbacks.map((r) => r.label)).toContain(
       "Langue du quotidien différente de votre souhait",
     );
@@ -110,9 +110,9 @@ describe("ranking the cities", () => {
       saturday: 1,
       size: 3,
       climate: "hot",
-      language: "en",
+      languages: ["en"],
       job: "remote",
-      landscape: "beach",
+      landscapes: ["beach"],
       priorities: ["career", "diaspora", "flights"],
     };
     for (const m of rankCities(busy)) {
@@ -133,7 +133,7 @@ describe("ranking the cities", () => {
   });
 
   it("removes a city a stated constraint rules out, and says why", () => {
-    const strict: Answers = { language: "fr", languageOnly: true };
+    const strict: Answers = { languages: ["fr"], languageOnly: true };
     const lagos = rankCities(strict).find((m) => m.city.name === "Lagos");
     expect(lagos?.excludedBecause).toBe("On n'y vit pas en français");
     for (const m of bestMatches(strict, 20)) expect(m.excludedBecause).toBeUndefined();

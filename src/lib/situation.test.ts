@@ -2,13 +2,11 @@ import { describe, expect, it } from "vitest";
 import { DEEP_QUESTIONS } from "./deep-questions";
 import { readSituation } from "./situation";
 
-// Every answer the engine reads: the questionnaire's, plus the three single-answer forms the
-// prototype still produces and profileOf still accepts (job, language, landscape).
+// Every answer the engine reads: the questionnaire's, plus the job, which the prototype still
+// reads from free text although the quiz now asks for the profession.
 const VALID: Record<string, Set<unknown>> = {
   ...Object.fromEntries(DEEP_QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))])),
   job: new Set(["cadre", "entre", "remote", "crea", "soin"]),
-  language: new Set(["fr", "en", "pt", "ar", "es", "sw"]),
-  landscape: new Set(["beach", "water", "nature", "wildSpaces", "urban", "island"]),
 };
 
 describe("reading a free-text situation into quiz answers", () => {
@@ -19,10 +17,17 @@ describe("reading a free-text situation into quiz answers", () => {
     expect(answers).toMatchObject({
       family: "parents",
       job: "soin",
-      landscape: "beach",
+      landscapes: ["beach"],
       budget: "serre",
-      language: "fr",
+      languages: ["fr"],
     });
+  });
+
+  it("answers in the questionnaire's own shape, several languages and landscapes allowed", () => {
+    const { answers } = readSituation("On parle anglais et on aime la plage.");
+    expect(answers).toMatchObject({ languages: ["en"], landscapes: ["beach"] });
+    expect(answers).not.toHaveProperty("language");
+    expect(answers).not.toHaveProperty("landscape");
   });
 
   it("understands someone remote, alone, who wants to try a lively city", () => {

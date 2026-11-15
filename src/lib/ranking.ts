@@ -33,13 +33,9 @@ export interface Answers {
   job?: "cadre" | "entre" | "remote" | "crea" | "soin";
   /** Every language the reader can live in. */
   languages?: QuizLanguage[];
-  /** @deprecated one language; kept for answers given before several were allowed. */
-  language?: QuizLanguage;
   size?: City["size"];
   /** Every landscape the reader wants nearby. */
   landscapes?: Landscape[];
-  /** @deprecated one landscape; kept for answers given before several were allowed. */
-  landscape?: Landscape;
   climate?: "hot" | "mild" | "dry";
   /** Ideal Saturday night: 1 out late with a crowd, 0.5 dinner with friends, 0 quiet at home. */
   saturday?: Step;
@@ -563,10 +559,10 @@ function originsOf(answers: Answers): Origin[] {
 }
 
 function languagesOf(answers: Answers): string[] {
-  return answers.languages ?? (answers.language ? [answers.language] : []);
+  return answers.languages ?? [];
 }
 function landscapesOf(answers: Answers): Landscape[] {
-  return answers.landscapes ?? (answers.landscape ? [answers.landscape] : []);
+  return answers.landscapes ?? [];
 }
 
 const CRITERION_OF: Partial<Record<Axis, CriterionKey>> = {
