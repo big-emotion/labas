@@ -117,11 +117,15 @@ npm run test:watch
 ## Brand
 
 - **Name:** Là-bas — the word the diaspora already uses for the continent.
-- **Mark:** the grave accent of « là » drawn as a dotted flight path landing on a saffron city
-  (`src/components/Wordmark.astro`, `public/favicon.svg`). Sketch quality: the final logo should
-  be redrawn as outlined vectors.
+- **Mark:** the grave accent of « là » drawn as Africa, in saffron, at the end of a dotted flight
+  path (`src/components/Wordmark.astro`, `public/favicon.svg`).
 - **Type:** Fraunces, Nunito Sans, JetBrains Mono — self-hosted, so no visit reaches Google.
-- **Colour:** night blue (`#161A5C`) and saffron (`#FFB627`), coral for second rank.
+- **Colour:** night blue (`#161A5C`) and saffron (`#FFB627`), coral for what counts against.
+- **Design system:** tokens, type, components and usage rules, built from this code:
+  <https://claude.ai/artifact/XUL4V2mUjGZuWr64bn5XBP> (private; ask the maintainer for access).
+- **Share pictures:** drawn at build time by `src/lib/share-card.ts` (satori, resvg, sharp) — one
+  for the home page, one per city with its credited photo, served from `/og/`. No page calls a
+  third party to draw them.
 
 ## Roadmap
 

@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
+import ShareMeta from "../components/ShareMeta.astro";
+import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
 import { FILTER_MENU } from "../lib/filters";
@@ -9,18 +11,27 @@ import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
 import borders from "../data/africa-borders.json";
 
 const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
-const description =
-  "Répondez à dix questions et découvrez les villes d'Afrique qui vous ressemblent, parmi 115 villes dans les 54 pays.";
+const description = siteDescription();
+const title = "Là-bas · Quelle ville d'Afrique vous ressemble ?";
+const website = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Là-bas",
+  url: `${SITE}/`,
+  inLanguage: "fr",
+  description,
+});
 ---
 
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#161a5c" />
-    <title>Là-bas · Quelle ville d'Afrique vous ressemble ?</title>
+    <title>{title}</title>
+    <ShareMeta title={title} description={description} />
+    <script type="application/ld+json" is:inline set:html={website} />
     <Analytics />
   </head>
   <body>
