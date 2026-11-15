@@ -6,6 +6,16 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-15
+
+### Added
+
+- The full questionnaire asks first the questions that fit your profile: on holiday and fond of
+  going out, what kind of night; settling and fond of calm, what your evenings need. Each answer
+  moves the cities that fit it.
+- Your profile is shown at the end of both questionnaires, and under each city's percentage, the
+  neighbourhoods that match your temperament (« Calme le soir : 3 quartiers sur 11 »).
+
 ## [0.5.1] - 2026-11-15
 
 ### Fixed
@@ -116,7 +126,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/big-emotion/labas/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/big-emotion/labas/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/big-emotion/labas/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/big-emotion/labas/compare/v0.3.0...v0.4.0
