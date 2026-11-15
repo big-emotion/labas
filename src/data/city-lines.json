@@ -6178,5 +6178,502 @@
         "accessed": "2026-11-14"
       }
     ]
+  },
+  {
+    "name": "Bamako",
+    "reputation": "On connaît Bamako comme une capitale de la musique : depuis les années 1990, Salif Keita et Ali Farka Touré y ont attiré producteurs et musiciens, et le djembé s'entend encore dans la rue.",
+    "surprise": "Bamako est aussi une ville de la photo : depuis 1994, les Rencontres africaines de la photographie y reviennent tous les deux ans, avec des expositions au Musée national. Et trois ponts relient les deux rives du Niger, dont le pont des Martyrs, achevé en janvier 1960.",
+    "neighbourhoods": [
+      {
+        "name": "Niaréla",
+        "text": "Le plus ancien quartier de la ville, dans la commune II, où vit la famille des fondateurs.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Hippodrome",
+        "text": "Quartier de la commune II, souvent cité pour les logements des classes moyennes et des expatriés.",
+        "setting": "central",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "ACI 2000",
+        "text": "Le nouveau quartier d'affaires, à l'ouest du centre, construit sur les anciennes pistes de l'aéroport.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Badalabougou",
+        "text": "Sur la rive droite du Niger, dans la commune V, un quartier souvent cité pour les logements des classes moyennes.",
+        "setting": "residential",
+        "standing": "middle",
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Bamako — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bamako",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Bamako — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Bamako",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Ouagadougou",
+    "reputation": "On connaît Ouagadougou comme la capitale du cinéma africain : le FESPACO, créé en 1969, y revient tous les deux ans, à la fin février.",
+    "surprise": "En pleine ville, le parc Bangr Weogo couvre 265 hectares de forêt, avec un zoo, un jardin botanique et un musée de l'environnement.",
+    "neighbourhoods": [
+      {
+        "name": "Ouaga 2000",
+        "text": "Quartier du sud, calme et moderne, avec des villas gardées et les institutions internationales. Pour comparer : au centre, un deux-pièces coûte environ 380 € par mois.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": false,
+        "lively": false
+      },
+      {
+        "name": "Zone du Bois",
+        "text": "Quartier résidentiel calme, proche du centre, construit au début des années 1970.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": false
+      },
+      {
+        "name": "Koulouba",
+        "text": "Quartier calme, tout près du centre.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": false
+      },
+      {
+        "name": "Dapoya",
+        "text": "Vieux quartier près du palais impérial, l'ancien « quartier des captifs affranchis ».",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Festival panafricain du cinéma et de la télévision de Ouagadougou — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Festival_panafricain_du_cin%C3%A9ma_et_de_la_t%C3%A9l%C3%A9vision_de_Ouagadougou",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Ouagadougou — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Ouagadougou",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Guide Burkina Faso — Expat.com",
+        "url": "https://www.expat.com/fr/guide/afrique/burkina-faso/",
+        "published": "2025-10",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Niamey",
+    "reputation": "On connaît Niamey pour ses fadas : des groupes de jeunes qui se retrouvent le soir autour du thé, nés ici dans les années 1990 puis répandus dans tout le Niger.",
+    "surprise": "Chaque année, Niamey accueille le championnat national de lutte traditionnelle. Et au Petit Marché, en plein centre, se tient le plus grand marché aux légumes de la ville.",
+    "neighbourhoods": [
+      {
+        "name": "Terminus",
+        "text": "Le cœur ancien de la ville, là où les Français se sont installés en premier, sur le plateau de la rive gauche.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Plateau (commune I)",
+        "text": "Le côté le plus aisé de la ville, où vit la plupart du personnel des ambassades.",
+        "setting": "central",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Rive droite (Karadjé, Banga Bana)",
+        "text": "De l'autre côté du pont Kennedy, ouvert en 1970 : des quartiers récents et l'université Abdou-Moumouni. La Belgique conseille à ses ressortissants de l'éviter (conseils du 14 octobre 2026).",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Niamey — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Niamey",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Sécurité générale au Niger — SPF Affaires étrangères (Belgique)",
+        "url": "https://diplomatie.belgium.be/fr/pays/niger/voyager-au-niger-conseils-aux-voyageurs/securite-generale-au-niger",
+        "published": "2026-10-14",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Bangui",
+    "reputation": "On connaît Bangui sous le surnom de « Bangui la Coquette », au bord de l'Oubangui, face à Zongo, en RDC.",
+    "surprise": "Ici, le sport roi est le basket : Bangui a accueilli le championnat d'Afrique en 1974. Et sur l'Oubangui, les courses de pirogues rassemblent des centaines de rameurs.",
+    "neighbourhoods": [
+      {
+        "name": "Bimbo",
+        "text": "La commune voisine au sud, dans le Grand Bangui, avec environ 350 000 habitants en 2021. Avec Bangui, c'est la seule zone où la France ne déconseille pas formellement de se rendre (conseils du 10 septembre 2026).",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Bangui — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Bangui",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs – République centrafricaine — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/republique-centrafricaine/",
+        "published": "2026-09-10",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Mogadiscio",
+    "reputation": "On connaît Mogadiscio comme une ville qui se reconstruit, beaucoup grâce à sa diaspora : plus de 6 000 bâtiments neufs y sont sortis de terre entre 2020 et 2025, selon la mairie.",
+    "surprise": "Le vendredi matin, la plage du Liido se remplit avant la prière : des familles boivent le thé sous des toiles, des jeunes jouent au foot pieds nus, et des Somaliens rentrés de l'étranger y croisent ceux qui sont restés.",
+    "neighbourhoods": [
+      {
+        "name": "Hamar Weyne",
+        "text": "L'un des plus vieux quartiers de la ville, comme Shangani, son voisin.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Hodan",
+        "text": "Quartier où sortent de nouveaux immeubles, et où a ouvert en 2017 iRise Hub, le premier espace de coworking et d'incubation de la ville.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Liido",
+        "text": "La grande plage de l'est de la ville, lieu de sortie du vendredi. Un attentat y a fait des dizaines de morts en août 2024.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": null,
+        "lively": true
+      }
+    ],
+    "sources": [
+      {
+        "title": "Mogadishu — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Mogadishu",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Friday at the beach in Mogadishu: Optimism shines through despite Somalia's woes — NPR",
+        "url": "https://www.npr.org/sections/goatsandsoda/2023/01/20/1149831181/friday-at-the-beach-in-mogadishu-optimism-shines-through-despite-somalias-woes",
+        "published": "2023-01-20",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "iRise Hub, the first innovation hub in Somalia, has opened in Mogadishu — Quartz",
+        "url": "https://qz.com/africa/1071505/irise-hub-the-first-innovation-hub-in-somalia-has-opened-in-mogadishu",
+        "published": "2017-09",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Somalia: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/somalia/safety-and-security",
+        "published": "2026-06-04",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Juba",
+    "reputation": "On connaît Juba comme la capitale du plus jeune pays du monde, indépendant depuis 2011, sur les rives du Nil Blanc.",
+    "surprise": "Dans la rue, on parle l'arabe de Juba, une langue née ici au XIXe siècle. Aujourd'hui, c'est la langue la plus parlée du Soudan du Sud, devant l'anglais, la langue officielle.",
+    "neighbourhoods": [
+      {
+        "name": "Hai Jalaba",
+        "text": "Un petit faubourg, l'ancien « quartier grec », où des marchands grecs ont construit dans les années 1920 et 1930.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Munuki",
+        "text": "Ancien district administratif de la ville, avec son centre de santé.",
+        "setting": "residential",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Juba — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Juba",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Juba Arabic — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Juba_Arabic",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Tripoli",
+    "reputation": "On connaît Tripoli pour sa médina ottomane et le Château rouge, posés au bord de la Méditerranée.",
+    "surprise": "En pleine ville, un arc romain du IIe siècle tient encore debout : l'arc de Marc Aurèle, le seul vestige romain bien visible de Tripoli.",
+    "neighbourhoods": [
+      {
+        "name": "Médina",
+        "text": "La vieille ville, en plein centre, qui a pris sa forme actuelle à l'époque ottomane. Le Château rouge, à son bord, abrite un musée.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Place des Martyrs et centre d'affaires",
+        "text": "La grande place plantée de palmiers près du front de mer, et à côté, le quartier où les entreprises libyennes et étrangères ont leurs bureaux.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Tripoli, Libya — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Tripoli,_Libya",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Khartoum",
+    "reputation": "On connaît Khartoum pour al-Mogran, l'endroit où le Nil Blanc et le Nil Bleu se rejoignent.",
+    "surprise": "Après la guerre qui a vidé la ville, les gens reviennent : de novembre 2024 à août 2025, l'État de Khartoum a reçu plus d'un tiers des 2,25 millions de Soudanais rentrés chez eux, selon l'OIM. Le gouvernement et la banque centrale y sont revenus en janvier 2026.",
+    "neighbourhoods": [],
+    "sources": [
+      {
+        "title": "Khartoum — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Khartoum",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "DTM Sudan — IOM",
+        "url": "https://dtm.iom.int/sudan",
+        "published": "2025-10-31",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Timeline of the Sudanese civil war (2026) — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Timeline_of_the_Sudanese_civil_war_(2026)",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Ségou",
+    "reputation": "On connaît Ségou comme la capitale de la poterie malienne et l'ancienne capitale du royaume bambara, au bord du Niger.",
+    "surprise": "Sur la rive gauche du fleuve, le village de Kalabougou : des femmes y façonnent à la main des poteries en argile du Niger, vendues au marché du lundi.",
+    "neighbourhoods": [
+      {
+        "name": "Kalabougou",
+        "text": "Le grand village de potières, sur la rive gauche du Niger.",
+        "setting": "outskirts",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Ségou — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/S%C3%A9gou",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Bobo-Dioulasso",
+    "reputation": "On connaît Bobo-Dioulasso comme la capitale culturelle du Burkina : la Semaine nationale de la culture s'y tient tous les deux ans depuis 1990.",
+    "surprise": "Près de la ville, à Dafra, un lac abrite des silures sacrés. Et la gare de Bobo, sur la ligne Abidjan–Ouagadougou, a une architecture qui ne passe pas inaperçue.",
+    "neighbourhoods": [
+      {
+        "name": "Dioulassoba",
+        "text": "Le vieux quartier où s'est formée la communauté bobo-dioula, autour de la Grande Mosquée en terre, bâtie en 1880.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Bobo-Dioulasso — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Bobo-Dioulasso",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Agadez",
+    "reputation": "On connaît Agadez comme la porte du Sahara, avec sa Grande Mosquée, souvent citée comme la plus haute construction en terre crue du monde.",
+    "surprise": "Son centre historique est inscrit au patrimoine mondial de l'UNESCO depuis 2013. Et chaque fin septembre, près d'In-Gall, la Cure Salée réunit les éleveurs nomades.",
+    "neighbourhoods": [
+      {
+        "name": "Nasarawa",
+        "text": "Le quartier autour de la Grande Mosquée, dans le centre historique.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Agadez — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Agadez",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Cure Salée — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Cure_Sal%C3%A9e",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Berbérati",
+    "reputation": "On connaît Berbérati comme « la flamboyante », la capitale économique de l'ouest centrafricain, au cœur de la grande région du diamant.",
+    "surprise": "Au sud-ouest, la forêt de Dzanga-Sangha est classée à l'UNESCO depuis 2012. À Dzanga Bai, une clairière en pleine forêt, les éléphants de forêt viennent toute l'année.",
+    "neighbourhoods": [],
+    "sources": [
+      {
+        "title": "Berbérati — Wikipédia",
+        "url": "https://fr.wikipedia.org/wiki/Berb%C3%A9rati",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Dzanga-Sangha Special Reserve — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Dzanga-Sangha_Special_Reserve",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Wau",
+    "reputation": "On connaît Wau pour sa cathédrale Sainte-Marie, siège du diocèse catholique, au bord de la rivière Jur.",
+    "surprise": "Wau est un carrefour de commerce entre le Darfour, le Bahr el Ghazal et l'Équatoria, avec son marché aux bestiaux. Elle comptait environ 320 000 habitants en 2022, plus du double de 2011.",
+    "neighbourhoods": [],
+    "sources": [
+      {
+        "title": "Wau, South Sudan — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Wau,_South_Sudan",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Benghazi",
+    "reputation": "On connaît Benghazi comme la grande ville de l'est libyen, d'où l'on part visiter les ruines grecques de Cyrène.",
+    "surprise": "À Kwayfiya, au bord d'un lac naturel, le parc d'al-Buduzira a son parc aquatique. Et le phare italien de 1922 veille toujours près des ruines de l'antique Bérénice.",
+    "neighbourhoods": [
+      {
+        "name": "Al-Fuwayhat",
+        "text": "L'un des quartiers les plus verts et les plus aisés de la ville, avec le zoo al-Bosco.",
+        "setting": "residential",
+        "standing": "upscale",
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Al-Hawari",
+        "text": "Faubourg proche du centre, avec une grande cimenterie, au cœur des chantiers de reconstruction lancés après le cessez-le-feu de 2020.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Centre (rue Omar al-Mokhtar)",
+        "text": "L'ancien quartier italien et la médina. En mars 2023, une grande partie du centre historique a été rasée de nuit.",
+        "setting": "central",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      },
+      {
+        "name": "Al-Kwayfiya",
+        "text": "Quartier du bord de mer, au nord, avec le parc d'al-Buduzira autour de son lac.",
+        "setting": "seaside",
+        "standing": null,
+        "walkable": null,
+        "lively": null
+      }
+    ],
+    "sources": [
+      {
+        "title": "Benghazi — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Benghazi",
+        "accessed": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "name": "Port-Soudan",
+    "reputation": "On connaît Port-Soudan comme le grand port du pays : environ 90 % du commerce extérieur du Soudan passe par lui.",
+    "surprise": "À une trentaine de kilomètres au large, l'atoll de Sanganeb et ses récifs coralliens sont inscrits au patrimoine mondial de l'UNESCO depuis 2016, avec la baie de Dungonab, plus au nord.",
+    "neighbourhoods": [],
+    "sources": [
+      {
+        "title": "Port Sudan — Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Port_Sudan",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Sanganeb Marine National Park and Dungonab Bay – Mukkawar Island Marine National Park — IUCN World Heritage Outlook",
+        "url": "https://worldheritageoutlook.iucn.org/node/1192",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Africa gets two new names on UNESCO list of 'Golden Oldies' — TimesLIVE",
+        "url": "https://www.timeslive.co.za/sunday-times/lifestyle/travel/2016-07-24-africa-gets-two-new-names-on-unesco-list-of-golden-oldies/",
+        "published": "2016-07-24",
+        "accessed": "2026-11-15"
+      }
+    ]
   }
 ]

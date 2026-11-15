@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { QUESTIONS } from "./questions";
+import { CITIES } from "./cities";
 import { profileOf, rankCities, type Answers } from "./ranking";
 
 const NEUTRAL = new Set([
@@ -19,9 +20,9 @@ describe("the question bank", () => {
     }
   });
 
-  it("holds the 23 questions of the approved mockup, each once, with unique answers", () => {
-    expect(QUESTIONS).toHaveLength(23);
-    expect(new Set(QUESTIONS.map((q) => q.id)).size).toBe(23);
+  it("holds the 24 questions of the approved mockup, each once, with unique answers", () => {
+    expect(QUESTIONS).toHaveLength(24);
+    expect(new Set(QUESTIONS.map((q) => q.id)).size).toBe(24);
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));
       expect(new Set(values).size, question.id).toBe(values.length);
@@ -63,5 +64,16 @@ describe("the question bank", () => {
     expect(faith.when?.({ kin: "much" })).toBe(true);
     expect(faith.when?.({ kin: "none" })).toBe(false);
     expect(faith.when?.({})).toBe(false);
+  });
+
+  it("asks for the family's country only after an African region, offering every country", () => {
+    const countries = QUESTIONS.find((q) => q.id === "countries")!;
+    expect(countries.when?.({ origin: ["ouest"] })).toBe(true);
+    expect(countries.when?.({ origin: ["ameriques"] })).toBe(false);
+    expect(countries.when?.({})).toBe(false);
+    const offered = countries.choices.filter((c) => c.value !== null).map((c) => c.value);
+    expect(new Set(offered)).toEqual(new Set(CITIES.map((c) => c.country)));
+    for (const choice of countries.choices)
+      if (choice.value !== null) expect(choice.zone, String(choice.value)).toBeTruthy();
   });
 });

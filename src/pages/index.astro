@@ -88,6 +88,7 @@ const description =
                     class="chip"
                     aria-pressed="false"
                     data-value={JSON.stringify(choice.value)}
+                    data-zone={choice.zone}
                   >
                     {choice.label}
                   </button>
@@ -569,6 +570,13 @@ const description =
         // On the phone the title gives way to the map once the reader has started.
         document.body.classList.toggle("started", asked.length > 0);
         fieldsets.forEach((fieldset, key) => (fieldset.hidden = key !== id));
+        // « Et le pays ? » only offers the countries of the regions just picked.
+        const regions = [readAnswers().origin ?? []].flat();
+        for (const chip of fieldsets.get("countries")?.querySelectorAll<HTMLElement>(".chip") ??
+          []) {
+          chip.hidden = Boolean(chip.dataset.zone) && !regions.includes(chip.dataset.zone as never);
+          if (chip.hidden) chip.setAttribute("aria-pressed", "false");
+        }
         (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
         const filled = gauge(asked.length, id === undefined);
         (document.getElementById("counter") as HTMLElement).textContent =

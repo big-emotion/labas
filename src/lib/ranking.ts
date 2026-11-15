@@ -49,6 +49,8 @@ export interface Answers {
    * mixed family; a single value is still accepted.
    */
   origin?: Origin | Origin[];
+  /** The family's countries, among those of its African regions. */
+  countries?: string[];
   /** Passports held: French or EU, or one giving free movement in an African zone. */
   passports?: ("eu" | "ecowas" | "cemac" | "eac" | "other")[];
   /** How much feeling at home among one's own matters: origin, culture, religion. */
@@ -475,6 +477,17 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     const weight = 0.6 * KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
     facts.push({ kind: "faith", value: faith, weight });
   }
+  // The family's own country: what draws a diaspora back to a city no other answer reaches.
+  // It is more precise than the region, so it weighs at least as much.
+  const countries = (answers.countries ?? []).filter(Boolean);
+  if (countries.length) {
+    const roots = answers.roots === "rediscover" ? 4 : answers.roots === "both" ? 2 : 0;
+    const kin =
+      answers.kin === "much" || answers.kin === "some"
+        ? KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"]
+        : 0;
+    facts.push({ kind: "homeCountry", values: countries, weight: Math.max(2, roots + kin) });
+  }
   // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
   const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
   if (origins.length && away > 0) {
@@ -539,6 +552,7 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     return good ? "Facile d'y entrer avec ton passeport" : "Un visa à demander à l'ambassade";
   if (part.fact === "faith")
     return good ? "Ta foi y est largement partagée" : "Ta foi y est minoritaire";
+  if (part.fact === "homeCountry") return good ? "Le pays de ta famille" : undefined;
   if (part.fact === "kin")
     return good ? "Près de chez les tiens" : "Loin de la région de ta famille";
   if (part.fact === "elsewhere")

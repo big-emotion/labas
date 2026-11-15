@@ -1,9 +1,12 @@
+import { CITIES } from "./cities";
 import type { Answers } from "./ranking";
 
 export interface Choice {
   label: string;
   /** null: the reader would rather not say; it counts as a skip. */
   value: string | number | boolean | null;
+  /** The region a choice belongs to: only choices of regions already picked are shown. */
+  zone?: string;
 }
 
 export interface Question {
@@ -17,6 +20,18 @@ export interface Question {
   /** Asked only when this holds for the answers so far. */
   when?: (answers: Answers) => boolean;
 }
+
+/** African family regions picked so far. */
+const africanOrigins = (answers: Answers): string[] =>
+  (Array.isArray(answers.origin) ? answers.origin : [answers.origin]).filter(
+    (o): o is Exclude<typeof o, undefined> => Boolean(o) && o !== "ameriques",
+  );
+
+const COUNTRY_CHOICES: Choice[] = [
+  ...new Map(CITIES.map((city) => [city.country, city.zone])).entries(),
+]
+  .sort(([a], [b]) => a.localeCompare(b, "fr"))
+  .map(([country, zone]) => ({ label: country, value: country, zone }));
 
 const PROJECT = "TON PROJET";
 const TODAY = "TA VIE AUJOURD'HUI";
@@ -153,6 +168,14 @@ export const QUESTIONS: Question[] = [
       { label: "Caraïbes, Amériques", value: "ameriques" },
       { label: "Je préfère ne pas dire", value: null },
     ],
+  },
+  {
+    id: "countries",
+    group: ROOTS,
+    title: "Et le pays ?",
+    max: 3,
+    when: (answers) => africanOrigins(answers).length > 0,
+    choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
   },
   {
     id: "roots",

@@ -39,6 +39,8 @@ const SPACE: Record<string, unknown[]> = {
   kin: ["much", "some", "none"],
   adventure: ["familiar", "open", "seeking"],
   faith: ["muslim", "christian", "other", "none"],
+  // Each city's own country: the family country a diaspora would name.
+  countries: [...new Set(CITIES.map((c) => c.country))].map((country) => [country]),
 };
 describe("the city a profile lands on", () => {
   const proposable = CITIES;
@@ -482,6 +484,37 @@ describe("feeling at home among one's own", () => {
     expect(kin("Dakar")).toBe(1);
     expect(kin("Casablanca")).toBe(1);
     expect(kin("Nairobi")).toBeLessThan(1);
+  });
+
+  it("brings a family back to its own country when it seeks its roots", () => {
+    const sudanese = {
+      origin: ["nord"],
+      countries: ["Soudan"],
+      roots: "rediscover",
+      kin: "much",
+      languages: ["ar"],
+    } as Answers;
+    const names = bestMatches(sudanese, 3).map((m) => m.city.country);
+    expect(names).toContain("Soudan");
+  });
+
+  it("puts the family's own country first when feeling at home matters a lot", () => {
+    // Played in the browser on 2026-11-15; roots was never asked.
+    const played = {
+      project: "installer",
+      languages: ["ar"],
+      origin: ["nord"],
+      countries: ["Soudan"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "muslim",
+      profession: "finance",
+      rhythm: "same",
+      landscapes: ["beach"],
+      currentCity: "capital",
+      habits: ["gym"],
+    } as Answers;
+    expect(bestMatches(played, 3).map((m) => m.city.country)).toContain("Soudan");
   });
 
   it("does not weigh origin when feeling at home does not matter to the reader", () => {

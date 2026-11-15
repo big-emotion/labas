@@ -44,6 +44,8 @@ export type FactPull =
   | { kind: "kin"; origins: string[]; weight: number }
   /** The passports the reader holds: how easily each one gets into the city's country. */
   | { kind: "entry"; values: string[]; weight: number }
+  /** The family's own countries. */
+  | { kind: "homeCountry"; values: string[]; weight: number }
   /** The reader's faith: the share of the country that shares it. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
   /** The reverse, for readers after the unknown. */
@@ -297,6 +299,8 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       match = city.facts.climates.some((c) => wanted.includes(c));
     } else if (fact.kind === "zone") {
       match = fact.values.includes(city.zone);
+    } else if (fact.kind === "homeCountry") {
+      match = fact.values.includes(city.country);
     } else if (fact.kind === "sectors") {
       match = city.facts.sectors.some((s) => fact.values.includes(s));
     } else if (fact.kind === "professions") {

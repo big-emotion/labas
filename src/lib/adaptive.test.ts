@@ -54,15 +54,19 @@ describe("the free quiz, one question at a time", () => {
   it("always asks first what the match cannot do without", () => {
     for (const pick of [0, 1, 2]) {
       const { asked } = play(pick);
-      expect(asked.slice(0, 4), `pick ${pick}`).toEqual(["project", "languages", "origin", "kin"]);
+      expect(asked.slice(0, 3), `pick ${pick}`).toEqual(["project", "languages", "origin"]);
+      // The family's country comes next when an African region was picked.
+      const kin = asked.indexOf("kin");
+      expect(kin === 3 || (kin === 4 && asked[3] === "countries"), asked.join(",")).toBe(true);
     }
   });
 
   it("asks about adventure and faith right after, when feeling at home matters", () => {
     const { asked, answers } = play(0);
     expect(answers.kin).toBe("much");
-    expect(asked[4]).toBe("adventure");
-    expect(asked[5]).toBe("faith");
+    const kin = asked.indexOf("kin");
+    expect(asked[kin + 1]).toBe("adventure");
+    expect(asked[kin + 2]).toBe("faith");
   });
 
   it("settles after 8 to 12 questions, never asking one twice", () => {

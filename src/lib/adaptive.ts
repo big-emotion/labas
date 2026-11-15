@@ -49,6 +49,13 @@ const CORE: { id: string; when?: (answers: Answers) => boolean }[] = [
   { id: "project" },
   { id: "languages" },
   { id: "origin" },
+  {
+    id: "countries",
+    when: (answers) =>
+      (Array.isArray(answers.origin) ? answers.origin : [answers.origin]).some(
+        (o) => o && o !== "ameriques",
+      ),
+  },
   { id: "kin" },
   { id: "adventure", when: (answers) => answers.kin === "much" || answers.kin === "some" },
   { id: "faith", when: (answers) => answers.kin === "much" || answers.kin === "some" },
