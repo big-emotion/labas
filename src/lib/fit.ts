@@ -1,4 +1,5 @@
 import { CITIES, livableLanguages, type City, type CriterionKey } from "./cities";
+import { temperamentFit, type Trait } from "./city-temperament";
 import { linesFor } from "./lines";
 
 /**
@@ -54,7 +55,9 @@ export type FactPull =
   /** The reader's faith: the share of the country that shares it. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
   /** The reverse, for readers after the unknown. */
-  | { kind: "elsewhere"; origins: string[]; weight: number };
+  | { kind: "elsewhere"; origins: string[]; weight: number }
+  /** A temperament answer, 0 to 1: the share of the city's neighbourhoods that suits it. */
+  | { kind: "temperament"; trait: Trait; value: number; weight: number };
 
 export interface Pull {
   axis: Axis;
@@ -361,6 +364,15 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
         value: fact.kind === "kin" ? affinity : affinity < 1 ? 1 : 0,
         weight: fact.weight,
         known: true,
+        fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "temperament") {
+      const fit = temperamentFit(city.name, fact.trait, fact.value);
+      parts.push({
+        value: fit ?? NEUTRAL,
+        weight: fact.weight,
+        known: fit !== null,
         fact: fact.kind,
       });
       continue;

@@ -51,21 +51,35 @@ neighbourhood, and a reader fits a city as much as the share of it that suits th
    | Agreeableness | people lean on each other: neighbourhood life, associations, welcome                                 |
    | Stability     | daily life demands composure: outages, floods, traffic, slow paperwork                               |
 
+   **One scale for every city.** A first pass rated each city's neighbourhoods against each
+   other, so « lively for Kigali » got the same 1 as Abidjan's rue Princesse, and Kigali came out
+   no calmer than Abidjan. Every rating now sits on anchors shared by the 115 cities: on
+   Extraversion, 1 is nightlife people cross a big city for (rue Princesse, Victoria Island,
+   Osu, Westlands), 0.5 restaurants and some bars (Kimihurura, Dakar's Plateau), 0 nothing open
+   at night; on Stability, 1 is daily outages or gridlock (most of Lagos), 0.5 occasional ones
+   (most of Abidjan, Dakar, Nairobi), 0 a smooth daily life (Port-Louis, Windhoek). The sheets
+   favoured the areas newcomers settle in, so the big popular districts the research names
+   (Yopougon, Abobo, Mushin…) were added.
+
 2. **Per city, per axis: the share of its neighbourhoods at each value** (0, 0.5, 1). Every
    neighbourhood counts the same; the sheets give no population figures to weigh them by, and
    a weighting nobody can source would look more precise than it is.
 
 3. **Fit of a reader to a city, per axis: how much of the city suits the reader's answer.** A
    neighbourhood at the reader's value counts 1, one half-step away 0.5, at the opposite end 0;
-   the city's fit is the mean over its neighbourhoods. A calm reader fits
+   the city's fit is the mean over its neighbourhoods. Stability is the exception: a reader is
+   only hurt by more friction than they can take, so someone whom outages amuse fits a smooth
+   city fully. A calm reader fits
    Kigali on Extraversion because most of its neighbourhoods are quiet, and still fits Abidjan
    in part, through Cocody Riviera. The temperament score is the mean over the axes answered.
 
 4. **Why, for each result:** the same shares give the sentence shown beside the percentage,
    e.g. « Calme : 11 quartiers sur 14 », « Ça bouge : 3 quartiers sur 14 » (step 4).
 
-Cities without a neighbourhood sheet (the 24 that travel advice warns against are never
-proposed) get one city-level rating per axis from their city file, marked editorial.
+Cities without a neighbourhood sheet (15, all among those travel advice warns against) get one
+city-level rating per axis from their city file, marked editorial. The answers keep their
+existing pulls on the city's practical criteria (nightlife, pace, paperwork…); the
+neighbourhood fit is added beside them, as a fact weighing 2 per answer.
 
 ## Data honesty
 

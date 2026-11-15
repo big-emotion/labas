@@ -6,6 +6,7 @@ import {
   type CriterionKey,
   type Language,
 } from "./cities";
+import { TRAITS } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
 
@@ -128,7 +129,7 @@ export interface Rated {
 }
 
 /** The answers read as temperament (inspired by the Big Five, one question per trait). */
-export const TEMPERAMENT_KEYS = ["saturday", "adventure", "order", "together", "friction"] as const;
+export const TEMPERAMENT_KEYS = TRAITS;
 
 export interface Match {
   city: City;
@@ -404,6 +405,9 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
 const RECEPTION_WEIGHT = 8;
 const KIN_WEIGHT = { much: 8, some: 3.5 } as const;
 const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
+const ADVENTURE_LEVEL = { familiar: 0, open: 0.5, seeking: 1 } as const;
+// As much as the strongest pull of a temperament answer on the city's practical criteria.
+const TEMPERAMENT_WEIGHT = 2;
 const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
 const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
   culture: "culture",
@@ -468,6 +472,16 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (answers.friction !== undefined) add(STEP_PULLS.friction(answers.friction));
   if (answers.order !== undefined) add(ORDER[answers.order]);
   if (answers.together !== undefined) add(TOGETHER[answers.together]);
+  // Each temperament answer is also matched against the city's neighbourhoods, so a calm reader
+  // is drawn to a city that is mostly calm, not only to one with little nightlife on paper.
+  for (const trait of TRAITS) {
+    const value =
+      trait === "adventure"
+        ? answers.adventure && ADVENTURE_LEVEL[answers.adventure]
+        : answers[trait];
+    if (value === undefined) continue;
+    facts.push({ kind: "temperament", trait, value, weight: TEMPERAMENT_WEIGHT });
+  }
   if (answers.bargaining !== undefined) add(STEP_PULLS.bargaining(answers.bargaining));
   if (answers.tripsHome !== undefined) add(STEP_PULLS.tripsHome(answers.tripsHome));
   if (answers.setupBudget) add(SETUP[answers.setupBudget]);

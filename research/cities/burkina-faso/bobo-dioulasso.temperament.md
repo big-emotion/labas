@@ -1,0 +1,7 @@
+# Bobo-Dioulasso: temperament by neighbourhood
+
+> Rated 2026-11-15 on the shared cross-city scale of docs/criteria/temperament-cities.md, from research/cities/burkina-faso/bobo-dioulasso.md (no neighbourhood sheet, editorial city-level estimate). Editorial estimate inspired by the Big Five, not a personality test: each value describes streets, services and offer, never the people.
+
+| Neighbourhood | saturday | adventure | order | together | friction | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| Bobo-Dioulasso (ville entière) | 0.5 | 1 | 0.5 | 0.5 | 1 | saturday: no source (nightlife deliberately not curated), the regional state of emergency may suspend large meetings, so no more than the mid-size-city anchor [Gaps][C safety.general]; adventure: France advises against all travel with no French consulate open, the UK has no embassy, no expat-facing offer in any source [C safety.general]; order: 35% to 55% of surveyed households in unplanned non-loti areas, a mix of formal and informal (2022, old data) [C housing.areas]; together: a "peace fields" farming scheme for displaced families and a school taking fees in instalments, one scheme rather than city-wide neighbourhood life [C community.diaspora]; friction: central market sealed off for a whole day in November 2025, regional state of emergency, health care limited, main roads cut [C safety.general][C health.care][C daily.transport] |
