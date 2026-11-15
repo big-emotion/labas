@@ -1,13 +1,12 @@
 import {
   CITIES,
   CRITERIA,
-  CRITERION_KEYS,
   livableLanguages,
   type City,
   type CriterionKey,
   type Language,
-  type Setting,
 } from "./cities";
+import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
 
 /** The non-negotiables offered by the quiz (their values predate the sourced criteria). */
@@ -17,26 +16,51 @@ export type Priority =
 /** A three-step stated preference: 0, 0.5 or 1. */
 type Step = 0 | 0.5 | 1;
 
+type QuizLanguage = Exclude<Language, "es" | "sw"> | "es" | "sw";
+export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban";
+
 /**
- * Every answer is optional: an unanswered question drops out of the score. The first ten are
- * the free quiz; the rest belong to the fuller questionnaire (/approfondir).
+ * Every answer is optional: an unanswered question drops out of the score. The free quiz and
+ * the fuller questionnaire (/approfondir) fill the same profile.
  */
 export interface Answers {
   project?: "installer" | "pied" | "tester" | "investir" | "decouvrir";
   budget?: "serre" | "moyen" | "large";
   family?: "celib" | "couple" | "fonder" | "parents";
   job?: "cadre" | "entre" | "remote" | "crea" | "soin";
-  language?: Exclude<Language, "es" | "sw">;
+  /** Every language the reader can live in. */
+  languages?: QuizLanguage[];
+  /** @deprecated one language; kept for answers given before several were allowed. */
+  language?: QuizLanguage;
   size?: City["size"];
-  landscape?: "beach" | "nature" | "wildSpaces" | "urban";
+  /** Every landscape the reader wants nearby. */
+  landscapes?: Landscape[];
+  /** @deprecated one landscape; kept for answers given before several were allowed. */
+  landscape?: Landscape;
   climate?: "hot" | "mild" | "dry";
   /** Ideal Saturday night: 1 out late with a crowd, 0.5 dinner with friends, 0 quiet at home. */
   saturday?: Step;
   /** Non-negotiables; only the first three count. */
   priorities?: Priority[];
+  /** Where the family comes from: an African zone, or the Americas and the Caribbean. */
+  origin?: City["zone"] | "ameriques";
+  /** Looking for one's roots, somewhere new, or both. */
+  roots?: "rediscover" | "discover" | "both";
+  profession?:
+    | "tech"
+    | "trade"
+    | "health"
+    | "teaching"
+    | "culture"
+    | "admin"
+    | "craft"
+    | "student"
+    | "retired";
+  /** Where the reader grew up: a hint at the pace that suits them. */
+  grewUp?: "city" | "town" | "country";
 
   // The fuller questionnaire. Filters remove cities, and the page says how many and why.
-  /** Only cities where the reader's language is spoken day to day. */
+  /** Only cities where one of the reader's languages is spoken day to day. */
   languageOnly?: boolean;
   /** Children to school in this curriculum. */
   schoolCurriculum?: "french" | "english" | "any";
@@ -58,13 +82,13 @@ export interface Answers {
   setupBudget?: "low" | "medium" | "high";
   /** Life over there: among other returnees, like the locals, or both. */
   belonging?: "returnees" | "locals" | "both";
-  /** What the reader can give up (weight set to zero). */
+  /** What the reader can give up. */
   renounce?: CriterionKey[];
 }
 
 export interface Match {
   city: City;
-  /** 0 to 1: the share of the best possible weighted score this city reaches. */
+  /** 0 to 1: how close the city's fingerprint is to what the reader said. */
   score: number;
   /** 0 to 1: the share of the reader's weight backed by a known value (§4.2). */
   coverage: number;
@@ -78,15 +102,6 @@ export interface Match {
   portrait: PortraitLine[];
 }
 
-const MAX = 5;
-/** A missing value neither wins nor loses (§4.2): it sits in the middle of the scale. */
-const NEUTRAL = 2.5;
-const MAX_PRIORITIES = 3;
-const LABELS = Object.fromEntries(CRITERIA.map((c) => [c.key, c.label])) as Record<
-  CriterionKey,
-  string
->;
-
 const LANGUAGE_NAMES: Record<Language, string> = {
   fr: "français",
   en: "anglais",
@@ -96,214 +111,228 @@ const LANGUAGE_NAMES: Record<Language, string> = {
   sw: "swahili",
 };
 
-type Weights = Record<CriterionKey | "paperwork", number>;
-type Boost = Partial<Weights>;
+const MAX_PRIORITIES = 3;
+const pull = (axis: Axis, target: number, weight: number): Pull => ({ axis, target, weight });
 
-// The prototype's weights, carried over to the sourced criteria (§4.1), so a reader who answers
-// nothing still gets a sensible order: cost and safety matter to everyone.
-function baseWeights(): Weights {
-  const weights = Object.fromEntries(CRITERION_KEYS.map((k) => [k, 0])) as Weights;
-  return {
-    ...weights,
-    paperwork: 0,
-    cost: 1,
-    safety: 1,
-    utilities: 0.5,
-    internet: 0.5,
-    healthcare: 0.5,
-    flights: 0.5,
-    culture: 0.5,
-    history: 0.5,
-  };
-}
+// Each answer is a set of pulls: where it wants the city on an axis (0 to 1, relative to the
+// 115 cities), and how much that counts. A reading of the answer, written down so it can be
+// argued with: "Danser jusqu'au matin" wants a city at the lively end of nightlife.
+const PROJECT: Record<NonNullable<Answers["project"]>, Pull[]> = {
+  installer: [
+    pull("safety", 0.9, 1),
+    pull("comfort", 0.8, 1),
+    pull("returnees", 0.6, 0.5),
+    pull("paperwork", 0.8, 1),
+  ],
+  pied: [pull("flights", 0.85, 2.5), pull("internet", 0.8, 1)],
+  tester: [pull("easySetup", 0.85, 2), pull("returnees", 0.8, 1), pull("cheap", 0.7, 1)],
+  investir: [pull("business", 0.85, 2.5), pull("jobs", 0.7, 1), pull("paperwork", 0.8, 1)],
+  decouvrir: [pull("culture", 0.8, 1), pull("history", 0.8, 1)],
+};
+const SATURDAY: Record<Step, Pull[]> = {
+  1: [pull("nightlife", 1, 2.5), pull("pace", 0.8, 1)],
+  0.5: [pull("nightlife", 0.55, 2)],
+  0: [pull("nightlife", 0.1, 2.5), pull("pace", 0.2, 1)],
+};
+const BUDGET: Record<NonNullable<Answers["budget"]>, Pull[]> = {
+  serre: [pull("cheap", 1, 3), pull("easySetup", 0.8, 1)],
+  moyen: [pull("cheap", 0.6, 1.5)],
+  large: [pull("comfort", 0.8, 1)],
+};
+const FAMILY: Record<NonNullable<Answers["family"]>, Pull[]> = {
+  celib: [pull("nightlife", 0.7, 0.5), pull("returnees", 0.7, 0.5)],
+  couple: [],
+  fonder: [pull("schools", 0.9, 2), pull("safety", 0.9, 1.5), pull("comfort", 0.8, 1)],
+  parents: [pull("schools", 0.85, 3), pull("safety", 0.85, 2), pull("comfort", 0.8, 1)],
+};
+const JOB: Record<NonNullable<Answers["job"]>, Pull[]> = {
+  cadre: [pull("jobs", 0.85, 2.5)],
+  entre: [pull("business", 0.85, 2.5), pull("paperwork", 0.7, 0.5)],
+  remote: [pull("internet", 0.85, 3), pull("flights", 0.7, 1)],
+  crea: [pull("culture", 0.85, 2.5), pull("nightlife", 0.7, 0.5)],
+  soin: [pull("comfort", 0.8, 1), pull("cheap", 0.6, 1)],
+};
+const SIZE: Record<City["size"], Pull[]> = {
+  3: [pull("pace", 1, 2.5)],
+  2: [pull("pace", 0.5, 2.5)],
+  1: [pull("pace", 0.1, 2.5)],
+};
+const GREW_UP: Record<NonNullable<Answers["grewUp"]>, Pull[]> = {
+  city: [pull("pace", 0.8, 1)],
+  town: [pull("pace", 0.45, 1)],
+  country: [pull("pace", 0.15, 1)],
+};
+const PRIORITY: Record<Priority, Pull[]> = {
+  safety: [pull("safety", 1, 2.5)],
+  cost: [pull("cheap", 1, 2.5)],
+  healthAndSchools: [pull("comfort", 1, 1.5), pull("schools", 1, 1.5)],
+  career: [pull("jobs", 1, 2.5)],
+  diaspora: [pull("returnees", 1, 2.5)],
+  memory: [pull("history", 1, 2.5)],
+  flights: [pull("flights", 1, 2.5)],
+};
+// A profession meets the sectors that hire in a city (sourced facts), plus a nudge on an axis.
+const PROFESSION: Record<
+  NonNullable<Answers["profession"]>,
+  { sectors: string[]; pulls: Pull[] }
+> = {
+  tech: { sectors: ["tech"], pulls: [pull("internet", 0.9, 1), pull("business", 0.8, 1)] },
+  trade: {
+    sectors: ["port-trade"],
+    pulls: [pull("business", 0.8, 1), pull("bargaining", 0.8, 0.5)],
+  },
+  health: { sectors: ["admin-ngo"], pulls: [pull("comfort", 0.8, 1)] },
+  teaching: { sectors: ["admin-ngo"], pulls: [pull("schools", 0.8, 1)] },
+  culture: { sectors: ["tourism"], pulls: [pull("culture", 0.85, 1.5)] },
+  admin: { sectors: ["admin-ngo"], pulls: [pull("jobs", 0.8, 1)] },
+  craft: { sectors: ["port-trade", "tourism", "agriculture"], pulls: [pull("cheap", 0.7, 1)] },
+  student: { sectors: [], pulls: [pull("cheap", 0.9, 1.5), pull("culture", 0.7, 1)] },
+  retired: {
+    sectors: [],
+    pulls: [pull("comfort", 0.9, 1.5), pull("pace", 0.3, 1), pull("safety", 0.9, 1)],
+  },
+};
+const STEP_PULLS = {
+  crowds: (s: Step) => [pull("pace", 0.1 + 0.9 * s, 2)],
+  friction: (s: Step) => [
+    pull("comfort", 1 - 0.6 * s, 2 * (1 - s)),
+    pull("paperwork", 0.85, 1.5 * (1 - s)),
+    pull("easySetup", 0.85, 1 - s),
+  ],
+  bargaining: (s: Step) => [pull("bargaining", 0.1 + 0.9 * s, 1.5)],
+  tripsHome: (s: Step) => [pull("flights", 0.4 + 0.6 * s, 1 + 3 * s)],
+};
+const SETUP: Record<NonNullable<Answers["setupBudget"]>, Pull[]> = {
+  low: [pull("easySetup", 0.85, 3)],
+  medium: [pull("easySetup", 0.7, 1.5)],
+  high: [],
+};
+const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
+  returnees: [pull("returnees", 0.85, 2)],
+  locals: [pull("returnees", 0.3, 0.5)],
+  both: [pull("returnees", 0.7, 1)],
+};
+const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
+  culture: "culture",
+  internet: "internet",
+  flights: "flights",
+  history: "history",
+  jobs: "jobs",
+};
 
-const PROJECT: Record<NonNullable<Answers["project"]>, Boost> = {
-  installer: { cost: 1, safety: 1.5, utilities: 1, healthcare: 1, returnees: 1, paperwork: 1 },
-  pied: { internet: 1, business: 1, flights: 3 },
-  tester: { cost: 1, setupCost: 2, internet: 1.5, returnees: 1.5 },
-  investir: { jobs: 1.5, business: 3, flights: 1, paperwork: 1 },
-  decouvrir: { culture: 1, history: 1, safety: 0.5 },
-};
-const JOB: Record<NonNullable<Answers["job"]>, Boost> = {
-  cadre: { jobs: 2.5 },
-  entre: { jobs: 1, business: 2.5, paperwork: 1 },
-  remote: { utilities: 1.5, internet: 3, flights: 1 },
-  crea: { culture: 2.5 },
-  soin: { cost: 1, healthcare: 1, returnees: 0.5 },
-};
-const FAMILY: Record<NonNullable<Answers["family"]>, Boost> = {
-  celib: { returnees: 1.5, culture: 1 },
-  couple: {},
-  fonder: { schools: 2.5, healthcare: 1, safety: 1.5, returnees: 1 },
-  parents: { schools: 3.5, healthcare: 1, safety: 2.5 },
-};
-const PRIORITY: Record<Priority, Boost> = {
-  safety: { safety: 2.5 },
-  cost: { cost: 2.5 },
-  healthAndSchools: { healthcare: 2.5, schools: 2.5 },
-  career: { jobs: 2.5 },
-  diaspora: { returnees: 2.5 },
-  memory: { history: 2.5 },
-  flights: { flights: 2.5 },
-};
-const LANDSCAPES: Record<Exclude<NonNullable<Answers["landscape"]>, "urban">, Setting[]> = {
-  beach: ["ocean"],
-  nature: ["mountains", "forest", "lake-or-river"],
-  wildSpaces: ["savanna", "desert"],
-};
-const CLIMATES: Record<NonNullable<Answers["climate"]>, string[]> = {
-  hot: ["hot-humid", "hot-dry"],
-  mild: ["mild", "highland"],
-  dry: ["hot-dry"],
-};
-const PRIORITY_CRITERIA = Object.keys(PRIORITY) as Priority[];
-
-function weightsFor(answers: Answers): Weights {
-  const weights = baseWeights();
-  const add = (boost: Boost | undefined) => {
-    for (const [criterion, extra] of Object.entries(boost ?? {})) {
-      weights[criterion as keyof Weights] += extra;
-    }
-  };
+/** Turns answers into pulls on axes and facts to match. */
+function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] } {
+  // Safety matters to everyone a little, so a reader with few answers still gets a sane order.
+  const pulls: Pull[] = [pull("safety", 0.75, 0.5)];
+  const facts: FactPull[] = [];
+  const add = (more: Pull[] | undefined) => more && pulls.push(...more);
   if (answers.project) add(PROJECT[answers.project]);
-  if (answers.job) add(JOB[answers.job]);
+  if (answers.saturday !== undefined) add(SATURDAY[answers.saturday]);
+  if (answers.budget) add(BUDGET[answers.budget]);
   if (answers.family) add(FAMILY[answers.family]);
-  if (answers.landscape === "urban") add({ culture: 1.5 });
-  if (answers.budget === "serre") add({ cost: 3, setupCost: 1 });
-  if (answers.budget === "moyen") add({ cost: 1.5 });
-  if (answers.budget === "large") weights.cost = 0;
-  for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES)) {
-    if (PRIORITY_CRITERIA.includes(priority)) add(PRIORITY[priority]);
+  if (answers.job) add(JOB[answers.job]);
+  if (answers.size) add(SIZE[answers.size]);
+  if (answers.grewUp) add(GREW_UP[answers.grewUp]);
+  for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES))
+    add(PRIORITY[priority]);
+  if (answers.profession) {
+    const { sectors, pulls: more } = PROFESSION[answers.profession];
+    add(more);
+    if (sectors.length) facts.push({ kind: "sectors", values: sectors, weight: 1.5 });
   }
-  if (answers.friction !== undefined) {
-    const avoid = 1 - answers.friction;
-    add({ utilities: 2 * avoid, paperwork: 1.5 * avoid, setupCost: avoid });
+  if (answers.crowds !== undefined) add(STEP_PULLS.crowds(answers.crowds));
+  if (answers.friction !== undefined) add(STEP_PULLS.friction(answers.friction));
+  if (answers.bargaining !== undefined) add(STEP_PULLS.bargaining(answers.bargaining));
+  if (answers.tripsHome !== undefined) add(STEP_PULLS.tripsHome(answers.tripsHome));
+  if (answers.setupBudget) add(SETUP[answers.setupBudget]);
+  if (answers.belonging) add(BELONGING[answers.belonging]);
+
+  const languages = languagesOf(answers);
+  if (languages.length) facts.push({ kind: "languages", values: languages, weight: 3 });
+  const landscapes = landscapesOf(answers);
+  const natural = landscapes.filter((l) => l !== "urban");
+  if (natural.length) facts.push({ kind: "settings", values: natural, weight: 2.5 });
+  if (landscapes.includes("urban")) add([pull("culture", 0.8, 1.5), pull("pace", 0.7, 0.5)]);
+  if (answers.climate) facts.push({ kind: "climates", values: [answers.climate], weight: 2 });
+  // Roots bring the family's region closer; looking elsewhere never pushes it away.
+  if (answers.origin && answers.origin !== "ameriques" && answers.roots === "rediscover") {
+    facts.push({ kind: "zone", value: answers.origin, weight: 3 });
+  } else if (answers.origin && answers.origin !== "ameriques" && answers.roots === "both") {
+    facts.push({ kind: "zone", value: answers.origin, weight: 1.5 });
   }
-  if (answers.tripsHome !== undefined) add({ flights: 1 + 3 * answers.tripsHome });
-  if (answers.setupBudget === "low") add({ setupCost: 3 });
-  if (answers.setupBudget === "medium") add({ setupCost: 1.5 });
-  if (answers.belonging === "returnees") add({ returnees: 2 });
-  if (answers.belonging === "both") add({ returnees: 1 });
-  for (const key of answers.renounce ?? []) weights[key] = 0;
-  return weights;
+
+  const renounced = new Set((answers.renounce ?? []).map((key) => RENOUNCE_AXIS[key]));
+  return { pulls: pulls.filter((p) => !renounced.has(p.axis)), facts };
 }
 
-interface Part {
-  label: string;
-  /** How well the city does on this point, 0 to 5; null when nobody knows. */
-  value: number | null;
-  weight: number;
-  criterion?: CriterionKey;
+function languagesOf(answers: Answers): string[] {
+  return answers.languages ?? (answers.language ? [answers.language] : []);
+}
+function landscapesOf(answers: Answers): Landscape[] {
+  return answers.landscapes ?? (answers.landscape ? [answers.landscape] : []);
 }
 
-/** A target criterion scores by distance to what the reader wants (1 to 5). */
-function closeness(level: number | null, wanted: number): number | null {
-  return level === null ? null : Math.max(0, MAX - Math.abs(wanted - level));
-}
+const CRITERION_OF: Partial<Record<Axis, CriterionKey>> = {
+  easySetup: "setupCost",
+  safety: "safety",
+  internet: "internet",
+  schools: "schools",
+  jobs: "jobs",
+  business: "business",
+  flights: "flights",
+  culture: "culture",
+  history: "history",
+  returnees: "returnees",
+};
+const LABELS = Object.fromEntries(CRITERIA.map((c) => [c.key, c.label])) as Record<
+  CriterionKey,
+  string
+>;
 
-function partsFor(city: City, answers: Answers, weights: Weights): Part[] {
-  const parts: Part[] = [];
-  for (const key of CRITERION_KEYS) {
-    const def = CRITERIA.find((c) => c.key === key);
-    if (def?.direction === "target" || weights[key] === 0) continue;
-    parts.push({
-      label: LABELS[key],
-      value: city.scores[key].level,
-      weight: weights[key],
-      criterion: key,
-    });
+function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): string | undefined {
+  if (part.fact === "languages") {
+    const spoken = livableLanguages(city).filter((l) => languagesOf(answers).includes(l));
+    return good
+      ? `On y vit en ${spoken.map((l) => LANGUAGE_NAMES[l]).join(" et ")}`
+      : "Langue du quotidien différente de ton souhait";
   }
-  if (weights.paperwork > 0) {
-    parts.push({
-      label: "Démarches simples",
-      value: city.countryFacts?.paperwork.level ?? null,
-      weight: weights.paperwork,
-    });
+  if (part.fact === "settings")
+    return good ? "Le paysage que tu cherches, tout près" : "Paysage différent de ton souhait";
+  if (part.fact === "climates")
+    return good ? "Le climat que tu cherches" : "Climat différent de ton souhait";
+  if (part.fact === "zone") return good ? "Dans la région de ta famille" : undefined;
+  if (part.fact === "sectors") return good ? "Ton secteur y recrute" : "Ton secteur y recrute peu";
+  switch (part.axis) {
+    case "pace":
+      return good
+        ? "Le rythme de ville que tu cherches"
+        : "Un rythme éloigné de ce que tu cherches";
+    case "nightlife":
+      return good ? "Une ambiance à ta mesure" : "Une ambiance décalée par rapport à toi";
+    case "cheap":
+      return good ? "Une vie à ton budget" : "Plus cher que ton budget";
+    case "comfort":
+      return good ? "Courant, eau et soins à la hauteur" : "Courant, eau et soins en retrait";
+    case "bargaining":
+      return good
+        ? "Des prix comme tu les aimes"
+        : "Des prix qui se négocient plus ou moins que tu ne le voudrais";
+    case "paperwork":
+      return good ? "Démarches simples" : "Démarches plus lourdes";
+    default: {
+      const key = part.axis ? CRITERION_OF[part.axis] : undefined;
+      if (!key) return undefined;
+      return good ? LABELS[key] : `${LABELS[key]} : en retrait`;
+    }
   }
-
-  if (answers.saturday !== undefined) {
-    const value = closeness(city.scores.nightlife.level, 1 + 4 * answers.saturday);
-    parts.push({
-      label:
-        value === null || value >= 3
-          ? "Une ambiance à ta mesure"
-          : "Une ambiance décalée par rapport à toi",
-      value,
-      weight: 2.5,
-      criterion: "nightlife",
-    });
-  }
-  if (answers.crowds !== undefined) {
-    const value = closeness(city.scores.pace.level, 1 + 4 * answers.crowds);
-    parts.push({
-      label:
-        value === null || value >= 3
-          ? "Le rythme de ville que tu cherches"
-          : "Un rythme éloigné de ce que tu cherches",
-      value,
-      weight: 2,
-      criterion: "pace",
-    });
-  }
-  if (answers.bargaining !== undefined) {
-    const value = closeness(city.scores.negotiation.level, 1 + 4 * answers.bargaining);
-    parts.push({
-      label:
-        value === null || value >= 3
-          ? "Des prix comme tu les aimes"
-          : "Des prix qui se négocient plus ou moins que tu ne le voudrais",
-      value,
-      weight: 1.5,
-      criterion: "negotiation",
-    });
-  }
-  if (answers.size) {
-    const value = [5, 2.5, 0][Math.abs(city.size - answers.size)];
-    parts.push({
-      label:
-        value >= 3
-          ? "Le rythme de ville que tu cherches"
-          : "Taille de ville éloignée de ton souhait",
-      value,
-      weight: 2,
-    });
-  }
-  if (answers.language) {
-    const spoken = livableLanguages(city).includes(answers.language);
-    parts.push({
-      label: spoken
-        ? `On y vit en ${LANGUAGE_NAMES[answers.language]}`
-        : "Langue du quotidien différente de ton souhait",
-      value: spoken ? MAX : 0,
-      weight: 3,
-    });
-  }
-  if (answers.climate) {
-    const suits = city.facts.climates.some((c) => CLIMATES[answers.climate!].includes(c));
-    parts.push({
-      label: suits ? "Le climat que tu cherches" : "Climat différent de ton souhait",
-      value: suits ? MAX : 0,
-      weight: 2,
-    });
-  }
-  if (answers.landscape && answers.landscape !== "urban") {
-    const near = city.facts.settings.some((s) =>
-      LANDSCAPES[answers.landscape as "beach"].includes(s),
-    );
-    parts.push({
-      label: near ? "Le paysage que tu cherches, tout près" : "Paysage différent de ton souhait",
-      value: near ? MAX : 0,
-      weight: 3,
-    });
-  }
-  return parts;
 }
 
 function exclusionFor(city: City, answers: Answers): string | undefined {
   const country = city.countryFacts;
-  if (answers.languageOnly && answers.language) {
-    if (!livableLanguages(city).includes(answers.language)) {
-      return `On n'y vit pas en ${LANGUAGE_NAMES[answers.language]}`;
+  const languages = languagesOf(answers);
+  if (answers.languageOnly && languages.length) {
+    if (!livableLanguages(city).some((l) => languages.includes(l))) {
+      return `On n'y vit pas en ${languages.map((l) => LANGUAGE_NAMES[l as Language]).join(" ni en ")}`;
     }
   }
   if (answers.schoolCurriculum) {
@@ -331,28 +360,30 @@ function exclusionFor(city: City, answers: Answers): string | undefined {
   return undefined;
 }
 
-function evaluate(city: City, answers: Answers, weights: Weights): Match {
-  const parts = partsFor(city, answers, weights);
-  const value = (p: Part) => p.value ?? NEUTRAL;
-  const earned = parts.reduce((sum, p) => sum + p.weight * value(p), 0);
-  const possible = parts.reduce((sum, p) => sum + p.weight * MAX, 0);
-  const known = parts.filter((p) => p.value !== null).reduce((sum, p) => sum + p.weight, 0);
+function evaluate(city: City, answers: Answers, profile: ReturnType<typeof profileOf>): Match {
+  const parts = closenessOf(city, profile.pulls, profile.facts);
   const total = parts.reduce((sum, p) => sum + p.weight, 0);
+  const earned = parts.reduce((sum, p) => sum + p.weight * p.value, 0);
+  const known = parts.filter((p) => p.known).reduce((sum, p) => sum + p.weight, 0);
   // A missing value is never cited for or against a city.
-  const cited = parts.filter((p) => p.value !== null) as (Part & { value: number })[];
-  const reasons = cited
-    .filter((p) => p.weight > 0 && p.value >= 3.5)
-    .sort((a, b) => b.weight * b.value - a.weight * a.value)
-    .slice(0, 5)
-    .map((p) => p.label);
-  const drawbacks = cited
-    .filter((p) => p.weight >= 2 && p.value <= 2)
-    .sort((a, b) => b.weight * (MAX - b.value) - a.weight * (MAX - a.value))
-    .slice(0, 3)
-    .map((p) => p.label);
+  const cited = parts.filter((p) => p.known);
+  const words = (list: Closeness[], good: boolean) =>
+    list.map((p) => labelOf(p, city, answers, good)).filter((l): l is string => Boolean(l));
+  const reasons = words(
+    cited
+      .filter((p) => p.weight >= 1 && p.value >= 0.75)
+      .sort((a, b) => b.weight * b.value - a.weight * a.value),
+    true,
+  ).slice(0, 5);
+  const drawbacks = words(
+    cited
+      .filter((p) => p.weight >= 2 && p.value <= 0.35)
+      .sort((a, b) => b.weight * (1 - b.value) - a.weight * (1 - a.value)),
+    false,
+  ).slice(0, 3);
   return {
     city,
-    score: possible ? earned / possible : 0,
+    score: total ? earned / total : 0,
     coverage: total ? known / total : 1,
     excludedBecause: exclusionFor(city, answers),
     reasons,
@@ -362,8 +393,8 @@ function evaluate(city: City, answers: Answers, weights: Weights): Match {
 }
 
 export function rankCities(answers: Answers): Match[] {
-  const weights = weightsFor(answers);
-  return CITIES.map((city) => evaluate(city, answers, weights)).sort((a, b) => b.score - a.score);
+  const profile = profileOf(answers);
+  return CITIES.map((city) => evaluate(city, answers, profile)).sort((a, b) => b.score - a.score);
 }
 
 /**
