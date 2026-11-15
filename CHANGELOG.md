@@ -6,6 +6,21 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-15
+
+### Added
+
+- « Garder vos résultats » under the result and the full ranking: share, print or save as PDF,
+  or receive the result in your own mail app. The text carries cities and percentages, never
+  answers.
+- The full questionnaire picks up the quick quiz's answers (kept in your browser only) and goes
+  straight to the next questions, with « Tout reprendre à zéro ».
+- Audience funnel in Plausible: quick quiz finished, full questionnaire finished.
+
+### Fixed
+
+- The full questionnaire no longer asks the same question twice.
+
 ## [0.4.0] - 2026-11-15
 
 ### Added
@@ -93,7 +108,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/big-emotion/labas/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/big-emotion/labas/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/big-emotion/labas/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/big-emotion/labas/compare/v0.2.0...v0.2.1
