@@ -55,8 +55,15 @@ describe("the question bank", () => {
     }
   });
 
-  it("says in one line what each question is for", () => {
-    for (const question of QUESTIONS) expect(question.hint, question.id).toBeTruthy();
+  it("asks each question as a direct question", () => {
+    for (const question of QUESTIONS) expect(question.title, question.id).toMatch(/ \?$/);
+  });
+
+  it("says in one short sentence what each answer changes", () => {
+    for (const question of QUESTIONS) {
+      expect(question.hint, question.id).toBeTruthy();
+      expect(question.hint!.length, question.id).toBeLessThanOrEqual(120);
+    }
   });
 
   it("opens on the life project", () => {

@@ -346,8 +346,10 @@ describe("what the reader's life today brings to the match", () => {
   });
 
   it("matches a profession with the cities where it hires", () => {
-    const banker: Answers = { profession: "finance" };
-    expect(scoreOf(banker, "Johannesburg")).toBeGreaterThan(scoreOf(banker, "Saint-Louis"));
+    // Measured as a gain, other answers (here the default reception rule) being equal.
+    const gap = (answers: Answers) =>
+      scoreOf(answers, "Johannesburg") - scoreOf(answers, "Saint-Louis");
+    expect(gap({ profession: "finance" })).toBeGreaterThan(gap({}));
   });
 
   it("points someone from an upscale area to cities that have one", () => {
@@ -583,6 +585,35 @@ describe("never sending a reader where they would be badly received", () => {
     } as Answers;
     for (const country of countriesOf(martinican))
       expect(hostile.has(country), country).toBe(false);
+  });
+
+  it("keeps a reader who does not give their origin out of them too", () => {
+    const silent = {
+      project: "tester",
+      languages: ["fr", "ar"],
+      origin: [null],
+      adventure: "seeking",
+      saturday: 1,
+      landscapes: ["beach"],
+    } as unknown as Answers;
+    for (const country of countriesOf(silent)) expect(hostile.has(country), country).toBe(false);
+    const unasked = { ...silent, origin: undefined } as Answers;
+    for (const country of countriesOf(unasked)) expect(hostile.has(country), country).toBe(false);
+  });
+
+  it("keeps a French-Senegalese reader out of them, as in the first field test", () => {
+    // Field test of 2026-11-15: Senegalese father, French mother, never been to Tunisia.
+    const ely = {
+      project: "decouvrir",
+      languages: ["fr"],
+      origin: ["ouest"],
+      countries: ["Sénégal"],
+      kin: "some",
+      adventure: "seeking",
+      landscapes: ["beach", "island"],
+      passports: ["eu"],
+    } as Answers;
+    for (const country of countriesOf(ely)) expect(hostile.has(country), country).toBe(false);
   });
 
   it("still offers North Africa to a reader of North African family", () => {
