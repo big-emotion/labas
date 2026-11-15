@@ -52,10 +52,12 @@ src/data/city-scores.json   per city: 16 scores (level, justification, confidenc
 src/data/countries.json     per country: paperwork, visa, dual nationality, same-sex law…
 src/data/city-lines.json    per city: « On dit », « Ce qui pourrait te surprendre »,
         │                   neighbourhoods, own « pourquoi toi » sentences, sources
+src/data/africa-borders.json Natural Earth 1:50m borders (public domain), projected like the dots
 src/data/photos.json        per city: a Wikimedia Commons photo (public/photos) and its credit
 src/lib/ranking.ts          answers ──▶ weights ──▶ weighted score (0–1), coverage, filters
         │                   + reasons, drawbacks and « pourquoi toi » lines (portrait.ts)
-src/pages/index.astro       the free quiz: map, pinned top three, « Tes trois villes »
+src/pages/index.astro       the free quiz, one question at a time: bordered map, pinned top three,
+                            « C'est prêt », « Tes trois villes »
 src/pages/approfondir.astro the fuller questionnaire, one question at a time (adaptive.ts)
 src/pages/ville/[slug]      one page per city: every criterion with its sources
 src/pages/methode.astro     the rubric, the confidence levels, what is never scored
