@@ -6,6 +6,15 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-15
+
+### Added
+
+- Cities are matched to the reader's temperament neighbourhood by neighbourhood: 763
+  neighbourhoods rated on the five temperament axes, on one scale shared by every city. A calm
+  reader is drawn to cities that are mostly calm (Kigali before Abidjan) and still fits a lively
+  city in part.
+
 ## [0.2.1] - 2026-11-15
 
 ### Security
@@ -64,7 +73,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/big-emotion/labas/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/big-emotion/labas/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/big-emotion/labas/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/big-emotion/labas/compare/v0.1.3...v0.1.4
