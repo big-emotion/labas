@@ -51,6 +51,20 @@ describe("the free quiz, one question at a time", () => {
     }
   });
 
+  it("always asks first what the match cannot do without", () => {
+    for (const pick of [0, 1, 2]) {
+      const { asked } = play(pick);
+      expect(asked.slice(0, 4), `pick ${pick}`).toEqual(["project", "languages", "origin", "kin"]);
+    }
+  });
+
+  it("asks about adventure and faith right after, when feeling at home matters", () => {
+    const { asked, answers } = play(0);
+    expect(answers.kin).toBe("much");
+    expect(asked[4]).toBe("adventure");
+    expect(asked[5]).toBe("faith");
+  });
+
   it("settles after 8 to 12 questions, never asking one twice", () => {
     for (const pick of [0, 1, 2, 3, 4]) {
       const { asked } = play(pick);

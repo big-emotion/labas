@@ -296,6 +296,23 @@ describe("feeling at home among one's own", () => {
     expect(zones(westAfrican, 5)).not.toContain("nord");
   });
 
+  it("keeps North Africa out of the first five even when other answers favour it", () => {
+    // Played in the browser on 2026-11-15: the first choice of each adaptive question.
+    const played = {
+      ...westAfrican,
+      faith: "muslim",
+      profession: "finance",
+      saturday: 1,
+      rhythm: "same",
+    } as Answers;
+    const shown = bestMatches(played, 7).filter(
+      (m) => m.city.name !== "Dakar" && m.city.name !== "Abidjan",
+    );
+    expect(shown.slice(0, 5).map((m) => `${m.city.name}:${m.city.zone}`)).not.toContainEqual(
+      expect.stringMatching(/:nord$/),
+    );
+  });
+
   it("brings that reader closest to their family's region", () => {
     expect(zones(westAfrican).filter((z) => z === "ouest").length).toBeGreaterThanOrEqual(2);
   });

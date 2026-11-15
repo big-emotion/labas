@@ -367,7 +367,7 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
-const KIN_WEIGHT = { much: 5, some: 2.5 } as const;
+const KIN_WEIGHT = { much: 8, some: 3.5 } as const;
 const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
 const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
 const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {

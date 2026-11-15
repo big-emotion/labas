@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { rankCities, type Answers } from "./ranking";
-import { applyFilters, type Filters } from "./filters";
+import { applyFilters, FILTER_MENU, filtersFrom, type Filters } from "./filters";
 import { livableLanguages } from "./cities";
 
 const reader: Answers = { project: "installer", languages: ["fr"], origin: "ouest", kin: "much" };
@@ -70,5 +70,33 @@ describe("filtering the result", () => {
       expect(m.city.size).toBe(1);
       expect(m.city.zone).toBe("ouest");
     }
+  });
+});
+
+describe("the filter menu", () => {
+  it("offers the filters of the approved mockup, in its order", () => {
+    expect(FILTER_MENU.map((f) => f.label)).toEqual([
+      "Villes que tu connais déjà",
+      "Taille de la ville",
+      "Langue",
+      "Budget",
+      "Mer ou île",
+      "Région",
+      "Religion majoritaire",
+      "Lois sur l'homosexualité",
+    ]);
+  });
+
+  it("lists every city, alphabetically, among the ones the reader may know", () => {
+    const known = FILTER_MENU.find((f) => f.key === "known")!;
+    const labels = known.options.map((o) => o.label);
+    expect(labels).toHaveLength(115);
+    expect(labels).toEqual([...labels].sort((a, b) => a.localeCompare(b, "fr")));
+  });
+
+  it("builds filters the result understands from the options picked", () => {
+    const sizes = FILTER_MENU.find((f) => f.key === "sizes")!;
+    const filters = filtersFrom({ sizes: [sizes.options[2].value] });
+    for (const m of applyFilters(ranked, filters)) expect(m.city.size).toBe(1);
   });
 });

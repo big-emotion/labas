@@ -40,8 +40,24 @@ export function nextQuestion(answers: Answers, asked: string[]): string | undefi
   return pickNext(DEEP_QUESTIONS, answers, asked);
 }
 
+/**
+ * Questions the free quiz always asks first, in this order. They decide where a reader can feel
+ * at home (language, family region, how much that matters, appetite for the unknown, faith) and
+ * rarely reshuffle the top three on their own, so the adaptive rule alone would skip them.
+ */
+const CORE: { id: string; when?: (answers: Answers) => boolean }[] = [
+  { id: "project" },
+  { id: "languages" },
+  { id: "origin" },
+  { id: "kin" },
+  { id: "adventure", when: (answers) => answers.kin === "much" || answers.kin === "some" },
+  { id: "faith", when: (answers) => answers.kin === "much" || answers.kin === "some" },
+];
+
 /** The next question of the free quiz, from the bank of 23. */
 export function nextFreeQuestion(answers: Answers, asked: string[]): string | undefined {
+  const core = CORE.find((q) => !asked.includes(q.id) && (q.when?.(answers) ?? true));
+  if (core) return core.id;
   return pickNext(QUESTIONS, answers, asked);
 }
 

@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
+import { FILTER_MENU } from "../lib/filters";
 import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
 import borders from "../data/africa-borders.json";
 
@@ -60,11 +61,12 @@ const description =
       <main class="main">
         <div class="progress">
           <span id="counter" class="counter">
-            Question 1 sur {QUESTIONS.length}
+            Ça se dessine
           </span>
           <span class="track">
             <span id="progress"></span>
           </span>
+          <span class="gauge-hint">Ton résultat se précise à chaque réponse.</span>
         </div>
         <form id="form" class="questions" aria-label="Tes réponses">
           {QUESTIONS.map((question, index) => (
@@ -75,8 +77,9 @@ const description =
               hidden={index > 0}
             >
               <legend>
+                <span class="group">{question.group}</span>
                 {question.title}
-                {question.max && <span class="hint">Jusqu'à {question.max} choix</span>}
+                {question.max && <span class="hint">Plusieurs choix possibles</span>}
               </legend>
               <div class="chips">
                 {question.choices.map((choice) => (
@@ -91,7 +94,7 @@ const description =
                 ))}
               </div>
               <div class="steps">
-                <button type="button" class="back" data-step="back" disabled={index === 0}>
+                <button type="button" class="back" data-step="back">
                   ← Retour
                 </button>
                 {question.max ? (
@@ -112,9 +115,9 @@ const description =
             <button type="button" id="reveal" class="primary">
               Voir mes villes
             </button>
-            <a href="/approfondir" class="secondary">
-              Affiner avec le questionnaire complet
-            </a>
+            <button type="button" id="refine" class="secondary">
+              Affiner encore (questions de plus)
+            </button>
             <button type="button" class="back" data-step="back">
               ← Changer une réponse
             </button>
@@ -122,6 +125,35 @@ const description =
         </form>
 
         <div id="outcome" class="outcome" hidden>
+          <section class="filters" aria-label="Filtrer tes villes">
+            <div class="filter-chips">
+              {FILTER_MENU.map((entry) => (
+                <button
+                  type="button"
+                  class="filter-chip"
+                  data-filter={entry.key}
+                  aria-pressed="false"
+                >
+                  {entry.label}
+                </button>
+              ))}
+            </div>
+            <p class="hint" id="filter-note">
+              Les filtres retirent des villes ; l'ordre ne change jamais.
+            </p>
+          </section>
+
+          <dialog id="filter-sheet" class="sheet" aria-labelledby="sheet-title">
+            <form method="dialog" class="sheet-body">
+              <h2 id="sheet-title"></h2>
+              <p class="sheet-hint" id="sheet-hint"></p>
+              <div class="sheet-options" id="sheet-options"></div>
+              <button type="submit" class="primary">
+                Voir mes villes
+              </button>
+            </form>
+          </dialog>
+
           <section class="results" aria-labelledby="results-title">
             <h2 id="results-title">Tes trois villes</h2>
             <p class="hint" id="results-hint">
@@ -135,7 +167,9 @@ const description =
 
           <section class="others" aria-labelledby="others-title">
             <h2 id="others-title">Toutes les autres villes</h2>
-            <p class="hint">Les 115 villes, triées selon tes réponses.</p>
+            <p class="hint" id="others-hint">
+              Les 115 villes, triées selon tes réponses.
+            </p>
             <ol id="rows" class="rows"></ol>
             <button type="button" id="more" class="more">
               Voir plus de villes
@@ -269,6 +303,14 @@ const description =
 
     <script>
       import { bestMatches, rankCities, type Answers, type Match } from "../lib/ranking";
+      import { gauge, isSettled, nextFreeQuestion } from "../lib/adaptive";
+      import {
+        applyFilters,
+        FILTER_MENU,
+        filtersFrom,
+        type FilterOption,
+        type Filters,
+      } from "../lib/filters";
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { linesFor } from "../lib/lines";
       import { photoFor } from "../lib/photos";
@@ -467,7 +509,9 @@ const description =
         const current = readAnswers();
         const answered = Object.values(current).some((value) => value !== undefined);
         const ranked = rankCities(current);
-        const matches = bestMatches(current, 3);
+        // Filters only remove cities; the order stays the score's.
+        const kept = applyFilters(ranked, filtersFrom(picked));
+        const matches = kept.filter((m) => !m.city.unsafe && !m.excludedBecause).slice(0, 3);
         const scores = new Map(
           ranked
             .filter((m) => !m.city.unsafe)
@@ -490,7 +534,14 @@ const description =
 
         // Every other city, in score order; conflict zones keep their place, greyed.
         const shown = new Set(matches.map((m) => m.city.name));
-        const rest = ranked.filter((m) => !shown.has(m.city.name));
+        const rest = kept.filter((m) => !shown.has(m.city.name));
+        const removed = ranked.length - kept.length;
+        (document.getElementById("filter-note") as HTMLElement).textContent = removed
+          ? `${removed} ${removed > 1 ? "villes masquées" : "ville masquée"} par tes filtres. L'ordre ne change pas : seul ton score le décide.`
+          : "Les filtres retirent des villes ; l'ordre ne change jamais.";
+        (document.getElementById("others-hint") as HTMLElement).textContent = removed
+          ? `Les ${kept.length} villes qui passent tes filtres, triées selon tes réponses.`
+          : "Les 115 villes, triées selon tes réponses.";
         const visible = showAll ? rest : rest.slice(0, VISIBLE_ROWS);
         (document.getElementById("rows") as HTMLElement).replaceChildren(
           ...visible.map((m, i) => rowFor(m, i + 4)),
@@ -503,33 +554,62 @@ const description =
         render();
       });
 
-      // One question at a time: answering moves on, and every tap still re-ranks the map and
-      // the pinned top three (architecture.md §A.3, quiz mockup of 2026-11-15).
-      const steps = [...form.querySelectorAll<HTMLFieldSetElement>(".question")];
-      let step = 0;
+      // One question at a time, chosen by what would reshuffle the top three the most; the quiz
+      // settles after 8 to 12 answers (adaptive.ts, quiz mockup V2 of 2026-11-15).
+      const fieldsets = new Map(
+        [...form.querySelectorAll<HTMLFieldSetElement>(".question")].map((f) => [
+          f.dataset.question as string,
+          f,
+        ]),
+      );
+      const asked: string[] = [];
+      const tops: string[][] = [];
+      let current: string | undefined = "project";
       let revealed = false;
+      let refining = false;
 
-      function show(next: number) {
-        step = Math.max(0, Math.min(steps.length, next));
-        revealed = step >= steps.length;
+      function showQuestion(id: string | undefined) {
+        current = id;
+        revealed = id === undefined;
         // On the phone the title gives way to the map once the reader has started.
-        document.body.classList.toggle("started", step > 0);
-        steps.forEach((fieldset, index) => (fieldset.hidden = index !== step));
-        (document.getElementById("ready") as HTMLElement).hidden = step < steps.length;
-        const done = Math.min(step, steps.length);
+        document.body.classList.toggle("started", asked.length > 0);
+        fieldsets.forEach((fieldset, key) => (fieldset.hidden = key !== id));
+        (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
+        const filled = gauge(asked.length, id === undefined);
         (document.getElementById("counter") as HTMLElement).textContent =
-          step < steps.length ? `Question ${step + 1} sur ${steps.length}` : "Terminé";
+          filled >= 1 ? "Prêt" : filled >= 0.6 ? "Presque" : "Ça se dessine";
         (document.getElementById("progress") as HTMLElement).style.width =
-          `${Math.round((done / steps.length) * 100)}%`;
-        steps[step]?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+          `${Math.round(filled * 100)}%`;
+        const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
+        if (back) back.disabled = asked.length === 0;
+        if (id)
+          fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
         render();
+      }
+
+      function advance() {
+        if (current) {
+          asked.push(current);
+          tops.push(bestMatches(readAnswers(), 3).map((m) => m.city.name));
+        }
+        const next = nextFreeQuestion(readAnswers(), asked);
+        const settled = !next || (!refining && isSettled(asked.length, tops));
+        showQuestion(settled ? undefined : next);
+      }
+
+      function goBack() {
+        const last = asked.pop();
+        tops.pop();
+        refining = false;
+        if (last) showQuestion(last);
       }
 
       form.addEventListener("click", (event) => {
         const target = event.target as HTMLElement;
         const move = target.closest<HTMLButtonElement>("[data-step]")?.dataset.step;
         if (move) {
-          show(move === "back" ? step - 1 : step + 1);
+          if (move === "back") goBack();
+          else advance();
           return;
         }
         const chip = target.closest<HTMLButtonElement>(".chip");
@@ -539,7 +619,7 @@ const description =
         const fieldset = chip.closest<HTMLFieldSetElement>(".question");
         // A single-choice answer moves on by itself; several choices wait for « Valider ».
         if (Number(fieldset?.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
-          show(step + 1);
+          advance();
         }
       });
 
@@ -549,7 +629,67 @@ const description =
         outcome.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
-      show(0);
+      document.getElementById("refine")!.addEventListener("click", () => {
+        refining = true;
+        advance();
+      });
+
+      // Filters on the result: one sheet per filter, options toggled live.
+      const picked: Partial<Record<keyof Filters, FilterOption["value"][]>> = {};
+      const sheet = document.getElementById("filter-sheet") as HTMLDialogElement;
+
+      function syncFilterChips() {
+        for (const chip of document.querySelectorAll<HTMLButtonElement>(".filter-chip")) {
+          const key = chip.dataset.filter as keyof Filters;
+          chip.setAttribute("aria-pressed", String(Boolean(picked[key]?.length)));
+        }
+      }
+
+      function openSheet(key: keyof Filters) {
+        const entry = FILTER_MENU.find((f) => f.key === key)!;
+        (document.getElementById("sheet-title") as HTMLElement).textContent = entry.label;
+        (document.getElementById("sheet-hint") as HTMLElement).textContent = entry.hint;
+        (document.getElementById("sheet-options") as HTMLElement).replaceChildren(
+          ...entry.options.map((option) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "option";
+            button.textContent = option.label;
+            button.dataset.value = JSON.stringify(option.value);
+            const on = () => (picked[key] ?? []).includes(option.value);
+            button.setAttribute("aria-pressed", String(on()));
+            button.addEventListener("click", () => {
+              const values = picked[key] ?? [];
+              picked[key] = on()
+                ? values.filter((v) => v !== option.value)
+                : entry.single
+                  ? [option.value]
+                  : [...values, option.value];
+              for (const other of button.parentElement!.querySelectorAll<HTMLButtonElement>(
+                ".option",
+              ))
+                other.setAttribute(
+                  "aria-pressed",
+                  String((picked[key] ?? []).includes(JSON.parse(other.dataset.value!))),
+                );
+              syncFilterChips();
+              render();
+            });
+            return button;
+          }),
+        );
+        sheet.showModal();
+      }
+
+      for (const chip of document.querySelectorAll<HTMLButtonElement>(".filter-chip")) {
+        chip.addEventListener("click", () => openSheet(chip.dataset.filter as keyof Filters));
+      }
+      // A tap on the dimmed backdrop closes the sheet.
+      sheet.addEventListener("click", (event) => {
+        if (event.target === sheet) sheet.close();
+      });
+
+      showQuestion("project");
     </script>
 
     <style>
@@ -1052,6 +1192,103 @@ const description =
         margin: 0;
         color: var(--thread-dim);
         font-size: 0.85rem;
+      }
+      .group {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        color: var(--saffron);
+        margin-bottom: 6px;
+      }
+      .gauge-hint {
+        grid-column: 1 / -1;
+        font-size: 0.8rem;
+        color: var(--thread-dim);
+      }
+      .filters {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .filter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .filter-chip {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .filter-chip[aria-pressed="true"] {
+        background: var(--saffron);
+        border-color: var(--saffron);
+        color: var(--ink);
+      }
+      .sheet {
+        margin: auto auto 0;
+        width: 100%;
+        max-width: 560px;
+        max-height: 85vh;
+        border: 0;
+        border-radius: 22px 22px 0 0;
+        padding: 0;
+        background: var(--thread);
+        color: var(--ink);
+      }
+      .sheet::backdrop {
+        background: rgb(8 10 40 / 0.55);
+      }
+      .sheet-body {
+        display: grid;
+        gap: 12px;
+        padding: 20px 20px max(24px, env(safe-area-inset-bottom));
+      }
+      .sheet h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+      }
+      .sheet-hint {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .sheet-options {
+        display: grid;
+        gap: 8px;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+      .option {
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: 14px;
+        border: 2px solid var(--thread-faint);
+        background: transparent;
+        color: var(--ink);
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+      }
+      .option[aria-pressed="true"] {
+        background: var(--night);
+        border-color: var(--night);
+        color: var(--thread);
+      }
+      .sheet .primary {
+        min-height: 52px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--night);
+        color: var(--thread);
+        font-weight: 800;
+        cursor: pointer;
       }
       .progress {
         display: grid;
