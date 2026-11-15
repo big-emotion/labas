@@ -17,7 +17,7 @@ const { city } = Astro.props;
 const lines = linesFor(city.name);
 const photo = photoFor(city.name);
 // Unsafe cities get no route: the site never invites someone to go there.
-const routes = city.unsafe ? undefined : routesFor(city.name);
+const routes = routesFor(city.name);
 const country = city.countryFacts;
 const advisory = city.facts.advisory;
 
