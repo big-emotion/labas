@@ -20,13 +20,41 @@ describe("the question bank", () => {
     }
   });
 
-  it("holds the 24 questions of the approved mockup, each once, with unique answers", () => {
-    expect(QUESTIONS).toHaveLength(24);
-    expect(new Set(QUESTIONS.map((q) => q.id)).size).toBe(24);
+  it("asks the 18 questions of the approved mockup in chapter order", () => {
+    expect(QUESTIONS.map((q) => q.id)).toEqual([
+      "project",
+      "origin",
+      "countries",
+      "kin",
+      "faith",
+      "saturday",
+      "adventure",
+      "order",
+      "together",
+      "friction",
+      "profession",
+      "budget",
+      "family",
+      "passports",
+      "languages",
+      "size",
+      "landscapes",
+      "priorities",
+    ]);
+    expect([...new Set(QUESTIONS.map((q) => q.group))]).toEqual([
+      "Ton histoire avec l'Afrique",
+      "Ton tempérament",
+      "Ton projet de vie",
+      "Ton quotidien",
+    ]);
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));
       expect(new Set(values).size, question.id).toBe(values.length);
     }
+  });
+
+  it("says in one line what each question is for", () => {
+    for (const question of QUESTIONS) expect(question.hint, question.id).toBeTruthy();
   });
 
   it("opens on the life project", () => {

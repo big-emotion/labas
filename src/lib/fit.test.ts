@@ -36,6 +36,8 @@ const SPACE: Record<string, unknown[]> = {
   people: ["invited", "quiet", "both"],
   belonging: ["returnees", "locals", "both"],
   friction: [0, 0.5, 1],
+  order: [0, 0.5, 1],
+  together: [0, 0.5, 1],
   kin: ["much", "some", "none"],
   adventure: ["familiar", "open", "seeking"],
   faith: ["muslim", "christian", "other", "none"],

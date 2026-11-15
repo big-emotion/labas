@@ -7,6 +7,96 @@ import { QUESTIONS, type Question } from "./questions";
  */
 const FURTHER: Omit<Question, "group">[] = [
   {
+    id: "currentCity",
+    title: "Tu vis où aujourd'hui ?",
+    choices: [
+      { label: "Une grande capitale (Paris, Bruxelles…)", value: "capital" },
+      { label: "Une grande ville", value: "bigcity" },
+      { label: "Une petite ville", value: "town" },
+      { label: "À la campagne", value: "country" },
+      { label: "Je bouge tout le temps", value: "nomad" },
+    ],
+  },
+  {
+    id: "rhythm",
+    title: "Là-bas, ton rythme :",
+    choices: [
+      { label: "Le même qu'aujourd'hui", value: "same" },
+      { label: "Plus calme", value: "calmer" },
+      { label: "Plus intense", value: "more" },
+      { label: "Couper avec tout", value: "unplug" },
+    ],
+  },
+  {
+    id: "mobility",
+    title: "Comment tu te déplaces au quotidien ?",
+    choices: [
+      { label: "À pied", value: "walk" },
+      { label: "En transports", value: "transit" },
+      { label: "À vélo", value: "bike" },
+      { label: "En voiture", value: "car" },
+    ],
+  },
+  {
+    id: "habits",
+    title: "Ton quotidien, c'est plutôt…",
+    max: 3,
+    choices: [
+      { label: "Salle de sport", value: "gym" },
+      { label: "Cafés et restaurants", value: "cafes" },
+      { label: "Livres et expos", value: "culture" },
+      { label: "Marchés et petits commerces", value: "markets" },
+      { label: "Sorties le soir", value: "nights" },
+      { label: "Nature le week-end", value: "nature" },
+    ],
+  },
+  {
+    id: "neighbourhood",
+    title: "Ton quartier aujourd'hui :",
+    choices: [
+      { label: "Central et animé", value: "central" },
+      { label: "Résidentiel et calme", value: "residential" },
+      { label: "Plutôt chic", value: "upscale" },
+      { label: "Populaire et vivant", value: "popular" },
+    ],
+  },
+  {
+    id: "people",
+    title: "Avec les gens, tu aimes…",
+    choices: [
+      { label: "Être invité, connaître mes voisins", value: "invited" },
+      { label: "Garder ma tranquillité", value: "quiet" },
+      { label: "Un peu des deux", value: "both" },
+    ],
+  },
+  {
+    id: "belonging",
+    title: "Là-bas, tu veux vivre…",
+    choices: [
+      { label: "Parmi les gens du coin", value: "locals" },
+      { label: "Avec d'autres repats", value: "returnees" },
+      { label: "Un peu des deux", value: "both" },
+    ],
+  },
+  {
+    id: "roots",
+    title: "Tu cherches plutôt à…",
+    choices: [
+      { label: "Retrouver mes racines", value: "rediscover" },
+      { label: "Découvrir ailleurs", value: "discover" },
+      { label: "Les deux", value: "both" },
+    ],
+  },
+  {
+    id: "climate",
+    title: "Côté météo ?",
+    choices: [
+      { label: "Chaud toute l'année", value: "hot" },
+      { label: "Doux", value: "mild" },
+      { label: "Sec et ensoleillé", value: "dry" },
+    ],
+  },
+  {
     id: "languageOnly",
     title: "Ta langue, c'est…",
     choices: [

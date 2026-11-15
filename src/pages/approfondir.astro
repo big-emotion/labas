@@ -172,8 +172,14 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
             }),
           );
         };
-        fill(".pros", m.reasons);
-        fill(".cons", m.drawbacks);
+        fill(
+          ".pros",
+          m.reasons.map((r) => r.label),
+        );
+        fill(
+          ".cons",
+          m.drawbacks.map((r) => r.label),
+        );
         (row.querySelector(".coverage") as HTMLElement).hidden = m.coverage >= 0.7;
         return row;
       });

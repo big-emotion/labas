@@ -450,7 +450,10 @@ const description =
           }),
         );
         show("reasons", m.reasons.length > 0);
-        fillList(body.querySelector(".reasons") as HTMLElement, m.reasons);
+        fillList(
+          body.querySelector(".reasons") as HTMLElement,
+          m.reasons.map((r) => r.label),
+        );
         setText(body, '[data-field="watch"] p', m.city.watch);
         const advice = advisoryNote(m.city);
         show("advisory", Boolean(advice));
