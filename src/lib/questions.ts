@@ -43,6 +43,12 @@ const PROJECT = "Votre projet de vie";
 const DAILY = "Votre quotidien";
 
 /** Feeling at home matters to the reader: only then are faith and its weight asked. */
+/** The reader will spend real time there: not for an investor who does not live there. */
+const livesThere = (answers: Answers) => answers.project !== "investir";
+/** The reader will work there: not on holiday, not as a distant investor. */
+const worksThere = (answers: Answers) =>
+  answers.project !== "investir" && answers.project !== "decouvrir";
+
 const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
 
 // The free quiz of the approved V3 mockup (canvas « Là-bas — quiz », 2026-11-15): four chapters
@@ -115,6 +121,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "saturday",
     group: TEMPERAMENT,
+    when: livesThere,
     title: "Votre samedi soir idéal ?",
     hint: "Pour savoir si vous cherchez une ville animée ou plutôt calme.",
     choices: [
@@ -126,6 +133,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "adventure",
     group: TEMPERAMENT,
+    when: livesThere,
     title: "Découvrir une région d'Afrique que vous ne connaissez pas, ça vous tente ?",
     hint: "Si oui, on vous propose aussi des villes loin de la région de votre famille.",
     choices: [
@@ -137,6 +145,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "order",
     group: TEMPERAMENT,
+    when: livesThere,
     title: "Au quotidien, avez-vous besoin que tout soit organisé ?",
     hint: "Pour savoir si vous préférez une ville où les démarches sont simples et prévisibles.",
     choices: [
@@ -152,6 +161,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "together",
     group: TEMPERAMENT,
+    when: livesThere,
     title: "Pour avancer, vous comptez plutôt sur vous ou sur les autres ?",
     hint: "Pour savoir si vous cherchez une ville d'affaires et de compétition, ou une ville solidaire.",
     choices: [
@@ -163,6 +173,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "friction",
     group: TEMPERAMENT,
+    when: livesThere,
     title: "Coupures de courant, démarches lentes, imprévus : comment le vivez-vous ?",
     hint: "Si cela vous pèse, on écarte les villes où ces problèmes sont fréquents.",
     choices: [
@@ -174,6 +185,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "profession",
     group: PROJECT,
+    when: worksThere,
     title: "Votre métier ?",
     hint: "Pour privilégier les villes où votre métier recrute.",
     choices: [
@@ -194,6 +206,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "budget",
     group: PROJECT,
+    when: livesThere,
     title: "Votre budget sur place ?",
     hint: "Pour privilégier les villes où le logement et la vie courante tiennent dans votre budget.",
     choices: [
@@ -205,6 +218,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "family",
     group: PROJECT,
+    when: livesThere,
     title: "Vous partez avec qui ?",
     hint: "Avec des enfants, les écoles, les soins et la sécurité pèsent davantage.",
     choices: [
@@ -257,6 +271,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "landscapes",
     group: DAILY,
+    when: livesThere,
     title: "Quel paysage autour de vous ?",
     hint: "Une préférence : le paysage que vous aimeriez avoir tout près de chez vous.",
     max: 3,

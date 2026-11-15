@@ -90,3 +90,38 @@ describe("the free quiz, one question at a time", () => {
     expect(nextFreeQuestion(answers, asked)).toBeUndefined();
   });
 });
+
+describe("a path that fits the project", () => {
+  const ids = (answers: Answers) => freeQuestions(answers).map((q) => q.id);
+  const LIFE_THERE = [
+    "saturday",
+    "adventure",
+    "order",
+    "together",
+    "friction",
+    "budget",
+    "family",
+    "landscapes",
+    "profession",
+  ];
+
+  it("asks an investor only what investing and coming often need", () => {
+    const investor = ids({ project: "investir" } as Answers);
+    for (const id of LIFE_THERE) expect(investor, id).not.toContain(id);
+    expect(investor).toEqual(
+      expect.arrayContaining(["languages", "origin", "passports", "size", "priorities"]),
+    );
+  });
+
+  it("does not ask a holidaymaker about their job", () => {
+    const visitor = ids({ project: "decouvrir" } as Answers);
+    expect(visitor).not.toContain("profession");
+    expect(visitor).toContain("family");
+  });
+
+  it("asks everything of a reader who comes to live", () => {
+    for (const project of ["installer", "pied", "tester"])
+      for (const id of LIFE_THERE)
+        expect(ids({ project } as Answers), `${project} ${id}`).toContain(id);
+  });
+});
