@@ -65,9 +65,10 @@ describe("the city catalogue", () => {
     for (const city of CITIES) {
       expect(city.facts.advisory.sources.length, city.name).toBeGreaterThan(0);
     }
-    const unsafe = (name: string) => CITIES.find((city) => city.name === name)?.unsafe;
-    expect(unsafe("Bamako")).toBe(true);
-    expect(unsafe("Dakar")).toBe(false);
+    const advisedAgainst = (name: string) =>
+      CITIES.find((city) => city.name === name)?.advisedAgainst;
+    expect(advisedAgainst("Bamako")).toBe(true);
+    expect(advisedAgainst("Dakar")).toBe(false);
   });
 
   it("knows the national facts of every city's country", () => {

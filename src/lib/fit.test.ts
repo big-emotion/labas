@@ -41,11 +41,11 @@ const SPACE: Record<string, unknown[]> = {
   faith: ["muslim", "christian", "other", "none"],
 };
 describe("the city a profile lands on", () => {
-  const proposable = CITIES.filter((city) => !city.unsafe);
+  const proposable = CITIES;
 
   // How far ahead of the best other proposable city a city is, for these answers.
   const lead = (answers: Answers, name: string) => {
-    const ranked = rankCities(answers).filter((m) => !m.city.unsafe);
+    const ranked = rankCities(answers);
     const own = ranked.find((m) => m.city.name === name)!;
     const rival = ranked.find((m) => m.city.name !== name)!;
     return own.score - rival.score;

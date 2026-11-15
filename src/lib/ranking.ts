@@ -656,11 +656,12 @@ export function rankCities(answers: Answers): Match[] {
 }
 
 /**
- * The cities to offer the reader: conflict zones and cities a filter removed are ranked but
- * never proposed.
+ * The cities to offer the reader. Only a filter of the fuller questionnaire removes a city.
+ * Travel advice does not: it is shown with the city as dated information, because it is written
+ * for visitors who have never been there (operator, 2026-11-15).
  */
 export function bestMatches(answers: Answers, count: number): Match[] {
   return rankCities(answers)
-    .filter((m) => !m.city.unsafe && !m.excludedBecause)
+    .filter((m) => !m.excludedBecause)
     .slice(0, count);
 }

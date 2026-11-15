@@ -4,7 +4,7 @@ import { linesFor } from "./lines";
 
 // Wording the site never uses about the reader (docs/criteria/architecture.md §A.7).
 const TRAIT_WORDS = /personnalité|ton profil|tu es (quelqu|un |une |plutôt)|\bvous\b|\bvotre\b/i;
-const proposable = CITIES.filter((city) => !city.unsafe);
+const proposable = CITIES;
 
 describe("the level-1 lines of each city", () => {
   it("gives every proposable city a reputation and a surprise", () => {

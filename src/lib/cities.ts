@@ -165,7 +165,7 @@ export interface City extends Identity {
    * Diplomatie colours the city's zone orange or red, or the UK advises against all or all but
    * essential travel there.
    */
-  unsafe: boolean;
+  advisedAgainst: boolean;
 }
 
 interface ScoredEntry {
@@ -183,7 +183,7 @@ export function slugOf(name: string): string {
     .replace(/^-|-$/g, "");
 }
 
-export function isUnsafe(advisory: Advisory): boolean {
+export function isAdvisedAgainst(advisory: Advisory): boolean {
   return (
     advisory.franceDiplomatie === "orange" ||
     advisory.franceDiplomatie === "red" ||
@@ -212,7 +212,7 @@ export const CITIES: City[] = (catalogue as unknown as Identity[]).map((identity
     facts: scored.facts,
     countryFacts: COUNTRIES.get(identity.country),
     life: LIFE.get(identity.name) ?? { professions: [], places: null },
-    unsafe: isUnsafe(scored.facts.advisory),
+    advisedAgainst: isAdvisedAgainst(scored.facts.advisory),
   };
 });
 

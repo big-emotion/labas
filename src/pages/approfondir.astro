@@ -155,19 +155,14 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       const template = document.getElementById("row") as HTMLTemplateElement;
       const rows = visible.map((m, index) => {
         const row = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
-        row.classList.toggle("unsafe", m.city.unsafe);
         (row.querySelector(".rank") as HTMLElement).textContent = String(index + 1);
         const link = row.querySelector(".name") as HTMLAnchorElement;
         link.href = `/ville/${m.city.slug}`;
         link.textContent = `${m.city.name} · ${m.city.country}`;
-        (row.querySelector(".fit") as HTMLElement).textContent = m.city.unsafe
-          ? ""
-          : percent(m.score);
+        (row.querySelector(".fit") as HTMLElement).textContent = percent(m.score);
         (row.querySelector(".bar > span") as HTMLElement).style.width =
           `${Math.round(m.score * 100)}%`;
-        (row.querySelector(".tagline") as HTMLElement).textContent = m.city.unsafe
-          ? "Déconseillée en ce moment par les autorités : on ne te la propose pas."
-          : m.city.tagline;
+        (row.querySelector(".tagline") as HTMLElement).textContent = m.city.tagline;
         const fill = (selector: string, items: string[]) => {
           (row.querySelector(selector) as HTMLElement).replaceChildren(
             ...items.map((text) => {
@@ -177,9 +172,9 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
             }),
           );
         };
-        fill(".pros", m.city.unsafe ? [] : m.reasons);
-        fill(".cons", m.city.unsafe ? [] : m.drawbacks);
-        (row.querySelector(".coverage") as HTMLElement).hidden = m.city.unsafe || m.coverage >= 0.7;
+        fill(".pros", m.reasons);
+        fill(".cons", m.drawbacks);
+        (row.querySelector(".coverage") as HTMLElement).hidden = m.coverage >= 0.7;
         return row;
       });
       const list = document.getElementById("ranking") as HTMLElement;
@@ -339,9 +334,6 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     padding: 12px 14px;
     display: grid;
     gap: 6px;
-  }
-  .ranking :global(.unsafe) {
-    color: var(--thread-faint);
   }
   .ranking :global(.row-head) {
     display: grid;

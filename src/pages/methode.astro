@@ -2,12 +2,11 @@
 import Page from "../layouts/Page.astro";
 import { CITIES, CRITERIA, CRITERION_KEYS } from "../lib/cities";
 
-const proposable = CITIES.filter((city) => !city.unsafe);
 const scores = CITIES.flatMap((city) => CRITERION_KEYS.map((key) => city.scores[key]));
 const unknown = scores.filter((score) => score.level === null).length;
 const estimates = scores.filter((s) => s.level !== null && s.confidence === "editorial").length;
 const percentOf = (n: number) => Math.round((100 * n) / scores.length);
-const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
+const advisedAgainst = CITIES.filter((city) => city.advisedAgainst).length;
 ---
 
 <Page
@@ -86,13 +85,15 @@ const gated = CITIES.filter((city) => city.unsafe).map((city) => city.name);
     d'inconnues pour tes réponses, sa fiche le dit.
   </p>
 
-  <h2>Les villes que l'on ne propose pas</h2>
+  <h2>Les conseils aux voyageurs</h2>
   <p>
-    Quand le ministère des Affaires étrangères classe la zone d'une ville en orange ou en rouge, ou
-    que le Royaume-Uni déconseille de s'y rendre, la ville reste dans la liste, grisée, mais on ne
-    te la propose jamais. Cette règle s'applique seule, à partir de l'avis daté : aujourd'hui, cela
-    concerne {gated.length} villes ({gated.join(", ")}). {proposable.length} villes peuvent donc
-    t'être proposées.
+    Pour chaque ville, on donne l'avis du ministère des Affaires étrangères et celui du Royaume-Uni,
+    avec leur date. Cet avis ne retire aucune ville et ne change pas son score : il est écrit pour
+    des voyageurs qui ne connaissent pas la ville, alors que des gens y vivent, y travaillent et y
+    reviennent. Aujourd'hui, les autorités déconseillent {advisedAgainst} villes sur
+    {CITIES.length}. Pour celles-là, on te dit de demander à des gens qui y vivent quelles
+    précautions prendre. La sécurité au quotidien reste un critère noté, avec ses sources, comme les
+    autres.
   </p>
 
   <h2>Ce que l'on ne note jamais</h2>

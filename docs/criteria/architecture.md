@@ -105,9 +105,8 @@ country stay three cities from the same country. On the phone, in this order:
      sources". A field with nothing to show stays hidden rather than showing a placeholder.
 2. **"Toutes les autres villes"**: every other city in score order, numbered from 4, with the
    percentage, bar and tagline. Five rows show, then **"Voir plus de villes"** shows them all.
-   Each row opens the same detail. `unsafe` cities keep their place, greyed, with "Déconseillée
-   en ce moment par le ministère des Affaires étrangères…" and no detail; they are never among
-   the three.
+   Each row opens the same detail. A city the authorities advise against is ranked like any
+   other; its detail carries the dated advice (§4.3).
 3. The pinned bar at the bottom of the phone screen still shows the three cities and their
    percentages while the reader answers.
 
@@ -409,7 +408,8 @@ the 115 cities, many of them secondary.
 - **Means:** day-to-day crime and harassment risk for a resident who takes ordinary care, in
   the neighbourhoods newcomers live in.
 - **Does not mean:** war, terrorism or travel-advice zones. Those are handled by the advisory
-  gate (§4.3): a city in an orange or red zone is not "safety 0", it is not proposed at all.
+  advice (§4.3): a city in an orange or red zone is not "safety 0"; the advice is shown as dated
+  information and does not remove the city.
 - **Sources:** France Diplomatie "Conseils aux voyageurs" remarks naming the city (dated); UK
   FCDO; ACLED events within 25 km over 12 months (registration and EULA of 2025-07-08 to
   check); Afrobarometer "felt unsafe walking in your neighbourhood" for the region where
@@ -608,7 +608,7 @@ the 115 cities, many of them secondary.
 | Climate (chaud et humide / chaud et sec / doux / frais en altitude) + hottest-month figure + flood/cyclone exposure | Fact      | City                        | Köppen-Geiger 1 km, ERA5 or Meteostat, WRI Aqueduct             | Weight; risk goes in "à savoir"            |
 | Landscape within an hour (océan, lac ou fleuve, montagnes, forêt, savane, désert)                                   | Fact      | City                        | Map                                                             | Weight                                     |
 | Population and size class                                                                                           | Fact      | City                        | UN WUP 2025, Africapolis                                        | Target                                     |
-| Travel advice colour (France Diplomatie) and FCDO level                                                             | Fact      | City zone                   | France Diplomatie, FCDO                                         | Gate (§4.3)                                |
+| Travel advice colour (France Diplomatie) and FCDO level                                                             | Fact      | City zone                   | France Diplomatie, FCDO                                         | Information (§4.3)                         |
 | Sectors that hire                                                                                                   | Fact      | City                        | Dossiers                                                        | Weight via follow-up                       |
 | Visa-free days for French passports                                                                                 | Fact      | Country                     | France Diplomatie                                               | Filter (opt-in)                            |
 | Dual nationality and descent rules                                                                                  | Fact      | Country                     | GLOBALCIT v3.0 (2025-06-13), dossiers                           | Explanation                                |
@@ -761,20 +761,21 @@ A city with no reliable figure must neither win nor lose because of it.
 - **Confidence in the sentence:** an `editorial` value is shown with "(estimation)" next to the
   reason.
 
-### 4.3 Cities that stay ranked but are never proposed
+### 4.3 Travel advice is information, not a gate
 
-- `unsafe` becomes **derived**, not hand-set: true when France Diplomatie's zone covering the
-  city is orange or red, or the FCDO advises against all or all-but-essential travel there. The
-  15 cities flagged today (Bamako, Ouagadougou, Niamey, Bangui, Mogadiscio, Juba, Tripoli,
-  Khartoum, Ségou, Bobo-Dioulasso, Agadez, Berbérati, Wau, Benghazi, Port-Soudan) should be
-  rechecked against that rule; the dossiers add Bahir Dar (recommended `unsafe`), Hargeisa and N'Djamena (borderline).
-- They are still ranked so the reader can see where they would have landed, but they never
-  appear in the top three or on the map's highlight. Where one would have ranked in the top
-  ten, the page says: "Bamako aurait pu vous correspondre. Elle n'est pas proposée : le
-  ministère des Affaires étrangères déconseille de s'y rendre (zone rouge, mise à jour du …)".
-- The rule and its date are on the method page. The gate is re-run whenever travel advice is
-  updated; the reader never sees an advice colour older than its review date without
-  "à revérifier".
+**Decided by the operator on 2026-11-15, replacing the earlier gate.** Travel advice is written
+for visitors who have never been to a city; a reader who has lived in Kinshasa, or whose family
+goes back to Bamako, knows the precautions are local and learned. Treating the advice as a
+verdict would repeat the outsider's view the site exists to correct.
+
+- `advisedAgainst` is derived, not hand-set: true when France Diplomatie's zone covering the city
+  is orange or red, or the FCDO advises against all or all-but-essential travel there.
+- It never removes, greys or demotes a city: such a city is ranked and proposed by its score
+  like any other. Daily safety stays a scored criterion (`safety`), sourced like the others.
+- The advice is shown in the city's detail ("L'avis des autorités") and on its page, with its
+  date, and framed for what it is: advice for visitors; ask people who live there which
+  precautions to take (`src/lib/advisory.ts`). It is never the first thing said about a city.
+- The method page states the rule and how many cities it concerns today.
 
 ### 4.4 The level-2 questionnaire (paid tier)
 

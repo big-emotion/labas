@@ -189,8 +189,8 @@ const description =
         <footer class="footer">
           <p>
             Les résultats sont des propositions, pas des verdicts. Chaque note de ville renvoie à
-            ses sources, sur la page de la ville. Les villes que les autorités déconseillent ne sont
-            jamais proposées.
+            ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est
+            donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.
           </p>
           <p>Tes réponses restent dans ton navigateur : rien n'est enregistré ni envoyé.</p>
           <nav class="links" aria-label="Pages du site">
@@ -253,21 +253,6 @@ const description =
       </li>
     </template>
 
-    <template id="unsafe-template">
-      <li class="row unsafe">
-        <div class="row-head">
-          <span class="rank"></span>
-          <span class="row-name">
-            <b></b> <span class="row-country"></span>
-          </span>
-          <span class="row-note">
-            Déconseillée en ce moment par le ministère des Affaires étrangères. Elle garde sa place
-            dans la liste, mais on ne te la propose pas.
-          </span>
-        </div>
-      </li>
-    </template>
-
     <template id="detail-template">
       <div class="detail-body">
         <div class="field" data-field="portrait">
@@ -295,6 +280,10 @@ const description =
           <h4>À savoir</h4>
           <p></p>
         </div>
+        <div class="field watch" data-field="advisory">
+          <h4>L'avis des autorités</h4>
+          <p></p>
+        </div>
         <a class="field full" data-field="full">
           Voir la fiche complète, critère par critère, avec ses sources
         </a>
@@ -313,6 +302,7 @@ const description =
       } from "../lib/filters";
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { linesFor } from "../lib/lines";
+      import { advisoryNote } from "../lib/advisory";
       import { photoFor } from "../lib/photos";
 
       const SVG = "http://www.w3.org/2000/svg";
@@ -458,6 +448,9 @@ const description =
         show("reasons", m.reasons.length > 0);
         fillList(body.querySelector(".reasons") as HTMLElement, m.reasons);
         setText(body, '[data-field="watch"] p', m.city.watch);
+        const advice = advisoryNote(m.city);
+        show("advisory", Boolean(advice));
+        setText(body, '[data-field="advisory"] p', advice ?? "");
         (body.querySelector('[data-field="full"]') as HTMLAnchorElement).href =
           `/ville/${m.city.slug}`;
         return body;
@@ -500,11 +493,10 @@ const description =
       }
 
       function rowFor(m: Match, position: number): HTMLElement {
-        const row = clone(m.city.unsafe ? "unsafe-template" : "row-template");
+        const row = clone("row-template");
         setText(row, ".rank", String(position));
         setText(row, ".row-name b", m.city.name);
         setText(row, ".row-country", `· ${m.city.country}`);
-        if (m.city.unsafe) return row;
         setText(row, ".fit", percent(m.score));
         setText(row, ".row-tagline", m.city.tagline);
         setBar(row, m.score);
@@ -518,12 +510,8 @@ const description =
         const ranked = rankCities(current);
         // Filters only remove cities; the order stays the score's.
         const kept = applyFilters(ranked, filtersFrom(picked));
-        const matches = kept.filter((m) => !m.city.unsafe && !m.excludedBecause).slice(0, 3);
-        const scores = new Map(
-          ranked
-            .filter((m) => !m.city.unsafe)
-            .map((m) => [m.city.name, m.score] as [string, number]),
-        );
+        const matches = kept.filter((m) => !m.excludedBecause).slice(0, 3);
+        const scores = new Map(ranked.map((m) => [m.city.name, m.score] as [string, number]));
         // Before the first answer nothing is ranked yet: every dot stays the same and no city
         // is named, so the quiz does not look decided before it starts.
         // The map shows nothing before the first answer, colours every city by its score while the
@@ -971,6 +959,9 @@ const description =
         background: var(--saffron);
         border-radius: 999px;
       }
+      .results :global(.portrait-box[hidden]) {
+        display: none;
+      }
       .results :global(.portrait-box) {
         background: var(--night-lift);
         border-radius: 14px;
@@ -1138,18 +1129,6 @@ const description =
         border: 0;
         border-radius: 14px;
         padding: 14px;
-      }
-      .rows :global(.unsafe) {
-        color: var(--thread-faint);
-      }
-      .rows :global(.unsafe .row-head) {
-        background: var(--night-deep);
-        border-radius: 12px;
-        padding: 12px;
-      }
-      .rows :global(.row-note) {
-        font-size: 0.85rem;
-        line-height: 1.45;
       }
       .more {
         justify-self: stretch;

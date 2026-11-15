@@ -26,9 +26,25 @@ describe("ranking the cities", () => {
     }
   });
 
-  it("never offers a conflict zone among the best matches", () => {
-    const partyLover: Answers = { saturday: 1, landscape: "wildSpaces", language: "ar" };
-    for (const m of bestMatches(partyLover, 10)) expect(m.city.unsafe, m.city.name).toBe(false);
+  // Travel advice informs, it does not decide (operator, 2026-11-15): it is written for
+  // visitors who have never been, while people live, work and come back there every day.
+  it("offers a city the authorities advise against like any other, by its score", () => {
+    const kinois: Answers = {
+      languages: ["fr"],
+      origin: ["centre"],
+      kin: "much",
+      adventure: "familiar",
+      saturday: 1,
+      currentCity: "capital",
+      rhythm: "same",
+    };
+    const offered = bestMatches(kinois, 5);
+    expect(offered.map((m) => m.city.name)).toContain("Kinshasa");
+    expect(offered).toEqual(
+      rankCities(kinois)
+        .filter((m) => !m.excludedBecause)
+        .slice(0, 5),
+    );
   });
 
   it("puts a city where the reader can live in their language first", () => {
