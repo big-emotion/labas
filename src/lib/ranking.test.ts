@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { livableLanguages } from "./cities";
-import { bestMatches, rankCities, type Answers } from "./ranking";
+import { bestMatches, rankCities, topCities, type Answers } from "./ranking";
 
 function scoreOf(cityName: string, answers: Answers): number {
   const match = rankCities(answers).find((m) => m.city.name === cityName);
@@ -150,5 +150,12 @@ describe("ranking the cities", () => {
     expect(rankCities(four).map((m) => m.city.name)).toEqual(
       rankCities(three).map((m) => m.city.name),
     );
+  });
+});
+
+describe("the quick top used to choose the next question", () => {
+  it("names the same cities as the full ranking", () => {
+    const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };
+    expect(topCities(answers, 5)).toEqual(bestMatches(answers, 5).map((m) => m.city.name));
   });
 });

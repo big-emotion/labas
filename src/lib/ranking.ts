@@ -745,6 +745,19 @@ export function rankCities(answers: Answers): Match[] {
 }
 
 /**
+ * The names of the first cities, as bestMatches orders them, without building reasons or the
+ * temperament part: cheap enough to try every answer of every open question on a phone.
+ */
+export function topCities(answers: Answers, count: number): string[] {
+  const profile = profileOf(answers);
+  return CITIES.map((city) => ({ city, score: closeness(city, profile) ?? 0 }))
+    .sort((a, b) => b.score - a.score)
+    .filter(({ city }) => !exclusionFor(city, answers))
+    .slice(0, count)
+    .map(({ city }) => city.name);
+}
+
+/**
  * The cities to offer the reader. Only a filter of the fuller questionnaire removes a city.
  * Travel advice does not: it is shown with the city as dated information, because it is written
  * for visitors who have never been there (operator, 2026-11-15).
