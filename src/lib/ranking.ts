@@ -456,7 +456,7 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (passports.length) facts.push({ kind: "entry", values: passports, weight: 1.5 });
   // Feeling at home weighs with how little the reader wants the unknown (§ belonging).
   if (answers.origin && answers.kin && answers.kin !== "none") {
-    const weight = KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "familiar"];
+    const weight = KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
     facts.push({ kind: "kin", origin: answers.origin, weight });
   }
   // Faith counts the same way; a reader without one is not sent towards secular countries.
@@ -466,11 +466,13 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     answers.kin !== "none" &&
     (faith === "muslim" || faith === "christian" || faith === "other")
   ) {
-    const weight = 0.6 * KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "familiar"];
+    const weight = 0.6 * KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
     facts.push({ kind: "faith", value: faith, weight });
   }
-  if (answers.origin && answers.adventure === "seeking") {
-    facts.push({ kind: "elsewhere", origin: answers.origin, weight: 1.5 });
+  // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
+  const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
+  if (answers.origin && away > 0) {
+    facts.push({ kind: "elsewhere", origin: answers.origin, weight: away });
   }
 
   const renounced = new Set<Axis>(

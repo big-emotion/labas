@@ -1,12 +1,11 @@
 import { QUESTIONS, type Question } from "./questions";
 
 /**
- * The fuller questionnaire of /approfondir: the ten questions of the free quiz, then the filters
- * and stated tolerances of docs/criteria/architecture.md §2 and §4.4. Kept to what the sourced
- * data can answer today; the rest of the §4.4 bank waits for its data.
+ * The fuller questionnaire of /approfondir: the free quiz's bank, then the filters and stated
+ * tolerances of docs/criteria/architecture.md §2 and §4.4. Kept to what the sourced data can
+ * answer today; the rest of the §4.4 bank waits for its data.
  */
-export const DEEP_QUESTIONS: Question[] = [
-  ...QUESTIONS,
+const FURTHER: Omit<Question, "group">[] = [
   {
     id: "languageOnly",
     title: "Ta langue, c'est…",
@@ -114,4 +113,12 @@ export const DEEP_QUESTIONS: Question[] = [
       { label: "Un emploi sur place", value: "jobs" },
     ],
   },
+];
+
+export const DEEP_QUESTIONS: Question[] = [
+  ...QUESTIONS,
+  ...FURTHER.filter((q) => !QUESTIONS.some((free) => free.id === q.id)).map((q) => ({
+    ...q,
+    group: "POUR AFFINER",
+  })),
 ];

@@ -1,7 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { QUESTIONS } from "./questions";
+import { profileOf, rankCities, type Answers } from "./ranking";
 
-describe("the ten questions", () => {
+const NEUTRAL = new Set([
+  "mobility:car",
+  "passports:other",
+  "faith:none",
+  "kin:none",
+  "adventure:open",
+]);
+
+describe("the question bank", () => {
   it("speaks to the reader with « tu », never « vous »", () => {
     for (const question of QUESTIONS) {
       const texts = [question.title, ...question.choices.map((choice) => choice.label)];
@@ -10,11 +19,49 @@ describe("the ten questions", () => {
     }
   });
 
-  it("keeps ten questions with unique answers", () => {
-    expect(QUESTIONS).toHaveLength(10);
+  it("holds the 23 questions of the approved mockup, each once, with unique answers", () => {
+    expect(QUESTIONS).toHaveLength(23);
+    expect(new Set(QUESTIONS.map((q) => q.id)).size).toBe(23);
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));
       expect(new Set(values).size, question.id).toBe(values.length);
     }
+  });
+
+  it("opens on the life project", () => {
+    expect(QUESTIONS[0].id).toBe("project");
+  });
+
+  it("lets every answer move the match", () => {
+    for (const question of QUESTIONS) {
+      for (const choice of question.choices) {
+        // « Rather not say », and answers that ask nothing of a city, leave the match as it is.
+        if (choice.value === null || NEUTRAL.has(`${question.id}:${choice.value}`)) continue;
+        const value = question.max ? [choice.value] : choice.value;
+        const answers = { [question.id]: value } as Answers;
+        // Some answers only count together with another one (faith with feeling at home).
+        const context = {
+          project: "installer",
+          origin: "ouest",
+          kin: "much",
+          currentCity: "capital",
+        } as Answers;
+        delete (context as Record<string, unknown>)[question.id];
+        const profile = profileOf({ ...context, ...answers });
+        const base = profileOf(context);
+        const moved =
+          JSON.stringify(profile) !== JSON.stringify(base) ||
+          JSON.stringify(rankCities({ ...context, ...answers }).slice(0, 5)) !==
+            JSON.stringify(rankCities(context).slice(0, 5));
+        expect(moved, `${question.id}: ${choice.label}`).toBe(true);
+      }
+    }
+  });
+
+  it("asks about faith only when feeling at home among one's own matters", () => {
+    const faith = QUESTIONS.find((q) => q.id === "faith")!;
+    expect(faith.when?.({ kin: "much" })).toBe(true);
+    expect(faith.when?.({ kin: "none" })).toBe(false);
+    expect(faith.when?.({})).toBe(false);
   });
 });
