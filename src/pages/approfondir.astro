@@ -1,4 +1,5 @@
 ---
+import KeepResults from "../components/KeepResults.astro";
 import Page from "../layouts/Page.astro";
 import { DEEP_QUESTIONS } from "../lib/deep-questions";
 ---
@@ -9,6 +10,13 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
 >
   <h1>Aller plus loin</h1>
   <p class="lead">Vous pouvez passer une question ou revenir sur une réponse quand vous voulez.</p>
+  <p class="hint" id="resumed" hidden>
+    Vos réponses au premier quiz sont reprises : le questionnaire continue là où vous vous êtes
+    arrêté.{" "}
+    <button type="button" id="restart" class="restart">
+      Tout reprendre à zéro
+    </button>
+  </p>
 
   <section class="ask" aria-live="polite">
     {DEEP_QUESTIONS.map((question) => (
@@ -50,7 +58,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     <ul id="answers" class="answer-list"></ul>
   </section>
 
-  <section aria-labelledby="ranking-title">
+  <section aria-labelledby="ranking-title" data-print>
     <h2 id="ranking-title">Votre classement</h2>
     <p class="hint">
       Toutes les villes, triées selon vos réponses. Le pourcentage dit à quel point une ville
@@ -58,6 +66,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     </p>
     <ul id="removed" class="removed"></ul>
     <ol id="ranking" class="ranking"></ol>
+    <KeepResults />
   </section>
 
   <template id="row">
@@ -83,9 +92,37 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { nextQuestion } from "../lib/adaptive";
     import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { rankCities, type Answers } from "../lib/ranking";
+    import { finishedEvent } from "../lib/analytics";
+    import { forgetAnswers, loadAnswers, resultsText, saveAnswers } from "../lib/keep";
+    import { browserStore, track, wireKeep } from "../lib/keep-dom";
 
-    const answers: Record<string, unknown> = {};
-    const asked: string[] = [];
+    // The quick quiz's answers, kept in this browser: those questions are not asked again.
+    const answers: Record<string, unknown> = { ...loadAnswers(browserStore()) };
+    const asked: string[] = Object.keys(answers);
+    const resumed = asked.length;
+    (document.getElementById("resumed") as HTMLElement).hidden = resumed === 0;
+    document.getElementById("restart")!.addEventListener("click", () => {
+      forgetAnswers(browserStore());
+      location.reload();
+    });
+    for (const [id, value] of Object.entries(answers)) {
+      for (const chip of document.querySelectorAll<HTMLElement>(
+        `.question[data-question="${id}"] .chip`,
+      )) {
+        const values = Array.isArray(value) ? value : [value];
+        if (values.includes(JSON.parse(chip.dataset.value as string)))
+          chip.setAttribute("aria-pressed", "true");
+      }
+    }
+    wireKeep(() =>
+      resultsText(
+        rankCities(answers as Answers)
+          .filter((m) => !m.excludedBecause)
+          .slice(0, 5),
+      ),
+    );
+    // Counted once per visit.
+    let finished = false;
     let showAll = false;
     const VISIBLE = 20;
     const percent = (n: number) => `${Math.round(n * 100)}\u202f%`;
@@ -105,6 +142,10 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
         element.hidden = element.dataset.question !== next;
       }
       (document.getElementById("done") as HTMLElement).hidden = next !== undefined;
+      if (next === undefined && asked.length > resumed && !finished) {
+        finished = true;
+        track(finishedEvent("Questionnaire complet terminé"));
+      }
     }
 
     function renderAnswers() {
@@ -202,6 +243,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     }
 
     function render(advance = true) {
+      saveAnswers(browserStore(), answers as Answers);
       renderAnswers();
       renderRanking();
       if (advance) showNext();
@@ -243,6 +285,20 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
 </Page>
 
 <style>
+  /* A shared .hint rule sets display, which would otherwise win over the hidden attribute. */
+  .hint[hidden] {
+    display: none;
+  }
+  .restart {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--saffron);
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+  }
   .ask {
     background: var(--night-deep);
     border: 2px solid var(--saffron);

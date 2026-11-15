@@ -183,15 +183,6 @@ const FURTHER: Omit<Question, "group">[] = [
     ],
   },
   {
-    id: "belonging",
-    title: "Là-bas, vous aimeriez…",
-    choices: [
-      { label: "Retrouver d'autres repats", value: "returnees" },
-      { label: "Vivre comme les gens d'ici", value: "locals" },
-      { label: "Les deux", value: "both" },
-    ],
-  },
-  {
     id: "renounce",
     title: "À quoi pouvez-vous renoncer ?",
     max: 2,

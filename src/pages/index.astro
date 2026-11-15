@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
+import KeepResults from "../components/KeepResults.astro";
 import ShareMeta from "../components/ShareMeta.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
@@ -147,7 +148,7 @@ const website = JSON.stringify({
             </form>
           </dialog>
 
-          <section class="results" aria-labelledby="results-title">
+          <section class="results" aria-labelledby="results-title" data-print>
             <h2 id="results-title">Vos villes</h2>
             <p class="hint">
               Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.
@@ -163,6 +164,7 @@ const website = JSON.stringify({
               </p>
             </div>
             <div id="cards" class="cards"></div>
+            <KeepResults />
           </section>
 
           <section class="others" aria-labelledby="others-title">
@@ -209,7 +211,10 @@ const website = JSON.stringify({
             ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est
             donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.
           </p>
-          <p>Vos réponses restent dans votre navigateur : rien n'est enregistré ni envoyé.</p>
+          <p>
+            Vos réponses restent dans votre navigateur, qui les garde pour le questionnaire complet
+            : rien ne nous est envoyé.
+          </p>
           <nav class="links" aria-label="Pages du site">
             <a href="/approfondir">Aller plus loin</a>
             <a href="/methode">Notre méthode</a>
@@ -337,15 +342,10 @@ const website = JSON.stringify({
       import { linesFor } from "../lib/lines";
       import { advisoryNote } from "../lib/advisory";
       import { photoFor } from "../lib/photos";
-      import { answerEvent } from "../lib/analytics";
+      import { answerEvent, finishedEvent } from "../lib/analytics";
       import { goingThere } from "../lib/going";
-
-      // Defined by components/Analytics.astro only when audience measurement is configured.
-      declare global {
-        interface Window {
-          plausible?: (name: string, options: { props: Record<string, string> }) => void;
-        }
-      }
+      import { resultsText, saveAnswers } from "../lib/keep";
+      import { browserStore, track, wireKeep } from "../lib/keep-dom";
 
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
@@ -592,12 +592,17 @@ const website = JSON.stringify({
         return row;
       }
 
+      // The three cities on screen, for « Garder vos résultats ».
+      let onScreen: Match[] = [];
+      wireKeep(() => resultsText(onScreen));
+
       function render() {
         const current = readAnswers();
         const ranked = rankCities(current);
         // Filters only remove cities; the order stays the score's.
         const kept = applyFilters(ranked, filtersFrom(picked));
         const matches = kept.filter((m) => !m.excludedBecause).slice(0, 3);
+        onScreen = matches;
         const scores = new Map(ranked.map((m) => [m.city.name, m.score] as [string, number]));
         // Before the first answer nothing is ranked yet: every dot stays the same and no city
         // is named, so the quiz does not look decided before it starts.
@@ -660,6 +665,7 @@ const website = JSON.stringify({
       const asked: string[] = [];
       let current: string | undefined = "project";
       let revealed = false;
+      let finished = false;
       let timer: ReturnType<typeof setTimeout> | undefined;
 
       function showQuestion(id: string | undefined) {
@@ -697,6 +703,11 @@ const website = JSON.stringify({
         if (id) syncContinue(fieldsets.get(id)!);
         if (id)
           fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+        // Counted once per visit, when the last question is answered.
+        if (!id && !finished) {
+          finished = true;
+          track(finishedEvent("Questionnaire 1 terminé"));
+        }
         render();
       }
 
@@ -728,6 +739,8 @@ const website = JSON.stringify({
         if (!chip) return;
         pick(chip);
         render();
+        // Kept in this browser only, so « Affiner » starts where the quiz stopped.
+        saveAnswers(browserStore(), readAnswers());
         const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
         syncContinue(fieldset);
         if (chip.getAttribute("aria-pressed") === "true") {
@@ -735,7 +748,7 @@ const website = JSON.stringify({
             fieldset.dataset.question as string,
             JSON.parse(chip.dataset.value as string),
           );
-          if (event) window.plausible?.(event.name, { props: event.props });
+          if (event) track(event);
         }
         // A single answer lights up, then the next question comes half a second later.
         if (Number(fieldset.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {

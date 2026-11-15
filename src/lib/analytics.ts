@@ -32,6 +32,29 @@ export interface AnswerEvent {
   props: { question: string; answer: string };
 }
 
+/**
+ * The goals to declare in Plausible (Settings → Goals → Custom event): an event whose goal is
+ * missing is received but never shown. A minimal funnel, as a beta tester who does audience work
+ * suggested (2026-11-15): someone answers, finishes the quick quiz, then the full questionnaire.
+ * Where readers stop inside the quiz already shows in the « Réponse » breakdown by question.
+ */
+export const GOALS = [
+  "Réponse",
+  "Questionnaire 1 terminé",
+  "Questionnaire complet terminé",
+] as const;
+export type Goal = (typeof GOALS)[number];
+
+export interface SiteEvent {
+  name: Goal;
+}
+
+export function finishedEvent(
+  name: "Questionnaire 1 terminé" | "Questionnaire complet terminé",
+): SiteEvent {
+  return { name };
+}
+
 export function answerEvent(question: string, value: unknown): AnswerEvent | null {
   if (NEVER_SENT.has(question) || !MEASURED.has(question)) return null;
   if (value === undefined || value === null) return null;

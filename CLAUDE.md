@@ -26,11 +26,13 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   with any safety, racism, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
   FCDO) is shown with each city as dated information and never removes or greys a city
   (operator, 2026-11-15: it is written for visitors who have never been there).
-- **Privacy**: answers are computed and kept in the browser. The only thing sent is one
-  anonymous, cookieless Plausible event per quick-quiz answer (`src/lib/analytics.ts`, only when
+- **Privacy**: answers are computed and kept in the browser (localStorage, so the full
+  questionnaire resumes the quick quiz). What is sent: anonymous, cookieless Plausible events,
+  one per quick-quiz answer plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
-  LGBT filters are never sent. Fonts are self-hosted; do not add Google Fonts, trackers with
-  cookies, or third-party embeds.
+  LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
+  answers. Fonts are self-hosted;
+  do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 
 ## Commands
