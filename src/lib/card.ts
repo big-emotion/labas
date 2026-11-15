@@ -2,7 +2,7 @@ import type { City, CriterionKey } from "./cities";
 import type { Match, Rated } from "./ranking";
 
 /**
- * « Si tu y vivais »: three lines read straight from the sourced scores (0 to 5). A line no
+ * « Si vous y viviez »: three lines read straight from the sourced scores (0 to 5). A line no
  * source rates is left out rather than guessed.
  */
 export function livingLines(city: City): Rated[] {

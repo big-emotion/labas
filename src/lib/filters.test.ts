@@ -76,7 +76,7 @@ describe("filtering the result", () => {
 describe("the filter menu", () => {
   it("offers the filters of the approved mockup, in its order", () => {
     expect(FILTER_MENU.map((f) => f.label)).toEqual([
-      "Villes que tu connais déjà",
+      "Villes que vous connaissez déjà",
       "Taille de la ville",
       "Langue",
       "Budget",

@@ -37,22 +37,22 @@ const COUNTRY_CHOICES: Choice[] = [
   .sort(([a], [b]) => a.localeCompare(b, "fr"))
   .map(([country, zone]) => ({ label: country, value: country, zone }));
 
-const HISTORY = "Ton histoire avec l'Afrique";
-const TEMPERAMENT = "Ton tempérament";
-const PROJECT = "Ton projet de vie";
-const DAILY = "Ton quotidien";
+const HISTORY = "Votre histoire avec l'Afrique";
+const TEMPERAMENT = "Votre tempérament";
+const PROJECT = "Votre projet de vie";
+const DAILY = "Votre quotidien";
 
 /** Feeling at home matters to the reader: only then are faith and its weight asked. */
 const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
 
 // The free quiz of the approved V3 mockup (canvas « Là-bas — quiz », 2026-11-15): four chapters
-// in a fixed order, so the reader always sees « question 7 sur 18 ». Worded in « tu ». The
+// in a fixed order, so the reader always sees « question 7 sur 18 ». Worded in « vous ». The
 // temperament chapter is a quick reading inspired by the Big Five, one question per trait.
 export const QUESTIONS: Question[] = [
   {
     id: "project",
     group: HISTORY,
-    title: "Là-bas, tu t'y vois comment ?",
+    title: "Là-bas, vous vous y voyez comment ?",
     hint: "Pas besoin d'un projet arrêté : chaque ville dira aussi ce qu'elle vaut pour y vivre.",
     choices: [
       { label: "M'installer pour de bon", value: "installer", sub: "Y construire ma vie" },
@@ -65,8 +65,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "origin",
     group: HISTORY,
-    title: "D'où vient ta famille ?",
-    hint: "Facultatif. Sert à repérer les régions où tu as des repères. Rien n'est enregistré.",
+    title: "D'où vient votre famille ?",
+    hint: "Facultatif. Sert à repérer les régions où vous avez des repères. Rien n'est enregistré.",
     max: 3,
     choices: [
       { label: "Afrique de l'Ouest", value: "ouest" },
@@ -82,7 +82,7 @@ export const QUESTIONS: Question[] = [
     id: "countries",
     group: HISTORY,
     title: "Et le pays ?",
-    hint: "Le pays de ta famille compte fort si tu veux te sentir chez toi.",
+    hint: "Le pays de votre famille compte fort si vous voulez vous sentir chez vous.",
     max: 3,
     when: (answers) => africanOrigins(answers).length > 0,
     choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
@@ -90,7 +90,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "kin",
     group: HISTORY,
-    title: "Te sentir parmi les tiens, ça compte ?",
+    title: "Vous sentir parmi les vôtres, ça compte ?",
     hint: "Origine, culture, religion : ce qui fait qu'on se sent chez soi.",
     choices: [
       { label: "Beaucoup", value: "much" },
@@ -101,8 +101,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "faith",
     group: HISTORY,
-    title: "Ta religion ?",
-    hint: "Pour savoir si ta foi est largement partagée dans le pays (Pew Research Center, 2020).",
+    title: "Votre religion ?",
+    hint: "Pour savoir si votre foi est largement partagée dans le pays (Pew Research Center, 2020).",
     when: kinMatters,
     choices: [
       { label: "Islam", value: "muslim" },
@@ -115,8 +115,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "saturday",
     group: TEMPERAMENT,
-    title: "Ton samedi soir idéal ?",
-    hint: "Ton envie de monde, comparée à l'énergie de chaque ville.",
+    title: "Votre samedi soir idéal ?",
+    hint: "Votre envie de monde, comparée à l'énergie de chaque ville.",
     choices: [
       { label: "Du monde, de la musique, on rentre tard", value: 1 },
       { label: "Un dîner avec quelques amis", value: 0.5 },
@@ -126,8 +126,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "adventure",
     group: TEMPERAMENT,
-    title: "Partir loin de ce que tu connais, ça te tente ?",
-    hint: "Ton goût du dépaysement, comparé à ce que chaque ville a de nouveau pour toi.",
+    title: "Partir loin de ce que vous connaissez, ça vous tente ?",
+    hint: "Votre goût du dépaysement, comparé à ce que chaque ville a de nouveau pour vous.",
     choices: [
       { label: "Oui, c'est ce que je cherche", value: "seeking" },
       { label: "Pourquoi pas", value: "open" },
@@ -137,8 +137,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "order",
     group: TEMPERAMENT,
-    title: "Les règles et l'organisation, pour toi ?",
-    hint: "Ton besoin de cadre, comparé à l'ordre et à la prévisibilité de chaque ville.",
+    title: "Les règles et l'organisation, pour vous ?",
+    hint: "Votre besoin de cadre, comparé à l'ordre et à la prévisibilité de chaque ville.",
     choices: [
       {
         label: "J'ai besoin que tout soit carré",
@@ -152,7 +152,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "together",
     group: TEMPERAMENT,
-    title: "Dans la vie, tu avances comment ?",
+    title: "Dans la vie, vous avancez comment ?",
     hint: "Comparé à l'esprit de chaque ville : plutôt compétition, ou plutôt entraide.",
     choices: [
       { label: "Je trace ma route", value: 0, sub: "Que le meilleur gagne" },
@@ -164,7 +164,7 @@ export const QUESTIONS: Question[] = [
     id: "friction",
     group: TEMPERAMENT,
     title: "Coupures, démarches, imprévus…",
-    hint: "Ce que tu encaisses, comparé à l'intensité de chaque ville.",
+    hint: "Ce que vous encaissez, comparé à l'intensité de chaque ville.",
     choices: [
       { label: "Ça m'amuse presque, je m'adapte", value: 1 },
       { label: "Ça m'agace, mais je gère", value: 0.5 },
@@ -174,7 +174,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "profession",
     group: PROJECT,
-    title: "Ton métier ?",
+    title: "Votre métier ?",
     hint: "Toutes les villes n'offrent pas les mêmes débouchés selon le métier.",
     choices: [
       { label: "Finance", value: "finance" },
@@ -194,7 +194,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "budget",
     group: PROJECT,
-    title: "Ton budget sur place ?",
+    title: "Votre budget sur place ?",
     hint: "Pour comparer avec ce que coûtent un logement et la vie courante.",
     choices: [
       { label: "Serré", value: "serre" },
@@ -205,7 +205,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "family",
     group: PROJECT,
-    title: "Tu pars avec qui ?",
+    title: "Vous partez avec qui ?",
     hint: "Les écoles, les soins et le rythme comptent plus avec des enfants.",
     choices: [
       { label: "Seul·e", value: "celib" },
@@ -217,8 +217,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "passports",
     group: PROJECT,
-    title: "Ton passeport ?",
-    hint: "Pour savoir où tu entres sans visa, et où tu circules librement.",
+    title: "Votre passeport ?",
+    hint: "Pour savoir où vous entrez sans visa, et où vous circulez librement.",
     max: 2,
     choices: [
       { label: "Français ou européen", value: "eu" },
@@ -231,7 +231,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "languages",
     group: DAILY,
-    title: "Tu es à l'aise en…",
+    title: "Vous êtes à l'aise en…",
     hint: "La langue de tous les jours compte plus que tout le reste.",
     max: 6,
     choices: [
@@ -257,7 +257,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "landscapes",
     group: DAILY,
-    title: "Le week-end, tu files où ?",
+    title: "Le week-end, vous filez où ?",
     hint: "Mer, île, fleuve, montagne ou désert : le paysage autour de la ville.",
     max: 3,
     choices: [
@@ -272,7 +272,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "priorities",
     group: DAILY,
-    title: "Ce qui compte le plus pour toi ?",
+    title: "Ce qui compte le plus pour vous ?",
     hint: "Jusqu'à trois priorités. Elles pèsent lourd dans le score.",
     max: 3,
     choices: [

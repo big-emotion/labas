@@ -8,7 +8,7 @@ import { QUESTIONS, type Question } from "./questions";
 const FURTHER: Omit<Question, "group">[] = [
   {
     id: "currentCity",
-    title: "Tu vis où aujourd'hui ?",
+    title: "Vous vivez où aujourd'hui ?",
     choices: [
       { label: "Une grande capitale (Paris, Bruxelles…)", value: "capital" },
       { label: "Une grande ville", value: "bigcity" },
@@ -19,7 +19,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "rhythm",
-    title: "Là-bas, ton rythme :",
+    title: "Là-bas, votre rythme :",
     choices: [
       { label: "Le même qu'aujourd'hui", value: "same" },
       { label: "Plus calme", value: "calmer" },
@@ -29,7 +29,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "mobility",
-    title: "Comment tu te déplaces au quotidien ?",
+    title: "Comment vous déplacez-vous au quotidien ?",
     choices: [
       { label: "À pied", value: "walk" },
       { label: "En transports", value: "transit" },
@@ -39,7 +39,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "habits",
-    title: "Ton quotidien, c'est plutôt…",
+    title: "Votre quotidien, c'est plutôt…",
     max: 3,
     choices: [
       { label: "Salle de sport", value: "gym" },
@@ -52,7 +52,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "neighbourhood",
-    title: "Ton quartier aujourd'hui :",
+    title: "Votre quartier aujourd'hui :",
     choices: [
       { label: "Central et animé", value: "central" },
       { label: "Résidentiel et calme", value: "residential" },
@@ -62,7 +62,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "people",
-    title: "Avec les gens, tu aimes…",
+    title: "Avec les gens, vous aimez…",
     choices: [
       { label: "Être invité, connaître mes voisins", value: "invited" },
       { label: "Garder ma tranquillité", value: "quiet" },
@@ -71,7 +71,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "belonging",
-    title: "Là-bas, tu veux vivre…",
+    title: "Là-bas, vous voulez vivre…",
     choices: [
       { label: "Parmi les gens du coin", value: "locals" },
       { label: "Avec d'autres repats", value: "returnees" },
@@ -80,7 +80,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "roots",
-    title: "Tu cherches plutôt à…",
+    title: "Vous cherchez plutôt à…",
     choices: [
       { label: "Retrouver mes racines", value: "rediscover" },
       { label: "Découvrir ailleurs", value: "discover" },
@@ -98,7 +98,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "languageOnly",
-    title: "Ta langue, c'est…",
+    title: "Votre langue, c'est…",
     choices: [
       { label: "Indispensable au quotidien", value: true },
       { label: "Un plus", value: false },
@@ -123,7 +123,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "visaFreeOnly",
-    title: "Pour un premier séjour, tu veux éviter le visa ?",
+    title: "Pour un premier séjour, vous voulez éviter le visa ?",
     choices: [
       { label: "Oui, sans visa", value: true },
       { label: "Le visa ne me gêne pas", value: false },
@@ -131,7 +131,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "excludeCriminalising",
-    title: "Tu veux écarter les pays qui punissent l'homosexualité ?",
+    title: "Vous voulez écarter les pays qui punissent l'homosexualité ?",
     choices: [
       { label: "Oui, écarte-les", value: true },
       { label: "Non", value: false },
@@ -157,7 +157,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "bargaining",
-    title: "Négocier les prix (loyer, taxi, marché), pour toi c'est…",
+    title: "Négocier les prix (loyer, taxi, marché), pour vous c'est…",
     choices: [
       { label: "Un jeu", value: 1 },
       { label: "Ça va", value: 0.5 },
@@ -175,7 +175,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "setupBudget",
-    title: "Combien peux-tu avancer pour t'installer (caution, loyers d'avance) ?",
+    title: "Combien pouvez-vous avancer pour vous installer (caution, loyers d'avance) ?",
     choices: [
       { label: "Moins de 2 000 €", value: "low" },
       { label: "2 000 à 6 000 €", value: "medium" },
@@ -184,7 +184,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "belonging",
-    title: "Là-bas, tu aimerais…",
+    title: "Là-bas, vous aimeriez…",
     choices: [
       { label: "Retrouver d'autres repats", value: "returnees" },
       { label: "Vivre comme les gens d'ici", value: "locals" },
@@ -193,7 +193,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "renounce",
-    title: "À quoi peux-tu renoncer ?",
+    title: "À quoi pouvez-vous renoncer ?",
     max: 2,
     choices: [
       { label: "La vie culturelle", value: "culture" },

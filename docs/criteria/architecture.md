@@ -56,7 +56,7 @@ Analysis comes after, and only if they want it.
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | **Goal**     | Spark curiosity and emotion: "pourquoi pas là ?"                                                                                            | Help a real decision                                 |
 | **Length**   | The current 10 questions, ~5 minutes                                                                                                        | The full question bank (§4.4) and the filters (§2.1) |
-| **Tone**     | Warm, playful, "tu", "on te comprend"                                                                                                       | Precise, still plain French                          |
+| **Tone**     | Warm, playful, "vous" (since 2026-11-15, §A.7), "on vous comprend"                                                                          | Precise, still plain French                          |
 | **Result**   | Three cities by score, the first framed with its portrait open, then every city on the site in score order; details behind "Voir le détail" | A ranked list with every criterion, source and date  |
 | **Criteria** | Hidden, behind "Pourquoi cette ville ?"                                                                                                     | Shown in full                                        |
 | **Human**    | None                                                                                                                                        | Personal coaching (accompagnement)                   |
@@ -146,15 +146,17 @@ source, truncated links) are listed city by city in
 
 ### A.7 Tone
 
-- **Warm and close:** "tu", short sentences, the community's own words ("retour au pays",
-  "s'installer", "là-bas"). "Repat" is explained the first time it appears.
+- **Warm and close:** "vous" (decided 2026-11-15 by the operator, replacing "tu" site-wide:
+  more direct for a diaspora audience that spans generations), short sentences, the
+  community's own words ("retour au pays", "s'installer", "là-bas"). "Repat" is explained the
+  first time it appears.
 - **Knowledgeable, not expert:** we know the continent and say so through concrete places,
   never through jargon or criteria on the first screen. The resemblance
   score is the one number shown, as a percentage (decided 2026-11-14).
 - **On the reader's side:** we take the wish to go seriously and do not lecture. Difficulties
   are named once, honestly, in "à savoir", not used to discourage.
-- **Preferences, not traits:** "tu aimes", "tu cherches", "tu as dit"; never "tu es
-  quelqu'un de…", "ton profil", "ta personnalité", "test".
+- **Preferences, not traits:** "vous aimez", "vous cherchez", "vous avez dit"; never "vous
+  êtes quelqu'un de…", "votre profil", "votre personnalité", "test".
 
 ---
 

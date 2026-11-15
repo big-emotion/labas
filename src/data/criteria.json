@@ -147,7 +147,7 @@
     "key": "nightlife",
     "label": "Sorties",
     "means": "Ce qui se passe le soir : bars, concerts, clubs.",
-    "doesNotMean": "Un bon ou un mauvais point : on le compare à ton samedi soir idéal.",
+    "doesNotMean": "Un bon ou un mauvais point : on le compare à votre samedi soir idéal.",
     "direction": "target",
     "rubric": {
       "1": "Alcool interdit ou presque rien d'ouvert après le dîner.",
@@ -183,7 +183,7 @@
     "key": "pace",
     "label": "Rythme de la ville",
     "means": "Circulation, foule, bruit, vitesse de la vie quotidienne.",
-    "doesNotMean": "Un bon ou un mauvais point : on le compare à la ville que tu cherches.",
+    "doesNotMean": "Un bon ou un mauvais point : on le compare à la ville que vous cherchez.",
     "direction": "target",
     "rubric": {
       "1": "Petite ville, peu de circulation, soirées calmes.",

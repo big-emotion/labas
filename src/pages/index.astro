@@ -9,7 +9,7 @@ import borders from "../data/africa-borders.json";
 
 const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
 const description =
-  "Réponds à dix questions et découvre les villes d'Afrique qui te ressemblent, parmi 115 villes dans les 54 pays.";
+  "Répondez à dix questions et découvrez les villes d'Afrique qui vous ressemblent, parmi 115 villes dans les 54 pays.";
 ---
 
 <html lang="fr">
@@ -38,7 +38,7 @@ const description =
               id="map"
               viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
               role="img"
-              aria-label="Carte de l'Afrique : plus une ville te ressemble, plus son point est gros et coloré"
+              aria-label="Carte de l'Afrique : plus une ville vous ressemble, plus son point est gros et coloré"
             >
               <g class="land" aria-hidden="true">
                 {borders.map((country) => (
@@ -68,7 +68,7 @@ const description =
           <span id="stitches" class="stitches" aria-hidden="true"></span>
           <p id="counter" class="counter"></p>
         </div>
-        <form id="form" class="questions" aria-label="Tes réponses">
+        <form id="form" class="questions" aria-label="Vos réponses">
           {QUESTIONS.map((question, index) => (
             <fieldset
               class="question"
@@ -112,7 +112,7 @@ const description =
           ))}
           <div id="ready" class="ready" hidden>
             <h2>C'est prêt.</h2>
-            <p>Trois villes te ressemblent plus que les autres. Découvre pourquoi.</p>
+            <p>Trois villes vous ressemblent plus que les autres. Découvrez pourquoi.</p>
             <button type="button" id="reveal" class="primary">
               Voir mes villes
             </button>
@@ -135,12 +135,12 @@ const description =
           </dialog>
 
           <section class="results" aria-labelledby="results-title">
-            <h2 id="results-title">Tes villes</h2>
+            <h2 id="results-title">Vos villes</h2>
             <p class="hint">
-              Des propositions, classées selon tes réponses. Chaque pourcentage est expliqué.
+              Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.
             </p>
             <div id="temperament" class="temperament" hidden>
-              <p class="eyebrow">Ton tempérament</p>
+              <p class="eyebrow">Votre tempérament</p>
               <p class="archetype" id="archetype"></p>
               <p id="archetype-text"></p>
               <ul class="traits" id="traits"></ul>
@@ -155,9 +155,9 @@ const description =
           <section class="others" aria-labelledby="others-title">
             <h2 id="others-title">Toutes les autres villes</h2>
             <p class="hint" id="others-hint">
-              Les 115 villes, triées selon tes réponses.
+              Les 115 villes, triées selon vos réponses.
             </p>
-            <div class="filters" aria-label="Filtrer tes villes">
+            <div class="filters" aria-label="Filtrer vos villes">
               <div class="filter-chips">
                 {FILTER_MENU.map((entry) => (
                   <button
@@ -183,8 +183,8 @@ const description =
           <section class="further">
             <h2>Envie d'aller plus loin ?</h2>
             <p>
-              Le questionnaire complet : tes contraintes (école, soins, visa), ce qui te pèse et ce
-              qui te plaît, pour un classement plus fin.
+              Le questionnaire complet : vos contraintes (école, soins, visa), ce qui vous pèse et
+              ce qui vous plaît, pour un classement plus fin.
             </p>
             <a href="/approfondir">Affiner avec le questionnaire complet</a>
           </section>
@@ -196,7 +196,7 @@ const description =
             ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est
             donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.
           </p>
-          <p>Tes réponses restent dans ton navigateur : rien n'est enregistré ni envoyé.</p>
+          <p>Vos réponses restent dans votre navigateur : rien n'est enregistré ni envoyé.</p>
           <nav class="links" aria-label="Pages du site">
             <a href="/approfondir">Aller plus loin</a>
             <a href="/methode">Notre méthode</a>
@@ -217,7 +217,7 @@ const description =
           </div>
           <span class="fit">
             <b></b>
-            <small>proche de toi</small>
+            <small>proche de vous</small>
           </span>
         </header>
         <p class="split"></p>
@@ -227,7 +227,7 @@ const description =
         </figure>
         <p class="card-pitch"></p>
         <div class="rated" data-block="why">
-          <h4>Pourquoi toi</h4>
+          <h4>Pourquoi vous</h4>
           <ul></ul>
         </div>
         <div class="rated against" data-block="against">
@@ -235,7 +235,7 @@ const description =
           <ul></ul>
         </div>
         <div class="rated" data-block="living">
-          <h4>Si tu y vivais</h4>
+          <h4>Si vous y viviez</h4>
           <ul></ul>
         </div>
         <ul class="facts"></ul>
@@ -278,7 +278,7 @@ const description =
           <p class="quote"></p>
         </div>
         <div class="field" data-field="surprise">
-          <h4>Ce qui pourrait te surprendre</h4>
+          <h4>Ce qui pourrait vous surprendre</h4>
           <p></p>
         </div>
         <div class="field" data-field="neighbourhoods">
@@ -287,7 +287,7 @@ const description =
           <p class="small">Loyers affichés, souvent négociables.</p>
         </div>
         <div class="field" data-field="reasons">
-          <h4>Ses points forts pour toi</h4>
+          <h4>Ses points forts pour vous</h4>
           <ul class="reasons"></ul>
         </div>
         <div class="field watch" data-field="watch">
@@ -426,13 +426,13 @@ const description =
       }
 
       function fillPortrait(box: HTMLElement, m: Match) {
-        setText(box, ".portrait-title", `Pourquoi toi et ${m.city.name}`);
+        setText(box, ".portrait-title", `Pourquoi vous et ${m.city.name}`);
         (box.querySelector(".portrait") as HTMLElement).replaceChildren(
           ...m.portrait.map((line) => {
             const item = document.createElement("li");
             const said = document.createElement("span");
             said.className = "said";
-            said.textContent = `Tu as dit · ${line.said}`;
+            said.textContent = `Vous avez dit · ${line.said}`;
             item.append(said, document.createTextNode(line.text));
             return item;
           }),
@@ -577,7 +577,7 @@ const description =
         const missing = answersBeforeLight(count);
         renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
         (document.getElementById("legend") as HTMLElement).textContent = missing
-          ? `${CITIES_COUNT} villes en lice. Chaque réponse fait grossir celles qui te correspondent.`
+          ? `${CITIES_COUNT} villes en lice. Chaque réponse fait grossir celles qui vous correspondent.`
           : `En tête pour l'instant : ${matches.map((m) => m.city.name).join(", ")}`;
 
         const archetype = archetypeOf(current);
@@ -602,11 +602,11 @@ const description =
         const rest = kept.filter((m) => !shown.has(m.city.name));
         const removed = ranked.length - kept.length;
         (document.getElementById("filter-note") as HTMLElement).textContent = removed
-          ? `${removed} ${removed > 1 ? "villes masquées" : "ville masquée"} par tes filtres. L'ordre ne change pas : seul ton score le décide.`
+          ? `${removed} ${removed > 1 ? "villes masquées" : "ville masquée"} par vos filtres. L'ordre ne change pas : seul votre score le décide.`
           : "Les filtres retirent des villes ; l'ordre ne change jamais.";
         (document.getElementById("others-hint") as HTMLElement).textContent = removed
-          ? `Les ${kept.length} villes qui passent tes filtres, triées selon tes réponses.`
-          : "Les 115 villes, triées selon tes réponses.";
+          ? `Les ${kept.length} villes qui passent vos filtres, triées selon vos réponses.`
+          : "Les 115 villes, triées selon vos réponses.";
         const visible = showAll ? rest : rest.slice(0, VISIBLE_ROWS);
         (document.getElementById("rows") as HTMLElement).replaceChildren(
           ...visible.map((m, i) => rowFor(m, i + 4)),
@@ -647,7 +647,7 @@ const description =
           if (chip.hidden) chip.setAttribute("aria-pressed", "false");
         }
         (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
-        // « Ton tempérament · question 7 sur 18 »: the total only moves when a conditional
+        // « Votre tempérament · question 7 sur 18 »: the total only moves when a conditional
         // question comes in or drops out.
         const list = freeQuestions(readAnswers());
         const position = id ? asked.length + 1 : list.length;
@@ -1038,7 +1038,7 @@ const description =
         display: grid;
         gap: 10px;
       }
-      /* The city in first place: framed in saffron, bigger, with its "pourquoi toi" open. */
+      /* The city in first place: framed in saffron, bigger, with its "pourquoi vous" open. */
       .results :global(.card.first) {
         border: 2px solid var(--saffron);
         gap: 14px;

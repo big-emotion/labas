@@ -77,7 +77,7 @@ describe("ranking the cities", () => {
   it("names what holds a city back", () => {
     const lagos = rankCities({ language: "fr" }).find((m) => m.city.name === "Lagos");
     expect(lagos?.drawbacks.map((r) => r.label)).toContain(
-      "Langue du quotidien différente de ton souhait",
+      "Langue du quotidien différente de votre souhait",
     );
   });
 
@@ -96,7 +96,7 @@ describe("ranking the cities", () => {
   it("prefers a city's own sentence over the generic one", () => {
     const nairobi = rankCities({ saturday: 1 }).find((m) => m.city.name === "Nairobi");
     expect(nairobi?.portrait[0].text).toBe(
-      "Tu aimes danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
+      "Vous aimez danser jusqu'au matin : Nairobi aussi. Le samedi, Westlands ne dort pas.",
     );
   });
 
@@ -118,7 +118,9 @@ describe("ranking the cities", () => {
     for (const m of rankCities(busy)) {
       expect(m.portrait.length).toBeLessThanOrEqual(3);
       for (const line of m.portrait) {
-        expect(line.text).not.toMatch(/personnalité|ton profil|tu es (quelqu|un |une |plutôt)/i);
+        expect(line.text).not.toMatch(
+          /personnalité|votre profil|vous êtes (quelqu|un |une |plutôt)|(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu,
+        );
       }
     }
   });

@@ -11,7 +11,7 @@ const UK = {
 
 /** What travel advice is, said wherever it is shown. */
 export const ADVICE_FRAMING =
-  "Ces avis sont écrits pour des voyageurs qui ne connaissent pas la ville. Sur place, la situation change d'un quartier à l'autre : demande à des gens qui y vivent quelles précautions prendre.";
+  "Ces avis sont écrits pour des voyageurs qui ne connaissent pas la ville. Sur place, la situation change d'un quartier à l'autre : demandez à des gens qui y vivent quelles précautions prendre.";
 
 function frenchDate(iso: string): string {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("fr-FR", {
