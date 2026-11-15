@@ -3,9 +3,6 @@ import { CITIES } from "./cities";
 /** The production address. Links shared on social networks and read by search engines must be absolute. */
 export const SITE = "https://labas.africa";
 
-/** Pages kept out of search engines: prototypes that are not part of the site yet. */
-const PRIVATE_PATHS = ["/raconte"];
-
 const PUBLIC_PAGES = ["/", "/approfondir/", "/methode/", "/mentions-legales/", "/confidentialite/"];
 
 export function absoluteUrl(path: string): string {
@@ -46,11 +43,7 @@ ${urls}
 }
 
 export function robotsTxt(): string {
-  return [
-    "User-agent: *",
-    ...PRIVATE_PATHS.map((path) => `Disallow: ${path}`),
-    "",
-    `Sitemap: ${absoluteUrl("/sitemap.xml")}`,
-    "",
-  ].join("\n");
+  return ["User-agent: *", "Allow: /", "", `Sitemap: ${absoluteUrl("/sitemap.xml")}`, ""].join(
+    "\n",
+  );
 }

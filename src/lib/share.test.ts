@@ -53,13 +53,12 @@ describe("links shared on social networks and read by search engines", () => {
 });
 
 describe("the sitemap", () => {
-  it("lists the public pages and every city, never the prototype", () => {
+  it("lists the public pages and every city", () => {
     const paths = sitemapPaths();
     expect(paths).toContain("/");
     expect(paths).toContain("/approfondir/");
     expect(paths).toContain("/methode/");
     for (const city of CITIES) expect(paths).toContain(`/ville/${city.slug}/`);
-    expect(paths.some((path) => path.startsWith("/raconte"))).toBe(false);
   });
 
   it("is valid sitemap XML with absolute addresses", () => {
@@ -70,10 +69,10 @@ describe("the sitemap", () => {
     expect(xml.match(/<url>/g)).toHaveLength(2);
   });
 
-  it("is announced by robots.txt, which keeps the prototype out", () => {
+  it("is announced by robots.txt, which leaves every page open", () => {
     const robots = robotsTxt();
     expect(robots).toContain(`Sitemap: ${SITE}/sitemap.xml`);
-    expect(robots).toContain("Disallow: /raconte");
+    expect(robots).not.toContain("Disallow");
   });
 });
 

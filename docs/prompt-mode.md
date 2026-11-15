@@ -1,6 +1,8 @@
 # Prompt mode — "Raconte-nous ta situation"
 
-> Design note, 2026-11-15. Status: prototype on a branch, not merged. Decision owner: the
+> Design note, 2026-11-15. Status: **prototype removed on 2026-11-15**. The operator chose to
+> bring free text through ChatGPT and Claude versions of Là-bas later, rather than a keyword
+> reader on the site. The rules and options below still apply to that work. Decision owner: the
 > operator. Context: `docs/criteria/architecture.md` §4.5 says free text must fill the same
 > `Answers` as the quiz; the operator prefers a local open-source model if feasible.
 
@@ -40,15 +42,13 @@ Hard rules carried over from the repo:
 - C and D would each need the "nothing leaves the browser" rule to change; that is a product
   decision, not a technical one.
 
-## The prototype (branch `feat/prompt-mode-prototype`)
+## The prototype, removed
 
-- `src/lib/situation.ts` — `readSituation(text)` returns `{ answers, understood }`, where
-  `understood` lists, per question, the phrase that triggered it, so the page can show why.
-- `src/lib/situation.test.ts` — behaviour through `readSituation` only: each quiz topic, French
-  variants and accents, negations ("pas trop cher", "sans enfants"), and the rule that
-  `excludeCriminalising` is never set.
-- `src/pages/raconte.astro` — not linked from the menu, `noindex`: a textarea, the chips it
-  understood (tap to remove), and the top three cities from `rankCities`.
+Option A ran as `/raconte` (`src/pages/raconte.astro`, `src/lib/situation.ts` and its tests), off
+the menu and out of search engines, until v0.5.1. It read keywords into the quiz's
+answers, showed them as chips the reader could remove, and listed three cities. Removed on
+2026-11-15: a keyword list understands little, and the ChatGPT and Claude versions will do the
+reading better. The code is in the git history (tag `v0.5.1`).
 
 ## Open questions for the operator
 
