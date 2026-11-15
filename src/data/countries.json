@@ -137,6 +137,7 @@
     },
     "racism": {
       "kind": "xenophobia",
+      "label": "Violences xénophobes contre les étrangers africains (ONU, 2022)",
       "summary": "En juillet 2022, des experts de l'ONU ont averti que l'Afrique du Sud était « au bord d'une violence xénophobe explosive » contre les étrangers africains, et Human Rights Watch a documenté en 2023 des violences parfois mortelles contre des ressortissants étrangers, liées notamment au mouvement Operation Dudula.",
       "sources": [
         {
@@ -278,6 +279,7 @@
     },
     "racism": {
       "kind": "anti-black",
+      "label": "Profilage racial de migrants subsahariens (Amnesty International, 2017)",
       "summary": "Amnesty International a décrit en octobre 2017 un « profilage racial de masse » ayant mené à l'expulsion de plus de 2 000 migrants subsahariens vers le Niger et le Mali, et Human Rights Watch a documenté en octobre 2020 de nouvelles rafles de migrants, surtout subsahariens, abandonnés à la frontière du Niger.",
       "sources": [
         {
@@ -451,6 +453,7 @@
     },
     "racism": {
       "kind": "xenophobia",
+      "label": "Expulsions massives et violentes de Congolais (ONU, 2018)",
       "summary": "En octobre 2018, plus de 330 000 Congolais ont été expulsés ou ont fui la province de Lunda Norte ; la Haute-Commissaire de l'ONU aux droits de l'homme a signalé un usage excessif de la force et Human Rights Watch des meurtres et des pillages commis pendant ces expulsions.",
       "sources": [
         {
@@ -3544,6 +3547,7 @@
     },
     "racism": {
       "kind": "anti-black",
+      "label": "Incitation à la discrimination raciale contre les migrants noirs (Commission internationale de juristes, 2025)",
       "summary": "En mars 2023, la mission d'enquête de l'ONU a conclu à des crimes contre l'humanité contre des migrants détenus, dont l'esclavage, et avait relevé en 2021 un traitement plus dur des Africains subsahariens ; en mars-avril 2025, l'ONU et la Commission internationale de juristes ont alerté sur une campagne de haine visant les migrants, surtout les personnes noires.",
       "sources": [
         {
@@ -4125,6 +4129,7 @@
     },
     "racism": {
       "kind": "anti-black",
+      "label": "Violence racialisée contre les migrants africains (experts de l'ONU, 2022)",
       "summary": "Le 24 juin 2022, au moins 23 personnes selon le Maroc et au moins 37 selon Amnesty International, venues d'Afrique subsaharienne, sont mortes à la frontière de Melilla ; en novembre 2022, des experts de l'ONU sur le racisme ont parlé d'une violence « racialisée » contre les migrants africains.",
       "sources": [
         {
@@ -4402,6 +4407,7 @@
     },
     "racism": {
       "kind": "anti-black",
+      "label": "Traitements racistes de migrants africains (Human Rights Watch, 2025)",
       "summary": "En 2018, le CERD s'est inquiété de la discrimination et de la marginalisation des Haratines et des communautés noires africaines (Halpulaar, Soninké, Wolof) et de la persistance de l'esclavage ; en août 2025, Human Rights Watch a documenté torture, traitements racistes et expulsions collectives de migrants d'Afrique de l'Ouest et du Centre entre 2020 et 2025.",
       "sources": [
         {
@@ -6810,6 +6816,7 @@
     },
     "racism": {
       "kind": "anti-black",
+      "label": "Propos racistes et violences contre les Africains noirs (ONU, 2023)",
       "summary": "Après le discours présidentiel du 21 février 2023, le Comité de l'ONU pour l'élimination de la discrimination raciale (CERD) a dénoncé le 31 mars 2023 des propos racistes et des violences contre les Africains noirs, migrants et Tunisiens, avec expulsions de logement et arrestations arbitraires ; le CERD a de nouveau examiné ces faits en novembre 2025.",
       "sources": [
         {
@@ -7199,6 +7206,7 @@
     },
     "racism": {
       "kind": "anti-black",
+      "label": "Contrôles policiers visant les personnes noires (Amnesty International, 2024)",
       "summary": "En juin 2024, Amnesty International a documenté des arrestations massives et des renvois forcés de réfugiés soudanais, après des contrôles policiers visant des personnes noires dans les rues du Caire et de Gizeh.",
       "sources": [
         {

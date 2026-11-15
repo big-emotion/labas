@@ -590,9 +590,18 @@ describe("never sending a reader where they would be badly received", () => {
     expect(countriesOf(maghrebi, 3).some((c) => hostile.has(c))).toBe(true);
   });
 
-  it("says why on the card", () => {
+  it("says why on the card, in the words of the source, with its name and year", () => {
     const reader = { origin: ["ouest"], languages: ["ar"] } as Answers;
     const tunis = rankCities(reader).find((m) => m.city.name === "Tunis")!;
-    expect(tunis.drawbacks.map((d) => d.label)).toContain("Racisme anti-noir documenté (ONU, ONG)");
+    expect(tunis.drawbacks.map((d) => d.label)).toContain(
+      "Propos racistes et violences contre les Africains noirs (ONU, 2023)",
+    );
+  });
+
+  it("gives every documented case a short label that names its source and year", () => {
+    for (const city of CITIES) {
+      const racism = city.countryFacts?.racism;
+      if (racism) expect(racism.label, city.country).toMatch(/\([^)]+, \d{4}\)$/);
+    }
   });
 });
