@@ -1,0 +1,73 @@
+---
+// The reader's profile, shown at the end of the quick quiz and of the full questionnaire
+// (operator, 2026-11-15). Filled by showProfile() in lib/profile-dom.ts.
+---
+
+<div class="temperament" data-profile hidden>
+  <p class="eyebrow">Votre tempérament</p>
+  <p class="archetype" data-profile-name></p>
+  <p data-profile-text></p>
+  <ul class="traits" data-profile-traits></ul>
+  <p class="small">
+    Lecture rapide inspirée du Big Five, une question par trait. Ce n'est pas un test de
+    personnalité. Sous chaque ville, les quartiers qui vous ressemblent.
+  </p>
+</div>
+
+<style>
+  .temperament {
+    background: var(--night-deep);
+    border-radius: 20px;
+    padding: 18px;
+    display: grid;
+    gap: 10px;
+  }
+  .temperament[hidden] {
+    display: none;
+  }
+  .temperament p {
+    margin: 0;
+  }
+  .eyebrow,
+  .small {
+    color: var(--thread-dim);
+    font-size: 0.85rem;
+  }
+  .archetype {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--saffron);
+  }
+  .traits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .traits :global(li) {
+    display: grid;
+    grid-template-columns: minmax(0, 10em) 1fr;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.92rem;
+  }
+  .traits :global(small) {
+    display: block;
+    color: var(--thread-dim);
+    font-size: 0.78rem;
+  }
+  .traits :global(.meter) {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--night-lift);
+    overflow: hidden;
+  }
+  .traits :global(.meter i) {
+    display: block;
+    height: 100%;
+    background: var(--saffron);
+  }
+</style>

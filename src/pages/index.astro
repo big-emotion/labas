@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
 import KeepResults from "../components/KeepResults.astro";
+import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ShareMeta from "../components/ShareMeta.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
@@ -153,16 +154,7 @@ const website = JSON.stringify({
             <p class="hint">
               Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.
             </p>
-            <div id="temperament" class="temperament" hidden>
-              <p class="eyebrow">Votre tempérament</p>
-              <p class="archetype" id="archetype"></p>
-              <p id="archetype-text"></p>
-              <ul class="traits" id="traits"></ul>
-              <p class="small">
-                Lecture rapide inspirée du Big Five, une question par trait. Ce n'est pas un test de
-                personnalité.
-              </p>
-            </div>
+            <TemperamentProfile />
             <div id="cards" class="cards"></div>
             <KeepResults />
           </section>
@@ -239,6 +231,7 @@ const website = JSON.stringify({
           </span>
         </header>
         <p class="split"></p>
+        <ul class="why-temper"></ul>
         <figure class="photo" hidden>
           <img alt="" width="1280" height="853" loading="lazy" />
           <figcaption></figcaption>
@@ -328,7 +321,7 @@ const website = JSON.stringify({
     <script>
       import { rankCities, type Answers, type Match, type Rated } from "../lib/ranking";
       import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
-      import { archetypeOf } from "../lib/temperament";
+      import { showProfile } from "../lib/profile-dom";
       import { costLabel, livingLines, regionName, sameCountry } from "../lib/card";
       import { QUESTIONS } from "../lib/questions";
       import {
@@ -538,6 +531,7 @@ const website = JSON.stringify({
         setText(card, ".card-country", `${m.city.country} · ${regionName(m.city.zone)}`);
         setText(card, ".fit b", percent(m.score));
         const split = card.querySelector(".split") as HTMLElement;
+        fillList(card.querySelector(".why-temper") as HTMLElement, m.temperamentLines);
         split.hidden = m.temperament === null;
         if (m.temperament !== null)
           split.innerHTML = `Tempérament <b>${percent(m.temperament)}</b> · Vie pratique <b>${percent(m.practical)}</b>`;
@@ -615,19 +609,7 @@ const website = JSON.stringify({
           ? `${CITIES_COUNT} villes en lice. Chaque réponse fait grossir celles qui vous correspondent.`
           : `En tête pour l'instant : ${matches.map((m) => m.city.name).join(", ")}`;
 
-        const archetype = archetypeOf(current);
-        (document.getElementById("temperament") as HTMLElement).hidden = !archetype;
-        if (archetype) {
-          setText(document.body, "#archetype", archetype.name);
-          setText(document.body, "#archetype-text", archetype.text);
-          (document.getElementById("traits") as HTMLElement).replaceChildren(
-            ...archetype.traits.map((trait) => {
-              const item = document.createElement("li");
-              item.innerHTML = `<span>${trait.name}<small>${trait.range}</small></span><span class="meter"><i style="width:${Math.max(8, Math.round(trait.value * 100))}%"></i></span>`;
-              return item;
-            }),
-          );
-        }
+        showProfile(current);
         (document.getElementById("cards") as HTMLElement).replaceChildren(
           ...matches.map((m, i) => cardFor(m, i, ranked)),
         );
@@ -1639,6 +1621,16 @@ const website = JSON.stringify({
         text-transform: uppercase;
         color: var(--thread-dim);
       }
+      /* Why the temperament part: the neighbourhoods at the reader's level. */
+      .results :global(.why-temper) {
+        margin: 0;
+        padding-left: 1.1em;
+        font-size: 0.88rem;
+        color: var(--thread-dim);
+      }
+      .results :global(.why-temper:empty) {
+        display: none;
+      }
       .results :global(.split),
       .results :global(.same) {
         margin: 0;
@@ -1714,56 +1706,6 @@ const website = JSON.stringify({
         border-radius: 999px;
         padding: 4px 11px;
         font-size: 0.82rem;
-      }
-      .temperament {
-        background: var(--night-deep);
-        border-radius: 20px;
-        padding: 18px;
-        display: grid;
-        gap: 10px;
-      }
-      .temperament[hidden] {
-        display: none;
-      }
-      .temperament p {
-        margin: 0;
-      }
-      .archetype {
-        font-family: var(--font-display);
-        font-weight: 800;
-        font-size: 2rem;
-        line-height: 1;
-        color: var(--saffron);
-      }
-      .traits {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 8px;
-      }
-      .traits :global(li) {
-        display: grid;
-        grid-template-columns: minmax(0, 10em) 1fr;
-        gap: 10px;
-        align-items: center;
-        font-size: 0.92rem;
-      }
-      .traits :global(small) {
-        display: block;
-        color: var(--thread-dim);
-        font-size: 0.78rem;
-      }
-      .traits :global(.meter) {
-        height: 8px;
-        border-radius: 4px;
-        background: var(--night-lift);
-        overflow: hidden;
-      }
-      .traits :global(.meter i) {
-        display: block;
-        height: 100%;
-        background: var(--saffron);
       }
     </style>
   </body>
