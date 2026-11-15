@@ -1,13 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { CITIES } from "./cities";
+import { CITIES, livableLanguages } from "./cities";
 import { bestMatches, profileOf, rankCities, type Answers } from "./ranking";
 import { closenessOf, fingerprint, type Pull } from "./fit";
-
-// A deterministic stream of random numbers, so the audit gives the same result every run.
-function randomStream(seed: number) {
-  let state = seed;
-  return () => (state = (state * 1103515245 + 12345) % 2147483648) / 2147483648;
-}
 
 const SPACE: Record<string, unknown[]> = {
   project: ["installer", "pied", "tester", "investir", "decouvrir"],
@@ -46,27 +40,6 @@ const SPACE: Record<string, unknown[]> = {
   adventure: ["familiar", "open", "seeking"],
   faith: ["muslim", "christian", "other", "none"],
 };
-const MULTI: Record<string, unknown[]> = {
-  languages: ["fr", "en", "pt", "ar"],
-  landscapes: ["beach", "water", "nature", "wildSpaces", "urban", "island"],
-  priorities: ["safety", "cost", "healthAndSchools", "career", "diaspora", "memory", "flights"],
-  habits: ["gym", "cafes", "culture", "markets", "nights", "nature"],
-};
-
-function randomProfile(random: () => number): Answers {
-  const answers: Record<string, unknown> = {};
-  for (const [id, values] of Object.entries(SPACE)) {
-    if (random() < 0.85) answers[id] = values[Math.floor(random() * values.length)];
-  }
-  for (const [id, values] of Object.entries(MULTI)) {
-    const picked = values.filter(() => random() < 0.35);
-    answers[id] = picked.length
-      ? picked.slice(0, 3)
-      : [values[Math.floor(random() * values.length)]];
-  }
-  return answers as Answers;
-}
-
 describe("the city a profile lands on", () => {
   const proposable = CITIES.filter((city) => !city.unsafe);
 
@@ -139,24 +112,164 @@ describe("the city a profile lands on", () => {
     expect(unreachable, unreachable.join(", ")).toEqual([]);
   }, 120_000);
 
-  it("spreads French speakers across many cities rather than a few", () => {
-    const random = randomStream(7);
-    const RUNS = 3000;
-    const wins = new Map<string, number>();
-    for (let i = 0; i < RUNS; i++) {
-      const profile = { ...randomProfile(random), languages: ["fr"] } as Answers;
-      const [first] = bestMatches(profile, 1);
-      wins.set(first.city.name, (wins.get(first.city.name) ?? 0) + 1);
+  // Readers the site is made for, described the way they would answer (operator, 2026-11-15).
+  // Random answers do not look like anyone, so concentration is judged on these instead.
+  const READERS: Record<string, Answers> = {
+    "French, Senegalese and Guinean parents, Muslim": {
+      project: "installer",
+      languages: ["fr"],
+      origin: ["ouest"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "muslim",
+      passports: ["eu"],
+      profession: "finance",
+    },
+    "French-Cameroonian teacher, Christian, two children": {
+      project: "installer",
+      languages: ["fr", "en"],
+      origin: ["centre"],
+      kin: "much",
+      adventure: "open",
+      faith: "christian",
+      family: "parents",
+      profession: "teaching",
+      budget: "moyen",
+    },
+    "French-Algerian developer, Muslim": {
+      project: "pied",
+      languages: ["fr", "ar"],
+      origin: ["nord"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "muslim",
+      profession: "tech",
+      currentCity: "capital",
+    },
+    "Martinican remote worker after the sea": {
+      project: "tester",
+      languages: ["fr"],
+      origin: ["ameriques"],
+      kin: "some",
+      adventure: "seeking",
+      landscapes: ["beach", "island"],
+      profession: "tech",
+      budget: "moyen",
+    },
+    "French-Malian retiree on a small pension": {
+      project: "installer",
+      languages: ["fr"],
+      origin: ["ouest"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "muslim",
+      profession: "retired",
+      budget: "serre",
+      rhythm: "calmer",
+      currentCity: "bigcity",
+    },
+    "Belgian-Congolese trader who loves the night": {
+      project: "investir",
+      languages: ["fr"],
+      origin: ["centre"],
+      kin: "some",
+      adventure: "open",
+      profession: "trade",
+      saturday: 1,
+      rhythm: "more",
+    },
+    "British-Nigerian banker": {
+      project: "pied",
+      languages: ["en"],
+      origin: ["ouest"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "christian",
+      profession: "finance",
+      priorities: ["career"],
+      passports: ["eu"],
+    },
+    "French-Ivorian student, tight budget, curious": {
+      project: "tester",
+      languages: ["fr"],
+      origin: ["ouest"],
+      kin: "none",
+      adventure: "seeking",
+      profession: "student",
+      budget: "serre",
+      saturday: 1,
+      roots: "discover",
+    },
+    "French-Moroccan family with children": {
+      project: "installer",
+      languages: ["fr", "ar"],
+      origin: ["nord"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "muslim",
+      family: "parents",
+      priorities: ["safety", "healthAndSchools"],
+    },
+    "Haitian-Canadian NGO worker who likes nature": {
+      project: "tester",
+      languages: ["fr", "en"],
+      origin: ["ameriques"],
+      kin: "some",
+      adventure: "open",
+      profession: "ngo",
+      landscapes: ["nature"],
+      climate: "mild",
+    },
+    "British-Kenyan engineer": {
+      project: "installer",
+      languages: ["en", "sw"],
+      origin: ["est"],
+      kin: "some",
+      adventure: "open",
+      profession: "tech",
+      currentCity: "capital",
+    },
+    "French-Comorian nurse, Muslim, by the sea": {
+      project: "installer",
+      languages: ["fr"],
+      origin: ["sud"],
+      kin: "much",
+      adventure: "familiar",
+      faith: "muslim",
+      profession: "health",
+      landscapes: ["island"],
+    },
+    "Franco-Guadeloupean couple who want to unplug": {
+      project: "tester",
+      languages: ["fr"],
+      origin: ["ameriques"],
+      kin: "none",
+      adventure: "seeking",
+      family: "couple",
+      rhythm: "unplug",
+      friction: 1,
+      landscapes: ["beach"],
+    },
+  };
+
+  it("gives each reader cities where they can live in one of their languages", () => {
+    for (const [reader, answers] of Object.entries(READERS)) {
+      for (const m of bestMatches(answers, 3)) {
+        const spoken = livableLanguages(m.city);
+        expect(
+          spoken.some((l) => (answers.languages ?? []).includes(l)),
+          `${reader}: ${m.city.name}`,
+        ).toBe(true);
+      }
     }
-    console.log(
-      "SPREAD",
-      [...wins]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 8)
-        .map(([n, c]) => `${n} ${((c / RUNS) * 100).toFixed(1)}%`)
-        .join(", "),
-    );
-    for (const [name, count] of wins) expect(count / RUNS, name).toBeLessThan(0.08);
+  });
+
+  it("sends different readers to different cities", () => {
+    const firsts = Object.values(READERS).map((answers) => bestMatches(answers, 1)[0].city.name);
+    const counts = new Map<string, number>();
+    for (const name of firsts) counts.set(name, (counts.get(name) ?? 0) + 1);
+    expect(counts.size, firsts.join(", ")).toBeGreaterThanOrEqual(9);
+    for (const [name, count] of counts) expect(count, name).toBeLessThanOrEqual(2);
   });
 
   const topThree = (answers: Answers) => bestMatches(answers, 3).map((m) => m.city.name);

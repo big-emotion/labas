@@ -442,7 +442,7 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (answers.belonging) add(BELONGING[answers.belonging]);
 
   const languages = languagesOf(answers);
-  if (languages.length) facts.push({ kind: "languages", values: languages, weight: 3 });
+  if (languages.length) facts.push({ kind: "languages", values: languages, weight: 6 });
   const landscapes = landscapesOf(answers);
   const natural = landscapes.filter((l) => l !== "urban");
   if (natural.length) facts.push({ kind: "settings", values: natural, weight: 2.5 });
