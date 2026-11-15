@@ -6,6 +6,13 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-11-15
+
+### Removed
+
+- The « raconte » prototype (describe your situation in your own words), which was not linked from
+  the site. Free text will come through the ChatGPT and Claude versions of Là-bas.
+
 ## [0.6.0] - 2026-11-15
 
 ### Added
@@ -127,6 +134,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.6.0...HEAD
+[0.6.1]: https://github.com/big-emotion/labas/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/big-emotion/labas/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/big-emotion/labas/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/big-emotion/labas/compare/v0.4.0...v0.5.0
