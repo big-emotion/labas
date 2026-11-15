@@ -1265,7 +1265,8 @@ const description =
         max-height: 50vh;
         overflow-y: auto;
       }
-      .option {
+      /* Built by the script, so outside Astro's scoped styles. */
+      .sheet-options :global(.option) {
         min-height: 48px;
         padding: 0 14px;
         border-radius: 14px;
@@ -1276,7 +1277,7 @@ const description =
         text-align: left;
         cursor: pointer;
       }
-      .option[aria-pressed="true"] {
+      .sheet-options :global(.option[aria-pressed="true"]) {
         background: var(--night);
         border-color: var(--night);
         color: var(--thread);
@@ -1385,6 +1386,7 @@ const description =
         justify-content: center;
         min-height: 50px;
         border: 2px solid var(--thread);
+        background: transparent;
         color: var(--thread);
         text-decoration: none;
       }
