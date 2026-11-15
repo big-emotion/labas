@@ -6,7 +6,7 @@ import {
   type CriterionKey,
   type Language,
 } from "./cities";
-import { TRAITS } from "./city-temperament";
+import { TRAITS, neighbourhoodLine } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
 import { profileEffects, type ProfileAnswers } from "./profile-pulls";
@@ -142,6 +142,8 @@ export interface Match {
   drawbacks: Rated[];
   /** 0 to 1 on the five temperament answers alone; null before any of them. */
   temperament: number | null;
+  /** Why the temperament part is what it is: per answer, the neighbourhoods at the reader's level. */
+  temperamentLines: string[];
   /** 0 to 1 on every other answer. */
   practical: number;
   /** "Pourquoi vous" lines: what the reader said, met by what the city offers. */
@@ -736,6 +738,14 @@ function evaluate(
     reasons,
     drawbacks,
     temperament: profiles.temperament ? closeness(city, profiles.temperament) : null,
+    temperamentLines: TRAITS.flatMap((trait) => {
+      const reader =
+        trait === "adventure"
+          ? answers.adventure && ADVENTURE_LEVEL[answers.adventure]
+          : answers[trait];
+      const line = reader === undefined ? null : neighbourhoodLine(city.name, trait, reader);
+      return line ? [line] : [];
+    }),
     practical: closeness(city, profiles.practical) ?? 0,
     portrait: portraitFor(city, answers),
   };

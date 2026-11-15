@@ -1,5 +1,6 @@
 ---
 import KeepResults from "../components/KeepResults.astro";
+import TemperamentProfile from "../components/TemperamentProfile.astro";
 import Page from "../layouts/Page.astro";
 import { DEEP_QUESTIONS } from "../lib/deep-questions";
 ---
@@ -64,6 +65,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       Toutes les villes, triées selon vos réponses. Le pourcentage dit à quel point une ville
       correspond à ce que vous avez dit, rien de plus.
     </p>
+    <TemperamentProfile />
     <ul id="removed" class="removed"></ul>
     <ol id="ranking" class="ranking"></ol>
     <KeepResults />
@@ -80,6 +82,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
         <span></span>
       </span>
       <p class="tagline"></p>
+      <ul class="why-temper"></ul>
       <ul class="pros"></ul>
       <ul class="cons"></ul>
       <p class="coverage" hidden>
@@ -95,6 +98,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { finishedEvent } from "../lib/analytics";
     import { forgetAnswers, loadAnswers, resultsText, saveAnswers } from "../lib/keep";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
+    import { showProfile } from "../lib/profile-dom";
 
     // The quick quiz's answers, kept in this browser: those questions are not asked again.
     const answers: Record<string, unknown> = { ...loadAnswers(browserStore()) };
@@ -214,6 +218,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
             }),
           );
         };
+        fill(".why-temper", m.temperamentLines);
         fill(
           ".pros",
           m.reasons.map((r) => r.label),
@@ -244,6 +249,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
 
     function render(advance = true) {
       saveAnswers(browserStore(), answers as Answers);
+      showProfile(answers as Answers);
       renderAnswers();
       renderRanking();
       if (advance) showNext();
@@ -430,6 +436,16 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     margin: 0;
     font-size: 0.88rem;
     color: var(--thread-dim);
+  }
+  /* Why the temperament fits: the neighbourhoods at the reader's level. */
+  .ranking :global(.why-temper) {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.88rem;
+    color: var(--thread-dim);
+  }
+  .ranking :global(.why-temper:empty) {
+    display: none;
   }
   .ranking :global(.pros),
   .ranking :global(.cons) {
