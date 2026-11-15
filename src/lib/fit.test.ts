@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
-import { bestMatches, rankCities, type Answers } from "./ranking";
+import { bestMatches, profileOf, rankCities, type Answers } from "./ranking";
 import { closenessOf, fingerprint, type Pull } from "./fit";
 
 // A deterministic stream of random numbers, so the audit gives the same result every run.
@@ -326,6 +326,18 @@ describe("feeling at home among one's own", () => {
     expect(score(christian, "Accra")).toBeGreaterThan(score(christian, "Dakar"));
     const indifferent: Answers = { kin: "none", faith: "muslim" };
     expect(score(indifferent, "Dakar")).toBe(score(indifferent, "Accra"));
+  });
+
+  it("counts documented anti-Black racism against feeling at home, for a sub-Saharan family", () => {
+    const { pulls, facts } = profileOf(westAfrican);
+    const parts = (name: string) =>
+      closenessOf(
+        CITIES.find((c) => c.name === name)!,
+        pulls,
+        facts,
+      ).find((p) => p.fact === "kin")!.value;
+    // Same region on the map; the UN and HRW document anti-Black racism in Mauritania.
+    expect(parts("Nouakchott")).toBeLessThan(parts("Dakar"));
   });
 
   it("does not weigh origin when feeling at home does not matter to the reader", () => {

@@ -327,7 +327,10 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       });
       continue;
     } else if (fact.kind === "kin" || fact.kind === "elsewhere") {
-      const affinity = AFFINITY[fact.origin]?.[city.zone] ?? NEUTRAL;
+      // Documented anti-Black racism halves how at home a reader of sub-Saharan or Caribbean
+      // family can expect to feel, whatever the map says (UN, Amnesty, HRW: countries.json).
+      const exposed = city.countryFacts?.racism?.kind === "anti-black" && fact.origin !== "nord";
+      const affinity = (AFFINITY[fact.origin]?.[city.zone] ?? NEUTRAL) * (exposed ? 0.5 : 1);
       parts.push({
         // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
         // much an adventure for a reader from Dakar as Tunis is.
