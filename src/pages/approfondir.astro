@@ -1,6 +1,7 @@
 ---
 import KeepResults from "../components/KeepResults.astro";
 import TemperamentProfile from "../components/TemperamentProfile.astro";
+import ResultCards from "../components/ResultCards.astro";
 import Page from "../layouts/Page.astro";
 import { DEEP_QUESTIONS } from "../lib/deep-questions";
 ---
@@ -51,45 +52,33 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     </p>
   </section>
 
-  <section class="answers" aria-labelledby="answers-title">
-    <h2 id="answers-title">Vos réponses</h2>
+  <details class="answers">
+    <summary id="answers-title">Voir mes réponses</summary>
     <p class="hint" id="answers-empty">
       Pas encore de réponse.
     </p>
     <ul id="answers" class="answer-list"></ul>
-  </section>
+  </details>
 
-  <section aria-labelledby="ranking-title" data-print>
-    <h2 id="ranking-title">Votre classement</h2>
+  <section class="results" aria-labelledby="ranking-title" data-print>
+    <h2 id="ranking-title">Vos villes</h2>
     <p class="hint">
-      Toutes les villes, triées selon vos réponses. Le pourcentage dit à quel point une ville
-      correspond à ce que vous avez dit, rien de plus.
+      Classées selon toutes vos réponses. Le pourcentage dit à quel point une ville correspond à ce
+      que vous avez dit, rien de plus.
     </p>
     <TemperamentProfile />
     <ul id="removed" class="removed"></ul>
-    <ol id="ranking" class="ranking"></ol>
+    <div id="cards" class="cards"></div>
     <KeepResults />
   </section>
 
-  <template id="row">
-    <li class="row">
-      <div class="row-head">
-        <span class="rank"></span>
-        <a class="name"></a>
-        <span class="fit"></span>
-      </div>
-      <span class="bar">
-        <span></span>
-      </span>
-      <p class="tagline"></p>
-      <ul class="why-temper"></ul>
-      <ul class="pros"></ul>
-      <ul class="cons"></ul>
-      <p class="coverage" hidden>
-        Données incomplètes pour cette ville : on vous montre ce que l'on sait.
-      </p>
-    </li>
-  </template>
+  <section class="others" aria-labelledby="others-title">
+    <h2 id="others-title">Toutes les autres villes</h2>
+    <ol id="rows" class="rows"></ol>
+    <button type="button" id="more" class="more" hidden></button>
+  </section>
+
+  <ResultCards />
 
   <script>
     import { nextQuestion } from "../lib/adaptive";
@@ -99,6 +88,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { forgetAnswers, loadAnswers, resultsText, saveAnswers } from "../lib/keep";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
     import { showProfile } from "../lib/profile-dom";
+    import { cardFor, rowFor } from "../lib/cards-dom";
 
     // The quick quiz's answers, kept in this browser: those questions are not asked again.
     const answers: Record<string, unknown> = { ...loadAnswers(browserStore()) };
@@ -128,8 +118,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     // Counted once per visit.
     let finished = false;
     let showAll = false;
+    const TOP = 3;
     const VISIBLE = 20;
-    const percent = (n: number) => `${Math.round(n * 100)}\u202f%`;
 
     const fieldset = (id: string) =>
       document.querySelector<HTMLFieldSetElement>(`.question[data-question="${id}"]`)!;
@@ -156,6 +146,9 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       const list = document.getElementById("answers") as HTMLElement;
       const entries = Object.entries(answers).filter(([, value]) => value !== undefined);
       (document.getElementById("answers-empty") as HTMLElement).hidden = entries.length > 0;
+      (document.getElementById("answers-title") as HTMLElement).textContent = entries.length
+        ? `Voir mes réponses (${entries.length})`
+        : "Voir mes réponses";
       list.replaceChildren(
         ...entries.map(([id, value]) => {
           const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
@@ -197,54 +190,17 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
         }),
       );
       const proposed = ranked.filter((m) => !m.excludedBecause);
-      const visible = showAll ? proposed : proposed.slice(0, VISIBLE);
-      const template = document.getElementById("row") as HTMLTemplateElement;
-      const rows = visible.map((m, index) => {
-        const row = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
-        (row.querySelector(".rank") as HTMLElement).textContent = String(index + 1);
-        const link = row.querySelector(".name") as HTMLAnchorElement;
-        link.href = `/ville/${m.city.slug}`;
-        link.textContent = `${m.city.name} · ${m.city.country}`;
-        (row.querySelector(".fit") as HTMLElement).textContent = percent(m.score);
-        (row.querySelector(".bar > span") as HTMLElement).style.width =
-          `${Math.round(m.score * 100)}%`;
-        (row.querySelector(".tagline") as HTMLElement).textContent = m.city.tagline;
-        const fill = (selector: string, items: string[]) => {
-          (row.querySelector(selector) as HTMLElement).replaceChildren(
-            ...items.map((text) => {
-              const item = document.createElement("li");
-              item.textContent = text;
-              return item;
-            }),
-          );
-        };
-        fill(".why-temper", m.temperamentLines);
-        fill(
-          ".pros",
-          m.reasons.map((r) => r.label),
-        );
-        fill(
-          ".cons",
-          m.drawbacks.map((r) => r.label),
-        );
-        (row.querySelector(".coverage") as HTMLElement).hidden = m.coverage >= 0.7;
-        return row;
-      });
-      const list = document.getElementById("ranking") as HTMLElement;
-      list.replaceChildren(...rows);
-      if (!showAll && proposed.length > VISIBLE) {
-        const more = document.createElement("li");
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "more";
-        button.textContent = `Voir les ${proposed.length} villes`;
-        button.addEventListener("click", () => {
-          showAll = true;
-          renderRanking();
-        });
-        more.append(button);
-        list.append(more);
-      }
+      (document.getElementById("cards") as HTMLElement).replaceChildren(
+        ...proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked)),
+      );
+      const rest = proposed.slice(TOP);
+      const visible = showAll ? rest : rest.slice(0, VISIBLE);
+      (document.getElementById("rows") as HTMLElement).replaceChildren(
+        ...visible.map((m, i) => rowFor(m, TOP + i + 1)),
+      );
+      const more = document.getElementById("more") as HTMLButtonElement;
+      more.hidden = showAll || rest.length <= VISIBLE;
+      more.textContent = `Voir les ${rest.length} autres villes`;
     }
 
     function render(advance = true) {
@@ -284,6 +240,11 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
         if (action === "skip") delete answers[id];
         render();
       }
+    });
+
+    document.getElementById("more")!.addEventListener("click", () => {
+      showAll = true;
+      renderRanking();
     });
 
     render();
@@ -390,74 +351,25 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     color: var(--coral);
     padding-left: 1.1em;
   }
-  .ranking {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 10px;
-  }
-  .ranking :global(.row) {
-    background: var(--night-deep);
-    border-radius: 14px;
-    padding: 12px 14px;
-    display: grid;
-    gap: 6px;
-  }
-  .ranking :global(.row-head) {
-    display: grid;
-    grid-template-columns: 32px minmax(0, 1fr) auto;
-    gap: 8px;
-    align-items: baseline;
-  }
-  .ranking :global(.rank),
-  .ranking :global(.fit) {
-    font-family: var(--font-mono);
-    color: var(--saffron);
-  }
-  .ranking :global(.name) {
-    font-weight: 800;
-    color: var(--thread);
-  }
-  .ranking :global(.bar) {
-    display: block;
-    height: 6px;
-    border-radius: 999px;
-    background: var(--night-lift);
-    overflow: hidden;
-  }
-  .ranking :global(.bar > span) {
-    display: block;
-    height: 100%;
-    background: var(--saffron);
-  }
-  .ranking :global(.tagline),
-  .ranking :global(.coverage) {
-    margin: 0;
-    font-size: 0.88rem;
-    color: var(--thread-dim);
-  }
-  /* Why the temperament fits: the neighbourhoods at the reader's level. */
-  .ranking :global(.why-temper) {
-    margin: 0;
-    padding-left: 1.1em;
-    font-size: 0.88rem;
-    color: var(--thread-dim);
-  }
-  .ranking :global(.why-temper:empty) {
-    display: none;
-  }
-  .ranking :global(.pros),
-  .ranking :global(.cons) {
-    margin: 0;
-    padding-left: 1.1em;
-    font-size: 0.9rem;
-  }
-  .ranking :global(.cons) {
-    color: var(--coral);
-  }
   .more {
     width: 100%;
     background: var(--night-lift);
+  }
+  .results,
+  .others {
+    display: grid;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .answers {
+    margin-top: 18px;
+  }
+  .answers > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--saffron);
+    font-weight: 700;
   }
 </style>
