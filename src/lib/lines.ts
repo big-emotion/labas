@@ -17,7 +17,14 @@ export interface CityLines {
   reputation: string | null;
   /** The cliché the city breaks, through a checkable place or event. */
   surprise: string | null;
-  neighbourhoods: { name: string; text: string }[];
+  neighbourhoods: {
+    name: string;
+    text: string;
+    setting?: "central" | "residential" | "seaside" | "outskirts";
+    standing?: "upscale" | "middle" | "popular" | null;
+    walkable?: boolean | null;
+    lively?: boolean | null;
+  }[];
   /** A city's own "pourquoi toi" sentence for an answer, keyed "questionId:value". */
   why?: Record<string, string>;
   sources: Source[];

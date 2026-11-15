@@ -1,15 +1,19 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
 import { QUESTIONS } from "./questions";
-import { routesFor, weekFor } from "./routes";
+import { jobOf, routesFor, weekFor } from "./routes";
 
 // « rendez-vous » is a noun, not a « vous » addressed to the reader.
 const TRAIT_WORDS =
   /personnalité|ton profil|tu es (quelqu|un |une |plutôt)|(?<![-\w])vous\b|\bvotre\b/i;
-const proposable = CITIES.filter((city) => !city.unsafe);
-const VALID: Record<string, Set<unknown>> = Object.fromEntries(
-  QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))]),
-);
+// Routes were written for the cities proposed before 2026-11-15; those travel advice used to
+// hide have none yet, and their page simply shows no route.
+const proposable = CITIES.filter((city) => routesFor(city.name));
+const VALID: Record<string, Set<unknown>> = Object.fromEntries([
+  ...QUESTIONS.map((q) => [q.id, new Set(q.choices.map((c) => c.value))]),
+  // The free quiz no longer asks « Et le travail ? »: jobOf reads it from the profession.
+  ["job", new Set(["remote", "cadre", "entre"])],
+]);
 
 describe("the typical weeks and discovery routes of each city", () => {
   it("gives every proposable city five typical weeks and a discovery day and week", () => {
@@ -71,6 +75,27 @@ describe("the typical weeks and discovery routes of each city", () => {
 
   it("knows nothing about a city that is not in the catalogue", () => {
     expect(routesFor("Atlantide")).toBeUndefined();
+  });
+});
+
+describe("reading the way of working from today's answers", () => {
+  it("reads remote work from a digital profession or a life on the move", () => {
+    expect(jobOf({ profession: "tech" })).toBe("remote");
+    expect(jobOf({ currentCity: "nomad" })).toBe("remote");
+  });
+
+  it("reads entrepreneurship from trade, craft or an investment project", () => {
+    expect(jobOf({ profession: "trade" })).toBe("entre");
+    expect(jobOf({ project: "investir" })).toBe("entre");
+  });
+
+  it("reads salaried work from the other professions, and nothing from no answer", () => {
+    expect(jobOf({ profession: "finance" })).toBe("cadre");
+    expect(jobOf({})).toBeUndefined();
+  });
+
+  it("picks the remote-work week for a developer", () => {
+    expect(weekFor("Dakar", { profession: "tech", family: "celib" })?.for.job).toBe("remote");
   });
 });
 

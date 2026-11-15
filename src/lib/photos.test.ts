@@ -24,7 +24,7 @@ describe("the city photos", () => {
   });
 
   it("shows a photo for nearly every city the quiz can propose", () => {
-    const proposable = CITIES.filter((city) => !city.unsafe);
+    const proposable = CITIES;
     const withPhoto = proposable.filter((city) => photoFor(city.name));
     expect(withPhoto.length / proposable.length).toBeGreaterThan(0.9);
   });

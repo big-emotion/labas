@@ -13,7 +13,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
   as measured, never claim a question "measures" a personality trait, and add a dated source
-  with any safety, racism, LGBT-rights or conflict remark. `unsafe` cities are never proposed.
+  with any safety, racism, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
+  FCDO) is shown with each city as dated information and never removes or greys a city
+  (operator, 2026-11-15: it is written for visitors who have never been there).
 - **Privacy**: nothing leaves the browser. Fonts are self-hosted; do not add Google Fonts,
   trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.

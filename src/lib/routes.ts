@@ -36,11 +36,27 @@ export function routesFor(cityName: string): CityRoutes | undefined {
 }
 
 /**
+ * The way of working a typical week is written for. The free quiz now asks for the profession
+ * and today's life rather than « Et le travail ? », so the weeks keep their keys and the answer
+ * is read from those.
+ */
+export function jobOf(answers: Answers): Answers["job"] {
+  if (answers.job) return answers.job;
+  if (answers.profession === "tech" || answers.currentCity === "nomad") return "remote";
+  if (answers.profession === "trade" || answers.profession === "craft") return "entre";
+  if (answers.project === "investir") return "entre";
+  if (answers.profession && answers.profession !== "student" && answers.profession !== "retired")
+    return "cadre";
+  return undefined;
+}
+
+/**
  * The week whose answers match the reader's the most; the first week when none matches.
  * A week that contradicts an answer the reader gave (« En couple » for someone « Avec mes
  * enfants ») loses half a point, so ties go to the week that fits without contradiction.
  */
-export function weekFor(cityName: string, answers: Answers): TypicalWeek | undefined {
+export function weekFor(cityName: string, given: Answers): TypicalWeek | undefined {
+  const answers: Answers = { ...given, job: jobOf(given) };
   const weeks = routesFor(cityName)?.weeks ?? [];
   let best = weeks[0];
   let bestScore = 0;

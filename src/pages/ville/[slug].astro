@@ -1,4 +1,5 @@
 ---
+import { ADVICE_FRAMING } from "../../lib/advisory";
 import Page from "../../layouts/Page.astro";
 import { CITIES, CRITERIA, type City, type Confidence, type Source } from "../../lib/cities";
 import { linesFor } from "../../lib/lines";
@@ -16,7 +17,7 @@ const { city } = Astro.props;
 const lines = linesFor(city.name);
 const photo = photoFor(city.name);
 // Unsafe cities get no route: the site never invites someone to go there.
-const routes = city.unsafe ? undefined : routesFor(city.name);
+const routes = routesFor(city.name);
 const country = city.countryFacts;
 const advisory = city.facts.advisory;
 
@@ -57,6 +58,7 @@ const SETTINGS = {
   forest: "forêt",
   savanna: "savane",
   desert: "désert",
+  island: "une île",
 };
 const CLIMATES = {
   "hot-humid": "chaud et humide",
@@ -81,14 +83,6 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     <p class="eyebrow">{city.country}</p>
     <h1>{city.name}</h1>
     <p class="tagline">{city.tagline}</p>
-
-    {city.unsafe && (
-      <p class="gate">
-        On ne propose pas cette ville en ce moment : les autorités françaises ou britanniques
-        déconseillent de s'y rendre
-        {advisory.date && ` (avis du ${advisory.date})`}.
-      </p>
-    )}
 
     {photo && (
       <figure class="photo">
@@ -310,6 +304,7 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
         {advisory.date && `Avis du ${advisory.date}. `}
         Vérifie toujours la page du ministère avant de partir.
       </p>
+      {city.advisedAgainst && <p>{ADVICE_FRAMING}</p>}
       <p class="small">
         {advisory.sources.map((source, i) => (
           <>
@@ -382,13 +377,6 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     margin: 0;
     font-family: var(--font-mono);
     color: var(--saffron);
-  }
-  .gate {
-    background: var(--night-deep);
-    border: 2px solid var(--coral);
-    border-radius: 14px;
-    padding: 12px 14px;
-    margin: 0;
   }
   .photo {
     margin: 0;
