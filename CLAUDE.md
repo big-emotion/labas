@@ -14,8 +14,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
   as measured, never claim a question "measures" a personality trait, and add a dated source
   with any safety, racism, LGBT-rights or conflict remark. `unsafe` cities are never proposed.
-- **Privacy**: nothing leaves the browser. Fonts are self-hosted; do not add Google Fonts,
-  trackers with cookies, or third-party embeds.
+- **Privacy**: answers are computed and kept in the browser. The only thing sent is one
+  anonymous, cookieless Plausible event per level-1 answer (`src/lib/analytics.ts`, only when
+  `PUBLIC_PLAUSIBLE_DOMAIN` is set); health and LGBT filters are never sent. Fonts are
+  self-hosted; do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 
 ## Commands
