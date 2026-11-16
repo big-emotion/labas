@@ -50,6 +50,16 @@ answers, or keep the ranking's cities. Never hand-pick around it.
 Before writing hooks, invoke `attention-architect` (global CLAUDE.md). Every loop a carousel
 opens is closed on its last card or by the quiz.
 
+## Simple, direct French
+
+Operator, 2026-11-17, for every carousel: write the French people speak. Short sentences, common
+words, one idea per sentence, subject–verb–object. Say « Vous parlez français », not « Vous
+vivez en français »; « Vous aimez l'ordre », not « Vous aimez quand tout est à sa place »; no
+nominal lists (« Sécurité, santé et écoles : non négociables ») when a verb says it (« Il vous
+faut la sécurité, de bons hôpitaux… »). No turn of phrase, no wordplay, no literary register.
+Reread every card, caption and alt text aloud before showing it: if it would sound odd said to a
+cousin at the table, rewrite it.
+
 ## Data honesty on a card
 
 From CLAUDE.md, applied to social copy: scores are editorial estimates, never « mesuré » or « les
