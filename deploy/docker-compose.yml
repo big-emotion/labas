@@ -39,15 +39,34 @@ services:
     env_file: .env.subscribe
     networks:
       - proxy
+      - labas-internal
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
       - "traefik.http.services.labas-subscribe.loadbalancer.server.port=8080"
-      - "traefik.http.routers.labas-subscribe.rule=Host(`labas.africa`) && (PathPrefix(`/api/nouveautes`) || Path(`/api/resultats`))"
+      - "traefik.http.routers.labas-subscribe.rule=Host(`labas.africa`) && (PathPrefix(`/api/nouveautes`) || Path(`/api/resultats`) || PathPrefix(`/api/compte`))"
       - "traefik.http.routers.labas-subscribe.priority=100"
       - "traefik.http.routers.labas-subscribe.entrypoints=websecure"
       - "traefik.http.routers.labas-subscribe.tls.certresolver=myresolver"
 
+  # Saved journeys (src/server/accounts.ts). Reachable only from labas-subscribe, never from the
+  # proxy. Started by CI only once LABAS_DB_PASSWORD exists; its data lives in the named volume,
+  # which a redeploy never touches (backups: docs/deploy.md).
+  labas-db:
+    image: postgres:17-alpine
+    container_name: labas-db
+    restart: unless-stopped
+    env_file: .env.db
+    volumes:
+      - labas-db:/var/lib/postgresql/data
+    networks:
+      - labas-internal
+
 networks:
   proxy:
     external: true
+  labas-internal:
+    internal: true
+
+volumes:
+  labas-db:

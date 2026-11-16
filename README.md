@@ -110,6 +110,19 @@ npm run test:watch
 
 `make check` is the gate before every push; CI runs the same command on pull requests.
 
+### The server part
+
+The site is static, except for one small Node service, `src/server/`. It handles:
+
+- the e-mails a reader asks for: the news sign-up with double opt-in, and their results
+  (`subscribe.ts`, `emails.ts`, Mailjet);
+- saved journeys and « Mon espace », with Postgres and a login link sent by e-mail (`accounts.ts`,
+  rationale in [`docs/accounts.md`](docs/accounts.md)).
+
+`npm run build:server` bundles it into `dist-server/subscribe.mjs`. Its tests run in `npm test`,
+against a real Postgres (PGlite). Without its secrets it answers 503, and the site works the same.
+Setup, secrets and backups are in [`docs/deploy.md`](docs/deploy.md).
+
 ---
 
 ## Brand

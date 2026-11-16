@@ -60,15 +60,28 @@ jobs:
           MAILJET_LIST_ID: ${{ vars.MAILJET_LIST_ID }}
           MAILJET_SENDER: ${{ vars.MAILJET_SENDER }}
           SUBSCRIBE_SECRET: ${{ secrets.SUBSCRIBE_SECRET }}
+          LABAS_DB_PASSWORD: ${{ secrets.LABAS_DB_PASSWORD }}
         run: |
           umask 077
+          database=""
+          if [ -n "$LABAS_DB_PASSWORD" ]; then
+            database="postgres://labas:$LABAS_DB_PASSWORD@labas-db:5432/labas"
+          fi
           {
             echo "MAILJET_API_KEY=$MAILJET_API_KEY"
             echo "MAILJET_SECRET_KEY=$MAILJET_SECRET_KEY"
             echo "MAILJET_LIST_ID=$MAILJET_LIST_ID"
             echo "MAILJET_SENDER=$MAILJET_SENDER"
             echo "SUBSCRIBE_SECRET=$SUBSCRIBE_SECRET"
+            echo "DATABASE_URL=$database"
           } > /tmp/.env.subscribe
+          {
+            echo "POSTGRES_DB=labas"
+            echo "POSTGRES_USER=labas"
+            echo "POSTGRES_PASSWORD=$LABAS_DB_PASSWORD"
+          } > /tmp/.env.db
+          # Only start the database once its password exists.
+          if [ -n "$LABAS_DB_PASSWORD" ]; then echo "labas-db" > /tmp/services; else : > /tmp/services; fi
 
       # Pinned known_hosts — never StrictHostKeyChecking=no.
       - name: Configure deploy SSH key
@@ -84,7 +97,7 @@ jobs:
         run: |
           scp -i ~/.ssh/deploy_key -P ${{ vars.DEPLOY_PORT }} \
             -o UserKnownHostsFile=~/.ssh/known_hosts \
-            /tmp/labas.tar.gz /tmp/.env.subscribe deploy/docker-compose.yml \
+            /tmp/labas.tar.gz /tmp/.env.subscribe /tmp/.env.db /tmp/services deploy/docker-compose.yml \
             "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/home/${{ vars.DEPLOY_USER }}/labas/"
 
       - name: Load image and restart the container
@@ -93,11 +106,11 @@ jobs:
             -o UserKnownHostsFile=~/.ssh/known_hosts \
             "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
             "cd ~/labas && \
-             chmod 600 .env.subscribe && \
+             chmod 600 .env.subscribe .env.db && \
              docker load < labas.tar.gz && \
              docker tag labas:deploy labas:live && \
              docker tag labas-subscribe:deploy labas-subscribe:live && \
-             docker compose -f docker-compose.yml up -d --no-deps --pull never labas labas-subscribe && \
+             docker compose -f docker-compose.yml up -d --no-deps --pull never labas labas-subscribe \$(cat services) && \
              rm -f labas.tar.gz"
 
       # Retries for a minute: on a first deploy Traefik is still getting the Let's Encrypt

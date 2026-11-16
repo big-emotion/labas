@@ -5,14 +5,15 @@ infrastructure.
 
 ## The host
 
-|               |                                                                                                                |
-| ------------- | -------------------------------------------------------------------------------------------------------------- |
-| VPS           | the application host; name, IPv4 and SSH port are in the operator's private notes                              |
-| Login         | `ubuntu` on the host's non-default SSH port (in the operator's private notes)                                  |
-| Reverse proxy | Traefik, own compose project, ACME resolver `myresolver`, external network `proxy`                             |
-| App directory | `/home/ubuntu/labas/` — only `docker-compose.yml`; CI ships it with each deploy                                |
-| Container     | `labas`, image `labas:live`: nginx serving the static Astro build                                              |
-| Container     | `labas-subscribe`, image `labas-subscribe:live`: the mail service: `/api/nouveautes` and `/api/resultats` only |
+|               |                                                                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| VPS           | the application host; name, IPv4 and SSH port are in the operator's private notes                                                  |
+| Login         | `ubuntu` on the host's non-default SSH port (in the operator's private notes)                                                      |
+| Reverse proxy | Traefik, own compose project, ACME resolver `myresolver`, external network `proxy`                                                 |
+| App directory | `/home/ubuntu/labas/` — only `docker-compose.yml`; CI ships it with each deploy                                                    |
+| Container     | `labas`, image `labas:live`: nginx serving the static Astro build                                                                  |
+| Container     | `labas-subscribe`, image `labas-subscribe:live`: the mail and accounts service: `/api/nouveautes`, `/api/resultats`, `/api/compte` |
+| Container     | `labas-db`, Postgres 17, volume `labas-db`: saved journeys; internal network only                                                  |
 
 The VPS never builds: CI builds the image (`Dockerfile`), ships it as a tarball and restarts the
 container (`.github/workflows/deploy-production.yml`).
@@ -89,7 +90,21 @@ gh variable set NEWSLETTER --repo big-emotion/labas --body on
 4. Unsubscribing is Mailjet's own link in each campaign. Addresses without news for three years
    are deleted by hand from the list (the privacy page promises it).
 
-**5. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
+**5. Saved journeys (Postgres), when you want them on.** `labas-db` (Postgres 17) runs beside
+the mail service on an internal network the proxy cannot reach. The data lives in the named volume
+`labas-db`, which deploys never touch. Without a password, CI does not start it, and `/api/compte`
+answers 503.
+
+```bash
+openssl rand -base64 32 | tr -d '/+=' | gh secret set LABAS_DB_PASSWORD --repo big-emotion/labas
+```
+
+The password is read only when the volume is first created: changing it later needs `ALTER USER` in
+the database too. Backups: a daily `docker exec labas-db pg_dump -U labas labas | gzip` into a
+directory that is copied off the server. Set it up on the host before real readers save
+journeys. Why the module works this way: `docs/accounts.md`.
+
+**6. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
 The smoke check fails the job unless `https://labas.africa/` answers 200.
 
 ## Rollback

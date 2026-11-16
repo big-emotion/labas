@@ -28,6 +28,9 @@ ${inner}
 <p style="max-width:560px;margin:0 auto 24px;font-size:13px;color:#4a4870">${escape(footer)}</p>
 </body></html>`;
 
+const button = (link: string, label: string) =>
+  `<p><a href="${escape(link)}" style="display:inline-block;padding:14px 24px;border-radius:999px;background:#ffb627;color:#1d1b3a;font-weight:800;text-decoration:none">${escape(label)}</a></p>`;
+
 const confirmButton = (link: string, outlined = false) =>
   `<p><a href="${escape(link)}" style="display:inline-block;padding:14px 24px;border-radius:999px;${
     outlined ? "border:2px solid #ffb627;color:#ffb627" : "background:#ffb627;color:#1d1b3a"
@@ -144,6 +147,49 @@ ${confirmButton(confirmLink, true)}
     : ""
 }`,
       footer,
+    ),
+  };
+}
+
+/** After « Reprendre plus tard »: the journey waits, unconfirmed, until this link is opened. */
+export function saveLinkEmail(to: string, link: string): Mail {
+  return {
+    to,
+    subject: "Votre lien pour reprendre sur Là-bas",
+    text: `Bonjour, votre parcours est enregistré. Pour le reprendre là où vous en étiez, sur n'importe quel appareil, ouvrez ce lien :
+${link}
+
+Ce lien marche pendant 24 heures. Ensuite, ouvrez labas.africa et touchez « Mon espace » : un nouveau lien vous sera envoyé.
+
+Vous n'avez rien demandé ? Ignorez ce message : sans clic de votre part, ce parcours est effacé sous 7 jours.
+
+${SITE_FOOTER}`,
+    html: page(
+      `<p>Bonjour, votre parcours est enregistré. Touchez le bouton pour le reprendre là où vous en étiez, sur n'importe quel appareil.</p>
+${button(link, "Reprendre mon parcours")}
+<p style="color:#b4b8ea;font-size:15px">Ce lien marche pendant 24 heures. Ensuite, ouvrez labas.africa et touchez « Mon espace » : un nouveau lien vous sera envoyé.</p>
+<p style="color:#b4b8ea;font-size:15px">Vous n'avez rien demandé ? Ignorez ce message : sans clic de votre part, ce parcours est effacé sous 7 jours.</p>`,
+      SITE_FOOTER,
+    ),
+  };
+}
+
+/** From « Mon espace »: a short-lived, single-use link instead of a password. */
+export function loginLinkEmail(to: string, link: string): Mail {
+  return {
+    to,
+    subject: "Votre lien de connexion à Là-bas",
+    text: `Bonjour, voici votre lien pour ouvrir Mon espace sur Là-bas :
+${link}
+
+Il marche 15 minutes, une seule fois. Vous n'avez rien demandé ? Ignorez ce message : personne ne peut se connecter sans ce lien.
+
+${SITE_FOOTER}`,
+    html: page(
+      `<p>Bonjour, voici votre lien pour ouvrir Mon espace sur Là-bas.</p>
+${button(link, "Ouvrir Mon espace")}
+<p style="color:#b4b8ea;font-size:15px">Il marche 15 minutes, une seule fois. Vous n'avez rien demandé ? Ignorez ce message : personne ne peut se connecter sans ce lien.</p>`,
+      SITE_FOOTER,
     ),
   };
 }

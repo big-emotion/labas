@@ -35,7 +35,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » posts
   the result link (temperament and cities, as when shared) to `/api/resultats`; the service draws
-  the e-mail from that link with the site's own code, so no typed text reaches an inbox. Fonts are self-hosted;
+  the e-mail from that link with the site's own code, so no typed text reaches an inbox.
+  Saved journeys (`src/server/accounts.ts`, Postgres, `docs/accounts.md`) store answers —
+  sensitive ones included — only with the explicit consent box; magic-link login, no password;
+  erased 3 years after the last visit. Never send them to analytics, partners or an e-mail. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 
