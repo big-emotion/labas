@@ -6,6 +6,19 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-16
+
+### Added
+
+- The full questionnaire ends like the quick quiz: your answers fold behind « Voir mes
+  réponses », the top three cities get detailed cards (photo, why they fit, « Y aller », link to
+  the city page), the rest expandable rows.
+
+### Changed
+
+- « Ce qui compte le plus pour vous ? » becomes « Sur quoi ne voulez-vous pas transiger ? »,
+  says that the three choices weigh the most, and closes the quick quiz.
+
 ## [0.6.1] - 2026-11-15
 
 ### Removed
@@ -133,7 +146,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/big-emotion/labas/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/big-emotion/labas/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/big-emotion/labas/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/big-emotion/labas/compare/v0.5.0...v0.5.1
