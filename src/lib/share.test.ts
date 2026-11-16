@@ -76,7 +76,9 @@ describe("the sitemap", () => {
   });
 });
 
-describe("the share pictures", () => {
+// Rendering loads fonts and photos and encodes a JPEG: seconds on a busy CI runner, where the
+// 5 s default failed the v0.12.1 deploy.
+describe("the share pictures", { timeout: 30_000 }, () => {
   // Light enough for a phone on a slow network, well under every network's 5 MB limit.
   it("render the home picture as a 1200 × 630 JPEG under 300 KB", async () => {
     const jpeg = await renderShareCard({ kind: "home" });
@@ -91,7 +93,7 @@ describe("the share pictures", () => {
     const picture = await pictureOf(await renderShareCard({ kind: "city", city: dakar }));
     expect(picture).toMatchObject({ format: "jpeg", width: 1200, height: 630 });
     expect(picture.kilobytes).toBeLessThan(300);
-  }, 20_000);
+  });
 
   it("render a city without a photo too", async () => {
     const bare = CITIES.find((city) => city.slug === "teyateyaneng")!;
