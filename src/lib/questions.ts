@@ -16,7 +16,7 @@ export interface Question {
   /** The chapter name shown above the question. */
   group: string;
   /**
-   * The quick quiz's chapters come in this order and never interleave (docs: quiz paths audit,
+   * The quick quiz's chapters come in this order and never interleave (operator,
    * 2026-11-16): 1 the project, 2 the trip or the life there, 3 the temperament, 4 the reader's
    * history with Africa, 5 the non-negotiables.
    */
@@ -67,7 +67,7 @@ const withChildren = (answers: Answers) =>
   answers.family === "parents" || answers.family === "fonder";
 const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
 
-// The quick quiz, as paths (quiz paths audit, 2026-11-16): the project picks which questions
+// The quick quiz, as paths (operator, 2026-11-16): the project picks which questions
 // apply, and they come chapter by chapter. Worded in « vous ». The temperament chapter is a quick
 // reading inspired by the Big Five, one question per trait.
 export const QUESTIONS: Question[] = [

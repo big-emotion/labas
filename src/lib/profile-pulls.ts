@@ -2,7 +2,7 @@ import type { FactPull, Pull } from "./fit";
 import type { Answers } from "./ranking";
 
 /**
- * What each profile question's answer pulls (docs/criteria/adaptive-questions.md, validated
+ * What each profile question's answer pulls (validated
  * 2026-11-15). Each choice leans on data every city already has: its criteria, its settings and
  * its neighbourhoods on the temperament axes, so every answer moves cities.
  */

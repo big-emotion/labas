@@ -50,7 +50,7 @@ export function freeQuestions(answers: Answers): Question[] {
 
 /**
  * The next question of the quick quiz. The project opens; then the chapters come in order and
- * never interleave (quiz paths audit, 2026-11-16), and inside the current chapter the open
+ * never interleave (operator, 2026-11-16), and inside the current chapter the open
  * question whose answers would bring, on average, the most new cities into the top five comes
  * first, so every tap still moves the map. Ties keep the bank's order.
  */

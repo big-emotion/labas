@@ -1,6 +1,6 @@
 # Grand Baie: temperament by neighbourhood
 
-> Rated 2026-11-15 on the shared cross-city scale of docs/criteria/temperament-cities.md, from research/cities/maurice/grand-baie.neighbourhoods.md. Editorial estimate inspired by the Big Five, not a personality test: each value describes streets, services and offer, never the people.
+> Rated 2026-11-15 on one scale shared by every city, from research/cities/maurice/grand-baie.neighbourhoods.md. Editorial estimate inspired by the Big Five, not a personality test: each value describes streets, services and offer, never the people.
 
 | Neighbourhood | saturday | adventure | order | together | friction | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
