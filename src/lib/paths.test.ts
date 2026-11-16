@@ -176,5 +176,6 @@ describe("going back and changing an answer", () => {
       expect.arrayContaining(["duration", "budget", "passports", "countries", "faith"]),
     );
     expect(deep({ project: "pied", origin: [null] } as unknown as Answers)).toContain("tripsHome");
-  });
+    // Plays about fifteen whole quizzes: slower than the others on CI.
+  }, 30_000);
 });
