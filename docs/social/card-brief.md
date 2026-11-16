@@ -4,6 +4,31 @@ The brief to commission the carousel card template (Claude Design), from the ope
 of 2026-11-16. Once a template is accepted, record its version and reference files here; it then
 becomes the visual authority for the `labas-social` skill.
 
+## Chosen style: C « Carte postale » (operator, 2026-11-16)
+
+Chosen among three proposals on the Claude Design canvas « Là-bas · Cartes carrousel »
+(https://claude.ai/artifact/WhGoHoPGYZVR7xas9YmdyS, board `CartePostale.dc.html`), built on the
+« Là-bas » design system (https://claude.ai/artifact/XUL4V2mUjGZuWr64bn5XBP). Measures below are
+on the 1080 × 1350 card (the canvas draws it at a third).
+
+- **Frame**: a 1 px near-white line inset 42 px from every edge, at about 55 % opacity, on every
+  card, cover included.
+- **Text at the top**, left-aligned, 100 px from the left edge, starting about 170 px from the
+  top; a soft `--night-deep` gradient from the top edge (about 60 % at the top, gone by mid-card)
+  only on cards that carry text.
+- **Card number** top-right, « 02 / 06 », Nunito Sans 600, letter-spaced; not on the cover.
+- **Line card**: one sentence in Fraunces 500, about 75 px.
+- **Reveal card**: the city in Fraunces 700, about 140 px; below it « Seychelles · 91 % pour ce
+  profil » in Nunito Sans 600, the percentage in `--saffron`.
+- **Close card**: « Quelle ville vous ressemble ? » (Fraunces 500), « Faites le quiz · lien dans
+  la bio » (Nunito Sans 700, `--saffron`), photo credits at the bottom left; a second soft
+  gradient from the bottom edge carries the credits.
+- **Logo watermark** bottom-right, inside the frame, about 60 px, white at 60 % opacity.
+- **Cover**: photo, frame and watermark only.
+
+The sample's photos are the site's 1024 × 768 ones: they settle the layout, not the photo
+standard below.
+
 ## What the cards are for
 
 Là-bas ranks 115 African cities against a reader's answers (labas.africa). Its carousels speak to
