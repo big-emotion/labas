@@ -1,0 +1,20 @@
+# Actions and images are pinned by SHA and digest (a moved tag cannot change what runs);
+# Dependabot keeps those pins current, once a week, so pinning does not mean freezing.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker-compose
+    directory: /deploy
+    schedule:
+      interval: weekly

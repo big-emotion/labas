@@ -129,6 +129,7 @@ export function createHandler(
     if (!isEmail(email) || !valid(form)) return json(400, { error: "form" });
     // The hidden field only robots fill: they are told it worked.
     if (form.website) return json(202, { ok: true });
+    // Traefik replaces any client-sent X-Real-IP with the real address (docs/deploy.md).
     const connection = request.headers["x-real-ip"] ?? "unknown";
     if (!perConnection(connection, now())) return json(429, { error: "slow-down" });
     if (!perAddress(email, now())) return json(429, { error: "slow-down" });
