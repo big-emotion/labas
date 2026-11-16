@@ -6,6 +6,20 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-11-16
+
+### Changed
+
+- Cities are ranked on what resembles the reader first. A practical criterion the reader did not
+  name (safety, power and care, paperwork, set-up cost, flights, internet, jobs, schools, cost) is
+  now a floor: only the weakest third of cities loses points on it. A stated need still ranks, and
+  a non-negotiable weighs twice as much as before.
+- Temperament answers no longer ask for safety or comfort: they are matched against the city's
+  neighbourhoods, which weigh twice as much. The daily language weighs half as much.
+- A card names a practical criterion as a reason only when the reader asked for it.
+- On simulated quizzes, cities ever proposed in a top 3 rise from 85 to 106; Port-Louis falls from
+  41 % to 30 % of top 3s and Kigali from 20 % to 11 %.
+
 ## [0.13.3] - 2026-11-16
 
 ### Changed
