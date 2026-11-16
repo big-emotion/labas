@@ -31,7 +31,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   one per quick-quiz answer plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
   LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
-  answers. Fonts are self-hosted;
+  answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
+  server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
+  no partner box until partners are named (operator, 2026-11-16). Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 

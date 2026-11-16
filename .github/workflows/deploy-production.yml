@@ -40,15 +40,35 @@ jobs:
 
       - run: make check
 
-      - name: Build Docker image
+      - name: Build Docker images
         run: |
           docker build -t labas:deploy \
             --build-arg PUBLIC_PLAUSIBLE_DOMAIN="${{ vars.PLAUSIBLE_DOMAIN }}" \
             --build-arg PUBLIC_PLAUSIBLE_HOST="${{ vars.PLAUSIBLE_HOST }}" \
+            --build-arg PUBLIC_NEWSLETTER="${{ vars.NEWSLETTER }}" \
             .
+          docker build --target subscribe -t labas-subscribe:deploy .
 
-      - name: Export image as compressed tarball
-        run: docker save labas:deploy | gzip > /tmp/labas.tar.gz
+      - name: Export images as compressed tarball
+        run: docker save labas:deploy labas-subscribe:deploy | gzip > /tmp/labas.tar.gz
+
+      # The subscribe service's secrets travel as a 600 file, never on a command line.
+      - name: Write the subscribe service's environment
+        env:
+          MAILJET_API_KEY: ${{ secrets.MAILJET_API_KEY }}
+          MAILJET_SECRET_KEY: ${{ secrets.MAILJET_SECRET_KEY }}
+          MAILJET_LIST_ID: ${{ vars.MAILJET_LIST_ID }}
+          MAILJET_SENDER: ${{ vars.MAILJET_SENDER }}
+          SUBSCRIBE_SECRET: ${{ secrets.SUBSCRIBE_SECRET }}
+        run: |
+          umask 077
+          {
+            echo "MAILJET_API_KEY=$MAILJET_API_KEY"
+            echo "MAILJET_SECRET_KEY=$MAILJET_SECRET_KEY"
+            echo "MAILJET_LIST_ID=$MAILJET_LIST_ID"
+            echo "MAILJET_SENDER=$MAILJET_SENDER"
+            echo "SUBSCRIBE_SECRET=$SUBSCRIBE_SECRET"
+          } > /tmp/.env.subscribe
 
       # Pinned known_hosts — never StrictHostKeyChecking=no.
       - name: Configure deploy SSH key
@@ -64,7 +84,7 @@ jobs:
         run: |
           scp -i ~/.ssh/deploy_key -P ${{ vars.DEPLOY_PORT }} \
             -o UserKnownHostsFile=~/.ssh/known_hosts \
-            /tmp/labas.tar.gz deploy/docker-compose.yml \
+            /tmp/labas.tar.gz /tmp/.env.subscribe deploy/docker-compose.yml \
             "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/home/${{ vars.DEPLOY_USER }}/labas/"
 
       - name: Load image and restart the container
@@ -73,9 +93,11 @@ jobs:
             -o UserKnownHostsFile=~/.ssh/known_hosts \
             "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
             "cd ~/labas && \
+             chmod 600 .env.subscribe && \
              docker load < labas.tar.gz && \
              docker tag labas:deploy labas:live && \
-             docker compose -f docker-compose.yml up -d --no-deps --pull never labas && \
+             docker tag labas-subscribe:deploy labas-subscribe:live && \
+             docker compose -f docker-compose.yml up -d --no-deps --pull never labas labas-subscribe && \
              rm -f labas.tar.gz"
 
       # Retries for a minute: on a first deploy Traefik is still getting the Let's Encrypt

@@ -5,13 +5,14 @@ infrastructure.
 
 ## The host
 
-|               |                                                                                    |
-| ------------- | ---------------------------------------------------------------------------------- |
-| VPS           | the application host; name, IPv4 and SSH port are in the operator's private notes  |
-| Login         | `ubuntu` on the host's non-default SSH port (in the operator's private notes)      |
-| Reverse proxy | Traefik, own compose project, ACME resolver `myresolver`, external network `proxy` |
-| App directory | `/home/ubuntu/labas/` — only `docker-compose.yml`; CI ships it with each deploy    |
-| Container     | `labas`, image `labas:live`: nginx serving the static Astro build                  |
+|               |                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------- |
+| VPS           | the application host; name, IPv4 and SSH port are in the operator's private notes                 |
+| Login         | `ubuntu` on the host's non-default SSH port (in the operator's private notes)                     |
+| Reverse proxy | Traefik, own compose project, ACME resolver `myresolver`, external network `proxy`                |
+| App directory | `/home/ubuntu/labas/` — only `docker-compose.yml`; CI ships it with each deploy                   |
+| Container     | `labas`, image `labas:live`: nginx serving the static Astro build                                 |
+| Container     | `labas-subscribe`, image `labas-subscribe:live`: the news sign-up service, `/api/nouveautes` only |
 
 The VPS never builds: CI builds the image (`Dockerfile`), ships it as a tarball and restarts the
 container (`.github/workflows/deploy-production.yml`).
@@ -62,7 +63,33 @@ Optional, once the site is added in Plausible: `gh variable set PLAUSIBLE_DOMAIN
 event the site sends shows in Plausible only once it is declared as a goal (Settings → Goals →
 Add goal → Custom event), one per name listed in `GOALS` (`src/lib/analytics.ts`).
 
-**4. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
+**4. The news sign-up (Mailjet), when you want it on.** The service
+(`src/server/subscribe.ts`) holds the Mailjet key, mails the confirmation link and adds only
+confirmed addresses to the list. Without these settings it answers 503 and the site shows no
+sign-up block.
+
+1. In Mailjet: validate the sender address (Account → Senders & domains, with the domain's
+   SPF and DKIM), create a contact list for the news, note its ID, and create an API key.
+   Check under Account → Data that contacts are kept in the EU: the privacy page says so.
+2. In the repository:
+
+```bash
+gh secret set MAILJET_API_KEY --repo big-emotion/labas
+gh secret set MAILJET_SECRET_KEY --repo big-emotion/labas
+openssl rand -base64 32 | gh secret set SUBSCRIBE_SECRET --repo big-emotion/labas
+gh variable set MAILJET_LIST_ID --repo big-emotion/labas --body <list id>
+gh variable set MAILJET_SENDER --repo big-emotion/labas --body <validated sender address>
+gh variable set NEWSLETTER --repo big-emotion/labas --body on
+```
+
+3. Deploy. CI writes the secrets to `.env.subscribe` (mode 600) beside the compose file and
+   starts `labas-subscribe`; Traefik routes `labas.africa/api/nouveautes*` to it.
+   `NEWSLETTER=on` builds the sign-up blocks and the privacy section. Unset it and redeploy to
+   take them off. Changing `SUBSCRIBE_SECRET` voids the confirmation links already sent.
+4. Unsubscribing is Mailjet's own link in each campaign. Addresses without news for three years
+   are deleted by hand from the list (the privacy page promises it).
+
+**5. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
 The smoke check fails the job unless `https://labas.africa/` answers 200.
 
 ## Rollback

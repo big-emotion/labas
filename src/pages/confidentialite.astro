@@ -1,5 +1,8 @@
 ---
 import Page from "../layouts/Page.astro";
+
+// The news section shows with the sign-up blocks (components/Newsletter.astro).
+const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
 
 <Page
@@ -16,6 +19,8 @@ import Page from "../layouts/Page.astro";
     questionnaire complet reprenne là où vous vous êtes arrêté ; le bouton « Tout reprendre à zéro »
     du questionnaire complet les efface, comme l'effacement des données du site dans votre
     navigateur. Seul un compteur anonyme par réponse est envoyé, comme expliqué ci-dessous.
+    {newsletter &&
+      " Seule votre adresse e-mail nous parvient, si vous vous inscrivez aux nouveautés."}
   </p>
 
   <h2>Partager ou garder vos résultats</h2>
@@ -24,6 +29,33 @@ import Page from "../layouts/Page.astro";
     imprimante ou votre propre messagerie : Là-bas ne reçoit rien. Le texte partagé contient vos
     villes et leurs pourcentages, jamais vos réponses.
   </p>
+
+  {newsletter && (
+    <>
+      <h2>Les nouveautés par e-mail</h2>
+      <p>
+        Si vous vous inscrivez aux nouveautés, nous gardons votre adresse e-mail, et rien d'autre.
+        Elle sert à une seule chose : vous dire ce qui change sur Là-bas (nouvelles villes,
+        questionnaire amélioré), un e-mail par mois au plus.
+      </p>
+      <p>
+        Votre adresse n'est jamais reliée à vos réponses au questionnaire. Nous ne la vendons pas,
+        nous ne la prêtons pas, et nous ne la donnons à aucun partenaire.
+      </p>
+      <p>
+        L'envoi passe par Mailjet, un service d'e-mailing qui garde les adresses dans l'Union
+        européenne. Vous confirmez votre inscription par un lien reçu par e-mail : sans cette
+        confirmation, vous ne recevez rien.
+      </p>
+      <p>
+        Chaque e-mail contient un lien de désinscription. Après une désinscription, ou sans nouvelle
+        de votre part pendant trois ans, nous effaçons votre adresse. Vous pouvez aussi nous écrire
+        pour la consulter ou la faire effacer :{" "}
+        <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+      </p>
+      <p>Base légale : votre consentement, que vous pouvez retirer à tout moment.</p>
+    </>
+  )}
 
   <h2>Pas de traceurs, une mesure d'audience sans cookie</h2>
   <p>

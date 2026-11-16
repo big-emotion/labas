@@ -23,6 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t labas:ci .
+      - run: docker build --target subscribe -t labas-subscribe:ci .
+      - name: the subscribe service starts and stays closed without its secrets
+        run: |
+          docker run -d --name subscribe -p 8081:8080 labas-subscribe:ci
+          sleep 2
+          status=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'origin: https://labas.africa' \
+            -d '{"email":"a@exemple.fr","consent":true}' http://localhost:8081/api/nouveautes)
+          [ "$status" = "503" ] || { echo "expected 503, got $status"; exit 1; }
       - name: nginx accepts its configuration
         run: docker run --rm labas:ci nginx -t
       - name: the image serves the home page

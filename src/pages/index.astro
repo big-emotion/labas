@@ -6,6 +6,7 @@ import KeepResults from "../components/KeepResults.astro";
 import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ResultCards from "../components/ResultCards.astro";
 import ShareMeta from "../components/ShareMeta.astro";
+import Newsletter from "../components/Newsletter.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
@@ -137,6 +138,7 @@ const website = JSON.stringify({
             </button>
           </div>
         </form>
+        <Newsletter place="quiz" />
 
         <div id="outcome" class="outcome" hidden>
           <dialog id="filter-sheet" class="sheet" aria-labelledby="sheet-title">
@@ -187,6 +189,8 @@ const website = JSON.stringify({
               Voir plus de villes
             </button>
           </section>
+
+          <Newsletter place="results" />
 
           <section class="further">
             <h2>Envie d'aller plus loin ?</h2>
@@ -418,6 +422,8 @@ const website = JSON.stringify({
         const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
         if (back) back.hidden = asked.length === 0;
         if (id) syncContinue(fieldsets.get(id)!);
+        // The news block (components/Newsletter.astro) shows from the fourth answer.
+        document.dispatchEvent(new CustomEvent("labas:answered", { detail: asked.length }));
         if (id)
           fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
         // Counted once per visit, when the last question is answered.

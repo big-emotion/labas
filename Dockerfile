@@ -8,9 +8,21 @@ COPY . .
 # Audience measurement is baked in at build time; left empty, the site loads no script.
 ARG PUBLIC_PLAUSIBLE_DOMAIN=""
 ARG PUBLIC_PLAUSIBLE_HOST=""
+# The news sign-up blocks show only once the subscribe service has its Mailjet secrets.
+ARG PUBLIC_NEWSLETTER=""
 ENV PUBLIC_PLAUSIBLE_DOMAIN=$PUBLIC_PLAUSIBLE_DOMAIN \
-    PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST
+    PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST \
+    PUBLIC_NEWSLETTER=$PUBLIC_NEWSLETTER
 RUN npm run build
+
+# The news sign-up service (src/server/subscribe.ts): one file, no dependency, run by Node as is.
+# Built with --target subscribe; the default target below stays the static site.
+FROM node:24-alpine AS subscribe
+WORKDIR /app
+COPY src/server/subscribe.ts ./
+USER node
+EXPOSE 8080
+CMD ["node", "subscribe.ts"]
 
 FROM nginx:1.27-alpine
 COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
