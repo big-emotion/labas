@@ -4,6 +4,7 @@ import SourcesNote from "../components/SourcesNote.astro";
 import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ResultCards from "../components/ResultCards.astro";
 import Page from "../layouts/Page.astro";
+import SaveLater from "../components/SaveLater.astro";
 import { DEEP_QUESTIONS } from "../lib/deep-questions";
 ---
 
@@ -20,6 +21,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       Tout reprendre à zéro
     </button>
   </p>
+
+  <SaveLater kind="deep" />
 
   <section class="ask" aria-live="polite">
     {DEEP_QUESTIONS.map((question) => (
@@ -90,6 +93,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { rankCities, type Answers } from "../lib/ranking";
     import { finishedEvent } from "../lib/analytics";
     import { forgetAnswers, loadAnswers, saveAnswers } from "../lib/keep";
+    import { rememberJourney, syncJourney } from "../lib/account-dom";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
     import { showProfile } from "../lib/profile-dom";
     import { cardFor, rowFor } from "../lib/cards-dom";
@@ -101,6 +105,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     (document.getElementById("resumed") as HTMLElement).hidden = resumed === 0;
     document.getElementById("restart")!.addEventListener("click", () => {
       forgetAnswers(browserStore());
+      // Starting over is a new journey, not an edit of the saved one.
+      rememberJourney(null);
       location.reload();
     });
     for (const [id, value] of Object.entries(answers)) {
@@ -216,6 +222,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       }
       syncChoices(DEEP_QUESTIONS, answers as Answers, document);
       saveAnswers(browserStore(), answers as Answers);
+      syncJourney(answers as Answers);
       showProfile(answers as Answers);
       renderAnswers();
       renderRanking();

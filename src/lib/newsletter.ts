@@ -37,7 +37,7 @@ export function resultsBody(
 export type Outcome = { sent: true } | { sent: false; message: string };
 
 /** What the reader is told for each answer of the service; 0 is a network failure. */
-export function outcomeOf(status: number, form: "news" | "results" = "news"): Outcome {
+export function outcomeOf(status: number, form: "news" | "results" | "save" = "news"): Outcome {
   if (status === 202) return { sent: true };
   if (status === 400)
     return {
@@ -45,7 +45,9 @@ export function outcomeOf(status: number, form: "news" | "results" = "news"): Ou
       message:
         form === "news"
           ? "Vérifiez votre adresse et cochez la case, puis réessayez."
-          : "Vérifiez votre adresse, puis réessayez.",
+          : form === "save"
+            ? "Vérifiez votre adresse et cochez la case d'accord, puis réessayez."
+            : "Vérifiez votre adresse, puis réessayez.",
     };
   if (status === 429)
     return { sent: false, message: "Trop de demandes d'un coup. Réessayez dans une heure." };
