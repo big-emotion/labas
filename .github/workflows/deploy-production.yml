@@ -100,6 +100,8 @@ jobs:
             /tmp/labas.tar.gz /tmp/.env.subscribe /tmp/.env.db /tmp/services deploy/docker-compose.yml \
             "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/home/${{ vars.DEPLOY_USER }}/labas/"
 
+      # The site's images come in the tarball and are never pulled; the database image is pinned by
+      # digest from Docker Hub, so the VPS pulls it first or `--pull never` finds nothing.
       - name: Load image and restart the container
         run: |
           ssh -i ~/.ssh/deploy_key -p ${{ vars.DEPLOY_PORT }} \
@@ -110,6 +112,7 @@ jobs:
              docker load < labas.tar.gz && \
              docker tag labas:deploy labas:live && \
              docker tag labas-subscribe:deploy labas-subscribe:live && \
+             { [ ! -s services ] || docker compose -f docker-compose.yml pull \$(cat services); } && \
              docker compose -f docker-compose.yml up -d --no-deps --pull never labas labas-subscribe \$(cat services) && \
              rm -f labas.tar.gz"
 
