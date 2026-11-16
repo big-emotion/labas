@@ -29,13 +29,23 @@ export function forgetAnswers(store: Store | undefined): void {
  * offers: a stale or edited store never reaches the ranking.
  */
 export function loadAnswers(store: Store | undefined): Answers {
-  let kept: Record<string, unknown>;
+  let kept: unknown;
   try {
     kept = JSON.parse(store?.getItem(KEY) ?? "{}");
   } catch {
     return {};
   }
-  if (!kept || typeof kept !== "object") return {};
+  return cleanAnswers(kept);
+}
+
+/**
+ * Only what a question still asks, with a choice it still offers: used for a browser's store and
+ * for answers the server receives, so neither a stale store nor a forged request reaches the
+ * ranking or the database.
+ */
+export function cleanAnswers(raw: unknown): Answers {
+  if (!raw || typeof raw !== "object") return {};
+  const kept = raw as Record<string, unknown>;
   const answers: Record<string, unknown> = {};
   for (const question of DEEP_QUESTIONS) {
     const value = kept[question.id];

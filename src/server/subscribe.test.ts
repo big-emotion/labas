@@ -38,6 +38,7 @@ function recordingMailer(fail = false) {
     async addToList(email) {
       listed.push(email);
     },
+    async removeFromList() {},
   };
   return { mailer, sent, listed };
 }
@@ -312,5 +313,34 @@ describe("receiving one's results by e-mail", () => {
       ).status,
     ).toBe(503);
     expect(sent).toEqual([]);
+  });
+});
+
+describe("the accounts routes", () => {
+  it("stay closed while the database is not configured", async () => {
+    const { mailer } = recordingMailer();
+    const response = await createHandler(
+      CONFIG,
+      mailer,
+    )({
+      ...post({ email: "awa@exemple.fr", consent: true }),
+      path: "/api/compte/sauvegarder",
+    });
+    expect(response.status).toBe(503);
+  });
+
+  it("are handed to the accounts module when it is there", async () => {
+    const { mailer } = recordingMailer();
+    const accounts = async () => ({ status: 418, headers: {} });
+    const response = await createHandler(
+      CONFIG,
+      mailer,
+      Date.now,
+      accounts,
+    )({
+      ...post({}),
+      path: "/api/compte",
+    });
+    expect(response.status).toBe(418);
   });
 });

@@ -13,7 +13,9 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
+import pg from "pg";
 import { readShared, sharedResult } from "../lib/shared-result";
+import { type Db, createAccounts, migrate, purge } from "./accounts";
 import { type Mail, confirmationEmail, resultsEmail } from "./emails";
 
 export type { Mail } from "./emails";
@@ -34,6 +36,7 @@ export interface Config {
 export interface Mailer {
   send(mail: Mail): Promise<void>;
   addToList(email: string): Promise<void>;
+  removeFromList(email: string): Promise<void>;
 }
 
 interface Request {
@@ -93,7 +96,15 @@ const json = (status: number, body: object): Response => ({
 });
 const redirect = (location: string): Response => ({ status: 303, headers: { location } });
 
-export function createHandler(config: Config, mailer: Mailer, now: () => number = Date.now) {
+/** The saved-journeys module (accounts.ts), present only when the database is configured. */
+export type AccountsHandler = (request: Request) => Promise<Response>;
+
+export function createHandler(
+  config: Config,
+  mailer: Mailer,
+  now: () => number = Date.now,
+  accounts?: AccountsHandler,
+) {
   // Per connection: a person retrying is fine, a script is not.
   const perConnection = limiter(5, HOUR);
   // Per address: nobody can use Là-bas to flood someone else's inbox with confirmations.
@@ -144,6 +155,10 @@ export function createHandler(config: Config, mailer: Mailer, now: () => number 
   }
 
   return async (request: Request): Promise<Response> => {
+    if (request.path === "/api/compte" || request.path.startsWith("/api/compte/")) {
+      return accounts ? accounts(request) : json(503, { error: "closed" });
+    }
+
     if (request.method === "POST" && request.path === "/api/nouveautes") {
       return guard(
         request,
@@ -214,6 +229,11 @@ export function mailjet(config: Config, fetchImpl: typeof fetch = fetch): Mailer
         Email: email,
         Action: "addforce",
       }),
+    removeFromList: (email) =>
+      call(`https://api.mailjet.com/v3/REST/contactslist/${config.listId}/managecontact`, {
+        Email: email,
+        Action: "remove",
+      }),
   };
 }
 
@@ -228,7 +248,26 @@ function start(port: number) {
     siteUrl: process.env.SITE_URL ?? "https://labas.africa",
     replyTo: process.env.REPLY_TO ?? "hello@big-emotion.com",
   };
-  const handle = createHandler(config, mailjet(config));
+  const mailer = mailjet(config);
+  let accounts: AccountsHandler | undefined;
+  // One handler for the life of the process: its limits must remember every request.
+  const handle = createHandler(config, mailer, Date.now, (request) =>
+    accounts ? accounts(request) : Promise.resolve(json(503, { error: "closed" })),
+  );
+  // Without a database, or if it cannot be reached, the e-mail routes keep working and
+  // /api/compte answers 503: saved journeys are an extra, never a reason to go down.
+  if (process.env.DATABASE_URL && Object.values(config).every(Boolean)) {
+    const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+    const db: Db = { query: (sql, params) => pool.query(sql, params) as never };
+    migrate(db)
+      .then(() => {
+        accounts = createAccounts({ db, mailer, siteUrl: config.siteUrl });
+        const sweep = () => purge(db, Date.now()).catch((e) => console.error(String(e)));
+        sweep();
+        setInterval(sweep, 24 * 60 * 60 * 1000);
+      })
+      .catch((error) => console.error(`accounts off: ${String(error)}`));
+  }
   createServer(async (incoming, outgoing) => {
     let raw = "";
     for await (const chunk of incoming) {

@@ -31,6 +31,20 @@ jobs:
           status=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'origin: https://labas.africa' \
             -d '{"email":"a@exemple.fr","consent":true}' http://localhost:8081/api/nouveautes)
           [ "$status" = "503" ] || { echo "expected 503, got $status"; exit 1; }
+      - name: the accounts module migrates a real Postgres and opens
+        run: |
+          docker network create labas-ci
+          docker run -d --name labas-db --network labas-ci -e POSTGRES_USER=labas \
+            -e POSTGRES_PASSWORD=ci -e POSTGRES_DB=labas postgres:17-alpine
+          for i in $(seq 1 30); do docker exec labas-db pg_isready -U labas >/dev/null 2>&1 && break; sleep 1; done
+          docker run -d --name subscribe-db --network labas-ci -p 8082:8080 \
+            -e MAILJET_API_KEY=k -e MAILJET_SECRET_KEY=s -e MAILJET_LIST_ID=1 \
+            -e MAILJET_SENDER=ci@labas.africa -e SUBSCRIBE_SECRET=ci \
+            -e DATABASE_URL=postgres://labas:ci@labas-db:5432/labas labas-subscribe:ci
+          sleep 3
+          status=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8082/api/compte)
+          [ "$status" = "401" ] || { docker logs subscribe-db; echo "expected 401, got $status"; exit 1; }
+          docker exec labas-db psql -U labas -d labas -tAc "select count(*) from information_schema.tables where table_name in ('accounts','journeys','login_links','sessions')" | grep -q '^4$'
       - name: nginx accepts its configuration
         run: docker run --rm labas:ci nginx -t
       - name: the image serves the home page
