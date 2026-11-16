@@ -1,0 +1,161 @@
+---
+import Page from "../layouts/Page.astro";
+import TemperamentProfile from "../components/TemperamentProfile.astro";
+---
+
+<Page
+  title="Un résultat partagé"
+  description="Le profil et les villes d'Afrique d'une personne qui a fait le quiz Là-bas. Et vous, quelle ville vous ressemble ?"
+>
+  <h1>Ses villes d'Afrique</h1>
+  <p class="lead">
+    Quelqu'un vous a partagé son résultat sur Là-bas. Le lien ne contient que son tempérament et ses
+    villes, aucune autre réponse.
+  </p>
+
+  <div id="shared" hidden>
+    <TemperamentProfile />
+    <ol id="shared-cities" class="shared-cities"></ol>
+  </div>
+
+  <p id="broken" class="broken" hidden>
+    Ce lien de résultat ne s'ouvre pas : il a peut-être été coupé en route. Demandez-le à nouveau,
+    ou faites le quiz vous-même.
+  </p>
+
+  <a class="primary" href="/">
+    Et vous, quelle ville vous ressemble ? Faire le quiz
+  </a>
+
+  <template id="shared-city">
+    <li class="shared-city">
+      <div class="head">
+        <span class="rank"></span>
+        <div>
+          <a class="name"></a>
+          <p class="country"></p>
+        </div>
+        <span class="fit"></span>
+      </div>
+      <p class="tagline"></p>
+      <ul class="why"></ul>
+    </li>
+  </template>
+
+  <script>
+    import { showProfile } from "../lib/profile-dom";
+    import type { Answers } from "../lib/ranking";
+    import { readShared, sharedResult } from "../lib/shared-result";
+
+    // A link that only changes after « # » does not reload the page: read it again.
+    addEventListener("hashchange", () => location.reload());
+    const payload = readShared(location.hash);
+    const shared = payload && sharedResult(payload);
+    (document.getElementById("broken") as HTMLElement).hidden = Boolean(shared);
+    if (payload && shared) {
+      (document.getElementById("shared") as HTMLElement).hidden = false;
+      showProfile(payload.temperament as Answers);
+      const template = document.getElementById("shared-city") as HTMLTemplateElement;
+      (document.getElementById("shared-cities") as HTMLElement).replaceChildren(
+        ...shared.cities.map((entry, i) => {
+          const item = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+          if (i === 0) item.classList.add("first");
+          item.querySelector(".rank")!.textContent = String(i + 1);
+          const name = item.querySelector(".name") as HTMLAnchorElement;
+          name.href = `/ville/${entry.city.slug}/`;
+          name.textContent = entry.city.name;
+          item.querySelector(".country")!.textContent = entry.city.country;
+          item.querySelector(".fit")!.textContent = `${entry.percent}\u202f%`;
+          item.querySelector(".tagline")!.textContent = entry.city.pitch;
+          item.querySelector(".why")!.replaceChildren(
+            ...entry.lines.map((line) => {
+              const li = document.createElement("li");
+              li.textContent = line;
+              return li;
+            }),
+          );
+          return item;
+        }),
+      );
+    }
+  </script>
+</Page>
+
+<style>
+  #shared:not([hidden]) {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .shared-cities {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .shared-cities :global(.shared-city) {
+    background: var(--night-deep);
+    border: 1px solid var(--night-lift);
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    gap: 10px;
+  }
+  .shared-cities :global(.shared-city.first) {
+    border: 2px solid var(--saffron);
+  }
+  .shared-cities :global(.head) {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .shared-cities :global(.rank) {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--saffron);
+  }
+  .shared-cities :global(.head > div) {
+    flex-grow: 1;
+  }
+  .shared-cities :global(.name) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.45rem;
+    color: var(--thread);
+  }
+  .shared-cities :global(.country),
+  .shared-cities :global(.tagline) {
+    margin: 0;
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .shared-cities :global(.fit) {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--saffron);
+  }
+  .shared-cities :global(.why) {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.9rem;
+  }
+  .broken {
+    margin: 18px 0;
+  }
+  .primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    margin-top: 24px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+  }
+</style>

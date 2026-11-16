@@ -1,5 +1,5 @@
 import { DEEP_QUESTIONS } from "./deep-questions";
-import type { Answers, Match } from "./ranking";
+import type { Answers } from "./ranking";
 
 /**
  * The reader's answers kept in their own browser (localStorage), so the full questionnaire
@@ -48,24 +48,6 @@ export function loadAnswers(store: Store | undefined): Answers {
     }
   }
   return answers as Answers;
-}
-
-const SITE = "https://labas.africa/";
-
-/**
- * The result as the reader shares or keeps it: cities and percentages, and an invitation to take
- * the quiz. Never the answers, which can say where the family comes from or what one believes.
- */
-export function resultsText(matches: Match[]): string {
-  const lines = matches.map(
-    (m, i) => `${i + 1}. ${m.city.name} (${m.city.country}) · ${Math.round(m.score * 100)}\u202f%`,
-  );
-  return [
-    "Mes villes d'Afrique sur Là-bas :",
-    ...lines,
-    "",
-    `Et vous, quelle ville d'Afrique vous ressemble ? ${SITE}`,
-  ].join("\n");
 }
 
 /** The reader's own mail app, the result already written; they choose who receives it. */

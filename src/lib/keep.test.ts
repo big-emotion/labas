@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { GOALS, finishedEvent } from "./analytics";
 import { nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS } from "./deep-questions";
-import { loadAnswers, mailtoFor, resultsText, saveAnswers } from "./keep";
-import { QUESTIONS } from "./questions";
+import { loadAnswers, mailtoFor, saveAnswers } from "./keep";
+import { shareText } from "./shared-result";
 import { bestMatches, type Answers } from "./ranking";
 
 /** A browser's localStorage, as far as Là-bas uses it. */
@@ -44,21 +44,10 @@ describe("the full questionnaire picks up where the quick quiz stopped", () => {
   });
 });
 
-describe("keeping or sharing the result", () => {
-  const top = bestMatches(QUICK, 3);
-
-  it("writes the cities with their percentage and an invitation, never the answers", () => {
-    const text = resultsText(top);
-    for (const [i, m] of top.entries()) {
-      expect(text).toContain(`${i + 1}. ${m.city.name}`);
-      expect(text).toContain(`${Math.round(m.score * 100)}\u202f%`);
-    }
-    expect(text).toContain("https://labas.africa/");
-    for (const question of QUESTIONS) expect(text).not.toContain(question.title);
-  });
-
-  it("opens the reader's own mail with the result, addressed to nobody", () => {
-    const link = mailtoFor(resultsText(top));
+describe("keeping the result by mail", () => {
+  it("opens the reader's own mail with the shared message, addressed to nobody", () => {
+    const top = bestMatches(QUICK, 3);
+    const link = mailtoFor(shareText(QUICK, top));
     expect(link.startsWith("mailto:?")).toBe(true);
     expect(decodeURIComponent(link)).toContain(top[0].city.name);
   });

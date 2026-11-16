@@ -6,7 +6,7 @@ import {
   type CriterionKey,
   type Language,
 } from "./cities";
-import { TRAITS, neighbourhoodLine } from "./city-temperament";
+import { TRAITS, temperamentLinesFor } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
 import { profileEffects, type ProfileAnswers } from "./profile-pulls";
@@ -738,14 +738,7 @@ function evaluate(
     reasons,
     drawbacks,
     temperament: profiles.temperament ? closeness(city, profiles.temperament) : null,
-    temperamentLines: TRAITS.flatMap((trait) => {
-      const reader =
-        trait === "adventure"
-          ? answers.adventure && ADVENTURE_LEVEL[answers.adventure]
-          : answers[trait];
-      const line = reader === undefined ? null : neighbourhoodLine(city.name, trait, reader);
-      return line ? [line] : [];
-    }),
+    temperamentLines: temperamentLinesFor(city.name, answers),
     practical: closeness(city, profiles.practical) ?? 0,
     portrait: portraitFor(city, answers),
   };
