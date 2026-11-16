@@ -6,6 +6,14 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-16
+
+### Changed
+
+- Each city page is grouped by theme (the essentials, neighbourhoods, your typical week,
+  discovering, criteria, the country, getting there), with shortcuts at the top and a short
+  preview and « Voir plus » in each. The typical week shown is the one your answers point to.
+
 ## [0.8.0] - 2026-11-16
 
 ### Added
@@ -155,7 +163,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/big-emotion/labas/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/big-emotion/labas/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/big-emotion/labas/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/big-emotion/labas/compare/v0.6.0...v0.6.1
