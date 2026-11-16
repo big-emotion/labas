@@ -61,10 +61,10 @@ describe("the quick quiz, one question at a time", () => {
       });
       return counts.reduce((a, b) => a + b, 0) / counts.length;
     };
-    // The non-negotiables close the quiz whatever they would move (next test).
-    const open = freeQuestions(answers).filter(
-      (q) => !asked.includes(q.id) && q.id !== "priorities",
-    );
+    // Inside the current chapter (quiz paths, 2026-11-16).
+    const remaining = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+    const chapter = Math.min(...remaining.map((q) => q.chapter!));
+    const open = remaining.filter((q) => q.chapter === chapter);
     const best = Math.max(...open.map((q) => moved(q.id)));
     expect(moved(nextFreeQuestion(answers, asked)!)).toBe(best);
   });

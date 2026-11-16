@@ -1,10 +1,9 @@
 import { DEEP_QUESTIONS, PROFILE_QUESTIONS } from "./deep-questions";
-import { QUESTIONS, type Question } from "./questions";
+import { QUESTIONS, visibleChoices, type Question } from "./questions";
 import { bestMatches, topCities, type Answers } from "./ranking";
 
 const TOP = 3;
 const FIVE = 5;
-const CLOSING = "priorities";
 
 /**
  * The next question: the one whose answers would reshuffle the current top three the most
@@ -25,7 +24,7 @@ function mostDecisive(open: Question[], answers: Answers): string | undefined {
   let bestSpread = -1;
   for (const question of open) {
     const seen = new Set<string>();
-    for (const choice of question.choices) {
+    for (const choice of visibleChoices(question, answers)) {
       if (choice.value === null) continue;
       const value = question.max ? [choice.value] : choice.value;
       const tried = { ...answers, [question.id]: value } as Answers;
@@ -50,22 +49,23 @@ export function freeQuestions(answers: Answers): Question[] {
 }
 
 /**
- * The next question of the quick quiz: the open one whose answers would bring, on average, the
- * most new cities into the top five. The most decisive questions come first, and each answer
- * changes which one comes next (operator, 2026-11-15). Ties keep the bank's order.
+ * The next question of the quick quiz. The project opens; then the chapters come in order and
+ * never interleave (quiz paths audit, 2026-11-16), and inside the current chapter the open
+ * question whose answers would bring, on average, the most new cities into the top five comes
+ * first, so every tap still moves the map. Ties keep the bank's order.
  */
 export function nextFreeQuestion(answers: Answers, asked: string[]): string | undefined {
-  const remaining = freeQuestions(answers).filter((q) => !asked.includes(q.id));
   // With no answer every city ties and any question looks decisive: open on the project.
   if (!asked.includes("project")) return "project";
-  // The non-negotiables close the quiz (beta feedback, 2026-11-16): asked in the middle they read
-  // as a riddle, asked last as « now, what will you not compromise on ».
-  const open = remaining.length > 1 ? remaining.filter((q) => q.id !== CLOSING) : remaining;
+  const remaining = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+  if (remaining.length === 0) return undefined;
+  const chapter = Math.min(...remaining.map((q) => q.chapter ?? 5));
+  const open = remaining.filter((q) => (q.chapter ?? 5) === chapter);
   const before = new Set(topCities(answers, FIVE));
   let best: string | undefined;
   let bestMoved = -1;
   for (const question of open) {
-    const offered = question.choices.filter((c) => c.value !== null);
+    const offered = visibleChoices(question, answers).filter((c) => c.value !== null);
     const moved =
       offered.reduce((sum, c) => {
         const tried = { ...answers, [question.id]: question.max ? [c.value] : c.value } as Answers;
