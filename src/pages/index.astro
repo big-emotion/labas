@@ -446,7 +446,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         // Counted once per visit, when the last question is answered.
         if (!id && !finished) {
           finished = true;
-          track(finishedEvent("Questionnaire 1 terminé"));
+          track(finishedEvent("Questionnaire 1 terminé", readAnswers().project));
         }
         render();
       }
@@ -485,9 +485,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
         syncContinue(fieldset);
         if (chip.getAttribute("aria-pressed") === "true") {
+          // The question on screen is the next one after those already asked.
           const event = answerEvent(
             fieldset.dataset.question as string,
             JSON.parse(chip.dataset.value as string),
+            { project: readAnswers().project, step: asked.length + 1 },
           );
           if (event) track(event);
         }

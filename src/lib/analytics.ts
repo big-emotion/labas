@@ -29,7 +29,28 @@ const NEVER_SENT = new Set([
 
 export interface AnswerEvent {
   name: "Réponse";
-  props: { question: string; answer: string };
+  props: { parcours: string; etape: string; question: string; answer: string };
+}
+
+/**
+ * The paths as the dashboard shows them. The questions come in an order that depends on the
+ * answers, so each answer carries its path and its rank in it: filtered on a path, the « etape »
+ * breakdown shows where its readers stop (operator, 2026-11-16).
+ */
+const PATHS: Record<string, string> = {
+  installer: "S'installer",
+  pied: "Un pied ici, un pied là-bas",
+  tester: "Tester quelques mois",
+  investir: "Investir",
+  decouvrir: "Vacances",
+};
+const pathOf = (project: unknown) =>
+  (typeof project === "string" && PATHS[project]) || "Pas encore choisi";
+
+/** Where an answer sits: the reader's project so far, and the question's rank in their path. */
+export interface PathStep {
+  project?: string;
+  step: number;
 }
 
 /**
@@ -47,18 +68,28 @@ export type Goal = (typeof GOALS)[number];
 
 export interface SiteEvent {
   name: Goal;
+  props: { parcours: string };
 }
 
 export function finishedEvent(
   name: "Questionnaire 1 terminé" | "Questionnaire complet terminé",
+  project: string | undefined,
 ): SiteEvent {
-  return { name };
+  return { name, props: { parcours: pathOf(project) } };
 }
 
-export function answerEvent(question: string, value: unknown): AnswerEvent | null {
+export function answerEvent(question: string, value: unknown, at: PathStep): AnswerEvent | null {
   if (NEVER_SENT.has(question) || !MEASURED.has(question)) return null;
   if (value === undefined || value === null) return null;
   const answer = Array.isArray(value) ? value.map(String).join(",") : String(value);
   if (answer === "") return null;
-  return { name: "Réponse", props: { question, answer } };
+  return {
+    name: "Réponse",
+    props: {
+      parcours: pathOf(question === "project" ? value : at.project),
+      etape: String(at.step).padStart(2, "0"),
+      question,
+      answer,
+    },
+  };
 }
