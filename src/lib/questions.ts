@@ -1,4 +1,5 @@
 import { CITIES } from "./cities";
+import { SEASONS } from "./holiday";
 import type { Answers } from "./ranking";
 
 export interface Choice {
@@ -100,6 +101,20 @@ export const QUESTIONS: Question[] = [
       { label: "Faire la fête", value: "party" },
       { label: "L'histoire et la mémoire", value: "history" },
       { label: "La culture et les musées", value: "culture" },
+      { label: "Un safari", value: "safari" },
+      { label: "La plongée, le surf ou la glisse", value: "sea" },
+    ],
+  },
+  {
+    id: "season",
+    group: TRIP,
+    chapter: 2,
+    when: holiday,
+    title: "Quand partez-vous ?",
+    hint: "Pour éviter la saison des pluies et viser la belle saison.",
+    choices: [
+      ...SEASONS.map((s) => ({ label: s.label, value: s.value })),
+      { label: "Je ne sais pas encore", value: null },
     ],
   },
   {

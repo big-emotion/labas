@@ -612,6 +612,14 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
   if (part.fact === "reception") return good ? undefined : city.countryFacts?.racism?.label;
   if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
   if (part.fact === "music") return good ? "Votre musique y fait danser" : undefined;
+  if (part.fact === "season")
+    return good ? "La belle saison quand vous partez" : "La saison des pluies quand vous partez";
+  if (part.fact === "activities")
+    return good
+      ? part.tags?.includes("safari")
+        ? "Un safari à moins de deux heures"
+        : "Plongée, surf ou glisse tout près"
+      : undefined;
   if (part.fact === "kin")
     return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
   if (part.fact === "elsewhere")

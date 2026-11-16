@@ -8,6 +8,7 @@ import { photoFor } from "../../lib/photos";
 import { routesFor } from "../../lib/routes";
 import { costLabel } from "../../lib/card";
 import { criteriaPreview } from "../../lib/city-sections";
+import { holidayOf, monthNames } from "../../lib/holiday";
 
 export function getStaticPaths() {
   return CITIES.map((city) => ({ params: { slug: city.slug }, props: { city } }));
@@ -81,6 +82,23 @@ const PREVIEW = 2;
 const DAYS_SHOWN = 3;
 const places = lines?.neighbourhoods ?? [];
 const preview = criteriaPreview(city);
+// Holiday facts, each sourced (operator, 2026-11-16): only shown when something is known.
+const holidayData = holidayOf(city.name);
+const holiday =
+  holidayData &&
+  (holidayData.activities.length || holidayData.bestMonths.length || holidayData.escapes.length)
+    ? holidayData
+    : undefined;
+const ACTIVITY_NAMES = {
+  safari: "Safari",
+  desert: "Désert",
+  diving: "Plongée",
+  surf: "Surf",
+  hiking: "Randonnée",
+  watersports: "Sports nautiques",
+  heritage: "Patrimoine",
+  festival: "Festival",
+};
 const chips = [city.languageLabel, city.currency, costLabel(city.scores.cost.level)].filter(
   (chip): chip is string => Boolean(chip),
 );
@@ -93,6 +111,7 @@ const themes = [
         { id: "decouvrir", label: "Découvrir" },
       ]
     : []),
+  ...(holiday ? [{ id: "vacances", label: "En vacances" }] : []),
   { id: "criteres", label: "Critères" },
   ...(country ? [{ id: "pays", label: "Le pays" }] : []),
   ...(going ? [{ id: "y-aller", label: "Y aller" }] : []),
@@ -307,6 +326,60 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
             </>
           ))}
         </p>
+      </section>
+    )}
+
+    {holiday && (
+      <section class="theme" id="vacances">
+        <h2>En vacances</h2>
+        {holiday.bestMonths.length > 0 && (
+          <p>
+            <b>La belle saison :</b> {monthNames(holiday.bestMonths)}.
+            {holiday.rainyMonths.length > 0 && ` Les pluies : ${monthNames(holiday.rainyMonths)}.`}
+            {holiday.monthsSource && (
+              <>
+                {" "}
+                <a class="small" href={holiday.monthsSource.url} rel="noopener noreferrer">
+                  Source
+                </a>
+              </>
+            )}
+          </p>
+        )}
+        {holiday.activities.length > 0 && (
+          <ul class="facts">
+            {holiday.activities.map((activity) => (
+              <li>
+                <b>{ACTIVITY_NAMES[activity.tag]} :</b> {activity.where}
+                {activity.distance && `, ${activity.distance}`} (
+                <a href={activity.source.url} rel="noopener noreferrer">
+                  source
+                </a>
+                )
+              </li>
+            ))}
+          </ul>
+        )}
+        {holiday.escapes.length > 0 && (
+          <details>
+            <summary>
+              <span class="when-closed">Les escapades à faire</span>
+              <span class="when-open">Masquer</span>
+            </summary>
+            <ul class="facts">
+              {holiday.escapes.map((escape) => (
+                <li>
+                  <b>{escape.name}</b> · {escape.what}
+                  {escape.distance && `, ${escape.distance}`} (
+                  <a href={escape.source.url} rel="noopener noreferrer">
+                    source
+                  </a>
+                  )
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
       </section>
     )}
 

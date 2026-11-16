@@ -29,6 +29,7 @@ describe("the question bank", () => {
     expect(QUESTIONS.map((q) => q.id)).toEqual([
       "project",
       "wants",
+      "season",
       "profession",
       "family",
       "languages",
