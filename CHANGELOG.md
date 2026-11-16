@@ -6,6 +6,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-11-16
+
 ### Changed
 
 - Every answer is one piece of evidence and the pieces multiply, as in a guessing game: an answer
@@ -25,6 +27,18 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - The reception rule and its data: documented racism no longer weighs in the ranking, nothing is
   inferred from an origin the reader did not give, and the origin question promises nothing about
   it. With no answer, every city ties.
+- Le Cap's unsourced remark that Black repats feel less at home there than in Johannesburg; its
+  sourced half (inequality and crime in some areas) stays.
+
+### Fixed
+
+- Every « À savoir » remark on safety, conflict, discrimination or LGBT rights now shows the dated
+  sources that back it, under the remark on the city page.
+
+### Security
+
+- The server no longer tells its nginx version; every `.env` file is ignored; images and Actions
+  are pinned by digest and SHA, and Dependabot bumps them weekly.
 
 ## [0.15.0] - 2026-11-16
 
@@ -316,6 +330,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.15.0...HEAD
+[0.16.0]: https://github.com/big-emotion/labas/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/big-emotion/labas/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/big-emotion/labas/compare/v0.13.3...v0.14.0
 [0.13.3]: https://github.com/big-emotion/labas/compare/v0.13.2...v0.13.3
