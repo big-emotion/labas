@@ -1,4 +1,4 @@
-import { CITIES, livableLanguages, type City, type CriterionKey } from "./cities";
+import { CITIES, livableLanguages, type City, type CriterionKey, type Tension } from "./cities";
 import { temperamentFit, type Trait } from "./city-temperament";
 import { hasActivity, seasonFit, type ActivityTag } from "./holiday";
 import { linesFor } from "./lines";
@@ -51,6 +51,8 @@ export type FactPull =
    * country whatever the reader's taste for adventure, xenophobic violence half as much.
    */
   | { kind: "reception"; weight: number }
+  /** The family's own countries: any documented tension with the host country counts against it. */
+  | { kind: "tension"; values: string[]; weight: number }
   /** The family's own countries. */
   | { kind: "homeCountry"; values: string[]; weight: number }
   /** The countries where the music the reader picked plays (data/music.json). */
@@ -290,6 +292,15 @@ const AFFINITY: Record<string, Record<string, number>> = {
   ameriques: { ouest: 0.8, centre: 0.7, sud: 0.55, est: 0.5, nord: 0.1 },
 };
 
+/**
+ * The documented tension between a host country and the reader's family countries, if any. A
+ * family that also comes from the host country is at home there, whatever the two states do.
+ */
+export function tensionFor(city: City, familyCountries: string[]): Tension | undefined {
+  if (familyCountries.includes(city.country)) return undefined;
+  return city.countryFacts?.tensions?.find((t) => t.from.some((c) => familyCountries.includes(c)));
+}
+
 export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Closeness[] {
   // Several answers can pull the same axis: their targets average, their weights add up.
   const merged = new Map<Axis, { sum: number; weight: number }>();
@@ -325,6 +336,16 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       const racism = city.countryFacts?.racism?.kind;
       parts.push({
         value: racism === "anti-black" ? 0 : racism === "xenophobia" ? 0.5 : 1,
+        weight: fact.weight,
+        known: true,
+        fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "tension") {
+      const found = tensionFor(city, fact.values);
+      // A conflict between the two states weighs fully; a measure against nationals, half.
+      parts.push({
+        value: found ? (found.kind === "conflict" ? 0 : 0.5) : 1,
         weight: fact.weight,
         known: true,
         fact: fact.kind,

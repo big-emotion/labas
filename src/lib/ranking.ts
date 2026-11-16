@@ -565,6 +565,10 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     !(answers.countries ?? []).includes("Soudan");
   const black = !northOnly;
   if (black) facts.push({ kind: "reception", weight: RECEPTION_WEIGHT });
+  // A war or a ban aimed at the family's country is documented against the host country whatever
+  // the taste for adventure, like reception; unlike reception, it is never shown on the card.
+  if (countries.length)
+    facts.push({ kind: "tension", values: countries, weight: RECEPTION_WEIGHT });
   // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
   const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
   if (origins.length && away > 0) {
@@ -630,6 +634,9 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
   // Only what the sources say, in their words (operator, 2026-11-15).
   if (part.fact === "reception") return good ? undefined : city.countryFacts?.racism?.label;
+  // Weighs in the score, never written on a card: a war between two peoples next to a level reads
+  // as a verdict on the reader's family (operator, 2026-11-16).
+  if (part.fact === "tension") return undefined;
   if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
   if (part.fact === "music") return good ? "Votre musique y fait danser" : undefined;
   if (part.fact === "season")
