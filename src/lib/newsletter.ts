@@ -24,13 +24,29 @@ export function signUpBody(form: Form): Form | null {
   return { email, consent: true, website: form.website };
 }
 
+/** « Recevoir par e-mail »: the result link the page already builds, never the answers. */
+export function resultsBody(
+  form: { email: string; news: boolean; website: string },
+  link: string,
+): { email: string; link: string; news: boolean; website: string } | null {
+  const email = form.email.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
+  return { email, link, news: form.news, website: form.website };
+}
+
 export type Outcome = { sent: true } | { sent: false; message: string };
 
 /** What the reader is told for each answer of the service; 0 is a network failure. */
-export function outcomeOf(status: number): Outcome {
+export function outcomeOf(status: number, form: "news" | "results" = "news"): Outcome {
   if (status === 202) return { sent: true };
   if (status === 400)
-    return { sent: false, message: "Vérifiez votre adresse et cochez la case, puis réessayez." };
+    return {
+      sent: false,
+      message:
+        form === "news"
+          ? "Vérifiez votre adresse et cochez la case, puis réessayez."
+          : "Vérifiez votre adresse, puis réessayez.",
+    };
   if (status === 429)
     return { sent: false, message: "Trop de demandes d'un coup. Réessayez dans une heure." };
   return {

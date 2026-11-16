@@ -5,14 +5,14 @@ infrastructure.
 
 ## The host
 
-|               |                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------- |
-| VPS           | the application host; name, IPv4 and SSH port are in the operator's private notes                 |
-| Login         | `ubuntu` on the host's non-default SSH port (in the operator's private notes)                     |
-| Reverse proxy | Traefik, own compose project, ACME resolver `myresolver`, external network `proxy`                |
-| App directory | `/home/ubuntu/labas/` — only `docker-compose.yml`; CI ships it with each deploy                   |
-| Container     | `labas`, image `labas:live`: nginx serving the static Astro build                                 |
-| Container     | `labas-subscribe`, image `labas-subscribe:live`: the news sign-up service, `/api/nouveautes` only |
+|               |                                                                                                                |
+| ------------- | -------------------------------------------------------------------------------------------------------------- |
+| VPS           | the application host; name, IPv4 and SSH port are in the operator's private notes                              |
+| Login         | `ubuntu` on the host's non-default SSH port (in the operator's private notes)                                  |
+| Reverse proxy | Traefik, own compose project, ACME resolver `myresolver`, external network `proxy`                             |
+| App directory | `/home/ubuntu/labas/` — only `docker-compose.yml`; CI ships it with each deploy                                |
+| Container     | `labas`, image `labas:live`: nginx serving the static Astro build                                              |
+| Container     | `labas-subscribe`, image `labas-subscribe:live`: the mail service: `/api/nouveautes` and `/api/resultats` only |
 
 The VPS never builds: CI builds the image (`Dockerfile`), ships it as a tarball and restarts the
 container (`.github/workflows/deploy-production.yml`).
@@ -83,8 +83,8 @@ gh variable set NEWSLETTER --repo big-emotion/labas --body on
 ```
 
 3. Deploy. CI writes the secrets to `.env.subscribe` (mode 600) beside the compose file and
-   starts `labas-subscribe`; Traefik routes `labas.africa/api/nouveautes*` to it.
-   `NEWSLETTER=on` builds the sign-up blocks and the privacy section. Unset it and redeploy to
+   starts `labas-subscribe`; Traefik routes `labas.africa/api/nouveautes*` and `/api/resultats` to it.
+   `NEWSLETTER=on` builds the sign-up blocks, the « Recevoir par e-mail » form sent by Là-bas, and the privacy sections. Unset it and redeploy to
    take them off. Changing `SUBSCRIBE_SECRET` voids the confirmation links already sent.
 4. Unsubscribing is Mailjet's own link in each campaign. Addresses without news for three years
    are deleted by hand from the list (the privacy page promises it).

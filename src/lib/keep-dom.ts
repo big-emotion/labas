@@ -1,5 +1,6 @@
 import type { AnswerEvent, SiteEvent } from "./analytics";
 import { mailtoFor } from "./keep";
+import { outcomeOf, resultsBody } from "./newsletter";
 import type { Answers, Match } from "./ranking";
 import { resultImage } from "./share-image";
 import { readShared, resultLink, sharedResult, shareText } from "./shared-result";
@@ -32,11 +33,20 @@ export function browserStore(): Storage | undefined {
 export function wireKeep(current: () => { answers: Answers; matches: Match[] }): void {
   for (const block of document.querySelectorAll<HTMLElement>("[data-keep]")) {
     const note = block.querySelector<HTMLElement>("[data-keep-note]")!;
+    const mailForm = block.querySelector<HTMLFormElement>("[data-keep-mail]");
+    if (mailForm) wireMail(block, mailForm, current);
     block.addEventListener("click", async (event) => {
       const target = (event.target as HTMLElement).closest<HTMLElement>("[data-keep-way]");
       const way = target?.dataset.keepWay;
       if (!way) return;
       const { answers, matches } = current();
+      if (way === "envoi") {
+        const form = block.querySelector<HTMLFormElement>("[data-keep-mail]")!;
+        form.hidden = !form.hidden;
+        target!.setAttribute("aria-expanded", String(!form.hidden));
+        if (!form.hidden) form.querySelector("input")?.focus();
+        return;
+      }
       if (way === "e-mail") {
         // Set on the click itself, so the mail carries the result as it is now.
         (target as HTMLAnchorElement).href = mailtoFor(shareText(answers, matches));
@@ -80,4 +90,68 @@ async function savePicture(answers: Answers, matches: Match[], note: HTMLElement
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
   note.textContent = "Image enregistrée dans vos téléchargements.";
+}
+
+/**
+ * « Recevoir par e-mail » sent by Là-bas (components/KeepResults.astro, with the mail service on):
+ * the page posts the result link it already builds, the service draws the e-mail from it.
+ */
+function wireMail(
+  block: HTMLElement,
+  form: HTMLFormElement,
+  current: () => { answers: Answers; matches: Match[] },
+) {
+  const error = form.querySelector<HTMLElement>("[data-keep-error]")!;
+  const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const show = (status: number) => {
+    const outcome = outcomeOf(status, "results");
+    if (outcome.sent) return;
+    error.textContent = outcome.message;
+    error.hidden = false;
+  };
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const { answers, matches } = current();
+    const body = resultsBody(
+      {
+        email: String(data.get("email") ?? ""),
+        news: data.get("news") === "on",
+        website: String(data.get("website") ?? ""),
+      },
+      resultLink(answers, matches),
+    );
+    if (!body) return show(400);
+    submit.disabled = true;
+    let status = 0;
+    try {
+      const response = await fetch("/api/resultats", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      status = response.status;
+    } catch {
+      status = 0;
+    }
+    submit.disabled = false;
+    if (!outcomeOf(status).sent) return show(status);
+    const sent = document.createElement("div");
+    sent.setAttribute("role", "status");
+    sent.dataset.keepSent = "";
+    const title = document.createElement("p");
+    title.className = "keep-sent-title";
+    title.append("C'est parti : vos résultats arrivent à ");
+    const address = document.createElement("b");
+    address.textContent = body.email;
+    title.append(address, ".");
+    const hint = document.createElement("p");
+    hint.className = "keep-hint";
+    hint.textContent = body.news
+      ? "Touchez aussi le lien de confirmation des nouveautés, dans ce même e-mail. Rien reçu d'ici quelques minutes ? Regardez dans les indésirables."
+      : "Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.";
+    sent.append(title, hint);
+    form.replaceWith(sent);
+    block.querySelector('[data-keep-way="envoi"]')?.remove();
+  });
 }

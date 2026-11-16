@@ -33,7 +33,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
-  no partner box until partners are named (operator, 2026-11-16). Fonts are self-hosted;
+  no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » posts
+  the result link (temperament and cities, as when shared) to `/api/resultats`; the service draws
+  the e-mail from that link with the site's own code, so no typed text reaches an inbox. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 
