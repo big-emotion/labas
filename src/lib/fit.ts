@@ -1,5 +1,6 @@
 import { CITIES, livableLanguages, type City, type CriterionKey } from "./cities";
 import { temperamentFit, type Trait } from "./city-temperament";
+import { hasActivity, seasonFit, type ActivityTag } from "./holiday";
 import { linesFor } from "./lines";
 
 /**
@@ -54,6 +55,10 @@ export type FactPull =
   | { kind: "homeCountry"; values: string[]; weight: number }
   /** The countries where the music the reader picked plays (data/music.json). */
   | { kind: "music"; values: string[]; weight: number }
+  /** The months of the holiday: the city's best season, or its rains (data/city-holiday.json). */
+  | { kind: "season"; months: number[]; weight: number }
+  /** Something the reader wants to do within two hours of the city (safari, diving…). */
+  | { kind: "activities"; tags: ActivityTag[]; weight: number }
   /** The reader's faith: the share of the country that shares it. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
   /** The reverse, for readers after the unknown. */
@@ -164,6 +169,8 @@ export interface Closeness {
   known: boolean;
   axis?: Axis;
   fact?: FactPull["kind"];
+  /** For an « activities » fact: what the reader wants to do. */
+  tags?: ActivityTag[];
 }
 
 const CLIMATE_CLASSES: Record<string, string[]> = {
@@ -367,6 +374,25 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
         weight: fact.weight,
         known: true,
         fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "season") {
+      const fit = seasonFit(city.name, fact.months);
+      parts.push({
+        value: fit ?? NEUTRAL,
+        weight: fact.weight,
+        known: fit !== null,
+        fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "activities") {
+      const found = hasActivity(city.name, fact.tags);
+      parts.push({
+        value: found === null ? NEUTRAL : found ? 1 : 0,
+        weight: fact.weight,
+        known: found !== null,
+        fact: fact.kind,
+        tags: fact.tags,
       });
       continue;
     } else if (fact.kind === "temperament") {

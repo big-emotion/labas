@@ -1,4 +1,5 @@
 import { CITIES } from "./cities";
+import { SEASONS } from "./holiday";
 import type { Answers } from "./ranking";
 
 export interface Choice {
@@ -86,20 +87,6 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "duration",
-    group: TRIP,
-    chapter: 2,
-    when: holiday,
-    title: "Combien de temps ?",
-    hint: "Pour un séjour court, on privilégie les villes desservies par des vols directs.",
-    choices: [
-      { label: "Un long week-end", value: "weekend" },
-      { label: "Une semaine", value: "week" },
-      { label: "Deux à trois semaines", value: "weeks" },
-      { label: "Un mois ou plus", value: "month" },
-    ],
-  },
-  {
     id: "wants",
     group: TRIP,
     chapter: 2,
@@ -114,19 +101,20 @@ export const QUESTIONS: Question[] = [
       { label: "Faire la fête", value: "party" },
       { label: "L'histoire et la mémoire", value: "history" },
       { label: "La culture et les musées", value: "culture" },
+      { label: "Un safari", value: "safari" },
+      { label: "La plongée, le surf ou la glisse", value: "sea" },
     ],
   },
   {
-    id: "tripsHome",
-    group: PROJECT,
+    id: "season",
+    group: TRIP,
     chapter: 2,
-    when: (answers) => answers.project === "pied",
-    title: "Combien d'allers-retours vers l'Europe par an ?",
-    hint: "Plus vous rentrez souvent, plus les vols directs comptent.",
+    when: holiday,
+    title: "Quand partez-vous ?",
+    hint: "Pour éviter la saison des pluies et viser la belle saison.",
     choices: [
-      { label: "Un ou moins", value: 0 },
-      { label: "Deux ou trois", value: 0.5 },
-      { label: "Tous les mois", value: 1 },
+      ...SEASONS.map((s) => ({ label: s.label, value: s.value })),
+      { label: "Je ne sais pas encore", value: null },
     ],
   },
   {
@@ -166,19 +154,6 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "budget",
-    group: PROJECT,
-    chapter: 2,
-    when: livesThere,
-    title: "Votre budget sur place ?",
-    hint: "Pour privilégier les villes où le logement et la vie courante tiennent dans votre budget.",
-    choices: [
-      { label: "Serré", value: "serre" },
-      { label: "Moyen", value: "moyen" },
-      { label: "Le prix compte peu", value: "large" },
-    ],
-  },
-  {
     id: "languages",
     group: PROJECT,
     chapter: 2,
@@ -192,21 +167,6 @@ export const QUESTIONS: Question[] = [
       { label: "Arabe", value: "ar" },
       { label: "Espagnol", value: "es" },
       { label: "Swahili", value: "sw" },
-    ],
-  },
-  {
-    id: "passports",
-    group: PROJECT,
-    chapter: 2,
-    title: "Quel passeport avez-vous ?",
-    hint: "Pour privilégier les pays où vous entrez sans visa ou circulez librement.",
-    max: 2,
-    choices: [
-      { label: "Français ou européen", value: "eu" },
-      { label: "D'un pays de la CEDEAO", value: "ecowas" },
-      { label: "De la CEMAC", value: "cemac" },
-      { label: "De la Communauté d'Afrique de l'Est", value: "eac" },
-      { label: "Un autre", value: "other" },
     ],
   },
   {
@@ -326,16 +286,6 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "countries",
-    group: HISTORY,
-    chapter: 4,
-    title: "De quel pays vient votre famille ?",
-    hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
-    max: 3,
-    when: (answers) => africanOrigins(answers).length > 0,
-    choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
-  },
-  {
     id: "kin",
     group: HISTORY,
     chapter: 4,
@@ -347,21 +297,6 @@ export const QUESTIONS: Question[] = [
       { label: "Beaucoup", value: "much" },
       { label: "Un peu", value: "some" },
       { label: "Pas vraiment", value: "none" },
-    ],
-  },
-  {
-    id: "faith",
-    group: HISTORY,
-    chapter: 4,
-    title: "Votre religion ?",
-    hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
-    when: kinMatters,
-    choices: [
-      { label: "Islam", value: "muslim" },
-      { label: "Christianisme", value: "christian" },
-      { label: "Une autre", value: "other" },
-      { label: "Aucune", value: "none" },
-      { label: "Je préfère ne pas dire", value: null },
     ],
   },
   {
@@ -379,6 +314,94 @@ export const QUESTIONS: Question[] = [
       { label: "Retrouver d'autres repats", value: "diaspora", when: (a) => !holiday(a) },
       { label: "Les lieux de mémoire (traite, histoire des diasporas)", value: "memory" },
       { label: "Voyager facilement", value: "flights" },
+    ],
+  },
+];
+
+/**
+ * Asked in the full questionnaire, not the quick quiz: measured on 40 runs per path, they move the
+ * top five least (operator, 2026-11-16). Their rules still hold there.
+ */
+export const LATER: Question[] = [
+  {
+    id: "duration",
+    group: TRIP,
+    chapter: 2,
+    when: holiday,
+    title: "Combien de temps ?",
+    hint: "Pour un séjour court, on privilégie les villes desservies par des vols directs.",
+    choices: [
+      { label: "Un long week-end", value: "weekend" },
+      { label: "Une semaine", value: "week" },
+      { label: "Deux à trois semaines", value: "weeks" },
+      { label: "Un mois ou plus", value: "month" },
+    ],
+  },
+  {
+    id: "tripsHome",
+    group: PROJECT,
+    chapter: 2,
+    // Living there, not on holiday: how often the reader flies back.
+    when: (answers) => livesThere(answers) && !holiday(answers),
+    title: "Combien d'allers-retours vers l'Europe par an ?",
+    hint: "Plus vous rentrez souvent, plus les vols directs comptent.",
+    choices: [
+      { label: "Un ou moins", value: 0 },
+      { label: "Deux ou trois", value: 0.5 },
+      { label: "Tous les mois", value: 1 },
+    ],
+  },
+  {
+    id: "budget",
+    group: PROJECT,
+    chapter: 2,
+    when: livesThere,
+    title: "Votre budget sur place ?",
+    hint: "Pour privilégier les villes où le logement et la vie courante tiennent dans votre budget.",
+    choices: [
+      { label: "Serré", value: "serre" },
+      { label: "Moyen", value: "moyen" },
+      { label: "Le prix compte peu", value: "large" },
+    ],
+  },
+  {
+    id: "passports",
+    group: PROJECT,
+    chapter: 2,
+    title: "Quel passeport avez-vous ?",
+    hint: "Pour privilégier les pays où vous entrez sans visa ou circulez librement.",
+    max: 2,
+    choices: [
+      { label: "Français ou européen", value: "eu" },
+      { label: "D'un pays de la CEDEAO", value: "ecowas" },
+      { label: "De la CEMAC", value: "cemac" },
+      { label: "De la Communauté d'Afrique de l'Est", value: "eac" },
+      { label: "Un autre", value: "other" },
+    ],
+  },
+  {
+    id: "countries",
+    group: HISTORY,
+    chapter: 4,
+    title: "De quel pays vient votre famille ?",
+    hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
+    max: 3,
+    when: (answers) => africanOrigins(answers).length > 0,
+    choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
+  },
+  {
+    id: "faith",
+    group: HISTORY,
+    chapter: 4,
+    title: "Votre religion ?",
+    hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
+    when: kinMatters,
+    choices: [
+      { label: "Islam", value: "muslim" },
+      { label: "Christianisme", value: "christian" },
+      { label: "Une autre", value: "other" },
+      { label: "Aucune", value: "none" },
+      { label: "Je préfère ne pas dire", value: null },
     ],
   },
 ];

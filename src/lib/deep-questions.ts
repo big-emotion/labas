@@ -1,4 +1,4 @@
-import { livesThere, namedOrigins, QUESTIONS, worksThere, type Question } from "./questions";
+import { LATER, livesThere, namedOrigins, QUESTIONS, worksThere, type Question } from "./questions";
 import { MUSIC } from "./music";
 import type { Answers } from "./ranking";
 
@@ -305,6 +305,7 @@ export const PROFILE_QUESTIONS: Question[] = PROFILE.map((q) => ({ ...q, group: 
 export const DEEP_QUESTIONS: Question[] = [
   ...QUESTIONS,
   ...PROFILE_QUESTIONS,
+  ...LATER,
   ...FURTHER.filter((q) => !QUESTIONS.some((free) => free.id === q.id)).map((q) => ({
     ...q,
     group: "POUR AFFINER",

@@ -1,3 +1,4 @@
+import { SEASONS, type Season } from "./holiday";
 import { musicCountries } from "./music";
 import type { FactPull, Pull } from "./fit";
 import type { Answers } from "./ranking";
@@ -29,7 +30,8 @@ export interface ProfileAnswers {
   nightOut?: "clubs" | "maquis" | "waterside";
   quietStay?: "beach" | "walks" | "history";
   duration?: "weekend" | "week" | "weeks" | "month";
-  wants?: ("beach" | "wild" | "nature" | "party" | "history" | "culture")[];
+  wants?: ("beach" | "wild" | "nature" | "party" | "history" | "culture" | "safari" | "sea")[];
+  season?: Season;
   offTrack?: "far" | "some" | "near";
   afterWork?: "rooftops" | "outdoors" | "home";
   friends?: "associations" | "diaspora" | "neighbours";
@@ -40,7 +42,9 @@ export interface ProfileAnswers {
 }
 
 // Music pulls by country, below, not by choice.
-const EFFECTS: { [K in Exclude<keyof ProfileAnswers, "music">]-?: Record<string, Effect> } = {
+const EFFECTS: {
+  [K in Exclude<keyof ProfileAnswers, "music" | "season">]-?: Record<string, Effect>;
+} = {
   nightOut: {
     clubs: {
       pulls: [pull("nightlife", 1, 3), pull("pace", 0.85, 1)],
@@ -68,6 +72,8 @@ const EFFECTS: { [K in Exclude<keyof ProfileAnswers, "music">]-?: Record<string,
     party: { pulls: [pull("nightlife", 0.95, 2)], facts: [aura("saturday", 1, 1)] },
     history: { pulls: [pull("history", 0.9, 2)] },
     culture: { pulls: [pull("culture", 0.9, 2)] },
+    safari: { facts: [{ kind: "activities", tags: ["safari"], weight: 2.5 }] },
+    sea: { facts: [{ kind: "activities", tags: ["diving", "surf", "watersports"], weight: 2 }] },
   },
   offTrack: {
     far: { pulls: [pull("returnees", 0.15, 2)], facts: [aura("adventure", 1, 2)] },
@@ -116,6 +122,9 @@ export function profileEffects(answers: Answers): { pulls: Pull[]; facts: FactPu
       facts.push(...(effect?.facts ?? []));
     }
   }
+  // The season counts like the length of the stay: a holiday in the rains is a poor holiday.
+  const months = SEASONS.find((s) => s.value === answers.season)?.months;
+  if (months) facts.push({ kind: "season", months: [...months], weight: 2 });
   // A small pull: the music one loves is a reason, never the reason.
   const countries = musicCountries(answers.music);
   if (countries.length) facts.push({ kind: "music", values: countries, weight: 1.5 });

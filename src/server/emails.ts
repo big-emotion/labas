@@ -75,7 +75,10 @@ export function resultsEmail(
     : [];
   const citiesText = result.cities.flatMap((c, i) => [
     `${i + 1}. ${c.city.name} (${c.city.country}) · ${c.percent} %`,
-    ...c.lines.slice(0, 2).map((line) => `   ${line}`),
+    ...c.lines
+      .filter((line) => !line.weak)
+      .slice(0, 2)
+      .map((line) => `   ${line.text}`),
     `   ${siteUrl}/ville/${c.city.slug}/`,
   ]);
   const confirmText = confirmLink
@@ -97,8 +100,9 @@ export function resultsEmail(
       }">
 <p style="margin:0;font-family:Georgia,serif;font-size:20px;font-weight:700">${i + 1}. ${escape(c.city.name)} <span style="font-family:Arial,sans-serif;font-weight:400;font-size:15px;color:#b4b8ea">${escape(c.city.country)}</span> <span style="float:right;color:#ffb627">${c.percent} %</span></p>
 ${c.lines
+  .filter((line) => !line.weak)
   .slice(0, 2)
-  .map((line) => `<p style="margin:4px 0 0;font-size:15px;color:#b4b8ea">${escape(line)}</p>`)
+  .map((line) => `<p style="margin:4px 0 0;font-size:15px;color:#b4b8ea">${escape(line.text)}</p>`)
   .join("")}
 <p style="margin:6px 0 0"><a href="${siteUrl}/ville/${c.city.slug}/" style="color:#ffb627;font-weight:700">Voir la ville</a></p>
 </div>`,
