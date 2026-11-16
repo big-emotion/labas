@@ -1,3 +1,9 @@
+---
+// With the mail service on (PUBLIC_NEWSLETTER, docs/deploy.md), Là-bas sends the result itself;
+// otherwise « Recevoir par e-mail » opens the reader's own mail (approved mockup, 2026-11-16).
+const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+---
+
 <div class="keep" data-keep>
   <h3>Garder vos résultats</h3>
   <div class="keep-actions">
@@ -10,10 +16,51 @@
     <button type="button" data-keep-way="impression">
       Imprimer ou PDF
     </button>
-    <a href="mailto:" data-keep-way="e-mail">
-      Recevoir par e-mail
-    </a>
+    {serverMail ? (
+      <button type="button" data-keep-way="envoi" aria-expanded="false" aria-controls="keep-mail">
+        Recevoir par e-mail
+      </button>
+    ) : (
+      <a href="mailto:" data-keep-way="e-mail">
+        Recevoir par e-mail
+      </a>
+    )}
   </div>
+  {serverMail && (
+    <form id="keep-mail" class="keep-mail" data-keep-mail novalidate hidden>
+      <p class="keep-hint">
+        Là-bas vous envoie vos trois villes, leurs pourcentages et le lien pour revoir votre
+        résultat.
+      </p>
+      <label class="field">
+        Votre e-mail
+        <input
+          type="email"
+          name="email"
+          placeholder="vous@exemple.fr"
+          autocomplete="email"
+          required
+        />
+      </label>
+      <label class="trap" aria-hidden="true">
+        Site web
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
+      <label class="consent">
+        <input type="checkbox" name="news" />
+        <span>Je veux aussi recevoir les nouveautés de Là-bas (un e-mail par mois au plus).</span>
+      </label>
+      <p class="keep-error" data-keep-error role="alert" hidden />
+      <button type="submit" class="send">
+        Envoyer mes résultats
+      </button>
+      <p class="keep-hint small">
+        Seuls vos villes et votre profil de tempérament sont envoyés, jamais vos autres réponses.
+        Sans la case cochée, nous ne gardons pas votre adresse.{" "}
+        <a href="/confidentialite">Confidentialité</a>
+      </p>
+    </form>
+  )}
   <p class="keep-note" data-keep-note aria-live="polite"></p>
 </div>
 
@@ -63,6 +110,105 @@
     margin: 0;
     font-size: 0.9rem;
     color: var(--thread-dim);
+  }
+  .keep :global(.keep-sent-title) {
+    margin: 0;
+    font-weight: 700;
+  }
+  .keep :global([data-keep-sent]) {
+    display: grid;
+    gap: 8px;
+  }
+  .keep :global([data-keep-sent] .keep-hint) {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--thread-dim);
+  }
+  .keep:has([data-keep-sent]) {
+    border: 2px solid var(--saffron);
+  }
+  .keep-actions > [aria-expanded="true"] {
+    background: var(--night-pressed);
+    border-color: var(--saffron);
+  }
+  .keep-mail {
+    display: grid;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--night-lift);
+  }
+  .keep-mail[hidden],
+  .keep-error[hidden] {
+    display: none;
+  }
+  .keep-hint {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--thread-dim);
+  }
+  .keep-hint.small {
+    font-size: 0.82rem;
+  }
+  .keep-hint a {
+    color: var(--saffron);
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .field input {
+    min-height: 48px;
+    box-sizing: border-box;
+    border-radius: 14px;
+    border: 2px solid var(--thread-dim);
+    background: var(--night);
+    color: var(--thread);
+    padding: 0 14px;
+    font: inherit;
+    font-weight: 400;
+  }
+  .consent {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .consent input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--saffron);
+  }
+  /* Off screen rather than display:none, which some robots skip. */
+  .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .keep-error {
+    margin: 0;
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .send {
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .send:disabled {
+    opacity: 0.4;
   }
   @media print {
     .keep {
