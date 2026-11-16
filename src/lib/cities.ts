@@ -171,6 +171,8 @@ interface Identity {
   tagline: string;
   pitch: string;
   watch: string;
+  /** Required when « À savoir » speaks of safety, conflict, racism or LGBT rights (CLAUDE.md). */
+  watchSources?: Source[];
 }
 
 export interface City extends Identity {
