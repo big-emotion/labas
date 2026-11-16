@@ -15,7 +15,7 @@ import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
 import { readShared, sharedResult } from "../lib/shared-result";
-import { type Db, createAccounts, migrate, purge } from "./accounts";
+import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { type Mail, confirmationEmail, resultsEmail } from "./emails";
 
 export type { Mail } from "./emails";
@@ -254,12 +254,12 @@ function start(port: number) {
   const handle = createHandler(config, mailer, Date.now, (request) =>
     accounts ? accounts(request) : Promise.resolve(json(503, { error: "closed" })),
   );
-  // Without a database, or if it cannot be reached, the e-mail routes keep working and
+  // Without a database, or while it cannot be reached, the e-mail routes keep working and
   // /api/compte answers 503: saved journeys are an extra, never a reason to go down.
   if (process.env.DATABASE_URL && Object.values(config).every(Boolean)) {
     const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
     const db: Db = { query: (sql, params) => pool.query(sql, params) as never };
-    migrate(db)
+    whenReady(() => migrate(db))
       .then(() => {
         accounts = createAccounts({ db, mailer, siteUrl: config.siteUrl });
         const sweep = () => purge(db, Date.now()).catch((e) => console.error(String(e)));

@@ -3,7 +3,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { beforeEach, describe, expect, it } from "vitest";
 import { QUESTIONS } from "../lib/questions";
 import { type Mail, type Mailer } from "./subscribe";
-import { createAccounts, migrate, purge, type Db } from "./accounts";
+import { createAccounts, migrate, purge, whenReady, type Db } from "./accounts";
 
 const SITE = "https://labas.africa";
 const MINUTE = 60 * 1000;
@@ -261,5 +261,39 @@ describe("keeping data no longer than promised", () => {
     await purge(db, clock);
     expect((await db.query("select 1 from accounts")).rows).toEqual([]);
     expect((await db.query("select 1 from journeys")).rows).toEqual([]);
+  });
+});
+
+describe("starting beside a database that is still booting", () => {
+  it("keeps trying until the database answers, waiting a little longer each time", async () => {
+    const waits: number[] = [];
+    let attempts = 0;
+    const ready = await whenReady(
+      async () => {
+        attempts += 1;
+        if (attempts < 4) throw new Error("ECONNREFUSED");
+        return "up";
+      },
+      async (ms) => {
+        waits.push(ms);
+      },
+    );
+    expect(ready).toBe("up");
+    expect(waits).toEqual([2000, 4000, 8000]);
+  });
+
+  it("never waits more than a minute between two tries", async () => {
+    const waits: number[] = [];
+    let attempts = 0;
+    await whenReady(
+      async () => {
+        attempts += 1;
+        if (attempts < 9) throw new Error("ECONNREFUSED");
+      },
+      async (ms) => {
+        waits.push(ms);
+      },
+    );
+    expect(Math.max(...waits)).toBe(60_000);
   });
 });
