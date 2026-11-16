@@ -6,6 +6,15 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-16
+
+### Added
+
+- Sign-up for Là-bas news by e-mail (new cities, quiz improvements, one e-mail a month at most),
+  with a confirmation link. It is in the quiz from the fourth answer, once per visit, and on the
+  result. Only the e-mail address is kept; nothing from the quiz is sent. Switched off until the
+  Mailjet account is set up.
+
 ## [0.7.0] - 2026-11-16
 
 ### Added
@@ -147,6 +156,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.7.0...HEAD
+[0.8.0]: https://github.com/big-emotion/labas/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/big-emotion/labas/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/big-emotion/labas/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/big-emotion/labas/compare/v0.5.1...v0.6.0
