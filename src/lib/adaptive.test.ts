@@ -61,9 +61,21 @@ describe("the quick quiz, one question at a time", () => {
       });
       return counts.reduce((a, b) => a + b, 0) / counts.length;
     };
-    const open = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+    // The non-negotiables close the quiz whatever they would move (next test).
+    const open = freeQuestions(answers).filter(
+      (q) => !asked.includes(q.id) && q.id !== "priorities",
+    );
     const best = Math.max(...open.map((q) => moved(q.id)));
     expect(moved(nextFreeQuestion(answers, asked)!)).toBe(best);
+  });
+
+  // Beta feedback, 2026-11-16: asked in the middle, « Ce qui compte le plus » read as a riddle;
+  // asked last, it reads as « now, what will you not compromise on ».
+  it("asks the non-negotiables last, just before the result", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const { asked } = play(pick);
+      if (asked.includes("priorities")) expect(asked.at(-1), String(pick)).toBe("priorities");
+    }
   });
 
   it("opens on the life project: with no answer every city ties, so nothing else can be weighed", () => {
