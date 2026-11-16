@@ -18,6 +18,14 @@ infrastructure.
 The VPS never builds: CI builds the image (`Dockerfile`), ships it as a tarball and restarts the
 container (`.github/workflows/deploy-production.yml`).
 
+**What the mail service trusts from Traefik.** Its per-connection limit (5 sends an hour) keys on
+`X-Real-IP`. Traefik deletes that header when a client sends it and writes the real address
+instead, unless its entry point sets `forwardedHeaders.insecure` or lists the whole internet in
+`forwardedHeaders.trustedIPs`. Keep both off on the shared Traefik, and publish no port of
+`labas-subscribe`: otherwise anyone can pick their own key and the limit stops counting. Check on
+the host: `docker inspect <traefik container> --format '{{.Args}}'` (or its static config file)
+must show neither option. The per-address limit (3 a day) holds either way.
+
 ## What deploys
 
 ```
