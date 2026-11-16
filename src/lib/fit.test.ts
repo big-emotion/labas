@@ -638,3 +638,74 @@ describe("never sending a reader where they would be badly received", () => {
     }
   });
 });
+
+describe("tensions between a family's country and a host country", () => {
+  // The control swaps one family country for another that no source ties to the host, so the
+  // family-country pull is the same size and only the documented tension differs.
+  const scoreOf = (answers: Answers, name: string) =>
+    rankCities(answers).find((m) => m.city.name === name)!.score;
+  const family = (country: string): Answers => ({
+    origin: ["centre", "est", "ouest"],
+    countries: [country],
+    kin: "none",
+    adventure: "seeking",
+  });
+  const tensions = CITIES.flatMap((c) => c.countryFacts?.tensions ?? []);
+
+  it("lowers Rwanda for a family from RD Congo, where the UN documents Rwanda's role in the war", () => {
+    expect(scoreOf(family("RD Congo"), "Kigali")).toBeLessThan(scoreOf(family("Congo"), "Kigali"));
+  });
+
+  it("lowers RD Congo for a family from Rwanda", () => {
+    expect(scoreOf(family("Rwanda"), "Kinshasa")).toBeLessThan(
+      scoreOf(family("Burundi"), "Kinshasa"),
+    );
+  });
+
+  it("never turns a family against one of its own countries", () => {
+    // A family from both Rwanda and RD Congo is at home in each: the war between the two states
+    // must not push it out of either.
+    const mixed = { ...family("Rwanda"), countries: ["Rwanda", "RD Congo"] };
+    const control = { ...family("Rwanda"), countries: ["Rwanda", "Congo"] };
+    expect(scoreOf(mixed, "Kigali")).toBeCloseTo(scoreOf(control, "Kigali"), 2);
+    const otherControl = { ...family("Burundi"), countries: ["Burundi", "RD Congo"] };
+    expect(scoreOf(mixed, "Kinshasa")).toBeCloseTo(scoreOf(otherControl, "Kinshasa"), 2);
+  });
+
+  it("weighs a ban on small trade less than an armed conflict", () => {
+    const conflict = scoreOf(family("Congo"), "Kigali") - scoreOf(family("RD Congo"), "Kigali");
+    const restriction =
+      scoreOf(family("Ghana"), "Libreville") - scoreOf(family("Nigeria"), "Libreville");
+    expect(restriction).toBeGreaterThan(0);
+    expect(conflict).toBeGreaterThan(restriction);
+  });
+
+  // A war between two peoples shown under « Ce qui joue contre elle », with a level, reads as a
+  // verdict on the reader's family: it weighs in the score and is never written on a card
+  // (operator, 2026-11-16).
+  it("never writes a tension on a card, for the families it concerns or any other", () => {
+    const labels = new Set(tensions.map((t) => t.label));
+    for (const country of ["RD Congo", "Rwanda", "Nigeria", "Ghana"])
+      for (const match of rankCities(family(country)))
+        for (const line of [...match.reasons, ...match.drawbacks])
+          expect(labels.has(line.label), `${country} → ${match.city.name}`).toBe(false);
+  });
+
+  it("gives every documented tension a source name and year, dated sources and real countries", () => {
+    const countries = new Set(CITIES.map((c) => c.country));
+    expect(tensions.length).toBeGreaterThan(0);
+    for (const city of CITIES) {
+      for (const t of city.countryFacts?.tensions ?? []) {
+        expect(t.label, city.country).toMatch(/\([^)]+, \d{4}\)$/);
+        expect(t.sources.length, t.label).toBeGreaterThan(0);
+        for (const source of t.sources)
+          expect(source.accessed, t.label).toMatch(/^\d{4}-\d{2}-\d{2}/);
+        expect(t.from.length, t.label).toBeGreaterThan(0);
+        for (const from of t.from) {
+          expect(countries.has(from), from).toBe(true);
+          expect(from, t.label).not.toBe(city.country);
+        }
+      }
+    }
+  });
+});

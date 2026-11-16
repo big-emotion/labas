@@ -79,6 +79,20 @@ export interface Facts {
   advisory: Advisory;
 }
 
+/**
+ * A documented tie between the country of a reader's family and this host country: an armed
+ * conflict between the two states, or a measure aimed at nationals of the family's country.
+ * Unlike `racism`, it concerns only readers whose family comes from `from`.
+ */
+export interface Tension {
+  from: string[];
+  kind: "conflict" | "restriction";
+  /** Shown on cards: the source's own words, its name and year. */
+  label: string;
+  summary: string;
+  sources: Source[];
+}
+
 export interface CountryFacts {
   /** Religious composition, percent (Pew Research Center, 2020). */
   religion?: { muslim: number; christian: number; other: number; none: number; year: number };
@@ -89,6 +103,7 @@ export interface CountryFacts {
     label: string;
     summary: string;
   };
+  tensions?: Tension[];
   /** How a French or EU passport gets in: no visa, online or on arrival, or at an embassy. */
   entryFrenchPassport?: "free" | "online" | "embassy";
   name: string;

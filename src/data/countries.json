@@ -2297,7 +2297,23 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Cameroun", "Nigeria", "Mali"],
+        "kind": "restriction",
+        "label": "Petits commerces interdits aux étrangers (Financial Afrik, 2025)",
+        "summary": "Le 12 août 2025, le Conseil des ministres a interdit aux étrangers le commerce local, les services de téléphonie, la coiffure de rue, l'orpaillage artisanal, l'achat de récoltes et les petits ateliers ; la mesure touche surtout les Camerounais, Nigérians et Maliens, selon Financial Afrik.",
+        "sources": [
+          {
+            "title": "Financial Afrik, From Pretoria to Libreville: Gabon bans small businesses for foreigners (16 August 2025)",
+            "url": "https://www.financialafrik.com/en/2025/08/16/africa-gabon-bans-small-businesses-for-foreigners/",
+            "published": "2025-08-16",
+            "accessed": "2026-11-16"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Gambie",
@@ -5181,7 +5197,28 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Rwanda"],
+        "kind": "conflict",
+        "label": "RD Congo et Rwanda : conflit armé dans l'est du pays (ONU, 2025)",
+        "summary": "Le groupe d'experts de l'ONU a établi en juillet 2025 qu'environ 6 000 soldats rwandais étaient déployés dans le Kivu début 2025, ce que Kigali nie. Human Rights Watch décrit un M23 soutenu par le Rwanda, qui a pris Goma le 27 janvier et Bukavu le 16 février 2025, puis Uvira quelques jours après le cessez-le-feu de décembre ; un accord a été signé à Washington le 27 juin 2025. Des milices alliées à l'armée congolaise ont ciblé les Banyamulenge, Tutsi congolais du Sud-Kivu (Human Rights Watch, 2026).",
+        "sources": [
+          {
+            "title": "Africanews, Eastern DRC tensions: UN points to Rwanda's role in AFC/M23 conflict (3 July 2025)",
+            "url": "https://www.africanews.com/2025/07/03/eastern-drc-tensions-un-points-to-rwandas-role-in-afcm23-conflict/",
+            "published": "2025-07-03",
+            "accessed": "2026-11-16"
+          },
+          {
+            "title": "Human Rights Watch, World Report 2026: Democratic Republic of Congo",
+            "url": "https://www.hrw.org/world-report/2026/country-chapters/democratic-republic-of-congo",
+            "accessed": "2026-11-16"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Rwanda",
@@ -5304,7 +5341,28 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["RD Congo"],
+        "kind": "conflict",
+        "label": "Rwanda et RD Congo : conflit armé, soutien rwandais au M23 documenté (ONU, 2025)",
+        "summary": "Le groupe d'experts de l'ONU a établi en juillet 2025 qu'environ 6 000 soldats rwandais étaient déployés dans le Kivu début 2025, ce que Kigali nie. Human Rights Watch décrit un M23 soutenu par le Rwanda, qui a pris Goma le 27 janvier et Bukavu le 16 février 2025, puis Uvira quelques jours après le cessez-le-feu de décembre ; un accord a été signé à Washington le 27 juin 2025.",
+        "sources": [
+          {
+            "title": "Africanews, Eastern DRC tensions: UN points to Rwanda's role in AFC/M23 conflict (3 July 2025)",
+            "url": "https://www.africanews.com/2025/07/03/eastern-drc-tensions-un-points-to-rwandas-role-in-afcm23-conflict/",
+            "published": "2025-07-03",
+            "accessed": "2026-11-16"
+          },
+          {
+            "title": "Human Rights Watch, World Report 2026: Democratic Republic of Congo",
+            "url": "https://www.hrw.org/world-report/2026/country-chapters/democratic-republic-of-congo",
+            "accessed": "2026-11-16"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Seychelles",
