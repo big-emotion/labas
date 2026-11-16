@@ -46,6 +46,7 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
     import { showProfile } from "../lib/profile-dom";
     import type { Answers } from "../lib/ranking";
     import { readShared, sharedResult } from "../lib/shared-result";
+    import { fillLines } from "../lib/cards-dom";
 
     // A link that only changes after « # » does not reload the page: read it again.
     addEventListener("hashchange", () => location.reload());
@@ -67,13 +68,7 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
           item.querySelector(".country")!.textContent = entry.city.country;
           item.querySelector(".fit")!.textContent = `${entry.percent}\u202f%`;
           item.querySelector(".tagline")!.textContent = entry.city.pitch;
-          item.querySelector(".why")!.replaceChildren(
-            ...entry.lines.map((line) => {
-              const li = document.createElement("li");
-              li.textContent = line;
-              return li;
-            }),
-          );
+          fillLines(item.querySelector(".why") as HTMLElement, entry.lines);
           return item;
         }),
       );
@@ -140,6 +135,9 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
     margin: 0;
     padding-left: 1.1em;
     font-size: 0.9rem;
+  }
+  .shared-cities :global(.why .weak) {
+    color: var(--coral);
   }
   .broken {
     margin: 18px 0;

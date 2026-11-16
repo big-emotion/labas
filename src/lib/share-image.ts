@@ -102,7 +102,8 @@ export async function resultImage(shared: SharedResult): Promise<Blob> {
     ctx.fillText(entry.city.country, left + 64, top + 112);
     ctx.fillStyle = thread;
     ctx.font = `400 28px ${body}`;
-    const why = entry.lines.length ? entry.lines.slice(0, 2) : [entry.city.tagline];
+    const fits = entry.lines.filter((line) => !line.weak).map((line) => line.text);
+    const why = fits.length ? fits.slice(0, 2) : [entry.city.tagline];
     why.forEach((line, j) => {
       const [first] = wrap(ctx, line, W - 2 * PAD - 72, 1);
       ctx.fillText(first, left, top + 156 + j * 36);

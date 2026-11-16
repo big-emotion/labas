@@ -3,6 +3,7 @@ import { costLabel, livingLines, regionName, sameCountry } from "./card";
 import { goingThere } from "./going";
 import { linesFor } from "./lines";
 import { photoFor } from "./photos";
+import type { TemperamentLine } from "./city-temperament";
 import type { Match, Rated } from "./ranking";
 
 /** Render code for components/ResultCards.astro: a card for the top cities, a row for the rest. */
@@ -114,7 +115,7 @@ export function cardFor(m: Match, index: number, ranked: Match[]): HTMLElement {
   setText(card, ".card-country", `${m.city.country} · ${regionName(m.city.zone)}`);
   setText(card, ".fit b", percent(m.score));
   const split = card.querySelector(".split") as HTMLElement;
-  fillList(card.querySelector(".why-temper") as HTMLElement, m.temperamentLines);
+  fillLines(card.querySelector(".why-temper") as HTMLElement, m.temperamentLines);
   split.hidden = m.temperament === null;
   if (m.temperament !== null)
     split.innerHTML = `Tempérament <b>${percent(m.temperament)}</b> · Vie pratique <b>${percent(m.practical)}</b>`;
@@ -163,4 +164,16 @@ export function rowFor(m: Match, position: number): HTMLElement {
   setBar(row, m.score);
   row.querySelector(".detail")!.append(detailFor(m, true));
   return row;
+}
+
+/** The neighbourhood lines under a city; those that count nothing are marked against it. */
+export function fillLines(list: HTMLElement, lines: TemperamentLine[]) {
+  list.replaceChildren(
+    ...lines.map((line) => {
+      const item = document.createElement("li");
+      item.textContent = line.text;
+      if (line.weak) item.className = "weak";
+      return item;
+    }),
+  );
 }

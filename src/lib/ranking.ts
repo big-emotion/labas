@@ -6,7 +6,7 @@ import {
   type CriterionKey,
   type Language,
 } from "./cities";
-import { TRAITS, temperamentLinesFor } from "./city-temperament";
+import { TRAITS, temperamentLinesFor, type TemperamentLine } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
 import { profileEffects, type ProfileAnswers } from "./profile-pulls";
@@ -143,7 +143,7 @@ export interface Match {
   /** 0 to 1 on the five temperament answers alone; null before any of them. */
   temperament: number | null;
   /** Why the temperament part is what it is: per answer, the neighbourhoods at the reader's level. */
-  temperamentLines: string[];
+  temperamentLines: TemperamentLine[];
   /** 0 to 1 on every other answer. */
   practical: number;
   /** "Pourquoi vous" lines: what the reader said, met by what the city offers. */

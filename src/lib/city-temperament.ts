@@ -61,7 +61,11 @@ const LEVEL_NAMES: Record<Trait, [string, string, string]> = {
  * any smoother neighbourhood, so those count too; a reader whom outages amuse gets no line, since
  * every city suits them. A city rated as a whole says so.
  */
-export function neighbourhoodLine(cityName: string, trait: Trait, reader: number): string | null {
+export function neighbourhoodLine(
+  cityName: string,
+  trait: Trait,
+  reader: number,
+): TemperamentLine | null {
   const profile = BY_NAME.get(cityName);
   const level = LEVELS.indexOf(reader);
   if (!profile || level < 0) return null;
@@ -70,8 +74,17 @@ export function neighbourhoodLine(cityName: string, trait: Trait, reader: number
   const counts = profile[trait];
   const n =
     trait === "friction" ? counts.slice(0, level + 1).reduce((a, b) => a + b, 0) : counts[level];
-  if (profile.editorial) return `${name} : ${n ? "oui" : "non"}, estimation pour la ville`;
-  return `${name} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`;
+  if (profile.editorial)
+    return { text: `${name} : ${n ? "oui" : "non"}, estimation pour la ville`, weak: n === 0 };
+  // A line that counts nothing stays, readable and marked against the city (operator, 2026-11-16).
+  if (n === 0) return { text: `${name} : aucun quartier`, weak: true };
+  return { text: `${name} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`, weak: false };
+}
+
+/** One line under a city: its text, and whether it counts against the city (no neighbourhood fits). */
+export interface TemperamentLine {
+  text: string;
+  weak: boolean;
 }
 
 const ADVENTURE_LEVELS = { familiar: 0, open: 0.5, seeking: 1 } as const;
@@ -85,9 +98,15 @@ export type TemperamentAnswers = {
   friction?: number;
 };
 
-/** One line per temperament answer: the neighbourhoods of the city at the reader's level. */
-export function temperamentLinesFor(cityName: string, answers: TemperamentAnswers): string[] {
-  return TRAITS.flatMap((trait) => {
+/**
+ * One line per temperament answer: the neighbourhoods of the city at the reader's level, those
+ * that fit first and those that count nothing last.
+ */
+export function temperamentLinesFor(
+  cityName: string,
+  answers: TemperamentAnswers,
+): TemperamentLine[] {
+  const lines = TRAITS.flatMap((trait) => {
     const reader =
       trait === "adventure"
         ? answers.adventure && ADVENTURE_LEVELS[answers.adventure]
@@ -95,4 +114,5 @@ export function temperamentLinesFor(cityName: string, answers: TemperamentAnswer
     const line = reader === undefined ? null : neighbourhoodLine(cityName, trait, reader);
     return line ? [line] : [];
   });
+  return [...lines.filter((l) => !l.weak), ...lines.filter((l) => l.weak)];
 }
