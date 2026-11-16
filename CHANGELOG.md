@@ -6,6 +6,14 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-11-16
+
+### Added
+
+- « Recevoir par e-mail » is sent by Là-bas itself: the reader gives an address and receives
+  their profile, three cities, their pages and the link to the result, with an optional box to
+  sign up for the news in the same e-mail. Switched off until the Mailjet account is unblocked.
+
 ## [0.10.0] - 2026-11-16
 
 ### Added
@@ -186,6 +194,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.10.0...HEAD
+[0.11.0]: https://github.com/big-emotion/labas/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/big-emotion/labas/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/big-emotion/labas/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/big-emotion/labas/compare/v0.7.0...v0.8.0
