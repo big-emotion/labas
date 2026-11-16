@@ -1,3 +1,4 @@
+import { musicCountries } from "./music";
 import type { FactPull, Pull } from "./fit";
 import type { Answers } from "./ranking";
 
@@ -35,9 +36,11 @@ export interface ProfileAnswers {
   mustWork?: ("utilities" | "internet" | "paperwork" | "care")[];
   ambition?: "business" | "career" | "network";
   evenings?: "residential" | "space" | "nature";
+  music?: string[];
 }
 
-const EFFECTS: { [K in keyof ProfileAnswers]-?: Record<string, Effect> } = {
+// Music pulls by country, below, not by choice.
+const EFFECTS: { [K in Exclude<keyof ProfileAnswers, "music">]-?: Record<string, Effect> } = {
   nightOut: {
     clubs: {
       pulls: [pull("nightlife", 1, 3), pull("pace", 0.85, 1)],
@@ -113,5 +116,8 @@ export function profileEffects(answers: Answers): { pulls: Pull[]; facts: FactPu
       facts.push(...(effect?.facts ?? []));
     }
   }
+  // A small pull: the music one loves is a reason, never the reason.
+  const countries = musicCountries(answers.music);
+  if (countries.length) facts.push({ kind: "music", values: countries, weight: 1.5 });
   return { pulls, facts };
 }
