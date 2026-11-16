@@ -423,9 +423,12 @@ const ORIGIN_DRAW: Record<NonNullable<Answers["project"]>, number> = {
   investir: 0.75,
   decouvrir: 0,
 };
-// Before the reader says whether feeling at home matters, the region draws a little less.
-const KIN_SCALE = { much: 1.5, some: 1, unsaid: 0.75, none: 0.25 } as const;
-const ADVENTURE_SCALE = { familiar: 1.25, open: 1, seeking: 0.5 } as const;
+// Before the reader says whether feeling at home matters, the region draws a little less; once
+// they say it does not, it no longer draws at all (operator, 2026-11-16).
+const KIN_SCALE = { much: 1.5, some: 1, unsaid: 0.75, none: 0 } as const;
+// An appetite for the unknown makes the family's region nearly neutral rather than pushing to
+// its opposite: the other answers then mix the regions (operator, 2026-11-16).
+const ADVENTURE_SCALE = { familiar: 1.25, open: 1, seeking: 0.25 } as const;
 const PRACTICAL: Axis[] = [
   "safety",
   "comfort",
@@ -581,7 +584,7 @@ export function profileOf(answers: Answers): Profile {
     const draw = (answers.project ? ORIGIN_DRAW[answers.project] : 1) * scale;
     const away =
       (answers.project === "decouvrir" ? 0.5 : 0) +
-      (answers.adventure === "seeking" ? 1.5 : 0) +
+      (answers.adventure === "seeking" ? 0.6 : 0) +
       (answers.roots === "discover" ? 1 : 0);
     if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, draw + away);
     if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, draw + away);

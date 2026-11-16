@@ -454,7 +454,7 @@ describe("feeling at home among one's own", () => {
   });
 
   it("sends an adventurous reader out of the family's region, not only to its opposite", () => {
-    const away = zones({ ...westAfrican, adventure: "seeking" }, 5);
+    const away = zones({ ...westAfrican, adventure: "seeking" }, 10);
     expect(away.filter((z) => z !== "ouest" && z !== "nord").length).toBeGreaterThan(0);
   });
 
@@ -514,9 +514,22 @@ describe("feeling at home among one's own", () => {
     expect(bestMatches(played, 3).map((m) => m.city.country)).toContain("Soudan");
   });
 
-  it("weighs the family's region less when feeling at home does not matter to the reader", () => {
-    const inRegion = (answers: Answers) => zones(answers, 10).filter((z) => z === "ouest").length;
-    expect(inRegion({ ...westAfrican, kin: "none" })).toBeLessThan(inRegion(westAfrican));
+  // Operator, 2026-11-16: « Pas vraiment » must open the other regions, and an appetite for the
+  // unknown must mix them in, not swap the family's region for the rest of the continent.
+  const inRegion = (answers: Answers) => zones(answers, 10).filter((z) => z === "ouest").length;
+  const reader: Answers = { project: "installer", languages: ["fr", "en"], origin: ["ouest"] };
+
+  it("opens the other regions when feeling at home does not matter to the reader", () => {
+    expect(inRegion({ ...reader, kin: "none" })).toBeLessThanOrEqual(6);
+    expect(inRegion({ ...reader, kin: "none" })).toBeLessThan(inRegion({ ...reader, kin: "much" }));
+  });
+
+  it("mixes the family's region with others for an adventurous reader, without leaving it", () => {
+    for (const project of ["installer", "tester"] as const) {
+      const seeking = inRegion({ ...reader, project, kin: "some", adventure: "seeking" });
+      expect(seeking, project).toBeGreaterThanOrEqual(2);
+      expect(seeking, project).toBeLessThanOrEqual(7);
+    }
   });
 });
 

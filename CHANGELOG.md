@@ -14,7 +14,9 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - The daily language weighs most of all answers. « Peu importe, je m'adapte » leaves it open.
 - The project ranks on its own criteria (settling asks for safety, testing for an easy set-up).
 - The family's region weighs on its own, by project: it draws a settler, barely a holidaymaker,
-  whose trip leans away from it. « Près des vôtres » and the taste for adventure scale it.
+  whose trip leans away from it. « Près des vôtres » and the taste for adventure scale it:
+  « Pas vraiment » stops the pull, and an appetite for the unknown makes the region nearly neutral,
+  so the other answers mix the regions instead of swapping one for all the others.
 - A documented tension with the family's country counts inside that answer, no longer with a
   fixed weight of its own; it is still never written on a card.
 

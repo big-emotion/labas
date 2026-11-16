@@ -381,8 +381,9 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       );
       parts.push({
         // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
-        // much an adventure for a reader from Dakar as Tunis is.
-        value: fact.kind === "kin" ? affinity : affinity < 1 ? 1 : 0,
+        // much an adventure for a reader from Dakar as Tunis is. The family's region only steps
+        // back, so other answers can still bring one of its cities in (operator, 2026-11-16).
+        value: fact.kind === "kin" ? affinity : affinity < 1 ? 1 : 0.5,
         weight: fact.weight,
         known: true,
         fact: fact.kind,
