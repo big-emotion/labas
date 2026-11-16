@@ -25,9 +25,13 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
   <h2>Partager ou garder vos résultats</h2>
   <p>
-    « Partager », « Imprimer » et « Recevoir par e-mail » passent par votre téléphone, votre
-    imprimante ou votre propre messagerie : Là-bas ne reçoit rien. Le texte partagé contient vos
-    villes et leurs pourcentages, jamais vos réponses.
+    « Partager », « Enregistrer l'image », « Imprimer » et « Recevoir par e-mail » passent par votre
+    téléphone, votre imprimante ou votre propre messagerie : Là-bas ne reçoit rien. L'image est
+    dessinée dans votre navigateur. Le message et le lien partagés contiennent votre profil de
+    tempérament (vos cinq réponses sur le samedi soir, la découverte, l'organisation, l'entraide et
+    les imprévus) et vos villes avec leurs pourcentages, jamais vos autres réponses : ni votre
+    origine, ni le pays de votre famille, ni votre religion, ni vos filtres. Ces informations sont
+    placées après le « # » du lien, une partie que les navigateurs n'envoient pas au serveur.
   </p>
 
   {newsletter && (

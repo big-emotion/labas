@@ -73,3 +73,26 @@ export function neighbourhoodLine(cityName: string, trait: Trait, reader: number
   if (profile.editorial) return `${name} : ${n ? "oui" : "non"}, estimation pour la ville`;
   return `${name} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`;
 }
+
+const ADVENTURE_LEVELS = { familiar: 0, open: 0.5, seeking: 1 } as const;
+
+/** The reader's temperament answers, the only ones a shared result carries. */
+export type TemperamentAnswers = {
+  saturday?: number;
+  adventure?: keyof typeof ADVENTURE_LEVELS;
+  order?: number;
+  together?: number;
+  friction?: number;
+};
+
+/** One line per temperament answer: the neighbourhoods of the city at the reader's level. */
+export function temperamentLinesFor(cityName: string, answers: TemperamentAnswers): string[] {
+  return TRAITS.flatMap((trait) => {
+    const reader =
+      trait === "adventure"
+        ? answers.adventure && ADVENTURE_LEVELS[answers.adventure]
+        : answers[trait];
+    const line = reader === undefined ? null : neighbourhoodLine(cityName, trait, reader);
+    return line ? [line] : [];
+  });
+}

@@ -239,7 +239,7 @@ const website = JSON.stringify({
       } from "../lib/filters";
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { answerEvent, finishedEvent } from "../lib/analytics";
-      import { resultsText, saveAnswers } from "../lib/keep";
+      import { saveAnswers } from "../lib/keep";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
 
       const SVG = "http://www.w3.org/2000/svg";
@@ -334,7 +334,7 @@ const website = JSON.stringify({
 
       // The three cities on screen, for « Garder vos résultats ».
       let onScreen: Match[] = [];
-      wireKeep(() => resultsText(onScreen));
+      wireKeep(() => ({ answers: readAnswers(), matches: onScreen }));
 
       function render() {
         const current = readAnswers();

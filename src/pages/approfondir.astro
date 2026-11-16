@@ -87,7 +87,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { syncChoices } from "../lib/choices-dom";
     import { rankCities, type Answers } from "../lib/ranking";
     import { finishedEvent } from "../lib/analytics";
-    import { forgetAnswers, loadAnswers, resultsText, saveAnswers } from "../lib/keep";
+    import { forgetAnswers, loadAnswers, saveAnswers } from "../lib/keep";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
     import { showProfile } from "../lib/profile-dom";
     import { cardFor, rowFor } from "../lib/cards-dom";
@@ -110,13 +110,12 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
           chip.setAttribute("aria-pressed", "true");
       }
     }
-    wireKeep(() =>
-      resultsText(
-        rankCities(answers as Answers)
-          .filter((m) => !m.excludedBecause)
-          .slice(0, 5),
-      ),
-    );
+    wireKeep(() => ({
+      answers: answers as Answers,
+      matches: rankCities(answers as Answers)
+        .filter((m) => !m.excludedBecause)
+        .slice(0, 3),
+    }));
     // Counted once per visit.
     let finished = false;
     let showAll = false;
