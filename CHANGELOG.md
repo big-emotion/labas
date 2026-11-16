@@ -6,6 +6,13 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.13.2] - 2026-11-16
+
+### Fixed
+
+- The mail and accounts service waits for the database when it starts beside it, instead of
+  leaving saved journeys off until the next restart.
+
 ## [0.13.1] - 2026-11-16
 
 ### Changed
@@ -255,6 +262,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.13.1...HEAD
+[0.13.2]: https://github.com/big-emotion/labas/compare/v0.13.1...v0.13.2
 [0.13.1]: https://github.com/big-emotion/labas/compare/v0.13.0...v0.13.1
 [0.13.0]: https://github.com/big-emotion/labas/compare/v0.12.1...v0.13.0
 [0.12.1]: https://github.com/big-emotion/labas/compare/v0.12.0...v0.12.1
