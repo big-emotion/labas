@@ -9,7 +9,7 @@ export type Trait = (typeof TRAITS)[number];
 
 /**
  * How many of a city's neighbourhoods sit at 0, 0.5 and 1 on each axis, counted from the
- * ratings in research/cities/<country>/<city>.temperament.md (docs/criteria/temperament-cities.md).
+ * ratings in research/cities/<country>/<city>.temperament.md, on one scale shared by every city.
  * A city is not one temperament: Abidjan has calm neighbourhoods and Kigali lively streets, what
  * differs is how much of the city carries each aura. `editorial` marks a city rated as a whole
  * because it has no neighbourhood sheet.

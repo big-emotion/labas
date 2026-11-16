@@ -4,7 +4,7 @@ import { DEEP_QUESTIONS } from "./deep-questions";
 import { chapterName, keepInPath, QUESTIONS, visibleChoices, type Question } from "./questions";
 import type { Answers } from "./ranking";
 
-// Coherent paths per project (operator, 2026-11-16, after the quiz paths audit).
+// Coherent paths per project (operator, 2026-11-16).
 const PROJECTS = ["installer", "pied", "tester", "investir", "decouvrir"] as const;
 const question = (id: string): Question => QUESTIONS.find((q) => q.id === id)!;
 

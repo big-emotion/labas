@@ -205,7 +205,7 @@ const holiday = (a: Answers) => a.project === "decouvrir";
 
 /**
  * Asked only to the readers they fit, before the general questions: the project and the
- * temperament answers decide (docs/criteria/adaptive-questions.md, validated 2026-11-15).
+ * temperament answers decide (validated by the operator, 2026-11-15).
  */
 const PROFILE: Omit<Question, "group">[] = [
   {

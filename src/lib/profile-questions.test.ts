@@ -3,7 +3,7 @@ import { nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS, PROFILE_QUESTIONS } from "./deep-questions";
 import { rankCities, type Answers } from "./ranking";
 
-// docs/criteria/adaptive-questions.md, validated by the operator on 2026-11-15.
+// Profile questions validated by the operator on 2026-11-15.
 const HOLIDAY_NIGHT: Answers = { project: "decouvrir", saturday: 1, adventure: "open" };
 const SETTLER_REFUGE: Answers = { project: "installer", saturday: 0, order: 1, friction: 0 };
 
