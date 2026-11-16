@@ -6,6 +6,13 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.13.1] - 2026-11-16
+
+### Changed
+
+- The « Fondation » profile likes cities « aux démarches simples et prévisibles », no longer
+  cities where things « work as planned ».
+
 ## [0.13.0] - 2026-11-16
 
 ### Added
@@ -16,6 +23,12 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   and are erased three years after the last visit. Several journeys per reader. Switched off for
   readers until the Mailjet account is unblocked.
 - The saved journeys run on a database beside the mail service, reachable only from it.
+
+### Changed
+
+- « Prévoir des imprévus »: organisation and friction give one 1–5 gauge under each city, like
+  the criteria, instead of « Tout fonctionne comme prévu : n quartiers ». Cities rated as a whole
+  mark it « estimation » and their other lines read « …, selon notre estimation ».
 
 ## [0.12.1] - 2026-11-16
 
@@ -241,7 +254,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.12.1...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.13.1...HEAD
+[0.13.1]: https://github.com/big-emotion/labas/compare/v0.13.0...v0.13.1
 [0.13.0]: https://github.com/big-emotion/labas/compare/v0.12.1...v0.13.0
 [0.12.1]: https://github.com/big-emotion/labas/compare/v0.12.0...v0.12.1
 [0.12.0]: https://github.com/big-emotion/labas/compare/v0.11.0...v0.12.0
