@@ -23,6 +23,15 @@ describe("the reader's temperament", () => {
     expect(archetypeOf(all(1, "open", 0, 0, 1))!.name).toBe("Conquête");
   });
 
+  // Operator, 2026-11-16: no city « works as planned », not even Paris; a reader who needs order
+  // likes simple, predictable procedures.
+  it("never promises a city that works as planned", () => {
+    const orderly = archetypeOf(all(0.5, "open", 1, 0.5, 0.5))!;
+    expect(orderly.name).toBe("Fondation");
+    expect(orderly.text).not.toMatch(/comme prévu/);
+    expect(orderly.text).toMatch(/prévisibles/);
+  });
+
   it("gives the five traits on a 0 to 1 scale", () => {
     const traits = archetypeOf(all(1, "seeking", 0, 0.5, 1))!.traits;
     expect(traits.map((t) => t.name)).toEqual([

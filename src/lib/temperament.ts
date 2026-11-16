@@ -32,7 +32,7 @@ const ARCHETYPES: { name: string; text: string; at: number[] }[] = [
   },
   {
     name: "Fondation",
-    text: "Vous aimez les villes lisibles, où les choses fonctionnent comme prévu.",
+    text: "Vous aimez les villes lisibles, aux démarches simples et prévisibles.",
     at: [0.5, 0.5, 1, 0.5, 0.5],
   },
   {
