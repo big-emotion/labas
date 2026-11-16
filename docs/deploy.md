@@ -72,31 +72,42 @@ Optional, once the site is added in Plausible: `gh variable set PLAUSIBLE_DOMAIN
 event the site sends shows in Plausible only once it is declared as a goal (Settings → Goals →
 Add goal → Custom event), one per name listed in `GOALS` (`src/lib/analytics.ts`).
 
-**4. The news sign-up (Mailjet), when you want it on.** The service
-(`src/server/subscribe.ts`) holds the Mailjet key, mails the confirmation link and adds only
-confirmed addresses to the list. Without these settings it answers 503 and the site shows no
-sign-up block.
+**4. The news sign-up and the results e-mail, when you want them on.** The service
+(`src/server/subscribe.ts`) sends through Microsoft Graph as the Là-bas mailbox of the Big
+Emotion Microsoft 365 tenant, reusing the tenant's Entra app (the one big-emotion.com sends
+with). It mails the confirmation link and adds only confirmed addresses to the news list, kept in
+Postgres (`news_subscribers`, `src/server/news.ts`): the news sign-up therefore needs step 5.
+Without these settings it answers 503 and the site shows no sign-up block.
 
-1. In Mailjet: validate the sender address (Account → Senders & domains, with the domain's
-   SPF and DKIM), create a contact list for the news, note its ID, and create an API key.
-   Check under Account → Data that contacts are kept in the EU: the privacy page says so.
-2. In the repository:
+1. In Microsoft 365 (admin center → Settings → Domains): add `labas.africa`, prove it with the
+   TXT record Microsoft gives, then add the SPF include (`include:spf.protection.outlook.com`)
+   and the two DKIM CNAMEs (`selector1._domainkey`, `selector2._domainkey`) at the DNS host
+   that holds the zone. Keep the current MX and SPF includes while mail is still received
+   where it is today; in Exchange admin, set the domain as _Internal relay_ so mail to other
+   `@labas.africa` addresses still reaches that inbox. Turn DKIM signing on for the domain once
+   the CNAMEs resolve.
+2. Create a shared mailbox `bonjour@labas.africa` (no licence needed) and add it to the
+   mail-enabled group that the Entra app's `ApplicationAccessPolicy` is scoped to; without it,
+   Graph answers 403 (`ErrorAccessDenied`). Check with
+   `Test-ApplicationAccessPolicy -Identity bonjour@labas.africa -AppId <client id>`.
+3. In the repository:
 
 ```bash
-gh secret set MAILJET_API_KEY --repo big-emotion/labas
-gh secret set MAILJET_SECRET_KEY --repo big-emotion/labas
+gh variable set GRAPH_TENANT_ID --repo big-emotion/labas --body <tenant id>
+gh variable set GRAPH_CLIENT_ID --repo big-emotion/labas --body <client id>
+gh secret set GRAPH_CLIENT_SECRET --repo big-emotion/labas
+gh variable set MAIL_SENDER --repo big-emotion/labas --body bonjour@labas.africa
 openssl rand -base64 32 | gh secret set SUBSCRIBE_SECRET --repo big-emotion/labas
-gh variable set MAILJET_LIST_ID --repo big-emotion/labas --body <list id>
-gh variable set MAILJET_SENDER --repo big-emotion/labas --body <validated sender address>
 gh variable set NEWSLETTER --repo big-emotion/labas --body on
 ```
 
-3. Deploy. CI writes the secrets to `.env.subscribe` (mode 600) beside the compose file and
+4. Deploy. CI writes the settings to `.env.subscribe` (mode 600) beside the compose file and
    starts `labas-subscribe`; Traefik routes `labas.africa/api/nouveautes*` and `/api/resultats` to it.
    `NEWSLETTER=on` builds the sign-up blocks, the « Recevoir par e-mail » form sent by Là-bas, and the privacy sections. Unset it and redeploy to
    take them off. Changing `SUBSCRIBE_SECRET` voids the confirmation links already sent.
-4. Unsubscribing is Mailjet's own link in each campaign. Addresses without news for three years
-   are deleted by hand from the list (the privacy page promises it).
+5. The privacy page promises an unsubscribe link in every news e-mail: whatever sends the first
+   news must carry one. Addresses are erased three years after their last confirmation (the
+   daily purge).
 
 **5. Saved journeys (Postgres), when you want them on.** `labas-db` (Postgres 17) runs beside
 the mail service on an internal network the proxy cannot reach. The data lives in the named volume

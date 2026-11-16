@@ -55,10 +55,10 @@ jobs:
       # The subscribe service's secrets travel as a 600 file, never on a command line.
       - name: Write the subscribe service's environment
         env:
-          MAILJET_API_KEY: ${{ secrets.MAILJET_API_KEY }}
-          MAILJET_SECRET_KEY: ${{ secrets.MAILJET_SECRET_KEY }}
-          MAILJET_LIST_ID: ${{ vars.MAILJET_LIST_ID }}
-          MAILJET_SENDER: ${{ vars.MAILJET_SENDER }}
+          GRAPH_TENANT_ID: ${{ vars.GRAPH_TENANT_ID }}
+          GRAPH_CLIENT_ID: ${{ vars.GRAPH_CLIENT_ID }}
+          GRAPH_CLIENT_SECRET: ${{ secrets.GRAPH_CLIENT_SECRET }}
+          MAIL_SENDER: ${{ vars.MAIL_SENDER }}
           SUBSCRIBE_SECRET: ${{ secrets.SUBSCRIBE_SECRET }}
           LABAS_DB_PASSWORD: ${{ secrets.LABAS_DB_PASSWORD }}
         run: |
@@ -68,10 +68,10 @@ jobs:
             database="postgres://labas:$LABAS_DB_PASSWORD@labas-db:5432/labas"
           fi
           {
-            echo "MAILJET_API_KEY=$MAILJET_API_KEY"
-            echo "MAILJET_SECRET_KEY=$MAILJET_SECRET_KEY"
-            echo "MAILJET_LIST_ID=$MAILJET_LIST_ID"
-            echo "MAILJET_SENDER=$MAILJET_SENDER"
+            echo "GRAPH_TENANT_ID=$GRAPH_TENANT_ID"
+            echo "GRAPH_CLIENT_ID=$GRAPH_CLIENT_ID"
+            echo "GRAPH_CLIENT_SECRET=$GRAPH_CLIENT_SECRET"
+            echo "MAIL_SENDER=$MAIL_SENDER"
             echo "SUBSCRIBE_SECRET=$SUBSCRIBE_SECRET"
             echo "DATABASE_URL=$database"
           } > /tmp/.env.subscribe

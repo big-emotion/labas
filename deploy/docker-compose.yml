@@ -30,7 +30,7 @@ services:
       - "traefik.http.middlewares.labas-https.redirectscheme.permanent=true"
 
   # The mail service (src/server/subscribe.ts). Traefik sends it /api/nouveautes and /api/resultats;
-  # everything else stays with the static site. Its Mailjet secrets come from .env.subscribe,
+  # everything else stays with the static site. Its Microsoft Graph secret comes from .env.subscribe,
   # which CI writes from the repository secrets on each deploy.
   labas-subscribe:
     image: labas-subscribe:live

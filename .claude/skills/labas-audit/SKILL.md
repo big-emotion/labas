@@ -158,7 +158,7 @@ Also `npm run build:server` — the service bundle is not part of `make check`, 
   lifetimes), the table in `docs/accounts.md` and what `src/pages/confidentialite.astro` tells
   readers must agree, and `purge()` must enforce each one under test. A mismatch is a P0.
 - **Throttling**: a route that sends an e-mail to an address anyone can type, with no rate limit
-  anywhere on the path (service, nginx, Traefik), is a P1 (mail bombing, sender reputation, Mailjet
+  anywhere on the path (service, nginx, Traefik), is a P1 (mail bombing, sender reputation, Microsoft 365
   quota). Quote where the limit lives, or that none exists.
 - The service answers 503 without its secrets and starts no database without `LABAS_DB_PASSWORD`
   (the CI `image` job asserts both — read that it ran).
@@ -183,7 +183,7 @@ data), and `docs/`.
   `filters.ts`: a weight or cut-off with no named constant and no test that pins its effect.
 - **Lifetimes & durations** — `* 60`, `* 1000`, `DAY` arithmetic outside the named constants of
   `accounts.ts`.
-- **Hosts & URLs** — `labas.africa`, the Plausible collector, Mailjet endpoints written outside the
+- **Hosts & URLs** — `labas.africa`, the Plausible collector, Microsoft Graph endpoints written outside the
   one place that defines each.
 - **Size & truncation** — `slice(0, N)`, `.length > N`, top-N counts (the « top three » on the map,
   the « top five » the next question optimises) defined in more than one place.
@@ -297,7 +297,7 @@ gap drags the mean down several times and the domains stop ranking anything.
    whether a cap applied.
 3. **Clone → running in one session?** Walk `git clone`, `nvm use`, `npm ci`, `npm run dev`,
    `make check`, then the service: `npm run build:server` and the tests that run it against PGlite
-   (no real database, no Mailjet key needed). Every step with no doc or only tribal knowledge is a P1.
+   (no real database, no Microsoft 365 secret needed). Every step with no doc or only tribal knowledge is a P1.
 4. **Security and privacy posture?** One paragraph: headers served live, what leaves the browser,
    the service (origin, tokens, consent, lifetimes, throttling, the internal database, backups),
    secrets, public-repo hygiene, supply chain, branch protection as measured.
@@ -343,6 +343,6 @@ Before reporting done:
 
 ## Out of scope
 
-Fixing what the audit finds; any write to GitHub settings, the VPS, Postgres, Mailjet, Plausible or
+Fixing what the audit finds; any write to GitHub settings, the VPS, Postgres, Microsoft 365, Plausible or
 DNS; running a migration or `purge()` against a real database; load or Lighthouse runs against
 production (read-only `curl -sI` is the only live request); editorial rewriting of city data.

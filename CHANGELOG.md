@@ -6,6 +6,12 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+### Changed
+
+- Là-bas's e-mails (confirmation, results, sign-in link) leave from its Microsoft 365 mailbox
+  through Microsoft Graph instead of Mailjet. The news list is kept in the site's own database,
+  and an address is erased three years after its last confirmation.
+
 ## [0.16.0] - 2026-11-16
 
 ### Changed

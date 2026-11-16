@@ -8,7 +8,7 @@ COPY . .
 # Audience measurement is baked in at build time; left empty, the site loads no script.
 ARG PUBLIC_PLAUSIBLE_DOMAIN=""
 ARG PUBLIC_PLAUSIBLE_HOST=""
-# The news sign-up blocks show only once the subscribe service has its Mailjet secrets.
+# The news sign-up blocks show only once the subscribe service has its mail settings.
 ARG PUBLIC_NEWSLETTER=""
 ENV PUBLIC_PLAUSIBLE_DOMAIN=$PUBLIC_PLAUSIBLE_DOMAIN \
     PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST \
