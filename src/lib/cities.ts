@@ -6,8 +6,7 @@ import lifeCatalogue from "../data/city-life.json";
 
 /**
  * A city joins three files: who it is (cities.json), how it scores on each criterion with its
- * sources (city-scores.json), and the national facts of its country (countries.json). Rationale:
- * docs/criteria/architecture.md §3 and §5.
+ * sources (city-scores.json), and the national facts of its country (countries.json).
  */
 
 export const CRITERION_KEYS = [

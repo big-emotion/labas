@@ -35,10 +35,8 @@ its audience is the French-speaking diaspora first.
 >
 > Each of the 16 criteria is scored 0–5 on a written rubric (`src/data/criteria.json`, shown on
 > `/methode`), with a justification, a confidence level and dated sources. About one score in
-> five is still unknown and counts as a neutral 2.5. Editors' doubts are listed in
-> `docs/criteria/scores-review.md` and `docs/criteria/city-lines-review.md`; clear them before a
-> public launch. Cities that French or UK travel advice warns against are ranked but never
-> proposed, and the rule is derived from the stored advice, not set by hand.
+> five is still unknown and counts as a neutral 2.5. French and UK travel advice is shown with
+> each city as dated information; it never removes or greys a city.
 
 ---
 
@@ -65,7 +63,7 @@ src/pages/methode.astro     the rubric, the confidence levels, what is never sco
 
 Weights come from the prototype so its results stay recognisable. An unanswered question
 drops out of the score; tapping a pressed chip clears it. The page speaks to the reader with
-« tu ». The only ordering rule is the score. The design behind all this, and what comes next,
+« vous ». The only ordering rule is the score. The design behind all this, and what comes next,
 is in [`docs/criteria/architecture.md`](docs/criteria/architecture.md).
 
 ### Questions left out of the one-screen form
@@ -132,7 +130,7 @@ npm run test:watch
 1. Clear the review lists, then launch publicly.
 2. Shareable result link and a 1080 × 1920 story image.
 3. Personal coaching behind « Aller plus loin » (the questionnaire is open to everyone for now).
-4. The free-text entry, with explicit consent (docs/criteria/architecture.md §7).
+4. The free-text entry, with explicit consent.
 
 ---
 

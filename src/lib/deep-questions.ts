@@ -3,9 +3,8 @@ import { MUSIC } from "./music";
 import type { Answers } from "./ranking";
 
 /**
- * The fuller questionnaire of /approfondir: the quick quiz's bank, then the filters and stated
- * tolerances of docs/criteria/architecture.md §2 and §4.4. Kept to what the sourced data can
- * answer today; the rest of the §4.4 bank waits for its data.
+ * The fuller questionnaire of /approfondir: the quick quiz's bank, then filters and stated
+ * tolerances. Kept to what the sourced data can answer today.
  */
 const FURTHER: Omit<Question, "group">[] = [
   {

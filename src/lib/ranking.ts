@@ -165,7 +165,7 @@ const pull = (axis: Axis, target: number, weight: number): Pull => ({ axis, targ
 // Each answer is a set of pulls: where it wants the city on an axis (0 to 1, relative to the
 // 115 cities), and how much that counts. A reading of the answer, written down so it can be
 // argued with: "Danser jusqu'au matin" wants a city at the lively end of nightlife.
-// Each answer is read against every one of the 16 criteria (docs/criteria/weights.md): a pull
+// Each answer is read against every one of the 16 criteria: a pull
 // says where the answer wants the city (0 to 1, relative to the 115 cities) and how much that
 // counts; a criterion left out is unrelated to the answer on purpose. Everyday basics (safety,
 // power, water and care) count wherever a European-based reader would check them first.
