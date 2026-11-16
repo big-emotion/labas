@@ -4,6 +4,7 @@ import { bestMatches, topCities, type Answers } from "./ranking";
 
 const TOP = 3;
 const FIVE = 5;
+const CLOSING = "priorities";
 
 /**
  * The next question: the one whose answers would reshuffle the current top three the most
@@ -54,9 +55,12 @@ export function freeQuestions(answers: Answers): Question[] {
  * changes which one comes next (operator, 2026-11-15). Ties keep the bank's order.
  */
 export function nextFreeQuestion(answers: Answers, asked: string[]): string | undefined {
-  const open = freeQuestions(answers).filter((q) => !asked.includes(q.id));
+  const remaining = freeQuestions(answers).filter((q) => !asked.includes(q.id));
   // With no answer every city ties and any question looks decisive: open on the project.
   if (!asked.includes("project")) return "project";
+  // The non-negotiables close the quiz (beta feedback, 2026-11-16): asked in the middle they read
+  // as a riddle, asked last as « now, what will you not compromise on ».
+  const open = remaining.length > 1 ? remaining.filter((q) => q.id !== CLOSING) : remaining;
   const before = new Set(topCities(answers, FIVE));
   let best: string | undefined;
   let bestMoved = -1;

@@ -287,8 +287,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "priorities",
     group: DAILY,
-    title: "Ce qui compte le plus pour vous ?",
-    hint: "Jusqu'à trois choix. Ils pèsent lourd dans le résultat.",
+    title: "Sur quoi ne voulez-vous pas transiger ?",
+    hint: "Jusqu'à trois choix. Ce sont vos non-négociables : ils comptent le plus dans votre classement.",
     max: 3,
     choices: [
       { label: "Me sentir en sécurité", value: "safety" },
@@ -296,7 +296,7 @@ export const QUESTIONS: Question[] = [
       { label: "La santé et l'école", value: "healthAndSchools" },
       { label: "Ma carrière", value: "career" },
       { label: "Retrouver d'autres repats", value: "diaspora" },
-      { label: "La mémoire de la diaspora", value: "memory" },
+      { label: "Les lieux de mémoire (traite, histoire des diasporas)", value: "memory" },
       { label: "Voyager facilement", value: "flights" },
     ],
   },
