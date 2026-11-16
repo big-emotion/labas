@@ -1,16 +1,22 @@
 /**
- * The one piece of server code in Là-bas: it signs readers up for the news by e-mail.
+ * The one piece of server code in Là-bas: it sends the e-mails a reader asks for — the news
+ * sign-up and their results.
  *
  * Mailjet's API needs a secret key, which a static page cannot hold, so this small service holds
  * it (operator's choice, 2026-11-16, over a third-party form). It keeps no database: the
  * confirmation link carries the address, signed, and only a confirmed address reaches the
- * Mailjet list (double opt-in). It receives the address and the ticked box, nothing else.
+ * Mailjet list (double opt-in). A results e-mail is drawn from the site's own result link, read
+ * with the site's own code, so no text a visitor types can reach someone's inbox.
  *
- * One file with no local imports, so Node runs it as is: `node src/server/subscribe.ts`.
+ * Bundled with the site's data by `npm run build:server` (esbuild) into one file Node runs.
  */
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
+import { readShared, sharedResult } from "../lib/shared-result";
+import { type Mail, confirmationEmail, resultsEmail } from "./emails";
+
+export type { Mail } from "./emails";
 
 export interface Config {
   apiKey: string;
@@ -21,10 +27,12 @@ export interface Config {
   /** Signs the confirmation links. */
   secret: string;
   siteUrl: string;
+  /** Where readers' replies go: the operator's own mailbox. */
+  replyTo: string;
 }
 
 export interface Mailer {
-  sendConfirmation(email: string, link: string): Promise<void>;
+  send(mail: Mail): Promise<void>;
   addToList(email: string): Promise<void>;
 }
 
@@ -92,33 +100,71 @@ export function createHandler(config: Config, mailer: Mailer, now: () => number 
   const perAddress = limiter(3, DAY);
   const configured = Object.values(config).every(Boolean);
 
+  const confirmLinkFor = (email: string) =>
+    `${config.siteUrl}/api/nouveautes/confirmer?t=${signToken(email, now(), config.secret)}`;
+
+  /** What both forms share: the service is open, the form comes from the site, a real address, the limits. */
+  async function guard(
+    request: Request,
+    valid: (form: Record<string, unknown>) => boolean,
+    send: (email: string, form: Record<string, unknown>) => Mail,
+  ): Promise<Response> {
+    if (!configured) return json(503, { error: "closed" });
+    if (request.headers.origin !== config.siteUrl) return json(403, { error: "origin" });
+    const form = (request.body ?? {}) as Record<string, unknown>;
+    const email = String(form.email ?? "")
+      .trim()
+      .toLowerCase();
+    if (!isEmail(email) || !valid(form)) return json(400, { error: "form" });
+    // The hidden field only robots fill: they are told it worked.
+    if (form.website) return json(202, { ok: true });
+    const connection = request.headers["x-real-ip"] ?? "unknown";
+    if (!perConnection(connection, now())) return json(429, { error: "slow-down" });
+    if (!perAddress(email, now())) return json(429, { error: "slow-down" });
+    try {
+      await mailer.send(send(email, form));
+    } catch (error) {
+      // The operator's log gets Mailjet's answer, never the reader's address.
+      console.error(String(error));
+      return json(502, { error: "mail" });
+    }
+    return json(202, { ok: true });
+  }
+
+  /** The reader's result from its link on this site, or null for anything else. */
+  function resultFrom(link: unknown) {
+    try {
+      const url = new URL(String(link));
+      if (url.origin !== config.siteUrl || url.pathname !== "/resultat/") return null;
+      const payload = readShared(url.hash);
+      return payload && sharedResult(payload);
+    } catch {
+      return null;
+    }
+  }
+
   return async (request: Request): Promise<Response> => {
     if (request.method === "POST" && request.path === "/api/nouveautes") {
-      if (!configured) return json(503, { error: "closed" });
-      if (request.headers.origin !== config.siteUrl) return json(403, { error: "origin" });
-      const form = (request.body ?? {}) as {
-        email?: unknown;
-        consent?: unknown;
-        website?: unknown;
-      };
-      const email = String(form.email ?? "")
-        .trim()
-        .toLowerCase();
-      if (form.consent !== true || !isEmail(email)) return json(400, { error: "form" });
-      // The hidden field only robots fill: they are told it worked.
-      if (form.website) return json(202, { ok: true });
-      const connection = request.headers["x-real-ip"] ?? "unknown";
-      if (!perConnection(connection, now())) return json(429, { error: "slow-down" });
-      if (!perAddress(email, now())) return json(429, { error: "slow-down" });
-      const link = `${config.siteUrl}/api/nouveautes/confirmer?t=${signToken(email, now(), config.secret)}`;
-      try {
-        await mailer.sendConfirmation(email, link);
-      } catch (error) {
-        // The operator's log gets Mailjet's answer, never the reader's address.
-        console.error(String(error));
-        return json(502, { error: "mail" });
-      }
-      return json(202, { ok: true });
+      return guard(
+        request,
+        (form) => form.consent === true,
+        (email) => confirmationEmail(email, confirmLinkFor(email)),
+      );
+    }
+
+    if (request.method === "POST" && request.path === "/api/resultats") {
+      return guard(
+        request,
+        (form) => resultFrom(form.link) !== null,
+        (email, form) =>
+          resultsEmail(
+            email,
+            resultFrom(form.link)!,
+            String(form.link),
+            config.siteUrl,
+            form.news === true ? confirmLinkFor(email) : undefined,
+          ),
+      );
     }
 
     if (request.method === "GET" && request.path === "/api/nouveautes/confirmer") {
@@ -139,30 +185,6 @@ export function createHandler(config: Config, mailer: Mailer, now: () => number 
   };
 }
 
-const CONFIRMATION_TEXT = (link: string) => `Bonjour,
-
-Vous avez demandé à recevoir les nouveautés de Là-bas : nouvelles villes, questionnaire amélioré, un e-mail par mois au plus.
-
-Pour confirmer, ouvrez ce lien :
-${link}
-
-Vous n'avez rien demandé ? Ignorez ce message : vous ne recevrez rien d'autre.
-
-Là-bas est édité par Big Emotion · labas.africa. Nous gardons votre adresse, rien d'autre, et ne la vendons ni ne la prêtons.`;
-
-const CONFIRMATION_HTML = (
-  link: string,
-) => `<!doctype html><html lang="fr"><body style="margin:0;background:#f1f0ff;font-family:Arial,sans-serif;color:#1d1b3a">
-<div style="max-width:560px;margin:24px auto;background:#161a5c;color:#f1f0ff;border-radius:20px;padding:32px">
-<p style="margin:0 0 16px;font-family:Georgia,serif;font-weight:900;font-size:32px">Là<span style="color:#ffb627">-</span>bas</p>
-<p>Bonjour,</p>
-<p>Vous avez demandé à recevoir les nouveautés de Là-bas : nouvelles villes, questionnaire amélioré, un e-mail par mois au plus. Pour confirmer, touchez le bouton.</p>
-<p><a href="${link}" style="display:inline-block;padding:16px 26px;border-radius:999px;background:#ffb627;color:#1d1b3a;font-weight:800;text-decoration:none">Je confirme mon inscription</a></p>
-<p style="color:#b4b8ea;font-size:15px">Vous n'avez rien demandé ? Ignorez ce message : vous ne recevrez rien d'autre.</p>
-</div>
-<p style="max-width:560px;margin:0 auto 24px;font-size:13px;color:#4a4870">Là-bas est édité par Big Emotion · labas.africa · Nous gardons votre adresse, rien d'autre, et ne la vendons ni ne la prêtons.</p>
-</body></html>`;
-
 export function mailjet(config: Config, fetchImpl: typeof fetch = fetch): Mailer {
   const authorization = `Basic ${Buffer.from(`${config.apiKey}:${config.apiSecret}`).toString("base64")}`;
   const call = async (url: string, body: object) => {
@@ -174,15 +196,16 @@ export function mailjet(config: Config, fetchImpl: typeof fetch = fetch): Mailer
     if (!response.ok) throw new Error(`Mailjet answered ${response.status} on ${url}`);
   };
   return {
-    sendConfirmation: (email, link) =>
+    send: (mail) =>
       call("https://api.mailjet.com/v3.1/send", {
         Messages: [
           {
             From: { Email: config.sender, Name: "Là-bas" },
-            To: [{ Email: email }],
-            Subject: "Confirmez votre inscription aux nouveautés de Là-bas",
-            TextPart: CONFIRMATION_TEXT(link),
-            HTMLPart: CONFIRMATION_HTML(link),
+            ReplyTo: { Email: config.replyTo },
+            To: [{ Email: mail.to }],
+            Subject: mail.subject,
+            TextPart: mail.text,
+            HTMLPart: mail.html,
           },
         ],
       }),
@@ -203,6 +226,7 @@ function start(port: number) {
     sender: process.env.MAILJET_SENDER ?? "",
     secret: process.env.SUBSCRIBE_SECRET ?? "",
     siteUrl: process.env.SITE_URL ?? "https://labas.africa",
+    replyTo: process.env.REPLY_TO ?? "hello@big-emotion.com",
   };
   const handle = createHandler(config, mailjet(config));
   createServer(async (incoming, outgoing) => {

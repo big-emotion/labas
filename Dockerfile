@@ -13,16 +13,16 @@ ARG PUBLIC_NEWSLETTER=""
 ENV PUBLIC_PLAUSIBLE_DOMAIN=$PUBLIC_PLAUSIBLE_DOMAIN \
     PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST \
     PUBLIC_NEWSLETTER=$PUBLIC_NEWSLETTER
-RUN npm run build
+RUN npm run build && npm run build:server
 
-# The news sign-up service (src/server/subscribe.ts): one file, no dependency, run by Node as is.
+# The mail service (src/server/subscribe.ts), bundled with the site's data into one file.
 # Built with --target subscribe; the default target below stays the static site.
 FROM node:24-alpine AS subscribe
 WORKDIR /app
-COPY src/server/subscribe.ts ./
+COPY --from=build /app/dist-server/subscribe.mjs ./
 USER node
 EXPOSE 8080
-CMD ["node", "subscribe.ts"]
+CMD ["node", "subscribe.mjs"]
 
 FROM nginx:1.27-alpine
 COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf

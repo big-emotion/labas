@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { NEWS_AFTER, outcomeOf, shouldOfferNews, signUpBody } from "./newsletter";
+import { NEWS_AFTER, outcomeOf, resultsBody, shouldOfferNews, signUpBody } from "./newsletter";
 
 describe("when the quiz offers the news", () => {
   it("waits for the fourth answer, so the first questions come uninterrupted", () => {
@@ -46,5 +46,32 @@ describe("what the reader is told", () => {
         message: expect.stringContaining("hello@big-emotion.com"),
       });
     }
+  });
+});
+
+describe("sending one's results by e-mail", () => {
+  const link = "https://labas.africa/resultat/#r=abc";
+
+  it("sends the address, the result link and the news choice, nothing from the answers", () => {
+    expect(resultsBody({ email: " awa@exemple.fr ", news: false, website: "" }, link)).toEqual({
+      email: "awa@exemple.fr",
+      link,
+      news: false,
+      website: "",
+    });
+    expect(resultsBody({ email: "awa@exemple.fr", news: true, website: "" }, link)?.news).toBe(
+      true,
+    );
+  });
+
+  it("needs only a plausible address: the news box stays optional", () => {
+    expect(resultsBody({ email: "awa", news: true, website: "" }, link)).toBeNull();
+  });
+
+  it("asks only to check the address when the form is refused", () => {
+    expect(outcomeOf(400, "results")).toEqual({
+      sent: false,
+      message: "Vérifiez votre adresse, puis réessayez.",
+    });
   });
 });

@@ -1,7 +1,11 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
+import { CITIES } from "../lib/cities";
+import type { Match } from "../lib/ranking";
+import { resultLink } from "../lib/shared-result";
 import {
   type Config,
+  type Mail,
   type Mailer,
   createHandler,
   mailjet,
@@ -16,17 +20,20 @@ const CONFIG: Config = {
   sender: "nouveautes@labas.africa",
   secret: "a-long-random-secret-for-tests",
   siteUrl: "https://labas.africa",
+  replyTo: "hello@big-emotion.com",
 };
 const DAY = 24 * 60 * 60 * 1000;
 
 /** The only fake: the e-mail service at the edge of the system. */
 function recordingMailer(fail = false) {
-  const sent: { email: string; link: string }[] = [];
+  const sent: (Mail & { email: string; link: string })[] = [];
   const listed: string[] = [];
   const mailer: Mailer = {
-    async sendConfirmation(email, link) {
+    async send(mail) {
       if (fail) throw new Error("mailjet down");
-      sent.push({ email, link });
+      const link =
+        /https:\/\/labas\.africa\/api\/nouveautes\/confirmer\?t=[\w.-]+/.exec(mail.text)?.[0] ?? "";
+      sent.push({ ...mail, email: mail.to, link });
     },
     async addToList(email) {
       listed.push(email);
@@ -184,16 +191,19 @@ describe("the Mailjet connection", () => {
       return new Response("{}", { status: 200 });
     };
     const service = mailjet(CONFIG, fakeFetch as typeof fetch);
-    await service.sendConfirmation(
-      "awa@exemple.fr",
-      "https://labas.africa/api/nouveautes/confirmer?t=x",
-    );
+    await service.send({
+      to: "awa@exemple.fr",
+      subject: "Confirmez",
+      text: "Lien : https://labas.africa/api/nouveautes/confirmer?t=x",
+      html: "<a>Je confirme mon inscription</a>",
+    });
     await service.addToList("awa@exemple.fr");
 
     expect(calls[0].url).toBe("https://api.mailjet.com/v3.1/send");
     const message = JSON.parse(String(calls[0].init.body)).Messages[0];
     expect(message.From).toEqual({ Email: "nouveautes@labas.africa", Name: "Là-bas" });
     expect(message.To).toEqual([{ Email: "awa@exemple.fr" }]);
+    expect(message.ReplyTo).toEqual({ Email: "hello@big-emotion.com" });
     expect(message.TextPart).toContain("https://labas.africa/api/nouveautes/confirmer?t=x");
     expect(message.HTMLPart).toContain("Je confirme mon inscription");
 
@@ -211,5 +221,96 @@ describe("the Mailjet connection", () => {
     await expect(
       mailjet(CONFIG, refusing as typeof fetch).addToList("awa@exemple.fr"),
     ).rejects.toThrow(/401/);
+  });
+});
+
+describe("receiving one's results by e-mail", () => {
+  const top = CITIES.slice(0, 3).map((city, i) => ({ city, score: 0.9 - i / 10 }) as Match);
+  const link = resultLink({ order: 1, together: 0.5 }, top);
+  const ask = (body: Record<string, unknown>, headers: Record<string, string> = {}) => ({
+    ...post(body, headers),
+    path: "/api/resultats",
+  });
+
+  it("sends the three cities, their percentages, their pages and the result link", async () => {
+    const { mailer, sent, listed } = recordingMailer();
+    const response = await createHandler(CONFIG, mailer)(ask({ email: "awa@exemple.fr", link }));
+    expect(response.status).toBe(202);
+    expect(sent).toHaveLength(1);
+    const mail = sent[0];
+    expect(mail.to).toBe("awa@exemple.fr");
+    expect(mail.subject).toBe(`Vos villes d'Afrique : ${top.map((m) => m.city.name).join(", ")}`);
+    for (const [i, m] of top.entries()) {
+      expect(mail.text).toContain(`${i + 1}. ${m.city.name} (${m.city.country}) · ${90 - i * 10}`);
+      expect(mail.html).toContain(`https://labas.africa/ville/${m.city.slug}/`);
+    }
+    expect(mail.text).toContain(link);
+    expect(mail.link).toBe("");
+    expect(listed).toEqual([]);
+  });
+
+  it("adds the news confirmation link to the same e-mail only when the box is ticked", async () => {
+    const { mailer, sent } = recordingMailer();
+    await createHandler(CONFIG, mailer)(ask({ email: "awa@exemple.fr", link, news: true }));
+    expect(sent).toHaveLength(1);
+    expect(sent[0].link).toMatch(/confirmer\?t=/);
+    expect(sent[0].html).toContain("Je confirme mon inscription");
+  });
+
+  it("sends nothing the reader did not produce: only a result link of this site", async () => {
+    const { mailer, sent } = recordingMailer();
+    const handler = createHandler(CONFIG, mailer);
+    const forged = [
+      "https://spam.example/resultat/#r=abc",
+      "https://labas.africa/resultat/#r=not-base64-json",
+      "https://labas.africa/resultat/#r=" +
+        Buffer.from(
+          JSON.stringify({ temperament: {}, cities: [{ slug: "atlantis", percent: 99 }] }),
+        ).toString("base64url"),
+      "",
+    ];
+    for (const bad of forged) {
+      const response = await handler(ask({ email: "awa@exemple.fr", link: bad }));
+      expect(response.status, bad).toBe(400);
+    }
+    expect(sent).toEqual([]);
+  });
+
+  it("shares the limits of the news sign-up, per connection and per address", async () => {
+    const { mailer, sent } = recordingMailer();
+    const handler = createHandler(CONFIG, mailer);
+    await handler(post(SIGN_UP));
+    await handler(ask({ email: "awa@exemple.fr", link }, { "x-real-ip": "connection-b" }));
+    await handler(ask({ email: "awa@exemple.fr", link }, { "x-real-ip": "connection-c" }));
+    const fourth = await handler(
+      ask({ email: "awa@exemple.fr", link }, { "x-real-ip": "connection-d" }),
+    );
+    expect(fourth.status).toBe(429);
+    expect(sent).toHaveLength(3);
+  });
+
+  it("refuses another site, a robot and a closed service like the sign-up does", async () => {
+    const { mailer, sent } = recordingMailer();
+    expect(
+      (
+        await createHandler(
+          CONFIG,
+          mailer,
+        )(ask({ email: "awa@exemple.fr", link }, { origin: "https://evil.example" }))
+      ).status,
+    ).toBe(403);
+    expect(
+      (await createHandler(CONFIG, mailer)(ask({ email: "awa@exemple.fr", link, website: "x" })))
+        .status,
+    ).toBe(202);
+    expect(
+      (
+        await createHandler(
+          { ...CONFIG, apiKey: "" },
+          mailer,
+        )(ask({ email: "awa@exemple.fr", link }))
+      ).status,
+    ).toBe(503);
+    expect(sent).toEqual([]);
   });
 });
