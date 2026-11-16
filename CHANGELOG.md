@@ -6,6 +6,28 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-11-16
+
+### Added
+
+- Share your result: the message and the e-mail carry your profile and why each city fits, with
+  a link that opens your result for whoever receives it; « Enregistrer l'image » makes a picture
+  of it to post or send. The link holds your temperament and cities only, never your other
+  answers.
+- On holiday, the quiz asks how long you stay and what you want to live there (beach, desert,
+  nature, nights out, history, culture).
+
+### Changed
+
+- Each project has its own path: the questions come chapter by chapter, only those that fit
+  your project are asked, and the answers you give shape the next ones (no origins after « Je
+  préfère ne pas dire », no schools without children, no career on holiday).
+
+### Fixed
+
+- Going back and changing an answer no longer leaves answers that no longer apply counting in
+  your result.
+
 ## [0.9.0] - 2026-11-16
 
 ### Changed
@@ -163,7 +185,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/big-emotion/labas/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/big-emotion/labas/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/big-emotion/labas/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/big-emotion/labas/compare/v0.6.1...v0.7.0
