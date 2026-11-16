@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { temperamentOf } from "./city-temperament";
+import { CITIES } from "./cities";
+import { neighbourhoodLine, temperamentOf, TRAITS } from "./city-temperament";
 import { rankCities, type Answers } from "./ranking";
 
 const entriesOf = (cityName: string, answers: Answers) =>
@@ -30,7 +31,7 @@ describe("why a city fits the reader's temperament, neighbourhood by neighbourho
       `Peu d'imprévus : ${smooth} quartiers sur ${dakar.areas}`,
     ]);
     // Lagos has none: the line says so (all its neighbourhoods demand composure).
-    expect(linesOf("Lagos", { friction: 0.5 })).toEqual(["Peu d'imprévus : aucun quartier"]);
+    expect(linesOf("Lagos", { friction: 0.5 })).toEqual(["Aucun quartier avec peu d'imprévus"]);
   });
 
   it("says nothing about friction to a reader whom it amuses: every city suits them", () => {
@@ -47,7 +48,22 @@ describe("why a city fits the reader's temperament, neighbourhood by neighbourho
   it("says « aucun quartier » when none fits, marks it against the city and puts it last", () => {
     expect(temperamentOf("Grand-Bassam")!.saturday[2]).toBe(0);
     const lines = entriesOf("Grand-Bassam", { saturday: 1, order: 0.5 });
-    expect(lines.at(-1)).toEqual({ text: "On sort tard : aucun quartier", weak: true });
+    expect(lines.at(-1)).toEqual({ text: "Aucun quartier où l'on sort tard", weak: true });
     expect(lines[0].weak).toBe(false);
+  });
+
+  // « Tout fonctionne comme prévu : aucun quartier » read as if things worked (operator, 2026-11-16).
+  it("writes a line that counts nothing as a sentence, for every axis and level", () => {
+    let seen = 0;
+    for (const city of CITIES)
+      for (const trait of TRAITS)
+        for (const reader of [0, 0.5, 1]) {
+          const line = neighbourhoodLine(city.name, trait, reader);
+          if (!line?.weak || temperamentOf(city.name)!.editorial) continue;
+          expect(line.text, `${city.name} ${trait} ${reader}`).toMatch(/^Aucun quartier \S/);
+          expect(line.text).not.toContain(" : ");
+          seen++;
+        }
+    expect(seen).toBeGreaterThan(0);
   });
 });

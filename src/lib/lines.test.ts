@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
 import { linesFor } from "./lines";
 
-// Wording the site never uses about the reader (docs/criteria/architecture.md §A.7).
+// Wording the site never uses about the reader: it describes cities, never judges people.
 // Since 2026-11-15 the site says « vous »: no « tu », and never a trait about the reader.
 const TRAIT_WORDS =
   /personnalité|votre profil|vous êtes (quelqu|un |une |plutôt)|(?<![\p{L}'’])(tu|te|toi|ton|ta|tes)(?!\p{L})|(?<!\p{L})t['’](?=\p{L})/iu;

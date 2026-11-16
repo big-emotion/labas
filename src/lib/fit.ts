@@ -8,7 +8,7 @@ import { linesFor } from "./lines";
  * what you said". Each city gets a fingerprint on character axes, each relative to the whole
  * catalogue (a percentile), so no city is better everywhere. Each answer pulls some axes towards
  * a target with a weight, like tokens adding up. The score is the weighted closeness between
- * the reader's pulls and the city's fingerprint. Rationale: docs/criteria/architecture.md §4.
+ * the reader's pulls and the city's fingerprint.
  */
 
 export type Axis =
