@@ -85,3 +85,22 @@ button {
     inset: 0 0 auto 0;
   }
 }
+
+/* « Prévoir des imprévus » under a city, on every result page (cards-dom fillLines). */
+.gauge-line .pips {
+  display: inline-flex;
+  gap: 3px;
+  vertical-align: middle;
+}
+.gauge-line .pips i {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: var(--night-lift);
+}
+.gauge-line .pips i.on {
+  background: var(--saffron);
+}
+.gauge-line small {
+  color: var(--thread-faint);
+}

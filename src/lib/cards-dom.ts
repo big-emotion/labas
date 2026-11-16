@@ -3,7 +3,7 @@ import { costLabel, livingLines, regionName, sameCountry } from "./card";
 import { goingThere } from "./going";
 import { linesFor } from "./lines";
 import { photoFor } from "./photos";
-import type { TemperamentLine } from "./city-temperament";
+import { UNEXPECTED_LABEL, type TemperamentLine } from "./city-temperament";
 import type { Match, Rated } from "./ranking";
 
 /** Render code for components/ResultCards.astro: a card for the top cities, a row for the rest. */
@@ -92,18 +92,23 @@ function fillRated(block: HTMLElement, lines: Rated[]) {
       const item = document.createElement("li");
       const label = document.createElement("span");
       label.textContent = line.label;
-      const pips = document.createElement("span");
-      pips.className = "pips";
-      pips.setAttribute("aria-label", `${line.level} sur 5`);
-      for (let i = 1; i <= 5; i++) {
-        const pip = document.createElement("i");
-        if (i <= line.level) pip.className = "on";
-        pips.append(pip);
-      }
-      item.append(label, pips);
+      item.append(label, pipsOf(line.level));
       return item;
     }),
   );
+}
+
+/** Five pips, `level` of them lit, read aloud as « 3 sur 5 ». */
+function pipsOf(level: number): HTMLElement {
+  const pips = document.createElement("span");
+  pips.className = "pips";
+  pips.setAttribute("aria-label", `${level} sur 5`);
+  for (let i = 1; i <= 5; i++) {
+    const pip = document.createElement("i");
+    if (i <= level) pip.className = "on";
+    pips.append(pip);
+  }
+  return pips;
 }
 
 // Every card has the same fields; only the first one shows its photo.
@@ -171,6 +176,17 @@ export function fillLines(list: HTMLElement, lines: TemperamentLine[]) {
   list.replaceChildren(
     ...lines.map((line) => {
       const item = document.createElement("li");
+      if (line.gauge) {
+        // « Prévoir des imprévus » is drawn as a gauge, like the criteria (operator, 2026-11-16).
+        item.className = "gauge-line";
+        item.append(`${UNEXPECTED_LABEL} `, pipsOf(line.gauge.level));
+        if (line.gauge.estimate) {
+          const estimate = document.createElement("small");
+          estimate.textContent = " estimation";
+          item.append(estimate);
+        }
+        return item;
+      }
       item.textContent = line.text;
       if (line.weak) item.className = "weak";
       return item;

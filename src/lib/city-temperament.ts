@@ -46,21 +46,24 @@ export function temperamentFit(cityName: string, trait: Trait, reader: number): 
   return fit / profile.areas;
 }
 
+/** The axes told neighbourhood by neighbourhood; organisation and friction make the gauge. */
+type Told = "saturday" | "adventure" | "together";
+const TOLD: readonly Trait[] = ["saturday", "adventure", "together"];
+
 /** What a neighbourhood at each level is like, in the reader's words, low level first. */
-const LEVEL_NAMES: Record<Trait, [string, string, string]> = {
+const LEVEL_NAMES: Record<Told, [string, string, string]> = {
   saturday: ["Calme le soir", "Dîners et quelques bars", "On sort tard"],
   adventure: ["Repères familiers", "Entre repères et dépaysement", "Dépaysant"],
-  order: ["On improvise, tout se négocie", "Un peu de cadre", "Tout fonctionne comme prévu"],
   together: ["Chacun sa route", "Vie résidentielle tranquille", "Vie de quartier et entraide"],
-  friction: ["Quotidien sans heurts", "Peu d'imprévus", ""],
 };
 
 /**
- * The same levels when no neighbourhood has them, as a sentence: « Tout fonctionne comme prévu :
- * aucun quartier » read as if things worked. « Aucun » is the strongest claim the site makes
- * about a city, so it is tied to our notes (operator, 2026-11-16).
+ * The same levels when no neighbourhood has them, as a sentence: « On sort tard : aucun
+ * quartier » read badly. « Aucun » is the strongest claim the site makes about a city, so it is
+ * tied to our notes; a city rated as a whole says « pas une ville… » and that it is our estimate
+ * (operator, 2026-11-16).
  */
-const NO_NEIGHBOURHOOD: Record<Trait, [string, string, string]> = {
+const NO_NEIGHBOURHOOD: Record<Told, [string, string, string]> = {
   saturday: [
     "Aucun quartier calme le soir",
     "Aucun quartier de dîners et de quelques bars",
@@ -71,24 +74,34 @@ const NO_NEIGHBOURHOOD: Record<Trait, [string, string, string]> = {
     "Aucun quartier entre repères et dépaysement",
     "Aucun quartier dépaysant",
   ],
-  order: [
-    "Aucun quartier où l'on improvise",
-    "Aucun quartier avec un peu de cadre",
-    "Aucun quartier où tout fonctionne comme prévu",
-  ],
   together: [
     "Aucun quartier où chacun suit sa route",
     "Aucun quartier résidentiel et tranquille",
     "Aucun quartier où l'on vit en voisins",
   ],
-  friction: ["Aucun quartier au quotidien sans heurts", "Aucun quartier avec peu d'imprévus", ""],
+};
+const NOT_THE_CITY: Record<Told, [string, string, string]> = {
+  saturday: [
+    "Pas une ville calme le soir",
+    "Pas une ville de dîners et de quelques bars",
+    "Pas une ville où l'on sort tard",
+  ],
+  adventure: [
+    "Pas une ville aux repères familiers",
+    "Pas une ville entre repères et dépaysement",
+    "Pas une ville dépaysante",
+  ],
+  together: [
+    "Pas une ville où chacun suit sa route",
+    "Pas une ville résidentielle et tranquille",
+    "Pas une ville où l'on vit en voisins",
+  ],
 };
 
 /**
  * Why the city fits the reader's answer on one axis: how many of its neighbourhoods sit at the
- * reader's level (« Calme le soir : 3 quartiers sur 11 »). On `friction` a reader is fine with
- * any smoother neighbourhood, so those count too; a reader whom outages amuse gets no line, since
- * every city suits them. A city rated as a whole says so.
+ * reader's level (« Calme le soir : 3 quartiers sur 11 »). Organisation and friction have no
+ * such line: they make the gauge of surprises to plan for (`unexpectedGauge`).
  */
 export function neighbourhoodLine(
   cityName: string,
@@ -97,24 +110,49 @@ export function neighbourhoodLine(
 ): TemperamentLine | null {
   const profile = BY_NAME.get(cityName);
   const level = LEVELS.indexOf(reader);
-  if (!profile || level < 0) return null;
-  if (trait === "friction" && level === 2) return null;
-  const name = LEVEL_NAMES[trait][level];
-  const counts = profile[trait];
-  const n =
-    trait === "friction" ? counts.slice(0, level + 1).reduce((a, b) => a + b, 0) : counts[level];
+  if (!profile || level < 0 || !TOLD.includes(trait)) return null;
+  const told = trait as Told;
+  const n = profile[told][level];
   if (profile.editorial)
-    return { text: `${name} : ${n ? "oui" : "non"}, estimation pour la ville`, weak: n === 0 };
+    return n
+      ? { text: `${LEVEL_NAMES[told][level]}, selon notre estimation`, weak: false }
+      : { text: `${NOT_THE_CITY[told][level]}, selon notre estimation`, weak: true };
   // A line that counts nothing stays, readable and marked against the city (operator, 2026-11-16).
-  if (n === 0) return { text: `${NO_NEIGHBOURHOOD[trait][level]}, selon nos sources`, weak: true };
-  return { text: `${name} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`, weak: false };
+  if (n === 0) return { text: `${NO_NEIGHBOURHOOD[told][level]}, selon nos sources`, weak: true };
+  return {
+    text: `${LEVEL_NAMES[told][level]} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`,
+    weak: false,
+  };
 }
 
-/** One line under a city: its text, and whether it counts against the city (no neighbourhood fits). */
+const meanLevel = (counts: [number, number, number], areas: number) =>
+  counts.reduce((sum, count, i) => sum + count * LEVELS[i], 0) / areas;
+
+/**
+ * How many surprises to plan for, 1 to 5 (operator, 2026-11-16): no city can be said to « work
+ * as planned », not even Paris, but where people improvise and outages are common, one plans for
+ * more. Half how much of the city improvises (organisation), half how much friction it carries,
+ * from the same neighbourhood counts as the rest.
+ */
+export function unexpectedGauge(cityName: string): { level: number; estimate: boolean } | null {
+  const profile = BY_NAME.get(cityName);
+  if (!profile) return null;
+  const improvised = 1 - meanLevel(profile.order, profile.areas);
+  const friction = meanLevel(profile.friction, profile.areas);
+  return { level: 1 + Math.round(((improvised + friction) / 2) * 4), estimate: profile.editorial };
+}
+
+/**
+ * One line under a city: its text, whether it counts against the city (no neighbourhood fits),
+ * and for « Prévoir des imprévus » the gauge the cards draw (the text says it for e-mail and sharing).
+ */
 export interface TemperamentLine {
   text: string;
   weak: boolean;
+  gauge?: { level: number; estimate: boolean };
 }
+
+export const UNEXPECTED_LABEL = "Prévoir des imprévus";
 
 const ADVENTURE_LEVELS = { familiar: 0, open: 0.5, seeking: 1 } as const;
 
@@ -129,7 +167,8 @@ export type TemperamentAnswers = {
 
 /**
  * One line per temperament answer: the neighbourhoods of the city at the reader's level, those
- * that fit first and those that count nothing last.
+ * that fit first, then the gauge of surprises (one, for organisation or friction), then those
+ * that count nothing.
  */
 export function temperamentLinesFor(
   cityName: string,
@@ -143,5 +182,18 @@ export function temperamentLinesFor(
     const line = reader === undefined ? null : neighbourhoodLine(cityName, trait, reader);
     return line ? [line] : [];
   });
-  return [...lines.filter((l) => !l.weak), ...lines.filter((l) => l.weak)];
+  const gauge =
+    answers.order !== undefined || answers.friction !== undefined
+      ? unexpectedGauge(cityName)
+      : null;
+  const gaugeLine: TemperamentLine[] = gauge
+    ? [
+        {
+          text: `${UNEXPECTED_LABEL} : ${gauge.level} sur 5${gauge.estimate ? ", estimation" : ""}`,
+          weak: false,
+          gauge,
+        },
+      ]
+    : [];
+  return [...lines.filter((l) => !l.weak), ...gaugeLine, ...lines.filter((l) => l.weak)];
 }
