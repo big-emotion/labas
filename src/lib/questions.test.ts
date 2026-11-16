@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { QUESTIONS } from "./questions";
+import { QUESTIONS, visibleChoices } from "./questions";
 import { CITIES } from "./cities";
 import { profileOf, rankCities, type Answers } from "./ranking";
 
@@ -9,6 +9,8 @@ const NEUTRAL = new Set([
   "faith:none",
   "kin:none",
   "adventure:open",
+  // A month or more away asks nothing of the flights.
+  "duration:month",
 ]);
 
 describe("the question bank", () => {
@@ -22,32 +24,39 @@ describe("the question bank", () => {
     }
   });
 
-  it("asks the 18 questions of the approved mockup in chapter order", () => {
+  // Quiz paths audit, 2026-11-16: the bank is ordered by chapter; each path takes its share.
+  it("lists the questions chapter by chapter", () => {
     expect(QUESTIONS.map((q) => q.id)).toEqual([
       "project",
-      "origin",
-      "countries",
-      "kin",
-      "faith",
+      "duration",
+      "wants",
+      "tripsHome",
+      "profession",
+      "family",
+      "budget",
+      "languages",
+      "passports",
+      "size",
+      "landscapes",
       "saturday",
       "adventure",
       "order",
       "together",
       "friction",
-      "profession",
-      "budget",
-      "family",
-      "passports",
-      "languages",
-      "size",
-      "landscapes",
+      "origin",
+      "countries",
+      "kin",
+      "faith",
       "priorities",
     ]);
+    const chapters = QUESTIONS.map((q) => q.chapter!);
+    expect(chapters).toEqual([...chapters].sort());
     expect([...new Set(QUESTIONS.map((q) => q.group))]).toEqual([
-      "Votre histoire avec l'Afrique",
+      "Votre projet",
+      "Votre voyage",
       "Votre tempérament",
-      "Votre projet de vie",
-      "Votre quotidien",
+      "Votre histoire avec l'Afrique",
+      "Pour finir",
     ]);
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));
@@ -110,7 +119,9 @@ describe("the question bank", () => {
     expect(countries.when?.({})).toBe(false);
     const offered = countries.choices.filter((c) => c.value !== null).map((c) => c.value);
     expect(new Set(offered)).toEqual(new Set(CITIES.map((c) => c.country)));
-    for (const choice of countries.choices)
-      if (choice.value !== null) expect(choice.zone, String(choice.value)).toBeTruthy();
+    // Each country is offered only once its region is picked.
+    const west = visibleChoices(countries, { origin: ["ouest"] }).map((c) => c.value);
+    expect(west).toContain("Sénégal");
+    expect(west).not.toContain("Kenya");
   });
 });
