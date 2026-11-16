@@ -6,6 +6,8 @@ import { goingThere } from "../../lib/going";
 import { linesFor } from "../../lib/lines";
 import { photoFor } from "../../lib/photos";
 import { routesFor } from "../../lib/routes";
+import { costLabel } from "../../lib/card";
+import { criteriaPreview } from "../../lib/city-sections";
 
 export function getStaticPaths() {
   return CITIES.map((city) => ({ params: { slug: city.slug }, props: { city } }));
@@ -74,6 +76,27 @@ const LGBT = {
   "criminalised-not-enforced": "punies par la loi, sans application connue",
   unclear: "situation juridique incertaine",
 };
+// Grouped by theme, each with a short preview (beta feedback, 2026-11-16).
+const PREVIEW = 2;
+const DAYS_SHOWN = 3;
+const places = lines?.neighbourhoods ?? [];
+const preview = criteriaPreview(city);
+const chips = [city.languageLabel, city.currency, costLabel(city.scores.cost.level)].filter(
+  (chip): chip is string => Boolean(chip),
+);
+const themes = [
+  { id: "essentiel", label: "L'essentiel" },
+  ...(places.length ? [{ id: "quartiers", label: "Quartiers" }] : []),
+  ...(routes
+    ? [
+        { id: "semaine", label: "Votre semaine" },
+        { id: "decouvrir", label: "Découvrir" },
+      ]
+    : []),
+  { id: "criteres", label: "Critères" },
+  ...(country ? [{ id: "pays", label: "Le pays" }] : []),
+  ...(going ? [{ id: "y-aller", label: "Y aller" }] : []),
+];
 const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}` : ""}`;
 ---
 
@@ -82,89 +105,191 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
   description={`${city.name} (${city.country}) : ${city.tagline}. Ce qu'il faut savoir pour y vivre, critère par critère, avec nos sources.`}
 >
   <article class="city">
-    <p class="eyebrow">{city.country}</p>
-    <h1>{city.name}</h1>
-    <p class="tagline">{city.tagline}</p>
+    <header class="hero">
+      <p class="eyebrow">{city.country}</p>
+      <h1>{city.name}</h1>
+      <p class="tagline">{city.tagline}</p>
+      {photo && (
+        <figure class="photo">
+          <img
+            src={`/photos/${photo.file}`}
+            alt={photo.alt}
+            width="1280"
+            height="853"
+            loading="eager"
+          />
+          <figcaption>
+            Photo : {photo.author}, <a href={photo.licenseUrl}>{photo.license}</a>, via{" "}
+            <a href={photo.source}>Wikimedia Commons</a>.
+          </figcaption>
+        </figure>
+      )}
+      <p>{city.pitch}</p>
+      <ul class="chips">
+        {chips.map((chip) => (
+          <li>{chip}</li>
+        ))}
+      </ul>
+    </header>
 
-    {photo && (
-      <figure class="photo">
-        <img
-          src={`/photos/${photo.file}`}
-          alt={photo.alt}
-          width="1280"
-          height="853"
-          loading="eager"
-        />
-        <figcaption>
-          Photo : {photo.author}, <a href={photo.licenseUrl}>{photo.license}</a>, via{" "}
-          <a href={photo.source}>Wikimedia Commons</a>.
-        </figcaption>
-      </figure>
-    )}
+    <nav class="themes" aria-label="Thèmes de la fiche">
+      {themes.map((theme) => (
+        <a href={`#${theme.id}`}>{theme.label}</a>
+      ))}
+    </nav>
 
-    <p>{city.pitch}</p>
-
-    {lines?.reputation && (
-      <section>
-        <p class="eyebrow">On dit</p>
-        <p class="quote">{lines.reputation}</p>
-      </section>
-    )}
-    {lines?.surprise && (
-      <section>
-        <h2>Ce qui pourrait vous surprendre</h2>
-        <p>{lines.surprise}</p>
-      </section>
-    )}
-
-    <section class="watch">
-      <h2>À savoir</h2>
-      <p>{city.watch}</p>
+    <section class="theme" id="essentiel">
+      <h2>L'essentiel</h2>
+      {lines?.reputation && (
+        <p>
+          <b>On dit</b> <span class="quote">{lines.reputation}</span>
+        </p>
+      )}
+      {lines?.surprise && (
+        <p>
+          <b>Ce qui pourrait vous surprendre :</b> {lines.surprise}
+        </p>
+      )}
+      <p class="watch">
+        <b>À savoir :</b> {city.watch}
+      </p>
+      <p>
+        <b>Conseils aux voyageurs :</b>{" "}
+        {advisory.franceDiplomatie
+          ? `France Diplomatie : zone ${COLOURS[advisory.franceDiplomatie]}. `
+          : "France Diplomatie : couleur de la zone non trouvée. "}
+        {advisory.fcdo && `Le Royaume-Uni ${FCDO[advisory.fcdo]}. `}
+        {advisory.date && `Avis du ${advisory.date}. `}
+        Vérifiez toujours la page du ministère avant de partir.
+      </p>
+      {city.advisedAgainst && <p>{ADVICE_FRAMING}</p>}
+      <p class="small">
+        {advisory.sources.map((source, i) => (
+          <>
+            {i > 0 && " ; "}
+            <a href={source.url} rel="noopener noreferrer">
+              {sourceLabel(source)}
+            </a>
+          </>
+        ))}
+      </p>
+      <details>
+        <summary>
+          <span class="when-closed">Langues, climat et alentours</span>
+          <span class="when-open">Masquer</span>
+        </summary>
+        <ul class="facts">
+          <li>
+            <b>Langues :</b>{" "}
+            {city.facts.languages.map((l) => `${LANGUAGES[l.language]} ${USE[l.use]}`).join(", ") ||
+              city.languageLabel}
+          </li>
+          {city.facts.climates.length > 0 && (
+            <li>
+              <b>Climat :</b> {city.facts.climates.map((c) => CLIMATES[c]).join(", ")}
+            </li>
+          )}
+          {city.facts.settings.length > 0 && (
+            <li>
+              <b>Autour :</b> {city.facts.settings.map((s) => SETTINGS[s]).join(", ")}
+            </li>
+          )}
+          <li>
+            <b>Monnaie :</b> {city.currency}
+          </li>
+        </ul>
+      </details>
     </section>
 
-    {lines && lines.neighbourhoods.length > 0 && (
-      <section>
+    {places.length > 0 && (
+      <section class="theme" id="quartiers">
         <h2>Les quartiers</h2>
         <ul class="places">
-          {lines.neighbourhoods.map((place) => (
+          {places.slice(0, PREVIEW).map((place) => (
             <li>
               <b>{place.name}</b> {place.text}
             </li>
           ))}
         </ul>
+        {places.length > PREVIEW && (
+          <details>
+            <summary>
+              <span class="when-closed">Voir les {places.length} quartiers</span>
+              <span class="when-open">Masquer</span>
+            </summary>
+            <ul class="places">
+              {places.slice(PREVIEW).map((place) => (
+                <li>
+                  <b>{place.name}</b> {place.text}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
         <p class="small">Loyers affichés, souvent négociables.</p>
       </section>
     )}
 
     {routes && (
-      <section>
-        <h2>Une semaine type là-bas</h2>
+      <section class="theme" id="semaine">
+        <h2>Votre semaine type</h2>
         <p class="small">
-          Des lieux réels, tirés de nos sources. Choisissez la semaine qui vous ressemble le plus.
+          Des lieux réels, tirés de nos sources. Celle qui vous ressemble s'ouvre d'après vos
+          réponses ; les autres sont à un clic.
         </p>
+        <div class="week-tabs" role="group" aria-label="Choisir une semaine">
+          {routes.weeks.map((week, i) => (
+            <button type="button" data-week={i} aria-pressed={i === 0 ? "true" : "false"}>
+              {week.title}
+            </button>
+          ))}
+        </div>
         {routes.weeks.map((week, i) => (
-          <details class="route" open={i === 0}>
-            <summary>{week.title}</summary>
-            <p class="small">Point de départ : {week.base}</p>
+          <div class="week" data-week-panel={i} hidden={i !== 0}>
+            <p class="small">
+              Point de départ : {week.base}
+              {week.budget && ` · ${week.budget}`}
+            </p>
             <ul class="days">
-              {week.days.map((day) => (
+              {week.days.slice(0, DAYS_SHOWN).map((day) => (
                 <li>{day}</li>
               ))}
             </ul>
-            {week.budget && <p class="small">{week.budget}</p>}
-          </details>
+            <details>
+              <summary>
+                <span class="when-closed">Voir toute la semaine</span>
+                <span class="when-open">Masquer</span>
+              </summary>
+              <ul class="days">
+                {week.days.slice(DAYS_SHOWN).map((day) => (
+                  <li>{day}</li>
+                ))}
+              </ul>
+            </details>
+          </div>
         ))}
+        <script
+          type="application/json"
+          id="week-keys"
+          set:html={JSON.stringify(routes.weeks.map((week) => ({ for: week.for })))}
+        />
+      </section>
+    )}
+
+    {routes && (
+      <section class="theme" id="decouvrir">
         <h2>Pour découvrir d'abord</h2>
-        <details class="route">
-          <summary>Une journée</summary>
-          <ul class="days">
-            {routes.discovery.day.map((moment) => (
-              <li>{moment}</li>
-            ))}
-          </ul>
-        </details>
-        <details class="route">
-          <summary>Une semaine</summary>
+        <p class="small">Une journée :</p>
+        <ul class="days">
+          {routes.discovery.day.map((moment) => (
+            <li>{moment}</li>
+          ))}
+        </ul>
+        <details>
+          <summary>
+            <span class="when-closed">Voir la semaine découverte</span>
+            <span class="when-open">Masquer</span>
+          </summary>
           <ul class="days">
             {routes.discovery.week.map((day) => (
               <li>{day}</li>
@@ -185,72 +310,68 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
       </section>
     )}
 
-    <section>
+    <section class="theme" id="criteres">
       <h2>La ville, critère par critère</h2>
-      <p class="small">
-        Notes de 0 à 5 selon <a href="/methode">notre grille</a>. Pour les critères marqués « cible
-        », une note haute n'est ni bonne ni mauvaise : on la compare à ce que vous cherchez.
-      </p>
-      <ul class="scores">
-        {CRITERIA.map((criterion) => {
-          const score = city.scores[criterion.key];
-          return (
-            <li class="score">
-              <div class="score-head">
-                <a href={`/methode#${criterion.key}`} class="score-name">
-                  {criterion.label}
-                </a>
-                {criterion.direction === "target" && <span class="tag">cible</span>}
-                <span class="level">{score.level === null ? "?" : `${score.level}/5`}</span>
-              </div>
-              <span class="bar">
-                <span style={`width: ${((score.level ?? 0) / 5) * 100}%`} />
-              </span>
-              <p>{score.justification}</p>
-              <p class="small">
-                {score.level === null ? "Inconnu" : CONFIDENCE[score.confidence]}
-                {score.sources.length > 0 && " · "}
-                {score.sources.map((source, i) => (
-                  <>
-                    {i > 0 && " ; "}
-                    <a href={source.url} rel="noopener noreferrer">
-                      {sourceLabel(source)}
-                    </a>
-                  </>
-                ))}
-              </p>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-
-    <section>
-      <h2>Vivre à {city.name}</h2>
-      <ul class="facts">
-        <li>
-          <b>Langues :</b>{" "}
-          {city.facts.languages.map((l) => `${LANGUAGES[l.language]} ${USE[l.use]}`).join(", ") ||
-            city.languageLabel}
-        </li>
-        {city.facts.climates.length > 0 && (
+      <ul class="preview">
+        {preview.strongest.map((criterion) => (
           <li>
-            <b>Climat :</b> {city.facts.climates.map((c) => CLIMATES[c]).join(", ")}
+            <span>{criterion.label}</span>
+            <span class="level">{city.scores[criterion.key].level}/5</span>
+          </li>
+        ))}
+        {preview.weakest && (
+          <li class="weak">
+            <span>{preview.weakest.label}</span>
+            <span class="level">{city.scores[preview.weakest.key].level}/5</span>
           </li>
         )}
-        {city.facts.settings.length > 0 && (
-          <li>
-            <b>Autour :</b> {city.facts.settings.map((s) => SETTINGS[s]).join(", ")}
-          </li>
-        )}
-        <li>
-          <b>Monnaie :</b> {city.currency}
-        </li>
       </ul>
+      <details>
+        <summary>
+          <span class="when-closed">Voir les {CRITERIA.length} critères et leurs sources</span>
+          <span class="when-open">Masquer</span>
+        </summary>
+        <p class="small">
+          Notes de 0 à 5 selon <a href="/methode">notre grille</a>. Pour les critères marqués «
+          cible », une note haute n'est ni bonne ni mauvaise : on la compare à ce que vous cherchez.
+        </p>
+        <ul class="scores">
+          {CRITERIA.map((criterion) => {
+            const score = city.scores[criterion.key];
+            return (
+              <li class="score">
+                <div class="score-head">
+                  <a href={`/methode#${criterion.key}`} class="score-name">
+                    {criterion.label}
+                  </a>
+                  {criterion.direction === "target" && <span class="tag">cible</span>}
+                  <span class="level">{score.level === null ? "?" : `${score.level}/5`}</span>
+                </div>
+                <span class="bar">
+                  <span style={`width: ${((score.level ?? 0) / 5) * 100}%`} />
+                </span>
+                <p>{score.justification}</p>
+                <p class="small">
+                  {score.level === null ? "Inconnu" : CONFIDENCE[score.confidence]}
+                  {score.sources.length > 0 && " · "}
+                  {score.sources.map((source, i) => (
+                    <>
+                      {i > 0 && " ; "}
+                      <a href={source.url} rel="noopener noreferrer">
+                        {sourceLabel(source)}
+                      </a>
+                    </>
+                  ))}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
     </section>
 
     {country && (
-      <section>
+      <section class="theme" id="pays">
         <h2>Le pays : {country.name}</h2>
         <ul class="facts">
           <li>
@@ -261,66 +382,51 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
             {country.visaNote}
           </li>
           <li>
-            <b>Démarches :</b> {country.paperwork.justification}
-          </li>
-          <li>
             <b>Pour la diaspora :</b> {country.diasporaRoute}
           </li>
-          {country.dualNationality.note && (
-            <li>
-              <b>Double nationalité :</b> {country.dualNationality.note}
-            </li>
-          )}
-          {country.mobileMoney && (
-            <li>
-              <b>Payer :</b> {country.mobileMoney}
-            </li>
-          )}
-          {country.sameSexRelations.status && (
-            <li>
-              <b>Relations entre personnes de même sexe :</b>{" "}
-              {LGBT[country.sameSexRelations.status]}. {country.sameSexRelations.note}
-            </li>
-          )}
-          {country.described.returneePerception && (
-            <li>
-              <b>Le regard sur ceux qui reviennent :</b> {country.described.returneePerception}
-            </li>
-          )}
-          {country.described.womenDaily && (
-            <li>
-              <b>Le quotidien des femmes :</b> {country.described.womenDaily}
-            </li>
-          )}
         </ul>
+        <details>
+          <summary>
+            <span class="when-closed">Voir plus sur le pays</span>
+            <span class="when-open">Masquer</span>
+          </summary>
+          <ul class="facts">
+            <li>
+              <b>Démarches :</b> {country.paperwork.justification}
+            </li>
+            {country.dualNationality.note && (
+              <li>
+                <b>Double nationalité :</b> {country.dualNationality.note}
+              </li>
+            )}
+            {country.mobileMoney && (
+              <li>
+                <b>Payer :</b> {country.mobileMoney}
+              </li>
+            )}
+            {country.sameSexRelations.status && (
+              <li>
+                <b>Relations entre personnes de même sexe :</b>{" "}
+                {LGBT[country.sameSexRelations.status]}. {country.sameSexRelations.note}
+              </li>
+            )}
+            {country.described.returneePerception && (
+              <li>
+                <b>Le regard sur ceux qui reviennent :</b> {country.described.returneePerception}
+              </li>
+            )}
+            {country.described.womenDaily && (
+              <li>
+                <b>Le quotidien des femmes :</b> {country.described.womenDaily}
+              </li>
+            )}
+          </ul>
+        </details>
       </section>
     )}
 
-    <section>
-      <h2>Conseils aux voyageurs</h2>
-      <p>
-        {advisory.franceDiplomatie
-          ? `France Diplomatie : zone ${COLOURS[advisory.franceDiplomatie]}. `
-          : "France Diplomatie : couleur de la zone non trouvée. "}
-        {advisory.fcdo && `Le Royaume-Uni ${FCDO[advisory.fcdo]}. `}
-        {advisory.date && `Avis du ${advisory.date}. `}
-        Vérifiez toujours la page du ministère avant de partir.
-      </p>
-      {city.advisedAgainst && <p>{ADVICE_FRAMING}</p>}
-      <p class="small">
-        {advisory.sources.map((source, i) => (
-          <>
-            {i > 0 && " ; "}
-            <a href={source.url} rel="noopener noreferrer">
-              {sourceLabel(source)}
-            </a>
-          </>
-        ))}
-      </p>
-    </section>
-
     {going && (
-      <section id="y-aller">
+      <section class="theme" id="y-aller">
         <h2>Y aller</h2>
         <ul>
           {going.map((link) => (
@@ -355,7 +461,150 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
   </article>
 </Page>
 
+<script>
+  import { browserStore } from "../../lib/keep-dom";
+  import { loadAnswers } from "../../lib/keep";
+  import { bestWeekIndex } from "../../lib/week-pick";
+
+  const keys = document.getElementById("week-keys");
+  if (keys) {
+    const weeks = JSON.parse(keys.textContent ?? "[]");
+    const show = (index: number) => {
+      for (const button of document.querySelectorAll<HTMLButtonElement>("[data-week]"))
+        button.setAttribute("aria-pressed", String(Number(button.dataset.week) === index));
+      for (const panel of document.querySelectorAll<HTMLElement>("[data-week-panel]"))
+        panel.hidden = Number(panel.dataset.weekPanel) !== index;
+    };
+    show(bestWeekIndex(weeks, loadAnswers(browserStore())));
+    for (const button of document.querySelectorAll<HTMLButtonElement>("[data-week]"))
+      button.addEventListener("click", () => show(Number(button.dataset.week)));
+  }
+</script>
+
 <style>
+  .hero {
+    display: grid;
+    gap: 10px;
+  }
+  .hero p {
+    margin: 0;
+  }
+  .chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+  .chips li {
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--night-lift);
+    font-size: 0.82rem;
+  }
+  /* Shortcuts to each theme: one row that scrolls sideways on a phone. */
+  .themes {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .themes a {
+    flex: none;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid var(--night-lift);
+    color: var(--thread);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+  }
+  .themes a:first-child {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--ink);
+  }
+  .theme {
+    background: var(--night-deep);
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    gap: 12px;
+    scroll-margin-top: 12px;
+  }
+  .theme h2 {
+    margin: 0;
+  }
+  .theme p {
+    margin: 0;
+  }
+  .theme details > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    color: var(--saffron);
+    font-weight: 700;
+    list-style: none;
+  }
+  .theme details > summary::-webkit-details-marker {
+    display: none;
+  }
+  .theme details[open] .when-closed,
+  .theme details:not([open]) .when-open {
+    display: none;
+  }
+  .theme .places li,
+  .theme .score {
+    background: var(--night);
+  }
+  .watch b {
+    color: var(--coral);
+  }
+  .week-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .week-tabs button {
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid var(--night-lift);
+    background: transparent;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .week-tabs button[aria-pressed="true"] {
+    border-color: var(--saffron);
+    background: var(--night-pressed);
+  }
+  .week {
+    display: grid;
+    gap: 8px;
+  }
+  .week[hidden] {
+    display: none;
+  }
+  .preview {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .preview li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .preview .weak .level {
+    color: var(--coral);
+  }
   .route {
     background: var(--night-deep);
     border-radius: 12px;
