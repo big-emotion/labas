@@ -77,6 +77,24 @@ export async function migrate(db: Db): Promise<void> {
     )`);
 }
 
+/**
+ * Retries a first step until it works. On a first deploy Postgres initialises its files for a few
+ * seconds while the service is already up; giving up then left saved journeys off for good.
+ */
+export async function whenReady<T>(
+  attempt: () => Promise<T>,
+  sleep: (ms: number) => Promise<void> = (ms) => new Promise((done) => setTimeout(done, ms)),
+): Promise<T> {
+  for (let wait = 2000; ; wait = Math.min(wait * 2, 60_000)) {
+    try {
+      return await attempt();
+    } catch (error) {
+      console.error(`database not ready: ${String(error)}`);
+      await sleep(wait);
+    }
+  }
+}
+
 /** Erases what the privacy page says is erased; run at start and once a day. */
 export async function purge(db: Db, now: number): Promise<void> {
   const at = (ms: number) => new Date(ms).toISOString();
