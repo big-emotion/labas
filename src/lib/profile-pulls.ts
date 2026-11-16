@@ -15,6 +15,11 @@ const pull = (axis: Pull["axis"], target: number, weight: number): Pull => ({
   target,
   weight,
 });
+/** A practical need the reader states outright: it ranks, unlike a need read between the lines. */
+const need = (axis: Pull["axis"], target: number, weight: number): Pull => ({
+  ...pull(axis, target, weight),
+  chosen: true,
+});
 const settings = (values: string[], weight: number): FactPull => ({
   kind: "settings",
   values,
@@ -91,15 +96,15 @@ const EFFECTS: {
     neighbours: { pulls: [pull("welcome", 0.75, 1)], facts: [aura("together", 1, 2)] },
   },
   mustWork: {
-    utilities: { pulls: [pull("comfort", 0.9, 2.5)] },
-    internet: { pulls: [pull("internet", 0.9, 2.5)] },
-    paperwork: { pulls: [pull("paperwork", 0.9, 2)] },
+    utilities: { pulls: [need("comfort", 0.9, 2.5)] },
+    internet: { pulls: [need("internet", 0.9, 2.5)] },
+    paperwork: { pulls: [need("paperwork", 0.9, 2)] },
     // Healthcare is half of the « comfort » axis, with utilities.
-    care: { pulls: [pull("comfort", 0.9, 2)] },
+    care: { pulls: [need("comfort", 0.9, 2)] },
   },
   ambition: {
-    business: { pulls: [pull("business", 0.95, 3)] },
-    career: { pulls: [pull("jobs", 0.95, 3)] },
+    business: { pulls: [need("business", 0.95, 3)] },
+    career: { pulls: [need("jobs", 0.95, 3)] },
     network: { pulls: [pull("pace", 0.8, 1.5), pull("returnees", 0.75, 1.5)] },
   },
   evenings: {
