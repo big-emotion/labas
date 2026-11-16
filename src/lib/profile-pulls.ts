@@ -27,7 +27,8 @@ const aura = (
 export interface ProfileAnswers {
   nightOut?: "clubs" | "maquis" | "waterside";
   quietStay?: "beach" | "walks" | "history";
-  daytime?: ("history" | "markets" | "beach" | "nature")[];
+  duration?: "weekend" | "week" | "weeks" | "month";
+  wants?: ("beach" | "wild" | "nature" | "party" | "history" | "culture")[];
   offTrack?: "far" | "some" | "near";
   afterWork?: "rooftops" | "outdoors" | "home";
   friends?: "associations" | "diaspora" | "neighbours";
@@ -50,14 +51,20 @@ const EFFECTS: { [K in keyof ProfileAnswers]-?: Record<string, Effect> } = {
     walks: { pulls: [pull("pace", 0.2, 1)], facts: [settings(["nature"], 3)] },
     history: { pulls: [pull("history", 0.9, 2.5), pull("pace", 0.3, 1)] },
   },
-  daytime: {
-    history: { pulls: [pull("history", 0.9, 1.5), pull("culture", 0.8, 1)] },
-    markets: {
-      pulls: [pull("walkable", 0.8, 1), pull("bargaining", 0.7, 0.5)],
-      facts: [aura("adventure", 1, 1)],
-    },
-    beach: { facts: [settings(["beach", "island"], 2)] },
-    nature: { facts: [settings(["nature", "wildSpaces"], 2)] },
+  // How long the holiday lasts: a short stay needs direct flights, a long one barely.
+  duration: {
+    weekend: { pulls: [pull("flights", 1, 3)] },
+    week: { pulls: [pull("flights", 0.85, 2)] },
+    weeks: { pulls: [pull("flights", 0.65, 1)] },
+    month: {},
+  },
+  wants: {
+    beach: { facts: [settings(["beach", "island"], 2.5)] },
+    wild: { facts: [settings(["wildSpaces"], 2.5)] },
+    nature: { facts: [settings(["nature"], 2.5)] },
+    party: { pulls: [pull("nightlife", 0.95, 2)], facts: [aura("saturday", 1, 1)] },
+    history: { pulls: [pull("history", 0.9, 2)] },
+    culture: { pulls: [pull("culture", 0.9, 2)] },
   },
   offTrack: {
     far: { pulls: [pull("returnees", 0.15, 2)], facts: [aura("adventure", 1, 2)] },

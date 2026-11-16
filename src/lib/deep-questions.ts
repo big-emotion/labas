@@ -1,4 +1,4 @@
-import { QUESTIONS, type Question } from "./questions";
+import { livesThere, namedOrigins, QUESTIONS, worksThere, type Question } from "./questions";
 import type { Answers } from "./ranking";
 
 /**
@@ -9,6 +9,7 @@ import type { Answers } from "./ranking";
 const FURTHER: Omit<Question, "group">[] = [
   {
     id: "currentCity",
+    when: livesThere,
     title: "Vous vivez où aujourd'hui ?",
     choices: [
       { label: "Une grande capitale (Paris, Bruxelles…)", value: "capital" },
@@ -20,6 +21,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "rhythm",
+    when: livesThere,
     title: "Là-bas, votre rythme :",
     choices: [
       { label: "Le même qu'aujourd'hui", value: "same" },
@@ -30,6 +32,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "mobility",
+    when: livesThere,
     title: "Comment vous déplacez-vous au quotidien ?",
     choices: [
       { label: "À pied", value: "walk" },
@@ -40,6 +43,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "habits",
+    when: livesThere,
     title: "Votre quotidien, c'est plutôt…",
     max: 3,
     choices: [
@@ -53,6 +57,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "neighbourhood",
+    when: livesThere,
     title: "Votre quartier aujourd'hui :",
     choices: [
       { label: "Central et animé", value: "central" },
@@ -63,6 +68,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "people",
+    when: livesThere,
     title: "Avec les gens, vous aimez…",
     choices: [
       { label: "Être invité, connaître mes voisins", value: "invited" },
@@ -72,6 +78,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "belonging",
+    when: livesThere,
     title: "Là-bas, vous voulez vivre…",
     choices: [
       { label: "Parmi les gens du coin", value: "locals" },
@@ -81,6 +88,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "roots",
+    when: (a) => namedOrigins(a).length > 0,
     title: "Vous cherchez plutôt à…",
     choices: [
       { label: "Retrouver mes racines", value: "rediscover" },
@@ -107,6 +115,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "schoolCurriculum",
+    when: (a) => a.family === "parents" || a.family === "fonder",
     title: "Des enfants à scolariser là-bas ?",
     choices: [
       { label: "Oui, en programme français", value: "french" },
@@ -124,6 +133,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "visaFreeOnly",
+    when: (a) => a.project === "decouvrir" || a.project === "tester",
     title: "Pour un premier séjour, vous voulez éviter le visa ?",
     choices: [
       { label: "Oui, sans visa", value: true },
@@ -166,16 +176,8 @@ const FURTHER: Omit<Question, "group">[] = [
     ],
   },
   {
-    id: "tripsHome",
-    title: "Combien d'allers-retours vers l'Europe par an ?",
-    choices: [
-      { label: "Un ou moins", value: 0 },
-      { label: "Deux ou trois", value: 0.5 },
-      { label: "Tous les mois", value: 1 },
-    ],
-  },
-  {
     id: "setupBudget",
+    when: (a) => a.project === "installer" || a.project === "tester" || a.project === "pied",
     title: "Combien pouvez-vous avancer pour vous installer (caution, loyers d'avance) ?",
     choices: [
       { label: "Moins de 2 000 €", value: "low" },
@@ -192,12 +194,13 @@ const FURTHER: Omit<Question, "group">[] = [
       { label: "Un internet rapide", value: "internet" },
       { label: "Les avions directs", value: "flights" },
       { label: "Les lieux d'histoire", value: "history" },
-      { label: "Un emploi sur place", value: "jobs" },
+      { label: "Un emploi sur place", value: "jobs", when: worksThere },
     ],
   },
 ];
 
-const settling = (a: Answers) => Boolean(a.project) && a.project !== "decouvrir";
+const settling = (a: Answers) =>
+  Boolean(a.project) && a.project !== "decouvrir" && a.project !== "investir";
 const holiday = (a: Answers) => a.project === "decouvrir";
 
 /**
@@ -223,18 +226,6 @@ const PROFILE: Omit<Question, "group">[] = [
       { label: "La plage, et c'est tout", value: "beach" },
       { label: "Marcher, randonner, respirer", value: "walks" },
       { label: "Visiter des villes d'histoire, sans se presser", value: "history" },
-    ],
-  },
-  {
-    id: "daytime",
-    title: "Le jour, vous avez envie de…",
-    max: 2,
-    when: holiday,
-    choices: [
-      { label: "Musées, histoire, architecture", value: "history" },
-      { label: "Marchés, artisans, vie de quartier", value: "markets" },
-      { label: "Plage et baignade", value: "beach" },
-      { label: "Excursions dans la nature", value: "nature" },
     ],
   },
   {

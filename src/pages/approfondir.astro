@@ -83,6 +83,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
   <script>
     import { nextQuestion } from "../lib/adaptive";
     import { DEEP_QUESTIONS } from "../lib/deep-questions";
+    import { keepInBank } from "../lib/questions";
+    import { syncChoices } from "../lib/choices-dom";
     import { rankCities, type Answers } from "../lib/ranking";
     import { finishedEvent } from "../lib/analytics";
     import { forgetAnswers, loadAnswers, saveAnswers } from "../lib/keep";
@@ -203,6 +205,14 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     }
 
     function render(advance = true) {
+      // Drop what an earlier change made irrelevant, and ask again what lost its answer.
+      const kept = keepInBank(DEEP_QUESTIONS, answers as Answers) as Record<string, unknown>;
+      for (const id of Object.keys(answers)) {
+        if (kept[id] !== undefined) continue;
+        delete answers[id];
+        if (asked.includes(id)) asked.splice(asked.indexOf(id), 1);
+      }
+      syncChoices(DEEP_QUESTIONS, answers as Answers, document);
       saveAnswers(browserStore(), answers as Answers);
       showProfile(answers as Answers);
       renderAnswers();
