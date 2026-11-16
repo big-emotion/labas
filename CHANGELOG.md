@@ -6,6 +6,29 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-11-16
+
+### Added
+
+- Holiday mode: « Quand partez-vous ? » steers you to cities in their good season, away from
+  the rains; « Ce que vous voulez vivre » adds safari and diving, surf or water sports. Each city
+  page gets « En vacances »: the best months, what to do within about two hours and escapes for a
+  day or a weekend, every item with its source.
+- « La musique qui vous fait bouger ? » in the full questionnaire, for those who go out: seven
+  club genres, each tied to its countries by dated sources (listed on the Méthode page).
+
+### Changed
+
+- A shorter quick quiz: budget, passport, the family's country, faith, the length of a holiday
+  and trips home move to the full questionnaire, measured as the questions that change the result
+  least.
+- A neighbourhood line that counts nothing reads « aucun quartier », in the « against » colour,
+  after the lines that fit.
+
+### Fixed
+
+- The results e-mail writes the neighbourhood lines as text.
+
 ## [0.11.0] - 2026-11-16
 
 ### Added
@@ -193,7 +216,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.10.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/big-emotion/labas/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/big-emotion/labas/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/big-emotion/labas/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/big-emotion/labas/compare/v0.8.0...v0.9.0
