@@ -6,6 +6,20 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.12.1] - 2026-11-16
+
+### Changed
+
+- A neighbourhood line that counts nothing reads as a sentence tied to our notes: « Aucun
+  quartier où tout fonctionne comme prévu, selon nos sources ».
+- One short note under the results and on each city page says where the information comes from
+  (local voices, specialised and official sites), that sources can disagree and that the city can
+  differ on the spot; the Méthode page explains it.
+
+### Removed
+
+- Plan, audit and review documents; code comments no longer point at docs.
+
 ## [0.12.0] - 2026-11-16
 
 ### Added
@@ -216,7 +230,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.12.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.12.1...HEAD
+[0.12.1]: https://github.com/big-emotion/labas/compare/v0.12.0...v0.12.1
 [0.12.0]: https://github.com/big-emotion/labas/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/big-emotion/labas/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/big-emotion/labas/compare/v0.9.0...v0.10.0
