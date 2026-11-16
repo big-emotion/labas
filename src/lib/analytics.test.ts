@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { answerEvent, plausibleScriptSrc } from "./analytics";
+import { answerEvent, finishedEvent, plausibleScriptSrc } from "./analytics";
 
 describe("where the audience script comes from", () => {
   it("loads nothing when no site domain is configured", () => {
@@ -20,38 +20,60 @@ describe("where the audience script comes from", () => {
   });
 });
 
+// The questions come in an order that depends on the answers, so the question alone does not say
+// where readers stop: each answer also carries its path and its rank in it (operator, 2026-11-16).
+const AT = { project: "decouvrir", step: 7 };
+
 describe("the one anonymous event sent per quiz answer", () => {
-  it("names the question and the answer, nothing else", () => {
-    expect(answerEvent("project", "installer")).toEqual({
+  it("names the path, the rank in it, the question and the answer, nothing else", () => {
+    expect(answerEvent("wants", ["beach"], AT)).toEqual({
       name: "Réponse",
-      props: { question: "project", answer: "installer" },
+      props: { parcours: "Vacances", etape: "07", question: "wants", answer: "beach" },
+    });
+  });
+
+  it("starts the path with the project answer itself", () => {
+    expect(answerEvent("project", "investir", { step: 1 })?.props).toMatchObject({
+      parcours: "Investir",
+      etape: "01",
+    });
+  });
+
+  it("writes the rank on two digits, so the steps sort in order in any export", () => {
+    expect(answerEvent("priorities", ["safety"], { ...AT, step: 12 })?.props.etape).toBe("12");
+  });
+
+  it("tells which path finished the quick quiz", () => {
+    expect(finishedEvent("Questionnaire 1 terminé", "pied")).toEqual({
+      name: "Questionnaire 1 terminé",
+      props: { parcours: "Un pied ici, un pied là-bas" },
     });
   });
 
   it("joins a multiple answer and writes numbers as text", () => {
-    expect(answerEvent("priorities", ["safety", "cost"])?.props.answer).toBe("safety,cost");
-    expect(answerEvent("saturday", 0.5)?.props.answer).toBe("0.5");
+    expect(answerEvent("priorities", ["safety", "cost"], AT)?.props.answer).toBe("safety,cost");
+    expect(answerEvent("saturday", 0.5, AT)?.props.answer).toBe("0.5");
   });
 
   it("never sends origin, family country, feeling at home or faith (sensitive data, GDPR art. 9)", () => {
-    expect(answerEvent("origin", ["ouest"])).toBeNull();
-    expect(answerEvent("countries", ["Sénégal"])).toBeNull();
-    expect(answerEvent("kin", "much")).toBeNull();
-    expect(answerEvent("faith", "muslim")).toBeNull();
+    expect(answerEvent("origin", ["ouest"], AT)).toBeNull();
+    expect(answerEvent("countries", ["Sénégal"], AT)).toBeNull();
+    expect(answerEvent("kin", "much", AT)).toBeNull();
+    expect(answerEvent("faith", "muslim", AT)).toBeNull();
   });
 
   it("never sends the opt-in filter on laws against homosexuality or a health need", () => {
-    expect(answerEvent("excludeCriminalising", true)).toBeNull();
-    expect(answerEvent("specialistCare", true)).toBeNull();
+    expect(answerEvent("excludeCriminalising", true, AT)).toBeNull();
+    expect(answerEvent("specialistCare", true, AT)).toBeNull();
   });
 
   it("only sends answers to the quick-quiz questions", () => {
-    expect(answerEvent("visaFreeOnly", true)).toBeNull();
-    expect(answerEvent("anything", "x")).toBeNull();
+    expect(answerEvent("visaFreeOnly", true, AT)).toBeNull();
+    expect(answerEvent("anything", "x", AT)).toBeNull();
   });
 
   it("sends nothing when a question is cleared", () => {
-    expect(answerEvent("project", undefined)).toBeNull();
-    expect(answerEvent("priorities", [])).toBeNull();
+    expect(answerEvent("project", undefined, AT)).toBeNull();
+    expect(answerEvent("priorities", [], AT)).toBeNull();
   });
 });

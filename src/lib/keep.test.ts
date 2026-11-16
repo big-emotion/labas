@@ -56,6 +56,6 @@ describe("keeping the result by mail", () => {
 describe("the audience funnel", () => {
   it("names only goals declared in Plausible", () => {
     for (const name of ["Questionnaire 1 terminé", "Questionnaire complet terminé"] as const)
-      expect(GOALS).toContain(finishedEvent(name).name);
+      expect(GOALS).toContain(finishedEvent(name, "installer").name);
   });
 });

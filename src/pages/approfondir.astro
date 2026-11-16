@@ -147,7 +147,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       (document.getElementById("done") as HTMLElement).hidden = next !== undefined;
       if (next === undefined && asked.length > resumed && !finished) {
         finished = true;
-        track(finishedEvent("Questionnaire complet terminé"));
+        track(finishedEvent("Questionnaire complet terminé", (answers as Answers).project));
       }
     }
 

@@ -28,7 +28,7 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   (operator, 2026-11-15: it is written for visitors who have never been there).
 - **Privacy**: answers are computed and kept in the browser (localStorage, so the full
   questionnaire resumes the quick quiz). What is sent: anonymous, cookieless Plausible events,
-  one per quick-quiz answer plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
+  one per quick-quiz answer (with the reader's path and the question's rank in it) plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
   LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
