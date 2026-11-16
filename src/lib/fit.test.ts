@@ -348,7 +348,7 @@ describe("what the reader's life today brings to the match", () => {
   });
 
   it("matches a profession with the cities where it hires", () => {
-    // Measured as a gain, other answers (here the default reception rule) being equal.
+    // Measured as a gain over the same pair of cities with no answer.
     const gap = (answers: Answers) =>
       scoreOf(answers, "Johannesburg") - scoreOf(answers, "Saint-Louis");
     expect(gap({ profession: "finance" })).toBeGreaterThan(gap({}));
@@ -469,18 +469,6 @@ describe("feeling at home among one's own", () => {
     expect(score(indifferent, "Dakar")).toBe(score(indifferent, "Accra"));
   });
 
-  it("counts documented anti-Black racism against feeling at home, for a sub-Saharan family", () => {
-    const { pulls, facts } = profileOf(westAfrican);
-    const parts = (name: string) =>
-      closenessOf(
-        CITIES.find((c) => c.name === name)!,
-        pulls,
-        facts,
-      ).find((p) => p.fact === "kin")!.value;
-    // Same region on the map; the UN and HRW document anti-Black racism in Mauritania.
-    expect(parts("Nouakchott")).toBeLessThan(parts("Dakar"));
-  });
-
   it("feels at home wherever one side of a mixed family comes from", () => {
     const mixed = { ...westAfrican, origin: ["ouest", "nord"] } as Answers;
     const { pulls, facts } = profileOf(mixed);
@@ -526,10 +514,9 @@ describe("feeling at home among one's own", () => {
     expect(bestMatches(played, 3).map((m) => m.city.country)).toContain("Soudan");
   });
 
-  it("does not weigh the family's region when feeling at home does not matter to the reader", () => {
-    // Origin still protects against documented racism; it no longer pulls towards the region.
-    const indifferent = { ...westAfrican, kin: "none" } as Answers;
-    expect(profileOf(indifferent).facts.map((f) => f.kind)).not.toContain("kin");
+  it("weighs the family's region less when feeling at home does not matter to the reader", () => {
+    const inRegion = (answers: Answers) => zones(answers, 10).filter((z) => z === "ouest").length;
+    expect(inRegion({ ...westAfrican, kin: "none" })).toBeLessThan(inRegion(westAfrican));
   });
 });
 
@@ -550,92 +537,6 @@ describe("the reader's passport", () => {
   it("counts the easier of two passports", () => {
     const both: Answers = { passports: ["eu", "ecowas"] };
     expect(scoreOf(both, "Accra")).toBeCloseTo(scoreOf(both, "Dakar"), 6);
-  });
-});
-
-describe("never sending a reader where they would be badly received", () => {
-  // Countries where the UN or a major rights organisation documents anti-Black racism.
-  const hostile = new Set(
-    CITIES.filter((c) => c.countryFacts?.racism?.kind === "anti-black").map((c) => c.country),
-  );
-  const countriesOf = (answers: Answers, n = 5) =>
-    bestMatches(answers, n).map((m) => m.city.country);
-
-  it("keeps an adventurous reader of West African family out of them", () => {
-    const adventurous = {
-      project: "tester",
-      languages: ["fr", "ar"],
-      origin: ["ouest"],
-      kin: "none",
-      adventure: "seeking",
-      saturday: 1,
-      landscapes: ["beach"],
-    } as Answers;
-    for (const country of countriesOf(adventurous))
-      expect(hostile.has(country), country).toBe(false);
-  });
-
-  it("keeps a Caribbean reader after the sea out of them", () => {
-    const martinican = {
-      project: "tester",
-      languages: ["fr"],
-      origin: ["ameriques"],
-      kin: "some",
-      adventure: "seeking",
-      landscapes: ["beach", "island"],
-      profession: "tech",
-    } as Answers;
-    for (const country of countriesOf(martinican))
-      expect(hostile.has(country), country).toBe(false);
-  });
-
-  it("keeps a reader who does not give their origin out of them too", () => {
-    const silent = {
-      project: "tester",
-      languages: ["fr", "ar"],
-      origin: [null],
-      adventure: "seeking",
-      saturday: 1,
-      landscapes: ["beach"],
-    } as unknown as Answers;
-    for (const country of countriesOf(silent)) expect(hostile.has(country), country).toBe(false);
-    const unasked = { ...silent, origin: undefined } as Answers;
-    for (const country of countriesOf(unasked)) expect(hostile.has(country), country).toBe(false);
-  });
-
-  it("keeps a French-Senegalese reader out of them, as in the first field test", () => {
-    // Field test of 2026-11-15: Senegalese father, French mother, never been to Tunisia.
-    const ely = {
-      project: "decouvrir",
-      languages: ["fr"],
-      origin: ["ouest"],
-      countries: ["Sénégal"],
-      kin: "some",
-      adventure: "seeking",
-      landscapes: ["beach", "island"],
-      passports: ["eu"],
-    } as Answers;
-    for (const country of countriesOf(ely)) expect(hostile.has(country), country).toBe(false);
-  });
-
-  it("still offers North Africa to a reader of North African family", () => {
-    const maghrebi = { languages: ["fr", "ar"], origin: ["nord"], kin: "much" } as Answers;
-    expect(countriesOf(maghrebi, 3).some((c) => hostile.has(c))).toBe(true);
-  });
-
-  it("says why on the card, in the words of the source, with its name and year", () => {
-    const reader = { origin: ["ouest"], languages: ["ar"] } as Answers;
-    const tunis = rankCities(reader).find((m) => m.city.name === "Tunis")!;
-    expect(tunis.drawbacks.map((d) => d.label)).toContain(
-      "Propos racistes et violences contre les Africains noirs (ONU, 2023)",
-    );
-  });
-
-  it("gives every documented case a short label that names its source and year", () => {
-    for (const city of CITIES) {
-      const racism = city.countryFacts?.racism;
-      if (racism) expect(racism.label, city.country).toMatch(/\([^)]+, \d{4}\)$/);
-    }
   });
 });
 

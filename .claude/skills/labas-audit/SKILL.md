@@ -217,18 +217,18 @@ The domain-critical surface. Eight checks, each pass / fail / `N/A`:
    `editorial` scores are debt to burn down, not failures.
 2. **Editorial never shown as measured** — `src/pages/ville/[slug].astro` and the result cards show
    the confidence label next to each score; no page says a question « mesure » anything.
-3. **Sensitive remarks sourced** — every racism / xenophobia entry in `src/data/countries.json` has
-   a `label` naming the source and its year, a summary and at least one https source with `accessed`;
-   the same for `sameSexRelations` and for every safety or conflict remark (`watch` in
+3. **Sensitive remarks sourced** — every `sameSexRelations` and `tensions` entry in
+   `src/data/countries.json` has a `label` naming the source and its year, a summary and at least
+   one https source with `accessed`; the same for every safety or conflict remark (`watch` in
    `src/data/cities.json`). A published remark of these kinds with no dated source **caps Domain 8
    at 4**.
 4. **Travel advice is information** — France Diplomatie / FCDO advice is dated and shown with its
    city, and never removes or greys one (`src/lib/advisory.ts`, `advisory.test.ts`, and
    `bestMatches` unaffected by it).
-5. **Reception first** — a reader of sub-Saharan or Caribbean family is never sent where anti-Black
-   racism is documented, whatever their taste for adventure, and a reader who gives no origin is
-   protected too. Read the engine tests that pin it (`fit.test.ts`, `ranking.test.ts`); no test →
-   fail. A failure **caps Domain 8 at 4**: it is a promise of the product.
+5. **Every answer orients the list** — each answer is one piece of evidence and the pieces
+   multiply; no fact weighs without an answer that asks for it. Read the engine tests that pin it
+   (`ranking.test.ts`, « each answer orients the list »: a tie before any answer, a late language
+   answer that turns the list over); no test → fail. A failure **caps Domain 8 at 4**.
 6. **Temperament framing** — the chapter is introduced only as « inspirée du Big Five, ce n'est pas
    un test de personnalité », and the archetype as preferences in « vous », never « vous êtes »:
    `git grep -n "vous êtes" -- src ':!*.test.ts'` and read each hit.

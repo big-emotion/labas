@@ -167,6 +167,7 @@ export const QUESTIONS: Question[] = [
       { label: "Arabe", value: "ar" },
       { label: "Espagnol", value: "es" },
       { label: "Swahili", value: "sw" },
+      { label: "Peu importe, je m'adapte", value: null },
     ],
   },
   {
@@ -273,7 +274,7 @@ export const QUESTIONS: Question[] = [
     group: HISTORY,
     chapter: 4,
     title: "D'où vient votre famille ?",
-    hint: "Facultatif. Pour vous proposer des villes proches de vos repères et vous éviter les pays où le racisme est documenté.",
+    hint: "Facultatif. Pour vous proposer des villes proches de vos repères.",
     max: 3,
     choices: [
       { label: "Afrique de l'Ouest", value: "ouest" },

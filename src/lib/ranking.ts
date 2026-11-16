@@ -160,7 +160,7 @@ const LANGUAGE_NAMES: Record<Language, string> = {
 };
 
 const MAX_PRIORITIES = 3;
-// A non-negotiable must outweigh the temperament, which now weighs twice as much (2026-11-16).
+// A non-negotiable counts as two ordinary answers.
 const NON_NEGOTIABLE = 2;
 const pull = (axis: Axis, target: number, weight: number): Pull => ({ axis, target, weight });
 /** A practical need the reader states outright: it ranks, unlike a need read between the lines. */
@@ -178,54 +178,55 @@ const need = (axis: Axis, target: number, weight: number): Pull => ({
 // says where the answer wants the city (0 to 1, relative to the 115 cities) and how much that
 // counts; a criterion left out is unrelated to the answer on purpose. A practical criterion the
 // reader did not name is lowered to a floor by asFloor below: the site ranks on resemblance.
+// The project is a need the reader states: it ranks on its criteria (operator, 2026-11-16).
 const PROJECT: Record<NonNullable<Answers["project"]>, Pull[]> = {
   installer: [
-    pull("safety", 0.9, 2),
-    pull("comfort", 0.85, 2),
-    pull("paperwork", 0.85, 1.5),
-    pull("jobs", 0.7, 1),
-    pull("returnees", 0.7, 1),
-    pull("internet", 0.7, 0.5),
-    pull("schools", 0.6, 0.5),
-    pull("flights", 0.6, 0.5),
-    pull("cheap", 0.6, 0.5),
-    pull("easySetup", 0.6, 0.5),
+    need("safety", 0.9, 2),
+    need("comfort", 0.85, 2),
+    need("paperwork", 0.85, 1.5),
+    need("jobs", 0.7, 1),
+    need("returnees", 0.7, 1),
+    need("internet", 0.7, 0.5),
+    need("schools", 0.6, 0.5),
+    need("flights", 0.6, 0.5),
+    need("cheap", 0.6, 0.5),
+    need("easySetup", 0.6, 0.5),
   ],
   pied: [
-    pull("flights", 0.95, 3),
-    pull("internet", 0.85, 1.5),
-    pull("safety", 0.8, 1),
-    pull("comfort", 0.75, 1),
-    pull("paperwork", 0.8, 1),
-    pull("easySetup", 0.7, 0.5),
-    pull("returnees", 0.7, 0.5),
+    need("flights", 0.95, 3),
+    need("internet", 0.85, 1.5),
+    need("safety", 0.8, 1),
+    need("comfort", 0.75, 1),
+    need("paperwork", 0.8, 1),
+    need("easySetup", 0.7, 0.5),
+    need("returnees", 0.7, 0.5),
   ],
   tester: [
-    pull("easySetup", 0.9, 2),
-    pull("safety", 0.8, 1.5),
-    pull("returnees", 0.8, 1.5),
-    pull("cheap", 0.7, 1),
-    pull("comfort", 0.75, 1),
-    pull("internet", 0.75, 1),
-    pull("paperwork", 0.75, 1),
-    pull("flights", 0.7, 0.5),
+    need("easySetup", 0.9, 2),
+    need("safety", 0.8, 1.5),
+    need("returnees", 0.8, 1.5),
+    need("cheap", 0.7, 1),
+    need("comfort", 0.75, 1),
+    need("internet", 0.75, 1),
+    need("paperwork", 0.75, 1),
+    need("flights", 0.7, 0.5),
   ],
   investir: [
-    pull("business", 0.95, 3),
-    pull("paperwork", 0.85, 2),
-    pull("jobs", 0.7, 1),
-    pull("safety", 0.75, 1),
-    pull("flights", 0.7, 1),
-    pull("internet", 0.7, 0.5),
+    need("business", 0.95, 3),
+    need("paperwork", 0.85, 2),
+    need("jobs", 0.7, 1),
+    need("safety", 0.75, 1),
+    need("flights", 0.7, 1),
+    need("internet", 0.7, 0.5),
   ],
   decouvrir: [
-    pull("safety", 0.9, 2),
-    pull("comfort", 0.8, 1.5),
-    pull("culture", 0.8, 1.5),
-    pull("history", 0.8, 1.5),
-    pull("flights", 0.8, 1.5),
-    pull("nightlife", 0.65, 0.5),
-    pull("cheap", 0.6, 0.5),
+    need("safety", 0.9, 2),
+    need("comfort", 0.8, 1.5),
+    need("culture", 0.8, 1.5),
+    need("history", 0.8, 1.5),
+    need("flights", 0.8, 1.5),
+    need("nightlife", 0.65, 0.5),
+    need("cheap", 0.6, 0.5),
   ],
 };
 const SATURDAY: Record<Step, Pull[]> = {
@@ -402,14 +403,29 @@ const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
   locals: [pull("returnees", 0.2, 1.5)],
   both: [pull("returnees", 0.7, 1)],
 };
-const RECEPTION_WEIGHT = 8;
-const KIN_WEIGHT = { much: 8, some: 3.5 } as const;
-const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
 const ADVENTURE_LEVEL = { familiar: 0, open: 0.5, seeking: 1 } as const;
 // Twice its first weight: the neighbourhoods' temperament is what the site matches the reader on.
 const TEMPERAMENT_WEIGHT = 4;
-// The daily language is a threshold (can one live there or not), so it no longer outweighs the rest.
-const LANGUAGE_WEIGHT = 3;
+/**
+ * How much one answer counts against the others, as evidence (scoreOf below); an answer not
+ * listed counts 1. The daily language decides first: ticking Arabic must turn the list over at
+ * the thirteenth answer too (operator, 2026-11-16).
+ */
+const ANSWER_WEIGHT: Record<string, number> = { languages: 3, project: 1.5, music: 0.5 };
+/**
+ * How strongly the family's region draws the reader, by project: settling far from one's own is
+ * harder than travelling far from them, which is the point of a trip (operator, 2026-11-16).
+ */
+const ORIGIN_DRAW: Record<NonNullable<Answers["project"]>, number> = {
+  installer: 2,
+  pied: 1.5,
+  tester: 1,
+  investir: 0.75,
+  decouvrir: 0,
+};
+// Before the reader says whether feeling at home matters, the region draws a little less.
+const KIN_SCALE = { much: 1.5, some: 1, unsaid: 0.75, none: 0.25 } as const;
+const ADVENTURE_SCALE = { familiar: 1.25, open: 1, seeking: 0.5 } as const;
 const PRACTICAL: Axis[] = [
   "safety",
   "comfort",
@@ -438,25 +454,43 @@ const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
   jobs: "jobs",
 };
 
-/** Turns answers into pulls on axes and facts to match. */
-export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] } {
+interface Profile {
+  /** Every pull and fact names the answer it reads (`from`). */
+  pulls: Pull[];
+  facts: FactPull[];
+  /** How much each answer counts as evidence, by `from`. */
+  weights: Record<string, number>;
+}
+
+/** Turns answers into pulls on axes and facts to match, each tied to its answer. */
+export function profileOf(answers: Answers): Profile {
   // No default pull: with no answer every city is equal, and only answers rank them.
   const pulls: Pull[] = [];
   const facts: FactPull[] = [];
-  const add = (more: Pull[] | undefined) => more && pulls.push(...more);
-  if (answers.project) add(PROJECT[answers.project]);
-  if (answers.saturday !== undefined) add(SATURDAY[answers.saturday]);
-  if (answers.budget) add(BUDGET[answers.budget]);
-  if (answers.family) add(FAMILY[answers.family]);
-  if (answers.job) add(JOB[answers.job]);
-  if (answers.size) add(SIZE[answers.size]);
-  if (answers.grewUp) add(GREW_UP[answers.grewUp]);
+  const weights: Record<string, number> = {};
+  const add = (from: string, more: Pull[] | undefined, weight = ANSWER_WEIGHT[from] ?? 1) => {
+    if (!more?.length) return;
+    pulls.push(...more.map((p) => ({ ...p, from })));
+    weights[from] = weight;
+  };
+  const fact = (from: string, more: FactPull, weight = ANSWER_WEIGHT[from] ?? 1) => {
+    facts.push({ ...more, from });
+    weights[from] = weight;
+  };
+  if (answers.project) add("project", PROJECT[answers.project]);
+  if (answers.saturday !== undefined) add("saturday", SATURDAY[answers.saturday]);
+  if (answers.budget) add("budget", BUDGET[answers.budget]);
+  if (answers.family) add("family", FAMILY[answers.family]);
+  if (answers.job) add("job", JOB[answers.job]);
+  if (answers.size) add("size", SIZE[answers.size]);
+  if (answers.grewUp) add("grewUp", GREW_UP[answers.grewUp]);
+  // Each non-negotiable is a piece of evidence of its own, worth more than an ordinary answer.
   for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES))
-    add(PRIORITY[priority].map((p) => ({ ...p, weight: p.weight * NON_NEGOTIABLE })));
+    add(`priorities:${priority}`, PRIORITY[priority], NON_NEGOTIABLE);
   if (answers.profession) {
     const { fields, pulls: more } = PROFESSION[answers.profession];
-    add(more);
-    if (fields.length) facts.push({ kind: "professions", values: fields, weight: 2.5 });
+    add("profession", more);
+    if (fields.length) fact("profession", { kind: "professions", values: fields, weight: 2.5 });
   }
   if (answers.currentCity) {
     // Keeping the same rhythm doubles down on today's life; a change moves the pace target.
@@ -468,6 +502,7 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
           : 0;
     const boost = answers.rhythm === "same" ? 1.5 : answers.rhythm ? 0.6 : 1;
     add(
+      "currentCity",
       CURRENT_CITY[answers.currentCity].map((p) => ({
         ...p,
         target: p.axis === "pace" ? Math.min(1, Math.max(0.05, p.target + shift)) : p.target,
@@ -475,23 +510,27 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
       })),
     );
   } else if (answers.rhythm === "calmer") {
-    add([pull("pace", 0.25, 1.5)]);
+    add("rhythm", [pull("pace", 0.25, 1.5)]);
   } else if (answers.rhythm === "more") {
-    add([pull("pace", 0.85, 1.5)]);
+    add("rhythm", [pull("pace", 0.85, 1.5)]);
   }
   if (answers.rhythm === "unplug") {
-    add([pull("remote", 0.85, 2.5), pull("pace", 0.05, 1.5), pull("nightlife", 0.05, 1)]);
+    add("rhythm", [pull("remote", 0.85, 2.5), pull("pace", 0.05, 1.5), pull("nightlife", 0.05, 1)]);
   }
-  if (answers.mobility) add(MOBILITY[answers.mobility]);
-  for (const habit of answers.habits ?? []) add(HABITS[habit]);
+  if (answers.mobility) add("mobility", MOBILITY[answers.mobility]);
+  add(
+    "habits",
+    (answers.habits ?? []).flatMap((habit) => HABITS[habit]),
+  );
   if (answers.habits?.includes("nature"))
-    facts.push({ kind: "settings", values: ["nature"], weight: 1.5 });
-  if (answers.neighbourhood) add(NEIGHBOURHOOD[answers.neighbourhood]);
-  if (answers.neighbourhood === "upscale") facts.push({ kind: "upscale", values: [], weight: 2 });
-  if (answers.people) add(PEOPLE[answers.people]);
-  if (answers.crowds !== undefined) add(STEP_PULLS.crowds(answers.crowds));
-  if (answers.order !== undefined) add(ORDER[answers.order]);
-  if (answers.together !== undefined) add(TOGETHER[answers.together]);
+    fact("habits", { kind: "settings", values: ["nature"], weight: 1.5 });
+  if (answers.neighbourhood) add("neighbourhood", NEIGHBOURHOOD[answers.neighbourhood]);
+  if (answers.neighbourhood === "upscale")
+    fact("neighbourhood", { kind: "upscale", values: [], weight: 2 });
+  if (answers.people) add("people", PEOPLE[answers.people]);
+  if (answers.crowds !== undefined) add("crowds", STEP_PULLS.crowds(answers.crowds));
+  if (answers.order !== undefined) add("order", ORDER[answers.order]);
+  if (answers.together !== undefined) add("together", TOGETHER[answers.together]);
   // Each temperament answer is also matched against the city's neighbourhoods, so a calm reader
   // is drawn to a city that is mostly calm, not only to one with little nightlife on paper.
   for (const trait of TRAITS) {
@@ -500,40 +539,52 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
         ? answers.adventure && ADVENTURE_LEVEL[answers.adventure]
         : answers[trait];
     if (value === undefined) continue;
-    facts.push({ kind: "temperament", trait, value, weight: TEMPERAMENT_WEIGHT });
+    fact(trait, { kind: "temperament", trait, value, weight: TEMPERAMENT_WEIGHT });
   }
-  if (answers.bargaining !== undefined) add(STEP_PULLS.bargaining(answers.bargaining));
-  if (answers.tripsHome !== undefined) add(STEP_PULLS.tripsHome(answers.tripsHome));
-  if (answers.setupBudget) add(SETUP[answers.setupBudget]);
-  if (answers.belonging) add(BELONGING[answers.belonging]);
+  if (answers.bargaining !== undefined)
+    add("bargaining", STEP_PULLS.bargaining(answers.bargaining));
+  if (answers.tripsHome !== undefined) add("tripsHome", STEP_PULLS.tripsHome(answers.tripsHome));
+  if (answers.setupBudget) add("setupBudget", SETUP[answers.setupBudget]);
+  if (answers.belonging) add("belonging", BELONGING[answers.belonging]);
   const profile = profileEffects(answers);
-  add(profile.pulls);
-  facts.push(...profile.facts);
+  for (const p of profile.pulls) add(p.from!, [p]);
+  for (const f of profile.facts) fact(f.from!, f);
 
   const languages = languagesOf(answers);
-  if (languages.length)
-    facts.push({ kind: "languages", values: languages, weight: LANGUAGE_WEIGHT });
+  if (languages.length) fact("languages", { kind: "languages", values: languages, weight: 3 });
   const landscapes = landscapesOf(answers);
   const natural = landscapes.filter((l) => l !== "urban");
-  if (natural.length) facts.push({ kind: "settings", values: natural, weight: 2.5 });
+  if (natural.length) fact("landscapes", { kind: "settings", values: natural, weight: 2.5 });
   if (landscapes.includes("urban")) {
-    add([pull("culture", 0.8, 1.5), pull("pace", 0.7, 0.5), pull("nightlife", 0.65, 0.5)]);
+    add("landscapes", [
+      pull("culture", 0.8, 1.5),
+      pull("pace", 0.7, 0.5),
+      pull("nightlife", 0.65, 0.5),
+    ]);
   }
-  if (answers.climate) facts.push({ kind: "climates", values: [answers.climate], weight: 2 });
+  if (answers.climate) fact("climate", { kind: "climates", values: [answers.climate], weight: 2 });
   // Roots bring the family's regions closer.
   const origins = originsOf(answers);
   const africanOrigins = origins.filter((o) => o !== "ameriques");
   if (africanOrigins.length && (answers.roots === "rediscover" || answers.roots === "both")) {
-    const weight = answers.roots === "rediscover" ? 3 : 1.5;
-    facts.push({ kind: "zone", values: africanOrigins, weight });
+    const weight = answers.roots === "rediscover" ? 1.5 : 1;
+    fact("roots", { kind: "zone", values: africanOrigins, weight: 2 * weight }, weight);
   }
 
   const passports = (answers.passports ?? []).filter((p) => p !== "other");
-  if (passports.length) facts.push({ kind: "entry", values: passports, weight: 1.5 });
-  // Feeling at home weighs with how little the reader wants the unknown (§ belonging).
-  if (origins.length && answers.kin && answers.kin !== "none") {
-    const weight = KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
-    facts.push({ kind: "kin", origins, weight });
+  if (passports.length) fact("passports", { kind: "entry", values: passports, weight: 1.5 });
+  // The origin weighs on its own: the family's region draws the reader by project, more when
+  // feeling at home matters, less with an appetite for the unknown; a trip, or that appetite,
+  // leans away from it instead.
+  if (origins.length) {
+    const scale = KIN_SCALE[answers.kin ?? "unsaid"] * ADVENTURE_SCALE[answers.adventure ?? "open"];
+    const draw = (answers.project ? ORIGIN_DRAW[answers.project] : 1) * scale;
+    const away =
+      (answers.project === "decouvrir" ? 0.5 : 0) +
+      (answers.adventure === "seeking" ? 1.5 : 0) +
+      (answers.roots === "discover" ? 1 : 0);
+    if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, draw + away);
+    if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, draw + away);
   }
   // Faith counts the same way; a reader without one is not sent towards secular countries.
   const faith = answers.faith;
@@ -542,37 +593,21 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
     answers.kin !== "none" &&
     (faith === "muslim" || faith === "christian" || faith === "other")
   ) {
-    const weight = 0.6 * KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
-    facts.push({ kind: "faith", value: faith, weight });
+    const weight = KIN_SCALE[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
+    fact("faith", { kind: "faith", value: faith, weight: 2 * weight }, weight);
   }
-  // The family's own country: what draws a diaspora back to a city no other answer reaches.
-  // It is more precise than the region, so it weighs at least as much.
+  // The family's own country: what draws a diaspora back to a city no other answer reaches. A
+  // documented war or ban between it and the host country counts inside the same answer, never
+  // on its own, and is never written on a card (operator, 2026-11-16).
   const countries = (answers.countries ?? []).filter(Boolean);
   if (countries.length) {
-    const roots = answers.roots === "rediscover" ? 4 : answers.roots === "both" ? 2 : 0;
-    const kin =
-      answers.kin === "much" || answers.kin === "some"
-        ? KIN_WEIGHT[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"]
-        : 0;
-    facts.push({ kind: "homeCountry", values: countries, weight: Math.max(2, roots + kin) });
-  }
-  // A reader is never sent where anti-Black racism is documented, adventure or not: being badly
-  // received is a failure of the quiz, not a taste (operator, 2026-11-15). Only a family from
-  // North Africa alone lifts it; a reader who keeps their origin to themselves stays protected.
-  const northOnly =
-    origins.length > 0 &&
-    origins.every((o) => o === "nord") &&
-    !(answers.countries ?? []).includes("Soudan");
-  const black = !northOnly;
-  if (black) facts.push({ kind: "reception", weight: RECEPTION_WEIGHT });
-  // A war or a ban aimed at the family's country is documented against the host country whatever
-  // the taste for adventure, like reception; unlike reception, it is never shown on the card.
-  if (countries.length)
-    facts.push({ kind: "tension", values: countries, weight: RECEPTION_WEIGHT });
-  // « Découvrir ailleurs » and an appetite for the unknown both lean away from the family's region.
-  const away = (answers.adventure === "seeking" ? 1.5 : 0) + (answers.roots === "discover" ? 1 : 0);
-  if (origins.length && away > 0) {
-    facts.push({ kind: "elsewhere", origins, weight: away });
+    const roots = answers.roots === "rediscover" ? 2 : answers.roots === "both" ? 1 : 0;
+    // Feeling at home among one's own, when it matters a lot, makes the family's country the
+    // strongest answer of all, as the region is for a settler.
+    const kin = answers.kin === "much" ? 4 : answers.kin === "some" ? 2 : 0;
+    const weight = (1 + roots + kin) * ADVENTURE_SCALE[answers.adventure ?? "open"];
+    fact("countries", { kind: "homeCountry", values: countries, weight: 2 }, weight);
+    fact("countries", { kind: "tension", values: countries, weight: 2 }, weight);
   }
 
   const renounced = new Set<Axis>(
@@ -580,7 +615,11 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
       .map((key) => RENOUNCE_AXIS[key])
       .filter((axis): axis is Axis => Boolean(axis)),
   );
-  return { pulls: pulls.filter((p) => !renounced.has(p.axis)).map(asFloor), facts };
+  return {
+    pulls: pulls.filter((p) => !renounced.has(p.axis)).map(asFloor),
+    facts,
+    weights,
+  };
 }
 
 function originsOf(answers: Answers): Origin[] {
@@ -632,8 +671,6 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
     return good ? "Facile d'y entrer avec votre passeport" : "Un visa à demander à l'ambassade";
   if (part.fact === "faith")
     return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
-  // Only what the sources say, in their words (operator, 2026-11-15).
-  if (part.fact === "reception") return good ? undefined : city.countryFacts?.racism?.label;
   // Weighs in the score, never written on a card: a war between two peoples next to a level reads
   // as a verdict on the reader's family (operator, 2026-11-16).
   if (part.fact === "tension") return undefined;
@@ -726,26 +763,63 @@ function exclusionFor(city: City, answers: Answers): string | undefined {
   return undefined;
 }
 
-type Profile = ReturnType<typeof profileOf>;
-
 const levelOf = (value: number) => Math.round(1 + 4 * value);
 
-/** The weighted closeness of a city to some pulls and facts; null when nothing was asked. */
-function closeness(city: City, profile: Profile): number | null {
-  const parts = closenessOf(city, profile.pulls, profile.facts);
-  const total = parts.reduce((sum, p) => sum + p.weight, 0);
-  return total ? parts.reduce((sum, p) => sum + p.weight * p.value, 0) / total : null;
+/** One answer read as evidence: its weight against the other answers, and what it asks. */
+interface Evidence {
+  weight: number;
+  pulls: Pull[];
+  facts: FactPull[];
+}
+
+function evidenceOf(profile: Profile): Evidence[] {
+  const byAnswer = new Map<string, Evidence>();
+  const of = (from = "") => {
+    let evidence = byAnswer.get(from);
+    if (!evidence) {
+      evidence = { weight: profile.weights[from] ?? 1, pulls: [], facts: [] };
+      byAnswer.set(from, evidence);
+    }
+    return evidence;
+  };
+  for (const p of profile.pulls) of(p.from).pulls.push(p);
+  for (const f of profile.facts) of(f.from).facts.push(f);
+  return [...byAnswer.values()];
+}
+
+/** A clean miss keeps a tenth of its chances: an answer orients the list, it never erases a city. */
+const MISS_FLOOR = 0.1;
+
+/**
+ * Each answer is one piece of evidence and the pieces multiply, as in a guessing game: a city far
+ * from an answer loses as much at the thirteenth answer as at the first, however many criteria
+ * the other answers touch. The weighted geometric mean keeps the score between 0 and 1. The
+ * score is null when nothing was asked.
+ */
+function scoreOf(city: City, evidence: Evidence[]): { score: number | null; parts: Closeness[] } {
+  const parts: Closeness[] = [];
+  let log = 0;
+  let total = 0;
+  for (const answer of evidence) {
+    const own = closenessOf(city, answer.pulls, answer.facts);
+    const weight = own.reduce((sum, p) => sum + p.weight, 0);
+    if (!weight) continue;
+    const fit = own.reduce((sum, p) => sum + p.weight * p.value, 0) / weight;
+    log += answer.weight * Math.log(MISS_FLOOR + (1 - MISS_FLOOR) * fit);
+    total += answer.weight;
+    parts.push(...own);
+  }
+  return { score: total ? Math.exp(log / total) : null, parts };
 }
 
 function evaluate(
   city: City,
   answers: Answers,
-  profiles: { all: Profile; temperament: Profile | null; practical: Profile },
+  profile: Profile,
+  evidence: { all: Evidence[]; temperament: Evidence[] | null; practical: Evidence[] },
 ): Match {
-  const profile = profiles.all;
-  const parts = closenessOf(city, profile.pulls, profile.facts);
+  const { score, parts } = scoreOf(city, evidence.all);
   const total = parts.reduce((sum, p) => sum + p.weight, 0);
-  const earned = parts.reduce((sum, p) => sum + p.weight * p.value, 0);
   const known = parts.filter((p) => p.known).reduce((sum, p) => sum + p.weight, 0);
   // A missing value is never cited for or against a city.
   const cited = parts.filter((p) => p.known);
@@ -772,14 +846,14 @@ function evaluate(
   ).slice(0, 3);
   return {
     city,
-    score: total ? earned / total : 0,
+    score: score ?? 0,
     coverage: total ? known / total : 1,
     excludedBecause: exclusionFor(city, answers),
     reasons,
     drawbacks,
-    temperament: profiles.temperament ? closeness(city, profiles.temperament) : null,
+    temperament: evidence.temperament ? scoreOf(city, evidence.temperament).score : null,
     temperamentLines: temperamentLinesFor(city.name, answers),
-    practical: closeness(city, profiles.practical) ?? 0,
+    practical: scoreOf(city, evidence.practical).score ?? 0,
     portrait: portraitFor(city, answers),
   };
 }
@@ -787,19 +861,22 @@ function evaluate(
 export function rankCities(answers: Answers): Match[] {
   // The same matching, run on the temperament answers alone and on all the others, gives the
   // two parts of the score shown on a card.
-  const temperamentAnswers: Answers = { origin: answers.origin };
+  const temperamentAnswers: Answers = {};
   const practicalAnswers: Answers = { ...answers };
   for (const key of TEMPERAMENT_KEYS) {
     (temperamentAnswers as Record<string, unknown>)[key] = answers[key];
     delete (practicalAnswers as Record<string, unknown>)[key];
   }
   const asked = TEMPERAMENT_KEYS.some((key) => answers[key] !== undefined);
-  const profiles = {
-    all: profileOf(answers),
-    temperament: asked ? profileOf(temperamentAnswers) : null,
-    practical: profileOf(practicalAnswers),
+  const profile = profileOf(answers);
+  const evidence = {
+    all: evidenceOf(profile),
+    temperament: asked ? evidenceOf(profileOf(temperamentAnswers)) : null,
+    practical: evidenceOf(profileOf(practicalAnswers)),
   };
-  return CITIES.map((city) => evaluate(city, answers, profiles)).sort((a, b) => b.score - a.score);
+  return CITIES.map((city) => evaluate(city, answers, profile, evidence)).sort(
+    (a, b) => b.score - a.score,
+  );
 }
 
 /**
@@ -807,8 +884,8 @@ export function rankCities(answers: Answers): Match[] {
  * temperament part: cheap enough to try every answer of every open question on a phone.
  */
 export function topCities(answers: Answers, count: number): string[] {
-  const profile = profileOf(answers);
-  return CITIES.map((city) => ({ city, score: closeness(city, profile) ?? 0 }))
+  const evidence = evidenceOf(profileOf(answers));
+  return CITIES.map((city) => ({ city, score: scoreOf(city, evidence).score ?? 0 }))
     .sort((a, b) => b.score - a.score)
     .filter(({ city }) => !exclusionFor(city, answers))
     .slice(0, count)

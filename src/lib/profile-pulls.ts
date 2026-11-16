@@ -123,15 +123,16 @@ export function profileEffects(answers: Answers): { pulls: Pull[]; facts: FactPu
     const given = answers[question as keyof ProfileAnswers];
     for (const choice of [given ?? []].flat()) {
       const effect = byChoice[choice as string];
-      pulls.push(...(effect?.pulls ?? []));
-      facts.push(...(effect?.facts ?? []));
+      pulls.push(...(effect?.pulls ?? []).map((p) => ({ ...p, from: question })));
+      facts.push(...(effect?.facts ?? []).map((f) => ({ ...f, from: question })));
     }
   }
   // The season counts like the length of the stay: a holiday in the rains is a poor holiday.
   const months = SEASONS.find((s) => s.value === answers.season)?.months;
-  if (months) facts.push({ kind: "season", months: [...months], weight: 2 });
-  // A small pull: the music one loves is a reason, never the reason.
+  if (months) facts.push({ kind: "season", months: [...months], weight: 2, from: "season" });
+  // The music's small weight as an answer is set in ranking.ts (ANSWER_WEIGHT).
   const countries = musicCountries(answers.music);
-  if (countries.length) facts.push({ kind: "music", values: countries, weight: 1.5 });
+  if (countries.length)
+    facts.push({ kind: "music", values: countries, weight: 1.5, from: "music" });
   return { pulls, facts };
 }

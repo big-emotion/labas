@@ -16,14 +16,17 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
   quiz asks every question (« question 7 sur 18 »), opening on the project; then each answer
   picks the next question, the one most likely to change the top five (operator 2026-11-15).
-- **Reception first**: a reader of sub-Saharan or Caribbean family is never sent where anti-Black
-  racism is documented, whatever their taste for adventure (operator 2026-11-15).
+- **Every answer orients the list** (operator, 2026-11-16, like a guessing game): each answer is
+  one piece of evidence and the pieces multiply (`scoreOf` in `src/lib/ranking.ts`), so a late
+  answer still turns the list over. The daily language weighs most; the project and the origin
+  weigh on their own (the family's region draws a settler, not a holidaymaker). No fact weighs
+  without an answer that asks for it: nothing is inferred from an answer the reader did not give.
 - **Test first** (Vitest, `src/**/*.test.ts`), through the public functions `rankCities` and
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
   as measured, present the temperament chapter only as « inspirée du Big Five, ce n'est pas un test de
   personnalité » and its archetype as preferences in « vous », never as « vous êtes », and add a dated source
-  with any safety, racism, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
+  with any safety, discrimination, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
   FCDO) is shown with each city as dated information and never removes or greys a city
   (operator, 2026-11-15: it is written for visitors who have never been there).
 - **Privacy**: answers are computed and kept in the browser (localStorage, so the full

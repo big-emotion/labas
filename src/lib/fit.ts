@@ -33,8 +33,11 @@ export type Axis =
   | "leisure"
   | "remote";
 
-/** Facts are matched, not measured: a city has the sea or it does not. */
-export type FactPull =
+/**
+ * Facts are matched, not measured: a city has the sea or it does not. `from` names the answer a
+ * fact reads, so the ranking can weigh each answer as one piece of evidence (ranking.ts).
+ */
+export type FactPull = { from?: string } & (
   | { kind: "languages"; values: string[]; weight: number }
   | { kind: "settings"; values: string[]; weight: number }
   | { kind: "climates"; values: string[]; weight: number }
@@ -46,11 +49,6 @@ export type FactPull =
   | { kind: "kin"; origins: string[]; weight: number }
   /** The passports the reader holds: how easily each one gets into the city's country. */
   | { kind: "entry"; values: string[]; weight: number }
-  /**
-   * How a Black reader can expect to be received: documented anti-Black racism counts against a
-   * country whatever the reader's taste for adventure, xenophobic violence half as much.
-   */
-  | { kind: "reception"; weight: number }
   /** The family's own countries: any documented tension with the host country counts against it. */
   | { kind: "tension"; values: string[]; weight: number }
   /** The family's own countries. */
@@ -66,7 +64,8 @@ export type FactPull =
   /** The reverse, for readers after the unknown. */
   | { kind: "elsewhere"; origins: string[]; weight: number }
   /** A temperament answer, 0 to 1: the share of the city's neighbourhoods that suits it. */
-  | { kind: "temperament"; trait: Trait; value: number; weight: number };
+  | { kind: "temperament"; trait: Trait; value: number; weight: number }
+);
 
 export interface Pull {
   axis: Axis;
@@ -78,6 +77,8 @@ export interface Pull {
    * pull ranks cities on a practical criterion; any other is lowered to a floor (ranking.ts).
    */
   chosen?: boolean;
+  /** The answer this pull reads (see FactPull). */
+  from?: string;
 }
 
 /** What an axis reads from the sourced scores; comfort averages power, water and care. */
@@ -332,15 +333,6 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       match = city.facts.climates.some((c) => wanted.includes(c));
     } else if (fact.kind === "zone") {
       match = fact.values.includes(city.zone);
-    } else if (fact.kind === "reception") {
-      const racism = city.countryFacts?.racism?.kind;
-      parts.push({
-        value: racism === "anti-black" ? 0 : racism === "xenophobia" ? 0.5 : 1,
-        weight: fact.weight,
-        known: true,
-        fact: fact.kind,
-      });
-      continue;
     } else if (fact.kind === "tension") {
       const found = tensionFor(city, fact.values);
       // A conflict between the two states weighs fully; a measure against nationals, half.
@@ -383,15 +375,9 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       });
       continue;
     } else if (fact.kind === "kin" || fact.kind === "elsewhere") {
-      // A mixed family is at home wherever one of its sides is. Documented anti-Black racism
-      // halves how at home a reader of sub-Saharan or Caribbean family can expect to feel,
-      // whatever the map says (UN, Amnesty, HRW: countries.json).
-      const antiBlack = city.countryFacts?.racism?.kind === "anti-black";
+      // A mixed family is at home wherever one of its sides is.
       const affinity = Math.max(
-        ...fact.origins.map(
-          (origin) =>
-            (AFFINITY[origin]?.[city.zone] ?? NEUTRAL) * (antiBlack && origin !== "nord" ? 0.5 : 1),
-        ),
+        ...fact.origins.map((origin) => AFFINITY[origin]?.[city.zone] ?? NEUTRAL),
       );
       parts.push({
         // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
