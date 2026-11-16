@@ -6,6 +6,14 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.13.3] - 2026-11-16
+
+### Changed
+
+- Each anonymous quiz answer sent to Plausible carries the reader's path (Vacances, S'installer…)
+  and the question's rank in it, so the dashboard shows where each path loses its readers; the
+  « terminé » steps carry the path too. The privacy page says so.
+
 ## [0.13.2] - 2026-11-16
 
 ### Fixed
@@ -261,7 +269,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.13.1...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.13.3...HEAD
+[0.13.3]: https://github.com/big-emotion/labas/compare/v0.13.2...v0.13.3
 [0.13.2]: https://github.com/big-emotion/labas/compare/v0.13.1...v0.13.2
 [0.13.1]: https://github.com/big-emotion/labas/compare/v0.13.0...v0.13.1
 [0.13.0]: https://github.com/big-emotion/labas/compare/v0.12.1...v0.13.0
