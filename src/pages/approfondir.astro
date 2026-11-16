@@ -1,5 +1,6 @@
 ---
 import KeepResults from "../components/KeepResults.astro";
+import SourcesNote from "../components/SourcesNote.astro";
 import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ResultCards from "../components/ResultCards.astro";
 import Page from "../layouts/Page.astro";
@@ -66,6 +67,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
       Classées selon toutes vos réponses. Le pourcentage dit à quel point une ville correspond à ce
       que vous avez dit, rien de plus.
     </p>
+    <SourcesNote />
     <TemperamentProfile />
     <ul id="removed" class="removed"></ul>
     <div id="cards" class="cards"></div>

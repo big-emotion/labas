@@ -57,7 +57,7 @@ const advisedAgainst = CITIES.filter((city) => city.advisedAgainst).length;
     ))}
   </dl>
 
-  <h2>D'où viennent les chiffres</h2>
+  <h2 id="sources">D'où viennent les chiffres</h2>
   <p>
     Pour chaque pays, un dossier de recherche rassemble des sources datées : conseils aux voyageurs
     de la France et du Royaume-Uni, presse locale, annonces immobilières, enquêtes Afrobaromètre,
@@ -84,6 +84,13 @@ const advisedAgainst = CITIES.filter((city) => city.advisedAgainst).length;
     des estimations. Une note inconnue compte comme une note moyenne (2,5) : elle ne fait ni gagner
     ni perdre une ville, et elle n'est jamais citée comme raison. Quand une ville repose sur trop
     d'inconnues pour vos réponses, sa fiche le dit.
+  </p>
+  <p>
+    Nos sources ne disent pas toujours la même chose : une voix locale, un site spécialisé et un
+    site officiel peuvent voir la même ville autrement. Nous relayons ce qu'elles disent, à leur
+    date. Sur place, la réalité peut varier, d'un quartier à l'autre et d'un mois à l'autre. Quand
+    une ligne dit « aucun quartier », c'est qu'aucun des quartiers de nos notes ne s'y prête : la
+    ville en a peut-être d'autres.
   </p>
 
   <h2>Les conseils aux voyageurs</h2>

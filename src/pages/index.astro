@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
 import KeepResults from "../components/KeepResults.astro";
+import SourcesNote from "../components/SourcesNote.astro";
 import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ResultCards from "../components/ResultCards.astro";
 import ShareMeta from "../components/ShareMeta.astro";
@@ -156,6 +157,7 @@ const website = JSON.stringify({
             <p class="hint">
               Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.
             </p>
+            <SourcesNote />
             <TemperamentProfile />
             <div id="cards" class="cards"></div>
             <KeepResults />

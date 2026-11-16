@@ -57,7 +57,8 @@ const LEVEL_NAMES: Record<Trait, [string, string, string]> = {
 
 /**
  * The same levels when no neighbourhood has them, as a sentence: « Tout fonctionne comme prévu :
- * aucun quartier » read as if things worked (operator, 2026-11-16).
+ * aucun quartier » read as if things worked. « Aucun » is the strongest claim the site makes
+ * about a city, so it is tied to our notes (operator, 2026-11-16).
  */
 const NO_NEIGHBOURHOOD: Record<Trait, [string, string, string]> = {
   saturday: [
@@ -105,7 +106,7 @@ export function neighbourhoodLine(
   if (profile.editorial)
     return { text: `${name} : ${n ? "oui" : "non"}, estimation pour la ville`, weak: n === 0 };
   // A line that counts nothing stays, readable and marked against the city (operator, 2026-11-16).
-  if (n === 0) return { text: NO_NEIGHBOURHOOD[trait][level], weak: true };
+  if (n === 0) return { text: `${NO_NEIGHBOURHOOD[trait][level]}, selon nos sources`, weak: true };
   return { text: `${name} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`, weak: false };
 }
 
