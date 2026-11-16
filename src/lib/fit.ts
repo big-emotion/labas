@@ -71,6 +71,11 @@ export interface Pull {
   /** Where on the axis the reader wants to be, 0 to 1. */
   target: number;
   weight: number;
+  /**
+   * The reader named this need outright (a non-negotiable, a budget, what must work). Only such a
+   * pull ranks cities on a practical criterion; any other is lowered to a floor (ranking.ts).
+   */
+  chosen?: boolean;
 }
 
 /** What an axis reads from the sourced scores; comfort averages power, water and care. */

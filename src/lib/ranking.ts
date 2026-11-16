@@ -160,15 +160,24 @@ const LANGUAGE_NAMES: Record<Language, string> = {
 };
 
 const MAX_PRIORITIES = 3;
+// A non-negotiable must outweigh the temperament, which now weighs twice as much (2026-11-16).
+const NON_NEGOTIABLE = 2;
 const pull = (axis: Axis, target: number, weight: number): Pull => ({ axis, target, weight });
+/** A practical need the reader states outright: it ranks, unlike a need read between the lines. */
+const need = (axis: Axis, target: number, weight: number): Pull => ({
+  axis,
+  target,
+  weight,
+  chosen: true,
+});
 
 // Each answer is a set of pulls: where it wants the city on an axis (0 to 1, relative to the
 // 115 cities), and how much that counts. A reading of the answer, written down so it can be
 // argued with: "Danser jusqu'au matin" wants a city at the lively end of nightlife.
 // Each answer is read against every one of the 16 criteria: a pull
 // says where the answer wants the city (0 to 1, relative to the 115 cities) and how much that
-// counts; a criterion left out is unrelated to the answer on purpose. Everyday basics (safety,
-// power, water and care) count wherever a European-based reader would check them first.
+// counts; a criterion left out is unrelated to the answer on purpose. A practical criterion the
+// reader did not name is lowered to a floor by asFloor below: the site ranks on resemblance.
 const PROJECT: Record<NonNullable<Answers["project"]>, Pull[]> = {
   installer: [
     pull("safety", 0.9, 2),
@@ -220,18 +229,13 @@ const PROJECT: Record<NonNullable<Answers["project"]>, Pull[]> = {
   ],
 };
 const SATURDAY: Record<Step, Pull[]> = {
-  1: [
-    pull("nightlife", 1, 3),
-    pull("pace", 0.8, 1),
-    pull("culture", 0.7, 0.5),
-    pull("safety", 0.7, 0.5),
-  ],
+  1: [pull("nightlife", 1, 3), pull("pace", 0.8, 1), pull("culture", 0.7, 0.5)],
   0.5: [pull("nightlife", 0.55, 2), pull("culture", 0.6, 0.5)],
-  0: [pull("nightlife", 0.1, 2.5), pull("pace", 0.2, 1.5), pull("safety", 0.8, 0.5)],
+  0: [pull("nightlife", 0.1, 2.5), pull("pace", 0.2, 1.5)],
 };
 const BUDGET: Record<NonNullable<Answers["budget"]>, Pull[]> = {
-  serre: [pull("cheap", 1, 3), pull("easySetup", 0.85, 1.5), pull("bargaining", 0.6, 0.5)],
-  moyen: [pull("cheap", 0.65, 1.5), pull("easySetup", 0.6, 0.5)],
+  serre: [need("cheap", 1, 3), need("easySetup", 0.85, 1.5), pull("bargaining", 0.6, 0.5)],
+  moyen: [need("cheap", 0.65, 1.5), need("easySetup", 0.6, 0.5)],
   large: [pull("comfort", 0.85, 1), pull("safety", 0.8, 0.5)],
 };
 const FAMILY: Record<NonNullable<Answers["family"]>, Pull[]> = {
@@ -285,13 +289,13 @@ const GREW_UP: Record<NonNullable<Answers["grewUp"]>, Pull[]> = {
   country: [pull("pace", 0.15, 1)],
 };
 const PRIORITY: Record<Priority, Pull[]> = {
-  safety: [pull("safety", 1, 3)],
-  cost: [pull("cheap", 1, 3), pull("easySetup", 0.8, 1)],
-  healthAndSchools: [pull("comfort", 1, 2), pull("schools", 1, 2)],
-  career: [pull("jobs", 1, 3), pull("business", 0.7, 1)],
+  safety: [need("safety", 1, 3)],
+  cost: [need("cheap", 1, 3), need("easySetup", 0.8, 1)],
+  healthAndSchools: [need("comfort", 1, 2), need("schools", 1, 2)],
+  career: [need("jobs", 1, 3), need("business", 0.7, 1)],
   diaspora: [pull("returnees", 1, 3)],
   memory: [pull("history", 1, 3), pull("culture", 0.7, 0.5)],
-  flights: [pull("flights", 1, 3)],
+  flights: [need("flights", 1, 3)],
 };
 // A profession meets the fields that hire in a city (src/data/city-life.json), plus pulls.
 const PROFESSION: Record<
@@ -371,29 +375,26 @@ const PEOPLE: Record<NonNullable<Answers["people"]>, Pull[]> = {
   quiet: [pull("pace", 0.4, 0.5)],
   both: [pull("welcome", 0.7, 1)],
 };
+// Temperament answers are matched against the city's neighbourhoods (the temperament facts), not
+// read as a demand for comfort (operator, 2026-11-16): « tout carré » is a taste, not a need.
 const ORDER: Record<Step, Pull[]> = {
-  1: [pull("paperwork", 0.85, 1.5), pull("comfort", 0.8, 1), pull("safety", 0.8, 1)],
-  0.5: [pull("paperwork", 0.6, 1)],
+  1: [],
+  0.5: [],
   0: [pull("bargaining", 0.8, 1.5)],
 };
 const TOGETHER: Record<Step, Pull[]> = {
   1: [pull("welcome", 0.85, 2)],
   0.5: [pull("welcome", 0.6, 1)],
-  0: [pull("business", 0.85, 1.5), pull("jobs", 0.8, 1)],
+  0: [],
 };
 const STEP_PULLS = {
   crowds: (s: Step) => [pull("pace", 0.1 + 0.9 * s, 2)],
-  friction: (s: Step) => [
-    pull("comfort", 1 - 0.6 * s, 2 * (1 - s)),
-    pull("paperwork", 0.85, 1.5 * (1 - s)),
-    pull("easySetup", 0.85, 1 - s),
-  ],
   bargaining: (s: Step) => [pull("bargaining", 0.1 + 0.9 * s, 1.5)],
-  tripsHome: (s: Step) => [pull("flights", 0.4 + 0.6 * s, 1 + 3 * s)],
+  tripsHome: (s: Step) => [need("flights", 0.4 + 0.6 * s, 1 + 3 * s)],
 };
 const SETUP: Record<NonNullable<Answers["setupBudget"]>, Pull[]> = {
-  low: [pull("easySetup", 0.85, 3)],
-  medium: [pull("easySetup", 0.7, 1.5)],
+  low: [need("easySetup", 0.85, 3)],
+  medium: [need("easySetup", 0.7, 1.5)],
   high: [],
 };
 const BELONGING: Record<NonNullable<Answers["belonging"]>, Pull[]> = {
@@ -405,9 +406,30 @@ const RECEPTION_WEIGHT = 8;
 const KIN_WEIGHT = { much: 8, some: 3.5 } as const;
 const ADVENTURE_SCALE = { familiar: 1, open: 0.5, seeking: 0.15 } as const;
 const ADVENTURE_LEVEL = { familiar: 0, open: 0.5, seeking: 1 } as const;
-// As much as the strongest pull of a temperament answer on the city's practical criteria.
-const TEMPERAMENT_WEIGHT = 2;
-const COPED_WITH: Axis[] = ["comfort", "paperwork", "easySetup"];
+// Twice its first weight: the neighbourhoods' temperament is what the site matches the reader on.
+const TEMPERAMENT_WEIGHT = 4;
+// The daily language is a threshold (can one live there or not), so it no longer outweighs the rest.
+const LANGUAGE_WEIGHT = 3;
+const PRACTICAL: Axis[] = [
+  "safety",
+  "comfort",
+  "paperwork",
+  "easySetup",
+  "flights",
+  "internet",
+  "business",
+  "jobs",
+  "schools",
+  "cheap",
+];
+// A floor: only the weakest third of cities on the criterion lose points, the rest are equal.
+const FLOOR_TARGET = 0.3;
+const FLOOR_WEIGHT = 0.5;
+/** A practical criterion the reader did not name is a floor, not a ranking (operator, 2026-11-16). */
+const asFloor = (p: Pull): Pull =>
+  p.chosen || !PRACTICAL.includes(p.axis)
+    ? p
+    : { ...p, target: Math.min(p.target, FLOOR_TARGET), weight: p.weight * FLOOR_WEIGHT };
 const RENOUNCE_AXIS: Partial<Record<CriterionKey, Axis>> = {
   culture: "culture",
   internet: "internet",
@@ -430,7 +452,7 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (answers.size) add(SIZE[answers.size]);
   if (answers.grewUp) add(GREW_UP[answers.grewUp]);
   for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES))
-    add(PRIORITY[priority]);
+    add(PRIORITY[priority].map((p) => ({ ...p, weight: p.weight * NON_NEGOTIABLE })));
   if (answers.profession) {
     const { fields, pulls: more } = PROFESSION[answers.profession];
     add(more);
@@ -468,7 +490,6 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   if (answers.neighbourhood === "upscale") facts.push({ kind: "upscale", values: [], weight: 2 });
   if (answers.people) add(PEOPLE[answers.people]);
   if (answers.crowds !== undefined) add(STEP_PULLS.crowds(answers.crowds));
-  if (answers.friction !== undefined) add(STEP_PULLS.friction(answers.friction));
   if (answers.order !== undefined) add(ORDER[answers.order]);
   if (answers.together !== undefined) add(TOGETHER[answers.together]);
   // Each temperament answer is also matched against the city's neighbourhoods, so a calm reader
@@ -490,7 +511,8 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
   facts.push(...profile.facts);
 
   const languages = languagesOf(answers);
-  if (languages.length) facts.push({ kind: "languages", values: languages, weight: 6 });
+  if (languages.length)
+    facts.push({ kind: "languages", values: languages, weight: LANGUAGE_WEIGHT });
   const landscapes = landscapesOf(answers);
   const natural = landscapes.filter((l) => l !== "urban");
   if (natural.length) facts.push({ kind: "settings", values: natural, weight: 2.5 });
@@ -554,9 +576,7 @@ export function profileOf(answers: Answers): { pulls: Pull[]; facts: FactPull[] 
       .map((key) => RENOUNCE_AXIS[key])
       .filter((axis): axis is Axis => Boolean(axis)),
   );
-  // "Je fais avec": outages and paperwork stop counting, whatever other answers asked for.
-  if (answers.friction === 1) for (const axis of COPED_WITH) renounced.add(axis);
-  return { pulls: pulls.filter((p) => !renounced.has(p.axis)), facts };
+  return { pulls: pulls.filter((p) => !renounced.has(p.axis)).map(asFloor), facts };
 }
 
 function originsOf(answers: Answers): Origin[] {
@@ -727,8 +747,12 @@ function evaluate(
       const label = labelOf(p, city, answers, good);
       return label ? [{ label, level: levelOf(p.value) }] : [];
     });
+  // A practical criterion is a reason only when the reader asked for it: otherwise it is a floor,
+  // and the card leads with what resembles the reader (operator, 2026-11-16).
+  const chosen = new Set(profile.pulls.filter((p) => p.chosen).map((p) => p.axis));
   const reasons = rated(
     cited
+      .filter((p) => !p.axis || !PRACTICAL.includes(p.axis) || chosen.has(p.axis))
       .filter((p) => p.weight >= 1 && p.value >= 0.75)
       .sort((a, b) => b.weight * b.value - a.weight * a.value),
     true,

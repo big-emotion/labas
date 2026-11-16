@@ -155,6 +155,48 @@ describe("ranking the cities", () => {
   });
 });
 
+// The site promises the city that resembles the reader (operator, 2026-11-16): practical criteria
+// the reader did not choose are a floor, not a ranking, and the temperament is matched against the
+// city's neighbourhoods, never read as a demand for comfort.
+describe("ranking on resemblance first", () => {
+  const PRACTICAL_REASONS = [
+    "Sécurité au quotidien",
+    "Courant, eau et soins à la hauteur",
+    "Démarches simples",
+  ];
+  const citingPractical = (answers: Answers) =>
+    bestMatches(answers, 10).filter((m) =>
+      m.reasons.some((r) => PRACTICAL_REASONS.includes(r.label)),
+    );
+  const explorer: Answers = {
+    project: "installer",
+    languages: ["fr"],
+    saturday: 0.5,
+    adventure: "seeking",
+    order: 0,
+    together: 0.5,
+    friction: 1,
+  };
+
+  it("reads an orderly, calm temperament as a taste, not as a demand for safety", () => {
+    expect(citingPractical({ order: 1, friction: 0, saturday: 0 })).toEqual([]);
+  });
+
+  it("does not sell a settler on safety, power or paperwork they never asked about", () => {
+    expect(citingPractical({ project: "installer", languages: ["fr"], size: 2 })).toEqual([]);
+  });
+
+  it("ranks and explains on safety once the reader makes it a non-negotiable", () => {
+    const meanSafety = (answers: Answers) => {
+      const top = bestMatches(answers, 5);
+      return top.reduce((sum, m) => sum + (m.city.scores.safety.level ?? 2.5), 0) / top.length;
+    };
+    const safe: Answers = { ...explorer, priorities: ["safety"] };
+    expect(meanSafety(safe)).toBeGreaterThan(meanSafety(explorer));
+    expect(bestMatches(safe, 1)[0].reasons.map((r) => r.label)).toContain("Sécurité au quotidien");
+  });
+});
+
 describe("the quick top used to choose the next question", () => {
   it("names the same cities as the full ranking", () => {
     const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };
