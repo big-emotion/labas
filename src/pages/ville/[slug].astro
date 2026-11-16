@@ -1,6 +1,7 @@
 ---
 import { ADVICE_FRAMING } from "../../lib/advisory";
 import Page from "../../layouts/Page.astro";
+import SourcesNote from "../../components/SourcesNote.astro";
 import { CITIES, CRITERIA, type City, type Confidence, type Source } from "../../lib/cities";
 import { goingThere } from "../../lib/going";
 import { linesFor } from "../../lib/lines";
@@ -159,6 +160,7 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
 
     <section class="theme" id="essentiel">
       <h2>L'essentiel</h2>
+      <SourcesNote />
       {lines?.reputation && (
         <p>
           <b>On dit</b> <span class="quote">{lines.reputation}</span>
