@@ -96,7 +96,7 @@ the caption or on the last card. Record each photo's source, author and licence 
 `research.md`.
 
 No accepted card template exists yet (2026-11-16). Until the operator accepts one — commissioned
-like EthniAfrica's, through Claude Design, from the direction above — stop after approval 2's
+like EthniAfrica's, through Claude Design, from `docs/social/card-brief.md` — stop after approval 2's
 text and research, and say the visual proof is waiting. Colours come from the tokens in
 `src/styles/global.css`; fonts are the site's (Fraunces, Nunito Sans).
 
