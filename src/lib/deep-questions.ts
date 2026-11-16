@@ -1,4 +1,5 @@
 import { livesThere, namedOrigins, QUESTIONS, worksThere, type Question } from "./questions";
+import { MUSIC } from "./music";
 import type { Answers } from "./ranking";
 
 /**
@@ -208,6 +209,14 @@ const holiday = (a: Answers) => a.project === "decouvrir";
  * temperament answers decide (validated by the operator, 2026-11-15).
  */
 const PROFILE: Omit<Question, "group">[] = [
+  {
+    id: "music",
+    title: "La musique qui vous fait bouger ?",
+    hint: "Jusqu'à deux choix : on rapproche un peu les pays où elle fait danser.",
+    max: 2,
+    when: (a) => a.saturday === 1,
+    choices: MUSIC.map((genre) => ({ label: genre.label, value: genre.value })),
+  },
   {
     id: "nightOut",
     title: "Vos soirées là-bas, plutôt…",

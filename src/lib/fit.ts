@@ -52,6 +52,8 @@ export type FactPull =
   | { kind: "reception"; weight: number }
   /** The family's own countries. */
   | { kind: "homeCountry"; values: string[]; weight: number }
+  /** The countries where the music the reader picked plays (data/music.json). */
+  | { kind: "music"; values: string[]; weight: number }
   /** The reader's faith: the share of the country that shares it. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
   /** The reverse, for readers after the unknown. */
@@ -316,7 +318,7 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
         fact: fact.kind,
       });
       continue;
-    } else if (fact.kind === "homeCountry") {
+    } else if (fact.kind === "homeCountry" || fact.kind === "music") {
       match = fact.values.includes(city.country);
     } else if (fact.kind === "sectors") {
       match = city.facts.sectors.some((s) => fact.values.includes(s));

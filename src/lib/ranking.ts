@@ -6,7 +6,7 @@ import {
   type CriterionKey,
   type Language,
 } from "./cities";
-import { TRAITS, temperamentLinesFor } from "./city-temperament";
+import { TRAITS, temperamentLinesFor, type TemperamentLine } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
 import { profileEffects, type ProfileAnswers } from "./profile-pulls";
@@ -143,7 +143,7 @@ export interface Match {
   /** 0 to 1 on the five temperament answers alone; null before any of them. */
   temperament: number | null;
   /** Why the temperament part is what it is: per answer, the neighbourhoods at the reader's level. */
-  temperamentLines: string[];
+  temperamentLines: TemperamentLine[];
   /** 0 to 1 on every other answer. */
   practical: number;
   /** "Pourquoi vous" lines: what the reader said, met by what the city offers. */
@@ -611,6 +611,7 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
   // Only what the sources say, in their words (operator, 2026-11-15).
   if (part.fact === "reception") return good ? undefined : city.countryFacts?.racism?.label;
   if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
+  if (part.fact === "music") return good ? "Votre musique y fait danser" : undefined;
   if (part.fact === "kin")
     return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
   if (part.fact === "elsewhere")

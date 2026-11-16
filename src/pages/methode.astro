@@ -1,6 +1,7 @@
 ---
 import Page from "../layouts/Page.astro";
 import { CITIES, CRITERIA, CRITERION_KEYS } from "../lib/cities";
+import { MUSIC } from "../lib/music";
 
 const scores = CITIES.flatMap((city) => CRITERION_KEYS.map((key) => city.scores[key]));
 const unknown = scores.filter((score) => score.level === null).length;
@@ -103,6 +104,29 @@ const advisedAgainst = CITIES.filter((city) => city.advisedAgainst).length;
     elle reposerait sur des anecdotes. Nous la décrivons, avec une source datée, dans la rubrique «
     À savoir » ou sur la page de la ville. Il en va de même pour la religion et pour la cuisine.
   </p>
+
+  <h2 id="musique">La musique qui vous fait bouger</h2>
+  <p>
+    Dans le questionnaire complet, si vous aimez sortir, vous pouvez dire la musique qui vous fait
+    danser. Elle rapproche un peu les pays où elle est née ou remplit les pistes, jamais plus :
+    c'est une raison parmi d'autres. Chaque lien a sa source.
+  </p>
+  <ul>
+    {MUSIC.map((genre) => (
+      <li>
+        <b>{genre.label}</b> : {genre.countries.join(", ")} (
+        {genre.sources.map((source, i) => (
+          <>
+            {i > 0 && " ; "}
+            <a href={source.url} rel="noopener noreferrer">
+              {source.title}
+            </a>
+          </>
+        ))}
+        )
+      </li>
+    ))}
+  </ul>
 
   <h2>Nos limites</h2>
   <ul>

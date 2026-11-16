@@ -1,5 +1,10 @@
 import { CITIES, type City } from "./cities";
-import { TRAITS, temperamentLinesFor, type TemperamentAnswers } from "./city-temperament";
+import {
+  TRAITS,
+  temperamentLinesFor,
+  type TemperamentAnswers,
+  type TemperamentLine,
+} from "./city-temperament";
 import type { Answers, Match } from "./ranking";
 import { archetypeOf, type Archetype } from "./temperament";
 
@@ -16,7 +21,7 @@ export interface SharedPayload {
 
 export interface SharedResult {
   archetype: Archetype | undefined;
-  cities: { city: City; percent: number; lines: string[] }[];
+  cities: { city: City; percent: number; lines: TemperamentLine[] }[];
 }
 
 const SITE = "https://labas.africa";
@@ -101,7 +106,11 @@ export function shareText(answers: Answers, matches: Match[]): string {
     : [];
   const cities = shared.cities.flatMap((c, i) => [
     `${i + 1}. ${c.city.name} (${c.city.country}) · ${c.percent}\u202f%`,
-    ...c.lines.slice(0, 2).map((line) => `   ${line}`),
+    // What draws the reader there: the lines that fit.
+    ...c.lines
+      .filter((line) => !line.weak)
+      .slice(0, 2)
+      .map((line) => `   ${line.text}`),
   ]);
   return [
     ...profile,

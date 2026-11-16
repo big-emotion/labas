@@ -51,7 +51,7 @@ describe("a result shared by link (beta feedback, 2026-11-16)", () => {
     const shared = sharedResult(readShared(new URL(resultLink(READER, top)).hash)!)!;
     expect(text).toContain(shared.archetype!.name);
     for (const m of top) expect(text).toContain(m.city.name);
-    expect(text).toContain(top[0].temperamentLines[0]);
+    expect(text).toContain(top[0].temperamentLines.find((line) => !line.weak)!.text);
     expect(text).toContain("https://labas.africa/resultat/#r=");
   });
 });
