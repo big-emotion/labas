@@ -6,6 +6,26 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+### Changed
+
+- Every answer is one piece of evidence and the pieces multiply, as in a guessing game: an answer
+  given at the thirteenth question turns the list over as much as at the first. Ticking Arabic now
+  puts Arabic-speaking cities first, wherever it comes in the quiz.
+- The daily language weighs most of all answers. « Peu importe, je m'adapte » leaves it open.
+- The project ranks on its own criteria (settling asks for safety, testing for an easy set-up).
+- The family's region weighs on its own, by project: it draws a settler, barely a holidaymaker,
+  whose trip leans away from it. « Près des vôtres » and the taste for adventure scale it:
+  « Pas vraiment » stops the pull, and an appetite for the unknown makes the region nearly neutral,
+  so the other answers mix the regions instead of swapping one for all the others.
+- A documented tension with the family's country counts inside that answer, no longer with a
+  fixed weight of its own; it is still never written on a card.
+
+### Removed
+
+- The reception rule and its data: documented racism no longer weighs in the ranking, nothing is
+  inferred from an origin the reader did not give, and the origin question promises nothing about
+  it. With no answer, every city ties.
+
 ## [0.15.0] - 2026-11-16
 
 ### Added

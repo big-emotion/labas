@@ -182,8 +182,19 @@ describe("ranking on resemblance first", () => {
     expect(citingPractical({ order: 1, friction: 0, saturday: 0 })).toEqual([]);
   });
 
-  it("does not sell a settler on safety, power or paperwork they never asked about", () => {
-    expect(citingPractical({ project: "installer", languages: ["fr"], size: 2 })).toEqual([]);
+  it("does not sell a reader on safety, power or paperwork no answer asked about", () => {
+    expect(citingPractical({ languages: ["fr"], size: 2, saturday: 0.5 })).toEqual([]);
+  });
+
+  // The project is an answer like the others (operator, 2026-11-16): settling asks for safety.
+  it("lets a settler's project rank on safety", () => {
+    const meanSafety = (answers: Answers) => {
+      const top = bestMatches(answers, 10);
+      return top.reduce((sum, m) => sum + (m.city.scores.safety.level ?? 2.5), 0) / top.length;
+    };
+    expect(meanSafety({ project: "installer" })).toBeGreaterThan(
+      meanSafety({ project: "investir" }),
+    );
   });
 
   it("ranks and explains on safety once the reader makes it a non-negotiable", () => {
@@ -194,6 +205,72 @@ describe("ranking on resemblance first", () => {
     const safe: Answers = { ...explorer, priorities: ["safety"] };
     expect(meanSafety(safe)).toBeGreaterThan(meanSafety(explorer));
     expect(bestMatches(safe, 1)[0].reasons.map((r) => r.label)).toContain("Sécurité au quotidien");
+  });
+});
+
+// Like a guessing game (operator, 2026-11-16): every answer is one piece of evidence and the
+// pieces multiply, so the thirteenth answer still turns the list over when it should.
+describe("each answer orients the list", () => {
+  const speaks = (language: string) => (m: { city: Parameters<typeof livableLanguages>[0] }) =>
+    livableLanguages(m.city).includes(language as never);
+  const thirteen: Answers = {
+    project: "tester",
+    profession: "tech",
+    family: "celib",
+    size: 3,
+    landscapes: ["beach"],
+    saturday: 0.5,
+    adventure: "open",
+    order: 0.5,
+    together: 1,
+    friction: 0.5,
+    origin: ["ouest"],
+    kin: "some",
+    priorities: ["safety"],
+  };
+
+  it("ties every city before the first answer", () => {
+    const scores = new Set(rankCities({}).map((m) => m.score));
+    expect(scores.size).toBe(1);
+  });
+
+  it("puts Arabic-speaking cities first for a reader who lives in Arabic", () => {
+    const top = bestMatches({ project: "tester", profession: "tech", languages: ["ar"] }, 3);
+    expect(top.every(speaks("ar")), top.map((m) => m.city.name).join(", ")).toBe(true);
+  });
+
+  it("turns the top three and most of the list over when Arabic comes at the thirteenth answer", () => {
+    const french = bestMatches({ ...thirteen, languages: ["fr"] }, 10);
+    const arabic = bestMatches({ ...thirteen, languages: ["ar"] }, 10);
+    expect(arabic.slice(0, 3).every(speaks("ar"))).toBe(true);
+    const kept = arabic.filter((m) => french.some((f) => f.city.name === m.city.name));
+    expect(kept.length).toBeLessThanOrEqual(3);
+  });
+
+  it("assumes nothing from an origin the reader keeps to themselves", () => {
+    // The language is the only answer, so every city where one lives in Arabic scores the same.
+    const arabic = rankCities({ languages: ["ar"] }).filter(speaks("ar"));
+    expect(new Set(arabic.map((m) => m.score)).size).toBe(1);
+  });
+
+  it("lets the project alone change the list", () => {
+    const names = (answers: Answers) => bestMatches(answers, 5).map((m) => m.city.name);
+    const settle = names({ project: "installer" });
+    const holiday = names({ project: "decouvrir" });
+    expect(settle.filter((n) => holiday.includes(n)).length).toBeLessThanOrEqual(2);
+  });
+
+  it("lets the origin alone bring the family's region closer", () => {
+    const top = bestMatches({ origin: ["est"] }, 5);
+    expect(top.every((m) => m.city.zone === "est")).toBe(true);
+  });
+
+  it("weighs the origin more for a reader settling than for one on holiday", () => {
+    const inRegion = (answers: Answers) =>
+      bestMatches(answers, 20).filter((m) => m.city.zone === "ouest").length;
+    const settle = inRegion({ project: "installer", origin: ["ouest"], languages: ["fr"] });
+    const holiday = inRegion({ project: "decouvrir", origin: ["ouest"], languages: ["fr"] });
+    expect(settle).toBeGreaterThan(holiday);
   });
 });
 

@@ -100,6 +100,12 @@ describe("the question bank", () => {
     }
   });
 
+  // The language weighs heavily, so a reader who would rather not choose must be able to say so.
+  it("lets a reader leave the language open", () => {
+    const languages = QUESTIONS.find((q) => q.id === "languages")!;
+    expect(languages.choices.some((c) => c.value === null)).toBe(true);
+  });
+
   it("asks about faith only when feeling at home among one's own matters", () => {
     const faith = LATER.find((q) => q.id === "faith")!;
     expect(faith.when?.({ kin: "much" })).toBe(true);
