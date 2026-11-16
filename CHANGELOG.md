@@ -6,6 +6,18 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-11-16
+
+### Added
+
+- A reader who names their family's country is ranked away from a host country in documented
+  tension with it: Rwanda for a family from RD Congo and the reverse (UN Group of Experts 2025,
+  Human Rights Watch 2026), Gabon for a family from Cameroon, Nigeria or Mali (ban on small trade
+  by foreigners, August 2025). A war weighs as much as reception, a ban half as much.
+- The tension changes the ranking only and is never written on a result card, so a card never
+  reads as a verdict on the reader's family. A family that also comes from the host country is
+  never turned against it.
+
 ## [0.14.0] - 2026-11-16
 
 ### Changed
@@ -283,7 +295,9 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.13.3...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.15.0...HEAD
+[0.15.0]: https://github.com/big-emotion/labas/compare/v0.14.0...v0.15.0
+[0.14.0]: https://github.com/big-emotion/labas/compare/v0.13.3...v0.14.0
 [0.13.3]: https://github.com/big-emotion/labas/compare/v0.13.2...v0.13.3
 [0.13.2]: https://github.com/big-emotion/labas/compare/v0.13.1...v0.13.2
 [0.13.1]: https://github.com/big-emotion/labas/compare/v0.13.0...v0.13.1
