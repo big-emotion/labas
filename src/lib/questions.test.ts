@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { QUESTIONS, visibleChoices } from "./questions";
+import { LATER, QUESTIONS, visibleChoices } from "./questions";
 import { CITIES } from "./cities";
 import { profileOf, rankCities, type Answers } from "./ranking";
 
@@ -28,14 +28,10 @@ describe("the question bank", () => {
   it("lists the questions chapter by chapter", () => {
     expect(QUESTIONS.map((q) => q.id)).toEqual([
       "project",
-      "duration",
       "wants",
-      "tripsHome",
       "profession",
       "family",
-      "budget",
       "languages",
-      "passports",
       "size",
       "landscapes",
       "saturday",
@@ -44,9 +40,7 @@ describe("the question bank", () => {
       "together",
       "friction",
       "origin",
-      "countries",
       "kin",
-      "faith",
       "priorities",
     ]);
     const chapters = QUESTIONS.map((q) => q.chapter!);
@@ -80,7 +74,7 @@ describe("the question bank", () => {
   });
 
   it("lets every answer move the match", () => {
-    for (const question of QUESTIONS) {
+    for (const question of [...QUESTIONS, ...LATER]) {
       for (const choice of question.choices) {
         // « Rather not say », and answers that ask nothing of a city, leave the match as it is.
         if (choice.value === null || NEUTRAL.has(`${question.id}:${choice.value}`)) continue;
@@ -106,14 +100,14 @@ describe("the question bank", () => {
   });
 
   it("asks about faith only when feeling at home among one's own matters", () => {
-    const faith = QUESTIONS.find((q) => q.id === "faith")!;
+    const faith = LATER.find((q) => q.id === "faith")!;
     expect(faith.when?.({ kin: "much" })).toBe(true);
     expect(faith.when?.({ kin: "none" })).toBe(false);
     expect(faith.when?.({})).toBe(false);
   });
 
   it("asks for the family's country only after an African region, offering every country", () => {
-    const countries = QUESTIONS.find((q) => q.id === "countries")!;
+    const countries = LATER.find((q) => q.id === "countries")!;
     expect(countries.when?.({ origin: ["ouest"] })).toBe(true);
     expect(countries.when?.({ origin: ["ameriques"] })).toBe(false);
     expect(countries.when?.({})).toBe(false);

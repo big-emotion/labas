@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { nextFreeQuestion, nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS } from "./deep-questions";
-import { chapterName, keepInPath, QUESTIONS, visibleChoices, type Question } from "./questions";
+import {
+  chapterName,
+  keepInBank,
+  keepInPath,
+  QUESTIONS,
+  visibleChoices,
+  type Question,
+} from "./questions";
 import type { Answers } from "./ranking";
 
 // Coherent paths per project (operator, 2026-11-16).
@@ -50,12 +57,12 @@ describe("a path per project", () => {
 
   it("asks a holidaymaker how long and what to live, never a job or a landscape", () => {
     const { asked } = play("decouvrir", 0);
-    expect(asked).toEqual(expect.arrayContaining(["duration", "wants"]));
+    expect(asked).toContain("wants");
     for (const id of ["profession", "landscapes", "tripsHome"]) expect(asked).not.toContain(id);
   });
 
   it("asks both-feet readers how often they come back; investors nothing about daily life", () => {
-    expect(play("pied", 0).asked).toContain("tripsHome");
+    expect(play("pied", 0).asked).toContain("profession");
     const investor = play("investir", 0).asked;
     for (const id of ["saturday", "family", "budget", "duration", "tripsHome"])
       expect(investor).not.toContain(id);
@@ -120,7 +127,12 @@ describe("going back and changing an answer", () => {
       priorities: ["healthAndSchools", "safety"],
       saturday: 1,
     };
-    const after = keepInPath({ ...before, origin: [null] as never, family: "celib" });
+    // The full questionnaire holds country and faith: its bank drops them too.
+    const after = keepInBank(DEEP_QUESTIONS, {
+      ...before,
+      origin: [null] as never,
+      family: "celib",
+    });
     expect(after.countries).toBeUndefined();
     expect(after.kin).toBeUndefined();
     expect(after.faith).toBeUndefined();
@@ -134,11 +146,35 @@ describe("going back and changing an answer", () => {
     const changed = keepInPath({ ...answers, project: "decouvrir" });
     const asked = Object.keys(changed);
     const next = nextFreeQuestion(changed, asked);
-    expect(["duration", "wants"]).toContain(next);
+    expect(next).toBe("wants");
   });
 
   it("asks each question of the full questionnaire once", () => {
     const ids = DEEP_QUESTIONS.map((q) => q.id);
     expect(ids.length).toBe(new Set(ids).size);
+  });
+
+  // Operator, 2026-11-16: the six questions that move the top five least go to the full
+  // questionnaire, so the quick quiz stays quick; they are still asked there, where they fit.
+  it("keeps the questions that move the result least for the full questionnaire", () => {
+    const moved = ["budget", "passports", "countries", "faith", "duration", "tripsHome"];
+    for (const project of PROJECTS)
+      for (const pick of [0, 1, 2])
+        for (const id of moved)
+          expect(play(project, pick).asked, `${project} ${id}`).not.toContain(id);
+    const deep = (answers: Answers) => {
+      const asked = Object.keys(answers);
+      const seen: string[] = [];
+      for (let id = nextQuestion(answers, asked); id; id = nextQuestion(answers, asked)) {
+        seen.push(id);
+        asked.push(id);
+      }
+      return seen;
+    };
+    const holiday = deep({ project: "decouvrir", origin: ["ouest"], kin: "much" } as Answers);
+    expect(holiday).toEqual(
+      expect.arrayContaining(["duration", "budget", "passports", "countries", "faith"]),
+    );
+    expect(deep({ project: "pied", origin: [null] } as unknown as Answers)).toContain("tripsHome");
   });
 });
