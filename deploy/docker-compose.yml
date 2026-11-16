@@ -29,6 +29,25 @@ services:
       - "traefik.http.middlewares.labas-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.labas-https.redirectscheme.permanent=true"
 
+  # The news sign-up service (src/server/subscribe.ts). Traefik sends it /api/nouveautes only;
+  # everything else stays with the static site. Its Mailjet secrets come from .env.subscribe,
+  # which CI writes from the repository secrets on each deploy.
+  labas-subscribe:
+    image: labas-subscribe:live
+    container_name: labas-subscribe
+    restart: unless-stopped
+    env_file: .env.subscribe
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.services.labas-subscribe.loadbalancer.server.port=8080"
+      - "traefik.http.routers.labas-subscribe.rule=Host(`labas.africa`) && PathPrefix(`/api/nouveautes`)"
+      - "traefik.http.routers.labas-subscribe.priority=100"
+      - "traefik.http.routers.labas-subscribe.entrypoints=websecure"
+      - "traefik.http.routers.labas-subscribe.tls.certresolver=myresolver"
+
 networks:
   proxy:
     external: true

@@ -1,0 +1,283 @@
+---
+/**
+ * « Recevoir les nouveautés » (approved mockup, 2026-11-16): in the quiz after the fourth answer,
+ * once per visit, and always on the result. Built only when PUBLIC_NEWSLETTER is set, that is
+ * once the subscribe service has its Mailjet secrets (docs/deploy.md).
+ */
+interface Props {
+  place: "quiz" | "results";
+}
+const { place } = Astro.props;
+const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const id = `news-${place}`;
+---
+
+{enabled && (
+  <section
+    class:list={["news", place]}
+    data-news={place}
+    aria-labelledby={`${id}-title`}
+    hidden={place === "quiz"}
+  >
+    <div data-news-form>
+      <h2 id={`${id}-title`}>{place === "quiz" ? "Recevoir les nouveautés ?" : "Suivre Là-bas"}</h2>
+      <p class="lead">
+        {place === "quiz"
+          ? "Nouvelles villes, questionnaire amélioré : un e-mail par mois au plus. Vous pouvez aussi finir le quiz d'abord."
+          : "Nouvelles villes, nouvelles questions, classement affiné : un e-mail par mois au plus pour vous dire ce qui change."}
+      </p>
+      <form novalidate>
+        <label class="field">
+          Votre e-mail
+          <input
+            type="email"
+            name="email"
+            placeholder="vous@exemple.fr"
+            autocomplete="email"
+            required
+          />
+        </label>
+        <label class="trap" aria-hidden="true">
+          Site web
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+        <label class="consent">
+          <input type="checkbox" name="consent" />
+          <span>Je veux recevoir les nouveautés de Là-bas par e-mail.</span>
+        </label>
+        <p class="error" data-news-error role="alert" hidden></p>
+        <div class="actions">
+          <button type="submit" class="primary">
+            M'inscrire
+          </button>
+          {place === "quiz" && (
+            <button type="button" class="later" data-news-later>
+              Plus tard
+            </button>
+          )}
+        </div>
+      </form>
+      <p class="small">
+        Vous confirmerez par un lien reçu par e-mail. Désinscription en un clic. Nous gardons votre
+        adresse, rien d'autre : vos réponses au quiz ne sont jamais envoyées.{" "}
+        <a href="/confidentialite">Confidentialité</a>
+      </p>
+    </div>
+    <div class="sent" data-news-sent role="status" hidden>
+      <h2>Regardez votre boîte e-mail</h2>
+      <p>
+        Nous venons d'écrire à <b data-news-address />. Cliquez sur le lien de ce message pour
+        confirmer votre inscription.
+      </p>
+      <p class="small">
+        Sans confirmation, vous ne recevrez rien. Rien reçu d'ici quelques minutes ? Regardez dans
+        les indésirables.
+      </p>
+    </div>
+  </section>
+)}
+
+<script>
+  import { outcomeOf, shouldOfferNews, signUpBody } from "../lib/newsletter";
+
+  const DISMISSED = "labas.news.later";
+  const dismissed = () => {
+    try {
+      return sessionStorage.getItem(DISMISSED) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  for (const block of document.querySelectorAll<HTMLElement>("[data-news]")) {
+    const form = block.querySelector("form")!;
+    const error = block.querySelector<HTMLElement>("[data-news-error]")!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+    if (block.dataset.news === "quiz") {
+      // index.astro announces how many questions are answered; the block shows from the fourth.
+      document.addEventListener("labas:answered", (event) => {
+        const answered = (event as CustomEvent<number>).detail;
+        if (!block.querySelector<HTMLElement>("[data-news-sent]")!.hidden) return;
+        block.hidden = !shouldOfferNews(answered, dismissed());
+      });
+      block.querySelector("[data-news-later]")?.addEventListener("click", () => {
+        try {
+          sessionStorage.setItem(DISMISSED, "1");
+        } catch {
+          // Blocked storage: the block still closes for now.
+        }
+        block.hidden = true;
+      });
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const body = signUpBody({
+        email: String(data.get("email") ?? ""),
+        consent: data.get("consent") === "on",
+        website: String(data.get("website") ?? ""),
+      });
+      const show = (message: string) => {
+        error.textContent = message;
+        error.hidden = false;
+      };
+      if (!body) {
+        const outcome = outcomeOf(400);
+        if (!outcome.sent) show(outcome.message);
+        return;
+      }
+      submit.disabled = true;
+      let status = 0;
+      try {
+        const response = await fetch("/api/nouveautes", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        status = response.status;
+      } catch {
+        status = 0;
+      }
+      submit.disabled = false;
+      const outcome = outcomeOf(status);
+      if (!outcome.sent) return show(outcome.message);
+      block.querySelector<HTMLElement>("[data-news-address]")!.textContent = body.email;
+      block.querySelector<HTMLElement>("[data-news-form]")!.hidden = true;
+      block.querySelector<HTMLElement>("[data-news-sent]")!.hidden = false;
+    });
+  }
+</script>
+
+<style>
+  .news {
+    display: grid;
+    gap: 12px;
+    background: var(--night-deep);
+    border: 1px solid var(--night-lift);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .news.results {
+    border-radius: 20px;
+    padding: 22px;
+  }
+  .news:has(.sent:not([hidden])) {
+    border: 2px solid var(--saffron);
+  }
+  [data-news-form],
+  .sent,
+  form {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.15;
+  }
+  .results h2,
+  .sent h2 {
+    font-size: 1.6rem;
+  }
+  p {
+    margin: 0;
+  }
+  .lead,
+  .small {
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .small {
+    font-size: 0.82rem;
+  }
+  .small a {
+    color: var(--saffron);
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  input[type="email"] {
+    min-height: 48px;
+    box-sizing: border-box;
+    border-radius: 14px;
+    border: 2px solid var(--thread-dim);
+    background: var(--night);
+    color: var(--thread);
+    padding: 0 14px;
+    font: inherit;
+    font-weight: 400;
+  }
+  .consent {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .consent input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--saffron);
+  }
+  /* Off screen rather than display:none, which some robots skip. */
+  .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .error {
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .primary {
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    padding: 0 22px;
+    cursor: pointer;
+  }
+  .results .primary {
+    min-height: 54px;
+    flex: 1;
+    font-size: 1.05rem;
+  }
+  .primary:disabled {
+    opacity: 0.4;
+  }
+  .later {
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    color: var(--thread-dim);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0 4px;
+    cursor: pointer;
+  }
+  /* Last, and more specific than the display rules above, so hidden parts really hide. */
+  .news[hidden],
+  .news [hidden] {
+    display: none;
+  }
+</style>
