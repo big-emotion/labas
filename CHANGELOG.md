@@ -6,6 +6,17 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-11-16
+
+### Added
+
+- « Reprendre plus tard » and « Mon espace »: a reader can save a journey with their e-mail and
+  come back to it on any device through a login link, without a password. Answers, sensitive ones
+  included, are kept only with an explicit consent box, can be downloaded or deleted at any time,
+  and are erased three years after the last visit. Several journeys per reader. Switched off for
+  readers until the Mailjet account is unblocked.
+- The saved journeys run on a database beside the mail service, reachable only from it.
+
 ## [0.12.1] - 2026-11-16
 
 ### Changed
@@ -231,6 +242,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.12.1...HEAD
+[0.13.0]: https://github.com/big-emotion/labas/compare/v0.12.1...v0.13.0
 [0.12.1]: https://github.com/big-emotion/labas/compare/v0.12.0...v0.12.1
 [0.12.0]: https://github.com/big-emotion/labas/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/big-emotion/labas/compare/v0.10.0...v0.11.0
