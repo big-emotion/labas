@@ -11,7 +11,21 @@
     "currency": "Naira",
     "tagline": "Vitesse, argent, afrobeats",
     "pitch": "L'une des plus grandes villes du continent, moteur de Nollywood, de l'afrobeats et de la tech nigériane. On y vient pour réussir.",
-    "watch": "Ville intense : trafic éprouvant, coupures de courant fréquentes et vigilance nécessaire selon les quartiers."
+    "watch": "Ville intense : trafic éprouvant, coupures de courant fréquentes et vigilance nécessaire selon les quartiers.",
+    "watchSources": [
+      {
+        "title": "Conseils aux voyageurs : Nigéria — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/nigeria/",
+        "published": "2026-11-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Nigeria travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/nigeria/safety-and-security",
+        "published": "2026-11-10",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Abidjan",
@@ -81,7 +95,21 @@
     "currency": "Franc congolais",
     "tagline": "Musique, démesure, débrouille",
     "pitch": "Souvent présentée comme la plus grande ville francophone du monde, capitale de la rumba congolaise et de la sape, sur le fleuve Congo.",
-    "watch": "Ville éprouvante : infrastructures saturées, vie chère dès qu'on cherche un confort international et sécurité à suivre de près."
+    "watch": "Ville éprouvante : infrastructures saturées, vie chère dès qu'on cherche un confort international et sécurité à suivre de près.",
+    "watchSources": [
+      {
+        "title": "République démocratique du Congo — Conseils aux voyageurs, Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/republique-democratique-du-congo/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Sécurité générale en RDC — SPF Affaires étrangères (Belgique)",
+        "url": "https://diplomatie.belgium.be/fr/pays/republique-democratique-du-congo/voyager-en-republique-democratique-du-congo-conseils-aux-voyageurs/securite-generale-en-republique-democratique-du-congo",
+        "published": "2026-10-27",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Douala",
@@ -123,7 +151,26 @@
     "currency": "Shilling kényan",
     "tagline": "Tech, carrière, safaris",
     "pitch": "Carrefour d'affaires et de tech de l'Afrique de l'Est, siège de nombreuses organisations internationales, avec un parc national aux portes de la ville.",
-    "watch": "La sécurité varie fortement selon les quartiers, surtout la nuit."
+    "watch": "La sécurité varie fortement selon les quartiers, surtout la nuit.",
+    "watchSources": [
+      {
+        "title": "Kenya travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/kenya/safety-and-security",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs Kenya – Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/kenya/conseils-aux-voyageurs-securite",
+        "published": "2026-09-25",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Travel advice and advisories: Kenya — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/kenya",
+        "published": "2026-11-02",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Addis-Abeba",
@@ -165,7 +212,21 @@
     "currency": "Shilling ougandais",
     "tagline": "Jeunesse, nuit, collines",
     "pitch": "Capitale aux collines près du lac Victoria, réputée pour sa vie nocturne et sa jeunesse entreprenante.",
-    "watch": "Circulation chaotique dominée par les motos-taxis, et un cadre légal très répressif pour les personnes LGBT."
+    "watch": "Circulation chaotique dominée par les motos-taxis, et un cadre légal très répressif pour les personnes LGBT.",
+    "watchSources": [
+      {
+        "title": "Uganda travel advice: safety-and-security (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/uganda/safety-and-security",
+        "published": "2026-11-06",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Ouganda — Conseils aux voyageurs : sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/ouganda/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Kigali",
@@ -193,7 +254,20 @@
     "currency": "Rand",
     "tagline": "Finance, culture, intensité",
     "pitch": "Cœur économique de l'Afrique du Sud et première place boursière du continent, ville de Soweto et d'une scène artistique très vivante.",
-    "watch": "Criminalité élevée : on s'y déplace en voiture et on se renseigne quartier par quartier."
+    "watch": "Criminalité élevée : on s'y déplace en voiture et on se renseigne quartier par quartier.",
+    "watchSources": [
+      {
+        "title": "South Africa travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/south-africa/safety-and-security",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs Afrique du Sud, Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/afrique-du-sud/conseils-aux-voyageurs-securite",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Le Cap",
@@ -207,7 +281,20 @@
     "currency": "Rand",
     "tagline": "Beauté, confort, nature",
     "pitch": "Entre la montagne de la Table et deux océans, une ville de vignobles, de plages et de bonnes tables, prisée des télétravailleurs.",
-    "watch": "Fortes inégalités, criminalité élevée dans certains quartiers, et des repats noirs disent s'y sentir moins chez eux qu'à Johannesburg."
+    "watch": "Fortes inégalités et criminalité élevée dans certains quartiers.",
+    "watchSources": [
+      {
+        "title": "Cape Town Central tops national crime list — EWN",
+        "url": "https://www.ewn.co.za/2026/03/03/cape-town-central-tops-national-crime-list-as-serious-offences-rise",
+        "published": "2026-03-03",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "South Africa travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/south-africa/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Durban",
@@ -221,7 +308,21 @@
     "currency": "Rand",
     "tagline": "Plage, chaleur, métissage",
     "pitch": "Grand port sud-africain aux plages chaudes toute l'année, cœur du pays zoulou et d'une importante communauté d'origine indienne.",
-    "watch": "Criminalité élevée dans le centre et moins d'opportunités de carrière qu'à Johannesburg ou au Cap."
+    "watch": "Criminalité élevée dans le centre et moins d'opportunités de carrière qu'à Johannesburg ou au Cap.",
+    "watchSources": [
+      {
+        "title": "Crime stats: Chatsworth, Phoenix and Verulam among the highest — The Post (IOL)",
+        "url": "https://iol.co.za/thepost/news/2026-05-25-crime-stats-chatsworth-phoenix-and-verulam-among-the-highest-in-serious-cases/",
+        "published": "2026-05-25",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs Afrique du Sud, Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/afrique-du-sud/conseils-aux-voyageurs-securite",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Maputo",
@@ -305,7 +406,20 @@
     "currency": "Dinar tunisien",
     "tagline": "Méditerranée, médina, prix doux",
     "pitch": "Médina inscrite à l'UNESCO, ruines de Carthage et village de Sidi Bou Saïd, à prix doux au bord de la Méditerranée.",
-    "watch": "Le climat s'est tendu pour les personnes noires depuis 2023 : un point à vérifier avant de partir."
+    "watch": "Le climat s'est tendu pour les personnes noires depuis 2023 : un point à vérifier avant de partir.",
+    "watchSources": [
+      {
+        "title": "UN News, Tunisia must curb racist rhetoric and halt rights violations of Black Africans: CERD (April 2023)",
+        "url": "https://news.un.org/en/story/2023/04/1135347",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Tunisie : sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/tunisie/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Marrakech",
@@ -431,7 +545,14 @@
     "currency": "Ouguiya",
     "tagline": "Désert, océan, sobriété",
     "pitch": "Capitale entre Sahara et Atlantique, connue pour son port de pêche aux pirogues colorées et comme porte des villes caravanières de l'Adrar.",
-    "watch": "Société très conservatrice, sans vie nocturne, où les séquelles de l'esclavage restent un sujet vif."
+    "watch": "Société très conservatrice, sans vie nocturne, où les séquelles de l'esclavage restent un sujet vif.",
+    "watchSources": [
+      {
+        "title": "UN CERD, Concluding observations on Mauritania, CERD/C/MRT/CO/8-14 (2018)",
+        "url": "https://www.ecoi.net/en/file/local/1441952/1930_1535549473_g1814283-1.pdf",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Bamako",
@@ -445,7 +566,21 @@
     "currency": "Franc CFA",
     "tagline": "Musique, fleuve, hospitalité",
     "pitch": "Sur le fleuve Niger, l'une des grandes capitales musicales du continent, héritière de l'empire mandingue.",
-    "watch": "Insécurité liée aux groupes armés et régime militaire."
+    "watch": "Insécurité liée aux groupes armés et régime militaire.",
+    "watchSources": [
+      {
+        "title": "Mali travel advice: Safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/mali/safety-and-security",
+        "published": "2026-07-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Mali : le calme revient après des attaques coordonnées, couvre-feu instauré à Bamako — Studio Tamani",
+        "url": "https://www.studiotamani.org/202048-mali-le-calme-revient-apres-des-attaques-coordonnees-couvre-feu-instaure-a-bamako-2",
+        "published": "2026-04-26",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Ouagadougou",
@@ -459,7 +594,15 @@
     "currency": "Franc CFA",
     "tagline": "Cinéma, artisanat, simplicité",
     "pitch": "Capitale du cinéma africain avec le FESPACO, ville d'artisans et de musiciens réputée pour la simplicité de son accueil.",
-    "watch": "Le pays fait face à une insurrection armée et vit sous régime militaire."
+    "watch": "Le pays fait face à une insurrection armée et vit sous régime militaire.",
+    "watchSources": [
+      {
+        "title": "Burkina Faso: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/burkina-faso/safety-and-security",
+        "published": "2026-10-26",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Niamey",
@@ -473,7 +616,21 @@
     "currency": "Franc CFA",
     "tagline": "Fleuve, Sahel, lenteur",
     "pitch": "Capitale sahélienne posée sur le fleuve Niger, avec son musée national et ses marchés.",
-    "watch": "Régime militaire depuis 2023 et menace terroriste dans le pays."
+    "watch": "Régime militaire depuis 2023 et menace terroriste dans le pays.",
+    "watchSources": [
+      {
+        "title": "Niger travel advice — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/niger",
+        "published": "2026-10-23",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Niger : conseils aux voyageurs, sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/niger/conseils-aux-voyageurs-securite",
+        "published": "2026-11-10",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Brazzaville",
@@ -543,7 +700,21 @@
     "currency": "Franc CFA",
     "tagline": "Sahel, chaleur, carrefour",
     "pitch": "Capitale sahélienne au confluent du Chari et du Logone, carrefour entre Afrique centrale, Sahara et monde arabe.",
-    "watch": "Chaleur extrême, vie chère pour un confort limité et contexte sécuritaire tendu dans le pays."
+    "watch": "Chaleur extrême, vie chère pour un confort limité et contexte sécuritaire tendu dans le pays.",
+    "watchSources": [
+      {
+        "title": "Chad travel advice — GOV.UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/chad",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Tchad — Conseils aux voyageurs : sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/tchad/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Bangui",
@@ -557,7 +728,14 @@
     "currency": "Franc CFA",
     "tagline": "Fleuve, forêt, fragilité",
     "pitch": "Capitale au bord de l'Oubangui, aux portes de la grande forêt équatoriale.",
-    "watch": "Pays en conflit depuis plus de dix ans."
+    "watch": "Pays en conflit depuis plus de dix ans.",
+    "watchSources": [
+      {
+        "title": "Central African Republic: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/central-african-republic/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Djibouti",
@@ -585,7 +763,20 @@
     "currency": "Franc burundais",
     "tagline": "Lac, tambours, simplicité",
     "pitch": "Capitale économique au bord du lac Tanganyika et de ses plages, dans le pays des tambours royaux inscrits au patrimoine immatériel de l'UNESCO.",
-    "watch": "L'un des pays les plus pauvres du monde : pénuries de carburant et de devises, tensions politiques."
+    "watch": "L'un des pays les plus pauvres du monde : pénuries de carburant et de devises, tensions politiques.",
+    "watchSources": [
+      {
+        "title": "Burundi: safety and security — GOV.UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/burundi/safety-and-security",
+        "published": "2026-05-21",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "World Report 2026: Burundi — Human Rights Watch",
+        "url": "https://www.hrw.org/world-report/2026/country-chapters/burundi",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Asmara",
@@ -613,7 +804,21 @@
     "currency": "Shilling somalien et dollar américain",
     "tagline": "Océan, reconstruction, risque",
     "pitch": "Ancienne perle de l'océan Indien, en reconstruction portée par sa diaspora, avec la longue plage du Lido.",
-    "watch": "Attentats réguliers dans la ville."
+    "watch": "Attentats réguliers dans la ville.",
+    "watchSources": [
+      {
+        "title": "Somalie — Conseils aux voyageurs, Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/somalie/conseils-aux-voyageurs-securite",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Somalia: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/somalia/safety-and-security",
+        "published": "2026-06-04",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Juba",
@@ -627,7 +832,21 @@
     "currency": "Livre sud-soudanaise",
     "tagline": "Nil Blanc, jeune nation, instabilité",
     "pitch": "Capitale du plus jeune État du monde, indépendant depuis 2011, sur les rives du Nil Blanc.",
-    "watch": "Violences armées récurrentes et vie très chère."
+    "watch": "Violences armées récurrentes et vie très chère.",
+    "watchSources": [
+      {
+        "title": "South Sudan: safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/south-sudan/safety-and-security",
+        "published": "2026-08-25",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Travel advice: South Sudan — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/south-sudan",
+        "published": "2026-09-28",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Tripoli",
@@ -641,7 +860,26 @@
     "currency": "Dinar libyen",
     "tagline": "Méditerranée, médina, incertitude",
     "pitch": "Capitale méditerranéenne à la médina ancienne, proche des ruines romaines de Leptis Magna et de Sabratha.",
-    "watch": "Pays divisé entre autorités rivales, affrontements entre milices et violences documentées contre les migrants noirs."
+    "watch": "Pays divisé entre autorités rivales, affrontements entre milices et violences documentées contre les migrants noirs.",
+    "watchSources": [
+      {
+        "title": "World Report 2026: Libya — Human Rights Watch",
+        "url": "https://www.hrw.org/world-report/2026/country-chapters/libya",
+        "published": "2026",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Libye — Conseils aux voyageurs, Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/libye/conseils-aux-voyageurs-securite",
+        "published": "2026-10-29",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "International Commission of Jurists, Libya: immediately halt collective expulsions, arrests, violence and hate speech against migrants (April 2025)",
+        "url": "https://www.icj.org/libya-immediately-halt-collective-expulsions-arrests-violence-and-hate-speech-against-migrants-refugees-and-asylum-seekers/",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Khartoum",
@@ -767,7 +1005,20 @@
     "currency": "Loti",
     "tagline": "Altitude, montagnes, pays basotho",
     "pitch": "Capitale du royaume dans le ciel, pays entièrement situé en altitude, connu pour ses montagnes, ses poneys et ses couvertures basotho.",
-    "watch": "Hivers froids, chômage élevé, criminalité notable et forte dépendance à l'Afrique du Sud voisine."
+    "watch": "Hivers froids, chômage élevé, criminalité notable et forte dépendance à l'Afrique du Sud voisine.",
+    "watchSources": [
+      {
+        "title": "Travel advice and advisories for Lesotho — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/lesotho",
+        "published": "2026-10-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Lesotho travel advice: safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/lesotho/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Moroni",
@@ -823,7 +1074,21 @@
     "currency": "Franc CFA",
     "tagline": "Patrimoine, plage, artisans",
     "pitch": "Ancienne capitale coloniale inscrite à l'UNESCO, station balnéaire et ville d'artisans à moins d'une heure d'Abidjan.",
-    "watch": "Petite ville qui vit surtout le week-end, avec une mer dangereuse pour la baignade."
+    "watch": "Petite ville qui vit surtout le week-end, avec une mer dangereuse pour la baignade.",
+    "watchSources": [
+      {
+        "title": "Conseils aux voyageurs Côte d'Ivoire — Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/cote-d-ivoire/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Travel advice Côte d'Ivoire — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/cote-d-ivoire-ivory-coast",
+        "published": "2026-11-02",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "San-Pédro",
@@ -1019,7 +1284,21 @@
     "currency": "Franc CFA",
     "tagline": "Fleuve Niger, potiers, royaume bambara",
     "pitch": "Ancienne capitale du royaume bambara au bord du Niger, connue pour ses potiers, ses teinturiers et son festival de musique.",
-    "watch": "Insécurité liée aux groupes armés dans la région."
+    "watch": "Insécurité liée aux groupes armés dans la région.",
+    "watchSources": [
+      {
+        "title": "Mali travel advice: Safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/mali/safety-and-security",
+        "published": "2026-07-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Le couvre-feu reconduit dans les régions de Sikasso et de Ségou — Studio Tamani",
+        "url": "https://www.studiotamani.org/195899-le-couvre-feu-reconduit-dans-les-regions-de-sikasso-et-de-segou",
+        "published": "2025-11-05",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Bobo-Dioulasso",
@@ -1033,7 +1312,15 @@
     "currency": "Franc CFA",
     "tagline": "Musique, vieille mosquée, douceur",
     "pitch": "Capitale culturelle du pays, ville de musiciens à la grande mosquée de terre, plus verte et plus douce que Ouagadougou.",
-    "watch": "Le pays fait face à une insurrection armée et vit sous régime militaire."
+    "watch": "Le pays fait face à une insurrection armée et vit sous régime militaire.",
+    "watchSources": [
+      {
+        "title": "Burkina Faso: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/burkina-faso/safety-and-security",
+        "published": "2026-10-26",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Agadez",
@@ -1047,7 +1334,21 @@
     "currency": "Franc CFA",
     "tagline": "Sahara, minaret de terre, monde touareg",
     "pitch": "Porte du Sahara et cité touarègue au centre historique inscrit à l'UNESCO, dominée par son minaret de terre.",
-    "watch": "Région exposée aux groupes armés et aux trafics."
+    "watch": "Région exposée aux groupes armés et aux trafics.",
+    "watchSources": [
+      {
+        "title": "Travel advice and advisories: Niger — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/niger",
+        "published": "2026-10-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Trafic de stupéfiants à Zinder : 54 000 comprimés psychotropes saisis — ActuNiger",
+        "url": "https://www.actuniger.com/faits-divers/trafic-de-stupefiants-a-zinder-54-000-comprimes-psychotropes-saisis-par-locrtis-un-homme-de-32-ans-interpelle.html",
+        "published": "2026-11-12",
+        "accessed": "2026-11-14"
+      }
+    ]
   },
   {
     "name": "Lubumbashi",
@@ -1173,7 +1474,21 @@
     "currency": "Franc CFA",
     "tagline": "Sud tchadien, coton, fleuve",
     "pitch": "Deuxième ville du Tchad, capitale économique du sud, plus verte que la capitale, au bord du Logone.",
-    "watch": "Très peu de services et un contexte sécuritaire tendu dans le pays."
+    "watch": "Très peu de services et un contexte sécuritaire tendu dans le pays.",
+    "watchSources": [
+      {
+        "title": "Tchad — Conseils aux voyageurs : sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/tchad/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Chad travel advice — GOV.UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/chad",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Berbérati",
@@ -1187,7 +1502,20 @@
     "currency": "Franc CFA",
     "tagline": "Forêt, sud-ouest, isolement",
     "pitch": "Grande ville du sud-ouest, sur la route des forêts de Dzanga-Sangha et de leurs éléphants.",
-    "watch": "Pays en conflit depuis plus de dix ans."
+    "watch": "Pays en conflit depuis plus de dix ans.",
+    "watchSources": [
+      {
+        "title": "Conseils aux voyageurs — République centrafricaine — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/republique-centrafricaine/",
+        "published": "2026-09-10",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Central African Republic: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/central-african-republic/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Mombasa",
@@ -1201,7 +1529,20 @@
     "currency": "Shilling kényan",
     "tagline": "Swahili, océan, vieille ville",
     "pitch": "Grand port swahili de l'océan Indien, avec sa vieille ville, le fort Jésus inscrit à l'UNESCO et de longues plages au nord et au sud.",
-    "watch": "Chaleur humide, moins d'emplois qualifiés qu'à Nairobi et vigilance conseillée dans certains quartiers."
+    "watch": "Chaleur humide, moins d'emplois qualifiés qu'à Nairobi et vigilance conseillée dans certains quartiers.",
+    "watchSources": [
+      {
+        "title": "Kenya travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/kenya/safety-and-security",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Travel advice and advisories: Kenya — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/kenya",
+        "published": "2026-11-02",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Bahir Dar",
@@ -1215,7 +1556,21 @@
     "currency": "Birr",
     "tagline": "Lac Tana, monastères, Nil Bleu",
     "pitch": "Ville aux avenues de palmiers sur le lac Tana, entre monastères insulaires et chutes du Nil Bleu.",
-    "watch": "La région Amhara a connu des affrontements armés ces dernières années : à vérifier avant tout projet."
+    "watch": "La région Amhara a connu des affrontements armés ces dernières années : à vérifier avant tout projet.",
+    "watchSources": [
+      {
+        "title": "Ethiopia travel advice — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/ethiopia",
+        "published": "2026-10-30",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Fano forces say they conducted clandestine operations in Bahir Dar, Debre Markos — Borkena",
+        "url": "https://borkena.com/ethiopia-fano-forces-say-they-conducted-clandestine-operations-in-bahir-dar-debre-markos/",
+        "published": "2025-07-21",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Zanzibar",
@@ -1257,7 +1612,21 @@
     "currency": "Shilling ougandais",
     "tagline": "Source du Nil, rafting, calme",
     "pitch": "Petite ville tranquille là où le Nil sort du lac Victoria, connue pour le rafting et ses maisons anciennes.",
-    "watch": "Peu d'emplois, et un cadre légal très répressif pour les personnes LGBT dans le pays."
+    "watch": "Peu d'emplois, et un cadre légal très répressif pour les personnes LGBT dans le pays.",
+    "watchSources": [
+      {
+        "title": "Uganda travel advice: safety-and-security (UK FCDO)",
+        "url": "https://www.gov.uk/foreign-travel-advice/uganda/safety-and-security",
+        "published": "2026-11-06",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Ouganda — Conseils aux voyageurs : sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/ouganda/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Rubavu",
@@ -1271,7 +1640,21 @@
     "currency": "Franc rwandais",
     "tagline": "Lac Kivu, plages, volcans",
     "pitch": "Station du lac Kivu, anciennement Gisenyi, avec ses plages, ses sources chaudes et les volcans en toile de fond.",
-    "watch": "Collée à la frontière de Goma, en RD Congo, zone de conflit : situation à suivre."
+    "watch": "Collée à la frontière de Goma, en RD Congo, zone de conflit : situation à suivre.",
+    "watchSources": [
+      {
+        "title": "Travel advice and advisories: Rwanda — Government of Canada",
+        "url": "https://travel.gc.ca/destinations/rwanda",
+        "published": "2026-09-09",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Conseils aux voyageurs : Rwanda — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/rwanda/",
+        "published": "2026-09-17",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Gitega",
@@ -1327,7 +1710,21 @@
     "currency": "Shilling du Somaliland",
     "tagline": "Diaspora, commerce, calme relatif",
     "pitch": "Capitale du Somaliland, État autoproclamé nettement plus calme que le sud, reconstruite en grande partie par sa diaspora.",
-    "watch": "État non reconnu : les conseils aux voyageurs restent prudents et la société est très conservatrice."
+    "watch": "État non reconnu : les conseils aux voyageurs restent prudents et la société est très conservatrice.",
+    "watchSources": [
+      {
+        "title": "Somalie — Conseils aux voyageurs, Sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/somalie/conseils-aux-voyageurs-securite",
+        "published": "2026-11-04",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Somalia travel advice — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/somalia",
+        "published": "2026-06-04",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Wau",
@@ -1341,7 +1738,21 @@
     "currency": "Livre sud-soudanaise",
     "tagline": "Ouest du pays, rivière Jur",
     "pitch": "Deuxième ville du pays, sur la rivière Jur, connue pour sa cathédrale et son mélange de communautés.",
-    "watch": "Violences armées récurrentes dans le pays."
+    "watch": "Violences armées récurrentes dans le pays.",
+    "watchSources": [
+      {
+        "title": "Warrap State condemns killing of a teacher in Wau — Radio Tamazuj",
+        "url": "https://www.radiotamazuj.org/en/news/article/warrap-state-condemns-killing-of-a-teacher-in-wau",
+        "published": "2026-07-21",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "South Sudan: safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/south-sudan/safety-and-security",
+        "published": "2026-08-25",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Alexandrie",
@@ -1411,7 +1822,19 @@
     "currency": "Dinar tunisien",
     "tagline": "Médina, plages, stations",
     "pitch": "Ville côtière du Sahel tunisien, avec sa médina inscrite à l'UNESCO et ses longues plages bordées d'hôtels.",
-    "watch": "Le climat s'est tendu pour les personnes noires dans le pays depuis 2023."
+    "watch": "Le climat s'est tendu pour les personnes noires dans le pays depuis 2023.",
+    "watchSources": [
+      {
+        "title": "UN News, Tunisia must curb racist rhetoric and halt rights violations of Black Africans: CERD (April 2023)",
+        "url": "https://news.un.org/en/story/2023/04/1135347",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Tunisia: safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/tunisia/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Benghazi",
@@ -1425,7 +1848,15 @@
     "currency": "Dinar libyen",
     "tagline": "Cyrénaïque, Méditerranée, reconstruction",
     "pitch": "Grande ville de l'est libyen, en reconstruction, proche des ruines grecques de Cyrène.",
-    "watch": "Pays divisé entre autorités rivales."
+    "watch": "Pays divisé entre autorités rivales.",
+    "watchSources": [
+      {
+        "title": "World Report 2026: Libya — Human Rights Watch",
+        "url": "https://www.hrw.org/world-report/2026/country-chapters/libya",
+        "published": "2026",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Port-Soudan",

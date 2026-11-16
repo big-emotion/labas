@@ -88,6 +88,24 @@ describe("the city catalogue", () => {
       expect(city.watch.length, city.name).toBeGreaterThan(10);
     }
   });
+
+  // CLAUDE.md: a safety, racism, LGBT-rights or conflict remark carries a dated source. The words
+  // below are how such a remark reads in « À savoir »; a new remark using none of them escapes
+  // this test, so keep the list in step with the remarks.
+  const SENSITIVE_REMARK =
+    /sécurit|insécurit|vigilance|criminalit|violence|agression|enlèvement|attentat|terror|danger|conflit|armée?s?\b|milice|insurrection|affrontement|militaire|autorités rivales|tensions|conseils aux voyageurs|personnes noires|migrants noirs|racis|xénophob|esclavage|LGBT/i;
+
+  it("gives a dated source with every safety, conflict, racism or LGBT remark", () => {
+    const sensitive = CITIES.filter((city) => SENSITIVE_REMARK.test(city.watch));
+    expect(sensitive.length).toBeGreaterThan(30);
+    for (const city of sensitive) {
+      expect(city.watchSources?.length ?? 0, city.name).toBeGreaterThan(0);
+      for (const source of city.watchSources ?? []) {
+        expect(source.url, city.name).toMatch(/^https:\/\//);
+        expect(source.accessed, city.name).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
+    }
+  });
 });
 
 describe("the sources behind the scores", () => {
