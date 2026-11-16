@@ -8,6 +8,7 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ResultCards from "../components/ResultCards.astro";
 import ShareMeta from "../components/ShareMeta.astro";
 import Newsletter from "../components/Newsletter.astro";
+import SaveLater from "../components/SaveLater.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
@@ -26,6 +27,7 @@ const website = JSON.stringify({
   inLanguage: "fr",
   description,
 });
+const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
 
 <html lang="fr">
@@ -42,7 +44,14 @@ const website = JSON.stringify({
   <body>
     <div class="shell">
       <aside class="side">
-        <Wordmark />
+        <div class="brand">
+          <Wordmark />
+          {accounts && (
+            <a href="/espace/" class="space-link">
+              Mon espace
+            </a>
+          )}
+        </div>
         <h1>
           Quelle ville d'Afrique <em>vous ressemble ?</em>
         </h1>
@@ -86,6 +95,7 @@ const website = JSON.stringify({
           <span id="stitches" class="stitches" aria-hidden="true"></span>
           <p id="counter" class="counter"></p>
         </div>
+        <SaveLater kind="quick" />
         <form id="form" class="questions" aria-label="Vos réponses">
           {QUESTIONS.map((question, index) => (
             <fieldset
@@ -211,9 +221,10 @@ const website = JSON.stringify({
           </p>
           <p>
             Vos réponses restent dans votre navigateur, qui les garde pour le questionnaire complet
-            : rien ne nous est envoyé.
+            : rien ne nous est envoyé{accounts && ", sauf si vous enregistrez votre parcours"}.
           </p>
           <nav class="links" aria-label="Pages du site">
+            {accounts && <a href="/espace/">Mon espace</a>}
             <a href="/approfondir">Aller plus loin</a>
             <a href="/methode">Notre méthode</a>
             <a href="/mentions-legales">Mentions légales</a>
@@ -242,6 +253,7 @@ const website = JSON.stringify({
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import { answerEvent, finishedEvent } from "../lib/analytics";
       import { saveAnswers } from "../lib/keep";
+      import { syncJourney } from "../lib/account-dom";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
 
       const SVG = "http://www.w3.org/2000/svg";
@@ -469,6 +481,7 @@ const website = JSON.stringify({
         render();
         // Kept in this browser only, so « Affiner » starts where the quiz stopped.
         saveAnswers(browserStore(), readAnswers());
+        syncJourney(readAnswers());
         const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
         syncContinue(fieldset);
         if (chip.getAttribute("aria-pressed") === "true") {
@@ -575,6 +588,21 @@ const website = JSON.stringify({
           position: sticky;
           top: 24px;
         }
+      }
+      .brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .space-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--saffron);
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 0.95rem;
       }
       h1 {
         font-family: var(--font-display);

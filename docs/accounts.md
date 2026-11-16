@@ -52,7 +52,12 @@ nothing cross-site. Answers go through `cleanAnswers` (`src/lib/keep.ts`), so on
 choices the quiz offers reach the database. Results are not stored: the page computes them from the
 answers.
 
-## Still to build
+## The pages
 
-The pages (« Reprendre plus tard » in the quiz, `/espace/`, `/espace/lien-expire/`, the header
-link) wait for the mockup to be approved. The rewritten privacy page ships with them.
+- **« Reprendre plus tard »** (`components/SaveLater.astro`, beside the progress of both quizzes):
+  - a reader who is already signed in saves straight to Mon espace;
+  - anyone else gives an e-mail address and ticks the consent box.
+- **`/espace/`**: the login form, then the journeys, « Mes données » (news, download, delete everything) and « Me déconnecter ». A deletion is confirmed in a dialog first.
+- **`/espace/lien-expire/`**: shown for a used or expired link.
+- **Resuming**: « Reprendre » puts the journey's answers back in the browser and opens the full questionnaire. That questionnaire asks only what is missing, so a quick quiz left halfway continues there too. While the tab stays signed in, each answer is saved again (`syncJourney`).
+- **Visibility**: everything shows only when `PUBLIC_NEWSLETTER` is set, the same switch as the e-mails, since nothing works without them.

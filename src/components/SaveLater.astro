@@ -1,0 +1,219 @@
+---
+/**
+ * « Reprendre plus tard » (approved mockup, 2026-11-16): beside the progress of either quiz.
+ * Signed in, the journey goes straight to Mon espace; otherwise an e-mail, the explicit consent
+ * box naming the sensitive answers, and a link by e-mail. Shown only with the mail service on.
+ */
+interface Props {
+  kind: "quick" | "deep";
+}
+const { kind } = Astro.props;
+const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+---
+
+{enabled && (
+  <div class="save-later" data-save-later data-kind={kind}>
+    <button
+      type="button"
+      class="save-toggle"
+      data-save-toggle
+      aria-expanded="false"
+      aria-controls={`save-${kind}`}
+    >
+      Reprendre plus tard
+    </button>
+    <section
+      id={`save-${kind}`}
+      class="panel"
+      data-save-panel
+      aria-label="Reprendre plus tard"
+      hidden
+    >
+      <div data-save-intro>
+        <h2>Reprendre plus tard</h2>
+        <p class="lead">
+          Recevez un lien pour retrouver votre parcours là où vous en êtes, sur ce téléphone ou un
+          autre. Pas de mot de passe.
+        </p>
+      </div>
+      <form novalidate>
+        <label class="field">
+          Votre e-mail
+          <input
+            type="email"
+            name="email"
+            placeholder="vous@exemple.fr"
+            autocomplete="email"
+            required
+          />
+        </label>
+        <label class="trap" aria-hidden="true">
+          Site web
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+        <label class="consent">
+          <input type="checkbox" name="consent" />
+          <span>
+            J'accepte que Là-bas garde mes réponses,{" "}
+            <b>y compris mon origine, ma religion et ma santé</b> si je les ai données, pour
+            retrouver mon parcours. <span class="dim">Obligatoire pour enregistrer.</span>
+          </span>
+        </label>
+        <label class="consent">
+          <input type="checkbox" name="news" />
+          <span>Je veux aussi recevoir les nouveautés de Là-bas (un e-mail par mois au plus).</span>
+        </label>
+        <p class="error" data-save-error role="alert" hidden />
+        <button type="submit" class="send">
+          M'envoyer le lien
+        </button>
+        <p class="small">
+          Vos réponses sont effacées 3 ans après votre dernière visite, ou dès que vous le demandez
+          dans Mon espace. Elles ne sont jamais données à un partenaire.{" "}
+          <a href="/confidentialite">Confidentialité</a>
+        </p>
+      </form>
+      <p class="done-text" data-save-done role="status" hidden>
+        <b />
+        <span />
+      </p>
+    </section>
+  </div>
+)}
+
+<script>
+  import { wireSaveLater } from "../lib/account-dom";
+  import { loadAnswers } from "../lib/keep";
+  import { browserStore } from "../lib/keep-dom";
+
+  // Both quizzes keep every answer in the browser as it is given: that is what gets saved.
+  for (const block of document.querySelectorAll<HTMLElement>("[data-save-later]")) {
+    wireSaveLater(block.dataset.kind as "quick" | "deep", () => loadAnswers(browserStore()));
+  }
+</script>
+
+<style>
+  .save-later {
+    display: grid;
+    gap: 12px;
+  }
+  .save-toggle {
+    justify-self: end;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    color: var(--saffron);
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0 4px;
+    cursor: pointer;
+  }
+  .panel {
+    display: grid;
+    gap: 12px;
+    background: var(--night-deep);
+    border: 2px solid var(--saffron);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .panel.done {
+    border-width: 2px;
+  }
+  [data-save-intro],
+  form {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.15;
+  }
+  p {
+    margin: 0;
+  }
+  .lead {
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .small,
+  .dim {
+    color: var(--thread-dim);
+    font-size: 0.82rem;
+  }
+  .small a {
+    color: var(--saffron);
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  input[type="email"] {
+    min-height: 48px;
+    box-sizing: border-box;
+    border-radius: 14px;
+    border: 2px solid var(--thread-dim);
+    background: var(--night);
+    color: var(--thread);
+    padding: 0 14px;
+    font: inherit;
+    font-weight: 400;
+  }
+  .consent {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .consent input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--saffron);
+  }
+  .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .error {
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .send {
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .send:disabled {
+    opacity: 0.4;
+  }
+  .done-text {
+    display: grid;
+    gap: 6px;
+  }
+  .done-text span {
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .save-later [hidden] {
+    display: none;
+  }
+</style>
