@@ -129,7 +129,7 @@ const id = `news-${place}`;
         return;
       }
       submit.disabled = true;
-      let status = 0;
+      let status: number;
       try {
         const response = await fetch("/api/nouveautes", {
           method: "POST",

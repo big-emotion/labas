@@ -123,7 +123,7 @@ function wireMail(
     );
     if (!body) return show(400);
     submit.disabled = true;
-    let status = 0;
+    let status: number;
     try {
       const response = await fetch("/api/resultats", {
         method: "POST",
