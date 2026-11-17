@@ -6,6 +6,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-11-17
+
 ### Added
 
 - Every news e-mail, starting with the confirmation, carries a link to unsubscribe. It opens a
@@ -357,6 +359,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.15.0...HEAD
+[0.18.0]: https://github.com/big-emotion/labas/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/big-emotion/labas/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/big-emotion/labas/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/big-emotion/labas/compare/v0.14.0...v0.15.0
