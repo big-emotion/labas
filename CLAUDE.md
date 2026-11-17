@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Là-bas is a one-page static Astro site: ten chip questions rank 115 African cities live in
+Là-bas is a one-page static Astro site: adaptive chip questions rank 115 African cities live in
 the browser. `README.md` covers the product, the data caveat and the roadmap.
 
 ## Rules
@@ -14,8 +14,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
   change something: from the third answer the map colours every city by its score and names
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
-  quiz asks every question (« question 7 sur 18 »), opening on the project; then each answer
-  picks the next question, the one most likely to change the top five (operator 2026-11-15).
+  quiz opens on the project, the languages and the family's origin; then, themes mixed, a
+  follow-up comes right after its question and each answer picks the next question, the one most
+  likely to change the top three; it ends once no question can (« question 7 », no total), and
+  the rest waits in /approfondir (operator 2026-11-17).
 - **Every answer orients the list** (operator, 2026-11-16, like a guessing game): each answer is
   one piece of evidence and the pieces multiply (`scoreOf` in `src/lib/ranking.ts`), so a late
   answer still turns the list over. The daily language weighs most; the project and the origin

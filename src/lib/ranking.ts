@@ -34,7 +34,10 @@ export interface Answers extends ProfileAnswers {
   job?: "cadre" | "entre" | "remote" | "crea" | "soin";
   /** Every language the reader can live in. */
   languages?: QuizLanguage[];
+  /** The city's size: 3 a big city, 2 a mid-sized one, 1 a small town. */
   size?: City["size"];
+  /** The pace wanted, apart from the size: 1 lively day and night, 0.5 lively enough, 0 calm. */
+  pace?: Step;
   /** Every landscape the reader wants nearby. */
   landscapes?: Landscape[];
   climate?: "hot" | "mild" | "dry";
@@ -279,10 +282,12 @@ const JOB: Record<NonNullable<Answers["job"]>, Pull[]> = {
     pull("cheap", 0.6, 0.5),
   ],
 };
-const SIZE: Record<City["size"], Pull[]> = {
-  3: [pull("pace", 0.95, 2.5), pull("nightlife", 0.7, 0.5)],
-  2: [pull("pace", 0.5, 2.5)],
-  1: [pull("pace", 0.1, 2.5), pull("nightlife", 0.3, 0.5)],
+// The pace answer, apart from the size (operator, 2026-11-17: « une grande ville qui vibre » let
+// a lively small town pass for a big city).
+const PACE: Record<Step, Pull[]> = {
+  1: [pull("pace", 0.95, 2.5), pull("nightlife", 0.7, 0.5)],
+  0.5: [pull("pace", 0.5, 2.5)],
+  0: [pull("pace", 0.1, 2.5), pull("nightlife", 0.3, 0.5)],
 };
 const GREW_UP: Record<NonNullable<Answers["grewUp"]>, Pull[]> = {
   city: [pull("pace", 0.8, 1)],
@@ -485,7 +490,8 @@ export function profileOf(answers: Answers): Profile {
   if (answers.budget) add("budget", BUDGET[answers.budget]);
   if (answers.family) add("family", FAMILY[answers.family]);
   if (answers.job) add("job", JOB[answers.job]);
-  if (answers.size) add("size", SIZE[answers.size]);
+  if (answers.size) fact("size", { kind: "size", value: answers.size, weight: 2.5 });
+  if (answers.pace !== undefined) add("pace", PACE[answers.pace]);
   if (answers.grewUp) add("grewUp", GREW_UP[answers.grewUp]);
   // Each non-negotiable is a piece of evidence of its own, worth more than an ordinary answer.
   for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES))
@@ -586,8 +592,10 @@ export function profileOf(answers: Answers): Profile {
       (answers.project === "decouvrir" ? 0.5 : 0) +
       (answers.adventure === "seeking" ? 0.6 : 0) +
       (answers.roots === "discover" ? 1 : 0);
-    if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, draw + away);
-    if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, draw + away);
+    // Never more than a non-negotiable, so the temperament can still decide (operator, 2026-11-17).
+    const weight = Math.min(NON_NEGOTIABLE, draw + away);
+    if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, weight);
+    if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, weight);
   }
   // Faith counts the same way; a reader without one is not sent towards secular countries.
   const faith = answers.faith;
@@ -692,6 +700,8 @@ function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): 
   if (part.fact === "elsewhere")
     return good ? "Un ailleurs à découvrir, loin de ce que vous connaissez" : undefined;
   if (part.fact === "upscale") return good ? "Des quartiers comme le vôtre" : undefined;
+  if (part.fact === "size")
+    return good ? "La taille de ville que vous cherchez" : "Une ville d'une autre taille";
   switch (part.axis) {
     case "pace":
       return good

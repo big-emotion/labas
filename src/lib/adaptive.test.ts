@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
 import { QUESTIONS } from "./questions";
 import { topCities, type Answers } from "./ranking";
+
+const OPENING = ["project", "languages", "origin"];
 import { DEEP_QUESTIONS } from "./deep-questions";
 
 describe("choosing the next question", () => {
@@ -14,6 +16,12 @@ describe("choosing the next question", () => {
     const next = nextQuestion({ project: "tester", saturday: 1 }, asked);
     expect(next).toBeDefined();
     expect(asked).not.toContain(next);
+  });
+
+  it("asks the follow-ups of what was just answered before anything else", () => {
+    const answers = { project: "installer", origin: ["ouest"], kin: "much" } as Answers;
+    const next = nextQuestion(answers, ["project", "origin", "kin"]);
+    expect(["faith", "countries"]).toContain(next);
   });
 
   it("stops when every question has been asked", () => {
@@ -37,36 +45,83 @@ describe("the quick quiz, one question at a time", () => {
     return { answers: answers as Answers, asked };
   }
 
-  it("asks every question this reader can see, each once", () => {
+  // Operator, 2026-11-17: three fixed openers, then the path follows the answers, themes mixed.
+  it("opens on the project, the languages and the family's origin, in that order", () => {
+    for (const pick of [0, 1, 2, 3]) expect(play(pick).asked.slice(0, 3)).toEqual(OPENING);
+  });
+
+  it("asks size and pace together, whichever comes first", () => {
     for (const pick of [0, 1, 2, 3]) {
-      const { answers, asked } = play(pick);
-      expect([...asked].sort()).toEqual(
-        freeQuestions(answers)
-          .map((q) => q.id)
-          .sort(),
-      );
+      const { asked } = play(pick);
+      if (asked.includes("size") && asked.includes("pace"))
+        expect(Math.abs(asked.indexOf("size") - asked.indexOf("pace")), String(pick)).toBe(1);
     }
   });
 
-  it("asks next the open question whose answers change the top five the most", () => {
-    const answers = { project: "installer", languages: ["fr"] } as Answers;
-    const asked = ["project", "languages"];
-    const before = new Set(topCities(answers, 5));
+  it("asks a follow-up right after the question it follows", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const { asked } = play(pick);
+      if (asked.includes("kin"))
+        expect(asked.indexOf("kin"), String(pick)).toBe(asked.indexOf("origin") + 1);
+    }
+  });
+
+  it("after the openers, asks the open question that changes the top three the most, whatever its theme", () => {
+    const answers = { project: "installer", languages: ["fr"], origin: null } as unknown as Answers;
+    const asked = [...OPENING];
+    const before = new Set(topCities(answers, 3));
     const moved = (id: string) => {
       const question = QUESTIONS.find((q) => q.id === id)!;
       const offered = question.choices.filter((c) => c.value !== null);
       const counts = offered.map((c) => {
         const tried = { ...answers, [id]: question.max ? [c.value] : c.value } as Answers;
-        return topCities(tried, 5).filter((name) => !before.has(name)).length;
+        return topCities(tried, 3).filter((name) => !before.has(name)).length;
       });
       return counts.reduce((a, b) => a + b, 0) / counts.length;
     };
-    // Inside the current chapter (quiz paths, 2026-11-16).
-    const remaining = freeQuestions(answers).filter((q) => !asked.includes(q.id));
-    const chapter = Math.min(...remaining.map((q) => q.chapter!));
-    const open = remaining.filter((q) => q.chapter === chapter);
+    const open = freeQuestions(answers).filter(
+      (q) => !asked.includes(q.id) && q.id !== "priorities",
+    );
     const best = Math.max(...open.map((q) => moved(q.id)));
     expect(moved(nextFreeQuestion(answers, asked)!)).toBe(best);
+  });
+
+  it("never asks a question that could not change the top three", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const answers: Record<string, unknown> = {};
+      const asked: string[] = [];
+      for (
+        let id = nextFreeQuestion({}, []);
+        id;
+        id = nextFreeQuestion(answers as Answers, asked)
+      ) {
+        const question = QUESTIONS.find((q) => q.id === id)!;
+        const offered = question.choices.filter((c) => c.value !== null);
+        if (asked.length >= 3 && !question.after && id !== "priorities") {
+          const before = topCities(answers as Answers, 3).join();
+          const changes = offered.some(
+            (c) =>
+              topCities(
+                { ...answers, [id]: question.max ? [c.value] : c.value } as Answers,
+                3,
+              ).join() !== before,
+          );
+          expect(changes, `${pick} ${id}`).toBe(true);
+        }
+        const choice = offered[pick % offered.length];
+        answers[id] = question.max ? [choice.value] : choice.value;
+        asked.push(id);
+      }
+    }
+  });
+
+  it("stops once no open question could change the top three, short of the whole bank", () => {
+    const lengths = [0, 1, 2, 3].map((pick) => {
+      const { answers, asked } = play(pick);
+      return { asked: asked.length, bank: freeQuestions(answers).length };
+    });
+    for (const { asked, bank } of lengths) expect(asked).toBeLessThanOrEqual(bank);
+    expect(lengths.some(({ asked, bank }) => asked < bank)).toBe(true);
   });
 
   // Beta feedback, 2026-11-16: asked in the middle, « Ce qui compte le plus » read as a riddle;
@@ -101,6 +156,13 @@ describe("the quick quiz, one question at a time", () => {
     const { answers, asked } = play(0);
     expect(nextFreeQuestion(answers, asked)).toBeUndefined();
   });
+
+  it("never asks a question twice", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const { asked } = play(pick);
+      expect(new Set(asked).size).toBe(asked.length);
+    }
+  });
 });
 
 describe("a path that fits the project", () => {
@@ -119,7 +181,9 @@ describe("a path that fits the project", () => {
   it("asks an investor only what investing and coming often need", () => {
     const investor = ids({ project: "investir" } as Answers);
     for (const id of LIFE_THERE) expect(investor, id).not.toContain(id);
-    expect(investor).toEqual(expect.arrayContaining(["languages", "origin", "size", "priorities"]));
+    expect(investor).toEqual(
+      expect.arrayContaining(["languages", "origin", "size", "pace", "priorities"]),
+    );
   });
 
   it("does not ask a holidaymaker about their job", () => {

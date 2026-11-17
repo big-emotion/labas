@@ -88,6 +88,7 @@ const FURTHER: Omit<Question, "group">[] = [
   },
   {
     id: "roots",
+    after: "origin",
     when: (a) => namedOrigins(a).length > 0,
     title: "Vous cherchez plutôt à…",
     choices: [
@@ -210,6 +211,7 @@ const holiday = (a: Answers) => a.project === "decouvrir";
 const PROFILE: Omit<Question, "group">[] = [
   {
     id: "music",
+    after: "saturday",
     title: "La musique qui vous fait bouger ?",
     hint: "Jusqu'à deux choix : on rapproche un peu les pays où elle fait danser.",
     max: 2,
@@ -218,6 +220,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "nightOut",
+    after: "saturday",
     title: "Vos soirées là-bas, plutôt…",
     when: (a) => holiday(a) && a.saturday === 1,
     choices: [
@@ -228,6 +231,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "quietStay",
+    after: "saturday",
     title: "Des vacances au calme, c'est…",
     when: (a) => holiday(a) && a.saturday === 0,
     choices: [
@@ -238,6 +242,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "offTrack",
+    after: "adventure",
     title: "Sortir des sentiers battus, jusqu'où ?",
     when: (a) => holiday(a) && a.adventure === "seeking",
     choices: [
@@ -248,6 +253,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "afterWork",
+    after: "saturday",
     title: "En semaine, après le travail ?",
     when: (a) => settling(a) && a.saturday !== undefined && a.saturday >= 0.5,
     choices: [
@@ -258,6 +264,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "friends",
+    after: "together",
     title: "Pour vous faire des amis là-bas ?",
     when: (a) => settling(a) && a.together === 1,
     choices: [
@@ -268,6 +275,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "mustWork",
+    after: "friction",
     title: "Ce qui doit marcher sans faute ?",
     max: 2,
     when: (a) => settling(a) && a.friction === 0,
@@ -280,6 +288,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "ambition",
+    after: "together",
     title: "Là-bas, vous venez surtout pour…",
     when: (a) => (a.project === "installer" || a.project === "investir") && a.together === 0,
     choices: [
@@ -290,6 +299,7 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "evenings",
+    after: "order",
     title: "Le soir, chez vous, il vous faut…",
     when: (a) => a.project === "installer" && a.saturday === 0 && a.order === 1,
     choices: [

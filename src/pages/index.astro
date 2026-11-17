@@ -397,7 +397,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       });
 
       // One question at a time, chosen by what would reshuffle the top three the most; the quiz
-      // settles after 8 to 12 answers (adaptive.ts, quiz mockup V2 of 2026-11-15).
+      // ends once no question can change it (adaptive.ts, operator 2026-11-17).
       const fieldsets = new Map(
         [...form.querySelectorAll<HTMLFieldSetElement>(".question")].map((f) => [
           f.dataset.question as string,
@@ -421,18 +421,18 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         // with children…); readAnswers releases the rest.
         readAnswers();
         (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
-        // « Votre tempérament · question 7 sur 18 »: the total only moves when a conditional
-        // question comes in or drops out.
+        // « Votre tempérament · question 7 »: no total, since the quiz ends once no question can
+        // change the top three (adaptive.ts). The stitches count the questions it may still ask,
+        // and all fill up when it ends.
         const list = freeQuestions(readAnswers());
-        const position = id ? asked.length + 1 : list.length;
         const question = QUESTIONS.find((q) => q.id === id);
         (document.getElementById("counter") as HTMLElement).innerHTML = question
-          ? `<b>${chapterName(question, readAnswers())}</b> · question ${position} sur ${list.length}`
+          ? `<b>${chapterName(question, readAnswers())}</b> · question ${asked.length + 1}`
           : "<b>C'est prêt</b>";
         (document.getElementById("stitches") as HTMLElement).replaceChildren(
           ...list.map((_, i) => {
             const stitch = document.createElement("i");
-            if (i < asked.length) stitch.className = "done";
+            if (i < asked.length || !id) stitch.className = "done";
             return stitch;
           }),
         );

@@ -114,9 +114,9 @@ function candidates(city: City, answers: Answers): Candidate[] {
 
   if (answers.size && answers.size === city.size) {
     const bySize = {
-      3: `Vous voulez une ville qui vibre : ${name} ne s'arrête presque jamais.`,
-      2: `Vous voulez une ville à taille humaine : c'est le cas de ${name}.`,
-      1: `Vous préférez une ville qui prend son temps : ${name} vit à un rythme tranquille.`,
+      3: `Vous voulez une grande ville : ${name} en est une.`,
+      2: `Vous voulez une ville moyenne : c'est la taille de ${name}.`,
+      1: `Vous préférez une petite ville : ${name} en est une.`,
     };
     add(`size:${answers.size}`, 2, bySize[answers.size]);
   }

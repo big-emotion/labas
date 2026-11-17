@@ -32,22 +32,20 @@ function play(project: (typeof PROJECTS)[number], pick: number, overrides: Answe
 }
 
 describe("a path per project", () => {
-  it("asks the chapters in order, never interleaved, the non-negotiables last", () => {
+  it("ends on the non-negotiables, whatever the path", () => {
     for (const project of PROJECTS)
       for (const pick of [0, 1, 2, 3]) {
         const { asked } = play(project, pick);
-        const chapters = asked.map((id) => question(id).chapter);
-        expect(chapters, `${project} ${asked.join(",")}`).toEqual([...chapters].sort());
-        expect(asked.at(-1), project).toBe("priorities");
+        expect(asked.at(-1), `${project} ${asked.join(",")}`).toBe("priorities");
       }
   });
 
-  it("names the second chapter after the path: the trip on holiday, the project otherwise", () => {
+  it("names the project questions after the path: the trip on holiday, the project otherwise", () => {
     const shown = (project: (typeof PROJECTS)[number]) => {
       const { answers, asked } = play(project, 0);
       return new Set(
         asked
-          .filter((id) => question(id).chapter === 2)
+          .filter((id) => id !== "project" && question(id).group === "Votre projet")
           .map((id) => chapterName(question(id), answers)),
       );
     };
@@ -143,10 +141,10 @@ describe("going back and changing an answer", () => {
 
   it("re-routes the rest of the path from the changed answer", () => {
     const { answers } = play("installer", 1);
-    const changed = keepInPath({ ...answers, project: "decouvrir" });
-    const asked = Object.keys(changed);
-    const next = nextFreeQuestion(changed, asked);
-    expect(next).toBe("wants");
+    // Going back to the project takes the later answers off the « asked » list, the closing one too.
+    const changed = keepInPath({ ...answers, project: "decouvrir", priorities: undefined });
+    const asked = Object.keys(changed).filter((id) => changed[id as keyof Answers] !== undefined);
+    expect(["wants", "season"]).toContain(nextFreeQuestion(changed, asked));
   });
 
   it("asks each question of the full questionnaire once", () => {

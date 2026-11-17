@@ -6,6 +6,19 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+### Changed
+
+- The quick quiz opens on the project, the languages and the family's origin, then follows the
+  answers, themes mixed: a follow-up comes right after its question (« Vivre près de vos
+  origines » right after the origin), and each next question is the one most likely to change the
+  top three. It ends once no question can change it; the rest waits in « Aller plus loin ». The
+  counter says « question 7 », without a total.
+- « Quelle taille de ville ? » now asks the size only and matches the city's real size; a new
+  question, « Quel rythme de ville ? », asks the pace, right before or after it. A lively small town no longer passes for a big
+  city.
+- The family's region weighs at most like a non-negotiable, so the temperament can still decide
+  between cities of the same region.
+
 ## [0.18.0] - 2026-11-17
 
 ### Added

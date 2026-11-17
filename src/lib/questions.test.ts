@@ -24,35 +24,38 @@ describe("the question bank", () => {
     }
   });
 
-  // Quiz paths audit, 2026-11-16: the bank is ordered by chapter; each path takes its share.
-  it("lists the questions chapter by chapter", () => {
-    expect(QUESTIONS.map((q) => q.id)).toEqual([
-      "project",
-      "wants",
-      "season",
-      "profession",
-      "family",
-      "languages",
-      "size",
-      "landscapes",
-      "saturday",
-      "adventure",
-      "order",
-      "together",
-      "friction",
-      "origin",
-      "kin",
-      "priorities",
-    ]);
-    const chapters = QUESTIONS.map((q) => q.chapter!);
-    expect(chapters).toEqual([...chapters].sort());
-    expect([...new Set(QUESTIONS.map((q) => q.group))]).toEqual([
-      "Votre projet",
-      "Votre voyage",
-      "Votre tempérament",
-      "Votre histoire avec l'Afrique",
-      "Pour finir",
-    ]);
+  // The bank is a pool: the path, not its order, decides what comes next (operator, 2026-11-17).
+  it("offers each question once, with distinct answers", () => {
+    expect([...QUESTIONS.map((q) => q.id)].sort()).toEqual(
+      [
+        "project",
+        "wants",
+        "season",
+        "profession",
+        "family",
+        "languages",
+        "size",
+        "pace",
+        "landscapes",
+        "saturday",
+        "adventure",
+        "order",
+        "together",
+        "friction",
+        "origin",
+        "kin",
+        "priorities",
+      ].sort(),
+    );
+    expect(new Set(QUESTIONS.map((q) => q.group))).toEqual(
+      new Set([
+        "Votre projet",
+        "Votre voyage",
+        "Votre tempérament",
+        "Votre histoire avec l'Afrique",
+        "Pour finir",
+      ]),
+    );
     for (const question of QUESTIONS) {
       const values = question.choices.map((choice) => JSON.stringify(choice.value));
       expect(new Set(values).size, question.id).toBe(values.length);

@@ -45,6 +45,8 @@ export type FactPull = { from?: string } & (
   | { kind: "sectors"; values: string[]; weight: number }
   | { kind: "professions"; values: string[]; weight: number }
   | { kind: "upscale"; values: string[]; weight: number }
+  /** The city's real size, 1 to 3: the same scores 1, one step away a half. */
+  | { kind: "size"; value: number; weight: number }
   /** The city's region close to the family's. */
   | { kind: "kin"; origins: string[]; weight: number }
   /** The passports the reader holds: how easily each one gets into the city's country. */
@@ -414,6 +416,15 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
         value: fit ?? NEUTRAL,
         weight: fact.weight,
         known: fit !== null,
+        fact: fact.kind,
+      });
+      continue;
+    } else if (fact.kind === "size") {
+      const gap = Math.abs(city.size - fact.value);
+      parts.push({
+        value: gap === 0 ? 1 : gap === 1 ? 0.5 : 0,
+        weight: fact.weight,
+        known: true,
         fact: fact.kind,
       });
       continue;
