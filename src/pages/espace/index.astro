@@ -82,7 +82,13 @@ import Page from "../../layouts/Page.astro";
 </Page>
 
 <script>
-  import { dateLabel, journeySummary, resumeHref, type Journey } from "../../lib/account";
+  import {
+    dateLabel,
+    journeySummary,
+    resultsHref,
+    resumeHref,
+    type Journey,
+  } from "../../lib/account";
   import { api, rememberJourney, resume } from "../../lib/account-dom";
   import { outcomeOf } from "../../lib/newsletter";
 
@@ -135,6 +141,11 @@ import Page from "../../layouts/Page.astro";
     go.href = resumeHref(journey.id);
     go.textContent = "Reprendre";
     go.addEventListener("click", () => resume(journey));
+    const results = document.createElement("a");
+    results.className = "go";
+    results.href = resultsHref(journey.id);
+    results.textContent = "Voir mes résultats";
+    results.addEventListener("click", () => resume(journey));
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "danger";
@@ -150,7 +161,7 @@ import Page from "../../layouts/Page.astro";
       const { status } = await api("DELETE", `/api/compte/parcours/${journey.id}`);
       if (status === 200) show();
     });
-    row.append(go, remove);
+    row.append(...(summary.cities.length ? [results] : []), go, remove);
     item.append(head, detail, row);
     return item;
   }
@@ -169,6 +180,14 @@ import Page from "../../layouts/Page.astro";
     $("kept").textContent =
       `Vos parcours sont gardés jusqu'au ${dateLabel(data.keptUntil)}, trois ans après votre dernière visite. Ils ne sont jamais donnés à un partenaire.`;
     $<HTMLInputElement>("news").checked = Boolean(data.news);
+    // Arrived from the results e-mail's button: straight to that result.
+    const opened = journeys.find(
+      (j) => j.id === new URLSearchParams(location.search).get("ouvrir"),
+    );
+    if (opened) {
+      resume(opened);
+      location.replace(resultsHref(opened.id));
+    }
   }
 
   $("login").addEventListener("submit", async (event) => {

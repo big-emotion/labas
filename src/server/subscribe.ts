@@ -15,7 +15,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
-import { readShared, sharedResult } from "../lib/shared-result";
+import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { type Mail, confirmationEmail, resultsEmail } from "./emails";
 import { newsList } from "./news";
@@ -169,17 +169,7 @@ export function createHandler(
     return json(202, { ok: true });
   }
 
-  /** The reader's result from its link on this site, or null for anything else. */
-  function resultFrom(link: unknown) {
-    try {
-      const url = new URL(String(link));
-      if (url.origin !== config.siteUrl || url.pathname !== "/resultat/") return null;
-      const payload = readShared(url.hash);
-      return payload && sharedResult(payload);
-    } catch {
-      return null;
-    }
-  }
+  const resultFrom = (link: unknown) => resultAt(link, config.siteUrl);
 
   return async (request: Request): Promise<Response> => {
     if (request.path === "/api/compte" || request.path.startsWith("/api/compte/")) {
@@ -346,7 +336,8 @@ function start(port: number) {
     let raw = "";
     for await (const chunk of incoming) {
       raw += chunk;
-      if (raw.length > 2048) return outgoing.writeHead(413).end();
+      // Room for a full questionnaire's answers beside the result link.
+      if (raw.length > 8192) return outgoing.writeHead(413).end();
     }
     let body: unknown;
     try {

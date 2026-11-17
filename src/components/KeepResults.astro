@@ -1,6 +1,7 @@
 ---
 // With the mail service on (PUBLIC_NEWSLETTER, docs/deploy.md), Là-bas sends the result itself;
 // otherwise « Recevoir par e-mail » opens the reader's own mail (approved mockup, 2026-11-16).
+// Since 2026-11-17 the e-mail also opens a space: the result is kept there (docs/accounts.md).
 const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
 
@@ -29,8 +30,8 @@ const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
   {serverMail && (
     <form id="keep-mail" class="keep-mail" data-keep-mail novalidate hidden>
       <p class="keep-hint">
-        Là-bas vous envoie vos trois villes, leurs pourcentages et le lien pour revoir votre
-        résultat.
+        Là-bas vous envoie vos trois villes et garde votre résultat dans votre espace : le bouton de
+        l'e-mail l'ouvre, avec le classement complet. Pas de mot de passe.
       </p>
       <label class="field">
         Votre e-mail
@@ -47,6 +48,13 @@ const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         <input type="text" name="website" tabindex="-1" autocomplete="off" />
       </label>
       <label class="consent">
+        <input type="checkbox" name="sensitive" />
+        <span>
+          Garder aussi <b>mon origine, ma religion et ma santé</b>, si je les ai données. Sans cette
+          case, elles restent sur ce téléphone et le classement gardé peut changer un peu.
+        </span>
+      </label>
+      <label class="consent">
         <input type="checkbox" name="news" />
         <span>Je veux aussi recevoir les nouveautés de Là-bas (un e-mail par mois au plus).</span>
       </label>
@@ -55,8 +63,9 @@ const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         Envoyer mes résultats
       </button>
       <p class="keep-hint small">
-        Seuls vos villes et votre profil de tempérament sont envoyés, jamais vos autres réponses.
-        Sans la case cochée, nous ne gardons pas votre adresse.{" "}
+        L'e-mail contient vos villes et votre profil, jamais vos réponses. Votre adresse et vos
+        réponses sont effacées sous 7 jours si vous n'ouvrez pas le lien, sinon 3 ans après votre
+        dernière visite, ou dès que vous le demandez dans Mon espace.{" "}
         <a href="/confidentialite">Confidentialité</a>
       </p>
     </form>

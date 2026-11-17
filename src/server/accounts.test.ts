@@ -2,6 +2,8 @@
 import { PGlite } from "@electric-sql/pglite";
 import { beforeEach, describe, expect, it } from "vitest";
 import { QUESTIONS } from "../lib/questions";
+import { type Answers, bestMatches } from "../lib/ranking";
+import { resultLink } from "../lib/shared-result";
 import { type Mail, type Mailer } from "./subscribe";
 import { createAccounts, migrate, purge, whenReady, type Db } from "./accounts";
 
@@ -25,7 +27,7 @@ function recordingMailer() {
     async removeFromList() {},
   };
   const linkIn = (mail: Mail) =>
-    /https:\/\/labas\.africa\/api\/compte\/connexion\?t=[\w.-]+/.exec(mail.text)?.[0] ?? "";
+    /https:\/\/labas\.africa\/api\/compte\/connexion\?t=[\w.&=-]+/.exec(mail.text)?.[0] ?? "";
   return { mailer, sent, linkIn };
 }
 
@@ -244,6 +246,66 @@ describe("Mon espace", () => {
     expect((await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).status).toBe(
       401,
     );
+  });
+});
+
+describe("« Recevoir par e-mail » opens a space in the same gesture (operator, 2026-11-17)", () => {
+  const answers = { ...ANSWERS, project: firstChoice("project") } as Answers;
+  const link = resultLink(answers, bestMatches(answers, 3));
+  const sendResults = (extra: Record<string, unknown> = {}) =>
+    handle(
+      request("POST", "/api/compte/resultats", {
+        email: "awa@exemple.fr",
+        link,
+        journey: { kind: "quick", answers },
+        ...extra,
+      }),
+    );
+  const spaceOf = async (cookie: string) =>
+    JSON.parse((await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).body!);
+
+  it("mails the top three with a button that opens the full result in Mon espace", async () => {
+    expect((await sendResults()).status).toBe(202);
+    expect(mail.sent).toHaveLength(1);
+    const names = bestMatches(answers, 3).map((m) => m.city.name);
+    expect(mail.sent[0].subject).toBe(`Vos villes d'Afrique : ${names.join(", ")}`);
+    expect(mail.sent[0].html).toContain("Voir mes résultats");
+
+    const { response, cookie } = await follow();
+    const space = await spaceOf(cookie);
+    expect(space.journeys).toHaveLength(1);
+    expect(response.headers.location).toBe(`/espace/?ouvrir=${space.journeys[0].id}`);
+  });
+
+  it("keeps origin, faith and health only with their own box ticked", async () => {
+    await sendResults();
+    const without = await spaceOf((await follow()).cookie);
+    expect(without.journeys[0].answers).toEqual({ order: 1, project: answers.project });
+
+    await sendResults({ email: "eve@exemple.fr", sensitive: true });
+    const kept = await spaceOf((await follow()).cookie);
+    expect(kept.journeys[0].answers.origin).toEqual(ANSWERS.origin);
+  });
+
+  it("sends nothing for a result that is not a link of this site", async () => {
+    const response = await sendResults({ link: "https://spam.example/resultat/#r=abc" });
+    expect(response.status).toBe(400);
+    expect(mail.sent).toEqual([]);
+    expect((await db.query("select 1 from accounts")).rows).toEqual([]);
+  });
+
+  it("lets the button work for seven days, then brings a signed-in reader back to Mon espace", async () => {
+    await sendResults();
+    clock += 6 * DAY;
+    const { cookie } = await follow();
+    expect(cookie).not.toBe("");
+
+    const button = new URL(mail.linkIn(mail.sent[0]));
+    const again = await handle(
+      request("GET", button.pathname + button.search, undefined, asMember(cookie)),
+    );
+    expect(again.headers.location).toBe("/espace/");
+    expect((await follow()).response.headers.location).toBe("/espace/lien-expire/");
   });
 });
 

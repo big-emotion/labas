@@ -1,6 +1,7 @@
 import { createHash, randomBytes } from "node:crypto";
-import { cleanAnswers } from "../lib/keep";
-import { loginLinkEmail, saveLinkEmail } from "./emails";
+import { cleanAnswers, withoutSensitive } from "../lib/keep";
+import { resultAt } from "../lib/shared-result";
+import { loginLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
 import type { Mailer } from "./subscribe";
 
 /**
@@ -35,6 +36,8 @@ export const KEEP_FOR = 3 * 365 * DAY;
 /** A save nobody confirmed by opening its link is someone else's mistake: gone after a week. */
 const UNCONFIRMED_FOR = 7 * DAY;
 const SAVE_LINK_FOR = DAY;
+/** The results e-mail is kept and reopened: its button lasts as long as an unconfirmed space. */
+const RESULTS_LINK_FOR = UNCONFIRMED_FOR;
 const LOGIN_LINK_FOR = 15 * MINUTE;
 const SESSION_FOR = 30 * DAY;
 const COOKIE = "labas_session";
@@ -163,21 +166,46 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
   const at = (offset = 0) => new Date(now() + offset).toISOString();
   const iso = (value: string | Date) => new Date(value).toISOString();
 
-  async function mailLink(
+  /** `toResults` only picks where the link lands; the token alone authorises. */
+  async function issueLink(
     accountId: string,
-    email: string,
     lifetime: number,
     journeyId: string | null,
     news: boolean,
+    toResults = false,
   ) {
     const secret = token();
     await db.query(
       "insert into login_links (token_hash, account_id, journey_id, news, expires_at) values ($1, $2, $3, $4, $5)",
       [hash(secret), accountId, journeyId, news, at(lifetime)],
     );
-    const link = `${siteUrl}/api/compte/connexion?t=${secret}`;
-    await mailer.send(journeyId ? saveLinkEmail(email, link) : loginLinkEmail(email, link));
+    return `${siteUrl}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}`;
   }
+
+  /** An unconfirmed journey under this address; the account is created when it is new. */
+  async function keepJourney(email: string, kind: string, answers: unknown) {
+    await db.query(
+      `insert into accounts (email, created_at, last_seen_at, consent_at) values ($1, $2, $2, $2)
+       on conflict (email) do nothing`,
+      [email, at()],
+    );
+    const account = (
+      await db.query<{ id: string }>("select id from accounts where email = $1", [email])
+    ).rows[0];
+    const saved = await db.query<{ id: string }>(
+      `insert into journeys (account_id, kind, answers, created_at, updated_at)
+       values ($1, $2, $3, $4, $4) returning id`,
+      [account.id, kind, JSON.stringify(answers), at()],
+    );
+    return { accountId: account.id, journeyId: saved.rows[0].id };
+  }
+
+  const emailOf = (form: Record<string, unknown>) =>
+    String(form.email ?? "")
+      .trim()
+      .toLowerCase();
+  const kindOf = (form: Record<string, unknown>) =>
+    String((form.journey as { kind?: unknown } | undefined)?.kind);
 
   /** The reader behind the session cookie, kept alive by the visit. */
   async function member(request: Request): Promise<{ id: string; email: string } | null> {
@@ -216,35 +244,55 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     const form = (request.body ?? {}) as Record<string, unknown>;
     const connection = request.headers["x-real-ip"] ?? "unknown";
 
+    const answersOf = (form: Record<string, unknown>) =>
+      cleanAnswers((form.journey as { answers?: unknown } | undefined)?.answers);
+
     if (method === "POST" && path === "/api/compte/sauvegarder") {
-      const email = String(form.email ?? "")
-        .trim()
-        .toLowerCase();
-      const journey = (form.journey ?? {}) as { kind?: unknown; answers?: unknown };
-      if (
-        !isEmail(email) ||
-        form.consent !== true ||
-        !["quick", "deep"].includes(String(journey.kind))
-      )
+      const email = emailOf(form);
+      if (!isEmail(email) || form.consent !== true || !["quick", "deep"].includes(kindOf(form)))
         return json(400, { error: "form" });
       if (form.website) return json(202, { ok: true });
       if (!perConnection(connection, now()) || !perAddress(email, now()))
         return json(429, { error: "slow-down" });
-      await db.query(
-        `insert into accounts (email, created_at, last_seen_at, consent_at) values ($1, $2, $2, $2)
-         on conflict (email) do nothing`,
-        [email, at()],
-      );
-      const account = (
-        await db.query<{ id: string }>("select id from accounts where email = $1", [email])
-      ).rows[0];
-      const saved = await db.query<{ id: string }>(
-        `insert into journeys (account_id, kind, answers, created_at, updated_at)
-         values ($1, $2, $3, $4, $4) returning id`,
-        [account.id, journey.kind, JSON.stringify(cleanAnswers(journey.answers)), at()],
-      );
+      const { accountId, journeyId } = await keepJourney(email, kindOf(form), answersOf(form));
       try {
-        await mailLink(account.id, email, SAVE_LINK_FOR, saved.rows[0].id, form.news === true);
+        const link = await issueLink(accountId, SAVE_LINK_FOR, journeyId, form.news === true);
+        await mailer.send(saveLinkEmail(email, link));
+      } catch (error) {
+        console.error(String(error));
+        return json(502, { error: "mail" });
+      }
+      return json(202, { ok: true });
+    }
+
+    // « Recevoir par e-mail »: the top three by e-mail, and the journey kept so that the button
+    // opens the full result. Asking for the e-mail is the request to keep it; the sensitive
+    // answers need their own box (operator, 2026-11-17).
+    if (method === "POST" && path === "/api/compte/resultats") {
+      const email = emailOf(form);
+      const result = resultAt(form.link, siteUrl);
+      if (!isEmail(email) || !result || !["quick", "deep"].includes(kindOf(form)))
+        return json(400, { error: "form" });
+      if (form.website) return json(202, { ok: true });
+      if (!perConnection(connection, now()) || !perAddress(email, now()))
+        return json(429, { error: "slow-down" });
+      const sensitive = form.sensitive === true;
+      const answers = sensitive ? answersOf(form) : withoutSensitive(answersOf(form));
+      const { accountId, journeyId } = await keepJourney(email, kindOf(form), answers);
+      try {
+        const link = await issueLink(
+          accountId,
+          RESULTS_LINK_FOR,
+          journeyId,
+          form.news === true,
+          true,
+        );
+        await mailer.send(
+          resultsEmail(email, result, String(form.link), siteUrl, undefined, {
+            link,
+            sensitiveLeftOut: !sensitive,
+          }),
+        );
       } catch (error) {
         console.error(String(error));
         return json(502, { error: "mail" });
@@ -253,9 +301,7 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     }
 
     if (method === "POST" && path === "/api/compte/lien") {
-      const email = String(form.email ?? "")
-        .trim()
-        .toLowerCase();
+      const email = emailOf(form);
       if (!isEmail(email)) return json(400, { error: "form" });
       if (!perConnection(connection, now()) || !perAddress(email, now()))
         return json(429, { error: "slow-down" });
@@ -265,7 +311,9 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       // The same answer whether the address has a space or not: nobody learns who uses Là-bas.
       if (account) {
         try {
-          await mailLink(account.id, email, LOGIN_LINK_FOR, null, false);
+          await mailer.send(
+            loginLinkEmail(email, await issueLink(account.id, LOGIN_LINK_FOR, null, false)),
+          );
         } catch (error) {
           console.error(String(error));
         }
@@ -285,7 +333,8 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
         [hash(request.query.get("t") ?? ""), at()],
       );
       const link = rows[0];
-      if (!link) return redirect("/espace/lien-expire/");
+      // A used or old button still leads a reader who is signed in on this browser to their space.
+      if (!link) return redirect((await member(request)) ? "/espace/" : "/espace/lien-expire/");
       const account = (
         await db.query<{ email: string }>(
           `update accounts set confirmed_at = coalesce(confirmed_at, $2), last_seen_at = $2,
@@ -304,7 +353,11 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
         "insert into sessions (token_hash, account_id, expires_at) values ($1, $2, $3)",
         [hash(session), link.account_id, at(SESSION_FOR)],
       );
-      return redirect("/espace/", { "set-cookie": sessionCookie(session, SESSION_FOR / 1000) });
+      const landing =
+        link.journey_id && request.query.get("vers") === "resultats"
+          ? `/espace/?ouvrir=${link.journey_id}`
+          : "/espace/";
+      return redirect(landing, { "set-cookie": sessionCookie(session, SESSION_FOR / 1000) });
     }
 
     const reader = await member(request);

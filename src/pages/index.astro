@@ -170,6 +170,15 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             <SourcesNote />
             <TemperamentProfile />
             <div id="cards" class="cards"></div>
+            {/* Right under the top three, where the wish to go further comes (operator, 2026-11-17). */}
+            <section class="further" aria-labelledby="further-title">
+              <h2 id="further-title">Envie d'aller plus loin ?</h2>
+              <p>
+                Le questionnaire complet : vos contraintes (école, soins, visa), ce qui vous pèse et
+                ce qui vous plaît, pour un classement plus fin.
+              </p>
+              <a href="/approfondir">Affiner avec le questionnaire complet</a>
+            </section>
             <KeepResults />
           </section>
 
@@ -202,15 +211,6 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           </section>
 
           <Newsletter place="results" />
-
-          <section class="further">
-            <h2>Envie d'aller plus loin ?</h2>
-            <p>
-              Le questionnaire complet : vos contraintes (école, soins, visa), ce qui vous pèse et
-              ce qui vous plaît, pour un classement plus fin.
-            </p>
-            <a href="/approfondir">Affiner avec le questionnaire complet</a>
-          </section>
         </div>
 
         <footer class="footer">
@@ -348,7 +348,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
       // The three cities on screen, for « Garder vos résultats ».
       let onScreen: Match[] = [];
-      wireKeep(() => ({ answers: readAnswers(), matches: onScreen }));
+      wireKeep(() => ({ answers: readAnswers(), matches: onScreen }), "quick");
 
       function render() {
         const current = readAnswers();
@@ -1070,8 +1070,14 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         display: grid;
         gap: 40px;
       }
+      @media print {
+        .further {
+          display: none;
+        }
+      }
       .further {
         display: grid;
+        margin-top: 18px;
         gap: 12px;
         background: var(--saffron);
         color: var(--ink);

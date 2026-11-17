@@ -64,7 +64,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     <ul id="answers" class="answer-list"></ul>
   </details>
 
-  <section class="results" aria-labelledby="ranking-title" data-print>
+  <section id="vos-villes" class="results" aria-labelledby="ranking-title" data-print>
     <h2 id="ranking-title">Vos villes</h2>
     <p class="hint">
       Classées selon toutes vos réponses. Le pourcentage dit à quel point une ville correspond à ce
@@ -118,12 +118,15 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
           chip.setAttribute("aria-pressed", "true");
       }
     }
-    wireKeep(() => ({
-      answers: answers as Answers,
-      matches: rankCities(answers as Answers)
-        .filter((m) => !m.excludedBecause)
-        .slice(0, 3),
-    }));
+    wireKeep(
+      () => ({
+        answers: answers as Answers,
+        matches: rankCities(answers as Answers)
+          .filter((m) => !m.excludedBecause)
+          .slice(0, 3),
+      }),
+      "deep",
+    );
     // Counted once per visit.
     let finished = false;
     let showAll = false;
@@ -266,6 +269,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     });
 
     render();
+    // Opened from the results e-mail: the cards are drawn now, so the jump lands on them.
+    if (location.hash === "#vos-villes") document.getElementById("vos-villes")?.scrollIntoView();
   </script>
 </Page>
 

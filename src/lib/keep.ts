@@ -60,6 +60,26 @@ export function cleanAnswers(raw: unknown): Answers {
   return answers as Answers;
 }
 
+/**
+ * Origin, family country, feeling at home, faith, and the fuller questionnaire's filters about
+ * health and about laws against homosexuality: special-category data (GDPR art. 9). Never
+ * measured, and kept in Mon espace only with their own box ticked.
+ */
+export const SENSITIVE_ANSWERS = [
+  "origin",
+  "countries",
+  "kin",
+  "faith",
+  "excludeCriminalising",
+  "specialistCare",
+] as const;
+
+export function withoutSensitive(answers: Answers): Answers {
+  const kept: Record<string, unknown> = { ...answers };
+  for (const id of SENSITIVE_ANSWERS) delete kept[id];
+  return kept as Answers;
+}
+
 /** The reader's own mail app, the result already written; they choose who receives it. */
 export function mailtoFor(text: string): string {
   const subject = encodeURIComponent("Mes villes d'Afrique sur Là-bas");

@@ -66,8 +66,11 @@ ${confirmButton(link)}
 
 /**
  * The reader's result, sent once at their request (approved mockup, 2026-11-16): profile, three
- * cities with their percentage and why they fit, and the result link. Never the answers. With
- * the news box ticked, the same e-mail carries the confirmation link instead of a second one.
+ * cities with their percentage and why they fit. Never the answers. With the news box ticked, the
+ * same e-mail carries the confirmation link instead of a second one.
+ *
+ * With `space` (operator, 2026-11-17) the button is a login link instead of the shared result:
+ * the e-mail stays short, and the full ranking with its reasons waits in Mon espace.
  */
 export function resultsEmail(
   to: string,
@@ -75,6 +78,7 @@ export function resultsEmail(
   resultLink: string,
   siteUrl: string,
   confirmLink?: string,
+  space?: { link: string; sensitiveLeftOut: boolean },
 ): Mail {
   const names = result.cities.map((c) => c.city.name).join(", ");
   const profileText = result.archetype
@@ -93,6 +97,19 @@ export function resultsEmail(
         "",
         "Vous avez aussi demandé les nouveautés de Là-bas. Confirmez-le en ouvrant ce lien ; sans cela, vous ne recevrez rien d'autre :",
         confirmLink,
+      ]
+    : [];
+  const buttonLink = space ? space.link : resultLink;
+  const buttonLabel = space ? "Voir mes résultats" : "Revoir mon résultat";
+  const spaceNotes = space
+    ? [
+        "Ce bouton ouvre votre espace : votre classement complet et pourquoi chaque ville vous correspond. Il marche 7 jours, une seule fois. Ensuite, ouvrez labas.africa et touchez « Mon espace » : un nouveau lien vous sera envoyé.",
+        ...(space.sensitiveLeftOut
+          ? [
+              "Votre origine, votre religion et votre santé ne sont pas gardées, comme vous l'avez choisi : le questionnaire vous les redemandera, et le classement peut changer un peu.",
+            ]
+          : []),
+        "Vous n'avez rien demandé ? Ignorez ce message : sans clic de votre part, tout est effacé sous 7 jours.",
       ]
     : [];
   const footer = `Vous recevez cet e-mail parce que vous l'avez demandé sur labas.africa. Il contient votre profil et vos villes, jamais vos autres réponses. ${SITE_FOOTER}`;
@@ -126,7 +143,8 @@ ${c.lines
       "Vos villes d'Afrique :",
       ...citiesText,
       "",
-      `Revoir mon résultat : ${resultLink}`,
+      `${buttonLabel} : ${buttonLink}`,
+      ...spaceNotes,
       `Pour un classement plus fin, le questionnaire complet : ${siteUrl}/approfondir/`,
       ...confirmText,
       "",
@@ -140,7 +158,8 @@ ${
     : ""
 }
 ${citiesHtml}
-<p><a href="${escape(resultLink)}" style="display:inline-block;padding:14px 24px;border-radius:999px;background:#ffb627;color:#1d1b3a;font-weight:800;text-decoration:none">Revoir mon résultat</a></p>
+${button(buttonLink, buttonLabel)}
+${spaceNotes.map((note) => `<p style="color:#b4b8ea;font-size:15px">${escape(note)}</p>`).join("\n")}
 <p style="font-size:15px">Pour un classement plus fin : <a href="${siteUrl}/approfondir/" style="color:#ffb627">le questionnaire complet</a>.</p>
 ${
   confirmLink
