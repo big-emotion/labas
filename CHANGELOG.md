@@ -6,6 +6,14 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-11-17
+
+### Added
+
+- A `labas-social` skill and an `npm run social` command to prepare Instagram carousels: every
+  city a carousel names comes from the site's own ranking, so a reader who takes the quiz with the
+  same answers finds the same cities.
+
 ### Changed
 
 - The quick quiz opens on the project, the languages and the family's origin, then follows the
@@ -18,6 +26,9 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   city.
 - The family's region weighs at most like a non-negotiable, so the temperament can still decide
   between cities of the same region.
+- The site is now served by nginx 1.31 (was 1.27).
+- Build and test tools updated: ESLint 10, esbuild 0.28, PGlite 0.5.16, and the CI actions
+  `checkout` and `setup-node` 7.
 
 ## [0.18.0] - 2026-11-17
 
@@ -371,7 +382,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.15.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.19.0...HEAD
+[0.19.0]: https://github.com/big-emotion/labas/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/big-emotion/labas/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/big-emotion/labas/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/big-emotion/labas/compare/v0.15.0...v0.16.0
