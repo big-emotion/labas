@@ -48,3 +48,20 @@ describe("the news list, kept in Là-bas's own database", () => {
     expect(await subscribers()).toEqual(["binta@exemple.fr"]);
   });
 });
+
+describe("leaving the news with a space of one's own", () => {
+  it("also turns the news off in « Mon espace »", async () => {
+    const at = new Date(clock).toISOString();
+    await db.query(
+      `insert into accounts (email, created_at, last_seen_at, consent_at, news)
+       values ('awa@exemple.fr', $1, $1, $1, true)`,
+      [at],
+    );
+    await list.addToList("awa@exemple.fr");
+    await list.removeFromList("awa@exemple.fr");
+    const { rows } = await db.query<{ news: boolean }>(
+      "select news from accounts where email = 'awa@exemple.fr'",
+    );
+    expect(rows[0].news).toBe(false);
+  });
+});

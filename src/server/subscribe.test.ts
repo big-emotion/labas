@@ -28,6 +28,7 @@ const DAY = 24 * 60 * 60 * 1000;
 function recordingMailer(fail = false) {
   const sent: (Mail & { email: string; link: string })[] = [];
   const listed: string[] = [];
+  const removed: string[] = [];
   const mailer: Mailer = {
     async send(mail) {
       if (fail) throw new Error("mail service down");
@@ -38,9 +39,11 @@ function recordingMailer(fail = false) {
     async addToList(email) {
       listed.push(email);
     },
-    async removeFromList() {},
+    async removeFromList(email) {
+      removed.push(email);
+    },
   };
-  return { mailer, sent, listed };
+  return { mailer, sent, listed, removed };
 }
 
 const post = (body: unknown, headers: Record<string, string> = {}) => ({
@@ -181,6 +184,52 @@ describe("confirming the address", () => {
     expect(readToken(signToken("awa@exemple.fr", now - 6 * DAY, "s"), "s", now)).toBe(
       "awa@exemple.fr",
     );
+  });
+});
+
+// The privacy page promises a way out in every e-mail. The link opens a page with a button, so a
+// mail scanner that follows links cannot unsubscribe anyone by itself.
+describe("unsubscribing from the news", () => {
+  const unsubscribeLinkIn = (text: string) =>
+    /https:\/\/labas\.africa\/nouveautes\/desinscription\/#t=([\w.-]+)/.exec(text);
+  const leave = (token: string, headers: Record<string, string> = {}) => ({
+    ...post({ t: token }, headers),
+    path: "/api/nouveautes/desinscrire",
+  });
+
+  it("gives the way out in the confirmation e-mail, and it removes the address", async () => {
+    const { mailer, sent, removed } = recordingMailer();
+    const handler = createHandler(CONFIG, mailer);
+    await handler(post(SIGN_UP));
+    const link = unsubscribeLinkIn(sent[0].text);
+    expect(link, "text part").not.toBeNull();
+    expect(sent[0].html).toContain(link![0]);
+    const response = await handler(leave(link![1]));
+    expect(response.status).toBe(200);
+    expect(removed).toEqual(["awa@exemple.fr"]);
+  });
+
+  it("still works years later: leaving never expires", async () => {
+    let now = Date.now();
+    const { mailer, sent, removed } = recordingMailer();
+    const handler = createHandler(CONFIG, mailer, () => now);
+    await handler(post(SIGN_UP));
+    now += 3 * 365 * DAY;
+    await handler(leave(unsubscribeLinkIn(sent[0].text)![1]));
+    expect(removed).toEqual(["awa@exemple.fr"]);
+  });
+
+  it("removes nobody with a changed, foreign or confirmation token, or from another site", async () => {
+    const { mailer, sent, removed } = recordingMailer();
+    const handler = createHandler(CONFIG, mailer);
+    await handler(post(SIGN_UP));
+    const good = unsubscribeLinkIn(sent[0].text)![1];
+    const tampered = good.replace(/^[^.]+/, Buffer.from("eve@exemple.fr").toString("base64url"));
+    const confirmation = new URL(sent[0].link).searchParams.get("t")!;
+    for (const token of [tampered, confirmation, "", "not-a-token"])
+      expect((await handler(leave(token))).status, token).toBe(400);
+    expect((await handler(leave(good, { origin: "https://evil.example" }))).status).toBe(403);
+    expect(removed).toEqual([]);
   });
 });
 
