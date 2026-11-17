@@ -6,11 +6,21 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-11-17
+
+### Added
+
+- The news sign-up, « Recevoir par e-mail » and saved journeys are switched on.
+
 ### Changed
 
 - Là-bas's e-mails (confirmation, results, sign-in link) leave from its Microsoft 365 mailbox
   through Microsoft Graph instead of Mailjet. The news list is kept in the site's own database,
   and an address is erased three years after its last confirmation.
+
+### Fixed
+
+- A deploy no longer stops when the database image, pinned by digest, is not yet on the server.
 
 ## [0.16.0] - 2026-11-16
 
@@ -336,6 +346,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.15.0...HEAD
+[0.17.0]: https://github.com/big-emotion/labas/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/big-emotion/labas/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/big-emotion/labas/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/big-emotion/labas/compare/v0.13.3...v0.14.0
