@@ -21,6 +21,8 @@ export function newsList(
     },
     async removeFromList(email) {
       await db.query("delete from news_subscribers where email = $1", [email]);
+      // Leaving by the e-mail's link also turns the news off in « Mon espace », if there is one.
+      await db.query("update accounts set news = false where email = $1", [email]);
     },
   };
 }

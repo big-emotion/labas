@@ -36,7 +36,7 @@ const confirmButton = (link: string, outlined = false) =>
     outlined ? "border:2px solid #ffb627;color:#ffb627" : "background:#ffb627;color:#1d1b3a"
   };font-weight:800;text-decoration:none">Je confirme mon inscription</a></p>`;
 
-export function confirmationEmail(to: string, link: string): Mail {
+export function confirmationEmail(to: string, link: string, leaveLink: string): Mail {
   return {
     to,
     subject: "Confirmez votre inscription aux nouveautés de Là-bas",
@@ -49,12 +49,16 @@ ${link}
 
 Vous n'avez rien demandé ? Ignorez ce message : vous ne recevrez rien d'autre.
 
+Pour vous désinscrire plus tard, à tout moment :
+${leaveLink}
+
 ${SITE_FOOTER}`,
     html: page(
       `<p>Bonjour,</p>
 <p>Vous avez demandé à recevoir les nouveautés de Là-bas : nouvelles villes, questionnaire amélioré, un e-mail par mois au plus. Pour confirmer, touchez le bouton.</p>
 ${confirmButton(link)}
-<p style="color:#b4b8ea;font-size:15px">Vous n'avez rien demandé ? Ignorez ce message : vous ne recevrez rien d'autre.</p>`,
+<p style="color:#b4b8ea;font-size:15px">Vous n'avez rien demandé ? Ignorez ce message : vous ne recevrez rien d'autre.</p>
+<p style="color:#b4b8ea;font-size:13px">Pour vous désinscrire plus tard, à tout moment : <a href="${escape(leaveLink)}" style="color:#b4b8ea">se désinscrire</a>.</p>`,
       SITE_FOOTER,
     ),
   };

@@ -77,6 +77,29 @@ export function readToken(token: string, secret: string, now: number): string | 
   return age >= 0 && age <= LINK_LIFETIME && isEmail(email) ? email : null;
 }
 
+/**
+ * The way out of the news: signed for one address, never expiring (the privacy page promises a
+ * way out in every e-mail, whenever it is read), and signed apart so it confirms nothing.
+ */
+export function signLeave(email: string, secret: string): string {
+  const payload = Buffer.from(email).toString("base64url");
+  return `${payload}.${createHmac("sha256", secret).update(`leave|${payload}`).digest("base64url")}`;
+}
+
+function readLeave(token: string, secret: string): string | null {
+  const [payload, signature] = token.split(".");
+  if (!payload || !signature) return null;
+  const expected = createHmac("sha256", secret).update(`leave|${payload}`).digest();
+  const given = Buffer.from(signature, "base64url");
+  if (given.length !== expected.length || !timingSafeEqual(given, expected)) return null;
+  const email = Buffer.from(payload, "base64url").toString();
+  return isEmail(email) ? email : null;
+}
+
+/** A page with a button, not an action: mail scanners open links, and must not unsubscribe anyone. */
+export const leaveLink = (siteUrl: string, email: string, secret: string) =>
+  `${siteUrl}/nouveautes/desinscription/#t=${signLeave(email, secret)}`;
+
 function isEmail(value: string): boolean {
   return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -167,7 +190,12 @@ export function createHandler(
       return guard(
         request,
         (form) => form.consent === true,
-        (email) => confirmationEmail(email, confirmLinkFor(email)),
+        (email) =>
+          confirmationEmail(
+            email,
+            confirmLinkFor(email),
+            leaveLink(config.siteUrl, email, config.secret),
+          ),
       );
     }
 
@@ -184,6 +212,23 @@ export function createHandler(
             form.news === true ? confirmLinkFor(email) : undefined,
           ),
       );
+    }
+
+    if (request.method === "POST" && request.path === "/api/nouveautes/desinscrire") {
+      if (!configured) return json(503, { error: "closed" });
+      if (request.headers.origin !== config.siteUrl) return json(403, { error: "origin" });
+      const connection = request.headers["x-real-ip"] ?? "unknown";
+      if (!perConnection(connection, now())) return json(429, { error: "slow-down" });
+      const form = (request.body ?? {}) as Record<string, unknown>;
+      const email = readLeave(String(form.t ?? ""), config.secret);
+      if (!email) return json(400, { error: "link" });
+      try {
+        await mailer.removeFromList(email);
+      } catch (error) {
+        console.error(String(error));
+        return json(502, { error: "list" });
+      }
+      return json(200, { ok: true });
     }
 
     if (request.method === "GET" && request.path === "/api/nouveautes/confirmer") {

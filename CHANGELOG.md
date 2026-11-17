@@ -6,6 +6,17 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+### Added
+
+- Every news e-mail, starting with the confirmation, carries a link to unsubscribe. It opens a
+  page with a button, so a mail scanner opening links cannot unsubscribe anyone; the address is
+  erased at once, and the news are turned off in « Mon espace » too.
+
+### Changed
+
+- The privacy page says where the news list lives, how long the confirmation link lasts and how
+  unsubscribing works.
+
 ## [0.17.0] - 2026-11-17
 
 ### Added

@@ -29,6 +29,9 @@ Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested 
 | Session (`labas_session`, HttpOnly, Secure, SameSite=Lax) | 30 days                                   |
 | Unconfirmed account or journey                            | 7 days, then erased                       |
 | A space                                                   | 3 years after the last visit, then erased |
+| News confirmation link                                    | 7 days                                    |
+| News address (`news_subscribers`)                         | 3 years after its last confirmation       |
+| News unsubscribe link (`/nouveautes/desinscription/#t=`)  | Never expires; the button erases at once  |
 
 `purge()` applies these at start-up and then once a day.
 
