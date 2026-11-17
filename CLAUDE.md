@@ -38,11 +38,13 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
-  no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » posts
-  the result link (temperament and cities, as when shared) to `/api/resultats`; the service draws
-  the e-mail from that link with the site's own code, so no typed text reaches an inbox.
-  Saved journeys (`src/server/accounts.ts`, Postgres, `docs/accounts.md`) store answers —
-  sensitive ones included — only with the explicit consent box; magic-link login, no password;
+  no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a
+  space in the same gesture (operator, 2026-11-17): it posts the result link and the journey to
+  `/api/compte/resultats`; the e-mail, drawn from the link with the site's own code, carries the
+  top three and a 7-day login link to the full result, so no typed text reaches an inbox. The
+  sensitive answers are kept only with their own box ticked, otherwise they never leave the browser.
+  Saved journeys (`src/server/accounts.ts`, Postgres, `docs/accounts.md`) store answers
+  at the reader's request, and sensitive ones only with the explicit box that names them; magic-link login, no password;
   erased 3 years after the last visit. Never send them to analytics, partners or an e-mail. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.

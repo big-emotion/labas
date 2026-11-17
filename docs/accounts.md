@@ -1,6 +1,6 @@
 # Saved journeys and « Mon espace »
 
-Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested against a real Postgres
+Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space since 2026-11-17. Code: `src/server/accounts.ts`, tested against a real Postgres
 (PGlite) in `accounts.test.ts`. Mockup: the « sauvegarder et reprendre » canvas (7 boards).
 
 ## Why it works this way
@@ -9,6 +9,14 @@ Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested 
   mails signed links for the news, so the reader learns one gesture. A Google or Microsoft login was
   set aside: each provider means an application to register and screens to review, for little gain at
   this stage.
+- **« Recevoir par e-mail » opens the space in the same gesture** (operator, 2026-11-17). Before,
+  the e-mail carried a `#r=` link with the top three only, and readers who came back from it found
+  neither the rest of the ranking nor why each city fits. Now the e-mail stays short (the top
+  three) and its button is a login link that lands on the full result, recomputed from the kept
+  answers. Asking for the e-mail is the request that justifies keeping the result; the sensitive
+  answers still need their own box, and without it they never leave the browser
+  (`resultsMailBody`), and the server strips them again (`withoutSensitive`). The road not taken:
+  a permanent link to the result alone, simpler but readable by anyone holding the e-mail.
 - **Sensitive answers are kept, with explicit consent.** Origin, faith, health and the same-sex-law
   filter are special-category data (GDPR art. 9). They are stored only after the reader ticks a
   separate, unticked box that names them. They are never sent to a partner, to analytics or into an
@@ -24,6 +32,7 @@ Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested 
 
 | What                                                      | How long                                  |
 | --------------------------------------------------------- | ----------------------------------------- |
+| Button of the results e-mail (« Voir mes résultats »)     | 7 days, single use                        |
 | Link mailed after « Reprendre plus tard »                 | 24 hours, single use                      |
 | Login link asked from Mon espace                          | 15 minutes, single use                    |
 | Session (`labas_session`, HttpOnly, Secure, SameSite=Lax) | 30 days                                   |
@@ -40,6 +49,7 @@ Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested 
 | Route                                     | Who            | Does                                                                           |
 | ----------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
 | `POST /api/compte/sauvegarder`            | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link               |
+| `POST /api/compte/resultats`              | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result |
 | `POST /api/compte/lien`                   | anyone         | Email → a 15-minute link if the address has a space; same answer otherwise     |
 | `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`) |
 | `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                            |
@@ -53,7 +63,15 @@ Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested 
 Every change must come from `https://labas.africa` (Origin check). The cookie alone authorises
 nothing cross-site. Answers go through `cleanAnswers` (`src/lib/keep.ts`), so only questions and
 choices the quiz offers reach the database. Results are not stored: the page computes them from the
-answers.
+answers, so a result kept without the sensitive answers may rank a little differently, and the full
+questionnaire asks those questions again.
+
+A results link (`&vers=resultats`) lands on `/espace/?ouvrir=<journey>`, which puts the answers back
+in the browser and opens `/approfondir/?parcours=<journey>#vos-villes`. A used or expired link sends
+a reader still signed in on that browser to `/espace/` instead of the expired page.
+
+`/api/resultats` (no database) still sends the old e-mail with the `#r=` link: the page falls back
+to it when `/api/compte` answers 503, so the e-mail never depends on the database.
 
 ## The pages
 
@@ -62,5 +80,8 @@ answers.
   - anyone else gives an e-mail address and ticks the consent box.
 - **`/espace/`**: the login form, then the journeys, « Mes données » (news, download, delete everything) and « Me déconnecter ». A deletion is confirmed in a dialog first.
 - **`/espace/lien-expire/`**: shown for a used or expired link.
+- **« Recevoir par e-mail »** (`components/KeepResults.astro`, under the top three): an e-mail
+  address, the unticked box for the sensitive answers, the news box.
+- **Mon espace** shows « Voir mes résultats » beside « Reprendre » once a journey ranks cities.
 - **Resuming**: « Reprendre » puts the journey's answers back in the browser and opens the full questionnaire. That questionnaire asks only what is missing, so a quick quiz left halfway continues there too. While the tab stays signed in, each answer is saved again (`syncJourney`).
 - **Visibility**: everything shows only when `PUBLIC_NEWSLETTER` is set, the same switch as the e-mails, since nothing works without them.

@@ -10,31 +10,41 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
   description="Vos réponses restent dans votre navigateur : Là-bas ne les reçoit jamais et ne compte les réponses que de façon anonyme, sans cookie."
 >
   <h1>Confidentialité</h1>
-  <p class="lead">Dernière mise à jour : {newsletter ? "16" : "15"} novembre 2026.</p>
+  <p class="lead">Dernière mise à jour : {newsletter ? "17" : "15"} novembre 2026.</p>
 
   {newsletter ? (
     <>
       <h2>Sans compte, vos réponses restent chez vous</h2>
       <p>
         Le classement des villes est calculé dans votre navigateur. Tant que vous n'enregistrez pas
-        votre parcours, vos réponses ne nous sont jamais envoyées. Votre navigateur les garde
-        (stockage local) pour que le questionnaire complet reprenne là où vous vous êtes arrêté ; le
-        bouton « Tout reprendre à zéro » les efface. Seul un compteur anonyme par réponse est
-        envoyé, comme expliqué plus bas.
+        votre parcours et ne recevez pas vos résultats par e-mail, vos réponses ne nous sont jamais
+        envoyées. Votre navigateur les garde (stockage local) pour que le questionnaire complet
+        reprenne là où vous vous êtes arrêté ; le bouton « Tout reprendre à zéro » les efface. Seul
+        un compteur anonyme par réponse est envoyé, comme expliqué plus bas.
       </p>
 
-      <h2>Si vous enregistrez votre parcours</h2>
+      <h2>Si vous enregistrez votre parcours ou recevez vos résultats par e-mail</h2>
       <p>
-        <b>Ce que nous gardons :</b> votre adresse e-mail, vos réponses (y compris votre origine,
-        votre religion et votre santé si vous les avez données), vos parcours et leurs dates.
+        Deux gestes ouvrent un espace : « Reprendre plus tard » pendant le quiz, et « Recevoir par
+        e-mail » sous vos résultats. Dans les deux cas, pas de mot de passe : un lien reçu par
+        e-mail vous connecte.
       </p>
       <p>
-        <b>Pourquoi :</b> pour que vous retrouviez votre parcours, sur n'importe quel appareil. Rien
-        d'autre.
+        <b>Ce que nous gardons :</b> votre adresse e-mail, vos réponses, vos parcours et leurs
+        dates. Votre origine, le pays de votre famille, vos attaches, votre religion et vos filtres
+        sur la santé et les lois contre l'homosexualité ne sont gardés que si vous cochez la case
+        qui les nomme. Sans elle, avec « Recevoir par e-mail », ces réponses restent sur votre
+        appareil.
       </p>
       <p>
-        <b>Sur quelle base :</b> votre consentement explicite, donné en cochant la case prévue. Vous
-        pouvez le retirer à tout moment en supprimant votre espace.
+        <b>Pourquoi :</b> pour que vous retrouviez votre parcours et votre résultat complet, sur
+        n'importe quel appareil. Rien d'autre.
+      </p>
+      <p>
+        <b>Sur quelle base :</b> pour « Recevoir par e-mail », votre demande : garder le résultat
+        est ce qui permet de vous le montrer en entier. Pour « Reprendre plus tard » et pour les
+        réponses sensibles, votre consentement explicite, donné en cochant la case prévue. Vous
+        pouvez le retirer à tout moment en supprimant un parcours ou tout votre espace.
       </p>
       <p>
         <b>Qui y a accès :</b> seulement l'équipe de Là-bas (Big Emotion). Vos réponses ne sont
@@ -46,7 +56,10 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       </p>
       <p>
         <b>Combien de temps :</b> trois ans après votre dernière visite, puis tout est effacé. Un
-        parcours enregistré mais jamais confirmé par le lien reçu est effacé au bout de 7 jours.
+        parcours enregistré mais jamais confirmé par le lien reçu est effacé au bout de 7 jours,
+        avec l'adresse si son espace n'a jamais été ouvert. Les liens de connexion expirent : 15
+        minutes depuis Mon espace, 24 heures après « Reprendre plus tard », 7 jours dans l'e-mail de
+        résultats. La session dure 30 jours. L'effacement est automatique, chaque jour.
       </p>
       <p>
         <b>Vos droits :</b> dans <a href="/espace/">Mon espace</a>, vous pouvez voir, reprendre,
@@ -80,18 +93,18 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         vos villes, placés après le « # », une partie que les navigateurs n'envoient pas au serveur.
       </p>
       <p>
-        « Recevoir par e-mail » : vous nous donnez une adresse, et nous y envoyons, une seule fois,
-        vos trois villes, leurs pourcentages et le lien vers votre résultat. Ce lien contient votre
-        profil de tempérament (vos cinq réponses sur le samedi soir, la découverte, l'organisation,
-        l'entraide et les imprévus) : il passe donc par notre serveur et par la messagerie Microsoft
-        365 de Big Emotion, qui envoie l'e-mail. Vos autres réponses ne sont jamais envoyées : ni
-        votre origine, ni le pays de votre famille, ni votre religion, ni vos filtres.
+        « Recevoir par e-mail » : vous nous donnez une adresse, nous y envoyons vos trois villes et
+        leurs pourcentages, et nous gardons votre résultat dans votre espace, comme expliqué plus
+        haut. Le bouton de l'e-mail l'ouvre, avec le classement complet. L'e-mail lui-même ne
+        contient que votre profil de tempérament et vos villes, jamais vos réponses : il passe par
+        la messagerie Microsoft 365 de Big Emotion, qui l'envoie sans en garder de copie dans ses
+        messages envoyés.
       </p>
       <p>
-        Si vous ne cochez pas la case des nouveautés, nous ne gardons pas votre adresse après
-        l'envoi. Si vous la cochez, elle suit les règles de la section « Les nouveautés par e-mail
-        ». Pour éviter les abus, le serveur compte les envois par adresse pendant une journée, sans
-        les écrire nulle part.
+        La case des nouveautés est à part : sans elle, vous ne recevez rien d'autre que vos
+        résultats. Si vous la cochez, le bouton de l'e-mail confirme aussi votre inscription, qui
+        suit les règles de la section « Les nouveautés par e-mail ». Pour éviter les abus, le
+        serveur compte les envois par adresse pendant une journée, sans les écrire nulle part.
       </p>
     </>
   ) : (
@@ -115,8 +128,8 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         questionnaire amélioré), un e-mail par mois au plus.
       </p>
       <p>
-        Votre adresse n'est jamais reliée à vos réponses au questionnaire. Nous ne la vendons pas,
-        nous ne la prêtons pas, et nous ne la donnons à aucun partenaire.
+        La liste des nouveautés est séparée de vos réponses : elle ne contient que des adresses.
+        Nous ne la vendons pas, nous ne la prêtons pas, et nous ne la donnons à aucun partenaire.
       </p>
       <p>
         Votre adresse est gardée dans une liste à part, sur notre serveur hébergé en Allemagne

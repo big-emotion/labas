@@ -102,7 +102,7 @@ gh variable set NEWSLETTER --repo big-emotion/labas --body on
 ```
 
 4. Deploy. CI writes the settings to `.env.subscribe` (mode 600) beside the compose file and
-   starts `labas-subscribe`; Traefik routes `labas.africa/api/nouveautes*` and `/api/resultats` to it.
+   starts `labas-subscribe`; Traefik routes `labas.africa/api/nouveautes*`, `/api/resultats` and `/api/compte*` to it.
    `NEWSLETTER=on` builds the sign-up blocks, the « Recevoir par e-mail » form sent by Là-bas, and the privacy sections. Unset it and redeploy to
    take them off. Changing `SUBSCRIBE_SECRET` voids the confirmation links already sent.
 5. The privacy page promises an unsubscribe link in every news e-mail: whatever sends the first
