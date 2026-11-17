@@ -1,4 +1,4 @@
-import { cleanAnswers } from "./keep";
+import { cleanAnswers, withoutSensitive } from "./keep";
 import { ANSWERS_TO_LIGHT } from "./map";
 import { type Answers, bestMatches } from "./ranking";
 
@@ -33,6 +33,28 @@ export function saveBody(
   };
 }
 
+/**
+ * « Recevoir par e-mail » (operator, 2026-11-17): the result link for the e-mail, and the journey
+ * for Mon espace. The sensitive answers stay in the browser unless their own box is ticked.
+ */
+export function resultsMailBody(
+  form: { email: string; sensitive: boolean; news: boolean; website: string },
+  kind: JourneyKind,
+  answers: Answers,
+  link: string,
+) {
+  const email = form.email.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
+  return {
+    email,
+    link,
+    sensitive: form.sensitive,
+    news: form.news,
+    website: form.website,
+    journey: { kind, answers: form.sensitive ? answers : withoutSensitive(answers) },
+  };
+}
+
 /** What a journey card shows: its kind, how far it went and, once enough is answered, its cities. */
 export function journeySummary(journey: Journey) {
   const answers = cleanAnswers(journey.answers);
@@ -56,6 +78,11 @@ export function journeySummary(journey: Journey) {
  */
 export function resumeHref(id: string): string {
   return `/approfondir/?parcours=${id}`;
+}
+
+/** The same page, scrolled to the ranking: where the results e-mail's button lands. */
+export function resultsHref(id: string): string {
+  return `${resumeHref(id)}#vos-villes`;
 }
 
 export function dateLabel(iso: string): string {

@@ -97,6 +97,18 @@ export function sharedResult(payload: SharedPayload): SharedResult | null {
   };
 }
 
+/** The result behind a link of this site, or null for anything else (another site, a forged hash). */
+export function resultAt(link: unknown, siteUrl: string): SharedResult | null {
+  try {
+    const url = new URL(String(link));
+    if (url.origin !== siteUrl || url.pathname !== "/resultat/") return null;
+    const payload = readShared(url.hash);
+    return payload && sharedResult(payload);
+  } catch {
+    return null;
+  }
+}
+
 /** The message that goes with the link: the profile, each city and its why, then the link. */
 export function shareText(answers: Answers, matches: Match[]): string {
   const link = resultLink(answers, matches);

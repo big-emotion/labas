@@ -1,3 +1,4 @@
+import { SENSITIVE_ANSWERS } from "./keep";
 import { QUESTIONS } from "./questions";
 
 /**
@@ -14,18 +15,9 @@ export function plausibleScriptSrc(config: { domain?: string; host?: string }): 
   return `${host}/js/script.js`;
 }
 
-// Only the quick-quiz questions are measured. Origin, family country, feeling at home and faith
-// are sensitive data (GDPR art. 9) and never leave the browser, nor do the fuller
-// questionnaire's filters about health and about laws against homosexuality.
+// Only the quick-quiz questions are measured, and never the sensitive answers (keep.ts).
 const MEASURED = new Set<string>(QUESTIONS.map((question) => question.id));
-const NEVER_SENT = new Set([
-  "origin",
-  "countries",
-  "kin",
-  "faith",
-  "excludeCriminalising",
-  "specialistCare",
-]);
+const NEVER_SENT = new Set<string>(SENSITIVE_ANSWERS);
 
 export interface AnswerEvent {
   name: "Réponse";

@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { type Answers, bestMatches } from "./ranking";
 import { QUESTIONS } from "./questions";
-import { dateLabel, journeySummary, resumeHref, saveBody } from "./account";
+import {
+  dateLabel,
+  journeySummary,
+  resultsHref,
+  resultsMailBody,
+  resumeHref,
+  saveBody,
+} from "./account";
 import { outcomeOf } from "./newsletter";
 
 const first = (id: string) => QUESTIONS.find((q) => q.id === id)!.choices[0].value;
@@ -76,7 +83,35 @@ describe("a journey in Mon espace", () => {
     expect(resumeHref("8d3c")).toBe("/approfondir/?parcours=8d3c");
   });
 
+  it("opens a journey on its result, the full ranking with the reasons for each city", () => {
+    expect(resultsHref("8d3c")).toBe("/approfondir/?parcours=8d3c#vos-villes");
+  });
+
   it("writes dates the French way", () => {
     expect(dateLabel("2029-11-16T12:00:00.000Z")).toBe("16 novembre 2029");
+  });
+});
+
+describe("« Recevoir par e-mail », which keeps the result in Mon espace", () => {
+  const link = "https://labas.africa/resultat/#r=abc";
+  const answers = { order: 1, origin: [first("origin")], faith: "none" } as Answers;
+  const form = { email: " awa@exemple.fr ", sensitive: false, news: true, website: "" };
+
+  it("leaves origin and faith in the browser unless their own box is ticked", () => {
+    expect(resultsMailBody(form, "quick", answers, link)).toEqual({
+      email: "awa@exemple.fr",
+      link,
+      sensitive: false,
+      news: true,
+      website: "",
+      journey: { kind: "quick", answers: { order: 1 } },
+    });
+    expect(
+      resultsMailBody({ ...form, sensitive: true }, "deep", answers, link)?.journey.answers,
+    ).toEqual(answers);
+  });
+
+  it("needs a real address only: the request is the reason to keep the result", () => {
+    expect(resultsMailBody({ ...form, email: "awa" }, "quick", answers, link)).toBeNull();
   });
 });

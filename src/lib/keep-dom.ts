@@ -1,4 +1,5 @@
 import type { AnswerEvent, SiteEvent } from "./analytics";
+import { type JourneyKind, resultsMailBody } from "./account";
 import { mailtoFor } from "./keep";
 import { outcomeOf, resultsBody } from "./newsletter";
 import type { Answers, Match } from "./ranking";
@@ -30,11 +31,14 @@ export function browserStore(): Storage | undefined {
  * result the reader sees right now: the message with the profile and the link, the picture,
  * print, and the reader's own mail.
  */
-export function wireKeep(current: () => { answers: Answers; matches: Match[] }): void {
+export function wireKeep(
+  current: () => { answers: Answers; matches: Match[] },
+  kind: JourneyKind,
+): void {
   for (const block of document.querySelectorAll<HTMLElement>("[data-keep]")) {
     const note = block.querySelector<HTMLElement>("[data-keep-note]")!;
     const mailForm = block.querySelector<HTMLFormElement>("[data-keep-mail]");
-    if (mailForm) wireMail(block, mailForm, current);
+    if (mailForm) wireMail(block, mailForm, current, kind);
     block.addEventListener("click", async (event) => {
       const target = (event.target as HTMLElement).closest<HTMLElement>("[data-keep-way]");
       const way = target?.dataset.keepWay;
@@ -92,14 +96,30 @@ async function savePicture(answers: Answers, matches: Match[], note: HTMLElement
   note.textContent = "Image enregistrée dans vos téléchargements.";
 }
 
+async function post(path: string, body: unknown): Promise<number> {
+  try {
+    const response = await fetch(path, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    return response.status;
+  } catch {
+    return 0;
+  }
+}
+
 /**
  * « Recevoir par e-mail » sent by Là-bas (components/KeepResults.astro, with the mail service on):
- * the page posts the result link it already builds, the service draws the e-mail from it.
+ * the service draws the e-mail from the result link the page builds, and keeps the journey so the
+ * e-mail's button opens the full result in Mon espace (operator, 2026-11-17). While the database
+ * is away (503), the e-mail still leaves, with the shared result link only.
  */
 function wireMail(
   block: HTMLElement,
   form: HTMLFormElement,
   current: () => { answers: Answers; matches: Match[] },
+  kind: JourneyKind,
 ) {
   const error = form.querySelector<HTMLElement>("[data-keep-error]")!;
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
@@ -113,27 +133,19 @@ function wireMail(
     event.preventDefault();
     const data = new FormData(form);
     const { answers, matches } = current();
-    const body = resultsBody(
-      {
-        email: String(data.get("email") ?? ""),
-        news: data.get("news") === "on",
-        website: String(data.get("website") ?? ""),
-      },
-      resultLink(answers, matches),
-    );
+    const fields = {
+      email: String(data.get("email") ?? ""),
+      sensitive: data.get("sensitive") === "on",
+      news: data.get("news") === "on",
+      website: String(data.get("website") ?? ""),
+    };
+    const link = resultLink(answers, matches);
+    const body = resultsMailBody(fields, kind, answers, link);
     if (!body) return show(400);
     submit.disabled = true;
-    let status: number;
-    try {
-      const response = await fetch("/api/resultats", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      status = response.status;
-    } catch {
-      status = 0;
-    }
+    let status = await post("/api/compte/resultats", body);
+    const withSpace = status !== 503;
+    if (!withSpace) status = await post("/api/resultats", resultsBody(fields, link));
     submit.disabled = false;
     if (!outcomeOf(status).sent) return show(status);
     const sent = document.createElement("div");
@@ -147,9 +159,19 @@ function wireMail(
     title.append(address, ".");
     const hint = document.createElement("p");
     hint.className = "keep-hint";
-    hint.textContent = body.news
-      ? "Touchez aussi le lien de confirmation des nouveautés, dans ce même e-mail. Rien reçu d'ici quelques minutes ? Regardez dans les indésirables."
-      : "Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.";
+    hint.textContent = [
+      withSpace
+        ? "Le bouton « Voir mes résultats » de l'e-mail ouvre votre espace, avec votre classement complet."
+        : "",
+      body.news
+        ? withSpace
+          ? "Ce même bouton confirme aussi les nouveautés."
+          : "Touchez aussi le lien de confirmation des nouveautés, dans ce même e-mail."
+        : "",
+      "Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.",
+    ]
+      .filter(Boolean)
+      .join(" ");
     sent.append(title, hint);
     form.replaceWith(sent);
     block.querySelector('[data-keep-way="envoi"]')?.remove();
