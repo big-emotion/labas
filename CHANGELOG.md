@@ -6,6 +6,28 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-11-17
+
+### Added
+
+- « Recevoir par e-mail » now opens your space in the same gesture: the e-mail shows your top
+  three, and its « Voir mes résultats » button (7 days, single use) opens the full ranking with
+  why each city fits. Origin, faith and health are kept only if you tick their own box; otherwise
+  they stay on your device.
+- Mon espace shows « Voir mes résultats » beside « Reprendre ».
+
+### Changed
+
+- « Envie d'aller plus loin ? » sits right under your top three.
+- An e-mail link that was already used brings a reader still signed in back to Mon espace instead
+  of the expired-link page.
+- The privacy page explains what is kept when you receive your results by e-mail, and for how long.
+
+### Fixed
+
+- Saving a long full questionnaire with « Reprendre plus tard » could be refused: the service now
+  accepts up to 8 KB instead of 2 KB.
+
 ## [0.19.0] - 2026-11-17
 
 ### Added
@@ -383,6 +405,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.19.0...HEAD
+[0.20.0]: https://github.com/big-emotion/labas/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/big-emotion/labas/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/big-emotion/labas/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/big-emotion/labas/compare/v0.16.0...v0.17.0
