@@ -274,6 +274,44 @@ describe("each answer orients the list", () => {
   });
 });
 
+// Operator, 2026-11-17: « Une grande ville » was read as a lively one, and a small town could
+// pass for a big city. Size and pace are now two questions.
+describe("the size of the city and its pace", () => {
+  it("matches the city's real size", () => {
+    for (const size of [1, 2, 3] as const)
+      for (const m of bestMatches({ size }, 10)) expect(m.city.size, m.city.name).toBe(size);
+  });
+
+  it("matches the pace apart from the size", () => {
+    const lively = bestMatches({ pace: 1 }, 10).map((m) => m.city.name);
+    const calm = bestMatches({ pace: 0 }, 10).map((m) => m.city.name);
+    expect(lively.filter((n) => calm.includes(n))).toEqual([]);
+  });
+});
+
+// The family's region weighs like a non-negotiable at most, so the temperament can still decide.
+describe("an origin that weighs without deciding alone", () => {
+  it("leaves room for the temperament: the field test of 2026-11-17 keeps Kigali in the top three", () => {
+    const fieldTest: Answers = {
+      project: "pied",
+      profession: "consulting",
+      family: "celib",
+      languages: ["fr", "en"],
+      size: 3,
+      landscapes: ["nature", "urban"],
+      saturday: 1,
+      adventure: "familiar",
+      order: 1,
+      together: 0,
+      friction: 0,
+      origin: ["ouest"],
+      kin: "much",
+      priorities: ["safety"],
+    };
+    expect(bestMatches(fieldTest, 3).map((m) => m.city.name)).toContain("Kigali");
+  });
+});
+
 describe("the quick top used to choose the next question", () => {
   it("names the same cities as the full ranking", () => {
     const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };

@@ -17,11 +17,10 @@ export interface Question {
   /** The chapter name shown above the question. */
   group: string;
   /**
-   * The quick quiz's chapters come in this order and never interleave (operator,
-   * 2026-11-16): 1 the project, 2 the trip or the life there, 3 the temperament, 4 the reader's
-   * history with Africa, 5 the non-negotiables.
+   * A follow-up: asked right after this question once it is answered, so a theme is not left
+   * and taken up again three screens later (operator, 2026-11-17).
    */
-  chapter?: 1 | 2 | 3 | 4 | 5;
+  after?: keyof Answers;
   title: string;
   /** One line saying what the question is for. */
   hint?: string;
@@ -68,14 +67,13 @@ const withChildren = (answers: Answers) =>
   answers.family === "parents" || answers.family === "fonder";
 const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
 
-// The quick quiz, as paths (operator, 2026-11-16): the project picks which questions
-// apply, and they come chapter by chapter. Worded in « vous ». The temperament chapter is a quick
-// reading inspired by the Big Five, one question per trait.
+// The quick quiz's pool (operator, 2026-11-17): the project picks which questions apply, and
+// adaptive.ts picks the order from the answers. Worded in « vous ». The temperament questions are
+// a quick reading inspired by the Big Five, one question per trait.
 export const QUESTIONS: Question[] = [
   {
     id: "project",
     group: PROJECT,
-    chapter: 1,
     title: "Là-bas, vous vous y voyez comment ?",
     hint: "Selon votre projet, on regarde surtout la sécurité, les démarches, les vols ou le coût pour s'installer.",
     choices: [
@@ -89,7 +87,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "wants",
     group: TRIP,
-    chapter: 2,
     when: holiday,
     title: "Ce que vous voulez vivre là-bas ?",
     hint: "Jusqu'à trois choix : on cherche les villes où vous pourrez le faire.",
@@ -108,7 +105,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "season",
     group: TRIP,
-    chapter: 2,
     when: holiday,
     title: "Quand partez-vous ?",
     hint: "Pour éviter la saison des pluies et viser la belle saison.",
@@ -120,7 +116,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "profession",
     group: PROJECT,
-    chapter: 2,
     when: worksThere,
     title: "Votre métier ?",
     hint: "Pour privilégier les villes où votre métier recrute.",
@@ -142,7 +137,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "family",
     group: PROJECT,
-    chapter: 2,
     when: livesThere,
     title: "Vous partez avec qui ?",
     hint: "Avec des enfants, les écoles, les soins et la sécurité pèsent davantage.",
@@ -156,7 +150,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "languages",
     group: PROJECT,
-    chapter: 2,
     title: "Dans quelles langues êtes-vous à l'aise au quotidien ?",
     hint: "Pour vous proposer des villes où l'on vit dans l'une de ces langues.",
     max: 6,
@@ -173,19 +166,31 @@ export const QUESTIONS: Question[] = [
   {
     id: "size",
     group: PROJECT,
-    chapter: 2,
+    // Size and pace go together, whichever comes first.
+    after: "pace",
     title: "Quelle taille de ville ?",
-    hint: "Pour savoir si vous préférez l'animation d'une grande ville ou le calme d'une petite.",
+    hint: "La taille seulement : le rythme se demande à part.",
     choices: [
-      { label: "Une grande ville qui vibre jour et nuit", value: 3 },
-      { label: "Une ville à taille humaine", value: 2 },
-      { label: "Une petite ville qui prend son temps", value: 1 },
+      { label: "Une grande ville", value: 3 },
+      { label: "Une ville moyenne", value: 2 },
+      { label: "Une petite ville", value: 1 },
+    ],
+  },
+  {
+    id: "pace",
+    group: PROJECT,
+    after: "size",
+    title: "Quel rythme de ville ?",
+    hint: "Une grande ville peut être calme, une petite peut bouger tard.",
+    choices: [
+      { label: "Ça bouge jour et nuit", value: 1 },
+      { label: "Animé, sans excès", value: 0.5 },
+      { label: "Calme et posé", value: 0 },
     ],
   },
   {
     id: "landscapes",
     group: PROJECT,
-    chapter: 2,
     // On holiday, « Ce que vous voulez vivre » asks it better.
     when: (answers) => livesThere(answers) && !holiday(answers),
     title: "Quel paysage autour de vous ?",
@@ -203,7 +208,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "saturday",
     group: TEMPERAMENT,
-    chapter: 3,
     when: livesThere,
     title: "Votre samedi soir idéal ?",
     hint: "Pour savoir si vous cherchez une ville animée ou plutôt calme.",
@@ -216,7 +220,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "adventure",
     group: TEMPERAMENT,
-    chapter: 3,
     when: livesThere,
     title: "Découvrir une région d'Afrique que vous ne connaissez pas, ça vous tente ?",
     hint: "Si oui, on vous propose aussi des villes loin de la région de votre famille.",
@@ -229,7 +232,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "order",
     group: TEMPERAMENT,
-    chapter: 3,
     when: livesThere,
     title: "Au quotidien, avez-vous besoin que tout soit organisé ?",
     hint: "Pour savoir si vous préférez une ville où les démarches sont simples et prévisibles.",
@@ -246,7 +248,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "together",
     group: TEMPERAMENT,
-    chapter: 3,
     when: livesThere,
     title: "Pour avancer, vous comptez plutôt sur vous ou sur les autres ?",
     hint: "Pour savoir si vous cherchez une ville d'affaires et de compétition, ou une ville solidaire.",
@@ -259,7 +260,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "friction",
     group: TEMPERAMENT,
-    chapter: 3,
     when: livesThere,
     title: "Coupures de courant, démarches lentes, imprévus : comment le vivez-vous ?",
     hint: "Si cela vous pèse, on écarte les villes où ces problèmes sont fréquents.",
@@ -272,7 +272,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "origin",
     group: HISTORY,
-    chapter: 4,
     title: "D'où vient votre famille ?",
     hint: "Facultatif. Pour vous proposer des villes proches de vos repères.",
     max: 3,
@@ -289,7 +288,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "kin",
     group: HISTORY,
-    chapter: 4,
+    after: "origin",
     // Only with a region to be near: « Je préfère ne pas dire » skips it (operator, 2026-11-16).
     when: (answers) => namedOrigins(answers).length > 0,
     title: "Vivre près de vos origines, de votre culture, de votre religion, ça compte pour vous ?",
@@ -303,7 +302,6 @@ export const QUESTIONS: Question[] = [
   {
     id: "priorities",
     group: LAST,
-    chapter: 5,
     title: "Sur quoi ne voulez-vous pas transiger ?",
     hint: "Jusqu'à trois choix. Ce sont vos non-négociables : ils comptent le plus dans votre classement.",
     max: 3,
@@ -327,7 +325,6 @@ export const LATER: Question[] = [
   {
     id: "duration",
     group: TRIP,
-    chapter: 2,
     when: holiday,
     title: "Combien de temps ?",
     hint: "Pour un séjour court, on privilégie les villes desservies par des vols directs.",
@@ -341,7 +338,6 @@ export const LATER: Question[] = [
   {
     id: "tripsHome",
     group: PROJECT,
-    chapter: 2,
     // Living there, not on holiday: how often the reader flies back.
     when: (answers) => livesThere(answers) && !holiday(answers),
     title: "Combien d'allers-retours vers l'Europe par an ?",
@@ -355,7 +351,6 @@ export const LATER: Question[] = [
   {
     id: "budget",
     group: PROJECT,
-    chapter: 2,
     when: livesThere,
     title: "Votre budget sur place ?",
     hint: "Pour privilégier les villes où le logement et la vie courante tiennent dans votre budget.",
@@ -368,7 +363,6 @@ export const LATER: Question[] = [
   {
     id: "passports",
     group: PROJECT,
-    chapter: 2,
     title: "Quel passeport avez-vous ?",
     hint: "Pour privilégier les pays où vous entrez sans visa ou circulez librement.",
     max: 2,
@@ -383,7 +377,7 @@ export const LATER: Question[] = [
   {
     id: "countries",
     group: HISTORY,
-    chapter: 4,
+    after: "origin",
     title: "De quel pays vient votre famille ?",
     hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
     max: 3,
@@ -393,7 +387,7 @@ export const LATER: Question[] = [
   {
     id: "faith",
     group: HISTORY,
-    chapter: 4,
+    after: "kin",
     title: "Votre religion ?",
     hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
     when: kinMatters,
@@ -456,6 +450,7 @@ export function keepInPath(answers: Answers): Answers {
 
 /** The chapter name shown above a question: the second chapter is the trip on holiday. */
 export function chapterName(question: Question, answers: Answers): string {
-  if (question.chapter === 2) return holiday(answers) ? TRIP : PROJECT;
+  if (question.group === PROJECT && question.id !== "project")
+    return holiday(answers) ? TRIP : PROJECT;
   return question.group;
 }
