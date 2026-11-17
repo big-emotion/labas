@@ -2,11 +2,12 @@
  * The one piece of server code in Là-bas: it sends the e-mails a reader asks for — the news
  * sign-up and their results.
  *
- * Mailjet's API needs a secret key, which a static page cannot hold, so this small service holds
- * it (operator's choice, 2026-11-16, over a third-party form). It keeps no database: the
- * confirmation link carries the address, signed, and only a confirmed address reaches the
- * Mailjet list (double opt-in). A results e-mail is drawn from the site's own result link, read
- * with the site's own code, so no text a visitor types can reach someone's inbox.
+ * Mail leaves through Microsoft Graph as the Là-bas mailbox of the Microsoft 365 tenant
+ * (operator, 2026-11-17, replacing Mailjet), whose app secret a static page cannot hold, so this
+ * small service holds it. The confirmation link carries the address, signed, and only a
+ * confirmed address reaches the news list, kept in the site's own database (news.ts, double
+ * opt-in). A results e-mail is drawn from the site's own result link, read with the site's own
+ * code, so no text a visitor types can reach someone's inbox.
  *
  * Bundled with the site's data by `npm run build:server` (esbuild) into one file Node runs.
  */
@@ -17,14 +18,16 @@ import pg from "pg";
 import { readShared, sharedResult } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { type Mail, confirmationEmail, resultsEmail } from "./emails";
+import { newsList } from "./news";
 
 export type { Mail } from "./emails";
 
 export interface Config {
-  apiKey: string;
-  apiSecret: string;
-  listId: string;
-  /** A sender address validated in the Mailjet account. */
+  /** The Entra app that may send as `sender` only (an application access policy says so). */
+  tenantId: string;
+  clientId: string;
+  clientSecret: string;
+  /** The Là-bas mailbox in the Microsoft 365 tenant. */
   sender: string;
   /** Signs the confirmation links. */
   secret: string;
@@ -136,7 +139,7 @@ export function createHandler(
     try {
       await mailer.send(send(email, form));
     } catch (error) {
-      // The operator's log gets Mailjet's answer, never the reader's address.
+      // The operator's log gets the mail service's answer, never the reader's address.
       console.error(String(error));
       return json(502, { error: "mail" });
     }
@@ -201,65 +204,90 @@ export function createHandler(
   };
 }
 
-export function mailjet(config: Config, fetchImpl: typeof fetch = fetch): Mailer {
-  const authorization = `Basic ${Buffer.from(`${config.apiKey}:${config.apiSecret}`).toString("base64")}`;
-  const call = async (url: string, body: object) => {
-    const response = await fetchImpl(url, {
-      method: "POST",
-      headers: { authorization, "content-type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!response.ok) throw new Error(`Mailjet answered ${response.status} on ${url}`);
+/**
+ * Sends through Microsoft Graph with an app-only token (client credentials), minted once and
+ * reused until a minute before it expires. Graph requires the From address to be the mailbox in
+ * the URL.
+ */
+export function graph(config: Config, fetchImpl: typeof fetch = fetch): Pick<Mailer, "send"> {
+  let token: { value: string; expiresAt: number } | null = null;
+  const accessToken = async () => {
+    if (token && token.expiresAt - 60_000 > Date.now()) return token.value;
+    const response = await fetchImpl(
+      `https://login.microsoftonline.com/${config.tenantId}/oauth2/v2.0/token`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          client_id: config.clientId,
+          client_secret: config.clientSecret,
+          scope: "https://graph.microsoft.com/.default",
+          grant_type: "client_credentials",
+        }),
+      },
+    );
+    if (!response.ok) throw new Error(`Microsoft answered ${response.status} on the token`);
+    const body = (await response.json()) as { access_token: string; expires_in: number };
+    token = { value: body.access_token, expiresAt: Date.now() + body.expires_in * 1000 };
+    return token.value;
   };
   return {
-    send: (mail) =>
-      call("https://api.mailjet.com/v3.1/send", {
-        Messages: [
-          {
-            From: { Email: config.sender, Name: "Là-bas" },
-            ReplyTo: { Email: config.replyTo },
-            To: [{ Email: mail.to }],
-            Subject: mail.subject,
-            TextPart: mail.text,
-            HTMLPart: mail.html,
+    async send(mail) {
+      const url = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(config.sender)}/sendMail`;
+      const response = await fetchImpl(url, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${await accessToken()}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          message: {
+            subject: mail.subject,
+            body: { contentType: "HTML", content: mail.html },
+            from: { emailAddress: { address: config.sender, name: "Là-bas" } },
+            toRecipients: [{ emailAddress: { address: mail.to } }],
+            replyTo: [{ emailAddress: { address: config.replyTo } }],
           },
-        ],
-      }),
-    addToList: (email) =>
-      call(`https://api.mailjet.com/v3/REST/contactslist/${config.listId}/managecontact`, {
-        Email: email,
-        Action: "addforce",
-      }),
-    removeFromList: (email) =>
-      call(`https://api.mailjet.com/v3/REST/contactslist/${config.listId}/managecontact`, {
-        Email: email,
-        Action: "remove",
-      }),
+          // A copy of every reader's mail in the mailbox would be one more place keeping it.
+          saveToSentItems: false,
+        }),
+      });
+      if (!response.ok) throw new Error(`Microsoft answered ${response.status} on sendMail`);
+    },
   };
 }
 
 /** The HTTP shell around the handler: small bodies only, JSON in, JSON or a redirect out. */
 function start(port: number) {
   const config: Config = {
-    apiKey: process.env.MAILJET_API_KEY ?? "",
-    apiSecret: process.env.MAILJET_SECRET_KEY ?? "",
-    listId: process.env.MAILJET_LIST_ID ?? "",
-    sender: process.env.MAILJET_SENDER ?? "",
+    tenantId: process.env.GRAPH_TENANT_ID ?? "",
+    clientId: process.env.GRAPH_CLIENT_ID ?? "",
+    clientSecret: process.env.GRAPH_CLIENT_SECRET ?? "",
+    sender: process.env.MAIL_SENDER ?? "",
     secret: process.env.SUBSCRIBE_SECRET ?? "",
     siteUrl: process.env.SITE_URL ?? "https://labas.africa",
     replyTo: process.env.REPLY_TO ?? "hello@big-emotion.com",
   };
-  const mailer = mailjet(config);
+  const pool = process.env.DATABASE_URL
+    ? new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 5 })
+    : null;
+  const db: Db | null = pool && { query: (sql, params) => pool.query(sql, params) as never };
+  // The news list lives in the database: without one, a confirmation link says it failed.
+  const noList = async () => {
+    throw new Error("no database for the news list");
+  };
+  const mailer: Mailer = {
+    ...graph(config),
+    ...(db ? newsList(db) : { addToList: noList, removeFromList: noList }),
+  };
   let accounts: AccountsHandler | undefined;
   // One handler for the life of the process: its limits must remember every request.
   const handle = createHandler(config, mailer, Date.now, (request) =>
     accounts ? accounts(request) : Promise.resolve(json(503, { error: "closed" })),
   );
-  // Without a database, or while it cannot be reached, the e-mail routes keep working and
+  // Without a database, or while it cannot be reached, the results e-mail keeps working and
   // /api/compte answers 503: saved journeys are an extra, never a reason to go down.
-  if (process.env.DATABASE_URL && Object.values(config).every(Boolean)) {
-    const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
-    const db: Db = { query: (sql, params) => pool.query(sql, params) as never };
+  if (db && Object.values(config).every(Boolean)) {
     whenReady(() => migrate(db))
       .then(() => {
         accounts = createAccounts({ db, mailer, siteUrl: config.siteUrl });

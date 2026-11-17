@@ -41,7 +41,7 @@ Decided with the operator on 2026-11-16. Code: `src/server/accounts.ts`, tested 
 | `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`) |
 | `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                            |
 | `GET /api/compte/export`                  | session        | Everything kept, as a JSON download                                            |
-| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the Mailjet list)                            |
+| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the news list)                               |
 | `POST /api/compte/parcours`               | session        | A new journey                                                                  |
 | `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                             |
 | `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list      |

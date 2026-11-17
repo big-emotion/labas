@@ -8,15 +8,15 @@ import {
   type Mail,
   type Mailer,
   createHandler,
-  mailjet,
+  graph,
   readToken,
   signToken,
 } from "./subscribe";
 
 const CONFIG: Config = {
-  apiKey: "key",
-  apiSecret: "secret",
-  listId: "123",
+  tenantId: "tenant",
+  clientId: "client",
+  clientSecret: "client-secret",
   sender: "nouveautes@labas.africa",
   secret: "a-long-random-secret-for-tests",
   siteUrl: "https://labas.africa",
@@ -30,7 +30,7 @@ function recordingMailer(fail = false) {
   const listed: string[] = [];
   const mailer: Mailer = {
     async send(mail) {
-      if (fail) throw new Error("mailjet down");
+      if (fail) throw new Error("mail service down");
       const link =
         /https:\/\/labas\.africa\/api\/nouveautes\/confirmer\?t=[\w.-]+/.exec(mail.text)?.[0] ?? "";
       sent.push({ ...mail, email: mail.to, link });
@@ -140,7 +140,7 @@ describe("signing up for the news", () => {
 
   it("is closed until it is configured", async () => {
     const { mailer, sent } = recordingMailer();
-    const response = await createHandler({ ...CONFIG, apiKey: "" }, mailer)(post(SIGN_UP));
+    const response = await createHandler({ ...CONFIG, clientSecret: "" }, mailer)(post(SIGN_UP));
     expect(response.status).toBe(503);
     expect(sent).toEqual([]);
   });
@@ -184,44 +184,51 @@ describe("confirming the address", () => {
   });
 });
 
-describe("the Mailjet connection", () => {
-  it("sends the confirmation through the Send API and lists through managecontact", async () => {
+describe("the Microsoft Graph connection", () => {
+  const MAIL = {
+    to: "awa@exemple.fr",
+    subject: "Confirmez",
+    text: "Lien : https://labas.africa/api/nouveautes/confirmer?t=x",
+    html: "<a>Je confirme mon inscription</a>",
+  };
+
+  it("sends as the Là-bas mailbox with an app-only token, minted once for several mails", async () => {
     const calls: { url: string; init: RequestInit }[] = [];
     const fakeFetch = async (url: string | URL | Request, init?: RequestInit) => {
       calls.push({ url: String(url), init: init! });
-      return new Response("{}", { status: 200 });
+      return String(url).includes("/oauth2/")
+        ? Response.json({ access_token: "token-1", expires_in: 3600 })
+        : new Response(null, { status: 202 });
     };
-    const service = mailjet(CONFIG, fakeFetch as typeof fetch);
-    await service.send({
-      to: "awa@exemple.fr",
-      subject: "Confirmez",
-      text: "Lien : https://labas.africa/api/nouveautes/confirmer?t=x",
-      html: "<a>Je confirme mon inscription</a>",
-    });
-    await service.addToList("awa@exemple.fr");
+    const service = graph(CONFIG, fakeFetch as typeof fetch);
+    await service.send(MAIL);
+    await service.send(MAIL);
 
-    expect(calls[0].url).toBe("https://api.mailjet.com/v3.1/send");
-    const message = JSON.parse(String(calls[0].init.body)).Messages[0];
-    expect(message.From).toEqual({ Email: "nouveautes@labas.africa", Name: "Là-bas" });
-    expect(message.To).toEqual([{ Email: "awa@exemple.fr" }]);
-    expect(message.ReplyTo).toEqual({ Email: "hello@big-emotion.com" });
-    expect(message.TextPart).toContain("https://labas.africa/api/nouveautes/confirmer?t=x");
-    expect(message.HTMLPart).toContain("Je confirme mon inscription");
+    expect(calls.map((c) => c.url)).toEqual([
+      "https://login.microsoftonline.com/tenant/oauth2/v2.0/token",
+      "https://graph.microsoft.com/v1.0/users/nouveautes%40labas.africa/sendMail",
+      "https://graph.microsoft.com/v1.0/users/nouveautes%40labas.africa/sendMail",
+    ]);
+    const grant = new URLSearchParams(String(calls[0].init.body));
+    expect(grant.get("grant_type")).toBe("client_credentials");
+    expect(grant.get("client_id")).toBe("client");
+    expect(grant.get("scope")).toBe("https://graph.microsoft.com/.default");
+    expect(new Headers(calls[1].init.headers).get("authorization")).toBe("Bearer token-1");
 
-    expect(calls[1].url).toBe("https://api.mailjet.com/v3/REST/contactslist/123/managecontact");
-    expect(JSON.parse(String(calls[1].init.body))).toEqual({
-      Email: "awa@exemple.fr",
-      Action: "addforce",
+    const { message, saveToSentItems } = JSON.parse(String(calls[1].init.body));
+    expect(saveToSentItems).toBe(false);
+    expect(message.from).toEqual({
+      emailAddress: { address: "nouveautes@labas.africa", name: "Là-bas" },
     });
-    const auth = new Headers(calls[1].init.headers).get("authorization");
-    expect(auth).toBe(`Basic ${Buffer.from("key:secret").toString("base64")}`);
+    expect(message.toRecipients).toEqual([{ emailAddress: { address: "awa@exemple.fr" } }]);
+    expect(message.replyTo).toEqual([{ emailAddress: { address: "hello@big-emotion.com" } }]);
+    expect(message.subject).toBe("Confirmez");
+    expect(message.body).toEqual({ contentType: "HTML", content: MAIL.html });
   });
 
-  it("fails loudly when Mailjet refuses", async () => {
+  it("fails loudly when Microsoft refuses", async () => {
     const refusing = async () => new Response("bad", { status: 401 });
-    await expect(
-      mailjet(CONFIG, refusing as typeof fetch).addToList("awa@exemple.fr"),
-    ).rejects.toThrow(/401/);
+    await expect(graph(CONFIG, refusing as typeof fetch).send(MAIL)).rejects.toThrow(/401/);
   });
 });
 
@@ -307,7 +314,7 @@ describe("receiving one's results by e-mail", () => {
     expect(
       (
         await createHandler(
-          { ...CONFIG, apiKey: "" },
+          { ...CONFIG, clientSecret: "" },
           mailer,
         )(ask({ email: "awa@exemple.fr", link }))
       ).status,

@@ -70,6 +70,11 @@ export async function migrate(db: Db): Promise<void> {
       used_at timestamptz
     )`);
   await db.query(`
+    create table if not exists news_subscribers (
+      email text primary key,
+      confirmed_at timestamptz not null
+    )`);
+  await db.query(`
     create table if not exists sessions (
       token_hash text primary key,
       account_id uuid not null references accounts(id) on delete cascade,
@@ -107,6 +112,7 @@ export async function purge(db: Db, now: number): Promise<void> {
   ]);
   await db.query("delete from login_links where expires_at < $1", [at(now)]);
   await db.query("delete from sessions where expires_at < $1", [at(now)]);
+  await db.query("delete from news_subscribers where confirmed_at < $1", [at(now - KEEP_FOR)]);
 }
 
 const token = () => randomBytes(32).toString("base64url");

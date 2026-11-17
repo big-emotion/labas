@@ -115,7 +115,7 @@ npm run test:watch
 The site is static, except for one small Node service, `src/server/`. It handles:
 
 - the e-mails a reader asks for: the news sign-up with double opt-in, and their results
-  (`subscribe.ts`, `emails.ts`, Mailjet);
+  (`subscribe.ts`, `emails.ts`, Microsoft Graph; the news list in Postgres, `news.ts`);
 - saved journeys and « Mon espace », with Postgres and a login link sent by e-mail (`accounts.ts`,
   rationale in [`docs/accounts.md`](docs/accounts.md)).
 

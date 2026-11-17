@@ -38,8 +38,8 @@ jobs:
             -e POSTGRES_PASSWORD=ci -e POSTGRES_DB=labas postgres:17-alpine
           for i in $(seq 1 30); do docker exec labas-db pg_isready -U labas >/dev/null 2>&1 && break; sleep 1; done
           docker run -d --name subscribe-db --network labas-ci -p 8082:8080 \
-            -e MAILJET_API_KEY=k -e MAILJET_SECRET_KEY=s -e MAILJET_LIST_ID=1 \
-            -e MAILJET_SENDER=ci@labas.africa -e SUBSCRIBE_SECRET=ci \
+            -e GRAPH_TENANT_ID=t -e GRAPH_CLIENT_ID=c -e GRAPH_CLIENT_SECRET=s \
+            -e MAIL_SENDER=ci@labas.africa -e SUBSCRIBE_SECRET=ci \
             -e DATABASE_URL=postgres://labas:ci@labas-db:5432/labas labas-subscribe:ci
           sleep 3
           status=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8082/api/compte)
