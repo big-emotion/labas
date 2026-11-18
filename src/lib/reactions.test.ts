@@ -13,7 +13,9 @@ import {
 describe("the count on /avis", () => {
   it("says how many reviews the filters keep, out of how many", () => {
     expect(reviewsFound(0, 0)).toBe("Aucun avis pour l'instant");
-    expect(reviewsFound(12, 12)).toBe("12 avis, les plus récents d'abord");
+    // The order is the reader's sort now, so the count no longer claims « les plus récents ».
+    expect(reviewsFound(12, 12)).toBe("12 avis");
+    expect(reviewsFound(1, 1)).toBe("1 avis");
     expect(reviewsFound(3, 12)).toBe("3 avis sur 12");
     expect(reviewsFound(0, 12)).toBe("Aucun avis sur 12 ne correspond");
   });
