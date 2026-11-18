@@ -1,0 +1,340 @@
+---
+/**
+ * Reactions on a city (operator, 2026-11-18): the whole thread on the city page, a preview of the
+ * first city on every result page. Reactions are what the operator wants to learn from, so the
+ * block sits high and on a light background that stands out from the night-blue page.
+ * Rendered by lib/reactions-dom.ts; hidden when the accounts service does not answer.
+ */
+import { ofCity } from "../lib/reactions";
+
+interface Props {
+  /** Known on the city page; on a result page the script fills in the first city. */
+  city?: { slug: string; name: string };
+  preview?: boolean;
+}
+const { city, preview = false } = Astro.props;
+const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const titleId = preview ? "reactions-preview-title" : "reactions-title";
+---
+
+{enabled && (
+  <section
+    class:list={["reactions", { preview }]}
+    id={preview ? undefined : "reactions"}
+    data-reactions={preview ? "preview" : "thread"}
+    data-city={city?.slug}
+    data-city-name={city?.name}
+    aria-labelledby={titleId}
+    hidden
+  >
+    <header class="head">
+      <h2 id={titleId}>
+        Ce qu'on dit <span data-of>{city && ofCity(city.name)}</span>
+      </h2>
+      <p class="count" data-count />
+    </header>
+
+    <ol class="list" data-list />
+    <p class="empty" data-empty hidden>
+      Personne n'a encore réagi. Vous connaissez <span data-name>{city?.name}</span>, ou elle vous
+      attire ? Donnez le premier avis.
+    </p>
+    <button type="button" class="more" data-more hidden>
+      Voir plus de réactions
+    </button>
+
+    <div class="actions">
+      <button type="button" class="react" data-open aria-expanded="false">
+        Réagir
+      </button>
+      {preview && (
+        <a class="all" data-all>
+          Voir toutes les réactions
+        </a>
+      )}
+    </div>
+
+    <form class="form" data-form novalidate hidden>
+      <label class="field">
+        Votre réaction
+        <textarea name="text" rows="4" maxlength="1000" required />
+      </label>
+      <p class="hint">
+        Ce que vous y avez vécu, ce qui vous attire ou ce qui vous retient. 1 000 caractères au
+        plus.
+      </p>
+      <label class="field">
+        Nom affiché <span class="dim">(facultatif)</span>
+        <input type="text" name="name" maxlength="40" autocomplete="nickname" />
+      </label>
+      <p class="hint">
+        Sinon, « Utilisateur » et un numéro. Les réactions sont publiques : évitez votre nom
+        complet.
+      </p>
+      <label class="check" data-top-field hidden>
+        <input type="checkbox" name="top" />
+        <span>
+          Joindre mon top 3{" "}
+          <span class="dim">(les villes et leurs pourcentages, aucune réponse)</span>
+        </span>
+      </label>
+      <div class="email" data-email-field>
+        <label class="field">
+          Votre e-mail
+          <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+        </label>
+        <p class="hint">
+          Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réaction ; ensuite,
+          plus besoin : vos réactions suivantes sont publiées tout de suite.
+        </p>
+      </div>
+      <label class="trap" aria-hidden="true">
+        Site web
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
+      <p class="error" data-error role="alert" hidden />
+      <button type="submit" class="send">
+        Envoyer
+      </button>
+      <p class="hint">
+        <a href="/confidentialite">Confidentialité</a>
+      </p>
+    </form>
+
+    <p class="pending" data-pending role="status" hidden />
+
+    <template data-item>
+      <li class="reaction">
+        <p class="meta">
+          <b class="who" />
+          <span aria-hidden="true">·</span>
+          <time />
+        </p>
+        <p class="text" />
+        <p class="top" hidden />
+        <div class="tools">
+          <button type="button" data-report>
+            Signaler
+          </button>
+          <button type="button" data-delete hidden>
+            Supprimer
+          </button>
+        </div>
+      </li>
+    </template>
+  </section>
+)}
+
+<script>
+  import { mountThread } from "../lib/reactions-dom";
+
+  const thread = document.querySelector<HTMLElement>('[data-reactions="thread"]');
+  if (thread) mountThread(thread);
+</script>
+
+<style>
+  /* Light on purpose: the one block of the page the eye must not skip (operator, 2026-11-18). */
+  .reactions {
+    --focus: var(--ink);
+    /* Its own size: the map column of the quiz sets a much larger one. */
+    font-size: 1rem;
+    display: grid;
+    gap: 14px;
+    background: var(--thread);
+    color: var(--ink);
+    border-radius: 20px;
+    padding: 18px 16px;
+  }
+  .reactions[hidden] {
+    display: none;
+  }
+  .reactions :focus-visible {
+    outline-color: var(--focus);
+  }
+  .head {
+    display: grid;
+    gap: 2px;
+  }
+  .reactions h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  p {
+    margin: 0;
+  }
+  .count,
+  .hint,
+  .dim,
+  .meta {
+    color: var(--night-lift);
+    font-size: 0.85rem;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .list:empty {
+    display: none;
+  }
+  .reactions :global(.reaction) {
+    /* The page caps list items at 68ch for reading; a reaction card spans its block. */
+    max-width: none;
+    display: grid;
+    gap: 6px;
+    background: var(--paper);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+  .reactions :global(.meta) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .reactions :global(.meta b) {
+    color: var(--ink);
+  }
+  .reactions :global(.text) {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  .preview :global(.text) {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .reactions :global(.top) {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--night-lift);
+  }
+  .reactions :global(.tools) {
+    display: flex;
+    gap: 14px;
+  }
+  .reactions :global(.tools button) {
+    min-height: 32px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--night-lift);
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  /* After the rule above on purpose: a preview only reads, the full thread is where to act. */
+  .preview :global(.tools) {
+    display: none;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+  }
+  .react,
+  .send {
+    min-height: 48px;
+    padding: 0 26px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .send:disabled {
+    opacity: 0.6;
+  }
+  .all,
+  .more,
+  .hint a {
+    color: var(--night);
+    font-weight: 700;
+    text-underline-offset: 4px;
+  }
+  .more {
+    justify-self: start;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .form,
+  .email {
+    display: grid;
+    gap: 10px;
+  }
+  .form[hidden],
+  .email[hidden] {
+    display: none;
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  textarea,
+  input[type="text"],
+  input[type="email"] {
+    min-height: 48px;
+    border-radius: 14px;
+    border: 2px solid var(--thread-faint);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 10px 14px;
+    font: inherit;
+    font-weight: 400;
+  }
+  textarea {
+    resize: vertical;
+  }
+  .check {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 0.92rem;
+  }
+  .check[hidden] {
+    display: none;
+  }
+  .check input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--night);
+  }
+  .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .error {
+    color: var(--brick);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .pending {
+    background: var(--night);
+    color: var(--thread);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 0.92rem;
+  }
+  @media (min-width: 768px) {
+    .reactions {
+      padding: 22px 24px;
+    }
+  }
+</style>

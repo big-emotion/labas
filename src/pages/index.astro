@@ -9,6 +9,7 @@ import ResultCards from "../components/ResultCards.astro";
 import ShareMeta from "../components/ShareMeta.astro";
 import Newsletter from "../components/Newsletter.astro";
 import SaveLater from "../components/SaveLater.astro";
+import Reactions from "../components/Reactions.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
@@ -88,6 +89,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           </div>
           <p class="map-legend" id="legend"></p>
         </div>
+        {/* Moved by the script: into the first card on the phone, here on a wide screen. */}
+        <Reactions preview />
       </aside>
 
       <main class="main">
@@ -255,6 +258,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       import { saveAnswers } from "../lib/keep";
       import { syncJourney } from "../lib/account-dom";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
+      import { showCounts, showPreview } from "../lib/reactions-dom";
+      import { resultLink } from "../lib/shared-result";
 
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
@@ -370,9 +375,10 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           : `En tête pour l'instant : ${matches.map((m) => m.city.name).join(", ")}`;
 
         showProfile(current);
-        (document.getElementById("cards") as HTMLElement).replaceChildren(
-          ...matches.map((m, i) => cardFor(m, i, ranked)),
-        );
+        const cards = matches.map((m, i) => cardFor(m, i, ranked));
+        (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+        if (revealed)
+          void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
 
         // Every other city, in score order; conflict zones keep their place, greyed.
         const shown = new Set(matches.map((m) => m.city.name));
@@ -389,7 +395,22 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           ...visible.map((m, i) => rowFor(m, i + 4)),
         );
         (document.getElementById("more") as HTMLElement).hidden = showAll;
+        placePreview();
       }
+
+      // What others say of the first city, high on the page: right under its pitch on the phone,
+      // in the map column on a wide screen (operator, 2026-11-18).
+      const WIDE = "(min-width: 880px)";
+      function placePreview() {
+        const outcome = document.getElementById("outcome") as HTMLElement;
+        document.body.classList.toggle("results", !outcome.hidden);
+        if (outcome.hidden || !onScreen[0]) return;
+        void showPreview(onScreen[0].city, resultLink(readAnswers(), onScreen), (root) => {
+          if (matchMedia(WIDE).matches) document.querySelector(".side")!.append(root);
+          else document.querySelector("#cards .card-pitch")?.after(root);
+        });
+      }
+      matchMedia(WIDE).addEventListener("change", placePreview);
 
       document.getElementById("more")!.addEventListener("click", () => {
         showAll = true;
@@ -503,6 +524,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       document.getElementById("reveal")!.addEventListener("click", () => {
         const outcome = document.getElementById("outcome") as HTMLElement;
         outcome.hidden = false;
+        placePreview();
         outcome.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
@@ -586,9 +608,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           gap: 48px;
           padding-top: 36px;
         }
+        /* align-self: a grid item stretched to the row's height never sticks. */
         .side {
           position: sticky;
           top: 24px;
+          align-self: start;
         }
       }
       .brand {
@@ -861,6 +885,17 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       .map :global(.dot.top) {
         fill: var(--saffron);
         opacity: 1;
+      }
+      /* With the result, the map column makes room for the reactions preview. */
+      @media (min-width: 880px) {
+        :global(body.results) .side h1,
+        :global(body.results) .lead {
+          display: none;
+        }
+        :global(body.results) .map {
+          width: 72%;
+          margin-inline: auto;
+        }
       }
       @media (max-width: 879px) {
         :global(body.started) .side h1,

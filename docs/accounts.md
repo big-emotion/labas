@@ -28,6 +28,33 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
   whether or not the address has a space.
 - **Tokens are stored hashed.** A copy of the database opens no session and no link.
 
+## Reactions on a city
+
+Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` routes in
+`src/server/accounts.ts`, tested in `reactions.test.ts`; the block is `components/Reactions.astro`.
+
+- **On a city, not on a ranking.** A ranking differs for every reader; a city is the same for
+  all, so its thread is worth reading. The full thread sits on the city page, right after the
+  photo; result pages show a preview of the first city (inside its card on a phone, in the map
+  column from 880 px), with a count on the other two cards' pages.
+- **High and light.** Reactions are what the operator wants to learn from, so the block sits
+  above the fold and on `--thread`, the one light surface of the site.
+- **One e-mail, once.** A signed-out reader leaves an address; the reaction waits, unpublished,
+  and the link that publishes it also confirms the address and opens a session. A signed-in
+  reader publishes at once. An address that already has a space gets the same link, which is
+  also a login.
+- **Back where it was asked.** A link may carry a way back, stored with the token rather than
+  written in the URL, and only a path of this site (`backOf`). « Recevoir mon lien de connexion »
+  uses it too.
+- **The top 3 is recomputed, never typed.** The box sends the result link; the server draws the
+  cities and percentages from it with `resultAt`, so no answer and no forged text is published.
+  The shared result page offers no such box: that result is someone else's.
+- **Moderation, minimal.** Authors delete their own reactions; three reports from different
+  connections hide one. Who reported what is kept in memory only. The road not taken: a review
+  queue before publication, too slow for a beta whose point is to hear readers.
+- **Display names** are optional, 40 characters at most; without one, « Utilisateur » and a number
+  stable for the account. The address is never shown.
+
 ## Lifetimes
 
 | What                                                      | How long                                  |
@@ -37,6 +64,7 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
 | Login link asked from Mon espace                          | 15 minutes, single use                    |
 | Session (`labas_session`, HttpOnly, Secure, SameSite=Lax) | 30 days                                   |
 | Unconfirmed account or journey                            | 7 days, then erased                       |
+| Unpublished reaction, and its link                        | 7 days, then erased                       |
 | A space                                                   | 3 years after the last visit, then erased |
 | News confirmation link                                    | 7 days                                    |
 | News address (`news_subscribers`)                         | 3 years after its last confirmation       |
@@ -46,19 +74,23 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
 
 ## Routes (`/api/compte`, the subscribe service)
 
-| Route                                     | Who            | Does                                                                           |
-| ----------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
-| `POST /api/compte/sauvegarder`            | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link               |
-| `POST /api/compte/resultats`              | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result |
-| `POST /api/compte/lien`                   | anyone         | Email → a 15-minute link if the address has a space; same answer otherwise     |
-| `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`) |
-| `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                            |
-| `GET /api/compte/export`                  | session        | Everything kept, as a JSON download                                            |
-| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the news list)                               |
-| `POST /api/compte/parcours`               | session        | A new journey                                                                  |
-| `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                             |
-| `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list      |
-| `POST /api/compte/deconnexion`            | session        | Ends the session                                                               |
+| Route                                     | Who            | Does                                                                                    |
+| ----------------------------------------- | -------------- | --------------------------------------------------------------------------------------- |
+| `POST /api/compte/sauvegarder`            | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link                        |
+| `POST /api/compte/resultats`              | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result          |
+| `POST /api/compte/lien`                   | anyone         | Email (and `back`) → a 15-minute link if the address has a space; same answer otherwise |
+| `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`)          |
+| `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                                     |
+| `GET /api/compte/export`                  | session        | Everything kept, as a JSON download                                                     |
+| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the news list)                                        |
+| `POST /api/compte/parcours`               | session        | A new journey                                                                           |
+| `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                                      |
+| `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list               |
+| `POST /api/compte/deconnexion`            | session        | Ends the session                                                                        |
+| `GET /api/compte/reactions?ville=`        | anyone         | Published reactions of a city, newest first; `mine` for the author                      |
+| `POST /api/compte/reactions`              | anyone         | Signed in: published at once. Otherwise e-mail → a 7-day link that publishes            |
+| `POST /api/compte/reactions/:id/signaler` | anyone         | Counts one report per connection; three hide the reaction                               |
+| `DELETE /api/compte/reactions/:id`        | the owner only | Deletes one reaction                                                                    |
 
 Every change must come from `https://labas.africa` (Origin check). The cookie alone authorises
 nothing cross-site. Answers go through `cleanAnswers` (`src/lib/keep.ts`), so only questions and

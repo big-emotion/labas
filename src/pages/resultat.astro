@@ -2,6 +2,7 @@
 import Page from "../layouts/Page.astro";
 import SourcesNote from "../components/SourcesNote.astro";
 import TemperamentProfile from "../components/TemperamentProfile.astro";
+import Reactions from "../components/Reactions.astro";
 ---
 
 <Page
@@ -17,6 +18,7 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
   <div id="shared" hidden>
     <TemperamentProfile />
     <ol id="shared-cities" class="shared-cities"></ol>
+    <Reactions preview />
     <SourcesNote />
   </div>
 
@@ -49,6 +51,7 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
     import type { Answers } from "../lib/ranking";
     import { readShared, sharedResult } from "../lib/shared-result";
     import { fillLines } from "../lib/cards-dom";
+    import { showPreview } from "../lib/reactions-dom";
 
     // A link that only changes after « # » does not reload the page: read it again.
     addEventListener("hashchange", () => location.reload());
@@ -74,6 +77,10 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
           return item;
         }),
       );
+      // What others say of the first city, inside its card (operator, 2026-11-18). No top 3 to
+      // join: this result is someone else's.
+      const first = document.querySelector("#shared-cities .shared-city");
+      void showPreview(shared.cities[0].city, null, (root) => first?.append(root));
     }
   </script>
 </Page>

@@ -2,6 +2,7 @@
 import { ADVICE_FRAMING } from "../../lib/advisory";
 import Page from "../../layouts/Page.astro";
 import SourcesNote from "../../components/SourcesNote.astro";
+import Reactions from "../../components/Reactions.astro";
 import { CITIES, CRITERIA, type City, type Confidence, type Source } from "../../lib/cities";
 import { goingThere } from "../../lib/going";
 import { linesFor } from "../../lib/lines";
@@ -144,6 +145,9 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
           </figcaption>
         </figure>
       )}
+      {/* High on the page, right after the photo: reactions are what the operator wants to
+          learn from (operator, 2026-11-18). */}
+      <Reactions city={{ slug: city.slug, name: city.name }} />
       <p>{city.pitch}</p>
       <ul class="chips">
         {chips.map((chip) => (
@@ -744,6 +748,12 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     object-fit: cover;
     border-radius: 16px;
     display: block;
+  }
+  /* A wider, lower photo from the tablet up, so the reactions below it show on arrival. */
+  @media (min-width: 768px) {
+    .photo img {
+      aspect-ratio: 2 / 1;
+    }
   }
   .photo figcaption,
   .small {

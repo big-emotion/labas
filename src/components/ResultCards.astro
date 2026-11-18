@@ -10,6 +10,7 @@
       <div>
         <h3 class="card-name"></h3>
         <p class="card-country"></p>
+        <a class="card-reactions" hidden></a>
       </div>
       <span class="fit">
         <b></b>
@@ -158,6 +159,18 @@
     margin: 0;
     color: var(--thread-dim);
     font-size: 0.85rem;
+  }
+  /* Cards 2 and 3 only (reactions-dom showCounts): the first one carries the preview itself. */
+  .results .card-reactions {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--saffron);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+  .results .card-reactions[hidden] {
+    display: none;
   }
   .results .card-tagline,
   .rows .row-tagline {
