@@ -1,3 +1,4 @@
+import { pageLocale, type Bilingual } from "../i18n/locale";
 import { saveAnswers } from "./keep";
 import { browserStore } from "./keep-dom";
 import { type Journey, type JourneyKind, memberJourneyBody, saveBody } from "./account";
@@ -61,7 +62,24 @@ export function resume(journey: Journey) {
   rememberJourney(journey.id);
 }
 
+const SAVED = {
+  fr: {
+    member: "C'est enregistré dans Mon espace.",
+    memberNext: "Vous pouvez continuer : chaque réponse est désormais enregistrée.",
+    mailed: (email: string) => `C'est enregistré. Le lien pour reprendre arrive à ${email}.`,
+    mailedNext: "Ouvrez-le pour retrouver ce parcours, ici ou sur un autre appareil.",
+  },
+  en: {
+    member: "It's saved in My space.",
+    memberNext: "You can carry on: every answer is now saved.",
+    mailed: (email: string) => `It's saved. The link to pick up again is on its way to ${email}.`,
+    mailedNext: "Open it to find this journey again, here or on another device.",
+  },
+} satisfies Bilingual<unknown>;
+
 export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
+  const locale = pageLocale();
+  const copy = SAVED[locale];
   for (const block of document.querySelectorAll<HTMLElement>("[data-save-later]")) {
     const toggle = block.querySelector<HTMLButtonElement>("[data-save-toggle]")!;
     const panel = block.querySelector<HTMLElement>("[data-save-panel]")!;
@@ -111,10 +129,7 @@ export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
         return;
       }
       rememberJourney(created.data.id);
-      finish(
-        "C'est enregistré dans Mon espace.",
-        "Vous pouvez continuer : chaque réponse est désormais enregistrée.",
-      );
+      finish(copy.member, copy.memberNext);
     });
 
     form.addEventListener("submit", async (event) => {
@@ -130,9 +145,10 @@ export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
         },
         kind,
         current(),
+        locale,
       );
       const show = (status: number) => {
-        const outcome = outcomeOf(status, "save");
+        const outcome = outcomeOf(status, "save", locale);
         if (outcome.sent) return;
         error.textContent = outcome.message;
         error.hidden = false;
@@ -142,10 +158,7 @@ export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
       const { status } = await api("POST", "/api/compte/sauvegarder", body);
       submit.disabled = false;
       if (status !== 202) return show(status);
-      finish(
-        `C'est enregistré. Le lien pour reprendre arrive à ${body.email}.`,
-        "Ouvrez-le pour retrouver ce parcours, ici ou sur un autre appareil.",
-      );
+      finish(copy.mailed(body.email), copy.mailedNext);
     });
   }
 }

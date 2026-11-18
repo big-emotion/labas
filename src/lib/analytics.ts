@@ -109,6 +109,7 @@ const PLACES = {
   thread: "Fiche ville",
   card: "Carte 2 ou 3",
   row: "Liste des villes",
+  everywhere: "Page des avis",
 } as const;
 export type ReactionPlace = keyof typeof PLACES;
 
