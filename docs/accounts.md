@@ -136,7 +136,8 @@ Decided with the operator on 2026-11-18. Every form that makes the service write
 sign-up, « Recevoir par e-mail », « Reprendre plus tard », a login link, a reaction) sends the
 page's `locale` (`fr` or `en`; anything else reads as French). The e-mail is written in it, and
 its links open the pages in that language (`pageUrl` in `emails.ts`: `SITE_URL` plus the built
-path, English always under `/en/`). The links the service signs carry `lang=en` when they come
+path, English under `/en/`; once `EN_SITE_URL` names the English domain, English links, sign-in
+links included so the session cookie lands there, use it with the bare English paths). The links the service signs carry `lang=en` when they come
 from English, so the redirects after them (`/en/my-space/`, `/en/my-space/link-expired/`,
 `/en/news/confirmed/`, `/en/news/invalid-link/`) stay in English; `lang` only picks a page, the
 token alone authorises. `news_subscribers.locale` keeps the language of the last confirmation, so
@@ -234,7 +235,7 @@ tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `s
 | `POST /api/compte/reactions/:id/signaler`   | anyone         | Counts one report per connection; three hide the reaction                                       |
 | `DELETE /api/compte/reactions/:id`          | the owner only | Deletes one reaction                                                                            |
 
-Every change must come from `https://labas.africa` (Origin check). The cookie alone authorises
+Every change must come from `https://labas.africa`, or from `EN_SITE_URL` when it is set (Origin check). The cookie alone authorises
 nothing cross-site. Answers go through `cleanAnswers` (`src/lib/keep.ts`), so only questions and
 choices the quiz offers reach the database. Results are not stored: the page computes them from the
 answers, so a result kept without the sensitive answers may rank a little differently, and the full

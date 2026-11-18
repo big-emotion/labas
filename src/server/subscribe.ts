@@ -21,8 +21,16 @@ import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { deepl } from "./deepl";
 import { plausibleStats } from "./plausible";
 import type { Locale } from "../i18n/locale";
-import { builtPathFor } from "../i18n/routes";
-import { type Mail, confirmationEmail, pageUrl, readLocale, resultsEmail } from "./emails";
+import {
+  type Mail,
+  type Sites,
+  confirmationEmail,
+  originFor,
+  pagePath,
+  pageUrl,
+  readLocale,
+  resultsEmail,
+} from "./emails";
 import { limiter } from "./limiter";
 import { newsList } from "./news";
 
@@ -38,6 +46,8 @@ export interface Config {
   /** Signs the confirmation links. */
   secret: string;
   siteUrl: string;
+  /** The English domain once it points here (EN_SITE_URL); empty, English lives under /en/. */
+  enSiteUrl?: string;
   /** Where readers' replies go: the operator's own mailbox. */
   replyTo: string;
 }
@@ -104,8 +114,18 @@ function readLeave(token: string, secret: string): string | null {
 }
 
 /** A page with a button, not an action: mail scanners open links, and must not unsubscribe anyone. */
-export const leaveLink = (siteUrl: string, email: string, secret: string, locale: Locale) =>
-  `${pageUrl(siteUrl, "newsUnsubscribed", locale)}#t=${signLeave(email, secret)}`;
+export const leaveLink = (sites: Sites, email: string, secret: string, locale: Locale) =>
+  `${pageUrl(sites, "newsUnsubscribed", locale)}#t=${signLeave(email, secret)}`;
+
+/** The service's sites, from its settings: SITE_URL, and EN_SITE_URL when English has a domain. */
+export const sitesOf = (config: Pick<Config, "siteUrl" | "enSiteUrl">): Sites => ({
+  fr: config.siteUrl,
+  en: config.enSiteUrl ?? "",
+});
+
+/** The English settings are optional: without them, everything stays on SITE_URL. */
+export const isConfigured = (config: Config) =>
+  Object.entries(config).every(([key, value]) => key === "enSiteUrl" || Boolean(value));
 
 /**
  * The language a link the service mailed was asked in: « lang=en » rides on the links it builds,
@@ -137,10 +157,13 @@ export function createHandler(
   const perConnection = limiter(5, HOUR);
   // Per address: nobody can use Là-bas to flood someone else's inbox with confirmations.
   const perAddress = limiter(3, DAY);
-  const configured = Object.values(config).every(Boolean);
+  const configured = isConfigured(config);
+  const sites = sitesOf(config);
+  const fromSite = (request: Request) =>
+    [sites.fr, sites.en].filter(Boolean).includes(request.headers.origin ?? "");
 
   const confirmLinkFor = (email: string, locale: Locale) =>
-    `${config.siteUrl}/api/nouveautes/confirmer?t=${signToken(email, now(), config.secret)}${langParam(locale)}`;
+    `${originFor(sites, locale)}/api/nouveautes/confirmer?t=${signToken(email, now(), config.secret)}${langParam(locale)}`;
 
   /** What both forms share: the service is open, the form comes from the site, a real address, the limits. */
   async function guard(
@@ -149,7 +172,7 @@ export function createHandler(
     send: (email: string, form: Record<string, unknown>) => Mail,
   ): Promise<Response> {
     if (!configured) return json(503, { error: "closed" });
-    if (request.headers.origin !== config.siteUrl) return json(403, { error: "origin" });
+    if (!fromSite(request)) return json(403, { error: "origin" });
     const form = (request.body ?? {}) as Record<string, unknown>;
     const email = String(form.email ?? "")
       .trim()
@@ -197,7 +220,7 @@ export function createHandler(
           return confirmationEmail(
             email,
             confirmLinkFor(email, locale),
-            leaveLink(config.siteUrl, email, config.secret, locale),
+            leaveLink(sites, email, config.secret, locale),
             locale,
           );
         },
@@ -215,7 +238,7 @@ export function createHandler(
             resultFrom(form.link)!,
             {
               resultLink: String(form.link),
-              siteUrl: config.siteUrl,
+              sites,
               confirmLink: form.news === true ? confirmLinkFor(email, locale) : undefined,
             },
             locale,
@@ -226,7 +249,7 @@ export function createHandler(
 
     if (request.method === "POST" && request.path === "/api/nouveautes/desinscrire") {
       if (!configured) return json(503, { error: "closed" });
-      if (request.headers.origin !== config.siteUrl) return json(403, { error: "origin" });
+      if (!fromSite(request)) return json(403, { error: "origin" });
       const connection = request.headers["x-real-ip"] ?? "unknown";
       if (!perConnection(connection, now())) return json(429, { error: "slow-down" });
       const form = (request.body ?? {}) as Record<string, unknown>;
@@ -243,7 +266,7 @@ export function createHandler(
 
     if (request.method === "GET" && request.path === "/api/nouveautes/confirmer") {
       const locale = readLocale(request.query.get("lang"));
-      const invalid = redirect(builtPathFor("newsInvalid", locale));
+      const invalid = redirect(pagePath(sites, "newsInvalid", locale));
       const email = configured
         ? readToken(request.query.get("t") ?? "", config.secret, now())
         : null;
@@ -254,7 +277,7 @@ export function createHandler(
         console.error(String(error));
         return invalid;
       }
-      return redirect(builtPathFor("newsConfirmed", locale));
+      return redirect(pagePath(sites, "newsConfirmed", locale));
     }
 
     return json(404, { error: "not-found" });
@@ -323,6 +346,7 @@ function start(port: number) {
     sender: process.env.MAIL_SENDER ?? "",
     secret: process.env.SUBSCRIBE_SECRET ?? "",
     siteUrl: process.env.SITE_URL ?? SITE,
+    enSiteUrl: process.env.EN_SITE_URL?.trim().replace(/\/$/, "") ?? "",
     replyTo: process.env.REPLY_TO ?? "hello@big-emotion.com",
   };
   const pool = process.env.DATABASE_URL
@@ -344,7 +368,7 @@ function start(port: number) {
   );
   // Without a database, or while it cannot be reached, the results e-mail keeps working and
   // /api/compte answers 503: saved journeys are an extra, never a reason to go down.
-  if (db && Object.values(config).every(Boolean)) {
+  if (db && isConfigured(config)) {
     whenReady(() => migrate(db))
       .then(() => {
         const { PLAUSIBLE_API_KEY, PLAUSIBLE_SITE, PLAUSIBLE_API_HOST, DEEPL_API_KEY } =
@@ -353,6 +377,7 @@ function start(port: number) {
           db,
           mailer,
           siteUrl: config.siteUrl,
+          enSiteUrl: config.enSiteUrl,
           admins: (process.env.ADMIN_EMAILS ?? "").split(","),
           team: config.replyTo,
           translate: DEEPL_API_KEY ? deepl(DEEPL_API_KEY) : undefined,

@@ -149,6 +149,11 @@ Without the key, `POST /api/compte/reactions/:id/traduction` answers 503 and the
 « Traduire » button. Only a review's text is sent to DeepL, once per review and language; the
 copy is kept in `reaction_translations` and goes with the review (`docs/accounts.md`).
 
+Once the English domain points at this server, tell the mail and accounts service with
+`gh variable set EN_SITE_URL --repo big-emotion/labas --body https://overthere.africa`: it then
+accepts forms from that origin and writes English links (sign-in links included) on it. Empty,
+English stays under `labas.africa/en/`.
+
 **8. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
 The smoke check fails the job unless `https://labas.africa/` answers 200.
 

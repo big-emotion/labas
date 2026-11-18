@@ -1,6 +1,6 @@
 import { BRAND, type Bilingual, type Locale } from "../i18n/locale";
 import { cityName, countryName } from "../i18n/places";
-import { builtPathFor, type Route } from "../i18n/routes";
+import { builtPathFor, ROUTES, type Route } from "../i18n/routes";
 import type { SharedResult } from "../lib/shared-result";
 
 /**
@@ -24,12 +24,27 @@ export function readLocale(value: unknown): Locale {
 }
 
 /**
- * A page of the site in the reader's language, on the service's own origin (SITE_URL), so a link
- * in an e-mail opens the page the reader asked from. English is always built under /en/, which
- * keeps answering on labas.africa even once English gets its own domain.
+ * Where the service's pages live: SITE_URL, and EN_SITE_URL once English has its own domain
+ * (overthere.africa, docs/deploy.md); `en` is empty until then, and English stays under /en/.
  */
-export const pageUrl = (siteUrl: string, route: Route, locale: Locale, slug = "") =>
-  `${siteUrl}${builtPathFor(route, locale, slug)}`;
+export interface Sites {
+  fr: string;
+  en: string;
+}
+
+/** The origin a reader of this language uses: links and the session cookie must land there. */
+export const originFor = (sites: Sites, locale: Locale) =>
+  locale === "en" && sites.en ? sites.en : sites.fr;
+
+/** A page's path on that origin: bare English words on the English domain, /en/… otherwise. */
+export const pagePath = (sites: Sites, route: Route, locale: Locale, slug = "") =>
+  locale === "en" && sites.en
+    ? ROUTES[route].en.replace(":slug", slug)
+    : builtPathFor(route, locale, slug);
+
+/** A page of the site in the reader's language, so a link in an e-mail opens the page they asked from. */
+export const pageUrl = (sites: Sites, route: Route, locale: Locale, slug = "") =>
+  `${originFor(sites, locale)}${pagePath(sites, route, locale, slug)}`;
 
 const SITE_FOOTER: Bilingual<string> = {
   fr: "Là-bas est édité par Big Emotion · labas.africa. Nous ne vendons ni ne prêtons votre adresse.",
@@ -87,7 +102,7 @@ const CONFIRMATION = {
   en: {
     subject: `Confirm your sign-up to ${BRAND.en} news`,
     hello: "Hello,",
-    asked: `You asked to receive ${BRAND.en} news: new cities, a better questionnaire, one e-mail a month at most.`,
+    asked: `You asked to receive ${BRAND.en} news: new cities, a better questionnaire, one email a month at most.`,
     openLink: "To confirm, open this link:",
     tapButton: "To confirm, tap the button.",
     notYou: "Didn't ask for this? Ignore this message: you won't receive anything else.",
@@ -175,7 +190,7 @@ const RESULTS = {
     newsText: `You also asked for ${BRAND.en} news. Confirm it by opening this link; without that, you won't receive anything else:`,
     newsHtml: `You also asked for ${BRAND.en} news. Confirm it in one click; without that, you won't receive anything else.`,
     footer:
-      "You're receiving this e-mail because you asked for it on labas.africa. It holds your profile and your cities, never your other answers.",
+      "You're receiving this email because you asked for it on labas.africa. It holds your profile and your cities, never your other answers.",
   },
 } satisfies Bilingual<Record<string, unknown>>;
 
@@ -195,22 +210,22 @@ export function resultsEmail(
   result: SharedResult,
   links: {
     resultLink: string;
-    siteUrl: string;
+    sites: Sites;
     confirmLink?: string;
     space?: { link: string; sensitiveLeftOut: boolean };
   },
   locale: Locale,
 ): Mail {
-  const { resultLink, siteUrl, confirmLink, space } = links;
+  const { resultLink, sites, confirmLink, space } = links;
   const copy = RESULTS[locale];
   const cities = result.cities.map((c) => ({
     percent: c.percent,
     name: cityName(c.city.name, locale),
     country: countryName(c.city.country, locale),
-    page: pageUrl(siteUrl, "city", locale, c.city.slug),
+    page: pageUrl(sites, "city", locale, c.city.slug),
     fits: c.lines.filter((line) => !line.weak).slice(0, 2),
   }));
-  const deeper = pageUrl(siteUrl, "deep", locale);
+  const deeper = pageUrl(sites, "deep", locale);
   const profileText = result.archetype
     ? [`${copy.profile} ${result.archetype.name}. ${result.archetype.text}`, ""]
     : [];
@@ -387,15 +402,15 @@ const REACTION_LINK = {
       "Vous n'avez rien écrit ? Ignorez ce message : sans clic de votre part, cette réaction est effacée sous 7 jours.",
   },
   en: {
-    subject: (city: string) => `Publish your review of ${city}`,
-    thanks: (city: string) => `Hello, thank you for your review of ${city}.`,
+    subject: (city: string) => `Publish your reaction to ${city}`,
+    thanks: (city: string) => `Hello, thank you for your reaction to ${city}.`,
     openLink: "To put it online, open this link:",
     tapButton: "Tap the button to put it online.",
-    button: "Publish my review",
+    button: "Publish my reaction",
     confirms:
-      "This link also confirms your address: your next reviews will go online straight away. It works for 7 days, once.",
+      "This link also confirms your address: your next reactions will go online straight away. It works for 7 days, once.",
     notYou:
-      "Didn't write anything? Ignore this message: unless you click, this review is erased within 7 days.",
+      "Didn't write anything? Ignore this message: unless you click, this reaction is erased within 7 days.",
   },
 } satisfies Bilingual<Record<string, unknown>>;
 

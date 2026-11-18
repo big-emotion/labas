@@ -1,7 +1,6 @@
 import { createHash, randomBytes } from "node:crypto";
 import type { Locale } from "../i18n/locale";
 import { cityName } from "../i18n/places";
-import { builtPathFor } from "../i18n/routes";
 import { CITIES } from "../lib/cities";
 import { FEEDBACK_KINDS, MESSAGE_MAX } from "../lib/feedback";
 import { cleanAnswers, SENSITIVE_ANSWERS, withoutSensitive } from "../lib/keep";
@@ -10,6 +9,8 @@ import { MARKS } from "../lib/reactions";
 import { resultAt } from "../lib/shared-result";
 import {
   loginLinkEmail,
+  originFor,
+  pagePath,
   reactionLinkEmail,
   readLocale,
   resultsEmail,
@@ -280,6 +281,8 @@ interface Options {
   db: Db;
   mailer: Mailer;
   siteUrl: string;
+  /** The English domain once it points here (EN_SITE_URL); empty, English lives under /en/. */
+  enSiteUrl?: string;
   now?: () => number;
   /** Addresses that open /admin; none means the admin stays shut. */
   admins?: string[];
@@ -353,12 +356,14 @@ export function createAccounts({
   db,
   mailer,
   siteUrl,
+  enSiteUrl = "",
   now = Date.now,
   admins = [],
   stats,
   team,
   translate,
 }: Options) {
+  const sites = { fr: siteUrl, en: enSiteUrl };
   const adminAddresses = new Set(admins.map((a) => a.trim().toLowerCase()).filter(Boolean));
   const perConnection = limiter(5, HOUR);
   const perAddress = limiter(3, DAY);
@@ -382,7 +387,9 @@ export function createAccounts({
       [hash(secret), accountId, journeyId, reactionId, news, options.back ?? null, at(lifetime)],
     );
     const lang = options.locale === "en" ? "&lang=en" : "";
-    return `${siteUrl}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}${lang}`;
+    // On the reader's own domain: the session cookie it sets must be the one their pages send.
+    const origin = originFor(sites, options.locale ?? "fr");
+    return `${origin}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}${lang}`;
   }
 
   /** The account behind an address, created unconfirmed when it is new. */
@@ -534,7 +541,10 @@ export function createAccounts({
   return async (request: Request): Promise<Response> => {
     const { method, path } = request;
     // Every change comes from the site itself; the session cookie alone authorises nothing else.
-    if (method !== "GET" && request.headers.origin !== siteUrl)
+    if (
+      method !== "GET" &&
+      ![siteUrl, enSiteUrl].filter(Boolean).includes(request.headers.origin ?? "")
+    )
       return json(403, { error: "origin" });
     const form = (request.body ?? {}) as Record<string, unknown>;
     const connection = request.headers["x-real-ip"] ?? "unknown";
@@ -602,7 +612,7 @@ export function createAccounts({
             result,
             {
               resultLink: String(form.link),
-              siteUrl,
+              sites,
               space: { link, sensitiveLeftOut: !sensitive },
             },
             locale,
@@ -641,7 +651,7 @@ export function createAccounts({
 
     if (method === "GET" && path === "/api/compte/connexion") {
       const landingLocale = readLocale(request.query.get("lang"));
-      const space = builtPathFor("space", landingLocale);
+      const space = pagePath(sites, "space", landingLocale);
       const { rows } = await db.query<{
         account_id: string;
         journey_id: string | null;
@@ -658,7 +668,7 @@ export function createAccounts({
       // A used or old button still leads a reader who is signed in on this browser to their space.
       if (!link)
         return redirect(
-          (await member(request)) ? space : builtPathFor("spaceExpired", landingLocale),
+          (await member(request)) ? space : pagePath(sites, "spaceExpired", landingLocale),
         );
       const account = (
         await db.query<{ email: string }>(

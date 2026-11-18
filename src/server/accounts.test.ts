@@ -471,6 +471,38 @@ describe("a reader on the English pages", () => {
   });
 });
 
+describe("once English has its own domain (EN_SITE_URL)", () => {
+  it("takes the save from it and signs the reader in there, on its bare English space", async () => {
+    const english = createAccounts({
+      db,
+      mailer: mail.mailer,
+      siteUrl: SITE,
+      enSiteUrl: "https://overthere.africa",
+      now: () => clock,
+    });
+    const response = await english(
+      request(
+        "POST",
+        "/api/compte/sauvegarder",
+        {
+          email: "awa@exemple.fr",
+          consent: true,
+          locale: "en",
+          journey: { kind: "quick", answers: ANSWERS },
+        },
+        { origin: "https://overthere.africa" },
+      ),
+    );
+    expect(response.status).toBe(202);
+    const link = /https:\/\/overthere\.africa\/api\/compte\/connexion\?t=[\w&=-]+/.exec(
+      mail.sent[0].text,
+    )![0];
+    const url = new URL(link);
+    const landing = await english(request("GET", url.pathname + url.search));
+    expect(landing.headers.location).toBe("/my-space/");
+  });
+});
+
 describe("journeys kept before the per-journey box existed", () => {
   it("erases the sensitive answers a journey from Mon espace kept without a box, and nothing else", async () => {
     await db.query("alter table journeys drop column sensitive");

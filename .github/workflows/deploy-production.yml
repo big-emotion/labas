@@ -66,6 +66,7 @@ jobs:
           PLAUSIBLE_SITE: ${{ vars.PLAUSIBLE_DOMAIN }}
           PLAUSIBLE_API_HOST: ${{ vars.PLAUSIBLE_API_HOST }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          EN_SITE_URL: ${{ vars.EN_SITE_URL }}
         run: |
           umask 077
           database=""
@@ -84,6 +85,7 @@ jobs:
             echo "PLAUSIBLE_SITE=$PLAUSIBLE_SITE"
             echo "PLAUSIBLE_API_HOST=$PLAUSIBLE_API_HOST"
             echo "DEEPL_API_KEY=$DEEPL_API_KEY"
+            echo "EN_SITE_URL=$EN_SITE_URL"
           } > /tmp/.env.subscribe
           {
             echo "POSTGRES_DB=labas"

@@ -22,7 +22,7 @@ describe("the results e-mail", () => {
     const mail = resultsEmail(
       "reader@example.org",
       shared,
-      { resultLink: link, siteUrl: SITE },
+      { resultLink: link, sites: { fr: SITE, en: "" } },
       "fr",
     );
     for (const body of [mail.text, mail.html]) expect(body).not.toContain("[object Object]");
@@ -38,7 +38,7 @@ describe("the results e-mail", () => {
       shared,
       {
         resultLink: link,
-        siteUrl: SITE,
+        sites: { fr: SITE, en: "" },
         space: { link: "https://x/login", sensitiveLeftOut: true },
       },
       "en",
@@ -76,8 +76,8 @@ describe("the e-mails in the reader's language", () => {
       "Your sign-in link for Over There",
     );
     const reaction = reactionLinkEmail("a@b.co", "https://l", "Cape Town", "en");
-    expect(reaction.subject).toBe("Publish your review of Cape Town");
-    expect(reaction.html).toContain("Publish my review");
+    expect(reaction.subject).toBe("Publish your reaction to Cape Town");
+    expect(reaction.html).toContain("Publish my reaction");
   });
 });
 

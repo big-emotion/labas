@@ -129,7 +129,7 @@ describe("reacting to a city without being signed in", () => {
 describe("reacting from an English page", () => {
   it("mails the link in English, naming the city in English", async () => {
     await react({ city: "le-cap", locale: "en", back: "/en/city/le-cap/#reactions" });
-    expect(mail.sent[0].subject).toBe("Publish your review of Cape Town");
+    expect(mail.sent[0].subject).toBe("Publish your reaction to Cape Town");
     expect(linkIn(mail.sent[0])).toMatch(/&lang=en$/);
     expect((await follow()).response.headers.location).toBe("/en/city/le-cap/#reactions");
   });

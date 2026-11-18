@@ -287,6 +287,43 @@ describe("an English reader", () => {
   });
 });
 
+describe("once English has its own domain (EN_SITE_URL)", () => {
+  const ENGLISH = { ...CONFIG, enSiteUrl: "https://overthere.africa" };
+
+  it("accepts forms from it, builds English links on it, and lands on its bare English pages", async () => {
+    const { mailer, sent } = recordingMailer();
+    const handler = createHandler(ENGLISH, mailer);
+    const response = await handler(
+      post({ ...SIGN_UP, locale: "en" }, { origin: "https://overthere.africa" }),
+    );
+    expect(response.status).toBe(202);
+    expect(sent[0].text).toMatch(/https:\/\/overthere\.africa\/api\/nouveautes\/confirmer\?t=/);
+    expect(sent[0].text).toContain("https://overthere.africa/news/unsubscribe/#t=");
+    const broken = await handler({
+      ...confirm("broken"),
+      query: new URLSearchParams({ t: "broken", lang: "en" }),
+    });
+    expect(broken.headers.location).toBe("/news/invalid-link/");
+  });
+
+  it("keeps French readers on labas.africa, and still refuses any other site", async () => {
+    const { mailer, sent } = recordingMailer();
+    const handler = createHandler(ENGLISH, mailer);
+    await handler(post(SIGN_UP));
+    expect(sent[0].link).toMatch(/^https:\/\/labas\.africa\/api\/nouveautes\/confirmer/);
+    const elsewhere = await handler(post(SIGN_UP, { origin: "https://evil.example" }));
+    expect(elsewhere.status).toBe(403);
+  });
+
+  it("changes nothing while it is empty", async () => {
+    const { mailer } = recordingMailer();
+    const handler = createHandler({ ...CONFIG, enSiteUrl: "" }, mailer);
+    expect((await handler(post(SIGN_UP))).status).toBe(202);
+    const other = await handler(post(SIGN_UP, { origin: "https://overthere.africa" }));
+    expect(other.status).toBe(403);
+  });
+});
+
 describe("the Microsoft Graph connection", () => {
   const MAIL = {
     to: "awa@exemple.fr",
