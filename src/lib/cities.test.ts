@@ -89,11 +89,11 @@ describe("the city catalogue", () => {
     }
   });
 
-  // CLAUDE.md: a safety, racism, LGBT-rights or conflict remark carries a dated source. The words
+  // CLAUDE.md: a safety, racism, LGBT-rights, conflict or political remark carries a dated source. The words
   // below are how such a remark reads in « À savoir »; a new remark using none of them escapes
   // this test, so keep the list in step with the remarks.
   const SENSITIVE_REMARK =
-    /sécurit|insécurit|vigilance|criminalit|violence|agression|enlèvement|attentat|terror|danger|conflit|armée?s?\b|milice|insurrection|affrontement|militaire|autorités rivales|tensions|conseils aux voyageurs|personnes noires|migrants noirs|racis|xénophob|esclavage|LGBT/i;
+    /sécurit|insécurit|vigilance|criminalit|violence|agression|enlèvement|attentat|terror|danger|conflit|armée?s?\b|milice|insurrection|affrontement|militaire|autorités rivales|tensions|conseils aux voyageurs|personnes noires|migrants noirs|racis|xénophob|esclavage|LGBT|guerre|instabilité politique|délinquan|verrouill|régime|plus fermés|permis nécessaire|tourisme sexuel|sollicitations insistantes/i;
 
   it("gives a dated source with every safety, conflict, racism or LGBT remark", () => {
     const sensitive = CITIES.filter((city) => SENSITIVE_REMARK.test(city.watch));
