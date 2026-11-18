@@ -64,6 +64,19 @@ describe("who may open the admin", () => {
     expect((await call("GET", "/api/compte/admin", undefined, admin)).status).toBe(200);
   });
 
+  it("mails a login link to a listed address that has no space yet, and to no other", async () => {
+    await call("POST", "/api/compte/lien", { email: "inconnu@exemple.fr", back: "/admin/" });
+    expect(sent).toHaveLength(0);
+    await call("POST", "/api/compte/lien", { email: ADMIN.toUpperCase(), back: "/admin/" });
+    expect(sent).toHaveLength(1);
+    expect(sent[0].to).toBe(ADMIN);
+    const url = new URL(/https:\/\/\S+connexion\?t=[\w-]+/.exec(sent[0].text)![0]);
+    const response = await handle(request("GET", url.pathname + url.search));
+    expect(response.headers.location).toBe("/admin/");
+    const cookie = (response.headers["set-cookie"] ?? "").split(";")[0];
+    expect((await call("GET", "/api/compte/admin", undefined, cookie)).status).toBe(200);
+  });
+
   it("stays shut when no address is listed", async () => {
     const closed = createAccounts({ db, siteUrl: SITE, mailer: { send: async () => {} } as never });
     const admin = await reviewer(ADMIN);

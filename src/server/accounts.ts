@@ -503,16 +503,18 @@ export function createAccounts({
       if (!isEmail(email)) return json(400, { error: "form" });
       if (!perConnection(connection, now()) || !perAddress(email, now()))
         return json(429, { error: "slow-down" });
-      const account = (
+      const existing = (
         await db.query<{ id: string }>("select id from accounts where email = $1", [email])
-      ).rows[0];
+      ).rows[0]?.id;
+      // An admin address gets its space on first login: /admin would be unreachable otherwise.
+      const accountId = existing ?? (adminAddresses.has(email) ? await accountFor(email) : null);
       // The same answer whether the address has a space or not: nobody learns who uses Là-bas.
-      if (account) {
+      if (accountId) {
         try {
           await mailer.send(
             loginLinkEmail(
               email,
-              await issueLink(account.id, LOGIN_LINK_FOR, { back: backOf(form.back) }),
+              await issueLink(accountId, LOGIN_LINK_FOR, { back: backOf(form.back) }),
             ),
           );
         } catch (error) {
