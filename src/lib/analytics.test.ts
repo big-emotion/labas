@@ -4,6 +4,7 @@ import {
   finishedEvent,
   GOALS,
   messageEvent,
+  notForMeEvent,
   plausibleScriptSrc,
   reactionEvent,
 } from "./analytics";
@@ -123,6 +124,32 @@ describe("the events around reactions", () => {
       "Réaction traduite",
     ])
       expect(GOALS).toContain(name);
+  });
+});
+
+describe("the event sent when a reader sets a place aside", () => {
+  it("says where and at which level, never which city, country or region", () => {
+    expect(notForMeEvent("quiz", "region")).toEqual({
+      name: "Pas pour moi",
+      props: { lieu: "Questionnaire", niveau: "Région" },
+    });
+    expect(notForMeEvent("result", "city")).toEqual({
+      name: "Pas pour moi",
+      props: { lieu: "Résultat", niveau: "Ville" },
+    });
+    expect(notForMeEvent("deep", "country", true)).toEqual({
+      name: "Pas pour moi annulé",
+      props: { lieu: "Questionnaire complet", niveau: "Pays" },
+    });
+  });
+
+  it("is declared as a goal, set aside and undone", () => {
+    expect(GOALS).toContain("Pas pour moi");
+    expect(GOALS).toContain("Pas pour moi annulé");
+  });
+
+  it("never sends the places set aside as an answer", () => {
+    expect(answerEvent("avoidRegions", ["nord"], { step: 4 })).toBeNull();
   });
 });
 
