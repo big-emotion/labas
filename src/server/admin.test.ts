@@ -55,6 +55,14 @@ async function reviewer(email: string, city = "dakar", text = "La mer change tou
   return (response.headers["set-cookie"] ?? "").split(";")[0];
 }
 
+/** Three signed-in readers, on another city so that the counts here do not move, report a review. */
+async function reportedByThree(id: string) {
+  for (const email of ["r1@exemple.fr", "r2@exemple.fr", "r3@exemple.fr"]) {
+    const cookie = await reviewer(email, "bamako", "Bamako au bord du fleuve.");
+    await call("POST", `/api/compte/reactions/${id}/signaler`, undefined, cookie);
+  }
+}
+
 describe("who may open the admin", () => {
   it("lets in the addresses listed, and nobody else", async () => {
     const admin = await reviewer(ADMIN);
@@ -93,14 +101,11 @@ describe("every review, for moderation", () => {
       data: { reactions },
     } = await call("GET", "/api/compte/reactions?ville=accra");
     await call("POST", "/api/compte/reactions", { replyTo: reactions[0].id, text: "Où ?" }, admin);
-    for (const ip of ["a", "b", "c"])
-      await handle({
-        ...request("POST", `/api/compte/reactions/${reactions[0].id}/signaler`),
-        headers: { origin: SITE, "x-real-ip": ip },
-      });
+    await reportedByThree(reactions[0].id);
 
     const { data } = await call("GET", "/api/compte/admin", undefined, admin);
-    expect(data.reviews).toHaveLength(3);
+    // Beside the three who reported, on Bamako.
+    expect(data.reviews.filter((r: { city: string }) => r.city !== "bamako")).toHaveLength(3);
     const accra = data.reviews.find((r: { text: string }) => r.text === "Accra la nuit.");
     expect(accra).toMatchObject({ city: "accra", reports: 3, hidden: true, replyTo: null });
     const reply = data.reviews.find((r: { text: string }) => r.text === "Où ?");
@@ -134,11 +139,7 @@ describe("moderating a review", () => {
 
   it("restoring a reported review clears its reports", async () => {
     const { admin, id } = await setup();
-    for (const ip of ["a", "b", "c"])
-      await handle({
-        ...request("POST", `/api/compte/reactions/${id}/signaler`),
-        headers: { origin: SITE, "x-real-ip": ip },
-      });
+    await reportedByThree(id);
     expect(await publicCount()).toBe(1);
     await call("POST", `/api/compte/admin/reactions/${id}`, { action: "retablir" }, admin);
     expect(await publicCount()).toBe(2);

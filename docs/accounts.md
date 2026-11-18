@@ -19,13 +19,17 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
   a permanent link to the result alone, simpler but readable by anyone holding the e-mail.
 - **Sensitive answers are kept, with explicit consent.** Origin, faith, health and the same-sex-law
   filter are special-category data (GDPR art. 9). They are stored only after the reader ticks a
-  separate, unticked box that names them. They are never sent to a partner, to analytics or into an
-  e-mail.
+  separate, unticked box that names them, on every form that keeps a journey (« Reprendre plus
+  tard » signed in or not, « Recevoir par e-mail »). The choice is stored per journey
+  (`journeys.sensitive`), so answers given later to a journey kept without the box are stripped
+  too (`keptOf` in `accounts.ts`, decided 2026-11-18 after the audit found `/parcours` storing them
+  without one). Journeys from before the column were migrated: one started from Mon espace had its
+  sensitive answers erased. They are never sent to a partner, to analytics or into an e-mail.
 - **Saving under someone else's address does nothing visible.** A save creates an unconfirmed journey,
   and only opening the link from that address confirms it. Until then it does not show in Mon espace,
   and it is erased after 7 days.
 - **Nothing reveals who uses Là-bas.** « Recevoir mon lien de connexion » gives the same answer
-  whether or not the address has a space.
+  whether or not the address has a space, and as fast: the mail is sent after the answer.
 - **Tokens are stored hashed.** A copy of the database opens no session and no link.
 
 ## Reactions on a city
@@ -61,8 +65,11 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 - **Back to the city page.** The link that publishes a reaction written on a result page lands on
   the city page: the quick quiz cannot be redrawn from a link, it starts over.
 - **Moderation, minimal.** Authors delete their own reactions; three reports from different
-  connections hide one. Who reported what is kept in memory only. The road not taken: a review
-  queue before publication, too slow for a beta whose point is to hear readers.
+  signed-in readers hide one (operator, 2026-11-18: connections were too cheap to count, one
+  person with three addresses could hide any review). `reaction_reports` keeps who reported so
+  that each counts once across restarts; it is in the export, goes with the space, and « rétablir »
+  clears it. The road not taken: a review queue before publication, too slow for a beta whose
+  point is to hear readers.
 - **Measured, anonymously.** Three Plausible goals (`reactionEvent` in `src/lib/analytics.ts`):
   « Réaction : formulaire ouvert », « Réaction envoyée » (statut: published at once or waiting for
   its link) and « Réactions consultées », each with `lieu` and `ville`. Publication by the e-mailed

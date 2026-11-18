@@ -5,6 +5,7 @@ import {
   dateLabel,
   journeySummary,
   resultsHref,
+  memberJourneyBody,
   resultsMailBody,
   resumeHref,
   saveBody,
@@ -16,33 +17,41 @@ const first = (id: string) => QUESTIONS.find((q) => q.id === id)!.choices[0].val
 describe("« Reprendre plus tard »", () => {
   const answers = { order: 1 } as Answers;
 
+  const form = { email: " awa@exemple.fr ", consent: true, sensitive: false, news: false };
+  const withOrigin = { ...answers, origin: [first("origin")] } as Answers;
+
   it("sends the address, the explicit consent, the news choice and the journey", () => {
-    expect(
-      saveBody(
-        { email: " awa@exemple.fr ", consent: true, news: false, website: "" },
-        "quick",
-        answers,
-      ),
-    ).toEqual({
+    expect(saveBody({ ...form, website: "" }, "quick", answers)).toEqual({
       email: "awa@exemple.fr",
       consent: true,
+      sensitive: false,
       news: false,
       website: "",
       journey: { kind: "quick", answers },
     });
   });
 
-  it("saves nothing without the consent box, which names the sensitive answers", () => {
+  it("keeps the sensitive answers in the browser unless their own box is ticked", () => {
+    expect(saveBody({ ...form, website: "" }, "quick", withOrigin)?.journey.answers).toEqual(
+      answers,
+    );
     expect(
-      saveBody(
-        { email: "awa@exemple.fr", consent: false, news: true, website: "" },
-        "quick",
-        answers,
-      ),
-    ).toBeNull();
-    expect(
-      saveBody({ email: "awa", consent: true, news: false, website: "" }, "quick", answers),
-    ).toBeNull();
+      saveBody({ ...form, sensitive: true, website: "" }, "quick", withOrigin)?.journey.answers,
+    ).toEqual(withOrigin);
+  });
+
+  it("saves nothing without the consent box", () => {
+    expect(saveBody({ ...form, consent: false, website: "" }, "quick", answers)).toBeNull();
+    expect(saveBody({ ...form, email: "awa", website: "" }, "quick", answers)).toBeNull();
+  });
+
+  it("sends the journey of a signed-in reader with the same separate box", () => {
+    expect(memberJourneyBody("deep", withOrigin, false)).toEqual({
+      kind: "deep",
+      sensitive: false,
+      answers,
+    });
+    expect(memberJourneyBody("deep", withOrigin, true).answers).toEqual(withOrigin);
   });
 
   it("says what to fix when the form is refused", () => {

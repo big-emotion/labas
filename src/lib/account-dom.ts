@@ -1,6 +1,6 @@
 import { saveAnswers } from "./keep";
 import { browserStore } from "./keep-dom";
-import { type Journey, type JourneyKind, saveBody } from "./account";
+import { type Journey, type JourneyKind, memberJourneyBody, saveBody } from "./account";
 import { outcomeOf } from "./newsletter";
 import type { Answers } from "./ranking";
 
@@ -65,13 +65,15 @@ export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
   for (const block of document.querySelectorAll<HTMLElement>("[data-save-later]")) {
     const toggle = block.querySelector<HTMLButtonElement>("[data-save-toggle]")!;
     const panel = block.querySelector<HTMLElement>("[data-save-panel]")!;
-    const form = panel.querySelector("form")!;
+    const form = panel.querySelector<HTMLFormElement>("form:not([data-save-member])")!;
+    const memberForm = panel.querySelector<HTMLFormElement>("[data-save-member]")!;
     const error = panel.querySelector<HTMLElement>("[data-save-error]")!;
     const done = panel.querySelector<HTMLElement>("[data-save-done]")!;
     const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
     const finish = (title: string, text: string) => {
       form.hidden = true;
+      memberForm.hidden = true;
       panel.querySelector<HTMLElement>("[data-save-intro]")!.hidden = true;
       done.querySelector("b")!.textContent = title;
       done.querySelector("span")!.textContent = text;
@@ -83,17 +85,36 @@ export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
       panel.hidden = !panel.hidden;
       toggle.setAttribute("aria-expanded", String(!panel.hidden));
       if (!panel.hidden && !form.hidden) {
-        // Signed in already: no e-mail needed, the journey goes straight to Mon espace.
+        // Signed in already: no e-mail needed, only the separate box for the sensitive answers.
         const { status } = await api("GET", "/api/compte");
         if (status !== 200) return form.querySelector("input")?.focus();
-        const created = await api("POST", "/api/compte/parcours", { kind, answers: current() });
-        if (created.status !== 201) return form.querySelector("input")?.focus();
-        rememberJourney(created.data.id);
-        finish(
-          "C'est enregistré dans Mon espace.",
-          "Vous pouvez continuer : chaque réponse est désormais enregistrée.",
-        );
+        form.hidden = true;
+        memberForm.hidden = false;
+        memberForm.querySelector("input")?.focus();
       }
+    });
+
+    memberForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const sensitive = new FormData(memberForm).get("sensitive") === "on";
+      const failed = memberForm.querySelector<HTMLElement>("[data-save-member-error]")!;
+      const button = memberForm.querySelector<HTMLButtonElement>("button")!;
+      button.disabled = true;
+      const created = await api(
+        "POST",
+        "/api/compte/parcours",
+        memberJourneyBody(kind, current(), sensitive),
+      );
+      button.disabled = false;
+      if (created.status !== 201) {
+        failed.hidden = false;
+        return;
+      }
+      rememberJourney(created.data.id);
+      finish(
+        "C'est enregistré dans Mon espace.",
+        "Vous pouvez continuer : chaque réponse est désormais enregistrée.",
+      );
     });
 
     form.addEventListener("submit", async (event) => {
@@ -103,6 +124,7 @@ export function wireSaveLater(kind: JourneyKind, current: () => Answers) {
         {
           email: String(data.get("email") ?? ""),
           consent: data.get("consent") === "on",
+          sensitive: data.get("sensitive") === "on",
           news: data.get("news") === "on",
           website: String(data.get("website") ?? ""),
         },

@@ -318,7 +318,10 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
   report.hidden = reaction.mine;
   remove.hidden = !reaction.mine;
   report.addEventListener("click", async () => {
-    await api("POST", `/api/compte/reactions/${reaction.id}/signaler`);
+    const { status } = await api("POST", `/api/compte/reactions/${reaction.id}/signaler`);
+    // A report counts once per reader, so it needs a space, like hearts.
+    if (status === 401) return askLogin(block, slot);
+    if (status !== 202) return;
     report.textContent = "Signalée, merci";
     report.disabled = true;
   });
