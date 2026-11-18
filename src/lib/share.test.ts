@@ -47,8 +47,15 @@ describe("links shared on social networks and read by search engines", () => {
   });
 
   it("describe the quiz without a fixed number of questions, with the real city count", () => {
-    expect(siteDescription()).not.toMatch(/dix questions/);
-    expect(siteDescription()).toContain(`${CITIES.length} villes`);
+    expect(siteDescription("fr")).not.toMatch(/dix questions/);
+    expect(siteDescription("fr")).toContain(`${CITIES.length} villes`);
+    expect(siteDescription("en")).toContain(`${CITIES.length} cities`);
+  });
+
+  it("name an English page by its English address", () => {
+    expect(canonicalUrl("/en/city/dakar")).toBe(`${SITE}/en/city/dakar/`);
+    expect(shareImageFor("/en/city/dakar/")).toBe(`${SITE}/og/en/dakar.jpg`);
+    expect(shareImageFor("/en/")).toBe(`${SITE}/og/en/home.jpg`);
   });
 });
 
@@ -60,6 +67,13 @@ describe("the sitemap", () => {
     expect(paths).toContain("/methode/");
     expect(paths).toContain("/villes/");
     for (const city of CITIES) expect(paths).toContain(`/ville/${city.slug}/`);
+  });
+
+  it("lists every public page in English too", () => {
+    const paths = sitemapPaths();
+    expect(paths).toContain("/en/");
+    expect(paths).toContain("/en/go-deeper/");
+    for (const city of CITIES) expect(paths).toContain(`/en/city/${city.slug}/`);
   });
 
   it("is valid sitemap XML with absolute addresses", () => {
