@@ -15,6 +15,9 @@
   --saffron: #ffb627;
   --coral: #ff8f7a;
   --ink: #1d1b3a;
+  /* The light reactions block (components/Reactions.astro): its cards and its error text. */
+  --paper: #ffffff;
+  --brick: #a3271a;
   --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
   --font-body: "Nunito Sans Variable", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;

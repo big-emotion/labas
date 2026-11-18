@@ -9,6 +9,7 @@ import ResultCards from "../components/ResultCards.astro";
 import ShareMeta from "../components/ShareMeta.astro";
 import Newsletter from "../components/Newsletter.astro";
 import SaveLater from "../components/SaveLater.astro";
+import Reactions from "../components/Reactions.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
@@ -170,6 +171,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             <SourcesNote />
             <TemperamentProfile />
             <div id="cards" class="cards"></div>
+            {/* Moved by the script right under the first city's pitch. */}
+            <Reactions preview />
             {/* Right under the top three, where the wish to go further comes (operator, 2026-11-17). */}
             <section class="further" aria-labelledby="further-title">
               <h2 id="further-title">Envie d'aller plus loin ?</h2>
@@ -255,6 +258,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       import { saveAnswers } from "../lib/keep";
       import { syncJourney } from "../lib/account-dom";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
+      import { showCounts, showPreview } from "../lib/reactions-dom";
+      import { resultLink } from "../lib/shared-result";
 
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
@@ -370,9 +375,10 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           : `En tête pour l'instant : ${matches.map((m) => m.city.name).join(", ")}`;
 
         showProfile(current);
-        (document.getElementById("cards") as HTMLElement).replaceChildren(
-          ...matches.map((m, i) => cardFor(m, i, ranked)),
-        );
+        const cards = matches.map((m, i) => cardFor(m, i, ranked));
+        (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+        if (revealed)
+          void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
 
         // Every other city, in score order; conflict zones keep their place, greyed.
         const shown = new Set(matches.map((m) => m.city.name));
@@ -389,6 +395,17 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           ...visible.map((m, i) => rowFor(m, i + 4)),
         );
         (document.getElementById("more") as HTMLElement).hidden = showAll;
+        placePreview();
+      }
+
+      // What others say of the first city, inside its card right under its pitch, on every
+      // screen: the map column stays as it was (operator, 2026-11-18).
+      function placePreview() {
+        const outcome = document.getElementById("outcome") as HTMLElement;
+        if (outcome.hidden || !onScreen[0]) return;
+        void showPreview(onScreen[0].city, resultLink(readAnswers(), onScreen), (root) =>
+          document.querySelector("#cards .card-pitch")?.after(root),
+        );
       }
 
       document.getElementById("more")!.addEventListener("click", () => {
@@ -503,6 +520,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       document.getElementById("reveal")!.addEventListener("click", () => {
         const outcome = document.getElementById("outcome") as HTMLElement;
         outcome.hidden = false;
+        placePreview();
         outcome.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 

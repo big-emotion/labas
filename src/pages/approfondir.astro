@@ -5,6 +5,7 @@ import TemperamentProfile from "../components/TemperamentProfile.astro";
 import ResultCards from "../components/ResultCards.astro";
 import Page from "../layouts/Page.astro";
 import SaveLater from "../components/SaveLater.astro";
+import Reactions from "../components/Reactions.astro";
 import { DEEP_QUESTIONS } from "../lib/deep-questions";
 ---
 
@@ -74,6 +75,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     <TemperamentProfile />
     <ul id="removed" class="removed"></ul>
     <div id="cards" class="cards"></div>
+    {/* Moved by the script right under the first city's pitch. */}
+    <Reactions preview />
     <KeepResults />
   </section>
 
@@ -97,6 +100,8 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
     import { showProfile } from "../lib/profile-dom";
     import { cardFor, rowFor } from "../lib/cards-dom";
+    import { showCounts, showPreview } from "../lib/reactions-dom";
+    import { resultLink } from "../lib/shared-result";
 
     // The quick quiz's answers, kept in this browser: those questions are not asked again.
     const answers: Record<string, unknown> = { ...loadAnswers(browserStore()) };
@@ -202,9 +207,16 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
         }),
       );
       const proposed = ranked.filter((m) => !m.excludedBecause);
-      (document.getElementById("cards") as HTMLElement).replaceChildren(
-        ...proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked)),
-      );
+      const cards = proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked));
+      (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+      void showCounts(proposed.slice(1, TOP).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
+      // What others say of the first city, right under its pitch (operator, 2026-11-18).
+      if (proposed[0])
+        void showPreview(
+          proposed[0].city,
+          resultLink(answers as Answers, proposed.slice(0, TOP)),
+          (root) => document.querySelector("#cards .card-pitch")?.after(root),
+        );
       const rest = proposed.slice(TOP);
       const visible = showAll ? rest : rest.slice(0, VISIBLE);
       (document.getElementById("rows") as HTMLElement).replaceChildren(

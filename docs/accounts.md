@@ -28,6 +28,44 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
   whether or not the address has a space.
 - **Tokens are stored hashed.** A copy of the database opens no session and no link.
 
+## Reactions on a city
+
+Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` routes in
+`src/server/accounts.ts`, tested in `reactions.test.ts`; the block is `components/Reactions.astro`.
+
+- **On a city, not on a ranking.** A ranking differs for every reader; a city is the same for
+  all, so its thread is worth reading. The full thread sits on the city page, right after the
+  photo; result pages show the first city's three latest reactions inside its card, under its
+  pitch, on every screen. The other two cards carry a count, and every city of the full list a
+  « Voir les réactions » link in its detail. A preview in the map column was tried and dropped
+  (operator, 2026-11-18): it shrank the map for little gain.
+- **High and light.** Reactions are what the operator wants to learn from, so the block sits
+  above the fold and on `--thread`, the one light surface of the site.
+- **One e-mail, once.** A signed-out reader leaves an address; the reaction waits, unpublished,
+  and the link that publishes it also confirms the address and opens a session. A signed-in
+  reader publishes at once. An address that already has a space gets the same link, which is
+  also a login.
+- **Back where it was asked.** A link may carry a way back, stored with the token rather than
+  written in the URL, and only a path of this site (`backOf`). « Recevoir mon lien de connexion »
+  uses it too.
+- **The journey is public by default, one box keeps it back** (operator, 2026-11-18): the top 3
+  and the temperament (archetype and five traits) show under the reaction unless « Ne pas rendre
+  public » is ticked. Both are recomputed from the result link with `resultAt`, so no answer and no
+  forged text is published; the temperament is the one a shared result link already carries. The
+  city page uses the last result shown in this browser; the shared result page offers none, since
+  that result is someone else's.
+- **One line, then the detail.** Under the text, a single line shows the first city, the
+  temperament and « +2 villes »; a tap opens the three cities and the five traits. Three layouts
+  were mocked up (a reveal button, pills by the name, this line); the panel always open outweighed
+  the reaction itself, and pills by the name did not fit at 430 px (operator, 2026-11-18).
+- **Back to the city page.** The link that publishes a reaction written on a result page lands on
+  the city page: the quick quiz cannot be redrawn from a link, it starts over.
+- **Moderation, minimal.** Authors delete their own reactions; three reports from different
+  connections hide one. Who reported what is kept in memory only. The road not taken: a review
+  queue before publication, too slow for a beta whose point is to hear readers.
+- **Display names** are optional, 40 characters at most; without one, « Utilisateur » and a number
+  stable for the account. The address is never shown.
+
 ## Lifetimes
 
 | What                                                      | How long                                  |
@@ -37,6 +75,7 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
 | Login link asked from Mon espace                          | 15 minutes, single use                    |
 | Session (`labas_session`, HttpOnly, Secure, SameSite=Lax) | 30 days                                   |
 | Unconfirmed account or journey                            | 7 days, then erased                       |
+| Unpublished reaction, and its link                        | 7 days, then erased                       |
 | A space                                                   | 3 years after the last visit, then erased |
 | News confirmation link                                    | 7 days                                    |
 | News address (`news_subscribers`)                         | 3 years after its last confirmation       |
@@ -46,19 +85,23 @@ Decided with the operator on 2026-11-16; « Recevoir par e-mail » opens a space
 
 ## Routes (`/api/compte`, the subscribe service)
 
-| Route                                     | Who            | Does                                                                           |
-| ----------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
-| `POST /api/compte/sauvegarder`            | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link               |
-| `POST /api/compte/resultats`              | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result |
-| `POST /api/compte/lien`                   | anyone         | Email → a 15-minute link if the address has a space; same answer otherwise     |
-| `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`) |
-| `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                            |
-| `GET /api/compte/export`                  | session        | Everything kept, as a JSON download                                            |
-| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the news list)                               |
-| `POST /api/compte/parcours`               | session        | A new journey                                                                  |
-| `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                             |
-| `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list      |
-| `POST /api/compte/deconnexion`            | session        | Ends the session                                                               |
+| Route                                     | Who            | Does                                                                                    |
+| ----------------------------------------- | -------------- | --------------------------------------------------------------------------------------- |
+| `POST /api/compte/sauvegarder`            | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link                        |
+| `POST /api/compte/resultats`              | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result          |
+| `POST /api/compte/lien`                   | anyone         | Email (and `back`) → a 15-minute link if the address has a space; same answer otherwise |
+| `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`)          |
+| `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                                     |
+| `GET /api/compte/export`                  | session        | Everything kept, as a JSON download                                                     |
+| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the news list)                                        |
+| `POST /api/compte/parcours`               | session        | A new journey                                                                           |
+| `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                                      |
+| `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list               |
+| `POST /api/compte/deconnexion`            | session        | Ends the session                                                                        |
+| `GET /api/compte/reactions?ville=`        | anyone         | Published reactions of a city, newest first; `mine` for the author                      |
+| `POST /api/compte/reactions`              | anyone         | Signed in: published at once. Otherwise e-mail → a 7-day link that publishes            |
+| `POST /api/compte/reactions/:id/signaler` | anyone         | Counts one report per connection; three hide the reaction                               |
+| `DELETE /api/compte/reactions/:id`        | the owner only | Deletes one reaction                                                                    |
 
 Every change must come from `https://labas.africa` (Origin check). The cookie alone authorises
 nothing cross-site. Answers go through `cleanAnswers` (`src/lib/keep.ts`), so only questions and
