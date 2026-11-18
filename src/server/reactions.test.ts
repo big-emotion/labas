@@ -280,3 +280,155 @@ describe("signing in from any page", () => {
     expect((await follow()).response.headers.location).toBe("/ville/accra/");
   });
 });
+
+describe("the reviews of every city (/avis)", () => {
+  const everywhere = async (headers: Record<string, string> = {}) =>
+    JSON.parse(
+      (await handle(request("GET", "/api/compte/reactions", undefined, headers))).body ?? "{}",
+    );
+
+  it("lists the newest reviews of every city, each with its city", async () => {
+    const { cookie } = await signedIn();
+    clock += DAY;
+    await react({ email: undefined, city: "accra", text: "Accra la nuit." }, { cookie });
+    const { reactions, total } = await everywhere();
+    expect(total).toBe(2);
+    expect(reactions.map((r: { city: string }) => r.city)).toEqual(["accra", "dakar"]);
+  });
+
+  it("still refuses an unknown city when one is asked", async () => {
+    expect((await handle(request("GET", "/api/compte/reactions?ville=atlantis"))).status).toBe(400);
+  });
+});
+
+describe("answering a review", () => {
+  const reply = (replyTo: string, fields: Record<string, unknown>, headers = {}) =>
+    handle(request("POST", "/api/compte/reactions", { replyTo, ...fields }, headers));
+
+  it("files a reply under the review, on its city, without counting it as a review", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    const response = await reply(review.id, { text: "Quel quartier ?", city: "accra" }, { cookie });
+    expect(response.status).toBe(201);
+    const after = await thread();
+    expect(after.total).toBe(1);
+    expect(after.reactions[0].replies).toHaveLength(1);
+    expect(after.reactions[0].replies[0].text).toBe("Quel quartier ?");
+    expect(after.reactions[0].replies[0].mention).toBeNull();
+    expect((await thread("accra")).total).toBe(0);
+  });
+
+  it("keeps two levels: a reply to a reply joins the first review and names who it answers", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    await reply(review.id, { text: "Quel quartier ?", name: "Binta" }, { cookie });
+    const [first] = (await thread()).reactions[0].replies;
+    await reply(first.id, { text: "Les Almadies." }, { cookie });
+    const replies = (await thread()).reactions[0].replies;
+    expect(replies.map((r: { text: string }) => r.text)).toEqual([
+      "Quel quartier ?",
+      "Les Almadies.",
+    ]);
+    expect(replies[1].mention).toBe("Binta");
+    expect(replies.every((r: { replies?: unknown }) => r.replies === undefined)).toBe(true);
+  });
+
+  it("carries no journey: a reply is a conversation, not a result", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    await reply(
+      review.id,
+      { text: "Merci !", link: "https://labas.africa/resultat/#r=x" },
+      { cookie },
+    );
+    const [answer] = (await thread()).reactions[0].replies;
+    expect(answer.top).toBeNull();
+    expect(answer.profile).toBeNull();
+  });
+
+  it("asks a reader who is not signed in to confirm the address, like a review", async () => {
+    await signedIn();
+    const [review] = (await thread()).reactions;
+    const response = await reply(review.id, { text: "Et le bruit ?", email: "omar@exemple.fr" });
+    expect(response.status).toBe(202);
+    expect((await thread()).reactions[0].replies).toEqual([]);
+    await follow();
+    expect((await thread()).reactions[0].replies).toHaveLength(1);
+  });
+
+  it("refuses a reply to a review that does not exist", async () => {
+    const { cookie } = await signedIn();
+    const missing = "00000000-0000-0000-0000-000000000000";
+    expect((await reply(missing, { text: "Allô ?" }, { cookie })).status).toBe(400);
+    expect((await reply("pas-un-id", { text: "Allô ?" }, { cookie })).status).toBe(400);
+  });
+
+  it("takes the replies away with the review they answer", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    await reply(review.id, { text: "Quel quartier ?" }, { cookie });
+    await handle(request("DELETE", `/api/compte/reactions/${review.id}`, undefined, { cookie }));
+    const { rows } = await db.query("select id from reactions");
+    expect(rows).toHaveLength(0);
+  });
+});
+
+describe("hearts and the few other marks on a review", () => {
+  const mark = (id: string, value: string, headers: Record<string, string> = {}) =>
+    handle(request("POST", `/api/compte/reactions/${id}/marques`, { mark: value }, headers));
+
+  it("counts each mark once per reader, a second tap takes it back", async () => {
+    const { cookie } = await signedIn();
+    const other = await signedIn("binta@exemple.fr");
+    const [, review] = (await thread()).reactions;
+    await mark(review.id, "coeur", { cookie });
+    await mark(review.id, "coeur", other);
+    await mark(review.id, "merci", other);
+    const seen = (await thread("dakar", { cookie })).reactions[1];
+    expect(seen.marks).toEqual({ coeur: 2, merci: 1 });
+    expect(seen.myMarks).toEqual(["coeur"]);
+    expect(JSON.stringify(seen)).not.toContain("binta");
+
+    const undo = await mark(review.id, "coeur", { cookie });
+    expect(JSON.parse(undo.body!)).toEqual({ marks: { coeur: 1, merci: 1 }, mine: [] });
+  });
+
+  it("shows the counts to anyone, and marks nothing for a reader who is not signed in", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    await mark(review.id, "coeur", { cookie });
+    expect((await mark(review.id, "coeur")).status).toBe(401);
+    const seen = (await thread()).reactions[0];
+    expect(seen.marks).toEqual({ coeur: 1 });
+    expect(seen.myMarks).toEqual([]);
+  });
+
+  it("knows only its few marks, and only published reviews", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    expect((await mark(review.id, "colere", { cookie })).status).toBe(400);
+    await react({ email: "omar@exemple.fr" });
+    const { rows } = await db.query<{ id: string }>(
+      "select id from reactions where published_at is null",
+    );
+    expect((await mark(rows[0].id, "coeur", { cookie })).status).toBe(404);
+  });
+
+  it("marks replies too, keeps marks in the export and erases them with the space", async () => {
+    const { cookie } = await signedIn();
+    const [review] = (await thread()).reactions;
+    await handle(
+      request("POST", "/api/compte/reactions", { replyTo: review.id, text: "Oui !" }, { cookie }),
+    );
+    const [answer] = (await thread()).reactions[0].replies;
+    await mark(answer.id, "bravo", { cookie });
+    expect((await thread()).reactions[0].replies[0].marks).toEqual({ bravo: 1 });
+    const exported = JSON.parse(
+      (await handle(request("GET", "/api/compte/export", undefined, { cookie }))).body!,
+    );
+    expect(exported.marks).toEqual([{ reaction: answer.id, mark: "bravo" }]);
+    await handle(request("DELETE", "/api/compte", undefined, { cookie }));
+    const { rows } = await db.query("select * from reaction_marks");
+    expect(rows).toHaveLength(0);
+  });
+});

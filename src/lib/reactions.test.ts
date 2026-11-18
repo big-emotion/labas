@@ -1,5 +1,39 @@
 import { describe, expect, it } from "vitest";
-import { initialOf, journeySummary, ofCity, reactionCount, reactionDate } from "./reactions";
+import {
+  initialOf,
+  journeySummary,
+  markLabel,
+  ofCity,
+  reactionCount,
+  reactionDate,
+  replyCount,
+  reviewsFound,
+} from "./reactions";
+
+describe("the count on /avis", () => {
+  it("says how many reviews the filters keep, out of how many", () => {
+    expect(reviewsFound(0, 0)).toBe("Aucun avis pour l'instant");
+    expect(reviewsFound(12, 12)).toBe("12 avis, les plus récents d'abord");
+    expect(reviewsFound(3, 12)).toBe("3 avis sur 12");
+    expect(reviewsFound(0, 12)).toBe("Aucun avis sur 12 ne correspond");
+  });
+});
+
+describe("the replies under a review", () => {
+  it("agrees the noun with the number", () => {
+    expect(replyCount(0)).toBe("Répondre");
+    expect(replyCount(1)).toBe("1 réponse");
+    expect(replyCount(4)).toBe("4 réponses");
+  });
+});
+
+describe("a mark read aloud", () => {
+  it("names the mark, how many readers left it and whether the reader did", () => {
+    expect(markLabel("coeur", 0, false)).toBe("J'aime");
+    expect(markLabel("coeur", 3, true)).toBe("J'aime, 3 personnes, dont vous");
+    expect(markLabel("merci", 1, false)).toBe("Merci, 1 personne");
+  });
+});
 
 const NOW = Date.UTC(2026, 10, 18, 12);
 const HOUR = 60 * 60 * 1000;

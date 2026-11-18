@@ -12,14 +12,35 @@ export interface Profile {
   traits: { name: string; range: string; value: number }[];
 }
 
+/**
+ * The few marks a reader can leave on a review (operator, 2026-11-18): the heart first and
+ * foremost, then four friendly ones. No thumbs down: disagreeing is what a reply is for.
+ */
+export const MARKS = [
+  { key: "coeur", emoji: "❤️", label: "J'aime" },
+  { key: "bravo", emoji: "👍", label: "Bien vu" },
+  { key: "merci", emoji: "🙏", label: "Merci" },
+  { key: "rire", emoji: "😂", label: "Ça me fait rire" },
+  { key: "utile", emoji: "💡", label: "Utile" },
+] as const;
+export type MarkKey = (typeof MARKS)[number]["key"];
+
 export interface Reaction {
   id: string;
+  /** The city slug: the reviews of every city share one list on /avis. */
+  city: string;
   name: string;
   text: string;
   top: TopCity[] | null;
   profile: Profile | null;
   createdAt: string;
   mine: boolean;
+  marks: Partial<Record<MarkKey, number>>;
+  myMarks: MarkKey[];
+  /** On a reply to a reply only: who it answers, since the thread keeps two levels. */
+  mention: string | null;
+  /** On a review only, oldest first. */
+  replies?: Reaction[];
 }
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -70,4 +91,25 @@ export function journeySummary(top: TopCity[] | null, profile: Profile | null) {
     more: others > 0 ? `+${others} ${others > 1 ? "villes" : "ville"}` : null,
     label: `Son parcours : ${parts.join(", ")}. Voir le détail`,
   };
+}
+
+/** « avis » is invariable: the count reads the same for one or twelve. */
+export function reviewsFound(found: number, total: number): string {
+  if (total === 0) return "Aucun avis pour l'instant";
+  if (found === total) return `${total} avis, les plus récents d'abord`;
+  if (found === 0) return `Aucun avis sur ${total} ne correspond`;
+  return `${found} avis sur ${total}`;
+}
+
+/** The reply button carries the count, so a thread shows it has answers before it opens. */
+export function replyCount(total: number): string {
+  if (total === 0) return "Répondre";
+  return `${total} ${total > 1 ? "réponses" : "réponse"}`;
+}
+
+export function markLabel(key: MarkKey, count: number, mine: boolean): string {
+  const label = MARKS.find((m) => m.key === key)!.label;
+  if (count === 0) return label;
+  const people = `${count} ${count > 1 ? "personnes" : "personne"}`;
+  return `${label}, ${people}${mine ? ", dont vous" : ""}`;
 }
