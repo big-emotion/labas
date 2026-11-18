@@ -17,6 +17,7 @@ import { fileURLToPath } from "node:url";
 import pg from "pg";
 import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
+import { plausibleStats } from "./plausible";
 import { type Mail, confirmationEmail, resultsEmail } from "./emails";
 import { newsList } from "./news";
 
@@ -325,7 +326,21 @@ function start(port: number) {
   if (db && Object.values(config).every(Boolean)) {
     whenReady(() => migrate(db))
       .then(() => {
-        accounts = createAccounts({ db, mailer, siteUrl: config.siteUrl });
+        const { PLAUSIBLE_API_KEY, PLAUSIBLE_SITE, PLAUSIBLE_API_HOST } = process.env;
+        accounts = createAccounts({
+          db,
+          mailer,
+          siteUrl: config.siteUrl,
+          admins: (process.env.ADMIN_EMAILS ?? "").split(","),
+          stats:
+            PLAUSIBLE_API_KEY && PLAUSIBLE_SITE && PLAUSIBLE_API_HOST
+              ? plausibleStats({
+                  host: PLAUSIBLE_API_HOST,
+                  site: PLAUSIBLE_SITE,
+                  apiKey: PLAUSIBLE_API_KEY,
+                })
+              : undefined,
+        });
         const sweep = () => purge(db, Date.now()).catch((e) => console.error(String(e)));
         sweep();
         setInterval(sweep, 24 * 60 * 60 * 1000);
