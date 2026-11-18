@@ -3,10 +3,12 @@ import type { Reaction } from "./reactions";
 import { TEMPERAMENTS } from "./temperament";
 
 /**
- * The search of /avis (operator, 2026-11-18): another way in than the quiz. A reader picks a few
- * filters and the reviews closest to them come first, so the cities they talk about surface.
+ * The search of /avis (operator, 2026-11-18): another way in than the quiz. A reader picks a
+ * region, then one of its cities, a sort, a temperament, and reads the reviews twenty at a time.
  * The place filters are strict (a reader asking for Dakar wants Dakar); the temperament only
- * orders, so a young list never answers « nothing found ».
+ * orders, so a young list never answers « nothing found ». It all runs in the browser over every
+ * published review (the server sends them all, up to a cap): the temperament distance is computed
+ * here, and a beta's few hundred reviews do not need a paginated API yet.
  */
 
 export interface Place {
@@ -24,7 +26,32 @@ export interface ReviewFilters {
   zone: Zone | null;
   /** An archetype name of the temperament chapter. */
   temperament: string | null;
+  sort: ReviewSort;
 }
+
+/** The sorts of /avis, in the order the reader sees them; the first is the default. */
+export const SORTS = [
+  { key: "recents", label: "Plus récents" },
+  { key: "anciens", label: "Plus anciens" },
+  { key: "aimes", label: "Plus aimés" },
+  { key: "moins-aimes", label: "Moins aimés" },
+  { key: "reponses", label: "Plus de réponses" },
+] as const;
+export type ReviewSort = (typeof SORTS)[number]["key"];
+
+/** Every friendly mark counts the same: there is no thumbs down to subtract. */
+const likesOf = (review: Reaction) =>
+  Object.values(review.marks).reduce((sum, n) => sum + (n ?? 0), 0);
+const age = (review: Reaction) => -Date.parse(review.createdAt);
+
+/** Negative when `a` comes first; a tie always falls back to the newest first. */
+const BY: Record<ReviewSort, (a: Reaction, b: Reaction) => number> = {
+  recents: (a, b) => age(a) - age(b),
+  anciens: (a, b) => age(b) - age(a),
+  aimes: (a, b) => likesOf(b) - likesOf(a) || age(a) - age(b),
+  "moins-aimes": (a, b) => likesOf(a) - likesOf(b) || age(a) - age(b),
+  reponses: (a, b) => (b.replies?.length ?? 0) - (a.replies?.length ?? 0) || age(a) - age(b),
+};
 
 export interface Found {
   review: Reaction;
@@ -65,36 +92,50 @@ export function searchReviews(
     ];
     return said.some((text) => plain(text).includes(words));
   });
+  const sorted = [...kept].sort(BY[filters.sort]);
   const { temperament } = filters;
-  if (!temperament) return kept.map((review) => ({ review, close: true }));
-  // A stable sort: at equal distance the newest stays first. Equal is tested first because
+  if (!temperament) return sorted.map((review) => ({ review, close: true }));
+  // A stable sort: at equal distance the chosen sort stays. Equal is tested first because
   // Infinity - Infinity is NaN, which would scramble the reviews that have no temperament.
-  return kept
+  return sorted
     .map((review) => ({ review, distance: distanceTo(review, temperament) }))
     .sort((a, b) => (a.distance === b.distance ? 0 : a.distance - b.distance))
     .map(({ review, distance }) => ({ review, close: distance <= CLOSE_ENOUGH }));
 }
 
-export interface RisingCity {
+/** Twenty reviews a page: a phone screen or two, and few enough pages to number them. */
+const PER_PAGE = 20;
+
+export function pageOf(found: Found[], asked: number) {
+  const pages = Math.max(1, Math.ceil(found.length / PER_PAGE));
+  const page = Number.isFinite(asked) ? Math.min(Math.max(1, Math.trunc(asked)), pages) : 1;
+  return { items: found.slice((page - 1) * PER_PAGE, page * PER_PAGE), page, pages };
+}
+
+/** Every page up to seven; beyond, the first, the last and the current one's neighbours. */
+export function pageLinks(page: number, pages: number): (number | "…")[] {
+  if (pages <= 7) return Array.from({ length: pages }, (_, i) => i + 1);
+  const near = [1, page - 1, page, page + 1, pages].filter((n) => n >= 1 && n <= pages);
+  const kept = [...new Set(near)].sort((a, b) => a - b);
+  return kept.flatMap((n, i) => (i > 0 && n - kept[i - 1] > 1 ? ["…" as const, n] : [n]));
+}
+
+export interface ZoneCity {
   slug: string;
   name: string;
   count: number;
 }
 
-/** The cities the close reviews keep coming back to: where they were written and their top three. */
-export function risingCities(
-  found: Found[],
+/** The list to pick a city in a region: all its cities, the most reviewed first, then by name. */
+export function citiesOfZone(
+  reviews: Reaction[],
   places: Record<string, Place>,
-  limit = 6,
-): RisingCity[] {
+  zone: Zone,
+): ZoneCity[] {
   const counts = new Map<string, number>();
-  for (const { review, close } of found) {
-    if (!close) continue;
-    const named = new Set([review.city, ...(review.top ?? []).map((c) => c.slug)]);
-    for (const slug of named) if (places[slug]) counts.set(slug, (counts.get(slug) ?? 0) + 1);
-  }
-  return [...counts]
-    .map(([slug, count]) => ({ slug, name: places[slug].name, count }))
-    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "fr"))
-    .slice(0, limit);
+  for (const review of reviews) counts.set(review.city, (counts.get(review.city) ?? 0) + 1);
+  return Object.values(places)
+    .filter((place) => place.zone === zone)
+    .map((place) => ({ slug: place.slug, name: place.name, count: counts.get(place.slug) ?? 0 }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "fr"));
 }
