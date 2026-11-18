@@ -56,3 +56,10 @@ describe("sharing a result on a network", () => {
     expect(GOALS).toContain(shareEvent("x").name);
   });
 });
+
+describe("sharing a result from an English page", () => {
+  it("says the cities in English under the Over There name", () => {
+    expect(networkText(link, "en")).toMatch(/^My African cities on Over There: .+\. https:/);
+    expect(networkText(link, "en")).not.toContain("Là-bas");
+  });
+});

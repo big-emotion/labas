@@ -96,7 +96,7 @@ describe("the sitemap", () => {
 describe("the share pictures", { timeout: 30_000 }, () => {
   // Light enough for a phone on a slow network, well under every network's 5 MB limit.
   it("render the home picture as a 1200 × 630 JPEG under 300 KB", async () => {
-    const jpeg = await renderShareCard({ kind: "home" });
+    const jpeg = await renderShareCard({ kind: "home" }, "fr");
     expect([...jpeg.slice(0, 3)]).toEqual(JPEG_SIGNATURE);
     const picture = await pictureOf(jpeg);
     expect(picture).toMatchObject({ format: "jpeg", width: 1200, height: 630 });
@@ -105,14 +105,23 @@ describe("the share pictures", { timeout: 30_000 }, () => {
 
   it("render a city picture, photo credited, as a 1200 × 630 JPEG under 300 KB", async () => {
     const dakar = CITIES.find((city) => city.slug === "dakar")!;
-    const picture = await pictureOf(await renderShareCard({ kind: "city", city: dakar }));
+    const picture = await pictureOf(await renderShareCard({ kind: "city", city: dakar }, "fr"));
     expect(picture).toMatchObject({ format: "jpeg", width: 1200, height: 630 });
     expect(picture.kilobytes).toBeLessThan(300);
   });
 
+  it("render the English home and city pictures at the same size", async () => {
+    const dakar = CITIES.find((city) => city.slug === "dakar")!;
+    for (const card of [{ kind: "home" }, { kind: "city", city: dakar }] as const) {
+      const picture = await pictureOf(await renderShareCard(card, "en"));
+      expect(picture).toMatchObject({ format: "jpeg", width: 1200, height: 630 });
+      expect(picture.kilobytes).toBeLessThan(300);
+    }
+  });
+
   it("render a city without a photo too", async () => {
     const bare = CITIES.find((city) => city.slug === "teyateyaneng")!;
-    const picture = await pictureOf(await renderShareCard({ kind: "city", city: bare }));
+    const picture = await pictureOf(await renderShareCard({ kind: "city", city: bare }, "fr"));
     expect(picture).toMatchObject({ format: "jpeg", width: 1200, height: 630 });
   });
 

@@ -58,7 +58,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   replies are two levels, carry no journey, and hearts and the few friendly marks need a session
   and show as counts only, never who left them. A review is translated only when a reader
   presses the button (operator 2026-11-18): its public text alone goes to DeepL SE (EU), once per
-  language, and the translation is kept with the review and deleted with it. Fonts are self-hosted;
+  language, and the translation is kept with the review and deleted with it. The « Votre avis » feedback tab
+  (`components/Feedback.astro`, operator 2026-11-18) sends only its kind, text, page path and an
+  optional e-mail, kept 1 year for /admin and mailed to the team; never published, never a quiz
+  answer. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 

@@ -275,6 +275,20 @@ describe("the Microsoft Graph connection", () => {
     expect(message.body).toEqual({ contentType: "HTML", content: MAIL.html });
   });
 
+  it("lets a mail name its own Reply-To, the team's mailbox otherwise", async () => {
+    const bodies: string[] = [];
+    const fakeFetch = async (url: string | URL | Request, init?: RequestInit) => {
+      bodies.push(String(init?.body));
+      return String(url).includes("/oauth2/")
+        ? Response.json({ access_token: "token-1", expires_in: 3600 })
+        : new Response(null, { status: 202 });
+    };
+    await graph(CONFIG, fakeFetch as typeof fetch).send({ ...MAIL, replyTo: "awa@exemple.fr" });
+    expect(JSON.parse(bodies[1]).message.replyTo).toEqual([
+      { emailAddress: { address: "awa@exemple.fr" } },
+    ]);
+  });
+
   it("fails loudly when Microsoft refuses", async () => {
     const refusing = async () => new Response("bad", { status: 401 });
     await expect(graph(CONFIG, refusing as typeof fetch).send(MAIL)).rejects.toThrow(/401/);

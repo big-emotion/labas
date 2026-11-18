@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
 import ShareMeta from "../components/ShareMeta.astro";
+import Feedback from "../components/Feedback.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import { BRAND, LANGUAGE_TAG, type Bilingual } from "../i18n/locale";
 import { localeOfPath, pathFor } from "../i18n/routes";
@@ -12,10 +13,12 @@ interface Props {
   description: string;
   /** Private pages (/admin) stay out of search engines. */
   noindex?: boolean;
+  /** The feedback tab; off on /admin, where the operator would only be writing to themself. */
+  feedback?: boolean;
   /** The admin is French only (operator, 2026-11-18): no language switch there. */
   monolingual?: boolean;
 }
-const { title, description, noindex = false, monolingual = false } = Astro.props;
+const { title, description, noindex = false, feedback = true, monolingual = false } = Astro.props;
 const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const locale = localeOfPath(Astro.url.pathname);
 const brand = BRAND[locale];
@@ -92,6 +95,7 @@ const to = (route: Parameters<typeof pathFor>[0]) => pathFor(route, locale);
         </nav>
       </footer>
     </div>
+    {feedback && <Feedback />}
   </body>
 </html>
 

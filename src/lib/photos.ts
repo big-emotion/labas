@@ -1,3 +1,4 @@
+import type { Locale } from "../i18n/locale";
 import catalogue from "../data/photos.json";
 
 /** A free-licensed photo from Wikimedia Commons, served from /photos so no page calls a third party. */
@@ -18,4 +19,9 @@ const BY_NAME = new Map(
 
 export function photoFor(cityName: string): Photo | undefined {
   return BY_NAME.get(cityName);
+}
+
+/** « Photo : author · licence », the short credit drawn on share pictures. */
+export function photoCredit(photo: Photo, locale: Locale): string {
+  return `${locale === "en" ? "Photo:" : "Photo :"} ${photo.author} · ${photo.license}`;
 }

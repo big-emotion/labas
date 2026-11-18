@@ -1,3 +1,4 @@
+import type { FeedbackKind } from "./feedback";
 import { SENSITIVE_ANSWERS } from "./keep";
 import { QUESTIONS } from "./questions";
 
@@ -59,6 +60,7 @@ export const GOALS = [
   "Réaction envoyée",
   "Réactions consultées",
   "Partage",
+  "Message envoyé",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -123,4 +125,18 @@ export function reactionEvent(
   const props: ReactionEvent["props"] = { lieu: PLACES[place], ville: city };
   if (published !== undefined) props.statut = published ? "Publiée" : "En attente du lien";
   return { name, props };
+}
+
+/**
+ * A message from the feedback tab (operator, 2026-11-18): only whether it reviews the site or
+ * writes to the team. The prop « type » must be listed in Plausible's custom properties. Never the
+ * text, the page or the address.
+ */
+export interface MessageEvent {
+  name: "Message envoyé";
+  props: { type: "Avis" | "Message" };
+}
+
+export function messageEvent(kind: FeedbackKind): MessageEvent {
+  return { name: "Message envoyé", props: { type: kind === "site" ? "Avis" : "Message" } };
 }

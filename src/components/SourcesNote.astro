@@ -4,12 +4,25 @@
  * 2026-11-16): local voices, specialised or official sites, which may disagree, and a city that
  * may differ on the spot.
  */
+import type { Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
+const locale = localeOfPath(Astro.url.pathname);
+const COPY: Bilingual<{ text: string; link: string }> = {
+  fr: {
+    text: "Ces informations viennent de nos sources : des voix locales, des sites spécialisés, des sites officiels. Elles ne disent pas toujours la même chose, et sur place, la réalité peut varier.",
+    link: "Comment nous travaillons",
+  },
+  en: {
+    text: "This information comes from our sources: local voices, specialist sites and official sites. They do not always say the same thing, and on the ground, reality can vary.",
+    link: "How we work",
+  },
+};
+const copy = COPY[locale];
 ---
 
 <p class="sources-note">
-  Ces informations viennent de nos sources : des voix locales, des sites spécialisés, des sites
-  officiels. Elles ne disent pas toujours la même chose, et sur place, la réalité peut varier.{" "}
-  <a href="/methode#sources">Comment nous travaillons</a>
+  {copy.text} <a href={`${pathFor("method", locale)}#sources`}>{copy.link}</a>
 </p>
 
 <style>

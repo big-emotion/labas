@@ -43,3 +43,13 @@ describe("the « Y aller » links of a city", () => {
     for (const city of advisedAgainst) expect(goingThere(city), city.name).toBeUndefined();
   });
 });
+
+describe("the « Y aller » links in English", () => {
+  it("names flights and lodging in English and keeps the same places", () => {
+    const [flights, lodging] = goingThere(dakar!, "en") ?? [];
+    expect(flights.title).toBe("Flights to Dakar (Google Flights)");
+    expect(flights.url).toContain("hl=en");
+    expect(lodging.title).toBe("Places to stay in Dakar (Booking)");
+    expect(decodeURIComponent(lodging.url)).toContain("Dakar, Sénégal");
+  });
+});

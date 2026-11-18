@@ -1,3 +1,4 @@
+import type { Locale } from "../i18n/locale";
 import catalogue from "../data/city-holiday.json";
 import type { Source } from "./lines";
 
@@ -66,9 +67,25 @@ const MONTHS = [
   "décembre",
 ];
 
+const MONTHS_EN = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 /** « novembre, décembre, janvier » for a list of month numbers. */
-export function monthNames(months: number[]): string {
-  return months.map((m) => MONTHS[m - 1]).join(", ");
+export function monthNames(months: number[], locale: Locale): string {
+  const names = locale === "en" ? MONTHS_EN : MONTHS;
+  return months.map((m) => names[m - 1]).join(", ");
 }
 
 /** The answers of « Quand partez-vous ? », by three-month stretch. */
