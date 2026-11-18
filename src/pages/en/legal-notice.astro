@@ -1,0 +1,58 @@
+---
+import Page from "../../layouts/Page.astro";
+
+// Mirrors /mentions-legales: same build-time host settings, same facts. Prose pages keep one file
+// per language rather than a dictionary, so each reads as written rather than assembled.
+const hostName = import.meta.env.LEGAL_HOST_NAME?.trim();
+const hostAddress = import.meta.env.LEGAL_HOST_ADDRESS?.trim();
+const host = hostName
+  ? `by ${hostAddress ? `${hostName}, ${hostAddress}` : hostName}`
+  : "on servers run on the publisher's behalf";
+---
+
+<Page
+  title="Legal notice"
+  description="Who publishes Over There, who is responsible for it and where it is hosted."
+>
+  <h1>Legal notice</h1>
+  <p class="lead">Last updated: 18 November 2026.</p>
+
+  <h2>Publisher</h2>
+  <p>
+    Over There (Là-bas in French) is published by BIG EMOTION, a French SASU (simplified joint-stock
+    company with a single shareholder) with a share capital of €500.
+  </p>
+  <p>
+    Registered office: 14 rue Bausset, 75015 Paris, France. Paris Trade and Companies Register
+    (RCS): 983 423 351. EU VAT number: FR30983423351.
+  </p>
+  <p>
+    Contact: <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+  </p>
+
+  <h2>Publication director</h2>
+  <p>Jean-Noé Kollo, president of BIG EMOTION.</p>
+
+  <h2>Hosting</h2>
+  <p>The site is hosted {host}.</p>
+
+  <h2>Content and photos</h2>
+  <p>
+    The texts, the city scores and the way they are presented belong to BIG EMOTION. Every score
+    links to its sources, which remain the property of their authors.
+  </p>
+  <p>
+    The city photos come from Wikimedia Commons, under free licences. Each photo's author and
+    licence are shown on the city's page.
+  </p>
+
+  <h2>What this site is not</h2>
+  <p>
+    Over There suggests cities to discover. It is neither travel advice nor a safety notice: before
+    you go, check your government's travel advice (for example the UK Foreign Office, FCDO).
+  </p>
+  <p>
+    The French version of this notice is the reference:{" "}
+    <a href="/mentions-legales/">Mentions légales</a>.
+  </p>
+</Page>

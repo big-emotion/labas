@@ -4,6 +4,9 @@ import Wordmark from "../components/Wordmark.astro";
 import Analytics from "../components/Analytics.astro";
 import ShareMeta from "../components/ShareMeta.astro";
 import Feedback from "../components/Feedback.astro";
+import LanguageSwitch from "../components/LanguageSwitch.astro";
+import { BRAND, LANGUAGE_TAG, type Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
 
 interface Props {
   title: string;
@@ -12,47 +15,83 @@ interface Props {
   noindex?: boolean;
   /** The feedback tab; off on /admin, where the operator would only be writing to themself. */
   feedback?: boolean;
+  /** The admin is French only (operator, 2026-11-18): no language switch there. */
+  monolingual?: boolean;
 }
-const { title, description, noindex = false, feedback = true } = Astro.props;
+const { title, description, noindex = false, feedback = true, monolingual = false } = Astro.props;
 const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const locale = localeOfPath(Astro.url.pathname);
+const brand = BRAND[locale];
+const COPY: Bilingual<Record<string, string>> = {
+  fr: {
+    home: "Là-bas, retour au quiz",
+    shortcuts: "Raccourcis",
+    space: "Mon espace",
+    retake: "Refaire le quiz",
+    pages: "Pages du site",
+    cities: "Les villes",
+    reviews: "Les avis",
+    deep: "Aller plus loin",
+    method: "Notre méthode",
+    legal: "Mentions légales",
+    privacy: "Confidentialité",
+  },
+  en: {
+    home: "Over There, back to the quiz",
+    shortcuts: "Shortcuts",
+    space: "My space",
+    retake: "Take the quiz again",
+    pages: "Site pages",
+    cities: "The cities",
+    reviews: "Reviews",
+    deep: "Go deeper",
+    method: "Our method",
+    legal: "Legal notice",
+    privacy: "Privacy",
+  },
+};
+const copy = COPY[locale];
+const to = (route: Parameters<typeof pathFor>[0]) => pathFor(route, locale);
 ---
 
-<html lang="fr">
+<html lang={LANGUAGE_TAG[locale].html}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <ShareMeta title={`${title} · Là-bas`} description={description} />
+    <ShareMeta title={`${title} · ${brand}`} description={description} />
     <meta name="theme-color" content="#161a5c" />
-    <title>{title} · Là-bas</title>
+    <title>{title} · {brand}</title>
     <Analytics />
   </head>
   <body>
     <div class="page">
       <header class="top">
-        <a href="/" class="home" aria-label="Là-bas, retour au quiz">
+        <a href={to("home")} class="home" aria-label={copy.home}>
           <Wordmark />
         </a>
-        <nav class="top-links" aria-label="Raccourcis">
-          {accounts && <a href="/espace/">Mon espace</a>}
-          <a href="/" class="back">
-            Refaire le quiz
+        <nav class="top-links" aria-label={copy.shortcuts}>
+          {accounts && <a href={to("space")}>{copy.space}</a>}
+          <a href={to("home")} class="back">
+            {copy.retake}
           </a>
+          {!monolingual && <LanguageSwitch />}
         </nav>
       </header>
       <main>
         <slot />
       </main>
       <footer class="bottom">
-        <nav aria-label="Pages du site">
-          {accounts && <a href="/espace/">Mon espace</a>}
-          <a href="/villes/">Les villes</a>
-          {accounts && <a href="/avis/">Les avis</a>}
-          <a href="/approfondir">Aller plus loin</a>
-          <a href="/methode">Notre méthode</a>
-          <a href="/mentions-legales">Mentions légales</a>
-          <a href="/confidentialite">Confidentialité</a>
+        <nav aria-label={copy.pages}>
+          {accounts && <a href={to("space")}>{copy.space}</a>}
+          <a href={to("cities")}>{copy.cities}</a>
+          {accounts && <a href={to("reviews")}>{copy.reviews}</a>}
+          <a href={to("deep")}>{copy.deep}</a>
+          <a href={to("method")}>{copy.method}</a>
+          <a href={to("legal")}>{copy.legal}</a>
+          <a href={to("privacy")}>{copy.privacy}</a>
+          {!monolingual && <LanguageSwitch />}
         </nav>
       </footer>
     </div>

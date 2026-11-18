@@ -1,16 +1,11 @@
 import { CITIES } from "./cities";
+import type { Locale } from "../i18n/locale";
+import { builtPathFor, EN_SITE, FR_ORIGIN, localeOfPath, type Route } from "../i18n/routes";
 
 /** The production address. Links shared on social networks and read by search engines must be absolute. */
-export const SITE = "https://labas.africa";
+export const SITE = FR_ORIGIN;
 
-const PUBLIC_PAGES = [
-  "/",
-  "/approfondir/",
-  "/villes/",
-  "/methode/",
-  "/mentions-legales/",
-  "/confidentialite/",
-];
+const PUBLIC_PAGES: Route[] = ["home", "deep", "cities", "method", "legal", "privacy"];
 
 export function absoluteUrl(path: string): string {
   return new URL(path, SITE).href;
@@ -22,26 +17,35 @@ export function absoluteUrl(path: string): string {
  */
 export function canonicalUrl(path: string): string {
   const folder = path.replace(/index\.html$/, "").replace(/\/?$/, "/");
+  // English pages are built under /en/; EN_SITE says where they are read (labas.africa/en for now).
+  if (localeOfPath(folder) === "en") return `${EN_SITE}${folder.slice("/en".length)}`;
   return absoluteUrl(folder);
 }
 
-/** A city page shares its own picture; every other page shares the home picture. */
+/** A city page shares its own picture; every other page shares the home picture, in its language. */
 export function shareImageFor(path: string): string {
-  const city = /^\/ville\/([a-z0-9-]+)\/?$/.exec(path)?.[1];
-  return absoluteUrl(`/og/${city ?? "home"}.jpg`);
+  const english = localeOfPath(path) === "en";
+  const city = /^(?:\/en\/city|\/ville)\/([a-z0-9-]+)\/?$/.exec(path)?.[1];
+  return absoluteUrl(`/og/${english ? "en/" : ""}${city ?? "home"}.jpg`);
 }
 
 /** The quick part's length depends on the reader's project, so no number of questions is promised. */
-export function siteDescription(): string {
-  return `Répondez à quelques questions directes et découvrez, parmi ${CITIES.length} villes des 54 pays d'Afrique, celles qui vous ressemblent.`;
+export function siteDescription(locale: Locale): string {
+  return locale === "en"
+    ? `Answer a few straight questions and discover which of ${CITIES.length} cities across Africa's 54 countries resemble you.`
+    : `Répondez à quelques questions directes et découvrez, parmi ${CITIES.length} villes des 54 pays d'Afrique, celles qui vous ressemblent.`;
 }
 
+/** Built paths (English under /en/) of every page search engines should know, in both languages. */
 export function sitemapPaths(): string[] {
-  return [...PUBLIC_PAGES, ...CITIES.map((city) => `/ville/${city.slug}/`)];
+  return (["fr", "en"] as const).flatMap((locale: Locale) => [
+    ...PUBLIC_PAGES.map((route) => builtPathFor(route, locale)),
+    ...CITIES.map((city) => builtPathFor("city", locale, city.slug)),
+  ]);
 }
 
 export function sitemapXml(paths: string[]): string {
-  const urls = paths.map((path) => `  <url><loc>${absoluteUrl(path)}</loc></url>`).join("\n");
+  const urls = paths.map((path) => `  <url><loc>${canonicalUrl(path)}</loc></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls}
