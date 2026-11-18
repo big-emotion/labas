@@ -58,6 +58,6 @@ describe("the « Y aller » links in English", () => {
     expect(flights.title).toBe("Flights to Dakar (Google Flights)");
     expect(flights.url).toContain("hl=en");
     expect(lodging.title).toBe("Places to stay in Dakar (Booking)");
-    expect(decodeURIComponent(lodging.url)).toContain("Dakar, Sénégal");
+    expect(decodeURIComponent(lodging.url)).toContain("Dakar, Senegal");
   });
 });
