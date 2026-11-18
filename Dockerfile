@@ -10,9 +10,13 @@ ARG PUBLIC_PLAUSIBLE_DOMAIN=""
 ARG PUBLIC_PLAUSIBLE_HOST=""
 # The news sign-up blocks show only once the subscribe service has its mail settings.
 ARG PUBLIC_NEWSLETTER=""
+# English links drop their /en prefix once overthere.africa serves them (docs/deploy.md); empty
+# until the switch.
+ARG PUBLIC_EN_ORIGIN=""
 ENV PUBLIC_PLAUSIBLE_DOMAIN=$PUBLIC_PLAUSIBLE_DOMAIN \
     PUBLIC_PLAUSIBLE_HOST=$PUBLIC_PLAUSIBLE_HOST \
-    PUBLIC_NEWSLETTER=$PUBLIC_NEWSLETTER
+    PUBLIC_NEWSLETTER=$PUBLIC_NEWSLETTER \
+    PUBLIC_EN_ORIGIN=$PUBLIC_EN_ORIGIN
 RUN npm run build && npm run build:server
 
 # The mail service (src/server/subscribe.ts), bundled with the site's data into one file.

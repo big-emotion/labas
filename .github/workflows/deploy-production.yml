@@ -46,6 +46,7 @@ jobs:
             --build-arg PUBLIC_PLAUSIBLE_DOMAIN="${{ vars.PLAUSIBLE_DOMAIN }}" \
             --build-arg PUBLIC_PLAUSIBLE_HOST="${{ vars.PLAUSIBLE_HOST }}" \
             --build-arg PUBLIC_NEWSLETTER="${{ vars.NEWSLETTER }}" \
+            --build-arg PUBLIC_EN_ORIGIN="${{ vars.EN_ORIGIN }}" \
             .
           docker build --target subscribe -t labas-subscribe:deploy .
 

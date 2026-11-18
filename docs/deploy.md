@@ -156,3 +156,94 @@ so the current registrar's MX, SPF and DMARC records need not be recreated.
    its DNS zone.
 3. In the new zone, before switching name servers: `@` A `<server-ip>`, `www` A `<server-ip>`.
 4. Once the transfer completes and the new name servers answer, check with `dig` as in step 1.
+
+## Second domain: overthere.africa (prepared, not live)
+
+The English site, Over There, is built under `/en/` and served today at `labas.africa/en/…`
+(addresses in `src/i18n/routes.ts`). `overthere.africa` was free on 2026-11-18 and is not bought
+yet. Everything that does not depend on the domain is already in place, so the switch is a DNS,
+variable and Traefik step:
+
+- `deploy/nginx.conf` has a `server` block for `overthere.africa` and `www.overthere.africa`. It
+  serves the same build and looks every address up in `/en/` first (`/city/dakar/` →
+  `/en/city/dakar/index.html`), falling back to the root for the shared files (`/_astro/`, `/og/`,
+  `/photos/`, icons, manifest). Old `/en/…` links there redirect to the bare address. Until a DNS
+  record and a Traefik router send traffic to it, nothing reaches that block.
+- The build reads `PUBLIC_EN_ORIGIN` (the `Dockerfile` argument, fed from the repository
+  variable `EN_ORIGIN`). Empty, English links keep the `/en` prefix; set, they drop it, and the
+  language switch links across the two domains.
+- The labas.africa block carries the `/en/…` → overthere.africa 301, commented out with « enable
+  after the switch ».
+
+Both domains then serve the same site; each opens on its own language, and the FR/EN switch on
+every page links to the other domain.
+
+### Why Traefik is not prepared in the compose file
+
+A Traefik router asks Let's Encrypt for one certificate covering every `Host()` in its rule. Adding
+`overthere.africa` to the `labas` router before the name resolves would make every order for that
+certificate fail, `labas.africa`'s renewal included, and the failed validations count against
+Let's Encrypt's rate limits. A separate router would keep labas.africa safe but would still retry
+and fail on every request. So the labels below stay here, and go into
+`deploy/docker-compose.yml` only on switch day, after DNS answers.
+
+```diff
+       - "traefik.http.middlewares.labas-https.redirectscheme.permanent=true"
++      # overthere.africa — the English site, on its own router so a certificate problem on one
++      # domain never blocks the other.
++      - "traefik.http.routers.labas-en.rule=Host(`overthere.africa`) || Host(`www.overthere.africa`)"
++      - "traefik.http.routers.labas-en.entrypoints=websecure"
++      - "traefik.http.routers.labas-en.tls.certresolver=myresolver"
++      - "traefik.http.routers.labas-en.middlewares=labas-en-www"
++      - "traefik.http.middlewares.labas-en-www.redirectregex.regex=^https://www\\.overthere\\.africa/(.*)"
++      - "traefik.http.middlewares.labas-en-www.redirectregex.replacement=https://overthere.africa/$${1}"
++      - "traefik.http.middlewares.labas-en-www.redirectregex.permanent=true"
++      - "traefik.http.routers.labas-en-http.rule=Host(`overthere.africa`) || Host(`www.overthere.africa`)"
++      - "traefik.http.routers.labas-en-http.entrypoints=web"
++      - "traefik.http.routers.labas-en-http.middlewares=labas-https"
+ ...
+-      - "traefik.http.routers.labas-subscribe.rule=Host(`labas.africa`) && (PathPrefix(`/api/nouveautes`) || Path(`/api/resultats`) || PathPrefix(`/api/compte`))"
++      - "traefik.http.routers.labas-subscribe.rule=(Host(`labas.africa`) || Host(`overthere.africa`)) && (PathPrefix(`/api/nouveautes`) || Path(`/api/resultats`) || PathPrefix(`/api/compte`))"
+```
+
+The subscribe router needs no `www` host: `www.overthere.africa` redirects before any API call.
+Adding `overthere.africa` to it changes its certificate the same way, which is why it waits too.
+
+### Switch day, in this order
+
+1. **Buy the domain** (operator). Note the date: registries refuse a transfer for 60 days after
+   registration, as for labas.africa above.
+2. **DNS**: `@` A `<server-ip>`, `www` A `<server-ip>`, delete the registrar's default AAAA. Wait
+   until `dig +short overthere.africa A` and `dig +short www.overthere.africa A` both answer
+   `<server-ip>`.
+3. **The mail and accounts service accepts the second origin.** `src/server/subscribe.ts` refuses
+   any request whose `Origin` is not its `siteUrl` (labas.africa), and the e-mails it sends link to
+   `siteUrl`. Before English pages post to `/api/…` from overthere.africa, the service must accept
+   `https://overthere.africa` too and link English readers there: a code change with its tests,
+   shipped before or with the switch.
+4. **Traefik**: apply the diff above to `deploy/docker-compose.yml`.
+5. **The build variable**:
+   `gh variable set EN_ORIGIN --repo big-emotion/labas --body https://overthere.africa`.
+6. **The redirect**: uncomment the two `/en` lines in the labas.africa block of
+   `deploy/nginx.conf`.
+7. **Release** (`/labas-release`). The first request to overthere.africa gets its certificate.
+8. **Check**:
+   - `curl -sI https://overthere.africa/` answers 200 and the page has `<html lang="en">`;
+     `/city/dakar/` answers 200.
+   - `curl -sI https://www.overthere.africa/method/` → 301 to `https://overthere.africa/method/`.
+   - `curl -sI https://labas.africa/en/privacy/` → 301 to `https://overthere.africa/privacy/`.
+   - `curl -sI https://overthere.africa/en/method/` → 301 to `/method/`.
+   - `https://labas.africa/` still answers 200 in French, with its certificate unchanged.
+   - On both domains, the FR/EN switch lands on the same page in the other language.
+   - "Get it by email" works from an English page (no 403 `origin`).
+   - Plausible counts visits from both hostnames (no hostname allow-list leaving out
+     overthere.africa in the site settings).
+   - Add `https://overthere.africa/` to the smoke check in `deploy-production.yml`.
+   - Search engines: add overthere.africa to the search consoles, with its own sitemap.
+
+### Social handles to reserve
+
+Reserve « overthere.africa », or « overthereafrica » where dots are not allowed, on Instagram,
+TikTok, Facebook and LinkedIn (the four networks of the `labas-social` skill), plus X and YouTube
+to keep the name. Do it on purchase day: names go fast once a domain shows in public DNS. Note
+what was reserved, and under which account, in the operator's private notes.
