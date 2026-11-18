@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { Profile, Reaction, TopCity } from "./reactions";
-import { risingCities, searchReviews, type Place } from "./review-search";
+import type { Profile, Reaction } from "./reactions";
+import { citiesOfZone, pageLinks, pageOf, searchReviews, type Place } from "./review-search";
 
 const PLACES: Record<string, Place> = {
   dakar: { slug: "dakar", name: "Dakar", country: "Sénégal", zone: "ouest" },
@@ -37,10 +37,14 @@ function review(city: string, text: string, extra: Partial<Reaction> = {}): Reac
     ...extra,
   };
 }
-const top = (...slugs: string[]): TopCity[] =>
-  slugs.map((slug) => ({ slug, name: PLACES[slug].name, percent: 70 }));
 
-const NO_FILTER = { query: "", city: null, zone: null, temperament: null };
+const NO_FILTER = {
+  query: "",
+  city: null,
+  zone: null,
+  temperament: null,
+  sort: "recents" as const,
+};
 const ids = (found: { review: Reaction }[]) => found.map((f) => f.review.id);
 
 describe("searching the reviews", () => {
@@ -93,30 +97,80 @@ describe("searching the reviews", () => {
   });
 });
 
-describe("the cities that come back in the reviews found", () => {
-  it("counts, once per review, its city and the cities of its author's top three", () => {
-    const found = searchReviews(
-      [
-        review("dakar", "a", { top: top("dakar", "accra", "nairobi") }),
-        review("accra", "b", { top: top("dakar", "accra") }),
-        review("dakar", "c"),
-      ],
-      PLACES,
-      NO_FILTER,
-    );
-    expect(risingCities(found, PLACES)).toEqual([
-      { slug: "dakar", name: "Dakar", count: 3 },
-      { slug: "accra", name: "Accra", count: 2 },
-      { slug: "nairobi", name: "Nairobi", count: 1 },
-    ]);
+describe("sorting the reviews", () => {
+  const liked = (n: number) => ({ coeur: n });
+  const reviews = [
+    review("dakar", "a", { marks: liked(1) }),
+    review("accra", "b", { marks: { coeur: 2, bravo: 3 } }),
+    review("nairobi", "c", { replies: [review("nairobi", "r1"), review("nairobi", "r2")] }),
+    review("marrakech", "d", { marks: liked(1), replies: [review("marrakech", "r3")] }),
+  ];
+  const cities = (sort: "recents" | "anciens" | "aimes" | "moins-aimes" | "reponses") =>
+    searchReviews(reviews, PLACES, { ...NO_FILTER, sort }).map((f) => f.review.city);
+
+  it("puts the newest first by default, and the oldest first when asked", () => {
+    expect(cities("recents")).toEqual(["dakar", "accra", "nairobi", "marrakech"]);
+    expect(cities("anciens")).toEqual(["marrakech", "nairobi", "accra", "dakar"]);
   });
 
-  it("only listens to the reviews close to the temperament chosen", () => {
-    const found = searchReviews(
-      [review("nairobi", "a", { profile: EXPLORER }), review("dakar", "b", { profile: REFUGE })],
-      PLACES,
-      { ...NO_FILTER, temperament: "Exploration" },
-    );
-    expect(risingCities(found, PLACES).map((c) => c.slug)).toEqual(["nairobi"]);
+  it("counts every friendly mark for the most and the least liked, the newest first on a tie", () => {
+    expect(cities("aimes")).toEqual(["accra", "dakar", "marrakech", "nairobi"]);
+    expect(cities("moins-aimes")).toEqual(["nairobi", "dakar", "marrakech", "accra"]);
+  });
+
+  it("puts the reviews with the most replies first", () => {
+    expect(cities("reponses")).toEqual(["nairobi", "marrakech", "dakar", "accra"]);
+  });
+
+  it("keeps the temperament first: the sort orders reviews equally close", () => {
+    const close = [
+      review("dakar", "x", { profile: EXPLORER }),
+      review("accra", "y", { profile: EXPLORER, marks: liked(5) }),
+      review("nairobi", "z", { profile: REFUGE, marks: liked(9) }),
+    ];
+    const found = searchReviews(close, PLACES, {
+      ...NO_FILTER,
+      temperament: "Exploration",
+      sort: "aimes",
+    });
+    expect(found.map((f) => f.review.city)).toEqual(["accra", "dakar", "nairobi"]);
+  });
+});
+
+describe("pages of reviews", () => {
+  const many = Array.from({ length: 45 }, (_, i) => ({
+    review: review("dakar", `n${i}`),
+    close: true,
+  }));
+
+  it("shows twenty a page, and says how many pages there are", () => {
+    const first = pageOf(many, 1);
+    expect(first.items).toHaveLength(20);
+    expect(first).toMatchObject({ page: 1, pages: 3 });
+    expect(pageOf(many, 3).items).toHaveLength(5);
+  });
+
+  it("brings a page out of range back to the nearest one", () => {
+    expect(pageOf(many, 9).page).toBe(3);
+    expect(pageOf(many, 0).page).toBe(1);
+    expect(pageOf(many, Number.NaN).page).toBe(1);
+    expect(pageOf([], 4)).toMatchObject({ items: [], page: 1, pages: 1 });
+  });
+
+  it("numbers every page when there are few, and keeps the ends and the neighbours otherwise", () => {
+    expect(pageLinks(2, 4)).toEqual([1, 2, 3, 4]);
+    expect(pageLinks(6, 12)).toEqual([1, "…", 5, 6, 7, "…", 12]);
+    expect(pageLinks(1, 12)).toEqual([1, 2, "…", 12]);
+    expect(pageLinks(12, 12)).toEqual([1, "…", 11, 12]);
+  });
+});
+
+describe("the cities of a region, for the list to pick one", () => {
+  it("lists every city of the region with its number of reviews, the most reviewed first", () => {
+    const reviews = [review("accra", "a"), review("accra", "b"), review("nairobi", "c")];
+    expect(citiesOfZone(reviews, PLACES, "ouest")).toEqual([
+      { slug: "accra", name: "Accra", count: 2 },
+      { slug: "dakar", name: "Dakar", count: 0 },
+    ]);
   });
 });

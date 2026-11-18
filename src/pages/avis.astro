@@ -2,15 +2,36 @@
 import Page from "../layouts/Page.astro";
 import Reactions from "../components/Reactions.astro";
 import { CITIES, ZONES } from "../lib/cities";
-import type { Place } from "../lib/review-search";
+import { photoFor } from "../lib/photos";
+import { SORTS, type Place } from "../lib/review-search";
 import { TEMPERAMENTS } from "../lib/temperament";
 
 /**
  * The reviews of every city (operator, 2026-11-18): another way in than the quiz. Anyone reads;
- * replying and marking need a space. The filters run in the browser over the newest reviews.
+ * replying and marking need a space. A region, then one of its cities, a sort and a temperament
+ * filter the list in the browser, twenty a page; a city chosen shows its card above the reviews.
  */
 const places: Record<string, Place> = Object.fromEntries(
   CITIES.map((c) => [c.slug, { slug: c.slug, name: c.name, country: c.country, zone: c.zone }]),
+);
+/** What the city card shows: the top of the city page, so the reader knows where they are. */
+const cards = Object.fromEntries(
+  CITIES.map((c) => {
+    const photo = photoFor(c.name);
+    return [
+      c.slug,
+      {
+        tagline: c.tagline,
+        pitch: c.pitch,
+        region: ZONES[c.zone],
+        photo: photo && {
+          src: `/photos/${photo.file}`,
+          alt: photo.alt,
+          credit: `Photo : ${photo.author}, ${photo.license}, via Wikimedia Commons.`,
+        },
+      },
+    ];
+  }),
 );
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
@@ -22,12 +43,16 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
   <h1>Les avis</h1>
   <p class="lead">
     Ce que les lecteurs disent des villes d'Afrique qu'ils connaissent ou qui les attirent.
-    Choisissez des filtres : les avis les plus proches passent devant, et les villes dont ils
-    parlent apparaissent.
+    Choisissez une région puis une ville, ou cherchez un mot.
   </p>
 
   {enabled ? (
-    <div class="space" data-avis data-places={JSON.stringify(places)}>
+    <div
+      class="space"
+      data-avis
+      data-places={JSON.stringify(places)}
+      data-cards={JSON.stringify(cards)}
+    >
       <form class="filters" data-filters role="search" aria-label="Filtrer les avis">
         <label class="search">
           <span>Chercher</span>
@@ -38,13 +63,6 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             autocomplete="off"
           />
         </label>
-
-        <p class="city-chip" data-city-chip hidden>
-          <span data-city-name />
-          <button type="button" data-clear-city aria-label="Retirer le filtre de ville">
-            ×
-          </button>
-        </p>
 
         <fieldset>
           <legend>Région</legend>
@@ -61,6 +79,22 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             ))}
           </div>
         </fieldset>
+
+        <label class="pick" data-city-pick hidden>
+          <span>Ville</span>
+          <select name="ville">
+            <option value="">Toutes les villes de la région</option>
+          </select>
+        </label>
+
+        <label class="pick">
+          <span>Trier</span>
+          <select name="tri">
+            {SORTS.map((sort) => (
+              <option value={sort.key}>{sort.label}</option>
+            ))}
+          </select>
+        </label>
 
         <fieldset>
           <legend>Des gens qui vous ressemblent</legend>
@@ -83,12 +117,25 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         </fieldset>
       </form>
 
-      <section class="rising" data-rising aria-labelledby="rising-title" hidden>
-        <h2 id="rising-title">Les villes qui reviennent dans ces avis</h2>
-        <ol data-rising-list />
-      </section>
+      <article class="city-card" data-city-card aria-labelledby="city-card-name" hidden>
+        <figure class="city-photo" data-card-photo hidden>
+          <img alt="" width="640" height="360" loading="lazy" decoding="async" />
+          <figcaption />
+        </figure>
+        <div class="city-body">
+          <p class="city-where" data-card-where />
+          <h2 id="city-card-name" data-card-name />
+          <p class="city-tagline" data-card-tagline />
+          <p class="city-pitch" data-card-pitch />
+          <a class="city-link" data-card-link href="/villes/">
+            Voir la page
+          </a>
+        </div>
+      </article>
 
       <Reactions everywhere />
+
+      <nav class="pages" data-pages aria-label="Pages des avis" hidden />
 
       <p class="give">
         Pour donner votre avis, ouvrez la page d'une ville dans{" "}
@@ -103,21 +150,42 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
 <script>
   import { mountEverywhere } from "../lib/reactions-dom";
-  import { risingCities, searchReviews, type Place } from "../lib/review-search";
+  import { ofCity, type Reaction } from "../lib/reactions";
+  import {
+    citiesOfZone,
+    pageLinks,
+    pageOf,
+    searchReviews,
+    SORTS,
+    type Place,
+    type ReviewSort,
+  } from "../lib/review-search";
   import type { Zone } from "../lib/cities";
   import { TEMPERAMENTS } from "../lib/temperament";
 
+  interface Card {
+    tagline: string;
+    pitch: string;
+    region: string;
+    photo?: { src: string; alt: string; credit: string };
+  }
+
   async function start(space: HTMLElement, root: HTMLElement) {
     const places = JSON.parse(space.dataset.places!) as Record<string, Place>;
+    const cards = JSON.parse(space.dataset.cards!) as Record<string, Card>;
     const form = space.querySelector<HTMLFormElement>("[data-filters]")!;
-    const cityChip = space.querySelector<HTMLElement>("[data-city-chip]")!;
-    const rising = space.querySelector<HTMLElement>("[data-rising]")!;
+    const cityPick = space.querySelector<HTMLElement>("[data-city-pick]")!;
+    const citySelect = cityPick.querySelector("select")!;
+    const card = space.querySelector<HTMLElement>("[data-city-card]")!;
+    const pages = space.querySelector<HTMLElement>("[data-pages]")!;
     const temperamentText = space.querySelector<HTMLElement>("[data-temperament-text]")!;
     const defaultText = temperamentText.textContent!;
+    let loaded: Reaction[] = [];
 
-    // The filters live in the address too: a filtered list can be shared or come back to.
+    // The filters and the page live in the address: a filtered list can be shared or come back to.
     const params = new URLSearchParams(location.search);
-    let city = places[params.get("ville") ?? ""] ? params.get("ville") : null;
+    let page = Number(params.get("page") ?? "1");
+    const wanted = places[params.get("ville") ?? ""] ? params.get("ville")! : "";
     form.q.value = params.get("q") ?? "";
     const pick = (name: string, value: string | null) => {
       const input = form.querySelector<HTMLInputElement>(
@@ -125,79 +193,144 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       );
       if (input) input.checked = true;
     };
-    pick("zone", params.get("region"));
+    // A city given in the address brings its region with it, so the list shows it chosen.
+    pick("zone", wanted ? places[wanted].zone : params.get("region"));
     pick("temperament", params.get("temperament"));
+    const tri = params.get("tri");
+    if (SORTS.some((s) => s.key === tri)) form.tri.value = tri;
+
+    const zoneOf = () => (String(new FormData(form).get("zone") ?? "") || null) as Zone | null;
+
+    /** The city list follows the region: hidden for all of Africa, rebuilt with the counts. */
+    function fillCities(keep: string) {
+      const zone = zoneOf();
+      cityPick.hidden = !zone;
+      const options = zone
+        ? citiesOfZone(loaded, places, zone).map((c) => {
+            const option = new Option(`${c.name} (${c.count})`, c.slug);
+            return option;
+          })
+        : [];
+      citySelect.replaceChildren(new Option("Toutes les villes de la région", ""), ...options);
+      citySelect.value = zone && places[keep]?.zone === zone ? keep : "";
+    }
 
     const filters = () => {
       const data = new FormData(form);
       return {
         query: String(data.get("q") ?? ""),
-        city,
-        zone: (String(data.get("zone") ?? "") || null) as Zone | null,
+        city: String(data.get("ville") ?? "") || null,
+        zone: zoneOf(),
         temperament: String(data.get("temperament") ?? "") || null,
+        sort: (String(data.get("tri") ?? "") || "recents") as ReviewSort,
       };
     };
 
-    function remember() {
-      const { query, zone, temperament } = filters();
+    function remember(at: number) {
+      const { query, city, zone, temperament, sort } = filters();
       const next = new URLSearchParams();
       if (city) next.set("ville", city);
+      else if (zone) next.set("region", zone);
       if (query.trim()) next.set("q", query.trim());
-      if (zone) next.set("region", zone);
       if (temperament) next.set("temperament", temperament);
+      if (sort !== "recents") next.set("tri", sort);
+      if (at > 1) next.set("page", String(at));
       const search = next.toString();
       history.replaceState(null, "", search ? `?${search}` : location.pathname);
     }
 
-    function showCity() {
-      cityChip.hidden = !city;
-      cityChip.querySelector("[data-city-name]")!.textContent = city
-        ? `Ville : ${places[city].name}`
-        : "";
+    function showCard(city: string | null) {
+      card.hidden = !city;
+      if (!city) return;
+      const place = places[city];
+      const about = cards[city];
+      card.querySelector("[data-card-where]")!.textContent = `${place.country} · ${about.region}`;
+      card.querySelector("[data-card-name]")!.textContent = place.name;
+      card.querySelector("[data-card-tagline]")!.textContent = about.tagline;
+      card.querySelector("[data-card-pitch]")!.textContent = about.pitch;
+      const link = card.querySelector<HTMLAnchorElement>("[data-card-link]")!;
+      link.href = `/ville/${city}/`;
+      link.textContent = `Voir la page ${ofCity(place.name)}`;
+      const figure = card.querySelector<HTMLElement>("[data-card-photo]")!;
+      figure.hidden = !about.photo;
+      if (about.photo) {
+        const img = figure.querySelector("img")!;
+        img.src = about.photo.src;
+        img.alt = about.photo.alt;
+        figure.querySelector("figcaption")!.textContent = about.photo.credit;
+      }
+    }
+
+    function showPages(current: number, total: number) {
+      pages.hidden = total <= 1;
+      const button = (label: string, to: number, extra: Partial<HTMLButtonElement> = {}) => {
+        const b = Object.assign(document.createElement("button"), {
+          type: "button",
+          textContent: label,
+          ...extra,
+        });
+        b.addEventListener("click", () => {
+          page = to;
+          redraw(false);
+          root.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        return b;
+      };
+      const items = pageLinks(current, total).map((n) => {
+        if (n === "…") return Object.assign(document.createElement("span"), { textContent: "…" });
+        const b = button(String(n), n);
+        b.setAttribute("aria-label", `Page ${n}`);
+        if (n === current) b.setAttribute("aria-current", "page");
+        return b;
+      });
+      pages.replaceChildren(
+        button("Précédent", current - 1, { disabled: current <= 1 }),
+        ...items,
+        button("Suivant", current + 1, { disabled: current >= total }),
+      );
     }
 
     const list = await mountEverywhere(root, {
       places,
-      select: (reactions) => searchReviews(reactions, places, filters()),
+      select: (reactions) => {
+        const found = searchReviews(reactions, places, filters());
+        const shown = pageOf(found, page);
+        page = shown.page;
+        showPages(shown.page, shown.pages);
+        remember(shown.page);
+        return { shown: shown.items, total: found.length };
+      },
       temperament: () => filters().temperament,
-      onDraw(found) {
-        const cities = risingCities(found, places);
-        rising.hidden = cities.length === 0;
-        rising.querySelector("ol")!.replaceChildren(
-          ...cities.map((c) => {
-            const item = document.createElement("li");
-            const link = document.createElement("a");
-            link.href = `/ville/${c.slug}/`;
-            link.textContent = c.name;
-            const count = document.createElement("small");
-            count.textContent = String(c.count);
-            count.setAttribute("aria-label", `${c.count} fois`);
-            link.append(count);
-            item.append(link);
-            return item;
-          }),
-        );
+      onDraw(reactions) {
+        loaded = reactions;
+        showCard(filters().city);
         const chosen = TEMPERAMENTS.find((t) => t.name === filters().temperament);
         temperamentText.textContent = chosen
           ? `${chosen.text} Inspiré du Big Five, ce n'est pas un test de personnalité.`
           : defaultText;
       },
     });
-    showCity();
-    if (!list.loaded) space.hidden = true;
+    if (!list.loaded) {
+      space.hidden = true;
+      return;
+    }
+    // The counts need the reviews: the city list is built once they are here.
+    fillCities(wanted);
+    list.redraw();
 
-    const redraw = () => {
-      remember();
+    function redraw(fromFilters: boolean) {
+      // A new filter starts again at its first page.
+      if (fromFilters) page = 1;
       list.redraw();
-    };
-    form.addEventListener("change", redraw);
-    form.addEventListener("input", redraw);
-    form.addEventListener("submit", (event) => event.preventDefault());
-    cityChip.querySelector("button")!.addEventListener("click", () => {
-      city = null;
-      showCity();
-      redraw();
+    }
+    form.addEventListener("change", (event) => {
+      if ((event.target as HTMLInputElement).name === "zone") fillCities("");
+      redraw(true);
     });
+    form.addEventListener("input", (event) => {
+      if ((event.target as HTMLInputElement).name === "q") redraw(true);
+    });
+    form.addEventListener("submit", (event) => event.preventDefault());
   }
 
   const space = document.querySelector<HTMLElement>("[data-avis]");
@@ -283,67 +416,123 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     font-size: 0.85rem;
     margin: 0;
   }
-  .city-chip {
-    display: inline-flex;
-    justify-self: start;
-    align-items: center;
+  .pick {
+    display: grid;
     gap: 6px;
+    font-weight: 700;
+  }
+  .pick[hidden] {
+    display: none;
+  }
+  .pick select {
+    min-height: 48px;
+    border-radius: 14px;
+    border: 2px solid var(--thread-faint);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 0 12px;
+    font: inherit;
+    font-weight: 400;
+  }
+  .city-card {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 18px;
+    background: var(--night-deep);
+    border: 1px solid var(--night-lift);
+  }
+  .city-card[hidden],
+  .city-photo[hidden] {
+    display: none;
+  }
+  .city-photo {
     margin: 0;
-    padding: 0 4px 0 14px;
-    min-height: 40px;
+    display: grid;
+    gap: 4px;
+  }
+  .city-photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .city-photo figcaption,
+  .city-where {
+    font-size: 0.8rem;
+    color: var(--thread-dim);
+    margin: 0;
+  }
+  .city-body {
+    display: grid;
+    gap: 6px;
+  }
+  .city-body h2 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  .city-tagline {
+    margin: 0;
+    font-weight: 700;
+    color: var(--saffron);
+  }
+  .city-pitch {
+    margin: 0;
+    color: var(--thread);
+  }
+  .city-link {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
     border-radius: 999px;
     background: var(--saffron);
     color: var(--ink);
     font-weight: 700;
-  }
-  .city-chip[hidden] {
-    display: none;
-  }
-  .city-chip button {
-    width: 32px;
-    height: 32px;
-    border: 0;
-    border-radius: 50%;
-    background: var(--ink);
-    color: var(--saffron);
-    font-size: 1.1rem;
-    cursor: pointer;
-  }
-  .rising h2 {
-    margin-top: 0;
-    font-size: 1.15rem;
-  }
-  .rising[hidden] {
-    display: none;
-  }
-  .rising ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .rising :global(a) {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 40px;
-    padding: 0 6px 0 14px;
-    border-radius: 999px;
-    background: var(--night-lift);
-    color: var(--thread);
-    font-weight: 700;
     text-decoration: none;
   }
-  .rising :global(small) {
-    display: grid;
-    place-items: center;
-    min-width: 28px;
-    height: 28px;
+  /* From a tablet up, the photo sits beside the text. */
+  @media (min-width: 768px) {
+    .city-card:has(.city-photo:not([hidden])) {
+      grid-template-columns: 2fr 3fr;
+      align-items: start;
+    }
+  }
+  .pages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+  .pages[hidden] {
+    display: none;
+  }
+  .pages :global(button) {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 12px;
     border-radius: 999px;
-    background: var(--night);
-    color: var(--saffron);
+    border: 1px solid var(--thread-faint);
+    background: transparent;
+    color: var(--thread);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .pages :global(button[aria-current="page"]) {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--ink);
+  }
+  .pages :global(button:disabled) {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .pages :global(span) {
+    color: var(--thread-dim);
   }
   .give {
     color: var(--thread-dim);

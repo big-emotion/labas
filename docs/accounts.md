@@ -82,14 +82,22 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 Decided with the operator on 2026-11-18: another way in than the quiz. Code: `src/pages/avis.astro`,
 the search in `src/lib/review-search.ts`, the list in `Reactions.astro` (mode `everywhere`).
 
-- **Read by anyone, newest first.** `GET /api/compte/reactions` without `ville` returns the 200
-  newest reviews of every city; the page filters them in the browser. The road not taken: a
-  server-side search, premature while the whole list fits in one answer.
+- **Read by anyone, newest first.** `GET /api/compte/reactions` without `ville` returns up to the
+  1 000 newest reviews of every city; the page filters, sorts and pages them in the browser. The
+  road not taken: a server-side search and pagination, premature while the whole list fits in one
+  answer, and heavy because the temperament order is computed from each author's profile. Past
+  the cap, page on the server.
+- **Region, then city.** A region shows its cities in a list, the most reviewed first with their
+  count (« Dakar (12) »); picking one keeps only its reviews and shows a card for the city (name,
+  country, its pitch, a link to its page). The list of cities that used to sit under the filters
+  is gone (operator, 2026-11-18): it looked like a filter and left the page.
+- **Sorts and pages.** Plus récents (default), plus anciens, plus aimés, moins aimés (every
+  friendly mark counts the same), plus de réponses; twenty reviews a page, numbered.
 - **Place filters are strict, the temperament only orders.** A reader asking for Dakar wants Dakar;
-  a temperament puts the closest authors first (same archetype, then nearest on the five traits)
-  and keeps the others below « Moins proches », so a young list never answers « nothing found ».
-  « Les villes qui reviennent » counts, among the close reviews, each review's city and its
-  author's top three. The filters sit in the address, so a city page links to `/avis/?ville=…`.
+  a temperament puts the closest authors first (same archetype, then nearest on the five traits),
+  the chosen sort orders those equally close, and the others stay below « Moins proches », so a
+  young list never answers « nothing found ». The filters and the page sit in the address, so a
+  city page links to `/avis/?ville=…`.
 - **Replies, two levels, never a tree.** A reply hangs on the first review (`parent_id`); a reply
   to a reply hangs there too and names whom it answers (`mention`). A reply carries no journey and
   follows the review's rules: signed in it goes online at once, otherwise one e-mailed link

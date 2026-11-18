@@ -96,7 +96,7 @@ export function journeySummary(top: TopCity[] | null, profile: Profile | null) {
 /** « avis » is invariable: the count reads the same for one or twelve. */
 export function reviewsFound(found: number, total: number): string {
   if (total === 0) return "Aucun avis pour l'instant";
-  if (found === total) return `${total} avis, les plus récents d'abord`;
+  if (found === total) return `${total} avis`;
   if (found === 0) return `Aucun avis sur ${total} ne correspond`;
   return `${found} avis sur ${total}`;
 }

@@ -302,8 +302,11 @@ const UUID = new RegExp(`^${ID}$`);
 /** The id in a path, only when it is one: anything else would reach Postgres and fail there. */
 const idIn = (path: string, before: string, after = "") =>
   new RegExp(`^${before}(${ID})${after}$`).exec(path)?.[1];
-/** The reviews of every city on /avis: enough for a beta, filtered in the browser. */
-const LATEST = 200;
+/**
+ * The reviews of every city on /avis, filtered, sorted and paged in the browser (the temperament
+ * order is computed there). Past this many, page on the server instead (docs/accounts.md).
+ */
+const LATEST = 1000;
 
 interface LinkOptions {
   journeyId?: string | null;

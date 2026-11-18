@@ -47,9 +47,11 @@ function lastResult(): string | null {
 /** What /avis adds: names for every city, and the page's filters. */
 export interface Everywhere {
   places: Record<string, Place>;
-  select: (reactions: Reaction[]) => Found[];
+  /** The page to show and how many reviews the filters keep in all. */
+  select: (reactions: Reaction[]) => { shown: Found[]; total: number };
   temperament: () => string | null;
-  onDraw: (found: Found[]) => void;
+  /** Every review loaded, for what the page builds around the list (the city list, the pages). */
+  onDraw: (reactions: Reaction[]) => void;
 }
 
 interface Block {
@@ -240,8 +242,8 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
   const place = block.everywhere?.places[reaction.city];
   if (place && !isReply) {
     const where = part<HTMLAnchorElement>(item, "where");
-    where.href = `/ville/${place.slug}/#reactions`;
-    where.textContent = place.name;
+    where.href = `/ville/${place.slug}/`;
+    where.textContent = `${place.name}, ${place.country}`;
     where.hidden = false;
   }
   if (reaction.mention) {
@@ -351,12 +353,12 @@ function farther(temperament: string): HTMLElement {
 function draw(block: Block) {
   const { root, reactions, everywhere } = block;
   const preview = isPreview(block);
-  const found = everywhere
-    ? everywhere.select(reactions)
-    : reactions.map((review) => ({ review, close: true }));
-  const visible = found.slice(0, preview ? PREVIEW : block.shown);
-  part(root, "count").textContent = everywhere
-    ? reviewsFound(found.length, reactions.length)
+  // /avis pages its list itself; the other places show more on « Voir plus ».
+  const selected = everywhere?.select(reactions);
+  const found = selected ? selected.shown : reactions.map((review) => ({ review, close: true }));
+  const visible = selected ? found : found.slice(0, preview ? PREVIEW : block.shown);
+  part(root, "count").textContent = selected
+    ? reviewsFound(selected.total, reactions.length)
     : reactionCount(reactions.length);
   const temperament = everywhere?.temperament();
   part(root, "list").replaceChildren(
@@ -374,9 +376,9 @@ function draw(block: Block) {
         text.scrollHeight <= text.clientHeight + 2;
     }
   });
-  part(root, "empty").hidden = found.length > 0;
-  part(root, "more").hidden = preview || visible.length >= found.length;
-  everywhere?.onDraw(found);
+  part(root, "empty").hidden = (selected?.total ?? found.length) > 0;
+  part(root, "more").hidden = preview || Boolean(selected) || visible.length >= found.length;
+  everywhere?.onDraw(reactions);
   if (everywhere) return;
   for (const name of root.querySelectorAll("[data-name]")) name.textContent = block.cityName;
   part(root, "of").textContent = ofCity(block.cityName);

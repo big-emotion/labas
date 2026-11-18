@@ -59,6 +59,7 @@ export const GOALS = [
   "Réaction : formulaire ouvert",
   "Réaction envoyée",
   "Réactions consultées",
+  "Partage",
   "Message envoyé",
 ] as const;
 export type Goal = (typeof GOALS)[number];
@@ -66,6 +67,12 @@ export type Goal = (typeof GOALS)[number];
 export interface SiteEvent {
   name: Goal;
   props: { parcours: string };
+}
+
+/** A result shared on a network (`networks.ts`); « reseau » is a Plausible custom property. */
+export interface ShareEvent {
+  name: "Partage";
+  props: { reseau: string };
 }
 
 export function finishedEvent(
