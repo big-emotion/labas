@@ -59,6 +59,7 @@ export const GOALS = [
   "Réaction : formulaire ouvert",
   "Réaction envoyée",
   "Réactions consultées",
+  "Réaction traduite",
   "Partage",
   "Message envoyé",
 ] as const;
@@ -112,7 +113,11 @@ const PLACES = {
 export type ReactionPlace = keyof typeof PLACES;
 
 export interface ReactionEvent {
-  name: "Réaction : formulaire ouvert" | "Réaction envoyée" | "Réactions consultées";
+  name:
+    | "Réaction : formulaire ouvert"
+    | "Réaction envoyée"
+    | "Réactions consultées"
+    | "Réaction traduite";
   props: { lieu: string; ville: string; statut?: string };
 }
 

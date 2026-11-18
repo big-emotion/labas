@@ -18,6 +18,7 @@ import pg from "pg";
 import { SITE } from "../lib/share";
 import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
+import { deepl } from "./deepl";
 import { plausibleStats } from "./plausible";
 import type { Locale } from "../i18n/locale";
 import { builtPathFor } from "../i18n/routes";
@@ -346,13 +347,15 @@ function start(port: number) {
   if (db && Object.values(config).every(Boolean)) {
     whenReady(() => migrate(db))
       .then(() => {
-        const { PLAUSIBLE_API_KEY, PLAUSIBLE_SITE, PLAUSIBLE_API_HOST } = process.env;
+        const { PLAUSIBLE_API_KEY, PLAUSIBLE_SITE, PLAUSIBLE_API_HOST, DEEPL_API_KEY } =
+          process.env;
         accounts = createAccounts({
           db,
           mailer,
           siteUrl: config.siteUrl,
           admins: (process.env.ADMIN_EMAILS ?? "").split(","),
           team: config.replyTo,
+          translate: DEEPL_API_KEY ? deepl(DEEPL_API_KEY) : undefined,
           stats:
             PLAUSIBLE_API_KEY && PLAUSIBLE_SITE && PLAUSIBLE_API_HOST
               ? plausibleStats({

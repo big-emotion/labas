@@ -16,6 +16,7 @@ import {
   saveLinkEmail,
   teamMessageEmail,
 } from "./emails";
+import type { Translator } from "./deepl";
 import { limiter } from "./limiter";
 import type { Mailer } from "./subscribe";
 
@@ -154,6 +155,17 @@ export async function migrate(db: Db): Promise<void> {
       email text,
       created_at timestamptz not null
     )`);
+  // A review is sent to DeepL at most once per language (operator, 2026-11-18); its copies go
+  // with it. Reviews are never edited, so a copy never goes stale.
+  await db.query(`
+    create table if not exists reaction_translations (
+      reaction_id uuid not null references reactions(id) on delete cascade,
+      target text not null check (target in ('fr', 'en')),
+      text text not null,
+      detected_source text not null,
+      created_at timestamptz not null,
+      primary key (reaction_id, target)
+    )`);
   await consentPerJourney(db);
   await db.query(`
     create table if not exists news_subscribers (
@@ -275,6 +287,8 @@ interface Options {
   stats?: () => Promise<object>;
   /** The team's mailbox, where the feedback tab's messages are mailed; absent, they are only kept. */
   team?: string;
+  /** Translates a review on request (deepl.ts); absent until a DeepL key is set. */
+  translate?: Translator;
 }
 
 interface ReactionRow {
@@ -343,6 +357,7 @@ export function createAccounts({
   admins = [],
   stats,
   team,
+  translate,
 }: Options) {
   const adminAddresses = new Set(admins.map((a) => a.trim().toLowerCase()).filter(Boolean));
   const perConnection = limiter(5, HOUR);
@@ -352,6 +367,8 @@ export function createAccounts({
   // Apart from the others: a reader who just saved a journey can still write to the team.
   const messagesPerConnection = limiter(5, HOUR);
   const messagesPerAddress = limiter(3, DAY);
+  // Counts only the reviews that go to DeepL: a copy already kept costs nothing.
+  const translationsPerConnection = limiter(30, HOUR);
   const at = (offset = 0) => new Date(now() + offset).toISOString();
   const iso = (value: string | Date) => new Date(value).toISOString();
 
@@ -688,7 +705,11 @@ export function createAccounts({
          order by published_at desc, seq desc limit $3`,
         [city, REPORTS_TO_HIDE, LATEST],
       );
-      return json(200, { total: rows.length, reactions: await threadsOf(rows, reader?.id) });
+      return json(200, {
+        total: rows.length,
+        reactions: await threadsOf(rows, reader?.id),
+        translate: Boolean(translate),
+      });
     }
 
     // Someone signed in publishes at once; anyone else confirms the address once, by e-mail,
@@ -757,6 +778,38 @@ export function createAccounts({
         return json(502, { error: "mail" });
       }
       return json(202, { published: false });
+    }
+
+    // A review or reply in the page's language. Looked up by id, so only a published review's own
+    // text reaches DeepL: the route is no free translation service for any text.
+    const translated = idIn(path, "/api/compte/reactions/", "/traduction");
+    if (translated && method === "POST") {
+      if (!translate) return json(503, { error: "closed" });
+      const target = form.target === "en" || form.target === "fr" ? form.target : null;
+      if (!target) return json(400, { error: "form" });
+      const review = await reviewToAnswer(translated);
+      if (!review) return json(404, { error: "not-found" });
+      const kept = (
+        await db.query<{ text: string; detected_source: string }>(
+          "select text, detected_source from reaction_translations where reaction_id = $1 and target = $2",
+          [review.id, target],
+        )
+      ).rows[0];
+      if (kept) return json(200, { text: kept.text, detectedSource: kept.detected_source });
+      if (!translationsPerConnection(connection, now())) return json(429, { error: "slow-down" });
+      let translation;
+      try {
+        translation = await translate(review.text, target);
+      } catch (error) {
+        console.error(String(error));
+        return json(502, { error: "translation" });
+      }
+      await db.query(
+        `insert into reaction_translations (reaction_id, target, text, detected_source, created_at)
+         values ($1, $2, $3, $4, $5) on conflict do nothing`,
+        [review.id, target, translation.text, translation.detectedSource, at()],
+      );
+      return json(200, translation);
     }
 
     // The feedback tab (operator, 2026-11-18): kept for /admin and mailed to the team, never to
