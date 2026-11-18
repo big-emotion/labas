@@ -6,6 +6,25 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.21.0] - 2026-11-18
+
+### Added
+
+- Reactions on every city: the city page shows what readers say of it, right after its photo,
+  and you can add yours. Signed in, it goes online at once; otherwise one e-mail link publishes
+  it and confirms your address, once for all your next reactions.
+- Each result shows the three latest reactions on your first city inside its card; cities 2 and
+  3 and every city of the full list link to their own reactions.
+- A reaction shows its author's first city and temperament on one line, with their three cities
+  and five traits one tap away. A box keeps them private; your answers are never shown.
+- Authors can delete their reactions; a reaction reported by three people is hidden.
+- A login link brings you back to the page you asked it from.
+- Anonymous counts of reactions opened, sent and read, by city.
+
+### Changed
+
+- The privacy page explains what a reaction makes public and what is counted.
+
 ## [0.20.0] - 2026-11-17
 
 ### Added
@@ -405,6 +424,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.19.0...HEAD
+[0.21.0]: https://github.com/big-emotion/labas/compare/v0.20.0...v0.21.0
 [0.20.0]: https://github.com/big-emotion/labas/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/big-emotion/labas/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/big-emotion/labas/compare/v0.17.0...v0.18.0
