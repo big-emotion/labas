@@ -749,12 +749,6 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     border-radius: 16px;
     display: block;
   }
-  /* A wider, lower photo from the tablet up, so the reactions below it show on arrival. */
-  @media (min-width: 768px) {
-    .photo img {
-      aspect-ratio: 2 / 1;
-    }
-  }
   .photo figcaption,
   .small {
     font-size: 0.8rem;

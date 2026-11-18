@@ -47,8 +47,8 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   at the reader's request, and sensitive ones only with the explicit box that names them; magic-link login, no password;
   erased 3 years after the last visit. Never send them to analytics, partners or an e-mail. Reactions on a city
   (`components/Reactions.astro`, operator 2026-11-18) are public: text, chosen name or
-  « Utilisateur N », date and, only with its box, the top 3 recomputed from the result link;
-  never an answer, never the address. Fonts are self-hosted;
+  « Utilisateur N », date and, unless its box keeps them back, the top 3 and the temperament
+  recomputed from the result link; never an answer, never the address. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 

@@ -89,8 +89,6 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           </div>
           <p class="map-legend" id="legend"></p>
         </div>
-        {/* Moved by the script: into the first card on the phone, here on a wide screen. */}
-        <Reactions preview />
       </aside>
 
       <main class="main">
@@ -173,6 +171,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             <SourcesNote />
             <TemperamentProfile />
             <div id="cards" class="cards"></div>
+            {/* Moved by the script right under the first city's pitch. */}
+            <Reactions preview />
             {/* Right under the top three, where the wish to go further comes (operator, 2026-11-17). */}
             <section class="further" aria-labelledby="further-title">
               <h2 id="further-title">Envie d'aller plus loin ?</h2>
@@ -398,19 +398,15 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         placePreview();
       }
 
-      // What others say of the first city, high on the page: right under its pitch on the phone,
-      // in the map column on a wide screen (operator, 2026-11-18).
-      const WIDE = "(min-width: 880px)";
+      // What others say of the first city, inside its card right under its pitch, on every
+      // screen: the map column stays as it was (operator, 2026-11-18).
       function placePreview() {
         const outcome = document.getElementById("outcome") as HTMLElement;
-        document.body.classList.toggle("results", !outcome.hidden);
         if (outcome.hidden || !onScreen[0]) return;
-        void showPreview(onScreen[0].city, resultLink(readAnswers(), onScreen), (root) => {
-          if (matchMedia(WIDE).matches) document.querySelector(".side")!.append(root);
-          else document.querySelector("#cards .card-pitch")?.after(root);
-        });
+        void showPreview(onScreen[0].city, resultLink(readAnswers(), onScreen), (root) =>
+          document.querySelector("#cards .card-pitch")?.after(root),
+        );
       }
-      matchMedia(WIDE).addEventListener("change", placePreview);
 
       document.getElementById("more")!.addEventListener("click", () => {
         showAll = true;
@@ -608,11 +604,9 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           gap: 48px;
           padding-top: 36px;
         }
-        /* align-self: a grid item stretched to the row's height never sticks. */
         .side {
           position: sticky;
           top: 24px;
-          align-self: start;
         }
       }
       .brand {
@@ -885,17 +879,6 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       .map :global(.dot.top) {
         fill: var(--saffron);
         opacity: 1;
-      }
-      /* With the result, the map column makes room for the reactions preview. */
-      @media (min-width: 880px) {
-        :global(body.results) .side h1,
-        :global(body.results) .lead {
-          display: none;
-        }
-        :global(body.results) .map {
-          width: 72%;
-          margin-inline: auto;
-        }
       }
       @media (max-width: 879px) {
         :global(body.started) .side h1,

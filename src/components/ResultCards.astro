@@ -1,6 +1,7 @@
 ---
 // The result cards and rows, shared by the quick quiz and the full questionnaire. Rendered by
 // lib/cards-dom.ts; the page wraps cards in .results and rows in .rows.
+const reactions = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
 
 <template id="card-template">
@@ -99,6 +100,8 @@
       <h4>L'avis des autorités</h4>
       <p></p>
     </div>
+    {/* Every city of the result leads to its reactions (operator, 2026-11-18). */}
+    <a class="field full" data-field="reactions" hidden={!reactions}></a>
     <a class="field full" data-field="full">
       Voir la fiche complète, critère par critère, avec ses sources
     </a>

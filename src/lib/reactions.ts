@@ -6,11 +6,18 @@ export interface TopCity {
   percent: number;
 }
 
+/** The archetype and its five traits, as the temperament chapter computes them (temperament.ts). */
+export interface Profile {
+  name: string;
+  traits: { name: string; range: string; value: number }[];
+}
+
 export interface Reaction {
   id: string;
   name: string;
   text: string;
   top: TopCity[] | null;
+  profile: Profile | null;
   createdAt: string;
   mine: boolean;
 }
@@ -37,8 +44,8 @@ export function reactionCount(total: number): string {
   return `${total} ${total > 1 ? "réactions" : "réaction"}`;
 }
 
-export function topLine(top: TopCity[]): string {
-  return `Son top 3 : ${top.map((c) => `${c.name} ${c.percent}\u202f%`).join(", ")}`;
+export function initialOf(name: string): string {
+  return name.trim().charAt(0).toLocaleUpperCase("fr-FR") || "?";
 }
 
 /** « d'Abidjan », « de Dakar ». A city starting with « H » keeps « de »: most are aspirated. */

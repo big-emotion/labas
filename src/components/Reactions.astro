@@ -64,18 +64,24 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
         plus.
       </p>
       <label class="field">
-        Nom affiché <span class="dim">(facultatif)</span>
+        <span>
+          Nom affiché <span class="dim">(facultatif)</span>
+        </span>
         <input type="text" name="name" maxlength="40" autocomplete="nickname" />
       </label>
       <p class="hint">
         Sinon, « Utilisateur » et un numéro. Les réactions sont publiques : évitez votre nom
         complet.
       </p>
+      {/* Public by default, one box to keep them back (operator, 2026-11-18). */}
       <label class="check" data-top-field hidden>
-        <input type="checkbox" name="top" />
+        <input type="checkbox" name="private" />
         <span>
-          Joindre mon top 3{" "}
-          <span class="dim">(les villes et leurs pourcentages, aucune réponse)</span>
+          Ne pas rendre public mon top 3 ni mon profil de personnalité
+          <span class="dim">
+            Sans cette case, ils s'affichent sous votre réaction : vos trois villes avec leurs
+            pourcentages, et votre tempérament. Jamais vos réponses.
+          </span>
         </span>
       </label>
       <div class="email" data-email-field>
@@ -105,21 +111,36 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
 
     <template data-item>
       <li class="reaction">
-        <p class="meta">
-          <b class="who" />
-          <span aria-hidden="true">·</span>
-          <time />
-        </p>
-        <p class="text" />
-        <p class="top" hidden />
-        <div class="tools">
+        <header class="byline">
+          <span class="avatar" aria-hidden="true"></span>
+          <span class="who-when">
+            <b class="who"></b>
+            <time></time>
+          </span>
+        </header>
+        <p class="text"></p>
+        <button type="button" class="read-more" data-read-more aria-expanded="false" hidden>
+          Lire la suite
+        </button>
+        <div class="journey" hidden>
+          <p class="journey-title">Son parcours sur Là-bas</p>
+          <ol class="top"></ol>
+          <div class="profile" hidden>
+            <p class="profile-name">
+              Tempérament <b></b>
+            </p>
+            <ul class="traits"></ul>
+            <p class="profile-note">Inspiré du Big Five, ce n'est pas un test de personnalité.</p>
+          </div>
+        </div>
+        <footer class="tools">
           <button type="button" data-report>
             Signaler
           </button>
           <button type="button" data-delete hidden>
             Supprimer
           </button>
-        </div>
+        </footer>
       </li>
     </template>
   </section>
@@ -136,6 +157,8 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
   /* Light on purpose: the one block of the page the eye must not skip (operator, 2026-11-18). */
   .reactions {
     --focus: var(--ink);
+    /* Native controls (the checkbox) drawn for a light surface on this dark site. */
+    color-scheme: light;
     /* Its own size: the map column of the quiz sets a much larger one. */
     font-size: 1rem;
     display: grid;
@@ -166,8 +189,7 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
   }
   .count,
   .hint,
-  .dim,
-  .meta {
+  .dim {
     color: var(--night-lift);
     font-size: 0.85rem;
   }
@@ -185,36 +207,181 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
     /* The page caps list items at 68ch for reading; a reaction card spans its block. */
     max-width: none;
     display: grid;
-    gap: 6px;
+    gap: 10px;
     background: var(--paper);
-    border-radius: 14px;
-    padding: 12px 14px;
+    border-radius: 16px;
+    padding: 14px 16px 10px;
+    box-shadow: 0 1px 0 var(--thread-dim);
   }
-  .reactions :global(.meta) {
+  .reactions :global(.byline) {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    align-items: center;
+    gap: 10px;
   }
-  .reactions :global(.meta b) {
+  .reactions :global(.avatar) {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--night);
+    color: var(--saffron);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+  .reactions :global(.who-when) {
+    display: grid;
+    line-height: 1.25;
+  }
+  .reactions :global(.who) {
     color: var(--ink);
+    font-size: 0.98rem;
+  }
+  .reactions :global(time) {
+    color: var(--night-lift);
+    font-size: 0.8rem;
   }
   .reactions :global(.text) {
     white-space: pre-line;
     overflow-wrap: anywhere;
-  }
-  .preview :global(.text) {
+    font-size: 1rem;
+    line-height: 1.55;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  .preview :global(.text) {
+    -webkit-line-clamp: 3;
+  }
+  .reactions :global(.reaction.open .text) {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+  .reactions :global(.read-more) {
+    justify-self: start;
+    min-height: 32px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--night);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .reactions :global(.read-more[hidden]) {
+    display: none;
+  }
+  /* The author's journey: a quieter panel inside the card, so the text stays the main thing. */
+  .reactions :global(.journey) {
+    display: grid;
+    gap: 8px;
+    background: var(--thread);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .reactions :global(.journey[hidden]),
+  .reactions :global(.profile[hidden]) {
+    display: none;
+  }
+  .reactions :global(.journey-title),
+  .reactions :global(.profile-note) {
+    color: var(--night-lift);
+    font-size: 0.75rem;
+  }
+  .reactions :global(.journey-title) {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
   .reactions :global(.top) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .reactions :global(.top li) {
+    max-width: none;
+  }
+  .reactions :global(.top a) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 0 10px 0 4px;
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
     font-size: 0.85rem;
     font-weight: 700;
+    text-decoration: none;
+  }
+  .reactions :global(.top .place) {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--saffron);
+    font-size: 0.78rem;
+  }
+  .reactions :global(.top small) {
     color: var(--night-lift);
+    font-weight: 600;
+  }
+  .reactions :global(.profile) {
+    display: grid;
+    gap: 6px;
+  }
+  .reactions :global(.profile-name) {
+    font-size: 0.85rem;
+    color: var(--night-lift);
+  }
+  .reactions :global(.profile-name b) {
+    margin-left: 4px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .reactions :global(.traits) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px 16px;
+  }
+  .reactions :global(.traits li) {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 7.5em 1fr;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.78rem;
+  }
+  .reactions :global(.meter) {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--thread-dim);
+    overflow: hidden;
+  }
+  .reactions :global(.meter i) {
+    display: block;
+    height: 100%;
+    background: var(--night);
+  }
+  /* The preview names the temperament; its five traits wait on the city page. */
+  .preview :global(.traits) {
+    display: none;
   }
   .reactions :global(.tools) {
     display: flex;
+    justify-content: flex-end;
     gap: 14px;
   }
   .reactions :global(.tools button) {
@@ -223,9 +390,11 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
     border: 0;
     background: none;
     color: var(--night-lift);
-    font-size: 0.82rem;
-    text-decoration: underline;
+    font-size: 0.78rem;
     cursor: pointer;
+  }
+  .reactions :global(.tools button:hover) {
+    text-decoration: underline;
   }
   /* After the rule above on purpose: a preview only reads, the full thread is where to act. */
   .preview :global(.tools) {
@@ -297,6 +466,10 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
   textarea {
     resize: vertical;
   }
+  .check .dim {
+    display: block;
+    margin-top: 2px;
+  }
   .check {
     display: grid;
     grid-template-columns: 22px 1fr;
@@ -335,6 +508,9 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
   @media (min-width: 768px) {
     .reactions {
       padding: 22px 24px;
+    }
+    .reactions :global(.traits) {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

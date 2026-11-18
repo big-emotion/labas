@@ -1,5 +1,13 @@
 import { api } from "./account-dom";
-import { ofCity, type Reaction, reactionCount, reactionDate, topLine } from "./reactions";
+import {
+  initialOf,
+  ofCity,
+  type Profile,
+  type Reaction,
+  reactionCount,
+  reactionDate,
+  type TopCity,
+} from "./reactions";
 
 /**
  * The browser side of reactions (components/Reactions.astro): the thread on a city page, the
@@ -7,15 +15,15 @@ import { ofCity, type Reaction, reactionCount, reactionDate, topLine } from "./r
  */
 
 const PAGE = 10;
-const PREVIEW = 2;
-/** The last result link shown, so a reaction written on the city page can still join the top 3. */
+const PREVIEW = 3;
+/** The last result link shown, so a reaction written on the city page still carries the journey. */
 const LAST_RESULT = "labas.result-link";
 
 function remember(link: string) {
   try {
     localStorage.setItem(LAST_RESULT, link);
   } catch {
-    // Blocked storage: the top 3 is simply not offered on the city page.
+    // Blocked storage: the city page simply has no journey to join.
   }
 }
 function lastResult(): string | null {
@@ -38,19 +46,67 @@ interface Block {
 const part = <T extends HTMLElement>(root: HTMLElement, name: string) =>
   root.querySelector<T>(`[data-${name}]`)!;
 
+function topChips(top: TopCity[]): HTMLElement[] {
+  return top.map((city, i) => {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = `/ville/${city.slug}/`;
+    const place = document.createElement("span");
+    place.className = "place";
+    place.textContent = String(i + 1);
+    const percent = document.createElement("small");
+    percent.textContent = `${city.percent}\u202f%`;
+    link.append(place, document.createTextNode(city.name), percent);
+    item.append(link);
+    return item;
+  });
+}
+
+function traitRows(profile: Profile): HTMLElement[] {
+  return profile.traits.map((trait) => {
+    const item = document.createElement("li");
+    const label = document.createElement("span");
+    label.textContent = trait.name;
+    label.title = trait.range;
+    const meter = document.createElement("span");
+    meter.className = "meter";
+    meter.setAttribute(
+      "aria-label",
+      `${trait.name} : ${trait.range}, ${Math.round(trait.value * 100)} sur 100`,
+    );
+    const fill = document.createElement("i");
+    fill.style.width = `${Math.max(8, Math.round(trait.value * 100))}%`;
+    meter.append(fill);
+    item.append(label, meter);
+    return item;
+  });
+}
+
 function itemFor(block: Block, reaction: Reaction): HTMLElement {
   const template = part<HTMLTemplateElement>(block.root, "item");
   const item = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+  item.querySelector(".avatar")!.textContent = initialOf(reaction.name);
   item.querySelector(".who")!.textContent = reaction.name;
   const time = item.querySelector("time")!;
   time.dateTime = reaction.createdAt;
   time.textContent = reactionDate(reaction.createdAt, Date.now());
   // textContent, never HTML: a reaction is the readers' text, shown as typed.
   item.querySelector(".text")!.textContent = reaction.text;
-  if (reaction.top) {
-    const top = item.querySelector<HTMLElement>(".top")!;
-    top.textContent = topLine(reaction.top);
-    top.hidden = false;
+  const readMore = item.querySelector<HTMLButtonElement>("[data-read-more]")!;
+  readMore.addEventListener("click", () => {
+    const open = item.classList.toggle("open");
+    readMore.textContent = open ? "Réduire" : "Lire la suite";
+    readMore.setAttribute("aria-expanded", String(open));
+  });
+  if (reaction.top || reaction.profile) {
+    item.querySelector<HTMLElement>(".journey")!.hidden = false;
+    if (reaction.top) item.querySelector(".top")!.replaceChildren(...topChips(reaction.top));
+    if (reaction.profile) {
+      const profile = item.querySelector<HTMLElement>(".profile")!;
+      profile.hidden = false;
+      profile.querySelector("b")!.textContent = reaction.profile.name;
+      profile.querySelector(".traits")!.replaceChildren(...traitRows(reaction.profile));
+    }
   }
   const report = item.querySelector<HTMLButtonElement>("[data-report]")!;
   const remove = item.querySelector<HTMLButtonElement>("[data-delete]")!;
@@ -82,6 +138,14 @@ function draw(block: Block) {
   const visible = reactions.slice(0, preview ? PREVIEW : block.shown);
   part(root, "count").textContent = reactionCount(reactions.length);
   part(root, "list").replaceChildren(...visible.map((r) => itemFor(block, r)));
+  // « Lire la suite » only where the text is really cut, measured once the block is laid out.
+  requestAnimationFrame(() => {
+    for (const item of root.querySelectorAll<HTMLElement>(".reaction:not(.open)")) {
+      const text = item.querySelector<HTMLElement>(".text")!;
+      item.querySelector<HTMLElement>("[data-read-more]")!.hidden =
+        text.scrollHeight <= text.clientHeight + 2;
+    }
+  });
   part(root, "empty").hidden = reactions.length > 0;
   part(root, "more").hidden = preview || visible.length >= reactions.length;
   for (const name of root.querySelectorAll("[data-name]")) name.textContent = block.cityName;
@@ -91,7 +155,7 @@ function draw(block: Block) {
     all.href = `/ville/${block.city}/#reactions`;
     all.textContent = reactions.length
       ? `Voir toutes les réactions (${reactions.length})`
-      : `Voir la page de ${block.cityName}`;
+      : `Voir la page ${ofCity(block.cityName)}`;
   }
 }
 
@@ -137,9 +201,15 @@ function wireForm(block: Block) {
       text: String(data.get("text") ?? "").trim(),
       name: String(data.get("name") ?? "").trim(),
       email: signedIn ? undefined : String(data.get("email") ?? "").trim(),
-      link: data.get("top") === "on" ? block.link : undefined,
+      link: block.link ?? undefined,
+      private: data.get("private") === "on",
       website: String(data.get("website") ?? ""),
-      back: `${location.pathname}${location.search}#${root.id || "reactions-preview"}`,
+      // A result page cannot be redrawn from a link (the quick quiz starts over): the city page
+      // shows the published reaction wherever it was written.
+      back:
+        root.dataset.reactions === "preview"
+          ? `/ville/${block.city}/#reactions`
+          : `${location.pathname}#reactions`,
     };
     error.hidden = true;
     if (!body.text) {
@@ -198,7 +268,7 @@ let previewBlock: Block | null = null;
 
 /**
  * The preview of the first city on a result page, called after every drawing of the result.
- * `put` places it (inside the first card, or in the map column on a wide screen); the thread is
+ * `put` places it inside the first card, under its pitch; the thread is
  * fetched again only when the first city changed.
  */
 export async function showPreview(

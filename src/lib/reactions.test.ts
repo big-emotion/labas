@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ofCity, reactionCount, reactionDate, topLine } from "./reactions";
+import { initialOf, ofCity, reactionCount, reactionDate } from "./reactions";
 
 const NOW = Date.UTC(2026, 10, 18, 12);
 const HOUR = 60 * 60 * 1000;
@@ -22,14 +22,12 @@ describe("how many reactions", () => {
   });
 });
 
-describe("the joined top three", () => {
-  it("names the cities and their percentages, nothing else", () => {
-    const top = [
-      { slug: "dakar", name: "Dakar", percent: 87 },
-      { slug: "accra", name: "Accra", percent: 81 },
-      { slug: "abidjan", name: "Abidjan", percent: 79 },
-    ];
-    expect(topLine(top)).toBe("Son top 3 : Dakar 87\u202f%, Accra 81\u202f%, Abidjan 79\u202f%");
+describe("the round badge of the author", () => {
+  it("shows the first letter of the name, accents kept, upper case", () => {
+    expect(initialOf("awa de Lyon")).toBe("A");
+    expect(initialOf("Élodie")).toBe("É");
+    expect(initialOf("Utilisateur 3016")).toBe("U");
+    expect(initialOf("  ")).toBe("?");
   });
 });
 

@@ -157,21 +157,43 @@ describe("what a reaction shows", () => {
     expect((await thread()).reactions[0].text).toBe("La plus récente.");
   });
 
-  it("joins the top three drawn from the result link, never an answer", async () => {
-    const answers: Answers = { project: "installer" } as Answers;
-    const link = resultLink(answers, bestMatches(answers, 3));
-    await react({ link });
+  // The reader's top 3 and temperament are public by default; one box keeps them back.
+  const TEMPERAMENT = { saturday: 1, adventure: "seeking", order: 0.5, together: 1, friction: 1 };
+  const linkOf = (answers: Answers) => resultLink(answers, bestMatches(answers, 3));
+
+  it("joins the top three and the temperament drawn from the result link, never an answer", async () => {
+    await react({ link: linkOf({ project: "installer", ...TEMPERAMENT } as Answers) });
     await follow();
     const [reaction] = (await thread()).reactions;
     expect(reaction.top).toHaveLength(3);
     expect(Object.keys(reaction.top[0]).sort()).toEqual(["name", "percent", "slug"]);
+    expect(reaction.profile.name).toBeTruthy();
+    expect(reaction.profile.traits).toHaveLength(5);
+    expect(Object.keys(reaction.profile.traits[0]).sort()).toEqual(["name", "range", "value"]);
     expect(JSON.stringify(reaction)).not.toContain("installer");
+  });
+
+  it("joins the top three alone when the temperament was not answered", async () => {
+    await react({ link: linkOf({ project: "installer" } as Answers) });
+    await follow();
+    const [reaction] = (await thread()).reactions;
+    expect(reaction.top).toHaveLength(3);
+    expect(reaction.profile).toBeNull();
+  });
+
+  it("keeps the top three and the temperament back when the reader asks", async () => {
+    await react({ link: linkOf(TEMPERAMENT as Answers), private: true });
+    await follow();
+    const [reaction] = (await thread()).reactions;
+    expect(reaction.top).toBeNull();
+    expect(reaction.profile).toBeNull();
   });
 
   it("drops a link that is not a result of this site", async () => {
     await react({ link: "https://evil.example/resultat/#r=x" });
     await follow();
     expect((await thread()).reactions[0].top).toBeNull();
+    expect((await thread()).reactions[0].profile).toBeNull();
   });
 
   it("tells the author which reactions are theirs, and nobody else", async () => {

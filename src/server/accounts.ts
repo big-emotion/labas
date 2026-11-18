@@ -99,6 +99,7 @@ export async function migrate(db: Db): Promise<void> {
     "alter table login_links add column if not exists reaction_id uuid references reactions(id) on delete cascade",
   );
   await db.query("alter table login_links add column if not exists back text");
+  await db.query("alter table reactions add column if not exists profile jsonb");
   await db.query(`
     create table if not exists news_subscribers (
       email text primary key,
@@ -202,6 +203,7 @@ interface ReactionRow {
   text: string;
   name: string | null;
   top: unknown;
+  profile: unknown;
   created_at: string | Date;
   published_at: string | Date | null;
 }
@@ -266,13 +268,15 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     return { accountId, journeyId: saved.rows[0].id };
   }
 
-  const reactionColumns = "id, account_id, city, text, name, top, created_at, published_at";
+  const reactionColumns =
+    "id, account_id, city, text, name, top, profile, created_at, published_at";
   /** What anyone may read of a reaction: never the address, never the account. */
   const publicReaction = (r: ReactionRow, readerId: string | undefined) => ({
     id: r.id,
     name: r.name ?? anonymousName(r.account_id),
     text: r.text,
     top: r.top ?? null,
+    profile: r.profile ?? null,
     createdAt: iso(r.published_at ?? r.created_at),
     mine: r.account_id === readerId,
   });
@@ -288,6 +292,7 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       text: r.text,
       name: r.name,
       top: r.top,
+      profile: r.profile,
       createdAt: iso(r.created_at),
       publishedAt: r.published_at ? iso(r.published_at) : null,
     }));
@@ -500,16 +505,31 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       if (form.website) return json(202, { published: false });
       if (!perConnection(connection, now()) || (!reader && !perAddress(email, now())))
         return json(429, { error: "slow-down" });
-      // The top three is recomputed from a result link of this site, so no typed text poses as one.
+      // The top three and the temperament are public unless the reader keeps them back
+      // (operator, 2026-11-18). Both are recomputed from a result link of this site, so no typed
+      // text poses as one and no other answer travels.
+      const result = form.private === true ? null : resultAt(form.link, siteUrl);
       const top =
-        resultAt(form.link, siteUrl)
-          ?.cities.slice(0, 3)
+        result?.cities
+          .slice(0, 3)
           .map((c) => ({ slug: c.city.slug, name: c.city.name, percent: c.percent })) ?? null;
+      const profile = result?.archetype
+        ? { name: result.archetype.name, traits: result.archetype.traits }
+        : null;
       const accountId = reader ? reader.id : await accountFor(email);
       const { rows } = await db.query<ReactionRow>(
-        `insert into reactions (account_id, city, text, name, top, created_at, published_at)
-         values ($1, $2, $3, $4, $5, $6, $7) returning ${reactionColumns}`,
-        [accountId, city.slug, text, name, top && JSON.stringify(top), at(), reader ? at() : null],
+        `insert into reactions (account_id, city, text, name, top, profile, created_at, published_at)
+         values ($1, $2, $3, $4, $5, $6, $7, $8) returning ${reactionColumns}`,
+        [
+          accountId,
+          city.slug,
+          text,
+          name,
+          top && JSON.stringify(top),
+          profile && JSON.stringify(profile),
+          at(),
+          reader ? at() : null,
+        ],
       );
       if (reader)
         return json(201, { published: true, reaction: publicReaction(rows[0], reader.id) });

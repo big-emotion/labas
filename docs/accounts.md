@@ -35,8 +35,10 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 
 - **On a city, not on a ranking.** A ranking differs for every reader; a city is the same for
   all, so its thread is worth reading. The full thread sits on the city page, right after the
-  photo; result pages show a preview of the first city (inside its card on a phone, in the map
-  column from 880 px), with a count on the other two cards' pages.
+  photo; result pages show the first city's three latest reactions inside its card, under its
+  pitch, on every screen. The other two cards carry a count, and every city of the full list a
+  « Voir les réactions » link in its detail. A preview in the map column was tried and dropped
+  (operator, 2026-11-18): it shrank the map for little gain.
 - **High and light.** Reactions are what the operator wants to learn from, so the block sits
   above the fold and on `--thread`, the one light surface of the site.
 - **One e-mail, once.** A signed-out reader leaves an address; the reaction waits, unpublished,
@@ -46,9 +48,14 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 - **Back where it was asked.** A link may carry a way back, stored with the token rather than
   written in the URL, and only a path of this site (`backOf`). « Recevoir mon lien de connexion »
   uses it too.
-- **The top 3 is recomputed, never typed.** The box sends the result link; the server draws the
-  cities and percentages from it with `resultAt`, so no answer and no forged text is published.
-  The shared result page offers no such box: that result is someone else's.
+- **The journey is public by default, one box keeps it back** (operator, 2026-11-18): the top 3
+  and the temperament (archetype and five traits) show under the reaction unless « Ne pas rendre
+  public » is ticked. Both are recomputed from the result link with `resultAt`, so no answer and no
+  forged text is published; the temperament is the one a shared result link already carries. The
+  city page uses the last result shown in this browser; the shared result page offers none, since
+  that result is someone else's.
+- **Back to the city page.** The link that publishes a reaction written on a result page lands on
+  the city page: the quick quiz cannot be redrawn from a link, it starts over.
 - **Moderation, minimal.** Authors delete their own reactions; three reports from different
   connections hide one. Who reported what is kept in memory only. The road not taken: a review
   queue before publication, too slow for a beta whose point is to hear readers.

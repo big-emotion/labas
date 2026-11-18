@@ -78,6 +78,9 @@ export function detailFor(m: Match, withPortrait: boolean): HTMLElement {
   show("advisory", Boolean(advice));
   setText(body, '[data-field="advisory"] p', advice ?? "");
   (body.querySelector('[data-field="full"]') as HTMLAnchorElement).href = `/ville/${m.city.slug}`;
+  const reactions = body.querySelector('[data-field="reactions"]') as HTMLAnchorElement;
+  reactions.href = `/ville/${m.city.slug}/#reactions`;
+  reactions.textContent = `Voir les réactions sur ${m.city.name}`;
   return body;
 }
 
