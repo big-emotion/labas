@@ -6,6 +6,28 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.22.0] - 2026-11-18
+
+### Added
+
+- « Les avis » (/avis): what readers say of every city, newest first, open to anyone. Search a
+  city, a country or a word, keep one region, or pick a temperament: reviews by people with close
+  preferences come first, and the cities they keep naming show above the list.
+- A city page opens its reviews on /avis already filtered on that city.
+- Reply to a review. Replies stay two levels deep: answering a reply files it under the same
+  review, with « En réponse à … » above it. Replies never show their author's journey.
+- Hearts on reviews and replies, with four more friendly marks behind « + » (👍 🙏 😂 💡); no
+  thumbs down. Signed in only; tap again to take it back. Only the counts are public.
+- « Les villes » (/villes): the cities by region, each linked to its page. Both footers now link
+  to the cities and to the reviews.
+- An admin page for the team (/admin, addresses in `ADMIN_EMAILS`): every review grouped by city,
+  reported or hidden ones on top, with Masquer, Rétablir and Supprimer; and the audience over 7 or
+  30 days from Plausible: visitors, the quiz step by step, the review counts, the most read pages.
+
+### Changed
+
+- The privacy page explains what replies and hearts make public and what is kept.
+
 ## [0.21.0] - 2026-11-18
 
 ### Added
@@ -423,7 +445,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.19.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.22.0...HEAD
+[0.22.0]: https://github.com/big-emotion/labas/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/big-emotion/labas/compare/v0.20.0...v0.21.0
 [0.20.0]: https://github.com/big-emotion/labas/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/big-emotion/labas/compare/v0.18.0...v0.19.0
