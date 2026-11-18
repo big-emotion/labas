@@ -569,7 +569,15 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         renderLeftOut();
 
         showProfile(current, locale);
-        const cards = matches.map((m, i) => cardFor(m, i, ranked, locale));
+        const cards = matches.map((m, i) => {
+          const card = cardFor(m, i, ranked, locale);
+          const aside = card.querySelector<HTMLButtonElement>(".not-for-me");
+          if (aside) {
+            aside.hidden = false;
+            aside.addEventListener("click", () => openAside(m.city, "result"));
+          }
+          return card;
+        });
         (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
         if (revealed)
           void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
@@ -1278,11 +1286,18 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         font-size: 0.9rem;
         cursor: pointer;
       }
+      /* Pinned above the feedback tab, so « Annuler » shows wherever the place was set aside. */
       .aside-notice {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: max(72px, calc(env(safe-area-inset-bottom) + 56px));
+        z-index: 20;
+        max-width: 560px;
+        margin: 0 auto;
         display: flex;
         align-items: center;
         gap: 12px;
-        margin: 0;
         padding: 8px 8px 8px 16px;
         border-radius: 14px;
         border: 2px solid var(--saffron);
