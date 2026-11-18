@@ -3,7 +3,14 @@ import { CITIES } from "./cities";
 /** The production address. Links shared on social networks and read by search engines must be absolute. */
 export const SITE = "https://labas.africa";
 
-const PUBLIC_PAGES = ["/", "/approfondir/", "/methode/", "/mentions-legales/", "/confidentialite/"];
+const PUBLIC_PAGES = [
+  "/",
+  "/approfondir/",
+  "/villes/",
+  "/methode/",
+  "/mentions-legales/",
+  "/confidentialite/",
+];
 
 export function absoluteUrl(path: string): string {
   return new URL(path, SITE).href;

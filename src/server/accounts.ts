@@ -1,6 +1,7 @@
 import { createHash, randomBytes } from "node:crypto";
 import { CITIES } from "../lib/cities";
 import { cleanAnswers, withoutSensitive } from "../lib/keep";
+import { MARKS } from "../lib/reactions";
 import { resultAt } from "../lib/shared-result";
 import { loginLinkEmail, reactionLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
 import type { Mailer } from "./subscribe";
@@ -100,6 +101,21 @@ export async function migrate(db: Db): Promise<void> {
   );
   await db.query("alter table login_links add column if not exists back text");
   await db.query("alter table reactions add column if not exists profile jsonb");
+  // Two levels, never a tree (operator, 2026-11-18): a reply always hangs on the first review,
+  // and `mention` names the reply it answers when it answers one.
+  await db.query(
+    "alter table reactions add column if not exists parent_id uuid references reactions(id) on delete cascade",
+  );
+  await db.query("alter table reactions add column if not exists mention text");
+  await db.query("create index if not exists reactions_by_parent on reactions (parent_id)");
+  // Who marked is kept only so that a second tap takes the mark back; only counts are shown.
+  await db.query(`
+    create table if not exists reaction_marks (
+      reaction_id uuid not null references reactions(id) on delete cascade,
+      account_id uuid not null references accounts(id) on delete cascade,
+      mark text not null,
+      primary key (reaction_id, account_id, mark)
+    )`);
   await db.query(`
     create table if not exists news_subscribers (
       email text primary key,
@@ -204,9 +220,16 @@ interface ReactionRow {
   name: string | null;
   top: unknown;
   profile: unknown;
+  parent_id: string | null;
+  mention: string | null;
   created_at: string | Date;
   published_at: string | Date | null;
 }
+
+const MARK_KEYS: readonly string[] = MARKS.map((m) => m.key);
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+/** The reviews of every city on /avis: enough for a beta, filtered in the browser. */
+const LATEST = 200;
 
 interface LinkOptions {
   journeyId?: string | null;
@@ -228,6 +251,8 @@ interface JourneyRow {
 export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options) {
   const perConnection = limiter(5, HOUR);
   const perAddress = limiter(3, DAY);
+  // Generous for a person, short for a script tapping every heart on the site.
+  const perMark = limiter(120, HOUR);
   // Kept in memory on purpose: storing who reported what would keep data on readers for nothing.
   const reportedBy = new Set<string>();
   const perReport = (key: string) => !reportedBy.has(key) && Boolean(reportedBy.add(key));
@@ -269,17 +294,63 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
   }
 
   const reactionColumns =
-    "id, account_id, city, text, name, top, profile, created_at, published_at";
+    "id, account_id, city, text, name, top, profile, parent_id, mention, created_at, published_at";
+  const displayName = (r: { name: string | null; account_id: string }) =>
+    r.name ?? anonymousName(r.account_id);
+
+  type Marks = { counts: Record<string, number>; mine: string[] };
+  /** Counts for everyone; the reader's own marks only so their taps show as taken. */
+  async function marksOf(ids: string[], readerId: string | undefined) {
+    const marks = new Map<string, Marks>(ids.map((id) => [id, { counts: {}, mine: [] }]));
+    if (!ids.length) return marks;
+    const { rows } = await db.query<{ reaction_id: string; mark: string; account_id: string }>(
+      "select reaction_id, mark, account_id from reaction_marks where reaction_id = any($1) order by mark",
+      [ids],
+    );
+    for (const row of rows) {
+      const entry = marks.get(row.reaction_id)!;
+      entry.counts[row.mark] = (entry.counts[row.mark] ?? 0) + 1;
+      if (row.account_id === readerId) entry.mine.push(row.mark);
+    }
+    return marks;
+  }
+
   /** What anyone may read of a reaction: never the address, never the account. */
-  const publicReaction = (r: ReactionRow, readerId: string | undefined) => ({
+  const publicReaction = (r: ReactionRow, readerId: string | undefined, marks?: Marks) => ({
     id: r.id,
-    name: r.name ?? anonymousName(r.account_id),
+    city: r.city,
+    name: displayName(r),
     text: r.text,
     top: r.top ?? null,
     profile: r.profile ?? null,
     createdAt: iso(r.published_at ?? r.created_at),
     mine: r.account_id === readerId,
+    marks: marks?.counts ?? {},
+    myMarks: marks?.mine ?? [],
+    mention: r.mention ?? null,
   });
+
+  /** Reviews with their replies hung under them, oldest reply first, and every mark counted. */
+  async function threadsOf(reviews: ReactionRow[], readerId: string | undefined) {
+    const { rows: replies } = reviews.length
+      ? await db.query<ReactionRow>(
+          `select ${reactionColumns} from reactions
+           where parent_id = any($1) and published_at is not null and reports < $2
+           order by published_at, seq`,
+          [reviews.map((r) => r.id), REPORTS_TO_HIDE],
+        )
+      : { rows: [] };
+    const marks = await marksOf(
+      [...reviews, ...replies].map((r) => r.id),
+      readerId,
+    );
+    return reviews.map((review) => ({
+      ...publicReaction(review, readerId, marks.get(review.id)),
+      replies: replies
+        .filter((reply) => reply.parent_id === review.id)
+        .map((reply) => publicReaction(reply, readerId, marks.get(reply.id))),
+    }));
+  }
 
   async function reactionsOf(accountId: string) {
     const { rows } = await db.query<ReactionRow>(
@@ -293,6 +364,7 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       name: r.name,
       top: r.top,
       profile: r.profile,
+      replyTo: r.parent_id,
       createdAt: iso(r.created_at),
       publishedAt: r.published_at ? iso(r.published_at) : null,
     }));
@@ -332,6 +404,17 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       createdAt: iso(r.created_at),
       updatedAt: iso(r.updated_at),
     }));
+  }
+
+  /** A published review or reply, or undefined when there is nothing to answer. */
+  async function reviewToAnswer(id: unknown) {
+    if (typeof id !== "string" || !UUID.test(id)) return undefined;
+    const { rows } = await db.query<ReactionRow>(
+      `select ${reactionColumns} from reactions
+       where id = $1 and published_at is not null and reports < $2`,
+      [id, REPORTS_TO_HIDE],
+    );
+    return rows[0];
   }
 
   return async (request: Request): Promise<Response> => {
@@ -471,25 +554,28 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     }
 
     if (path === "/api/compte/reactions" && method === "GET") {
+      // Without a city: the newest reviews of every city, for /avis.
       const city = request.query.get("ville");
-      if (!CITIES.some((c) => c.slug === city)) return json(400, { error: "form" });
+      if (city !== null && !CITIES.some((c) => c.slug === city))
+        return json(400, { error: "form" });
       const reader = await member(request);
       const { rows } = await db.query<ReactionRow>(
         `select ${reactionColumns} from reactions
-         where city = $1 and published_at is not null and reports < $2
-         order by published_at desc, seq desc limit 200`,
-        [city, REPORTS_TO_HIDE],
+         where ($1::text is null or city = $1) and parent_id is null
+           and published_at is not null and reports < $2
+         order by published_at desc, seq desc limit $3`,
+        [city, REPORTS_TO_HIDE, LATEST],
       );
-      return json(200, {
-        total: rows.length,
-        reactions: rows.map((r) => publicReaction(r, reader?.id)),
-      });
+      return json(200, { total: rows.length, reactions: await threadsOf(rows, reader?.id) });
     }
 
     // Someone signed in publishes at once; anyone else confirms the address once, by e-mail,
     // and the link that publishes also signs them in (operator, 2026-11-18).
     if (path === "/api/compte/reactions" && method === "POST") {
-      const city = CITIES.find((c) => c.slug === form.city);
+      // A reply lives on the city of the review it answers, whatever the form says.
+      const parent = form.replyTo === undefined ? null : await reviewToAnswer(form.replyTo);
+      if (parent === undefined) return json(400, { error: "form" });
+      const city = CITIES.find((c) => c.slug === (parent ? parent.city : form.city));
       const text = String(form.text ?? "").trim();
       const name = String(form.name ?? "").trim() || null;
       const reader = await member(request);
@@ -508,7 +594,8 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       // The top three and the temperament are public unless the reader keeps them back
       // (operator, 2026-11-18). Both are recomputed from a result link of this site, so no typed
       // text poses as one and no other answer travels.
-      const result = form.private === true ? null : resultAt(form.link, siteUrl);
+      // A reply carries no journey: it answers a person, it does not present a result.
+      const result = form.private === true || parent ? null : resultAt(form.link, siteUrl);
       const top =
         result?.cities
           .slice(0, 3)
@@ -518,8 +605,9 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
         : null;
       const accountId = reader ? reader.id : await accountFor(email);
       const { rows } = await db.query<ReactionRow>(
-        `insert into reactions (account_id, city, text, name, top, profile, created_at, published_at)
-         values ($1, $2, $3, $4, $5, $6, $7, $8) returning ${reactionColumns}`,
+        `insert into reactions
+           (account_id, city, text, name, top, profile, parent_id, mention, created_at, published_at)
+         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning ${reactionColumns}`,
         [
           accountId,
           city.slug,
@@ -527,6 +615,8 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
           name,
           top && JSON.stringify(top),
           profile && JSON.stringify(profile),
+          parent ? (parent.parent_id ?? parent.id) : null,
+          parent?.parent_id ? displayName(parent) : null,
           at(),
           reader ? at() : null,
         ],
@@ -555,6 +645,27 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
 
     const reader = await member(request);
     if (!reader) return json(401, { error: "login" });
+
+    // A tap on a mark puts it, a second tap takes it back.
+    const marked = /^\/api\/compte\/reactions\/([0-9a-f-]{36})\/marques$/.exec(path)?.[1];
+    if (marked && method === "POST") {
+      const mark = String(form.mark ?? "");
+      if (!MARK_KEYS.includes(mark)) return json(400, { error: "form" });
+      if (!(await reviewToAnswer(marked))) return json(404, { error: "not-found" });
+      if (!perMark(reader.id, now())) return json(429, { error: "slow-down" });
+      const { rows } = await db.query(
+        `delete from reaction_marks where reaction_id = $1 and account_id = $2 and mark = $3
+         returning mark`,
+        [marked, reader.id, mark],
+      );
+      if (!rows.length)
+        await db.query(
+          "insert into reaction_marks (reaction_id, account_id, mark) values ($1, $2, $3)",
+          [marked, reader.id, mark],
+        );
+      const marks = (await marksOf([marked], reader.id)).get(marked)!;
+      return json(200, { marks: marks.counts, mine: marks.mine });
+    }
 
     const reaction = /^\/api\/compte\/reactions\/([0-9a-f-]{36})$/.exec(path)?.[1];
     if (reaction && method === "DELETE") {
@@ -586,6 +697,12 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
           exportedAt: at(),
           journeys: await journeysOf(reader.id),
           reactions: await reactionsOf(reader.id),
+          marks: (
+            await db.query<{ reaction_id: string; mark: string }>(
+              "select reaction_id, mark from reaction_marks where account_id = $1 order by mark",
+              [reader.id],
+            )
+          ).rows.map((m) => ({ reaction: m.reaction_id, mark: m.mark })),
         },
         { "content-disposition": 'attachment; filename="la-bas-mes-donnees.json"' },
       );

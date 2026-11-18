@@ -11,17 +11,20 @@ interface Props {
   /** Known on the city page; on a result page the script fills in the first city. */
   city?: { slug: string; name: string };
   preview?: boolean;
+  /** /avis: the reviews of every city, mounted by that page with its filters. */
+  everywhere?: boolean;
 }
-const { city, preview = false } = Astro.props;
+const { city, preview = false, everywhere = false } = Astro.props;
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const titleId = preview ? "reactions-preview-title" : "reactions-title";
+const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
 ---
 
 {enabled && (
   <section
     class:list={["reactions", { preview }]}
     id={preview ? undefined : "reactions"}
-    data-reactions={preview ? "preview" : "thread"}
+    data-reactions={mode}
     data-city={city?.slug}
     data-city-name={city?.name}
     aria-labelledby={titleId}
@@ -29,30 +32,49 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
   >
     <header class="head">
       <h2 id={titleId}>
-        Ce qu'on dit <span data-of>{city && ofCity(city.name)}</span>
+        {everywhere ? (
+          "Les derniers avis"
+        ) : (
+          <>
+            Ce qu'on dit <span data-of>{city && ofCity(city.name)}</span>
+          </>
+        )}
       </h2>
-      <p class="count" data-count />
+      <p class="count" data-count role={everywhere ? "status" : undefined} />
     </header>
 
     <ol class="list" data-list />
-    <p class="empty" data-empty hidden>
-      Personne n'a encore réagi. Vous connaissez <span data-name>{city?.name}</span>, ou elle vous
-      attire ? Donnez le premier avis.
-    </p>
+    {everywhere ? (
+      <p class="empty" data-empty hidden>
+        Aucun avis ne correspond. Essayez un autre mot, une autre région, ou retirez un filtre.
+      </p>
+    ) : (
+      <p class="empty" data-empty hidden>
+        Personne n'a encore réagi. Vous connaissez <span data-name>{city?.name}</span>, ou elle vous
+        attire ? Donnez le premier avis.
+      </p>
+    )}
     <button type="button" class="more" data-more hidden>
-      Voir plus de réactions
+      {everywhere ? "Voir plus d'avis" : "Voir plus de réactions"}
     </button>
 
-    <div class="actions">
-      <button type="button" class="react" data-open aria-expanded="false">
-        Réagir
-      </button>
-      {preview && (
-        <a class="all" data-all>
-          Voir toutes les réactions
-        </a>
-      )}
-    </div>
+    {!everywhere && (
+      <div class="actions">
+        <button type="button" class="react" data-open aria-expanded="false">
+          Réagir
+        </button>
+        {preview && (
+          <a class="all" data-all>
+            Voir toutes les réactions
+          </a>
+        )}
+        {!preview && city && (
+          <a class="all" href={`/avis/?ville=${city.slug}`}>
+            Ouvrir dans l'espace avis
+          </a>
+        )}
+      </div>
+    )}
 
     <form class="form" data-form novalidate hidden>
       <label class="field">
@@ -117,7 +139,9 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
             <b class="who"></b>
             <time></time>
           </span>
+          <a class="where" data-where hidden></a>
         </header>
+        <p class="mention" data-mention hidden></p>
         <p class="text"></p>
         <button type="button" class="read-more" data-read-more aria-expanded="false" hidden>
           Lire la suite
@@ -143,6 +167,10 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
           </div>
         </div>
         <footer class="tools">
+          <div class="marks" data-marks></div>
+          <button type="button" class="answer" data-reply aria-expanded="false">
+            Répondre
+          </button>
           <button type="button" data-report>
             Signaler
           </button>
@@ -150,7 +178,60 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
             Supprimer
           </button>
         </footer>
+        <ol class="replies" data-replies hidden></ol>
+        <div class="slot" data-slot></div>
       </li>
+    </template>
+
+    <template data-reply-template>
+      <form class="reply-form" novalidate>
+        <p class="replying" data-replying></p>
+        <label class="field">
+          Votre réponse
+          <textarea name="text" rows="3" maxlength="1000" required></textarea>
+        </label>
+        <label class="field">
+          <span>
+            Nom affiché <span class="dim">(facultatif)</span>
+          </span>
+          <input type="text" name="name" maxlength="40" autocomplete="nickname" />
+        </label>
+        <div class="email" data-email-field hidden>
+          <label class="field">
+            Votre e-mail
+            <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+          </label>
+          <p class="hint">
+            Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réponse ; il vous
+            connecte aussi.
+          </p>
+        </div>
+        <label class="trap" aria-hidden="true">
+          Site web
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+        <p class="error" data-error role="alert" hidden></p>
+        <button type="submit" class="send">
+          Envoyer la réponse
+        </button>
+      </form>
+    </template>
+
+    <template data-login-template>
+      <form class="login" novalidate>
+        <p>Pour réagir, connectez-vous : nous vous envoyons un lien par e-mail.</p>
+        <label class="field">
+          Votre e-mail
+          <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+        </label>
+        <button type="submit" class="send">
+          Recevoir le lien
+        </button>
+        <p class="hint" data-done role="status" hidden>
+          Si un espace existe pour cette adresse, le lien arrive dans quelques minutes. Pas encore
+          d'espace ? Répondez à un avis ou donnez le vôtre : le lien de publication vous connecte.
+        </p>
+      </form>
     </template>
   </section>
 )}
@@ -445,8 +526,119 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
   }
   .reactions :global(.tools) {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: flex-end;
-    gap: 14px;
+    gap: 6px 14px;
+  }
+  /* The marks lead the row, pushed left; the quieter tools stay on the right. */
+  .reactions :global(.marks) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-right: auto;
+  }
+  .reactions :global(.tools .mark) {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 40px;
+    min-height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--thread-dim);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 0.85rem;
+    font-weight: 700;
+    justify-content: center;
+  }
+  .reactions :global(.tools .mark[aria-pressed="true"]) {
+    border-color: var(--saffron);
+    background: var(--saffron);
+  }
+  .reactions :global(.tools .mark[hidden]) {
+    display: none;
+  }
+  .reactions :global(.tools .mark:hover) {
+    text-decoration: none;
+    border-color: var(--night);
+  }
+  .reactions :global(.tools .answer) {
+    color: var(--night);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .reactions :global(.where) {
+    margin-left: auto;
+    align-self: start;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--night);
+    color: var(--saffron);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .reactions :global(.where[hidden]),
+  .reactions :global(.mention[hidden]),
+  .reactions :global(.replies[hidden]) {
+    display: none;
+  }
+  .reactions :global(.mention) {
+    color: var(--night-lift);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  /* Two levels only: the replies sit one step in, never deeper. */
+  .reactions :global(.replies) {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 12px;
+    border-left: 2px solid var(--thread-dim);
+    display: grid;
+    gap: 8px;
+  }
+  .reactions :global(.reaction.reply) {
+    background: var(--thread);
+    box-shadow: none;
+    padding: 10px 12px 6px;
+  }
+  .reactions :global(.reply .avatar) {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+  .reactions :global(.slot:empty) {
+    display: none;
+  }
+  .reactions :global(.reply-form),
+  .reactions :global(.login) {
+    display: grid;
+    gap: 10px;
+    padding-top: 6px;
+    border-top: 1px solid var(--thread-dim);
+  }
+  .reactions :global(.replying) {
+    color: var(--night-lift);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .reactions :global(.slot .pending) {
+    background: var(--night);
+    color: var(--thread);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 0.92rem;
+  }
+  .reactions :global(.farther) {
+    max-width: none;
+    padding: 10px 0 2px;
+    color: var(--night-lift);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
   .reactions :global(.tools button) {
     min-height: 32px;

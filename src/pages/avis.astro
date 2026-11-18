@@ -1,0 +1,351 @@
+---
+import Page from "../layouts/Page.astro";
+import Reactions from "../components/Reactions.astro";
+import { CITIES, ZONES } from "../lib/cities";
+import type { Place } from "../lib/review-search";
+import { TEMPERAMENTS } from "../lib/temperament";
+
+/**
+ * The reviews of every city (operator, 2026-11-18): another way in than the quiz. Anyone reads;
+ * replying and marking need a space. The filters run in the browser over the newest reviews.
+ */
+const places: Record<string, Place> = Object.fromEntries(
+  CITIES.map((c) => [c.slug, { slug: c.slug, name: c.name, country: c.country, zone: c.zone }]),
+);
+const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+---
+
+<Page
+  title="Les avis sur les villes"
+  description="Ce que les lecteurs de Là-bas disent des villes d'Afrique qu'ils connaissent : cherchez par ville, par région ou par tempérament."
+>
+  <h1>Les avis</h1>
+  <p class="lead">
+    Ce que les lecteurs disent des villes d'Afrique qu'ils connaissent ou qui les attirent.
+    Choisissez des filtres : les avis les plus proches passent devant, et les villes dont ils
+    parlent apparaissent.
+  </p>
+
+  {enabled ? (
+    <div class="space" data-avis data-places={JSON.stringify(places)}>
+      <form class="filters" data-filters role="search" aria-label="Filtrer les avis">
+        <label class="search">
+          <span>Chercher</span>
+          <input
+            type="search"
+            name="q"
+            placeholder="Une ville, un pays, un mot"
+            autocomplete="off"
+          />
+        </label>
+
+        <p class="city-chip" data-city-chip hidden>
+          <span data-city-name />
+          <button type="button" data-clear-city aria-label="Retirer le filtre de ville">
+            ×
+          </button>
+        </p>
+
+        <fieldset>
+          <legend>Région</legend>
+          <div class="chips">
+            <label>
+              <input type="radio" name="zone" value="" checked />
+              <span>Toute l'Afrique</span>
+            </label>
+            {Object.entries(ZONES).map(([zone, label]) => (
+              <label>
+                <input type="radio" name="zone" value={zone} />
+                <span>{label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Des gens qui vous ressemblent</legend>
+          <div class="chips">
+            <label>
+              <input type="radio" name="temperament" value="" checked />
+              <span>Tout le monde</span>
+            </label>
+            {TEMPERAMENTS.map((t) => (
+              <label title={t.text}>
+                <input type="radio" name="temperament" value={t.name} />
+                <span>{t.name}</span>
+              </label>
+            ))}
+          </div>
+          <p class="hint" data-temperament-text>
+            Choisissez un tempérament : les avis de personnes aux préférences proches passent
+            devant. Inspiré du Big Five, ce n'est pas un test de personnalité.
+          </p>
+        </fieldset>
+      </form>
+
+      <section class="rising" data-rising aria-labelledby="rising-title" hidden>
+        <h2 id="rising-title">Les villes qui reviennent dans ces avis</h2>
+        <ol data-rising-list />
+      </section>
+
+      <Reactions everywhere />
+
+      <p class="give">
+        Pour donner votre avis, ouvrez la page d'une ville dans{" "}
+        <a href="/villes/">la liste des villes</a>, ou <a href="/">faites le quiz</a> pour trouver
+        les vôtres.
+      </p>
+    </div>
+  ) : (
+    <p>Les avis ne sont pas disponibles pour l'instant.</p>
+  )}
+</Page>
+
+<script>
+  import { mountEverywhere } from "../lib/reactions-dom";
+  import { risingCities, searchReviews, type Place } from "../lib/review-search";
+  import type { Zone } from "../lib/cities";
+  import { TEMPERAMENTS } from "../lib/temperament";
+
+  async function start(space: HTMLElement, root: HTMLElement) {
+    const places = JSON.parse(space.dataset.places!) as Record<string, Place>;
+    const form = space.querySelector<HTMLFormElement>("[data-filters]")!;
+    const cityChip = space.querySelector<HTMLElement>("[data-city-chip]")!;
+    const rising = space.querySelector<HTMLElement>("[data-rising]")!;
+    const temperamentText = space.querySelector<HTMLElement>("[data-temperament-text]")!;
+    const defaultText = temperamentText.textContent!;
+
+    // The filters live in the address too: a filtered list can be shared or come back to.
+    const params = new URLSearchParams(location.search);
+    let city = places[params.get("ville") ?? ""] ? params.get("ville") : null;
+    form.q.value = params.get("q") ?? "";
+    const pick = (name: string, value: string | null) => {
+      const input = form.querySelector<HTMLInputElement>(
+        `input[name="${name}"][value="${CSS.escape(value ?? "")}"]`,
+      );
+      if (input) input.checked = true;
+    };
+    pick("zone", params.get("region"));
+    pick("temperament", params.get("temperament"));
+
+    const filters = () => {
+      const data = new FormData(form);
+      return {
+        query: String(data.get("q") ?? ""),
+        city,
+        zone: (String(data.get("zone") ?? "") || null) as Zone | null,
+        temperament: String(data.get("temperament") ?? "") || null,
+      };
+    };
+
+    function remember() {
+      const { query, zone, temperament } = filters();
+      const next = new URLSearchParams();
+      if (city) next.set("ville", city);
+      if (query.trim()) next.set("q", query.trim());
+      if (zone) next.set("region", zone);
+      if (temperament) next.set("temperament", temperament);
+      const search = next.toString();
+      history.replaceState(null, "", search ? `?${search}` : location.pathname);
+    }
+
+    function showCity() {
+      cityChip.hidden = !city;
+      cityChip.querySelector("[data-city-name]")!.textContent = city
+        ? `Ville : ${places[city].name}`
+        : "";
+    }
+
+    const list = await mountEverywhere(root, {
+      places,
+      select: (reactions) => searchReviews(reactions, places, filters()),
+      temperament: () => filters().temperament,
+      onDraw(found) {
+        const cities = risingCities(found, places);
+        rising.hidden = cities.length === 0;
+        rising.querySelector("ol")!.replaceChildren(
+          ...cities.map((c) => {
+            const item = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = `/ville/${c.slug}/`;
+            link.textContent = c.name;
+            const count = document.createElement("small");
+            count.textContent = String(c.count);
+            count.setAttribute("aria-label", `${c.count} fois`);
+            link.append(count);
+            item.append(link);
+            return item;
+          }),
+        );
+        const chosen = TEMPERAMENTS.find((t) => t.name === filters().temperament);
+        temperamentText.textContent = chosen
+          ? `${chosen.text} Inspiré du Big Five, ce n'est pas un test de personnalité.`
+          : defaultText;
+      },
+    });
+    showCity();
+    if (!list.loaded) space.hidden = true;
+
+    const redraw = () => {
+      remember();
+      list.redraw();
+    };
+    form.addEventListener("change", redraw);
+    form.addEventListener("input", redraw);
+    form.addEventListener("submit", (event) => event.preventDefault());
+    cityChip.querySelector("button")!.addEventListener("click", () => {
+      city = null;
+      showCity();
+      redraw();
+    });
+  }
+
+  const space = document.querySelector<HTMLElement>("[data-avis]");
+  const root = document.querySelector<HTMLElement>('[data-reactions="everywhere"]');
+  if (space && root) start(space, root);
+</script>
+
+<style>
+  .space {
+    display: grid;
+    gap: 20px;
+  }
+  .space[hidden] {
+    display: none;
+  }
+  .filters {
+    display: grid;
+    gap: 16px;
+  }
+  .search {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+  }
+  .search input {
+    min-height: 48px;
+    border-radius: 14px;
+    border: 2px solid var(--thread-faint);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 10px 14px;
+    font: inherit;
+  }
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  legend {
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chips label {
+    position: relative;
+  }
+  /* The radio stays in the page for the keyboard and screen readers; the chip is what shows. */
+  .chips input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .chips span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid var(--thread-faint);
+    color: var(--thread);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .chips input:checked + span {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--ink);
+  }
+  .chips input:focus-visible + span {
+    outline: 2px solid var(--saffron);
+    outline-offset: 2px;
+  }
+  .hint {
+    color: var(--thread-dim);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  .city-chip {
+    display: inline-flex;
+    justify-self: start;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0 4px 0 14px;
+    min-height: 40px;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .city-chip[hidden] {
+    display: none;
+  }
+  .city-chip button {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--saffron);
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .rising h2 {
+    margin-top: 0;
+    font-size: 1.15rem;
+  }
+  .rising[hidden] {
+    display: none;
+  }
+  .rising ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .rising :global(a) {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 6px 0 14px;
+    border-radius: 999px;
+    background: var(--night-lift);
+    color: var(--thread);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .rising :global(small) {
+    display: grid;
+    place-items: center;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--night);
+    color: var(--saffron);
+  }
+  .give {
+    color: var(--thread-dim);
+  }
+</style>

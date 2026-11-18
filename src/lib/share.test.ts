@@ -58,6 +58,7 @@ describe("the sitemap", () => {
     expect(paths).toContain("/");
     expect(paths).toContain("/approfondir/");
     expect(paths).toContain("/methode/");
+    expect(paths).toContain("/villes/");
     for (const city of CITIES) expect(paths).toContain(`/ville/${city.slug}/`);
   });
 
