@@ -6,6 +6,23 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+### Added
+
+- Là-bas in English: Over There. The quiz, the results, the cities and the reviews have English
+  pages under `/en/`, with English addresses (`/en/cities/`, `/en/city/dakar/`, `/en/reviews/`).
+  An « English » / « Français » link on every page opens the same page in the other language and
+  keeps your shared result.
+- « Notre méthode » and « Confidentialité » in English: `/en/method/` and `/en/privacy/`, with the
+  same figures and the same promises.
+- Reviews can be translated on request. The privacy pages say what is sent: only the review's
+  public text, to DeepL SE (Germany, EU), translated once per language and kept with the review;
+  never the author's name, journey, answers or address, and nothing unless someone asks.
+
+### Changed
+
+- The long city guides (neighbourhoods, daily life, holidays) and the criterion grids stay in
+  French on the English pages for now, with a note saying so.
+
 ## [0.22.1] - 2026-11-18
 
 ### Security
