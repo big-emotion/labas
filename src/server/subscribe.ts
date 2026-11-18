@@ -283,7 +283,7 @@ export function graph(config: Config, fetchImpl: typeof fetch = fetch): Pick<Mai
             body: { contentType: "HTML", content: mail.html },
             from: { emailAddress: { address: config.sender, name: "Là-bas" } },
             toRecipients: [{ emailAddress: { address: mail.to } }],
-            replyTo: [{ emailAddress: { address: config.replyTo } }],
+            replyTo: [{ emailAddress: { address: mail.replyTo ?? config.replyTo } }],
           },
           // A copy of every reader's mail in the mailbox would be one more place keeping it.
           saveToSentItems: false,
@@ -333,6 +333,7 @@ function start(port: number) {
           mailer,
           siteUrl: config.siteUrl,
           admins: (process.env.ADMIN_EMAILS ?? "").split(","),
+          team: config.replyTo,
           stats:
             PLAUSIBLE_API_KEY && PLAUSIBLE_SITE && PLAUSIBLE_API_HOST
               ? plausibleStats({

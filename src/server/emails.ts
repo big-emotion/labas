@@ -10,6 +10,8 @@ export interface Mail {
   subject: string;
   text: string;
   html: string;
+  /** Only a message to the team sets it, to the reader who asked for an answer. */
+  replyTo?: string;
 }
 
 const SITE_FOOTER =
@@ -236,6 +238,41 @@ ${button(link, "Publier ma réaction")}
 <p style="color:#b4b8ea;font-size:15px">Ce lien confirme aussi votre adresse : vos prochaines réactions seront publiées tout de suite. Il marche 7 jours, une seule fois.</p>
 <p style="color:#b4b8ea;font-size:15px">Vous n'avez rien écrit ? Ignorez ce message : sans clic de votre part, cette réaction est effacée sous 7 jours.</p>`,
       SITE_FOOTER,
+    ),
+  };
+}
+
+/**
+ * A message from the feedback tab, to the team only. Its text is typed by a visitor, so it is
+ * escaped and never reaches anyone but the team's own mailbox.
+ */
+export function teamMessageEmail(
+  to: string,
+  message: { kind: "site" | "message"; text: string; page: string | null; email: string | null },
+): Mail {
+  const subject = message.kind === "site" ? "Avis sur le site" : "Nouveau message";
+  const details = [
+    `Page : ${message.page ?? "inconnue"}`,
+    message.email
+      ? `Pour répondre : ${message.email} (répondre à cet e-mail lui écrit)`
+      : "Pas d'adresse : la personne n'attend pas de réponse.",
+  ];
+  return {
+    to,
+    subject: `Là-bas · ${subject}`,
+    ...(message.email ? { replyTo: message.email } : {}),
+    text: [
+      `${subject} reçu depuis l'onglet « Votre avis » :`,
+      "",
+      message.text,
+      "",
+      ...details,
+    ].join("\n"),
+    html: page(
+      `<p>${subject} reçu depuis l'onglet « Votre avis » :</p>
+<p style="white-space:pre-wrap;padding:14px 16px;border-radius:14px;background:#0e1145">${escape(message.text)}</p>
+${details.map((line) => `<p style="color:#b4b8ea;font-size:15px">${escape(line)}</p>`).join("\n")}`,
+      "Gardé 1 an, puis effacé. À lire aussi dans /admin.",
     ),
   };
 }

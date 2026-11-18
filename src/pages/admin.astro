@@ -4,13 +4,14 @@ import { CITIES } from "../lib/cities";
 
 /**
  * The operator's page (operator, 2026-11-18): every review grouped by city with the ones to
- * reread on top, and the audience figures read from Plausible on the server. Opened only to the
+ * reread on top, the private messages of the feedback tab, and the audience figures read from
+ * Plausible on the server. Opened only to the
  * addresses in ADMIN_EMAILS; the page itself holds nothing until the API says yes.
  */
 const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
 ---
 
-<Page title="Admin" description="Espace réservé à l'équipe de Là-bas." noindex>
+<Page title="Admin" description="Espace réservé à l'équipe de Là-bas." noindex feedback={false}>
   <h1>Admin</h1>
   <div class="admin" data-admin data-names={JSON.stringify(names)}>
     <p class="state" data-state role="status">
@@ -43,6 +44,15 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
         <button
           type="button"
           role="tab"
+          id="tab-messages"
+          aria-controls="panel-messages"
+          aria-selected="false"
+        >
+          Messages<span data-tab-messages-count></span>
+        </button>
+        <button
+          type="button"
+          role="tab"
           id="tab-audience"
           aria-controls="panel-audience"
           aria-selected="false"
@@ -60,6 +70,17 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
         <ol class="cards" data-reread></ol>
         <h2>Par ville</h2>
         <div class="cities" data-cities></div>
+      </section>
+
+      <section id="panel-messages" role="tabpanel" aria-labelledby="tab-messages" hidden>
+        <p class="hint">
+          Envoyés depuis l'onglet « Votre avis », pour l'équipe seulement. Effacés 1 an après leur
+          envoi.
+        </p>
+        <p class="hint" data-messages-empty hidden>
+          Aucun message pour l'instant.
+        </p>
+        <ol class="cards" data-messages></ol>
       </section>
 
       <section id="panel-audience" role="tabpanel" aria-labelledby="tab-audience" hidden>
@@ -218,11 +239,57 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     );
   }
 
+  interface AdminMessage {
+    id: string;
+    kind: "site" | "message";
+    text: string;
+    page: string | null;
+    email: string | null;
+    createdAt: string;
+  }
+
+  function messageCard(message: AdminMessage): HTMLElement {
+    const head = el(
+      "p",
+      "meta",
+      el("b", "", message.kind === "site" ? "Avis sur le site" : "Message"),
+      ` · ${dateOf(message.createdAt)}${message.page ? ` · ${message.page}` : ""}`,
+    );
+    const reply = message.email
+      ? el("a", "", `Répondre à ${message.email}`)
+      : el("span", "", "Sans adresse : pas de réponse attendue.");
+    if (message.email) (reply as HTMLAnchorElement).href = `mailto:${message.email}`;
+    const remove = el("button", "danger", "Supprimer") as HTMLButtonElement;
+    remove.type = "button";
+    remove.addEventListener("click", async () => {
+      if (remove.dataset.armed !== "true") {
+        remove.dataset.armed = "true";
+        remove.textContent = "Supprimer pour de bon ?";
+        return;
+      }
+      remove.disabled = true;
+      await api("DELETE", `/api/compte/admin/messages/${message.id}`);
+      await loadReviews();
+    });
+    return el(
+      "li",
+      "card",
+      head,
+      el("p", "text", message.text),
+      el("p", "meta", reply),
+      el("div", "actions", remove),
+    );
+  }
+
   async function loadReviews() {
     const { status, data } = await api("GET", "/api/compte/admin");
     if (status !== 200) return status;
     reviews = data.reviews;
     drawReviews();
+    const messages: AdminMessage[] = data.messages ?? [];
+    $("messages").replaceChildren(...messages.map(messageCard));
+    $("messages-empty").hidden = messages.length > 0;
+    $("tab-messages-count").textContent = messages.length ? ` (${messages.length})` : "";
     return status;
   }
 

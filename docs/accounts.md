@@ -108,6 +108,29 @@ the search in `src/lib/review-search.ts`, the list in `Reactions.astro` (mode `e
   goes with the space. At most 120 marks an hour per space.
 - **`/villes`** lists every city by region, static, for whoever wants a city page without the quiz.
 
+## The feedback tab (« Votre avis »)
+
+Decided with the operator on 2026-11-18. Code: the `/api/compte/messages` route in `accounts.ts`,
+tested in `messages.test.ts`; the tab is `components/Feedback.astro`, mounted by `layouts/Page.astro`
+and `index.astro` on every page but `/admin`.
+
+- **Private, unlike `/avis`.** A review of the site or a message to the team, never published.
+  The site had no contact form; a `mailto:` alone loses readers who have no mail app set up.
+- **A tab at the edge, not a button in the page** (the Hotjar/Usabilla pattern): on the right edge,
+  vertically centred, from 768 px; bottom right on a phone, above the gesture area, opening a bottom
+  sheet. A plain panel rather than a modal `<dialog>`, so the reader still sees what they comment
+  on. The page keeps 64 px at its end on a phone so the tab never covers its last button.
+- **What travels.** The kind, the text (2000 characters at most), the page's path, and an address
+  only when the reader wants an answer. Nothing from the quiz (`feedbackBody` in
+  `src/lib/feedback.ts`). The page path is kept only when it is a path of this site (`backOf`).
+- **Where it goes.** Kept in `messages` first, then mailed to the team's mailbox (`REPLY_TO`), never
+  to the reader; Reply-To is the reader's address when they gave one. A failing mail service loses
+  nothing: the message waits in `/admin`, so the reader is still told it arrived.
+- **No account.** `messages` has no link to `accounts`: writing needs no login, and the address
+  given here opens no space. Its own limits: 5 an hour per connection, 3 a day per address.
+- **Measured, anonymously.** « Message envoyé » with `type` (Avis or Message), never the text, the
+  page or the address (`messageEvent`).
+
 ## The admin (`/admin`)
 
 Decided with the operator on 2026-11-18. Code: the `/api/compte/admin` routes in `accounts.ts`,
@@ -119,6 +142,8 @@ tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `s
 - **What.** Every published review and reply, hidden ones included, grouped by city (newest
   activity first) with « À relire » on top: hidden first, then the most reported. Never the
   author's address: moderating does not need it, and the privacy page says it is never shown.
+- **Messages.** The feedback tab's messages, newest first, in their own tab, with the reader's
+  address only when they gave it for an answer: it is the team's own inbox. « Supprimer » erases one.
 - **Actions.** « Masquer » sets `hidden`; « Rétablir » clears `hidden` and the reports, since the
   operator has read it; « Supprimer » deletes the review and its replies (two taps, no dialog).
   Public reads skip `hidden` as they skip three reports.
@@ -141,6 +166,7 @@ tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `s
 | News confirmation link                                    | 7 days                                    |
 | News address (`news_subscribers`)                         | 3 years after its last confirmation       |
 | News unsubscribe link (`/nouveautes/desinscription/#t=`)  | Never expires; the button erases at once  |
+| Message from the feedback tab (`messages`)                | 1 year after it was sent, then erased     |
 
 `purge()` applies these at start-up and then once a day.
 
@@ -162,7 +188,9 @@ tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `s
 | `GET /api/compte/reactions?ville=`        | anyone         | Published reviews of a city (every city without `ville`), with replies and mark counts  |
 | `POST /api/compte/reactions`              | anyone         | A review, or a reply with `replyTo`. Signed in: online at once; else a 7-day link       |
 | `POST /api/compte/reactions/:id/marques`  | signed in      | Puts a mark, or takes it back; answers the counts and the reader's own marks            |
-| `GET /api/compte/admin`                   | admin only     | Every published review and reply, hidden ones included; never an address                |
+| `POST /api/compte/messages`               | anyone         | `kind`, `text`, `page`, optional `email` → kept, mailed to the team; 202                |
+| `GET /api/compte/admin`                   | admin only     | Every review and reply (never an address), and the feedback tab's messages              |
+| `DELETE /api/compte/admin/messages/:id`   | admin only     | Deletes one message                                                                     |
 | `POST /api/compte/admin/reactions/:id`    | admin only     | `action`: `masquer`, or `retablir` (also clears the reports)                            |
 | `DELETE /api/compte/admin/reactions/:id`  | admin only     | Deletes a review and its replies                                                        |
 | `GET /api/compte/admin/stats`             | admin only     | The Plausible figures; 503 without a key, 502 when Plausible fails                      |
