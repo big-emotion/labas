@@ -1,5 +1,6 @@
 ---
 import Page from "../layouts/Page.astro";
+import { pathFor } from "../i18n/routes";
 
 // The news section shows with the sign-up blocks (components/Newsletter.astro).
 const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
@@ -10,7 +11,7 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
   description="Vos réponses restent dans votre navigateur : Là-bas ne les reçoit jamais et ne compte les réponses que de façon anonyme, sans cookie."
 >
   <h1>Confidentialité</h1>
-  <p class="lead">Dernière mise à jour : {newsletter ? "17" : "15"} novembre 2026.</p>
+  <p class="lead">Dernière mise à jour : {newsletter ? "18" : "15"} novembre 2026.</p>
 
   {newsletter ? (
     <>
@@ -62,10 +63,10 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         résultats. La session dure 30 jours. L'effacement est automatique, chaque jour.
       </p>
       <p>
-        <b>Vos droits :</b> dans <a href="/espace/">Mon espace</a>, vous pouvez voir, reprendre,
-        télécharger ou supprimer vos parcours, ou supprimer tout votre espace. Pour toute autre
-        demande : <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>. Vous pouvez
-        aussi saisir la CNIL.
+        <b>Vos droits :</b> dans <a href={pathFor("space", "fr")}>Mon espace</a>, vous pouvez voir,
+        reprendre, télécharger ou supprimer vos parcours, ou supprimer tout votre espace. Pour toute
+        autre demande : <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>. Vous
+        pouvez aussi saisir la CNIL.
       </p>
 
       <h2>Si vous réagissez sur une ville</h2>
@@ -95,6 +96,13 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         ne voit qui l'a mis. Nous gardons le lien entre votre espace et vos cœurs pour qu'un
         deuxième appui les retire ; ils sont dans le fichier téléchargé depuis Mon espace et effacés
         avec votre espace.
+      </p>
+      <p>
+        <b>La traduction des avis :</b> quand un lecteur demande la traduction d'un avis, seul le
+        texte public de cet avis est envoyé à DeepL SE (Allemagne, Union européenne), qui le
+        traduit. Il est traduit une fois par langue, et la traduction est gardée dans notre base
+        avec l'avis, puis effacée avec lui. Jamais le nom de l'auteur, son parcours, ses réponses ni
+        son adresse e-mail. Rien n'est envoyé tant que personne n'appuie sur le bouton.
       </p>
     </>
   ) : (
