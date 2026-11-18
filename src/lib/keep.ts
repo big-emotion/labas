@@ -1,5 +1,6 @@
 import { DEEP_QUESTIONS } from "./deep-questions";
 import type { Answers } from "./ranking";
+import { BRAND, type Locale } from "../i18n/locale";
 
 /**
  * The reader's answers kept in their own browser (localStorage), so the full questionnaire
@@ -81,7 +82,9 @@ export function withoutSensitive(answers: Answers): Answers {
 }
 
 /** The reader's own mail app, the result already written; they choose who receives it. */
-export function mailtoFor(text: string): string {
-  const subject = encodeURIComponent("Mes villes d'Afrique sur Là-bas");
+export function mailtoFor(text: string, locale: Locale): string {
+  const subject = encodeURIComponent(
+    locale === "fr" ? `Mes villes d'Afrique sur ${BRAND.fr}` : `My African cities on ${BRAND.en}`,
+  );
   return `mailto:?subject=${subject}&body=${encodeURIComponent(text)}`;
 }

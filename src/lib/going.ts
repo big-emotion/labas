@@ -1,5 +1,7 @@
 import catalogue from "../data/city-actions.json";
 import type { City } from "./cities";
+import type { Locale } from "../i18n/locale";
+import { cityCopy } from "../i18n/city-copy";
 
 /** A link that moves the reader from a result to doing something about it. */
 export interface GoingLink {
@@ -27,19 +29,23 @@ const BY_NAME = new Map(
  * travel advice warns against (operator, 2026-11-15). Neutral links, no affiliation: Google
  * Flights fills the departure from where the reader is, which a fixed origin could not.
  */
-export function goingThere(city: City): GoingLink[] | undefined {
+export function goingThere(city: City, locale: Locale = "fr"): GoingLink[] | undefined {
   const actions = BY_NAME.get(city.name);
   if (city.advisedAgainst || !actions) return undefined;
-  const place = `${city.name}, ${city.country}`;
+  const { name, country } = cityCopy(city, locale);
+  const place = `${name}, ${country}`;
+  const english = locale === "en";
+  const flights = english ? `Flights to ${actions.airport}` : `Vols vers ${actions.airport}`;
   return [
     {
-      title: `Vols vers ${city.name} (Google Flights)`,
-      url: `https://www.google.com/travel/flights?hl=fr&q=${encodeURIComponent(`Vols vers ${actions.airport}`)}`,
+      title: english ? `Flights to ${name} (Google Flights)` : `Vols vers ${name} (Google Flights)`,
+      url: `https://www.google.com/travel/flights?hl=${english ? "en-GB" : "fr"}&q=${encodeURIComponent(flights)}`,
     },
     {
-      title: `Logement à ${city.name} (Booking)`,
-      url: `https://www.booking.com/searchresults.fr.html?ss=${encodeURIComponent(place)}`,
+      title: english ? `Places to stay in ${name} (Booking)` : `Logement à ${name} (Booking)`,
+      url: `https://www.booking.com/searchresults.${english ? "en-gb" : "fr"}.html?ss=${encodeURIComponent(place)}`,
     },
+    // The local links are written in French for now, like the rest of the city guides.
     ...actions.links,
   ];
 }

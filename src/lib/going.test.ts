@@ -17,6 +17,14 @@ describe("the « Y aller » links of a city", () => {
     expect(decodeURIComponent(lodging.url)).toContain("Dakar, Sénégal");
   });
 
+  it("names the flights and lodging in English for an English reader", () => {
+    const [flights, lodging] = goingThere(dakar!, "en") ?? [];
+    expect(flights.title).toBe("Flights to Dakar (Google Flights)");
+    expect(flights.url).toContain("hl=en-GB");
+    expect(lodging.title).toBe("Places to stay in Dakar (Booking)");
+    expect(decodeURIComponent(lodging.url)).toContain("Dakar, Senegal");
+  });
+
   it("gives every proposable city its flights, its lodging and one to three local links", () => {
     for (const city of proposable) {
       const links = goingThere(city);

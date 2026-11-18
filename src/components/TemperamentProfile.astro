@@ -1,17 +1,28 @@
 ---
 // The reader's profile, shown at the end of the quick quiz and of the full questionnaire
 // (operator, 2026-11-15). Filled by showProfile() in lib/profile-dom.ts.
+import type { Bilingual } from "../i18n/locale";
+import { localeOfPath } from "../i18n/routes";
+
+const COPY: Bilingual<{ title: string; note: string }> = {
+  fr: {
+    title: "Votre tempérament",
+    note: "Lecture rapide inspirée du Big Five, une question par trait. Ce n'est pas un test de personnalité. Sous chaque ville, les quartiers qui vous ressemblent.",
+  },
+  en: {
+    title: "Your temperament",
+    note: "A quick reading, one question per trait, inspired by the Big Five; it is not a personality test. Under each city, the neighbourhoods that are most like you.",
+  },
+};
+const copy = COPY[localeOfPath(Astro.url.pathname)];
 ---
 
 <div class="temperament" data-profile hidden>
-  <p class="eyebrow">Votre tempérament</p>
+  <p class="eyebrow">{copy.title}</p>
   <p class="archetype" data-profile-name></p>
   <p data-profile-text></p>
   <ul class="traits" data-profile-traits></ul>
-  <p class="small">
-    Lecture rapide inspirée du Big Five, une question par trait. Ce n'est pas un test de
-    personnalité. Sous chaque ville, les quartiers qui vous ressemblent.
-  </p>
+  <p class="small">{copy.note}</p>
 </div>
 
 <style>
