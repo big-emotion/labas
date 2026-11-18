@@ -18,7 +18,7 @@ import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
 import borders from "../data/africa-borders.json";
 
 const dots = CITIES.map((city) => ({ name: city.name, ...project(city.lat, city.lon) }));
-const description = siteDescription();
+const description = siteDescription("fr");
 const title = "Là-bas · Quelle ville d'Afrique vous ressemble ?";
 const website = JSON.stringify({
   "@context": "https://schema.org",
