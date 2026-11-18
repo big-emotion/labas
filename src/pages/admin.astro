@@ -1,0 +1,586 @@
+---
+import Page from "../layouts/Page.astro";
+import { CITIES } from "../lib/cities";
+
+/**
+ * The operator's page (operator, 2026-11-18): every review grouped by city with the ones to
+ * reread on top, and the audience figures read from Plausible on the server. Opened only to the
+ * addresses in ADMIN_EMAILS; the page itself holds nothing until the API says yes.
+ */
+const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
+---
+
+<Page title="Admin" description="Espace réservé à l'équipe de Là-bas." noindex>
+  <h1>Admin</h1>
+  <div class="admin" data-admin data-names={JSON.stringify(names)}>
+    <p class="state" data-state role="status">
+      Chargement…
+    </p>
+
+    <form class="login" data-login hidden>
+      <p>Connectez-vous avec votre adresse d'équipe : nous vous envoyons un lien.</p>
+      <label>
+        Votre e-mail
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <button type="submit">Recevoir le lien</button>
+      <p class="hint" data-sent hidden>
+        Si un espace existe pour cette adresse, le lien arrive dans quelques minutes.
+      </p>
+    </form>
+
+    <div data-panels hidden>
+      <div class="tabs" role="tablist" aria-label="Rubriques">
+        <button
+          type="button"
+          role="tab"
+          id="tab-avis"
+          aria-controls="panel-avis"
+          aria-selected="true"
+        >
+          Avis
+        </button>
+        <button
+          type="button"
+          role="tab"
+          id="tab-audience"
+          aria-controls="panel-audience"
+          aria-selected="false"
+        >
+          Audience
+        </button>
+      </div>
+
+      <section id="panel-avis" role="tabpanel" aria-labelledby="tab-avis">
+        <p class="summary" data-summary></p>
+        <h2>À relire</h2>
+        <p class="hint" data-reread-empty hidden>
+          Rien à relire : aucun avis signalé ni masqué.
+        </p>
+        <ol class="cards" data-reread></ol>
+        <h2>Par ville</h2>
+        <div class="cities" data-cities></div>
+      </section>
+
+      <section id="panel-audience" role="tabpanel" aria-labelledby="tab-audience" hidden>
+        <p class="state" data-stats-state role="status">
+          Chargement des chiffres…
+        </p>
+        <div data-stats hidden>
+          <div class="periods" role="radiogroup" aria-label="Période">
+            <label>
+              <input type="radio" name="period" value="0" checked />
+              <span>7 jours</span>
+            </label>
+            <label>
+              <input type="radio" name="period" value="1" />
+              <span>30 jours</span>
+            </label>
+          </div>
+          <dl class="kpis" data-kpis></dl>
+          <h2>Le quiz, marche par marche</h2>
+          <ol class="funnel" data-funnel></ol>
+          <h2>Les avis</h2>
+          <dl class="kpis" data-review-kpis></dl>
+          <h2>
+            Pages les plus vues <small>(30 jours)</small>
+          </h2>
+          <ol class="ranking" data-pages></ol>
+          <h2>
+            Villes qui reçoivent des avis <small>(30 jours)</small>
+          </h2>
+          <ol class="ranking" data-reviewed></ol>
+          <p>
+            <a data-plausible target="_blank" rel="noopener">
+              Ouvrir le tableau Plausible complet
+            </a>
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</Page>
+
+<script>
+  import { api } from "../lib/account-dom";
+  import { type AdminReview, byCity, funnel, toReread } from "../lib/admin";
+  import { MARKS } from "../lib/reactions";
+  import type { Dashboard } from "../server/plausible";
+
+  const root = document.querySelector<HTMLElement>("[data-admin]")!;
+  const names = JSON.parse(root.dataset.names!) as Record<string, string>;
+  const $ = <T extends HTMLElement = HTMLElement>(name: string) =>
+    root.querySelector<T>(`[data-${name}]`)!;
+
+  /** A small element builder: the admin draws many little lists. */
+  function el(tag: string, className = "", ...children: (Node | string)[]) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    node.append(...children);
+    return node;
+  }
+  const dateOf = (iso: string) =>
+    new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short" }).format(new Date(iso));
+  const marksOf = (marks: Record<string, number>) =>
+    MARKS.filter((m) => marks[m.key])
+      .map((m) => `${m.emoji} ${marks[m.key]}`)
+      .join("  ");
+
+  let reviews: AdminReview[] = [];
+
+  function card(review: AdminReview): HTMLElement {
+    // Red only for what needs the operator: reports and hiding. A reply is just context.
+    const flags = [
+      review.reports ? `⚑ ${review.reports} signalement${review.reports > 1 ? "s" : ""}` : "",
+      review.hidden ? "Masqué" : "",
+    ].filter(Boolean);
+    const context = review.replyTo
+      ? ` · réponse${review.mention ? ` à ${review.mention}` : ""}`
+      : "";
+    const link = el("a", "", names[review.city] ?? review.city) as HTMLAnchorElement;
+    link.href = `/ville/${review.city}/#reactions`;
+    const head = el(
+      "p",
+      "meta",
+      el("b", "", review.name),
+      ` · ${dateOf(review.createdAt)} · `,
+      link,
+      context,
+    );
+    const text = el("p", "text", review.text);
+    const tags = el("p", "tags", flags.join(" · "));
+    tags.hidden = flags.length === 0;
+    const marks = el("p", "marks", marksOf(review.marks));
+    marks.hidden = !marks.textContent;
+
+    const toggle = el("button", "", review.hidden ? "Rétablir" : "Masquer") as HTMLButtonElement;
+    toggle.type = "button";
+    toggle.addEventListener("click", async () => {
+      toggle.disabled = true;
+      await api("POST", `/api/compte/admin/reactions/${review.id}`, {
+        action: review.hidden ? "retablir" : "masquer",
+      });
+      await loadReviews();
+    });
+    // Two taps instead of a browser dialog: the first one only asks.
+    const remove = el("button", "danger", "Supprimer") as HTMLButtonElement;
+    remove.type = "button";
+    remove.addEventListener("click", async () => {
+      if (remove.dataset.armed !== "true") {
+        remove.dataset.armed = "true";
+        remove.textContent = review.replyTo
+          ? "Supprimer pour de bon ?"
+          : "Supprimer avec ses réponses ?";
+        return;
+      }
+      remove.disabled = true;
+      await api("DELETE", `/api/compte/admin/reactions/${review.id}`);
+      await loadReviews();
+    });
+    const item = el("li", review.hidden ? "card hidden" : "card", head, tags, text, marks);
+    item.append(el("div", "actions", toggle, remove));
+    return item;
+  }
+
+  function drawReviews() {
+    const firsts = reviews.filter((r) => !r.replyTo).length;
+    const reread = toReread(reviews);
+    $("summary").textContent =
+      `${firsts} avis, ${reviews.length - firsts} réponses, ${reread.length} à relire.`;
+    $("reread").replaceChildren(...reread.map(card));
+    $("reread-empty").hidden = reread.length > 0;
+    $("cities").replaceChildren(
+      ...byCity(reviews, names).map((group) => {
+        const counts = [
+          `${group.reviews} avis`,
+          group.replies ? `${group.replies} réponses` : "",
+          group.flagged ? `⚑ ${group.flagged}` : "",
+          `dernier le ${dateOf(group.latest)}`,
+        ].filter(Boolean);
+        const summary = el(
+          "summary",
+          "",
+          el("b", "", group.name),
+          el("span", "", counts.join(" · ")),
+        );
+        const threads = el(
+          "ol",
+          "cards",
+          ...group.threads.map((thread) => {
+            const first = card(thread.review);
+            if (thread.replies.length)
+              first.append(el("ol", "cards replies", ...thread.replies.map(card)));
+            return first;
+          }),
+        );
+        return el("details", "city", summary, threads);
+      }),
+    );
+  }
+
+  async function loadReviews() {
+    const { status, data } = await api("GET", "/api/compte/admin");
+    if (status !== 200) return status;
+    reviews = data.reviews;
+    drawReviews();
+    return status;
+  }
+
+  let dashboard: Dashboard | null = null;
+  const kpi = (label: string, value: number | string) =>
+    [el("dt", "", label), el("dd", "", String(value))] as const;
+  const goal = (period: Dashboard["periods"][number], name: string) =>
+    period.goals[name]?.events ?? 0;
+
+  function drawStats() {
+    if (!dashboard) return;
+    const index = Number(
+      root.querySelector<HTMLInputElement>('input[name="period"]:checked')?.value ?? 0,
+    );
+    const period = dashboard.periods[index];
+    $("kpis").replaceChildren(
+      ...kpi("Visiteurs", period.visitors),
+      ...kpi("Pages vues", period.pageviews),
+      ...kpi("Réponses au quiz", goal(period, "Réponse")),
+    );
+    $("funnel").replaceChildren(
+      ...funnel(period.visitors, period.goals).map((step) => {
+        const bar = el("span", "bar");
+        bar.style.setProperty("--share", step.share === "–" ? "0%" : step.share.replace(" ", ""));
+        return el(
+          "li",
+          "",
+          el("span", "label", step.label),
+          el("span", "value", `${step.visitors} · ${step.share}`),
+          bar,
+        );
+      }),
+    );
+    $("review-kpis").replaceChildren(
+      ...kpi("Formulaires ouverts", goal(period, "Réaction : formulaire ouvert")),
+      ...kpi("Avis envoyés", goal(period, "Réaction envoyée")),
+      ...kpi("Avis lus", goal(period, "Réactions consultées")),
+    );
+    $("pages").replaceChildren(
+      ...dashboard.pages.map((p) =>
+        el("li", "", el("span", "", p.page), el("b", "", String(p.visitors))),
+      ),
+    );
+    $("reviewed").replaceChildren(
+      ...dashboard.reviewedCities.map((c) =>
+        el("li", "", el("span", "", names[c.city] ?? c.city), el("b", "", String(c.events))),
+      ),
+    );
+    $<HTMLAnchorElement>("plausible").href = dashboard.link;
+  }
+
+  async function loadStats() {
+    if (dashboard) return;
+    const state = $("stats-state");
+    const { status, data } = await api("GET", "/api/compte/admin/stats");
+    if (status !== 200) {
+      state.textContent =
+        status === 503
+          ? "Les chiffres arrivent dès que la clé Plausible est installée sur le serveur."
+          : "Plausible ne répond pas pour l'instant. Réessayez dans un moment.";
+      return;
+    }
+    dashboard = data;
+    state.hidden = true;
+    $("stats").hidden = false;
+    drawStats();
+  }
+
+  const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+  for (const tab of tabs)
+    tab.addEventListener("click", () => {
+      for (const other of tabs) {
+        const on = other === tab;
+        other.setAttribute("aria-selected", String(on));
+        document.getElementById(other.getAttribute("aria-controls")!)!.hidden = !on;
+      }
+      if (tab.id === "tab-audience") loadStats();
+    });
+  root.querySelector(".periods")!.addEventListener("change", drawStats);
+
+  const login = $<HTMLFormElement>("login");
+  login.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = String(new FormData(login).get("email") ?? "").trim();
+    if (!email) return;
+    await api("POST", "/api/compte/lien", { email, back: "/admin/" });
+    $("sent").hidden = false;
+  });
+
+  loadReviews().then((status) => {
+    const state = $("state");
+    if (status === 200) {
+      state.hidden = true;
+      $("panels").hidden = false;
+    } else if (status === 401) {
+      state.hidden = true;
+      login.hidden = false;
+    } else {
+      state.textContent =
+        status === 403
+          ? "Cette page est réservée à l'équipe de Là-bas."
+          : "L'espace n'est pas disponible pour l'instant.";
+    }
+  });
+</script>
+
+<style>
+  .admin {
+    display: grid;
+    gap: 16px;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  .state,
+  .hint,
+  .summary {
+    color: var(--thread-dim);
+  }
+  .login {
+    display: grid;
+    gap: 10px;
+    max-width: 420px;
+  }
+  .login label {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+  }
+  input[type="email"] {
+    min-height: 48px;
+    border-radius: 14px;
+    border: 2px solid var(--thread-faint);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 10px 14px;
+    font: inherit;
+  }
+  .login button {
+    justify-self: start;
+    min-height: 48px;
+    padding: 0 24px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--night-lift);
+  }
+  .tabs button {
+    min-height: 44px;
+    padding: 0 16px;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background: none;
+    color: var(--thread-dim);
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] {
+    color: var(--thread);
+    border-bottom-color: var(--saffron);
+  }
+  section {
+    display: grid;
+    gap: 10px;
+  }
+  h2 small {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--thread-dim);
+  }
+  /* Script-built nodes carry no scope attribute: their rules go through :global. */
+  .admin :global(.cards) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .admin :global(.card) {
+    max-width: none;
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--thread);
+    color: var(--ink);
+  }
+  .admin :global(.card.hidden) {
+    background: var(--thread-dim);
+  }
+  .admin :global(.card p) {
+    margin: 0;
+  }
+  .admin :global(.card a) {
+    color: var(--night);
+    font-weight: 700;
+  }
+  .admin :global(.meta),
+  .admin :global(.marks) {
+    font-size: 0.85rem;
+  }
+  .admin :global(.tags) {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--brick);
+  }
+  .admin :global(.text) {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  .admin :global(.actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .admin :global(.actions button) {
+    min-height: 36px;
+    padding: 0 14px;
+    border: 1px solid var(--night);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .admin :global(.actions .danger) {
+    border-color: var(--brick);
+    color: var(--brick);
+  }
+  .admin :global(.replies) {
+    margin-left: 12px;
+    padding-left: 10px;
+    border-left: 2px solid var(--thread-faint);
+  }
+  .admin :global(.replies .card) {
+    background: var(--paper);
+  }
+  .cities {
+    display: grid;
+    gap: 8px;
+  }
+  .admin :global(.city) {
+    border-radius: 14px;
+    background: var(--night-lift);
+    padding: 0 12px;
+  }
+  .admin :global(.city[open]) {
+    padding-bottom: 12px;
+  }
+  .admin :global(.city summary) {
+    display: grid;
+    gap: 2px;
+    min-height: 48px;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  .admin :global(.city summary span) {
+    color: var(--thread-dim);
+    font-size: 0.85rem;
+  }
+  .periods {
+    display: flex;
+    gap: 8px;
+    margin: 6px 0 10px;
+  }
+  .periods label {
+    position: relative;
+  }
+  .periods input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .periods span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid var(--thread-faint);
+    font-weight: 700;
+  }
+  .periods input:checked + span {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--ink);
+  }
+  .periods input:focus-visible + span {
+    outline: 2px solid var(--saffron);
+    outline-offset: 2px;
+  }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0;
+  }
+  .admin :global(.kpis dt) {
+    grid-row: 2;
+    color: var(--thread-dim);
+    font-size: 0.8rem;
+  }
+  .admin :global(.kpis dd) {
+    grid-row: 1;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+  .funnel,
+  .ranking {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .admin :global(.funnel li) {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+  }
+  .admin :global(.funnel .value) {
+    font-weight: 800;
+  }
+  .admin :global(.funnel .bar) {
+    grid-column: 1 / -1;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(
+      to right,
+      var(--saffron) var(--share),
+      var(--night-lift) var(--share)
+    );
+  }
+  .admin :global(.ranking li) {
+    max-width: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--night-lift);
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 768px) {
+    .kpis {
+      max-width: 520px;
+    }
+  }
+</style>

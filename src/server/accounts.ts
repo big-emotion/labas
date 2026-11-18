@@ -108,6 +108,10 @@ export async function migrate(db: Db): Promise<void> {
   );
   await db.query("alter table reactions add column if not exists mention text");
   await db.query("create index if not exists reactions_by_parent on reactions (parent_id)");
+  // Hidden by the operator from /admin; restoring clears this and the reports alike.
+  await db.query(
+    "alter table reactions add column if not exists hidden boolean not null default false",
+  );
   // Who marked is kept only so that a second tap takes the mark back; only counts are shown.
   await db.query(`
     create table if not exists reaction_marks (
@@ -210,6 +214,10 @@ interface Options {
   mailer: Mailer;
   siteUrl: string;
   now?: () => number;
+  /** Addresses that open /admin; none means the admin stays shut. */
+  admins?: string[];
+  /** The audience figures of /admin (plausible.ts); absent until a Stats API key is set. */
+  stats?: () => Promise<object>;
 }
 
 interface ReactionRow {
@@ -248,7 +256,15 @@ interface JourneyRow {
   updated_at: string | Date;
 }
 
-export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options) {
+export function createAccounts({
+  db,
+  mailer,
+  siteUrl,
+  now = Date.now,
+  admins = [],
+  stats,
+}: Options) {
+  const adminAddresses = new Set(admins.map((a) => a.trim().toLowerCase()).filter(Boolean));
   const perConnection = limiter(5, HOUR);
   const perAddress = limiter(3, DAY);
   // Generous for a person, short for a script tapping every heart on the site.
@@ -335,7 +351,7 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     const { rows: replies } = reviews.length
       ? await db.query<ReactionRow>(
           `select ${reactionColumns} from reactions
-           where parent_id = any($1) and published_at is not null and reports < $2
+           where parent_id = any($1) and published_at is not null and reports < $2 and not hidden
            order by published_at, seq`,
           [reviews.map((r) => r.id), REPORTS_TO_HIDE],
         )
@@ -411,7 +427,7 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     if (typeof id !== "string" || !UUID.test(id)) return undefined;
     const { rows } = await db.query<ReactionRow>(
       `select ${reactionColumns} from reactions
-       where id = $1 and published_at is not null and reports < $2`,
+       where id = $1 and published_at is not null and reports < $2 and not hidden`,
       [id, REPORTS_TO_HIDE],
     );
     return rows[0];
@@ -487,16 +503,18 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       if (!isEmail(email)) return json(400, { error: "form" });
       if (!perConnection(connection, now()) || !perAddress(email, now()))
         return json(429, { error: "slow-down" });
-      const account = (
+      const existing = (
         await db.query<{ id: string }>("select id from accounts where email = $1", [email])
-      ).rows[0];
+      ).rows[0]?.id;
+      // An admin address gets its space on first login: /admin would be unreachable otherwise.
+      const accountId = existing ?? (adminAddresses.has(email) ? await accountFor(email) : null);
       // The same answer whether the address has a space or not: nobody learns who uses Là-bas.
-      if (account) {
+      if (accountId) {
         try {
           await mailer.send(
             loginLinkEmail(
               email,
-              await issueLink(account.id, LOGIN_LINK_FOR, { back: backOf(form.back) }),
+              await issueLink(accountId, LOGIN_LINK_FOR, { back: backOf(form.back) }),
             ),
           );
         } catch (error) {
@@ -562,7 +580,7 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       const { rows } = await db.query<ReactionRow>(
         `select ${reactionColumns} from reactions
          where ($1::text is null or city = $1) and parent_id is null
-           and published_at is not null and reports < $2
+           and published_at is not null and reports < $2 and not hidden
          order by published_at desc, seq desc limit $3`,
         [city, REPORTS_TO_HIDE, LATEST],
       );
@@ -645,6 +663,68 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
 
     const reader = await member(request);
     if (!reader) return json(401, { error: "login" });
+
+    // /admin: every published review and reply, for the operator only. Never an address.
+    if (path === "/api/compte/admin" || path.startsWith("/api/compte/admin/")) {
+      if (!adminAddresses.has(reader.email.toLowerCase())) return json(403, { error: "admin" });
+
+      if (method === "GET" && path === "/api/compte/admin") {
+        const { rows } = await db.query<ReactionRow & { reports: number; hidden: boolean }>(
+          `select ${reactionColumns}, reports, hidden from reactions
+           where published_at is not null order by published_at desc, seq desc`,
+        );
+        const marks = await marksOf(
+          rows.map((r) => r.id),
+          undefined,
+        );
+        return json(200, {
+          reviews: rows.map((r) => ({
+            id: r.id,
+            city: r.city,
+            name: displayName(r),
+            text: r.text,
+            createdAt: iso(r.published_at ?? r.created_at),
+            reports: r.reports,
+            hidden: r.hidden || r.reports >= REPORTS_TO_HIDE,
+            replyTo: r.parent_id,
+            mention: r.mention,
+            marks: marks.get(r.id)!.counts,
+          })),
+        });
+      }
+
+      if (method === "GET" && path === "/api/compte/admin/stats") {
+        if (!stats) return json(503, { error: "no-stats" });
+        try {
+          return json(200, await stats());
+        } catch (error) {
+          console.error(String(error));
+          return json(502, { error: "stats" });
+        }
+      }
+
+      const target = /^\/api\/compte\/admin\/reactions\/([0-9a-f-]{36})$/.exec(path)?.[1];
+      if (target && method === "DELETE") {
+        const { rows } = await db.query("delete from reactions where id = $1 returning id", [
+          target,
+        ]);
+        return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
+      }
+      if (target && method === "POST") {
+        // « rétablir » also forgets the reports: the operator has read it and keeps it.
+        const change = {
+          masquer: "hidden = true",
+          retablir: "hidden = false, reports = 0",
+        }[String(form.action)];
+        if (!change) return json(400, { error: "form" });
+        const { rows } = await db.query(
+          `update reactions set ${change} where id = $1 returning id`,
+          [target],
+        );
+        return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
+      }
+      return json(404, { error: "not-found" });
+    }
 
     // A tap on a mark puts it, a second tap takes it back.
     const marked = /^\/api\/compte\/reactions\/([0-9a-f-]{36})\/marques$/.exec(path)?.[1];
