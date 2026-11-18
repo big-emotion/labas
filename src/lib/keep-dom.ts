@@ -1,4 +1,3 @@
-import { pageLocale } from "../i18n/locale";
 import type { AnswerEvent, MessageEvent, ReactionEvent, ShareEvent, SiteEvent } from "./analytics";
 import { type Network, networkShare, networkText, shareEvent } from "./networks";
 import { type JourneyKind, resultsMailBody } from "./account";
@@ -171,7 +170,10 @@ async function shareOn(
 async function pictureOf(answers: Answers, matches: Match[], note: HTMLElement) {
   const locale = pageLocale();
   const copy = COPY[locale];
-  const shared = sharedResult(readShared(new URL(resultLink(answers, matches, locale)).hash)!, locale);
+  const shared = sharedResult(
+    readShared(new URL(resultLink(answers, matches, locale)).hash)!,
+    locale,
+  );
   if (!shared) return null;
   note.textContent = copy.preparing;
   const file = new File([await resultImage(shared, locale)], copy.pictureFile, {

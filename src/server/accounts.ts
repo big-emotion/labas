@@ -748,7 +748,8 @@ export function createAccounts({
       // (operator, 2026-11-18). Both are recomputed from a result link of this site, so no typed
       // text poses as one and no other answer travels.
       // A reply carries no journey: it answers a person, it does not present a result.
-      const result = form.private === true || parent ? null : resultAt(form.link, siteUrl, enSiteUrl);
+      const result =
+        form.private === true || parent ? null : resultAt(form.link, siteUrl, enSiteUrl);
       const top =
         result?.cities
           .slice(0, TOP_THREE)
