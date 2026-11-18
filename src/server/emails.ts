@@ -216,3 +216,26 @@ ${button(link, "Ouvrir Mon espace")}
     ),
   };
 }
+
+/** After a reaction written while signed out: it waits, unpublished, until this link is opened. */
+export function reactionLinkEmail(to: string, link: string, city: string): Mail {
+  return {
+    to,
+    subject: `Publiez votre réaction sur ${city}`,
+    text: `Bonjour, merci pour votre réaction sur ${city}. Pour la mettre en ligne, ouvrez ce lien :
+${link}
+
+Ce lien confirme aussi votre adresse : vos prochaines réactions seront publiées tout de suite. Il marche 7 jours, une seule fois.
+
+Vous n'avez rien écrit ? Ignorez ce message : sans clic de votre part, cette réaction est effacée sous 7 jours.
+
+${SITE_FOOTER}`,
+    html: page(
+      `<p>Bonjour, merci pour votre réaction sur ${escape(city)}. Touchez le bouton pour la mettre en ligne.</p>
+${button(link, "Publier ma réaction")}
+<p style="color:#b4b8ea;font-size:15px">Ce lien confirme aussi votre adresse : vos prochaines réactions seront publiées tout de suite. Il marche 7 jours, une seule fois.</p>
+<p style="color:#b4b8ea;font-size:15px">Vous n'avez rien écrit ? Ignorez ce message : sans clic de votre part, cette réaction est effacée sous 7 jours.</p>`,
+      SITE_FOOTER,
+    ),
+  };
+}

@@ -1,7 +1,8 @@
 import { createHash, randomBytes } from "node:crypto";
+import { CITIES } from "../lib/cities";
 import { cleanAnswers, withoutSensitive } from "../lib/keep";
 import { resultAt } from "../lib/shared-result";
-import { loginLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
+import { loginLinkEmail, reactionLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
 import type { Mailer } from "./subscribe";
 
 /**
@@ -41,6 +42,10 @@ const RESULTS_LINK_FOR = UNCONFIRMED_FOR;
 const LOGIN_LINK_FOR = 15 * MINUTE;
 const SESSION_FOR = 30 * DAY;
 const COOKIE = "labas_session";
+const REACTION_MAX = 1000;
+const NAME_MAX = 40;
+/** Three connections, not three clicks: one reader alone cannot take a reaction down. */
+const REPORTS_TO_HIDE = 3;
 
 export async function migrate(db: Db): Promise<void> {
   await db.query(`
@@ -72,6 +77,28 @@ export async function migrate(db: Db): Promise<void> {
       expires_at timestamptz not null,
       used_at timestamptz
     )`);
+  // Reactions belong to a city, not to a ranking: the ranking differs for everyone (operator,
+  // 2026-11-18). Published once the address is confirmed; `seq` orders two within the same instant.
+  await db.query(`
+    create table if not exists reactions (
+      id uuid primary key default gen_random_uuid(),
+      seq bigint generated always as identity,
+      account_id uuid not null references accounts(id) on delete cascade,
+      city text not null,
+      text text not null,
+      name text,
+      top jsonb,
+      created_at timestamptz not null,
+      published_at timestamptz,
+      reports integer not null default 0
+    )`);
+  await db.query(
+    "create index if not exists reactions_by_city on reactions (city, published_at desc)",
+  );
+  await db.query(
+    "alter table login_links add column if not exists reaction_id uuid references reactions(id) on delete cascade",
+  );
+  await db.query("alter table login_links add column if not exists back text");
   await db.query(`
     create table if not exists news_subscribers (
       email text primary key,
@@ -113,6 +140,9 @@ export async function purge(db: Db, now: number): Promise<void> {
   await db.query("delete from journeys where confirmed_at is null and created_at < $1", [
     at(now - UNCONFIRMED_FOR),
   ]);
+  await db.query("delete from reactions where published_at is null and created_at < $1", [
+    at(now - UNCONFIRMED_FOR),
+  ]);
   await db.query("delete from login_links where expires_at < $1", [at(now)]);
   await db.query("delete from sessions where expires_at < $1", [at(now)]);
   await db.query("delete from news_subscribers where confirmed_at < $1", [at(now - KEEP_FOR)]);
@@ -135,6 +165,19 @@ const redirect = (location: string, headers: Record<string, string> = {}): Respo
 const sessionCookie = (value: string, maxAge: number) =>
   `${COOKIE}=${value}; Path=/; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Lax`;
 
+/**
+ * Where a link may bring the reader back: a path of this site only. « //host » and « /\\host » are
+ * read by browsers as another site, so they are refused like any full address.
+ */
+function backOf(value: unknown): string | null {
+  const back = String(value ?? "");
+  return /^\/(?![/\\])[^\s\\]{0,300}$/.test(back) ? back : null;
+}
+
+/** A stable stand-in for a reader who gave no name: the same number on each of their reactions. */
+const anonymousName = (accountId: string) =>
+  `Utilisateur ${1000 + (parseInt(hash(accountId).slice(0, 8), 16) % 9000)}`;
+
 function limiter(max: number, window: number) {
   const seen = new Map<string, number[]>();
   return (key: string, now: number): boolean => {
@@ -152,6 +195,26 @@ interface Options {
   now?: () => number;
 }
 
+interface ReactionRow {
+  id: string;
+  account_id: string;
+  city: string;
+  text: string;
+  name: string | null;
+  top: unknown;
+  created_at: string | Date;
+  published_at: string | Date | null;
+}
+
+interface LinkOptions {
+  journeyId?: string | null;
+  reactionId?: string | null;
+  news?: boolean;
+  /** Only picks where the link lands; the token alone authorises. */
+  toResults?: boolean;
+  back?: string | null;
+}
+
 interface JourneyRow {
   id: string;
   kind: string;
@@ -163,41 +226,71 @@ interface JourneyRow {
 export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options) {
   const perConnection = limiter(5, HOUR);
   const perAddress = limiter(3, DAY);
+  // Kept in memory on purpose: storing who reported what would keep data on readers for nothing.
+  const reportedBy = new Set<string>();
+  const perReport = (key: string) => !reportedBy.has(key) && Boolean(reportedBy.add(key));
   const at = (offset = 0) => new Date(now() + offset).toISOString();
   const iso = (value: string | Date) => new Date(value).toISOString();
 
-  /** `toResults` only picks where the link lands; the token alone authorises. */
-  async function issueLink(
-    accountId: string,
-    lifetime: number,
-    journeyId: string | null,
-    news: boolean,
-    toResults = false,
-  ) {
+  async function issueLink(accountId: string, lifetime: number, options: LinkOptions = {}) {
+    const { journeyId = null, reactionId = null, news = false, toResults = false } = options;
     const secret = token();
+    // The way back is stored with the token, not written in the link: nobody can retarget it.
     await db.query(
-      "insert into login_links (token_hash, account_id, journey_id, news, expires_at) values ($1, $2, $3, $4, $5)",
-      [hash(secret), accountId, journeyId, news, at(lifetime)],
+      `insert into login_links (token_hash, account_id, journey_id, reaction_id, news, back, expires_at)
+       values ($1, $2, $3, $4, $5, $6, $7)`,
+      [hash(secret), accountId, journeyId, reactionId, news, options.back ?? null, at(lifetime)],
     );
     return `${siteUrl}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}`;
   }
 
-  /** An unconfirmed journey under this address; the account is created when it is new. */
-  async function keepJourney(email: string, kind: string, answers: unknown) {
+  /** The account behind an address, created unconfirmed when it is new. */
+  async function accountFor(email: string): Promise<string> {
     await db.query(
       `insert into accounts (email, created_at, last_seen_at, consent_at) values ($1, $2, $2, $2)
        on conflict (email) do nothing`,
       [email, at()],
     );
-    const account = (
-      await db.query<{ id: string }>("select id from accounts where email = $1", [email])
-    ).rows[0];
+    return (await db.query<{ id: string }>("select id from accounts where email = $1", [email]))
+      .rows[0].id;
+  }
+
+  /** An unconfirmed journey under this address. */
+  async function keepJourney(email: string, kind: string, answers: unknown) {
+    const accountId = await accountFor(email);
     const saved = await db.query<{ id: string }>(
       `insert into journeys (account_id, kind, answers, created_at, updated_at)
        values ($1, $2, $3, $4, $4) returning id`,
-      [account.id, kind, JSON.stringify(answers), at()],
+      [accountId, kind, JSON.stringify(answers), at()],
     );
-    return { accountId: account.id, journeyId: saved.rows[0].id };
+    return { accountId, journeyId: saved.rows[0].id };
+  }
+
+  const reactionColumns = "id, account_id, city, text, name, top, created_at, published_at";
+  /** What anyone may read of a reaction: never the address, never the account. */
+  const publicReaction = (r: ReactionRow, readerId: string | undefined) => ({
+    id: r.id,
+    name: r.name ?? anonymousName(r.account_id),
+    text: r.text,
+    top: r.top ?? null,
+    createdAt: iso(r.published_at ?? r.created_at),
+    mine: r.account_id === readerId,
+  });
+
+  async function reactionsOf(accountId: string) {
+    const { rows } = await db.query<ReactionRow>(
+      `select ${reactionColumns} from reactions where account_id = $1 order by seq`,
+      [accountId],
+    );
+    return rows.map((r) => ({
+      id: r.id,
+      city: r.city,
+      text: r.text,
+      name: r.name,
+      top: r.top,
+      createdAt: iso(r.created_at),
+      publishedAt: r.published_at ? iso(r.published_at) : null,
+    }));
   }
 
   const emailOf = (form: Record<string, unknown>) =>
@@ -256,7 +349,10 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
         return json(429, { error: "slow-down" });
       const { accountId, journeyId } = await keepJourney(email, kindOf(form), answersOf(form));
       try {
-        const link = await issueLink(accountId, SAVE_LINK_FOR, journeyId, form.news === true);
+        const link = await issueLink(accountId, SAVE_LINK_FOR, {
+          journeyId,
+          news: form.news === true,
+        });
         await mailer.send(saveLinkEmail(email, link));
       } catch (error) {
         console.error(String(error));
@@ -280,13 +376,11 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       const answers = sensitive ? answersOf(form) : withoutSensitive(answersOf(form));
       const { accountId, journeyId } = await keepJourney(email, kindOf(form), answers);
       try {
-        const link = await issueLink(
-          accountId,
-          RESULTS_LINK_FOR,
+        const link = await issueLink(accountId, RESULTS_LINK_FOR, {
           journeyId,
-          form.news === true,
-          true,
-        );
+          news: form.news === true,
+          toResults: true,
+        });
         await mailer.send(
           resultsEmail(email, result, String(form.link), siteUrl, undefined, {
             link,
@@ -312,7 +406,10 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       if (account) {
         try {
           await mailer.send(
-            loginLinkEmail(email, await issueLink(account.id, LOGIN_LINK_FOR, null, false)),
+            loginLinkEmail(
+              email,
+              await issueLink(account.id, LOGIN_LINK_FOR, { back: backOf(form.back) }),
+            ),
           );
         } catch (error) {
           console.error(String(error));
@@ -325,11 +422,13 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
       const { rows } = await db.query<{
         account_id: string;
         journey_id: string | null;
+        reaction_id: string | null;
         news: boolean;
+        back: string | null;
       }>(
         `update login_links set used_at = $2
          where token_hash = $1 and used_at is null and expires_at > $2
-         returning account_id, journey_id, news`,
+         returning account_id, journey_id, reaction_id, news, back`,
         [hash(request.query.get("t") ?? ""), at()],
       );
       const link = rows[0];
@@ -347,21 +446,104 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
           link.journey_id,
           at(),
         ]);
+      if (link.reaction_id)
+        await db.query(
+          "update reactions set published_at = coalesce(published_at, $2) where id = $1",
+          [link.reaction_id, at()],
+        );
       if (link.news) await mailer.addToList(account.email).catch((e) => console.error(String(e)));
       const session = token();
       await db.query(
         "insert into sessions (token_hash, account_id, expires_at) values ($1, $2, $3)",
         [hash(session), link.account_id, at(SESSION_FOR)],
       );
-      const landing =
-        link.journey_id && request.query.get("vers") === "resultats"
+      const landing = link.back
+        ? link.back
+        : link.journey_id && request.query.get("vers") === "resultats"
           ? `/espace/?ouvrir=${link.journey_id}`
           : "/espace/";
       return redirect(landing, { "set-cookie": sessionCookie(session, SESSION_FOR / 1000) });
     }
 
+    if (path === "/api/compte/reactions" && method === "GET") {
+      const city = request.query.get("ville");
+      if (!CITIES.some((c) => c.slug === city)) return json(400, { error: "form" });
+      const reader = await member(request);
+      const { rows } = await db.query<ReactionRow>(
+        `select ${reactionColumns} from reactions
+         where city = $1 and published_at is not null and reports < $2
+         order by published_at desc, seq desc limit 200`,
+        [city, REPORTS_TO_HIDE],
+      );
+      return json(200, {
+        total: rows.length,
+        reactions: rows.map((r) => publicReaction(r, reader?.id)),
+      });
+    }
+
+    // Someone signed in publishes at once; anyone else confirms the address once, by e-mail,
+    // and the link that publishes also signs them in (operator, 2026-11-18).
+    if (path === "/api/compte/reactions" && method === "POST") {
+      const city = CITIES.find((c) => c.slug === form.city);
+      const text = String(form.text ?? "").trim();
+      const name = String(form.name ?? "").trim() || null;
+      const reader = await member(request);
+      const email = emailOf(form);
+      if (
+        !city ||
+        !text ||
+        text.length > REACTION_MAX ||
+        (name && name.length > NAME_MAX) ||
+        (!reader && !isEmail(email))
+      )
+        return json(400, { error: "form" });
+      if (form.website) return json(202, { published: false });
+      if (!perConnection(connection, now()) || (!reader && !perAddress(email, now())))
+        return json(429, { error: "slow-down" });
+      // The top three is recomputed from a result link of this site, so no typed text poses as one.
+      const top =
+        resultAt(form.link, siteUrl)
+          ?.cities.slice(0, 3)
+          .map((c) => ({ slug: c.city.slug, name: c.city.name, percent: c.percent })) ?? null;
+      const accountId = reader ? reader.id : await accountFor(email);
+      const { rows } = await db.query<ReactionRow>(
+        `insert into reactions (account_id, city, text, name, top, created_at, published_at)
+         values ($1, $2, $3, $4, $5, $6, $7) returning ${reactionColumns}`,
+        [accountId, city.slug, text, name, top && JSON.stringify(top), at(), reader ? at() : null],
+      );
+      if (reader)
+        return json(201, { published: true, reaction: publicReaction(rows[0], reader.id) });
+      try {
+        const link = await issueLink(accountId, UNCONFIRMED_FOR, {
+          reactionId: rows[0].id,
+          back: backOf(form.back),
+        });
+        await mailer.send(reactionLinkEmail(email, link, city.name));
+      } catch (error) {
+        console.error(String(error));
+        return json(502, { error: "mail" });
+      }
+      return json(202, { published: false });
+    }
+
+    const reported = /^\/api\/compte\/reactions\/([0-9a-f-]{36})\/signaler$/.exec(path)?.[1];
+    if (reported && method === "POST") {
+      if (perReport(`${reported} ${connection}`))
+        await db.query("update reactions set reports = reports + 1 where id = $1", [reported]);
+      return json(202, { ok: true });
+    }
+
     const reader = await member(request);
     if (!reader) return json(401, { error: "login" });
+
+    const reaction = /^\/api\/compte\/reactions\/([0-9a-f-]{36})$/.exec(path)?.[1];
+    if (reaction && method === "DELETE") {
+      const { rows } = await db.query(
+        "delete from reactions where id = $1 and account_id = $2 returning id",
+        [reaction, reader.id],
+      );
+      return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
+    }
 
     if (method === "GET" && path === "/api/compte") {
       const { rows } = await db.query<{ news: boolean }>(
@@ -379,7 +561,12 @@ export function createAccounts({ db, mailer, siteUrl, now = Date.now }: Options)
     if (method === "GET" && path === "/api/compte/export") {
       return json(
         200,
-        { email: reader.email, exportedAt: at(), journeys: await journeysOf(reader.id) },
+        {
+          email: reader.email,
+          exportedAt: at(),
+          journeys: await journeysOf(reader.id),
+          reactions: await reactionsOf(reader.id),
+        },
         { "content-disposition": 'attachment; filename="la-bas-mes-donnees.json"' },
       );
     }
