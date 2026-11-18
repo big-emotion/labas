@@ -19,6 +19,7 @@ import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { plausibleStats } from "./plausible";
 import { type Mail, confirmationEmail, resultsEmail } from "./emails";
+import { limiter } from "./limiter";
 import { newsList } from "./news";
 
 export type { Mail } from "./emails";
@@ -105,17 +106,6 @@ function isEmail(value: string): boolean {
   return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-/** Counts attempts per key in a sliding window; in memory, which is enough for one container. */
-function limiter(max: number, window: number) {
-  const seen = new Map<string, number[]>();
-  return (key: string, now: number): boolean => {
-    const recent = (seen.get(key) ?? []).filter((at) => now - at < window);
-    if (recent.length >= max) return false;
-    seen.set(key, [...recent, now]);
-    return true;
-  };
-}
-
 const json = (status: number, body: object): Response => ({
   status,
   headers: { "content-type": "application/json; charset=utf-8" },
@@ -173,6 +163,16 @@ export function createHandler(
   const resultFrom = (link: unknown) => resultAt(link, config.siteUrl);
 
   return async (request: Request): Promise<Response> => {
+    try {
+      return await route(request);
+    } catch (error) {
+      // An unhandled rejection would stop the process, and every reader with it.
+      console.error(String(error));
+      return json(500, { error: "server" });
+    }
+  };
+
+  async function route(request: Request): Promise<Response> {
     if (request.path === "/api/compte" || request.path.startsWith("/api/compte/")) {
       return accounts ? accounts(request) : json(503, { error: "closed" });
     }
@@ -237,7 +237,7 @@ export function createHandler(
     }
 
     return json(404, { error: "not-found" });
-  };
+  }
 }
 
 /**

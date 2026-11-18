@@ -44,7 +44,7 @@ jobs:
           sleep 3
           status=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8082/api/compte)
           [ "$status" = "401" ] || { docker logs subscribe-db; echo "expected 401, got $status"; exit 1; }
-          docker exec labas-db psql -U labas -d labas -tAc "select count(*) from information_schema.tables where table_name in ('accounts','journeys','login_links','sessions')" | grep -q '^4$'
+          docker exec labas-db psql -U labas -d labas -tAc "select count(*) from information_schema.tables where table_name in ('accounts','journeys','login_links','sessions','reactions','reaction_marks','reaction_reports','news_subscribers')" | grep -q '^8$'
       - name: nginx accepts its configuration
         run: docker run --rm labas:ci nginx -t
       - name: the image serves the home page
