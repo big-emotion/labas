@@ -54,6 +54,10 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
   forged text is published; the temperament is the one a shared result link already carries. The
   city page uses the last result shown in this browser; the shared result page offers none, since
   that result is someone else's.
+- **One line, then the detail.** Under the text, a single line shows the first city, the
+  temperament and « +2 villes »; a tap opens the three cities and the five traits. Three layouts
+  were mocked up (a reveal button, pills by the name, this line); the panel always open outweighed
+  the reaction itself, and pills by the name did not fit at 430 px (operator, 2026-11-18).
 - **Back to the city page.** The link that publishes a reaction written on a result page lands on
   the city page: the quick quiz cannot be redrawn from a link, it starts over.
 - **Moderation, minimal.** Authors delete their own reactions; three reports from different

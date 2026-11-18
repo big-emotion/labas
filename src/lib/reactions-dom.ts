@@ -1,6 +1,7 @@
 import { api } from "./account-dom";
 import {
   initialOf,
+  journeySummary,
   ofCity,
   type Profile,
   type Reaction,
@@ -99,7 +100,23 @@ function itemFor(block: Block, reaction: Reaction): HTMLElement {
     readMore.setAttribute("aria-expanded", String(open));
   });
   if (reaction.top || reaction.profile) {
-    item.querySelector<HTMLElement>(".journey")!.hidden = false;
+    const journey = item.querySelector<HTMLElement>(".journey")!;
+    const summary = item.querySelector<HTMLButtonElement>("[data-summary]")!;
+    const line = journeySummary(reaction.top, reaction.profile);
+    const show = (name: string, text: string | null) => {
+      const part = summary.querySelector<HTMLElement>(`[data-${name}]`)!;
+      part.hidden = !text;
+      (part.lastElementChild ?? part).textContent = text ?? "";
+    };
+    show("first", line.first);
+    show("temperament", line.temperament);
+    show("others", line.more);
+    summary.setAttribute("aria-label", line.label);
+    summary.hidden = false;
+    summary.addEventListener("click", () => {
+      journey.hidden = !journey.hidden;
+      summary.setAttribute("aria-expanded", String(!journey.hidden));
+    });
     if (reaction.top) item.querySelector(".top")!.replaceChildren(...topChips(reaction.top));
     if (reaction.profile) {
       const profile = item.querySelector<HTMLElement>(".profile")!;

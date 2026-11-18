@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { initialOf, ofCity, reactionCount, reactionDate } from "./reactions";
+import { initialOf, journeySummary, ofCity, reactionCount, reactionDate } from "./reactions";
 
 const NOW = Date.UTC(2026, 10, 18, 12);
 const HOUR = 60 * 60 * 1000;
@@ -37,5 +37,32 @@ describe("the city in the title", () => {
     expect(ofCity("Abidjan")).toBe("d'Abidjan");
     expect(ofCity("Essaouira")).toBe("d'Essaouira");
     expect(ofCity("Hargeisa")).toBe("de Hargeisa");
+  });
+});
+
+describe("the one-line summary of the author's journey", () => {
+  const top = [
+    { slug: "arusha", name: "Arusha", percent: 79 },
+    { slug: "port-louis", name: "Port-Louis", percent: 78 },
+    { slug: "grand-baie", name: "Grand Baie", percent: 76 },
+  ];
+  const profile = { name: "Fondation", traits: [] };
+
+  it("names the first city, the temperament and how many cities wait behind", () => {
+    expect(journeySummary(top, profile)).toEqual({
+      first: "Arusha 79\u202f%",
+      temperament: "Fondation",
+      more: "+2 villes",
+      label: "Son parcours : Arusha en tête, tempérament Fondation. Voir le détail",
+    });
+  });
+
+  it("leaves out what the reader did not give", () => {
+    expect(journeySummary(top, null).temperament).toBeNull();
+    expect(journeySummary(top.slice(0, 2), null).more).toBe("+1 ville");
+    expect(journeySummary(null, profile).first).toBeNull();
+    expect(journeySummary(null, profile).label).toBe(
+      "Son parcours : tempérament Fondation. Voir le détail",
+    );
   });
 });

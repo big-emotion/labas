@@ -52,3 +52,22 @@ export function initialOf(name: string): string {
 export function ofCity(name: string): string {
   return /^[AEIOUYÂÉÈÊÎÔÛ]/i.test(name) ? `d'${name}` : `de ${name}`;
 }
+
+/**
+ * The line under a reaction (operator's pick, 2026-11-18): the first city and the temperament at
+ * a glance, the detail one tap away, so the journey never outweighs the text.
+ */
+export function journeySummary(top: TopCity[] | null, profile: Profile | null) {
+  const first = top?.[0] ? `${top[0].name} ${top[0].percent}\u202f%` : null;
+  const others = top ? top.length - 1 : 0;
+  const parts = [
+    top?.[0] ? `${top[0].name} en tête` : null,
+    profile ? `tempérament ${profile.name}` : null,
+  ].filter(Boolean);
+  return {
+    first,
+    temperament: profile?.name ?? null,
+    more: others > 0 ? `+${others} ${others > 1 ? "villes" : "ville"}` : null,
+    label: `Son parcours : ${parts.join(", ")}. Voir le détail`,
+  };
+}

@@ -122,6 +122,15 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
         <button type="button" class="read-more" data-read-more aria-expanded="false" hidden>
           Lire la suite
         </button>
+        {/* One line at a glance, the detail one tap away (operator's pick C, 2026-11-18). */}
+        <button type="button" class="summary" data-summary aria-expanded="false" hidden>
+          <span class="first" data-first hidden>
+            <span class="place">1</span>
+            <span></span>
+          </span>
+          <span class="temperament" data-temperament hidden></span>
+          <span class="others" data-others hidden></span>
+        </button>
         <div class="journey" hidden>
           <p class="journey-title">Son parcours sur Là-bas</p>
           <ol class="top"></ol>
@@ -375,9 +384,64 @@ const titleId = preview ? "reactions-preview-title" : "reactions-title";
     height: 100%;
     background: var(--night);
   }
-  /* The preview names the temperament; its five traits wait on the city page. */
-  .preview :global(.traits) {
+  .reactions :global(.summary) {
+    justify-self: start;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 4px 10px 4px 4px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--thread);
+    color: var(--night);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+  }
+  .reactions :global(.summary[hidden]),
+  .reactions :global(.summary [hidden]) {
     display: none;
+  }
+  .reactions :global(.summary::after) {
+    content: "▾";
+    font-size: 0.65rem;
+    color: var(--night-lift);
+  }
+  .reactions :global(.summary[aria-expanded="true"]::after) {
+    content: "▴";
+  }
+  .reactions :global(.summary .first) {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding: 0 9px 0 3px;
+    border-radius: 999px;
+    background: var(--paper);
+  }
+  .reactions :global(.summary .place) {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--saffron);
+    font-size: 0.7rem;
+  }
+  .reactions :global(.summary .temperament) {
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 999px;
+    background: var(--night);
+    color: var(--saffron);
+  }
+  .reactions :global(.summary .others) {
+    color: var(--night-lift);
   }
   .reactions :global(.tools) {
     display: flex;
