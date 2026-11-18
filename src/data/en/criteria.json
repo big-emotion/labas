@@ -1,1 +1,18 @@
-{}
+{
+  "cost": { "label": "Cost of living" },
+  "setupCost": { "label": "Cost of settling in" },
+  "negotiation": { "label": "Room to negotiate" },
+  "safety": { "label": "Everyday safety" },
+  "utilities": { "label": "Power and water" },
+  "internet": { "label": "Internet" },
+  "healthcare": { "label": "Healthcare" },
+  "schools": { "label": "Schools" },
+  "jobs": { "label": "Jobs" },
+  "business": { "label": "Starting a business and investing" },
+  "flights": { "label": "Flights to Europe" },
+  "culture": { "label": "Cultural life" },
+  "nightlife": { "label": "Going out" },
+  "history": { "label": "History and memory" },
+  "returnees": { "label": "Returnee network" },
+  "pace": { "label": "Pace of the city" }
+}
