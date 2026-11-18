@@ -1,5 +1,7 @@
 ---
 import { canonicalUrl, shareImageFor } from "../lib/share";
+import { BRAND, LANGUAGE_TAG } from "../i18n/locale";
+import { counterpartBuilt, localeOfPath } from "../i18n/routes";
 
 interface Props {
   /** The full document title, as shown in the tab and in shared links. */
@@ -8,16 +10,25 @@ interface Props {
 }
 const { title, description } = Astro.props;
 const url = canonicalUrl(Astro.url.pathname);
-const image = shareImageFor(new URL(url).pathname);
+const image = shareImageFor(Astro.url.pathname);
+const locale = localeOfPath(Astro.url.pathname);
+const other = locale === "fr" ? "en" : "fr";
+const otherUrl = canonicalUrl(counterpartBuilt(Astro.url.pathname));
+const frUrl = locale === "fr" ? url : otherUrl;
+const enUrl = locale === "en" ? url : otherUrl;
 ---
 
 <link rel="canonical" href={url} />
+<link rel="alternate" hreflang="fr" href={frUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={frUrl} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/manifest.webmanifest" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Là-bas" />
-<meta property="og:locale" content="fr_FR" />
+<meta property="og:site_name" content={BRAND[locale]} />
+<meta property="og:locale" content={LANGUAGE_TAG[locale].og} />
+<meta property="og:locale:alternate" content={LANGUAGE_TAG[other].og} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={url} />
