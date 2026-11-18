@@ -1,0 +1,350 @@
+---
+/**
+ * The feedback tab (operator, 2026-11-18): a small tab stuck to the screen edge that opens a
+ * panel to review the site or write to the team. Private, unlike the reviews of /avis: kept for
+ * /admin and mailed to the team (POST /api/compte/messages), never published. Sends only what the
+ * form asks and the page's path, never an answer or a result.
+ *
+ * A plain panel rather than a modal <dialog>: the page stays usable behind it, and the reader can
+ * read what they are commenting on. Shown only with the mail service on, like the other forms.
+ */
+import { MESSAGE_MAX } from "../lib/feedback";
+
+const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+---
+
+{enabled && (
+  <div class="feedback" data-feedback>
+    <div class="room" aria-hidden="true" />
+    <button
+      type="button"
+      class="tab"
+      data-feedback-tab
+      aria-expanded="false"
+      aria-controls="feedback-panel"
+    >
+      Votre avis
+    </button>
+    <section
+      id="feedback-panel"
+      class="panel"
+      data-feedback-panel
+      aria-labelledby="feedback-title"
+      hidden
+    >
+      <div class="head">
+        <h2 id="feedback-title">Votre avis</h2>
+        <button type="button" class="close" data-feedback-close aria-label="Fermer">
+          ×
+        </button>
+      </div>
+      <form novalidate data-feedback-form>
+        <fieldset class="kinds">
+          <legend>Vous voulez :</legend>
+          <label>
+            <input type="radio" name="kind" value="site" checked />
+            <span>Donner mon avis sur le site</span>
+          </label>
+          <label>
+            <input type="radio" name="kind" value="message" />
+            <span>Nous écrire</span>
+          </label>
+        </fieldset>
+        <label class="field">
+          Votre message
+          <textarea name="text" rows="5" maxlength={MESSAGE_MAX} required />
+        </label>
+        <label class="field">
+          <span>
+            Votre e-mail <span class="dim">(si vous voulez une réponse)</span>
+          </span>
+          <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+        </label>
+        <label class="trap" aria-hidden="true">
+          Site web
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+        <p class="error" data-feedback-error role="alert" hidden />
+        <button type="submit" class="send">
+          Envoyer
+        </button>
+        <p class="small">
+          Lu seulement par l'équipe de Là-bas, jamais publié. Nous gardons votre message, la page où
+          vous l'écrivez et votre e-mail si vous le donnez, 1 an au plus. Vos réponses au quiz ne
+          sont pas envoyées. <a href="/confidentialite">Confidentialité</a>
+        </p>
+      </form>
+      <p class="done" data-feedback-done role="status" tabindex="-1" hidden>
+        <b>Merci, votre message est bien arrivé.</b>
+        <span>L'équipe le lit. Si vous avez donné votre e-mail, elle vous répond par e-mail.</span>
+      </p>
+    </section>
+  </div>
+)}
+
+<script>
+  import { api } from "../lib/account-dom";
+  import { messageEvent } from "../lib/analytics";
+  import { feedbackBody } from "../lib/feedback";
+  import { track } from "../lib/keep-dom";
+
+  const block = document.querySelector<HTMLElement>("[data-feedback]");
+  if (block) {
+    const tab = block.querySelector<HTMLButtonElement>("[data-feedback-tab]")!;
+    const panel = block.querySelector<HTMLElement>("[data-feedback-panel]")!;
+    const form = block.querySelector<HTMLFormElement>("[data-feedback-form]")!;
+    const error = block.querySelector<HTMLElement>("[data-feedback-error]")!;
+    const done = block.querySelector<HTMLElement>("[data-feedback-done]")!;
+    const send = form.querySelector<HTMLButtonElement>(".send")!;
+
+    const open = () => {
+      panel.hidden = false;
+      tab.setAttribute("aria-expanded", "true");
+      (done.hidden ? form.querySelector<HTMLElement>("input:checked")! : done).focus();
+    };
+    const close = () => {
+      panel.hidden = true;
+      tab.setAttribute("aria-expanded", "false");
+      tab.focus();
+    };
+    tab.addEventListener("click", () => (panel.hidden ? open() : close()));
+    block.querySelector("[data-feedback-close]")!.addEventListener("click", close);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !panel.hidden) close();
+    });
+
+    const say = (text: string) => {
+      error.textContent = text;
+      error.hidden = false;
+    };
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const body = feedbackBody(new FormData(form), location.pathname);
+      if (!body.text) return say("Écrivez votre message avant d'envoyer.");
+      error.hidden = true;
+      send.disabled = true;
+      const { status } = await api("POST", "/api/compte/messages", body);
+      send.disabled = false;
+      if (status === 202) {
+        track(messageEvent(body.kind === "message" ? "message" : "site"));
+        form.reset();
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
+        return;
+      }
+      say(
+        status === 400
+          ? "Vérifiez votre e-mail, ou laissez-le vide."
+          : status === 429
+            ? "Vous avez envoyé plusieurs messages de suite. Réessayez dans une heure."
+            : "L'envoi n'a pas marché pour l'instant. Réessayez plus tard, ou écrivez à hello@big-emotion.com.",
+      );
+    });
+  }
+</script>
+
+<style>
+  /* Mobile first: a small tab at the bottom right, above the gesture area, and a bottom sheet. */
+  .tab {
+    position: fixed;
+    z-index: 40;
+    right: 0;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 14px 0 16px;
+    border: 0;
+    border-radius: 999px 0 0 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  /* Room at the end of the page, so the tab never covers its last line or button. */
+  .room {
+    height: 64px;
+  }
+  .panel {
+    position: fixed;
+    z-index: 41;
+    inset: auto 0 0 0;
+    max-height: 85dvh;
+    overflow-y: auto;
+    display: grid;
+    gap: 12px;
+    padding: 18px max(16px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom))
+      max(16px, env(safe-area-inset-left));
+    background: var(--night-deep);
+    border-top: 2px solid var(--saffron);
+    border-radius: 20px 20px 0 0;
+    animation: rise 0.2s ease-out;
+  }
+  @keyframes rise {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+    }
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+  }
+  .close {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--night-lift);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  form {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+  }
+  .kinds {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  legend {
+    padding: 0;
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .kinds label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    cursor: pointer;
+  }
+  .kinds input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--saffron);
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  textarea,
+  input[type="email"] {
+    box-sizing: border-box;
+    border-radius: 14px;
+    border: 2px solid var(--thread-dim);
+    background: var(--night);
+    color: var(--thread);
+    padding: 12px 14px;
+    font: inherit;
+    font-weight: 400;
+  }
+  input[type="email"] {
+    min-height: 48px;
+  }
+  textarea {
+    resize: vertical;
+  }
+  .dim,
+  .small {
+    color: var(--thread-dim);
+    font-size: 0.82rem;
+    font-weight: 400;
+  }
+  .small a {
+    color: var(--saffron);
+  }
+  .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .error {
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .send {
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .send:disabled {
+    opacity: 0.4;
+  }
+  .done {
+    display: grid;
+    gap: 6px;
+  }
+  .done span {
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .feedback [hidden] {
+    display: none;
+  }
+
+  /* Tablet and desktop: a narrow vertical tab on the right edge, the panel sliding out beside it. */
+  @media (min-width: 768px) {
+    .room {
+      display: none;
+    }
+    .tab {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%) rotate(180deg);
+      writing-mode: vertical-rl;
+      min-height: 0;
+      padding: 16px 0;
+      width: 40px;
+      border-radius: 0 12px 12px 0;
+    }
+    .panel {
+      inset: 50% 48px auto auto;
+      transform: translateY(-50%);
+      width: 360px;
+      max-height: 90dvh;
+      padding: 20px;
+      border: 2px solid var(--saffron);
+      border-radius: 20px;
+      animation-name: slide;
+    }
+    @keyframes slide {
+      from {
+        transform: translate(24px, -50%);
+        opacity: 0;
+      }
+    }
+  }
+
+  @media print {
+    .feedback {
+      display: none;
+    }
+  }
+</style>

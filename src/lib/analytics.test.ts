@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { answerEvent, finishedEvent, GOALS, plausibleScriptSrc, reactionEvent } from "./analytics";
+import {
+  answerEvent,
+  finishedEvent,
+  GOALS,
+  messageEvent,
+  plausibleScriptSrc,
+  reactionEvent,
+} from "./analytics";
 
 describe("where the audience script comes from", () => {
   it("loads nothing when no site domain is configured", () => {
@@ -111,5 +118,16 @@ describe("the events around reactions", () => {
   it("are all declared as goals, or the dashboard would never show them", () => {
     for (const name of ["Réaction : formulaire ouvert", "Réaction envoyée", "Réactions consultées"])
       expect(GOALS).toContain(name);
+  });
+});
+
+describe("the event sent with a message from the feedback tab", () => {
+  it("says only whether it was a review of the site or a message, never the text or the address", () => {
+    expect(messageEvent("site")).toEqual({ name: "Message envoyé", props: { type: "Avis" } });
+    expect(messageEvent("message")).toEqual({ name: "Message envoyé", props: { type: "Message" } });
+  });
+
+  it("is declared as a goal", () => {
+    expect(GOALS).toContain(messageEvent("site").name);
   });
 });

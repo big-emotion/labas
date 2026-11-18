@@ -1,4 +1,4 @@
-import type { AnswerEvent, ReactionEvent, SiteEvent } from "./analytics";
+import type { AnswerEvent, MessageEvent, ReactionEvent, SiteEvent } from "./analytics";
 import { type JourneyKind, resultsMailBody } from "./account";
 import { mailtoFor } from "./keep";
 import { outcomeOf, resultsBody } from "./newsletter";
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export function track(event: SiteEvent | AnswerEvent | ReactionEvent): void {
+export function track(event: SiteEvent | AnswerEvent | ReactionEvent | MessageEvent): void {
   window.plausible?.(event.name, "props" in event ? { props: event.props } : undefined);
 }
 

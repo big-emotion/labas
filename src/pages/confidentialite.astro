@@ -10,7 +10,7 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
   description="Vos réponses restent dans votre navigateur : Là-bas ne les reçoit jamais et ne compte les réponses que de façon anonyme, sans cookie."
 >
   <h1>Confidentialité</h1>
-  <p class="lead">Dernière mise à jour : {newsletter ? "17" : "15"} novembre 2026.</p>
+  <p class="lead">Dernière mise à jour : {newsletter ? "18" : "15"} novembre 2026.</p>
 
   {newsletter ? (
     <>
@@ -95,6 +95,29 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         ne voit qui l'a mis. Nous gardons le lien entre votre espace et vos cœurs pour qu'un
         deuxième appui les retire ; ils sont dans le fichier téléchargé depuis Mon espace et effacés
         avec votre espace.
+      </p>
+
+      <h2>Si vous nous écrivez avec « Votre avis »</h2>
+      <p>
+        L'onglet « Votre avis », au bord de l'écran, sert à donner votre avis sur le site ou à nous
+        écrire. Ce message est privé : il n'est jamais publié, contrairement aux avis sur les
+        villes.
+      </p>
+      <p>
+        <b>Ce qui est envoyé :</b> votre message, son type (avis sur le site ou message), l'adresse
+        de la page où vous l'écrivez (par exemple « /villes/ ») et votre e-mail seulement si vous le
+        donnez pour avoir une réponse. Rien du quiz : ni vos réponses, ni vos résultats, ni votre
+        parcours.
+      </p>
+      <p>
+        <b>Qui le lit :</b> seulement l'équipe de Là-bas (Big Emotion). Il est gardé sur notre
+        serveur, en Allemagne, et envoyé à la boîte e-mail de l'équipe par la messagerie Microsoft
+        365 de Big Emotion. Si vous avez donné votre e-mail, nous pouvons vous répondre ; sinon,
+        personne ne peut savoir qui l'a écrit.
+      </p>
+      <p>
+        <b>Combien de temps :</b> 1 an après son envoi, puis il est effacé automatiquement. Pour le
+        faire effacer plus tôt : <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
       </p>
     </>
   ) : (
@@ -196,6 +219,8 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     santé et les lois contre l'homosexualité ne sont jamais envoyées. Pour les réactions, nous
     comptons de la même façon qui ouvre le formulaire, qui envoie et qui va les lire, avec la ville
     et l'endroit de la page ; jamais le texte, le nom ni l'adresse.
+    {newsletter &&
+      " Pour « Votre avis », nous comptons seulement qu'un message est parti, avis sur le site ou message ; jamais son texte, sa page ni votre adresse."}
   </p>
 
   <h2>Ce que l'hébergeur peut voir</h2>

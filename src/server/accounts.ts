@@ -1,10 +1,17 @@
 import { createHash, randomBytes } from "node:crypto";
 import { CITIES } from "../lib/cities";
+import { FEEDBACK_KINDS, MESSAGE_MAX } from "../lib/feedback";
 import { cleanAnswers, SENSITIVE_ANSWERS, withoutSensitive } from "../lib/keep";
 import { TOP_THREE, type Answers } from "../lib/ranking";
 import { MARKS } from "../lib/reactions";
 import { resultAt } from "../lib/shared-result";
-import { loginLinkEmail, reactionLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
+import {
+  loginLinkEmail,
+  reactionLinkEmail,
+  resultsEmail,
+  saveLinkEmail,
+  teamMessageEmail,
+} from "./emails";
 import { limiter } from "./limiter";
 import type { Mailer } from "./subscribe";
 
@@ -49,6 +56,8 @@ const REACTION_MAX = 1000;
 const NAME_MAX = 40;
 /** Three readers, not three clicks: one reader alone cannot take a reaction down. */
 const REPORTS_TO_HIDE = 3;
+/** Long enough to answer and learn from, short enough not to become an archive (operator, 2026-11-18). */
+const MESSAGES_FOR = 365 * DAY;
 
 export async function migrate(db: Db): Promise<void> {
   await db.query(`
@@ -129,6 +138,18 @@ export async function migrate(db: Db): Promise<void> {
       account_id uuid not null references accounts(id) on delete cascade,
       primary key (reaction_id, account_id)
     )`);
+  // The feedback tab: private words to the team, apart from the public reviews and from any
+  // account, so they leave nothing behind when a space is erased and need no login.
+  await db.query(`
+    create table if not exists messages (
+      id uuid primary key default gen_random_uuid(),
+      seq bigint generated always as identity,
+      kind text not null check (kind in ('site', 'message')),
+      text text not null,
+      page text,
+      email text,
+      created_at timestamptz not null
+    )`);
   await consentPerJourney(db);
   await db.query(`
     create table if not exists news_subscribers (
@@ -202,6 +223,7 @@ export async function purge(db: Db, now: number): Promise<void> {
   await db.query("delete from login_links where expires_at < $1", [at(now)]);
   await db.query("delete from sessions where expires_at < $1", [at(now)]);
   await db.query("delete from news_subscribers where confirmed_at < $1", [at(now - KEEP_FOR)]);
+  await db.query("delete from messages where created_at < $1", [at(now - MESSAGES_FOR)]);
 }
 
 const token = () => randomBytes(32).toString("base64url");
@@ -243,6 +265,8 @@ interface Options {
   admins?: string[];
   /** The audience figures of /admin (plausible.ts); absent until a Stats API key is set. */
   stats?: () => Promise<object>;
+  /** The team's mailbox, where the feedback tab's messages are mailed; absent, they are only kept. */
+  team?: string;
 }
 
 interface ReactionRow {
@@ -257,6 +281,15 @@ interface ReactionRow {
   mention: string | null;
   created_at: string | Date;
   published_at: string | Date | null;
+}
+
+interface MessageRow {
+  id: string;
+  kind: string;
+  text: string;
+  page: string | null;
+  email: string | null;
+  created_at: string | Date;
 }
 
 /** What a journey may keep: the sensitive answers only under their own box. */
@@ -296,12 +329,16 @@ export function createAccounts({
   now = Date.now,
   admins = [],
   stats,
+  team,
 }: Options) {
   const adminAddresses = new Set(admins.map((a) => a.trim().toLowerCase()).filter(Boolean));
   const perConnection = limiter(5, HOUR);
   const perAddress = limiter(3, DAY);
   // Generous for a person, short for a script tapping every heart on the site.
   const perMark = limiter(120, HOUR);
+  // Apart from the others: a reader who just saved a journey can still write to the team.
+  const messagesPerConnection = limiter(5, HOUR);
+  const messagesPerAddress = limiter(3, DAY);
   const at = (offset = 0) => new Date(now() + offset).toISOString();
   const iso = (value: string | Date) => new Date(value).toISOString();
 
@@ -686,6 +723,29 @@ export function createAccounts({
       return json(202, { published: false });
     }
 
+    // The feedback tab (operator, 2026-11-18): kept for /admin and mailed to the team, never to
+    // the reader. Kept first, so a failing mail service loses nothing.
+    if (method === "POST" && path === "/api/compte/messages") {
+      const kind = FEEDBACK_KINDS.find((k) => k === form.kind);
+      const text = String(form.text ?? "").trim();
+      const email = emailOf(form) || null;
+      if (!kind || !text || text.length > MESSAGE_MAX || (email && !isEmail(email)))
+        return json(400, { error: "form" });
+      if (form.website) return json(202, { ok: true });
+      if (!messagesPerConnection(connection, now()) || (email && !messagesPerAddress(email, now())))
+        return json(429, { error: "slow-down" });
+      const page = backOf(form.page);
+      await db.query(
+        "insert into messages (kind, text, page, email, created_at) values ($1, $2, $3, $4, $5)",
+        [kind, text, page, email, at()],
+      );
+      if (team)
+        await mailer
+          .send(teamMessageEmail(team, { kind, text, page, email }))
+          .catch((error) => console.error(String(error)));
+      return json(202, { ok: true });
+    }
+
     const reader = await member(request);
     if (!reader) return json(401, { error: "login" });
 
@@ -703,7 +763,8 @@ export function createAccounts({
       return json(202, { ok: true });
     }
 
-    // /admin: every published review and reply, for the operator only. Never an address.
+    // /admin: every published review and reply, for the operator only, never a reviewer's
+    // address; and the feedback tab's messages.
     if (path === "/api/compte/admin" || path.startsWith("/api/compte/admin/")) {
       if (!adminAddresses.has(reader.email.toLowerCase())) return json(403, { error: "admin" });
 
@@ -716,7 +777,19 @@ export function createAccounts({
           rows.map((r) => r.id),
           undefined,
         );
+        // The operator's own inbox: the address is there because the reader gave it for an answer.
+        const { rows: messages } = await db.query<MessageRow>(
+          "select id, kind, text, page, email, created_at from messages order by created_at desc, seq desc",
+        );
         return json(200, {
+          messages: messages.map((m) => ({
+            id: m.id,
+            kind: m.kind,
+            text: m.text,
+            page: m.page,
+            email: m.email,
+            createdAt: iso(m.created_at),
+          })),
           reviews: rows.map((r) => ({
             id: r.id,
             city: r.city,
@@ -740,6 +813,14 @@ export function createAccounts({
           console.error(String(error));
           return json(502, { error: "stats" });
         }
+      }
+
+      const message = idIn(path, "/api/compte/admin/messages/");
+      if (message && method === "DELETE") {
+        const { rows } = await db.query("delete from messages where id = $1 returning id", [
+          message,
+        ]);
+        return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
       }
 
       const target = idIn(path, "/api/compte/admin/reactions/");

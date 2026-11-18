@@ -10,6 +10,7 @@ import ShareMeta from "../components/ShareMeta.astro";
 import Newsletter from "../components/Newsletter.astro";
 import SaveLater from "../components/SaveLater.astro";
 import Reactions from "../components/Reactions.astro";
+import Feedback from "../components/Feedback.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
 import { QUESTIONS } from "../lib/questions";
@@ -240,6 +241,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     </div>
 
     <ResultCards />
+    <Feedback />
 
     <script>
       import { rankCities, TOP_THREE, type Answers, type Match } from "../lib/ranking";
