@@ -6,6 +6,32 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.22.1] - 2026-11-18
+
+### Security
+
+- Your origin, family country, faith and health filters are kept in Mon espace only when you tick
+  their own box, now on every way of saving a journey, including « Reprendre plus tard » while
+  signed in. The choice belongs to each journey: answering those questions later does not slip
+  them in. Journeys started from Mon espace before this release had those answers kept without
+  the box; they are erased.
+- One malformed request could stop the service that saves journeys and sends e-mails; it now gets
+  an error page and the service keeps running.
+- Reporting a review needs a signed-in reader, and each reader counts once: three people, not
+  three connections, are needed to hide a review. Who reported is in your downloaded file and goes
+  with your space.
+- « Recevoir mon lien de connexion » answers as fast whether or not the address has a space.
+
+### Fixed
+
+- Every safety, conflict and political remark on a city page (« À savoir ») now names a dated
+  source. Conakry and Nosy Be are reworded to say what their sources say.
+- The privacy page says the news address is erased three years after its last confirmation.
+
+### Changed
+
+- A few colours and the « top three » now come from one place each; nothing changes on screen.
+
 ## [0.22.0] - 2026-11-18
 
 ### Added
@@ -446,6 +472,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.22.0...HEAD
+[0.22.1]: https://github.com/big-emotion/labas/compare/v0.22.0...v0.22.1
 [0.22.0]: https://github.com/big-emotion/labas/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/big-emotion/labas/compare/v0.20.0...v0.21.0
 [0.20.0]: https://github.com/big-emotion/labas/compare/v0.19.0...v0.20.0
