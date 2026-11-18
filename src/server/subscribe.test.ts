@@ -385,6 +385,23 @@ describe("the accounts routes", () => {
     expect(response.status).toBe(503);
   });
 
+  it("answer 500 when the module breaks, so one request never takes the service down", async () => {
+    const { mailer } = recordingMailer();
+    const broken = async (): Promise<never> => {
+      throw new Error('invalid input syntax for type uuid: "------------------------------------"');
+    };
+    const response = await createHandler(
+      CONFIG,
+      mailer,
+      Date.now,
+      broken,
+    )({
+      ...post({}),
+      path: "/api/compte/reactions/------------------------------------/signaler",
+    });
+    expect(response.status).toBe(500);
+  });
+
   it("are handed to the accounts module when it is there", async () => {
     const { mailer } = recordingMailer();
     const accounts = async () => ({ status: 418, headers: {} });

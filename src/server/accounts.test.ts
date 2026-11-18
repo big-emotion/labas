@@ -62,6 +62,7 @@ const save = (email = "awa@exemple.fr", extra: Record<string, unknown> = {}) =>
     request("POST", "/api/compte/sauvegarder", {
       email,
       consent: true,
+      sensitive: true,
       journey: { kind: "quick", answers: ANSWERS },
       ...extra,
     }),
@@ -87,6 +88,15 @@ describe("saving a journey to come back later", () => {
       "select confirmed_at from accounts",
     );
     expect(rows).toEqual([{ confirmed_at: null }]);
+  });
+
+  it("keeps the sensitive answers only with their own, separate box", async () => {
+    await save("awa@exemple.fr", { sensitive: false });
+    const cookie = (await follow()).cookie;
+    const space = JSON.parse(
+      (await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).body!,
+    );
+    expect(space.journeys[0].answers).toEqual({ order: 1 });
   });
 
   it("stores nothing without the explicit consent box", async () => {
@@ -149,6 +159,32 @@ describe("the link in the e-mail", () => {
   });
 });
 
+describe("asking for a login link without waiting for the mail", () => {
+  it("answers at once for a known address, as for an unknown one, while the mail is still on its way", async () => {
+    await save();
+    await follow();
+    let sending = false;
+    const slow = createAccounts({
+      db,
+      siteUrl: SITE,
+      now: () => clock,
+      mailer: {
+        ...mail.mailer,
+        send: () => {
+          sending = true;
+          return new Promise(() => {});
+        },
+      },
+    });
+    const ask = (email: string) =>
+      slow(request("POST", "/api/compte/lien", { email }, { "x-real-ip": email }));
+    const known = await ask("awa@exemple.fr");
+    const unknown = await ask("personne@exemple.fr");
+    expect(sending).toBe(true);
+    expect([known.status, known.body]).toEqual([unknown.status, unknown.body]);
+  });
+});
+
 describe("asking for a login link from Mon espace", () => {
   it("mails a link to a known address and answers the same for an unknown one", async () => {
     await save();
@@ -194,6 +230,71 @@ describe("Mon espace", () => {
       request("PUT", `/api/compte/parcours/${id}`, { answers: {} }, asMember(eve)),
     );
     expect(theft.status).toBe(404);
+  });
+
+  it("keeps sensitive answers of a journey started from Mon espace only with its own box", async () => {
+    const cookie = await member();
+    const start = async (extra: Record<string, unknown>) => {
+      const created = await handle(
+        request(
+          "POST",
+          "/api/compte/parcours",
+          { kind: "quick", answers: ANSWERS, ...extra },
+          asMember(cookie),
+        ),
+      );
+      return JSON.parse(created.body!).id as string;
+    };
+    const answersOf = async (id: string) => {
+      const space = JSON.parse(
+        (await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).body!,
+      );
+      return space.journeys.find((j: { id: string }) => j.id === id).answers;
+    };
+
+    const unboxed = await start({});
+    expect(await answersOf(unboxed)).toEqual({ order: 1 });
+    // Answering the question again later does not slip it in either.
+    await handle(
+      request("PUT", `/api/compte/parcours/${unboxed}`, { answers: ANSWERS }, asMember(cookie)),
+    );
+    expect(await answersOf(unboxed)).toEqual({ order: 1 });
+
+    const boxed = await start({ sensitive: true });
+    expect((await answersOf(boxed)).origin).toEqual(ANSWERS.origin);
+  });
+
+  it("keeps sensitive answers on a journey saved with the consent box, as the quiz goes", async () => {
+    const cookie = await member();
+    const { journeys } = JSON.parse(
+      (await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).body!,
+    );
+    await handle(
+      request(
+        "PUT",
+        `/api/compte/parcours/${journeys[0].id}`,
+        { answers: { ...ANSWERS, order: 0 } },
+        asMember(cookie),
+      ),
+    );
+    const after = JSON.parse(
+      (await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).body!,
+    );
+    expect(after.journeys[0].answers).toEqual({ origin: ANSWERS.origin, order: 0 });
+  });
+
+  it("answers 404, never fails, for an id that is not a journey", async () => {
+    const cookie = await member();
+    for (const id of ["-".repeat(36), "00000000-0000-0000-0000-000000000000"]) {
+      const put = await handle(
+        request("PUT", `/api/compte/parcours/${id}`, { answers: {} }, asMember(cookie)),
+      );
+      expect(put.status).toBe(404);
+      const del = await handle(
+        request("DELETE", `/api/compte/parcours/${id}`, undefined, asMember(cookie)),
+      );
+      expect(del.status).toBe(404);
+    }
   });
 
   it("does not show a journey someone saved under this address until its link is opened", async () => {
@@ -306,6 +407,35 @@ describe("« Recevoir par e-mail » opens a space in the same gesture (operator,
     );
     expect(again.headers.location).toBe("/espace/");
     expect((await follow()).response.headers.location).toBe("/espace/lien-expire/");
+  });
+});
+
+describe("journeys kept before the per-journey box existed", () => {
+  it("erases the sensitive answers a journey from Mon espace kept without a box, and nothing else", async () => {
+    await db.query("alter table journeys drop column sensitive");
+    await db.query(
+      `insert into accounts (id, email, created_at, confirmed_at, last_seen_at, consent_at)
+       values ('11111111-1111-4111-8111-111111111111', 'awa@exemple.fr', now(), now(), now(), now())`,
+    );
+    const keep = (answers: object, created: string, confirmed: string | null) =>
+      db.query(
+        `insert into journeys (account_id, kind, answers, created_at, updated_at, confirmed_at)
+         values ('11111111-1111-4111-8111-111111111111', 'quick', $1, $2, $2, $3)`,
+        [JSON.stringify(answers), created, confirmed],
+      );
+    const kept = { origin: ANSWERS.origin, order: 1 };
+    // Started from Mon espace: created and confirmed in the same instant.
+    await keep(kept, "2026-11-17T10:00:00.000Z", "2026-11-17T10:00:00.000Z");
+    // Saved with the consent box, confirmed later from the e-mail.
+    await keep(kept, "2026-11-17T10:00:00.000Z", "2026-11-17T11:00:00.000Z");
+    await migrate(db);
+    const { rows } = await db.query<{ answers: object; sensitive: boolean }>(
+      "select answers, sensitive from journeys order by confirmed_at",
+    );
+    expect(rows).toEqual([
+      { answers: { order: 1 }, sensitive: false },
+      { answers: kept, sensitive: true },
+    ]);
   });
 });
 

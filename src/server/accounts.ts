@@ -1,10 +1,11 @@
 import { createHash, randomBytes } from "node:crypto";
 import { CITIES } from "../lib/cities";
-import { cleanAnswers, withoutSensitive } from "../lib/keep";
-import { TOP_THREE } from "../lib/ranking";
+import { cleanAnswers, SENSITIVE_ANSWERS, withoutSensitive } from "../lib/keep";
+import { TOP_THREE, type Answers } from "../lib/ranking";
 import { MARKS } from "../lib/reactions";
 import { resultAt } from "../lib/shared-result";
 import { loginLinkEmail, reactionLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
+import { limiter } from "./limiter";
 import type { Mailer } from "./subscribe";
 
 /**
@@ -46,7 +47,7 @@ const SESSION_FOR = 30 * DAY;
 const COOKIE = "labas_session";
 const REACTION_MAX = 1000;
 const NAME_MAX = 40;
-/** Three connections, not three clicks: one reader alone cannot take a reaction down. */
+/** Three readers, not three clicks: one reader alone cannot take a reaction down. */
 const REPORTS_TO_HIDE = 3;
 
 export async function migrate(db: Db): Promise<void> {
@@ -121,6 +122,14 @@ export async function migrate(db: Db): Promise<void> {
       mark text not null,
       primary key (reaction_id, account_id, mark)
     )`);
+  // Who reported is kept so that a reader counts once, across restarts; erased with the space.
+  await db.query(`
+    create table if not exists reaction_reports (
+      reaction_id uuid not null references reactions(id) on delete cascade,
+      account_id uuid not null references accounts(id) on delete cascade,
+      primary key (reaction_id, account_id)
+    )`);
+  await consentPerJourney(db);
   await db.query(`
     create table if not exists news_subscribers (
       email text primary key,
@@ -132,6 +141,31 @@ export async function migrate(db: Db): Promise<void> {
       account_id uuid not null references accounts(id) on delete cascade,
       expires_at timestamptz not null
     )`);
+}
+
+/**
+ * Sensitive answers are kept per journey, only when that journey's own box was ticked (operator,
+ * 2026-11-18). Journeys from before the column: one saved with the consent box or by e-mail and
+ * already holding sensitive answers had them with consent; one started from Mon espace (created
+ * and confirmed in the same instant) never asked, so its sensitive answers are erased.
+ */
+async function consentPerJourney(db: Db): Promise<void> {
+  const { rows } = await db.query(
+    `select 1 from information_schema.columns
+     where table_name = 'journeys' and column_name = 'sensitive'`,
+  );
+  if (rows.length) return;
+  await db.query("alter table journeys add column sensitive boolean");
+  await db.query(
+    `update journeys set sensitive =
+       (confirmed_at is null or confirmed_at <> created_at) and answers ?| $1::text[]`,
+    [SENSITIVE_ANSWERS],
+  );
+  await db.query("update journeys set answers = answers - $1::text[] where not sensitive", [
+    SENSITIVE_ANSWERS,
+  ]);
+  await db.query("alter table journeys alter column sensitive set default false");
+  await db.query("alter table journeys alter column sensitive set not null");
 }
 
 /**
@@ -200,16 +234,6 @@ function backOf(value: unknown): string | null {
 const anonymousName = (accountId: string) =>
   `Utilisateur ${1000 + (parseInt(hash(accountId).slice(0, 8), 16) % 9000)}`;
 
-function limiter(max: number, window: number) {
-  const seen = new Map<string, number[]>();
-  return (key: string, now: number): boolean => {
-    const recent = (seen.get(key) ?? []).filter((at) => now - at < window);
-    if (recent.length >= max) return false;
-    seen.set(key, [...recent, now]);
-    return true;
-  };
-}
-
 interface Options {
   db: Db;
   mailer: Mailer;
@@ -235,8 +259,16 @@ interface ReactionRow {
   published_at: string | Date | null;
 }
 
+/** What a journey may keep: the sensitive answers only under their own box. */
+const keptOf = (answers: Answers, sensitive: boolean) =>
+  sensitive ? answers : withoutSensitive(answers);
+
 const MARK_KEYS: readonly string[] = MARKS.map((m) => m.key);
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const ID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
+const UUID = new RegExp(`^${ID}$`);
+/** The id in a path, only when it is one: anything else would reach Postgres and fail there. */
+const idIn = (path: string, before: string, after = "") =>
+  new RegExp(`^${before}(${ID})${after}$`).exec(path)?.[1];
 /** The reviews of every city on /avis: enough for a beta, filtered in the browser. */
 const LATEST = 200;
 
@@ -270,9 +302,6 @@ export function createAccounts({
   const perAddress = limiter(3, DAY);
   // Generous for a person, short for a script tapping every heart on the site.
   const perMark = limiter(120, HOUR);
-  // Kept in memory on purpose: storing who reported what would keep data on readers for nothing.
-  const reportedBy = new Set<string>();
-  const perReport = (key: string) => !reportedBy.has(key) && Boolean(reportedBy.add(key));
   const at = (offset = 0) => new Date(now() + offset).toISOString();
   const iso = (value: string | Date) => new Date(value).toISOString();
 
@@ -300,12 +329,12 @@ export function createAccounts({
   }
 
   /** An unconfirmed journey under this address. */
-  async function keepJourney(email: string, kind: string, answers: unknown) {
+  async function keepJourney(email: string, kind: string, answers: Answers, sensitive: boolean) {
     const accountId = await accountFor(email);
     const saved = await db.query<{ id: string }>(
-      `insert into journeys (account_id, kind, answers, created_at, updated_at)
-       values ($1, $2, $3, $4, $4) returning id`,
-      [accountId, kind, JSON.stringify(answers), at()],
+      `insert into journeys (account_id, kind, answers, sensitive, created_at, updated_at)
+       values ($1, $2, $3, $4, $5, $5) returning id`,
+      [accountId, kind, JSON.stringify(keptOf(answers, sensitive)), sensitive, at()],
     );
     return { accountId, journeyId: saved.rows[0].id };
   }
@@ -452,7 +481,12 @@ export function createAccounts({
       if (form.website) return json(202, { ok: true });
       if (!perConnection(connection, now()) || !perAddress(email, now()))
         return json(429, { error: "slow-down" });
-      const { accountId, journeyId } = await keepJourney(email, kindOf(form), answersOf(form));
+      const { accountId, journeyId } = await keepJourney(
+        email,
+        kindOf(form),
+        answersOf(form),
+        form.sensitive === true,
+      );
       try {
         const link = await issueLink(accountId, SAVE_LINK_FOR, {
           journeyId,
@@ -478,8 +512,12 @@ export function createAccounts({
       if (!perConnection(connection, now()) || !perAddress(email, now()))
         return json(429, { error: "slow-down" });
       const sensitive = form.sensitive === true;
-      const answers = sensitive ? answersOf(form) : withoutSensitive(answersOf(form));
-      const { accountId, journeyId } = await keepJourney(email, kindOf(form), answers);
+      const { accountId, journeyId } = await keepJourney(
+        email,
+        kindOf(form),
+        answersOf(form),
+        sensitive,
+      );
       try {
         const link = await issueLink(accountId, RESULTS_LINK_FOR, {
           journeyId,
@@ -509,18 +547,11 @@ export function createAccounts({
       ).rows[0]?.id;
       // An admin address gets its space on first login: /admin would be unreachable otherwise.
       const accountId = existing ?? (adminAddresses.has(email) ? await accountFor(email) : null);
-      // The same answer whether the address has a space or not: nobody learns who uses Là-bas.
+      // The same answer whether the address has a space or not, and as fast: the mail goes out
+      // after the answer, or waiting for it would tell who uses Là-bas.
       if (accountId) {
-        try {
-          await mailer.send(
-            loginLinkEmail(
-              email,
-              await issueLink(accountId, LOGIN_LINK_FOR, { back: backOf(form.back) }),
-            ),
-          );
-        } catch (error) {
-          console.error(String(error));
-        }
+        const link = await issueLink(accountId, LOGIN_LINK_FOR, { back: backOf(form.back) });
+        mailer.send(loginLinkEmail(email, link)).catch((error) => console.error(String(error)));
       }
       return json(202, { ok: true });
     }
@@ -655,15 +686,22 @@ export function createAccounts({
       return json(202, { published: false });
     }
 
-    const reported = /^\/api\/compte\/reactions\/([0-9a-f-]{36})\/signaler$/.exec(path)?.[1];
+    const reader = await member(request);
+    if (!reader) return json(401, { error: "login" });
+
+    // Signed in only: connections are too cheap to count, a confirmed address is not.
+    const reported = idIn(path, "/api/compte/reactions/", "/signaler");
     if (reported && method === "POST") {
-      if (perReport(`${reported} ${connection}`))
+      if (!(await reviewToAnswer(reported))) return json(404, { error: "not-found" });
+      const { rows } = await db.query(
+        `insert into reaction_reports (reaction_id, account_id) values ($1, $2)
+         on conflict do nothing returning reaction_id`,
+        [reported, reader.id],
+      );
+      if (rows.length)
         await db.query("update reactions set reports = reports + 1 where id = $1", [reported]);
       return json(202, { ok: true });
     }
-
-    const reader = await member(request);
-    if (!reader) return json(401, { error: "login" });
 
     // /admin: every published review and reply, for the operator only. Never an address.
     if (path === "/api/compte/admin" || path.startsWith("/api/compte/admin/")) {
@@ -704,7 +742,7 @@ export function createAccounts({
         }
       }
 
-      const target = /^\/api\/compte\/admin\/reactions\/([0-9a-f-]{36})$/.exec(path)?.[1];
+      const target = idIn(path, "/api/compte/admin/reactions/");
       if (target && method === "DELETE") {
         const { rows } = await db.query("delete from reactions where id = $1 returning id", [
           target,
@@ -722,13 +760,16 @@ export function createAccounts({
           `update reactions set ${change} where id = $1 returning id`,
           [target],
         );
+        // Forgetting the reports forgets who made them: the count and its readers go together.
+        if (rows.length && form.action === "retablir")
+          await db.query("delete from reaction_reports where reaction_id = $1", [target]);
         return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
       }
       return json(404, { error: "not-found" });
     }
 
     // A tap on a mark puts it, a second tap takes it back.
-    const marked = /^\/api\/compte\/reactions\/([0-9a-f-]{36})\/marques$/.exec(path)?.[1];
+    const marked = idIn(path, "/api/compte/reactions/", "/marques");
     if (marked && method === "POST") {
       const mark = String(form.mark ?? "");
       if (!MARK_KEYS.includes(mark)) return json(400, { error: "form" });
@@ -748,7 +789,7 @@ export function createAccounts({
       return json(200, { marks: marks.counts, mine: marks.mine });
     }
 
-    const reaction = /^\/api\/compte\/reactions\/([0-9a-f-]{36})$/.exec(path)?.[1];
+    const reaction = idIn(path, "/api/compte/reactions/");
     if (reaction && method === "DELETE") {
       const { rows } = await db.query(
         "delete from reactions where id = $1 and account_id = $2 returning id",
@@ -784,6 +825,12 @@ export function createAccounts({
               [reader.id],
             )
           ).rows.map((m) => ({ reaction: m.reaction_id, mark: m.mark })),
+          reports: (
+            await db.query<{ reaction_id: string }>(
+              "select reaction_id from reaction_reports where account_id = $1 order by reaction_id",
+              [reader.id],
+            )
+          ).rows.map((r) => ({ reaction: r.reaction_id })),
         },
         { "content-disposition": 'attachment; filename="la-bas-mes-donnees.json"' },
       );
@@ -801,22 +848,31 @@ export function createAccounts({
 
     if (method === "POST" && path === "/api/compte/parcours") {
       if (!["quick", "deep"].includes(String(form.kind))) return json(400, { error: "form" });
+      const sensitive = form.sensitive === true;
+      const answers = keptOf(cleanAnswers(form.answers), sensitive);
       const { rows } = await db.query<{ id: string }>(
-        `insert into journeys (account_id, kind, answers, created_at, updated_at, confirmed_at)
-         values ($1, $2, $3, $4, $4, $4) returning id`,
-        [reader.id, form.kind, JSON.stringify(cleanAnswers(form.answers)), at()],
+        `insert into journeys (account_id, kind, answers, sensitive, created_at, updated_at, confirmed_at)
+         values ($1, $2, $3, $4, $5, $5, $5) returning id`,
+        [reader.id, form.kind, JSON.stringify(answers), sensitive, at()],
       );
       return json(201, { id: rows[0].id });
     }
 
-    const one = /^\/api\/compte\/parcours\/([0-9a-f-]{36})$/.exec(path)?.[1];
+    const one = idIn(path, "/api/compte/parcours/");
     if (one && method === "PUT") {
-      const { rows } = await db.query(
-        `update journeys set answers = $3, updated_at = $4
-         where id = $1 and account_id = $2 and confirmed_at is not null returning id`,
-        [one, reader.id, JSON.stringify(cleanAnswers(form.answers)), at()],
+      // The journey keeps the choice made when it was saved: a later answer cannot widen it.
+      const { rows } = await db.query<{ sensitive: boolean }>(
+        "select sensitive from journeys where id = $1 and account_id = $2 and confirmed_at is not null",
+        [one, reader.id],
       );
-      return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
+      if (!rows[0]) return json(404, { error: "not-found" });
+      const answers = keptOf(cleanAnswers(form.answers), rows[0].sensitive);
+      await db.query("update journeys set answers = $2, updated_at = $3 where id = $1", [
+        one,
+        JSON.stringify(answers),
+        at(),
+      ]);
+      return json(200, { ok: true });
     }
     if (one && method === "DELETE") {
       const { rows } = await db.query(

@@ -364,7 +364,14 @@
     "currency": "Livre égyptienne",
     "tagline": "Démesure, histoire, Nil",
     "pitch": "Mégapole du Nil aux portes des pyramides de Gizeh, d'une richesse historique sans équivalent et grand carrefour aérien.",
-    "watch": "Bruit, pollution et circulation intenses, sollicitations insistantes sur les sites touristiques."
+    "watch": "Bruit, pollution et circulation intenses, sollicitations insistantes sur les sites touristiques.",
+    "watchSources": [
+      {
+        "title": "Egypt travel advice: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/egypt/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Casablanca",
@@ -447,7 +454,15 @@
     "currency": "Franc CFA",
     "tagline": "Bord de mer, grand marché, hub régional",
     "pitch": "Capitale en bord de mer à taille humaine, connue pour son grand marché et ses Nana Benz, et base d'une compagnie aérienne qui relie toute la région.",
-    "watch": "Vie politique verrouillée de longue date et offre de soins limitée."
+    "watch": "Vie politique verrouillée de longue date et offre de soins limitée.",
+    "watchSources": [
+      {
+        "title": "Togo 2025 — Amnesty International Report 2025/26",
+        "url": "https://www.amnesty.org/en/location/africa/west-and-central-africa/togo/report-togo/",
+        "published": "2026",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Freetown",
@@ -489,7 +504,21 @@
     "currency": "Franc guinéen",
     "tagline": "Presqu'île, percussions, débrouille",
     "pitch": "Capitale sur une presqu'île de l'Atlantique, héritière de grandes traditions de percussion et de danse, face aux îles de Loos.",
-    "watch": "Coupures d'eau et d'électricité, pluies parmi les plus fortes de la région et instabilité politique récurrente."
+    "watch": "Coupures d'eau et d'électricité, pluies parmi les plus fortes de la région et tensions politiques chroniques.",
+    "watchSources": [
+      {
+        "title": "Guinée, conseils aux voyageurs, sécurité — France Diplomatie",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/guinee/conseils-aux-voyageurs-securite",
+        "published": "2026-09-15",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Guinea travel advice: safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/guinea/safety-and-security",
+        "published": "2026-08-12",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Bissau",
@@ -503,7 +532,15 @@
     "currency": "Franc CFA",
     "tagline": "Créole, lenteur, archipel",
     "pitch": "Petite capitale lusophone et créole, porte de l'archipel des Bijagos, réserve de biosphère aux îles presque intactes.",
-    "watch": "Instabilité politique chronique, infrastructures très limitées et peu de vols directs."
+    "watch": "Instabilité politique chronique, infrastructures très limitées et peu de vols directs.",
+    "watchSources": [
+      {
+        "title": "Guinea-Bissau travel advice: Safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/guinea-bissau/safety-and-security",
+        "published": "2025-12-10",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Banjul",
@@ -672,7 +709,15 @@
     "currency": "Franc CFA",
     "tagline": "Île, pétrole, hispanité",
     "pitch": "Seule capitale hispanophone du continent, sur l'île volcanique de Bioko.",
-    "watch": "Vie très chère, visa difficile à obtenir et régime parmi les plus fermés du continent."
+    "watch": "Vie très chère, visa difficile à obtenir et régime parmi les plus fermés du continent.",
+    "watchSources": [
+      {
+        "title": "Equatorial Guinea: Freedom in the World 2025 — Freedom House",
+        "url": "https://freedomhouse.org/country/equatorial-guinea/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "São Tomé",
@@ -790,7 +835,20 @@
     "currency": "Nakfa",
     "tagline": "Altitude, modernisme, huis clos",
     "pitch": "Capitale d'altitude inscrite à l'UNESCO pour son architecture moderniste, paisible et comme hors du temps.",
-    "watch": "L'un des pays les plus fermés du monde : internet rare, permis nécessaires pour circuler et quasi-impossibilité de s'y installer ou d'y investir."
+    "watch": "L'un des pays les plus fermés du monde : internet rare, permis nécessaires pour circuler et quasi-impossibilité de s'y installer ou d'y investir.",
+    "watchSources": [
+      {
+        "title": "Freedom in the World 2025: Eritrea — Freedom House",
+        "url": "https://www.freedomhouse.org/country/eritrea/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Eritrea: safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/eritrea/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Mogadiscio",
@@ -893,7 +951,14 @@
     "currency": "Livre soudanaise",
     "tagline": "Deux Nils, hospitalité, guerre",
     "pitch": "Au confluent du Nil Blanc et du Nil Bleu, capitale d'un pays aux centaines de pyramides nubiennes et réputé pour son hospitalité.",
-    "watch": "La guerre déclenchée en avril 2023 a dévasté la ville et déplacé des millions d'habitants."
+    "watch": "La guerre déclenchée en avril 2023 a dévasté la ville et déplacé des millions d'habitants.",
+    "watchSources": [
+      {
+        "title": "Sudan: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/sudan/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Antananarivo",
@@ -907,7 +972,21 @@
     "currency": "Ariary",
     "tagline": "Collines, artisanat, monde à part",
     "pitch": "Capitale des hautes terres aux collines sacrées, cœur d'une culture unique entre Afrique et Asie, sur une île à la faune introuvable ailleurs.",
-    "watch": "Grande pauvreté, petite délinquance, routes difficiles et instabilité politique récurrente."
+    "watch": "Grande pauvreté, petite délinquance, routes difficiles et instabilité politique récurrente.",
+    "watchSources": [
+      {
+        "title": "France Diplomatie — Madagascar, sécurité",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/madagascar/conseils-aux-voyageurs-securite",
+        "published": "2026-11-13",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Madagascar: Freedom in the World 2026 — Freedom House",
+        "url": "https://freedomhouse.org/country/madagascar/freedom-world/2026",
+        "published": "2026",
+        "accessed": "2026-11-18"
+      }
+    ]
   },
   {
     "name": "Lusaka",
@@ -1446,7 +1525,15 @@
     "currency": "Franc CFA",
     "tagline": "Front de mer, continent, calme",
     "pitch": "Plus grande ville du pays, sur la partie continentale, avec un long front de mer et des plages proches.",
-    "watch": "Visa difficile à obtenir et régime parmi les plus fermés du continent."
+    "watch": "Visa difficile à obtenir et régime parmi les plus fermés du continent.",
+    "watchSources": [
+      {
+        "title": "Equatorial Guinea: Freedom in the World 2025 — Freedom House",
+        "url": "https://freedomhouse.org/country/equatorial-guinea/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Santo António",
@@ -1696,7 +1783,20 @@
     "currency": "Nakfa",
     "tagline": "Mer Rouge, architecture ottomane, îles",
     "pitch": "Vieux port de la mer Rouge à l'architecture ottomane et italienne, face à l'archipel des Dahlak.",
-    "watch": "Pays parmi les plus fermés du monde, chaleur extrême et permis nécessaire pour s'y rendre."
+    "watch": "Pays parmi les plus fermés du monde, chaleur extrême et permis nécessaire pour s'y rendre.",
+    "watchSources": [
+      {
+        "title": "Freedom in the World 2025: Eritrea — Freedom House",
+        "url": "https://www.freedomhouse.org/country/eritrea/freedom-world/2025",
+        "published": "2025",
+        "accessed": "2026-11-15"
+      },
+      {
+        "title": "Eritrea: safety and security — GOV.UK",
+        "url": "https://www.gov.uk/foreign-travel-advice/eritrea/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Hargeisa",
@@ -1870,7 +1970,14 @@
     "currency": "Livre soudanaise",
     "tagline": "Mer Rouge, récifs, refuge",
     "pitch": "Port de la mer Rouge aux récifs réputés, devenu le refuge de l'administration pendant la guerre.",
-    "watch": "Le pays est en guerre depuis avril 2023."
+    "watch": "Le pays est en guerre depuis avril 2023.",
+    "watchSources": [
+      {
+        "title": "Sudan: Safety and security — UK FCDO",
+        "url": "https://www.gov.uk/foreign-travel-advice/sudan/safety-and-security",
+        "accessed": "2026-11-15"
+      }
+    ]
   },
   {
     "name": "Vilankulo",
@@ -1912,7 +2019,15 @@
     "currency": "Ariary",
     "tagline": "Île aux parfums, plongée, ylang-ylang",
     "pitch": "Île tropicale du nord-ouest, première destination balnéaire du pays, entre plantations d'ylang-ylang et fonds marins.",
-    "watch": "Économie entièrement touristique, soins limités et tourisme sexuel visible par endroits."
+    "watch": "Économie entièrement touristique, soins limités et tourisme sexuel signalé, y compris avec des mineures.",
+    "watchSources": [
+      {
+        "title": "2022 Trafficking in Persons Report: Madagascar — US Department of State (ecoi.net)",
+        "url": "https://www.ecoi.net/en/document/2077780.html",
+        "published": "2022-07-29",
+        "accessed": "2026-11-18"
+      }
+    ]
   },
   {
     "name": "Livingstone",

@@ -18,7 +18,7 @@ export interface Journey {
 
 /** « Reprendre plus tard »: nothing leaves without the explicit consent box. */
 export function saveBody(
-  form: { email: string; consent: boolean; news: boolean; website: string },
+  form: { email: string; consent: boolean; sensitive: boolean; news: boolean; website: string },
   kind: JourneyKind,
   answers: Answers,
 ) {
@@ -27,10 +27,16 @@ export function saveBody(
   return {
     email,
     consent: true as const,
+    sensitive: form.sensitive,
     news: form.news,
     website: form.website,
-    journey: { kind, answers },
+    journey: { kind, answers: form.sensitive ? answers : withoutSensitive(answers) },
   };
+}
+
+/** « Reprendre plus tard » for a signed-in reader: no address, the same separate box. */
+export function memberJourneyBody(kind: JourneyKind, answers: Answers, sensitive: boolean) {
+  return { kind, sensitive, answers: sensitive ? answers : withoutSensitive(answers) };
 }
 
 /**

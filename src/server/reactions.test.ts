@@ -235,21 +235,76 @@ describe("removing a reaction", () => {
     expect((await thread()).total).toBe(1);
   });
 
-  it("hides a reaction reported from three different connections", async () => {
+  it("hides a reaction reported by three different readers, each counted once", async () => {
     await signedIn();
     const [reaction] = (await thread()).reactions;
-    const report = (ip: string) =>
+    const reportAs = (cookie: string) =>
       handle(
-        request("POST", `/api/compte/reactions/${reaction.id}/signaler`, undefined, {
-          "x-real-ip": ip,
-        }),
+        request("POST", `/api/compte/reactions/${reaction.id}/signaler`, undefined, { cookie }),
       );
-    await report("a");
-    await report("a");
-    await report("b");
-    expect((await thread()).total).toBe(1);
-    await report("c");
-    expect((await thread()).total).toBe(0);
+    const binta = (await signedIn("binta@exemple.fr")).cookie;
+    const chris = (await signedIn("chris@exemple.fr")).cookie;
+    const dede = (await signedIn("dede@exemple.fr")).cookie;
+    await reportAs(binta);
+    await reportAs(binta);
+    await reportAs(chris);
+    expect((await thread()).reactions.some((r: { id: string }) => r.id === reaction.id)).toBe(true);
+    await reportAs(dede);
+    expect((await thread()).reactions.some((r: { id: string }) => r.id === reaction.id)).toBe(
+      false,
+    );
+    // Who reported is data about that reader: it is in their export, and goes with their space.
+    const exported = JSON.parse(
+      (await handle(request("GET", "/api/compte/export", undefined, { cookie: binta }))).body!,
+    );
+    expect(exported.reports).toEqual([{ reaction: reaction.id }]);
+  });
+
+  it("asks a reader to sign in before reporting: connections are too cheap to count", async () => {
+    await signedIn();
+    const [reaction] = (await thread()).reactions;
+    const report = await handle(
+      request("POST", `/api/compte/reactions/${reaction.id}/signaler`, undefined, {
+        "x-real-ip": "anyone",
+      }),
+    );
+    expect(report.status).toBe(401);
+  });
+
+  it("answers 404, never fails, for an id that is not a reaction", async () => {
+    const { cookie } = await signedIn();
+    for (const id of ["-".repeat(36), "00000000-0000-0000-0000-000000000000"]) {
+      const paths = [
+        ["POST", `/api/compte/reactions/${id}/signaler`, undefined],
+        ["POST", `/api/compte/reactions/${id}/marques`, { mark: "coeur" }],
+        ["DELETE", `/api/compte/reactions/${id}`, undefined],
+      ] as const;
+      for (const [method, path, body] of paths) {
+        const response = await handle(request(method, path, body, { cookie }));
+        expect([method, path, response.status]).toEqual([method, path, 404]);
+      }
+    }
+    const signedOut = await handle(
+      request("POST", `/api/compte/reactions/${"-".repeat(36)}/signaler`),
+    );
+    expect(signedOut.status).not.toBe(500);
+  });
+
+  it("erases reactions and marks with a space three years after its last visit", async () => {
+    const { cookie } = await signedIn();
+    const [reaction] = (await thread()).reactions;
+    await handle(
+      request(
+        "POST",
+        `/api/compte/reactions/${reaction.id}/marques`,
+        { mark: "coeur" },
+        { cookie },
+      ),
+    );
+    clock += 3 * 365 * DAY + DAY;
+    await purge(db, clock);
+    expect((await db.query("select 1 from reactions")).rows).toEqual([]);
+    expect((await db.query("select 1 from reaction_marks")).rows).toEqual([]);
   });
 
   it("erases reactions with the space, and keeps them in the export", async () => {

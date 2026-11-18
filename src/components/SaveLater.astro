@@ -54,9 +54,15 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         <label class="consent">
           <input type="checkbox" name="consent" />
           <span>
-            J'accepte que Là-bas garde mes réponses,{" "}
-            <b>y compris mon origine, ma religion et ma santé</b> si je les ai données, pour
-            retrouver mon parcours. <span class="dim">Obligatoire pour enregistrer.</span>
+            J'accepte que Là-bas garde mes réponses pour retrouver mon parcours.{" "}
+            <span class="dim">Obligatoire pour enregistrer.</span>
+          </span>
+        </label>
+        <label class="consent">
+          <input type="checkbox" name="sensitive" />
+          <span>
+            Garder aussi <b>mon origine, ma religion et ma santé</b> si je les ai données.{" "}
+            <span class="dim">Sans cette case, elles restent dans ce navigateur.</span>
           </span>
         </label>
         <label class="consent">
@@ -72,6 +78,21 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           dans Mon espace. Elles ne sont jamais données à un partenaire.{" "}
           <a href="/confidentialite">Confidentialité</a>
         </p>
+      </form>
+      <form data-save-member novalidate hidden>
+        <label class="consent">
+          <input type="checkbox" name="sensitive" />
+          <span>
+            Garder aussi <b>mon origine, ma religion et ma santé</b> si je les ai données.{" "}
+            <span class="dim">Sans cette case, elles restent dans ce navigateur.</span>
+          </span>
+        </label>
+        <p class="error" data-save-member-error role="alert" hidden>
+          L'enregistrement n'a pas marché. Réessayez dans un instant.
+        </p>
+        <button type="submit" class="send">
+          Enregistrer dans Mon espace
+        </button>
       </form>
       <p class="done-text" data-save-done role="status" hidden>
         <b />
