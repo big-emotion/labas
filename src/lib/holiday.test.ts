@@ -54,6 +54,11 @@ describe("holiday questions move the cities that fit", () => {
   it("knows a city without holiday data is unknown, not bad", () => {
     expect(holidayOf("Mogadiscio")).toBeUndefined();
   });
+
+  it("names the months in the reader's language", () => {
+    expect(monthNames([11, 12, 1])).toBe("novembre, décembre, janvier");
+    expect(monthNames([11, 12, 1], "en")).toBe("November, December, January");
+  });
 });
 
 describe("the months of a holiday", () => {

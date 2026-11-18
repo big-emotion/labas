@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { livableLanguages } from "./cities";
 import { bestMatches, rankCities, topCities, type Answers } from "./ranking";
+import { looksFrench } from "../i18n/looks-french";
 
 function scoreOf(cityName: string, answers: Answers): number {
   const match = rankCities(answers).find((m) => m.city.name === cityName);
@@ -316,5 +317,51 @@ describe("the quick top used to choose the next question", () => {
   it("names the same cities as the full ranking", () => {
     const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };
     expect(topCities(answers, 5)).toEqual(bestMatches(answers, 5).map((m) => m.city.name));
+  });
+});
+
+describe("ranking the cities for an English reader", () => {
+  // A reader who answered a bit of everything, so most kinds of line come up somewhere.
+  const answers: Answers = {
+    project: "installer",
+    languages: ["pt", "en"],
+    origin: ["ouest"],
+    kin: "much",
+    faith: "muslim",
+    saturday: 1,
+    adventure: "seeking",
+    order: 1,
+    together: 0,
+    friction: 0,
+    size: 3,
+    climate: "hot",
+    landscapes: ["beach"],
+    priorities: ["safety", "cost", "flights"],
+    languageOnly: true,
+    visaFreeOnly: true,
+    excludeCriminalising: true,
+  };
+
+  it("explains a match in English", () => {
+    const luanda = rankCities({ languages: ["pt"] }, "en").find((m) => m.city.name === "Luanda");
+    expect(luanda?.reasons.map((r) => r.label)).toContain("Daily life happens in Portuguese there");
+  });
+
+  it("writes every reason, drawback, filter and portrait line in English", () => {
+    for (const m of rankCities(answers, "en")) {
+      const texts = [
+        ...m.reasons.map((r) => r.label),
+        ...m.drawbacks.map((r) => r.label),
+        ...m.temperamentLines.map((l) => l.text),
+        ...m.portrait.flatMap((l) => [l.said, l.text]),
+        m.excludedBecause ?? "",
+      ];
+      for (const text of texts) expect(looksFrench(text), `${m.city.name}: ${text}`).toBe(false);
+    }
+  });
+
+  it("ranks the same way in both languages", () => {
+    const names = (locale: "fr" | "en") => rankCities(answers, locale).map((m) => m.city.name);
+    expect(names("en")).toEqual(names("fr"));
   });
 });

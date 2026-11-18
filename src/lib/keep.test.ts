@@ -47,9 +47,14 @@ describe("the full questionnaire picks up where the quick quiz stopped", () => {
 describe("keeping the result by mail", () => {
   it("opens the reader's own mail with the shared message, addressed to nobody", () => {
     const top = bestMatches(QUICK, 3);
-    const link = mailtoFor(shareText(QUICK, top));
+    const link = mailtoFor(shareText(QUICK, top, "fr"), "fr");
     expect(link.startsWith("mailto:?")).toBe(true);
     expect(decodeURIComponent(link)).toContain(top[0].city.name);
+  });
+
+  it("writes the subject in English for an English reader", () => {
+    const link = mailtoFor("text", "en");
+    expect(decodeURIComponent(link)).toContain("subject=My African cities on Over There");
   });
 });
 

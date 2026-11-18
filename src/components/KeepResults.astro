@@ -5,41 +5,113 @@
 // The networks (lib/networks.ts, operator 2026-11-18) are plain links or the phone's share sheet:
 // no script of theirs ever loads here.
 import { NETWORKS } from "../lib/networks";
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
 
 const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const locale = localeOfPath(Astro.url.pathname);
+const COPY: Bilingual<{
+  title: string;
+  share: string;
+  picture: string;
+  print: string;
+  mail: string;
+  networks: string;
+  networksLabel: string;
+  shareOn: (network: string) => string;
+  mailHint: string;
+  email: string;
+  placeholder: string;
+  website: string;
+  sensitiveBefore: string;
+  sensitive: string;
+  sensitiveAfter: string;
+  news: string;
+  send: string;
+  privacyNote: string;
+  privacy: string;
+}> = {
+  fr: {
+    title: "Garder vos résultats",
+    share: "Partager",
+    picture: "Enregistrer l'image",
+    print: "Imprimer ou PDF",
+    mail: "Recevoir par e-mail",
+    networks: "Partager sur un réseau",
+    networksLabel: "Sur les réseaux",
+    shareOn: (network) => `Partager sur ${network}`,
+    mailHint: `${BRAND.fr} vous envoie vos trois villes et garde votre résultat dans votre espace : le bouton de l'e-mail l'ouvre, avec le classement complet. Pas de mot de passe.`,
+    email: "Votre e-mail",
+    placeholder: "vous@exemple.fr",
+    website: "Site web",
+    sensitiveBefore: "Garder aussi ",
+    sensitive: "mon origine, ma religion et ma santé",
+    sensitiveAfter:
+      ", si je les ai données. Sans cette case, elles restent sur ce téléphone et le classement gardé peut changer un peu.",
+    news: `Je veux aussi recevoir les nouveautés de ${BRAND.fr} (un e-mail par mois au plus).`,
+    send: "Envoyer mes résultats",
+    privacyNote:
+      "L'e-mail contient vos villes et votre profil, jamais vos réponses. Votre adresse et vos réponses sont effacées sous 7 jours si vous n'ouvrez pas le lien, sinon 3 ans après votre dernière visite, ou dès que vous le demandez dans Mon espace.",
+    privacy: "Confidentialité",
+  },
+  en: {
+    title: "Keep your results",
+    share: "Share",
+    picture: "Save the picture",
+    print: "Print or PDF",
+    mail: "Get it by email",
+    networks: "Share on a network",
+    networksLabel: "On social networks",
+    shareOn: (network) => `Share on ${network}`,
+    mailHint: `${BRAND.en} sends you your three cities and keeps your result in your space: the button in the email opens it, with the full ranking. No password.`,
+    email: "Your email",
+    placeholder: "you@example.com",
+    website: "Website",
+    sensitiveBefore: "Also keep ",
+    sensitive: "my origin, my religion and my health",
+    sensitiveAfter:
+      ", if I gave them. Without this box, they stay on this phone and the kept ranking may change a little.",
+    news: `I would also like to receive news from ${BRAND.en} (one email a month at most).`,
+    send: "Send my results",
+    privacyNote:
+      "The email holds your cities and your profile, never your answers. Your address and your answers are erased within 7 days if you do not open the link, otherwise 3 years after your last visit, or as soon as you ask in My space.",
+    privacy: "Privacy",
+  },
+};
+const copy = COPY[locale];
 ---
 
 <div class="keep" data-keep>
-  <h3>Garder vos résultats</h3>
+  <h3>{copy.title}</h3>
   <div class="keep-actions">
     <button type="button" data-keep-way="partage">
-      Partager
+      {copy.share}
     </button>
     <button type="button" data-keep-way="image">
-      Enregistrer l'image
+      {copy.picture}
     </button>
     <button type="button" data-keep-way="impression">
-      Imprimer ou PDF
+      {copy.print}
     </button>
     {serverMail ? (
       <button type="button" data-keep-way="envoi" aria-expanded="false" aria-controls="keep-mail">
-        Recevoir par e-mail
+        {copy.mail}
       </button>
     ) : (
       <a href="mailto:" data-keep-way="e-mail">
-        Recevoir par e-mail
+        {copy.mail}
       </a>
     )}
   </div>
-  <div class="networks" role="group" aria-label="Partager sur un réseau">
-    <span class="networks-label">Sur les réseaux</span>
+  <div class="networks" role="group" aria-label={copy.networks}>
+    <span class="networks-label">{copy.networksLabel}</span>
     {NETWORKS.map((n) => (
       <a
         href="#"
         data-share-network={n.key}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Partager sur ${n.label}`}
+        aria-label={copy.shareOn(n.label)}
       >
         {n.label}
       </a>
@@ -47,44 +119,39 @@ const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
   </div>
   {serverMail && (
     <form id="keep-mail" class="keep-mail" data-keep-mail novalidate hidden>
-      <p class="keep-hint">
-        Là-bas vous envoie vos trois villes et garde votre résultat dans votre espace : le bouton de
-        l'e-mail l'ouvre, avec le classement complet. Pas de mot de passe.
-      </p>
+      <p class="keep-hint">{copy.mailHint}</p>
       <label class="field">
-        Votre e-mail
+        {copy.email}
         <input
           type="email"
           name="email"
-          placeholder="vous@exemple.fr"
+          placeholder={copy.placeholder}
           autocomplete="email"
           required
         />
       </label>
       <label class="trap" aria-hidden="true">
-        Site web
+        {copy.website}
         <input type="text" name="website" tabindex="-1" autocomplete="off" />
       </label>
       <label class="consent">
         <input type="checkbox" name="sensitive" />
         <span>
-          Garder aussi <b>mon origine, ma religion et ma santé</b>, si je les ai données. Sans cette
-          case, elles restent sur ce téléphone et le classement gardé peut changer un peu.
+          {copy.sensitiveBefore}
+          <b>{copy.sensitive}</b>
+          {copy.sensitiveAfter}
         </span>
       </label>
       <label class="consent">
         <input type="checkbox" name="news" />
-        <span>Je veux aussi recevoir les nouveautés de Là-bas (un e-mail par mois au plus).</span>
+        <span>{copy.news}</span>
       </label>
       <p class="keep-error" data-keep-error role="alert" hidden />
       <button type="submit" class="send">
-        Envoyer mes résultats
+        {copy.send}
       </button>
       <p class="keep-hint small">
-        L'e-mail contient vos villes et votre profil, jamais vos réponses. Votre adresse et vos
-        réponses sont effacées sous 7 jours si vous n'ouvrez pas le lien, sinon 3 ans après votre
-        dernière visite, ou dès que vous le demandez dans Mon espace.{" "}
-        <a href="/confidentialite">Confidentialité</a>
+        {copy.privacyNote} <a href={pathFor("privacy", locale)}>{copy.privacy}</a>
       </p>
     </form>
   )}

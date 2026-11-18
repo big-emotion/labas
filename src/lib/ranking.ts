@@ -3,9 +3,12 @@ import {
   CRITERIA,
   livableLanguages,
   type City,
+  type CriterionDefinition,
   type CriterionKey,
   type Language,
 } from "./cities";
+import type { Bilingual, Locale } from "../i18n/locale";
+import { criterionCopy } from "../i18n/city-copy";
 import { TRAITS, temperamentLinesFor, type TemperamentLine } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
 import { portraitFor, type PortraitLine } from "./portrait";
@@ -137,7 +140,7 @@ export interface Match {
   score: number;
   /** 0 to 1: the share of the reader's weight backed by a known value (§4.2). */
   coverage: number;
-  /** Why a filter of the fuller questionnaire keeps this city out, in plain French. */
+  /** Why a filter of the fuller questionnaire keeps this city out, in the reader's language. */
   excludedBecause?: string;
   /** Up to five plain-language reasons the city fits, each rated 1 to 5. */
   reasons: Rated[];
@@ -153,13 +156,23 @@ export interface Match {
   portrait: PortraitLine[];
 }
 
-const LANGUAGE_NAMES: Record<Language, string> = {
-  fr: "français",
-  en: "anglais",
-  pt: "portugais",
-  ar: "arabe",
-  es: "espagnol",
-  sw: "swahili",
+const LANGUAGE_NAMES: Bilingual<Record<Language, string>> = {
+  fr: {
+    fr: "français",
+    en: "anglais",
+    pt: "portugais",
+    ar: "arabe",
+    es: "espagnol",
+    sw: "swahili",
+  },
+  en: {
+    fr: "French",
+    en: "English",
+    pt: "Portuguese",
+    ar: "Arabic",
+    es: "Spanish",
+    sw: "Swahili",
+  },
 };
 
 const MAX_PRIORITIES = 3;
@@ -657,98 +670,184 @@ const CRITERION_OF: Partial<Record<Axis, CriterionKey>> = {
   history: "history",
   returnees: "returnees",
 };
-const LABELS = Object.fromEntries(CRITERIA.map((c) => [c.key, c.label])) as Record<
+const CRITERION_BY_KEY = Object.fromEntries(CRITERIA.map((c) => [c.key, c])) as Record<
   CriterionKey,
-  string
+  CriterionDefinition
 >;
 
-function labelOf(part: Closeness, city: City, answers: Answers, good: boolean): string | undefined {
+/** A reason when the city fits, and a drawback when it does not; no drawback line for some. */
+type LinePair = readonly [good: string, bad?: string];
+
+interface LineCopy {
+  facts: Partial<Record<NonNullable<Closeness["fact"]>, LinePair>>;
+  axes: Partial<Record<Axis, LinePair>>;
+  spoken: (names: string) => string;
+  otherLanguage: string;
+  and: string;
+  safari: string;
+  sea: string;
+  behind: (label: string) => string;
+  notSpoken: (names: string) => string;
+  nor: string;
+  noSchool: string;
+  care: string;
+  visa: string;
+  law: string;
+}
+
+const LINE_COPY: Bilingual<LineCopy> = {
+  fr: {
+    facts: {
+      settings: ["Le paysage que vous cherchez, tout près", "Paysage différent de votre souhait"],
+      climates: ["Le climat que vous cherchez", "Climat différent de votre souhait"],
+      zone: ["Dans la région de votre famille"],
+      sectors: ["Votre secteur y recrute", "Votre secteur y recrute peu"],
+      professions: ["Votre métier y recrute", "Votre métier y recrute peu"],
+      entry: ["Facile d'y entrer avec votre passeport", "Un visa à demander à l'ambassade"],
+      faith: ["Votre foi y est largement partagée", "Votre foi y est minoritaire"],
+      homeCountry: ["Le pays de votre famille"],
+      music: ["Votre musique y fait danser"],
+      season: ["La belle saison quand vous partez", "La saison des pluies quand vous partez"],
+      kin: ["Près de chez les vôtres", "Loin de la région de votre famille"],
+      elsewhere: ["Un ailleurs à découvrir, loin de ce que vous connaissez"],
+      upscale: ["Des quartiers comme le vôtre"],
+      size: ["La taille de ville que vous cherchez", "Une ville d'une autre taille"],
+    },
+    axes: {
+      pace: ["Le rythme de ville que vous cherchez", "Un rythme éloigné de ce que vous cherchez"],
+      nightlife: ["Une ambiance à votre mesure", "Une ambiance décalée par rapport à vous"],
+      cheap: ["Une vie à votre budget", "Plus cher que votre budget"],
+      comfort: ["Courant, eau et soins à la hauteur", "Courant, eau et soins en retrait"],
+      bargaining: [
+        "Des prix comme vous les aimez",
+        "Des prix qui se négocient plus ou moins que vous ne le voudriez",
+      ],
+      welcome: [
+        "Des habitants ouverts aux nouveaux venus (enquête Afrobaromètre)",
+        "Une ouverture aux nouveaux venus plus réservée (enquête Afrobaromètre)",
+      ],
+      walkable: [
+        "Beaucoup de choses à faire à pied",
+        "Une ville où l'on se déplace surtout en voiture",
+      ],
+      leisure: [
+        "Votre quotidien à portée : sport, cafés, culture",
+        "Moins de lieux du quotidien à portée",
+      ],
+      paperwork: ["Démarches simples", "Démarches plus lourdes"],
+      remote: [
+        "Loin de l'agitation, comme vous le voulez",
+        "Plus fréquentée que vous ne le voudriez",
+      ],
+    },
+    spoken: (names) => `On y vit en ${names}`,
+    otherLanguage: "Langue du quotidien différente de votre souhait",
+    and: " et ",
+    safari: "Un safari à moins de deux heures",
+    sea: "Plongée, surf ou glisse tout près",
+    behind: (label) => `${label} : en retrait`,
+    notSpoken: (names) => `On n'y vit pas en ${names}`,
+    nor: " ni en ",
+    noSchool: "Pas d'école du programme souhaité",
+    care: "Les soins suivis demandent d'aller ailleurs",
+    visa: "Visa nécessaire avec un passeport français",
+    law: "Le pays punit l'homosexualité",
+  },
+  en: {
+    facts: {
+      settings: [
+        "The landscape you are looking for, close by",
+        "A landscape unlike the one you want",
+      ],
+      climates: ["The climate you are looking for", "A climate unlike the one you want"],
+      zone: ["In your family's region"],
+      sectors: ["Your sector is hiring there", "Your sector hires little there"],
+      professions: ["Your profession is hiring there", "Your profession hires little there"],
+      entry: ["Easy to enter with your passport", "A visa to request from the embassy"],
+      faith: ["Your faith is widely shared there", "Your faith is a minority there"],
+      homeCountry: ["Your family's country"],
+      music: ["Your music fills the dance floors there"],
+      season: ["The good season when you travel", "The rainy season when you travel"],
+      kin: ["Close to your own people", "Far from your family's region"],
+      elsewhere: ["Somewhere new to discover, far from what you know"],
+      upscale: ["Neighbourhoods like yours"],
+      size: ["The size of city you are looking for", "A city of another size"],
+    },
+    axes: {
+      pace: ["The pace of city you are looking for", "A pace far from what you are looking for"],
+      nightlife: ["A mood that suits you", "A mood out of step with you"],
+      cheap: ["A life within your budget", "More expensive than your budget"],
+      comfort: [
+        "Power, water and healthcare up to standard",
+        "Power, water and healthcare lagging behind",
+      ],
+      bargaining: [
+        "Prices the way you like them",
+        "Prices haggled more or less than you would like",
+      ],
+      welcome: [
+        "People open to newcomers (Afrobarometer survey)",
+        "A more reserved welcome for newcomers (Afrobarometer survey)",
+      ],
+      walkable: ["Plenty to do on foot", "A city where people mostly get around by car"],
+      leisure: [
+        "Your daily life within reach: sport, cafés, culture",
+        "Fewer everyday places within reach",
+      ],
+      paperwork: ["Simple paperwork", "Heavier paperwork"],
+      remote: ["Away from the bustle, as you want", "Busier than you would like"],
+    },
+    spoken: (names) => `Daily life happens in ${names} there`,
+    otherLanguage: "A daily language other than the one you want",
+    and: " and ",
+    safari: "A safari less than two hours away",
+    sea: "Diving, surfing or board sports close by",
+    behind: (label) => `${label}: lagging behind`,
+    notSpoken: (names) => `Daily life there is not in ${names}`,
+    nor: " or ",
+    noSchool: "No school with the curriculum you want",
+    care: "Ongoing care means going elsewhere",
+    visa: "A visa is needed with a French passport",
+    law: "The country punishes homosexuality",
+  },
+};
+
+function labelOf(
+  part: Closeness,
+  city: City,
+  answers: Answers,
+  good: boolean,
+  locale: Locale,
+): string | undefined {
+  const copy = LINE_COPY[locale];
   if (part.fact === "languages") {
     const spoken = livableLanguages(city).filter((l) => languagesOf(answers).includes(l));
     return good
-      ? `On y vit en ${spoken.map((l) => LANGUAGE_NAMES[l]).join(" et ")}`
-      : "Langue du quotidien différente de votre souhait";
+      ? copy.spoken(spoken.map((l) => LANGUAGE_NAMES[locale][l]).join(copy.and))
+      : copy.otherLanguage;
   }
-  if (part.fact === "settings")
-    return good ? "Le paysage que vous cherchez, tout près" : "Paysage différent de votre souhait";
-  if (part.fact === "climates")
-    return good ? "Le climat que vous cherchez" : "Climat différent de votre souhait";
-  if (part.fact === "zone") return good ? "Dans la région de votre famille" : undefined;
-  if (part.fact === "sectors")
-    return good ? "Votre secteur y recrute" : "Votre secteur y recrute peu";
-  if (part.fact === "professions")
-    return good ? "Votre métier y recrute" : "Votre métier y recrute peu";
-  if (part.fact === "entry")
-    return good ? "Facile d'y entrer avec votre passeport" : "Un visa à demander à l'ambassade";
-  if (part.fact === "faith")
-    return good ? "Votre foi y est largement partagée" : "Votre foi y est minoritaire";
   // Weighs in the score, never written on a card: a war between two peoples next to a level reads
   // as a verdict on the reader's family (operator, 2026-11-16).
   if (part.fact === "tension") return undefined;
-  if (part.fact === "homeCountry") return good ? "Le pays de votre famille" : undefined;
-  if (part.fact === "music") return good ? "Votre musique y fait danser" : undefined;
-  if (part.fact === "season")
-    return good ? "La belle saison quand vous partez" : "La saison des pluies quand vous partez";
   if (part.fact === "activities")
-    return good
-      ? part.tags?.includes("safari")
-        ? "Un safari à moins de deux heures"
-        : "Plongée, surf ou glisse tout près"
-      : undefined;
-  if (part.fact === "kin")
-    return good ? "Près de chez les vôtres" : "Loin de la région de votre famille";
-  if (part.fact === "elsewhere")
-    return good ? "Un ailleurs à découvrir, loin de ce que vous connaissez" : undefined;
-  if (part.fact === "upscale") return good ? "Des quartiers comme le vôtre" : undefined;
-  if (part.fact === "size")
-    return good ? "La taille de ville que vous cherchez" : "Une ville d'une autre taille";
-  switch (part.axis) {
-    case "pace":
-      return good
-        ? "Le rythme de ville que vous cherchez"
-        : "Un rythme éloigné de ce que vous cherchez";
-    case "nightlife":
-      return good ? "Une ambiance à votre mesure" : "Une ambiance décalée par rapport à vous";
-    case "cheap":
-      return good ? "Une vie à votre budget" : "Plus cher que votre budget";
-    case "comfort":
-      return good ? "Courant, eau et soins à la hauteur" : "Courant, eau et soins en retrait";
-    case "bargaining":
-      return good
-        ? "Des prix comme vous les aimez"
-        : "Des prix qui se négocient plus ou moins que vous ne le voudriez";
-    case "welcome":
-      return good
-        ? "Des habitants ouverts aux nouveaux venus (enquête Afrobaromètre)"
-        : "Une ouverture aux nouveaux venus plus réservée (enquête Afrobaromètre)";
-    case "walkable":
-      return good
-        ? "Beaucoup de choses à faire à pied"
-        : "Une ville où l'on se déplace surtout en voiture";
-    case "leisure":
-      return good
-        ? "Votre quotidien à portée : sport, cafés, culture"
-        : "Moins de lieux du quotidien à portée";
-    case "paperwork":
-      return good ? "Démarches simples" : "Démarches plus lourdes";
-    case "remote":
-      return good
-        ? "Loin de l'agitation, comme vous le voulez"
-        : "Plus fréquentée que vous ne le voudriez";
-    default: {
-      const key = part.axis ? CRITERION_OF[part.axis] : undefined;
-      if (!key) return undefined;
-      return good ? LABELS[key] : `${LABELS[key]} : en retrait`;
-    }
-  }
+    return good ? (part.tags?.includes("safari") ? copy.safari : copy.sea) : undefined;
+  const pair = (part.fact && copy.facts[part.fact]) || (part.axis && copy.axes[part.axis]);
+  if (pair) return good ? pair[0] : pair[1];
+  const key = part.axis ? CRITERION_OF[part.axis] : undefined;
+  if (!key) return undefined;
+  const label = criterionCopy(CRITERION_BY_KEY[key], locale).label;
+  return good ? label : copy.behind(label);
 }
 
-function exclusionFor(city: City, answers: Answers): string | undefined {
+function exclusionFor(city: City, answers: Answers, locale: Locale): string | undefined {
+  const copy = LINE_COPY[locale];
   const country = city.countryFacts;
   const languages = languagesOf(answers);
   if (answers.languageOnly && languages.length) {
     if (!livableLanguages(city).some((l) => languages.includes(l))) {
-      return `On n'y vit pas en ${languages.map((l) => LANGUAGE_NAMES[l as Language]).join(" ni en ")}`;
+      return copy.notSpoken(
+        languages.map((l) => LANGUAGE_NAMES[locale][l as Language]).join(copy.nor),
+      );
     }
   }
   if (answers.schoolCurriculum) {
@@ -758,19 +857,19 @@ function exclusionFor(city: City, answers: Answers): string | undefined {
         ? curricula.length > 0
         : curricula.includes(answers.schoolCurriculum);
     // A school score nobody checked keeps the city, marked "à vérifier" (§4.2).
-    if (!fits && city.scores.schools.level !== null) return "Pas d'école du programme souhaité";
+    if (!fits && city.scores.schools.level !== null) return copy.noSchool;
   }
   if (answers.specialistCare) {
     const level = city.scores.healthcare.level;
-    if (level !== null && level < 3) return "Les soins suivis demandent d'aller ailleurs";
+    if (level !== null && level < 3) return copy.care;
   }
   if (answers.visaFreeOnly && country?.visaFreeDaysFrenchPassport === 0) {
-    return "Visa nécessaire avec un passeport français";
+    return copy.visa;
   }
   if (answers.excludeCriminalising) {
     const status = country?.sameSexRelations.status;
     if (status === "criminalised" || status === "criminalised-not-enforced") {
-      return "Le pays punit l'homosexualité";
+      return copy.law;
     }
   }
   return undefined;
@@ -836,6 +935,7 @@ function evaluate(
   answers: Answers,
   profile: Profile,
   evidence: { all: Evidence[]; temperament: Evidence[] | null; practical: Evidence[] },
+  locale: Locale,
 ): Match {
   const { score, parts } = scoreOf(city, evidence.all);
   const total = parts.reduce((sum, p) => sum + p.weight, 0);
@@ -844,7 +944,7 @@ function evaluate(
   const cited = parts.filter((p) => p.known);
   const rated = (list: Closeness[], good: boolean): Rated[] =>
     list.flatMap((p) => {
-      const label = labelOf(p, city, answers, good);
+      const label = labelOf(p, city, answers, good, locale);
       return label ? [{ label, level: levelOf(p.value) }] : [];
     });
   // A practical criterion is a reason only when the reader asked for it: otherwise it is a floor,
@@ -867,17 +967,21 @@ function evaluate(
     city,
     score: score ?? 0,
     coverage: total ? known / total : 1,
-    excludedBecause: exclusionFor(city, answers),
+    excludedBecause: exclusionFor(city, answers, locale),
     reasons,
     drawbacks,
     temperament: evidence.temperament ? scoreOf(city, evidence.temperament).score : null,
-    temperamentLines: temperamentLinesFor(city.name, answers),
+    temperamentLines: temperamentLinesFor(city.name, answers, locale),
     practical: scoreOf(city, evidence.practical).score ?? 0,
-    portrait: portraitFor(city, answers),
+    portrait: portraitFor(city, answers, locale),
   };
 }
 
-export function rankCities(answers: Answers): Match[] {
+/**
+ * `locale` only sets the language of the reasons; the order is the same in both. It defaults to
+ * French for the callers that read scores and names only (the next question, the server).
+ */
+export function rankCities(answers: Answers, locale: Locale = "fr"): Match[] {
   // The same matching, run on the temperament answers alone and on all the others, gives the
   // two parts of the score shown on a card.
   const temperamentAnswers: Answers = {};
@@ -893,7 +997,7 @@ export function rankCities(answers: Answers): Match[] {
     temperament: asked ? evidenceOf(profileOf(temperamentAnswers)) : null,
     practical: evidenceOf(profileOf(practicalAnswers)),
   };
-  return CITIES.map((city) => evaluate(city, answers, profile, evidence)).sort(
+  return CITIES.map((city) => evaluate(city, answers, profile, evidence, locale)).sort(
     (a, b) => b.score - a.score,
   );
 }
@@ -906,7 +1010,7 @@ export function topCities(answers: Answers, count: number): string[] {
   const evidence = evidenceOf(profileOf(answers));
   return CITIES.map((city) => ({ city, score: scoreOf(city, evidence).score ?? 0 }))
     .sort((a, b) => b.score - a.score)
-    .filter(({ city }) => !exclusionFor(city, answers))
+    .filter(({ city }) => !exclusionFor(city, answers, "fr"))
     .slice(0, count)
     .map(({ city }) => city.name);
 }
@@ -916,8 +1020,8 @@ export function topCities(answers: Answers, count: number): string[] {
  * Travel advice does not: it is shown with the city as dated information, because it is written
  * for visitors who have never been there (operator, 2026-11-15).
  */
-export function bestMatches(answers: Answers, count: number): Match[] {
-  return rankCities(answers)
+export function bestMatches(answers: Answers, count: number, locale: Locale = "fr"): Match[] {
+  return rankCities(answers, locale)
     .filter((m) => !m.excludedBecause)
     .slice(0, count);
 }

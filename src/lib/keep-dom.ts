@@ -6,6 +6,53 @@ import { outcomeOf, resultsBody } from "./newsletter";
 import type { Answers, Match } from "./ranking";
 import { resultImage } from "./share-image";
 import { readShared, resultLink, sharedResult, shareText } from "./shared-result";
+import { BRAND, pageLocale, type Bilingual } from "../i18n/locale";
+
+const COPY: Bilingual<{
+  copied: string;
+  copyFailed: string;
+  linkCopied: (app: string) => string;
+  linkCopyFailed: (app: string) => string;
+  preparing: string;
+  pictureFile: string;
+  saved: string;
+  sentTo: string;
+  withSpace: string;
+  newsWithSpace: string;
+  newsAlone: string;
+  spam: string;
+}> = {
+  fr: {
+    copied: "Résultat et lien copiés : collez-les où vous voulez.",
+    copyFailed: "La copie n'a pas marché sur ce navigateur : essayez l'e-mail.",
+    linkCopied: (app) => `Lien copié : collez-le dans ${app}, en story ou en message.`,
+    linkCopyFailed: (app) =>
+      `La copie n'a pas marché : partagez depuis ${app} sur votre téléphone.`,
+    preparing: "Préparation de l'image…",
+    pictureFile: "la-bas-mes-villes.png",
+    saved: "Image enregistrée dans vos téléchargements.",
+    sentTo: "C'est parti : vos résultats arrivent à ",
+    withSpace:
+      "Le bouton « Voir mes résultats » de l'e-mail ouvre votre espace, avec votre classement complet.",
+    newsWithSpace: "Ce même bouton confirme aussi les nouveautés.",
+    newsAlone: "Touchez aussi le lien de confirmation des nouveautés, dans ce même e-mail.",
+    spam: "Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.",
+  },
+  en: {
+    copied: "Result and link copied: paste them wherever you like.",
+    copyFailed: "Copying did not work in this browser: try the email instead.",
+    linkCopied: (app) => `Link copied: paste it into ${app}, as a story or a message.`,
+    linkCopyFailed: (app) => `Copying did not work: share from ${app} on your phone.`,
+    preparing: "Preparing the picture…",
+    pictureFile: "over-there-my-cities.png",
+    saved: "Picture saved to your downloads.",
+    sentTo: "On its way: your results are heading to ",
+    withSpace: 'The "See my results" button in the email opens your space, with your full ranking.',
+    newsWithSpace: "The same button also confirms the news.",
+    newsAlone: "Also tap the link confirming the news, in the same email.",
+    spam: "Nothing after a few minutes? Check your spam folder.",
+  },
+};
 
 // Defined by components/Analytics.astro only when audience measurement is configured.
 declare global {
@@ -38,6 +85,8 @@ export function wireKeep(
   current: () => { answers: Answers; matches: Match[] },
   kind: JourneyKind,
 ): void {
+  const locale = pageLocale();
+  const copy = COPY[locale];
   for (const block of document.querySelectorAll<HTMLElement>("[data-keep]")) {
     const note = block.querySelector<HTMLElement>("[data-keep-note]")!;
     const mailForm = block.querySelector<HTMLFormElement>("[data-keep-mail]");
@@ -60,21 +109,21 @@ export function wireKeep(
       }
       if (way === "e-mail") {
         // Set on the click itself, so the mail carries the result as it is now.
-        (target as HTMLAnchorElement).href = mailtoFor(shareText(answers, matches));
+        (target as HTMLAnchorElement).href = mailtoFor(shareText(answers, matches, locale), locale);
         return;
       }
       if (way === "impression") return window.print();
       if (way === "image") return savePicture(answers, matches, note);
-      const text = shareText(answers, matches);
+      const text = shareText(answers, matches, locale);
       if (navigator.share) {
         // Closing the share sheet rejects; nothing to tell the reader.
-        return navigator.share({ title: "Là-bas", text }).catch(() => undefined);
+        return navigator.share({ title: BRAND[locale], text }).catch(() => undefined);
       }
       try {
         await navigator.clipboard.writeText(text);
-        note.textContent = "Résultat et lien copiés : collez-les où vous voulez.";
+        note.textContent = copy.copied;
       } catch {
-        note.textContent = "La copie n'a pas marché sur ce navigateur : essayez l'e-mail.";
+        note.textContent = copy.copyFailed;
       }
     });
   }
@@ -92,8 +141,9 @@ async function shareOn(
   note: HTMLElement,
 ) {
   const network = button.dataset.shareNetwork as Network;
-  const link = resultLink(answers, matches);
-  const share = networkShare(network, link);
+  const copy = COPY[pageLocale()];
+  const link = resultLink(answers, matches, pageLocale());
+  const share = networkShare(network, link, pageLocale());
   track(shareEvent(network));
   if (share.kind === "link") {
     button.href = share.href;
@@ -101,7 +151,7 @@ async function shareOn(
   }
   event.preventDefault();
   const file = await pictureOf(answers, matches, note);
-  const text = networkText(link);
+  const text = networkText(link, pageLocale());
   if (file && navigator.canShare?.({ files: [file] })) {
     try {
       return await navigator.share({ files: [file], text });
@@ -111,17 +161,19 @@ async function shareOn(
   }
   try {
     await navigator.clipboard.writeText(link);
-    note.textContent = `Lien copié : collez-le dans ${share.app}, en story ou en message.`;
+    note.textContent = copy.linkCopied(share.app);
   } catch {
-    note.textContent = `La copie n'a pas marché : partagez depuis ${share.app} sur votre téléphone.`;
+    note.textContent = copy.linkCopyFailed(share.app);
   }
 }
 
 async function pictureOf(answers: Answers, matches: Match[], note: HTMLElement) {
-  const shared = sharedResult(readShared(new URL(resultLink(answers, matches)).hash)!);
+  const locale = pageLocale();
+  const copy = COPY[locale];
+  const shared = sharedResult(readShared(new URL(resultLink(answers, matches, locale)).hash)!, locale);
   if (!shared) return null;
-  note.textContent = "Préparation de l'image…";
-  const file = new File([await resultImage(shared)], "la-bas-mes-villes.png", {
+  note.textContent = copy.preparing;
+  const file = new File([await resultImage(shared, locale)], copy.pictureFile, {
     type: "image/png",
   });
   note.textContent = "";
@@ -134,7 +186,10 @@ async function savePicture(answers: Answers, matches: Match[], note: HTMLElement
   if (!file) return;
   if (navigator.canShare?.({ files: [file] })) {
     try {
-      return await navigator.share({ files: [file], text: resultLink(answers, matches) });
+      return await navigator.share({
+        files: [file],
+        text: resultLink(answers, matches, pageLocale()),
+      });
     } catch (error) {
       if ((error as Error).name === "AbortError") return;
     }
@@ -143,7 +198,7 @@ async function savePicture(answers: Answers, matches: Match[], note: HTMLElement
   const link = Object.assign(document.createElement("a"), { href: url, download: file.name });
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
-  note.textContent = "Image enregistrée dans vos téléchargements.";
+  note.textContent = COPY[pageLocale()].saved;
 }
 
 async function post(path: string, body: unknown): Promise<number> {
@@ -189,7 +244,7 @@ function wireMail(
       news: data.get("news") === "on",
       website: String(data.get("website") ?? ""),
     };
-    const link = resultLink(answers, matches);
+    const link = resultLink(answers, matches, pageLocale());
     const body = resultsMailBody(fields, kind, answers, link);
     if (!body) return show(400);
     submit.disabled = true;
@@ -203,22 +258,17 @@ function wireMail(
     sent.dataset.keepSent = "";
     const title = document.createElement("p");
     title.className = "keep-sent-title";
-    title.append("C'est parti : vos résultats arrivent à ");
+    const copy = COPY[pageLocale()];
+    title.append(copy.sentTo);
     const address = document.createElement("b");
     address.textContent = body.email;
     title.append(address, ".");
     const hint = document.createElement("p");
     hint.className = "keep-hint";
     hint.textContent = [
-      withSpace
-        ? "Le bouton « Voir mes résultats » de l'e-mail ouvre votre espace, avec votre classement complet."
-        : "",
-      body.news
-        ? withSpace
-          ? "Ce même bouton confirme aussi les nouveautés."
-          : "Touchez aussi le lien de confirmation des nouveautés, dans ce même e-mail."
-        : "",
-      "Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.",
+      withSpace ? copy.withSpace : "",
+      body.news ? (withSpace ? copy.newsWithSpace : copy.newsAlone) : "",
+      copy.spam,
     ]
       .filter(Boolean)
       .join(" ");

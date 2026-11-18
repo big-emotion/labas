@@ -1,6 +1,6 @@
 import catalogue from "../data/city-actions.json";
 import type { Bilingual, Locale } from "../i18n/locale";
-import { cityName } from "../i18n/places";
+import { cityName, countryName } from "../i18n/places";
 import type { City } from "./cities";
 
 /** A link that moves the reader from a result to doing something about it. */
@@ -42,7 +42,7 @@ const COPY: Bilingual<{
     flights: (city) => `Flights to ${city} (Google Flights)`,
     flightsQuery: (airport) => `Flights to ${airport}`,
     lodging: (city) => `Places to stay in ${city} (Booking)`,
-    googleLanguage: "en",
+    googleLanguage: "en-GB",
     bookingPage: "searchresults.en-gb.html",
   },
 };
@@ -59,8 +59,8 @@ export function goingThere(city: City, locale: Locale = "fr"): GoingLink[] | und
   if (city.advisedAgainst || !actions) return undefined;
   const copy = COPY[locale];
   const name = cityName(city.name, locale);
-  // Booking's search reads the French names too, and they are the data's own.
-  const place = `${city.name}, ${city.country}`;
+  // Booking's English page searches best with the English names.
+  const place = `${name}, ${countryName(city.country, locale)}`;
   return [
     {
       title: copy.flights(name),

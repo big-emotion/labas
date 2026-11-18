@@ -281,16 +281,7 @@ const COPY: Bilingual<typeof FR> = {
 const copy = COPY[locale];
 
 /** English has no cost wording in lib/card.ts yet; the scale is the same, 5 being cheapest. */
-const COSTS_EN = [
-  "Very high cost of living",
-  "Very high cost of living",
-  "High cost of living",
-  "Middling cost of living",
-  "Affordable cost of living",
-  "Very affordable cost of living",
-];
-const cost = (level: number | null) =>
-  locale === "en" ? (level === null ? undefined : COSTS_EN[level]) : costLabel(level);
+const cost = (level: number | null) => costLabel(level, locale);
 
 // Grouped by theme, each with a short preview (beta feedback, 2026-11-16).
 const PREVIEW = 2;
