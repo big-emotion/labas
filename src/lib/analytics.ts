@@ -55,6 +55,9 @@ export const GOALS = [
   "Réponse",
   "Questionnaire 1 terminé",
   "Questionnaire complet terminé",
+  "Réaction : formulaire ouvert",
+  "Réaction envoyée",
+  "Réactions consultées",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -84,4 +87,33 @@ export function answerEvent(question: string, value: unknown, at: PathStep): Ans
       answer,
     },
   };
+}
+
+/**
+ * Reactions (operator, 2026-11-18): who opens the form, who sends, who goes to read, by place
+ * and city. The props « lieu », « ville » and « statut » must be listed in Plausible's custom
+ * properties. Never the text, the name or the address.
+ */
+const PLACES = {
+  preview: "Résultat",
+  thread: "Fiche ville",
+  card: "Carte 2 ou 3",
+  row: "Liste des villes",
+} as const;
+export type ReactionPlace = keyof typeof PLACES;
+
+export interface ReactionEvent {
+  name: "Réaction : formulaire ouvert" | "Réaction envoyée" | "Réactions consultées";
+  props: { lieu: string; ville: string; statut?: string };
+}
+
+export function reactionEvent(
+  name: ReactionEvent["name"],
+  place: ReactionPlace,
+  city: string,
+  published?: boolean,
+): ReactionEvent {
+  const props: ReactionEvent["props"] = { lieu: PLACES[place], ville: city };
+  if (published !== undefined) props.statut = published ? "Publiée" : "En attente du lien";
+  return { name, props };
 }

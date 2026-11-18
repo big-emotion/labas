@@ -1,4 +1,6 @@
 import { api } from "./account-dom";
+import { reactionEvent } from "./analytics";
+import { track } from "./keep-dom";
 import {
   initialOf,
   journeySummary,
@@ -173,6 +175,7 @@ function draw(block: Block) {
     all.textContent = reactions.length
       ? `Voir toutes les réactions (${reactions.length})`
       : `Voir la page ${ofCity(block.cityName)}`;
+    all.onclick = () => track(reactionEvent("Réactions consultées", "preview", block.city));
   }
 }
 
@@ -186,6 +189,9 @@ async function load(block: Block): Promise<boolean> {
   draw(block);
   return true;
 }
+
+const placeOf = (root: HTMLElement) =>
+  root.dataset.reactions === "preview" ? ("preview" as const) : ("thread" as const);
 
 function wireForm(block: Block) {
   const { root } = block;
@@ -202,6 +208,7 @@ function wireForm(block: Block) {
     form.hidden = !form.hidden;
     open.setAttribute("aria-expanded", String(!form.hidden));
     if (form.hidden) return;
+    track(reactionEvent("Réaction : formulaire ouvert", placeOf(root), block.city));
     pending.hidden = true;
     topField.hidden = !block.link;
     form.querySelector("textarea")!.focus();
@@ -237,6 +244,8 @@ function wireForm(block: Block) {
     submit.disabled = true;
     const { status, data: answer } = await api("POST", "/api/compte/reactions", body);
     submit.disabled = false;
+    if (status === 201 || status === 202)
+      track(reactionEvent("Réaction envoyée", placeOf(root), block.city, status === 201));
     if (status === 201) {
       block.reactions = [answer.reaction, ...block.reactions];
       draw(block);
@@ -337,6 +346,7 @@ export async function showCounts(
     if (total === null) continue;
     link.href = `/ville/${city.slug}/#reactions`;
     link.textContent = total ? reactionCount(total) : `Réagir sur ${city.name}`;
+    link.onclick = () => track(reactionEvent("Réactions consultées", "card", city.slug));
     link.hidden = false;
   }
 }

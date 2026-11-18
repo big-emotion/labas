@@ -63,6 +63,10 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 - **Moderation, minimal.** Authors delete their own reactions; three reports from different
   connections hide one. Who reported what is kept in memory only. The road not taken: a review
   queue before publication, too slow for a beta whose point is to hear readers.
+- **Measured, anonymously.** Three Plausible goals (`reactionEvent` in `src/lib/analytics.ts`):
+  « Réaction : formulaire ouvert », « Réaction envoyée » (statut: published at once or waiting for
+  its link) and « Réactions consultées », each with `lieu` and `ville`. Publication by the e-mailed
+  link happens on the server and is not counted.
 - **Display names** are optional, 40 characters at most; without one, « Utilisateur » and a number
   stable for the account. The address is never shown.
 

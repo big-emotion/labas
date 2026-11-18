@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { answerEvent, finishedEvent, plausibleScriptSrc } from "./analytics";
+import { answerEvent, finishedEvent, GOALS, plausibleScriptSrc, reactionEvent } from "./analytics";
 
 describe("where the audience script comes from", () => {
   it("loads nothing when no site domain is configured", () => {
@@ -75,5 +75,41 @@ describe("the one anonymous event sent per quiz answer", () => {
   it("sends nothing when a question is cleared", () => {
     expect(answerEvent("project", undefined, AT)).toBeNull();
     expect(answerEvent("priorities", [], AT)).toBeNull();
+  });
+});
+
+// Reactions are what the operator wants to learn from (2026-11-18): measure who opens the form,
+// who sends, and who reads, by city and by place. Never the text, the name or the address.
+describe("the events around reactions", () => {
+  it("counts the form opened, by place and city", () => {
+    expect(reactionEvent("Réaction : formulaire ouvert", "preview", "dakar")).toEqual({
+      name: "Réaction : formulaire ouvert",
+      props: { lieu: "Résultat", ville: "dakar" },
+    });
+  });
+
+  it("counts a reaction sent, published at once or waiting for its link", () => {
+    expect(reactionEvent("Réaction envoyée", "thread", "dakar", true)).toEqual({
+      name: "Réaction envoyée",
+      props: { lieu: "Fiche ville", ville: "dakar", statut: "Publiée" },
+    });
+    expect(reactionEvent("Réaction envoyée", "preview", "accra", false).props.statut).toBe(
+      "En attente du lien",
+    );
+  });
+
+  it("counts a click towards the reactions, by where it came from", () => {
+    expect(reactionEvent("Réactions consultées", "card", "accra")).toEqual({
+      name: "Réactions consultées",
+      props: { lieu: "Carte 2 ou 3", ville: "accra" },
+    });
+    expect(reactionEvent("Réactions consultées", "row", "accra").props.lieu).toBe(
+      "Liste des villes",
+    );
+  });
+
+  it("are all declared as goals, or the dashboard would never show them", () => {
+    for (const name of ["Réaction : formulaire ouvert", "Réaction envoyée", "Réactions consultées"])
+      expect(GOALS).toContain(name);
   });
 });
