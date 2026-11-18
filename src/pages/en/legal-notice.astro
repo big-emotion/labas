@@ -1,4 +1,5 @@
 ---
+import { CONTACT } from "../../i18n/locale";
 import Page from "../../layouts/Page.astro";
 
 // Mirrors /mentions-legales: same build-time host settings, same facts. Prose pages keep one file
@@ -27,7 +28,7 @@ const host = hostName
     (RCS): 983 423 351. EU VAT number: FR30983423351.
   </p>
   <p>
-    Contact: <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+    Contact: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
   </p>
 
   <h2>Publication director</h2>

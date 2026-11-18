@@ -1,4 +1,5 @@
 ---
+import { CONTACT } from "../../i18n/locale";
 import Page from "../../layouts/Page.astro";
 import { CITIES, CRITERIA, CRITERION_KEYS } from "../../lib/cities";
 import { MUSIC } from "../../lib/music";
@@ -175,7 +176,7 @@ const GENRES_EN: Record<string, string> = {
   </ul>
   <p>
     A mistake, a more recent source? Write to us:
-    <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+    <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
   </p>
 </Page>
 

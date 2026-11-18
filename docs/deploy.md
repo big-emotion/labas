@@ -233,11 +233,17 @@ Adding `overthere.africa` to it changes its certificate the same way, which is w
 2. **DNS**: `@` A `<server-ip>`, `www` A `<server-ip>`, delete the registrar's default AAAA. Wait
    until `dig +short overthere.africa A` and `dig +short www.overthere.africa A` both answer
    `<server-ip>`.
-3. **The mail and accounts service accepts the second origin.** `src/server/subscribe.ts` refuses
-   any request whose `Origin` is not its `siteUrl` (labas.africa), and the e-mails it sends link to
-   `siteUrl`. Before English pages post to `/api/…` from overthere.africa, the service must accept
-   `https://overthere.africa` too and link English readers there: a code change with its tests,
-   shipped before or with the switch.
+3. **The mail and accounts service accepts the second origin**:
+   `gh variable set EN_SITE_URL --repo big-emotion/labas --body https://overthere.africa` (see
+   step 7 of the one-time setup). It then accepts forms from that origin and links English
+   readers there.
+   **The English mailbox**: add overthere.africa to the Microsoft 365 tenant (its TXT and MX
+   records), create `hello@overthere.africa` as an alias of the team mailbox, then
+   `gh variable set REPLY_TO_EN --repo big-emotion/labas --body hello@overthere.africa`. English
+   e-mails already go out named "Over There"; with `REPLY_TO_EN` set, readers' answers go to that
+   address. English pages show it as the contact once `EN_ORIGIN` is set (step 5), not before, so
+   nobody writes to an address that bounces. The sender stays `MAIL_SENDER` (labas.africa): a
+   second sender would need its own Graph access policy.
 4. **Traefik**: apply the diff above to `deploy/docker-compose.yml`.
 5. **The build variable**:
    `gh variable set EN_ORIGIN --repo big-emotion/labas --body https://overthere.africa`.

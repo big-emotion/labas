@@ -1,4 +1,5 @@
 ---
+import { CONTACT } from "../../i18n/locale";
 import Page from "../../layouts/Page.astro";
 import { counterpart, pathFor } from "../../i18n/routes";
 
@@ -63,8 +64,8 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       <p>
         <b>Your rights:</b> in <a href={pathFor("space", "en")}>My space</a>, you can see, resume,
         download or delete your journeys, or delete your whole space. For any other request:{" "}
-        <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>. You can also contact the
-        CNIL, the French data protection authority.
+        <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>. You can also contact the CNIL, the French
+        data protection authority.
       </p>
 
       <h2>If you react to a city</h2>
@@ -118,7 +119,7 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       </p>
       <p>
         <b>How long:</b> 1 year after it is sent, then it is erased automatically. To have it erased
-        sooner: <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+        sooner: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
       </p>
     </>
   ) : (
@@ -198,7 +199,7 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         the site where a button erases your address from the list at once; if you have a space, news
         is switched off there too. Unless you confirm again, your address is erased automatically
         three years after your last confirmation. You can also write to us to see it or have it
-        erased: <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>.
+        erased: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
       </p>
       <p>Legal basis: your consent, which you can withdraw at any time.</p>
     </>
@@ -237,9 +238,8 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
   <h2>Contact us</h2>
   <p>
-    For any question: <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>. You can also
-    contact the CNIL, the French data protection authority (
-    <a href="https://www.cnil.fr">cnil.fr</a>).
+    For any question: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>. You can also contact the
+    CNIL, the French data protection authority (<a href="https://www.cnil.fr">cnil.fr</a>).
   </p>
   <p>
     The French version of this page is the reference:{" "}

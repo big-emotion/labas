@@ -9,7 +9,7 @@
  * read what they are commenting on. Shown only with the mail service on, like the other forms.
  */
 import { MESSAGE_MAX } from "../lib/feedback";
-import type { Bilingual } from "../i18n/locale";
+import { CONTACT, type Bilingual } from "../i18n/locale";
 import { localeOfPath, pathFor } from "../i18n/routes";
 
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
@@ -56,7 +56,7 @@ const COPY: Bilingual<Record<string, string>> = {
     empty: "Write your message before sending.",
     badEmail: "Check your email, or leave it empty.",
     tooMany: "You have sent several messages in a row. Try again in an hour.",
-    failed: "Sending did not work for now. Try again later, or write to hello@big-emotion.com.",
+    failed: `Sending did not work for now. Try again later, or write to ${CONTACT.en}.`,
   },
 };
 const copy = COPY[locale];

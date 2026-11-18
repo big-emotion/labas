@@ -27,3 +27,16 @@ export function pageLocale(): Locale {
 
 /** French sorts and formats numbers its own way; English pages use British English. */
 export const INTL_LOCALE: Bilingual<string> = { fr: "fr-FR", en: "en-GB" };
+
+/**
+ * Where a reader writes to the team. hello@overthere.africa (operator, 2026-11-18) exists only
+ * once the English domain does, so English pages show it only when PUBLIC_EN_ORIGIN is set:
+ * before that, a message to it would bounce.
+ */
+export function contactFor(enOrigin: string): Bilingual<string> {
+  return {
+    fr: "hello@big-emotion.com",
+    en: enOrigin ? "hello@overthere.africa" : "hello@big-emotion.com",
+  };
+}
+export const CONTACT = contactFor(import.meta.env?.PUBLIC_EN_ORIGIN?.trim() ?? "");

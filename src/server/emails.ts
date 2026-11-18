@@ -16,6 +16,8 @@ export interface Mail {
   html: string;
   /** Only a message to the team sets it, to the reader who asked for an answer. */
   replyTo?: string;
+  /** The reader's language: it picks the sender's name and the team address answers go to. */
+  locale?: Locale;
 }
 
 /** Anything but « en » reads as French, the site's source language and the default. */
@@ -120,6 +122,7 @@ export function confirmationEmail(
   const copy = CONFIRMATION[locale];
   return {
     to,
+    locale,
     subject: copy.subject,
     text: `${copy.hello}
 
@@ -259,6 +262,7 @@ ${c.fits.map((line) => `<p style="margin:4px 0 0;font-size:15px;color:#b4b8ea">$
 
   return {
     to,
+    locale,
     subject: copy.subject(cities.map((c) => c.name).join(", ")),
     text: [
       copy.hello,
@@ -330,6 +334,7 @@ export function saveLinkEmail(to: string, link: string, locale: Locale): Mail {
   const copy = SAVE_LINK[locale];
   return {
     to,
+    locale,
     subject: copy.subject,
     text: `${copy.saved} ${copy.openLink}
 ${link}
@@ -372,6 +377,7 @@ export function loginLinkEmail(to: string, link: string, locale: Locale): Mail {
   const copy = LOGIN_LINK[locale];
   return {
     to,
+    locale,
     subject: copy.subject,
     text: `${copy.here}${COLON[locale]}
 ${link}
@@ -422,6 +428,7 @@ export function reactionLinkEmail(to: string, link: string, city: string, locale
   const copy = REACTION_LINK[locale];
   return {
     to,
+    locale,
     subject: copy.subject(city),
     text: `${copy.thanks(city)} ${copy.openLink}
 ${link}

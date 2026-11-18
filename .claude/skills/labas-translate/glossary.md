@@ -12,6 +12,7 @@ and change every use in the same commit.
 | ---------------------------------- | ----------------- | -------------------------------------------------------------- |
 | Là-bas                             | Over There        | `BRAND` in `src/i18n/locale.ts`; never "Labas" in English      |
 | labas.africa                       | overthere.africa  | once live (docs/deploy.md); until then `/en/` on labas.africa  |
+| hello@big-emotion.com              | `CONTACT.en`      | hello@overthere.africa once the domain is live; never typed    |
 | Big Emotion, BIG EMOTION           | unchanged         | the publisher                                                  |
 | France Diplomatie                  | France Diplomatie | proper name, kept; gloss once as "the French foreign ministry" |
 | FCDO                               | FCDO              | the UK Foreign, Commonwealth & Development Office              |

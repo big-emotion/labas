@@ -56,6 +56,7 @@ describe("the results e-mail", () => {
 describe("the e-mails in the reader's language", () => {
   it("confirms the news in English, with the brand of the English site", () => {
     const mail = confirmationEmail("a@b.co", "https://c/confirm", "https://c/leave", "en");
+    expect(mail.locale).toBe("en");
     expect(mail.subject).toBe("Confirm your sign-up to Over There news");
     expect(mail.text).toContain("https://c/confirm");
     expect(mail.text).toContain("https://c/leave");

@@ -380,6 +380,26 @@ describe("the Microsoft Graph connection", () => {
     ]);
   });
 
+  it("signs an English mail as Over There, answered at the English address once it exists", async () => {
+    const bodies: string[] = [];
+    const fakeFetch = async (url: string | URL | Request, init?: RequestInit) => {
+      bodies.push(String(init?.body));
+      return String(url).includes("/oauth2/")
+        ? Response.json({ access_token: "token-1", expires_in: 3600 })
+        : new Response(null, { status: 202 });
+    };
+    const english = { ...CONFIG, replyToEn: "hello@overthere.africa" };
+    await graph(english, fakeFetch as typeof fetch).send({ ...MAIL, locale: "en" });
+    const { message } = JSON.parse(bodies[1]);
+    expect(message.from.emailAddress.name).toBe("Over There");
+    expect(message.replyTo).toEqual([{ emailAddress: { address: "hello@overthere.africa" } }]);
+
+    await graph(CONFIG, fakeFetch as typeof fetch).send({ ...MAIL, locale: "en" });
+    expect(JSON.parse(bodies[3]).message.replyTo).toEqual([
+      { emailAddress: { address: "hello@big-emotion.com" } },
+    ]);
+  });
+
   it("fails loudly when Microsoft refuses", async () => {
     const refusing = async () => new Response("bad", { status: 401 });
     await expect(graph(CONFIG, refusing as typeof fetch).send(MAIL)).rejects.toThrow(/401/);

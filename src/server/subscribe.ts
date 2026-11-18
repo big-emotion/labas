@@ -20,7 +20,7 @@ import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { deepl } from "./deepl";
 import { plausibleStats } from "./plausible";
-import type { Locale } from "../i18n/locale";
+import { BRAND, type Locale } from "../i18n/locale";
 import {
   type Mail,
   type Sites,
@@ -50,6 +50,8 @@ export interface Config {
   enSiteUrl?: string;
   /** Where readers' replies go: the operator's own mailbox. */
   replyTo: string;
+  /** The English team address (hello@overthere.africa) once it exists; empty, REPLY_TO answers. */
+  replyToEn?: string;
 }
 
 export interface Mailer {
@@ -125,7 +127,9 @@ export const sitesOf = (config: Pick<Config, "siteUrl" | "enSiteUrl">): Sites =>
 
 /** The English settings are optional: without them, everything stays on SITE_URL. */
 export const isConfigured = (config: Config) =>
-  Object.entries(config).every(([key, value]) => key === "enSiteUrl" || Boolean(value));
+  Object.entries(config).every(
+    ([key, value]) => key === "enSiteUrl" || key === "replyToEn" || Boolean(value),
+  );
 
 /**
  * The language a link the service mailed was asked in: « lang=en » rides on the links it builds,
@@ -290,6 +294,9 @@ export function createHandler(
  * the URL.
  */
 export function graph(config: Config, fetchImpl: typeof fetch = fetch): Pick<Mailer, "send"> {
+  // hello@overthere.africa answers English readers once that mailbox exists (REPLY_TO_EN).
+  const teamAddress = (locale: Locale | undefined) =>
+    locale === "en" && config.replyToEn ? config.replyToEn : config.replyTo;
   let token: { value: string; expiresAt: number } | null = null;
   const accessToken = async () => {
     if (token && token.expiresAt - 60_000 > Date.now()) return token.value;
@@ -324,9 +331,9 @@ export function graph(config: Config, fetchImpl: typeof fetch = fetch): Pick<Mai
           message: {
             subject: mail.subject,
             body: { contentType: "HTML", content: mail.html },
-            from: { emailAddress: { address: config.sender, name: "Là-bas" } },
+            from: { emailAddress: { address: config.sender, name: BRAND[mail.locale ?? "fr"] } },
             toRecipients: [{ emailAddress: { address: mail.to } }],
-            replyTo: [{ emailAddress: { address: mail.replyTo ?? config.replyTo } }],
+            replyTo: [{ emailAddress: { address: mail.replyTo ?? teamAddress(mail.locale) } }],
           },
           // A copy of every reader's mail in the mailbox would be one more place keeping it.
           saveToSentItems: false,
@@ -348,6 +355,7 @@ function start(port: number) {
     siteUrl: process.env.SITE_URL ?? SITE,
     enSiteUrl: process.env.EN_SITE_URL?.trim().replace(/\/$/, "") ?? "",
     replyTo: process.env.REPLY_TO ?? "hello@big-emotion.com",
+    replyToEn: process.env.REPLY_TO_EN?.trim() ?? "",
   };
   const pool = process.env.DATABASE_URL
     ? new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 5 })

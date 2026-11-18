@@ -1,6 +1,6 @@
 ---
 import Page from "../layouts/Page.astro";
-import { BRAND, type Bilingual } from "../i18n/locale";
+import { BRAND, CONTACT, type Bilingual } from "../i18n/locale";
 import { localeOfPath, pathFor } from "../i18n/routes";
 
 /** The way out of the news, at /nouveautes/desinscription/ and /en/news/unsubscribe/. */
@@ -33,12 +33,9 @@ const COPY = {
     done: "Done.",
     left: "Your address is erased from the news list. You can sign up again whenever you like, from the quiz.",
     back: "Back to the quiz",
-    incomplete:
-      "This link is incomplete. Open the one in your email, or write to us: hello@big-emotion.com.",
-    broken:
-      "This link doesn't work. Open the one in your email, or write to us: hello@big-emotion.com.",
-    failed:
-      "That didn't work, try again in a moment. Otherwise, write to us: hello@big-emotion.com.",
+    incomplete: `This link is incomplete. Open the one in your email, or write to us: ${CONTACT.en}.`,
+    broken: `This link doesn't work. Open the one in your email, or write to us: ${CONTACT.en}.`,
+    failed: `That didn't work, try again in a moment. Otherwise, write to us: ${CONTACT.en}.`,
   },
 } satisfies Bilingual<Record<string, string>>;
 const copy = COPY[locale];

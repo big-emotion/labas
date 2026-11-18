@@ -1,4 +1,4 @@
-import type { Bilingual, Locale } from "../i18n/locale";
+import { CONTACT, type Bilingual, type Locale } from "../i18n/locale";
 
 /**
  * The news sign-up as the page sees it (components/Newsletter.astro). The address goes to the
@@ -54,8 +54,7 @@ const OUTCOMES = {
     save: "Check your address and tick the consent box, then try again.",
     results: "Check your address, then try again.",
     slowDown: "Too many requests at once. Try again in an hour.",
-    failed:
-      "It didn't go through. Try again in a moment; if it keeps happening, write to us at hello@big-emotion.com.",
+    failed: `It didn't go through. Try again in a moment; if it keeps happening, write to us at ${CONTACT.en}.`,
   },
 } satisfies Bilingual<Record<string, string>>;
 
