@@ -19,7 +19,7 @@ const COPY: Bilingual<{ profile: string; cities: string; question: string; site:
   en: {
     profile: "MY PROFILE",
     cities: "MY AFRICAN CITIES",
-    question: "Which African city feels like you?",
+    question: "Which African city is most like you?",
     site: EN_SITE.replace(/^https:\/\//, ""),
   },
 };

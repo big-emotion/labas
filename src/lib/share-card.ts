@@ -26,7 +26,7 @@ const COPY: Bilingual<{
     living: "Vivre à",
   },
   en: {
-    question: ["Which city in Africa", "feels like you?"],
+    question: ["Which African city", "is most like you?"],
     promise: (cities) => `${cities} cities across Africa’s 54 countries. No sign-up.`,
     living: "Living in",
   },

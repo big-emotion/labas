@@ -32,7 +32,7 @@ export function shareImageFor(path: string): string {
 /** The quick part's length depends on the reader's project, so no number of questions is promised. */
 export function siteDescription(locale: Locale): string {
   return locale === "en"
-    ? `Answer a few straight questions and discover which of ${CITIES.length} cities across Africa's 54 countries resemble you.`
+    ? `Answer a few straight questions and discover which of ${CITIES.length} cities across Africa's 54 countries are most like you.`
     : `Répondez à quelques questions directes et découvrez, parmi ${CITIES.length} villes des 54 pays d'Afrique, celles qui vous ressemblent.`;
 }
 

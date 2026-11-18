@@ -90,3 +90,17 @@ already ships a different English label, align the two and fix this table.
 
 - « vous » → "you". Never "thou"-style formality, never "dear user", never "we've got you".
 - « nous » (the team) → "we".
+
+## Recurring phrases fixed when the site went bilingual (2026-11-18)
+
+| French                                         | English                                            | Note                                             |
+| ---------------------------------------------- | -------------------------------------------------- | ------------------------------------------------ |
+| Quelle ville d'Afrique vous ressemble ?        | Which African city is most like you?               | the slogan: home page, share cards, result page  |
+| En tête pour l'instant                         | Leading for now                                    | the live top three                               |
+| À savoir                                       | Good to know                                       |                                                  |
+| Y aller                                        | Getting there                                      |                                                  |
+| Réseau de repats                               | Returnee network                                   |                                                  |
+| Marge de négociation                           | Room to haggle                                     |                                                  |
+| Votre avis (onglet)                            | Your feedback                                      | the private feedback tab, not the public reviews |
+| Traduire / Voir l'original                     | Translate / Show original                          | under each review (DeepL)                        |
+| Conquête, Lien, Fondation, Exploration, Refuge | Drive, Connection, Foundation, Exploration, Refuge | temperament names (`TEMPERAMENTS[].en`)          |
