@@ -1,7 +1,7 @@
 import { createHash, randomBytes } from "node:crypto";
 import { CITIES } from "../lib/cities";
 import { cleanAnswers, SENSITIVE_ANSWERS, withoutSensitive } from "../lib/keep";
-import type { Answers } from "../lib/ranking";
+import { TOP_THREE, type Answers } from "../lib/ranking";
 import { MARKS } from "../lib/reactions";
 import { resultAt } from "../lib/shared-result";
 import { loginLinkEmail, reactionLinkEmail, resultsEmail, saveLinkEmail } from "./emails";
@@ -648,7 +648,7 @@ export function createAccounts({
       const result = form.private === true || parent ? null : resultAt(form.link, siteUrl);
       const top =
         result?.cities
-          .slice(0, 3)
+          .slice(0, TOP_THREE)
           .map((c) => ({ slug: c.city.slug, name: c.city.name, percent: c.percent })) ?? null;
       const profile = result?.archetype
         ? { name: result.archetype.name, traits: result.archetype.traits }

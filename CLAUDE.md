@@ -49,7 +49,7 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   (`components/Reactions.astro`, operator 2026-11-18) are public: text, chosen name or
   « Utilisateur N », date and, unless its box keeps them back, the top 3 and the temperament
   recomputed from the result link; never an answer, never the address. Their Plausible events (`reactionEvent`) carry the place
-  and the city slug only. `/avis` (operator 2026-11-18) lists every city's reviews for anyone;
+  and the city slug, plus whether a sent reaction went online at once; never its text. `/avis` (operator 2026-11-18) lists every city's reviews for anyone;
   replies are two levels, carry no journey, and hearts and the few friendly marks need a session
   and show as counts only, never who left them. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.

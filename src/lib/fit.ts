@@ -106,6 +106,10 @@ const SOURCES: Record<
 };
 
 const NEUTRAL = 0.5;
+/** A conflict between the two states weighs fully; a measure against nationals, half. */
+const TENSION_FIT = { conflict: 0, restriction: 0.5 } as const;
+/** For an adventure, the family's own region steps back by half; it is never excluded. */
+const ADVENTURE_AT_HOME = 0.5;
 
 const log = (n: number) => Math.log1p(n);
 
@@ -299,7 +303,7 @@ const AFFINITY: Record<string, Record<string, number>> = {
  * The documented tension between a host country and the reader's family countries, if any. A
  * family that also comes from the host country is at home there, whatever the two states do.
  */
-export function tensionFor(city: City, familyCountries: string[]): Tension | undefined {
+function tensionFor(city: City, familyCountries: string[]): Tension | undefined {
   if (familyCountries.includes(city.country)) return undefined;
   return city.countryFacts?.tensions?.find((t) => t.from.some((c) => familyCountries.includes(c)));
 }
@@ -337,9 +341,8 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       match = fact.values.includes(city.zone);
     } else if (fact.kind === "tension") {
       const found = tensionFor(city, fact.values);
-      // A conflict between the two states weighs fully; a measure against nationals, half.
       parts.push({
-        value: found ? (found.kind === "conflict" ? 0 : 0.5) : 1,
+        value: found ? TENSION_FIT[found.kind] : 1,
         weight: fact.weight,
         known: true,
         fact: fact.kind,
@@ -385,7 +388,7 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
         // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
         // much an adventure for a reader from Dakar as Tunis is. The family's region only steps
         // back, so other answers can still bring one of its cities in (operator, 2026-11-16).
-        value: fact.kind === "kin" ? affinity : affinity < 1 ? 1 : 0.5,
+        value: fact.kind === "kin" ? affinity : affinity < 1 ? 1 : ADVENTURE_AT_HOME,
         weight: fact.weight,
         known: true,
         fact: fact.kind,

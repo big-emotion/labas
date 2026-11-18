@@ -52,12 +52,6 @@ export function applyFilters(matches: Match[], filters: Filters): Match[] {
   return matches.filter((m) => passes(m.city, filters));
 }
 
-/** How many filters the reader has set, for the « N filtres » label. */
-export function activeFilterCount(filters: Filters): number {
-  return Object.values(filters).filter((v) => (Array.isArray(v) ? v.length > 0 : Boolean(v)))
-    .length;
-}
-
 export interface FilterOption {
   label: string;
   value: string | number | boolean;

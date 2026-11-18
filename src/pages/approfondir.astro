@@ -93,7 +93,7 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { DEEP_QUESTIONS } from "../lib/deep-questions";
     import { keepInBank } from "../lib/questions";
     import { syncChoices } from "../lib/choices-dom";
-    import { rankCities, type Answers } from "../lib/ranking";
+    import { rankCities, TOP_THREE, type Answers } from "../lib/ranking";
     import { finishedEvent } from "../lib/analytics";
     import { forgetAnswers, loadAnswers, saveAnswers } from "../lib/keep";
     import { rememberJourney, syncJourney } from "../lib/account-dom";
@@ -128,14 +128,14 @@ import { DEEP_QUESTIONS } from "../lib/deep-questions";
         answers: answers as Answers,
         matches: rankCities(answers as Answers)
           .filter((m) => !m.excludedBecause)
-          .slice(0, 3),
+          .slice(0, TOP_THREE),
       }),
       "deep",
     );
     // Counted once per visit.
     let finished = false;
     let showAll = false;
-    const TOP = 3;
+    const TOP = TOP_THREE;
     const VISIBLE = 20;
 
     const fieldset = (id: string) =>

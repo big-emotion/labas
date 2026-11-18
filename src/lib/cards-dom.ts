@@ -10,18 +10,18 @@ import type { Match, Rated } from "./ranking";
 
 /** Render code for components/ResultCards.astro: a card for the top cities, a row for the rest. */
 
-export const percent = (score: number) => `${Math.round(score * 100)}\u202f%`;
+const percent = (score: number) => `${Math.round(score * 100)}\u202f%`;
 
-export function clone(id: string): HTMLElement {
+function clone(id: string): HTMLElement {
   const template = document.getElementById(id) as HTMLTemplateElement;
   return template.content.firstElementChild!.cloneNode(true) as HTMLElement;
 }
 
-export function setText(root: HTMLElement, selector: string, text: string) {
+function setText(root: HTMLElement, selector: string, text: string) {
   (root.querySelector(selector) as HTMLElement).textContent = text;
 }
 
-export function fillList(list: HTMLElement, items: string[]) {
+function fillList(list: HTMLElement, items: string[]) {
   list.replaceChildren(
     ...items.map((text) => {
       const item = document.createElement("li");
@@ -46,7 +46,7 @@ function fillPortrait(box: HTMLElement, m: Match) {
 }
 
 // The same fields for every city, whether it is in the top three or further down.
-export function detailFor(m: Match, withPortrait: boolean): HTMLElement {
+function detailFor(m: Match, withPortrait: boolean): HTMLElement {
   const body = clone("detail-template");
   const lines = linesFor(m.city.name);
   const show = (field: string, visible: boolean) => {

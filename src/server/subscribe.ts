@@ -15,6 +15,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
+import { SITE } from "../lib/share";
 import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { plausibleStats } from "./plausible";
@@ -301,7 +302,7 @@ function start(port: number) {
     clientSecret: process.env.GRAPH_CLIENT_SECRET ?? "",
     sender: process.env.MAIL_SENDER ?? "",
     secret: process.env.SUBSCRIBE_SECRET ?? "",
-    siteUrl: process.env.SITE_URL ?? "https://labas.africa",
+    siteUrl: process.env.SITE_URL ?? SITE,
     replyTo: process.env.REPLY_TO ?? "hello@big-emotion.com",
   };
   const pool = process.env.DATABASE_URL

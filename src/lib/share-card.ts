@@ -20,8 +20,8 @@ const THREAD = "#f1f0ff";
 const THREAD_DIM = "#b4b8ea";
 const SAFFRON = "#ffb627";
 
-export const CARD_WIDTH = 1200;
-export const CARD_HEIGHT = 630;
+const CARD_WIDTH = 1200;
+const CARD_HEIGHT = 630;
 
 /** Satori reads woff, not woff2 or variable fonts, hence the static fontsource packages. */
 const require = createRequire(import.meta.url);

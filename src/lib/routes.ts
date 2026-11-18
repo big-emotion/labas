@@ -3,8 +3,6 @@ import type { Source } from "./lines";
 import type { Answers } from "./ranking";
 import { bestWeekIndex } from "./week-pick";
 
-export { jobOf } from "./week-pick";
-
 /**
  * A typical week and a discovery route per city, written from the sourced neighbourhood sheets
  * in research/cities/<country>/<city>.neighbourhoods.md. Each week is keyed to quick-quiz

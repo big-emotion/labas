@@ -144,13 +144,6 @@ export const ZONES = {
 } as const;
 export type Zone = keyof typeof ZONES;
 
-export const POPULATION_LABELS: Record<number, string> = {
-  4: "Mégapole de plus de 10 millions d'habitants",
-  3: "Agglomération de 3 à 10 millions",
-  2: "Agglomération de 1 à 3 millions",
-  1: "Moins d'un million d'habitants",
-};
-
 interface Identity {
   name: string;
   country: string;
@@ -188,7 +181,7 @@ interface ScoredEntry {
   facts: Facts;
 }
 
-export function slugOf(name: string): string {
+function slugOf(name: string): string {
   return name
     .normalize("NFKD")
     .replace(/[̀-ͯ]/g, "")
@@ -197,7 +190,7 @@ export function slugOf(name: string): string {
     .replace(/^-|-$/g, "");
 }
 
-export function isAdvisedAgainst(advisory: Advisory): boolean {
+function isAdvisedAgainst(advisory: Advisory): boolean {
   return (
     advisory.franceDiplomatie === "orange" ||
     advisory.franceDiplomatie === "red" ||

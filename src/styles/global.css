@@ -18,10 +18,17 @@
   /* The light reactions block (components/Reactions.astro): its cards and its error text. */
   --paper: #ffffff;
   --brick: #a3271a;
+  /* Behind a dialog: darker than --night-deep so the sheet above it stands out. */
+  --scrim: #080a28;
   --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
   --font-body: "Nunito Sans Variable", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   color-scheme: dark;
+}
+
+/* Older browsers do not let ::backdrop inherit from :root, so the scrim is defined there too. */
+::backdrop {
+  --scrim: #080a28;
 }
 
 * {

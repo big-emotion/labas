@@ -1,8 +1,8 @@
 import { DEEP_QUESTIONS, PROFILE_QUESTIONS } from "./deep-questions";
 import { QUESTIONS, visibleChoices, type Question } from "./questions";
-import { bestMatches, topCities, type Answers } from "./ranking";
+import { bestMatches, TOP_THREE, topCities, type Answers } from "./ranking";
 
-const TOP = 3;
+const TOP = TOP_THREE;
 const FIVE = 5;
 /**
  * The quick quiz's openers, always in this order (operator, 2026-11-17): the three answers that

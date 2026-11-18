@@ -1,3 +1,4 @@
+import { TOP_THREE } from "./ranking";
 import type { SharedResult } from "./shared-result";
 
 /**
@@ -78,7 +79,7 @@ export async function resultImage(shared: SharedResult): Promise<Blob> {
   ctx.fillText("MES VILLES D'AFRIQUE", PAD, y);
   y += 30;
   const blockH = shared.archetype ? 210 : 260;
-  shared.cities.slice(0, 3).forEach((entry, i) => {
+  shared.cities.slice(0, TOP_THREE).forEach((entry, i) => {
     const top = y + i * (blockH + 16);
     ctx.fillStyle = deep;
     ctx.beginPath();
