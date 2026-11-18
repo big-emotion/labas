@@ -1,0 +1,487 @@
+---
+import KeepResults from "../components/KeepResults.astro";
+import SourcesNote from "../components/SourcesNote.astro";
+import TemperamentProfile from "../components/TemperamentProfile.astro";
+import ResultCards from "../components/ResultCards.astro";
+import Page from "../layouts/Page.astro";
+import SaveLater from "../components/SaveLater.astro";
+import Reactions from "../components/Reactions.astro";
+import { DEEP_QUESTIONS } from "../lib/deep-questions";
+import { questionIn } from "../lib/questions";
+import type { Bilingual } from "../i18n/locale";
+import { localeOfPath } from "../i18n/routes";
+
+// The full questionnaire, built once per language: src/pages/approfondir.astro and
+// src/pages/en/go-deeper.astro.
+const locale = localeOfPath(Astro.url.pathname);
+const COPY: Bilingual<Record<string, string>> = {
+  fr: {
+    title: "Aller plus loin",
+    description:
+      "Le questionnaire complet : vos contraintes, vos envies, et toutes les villes avec leurs critères et leurs sources.",
+    lead: "Vous pouvez passer une question ou revenir sur une réponse quand vous voulez.",
+    resumed:
+      "Vos réponses au premier quiz sont reprises : le questionnaire continue là où vous vous êtes arrêté.",
+    restart: "Tout reprendre à zéro",
+    upTo: "Jusqu'à {n} choix",
+    confirm: "Valider",
+    skip: "Passer",
+    done: "Vous avez répondu à tout. Votre classement est ci-dessous ; vous pouvez encore changer une réponse.",
+    answers: "Voir mes réponses",
+    empty: "Pas encore de réponse.",
+    ranking: "Vos villes",
+    rankingHint:
+      "Classées selon toutes vos réponses. Le pourcentage dit à quel point une ville correspond à ce que vous avez dit, rien de plus.",
+    others: "Toutes les autres villes",
+  },
+  en: {
+    title: "Go deeper",
+    description:
+      "The full questionnaire: your constraints, what you want, and every city with its criteria and its sources.",
+    lead: "You can skip a question or come back to an answer whenever you like.",
+    resumed:
+      "Your answers to the first quiz are carried over: the questionnaire picks up where you left off.",
+    restart: "Start again",
+    upTo: "Up to {n} choices",
+    confirm: "Confirm",
+    skip: "Skip",
+    done: "You have answered everything. Your ranking is below; you can still change an answer.",
+    answers: "See my answers",
+    empty: "No answers yet.",
+    ranking: "Your cities",
+    rankingHint:
+      "Ranked by all your answers. The percentage says how closely a city matches what you said, nothing more.",
+    others: "All the other cities",
+  },
+};
+const copy = COPY[locale];
+const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale));
+---
+
+<Page title={copy.title} description={copy.description}>
+  <h1>{copy.title}</h1>
+  <p class="lead">{copy.lead}</p>
+  <p class="hint" id="resumed" hidden>
+    {copy.resumed}{" "}
+    <button type="button" id="restart" class="restart">
+      {copy.restart}
+    </button>
+  </p>
+
+  <SaveLater kind="deep" />
+
+  <section class="ask" aria-live="polite">
+    {questions.map((question) => (
+      <fieldset class="question" data-question={question.id} data-max={question.max ?? 1} hidden>
+        <legend>
+          {question.title}
+          {question.max && (
+            <span class="hint">{copy.upTo.replace("{n}", String(question.max))}</span>
+          )}
+        </legend>
+        <div class="chips">
+          {question.choices.map((choice) => (
+            <button type="button" class="chip" data-value={JSON.stringify(choice.value)}>
+              {choice.label}
+            </button>
+          ))}
+        </div>
+        <div class="ask-actions">
+          {question.max && (
+            <button type="button" class="next" data-action="confirm">
+              {copy.confirm}
+            </button>
+          )}
+          <button type="button" class="skip" data-action="skip">
+            {copy.skip}
+          </button>
+        </div>
+      </fieldset>
+    ))}
+    <p id="done" class="done" hidden>
+      {copy.done}
+    </p>
+  </section>
+
+  <details class="answers">
+    <summary id="answers-title">{copy.answers}</summary>
+    <p class="hint" id="answers-empty">
+      {copy.empty}
+    </p>
+    <ul id="answers" class="answer-list"></ul>
+  </details>
+
+  <section id="vos-villes" class="results" aria-labelledby="ranking-title" data-print>
+    <h2 id="ranking-title">{copy.ranking}</h2>
+    <p class="hint">{copy.rankingHint}</p>
+    <SourcesNote />
+    <TemperamentProfile />
+    <ul id="removed" class="removed"></ul>
+    <div id="cards" class="cards"></div>
+    {/* Moved by the script right under the first city's pitch. */}
+    <Reactions preview />
+    <KeepResults />
+  </section>
+
+  <section class="others" aria-labelledby="others-title">
+    <h2 id="others-title">{copy.others}</h2>
+    <ol id="rows" class="rows"></ol>
+    <button type="button" id="more" class="more" hidden></button>
+  </section>
+
+  <ResultCards />
+
+  <script>
+    import { nextQuestion } from "../lib/adaptive";
+    import { DEEP_QUESTIONS } from "../lib/deep-questions";
+    import { keepInBank, questionIn } from "../lib/questions";
+    import { syncChoices } from "../lib/choices-dom";
+    import { rankCities, TOP_THREE, type Answers } from "../lib/ranking";
+    import { finishedEvent } from "../lib/analytics";
+    import { forgetAnswers, loadAnswers, saveAnswers } from "../lib/keep";
+    import { rememberJourney, syncJourney } from "../lib/account-dom";
+    import { browserStore, track, wireKeep } from "../lib/keep-dom";
+    import { showProfile } from "../lib/profile-dom";
+    import { cardFor, rowFor } from "../lib/cards-dom";
+    import { showCounts, showPreview } from "../lib/reactions-dom";
+    import { resultLink } from "../lib/shared-result";
+    import { pageLocale, type Bilingual } from "../i18n/locale";
+
+    const locale = pageLocale();
+    const COPY: Bilingual<{
+      answers: string;
+      answersCount: (n: number) => string;
+      change: string;
+      removed: (count: number, reason: string) => string;
+      more: (count: number) => string;
+    }> = {
+      fr: {
+        answers: "Voir mes réponses",
+        answersCount: (n) => `Voir mes réponses (${n})`,
+        change: "Modifier",
+        removed: (count, reason) =>
+          `${count} ${count > 1 ? "villes retirées" : "ville retirée"} : ${reason.toLowerCase()}.`,
+        more: (count) => `Voir les ${count} autres villes`,
+      },
+      en: {
+        answers: "See my answers",
+        answersCount: (n) => `See my answers (${n})`,
+        change: "Change",
+        // Only the first letter goes lower case: the language names in a reason keep their capital.
+        removed: (count, reason) =>
+          `${count} ${count > 1 ? "cities taken out" : "city taken out"}: ${reason.charAt(0).toLowerCase()}${reason.slice(1)}.`,
+        more: (count) => `See the other ${count} cities`,
+      },
+    };
+    const copy = COPY[locale];
+    const bankFor = (id: string) =>
+      questionIn(
+        DEEP_QUESTIONS.find((q) => q.id === id)!,
+        locale,
+      );
+
+    // The quick quiz's answers, kept in this browser: those questions are not asked again.
+    const answers: Record<string, unknown> = { ...loadAnswers(browserStore()) };
+    const asked: string[] = Object.keys(answers);
+    const resumed = asked.length;
+    (document.getElementById("resumed") as HTMLElement).hidden = resumed === 0;
+    document.getElementById("restart")!.addEventListener("click", () => {
+      forgetAnswers(browserStore());
+      // Starting over is a new journey, not an edit of the saved one.
+      rememberJourney(null);
+      location.reload();
+    });
+    for (const [id, value] of Object.entries(answers)) {
+      for (const chip of document.querySelectorAll<HTMLElement>(
+        `.question[data-question="${id}"] .chip`,
+      )) {
+        const values = Array.isArray(value) ? value : [value];
+        if (values.includes(JSON.parse(chip.dataset.value as string)))
+          chip.setAttribute("aria-pressed", "true");
+      }
+    }
+    wireKeep(
+      () => ({
+        answers: answers as Answers,
+        matches: rankCities(answers as Answers, locale)
+          .filter((m) => !m.excludedBecause)
+          .slice(0, TOP_THREE),
+      }),
+      "deep",
+    );
+    // Counted once per visit.
+    let finished = false;
+    let showAll = false;
+    const TOP = TOP_THREE;
+    const VISIBLE = 20;
+
+    const fieldset = (id: string) =>
+      document.querySelector<HTMLFieldSetElement>(`.question[data-question="${id}"]`)!;
+
+    function labelOf(id: string, value: unknown): string {
+      const question = bankFor(id);
+      const values = Array.isArray(value) ? value : [value];
+      return values.map((v) => question.choices.find((c) => c.value === v)?.label ?? "").join(", ");
+    }
+
+    function showNext() {
+      const next = nextQuestion(answers as Answers, asked);
+      for (const element of document.querySelectorAll<HTMLElement>(".question")) {
+        element.hidden = element.dataset.question !== next;
+      }
+      (document.getElementById("done") as HTMLElement).hidden = next !== undefined;
+      if (next === undefined && asked.length > resumed && !finished) {
+        finished = true;
+        track(finishedEvent("Questionnaire complet terminé", (answers as Answers).project));
+      }
+    }
+
+    function renderAnswers() {
+      const list = document.getElementById("answers") as HTMLElement;
+      const entries = Object.entries(answers).filter(([, value]) => value !== undefined);
+      (document.getElementById("answers-empty") as HTMLElement).hidden = entries.length > 0;
+      (document.getElementById("answers-title") as HTMLElement).textContent = entries.length
+        ? copy.answersCount(entries.length)
+        : copy.answers;
+      list.replaceChildren(
+        ...entries.map(([id, value]) => {
+          const question = bankFor(id);
+          const item = document.createElement("li");
+          const text = document.createElement("span");
+          text.textContent = `${question.title} ${labelOf(id, value)}`;
+          const change = document.createElement("button");
+          change.type = "button";
+          change.textContent = copy.change;
+          change.addEventListener("click", () => {
+            delete answers[id];
+            asked.splice(asked.indexOf(id), 1);
+            for (const chip of fieldset(id).querySelectorAll(".chip")) {
+              chip.setAttribute("aria-pressed", "false");
+            }
+            for (const element of document.querySelectorAll<HTMLElement>(".question")) {
+              element.hidden = element.dataset.question !== id;
+            }
+            render(false);
+          });
+          item.append(text, change);
+          return item;
+        }),
+      );
+    }
+
+    function renderRanking() {
+      const ranked = rankCities(answers as Answers, locale);
+      const removed = new Map<string, number>();
+      for (const m of ranked) {
+        if (m.excludedBecause)
+          removed.set(m.excludedBecause, (removed.get(m.excludedBecause) ?? 0) + 1);
+      }
+      (document.getElementById("removed") as HTMLElement).replaceChildren(
+        ...[...removed].map(([reason, count]) => {
+          const item = document.createElement("li");
+          item.textContent = copy.removed(count, reason);
+          return item;
+        }),
+      );
+      const proposed = ranked.filter((m) => !m.excludedBecause);
+      const cards = proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked, locale));
+      (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+      void showCounts(proposed.slice(1, TOP).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
+      // What others say of the first city, right under its pitch (operator, 2026-11-18).
+      if (proposed[0])
+        void showPreview(
+          proposed[0].city,
+          resultLink(answers as Answers, proposed.slice(0, TOP), locale),
+          (root) => document.querySelector("#cards .card-pitch")?.after(root),
+        );
+      const rest = proposed.slice(TOP);
+      const visible = showAll ? rest : rest.slice(0, VISIBLE);
+      (document.getElementById("rows") as HTMLElement).replaceChildren(
+        ...visible.map((m, i) => rowFor(m, TOP + i + 1, locale)),
+      );
+      const more = document.getElementById("more") as HTMLButtonElement;
+      more.hidden = showAll || rest.length <= VISIBLE;
+      more.textContent = copy.more(rest.length);
+    }
+
+    function render(advance = true) {
+      // Drop what an earlier change made irrelevant, and ask again what lost its answer.
+      const kept = keepInBank(DEEP_QUESTIONS, answers as Answers) as Record<string, unknown>;
+      for (const id of Object.keys(answers)) {
+        if (kept[id] !== undefined) continue;
+        delete answers[id];
+        if (asked.includes(id)) asked.splice(asked.indexOf(id), 1);
+      }
+      syncChoices(DEEP_QUESTIONS, answers as Answers, document);
+      saveAnswers(browserStore(), answers as Answers);
+      syncJourney(answers as Answers);
+      showProfile(answers as Answers, locale);
+      renderAnswers();
+      renderRanking();
+      if (advance) showNext();
+    }
+
+    document.querySelector(".ask")!.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      const set = target.closest<HTMLFieldSetElement>(".question");
+      if (!set) return;
+      const id = set.dataset.question as string;
+      const max = Number(set.dataset.max);
+      const chip = target.closest<HTMLButtonElement>(".chip");
+      const action = target.closest<HTMLButtonElement>("[data-action]")?.dataset.action;
+      if (chip) {
+        const value = JSON.parse(chip.dataset.value as string);
+        if (max === 1) {
+          answers[id] = value;
+          if (!asked.includes(id)) asked.push(id);
+          render();
+          return;
+        }
+        const pressed = chip.getAttribute("aria-pressed") === "true";
+        const picked = (answers[id] as unknown[] | undefined) ?? [];
+        if (!pressed && picked.length >= max) return;
+        chip.setAttribute("aria-pressed", String(!pressed));
+        answers[id] = pressed ? picked.filter((v) => v !== value) : [...picked, value];
+        render(false);
+        return;
+      }
+      if (action) {
+        if (!asked.includes(id)) asked.push(id);
+        if (action === "skip") delete answers[id];
+        render();
+      }
+    });
+
+    document.getElementById("more")!.addEventListener("click", () => {
+      showAll = true;
+      renderRanking();
+    });
+
+    render();
+    // Opened from the results e-mail: the cards are drawn now, so the jump lands on them.
+    if (location.hash === "#vos-villes") document.getElementById("vos-villes")?.scrollIntoView();
+  </script>
+</Page>
+
+<style>
+  /* A shared .hint rule sets display, which would otherwise win over the hidden attribute. */
+  .hint[hidden] {
+    display: none;
+  }
+  .restart {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--saffron);
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .ask {
+    background: var(--night-deep);
+    border: 2px solid var(--saffron);
+    border-radius: 20px;
+    padding: 18px;
+  }
+  .question {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  legend {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .hint {
+    display: block;
+    color: var(--thread-dim);
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip,
+  .next,
+  .skip,
+  .more,
+  .answer-list :global(button) {
+    min-height: 44px;
+    border-radius: 999px;
+    padding: 9px 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .chip {
+    background: var(--night-lift);
+  }
+  .chip[aria-pressed="true"],
+  .next {
+    background: var(--saffron);
+    color: var(--ink);
+  }
+  .ask-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .skip,
+  .answer-list :global(button) {
+    background: transparent;
+    border-color: var(--thread-dim);
+  }
+  .done {
+    margin: 0;
+  }
+  .answer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .answer-list :global(li) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--night-lift);
+    padding-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  .removed {
+    color: var(--coral);
+    padding-left: 1.1em;
+  }
+  .more {
+    width: 100%;
+    background: var(--night-lift);
+  }
+  .results,
+  .others {
+    display: grid;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .answers {
+    margin-top: 18px;
+  }
+  .answers > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--saffron);
+    font-weight: 700;
+  }
+</style>
