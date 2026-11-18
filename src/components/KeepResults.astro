@@ -2,6 +2,10 @@
 // With the mail service on (PUBLIC_NEWSLETTER, docs/deploy.md), Là-bas sends the result itself;
 // otherwise « Recevoir par e-mail » opens the reader's own mail (approved mockup, 2026-11-16).
 // Since 2026-11-17 the e-mail also opens a space: the result is kept there (docs/accounts.md).
+// The networks (lib/networks.ts, operator 2026-11-18) are plain links or the phone's share sheet:
+// no script of theirs ever loads here.
+import { NETWORKS } from "../lib/networks";
+
 const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
 
@@ -26,6 +30,20 @@ const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         Recevoir par e-mail
       </a>
     )}
+  </div>
+  <div class="networks" role="group" aria-label="Partager sur un réseau">
+    <span class="networks-label">Sur les réseaux</span>
+    {NETWORKS.map((n) => (
+      <a
+        href="#"
+        data-share-network={n.key}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Partager sur ${n.label}`}
+      >
+        {n.label}
+      </a>
+    ))}
   </div>
   {serverMail && (
     <form id="keep-mail" class="keep-mail" data-keep-mail novalidate hidden>
@@ -111,6 +129,34 @@ const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     background: var(--saffron);
     border-color: var(--saffron);
     color: var(--ink);
+  }
+  .networks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .networks-label {
+    width: 100%;
+    font-size: 0.88rem;
+    color: var(--thread-dim);
+  }
+  .networks a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid var(--night-lift);
+    background: var(--night);
+    color: var(--thread);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .networks a:hover,
+  .networks a:focus-visible {
+    border-color: var(--saffron);
   }
   .keep-note:empty {
     display: none;
