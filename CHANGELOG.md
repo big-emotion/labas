@@ -6,6 +6,34 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.23.0] - 2026-11-18
+
+### Added
+
+- Share your result on WhatsApp, Facebook and X from « Garder vos résultats »: each button opens
+  that network's share page with your three cities and the link. Nothing of these networks loads
+  on Là-bas until you click.
+- Instagram and TikTok open your phone's share sheet with the picture of your result, ready for a
+  story; on a computer they copy the link.
+- « Votre avis », a small tab on every page: give your opinion of the site or write to the team.
+  On a computer it sits on the right edge; on a phone, small, at the bottom right. The message,
+  and your address only if you want an answer, go to the team and are erased after a year;
+  nothing from the quiz is sent.
+- On « Les avis »: pick a region, then one of its cities from a list showing how many reviews each
+  has, the most reviewed first. A city chosen shows its card above the reviews: photo, country and
+  region, its tagline and pitch, and a link to its page.
+- Sort the reviews: most recent, oldest, most liked, least liked, most replies.
+- Reviews come twenty a page, numbered; the page and the filters stay in the address.
+- The team reads the messages in /admin, beside the reviews.
+
+### Changed
+
+- Each review names its city and country and links to the city page.
+
+### Removed
+
+- The list of cities under the filters on « Les avis »: it looked like a filter and left the page.
+
 ## [0.22.1] - 2026-11-18
 
 ### Security
@@ -472,6 +500,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.22.0...HEAD
+[0.23.0]: https://github.com/big-emotion/labas/compare/v0.22.1...v0.23.0
 [0.22.1]: https://github.com/big-emotion/labas/compare/v0.22.0...v0.22.1
 [0.22.0]: https://github.com/big-emotion/labas/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/big-emotion/labas/compare/v0.20.0...v0.21.0
