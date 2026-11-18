@@ -70,6 +70,29 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 - **Display names** are optional, 40 characters at most; without one, « Utilisateur » and a number
   stable for the account. The address is never shown.
 
+## The avis space (`/avis`, `/villes`)
+
+Decided with the operator on 2026-11-18: another way in than the quiz. Code: `src/pages/avis.astro`,
+the search in `src/lib/review-search.ts`, the list in `Reactions.astro` (mode `everywhere`).
+
+- **Read by anyone, newest first.** `GET /api/compte/reactions` without `ville` returns the 200
+  newest reviews of every city; the page filters them in the browser. The road not taken: a
+  server-side search, premature while the whole list fits in one answer.
+- **Place filters are strict, the temperament only orders.** A reader asking for Dakar wants Dakar;
+  a temperament puts the closest authors first (same archetype, then nearest on the five traits)
+  and keeps the others below « Moins proches », so a young list never answers « nothing found ».
+  « Les villes qui reviennent » counts, among the close reviews, each review's city and its
+  author's top three. The filters sit in the address, so a city page links to `/avis/?ville=…`.
+- **Replies, two levels, never a tree.** A reply hangs on the first review (`parent_id`); a reply
+  to a reply hangs there too and names whom it answers (`mention`). A reply carries no journey and
+  follows the review's rules: signed in it goes online at once, otherwise one e-mailed link
+  publishes it and signs the reader in. Deleting or hiding a review takes its replies with it.
+- **Marks, friendly only.** A heart first, then 👍 🙏 😂 💡 behind « + »; no thumbs down, a reply is
+  for disagreeing. One of each per space, a second tap takes it back, so marking needs a session.
+  Only counts are public; `reaction_marks` keeps who marked to allow the undo, is in the export and
+  goes with the space. At most 120 marks an hour per space.
+- **`/villes`** lists every city by region, static, for whoever wants a city page without the quiz.
+
 ## Lifetimes
 
 | What                                                      | How long                                  |
@@ -102,8 +125,9 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
 | `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                                      |
 | `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list               |
 | `POST /api/compte/deconnexion`            | session        | Ends the session                                                                        |
-| `GET /api/compte/reactions?ville=`        | anyone         | Published reactions of a city, newest first; `mine` for the author                      |
-| `POST /api/compte/reactions`              | anyone         | Signed in: published at once. Otherwise e-mail → a 7-day link that publishes            |
+| `GET /api/compte/reactions?ville=`        | anyone         | Published reviews of a city (every city without `ville`), with replies and mark counts  |
+| `POST /api/compte/reactions`              | anyone         | A review, or a reply with `replyTo`. Signed in: online at once; else a 7-day link       |
+| `POST /api/compte/reactions/:id/marques`  | signed in      | Puts a mark, or takes it back; answers the counts and the reader's own marks            |
 | `POST /api/compte/reactions/:id/signaler` | anyone         | Counts one report per connection; three hide the reaction                               |
 | `DELETE /api/compte/reactions/:id`        | the owner only | Deletes one reaction                                                                    |
 
