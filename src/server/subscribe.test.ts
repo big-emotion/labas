@@ -28,6 +28,7 @@ const DAY = 24 * 60 * 60 * 1000;
 function recordingMailer(fail = false) {
   const sent: (Mail & { email: string; link: string })[] = [];
   const listed: string[] = [];
+  const locales: string[] = [];
   const removed: string[] = [];
   const mailer: Mailer = {
     async send(mail) {
@@ -36,14 +37,15 @@ function recordingMailer(fail = false) {
         /https:\/\/labas\.africa\/api\/nouveautes\/confirmer\?t=[\w.-]+/.exec(mail.text)?.[0] ?? "";
       sent.push({ ...mail, email: mail.to, link });
     },
-    async addToList(email) {
+    async addToList(email, locale) {
       listed.push(email);
+      locales.push(locale);
     },
     async removeFromList(email) {
       removed.push(email);
     },
   };
-  return { mailer, sent, listed, removed };
+  return { mailer, sent, listed, locales, removed };
 }
 
 const post = (body: unknown, headers: Record<string, string> = {}) => ({
@@ -230,6 +232,58 @@ describe("unsubscribing from the news", () => {
       expect((await handler(leave(token))).status, token).toBe(400);
     expect((await handler(leave(good, { origin: "https://evil.example" }))).status).toBe(403);
     expect(removed).toEqual([]);
+  });
+});
+
+describe("an English reader", () => {
+  const confirmLinkIn = (text: string) =>
+    /https:\/\/labas\.africa\/api\/nouveautes\/confirmer\?t=[\w.-]+&lang=en/.exec(text)?.[0] ?? "";
+  const open = (link: string) => {
+    const url = new URL(link);
+    return { ...confirm(""), query: url.searchParams };
+  };
+
+  it("gets the confirmation in English, with English ways back and the language kept", async () => {
+    const { mailer, sent, listed, locales } = recordingMailer();
+    const handler = createHandler(CONFIG, mailer);
+    await handler(post({ ...SIGN_UP, locale: "en" }));
+    expect(sent[0].subject).toBe("Confirm your sign-up to Over There news");
+    expect(sent[0].text).toMatch(/https:\/\/labas\.africa\/en\/news\/unsubscribe\/#t=[\w.-]+/);
+    const response = await handler(open(confirmLinkIn(sent[0].text)));
+    expect(response.headers.location).toBe("/en/news/confirmed/");
+    expect(listed).toEqual(["awa@exemple.fr"]);
+    expect(locales).toEqual(["en"]);
+  });
+
+  it("lands on the English page when an English link is broken", async () => {
+    const { mailer } = recordingMailer();
+    const response = await createHandler(
+      CONFIG,
+      mailer,
+    )(open("https://labas.africa/api/nouveautes/confirmer?t=broken&lang=en"));
+    expect(response.headers.location).toBe("/en/news/invalid-link/");
+  });
+
+  it("reads anything but « en » as French", async () => {
+    const { mailer, sent } = recordingMailer();
+    await createHandler(CONFIG, mailer)(post({ ...SIGN_UP, locale: "de" }));
+    expect(sent[0].subject).toBe("Confirmez votre inscription aux nouveautés de Là-bas");
+    expect(sent[0].text).not.toContain("lang=");
+  });
+
+  it("gets the results in English, with links to the English city pages", async () => {
+    const top = CITIES.slice(0, 3).map((city, i) => ({ city, score: 0.9 - i / 10 }) as Match);
+    const link = resultLink({ order: 1, together: 0.5 }, top);
+    const { mailer, sent } = recordingMailer();
+    await createHandler(
+      CONFIG,
+      mailer,
+    )({
+      ...post({ email: "awa@exemple.fr", link, locale: "en" }),
+      path: "/api/resultats",
+    });
+    expect(sent[0].subject).toMatch(/^Your African cities: /);
+    expect(sent[0].html).toContain(`https://labas.africa/en/city/${top[0].city.slug}/`);
   });
 });
 

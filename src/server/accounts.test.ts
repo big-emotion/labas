@@ -410,6 +410,67 @@ describe("« Recevoir par e-mail » opens a space in the same gesture (operator,
   });
 });
 
+describe("a reader on the English pages", () => {
+  const answers = { ...ANSWERS, project: firstChoice("project") } as Answers;
+  const link = resultLink(answers, bestMatches(answers, 3));
+
+  it("gets the save link in English, and it lands on the English space", async () => {
+    await save("awa@exemple.fr", { locale: "en" });
+    expect(mail.sent[0].subject).toBe("Your link to pick up where you left off on Over There");
+    expect(mail.linkIn(mail.sent[0])).toMatch(/&lang=en$/);
+    const { response } = await follow();
+    expect(response.headers.location).toBe("/en/my-space/");
+    expect((await follow()).response.headers.location).toBe("/en/my-space/link-expired/");
+  });
+
+  it("gets the results in English, and the button opens the result from the English space", async () => {
+    await handle(
+      request("POST", "/api/compte/resultats", {
+        email: "awa@exemple.fr",
+        link,
+        locale: "en",
+        journey: { kind: "quick", answers },
+      }),
+    );
+    expect(mail.sent[0].subject).toMatch(/^Your African cities: /);
+    const { response, cookie } = await follow();
+    const space = JSON.parse(
+      (await handle(request("GET", "/api/compte", undefined, asMember(cookie)))).body!,
+    );
+    expect(response.headers.location).toBe(`/en/my-space/?ouvrir=${space.journeys[0].id}`);
+  });
+
+  it("gets the login link in English", async () => {
+    await save();
+    await follow();
+    await handle(request("POST", "/api/compte/lien", { email: "awa@exemple.fr", locale: "en" }));
+    expect(mail.sent[1].subject).toBe("Your sign-in link for Over There");
+    expect((await follow()).response.headers.location).toBe("/en/my-space/");
+  });
+
+  it("puts the address on the news list in the language it asked in", async () => {
+    const locales: string[] = [];
+    const english = createAccounts({
+      db,
+      siteUrl: SITE,
+      now: () => clock,
+      mailer: { ...mail.mailer, addToList: async (_email, locale) => void locales.push(locale) },
+    });
+    await english(
+      request("POST", "/api/compte/sauvegarder", {
+        email: "awa@exemple.fr",
+        consent: true,
+        news: true,
+        locale: "en",
+        journey: { kind: "quick", answers },
+      }),
+    );
+    const url = new URL(mail.linkIn(mail.sent[0]));
+    await english(request("GET", url.pathname + url.search));
+    expect(locales).toEqual(["en"]);
+  });
+});
+
 describe("journeys kept before the per-journey box existed", () => {
   it("erases the sensitive answers a journey from Mon espace kept without a box, and nothing else", async () => {
     await db.query("alter table journeys drop column sensitive");

@@ -23,14 +23,21 @@ const subscribers = async () =>
 
 describe("the news list, kept in Là-bas's own database", () => {
   it("adds a confirmed address once, however many times it is confirmed", async () => {
-    await list.addToList("awa@exemple.fr");
-    await list.addToList("awa@exemple.fr");
-    await list.addToList("binta@exemple.fr");
+    await list.addToList("awa@exemple.fr", "fr");
+    await list.addToList("awa@exemple.fr", "fr");
+    await list.addToList("binta@exemple.fr", "fr");
     expect(await subscribers()).toEqual(["awa@exemple.fr", "binta@exemple.fr"]);
   });
 
+  it("keeps the language the news will be written in, the latest confirmation's", async () => {
+    await list.addToList("awa@exemple.fr", "fr");
+    await list.addToList("awa@exemple.fr", "en");
+    const { rows } = await db.query<{ locale: string }>("select locale from news_subscribers");
+    expect(rows).toEqual([{ locale: "en" }]);
+  });
+
   it("removes an address, and removing it twice is harmless", async () => {
-    await list.addToList("awa@exemple.fr");
+    await list.addToList("awa@exemple.fr", "fr");
     await list.removeFromList("awa@exemple.fr");
     await list.removeFromList("awa@exemple.fr");
     expect(await subscribers()).toEqual([]);
@@ -38,9 +45,9 @@ describe("the news list, kept in Là-bas's own database", () => {
 
   // The privacy page promises it: an address is erased three years after it last confirmed.
   it("erases an address three years after its last confirmation", async () => {
-    await list.addToList("awa@exemple.fr");
+    await list.addToList("awa@exemple.fr", "fr");
     clock += KEEP_FOR - 1000;
-    await list.addToList("binta@exemple.fr");
+    await list.addToList("binta@exemple.fr", "fr");
     await purge(db, clock);
     expect(await subscribers()).toEqual(["awa@exemple.fr", "binta@exemple.fr"]);
     clock += 2000;
@@ -57,7 +64,7 @@ describe("leaving the news with a space of one's own", () => {
        values ('awa@exemple.fr', $1, $1, $1, true)`,
       [at],
     );
-    await list.addToList("awa@exemple.fr");
+    await list.addToList("awa@exemple.fr", "fr");
     await list.removeFromList("awa@exemple.fr");
     const { rows } = await db.query<{ news: boolean }>(
       "select news from accounts where email = 'awa@exemple.fr'",

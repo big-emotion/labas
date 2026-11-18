@@ -1,4 +1,7 @@
 import { createHash, randomBytes } from "node:crypto";
+import type { Locale } from "../i18n/locale";
+import { cityName } from "../i18n/places";
+import { builtPathFor } from "../i18n/routes";
 import { CITIES } from "../lib/cities";
 import { FEEDBACK_KINDS, MESSAGE_MAX } from "../lib/feedback";
 import { cleanAnswers, SENSITIVE_ANSWERS, withoutSensitive } from "../lib/keep";
@@ -8,6 +11,7 @@ import { resultAt } from "../lib/shared-result";
 import {
   loginLinkEmail,
   reactionLinkEmail,
+  readLocale,
   resultsEmail,
   saveLinkEmail,
   teamMessageEmail,
@@ -156,6 +160,10 @@ export async function migrate(db: Db): Promise<void> {
       email text primary key,
       confirmed_at timestamptz not null
     )`);
+  // The language the news will be written in for this address (operator, 2026-11-18: English).
+  await db.query(
+    "alter table news_subscribers add column if not exists locale text not null default 'fr' check (locale in ('fr', 'en'))",
+  );
   await db.query(`
     create table if not exists sessions (
       token_hash text primary key,
@@ -315,6 +323,8 @@ interface LinkOptions {
   /** Only picks where the link lands; the token alone authorises. */
   toResults?: boolean;
   back?: string | null;
+  /** Only picks the language of the page the link lands on. */
+  locale?: Locale;
 }
 
 interface JourneyRow {
@@ -354,7 +364,8 @@ export function createAccounts({
        values ($1, $2, $3, $4, $5, $6, $7)`,
       [hash(secret), accountId, journeyId, reactionId, news, options.back ?? null, at(lifetime)],
     );
-    return `${siteUrl}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}`;
+    const lang = options.locale === "en" ? "&lang=en" : "";
+    return `${siteUrl}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}${lang}`;
   }
 
   /** The account behind an address, created unconfirmed when it is new. */
@@ -510,6 +521,8 @@ export function createAccounts({
       return json(403, { error: "origin" });
     const form = (request.body ?? {}) as Record<string, unknown>;
     const connection = request.headers["x-real-ip"] ?? "unknown";
+    // The language of the page that asked; e-mails and the pages their links open follow it.
+    const locale = readLocale(form.locale);
 
     const answersOf = (form: Record<string, unknown>) =>
       cleanAnswers((form.journey as { answers?: unknown } | undefined)?.answers);
@@ -531,8 +544,9 @@ export function createAccounts({
         const link = await issueLink(accountId, SAVE_LINK_FOR, {
           journeyId,
           news: form.news === true,
+          locale,
         });
-        await mailer.send(saveLinkEmail(email, link));
+        await mailer.send(saveLinkEmail(email, link, locale));
       } catch (error) {
         console.error(String(error));
         return json(502, { error: "mail" });
@@ -563,12 +577,19 @@ export function createAccounts({
           journeyId,
           news: form.news === true,
           toResults: true,
+          locale,
         });
         await mailer.send(
-          resultsEmail(email, result, String(form.link), siteUrl, undefined, {
-            link,
-            sensitiveLeftOut: !sensitive,
-          }),
+          resultsEmail(
+            email,
+            result,
+            {
+              resultLink: String(form.link),
+              siteUrl,
+              space: { link, sensitiveLeftOut: !sensitive },
+            },
+            locale,
+          ),
         );
       } catch (error) {
         console.error(String(error));
@@ -590,13 +611,20 @@ export function createAccounts({
       // The same answer whether the address has a space or not, and as fast: the mail goes out
       // after the answer, or waiting for it would tell who uses Là-bas.
       if (accountId) {
-        const link = await issueLink(accountId, LOGIN_LINK_FOR, { back: backOf(form.back) });
-        mailer.send(loginLinkEmail(email, link)).catch((error) => console.error(String(error)));
+        const link = await issueLink(accountId, LOGIN_LINK_FOR, {
+          back: backOf(form.back),
+          locale,
+        });
+        mailer
+          .send(loginLinkEmail(email, link, locale))
+          .catch((error) => console.error(String(error)));
       }
       return json(202, { ok: true });
     }
 
     if (method === "GET" && path === "/api/compte/connexion") {
+      const landingLocale = readLocale(request.query.get("lang"));
+      const space = builtPathFor("space", landingLocale);
       const { rows } = await db.query<{
         account_id: string;
         journey_id: string | null;
@@ -611,7 +639,10 @@ export function createAccounts({
       );
       const link = rows[0];
       // A used or old button still leads a reader who is signed in on this browser to their space.
-      if (!link) return redirect((await member(request)) ? "/espace/" : "/espace/lien-expire/");
+      if (!link)
+        return redirect(
+          (await member(request)) ? space : builtPathFor("spaceExpired", landingLocale),
+        );
       const account = (
         await db.query<{ email: string }>(
           `update accounts set confirmed_at = coalesce(confirmed_at, $2), last_seen_at = $2,
@@ -629,7 +660,8 @@ export function createAccounts({
           "update reactions set published_at = coalesce(published_at, $2) where id = $1",
           [link.reaction_id, at()],
         );
-      if (link.news) await mailer.addToList(account.email).catch((e) => console.error(String(e)));
+      if (link.news)
+        await mailer.addToList(account.email, landingLocale).catch((e) => console.error(String(e)));
       const session = token();
       await db.query(
         "insert into sessions (token_hash, account_id, expires_at) values ($1, $2, $3)",
@@ -638,8 +670,8 @@ export function createAccounts({
       const landing = link.back
         ? link.back
         : link.journey_id && request.query.get("vers") === "resultats"
-          ? `/espace/?ouvrir=${link.journey_id}`
-          : "/espace/";
+          ? `${space}?ouvrir=${link.journey_id}`
+          : space;
       return redirect(landing, { "set-cookie": sessionCookie(session, SESSION_FOR / 1000) });
     }
 
@@ -717,8 +749,9 @@ export function createAccounts({
         const link = await issueLink(accountId, UNCONFIRMED_FOR, {
           reactionId: rows[0].id,
           back: backOf(form.back),
+          locale,
         });
-        await mailer.send(reactionLinkEmail(email, link, city.name));
+        await mailer.send(reactionLinkEmail(email, link, cityName(city.name, locale), locale));
       } catch (error) {
         console.error(String(error));
         return json(502, { error: "mail" });
@@ -924,7 +957,7 @@ export function createAccounts({
       if (typeof form.news !== "boolean") return json(400, { error: "form" });
       await db.query("update accounts set news = $2 where id = $1", [reader.id, form.news]);
       const change = form.news
-        ? mailer.addToList(reader.email)
+        ? mailer.addToList(reader.email, locale)
         : mailer.removeFromList(reader.email);
       await change.catch((e) => console.error(String(e)));
       return json(200, { ok: true });

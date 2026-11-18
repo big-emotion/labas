@@ -126,6 +126,20 @@ describe("reacting to a city without being signed in", () => {
   });
 });
 
+describe("reacting from an English page", () => {
+  it("mails the link in English, naming the city in English", async () => {
+    await react({ city: "le-cap", locale: "en", back: "/en/city/le-cap/#reactions" });
+    expect(mail.sent[0].subject).toBe("Publish your review of Cape Town");
+    expect(linkIn(mail.sent[0])).toMatch(/&lang=en$/);
+    expect((await follow()).response.headers.location).toBe("/en/city/le-cap/#reactions");
+  });
+
+  it("lands on the English space when there is no way back", async () => {
+    await react({ locale: "en" });
+    expect((await follow()).response.headers.location).toBe("/en/my-space/");
+  });
+});
+
 describe("reacting while signed in", () => {
   it("publishes at once, without any e-mail", async () => {
     const { cookie } = await signedIn();

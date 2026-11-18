@@ -19,7 +19,9 @@ import { SITE } from "../lib/share";
 import { resultAt } from "../lib/shared-result";
 import { type Db, createAccounts, migrate, purge, whenReady } from "./accounts";
 import { plausibleStats } from "./plausible";
-import { type Mail, confirmationEmail, resultsEmail } from "./emails";
+import type { Locale } from "../i18n/locale";
+import { builtPathFor } from "../i18n/routes";
+import { type Mail, confirmationEmail, pageUrl, readLocale, resultsEmail } from "./emails";
 import { limiter } from "./limiter";
 import { newsList } from "./news";
 
@@ -41,7 +43,8 @@ export interface Config {
 
 export interface Mailer {
   send(mail: Mail): Promise<void>;
-  addToList(email: string): Promise<void>;
+  /** `locale` is the language the news will be written in for this address. */
+  addToList(email: string, locale: Locale): Promise<void>;
   removeFromList(email: string): Promise<void>;
 }
 
@@ -100,8 +103,14 @@ function readLeave(token: string, secret: string): string | null {
 }
 
 /** A page with a button, not an action: mail scanners open links, and must not unsubscribe anyone. */
-export const leaveLink = (siteUrl: string, email: string, secret: string) =>
-  `${siteUrl}/nouveautes/desinscription/#t=${signLeave(email, secret)}`;
+export const leaveLink = (siteUrl: string, email: string, secret: string, locale: Locale) =>
+  `${pageUrl(siteUrl, "newsUnsubscribed", locale)}#t=${signLeave(email, secret)}`;
+
+/**
+ * The language a link the service mailed was asked in: « lang=en » rides on the links it builds,
+ * since a link opened from an inbox carries nothing else of the page it was asked from.
+ */
+const langParam = (locale: Locale) => (locale === "en" ? "&lang=en" : "");
 
 function isEmail(value: string): boolean {
   return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -129,8 +138,8 @@ export function createHandler(
   const perAddress = limiter(3, DAY);
   const configured = Object.values(config).every(Boolean);
 
-  const confirmLinkFor = (email: string) =>
-    `${config.siteUrl}/api/nouveautes/confirmer?t=${signToken(email, now(), config.secret)}`;
+  const confirmLinkFor = (email: string, locale: Locale) =>
+    `${config.siteUrl}/api/nouveautes/confirmer?t=${signToken(email, now(), config.secret)}${langParam(locale)}`;
 
   /** What both forms share: the service is open, the form comes from the site, a real address, the limits. */
   async function guard(
@@ -182,12 +191,15 @@ export function createHandler(
       return guard(
         request,
         (form) => form.consent === true,
-        (email) =>
-          confirmationEmail(
+        (email, form) => {
+          const locale = readLocale(form.locale);
+          return confirmationEmail(
             email,
-            confirmLinkFor(email),
-            leaveLink(config.siteUrl, email, config.secret),
-          ),
+            confirmLinkFor(email, locale),
+            leaveLink(config.siteUrl, email, config.secret, locale),
+            locale,
+          );
+        },
       );
     }
 
@@ -195,14 +207,19 @@ export function createHandler(
       return guard(
         request,
         (form) => resultFrom(form.link) !== null,
-        (email, form) =>
-          resultsEmail(
+        (email, form) => {
+          const locale = readLocale(form.locale);
+          return resultsEmail(
             email,
             resultFrom(form.link)!,
-            String(form.link),
-            config.siteUrl,
-            form.news === true ? confirmLinkFor(email) : undefined,
-          ),
+            {
+              resultLink: String(form.link),
+              siteUrl: config.siteUrl,
+              confirmLink: form.news === true ? confirmLinkFor(email, locale) : undefined,
+            },
+            locale,
+          );
+        },
       );
     }
 
@@ -224,17 +241,19 @@ export function createHandler(
     }
 
     if (request.method === "GET" && request.path === "/api/nouveautes/confirmer") {
+      const locale = readLocale(request.query.get("lang"));
+      const invalid = redirect(builtPathFor("newsInvalid", locale));
       const email = configured
         ? readToken(request.query.get("t") ?? "", config.secret, now())
         : null;
-      if (!email) return redirect("/nouveautes/lien-invalide/");
+      if (!email) return invalid;
       try {
-        await mailer.addToList(email);
+        await mailer.addToList(email, locale);
       } catch (error) {
         console.error(String(error));
-        return redirect("/nouveautes/lien-invalide/");
+        return invalid;
       }
-      return redirect("/nouveautes/confirmee/");
+      return redirect(builtPathFor("newsConfirmed", locale));
     }
 
     return json(404, { error: "not-found" });
