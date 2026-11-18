@@ -19,7 +19,7 @@ export interface Archetype {
  * never as a verdict on the reader (operator, 2026-11-15). Each archetype is a point on the five
  * traits; the reader gets the closest one.
  */
-const ARCHETYPES: { name: string; text: string; at: number[] }[] = [
+export const TEMPERAMENTS: { name: string; text: string; at: number[] }[] = [
   {
     name: "Conquête",
     text: "Vous aimez les villes qui vont vite, où tout se négocie et où l'on vient pour réussir.",
@@ -56,7 +56,7 @@ export function archetypeOf(answers: Answers): Archetype | undefined {
   if (given.some((v) => v === undefined)) return;
   const values = given as number[];
   const distance = (at: number[]) => at.reduce((sum, x, i) => sum + (x - values[i]) ** 2, 0);
-  const closest = ARCHETYPES.reduce((best, a) => (distance(a.at) < distance(best.at) ? a : best));
+  const closest = TEMPERAMENTS.reduce((best, a) => (distance(a.at) < distance(best.at) ? a : best));
   const names = ["Extraversion", "Ouverture", "Conscience", "Agréabilité", "Stabilité"];
   const ranges = [
     "calme ou monde",

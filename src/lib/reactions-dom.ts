@@ -4,17 +4,24 @@ import { track } from "./keep-dom";
 import {
   initialOf,
   journeySummary,
+  MARKS,
+  markLabel,
+  type MarkKey,
   ofCity,
   type Profile,
   type Reaction,
   reactionCount,
   reactionDate,
+  replyCount,
+  reviewsFound,
   type TopCity,
 } from "./reactions";
+import type { Found, Place } from "./review-search";
 
 /**
  * The browser side of reactions (components/Reactions.astro): the thread on a city page, the
- * preview of the first city on a result page, and the form both share.
+ * preview of the first city on a result page, the reviews of every city on /avis, and the forms
+ * they share.
  */
 
 const PAGE = 10;
@@ -37,6 +44,14 @@ function lastResult(): string | null {
   }
 }
 
+/** What /avis adds: names for every city, and the page's filters. */
+export interface Everywhere {
+  places: Record<string, Place>;
+  select: (reactions: Reaction[]) => Found[];
+  temperament: () => string | null;
+  onDraw: (found: Found[]) => void;
+}
+
 interface Block {
   root: HTMLElement;
   city: string;
@@ -44,10 +59,20 @@ interface Block {
   link: string | null;
   reactions: Reaction[];
   shown: number;
+  /** Reviews whose replies are open: a redraw after a tap must not fold them back. */
+  open: Set<string>;
+  everywhere?: Everywhere;
+  signedIn?: Promise<boolean>;
 }
 
 const part = <T extends HTMLElement>(root: HTMLElement, name: string) =>
   root.querySelector<T>(`[data-${name}]`)!;
+const fromTemplate = <T extends HTMLElement>(root: HTMLElement, name: string) =>
+  part<HTMLTemplateElement>(root, name).content.firstElementChild!.cloneNode(true) as T;
+const isPreview = (block: Block) => block.root.dataset.reactions === "preview";
+/** Asked once per page: the answer only changes through a link that reloads it. */
+const signedIn = (block: Block) =>
+  (block.signedIn ??= api("GET", "/api/compte").then(({ status }) => status === 200));
 
 function topChips(top: TopCity[]): HTMLElement[] {
   return top.map((city, i) => {
@@ -85,14 +110,145 @@ function traitRows(profile: Profile): HTMLElement[] {
   });
 }
 
-function itemFor(block: Block, reaction: Reaction): HTMLElement {
-  const template = part<HTMLTemplateElement>(block.root, "item");
-  const item = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+/** Asked where the reader tapped: hearts need a space, so that one tap counts once. */
+function askLogin(block: Block, slot: HTMLElement) {
+  const form = fromTemplate<HTMLFormElement>(block.root, "login-template");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = String(new FormData(form).get("email") ?? "").trim();
+    if (!email) return;
+    form.querySelector<HTMLButtonElement>("button")!.disabled = true;
+    await api("POST", "/api/compte/lien", { email, back: location.pathname + location.search });
+    part(form, "done").hidden = false;
+  });
+  slot.replaceChildren(form);
+  form.querySelector("input")!.focus();
+}
+
+function marksRow(block: Block, reaction: Reaction, row: HTMLElement, slot: HTMLElement) {
+  let all = false;
+  const toggle = async (key: MarkKey) => {
+    const { status, data } = await api("POST", `/api/compte/reactions/${reaction.id}/marques`, {
+      mark: key,
+    });
+    if (status === 401) return askLogin(block, slot);
+    if (status !== 200) return;
+    reaction.marks = data.marks;
+    reaction.myMarks = data.mine;
+    all = false;
+    paint();
+  };
+  // The heart always shows; the others only once someone left them, or on « + ».
+  const paint = () => {
+    const shown = MARKS.filter((m) => m.key === "coeur" || all || reaction.marks[m.key]);
+    const buttons = shown.map((mark) => {
+      const count = reaction.marks[mark.key] ?? 0;
+      const mine = reaction.myMarks.includes(mark.key);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "mark";
+      button.setAttribute("aria-pressed", String(mine));
+      button.setAttribute("aria-label", markLabel(mark.key, count, mine));
+      button.title = mark.label;
+      const emoji = document.createElement("span");
+      emoji.setAttribute("aria-hidden", "true");
+      emoji.textContent = mark.emoji;
+      button.append(emoji);
+      if (count) button.append(document.createTextNode(String(count)));
+      button.addEventListener("click", () => toggle(mark.key));
+      return button;
+    });
+    const more = document.createElement("button");
+    more.type = "button";
+    more.className = "mark more-marks";
+    more.textContent = all ? "−" : "+";
+    more.setAttribute("aria-label", all ? "Moins de réactions" : "Autres réactions");
+    more.setAttribute("aria-expanded", String(all));
+    more.hidden = !all && shown.length === MARKS.length;
+    more.addEventListener("click", () => {
+      all = !all;
+      paint();
+    });
+    row.replaceChildren(...buttons, more);
+  };
+  paint();
+}
+
+function replyForm(block: Block, review: Reaction, to: Reaction, slot: HTMLElement) {
+  const form = fromTemplate<HTMLFormElement>(block.root, "reply-template");
+  const error = part(form, "error");
+  part(form, "replying").textContent = `En réponse à ${to.name}`;
+  signedIn(block).then((yes) => (part(form, "email-field").hidden = yes));
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const isMember = await signedIn(block);
+    const body = {
+      replyTo: to.id,
+      text: String(data.get("text") ?? "").trim(),
+      name: String(data.get("name") ?? "").trim(),
+      email: isMember ? undefined : String(data.get("email") ?? "").trim(),
+      website: String(data.get("website") ?? ""),
+      back: location.pathname + location.search,
+    };
+    error.hidden = true;
+    if (!body.text) {
+      error.textContent = "Écrivez votre réponse avant d'envoyer.";
+      error.hidden = false;
+      return;
+    }
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    submit.disabled = true;
+    const { status, data: answer } = await api("POST", "/api/compte/reactions", body);
+    submit.disabled = false;
+    if (status === 201) {
+      review.replies = [...(review.replies ?? []), answer.reaction];
+      block.open.add(review.id);
+      draw(block);
+      return;
+    }
+    if (status === 202) {
+      const pending = document.createElement("p");
+      pending.className = "pending";
+      pending.setAttribute("role", "status");
+      pending.textContent = `Votre réponse est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${body.email}. Il vous connecte aussi.`;
+      slot.replaceChildren(pending);
+      return;
+    }
+    error.textContent =
+      status === 400
+        ? "Vérifiez votre adresse e-mail et la longueur du texte, puis réessayez."
+        : status === 429
+          ? "Trop de messages d'un coup. Réessayez dans une heure."
+          : "La réponse n'est pas partie. Réessayez dans un moment.";
+    error.hidden = false;
+  });
+  slot.replaceChildren(form);
+  form.querySelector("textarea")!.focus();
+}
+
+/** `review` is the first review of the thread when `reaction` is one of its replies. */
+function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction): HTMLElement {
+  const item = fromTemplate(block.root, "item");
+  const isReply = review !== reaction;
+  item.classList.toggle("reply", isReply);
   item.querySelector(".avatar")!.textContent = initialOf(reaction.name);
   item.querySelector(".who")!.textContent = reaction.name;
   const time = item.querySelector("time")!;
   time.dateTime = reaction.createdAt;
   time.textContent = reactionDate(reaction.createdAt, Date.now());
+  const place = block.everywhere?.places[reaction.city];
+  if (place && !isReply) {
+    const where = part<HTMLAnchorElement>(item, "where");
+    where.href = `/ville/${place.slug}/#reactions`;
+    where.textContent = place.name;
+    where.hidden = false;
+  }
+  if (reaction.mention) {
+    const mention = part(item, "mention");
+    mention.textContent = `En réponse à ${reaction.mention}`;
+    mention.hidden = false;
+  }
   // textContent, never HTML: a reaction is the readers' text, shown as typed.
   item.querySelector(".text")!.textContent = reaction.text;
   const readMore = item.querySelector<HTMLButtonElement>("[data-read-more]")!;
@@ -127,6 +283,36 @@ function itemFor(block: Block, reaction: Reaction): HTMLElement {
       profile.querySelector(".traits")!.replaceChildren(...traitRows(reaction.profile));
     }
   }
+  const slot = part(item, "slot");
+  marksRow(block, reaction, part(item, "marks"), slot);
+
+  // Two levels: the replies of a review, and a reply's « Répondre » writes under the same review.
+  const answer = part<HTMLButtonElement>(item, "reply");
+  const replies = part<HTMLOListElement>(item, "replies");
+  if (isReply) {
+    answer.textContent = "Répondre";
+    answer.addEventListener("click", () => {
+      const thread = item.closest<HTMLElement>(".reaction:not(.reply)")!;
+      replyForm(block, review, reaction, part(thread, "slot"));
+    });
+  } else {
+    const count = reaction.replies?.length ?? 0;
+    answer.textContent = replyCount(count);
+    const open = block.open.has(reaction.id);
+    answer.setAttribute("aria-expanded", String(open));
+    replies.replaceChildren(...(reaction.replies ?? []).map((r) => itemFor(block, r, reaction)));
+    replies.hidden = !open || count === 0;
+    answer.addEventListener("click", () => {
+      const opening = !block.open.has(reaction.id);
+      if (opening) block.open.add(reaction.id);
+      else block.open.delete(reaction.id);
+      answer.setAttribute("aria-expanded", String(opening));
+      replies.hidden = !opening || count === 0;
+      if (opening) replyForm(block, reaction, reaction, slot);
+      else slot.replaceChildren();
+    });
+  }
+
   const report = item.querySelector<HTMLButtonElement>("[data-report]")!;
   const remove = item.querySelector<HTMLButtonElement>("[data-delete]")!;
   report.hidden = reaction.mine;
@@ -145,18 +331,38 @@ function itemFor(block: Block, reaction: Reaction): HTMLElement {
     }
     const { status } = await api("DELETE", `/api/compte/reactions/${reaction.id}`);
     if (status !== 200) return;
-    block.reactions = block.reactions.filter((r) => r.id !== reaction.id);
+    if (isReply) review.replies = review.replies?.filter((r) => r.id !== reaction.id);
+    else block.reactions = block.reactions.filter((r) => r.id !== reaction.id);
     draw(block);
   });
   return item;
 }
 
+function farther(temperament: string): HTMLElement {
+  const line = document.createElement("li");
+  line.className = "farther";
+  line.textContent = `Moins proches du tempérament ${temperament}`;
+  return line;
+}
+
 function draw(block: Block) {
-  const { root, reactions } = block;
-  const preview = root.dataset.reactions === "preview";
-  const visible = reactions.slice(0, preview ? PREVIEW : block.shown);
-  part(root, "count").textContent = reactionCount(reactions.length);
-  part(root, "list").replaceChildren(...visible.map((r) => itemFor(block, r)));
+  const { root, reactions, everywhere } = block;
+  const preview = isPreview(block);
+  const found = everywhere
+    ? everywhere.select(reactions)
+    : reactions.map((review) => ({ review, close: true }));
+  const visible = found.slice(0, preview ? PREVIEW : block.shown);
+  part(root, "count").textContent = everywhere
+    ? reviewsFound(found.length, reactions.length)
+    : reactionCount(reactions.length);
+  const temperament = everywhere?.temperament();
+  part(root, "list").replaceChildren(
+    ...visible.flatMap(({ review, close }, i) => {
+      const item = itemFor(block, review);
+      const first = !close && temperament && (i === 0 || visible[i - 1].close);
+      return first ? [farther(temperament), item] : [item];
+    }),
+  );
   // « Lire la suite » only where the text is really cut, measured once the block is laid out.
   requestAnimationFrame(() => {
     for (const item of root.querySelectorAll<HTMLElement>(".reaction:not(.open)")) {
@@ -165,8 +371,10 @@ function draw(block: Block) {
         text.scrollHeight <= text.clientHeight + 2;
     }
   });
-  part(root, "empty").hidden = reactions.length > 0;
-  part(root, "more").hidden = preview || visible.length >= reactions.length;
+  part(root, "empty").hidden = found.length > 0;
+  part(root, "more").hidden = preview || visible.length >= found.length;
+  everywhere?.onDraw(found);
+  if (everywhere) return;
   for (const name of root.querySelectorAll("[data-name]")) name.textContent = block.cityName;
   part(root, "of").textContent = ofCity(block.cityName);
   const all = root.querySelector<HTMLAnchorElement>("[data-all]");
@@ -180,10 +388,8 @@ function draw(block: Block) {
 }
 
 async function load(block: Block): Promise<boolean> {
-  const { status, data } = await api(
-    "GET",
-    `/api/compte/reactions?ville=${encodeURIComponent(block.city)}`,
-  );
+  const query = block.everywhere ? "" : `?ville=${encodeURIComponent(block.city)}`;
+  const { status, data } = await api("GET", `/api/compte/reactions${query}`);
   if (status !== 200) return false;
   block.reactions = data.reactions;
   draw(block);
@@ -202,7 +408,7 @@ function wireForm(block: Block) {
   const emailField = part(root, "email-field");
   const topField = part(root, "top-field");
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-  let signedIn = false;
+  let member = false;
 
   open.addEventListener("click", async () => {
     form.hidden = !form.hidden;
@@ -213,8 +419,8 @@ function wireForm(block: Block) {
     topField.hidden = !block.link;
     form.querySelector("textarea")!.focus();
     // Signed in already: the address was confirmed once, the reaction goes online at once.
-    signedIn = (await api("GET", "/api/compte")).status === 200;
-    emailField.hidden = signedIn;
+    member = await signedIn(block);
+    emailField.hidden = member;
   });
 
   form.addEventListener("submit", async (event) => {
@@ -224,16 +430,13 @@ function wireForm(block: Block) {
       city: block.city,
       text: String(data.get("text") ?? "").trim(),
       name: String(data.get("name") ?? "").trim(),
-      email: signedIn ? undefined : String(data.get("email") ?? "").trim(),
+      email: member ? undefined : String(data.get("email") ?? "").trim(),
       link: block.link ?? undefined,
       private: data.get("private") === "on",
       website: String(data.get("website") ?? ""),
       // A result page cannot be redrawn from a link (the quick quiz starts over): the city page
       // shows the published reaction wherever it was written.
-      back:
-        root.dataset.reactions === "preview"
-          ? `/ville/${block.city}/#reactions`
-          : `${location.pathname}#reactions`,
+      back: isPreview(block) ? `/ville/${block.city}/#reactions` : `${location.pathname}#reactions`,
     };
     error.hidden = true;
     if (!body.text) {
@@ -247,7 +450,7 @@ function wireForm(block: Block) {
     if (status === 201 || status === 202)
       track(reactionEvent("Réaction envoyée", placeOf(root), block.city, status === 201));
     if (status === 201) {
-      block.reactions = [answer.reaction, ...block.reactions];
+      block.reactions = [{ ...answer.reaction, replies: [] }, ...block.reactions];
       draw(block);
       form.reset();
       form.hidden = true;
@@ -272,22 +475,48 @@ function wireForm(block: Block) {
   });
 }
 
-/** The full thread on a city page. */
-export async function mountThread(root: HTMLElement) {
-  const block: Block = {
-    root,
-    city: root.dataset.city!,
-    cityName: root.dataset.cityName!,
-    link: lastResult(),
-    reactions: [],
-    shown: PAGE,
-  };
-  part(root, "more").addEventListener("click", () => {
+const newBlock = (root: HTMLElement, fields: Partial<Block>): Block => ({
+  root,
+  city: "",
+  cityName: "",
+  link: null,
+  reactions: [],
+  shown: PAGE,
+  open: new Set(),
+  ...fields,
+});
+
+function wireMore(block: Block) {
+  part(block.root, "more").addEventListener("click", () => {
     block.shown += PAGE;
     draw(block);
   });
+}
+
+/** The full thread on a city page. */
+export async function mountThread(root: HTMLElement) {
+  const block = newBlock(root, {
+    city: root.dataset.city!,
+    cityName: root.dataset.cityName!,
+    link: lastResult(),
+  });
+  wireMore(block);
   wireForm(block);
   root.hidden = !(await load(block));
+}
+
+/** The reviews of every city on /avis; `redraw` after each change of filter. */
+export async function mountEverywhere(root: HTMLElement, everywhere: Everywhere) {
+  const block = newBlock(root, { everywhere });
+  wireMore(block);
+  root.hidden = !(await load(block));
+  return {
+    loaded: !root.hidden,
+    redraw() {
+      block.shown = PAGE;
+      draw(block);
+    },
+  };
 }
 
 let previewBlock: Block | null = null;
@@ -310,7 +539,7 @@ export async function showPreview(
   if (link) remember(link);
   put(root);
   if (!previewBlock) {
-    previewBlock = { root, city: "", cityName: "", link, reactions: [], shown: PREVIEW };
+    previewBlock = newBlock(root, { link, shown: PREVIEW });
     wireForm(previewBlock);
   }
   previewBlock.link = link;
