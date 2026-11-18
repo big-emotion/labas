@@ -1,3 +1,6 @@
+import { BRAND, type Bilingual, type Locale } from "../i18n/locale";
+import { cityCopy } from "../i18n/city-copy";
+import { EN_SITE, FR_ORIGIN } from "../i18n/routes";
 import { TOP_THREE } from "./ranking";
 import type { SharedResult } from "./shared-result";
 
@@ -6,6 +9,21 @@ import type { SharedResult } from "./shared-result";
  * the three cities with their percentage and why they fit. Drawn in the reader's browser with
  * the site's own fonts and colour tokens, so nothing is sent anywhere to make it.
  */
+const COPY: Bilingual<{ profile: string; cities: string; question: string; site: string }> = {
+  fr: {
+    profile: "MON PROFIL",
+    cities: "MES VILLES D'AFRIQUE",
+    question: "Quelle ville d'Afrique vous ressemble ?",
+    site: FR_ORIGIN.replace(/^https:\/\//, ""),
+  },
+  en: {
+    profile: "MY PROFILE",
+    cities: "MY AFRICAN CITIES",
+    question: "Which African city feels like you?",
+    site: EN_SITE.replace(/^https:\/\//, ""),
+  },
+};
+
 const W = 1080;
 const H = 1350;
 const PAD = 80;
@@ -34,7 +52,9 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, width: number, max: n
   return lines;
 }
 
-export async function resultImage(shared: SharedResult): Promise<Blob> {
+/** French by default while the result page that calls it is being translated. */
+export async function resultImage(shared: SharedResult, locale: Locale = "fr"): Promise<Blob> {
+  const copy = COPY[locale];
   await document.fonts.ready;
   const canvas = document.createElement("canvas");
   canvas.width = W;
@@ -57,13 +77,13 @@ export async function resultImage(shared: SharedResult): Promise<Blob> {
 
   ctx.fillStyle = thread;
   ctx.font = `900 56px ${display}`;
-  ctx.fillText("là-bas", PAD, 120);
+  ctx.fillText(BRAND[locale].toLowerCase(), PAD, 120);
 
   let y = 220;
   if (shared.archetype) {
     ctx.fillStyle = dim;
     ctx.font = `700 26px ${body}`;
-    ctx.fillText("MON PROFIL", PAD, y);
+    ctx.fillText(copy.profile, PAD, y);
     ctx.fillStyle = saffron;
     ctx.font = `900 92px ${display}`;
     ctx.fillText(shared.archetype.name, PAD, (y += 96));
@@ -76,11 +96,12 @@ export async function resultImage(shared: SharedResult): Promise<Blob> {
 
   ctx.fillStyle = dim;
   ctx.font = `700 26px ${body}`;
-  ctx.fillText("MES VILLES D'AFRIQUE", PAD, y);
+  ctx.fillText(copy.cities, PAD, y);
   y += 30;
   const blockH = shared.archetype ? 210 : 260;
   shared.cities.slice(0, TOP_THREE).forEach((entry, i) => {
     const top = y + i * (blockH + 16);
+    const city = cityCopy(entry.city, locale);
     ctx.fillStyle = deep;
     ctx.beginPath();
     ctx.roundRect(PAD, top, W - 2 * PAD, blockH, 28);
@@ -93,18 +114,18 @@ export async function resultImage(shared: SharedResult): Promise<Blob> {
     ctx.font = `900 64px ${display}`;
     ctx.fillText(String(i + 1), left, top + 76);
     ctx.fillStyle = thread;
-    ctx.fillText(entry.city.name, left + 64, top + 76);
+    ctx.fillText(city.name, left + 64, top + 76);
     ctx.fillStyle = saffron;
     ctx.font = `800 52px ${body}`;
     const percent = `${entry.percent} %`;
     ctx.fillText(percent, W - PAD - 36 - ctx.measureText(percent).width, top + 74);
     ctx.fillStyle = dim;
     ctx.font = `400 28px ${body}`;
-    ctx.fillText(entry.city.country, left + 64, top + 112);
+    ctx.fillText(city.country, left + 64, top + 112);
     ctx.fillStyle = thread;
     ctx.font = `400 28px ${body}`;
     const fits = entry.lines.filter((line) => !line.weak).map((line) => line.text);
-    const why = fits.length ? fits.slice(0, 2) : [entry.city.tagline];
+    const why = fits.length ? fits.slice(0, 2) : [city.tagline];
     why.forEach((line, j) => {
       const [first] = wrap(ctx, line, W - 2 * PAD - 72, 1);
       ctx.fillText(first, left, top + 156 + j * 36);
@@ -113,10 +134,10 @@ export async function resultImage(shared: SharedResult): Promise<Blob> {
 
   ctx.fillStyle = dim;
   ctx.font = `400 30px ${body}`;
-  ctx.fillText("Quelle ville d'Afrique vous ressemble ?", PAD, H - 90);
+  ctx.fillText(copy.question, PAD, H - 90);
   ctx.fillStyle = saffron;
   ctx.font = `800 34px ${body}`;
-  ctx.fillText("labas.africa", PAD, H - 44);
+  ctx.fillText(copy.site, PAD, H - 44);
 
   return new Promise((resolve, reject) =>
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("no image"))), "image/png"),
