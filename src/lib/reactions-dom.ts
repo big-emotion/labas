@@ -1,3 +1,6 @@
+import { pageLocale, type Bilingual } from "../i18n/locale";
+import { cityName } from "../i18n/places";
+import { pathFor } from "../i18n/routes";
 import { api } from "./account-dom";
 import { reactionEvent } from "./analytics";
 import { track } from "./keep-dom";
@@ -9,12 +12,16 @@ import {
   type MarkKey,
   ofCity,
   type Profile,
+  profileIn,
   type Reaction,
   reactionCount,
   reactionDate,
   replyCount,
   reviewsFound,
+  shownName,
+  temperamentName,
   type TopCity,
+  translationNote,
 } from "./reactions";
 import type { Found, Place } from "./review-search";
 
@@ -23,6 +30,76 @@ import type { Found, Place } from "./review-search";
  * preview of the first city on a result page, the reviews of every city on /avis, and the forms
  * they share.
  */
+
+/** Scripts run on built pages only, whose `<html lang>` names the language. */
+const locale = pageLocale();
+const cityPage = (slug: string) => pathFor("city", locale, slug);
+
+const COPY = {
+  fr: {
+    outOf100: (name: string, range: string, value: number) =>
+      `${name} : ${range}, ${value} sur 100`,
+    fewerMarks: "Moins de réactions",
+    moreMarks: "Autres réactions",
+    replyingTo: (name: string) => `En réponse à ${name}`,
+    writeReply: "Écrivez votre réponse avant d'envoyer.",
+    replyPending: (email: string) =>
+      `Votre réponse est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${email}. Il vous connecte aussi.`,
+    checkForm: "Vérifiez votre adresse e-mail et la longueur du texte, puis réessayez.",
+    tooManyReplies: "Trop de messages d'un coup. Réessayez dans une heure.",
+    replyFailed: "La réponse n'est pas partie. Réessayez dans un moment.",
+    reduce: "Réduire",
+    readMore: "Lire la suite",
+    reply: "Répondre",
+    reported: "Signalée, merci",
+    reallyDelete: "Supprimer pour de bon ?",
+    farther: (name: string) => `Moins proches du tempérament ${name}`,
+    allReactions: (total: number) => `Voir toutes les réactions (${total})`,
+    cityPage: (name: string) => `Voir la page ${ofCity(name)}`,
+    of: (name: string) => ofCity(name),
+    writeReaction: "Écrivez votre réaction avant d'envoyer.",
+    reactionPending: (email: string) =>
+      `Votre réaction est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${email}. Vous ne le ferez qu'une fois.`,
+    tooManyReactions: "Trop de réactions d'un coup. Réessayez dans une heure.",
+    reactionFailed: "La réaction n'est pas partie. Réessayez dans un moment.",
+    reactOn: (name: string) => `Réagir sur ${name}`,
+    translate: "Traduire",
+    original: "Voir l'original",
+    translationFailed: "La traduction n'a pas marché. Réessayez dans un moment.",
+  },
+  en: {
+    outOf100: (name: string, range: string, value: number) =>
+      `${name}: ${range}, ${value} out of 100`,
+    fewerMarks: "Fewer reactions",
+    moreMarks: "Other reactions",
+    replyingTo: (name: string) => `Replying to ${name}`,
+    writeReply: "Write your reply before sending.",
+    replyPending: (email: string) =>
+      `Your reply is waiting. To publish it, open the link we have just sent to ${email}. It signs you in as well.`,
+    checkForm: "Check your email address and the length of the text, then try again.",
+    tooManyReplies: "Too many messages at once. Try again in an hour.",
+    replyFailed: "The reply didn't go through. Try again in a moment.",
+    reduce: "Show less",
+    readMore: "Read more",
+    reply: "Reply",
+    reported: "Reported, thank you",
+    reallyDelete: "Delete for good?",
+    farther: (name: string) => `Further from the ${name} temperament`,
+    allReactions: (total: number) => `See all reactions (${total})`,
+    cityPage: (name: string) => `See the ${name} page`,
+    of: (name: string) => name,
+    writeReaction: "Write your reaction before sending.",
+    reactionPending: (email: string) =>
+      `Your reaction is waiting. To publish it, open the link we have just sent to ${email}. You'll only need to do this once.`,
+    tooManyReactions: "Too many reactions at once. Try again in an hour.",
+    reactionFailed: "The reaction didn't go through. Try again in a moment.",
+    reactOn: (name: string) => `React to ${name}`,
+    translate: "Translate",
+    original: "Show original",
+    translationFailed: "The translation didn't work. Try again in a moment.",
+  },
+} satisfies Bilingual<Record<string, unknown>>;
+const copy = COPY[locale];
 
 const PAGE = 10;
 const PREVIEW = 3;
@@ -65,6 +142,8 @@ interface Block {
   open: Set<string>;
   everywhere?: Everywhere;
   signedIn?: Promise<boolean>;
+  /** The service says whether a DeepL key is set; without one, no « Traduire » button. */
+  translatable: boolean;
 }
 
 const part = <T extends HTMLElement>(root: HTMLElement, name: string) =>
@@ -80,13 +159,13 @@ function topChips(top: TopCity[]): HTMLElement[] {
   return top.map((city, i) => {
     const item = document.createElement("li");
     const link = document.createElement("a");
-    link.href = `/ville/${city.slug}/`;
+    link.href = cityPage(city.slug);
     const place = document.createElement("span");
     place.className = "place";
     place.textContent = String(i + 1);
     const percent = document.createElement("small");
     percent.textContent = `${city.percent}\u202f%`;
-    link.append(place, document.createTextNode(city.name), percent);
+    link.append(place, document.createTextNode(cityName(city.name, locale)), percent);
     item.append(link);
     return item;
   });
@@ -102,7 +181,7 @@ function traitRows(profile: Profile): HTMLElement[] {
     meter.className = "meter";
     meter.setAttribute(
       "aria-label",
-      `${trait.name} : ${trait.range}, ${Math.round(trait.value * 100)} sur 100`,
+      copy.outOf100(trait.name, trait.range, Math.round(trait.value * 100)),
     );
     const fill = document.createElement("i");
     fill.style.width = `${Math.max(8, Math.round(trait.value * 100))}%`;
@@ -120,7 +199,11 @@ function askLogin(block: Block, slot: HTMLElement) {
     const email = String(new FormData(form).get("email") ?? "").trim();
     if (!email) return;
     form.querySelector<HTMLButtonElement>("button")!.disabled = true;
-    await api("POST", "/api/compte/lien", { email, back: location.pathname + location.search });
+    await api("POST", "/api/compte/lien", {
+      email,
+      back: location.pathname + location.search,
+      locale,
+    });
     part(form, "done").hidden = false;
   });
   slot.replaceChildren(form);
@@ -150,8 +233,8 @@ function marksRow(block: Block, reaction: Reaction, row: HTMLElement, slot: HTML
       button.type = "button";
       button.className = "mark";
       button.setAttribute("aria-pressed", String(mine));
-      button.setAttribute("aria-label", markLabel(mark.key, count, mine));
-      button.title = mark.label;
+      button.setAttribute("aria-label", markLabel(mark.key, count, mine, locale));
+      button.title = mark.label[locale];
       const emoji = document.createElement("span");
       emoji.setAttribute("aria-hidden", "true");
       emoji.textContent = mark.emoji;
@@ -164,7 +247,7 @@ function marksRow(block: Block, reaction: Reaction, row: HTMLElement, slot: HTML
     more.type = "button";
     more.className = "mark more-marks";
     more.textContent = all ? "−" : "+";
-    more.setAttribute("aria-label", all ? "Moins de réactions" : "Autres réactions");
+    more.setAttribute("aria-label", all ? copy.fewerMarks : copy.moreMarks);
     more.setAttribute("aria-expanded", String(all));
     more.hidden = !all && shown.length === MARKS.length;
     more.addEventListener("click", () => {
@@ -179,7 +262,7 @@ function marksRow(block: Block, reaction: Reaction, row: HTMLElement, slot: HTML
 function replyForm(block: Block, review: Reaction, to: Reaction, slot: HTMLElement) {
   const form = fromTemplate<HTMLFormElement>(block.root, "reply-template");
   const error = part(form, "error");
-  part(form, "replying").textContent = `En réponse à ${to.name}`;
+  part(form, "replying").textContent = copy.replyingTo(shownName(to.name, locale));
   signedIn(block).then((yes) => (part(form, "email-field").hidden = yes));
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -192,10 +275,11 @@ function replyForm(block: Block, review: Reaction, to: Reaction, slot: HTMLEleme
       email: isMember ? undefined : String(data.get("email") ?? "").trim(),
       website: String(data.get("website") ?? ""),
       back: location.pathname + location.search,
+      locale,
     };
     error.hidden = true;
     if (!body.text) {
-      error.textContent = "Écrivez votre réponse avant d'envoyer.";
+      error.textContent = copy.writeReply;
       error.hidden = false;
       return;
     }
@@ -213,16 +297,12 @@ function replyForm(block: Block, review: Reaction, to: Reaction, slot: HTMLEleme
       const pending = document.createElement("p");
       pending.className = "pending";
       pending.setAttribute("role", "status");
-      pending.textContent = `Votre réponse est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${body.email}. Il vous connecte aussi.`;
+      pending.textContent = copy.replyPending(body.email ?? "");
       slot.replaceChildren(pending);
       return;
     }
     error.textContent =
-      status === 400
-        ? "Vérifiez votre adresse e-mail et la longueur du texte, puis réessayez."
-        : status === 429
-          ? "Trop de messages d'un coup. Réessayez dans une heure."
-          : "La réponse n'est pas partie. Réessayez dans un moment.";
+      status === 400 ? copy.checkForm : status === 429 ? copy.tooManyReplies : copy.replyFailed;
     error.hidden = false;
   });
   slot.replaceChildren(form);
@@ -234,35 +314,37 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
   const item = fromTemplate(block.root, "item");
   const isReply = review !== reaction;
   item.classList.toggle("reply", isReply);
-  item.querySelector(".avatar")!.textContent = initialOf(reaction.name);
-  item.querySelector(".who")!.textContent = reaction.name;
+  const name = shownName(reaction.name, locale);
+  item.querySelector(".avatar")!.textContent = initialOf(name);
+  item.querySelector(".who")!.textContent = name;
   const time = item.querySelector("time")!;
   time.dateTime = reaction.createdAt;
-  time.textContent = reactionDate(reaction.createdAt, Date.now());
+  time.textContent = reactionDate(reaction.createdAt, Date.now(), locale);
   const place = block.everywhere?.places[reaction.city];
   if (place && !isReply) {
     const where = part<HTMLAnchorElement>(item, "where");
-    where.href = `/ville/${place.slug}/`;
+    where.href = cityPage(place.slug);
     where.textContent = `${place.name}, ${place.country}`;
     where.hidden = false;
   }
   if (reaction.mention) {
     const mention = part(item, "mention");
-    mention.textContent = `En réponse à ${reaction.mention}`;
+    mention.textContent = copy.replyingTo(shownName(reaction.mention, locale));
     mention.hidden = false;
   }
   // textContent, never HTML: a reaction is the readers' text, shown as typed.
   item.querySelector(".text")!.textContent = reaction.text;
+  if (block.translatable) wireTranslation(block, reaction, item);
   const readMore = item.querySelector<HTMLButtonElement>("[data-read-more]")!;
   readMore.addEventListener("click", () => {
     const open = item.classList.toggle("open");
-    readMore.textContent = open ? "Réduire" : "Lire la suite";
+    readMore.textContent = open ? copy.reduce : copy.readMore;
     readMore.setAttribute("aria-expanded", String(open));
   });
   if (reaction.top || reaction.profile) {
     const journey = item.querySelector<HTMLElement>(".journey")!;
     const summary = item.querySelector<HTMLButtonElement>("[data-summary]")!;
-    const line = journeySummary(reaction.top, reaction.profile);
+    const line = journeySummary(reaction.top, reaction.profile, locale);
     const show = (name: string, text: string | null) => {
       const part = summary.querySelector<HTMLElement>(`[data-${name}]`)!;
       part.hidden = !text;
@@ -279,10 +361,11 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
     });
     if (reaction.top) item.querySelector(".top")!.replaceChildren(...topChips(reaction.top));
     if (reaction.profile) {
+      const shown = profileIn(reaction.profile, locale);
       const profile = item.querySelector<HTMLElement>(".profile")!;
       profile.hidden = false;
-      profile.querySelector("b")!.textContent = reaction.profile.name;
-      profile.querySelector(".traits")!.replaceChildren(...traitRows(reaction.profile));
+      profile.querySelector("b")!.textContent = shown.name;
+      profile.querySelector(".traits")!.replaceChildren(...traitRows(shown));
     }
   }
   const slot = part(item, "slot");
@@ -292,14 +375,14 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
   const answer = part<HTMLButtonElement>(item, "reply");
   const replies = part<HTMLOListElement>(item, "replies");
   if (isReply) {
-    answer.textContent = "Répondre";
+    answer.textContent = copy.reply;
     answer.addEventListener("click", () => {
       const thread = item.closest<HTMLElement>(".reaction:not(.reply)")!;
       replyForm(block, review, reaction, part(thread, "slot"));
     });
   } else {
     const count = reaction.replies?.length ?? 0;
-    answer.textContent = replyCount(count);
+    answer.textContent = replyCount(count, locale);
     const open = block.open.has(reaction.id);
     answer.setAttribute("aria-expanded", String(open));
     replies.replaceChildren(...(reaction.replies ?? []).map((r) => itemFor(block, r, reaction)));
@@ -324,14 +407,14 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
     // A report counts once per reader, so it needs a space, like hearts.
     if (status === 401) return askLogin(block, slot);
     if (status !== 202) return;
-    report.textContent = "Signalée, merci";
+    report.textContent = copy.reported;
     report.disabled = true;
   });
   // Two taps instead of a browser dialog: the first one only asks.
   remove.addEventListener("click", async () => {
     if (remove.dataset.armed !== "true") {
       remove.dataset.armed = "true";
-      remove.textContent = "Supprimer pour de bon ?";
+      remove.textContent = copy.reallyDelete;
       return;
     }
     const { status } = await api("DELETE", `/api/compte/reactions/${reaction.id}`);
@@ -343,10 +426,66 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
   return item;
 }
 
+/**
+ * « Traduire » under a review or reply: the service looks the review up by its id and asks DeepL
+ * once per language (docs/accounts.md), so the page never sends the text itself. The answer is
+ * kept on the reaction, so a redraw or a second tap asks nothing again.
+ */
+const translations = new Map<string, Promise<{ text: string; detectedSource: string } | null>>();
+
+function wireTranslation(block: Block, reaction: Reaction, item: HTMLElement) {
+  const row = part(item, "translation");
+  const note = part(row, "translation-note");
+  const button = part<HTMLButtonElement>(row, "translate");
+  const text = item.querySelector<HTMLElement>(".text")!;
+  let translated = false;
+  row.hidden = false;
+  button.addEventListener("click", async () => {
+    if (translated) {
+      translated = false;
+      text.textContent = reaction.text;
+      text.lang = "";
+      note.textContent = "";
+      button.textContent = copy.translate;
+      return;
+    }
+    button.disabled = true;
+    if (!translations.has(reaction.id))
+      translations.set(
+        reaction.id,
+        api("POST", `/api/compte/reactions/${reaction.id}/traduction`, { target: locale }).then(
+          ({ status, data }) => {
+            // No key after all: the button goes, on every review of the page.
+            if (status === 503) block.translatable = false;
+            return status === 200 ? data : null;
+          },
+        ),
+      );
+    const answer = await translations.get(reaction.id)!;
+    button.disabled = false;
+    if (!answer) {
+      translations.delete(reaction.id);
+      if (!block.translatable) row.hidden = true;
+      else note.textContent = copy.translationFailed;
+      return;
+    }
+    note.textContent = translationNote(answer.detectedSource, locale);
+    if (answer.detectedSource === locale) {
+      button.hidden = true;
+      return;
+    }
+    track(reactionEvent("Réaction traduite", placeOf(block.root), reaction.city));
+    translated = true;
+    text.textContent = answer.text;
+    text.lang = locale;
+    button.textContent = copy.original;
+  });
+}
+
 function farther(temperament: string): HTMLElement {
   const line = document.createElement("li");
   line.className = "farther";
-  line.textContent = `Moins proches du tempérament ${temperament}`;
+  line.textContent = copy.farther(temperamentName(temperament, locale));
   return line;
 }
 
@@ -358,8 +497,8 @@ function draw(block: Block) {
   const found = selected ? selected.shown : reactions.map((review) => ({ review, close: true }));
   const visible = selected ? found : found.slice(0, preview ? PREVIEW : block.shown);
   part(root, "count").textContent = selected
-    ? reviewsFound(selected.total, reactions.length)
-    : reactionCount(reactions.length);
+    ? reviewsFound(selected.total, reactions.length, locale)
+    : reactionCount(reactions.length, locale);
   const temperament = everywhere?.temperament();
   part(root, "list").replaceChildren(
     ...visible.flatMap(({ review, close }, i) => {
@@ -381,13 +520,13 @@ function draw(block: Block) {
   everywhere?.onDraw(reactions);
   if (everywhere) return;
   for (const name of root.querySelectorAll("[data-name]")) name.textContent = block.cityName;
-  part(root, "of").textContent = ofCity(block.cityName);
+  part(root, "of").textContent = copy.of(block.cityName);
   const all = root.querySelector<HTMLAnchorElement>("[data-all]");
   if (all) {
-    all.href = `/ville/${block.city}/#reactions`;
+    all.href = `${cityPage(block.city)}#reactions`;
     all.textContent = reactions.length
-      ? `Voir toutes les réactions (${reactions.length})`
-      : `Voir la page ${ofCity(block.cityName)}`;
+      ? copy.allReactions(reactions.length)
+      : copy.cityPage(block.cityName);
     all.onclick = () => track(reactionEvent("Réactions consultées", "preview", block.city));
   }
 }
@@ -397,12 +536,17 @@ async function load(block: Block): Promise<boolean> {
   const { status, data } = await api("GET", `/api/compte/reactions${query}`);
   if (status !== 200) return false;
   block.reactions = data.reactions;
+  block.translatable = data.translate === true;
   draw(block);
   return true;
 }
 
 const placeOf = (root: HTMLElement) =>
-  root.dataset.reactions === "preview" ? ("preview" as const) : ("thread" as const);
+  root.dataset.reactions === "preview"
+    ? ("preview" as const)
+    : root.dataset.reactions === "everywhere"
+      ? ("everywhere" as const)
+      : ("thread" as const);
 
 function wireForm(block: Block) {
   const { root } = block;
@@ -441,11 +585,14 @@ function wireForm(block: Block) {
       website: String(data.get("website") ?? ""),
       // A result page cannot be redrawn from a link (the quick quiz starts over): the city page
       // shows the published reaction wherever it was written.
-      back: isPreview(block) ? `/ville/${block.city}/#reactions` : `${location.pathname}#reactions`,
+      back: isPreview(block)
+        ? `${cityPage(block.city)}#reactions`
+        : `${location.pathname}#reactions`,
+      locale,
     };
     error.hidden = true;
     if (!body.text) {
-      error.textContent = "Écrivez votre réaction avant d'envoyer.";
+      error.textContent = copy.writeReaction;
       error.hidden = false;
       return;
     }
@@ -466,16 +613,16 @@ function wireForm(block: Block) {
       form.reset();
       form.hidden = true;
       open.setAttribute("aria-expanded", "false");
-      pending.textContent = `Votre réaction est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${body.email}. Vous ne le ferez qu'une fois.`;
+      pending.textContent = copy.reactionPending(body.email ?? "");
       pending.hidden = false;
       return;
     }
     error.textContent =
       status === 400
-        ? "Vérifiez votre adresse e-mail et la longueur du texte, puis réessayez."
+        ? copy.checkForm
         : status === 429
-          ? "Trop de réactions d'un coup. Réessayez dans une heure."
-          : "La réaction n'est pas partie. Réessayez dans un moment.";
+          ? copy.tooManyReactions
+          : copy.reactionFailed;
     error.hidden = false;
   });
 }
@@ -488,6 +635,7 @@ const newBlock = (root: HTMLElement, fields: Partial<Block>): Block => ({
   reactions: [],
   shown: PAGE,
   open: new Set(),
+  translatable: false,
   ...fields,
 });
 
@@ -550,7 +698,7 @@ export async function showPreview(
   previewBlock.link = link;
   if (previewBlock.city === city.slug) return;
   previewBlock.city = city.slug;
-  previewBlock.cityName = city.name;
+  previewBlock.cityName = cityName(city.name, locale);
   root.hidden = !(await load(previewBlock));
 }
 
@@ -578,8 +726,10 @@ export async function showCounts(
     if (!link) continue;
     const total = await countOf(city.slug);
     if (total === null) continue;
-    link.href = `/ville/${city.slug}/#reactions`;
-    link.textContent = total ? reactionCount(total) : `Réagir sur ${city.name}`;
+    link.href = `${cityPage(city.slug)}#reactions`;
+    link.textContent = total
+      ? reactionCount(total, locale)
+      : copy.reactOn(cityName(city.name, locale));
     link.onclick = () => track(reactionEvent("Réactions consultées", "card", city.slug));
     link.hidden = false;
   }

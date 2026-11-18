@@ -1,4 +1,6 @@
 import { createHash, randomBytes } from "node:crypto";
+import type { Locale } from "../i18n/locale";
+import { cityName } from "../i18n/places";
 import { CITIES } from "../lib/cities";
 import { FEEDBACK_KINDS, MESSAGE_MAX } from "../lib/feedback";
 import { cleanAnswers, SENSITIVE_ANSWERS, withoutSensitive } from "../lib/keep";
@@ -7,11 +9,15 @@ import { MARKS } from "../lib/reactions";
 import { resultAt } from "../lib/shared-result";
 import {
   loginLinkEmail,
+  originFor,
+  pagePath,
   reactionLinkEmail,
+  readLocale,
   resultsEmail,
   saveLinkEmail,
   teamMessageEmail,
 } from "./emails";
+import type { Translator } from "./deepl";
 import { limiter } from "./limiter";
 import type { Mailer } from "./subscribe";
 
@@ -150,12 +156,27 @@ export async function migrate(db: Db): Promise<void> {
       email text,
       created_at timestamptz not null
     )`);
+  // A review is sent to DeepL at most once per language (operator, 2026-11-18); its copies go
+  // with it. Reviews are never edited, so a copy never goes stale.
+  await db.query(`
+    create table if not exists reaction_translations (
+      reaction_id uuid not null references reactions(id) on delete cascade,
+      target text not null check (target in ('fr', 'en')),
+      text text not null,
+      detected_source text not null,
+      created_at timestamptz not null,
+      primary key (reaction_id, target)
+    )`);
   await consentPerJourney(db);
   await db.query(`
     create table if not exists news_subscribers (
       email text primary key,
       confirmed_at timestamptz not null
     )`);
+  // The language the news will be written in for this address (operator, 2026-11-18: English).
+  await db.query(
+    "alter table news_subscribers add column if not exists locale text not null default 'fr' check (locale in ('fr', 'en'))",
+  );
   await db.query(`
     create table if not exists sessions (
       token_hash text primary key,
@@ -260,6 +281,8 @@ interface Options {
   db: Db;
   mailer: Mailer;
   siteUrl: string;
+  /** The English domain once it points here (EN_SITE_URL); empty, English lives under /en/. */
+  enSiteUrl?: string;
   now?: () => number;
   /** Addresses that open /admin; none means the admin stays shut. */
   admins?: string[];
@@ -267,6 +290,8 @@ interface Options {
   stats?: () => Promise<object>;
   /** The team's mailbox, where the feedback tab's messages are mailed; absent, they are only kept. */
   team?: string;
+  /** Translates a review on request (deepl.ts); absent until a DeepL key is set. */
+  translate?: Translator;
 }
 
 interface ReactionRow {
@@ -315,6 +340,8 @@ interface LinkOptions {
   /** Only picks where the link lands; the token alone authorises. */
   toResults?: boolean;
   back?: string | null;
+  /** Only picks the language of the page the link lands on. */
+  locale?: Locale;
 }
 
 interface JourneyRow {
@@ -329,11 +356,14 @@ export function createAccounts({
   db,
   mailer,
   siteUrl,
+  enSiteUrl = "",
   now = Date.now,
   admins = [],
   stats,
   team,
+  translate,
 }: Options) {
+  const sites = { fr: siteUrl, en: enSiteUrl };
   const adminAddresses = new Set(admins.map((a) => a.trim().toLowerCase()).filter(Boolean));
   const perConnection = limiter(5, HOUR);
   const perAddress = limiter(3, DAY);
@@ -342,6 +372,8 @@ export function createAccounts({
   // Apart from the others: a reader who just saved a journey can still write to the team.
   const messagesPerConnection = limiter(5, HOUR);
   const messagesPerAddress = limiter(3, DAY);
+  // Counts only the reviews that go to DeepL: a copy already kept costs nothing.
+  const translationsPerConnection = limiter(30, HOUR);
   const at = (offset = 0) => new Date(now() + offset).toISOString();
   const iso = (value: string | Date) => new Date(value).toISOString();
 
@@ -354,7 +386,10 @@ export function createAccounts({
        values ($1, $2, $3, $4, $5, $6, $7)`,
       [hash(secret), accountId, journeyId, reactionId, news, options.back ?? null, at(lifetime)],
     );
-    return `${siteUrl}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}`;
+    const lang = options.locale === "en" ? "&lang=en" : "";
+    // On the reader's own domain: the session cookie it sets must be the one their pages send.
+    const origin = originFor(sites, options.locale ?? "fr");
+    return `${origin}/api/compte/connexion?t=${secret}${toResults ? "&vers=resultats" : ""}${lang}`;
   }
 
   /** The account behind an address, created unconfirmed when it is new. */
@@ -506,10 +541,15 @@ export function createAccounts({
   return async (request: Request): Promise<Response> => {
     const { method, path } = request;
     // Every change comes from the site itself; the session cookie alone authorises nothing else.
-    if (method !== "GET" && request.headers.origin !== siteUrl)
+    if (
+      method !== "GET" &&
+      ![siteUrl, enSiteUrl].filter(Boolean).includes(request.headers.origin ?? "")
+    )
       return json(403, { error: "origin" });
     const form = (request.body ?? {}) as Record<string, unknown>;
     const connection = request.headers["x-real-ip"] ?? "unknown";
+    // The language of the page that asked; e-mails and the pages their links open follow it.
+    const locale = readLocale(form.locale);
 
     const answersOf = (form: Record<string, unknown>) =>
       cleanAnswers((form.journey as { answers?: unknown } | undefined)?.answers);
@@ -531,8 +571,9 @@ export function createAccounts({
         const link = await issueLink(accountId, SAVE_LINK_FOR, {
           journeyId,
           news: form.news === true,
+          locale,
         });
-        await mailer.send(saveLinkEmail(email, link));
+        await mailer.send(saveLinkEmail(email, link, locale));
       } catch (error) {
         console.error(String(error));
         return json(502, { error: "mail" });
@@ -545,7 +586,7 @@ export function createAccounts({
     // answers need their own box (operator, 2026-11-17).
     if (method === "POST" && path === "/api/compte/resultats") {
       const email = emailOf(form);
-      const result = resultAt(form.link, siteUrl);
+      const result = resultAt(form.link, siteUrl, enSiteUrl);
       if (!isEmail(email) || !result || !["quick", "deep"].includes(kindOf(form)))
         return json(400, { error: "form" });
       if (form.website) return json(202, { ok: true });
@@ -563,12 +604,19 @@ export function createAccounts({
           journeyId,
           news: form.news === true,
           toResults: true,
+          locale,
         });
         await mailer.send(
-          resultsEmail(email, result, String(form.link), siteUrl, undefined, {
-            link,
-            sensitiveLeftOut: !sensitive,
-          }),
+          resultsEmail(
+            email,
+            result,
+            {
+              resultLink: String(form.link),
+              sites,
+              space: { link, sensitiveLeftOut: !sensitive },
+            },
+            locale,
+          ),
         );
       } catch (error) {
         console.error(String(error));
@@ -590,13 +638,20 @@ export function createAccounts({
       // The same answer whether the address has a space or not, and as fast: the mail goes out
       // after the answer, or waiting for it would tell who uses Là-bas.
       if (accountId) {
-        const link = await issueLink(accountId, LOGIN_LINK_FOR, { back: backOf(form.back) });
-        mailer.send(loginLinkEmail(email, link)).catch((error) => console.error(String(error)));
+        const link = await issueLink(accountId, LOGIN_LINK_FOR, {
+          back: backOf(form.back),
+          locale,
+        });
+        mailer
+          .send(loginLinkEmail(email, link, locale))
+          .catch((error) => console.error(String(error)));
       }
       return json(202, { ok: true });
     }
 
     if (method === "GET" && path === "/api/compte/connexion") {
+      const landingLocale = readLocale(request.query.get("lang"));
+      const space = pagePath(sites, "space", landingLocale);
       const { rows } = await db.query<{
         account_id: string;
         journey_id: string | null;
@@ -611,7 +666,10 @@ export function createAccounts({
       );
       const link = rows[0];
       // A used or old button still leads a reader who is signed in on this browser to their space.
-      if (!link) return redirect((await member(request)) ? "/espace/" : "/espace/lien-expire/");
+      if (!link)
+        return redirect(
+          (await member(request)) ? space : pagePath(sites, "spaceExpired", landingLocale),
+        );
       const account = (
         await db.query<{ email: string }>(
           `update accounts set confirmed_at = coalesce(confirmed_at, $2), last_seen_at = $2,
@@ -629,7 +687,8 @@ export function createAccounts({
           "update reactions set published_at = coalesce(published_at, $2) where id = $1",
           [link.reaction_id, at()],
         );
-      if (link.news) await mailer.addToList(account.email).catch((e) => console.error(String(e)));
+      if (link.news)
+        await mailer.addToList(account.email, landingLocale).catch((e) => console.error(String(e)));
       const session = token();
       await db.query(
         "insert into sessions (token_hash, account_id, expires_at) values ($1, $2, $3)",
@@ -638,8 +697,8 @@ export function createAccounts({
       const landing = link.back
         ? link.back
         : link.journey_id && request.query.get("vers") === "resultats"
-          ? `/espace/?ouvrir=${link.journey_id}`
-          : "/espace/";
+          ? `${space}?ouvrir=${link.journey_id}`
+          : space;
       return redirect(landing, { "set-cookie": sessionCookie(session, SESSION_FOR / 1000) });
     }
 
@@ -656,7 +715,11 @@ export function createAccounts({
          order by published_at desc, seq desc limit $3`,
         [city, REPORTS_TO_HIDE, LATEST],
       );
-      return json(200, { total: rows.length, reactions: await threadsOf(rows, reader?.id) });
+      return json(200, {
+        total: rows.length,
+        reactions: await threadsOf(rows, reader?.id),
+        translate: Boolean(translate),
+      });
     }
 
     // Someone signed in publishes at once; anyone else confirms the address once, by e-mail,
@@ -685,7 +748,7 @@ export function createAccounts({
       // (operator, 2026-11-18). Both are recomputed from a result link of this site, so no typed
       // text poses as one and no other answer travels.
       // A reply carries no journey: it answers a person, it does not present a result.
-      const result = form.private === true || parent ? null : resultAt(form.link, siteUrl);
+      const result = form.private === true || parent ? null : resultAt(form.link, siteUrl, enSiteUrl);
       const top =
         result?.cities
           .slice(0, TOP_THREE)
@@ -717,13 +780,46 @@ export function createAccounts({
         const link = await issueLink(accountId, UNCONFIRMED_FOR, {
           reactionId: rows[0].id,
           back: backOf(form.back),
+          locale,
         });
-        await mailer.send(reactionLinkEmail(email, link, city.name));
+        await mailer.send(reactionLinkEmail(email, link, cityName(city.name, locale), locale));
       } catch (error) {
         console.error(String(error));
         return json(502, { error: "mail" });
       }
       return json(202, { published: false });
+    }
+
+    // A review or reply in the page's language. Looked up by id, so only a published review's own
+    // text reaches DeepL: the route is no free translation service for any text.
+    const translated = idIn(path, "/api/compte/reactions/", "/traduction");
+    if (translated && method === "POST") {
+      if (!translate) return json(503, { error: "closed" });
+      const target = form.target === "en" || form.target === "fr" ? form.target : null;
+      if (!target) return json(400, { error: "form" });
+      const review = await reviewToAnswer(translated);
+      if (!review) return json(404, { error: "not-found" });
+      const kept = (
+        await db.query<{ text: string; detected_source: string }>(
+          "select text, detected_source from reaction_translations where reaction_id = $1 and target = $2",
+          [review.id, target],
+        )
+      ).rows[0];
+      if (kept) return json(200, { text: kept.text, detectedSource: kept.detected_source });
+      if (!translationsPerConnection(connection, now())) return json(429, { error: "slow-down" });
+      let translation;
+      try {
+        translation = await translate(review.text, target);
+      } catch (error) {
+        console.error(String(error));
+        return json(502, { error: "translation" });
+      }
+      await db.query(
+        `insert into reaction_translations (reaction_id, target, text, detected_source, created_at)
+         values ($1, $2, $3, $4, $5) on conflict do nothing`,
+        [review.id, target, translation.text, translation.detectedSource, at()],
+      );
+      return json(200, translation);
     }
 
     // The feedback tab (operator, 2026-11-18): kept for /admin and mailed to the team, never to
@@ -924,7 +1020,7 @@ export function createAccounts({
       if (typeof form.news !== "boolean") return json(400, { error: "form" });
       await db.query("update accounts set news = $2 where id = $1", [reader.id, form.news]);
       const change = form.news
-        ? mailer.addToList(reader.email)
+        ? mailer.addToList(reader.email, locale)
         : mailer.removeFromList(reader.email);
       await change.catch((e) => console.error(String(e)));
       return json(200, { ok: true });

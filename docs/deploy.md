@@ -137,7 +137,24 @@ gh variable set PLAUSIBLE_API_HOST --repo big-emotion/labas --body https://stats
 `ADMIN_EMAILS` the page stays shut for everyone; without the key it shows the reviews and says the
 figures are waiting for it.
 
-**6. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
+**7. Translating reviews (DeepL), when you want it on.** It needs saved journeys (step 5), where
+the reviews live. Create a key in the DeepL account (Account → API keys; a free key ends in `:fx`
+and uses the free endpoint by itself), then paste it at the prompt:
+
+```bash
+gh secret set DEEPL_API_KEY --repo big-emotion/labas
+```
+
+Without the key, `POST /api/compte/reactions/:id/traduction` answers 503 and the pages show no
+« Traduire » button. Only a review's text is sent to DeepL, once per review and language; the
+copy is kept in `reaction_translations` and goes with the review (`docs/accounts.md`).
+
+Once the English domain points at this server, tell the mail and accounts service with
+`gh variable set EN_SITE_URL --repo big-emotion/labas --body https://overthere.africa`: it then
+accepts forms from that origin and writes English links (sign-in links included) on it. Empty,
+English stays under `labas.africa/en/`.
+
+**8. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
 The smoke check fails the job unless `https://labas.africa/` answers 200.
 
 ## Rollback

@@ -1,3 +1,4 @@
+import { pageLocale } from "../i18n/locale";
 import type { AnswerEvent, MessageEvent, ReactionEvent, ShareEvent, SiteEvent } from "./analytics";
 import { type Network, networkShare, networkText, shareEvent } from "./networks";
 import { type JourneyKind, resultsMailBody } from "./account";
@@ -229,7 +230,7 @@ function wireMail(
   const error = form.querySelector<HTMLElement>("[data-keep-error]")!;
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const show = (status: number) => {
-    const outcome = outcomeOf(status, "results");
+    const outcome = outcomeOf(status, "results", pageLocale());
     if (outcome.sent) return;
     error.textContent = outcome.message;
     error.hidden = false;
@@ -245,14 +246,14 @@ function wireMail(
       website: String(data.get("website") ?? ""),
     };
     const link = resultLink(answers, matches, pageLocale());
-    const body = resultsMailBody(fields, kind, answers, link);
+    const body = resultsMailBody(fields, kind, answers, link, pageLocale());
     if (!body) return show(400);
     submit.disabled = true;
     let status = await post("/api/compte/resultats", body);
     const withSpace = status !== 503;
-    if (!withSpace) status = await post("/api/resultats", resultsBody(fields, link));
+    if (!withSpace) status = await post("/api/resultats", resultsBody(fields, link, pageLocale()));
     submit.disabled = false;
-    if (!outcomeOf(status).sent) return show(status);
+    if (!outcomeOf(status, "results", pageLocale()).sent) return show(status);
     const sent = document.createElement("div");
     sent.setAttribute("role", "status");
     sent.dataset.keepSent = "";

@@ -21,28 +21,30 @@ describe("« Reprendre plus tard »", () => {
   const withOrigin = { ...answers, origin: [first("origin")] } as Answers;
 
   it("sends the address, the explicit consent, the news choice and the journey", () => {
-    expect(saveBody({ ...form, website: "" }, "quick", answers)).toEqual({
+    expect(saveBody({ ...form, website: "" }, "quick", answers, "en")).toEqual({
       email: "awa@exemple.fr",
       consent: true,
       sensitive: false,
       news: false,
       website: "",
+      locale: "en",
       journey: { kind: "quick", answers },
     });
   });
 
   it("keeps the sensitive answers in the browser unless their own box is ticked", () => {
-    expect(saveBody({ ...form, website: "" }, "quick", withOrigin)?.journey.answers).toEqual(
+    expect(saveBody({ ...form, website: "" }, "quick", withOrigin, "fr")?.journey.answers).toEqual(
       answers,
     );
     expect(
-      saveBody({ ...form, sensitive: true, website: "" }, "quick", withOrigin)?.journey.answers,
+      saveBody({ ...form, sensitive: true, website: "" }, "quick", withOrigin, "fr")?.journey
+        .answers,
     ).toEqual(withOrigin);
   });
 
   it("saves nothing without the consent box", () => {
-    expect(saveBody({ ...form, consent: false, website: "" }, "quick", answers)).toBeNull();
-    expect(saveBody({ ...form, email: "awa", website: "" }, "quick", answers)).toBeNull();
+    expect(saveBody({ ...form, consent: false, website: "" }, "quick", answers, "fr")).toBeNull();
+    expect(saveBody({ ...form, email: "awa", website: "" }, "quick", answers, "fr")).toBeNull();
   });
 
   it("sends the journey of a signed-in reader with the same separate box", () => {
@@ -55,7 +57,7 @@ describe("« Reprendre plus tard »", () => {
   });
 
   it("says what to fix when the form is refused", () => {
-    expect(outcomeOf(400, "save")).toEqual({
+    expect(outcomeOf(400, "save", "fr")).toEqual({
       sent: false,
       message: "Vérifiez votre adresse et cochez la case d'accord, puis réessayez.",
     });
@@ -64,17 +66,20 @@ describe("« Reprendre plus tard »", () => {
 
 describe("a journey in Mon espace", () => {
   it("names its kind and counts its answers", () => {
-    const summary = journeySummary({
-      id: "j1",
-      kind: "quick",
-      answers: { order: 1, together: 0.5 },
-    });
+    const summary = journeySummary(
+      {
+        id: "j1",
+        kind: "quick",
+        answers: { order: 1, together: 0.5 },
+      },
+      "fr",
+    );
     expect(summary.title).toBe("Quiz rapide");
     expect(summary.answered).toBe("2 réponses");
-    expect(journeySummary({ id: "j2", kind: "deep", answers: { order: 1 } }).title).toBe(
+    expect(journeySummary({ id: "j2", kind: "deep", answers: { order: 1 } }, "fr").title).toBe(
       "Questionnaire complet",
     );
-    expect(journeySummary({ id: "j2", kind: "deep", answers: { order: 1 } }).answered).toBe(
+    expect(journeySummary({ id: "j2", kind: "deep", answers: { order: 1 } }, "fr").answered).toBe(
       "1 réponse",
     );
   });
@@ -82,22 +87,34 @@ describe("a journey in Mon espace", () => {
   it("shows the three cities the answers give, as the quiz does, once enough is answered", () => {
     const answers = { project: first("project"), order: 1, together: 0.5, saturday: 1 } as Answers;
     const top = bestMatches(answers, 3).map((m) => m.city.name);
-    expect(journeySummary({ id: "j1", kind: "quick", answers }).cities.map((c) => c.name)).toEqual(
-      top,
+    expect(
+      journeySummary({ id: "j1", kind: "quick", answers }, "fr").cities.map((c) => c.name),
+    ).toEqual(top);
+    expect(journeySummary({ id: "j1", kind: "quick", answers: { order: 1 } }, "fr").cities).toEqual(
+      [],
     );
-    expect(journeySummary({ id: "j1", kind: "quick", answers: { order: 1 } }).cities).toEqual([]);
   });
 
   it("resumes in the full questionnaire, which picks up the answers already given", () => {
-    expect(resumeHref("8d3c")).toBe("/approfondir/?parcours=8d3c");
+    expect(resumeHref("8d3c", "fr")).toBe("/approfondir/?parcours=8d3c");
   });
 
   it("opens a journey on its result, the full ranking with the reasons for each city", () => {
-    expect(resultsHref("8d3c")).toBe("/approfondir/?parcours=8d3c#vos-villes");
+    expect(resultsHref("8d3c", "fr")).toBe("/approfondir/?parcours=8d3c#vos-villes");
   });
 
   it("writes dates the French way", () => {
-    expect(dateLabel("2029-11-16T12:00:00.000Z")).toBe("16 novembre 2029");
+    expect(dateLabel("2029-11-16T12:00:00.000Z", "fr")).toBe("16 novembre 2029");
+  });
+
+  it("speaks English on the English pages, with English addresses", () => {
+    const quick = journeySummary({ id: "j1", kind: "quick", answers: { order: 1 } }, "en");
+    expect([quick.title, quick.answered]).toEqual(["Quick quiz", "1 answer"]);
+    expect(journeySummary({ id: "j2", kind: "deep", answers: {} }, "en").answered).toBe(
+      "0 answers",
+    );
+    expect(resultsHref("8d3c", "en")).toBe("/en/go-deeper/?parcours=8d3c#vos-villes");
+    expect(dateLabel("2029-11-16T12:00:00.000Z", "en")).toBe("16 November 2029");
   });
 });
 
@@ -107,20 +124,21 @@ describe("« Recevoir par e-mail », which keeps the result in Mon espace", () =
   const form = { email: " awa@exemple.fr ", sensitive: false, news: true, website: "" };
 
   it("leaves origin and faith in the browser unless their own box is ticked", () => {
-    expect(resultsMailBody(form, "quick", answers, link)).toEqual({
+    expect(resultsMailBody(form, "quick", answers, link, "fr")).toEqual({
       email: "awa@exemple.fr",
       link,
       sensitive: false,
       news: true,
       website: "",
+      locale: "fr",
       journey: { kind: "quick", answers: { order: 1 } },
     });
     expect(
-      resultsMailBody({ ...form, sensitive: true }, "deep", answers, link)?.journey.answers,
+      resultsMailBody({ ...form, sensitive: true }, "deep", answers, link, "en")?.journey.answers,
     ).toEqual(answers);
   });
 
   it("needs a real address only: the request is the reason to keep the result", () => {
-    expect(resultsMailBody({ ...form, email: "awa" }, "quick", answers, link)).toBeNull();
+    expect(resultsMailBody({ ...form, email: "awa" }, "quick", answers, link, "fr")).toBeNull();
   });
 });

@@ -70,6 +70,21 @@ describe("a result shared by an English reader", () => {
     expect(resultAt("https://labas.africa/en/elsewhere/#r=x", "https://labas.africa")).toBeNull();
   });
 
+  it("is recognised on the service's own sites, wherever they run", () => {
+    const hash = new URL(resultLink(READER, english, "en")).hash;
+    expect(
+      resultAt(`http://localhost:4321/en/result/${hash}`, "http://localhost:4321"),
+    ).not.toBeNull();
+    expect(
+      resultAt(
+        `https://overthere.africa/result/${hash}`,
+        "https://labas.africa",
+        "https://overthere.africa",
+      ),
+    ).not.toBeNull();
+    expect(resultAt(`https://overthere.africa/result/${hash}`, "https://labas.africa")).toBeNull();
+  });
+
   it("keeps the French profile name for the site's own records", () => {
     const link = resultLink(READER, english, "en");
     const french = resultAt(link, "https://labas.africa")!;

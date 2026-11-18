@@ -93,6 +93,18 @@ const TRAIT_COPY: Bilingual<{ names: string[]; ranges: string[] }> = {
   },
 };
 
+/** A stored (French) archetype name's words in the reader's language: stored profiles stay French. */
+export function archetypeWords(
+  frenchName: string,
+  locale: Locale,
+): { name: string; text: string } | undefined {
+  const archetype = TEMPERAMENTS.find((a) => a.name === frenchName);
+  return archetype && (locale === "fr" ? archetype : archetype.en);
+}
+
+/** The five traits' names and ranges, in `archetypeOf`'s order. */
+export const traitWords = (locale: Locale) => TRAIT_COPY[locale];
+
 export function archetypeOf(answers: Answers, locale: Locale): Archetype | undefined {
   const { saturday, adventure, order, together, friction } = answers;
   if (adventure === undefined) return;

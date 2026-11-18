@@ -116,7 +116,12 @@ describe("the events around reactions", () => {
   });
 
   it("are all declared as goals, or the dashboard would never show them", () => {
-    for (const name of ["Réaction : formulaire ouvert", "Réaction envoyée", "Réactions consultées"])
+    for (const name of [
+      "Réaction : formulaire ouvert",
+      "Réaction envoyée",
+      "Réactions consultées",
+      "Réaction traduite",
+    ])
       expect(GOALS).toContain(name);
   });
 });

@@ -59,6 +59,7 @@ export const GOALS = [
   "Réaction : formulaire ouvert",
   "Réaction envoyée",
   "Réactions consultées",
+  "Réaction traduite",
   "Partage",
   "Message envoyé",
 ] as const;
@@ -108,11 +109,16 @@ const PLACES = {
   thread: "Fiche ville",
   card: "Carte 2 ou 3",
   row: "Liste des villes",
+  everywhere: "Page des avis",
 } as const;
 export type ReactionPlace = keyof typeof PLACES;
 
 export interface ReactionEvent {
-  name: "Réaction : formulaire ouvert" | "Réaction envoyée" | "Réactions consultées";
+  name:
+    | "Réaction : formulaire ouvert"
+    | "Réaction envoyée"
+    | "Réactions consultées"
+    | "Réaction traduite";
   props: { lieu: string; ville: string; statut?: string };
 }
 

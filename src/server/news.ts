@@ -11,12 +11,13 @@ export function newsList(
   now: () => number = Date.now,
 ): Pick<Mailer, "addToList" | "removeFromList"> {
   return {
-    async addToList(email) {
-      // A second confirmation renews the three years the privacy page promises.
+    async addToList(email, locale) {
+      // A second confirmation renews the three years the privacy page promises, and its
+      // language wins: the reader last confirmed from that page.
       await db.query(
-        `insert into news_subscribers (email, confirmed_at) values ($1, $2)
-         on conflict (email) do update set confirmed_at = excluded.confirmed_at`,
-        [email, new Date(now()).toISOString()],
+        `insert into news_subscribers (email, confirmed_at, locale) values ($1, $2, $3)
+         on conflict (email) do update set confirmed_at = excluded.confirmed_at, locale = excluded.locale`,
+        [email, new Date(now()).toISOString(), locale],
       );
     },
     async removeFromList(email) {

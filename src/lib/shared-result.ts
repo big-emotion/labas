@@ -118,11 +118,16 @@ export function sharedResult(payload: SharedPayload, locale: Locale = "fr"): Sha
  * The result behind a link of this site, French or English, or null for anything else (another
  * site, a forged hash). Read in French, as the server keeps it.
  */
-export function resultAt(link: unknown, siteUrl: string): SharedResult | null {
+export function resultAt(link: unknown, siteUrl: string, enSiteUrl = ""): SharedResult | null {
+  // The service's own sites, from its runtime settings: the build-time EN_SITE may differ.
+  const pages = [
+    `${siteUrl}${ROUTES.result.fr}`,
+    `${siteUrl}/en${ROUTES.result.en}`,
+    ...(enSiteUrl ? [`${enSiteUrl}${ROUTES.result.en}`] : []),
+  ];
   try {
     const url = new URL(String(link));
-    const page = `${url.origin}${url.pathname}`;
-    if (page !== `${siteUrl}${ROUTES.result.fr}` && page !== RESULT_PAGES.en) return null;
+    if (!pages.includes(`${url.origin}${url.pathname}`)) return null;
     const payload = readShared(url.hash);
     return payload && sharedResult(payload);
   } catch {
