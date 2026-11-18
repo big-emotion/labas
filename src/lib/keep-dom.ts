@@ -1,4 +1,5 @@
-import type { AnswerEvent, ReactionEvent, SiteEvent } from "./analytics";
+import type { AnswerEvent, ReactionEvent, ShareEvent, SiteEvent } from "./analytics";
+import { type Network, networkShare, networkText, shareEvent } from "./networks";
 import { type JourneyKind, resultsMailBody } from "./account";
 import { mailtoFor } from "./keep";
 import { outcomeOf, resultsBody } from "./newsletter";
@@ -13,7 +14,7 @@ declare global {
   }
 }
 
-export function track(event: SiteEvent | AnswerEvent | ReactionEvent): void {
+export function track(event: SiteEvent | AnswerEvent | ReactionEvent | ShareEvent): void {
   window.plausible?.(event.name, "props" in event ? { props: event.props } : undefined);
 }
 
@@ -40,6 +41,10 @@ export function wireKeep(
     const mailForm = block.querySelector<HTMLFormElement>("[data-keep-mail]");
     if (mailForm) wireMail(block, mailForm, current, kind);
     block.addEventListener("click", async (event) => {
+      const network = (event.target as HTMLElement).closest<HTMLAnchorElement>(
+        "[data-share-network]",
+      );
+      if (network) return shareOn(network, event, current(), note);
       const target = (event.target as HTMLElement).closest<HTMLElement>("[data-keep-way]");
       const way = target?.dataset.keepWay;
       if (!way) return;
@@ -73,15 +78,58 @@ export function wireKeep(
   }
 }
 
-/** Shares the picture where the phone can, and saves it otherwise. */
-async function savePicture(answers: Answers, matches: Match[], note: HTMLElement) {
+/**
+ * A network button. WhatsApp, Facebook and X: the link is set on the click itself, so it carries
+ * the result as it is now, and the browser follows it. Instagram and TikTok: the phone's share
+ * sheet with the picture, ready for a story; a computer has none, so the link is copied.
+ */
+async function shareOn(
+  button: HTMLAnchorElement,
+  event: Event,
+  { answers, matches }: { answers: Answers; matches: Match[] },
+  note: HTMLElement,
+) {
+  const network = button.dataset.shareNetwork as Network;
+  const link = resultLink(answers, matches);
+  const share = networkShare(network, link);
+  track(shareEvent(network));
+  if (share.kind === "link") {
+    button.href = share.href;
+    return;
+  }
+  event.preventDefault();
+  const file = await pictureOf(answers, matches, note);
+  const text = networkText(link);
+  if (file && navigator.canShare?.({ files: [file] })) {
+    try {
+      return await navigator.share({ files: [file], text });
+    } catch (error) {
+      if ((error as Error).name === "AbortError") return;
+    }
+  }
+  try {
+    await navigator.clipboard.writeText(link);
+    note.textContent = `Lien copié : collez-le dans ${share.app}, en story ou en message.`;
+  } catch {
+    note.textContent = `La copie n'a pas marché : partagez depuis ${share.app} sur votre téléphone.`;
+  }
+}
+
+async function pictureOf(answers: Answers, matches: Match[], note: HTMLElement) {
   const shared = sharedResult(readShared(new URL(resultLink(answers, matches)).hash)!);
-  if (!shared) return;
+  if (!shared) return null;
   note.textContent = "Préparation de l'image…";
   const file = new File([await resultImage(shared)], "la-bas-mes-villes.png", {
     type: "image/png",
   });
   note.textContent = "";
+  return file;
+}
+
+/** Shares the picture where the phone can, and saves it otherwise. */
+async function savePicture(answers: Answers, matches: Match[], note: HTMLElement) {
+  const file = await pictureOf(answers, matches, note);
+  if (!file) return;
   if (navigator.canShare?.({ files: [file] })) {
     try {
       return await navigator.share({ files: [file], text: resultLink(answers, matches) });
