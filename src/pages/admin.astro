@@ -10,7 +10,7 @@ import { CITIES } from "../lib/cities";
 const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
 ---
 
-<Page title="Admin" description="Espace réservé à l'équipe de Là-bas." noindex>
+<Page title="Admin" description="Espace réservé à l'équipe de Là-bas." noindex monolingual>
   <h1>Admin</h1>
   <div class="admin" data-admin data-names={JSON.stringify(names)}>
     <p class="state" data-state role="status">
