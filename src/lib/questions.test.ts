@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { LATER, QUESTIONS, visibleChoices } from "./questions";
+import { chapterName, LATER, QUESTIONS, questionIn, visibleChoices } from "./questions";
+import { DEEP_QUESTIONS } from "./deep-questions";
 import { CITIES } from "./cities";
+import { looksFrench } from "../i18n/looks-french";
 import { profileOf, rankCities, type Answers } from "./ranking";
 
 const NEUTRAL = new Set([
@@ -127,5 +129,44 @@ describe("the question bank", () => {
     const west = visibleChoices(countries, { origin: ["ouest"] }).map((c) => c.value);
     expect(west).toContain("Sénégal");
     expect(west).not.toContain("Kenya");
+  });
+});
+
+describe("the question bank in English", () => {
+  it("has every title, hint, answer and sub-line in English", () => {
+    for (const french of DEEP_QUESTIONS) {
+      const english = questionIn(french, "en");
+      expect(Boolean(english.hint), french.id).toBe(Boolean(french.hint));
+      const texts = [english.title, english.hint ?? ""];
+      expect(english.choices.map((c) => c.value).sort()).toEqual(
+        french.choices.map((c) => c.value).sort(),
+      );
+      english.choices.forEach((choice) => {
+        const source = french.choices.find((c) => c.value === choice.value)!;
+        expect(Boolean(choice.sub), `${french.id}: ${choice.label}`).toBe(Boolean(source.sub));
+        texts.push(choice.label, choice.sub ?? "");
+      });
+      for (const text of texts) expect(looksFrench(text), `${french.id}: ${text}`).toBe(false);
+    }
+  });
+
+  it("keeps the French bank as it is", () => {
+    expect(questionIn(QUESTIONS[0], "fr")).toBe(QUESTIONS[0]);
+  });
+
+  it("names the chapters in English", () => {
+    const project = QUESTIONS.find((q) => q.id === "family")!;
+    expect(chapterName(project, { project: "decouvrir" }, "en")).toBe("Your trip");
+    expect(chapterName(project, { project: "installer" }, "fr")).toBe("Votre projet");
+  });
+
+  it("sorts the family's countries in English", () => {
+    const countries = questionIn(
+      LATER.find((q) => q.id === "countries")!,
+      "en",
+    );
+    const labels = countries.choices.filter((c) => c.value !== null).map((c) => c.label);
+    expect(labels).toEqual([...labels].sort((a, b) => a.localeCompare(b, "en-GB")));
+    expect(labels).toContain("Senegal");
   });
 });

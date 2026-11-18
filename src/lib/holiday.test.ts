@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
-import { ACTIVITY_TAGS, HOLIDAYS, holidayOf, SEASONS } from "./holiday";
+import { ACTIVITY_TAGS, HOLIDAYS, holidayOf, monthNames, SEASONS } from "./holiday";
 import { QUESTIONS } from "./questions";
 import { rankCities, type Answers } from "./ranking";
 
@@ -53,5 +53,10 @@ describe("holiday questions move the cities that fit", () => {
 
   it("knows a city without holiday data is unknown, not bad", () => {
     expect(holidayOf("Mogadiscio")).toBeUndefined();
+  });
+
+  it("names the months in the reader's language", () => {
+    expect(monthNames([11, 12, 1])).toBe("novembre, décembre, janvier");
+    expect(monthNames([11, 12, 1], "en")).toBe("November, December, January");
   });
 });

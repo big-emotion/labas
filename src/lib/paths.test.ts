@@ -46,7 +46,7 @@ describe("a path per project", () => {
       return new Set(
         asked
           .filter((id) => id !== "project" && question(id).group === "Votre projet")
-          .map((id) => chapterName(question(id), answers)),
+          .map((id) => chapterName(question(id), answers, "fr")),
       );
     };
     expect(shown("decouvrir")).toEqual(new Set(["Votre voyage"]));
