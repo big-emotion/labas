@@ -9,8 +9,57 @@
  * read what they are commenting on. Shown only with the mail service on, like the other forms.
  */
 import { MESSAGE_MAX } from "../lib/feedback";
+import type { Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
 
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const locale = localeOfPath(Astro.url.pathname);
+const COPY: Bilingual<Record<string, string>> = {
+  fr: {
+    tab: "Votre avis",
+    close: "Fermer",
+    want: "Vous voulez :",
+    site: "Donner mon avis sur le site",
+    message: "Nous écrire",
+    text: "Votre message",
+    email: "Votre e-mail",
+    emailWhy: "(si vous voulez une réponse)",
+    placeholder: "vous@exemple.fr",
+    send: "Envoyer",
+    small:
+      "Lu seulement par l'équipe de Là-bas, jamais publié. Nous gardons votre message, la page où vous l'écrivez et votre e-mail si vous le donnez, 1 an au plus. Vos réponses au quiz ne sont pas envoyées.",
+    privacy: "Confidentialité",
+    thanks: "Merci, votre message est bien arrivé.",
+    reads: "L'équipe le lit. Si vous avez donné votre e-mail, elle vous répond par e-mail.",
+    empty: "Écrivez votre message avant d'envoyer.",
+    badEmail: "Vérifiez votre e-mail, ou laissez-le vide.",
+    tooMany: "Vous avez envoyé plusieurs messages de suite. Réessayez dans une heure.",
+    failed:
+      "L'envoi n'a pas marché pour l'instant. Réessayez plus tard, ou écrivez à hello@big-emotion.com.",
+  },
+  en: {
+    tab: "Your feedback",
+    close: "Close",
+    want: "You would like to:",
+    site: "Give my opinion of the site",
+    message: "Write to us",
+    text: "Your message",
+    email: "Your email",
+    emailWhy: "(if you would like a reply)",
+    placeholder: "you@example.com",
+    send: "Send",
+    small:
+      "Read only by the Over There team, never published. We keep your message, the page you wrote it on and your email if you give it, for 1 year at most. Your quiz answers are not sent.",
+    privacy: "Privacy",
+    thanks: "Thank you, your message has arrived.",
+    reads: "The team reads it. If you gave your email, they will reply by email.",
+    empty: "Write your message before sending.",
+    badEmail: "Check your email, or leave it empty.",
+    tooMany: "You have sent several messages in a row. Try again in an hour.",
+    failed: "Sending did not work for now. Try again later, or write to hello@big-emotion.com.",
+  },
+};
+const copy = COPY[locale];
 ---
 
 {enabled && (
@@ -23,7 +72,7 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       aria-expanded="false"
       aria-controls="feedback-panel"
     >
-      Votre avis
+      {copy.tab}
     </button>
     <section
       id="feedback-panel"
@@ -33,50 +82,57 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       hidden
     >
       <div class="head">
-        <h2 id="feedback-title">Votre avis</h2>
-        <button type="button" class="close" data-feedback-close aria-label="Fermer">
+        <h2 id="feedback-title">{copy.tab}</h2>
+        <button type="button" class="close" data-feedback-close aria-label={copy.close}>
           ×
         </button>
       </div>
       <form novalidate data-feedback-form>
         <fieldset class="kinds">
-          <legend>Vous voulez :</legend>
+          <legend>{copy.want}</legend>
           <label>
             <input type="radio" name="kind" value="site" checked />
-            <span>Donner mon avis sur le site</span>
+            <span>{copy.site}</span>
           </label>
           <label>
             <input type="radio" name="kind" value="message" />
-            <span>Nous écrire</span>
+            <span>{copy.message}</span>
           </label>
         </fieldset>
         <label class="field">
-          Votre message
+          {copy.text}
           <textarea name="text" rows="5" maxlength={MESSAGE_MAX} required />
         </label>
         <label class="field">
           <span>
-            Votre e-mail <span class="dim">(si vous voulez une réponse)</span>
+            {copy.email} <span class="dim">{copy.emailWhy}</span>
           </span>
-          <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+          <input type="email" name="email" placeholder={copy.placeholder} autocomplete="email" />
         </label>
         <label class="trap" aria-hidden="true">
           Site web
           <input type="text" name="website" tabindex="-1" autocomplete="off" />
         </label>
-        <p class="error" data-feedback-error role="alert" hidden />
+        <p
+          class="error"
+          data-feedback-error
+          data-empty={copy.empty}
+          data-bad-email={copy.badEmail}
+          data-too-many={copy.tooMany}
+          data-failed={copy.failed}
+          role="alert"
+          hidden
+        />
         <button type="submit" class="send">
-          Envoyer
+          {copy.send}
         </button>
         <p class="small">
-          Lu seulement par l'équipe de Là-bas, jamais publié. Nous gardons votre message, la page où
-          vous l'écrivez et votre e-mail si vous le donnez, 1 an au plus. Vos réponses au quiz ne
-          sont pas envoyées. <a href="/confidentialite">Confidentialité</a>
+          {copy.small} <a href={pathFor("privacy", locale)}>{copy.privacy}</a>
         </p>
       </form>
       <p class="done" data-feedback-done role="status" tabindex="-1" hidden>
-        <b>Merci, votre message est bien arrivé.</b>
-        <span>L'équipe le lit. Si vous avez donné votre e-mail, elle vous répond par e-mail.</span>
+        <b>{copy.thanks}</b>
+        <span>{copy.reads}</span>
       </p>
     </section>
   </div>
@@ -120,7 +176,9 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const body = feedbackBody(new FormData(form), location.pathname);
-      if (!body.text) return say("Écrivez votre message avant d'envoyer.");
+      // The messages are rendered in the page's language into data attributes (above).
+      const words = error.dataset;
+      if (!body.text) return say(words.empty!);
       error.hidden = true;
       send.disabled = true;
       const { status } = await api("POST", "/api/compte/messages", body);
@@ -133,13 +191,7 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         done.focus();
         return;
       }
-      say(
-        status === 400
-          ? "Vérifiez votre e-mail, ou laissez-le vide."
-          : status === 429
-            ? "Vous avez envoyé plusieurs messages de suite. Réessayez dans une heure."
-            : "L'envoi n'a pas marché pour l'instant. Réessayez plus tard, ou écrivez à hello@big-emotion.com.",
-      );
+      say(status === 400 ? words.badEmail! : status === 429 ? words.tooMany! : words.failed!);
     });
   }
 </script>
