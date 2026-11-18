@@ -11,6 +11,11 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 
 - **Reader-facing text is French**, plain and everyday, addressed with « vous » (decided
   2026-11-15; tests reject « tu »); docs, comments and commits are English.
+- **Languages** (operator, 2026-11-18): French is the source, English (Over There) follows in
+  British English. Every reader-facing text ships in French and English in the same change
+  (`Bilingual` copy in `src/i18n/locale.ts`, links through `pathFor` in `src/i18n/routes.ts`, one
+  prose page per language); the admin stays French only, and the long city data stays French
+  until it is translated. Run the `labas-translate` skill on every text change.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
   change something: from the third answer the map colours every city by its score and names
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
@@ -51,7 +56,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   recomputed from the result link; never an answer, never the address. Their Plausible events (`reactionEvent`) carry the place
   and the city slug, plus whether a sent reaction went online at once; never its text. `/avis` (operator 2026-11-18) lists every city's reviews for anyone;
   replies are two levels, carry no journey, and hearts and the few friendly marks need a session
-  and show as counts only, never who left them. Fonts are self-hosted;
+  and show as counts only, never who left them. A review is translated only when a reader
+  presses the button (operator 2026-11-18): its public text alone goes to DeepL SE (EU), once per
+  language, and the translation is kept with the review and deleted with it. Fonts are self-hosted;
   do not add Google Fonts, trackers with cookies, or third-party embeds.
 - Colours come from the tokens in `src/styles/global.css`, never literals in components.
 
