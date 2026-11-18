@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
 import { QUESTIONS } from "./questions";
-import { jobOf, routesFor, weekFor } from "./routes";
+import { routesFor, weekFor } from "./routes";
+import { jobOf } from "./week-pick";
 
 // Since 2026-11-15 the site says « vous »: no « tu », and never a trait about the reader.
 const TRAIT_WORDS =

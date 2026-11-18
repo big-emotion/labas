@@ -242,7 +242,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     <ResultCards />
 
     <script>
-      import { rankCities, type Answers, type Match } from "../lib/ranking";
+      import { rankCities, TOP_THREE, type Answers, type Match } from "../lib/ranking";
       import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
       import { showProfile } from "../lib/profile-dom";
       import { cardFor, rowFor } from "../lib/cards-dom";
@@ -362,7 +362,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const ranked = rankCities(current);
         // Filters only remove cities; the order stays the score's.
         const kept = applyFilters(ranked, filtersFrom(picked));
-        const matches = kept.filter((m) => !m.excludedBecause).slice(0, 3);
+        const matches = kept.filter((m) => !m.excludedBecause).slice(0, TOP_THREE);
         onScreen = matches;
         const scores = new Map(ranked.map((m) => [m.city.name, m.score] as [string, number]));
         // Before the first answer nothing is ranked yet: every dot stays the same and no city
@@ -649,7 +649,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       }
       .map {
         background-color: var(--night-deep);
-        background-image: radial-gradient(circle, rgba(241, 240, 255, 0.08) 1px, transparent 1.5px);
+        background-image: radial-gradient(
+          circle,
+          color-mix(in srgb, var(--thread) 8%, transparent) 1px,
+          transparent 1.5px
+        );
         background-size: 12px 12px;
         border-radius: 18px;
       }
@@ -791,7 +795,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         display: none;
       }
       .chip:hover {
-        border-color: rgba(255, 182, 39, 0.5);
+        border-color: color-mix(in srgb, var(--saffron) 50%, transparent);
       }
       .chip .box {
         width: 22px;
@@ -937,7 +941,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         color: var(--ink);
       }
       .sheet::backdrop {
-        background: rgb(8 10 40 / 0.55);
+        background: color-mix(in srgb, var(--scrim) 55%, transparent);
       }
       .sheet-body {
         display: grid;

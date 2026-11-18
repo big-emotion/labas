@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/server/subscribe.ts!", "scripts/*.ts!"],
+  "ignore": ["docs/**", "public/**"],
+  "ignoreDependencies": ["@fontsource-variable/.*", "@fontsource/.*"]
+}

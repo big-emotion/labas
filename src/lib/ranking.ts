@@ -129,7 +129,7 @@ export interface Rated {
 }
 
 /** The answers read as temperament (inspired by the Big Five, one question per trait). */
-export const TEMPERAMENT_KEYS = TRAITS;
+const TEMPERAMENT_KEYS = TRAITS;
 
 export interface Match {
   city: City;
@@ -802,6 +802,12 @@ function evidenceOf(profile: Profile): Evidence[] {
 
 /** A clean miss keeps a tenth of its chances: an answer orients the list, it never erases a city. */
 const MISS_FLOOR = 0.1;
+
+/**
+ * The cities a reader is shown first: « En tête pour l'instant » on the map, the mailed and shared
+ * result, a reaction's top three, and what the next question tries to turn over. One number.
+ */
+export const TOP_THREE = 3;
 
 /**
  * Each answer is one piece of evidence and the pieces multiply, as in a guessing game: a city far

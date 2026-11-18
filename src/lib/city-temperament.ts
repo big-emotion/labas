@@ -134,7 +134,7 @@ const meanLevel = (counts: [number, number, number], areas: number) =>
  * more. Half how much of the city improvises (organisation), half how much friction it carries,
  * from the same neighbourhood counts as the rest.
  */
-export function unexpectedGauge(cityName: string): { level: number; estimate: boolean } | null {
+function unexpectedGauge(cityName: string): { level: number; estimate: boolean } | null {
   const profile = BY_NAME.get(cityName);
   if (!profile) return null;
   const improvised = 1 - meanLevel(profile.order, profile.areas);

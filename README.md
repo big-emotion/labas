@@ -78,7 +78,7 @@ investment plans and leisure.
 
 ## Requirements
 
-- Node.js 24 (`.nvmrc`; Astro 7 needs ≥ 22.23.4) — `nvm use`
+- Node.js 24 (`.nvmrc`, `engines`; the Dockerfile and CI use 24 too) — `nvm use`
 - npm
 
 ## Setup

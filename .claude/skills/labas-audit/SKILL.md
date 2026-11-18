@@ -138,8 +138,10 @@ Also `npm run build:server` — the service bundle is not part of `make check`, 
   sources are fine. `git grep -n "fonts.googleapis" src` must be empty.
 - **What leaves the browser**: `git grep -nE "fetch\(|sendBeacon|XMLHttpRequest" -- src ':!*.test.ts'`.
   Each call must be one of: Plausible events (`src/lib/analytics.ts`, off unless
-  `PUBLIC_PLAUSIBLE_DOMAIN` is set), the news sign-up, « Recevoir par e-mail », or `/api/compte`
-  for a signed-in reader. `analytics.test.ts` must assert that origin, family country, feeling at
+  `PUBLIC_PLAUSIBLE_DOMAIN` is set), the news sign-up and its unsubscribe page (`/api/nouveautes`,
+  `/api/nouveautes/desinscrire`), « Recevoir par e-mail », or `/api/compte` (a signed-in reader, or a
+  signed-out one leaving an address to save a journey, ask a login link or post a reaction).
+  `analytics.test.ts` must assert that origin, family country, feeling at
   home, faith, health and same-sex-law answers are never sent; the shared and mailed result
   (`src/lib/share.ts`, `shared-result.ts`) must carry cities and percentages, never answers.
 - No cookie set by the static site; the only cookie in the project is the service's
@@ -252,7 +254,9 @@ npx --yes jscpd src --min-tokens 50 --min-lines 5 --ignore "**/*.test.ts,src/dat
 Run tools via `npx --yes` only — never add them to `package.json` for an audit. Production mode
 matters: in default mode a module imported only by its own test counts as used. Entry points that
 are not imports: `src/pages/**` (Astro routes), `src/server/subscribe.ts` (the `build:server` entry),
-`astro.config.mjs`. A tool that cannot resolve Astro without configuration is recorded as such and
+`astro.config.mjs`, `scripts/*.ts`. `knip.json` declares the non-Astro ones (suffixed `!` for production
+mode). A tool that cannot
+resolve Astro without configuration is recorded as such and
 its unreliable lines are read by hand, not counted.
 
 **Flag:** files no route or entry point reaches; unused exports; unused dependencies; blocks

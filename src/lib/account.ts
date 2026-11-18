@@ -1,6 +1,6 @@
 import { cleanAnswers, withoutSensitive } from "./keep";
 import { ANSWERS_TO_LIGHT } from "./map";
-import { type Answers, bestMatches } from "./ranking";
+import { type Answers, bestMatches, TOP_THREE } from "./ranking";
 
 /**
  * Saved journeys and « Mon espace » as the pages see them (approved mockup, 2026-11-16). The
@@ -64,7 +64,7 @@ export function journeySummary(journey: Journey) {
     answered: `${count} réponse${count > 1 ? "s" : ""}`,
     cities:
       count >= ANSWERS_TO_LIGHT
-        ? bestMatches(answers, 3).map((m) => ({
+        ? bestMatches(answers, TOP_THREE).map((m) => ({
             name: m.city.name,
             percent: Math.round(m.score * 100),
           }))

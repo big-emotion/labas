@@ -1,4 +1,5 @@
 import { CITIES, type City } from "./cities";
+import { SITE } from "./share";
 import {
   TRAITS,
   temperamentLinesFor,
@@ -24,7 +25,6 @@ export interface SharedResult {
   cities: { city: City; percent: number; lines: TemperamentLine[] }[];
 }
 
-const SITE = "https://labas.africa";
 const LEVELS = [0, 0.5, 1];
 const ADVENTURES = ["familiar", "open", "seeking"];
 
