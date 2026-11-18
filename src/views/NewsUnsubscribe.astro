@@ -1,0 +1,125 @@
+---
+import Page from "../layouts/Page.astro";
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
+/** The way out of the news, at /nouveautes/desinscription/ and /en/news/unsubscribe/. */
+const locale = localeOfPath(Astro.url.pathname);
+const COPY = {
+  fr: {
+    title: "Se désinscrire",
+    description: `Ne plus recevoir les nouveautés de ${BRAND.fr} par e-mail.`,
+    ask: "Ne plus recevoir les nouveautés ?",
+    explain:
+      "Touchez le bouton : votre adresse est effacée de la liste, et vous ne recevrez plus nos nouveautés.",
+    button: "Me désinscrire",
+    done: "C'est fait.",
+    left: "Votre adresse est effacée de la liste des nouveautés. Vous pouvez vous réinscrire quand vous voulez, depuis le quiz.",
+    back: "Revenir au quiz",
+    incomplete:
+      "Ce lien est incomplet. Ouvrez celui de votre e-mail, ou écrivez-nous : hello@big-emotion.com.",
+    broken:
+      "Ce lien ne fonctionne pas. Ouvrez celui de votre e-mail, ou écrivez-nous : hello@big-emotion.com.",
+    failed:
+      "Ça n'a pas marché, réessayez dans un moment. Sinon, écrivez-nous : hello@big-emotion.com.",
+  },
+  en: {
+    title: "Unsubscribe",
+    description: `Stop receiving ${BRAND.en} news by email.`,
+    ask: "Stop receiving the news?",
+    explain:
+      "Tap the button: your address is erased from the list, and you won't get our news any more.",
+    button: "Unsubscribe me",
+    done: "Done.",
+    left: "Your address is erased from the news list. You can sign up again whenever you like, from the quiz.",
+    back: "Back to the quiz",
+    incomplete:
+      "This link is incomplete. Open the one in your email, or write to us: hello@big-emotion.com.",
+    broken:
+      "This link doesn't work. Open the one in your email, or write to us: hello@big-emotion.com.",
+    failed:
+      "That didn't work, try again in a moment. Otherwise, write to us: hello@big-emotion.com.",
+  },
+} satisfies Bilingual<Record<string, string>>;
+const copy = COPY[locale];
+const messages = { incomplete: copy.incomplete, broken: copy.broken, failed: copy.failed };
+---
+
+<Page title={copy.title} description={copy.description}>
+  <section data-leave data-messages={JSON.stringify(messages)}>
+    <h1>{copy.ask}</h1>
+    <p>{copy.explain}</p>
+    <p class="error" data-leave-error role="alert" hidden></p>
+    <p>
+      <button type="button" class="primary" data-leave-button>
+        {copy.button}
+      </button>
+    </p>
+  </section>
+  <section data-left hidden>
+    <h1>{copy.done}</h1>
+    <p>{copy.left}</p>
+    <p>
+      <a href={pathFor("home", locale)}>{copy.back}</a>
+    </p>
+  </section>
+</Page>
+
+<script>
+  // The token stays after the « # »: browsers never send it to a server, nor in a referrer.
+  const token = new URLSearchParams(location.hash.slice(1)).get("t") ?? "";
+  const button = document.querySelector<HTMLButtonElement>("[data-leave-button]")!;
+  const error = document.querySelector<HTMLElement>("[data-leave-error]")!;
+  const messages = JSON.parse(
+    document.querySelector<HTMLElement>("[data-leave]")!.dataset.messages!,
+  ) as Record<"incomplete" | "broken" | "failed", string>;
+  const show = (message: string) => {
+    error.textContent = message;
+    error.hidden = false;
+  };
+  if (!token) {
+    button.hidden = true;
+    show(messages.incomplete);
+  }
+  button.addEventListener("click", async () => {
+    button.disabled = true;
+    let status: number;
+    try {
+      const response = await fetch("/api/nouveautes/desinscrire", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ t: token }),
+      });
+      status = response.status;
+    } catch {
+      status = 0;
+    }
+    button.disabled = false;
+    if (status === 200) {
+      document.querySelector<HTMLElement>("[data-leave]")!.hidden = true;
+      document.querySelector<HTMLElement>("[data-left]")!.hidden = false;
+      return;
+    }
+    show(status === 400 ? messages.broken : messages.failed);
+  });
+</script>
+
+<style>
+  .primary {
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    padding: 0 22px;
+    cursor: pointer;
+  }
+  .primary:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .error {
+    color: var(--coral);
+  }
+</style>
