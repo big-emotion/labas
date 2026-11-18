@@ -9,7 +9,32 @@ import {
   visibleChoices,
   type Question,
 } from "./questions";
-import type { Answers } from "./ranking";
+import { bestMatches, type Answers } from "./ranking";
+
+// « Pas pour moi » asked outright (operator, 2026-11-18): only in the full questionnaire, where
+// the reader settles their constraints; the quick quiz keeps it as a gesture on the cities.
+describe("the regions the reader does not want to live in", () => {
+  const regions = () => DEEP_QUESTIONS.find((q) => q.id === "avoidRegions");
+
+  it("are asked in the full questionnaire only, every region offered, none required", () => {
+    expect(QUESTIONS.some((q) => q.id === "avoidRegions")).toBe(false);
+    expect(regions()?.choices.map((c) => c.value)).toEqual([
+      "ouest",
+      "centre",
+      "est",
+      "sud",
+      "nord",
+      null,
+    ]);
+    expect(regions()?.max).toBeGreaterThanOrEqual(4);
+  });
+
+  it("are the same filter as the gesture: the cities of a region picked leave the best matches", () => {
+    const answers = { project: "installer", avoidRegions: ["nord"] } as Answers;
+    expect(nextQuestion(answers, Object.keys(answers))).not.toBe("avoidRegions");
+    for (const m of bestMatches(answers, 30)) expect(m.city.zone).not.toBe("nord");
+  });
+});
 
 // Coherent paths per project (operator, 2026-11-16).
 const PROJECTS = ["installer", "pied", "tester", "investir", "decouvrir"] as const;

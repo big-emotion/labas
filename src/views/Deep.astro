@@ -137,7 +137,7 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
     import { keepInBank, questionIn } from "../lib/questions";
     import { syncChoices } from "../lib/choices-dom";
     import { rankCities, TOP_THREE, type Answers } from "../lib/ranking";
-    import { finishedEvent } from "../lib/analytics";
+    import { finishedEvent, notForMeEvent } from "../lib/analytics";
     import { forgetAnswers, loadAnswers, saveAnswers } from "../lib/keep";
     import { rememberJourney, syncJourney } from "../lib/account-dom";
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
@@ -342,6 +342,9 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
         if (!pressed && picked.length >= max) return;
         chip.setAttribute("aria-pressed", String(!pressed));
         answers[id] = pressed ? picked.filter((v) => v !== value) : [...picked, value];
+        // Counted like the gesture on a city: the level only, never which region (analytics.ts).
+        if (id === "avoidRegions" && value !== null)
+          track(notForMeEvent("deep", "region", pressed));
         render(false);
         return;
       }

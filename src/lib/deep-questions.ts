@@ -204,6 +204,25 @@ const FURTHER: Omit<Question, "group">[] = [
     ],
   },
   {
+    // The same filter as « Pas pour moi » on a city (not-for-me.ts): asked, never inferred.
+    id: "avoidRegions",
+    title: "Des régions que vous préférez écarter ?",
+    hint: "Facultatif. Leurs villes sortent de votre liste. Vous n'avez pas à dire pourquoi.",
+    en: {
+      title: "Any regions you would rather leave out?",
+      hint: "Optional. Their cities leave your list. You don't have to say why.",
+    },
+    max: 4,
+    choices: [
+      { label: "Afrique de l'Ouest", value: "ouest", en: { label: "West Africa" } },
+      { label: "Afrique centrale", value: "centre", en: { label: "Central Africa" } },
+      { label: "Afrique de l'Est", value: "est", en: { label: "East Africa" } },
+      { label: "Afrique australe", value: "sud", en: { label: "Southern Africa" } },
+      { label: "Afrique du Nord", value: "nord", en: { label: "North Africa" } },
+      { label: "Aucune, tout reste possible", value: null, en: { label: "None, all stay open" } },
+    ],
+  },
+  {
     id: "crowds",
     title: "Le bruit et la foule…",
     en: { title: "Noise and crowds…" },
