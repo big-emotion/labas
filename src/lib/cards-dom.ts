@@ -1,4 +1,6 @@
 import { advisoryNote } from "./advisory";
+import { reactionEvent } from "./analytics";
+import { track } from "./keep-dom";
 import { costLabel, livingLines, regionName, sameCountry } from "./card";
 import { goingThere } from "./going";
 import { linesFor } from "./lines";
@@ -81,6 +83,10 @@ export function detailFor(m: Match, withPortrait: boolean): HTMLElement {
   const reactions = body.querySelector('[data-field="reactions"]') as HTMLAnchorElement;
   reactions.href = `/ville/${m.city.slug}/#reactions`;
   reactions.textContent = `Voir les réactions sur ${m.city.name}`;
+  // Rows are the only callers that show the portrait: it tells a list row from a top-3 card.
+  reactions.addEventListener("click", () =>
+    track(reactionEvent("Réactions consultées", withPortrait ? "row" : "card", m.city.slug)),
+  );
   return body;
 }
 
