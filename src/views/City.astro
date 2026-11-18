@@ -1,0 +1,1045 @@
+---
+import { ADVICE_FRAMING, advisoryLine } from "../lib/advisory";
+import Page from "../layouts/Page.astro";
+import SourcesNote from "../components/SourcesNote.astro";
+import FrenchContentNote from "../components/FrenchContentNote.astro";
+import Reactions from "../components/Reactions.astro";
+import { CRITERIA, type City, type Confidence, type Source } from "../lib/cities";
+import { goingThere } from "../lib/going";
+import { linesFor } from "../lib/lines";
+import { photoFor } from "../lib/photos";
+import { routesFor } from "../lib/routes";
+import { costLabel } from "../lib/card";
+import { criteriaPreview } from "../lib/city-sections";
+import { holidayOf, monthNames } from "../lib/holiday";
+import { cityCopy, criterionCopy } from "../i18n/city-copy";
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { countryName } from "../i18n/places";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
+interface Props {
+  city: City;
+}
+const { city } = Astro.props;
+const locale = localeOfPath(Astro.url.pathname);
+// On an English page the guide's texts are still the French data: they carry their language.
+const dataLang = locale === "en" ? "fr" : undefined;
+const shown = cityCopy(city, locale);
+const lines = linesFor(city.name);
+const photo = photoFor(city.name);
+// Unsafe cities get no route: the site never invites someone to go there.
+const routes = routesFor(city.name);
+const going = goingThere(city, locale);
+const country = city.countryFacts;
+const advisory = city.facts.advisory;
+
+const FR = {
+  separator: " ; ",
+  title: `Vivre à ${shown.name}, ${shown.country}`,
+  description: `${shown.name} (${shown.country}) : ${shown.tagline}. Ce qu'il faut savoir pour y vivre, critère par critère, avec nos sources.`,
+  photo: "Photo :",
+  themesLabel: "Thèmes de la fiche",
+  themes: {
+    essentiel: "L'essentiel",
+    quartiers: "Quartiers",
+    semaine: "Votre semaine",
+    decouvrir: "Découvrir",
+    vacances: "En vacances",
+    criteres: "Critères",
+    pays: "Le pays",
+    "y-aller": "Y aller",
+  },
+  essentials: "L'essentiel",
+  people: "On dit",
+  surprise: "Ce qui pourrait vous surprendre :",
+  watch: "À savoir :",
+  advice: "Conseils aux voyageurs :",
+  factsOpen: "Langues, climat et alentours",
+  hide: "Masquer",
+  languages: "Langues :",
+  climate: "Climat :",
+  around: "Autour :",
+  currency: "Monnaie :",
+  neighbourhoods: "Les quartiers",
+  allNeighbourhoods: (n: number) => `Voir les ${n} quartiers`,
+  rents: "Loyers affichés, souvent négociables.",
+  week: "Votre semaine type",
+  weekIntro:
+    "Des lieux réels, tirés de nos sources. Celle qui vous ressemble s'ouvre d'après vos réponses ; les autres sont à un clic.",
+  pickWeek: "Choisir une semaine",
+  base: "Point de départ :",
+  wholeWeek: "Voir toute la semaine",
+  discover: "Pour découvrir d'abord",
+  oneDay: "Une journée :",
+  discoveryWeek: "Voir la semaine découverte",
+  sources: "Sources :",
+  holiday: "En vacances",
+  bestMonths: "La belle saison :",
+  rains: (months: string) => ` Les pluies : ${months}.`,
+  source: "Source",
+  sourceLower: "source",
+  escapes: "Les escapades à faire",
+  criteria: "La ville, critère par critère",
+  allCriteria: (n: number) => `Voir les ${n} critères et leurs sources`,
+  scale: "Notes de 0 à 5 selon",
+  grid: "notre grille",
+  targetNote:
+    ". Pour les critères marqués « cible », une note haute n'est ni bonne ni mauvaise : on la compare à ce que vous cherchez.",
+  target: "cible",
+  unknown: "Inconnu",
+  country: (name: string) => `Le pays : ${name}`,
+  passport: "Entrer avec un passeport français :",
+  visaFree: (days: number) => `sans visa jusqu'à ${days} jours. `,
+  visaNeeded: "visa nécessaire. ",
+  diaspora: "Pour la diaspora :",
+  moreCountry: "Voir plus sur le pays",
+  paperwork: "Démarches :",
+  dualNationality: "Double nationalité :",
+  pay: "Payer :",
+  sameSex: "Relations entre personnes de même sexe :",
+  returnees: "Le regard sur ceux qui reviennent :",
+  women: "Le quotidien des femmes :",
+  going: "Y aller",
+  noCommission: `Ces liens mènent vers d'autres sites. ${BRAND.fr} ne touche aucune commission.`,
+  pageSources: "Sources des textes de cette page",
+  accessed: (date: string) => `, consulté le ${date}`,
+  confidence: {
+    measured: "Mesuré",
+    survey: "Enquête",
+    sourced: "Sourcé",
+    editorial: "Estimation",
+  } satisfies Record<Confidence, string>,
+  spoken: {
+    fr: "français",
+    en: "anglais",
+    pt: "portugais",
+    ar: "arabe",
+    es: "espagnol",
+    sw: "swahili",
+  },
+  use: {
+    daily: "au quotidien",
+    "work-and-admin": "au travail et dans les démarches",
+    limited: "peu utilisé",
+  },
+  settings: {
+    ocean: "océan",
+    "lake-or-river": "lac ou fleuve",
+    mountains: "montagnes",
+    forest: "forêt",
+    savanna: "savane",
+    desert: "désert",
+    island: "une île",
+  },
+  climates: {
+    "hot-humid": "chaud et humide",
+    "hot-dry": "chaud et sec",
+    mild: "doux",
+    highland: "frais en altitude",
+  },
+  lgbt: {
+    legal: "légales",
+    criminalised: "punies par la loi",
+    "criminalised-not-enforced": "punies par la loi, sans application connue",
+    unclear: "situation juridique incertaine",
+  },
+  activities: {
+    safari: "Safari",
+    desert: "Désert",
+    diving: "Plongée",
+    surf: "Surf",
+    hiking: "Randonnée",
+    watersports: "Sports nautiques",
+    heritage: "Patrimoine",
+    festival: "Festival",
+  },
+};
+const COPY: Bilingual<typeof FR> = {
+  fr: FR,
+  en: {
+    separator: "; ",
+    title: `Living in ${shown.name}, ${shown.country}`,
+    description: `${shown.name} (${shown.country}): ${shown.tagline}. What to know about living there, criterion by criterion, with our sources.`,
+    photo: "Photo:",
+    themesLabel: "Topics on this page",
+    themes: {
+      essentiel: "The essentials",
+      quartiers: "Neighbourhoods",
+      semaine: "Your week",
+      decouvrir: "Discover",
+      vacances: "On holiday",
+      criteres: "Criteria",
+      pays: "The country",
+      "y-aller": "Getting there",
+    },
+    essentials: "The essentials",
+    people: "People say",
+    surprise: "What might surprise you:",
+    watch: "Good to know:",
+    advice: "Travel advice:",
+    factsOpen: "Languages, climate and surroundings",
+    hide: "Hide",
+    languages: "Languages:",
+    climate: "Climate:",
+    around: "Around:",
+    currency: "Currency:",
+    neighbourhoods: "Neighbourhoods",
+    allNeighbourhoods: (n: number) => `See all ${n} neighbourhoods`,
+    rents: "Asking rents, often open to negotiation.",
+    week: "Your typical week",
+    weekIntro:
+      "Real places, taken from our sources. The week closest to you opens from your answers; the others are a tap away.",
+    pickWeek: "Choose a week",
+    base: "Starting point:",
+    wholeWeek: "See the whole week",
+    discover: "To discover it first",
+    oneDay: "One day:",
+    discoveryWeek: "See the discovery week",
+    sources: "Sources:",
+    holiday: "On holiday",
+    bestMonths: "The best season:",
+    rains: (months: string) => ` The rains: ${months}.`,
+    source: "Source",
+    sourceLower: "source",
+    escapes: "Escapes worth making",
+    criteria: "The city, criterion by criterion",
+    allCriteria: (n: number) => `See all ${n} criteria and their sources`,
+    scale: "Scores from 0 to 5 on",
+    grid: "our scale",
+    targetNote:
+      ". For the criteria marked “target”, a high score is neither good nor bad: it is compared with what you are looking for.",
+    target: "target",
+    unknown: "Unknown",
+    country: (name: string) => `The country: ${name}`,
+    passport: "Entering on a French passport:",
+    visaFree: (days: number) => `no visa needed for up to ${days} days. `,
+    visaNeeded: "a visa is needed. ",
+    diaspora: "For the diaspora:",
+    moreCountry: "See more about the country",
+    paperwork: "Paperwork:",
+    dualNationality: "Dual nationality:",
+    pay: "Paying:",
+    sameSex: "Same-sex relationships:",
+    returnees: "How people who come back are seen:",
+    women: "Daily life for women:",
+    going: "Getting there",
+    noCommission: `These links lead to other sites. ${BRAND.en} takes no commission.`,
+    pageSources: "Sources for the texts on this page",
+    accessed: (date: string) => `, accessed ${date}`,
+    confidence: {
+      measured: "Measured",
+      survey: "Survey",
+      sourced: "Sourced",
+      editorial: "Estimate",
+    },
+    spoken: {
+      fr: "French",
+      en: "English",
+      pt: "Portuguese",
+      ar: "Arabic",
+      es: "Spanish",
+      sw: "Swahili",
+    },
+    use: {
+      daily: "in daily life",
+      "work-and-admin": "at work and for paperwork",
+      limited: "little used",
+    },
+    settings: {
+      ocean: "ocean",
+      "lake-or-river": "lake or river",
+      mountains: "mountains",
+      forest: "forest",
+      savanna: "savanna",
+      desert: "desert",
+      island: "an island",
+    },
+    climates: {
+      "hot-humid": "hot and humid",
+      "hot-dry": "hot and dry",
+      mild: "mild",
+      highland: "cool at altitude",
+    },
+    lgbt: {
+      legal: "legal",
+      criminalised: "punishable by law",
+      "criminalised-not-enforced": "punishable by law, with no known enforcement",
+      unclear: "unclear legal situation",
+    },
+    activities: {
+      safari: "Safari",
+      desert: "Desert",
+      diving: "Diving",
+      surf: "Surfing",
+      hiking: "Hiking",
+      watersports: "Water sports",
+      heritage: "Heritage",
+      festival: "Festival",
+    },
+  },
+};
+const copy = COPY[locale];
+
+/** English has no cost wording in lib/card.ts yet; the scale is the same, 5 being cheapest. */
+const COSTS_EN = [
+  "Very high cost of living",
+  "Very high cost of living",
+  "High cost of living",
+  "Middling cost of living",
+  "Affordable cost of living",
+  "Very affordable cost of living",
+];
+const cost = (level: number | null) =>
+  locale === "en" ? (level === null ? undefined : COSTS_EN[level]) : costLabel(level);
+
+// Grouped by theme, each with a short preview (beta feedback, 2026-11-16).
+const PREVIEW = 2;
+const DAYS_SHOWN = 3;
+const places = lines?.neighbourhoods ?? [];
+const preview = criteriaPreview(city);
+const criteria = CRITERIA.map((criterion) => criterionCopy(criterion, locale));
+const label = (key: string) => criteria.find((c) => c.key === key)!.label;
+// Holiday facts, each sourced (operator, 2026-11-16): only shown when something is known.
+const holidayData = holidayOf(city.name);
+const holiday =
+  holidayData &&
+  (holidayData.activities.length || holidayData.bestMonths.length || holidayData.escapes.length)
+    ? holidayData
+    : undefined;
+const chips = [shown.languageLabel, shown.currency, cost(city.scores.cost.level)].filter(
+  (chip): chip is string => Boolean(chip),
+);
+const themeIds = [
+  "essentiel",
+  ...(places.length ? ["quartiers"] : []),
+  ...(routes ? ["semaine", "decouvrir"] : []),
+  ...(holiday ? ["vacances"] : []),
+  "criteres",
+  ...(country ? ["pays"] : []),
+  ...(going ? ["y-aller"] : []),
+] as (keyof typeof copy.themes)[];
+const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}` : ""}`;
+---
+
+<Page title={copy.title} description={copy.description}>
+  <article class="city">
+    <header class="hero">
+      <p class="eyebrow">{shown.country}</p>
+      <h1>{shown.name}</h1>
+      <p class="tagline">{shown.tagline}</p>
+      {photo && (
+        <figure class="photo">
+          <img
+            src={`/photos/${photo.file}`}
+            alt={photo.alt}
+            lang={dataLang}
+            width="1280"
+            height="853"
+            loading="eager"
+          />
+          <figcaption>
+            {copy.photo} {photo.author}, <a href={photo.licenseUrl}>{photo.license}</a>, via{" "}
+            <a href={photo.source}>Wikimedia Commons</a>.
+          </figcaption>
+        </figure>
+      )}
+      {/* High on the page, right after the photo: reactions are what the operator wants to
+          learn from (operator, 2026-11-18). */}
+      <Reactions city={{ slug: city.slug, name: city.name }} />
+      <p>{shown.pitch}</p>
+      <ul class="chips">
+        {chips.map((chip) => (
+          <li>{chip}</li>
+        ))}
+      </ul>
+    </header>
+
+    <nav class="themes" aria-label={copy.themesLabel}>
+      {themeIds.map((id) => (
+        <a href={`#${id}`}>{copy.themes[id]}</a>
+      ))}
+    </nav>
+
+    {locale === "en" && <FrenchContentNote />}
+
+    <section class="theme" id="essentiel">
+      <h2>{copy.essentials}</h2>
+      <SourcesNote />
+      {lines?.reputation && (
+        <p>
+          <b>{copy.people}</b>{" "}
+          <span class="quote" lang={dataLang}>
+            {lines.reputation}
+          </span>
+        </p>
+      )}
+      {lines?.surprise && (
+        <p>
+          <b>{copy.surprise}</b> <span lang={dataLang}>{lines.surprise}</span>
+        </p>
+      )}
+      <p class="watch">
+        <b>{copy.watch}</b> {shown.watch}
+      </p>
+      {city.watchSources && (
+        <p class="small">
+          {city.watchSources.map((source, i) => (
+            <>
+              {i > 0 && copy.separator}
+              <a href={source.url} rel="noopener noreferrer">
+                {sourceLabel(source)}
+              </a>
+            </>
+          ))}
+        </p>
+      )}
+      <p>
+        <b>{copy.advice}</b> {advisoryLine(advisory, locale)}
+      </p>
+      {city.advisedAgainst && <p>{ADVICE_FRAMING[locale]}</p>}
+      <p class="small">
+        {advisory.sources.map((source, i) => (
+          <>
+            {i > 0 && copy.separator}
+            <a href={source.url} rel="noopener noreferrer">
+              {sourceLabel(source)}
+            </a>
+          </>
+        ))}
+      </p>
+      <details>
+        <summary>
+          <span class="when-closed">{copy.factsOpen}</span>
+          <span class="when-open">{copy.hide}</span>
+        </summary>
+        <ul class="facts">
+          <li>
+            <b>{copy.languages}</b>{" "}
+            {city.facts.languages
+              .map((l) => `${copy.spoken[l.language]} ${copy.use[l.use]}`)
+              .join(", ") || shown.languageLabel}
+          </li>
+          {city.facts.climates.length > 0 && (
+            <li>
+              <b>{copy.climate}</b> {city.facts.climates.map((c) => copy.climates[c]).join(", ")}
+            </li>
+          )}
+          {city.facts.settings.length > 0 && (
+            <li>
+              <b>{copy.around}</b> {city.facts.settings.map((s) => copy.settings[s]).join(", ")}
+            </li>
+          )}
+          <li>
+            <b>{copy.currency}</b> {shown.currency}
+          </li>
+        </ul>
+      </details>
+    </section>
+
+    {places.length > 0 && (
+      <section class="theme" id="quartiers">
+        <h2>{copy.neighbourhoods}</h2>
+        <ul class="places" lang={dataLang}>
+          {places.slice(0, PREVIEW).map((place) => (
+            <li>
+              <b>{place.name}</b> {place.text}
+            </li>
+          ))}
+        </ul>
+        {places.length > PREVIEW && (
+          <details>
+            <summary>
+              <span class="when-closed">{copy.allNeighbourhoods(places.length)}</span>
+              <span class="when-open">{copy.hide}</span>
+            </summary>
+            <ul class="places" lang={dataLang}>
+              {places.slice(PREVIEW).map((place) => (
+                <li>
+                  <b>{place.name}</b> {place.text}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <p class="small">{copy.rents}</p>
+      </section>
+    )}
+
+    {routes && (
+      <section class="theme" id="semaine">
+        <h2>{copy.week}</h2>
+        <p class="small">{copy.weekIntro}</p>
+        <div class="week-tabs" role="group" aria-label={copy.pickWeek}>
+          {routes.weeks.map((week, i) => (
+            <button
+              type="button"
+              data-week={i}
+              aria-pressed={i === 0 ? "true" : "false"}
+              lang={dataLang}
+            >
+              {week.title}
+            </button>
+          ))}
+        </div>
+        {routes.weeks.map((week, i) => (
+          <div class="week" data-week-panel={i} hidden={i !== 0}>
+            <p class="small">
+              {copy.base}{" "}
+              <span lang={dataLang}>
+                {week.base}
+                {week.budget && ` · ${week.budget}`}
+              </span>
+            </p>
+            <ul class="days" lang={dataLang}>
+              {week.days.slice(0, DAYS_SHOWN).map((day) => (
+                <li>{day}</li>
+              ))}
+            </ul>
+            <details>
+              <summary>
+                <span class="when-closed">{copy.wholeWeek}</span>
+                <span class="when-open">{copy.hide}</span>
+              </summary>
+              <ul class="days" lang={dataLang}>
+                {week.days.slice(DAYS_SHOWN).map((day) => (
+                  <li>{day}</li>
+                ))}
+              </ul>
+            </details>
+          </div>
+        ))}
+        <script
+          type="application/json"
+          id="week-keys"
+          set:html={JSON.stringify(routes.weeks.map((week) => ({ for: week.for })))}
+        />
+      </section>
+    )}
+
+    {routes && (
+      <section class="theme" id="decouvrir">
+        <h2>{copy.discover}</h2>
+        <p class="small">{copy.oneDay}</p>
+        <ul class="days" lang={dataLang}>
+          {routes.discovery.day.map((moment) => (
+            <li>{moment}</li>
+          ))}
+        </ul>
+        <details>
+          <summary>
+            <span class="when-closed">{copy.discoveryWeek}</span>
+            <span class="when-open">{copy.hide}</span>
+          </summary>
+          <ul class="days" lang={dataLang}>
+            {routes.discovery.week.map((day) => (
+              <li>{day}</li>
+            ))}
+          </ul>
+        </details>
+        <p class="small">
+          {copy.sources}{" "}
+          {routes.sources.map((source, i) => (
+            <>
+              {i > 0 && copy.separator}
+              <a href={source.url} rel="noopener noreferrer">
+                {source.title}
+              </a>
+            </>
+          ))}
+        </p>
+      </section>
+    )}
+
+    {holiday && (
+      <section class="theme" id="vacances">
+        <h2>{copy.holiday}</h2>
+        {holiday.bestMonths.length > 0 && (
+          <p>
+            <b>{copy.bestMonths}</b> {monthNames(holiday.bestMonths, locale)}.
+            {holiday.rainyMonths.length > 0 && copy.rains(monthNames(holiday.rainyMonths, locale))}
+            {holiday.monthsSource && (
+              <>
+                {" "}
+                <a class="small" href={holiday.monthsSource.url} rel="noopener noreferrer">
+                  {copy.source}
+                </a>
+              </>
+            )}
+          </p>
+        )}
+        {holiday.activities.length > 0 && (
+          <ul class="facts">
+            {holiday.activities.map((activity) => (
+              <li>
+                <b>{copy.activities[activity.tag]}</b>{" "}
+                <span lang={dataLang}>
+                  {activity.where}
+                  {activity.distance && `, ${activity.distance}`}
+                </span>{" "}
+                (
+                <a href={activity.source.url} rel="noopener noreferrer">
+                  {copy.sourceLower}
+                </a>
+                )
+              </li>
+            ))}
+          </ul>
+        )}
+        {holiday.escapes.length > 0 && (
+          <details>
+            <summary>
+              <span class="when-closed">{copy.escapes}</span>
+              <span class="when-open">{copy.hide}</span>
+            </summary>
+            <ul class="facts">
+              {holiday.escapes.map((escape) => (
+                <li>
+                  <span lang={dataLang}>
+                    <b>{escape.name}</b> · {escape.what}
+                    {escape.distance && `, ${escape.distance}`}
+                  </span>{" "}
+                  (
+                  <a href={escape.source.url} rel="noopener noreferrer">
+                    {copy.sourceLower}
+                  </a>
+                  )
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </section>
+    )}
+
+    <section class="theme" id="criteres">
+      <h2>{copy.criteria}</h2>
+      <ul class="preview">
+        {preview.strongest.map((criterion) => (
+          <li>
+            <span>{label(criterion.key)}</span>
+            <span class="level">{city.scores[criterion.key].level}/5</span>
+          </li>
+        ))}
+        {preview.weakest && (
+          <li class="weak">
+            <span>{label(preview.weakest.key)}</span>
+            <span class="level">{city.scores[preview.weakest.key].level}/5</span>
+          </li>
+        )}
+      </ul>
+      <details>
+        <summary>
+          <span class="when-closed">{copy.allCriteria(criteria.length)}</span>
+          <span class="when-open">{copy.hide}</span>
+        </summary>
+        <p class="small">
+          {copy.scale} <a href={pathFor("method", locale)}>{copy.grid}</a>
+          {copy.targetNote}
+        </p>
+        <ul class="scores">
+          {criteria.map((criterion) => {
+            const score = city.scores[criterion.key];
+            return (
+              <li class="score">
+                <div class="score-head">
+                  <a href={`${pathFor("method", locale)}#${criterion.key}`} class="score-name">
+                    {criterion.label}
+                  </a>
+                  {criterion.direction === "target" && <span class="tag">{copy.target}</span>}
+                  <span class="level">{score.level === null ? "?" : `${score.level}/5`}</span>
+                </div>
+                <span class="bar">
+                  <span style={`width: ${((score.level ?? 0) / 5) * 100}%`} />
+                </span>
+                <p lang={dataLang}>{score.justification}</p>
+                <p class="small">
+                  {score.level === null ? copy.unknown : copy.confidence[score.confidence]}
+                  {score.sources.length > 0 && " · "}
+                  {score.sources.map((source, i) => (
+                    <>
+                      {i > 0 && copy.separator}
+                      <a href={source.url} rel="noopener noreferrer">
+                        {sourceLabel(source)}
+                      </a>
+                    </>
+                  ))}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+    </section>
+
+    {country && (
+      <section class="theme" id="pays">
+        <h2>{copy.country(countryName(country.name, locale))}</h2>
+        <ul class="facts">
+          <li>
+            <b>{copy.passport}</b>{" "}
+            {country.visaFreeDaysFrenchPassport
+              ? copy.visaFree(country.visaFreeDaysFrenchPassport)
+              : copy.visaNeeded}
+            <span lang={dataLang}>{country.visaNote}</span>
+          </li>
+          <li>
+            <b>{copy.diaspora}</b> <span lang={dataLang}>{country.diasporaRoute}</span>
+          </li>
+        </ul>
+        <details>
+          <summary>
+            <span class="when-closed">{copy.moreCountry}</span>
+            <span class="when-open">{copy.hide}</span>
+          </summary>
+          <ul class="facts">
+            <li>
+              <b>{copy.paperwork}</b> <span lang={dataLang}>{country.paperwork.justification}</span>
+            </li>
+            {country.dualNationality.note && (
+              <li>
+                <b>{copy.dualNationality}</b>{" "}
+                <span lang={dataLang}>{country.dualNationality.note}</span>
+              </li>
+            )}
+            {country.mobileMoney && (
+              <li>
+                <b>{copy.pay}</b> <span lang={dataLang}>{country.mobileMoney}</span>
+              </li>
+            )}
+            {country.sameSexRelations.status && (
+              <li>
+                <b>{copy.sameSex}</b> {copy.lgbt[country.sameSexRelations.status]}.{" "}
+                <span lang={dataLang}>{country.sameSexRelations.note}</span>
+              </li>
+            )}
+            {country.described.returneePerception && (
+              <li>
+                <b>{copy.returnees}</b>{" "}
+                <span lang={dataLang}>{country.described.returneePerception}</span>
+              </li>
+            )}
+            {country.described.womenDaily && (
+              <li>
+                <b>{copy.women}</b> <span lang={dataLang}>{country.described.womenDaily}</span>
+              </li>
+            )}
+          </ul>
+        </details>
+      </section>
+    )}
+
+    {going && (
+      <section class="theme" id="y-aller">
+        <h2>{copy.going}</h2>
+        <ul>
+          {going.map((link, i) => (
+            <li>
+              <a href={link.url} rel="noopener noreferrer" lang={i > 1 ? dataLang : undefined}>
+                {link.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="small">{copy.noCommission}</p>
+      </section>
+    )}
+
+    {lines && lines.sources.length > 0 && (
+      <details class="small">
+        <summary>{copy.pageSources}</summary>
+        <ul>
+          {lines.sources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer">
+                {sourceLabel(source)}
+              </a>
+              {copy.accessed(source.accessed)}
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
+  </article>
+</Page>
+
+<script>
+  import { browserStore } from "../lib/keep-dom";
+  import { loadAnswers } from "../lib/keep";
+  import { bestWeekIndex } from "../lib/week-pick";
+
+  const keys = document.getElementById("week-keys");
+  if (keys) {
+    const weeks = JSON.parse(keys.textContent ?? "[]");
+    const show = (index: number) => {
+      for (const button of document.querySelectorAll<HTMLButtonElement>("[data-week]"))
+        button.setAttribute("aria-pressed", String(Number(button.dataset.week) === index));
+      for (const panel of document.querySelectorAll<HTMLElement>("[data-week-panel]"))
+        panel.hidden = Number(panel.dataset.weekPanel) !== index;
+    };
+    show(bestWeekIndex(weeks, loadAnswers(browserStore())));
+    for (const button of document.querySelectorAll<HTMLButtonElement>("[data-week]"))
+      button.addEventListener("click", () => show(Number(button.dataset.week)));
+  }
+</script>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 10px;
+  }
+  .hero p {
+    margin: 0;
+  }
+  .chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+  .chips li {
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--night-lift);
+    font-size: 0.82rem;
+  }
+  /* Shortcuts to each theme: one row that scrolls sideways on a phone. */
+  .themes {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .themes a {
+    flex: none;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid var(--night-lift);
+    color: var(--thread);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+  }
+  .themes a:first-child {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--ink);
+  }
+  .theme {
+    background: var(--night-deep);
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    gap: 12px;
+    scroll-margin-top: 12px;
+  }
+  .theme h2 {
+    margin: 0;
+  }
+  .theme p {
+    margin: 0;
+  }
+  .theme details > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    color: var(--saffron);
+    font-weight: 700;
+    list-style: none;
+  }
+  .theme details > summary::-webkit-details-marker {
+    display: none;
+  }
+  .theme details[open] .when-closed,
+  .theme details:not([open]) .when-open {
+    display: none;
+  }
+  .theme .places li,
+  .theme .score {
+    background: var(--night);
+  }
+  .watch b {
+    color: var(--coral);
+  }
+  .week-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .week-tabs button {
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid var(--night-lift);
+    background: transparent;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .week-tabs button[aria-pressed="true"] {
+    border-color: var(--saffron);
+    background: var(--night-pressed);
+  }
+  .week {
+    display: grid;
+    gap: 8px;
+  }
+  .week[hidden] {
+    display: none;
+  }
+  .preview {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .preview li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .preview .weak .level {
+    color: var(--coral);
+  }
+  .route {
+    background: var(--night-deep);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .route summary {
+    cursor: pointer;
+    font-weight: 700;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .days {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 6px;
+  }
+  .city {
+    display: grid;
+    gap: 18px;
+  }
+  .city h1 {
+    margin: 0;
+  }
+  .city section h2 {
+    margin-top: 8px;
+  }
+  .eyebrow {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--saffron);
+  }
+  .tagline {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--saffron);
+  }
+  .photo {
+    margin: 0;
+  }
+  .photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+  .photo figcaption,
+  .small {
+    font-size: 0.8rem;
+    color: var(--thread-dim);
+    margin: 6px 0 0;
+  }
+  /* Each way there is a tap target of at least 44px on a phone. */
+  #y-aller li a {
+    display: inline-block;
+    padding: 10px 0;
+  }
+  .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin: 4px 0 0;
+  }
+  .watch {
+    border: 2px solid var(--coral);
+    border-radius: 14px;
+    padding: 4px 14px 12px;
+  }
+  .watch h2 {
+    color: var(--coral);
+  }
+  .places,
+  .scores,
+  .facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .places li,
+  .score {
+    background: var(--night-deep);
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+  .score p {
+    margin: 6px 0 0;
+  }
+  .score-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .score-name {
+    font-weight: 800;
+    color: var(--thread) !important;
+    text-decoration: none;
+    flex-grow: 1;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--thread-dim);
+  }
+  .level {
+    font-family: var(--font-mono);
+    color: var(--saffron);
+  }
+  .bar {
+    display: block;
+    height: 6px;
+    margin-top: 6px;
+    border-radius: 999px;
+    background: var(--night-lift);
+    overflow: hidden;
+  }
+  .bar span {
+    display: block;
+    height: 100%;
+    background: var(--saffron);
+  }
+  .facts li {
+    line-height: 1.5;
+  }
+  details summary {
+    cursor: pointer;
+  }
+</style>
