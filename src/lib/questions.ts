@@ -484,11 +484,12 @@ export const QUESTIONS: Question[] = [
     choices: [
       { label: "Me sentir en sécurité", value: "safety", en: { label: "Feeling safe" } },
       { label: "Une vie abordable", value: "cost", en: { label: "An affordable life" } },
+      { label: "De bons soins", value: "health", en: { label: "Good healthcare" } },
       {
-        label: "La santé et l'école",
-        value: "healthAndSchools",
+        label: "L'école des enfants",
+        value: "schools",
         when: withChildren,
-        en: { label: "Healthcare and schools" },
+        en: { label: "The children's schooling" },
       },
       { label: "Ma carrière", value: "career", when: worksThere, en: { label: "My career" } },
       {

@@ -16,7 +16,7 @@ import { profileEffects, type ProfileAnswers } from "./profile-pulls";
 
 /** The non-negotiables offered by the quiz (their values predate the sourced criteria). */
 export type Priority =
-  "safety" | "cost" | "healthAndSchools" | "career" | "diaspora" | "memory" | "flights";
+  "safety" | "cost" | "health" | "schools" | "career" | "diaspora" | "memory" | "flights";
 
 /** A three-step stated preference: 0, 0.5 or 1. */
 type Step = 0 | 0.5 | 1;
@@ -310,7 +310,9 @@ const GREW_UP: Record<NonNullable<Answers["grewUp"]>, Pull[]> = {
 const PRIORITY: Record<Priority, Pull[]> = {
   safety: [need("safety", 1, 3)],
   cost: [need("cheap", 1, 3), need("easySetup", 0.8, 1)],
-  healthAndSchools: [need("comfort", 1, 2), need("schools", 1, 2)],
+  // Healthcare is half of the « comfort » axis, with power and water (fit.ts): no axis of its own.
+  health: [need("comfort", 1, 3)],
+  schools: [need("schools", 1, 3)],
   career: [need("jobs", 1, 3), need("business", 0.7, 1)],
   diaspora: [pull("returnees", 1, 3)],
   memory: [pull("history", 1, 3), pull("culture", 0.7, 0.5)],
@@ -507,8 +509,12 @@ export function profileOf(answers: Answers): Profile {
   if (answers.pace !== undefined) add("pace", PACE[answers.pace]);
   if (answers.grewUp) add("grewUp", GREW_UP[answers.grewUp]);
   // Each non-negotiable is a piece of evidence of its own, worth more than an ordinary answer.
-  for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES))
+  for (const priority of (answers.priorities ?? []).slice(0, MAX_PRIORITIES)) {
+    // A journey saved before a choice was split (« La santé et l'école », 2026-11-18) may still
+    // carry its old value: it weighs nothing rather than breaking the ranking.
+    if (!(priority in PRIORITY)) continue;
     add(`priorities:${priority}`, PRIORITY[priority], NON_NEGOTIABLE);
+  }
   if (answers.profession) {
     const { fields, pulls: more } = PROFESSION[answers.profession];
     add("profession", more);

@@ -207,6 +207,32 @@ describe("ranking on resemblance first", () => {
     expect(meanSafety(safe)).toBeGreaterThan(meanSafety(explorer));
     expect(bestMatches(safe, 1)[0].reasons.map((r) => r.label)).toContain("Sécurité au quotidien");
   });
+
+  // Beta feedback (2026-11-18): healthcare matters without children too.
+  it("lifts well-equipped cities for a reader without children who makes health a non-negotiable", () => {
+    const meanCare = (answers: Answers) => {
+      const top = bestMatches(answers, 5);
+      return top.reduce((sum, m) => sum + (m.city.scores.healthcare.level ?? 2.5), 0) / top.length;
+    };
+    const single: Answers = { ...explorer, family: "celib" };
+    expect(meanCare({ ...single, priorities: ["health"] })).toBeGreaterThan(meanCare(single));
+  });
+
+  it("lifts cities with good schools for parents who make schooling a non-negotiable", () => {
+    const meanSchools = (answers: Answers) => {
+      const top = bestMatches(answers, 5);
+      return top.reduce((sum, m) => sum + (m.city.scores.schools.level ?? 2.5), 0) / top.length;
+    };
+    const parents: Answers = { ...explorer, family: "parents" };
+    expect(meanSchools({ ...parents, priorities: ["schools"] })).toBeGreaterThan(
+      meanSchools(parents),
+    );
+  });
+
+  it("still ranks a journey saved with the former « La santé et l'école » choice", () => {
+    const saved = { ...explorer, priorities: ["healthAndSchools"] } as unknown as Answers;
+    expect(rankCities(saved)).toHaveLength(rankCities(explorer).length);
+  });
 });
 
 // Like a guessing game (operator, 2026-11-16): every answer is one piece of evidence and the
