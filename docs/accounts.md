@@ -93,6 +93,25 @@ the search in `src/lib/review-search.ts`, the list in `Reactions.astro` (mode `e
   goes with the space. At most 120 marks an hour per space.
 - **`/villes`** lists every city by region, static, for whoever wants a city page without the quiz.
 
+## The admin (`/admin`)
+
+Decided with the operator on 2026-11-18. Code: the `/api/compte/admin` routes in `accounts.ts`,
+tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `src/pages/admin.astro`.
+
+- **Who.** The addresses in `ADMIN_EMAILS`, signed in with the usual magic link. Anyone else gets
+  403, and the static page holds nothing until the API says yes. The road not taken: a password
+  or a separate admin account, one more secret for a one-person team.
+- **What.** Every published review and reply, hidden ones included, grouped by city (newest
+  activity first) with « À relire » on top: hidden first, then the most reported. Never the
+  author's address: moderating does not need it, and the privacy page says it is never shown.
+- **Actions.** « Masquer » sets `hidden`; « Rétablir » clears `hidden` and the reports, since the
+  operator has read it; « Supprimer » deletes the review and its replies (two taps, no dialog).
+  Public reads skip `hidden` as they skip three reports.
+- **Figures.** The server asks Plausible's Stats API v2 with a key that never reaches the browser:
+  visitors, pages viewed and every goal over 7 and 30 days, the quiz funnel as a share of visitors,
+  the most read pages and the cities reviewed over 30 days. No Plausible frame in the page; the full
+  dashboard is one link away. A refusal shows as an error, never as zeros.
+
 ## Lifetimes
 
 | What                                                      | How long                                  |
@@ -128,6 +147,10 @@ the search in `src/lib/review-search.ts`, the list in `Reactions.astro` (mode `e
 | `GET /api/compte/reactions?ville=`        | anyone         | Published reviews of a city (every city without `ville`), with replies and mark counts  |
 | `POST /api/compte/reactions`              | anyone         | A review, or a reply with `replyTo`. Signed in: online at once; else a 7-day link       |
 | `POST /api/compte/reactions/:id/marques`  | signed in      | Puts a mark, or takes it back; answers the counts and the reader's own marks            |
+| `GET /api/compte/admin`                   | admin only     | Every published review and reply, hidden ones included; never an address                |
+| `POST /api/compte/admin/reactions/:id`    | admin only     | `action`: `masquer`, or `retablir` (also clears the reports)                            |
+| `DELETE /api/compte/admin/reactions/:id`  | admin only     | Deletes a review and its replies                                                        |
+| `GET /api/compte/admin/stats`             | admin only     | The Plausible figures; 503 without a key, 502 when Plausible fails                      |
 | `POST /api/compte/reactions/:id/signaler` | anyone         | Counts one report per connection; three hide the reaction                               |
 | `DELETE /api/compte/reactions/:id`        | the owner only | Deletes one reaction                                                                    |
 

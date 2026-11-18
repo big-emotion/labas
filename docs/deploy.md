@@ -123,6 +123,20 @@ the database too. Backups: a daily `docker exec labas-db pg_dump -U labas labas 
 directory that is copied off the server. Set it up on the host before real readers save
 journeys. Why the module works this way: `docs/accounts.md`.
 
+**6. The admin (`/admin`), when you want it on.** It needs saved journeys (step 5). The addresses
+that open it are a plain variable; the Plausible key is a secret, created in Plausible under
+Settings → API keys, type « Stats API ». Paste the key at the prompt, never on the command line.
+
+```bash
+gh variable set ADMIN_EMAILS --repo big-emotion/labas --body you@example.org   # comma-separated
+gh secret set PLAUSIBLE_API_KEY --repo big-emotion/labas
+gh variable set PLAUSIBLE_API_HOST --repo big-emotion/labas --body https://stats.ethniafrica.com
+```
+
+`PLAUSIBLE_DOMAIN`, already set for the tracking script, names the site to the API. Without
+`ADMIN_EMAILS` the page stays shut for everyone; without the key it shows the reviews and says the
+figures are waiting for it.
+
 **6. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
 The smoke check fails the job unless `https://labas.africa/` answers 200.
 

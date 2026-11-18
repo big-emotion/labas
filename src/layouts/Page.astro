@@ -7,8 +7,10 @@ import ShareMeta from "../components/ShareMeta.astro";
 interface Props {
   title: string;
   description: string;
+  /** Private pages (/admin) stay out of search engines. */
+  noindex?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 ---
 
@@ -17,6 +19,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <ShareMeta title={`${title} · Là-bas`} description={description} />
     <meta name="theme-color" content="#161a5c" />
     <title>{title} · Là-bas</title>
