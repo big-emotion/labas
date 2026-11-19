@@ -14,6 +14,7 @@ export interface Filters {
   sizes?: City["size"][];
   languages?: string[];
   water?: ("sea" | "island")[];
+  /** Regions taken out, like the cities the reader already knows (beta feedback, 2026-11-18). */
   regions?: City["zone"][];
   faiths?: ("muslim" | "christian")[];
   budget?: "serre" | "moyen" | "large";
@@ -34,7 +35,7 @@ function passes(city: City, filters: Filters): boolean {
     const wanted = filters.water.map((w) => (w === "sea" ? "ocean" : "island"));
     if (!settings.some((s) => wanted.includes(s as "ocean" | "island"))) return false;
   }
-  if (filters.regions?.length && !filters.regions.includes(city.zone)) return false;
+  if (filters.regions?.includes(city.zone)) return false;
   if (filters.faiths?.length) {
     const religion = city.countryFacts?.religion;
     if (religion && !filters.faiths.some((faith) => religion[faith] > 50)) return false;
@@ -142,8 +143,11 @@ export const FILTER_MENU: FilterMenuEntry[] = [
   {
     key: "regions",
     label: "Région",
-    hint: "Gardez les villes de ces régions d'Afrique.",
-    en: { label: "Region", hint: "Keep the cities in these regions of Africa." },
+    hint: "Retirez les villes des régions où vous ne voulez pas vivre.",
+    en: {
+      label: "Region",
+      hint: "Take out the cities in the regions where you do not want to live.",
+    },
     options: [
       { label: "Afrique de l'Ouest", value: "ouest", en: "West Africa" },
       { label: "Afrique centrale", value: "centre", en: "Central Africa" },

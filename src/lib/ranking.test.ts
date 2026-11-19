@@ -140,6 +140,41 @@ describe("ranking the cities", () => {
     for (const m of bestMatches(strict, 20)) expect(m.excludedBecause).toBeUndefined();
   });
 
+  // « Pas pour moi » (beta feedback, 2026-11-18): a place the reader sets aside is gone, it
+  // does not merely fall back.
+  describe("a place the reader sets aside", () => {
+    const base: Answers = { project: "installer", languages: ["fr"] };
+    const top = (answers: Answers) => bestMatches(answers, 10).map((m) => m.city.name);
+
+    it("takes a whole region out of the best matches, and says why", () => {
+      const answers: Answers = { ...base, avoidRegions: ["nord"] };
+      for (const m of bestMatches(answers, 30)) expect(m.city.zone).not.toBe("nord");
+      const tunis = rankCities(answers).find((m) => m.city.name === "Tunis");
+      expect(tunis?.excludedBecause).toBe("Vous avez écarté cette région");
+      expect(rankCities(answers, "en").find((m) => m.city.name === "Tunis")?.excludedBecause).toBe(
+        "You left out this region",
+      );
+    });
+
+    it("takes out a country or a single city the same way", () => {
+      const noAlgeria = rankCities({ ...base, avoidCountries: ["Algérie"] });
+      expect(
+        noAlgeria.filter((m) => m.city.country === "Algérie").map((m) => m.excludedBecause),
+      ).toEqual(["Vous avez écarté ce pays", "Vous avez écarté ce pays"]);
+      const noOran = rankCities({ ...base, avoidCities: ["Oran"] });
+      expect(noOran.find((m) => m.city.name === "Oran")?.excludedBecause).toBe(
+        "Vous avez écarté cette ville",
+      );
+      expect(noOran.find((m) => m.city.name === "Alger")?.excludedBecause).toBeUndefined();
+    });
+
+    it("leaves the order of every other city as it was", () => {
+      const before = top(base).filter((name) => name !== "Tunis" && name !== "Casablanca");
+      const after = top({ ...base, avoidCities: ["Tunis", "Casablanca"] });
+      expect(after.slice(0, before.length)).toEqual(before);
+    });
+  });
+
   it("only leaves out countries that punish homosexuality when the reader asks", () => {
     const criminalising = (answers: Answers) =>
       rankCities(answers).filter((m) => m.excludedBecause === "Le pays punit l'homosexualité");

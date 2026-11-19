@@ -63,6 +63,11 @@ const COPY: Bilingual<Record<string, string>> = {
     method: "Notre méthode",
     legal: "Mentions légales",
     privacy: "Confidentialité",
+    asideHint: "Choisissez ce que vous écartez. Vous pourrez le remettre à tout moment.",
+    cancel: "Annuler",
+    leftOut: "En moins :",
+    undo: "Annuler",
+    leaders: "En tête pour l'instant",
   },
   en: {
     question: "Which African city is most like you?",
@@ -102,6 +107,11 @@ const COPY: Bilingual<Record<string, string>> = {
     method: "Our method",
     legal: "Legal notice",
     privacy: "Privacy",
+    asideHint: "Choose what you leave out. You can put it back at any time.",
+    cancel: "Cancel",
+    leftOut: "Left out:",
+    undo: "Undo",
+    leaders: "Leading for now",
   },
 };
 const copy = COPY[locale];
@@ -183,8 +193,30 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
               <g id="highlights"></g>
             </svg>
           </div>
-          <p class="map-legend" id="legend"></p>
+          <div class="map-side">
+            <p class="map-legend" id="legend"></p>
+            <ol id="leaders" class="leaders" aria-label={copy.leaders} hidden></ol>
+          </div>
         </div>
+        <div id="left-out" class="left-out" hidden>
+          <span>{copy.leftOut}</span>
+        </div>
+        <p id="aside-notice" class="aside-notice" role="status" hidden>
+          <span id="aside-text"></span>
+          <button type="button" id="aside-undo">
+            {copy.undo}
+          </button>
+        </p>
+        <dialog id="aside-sheet" class="sheet" aria-labelledby="aside-title">
+          <form method="dialog" class="sheet-body">
+            <h2 id="aside-title"></h2>
+            <p class="sheet-hint">{copy.asideHint}</p>
+            <div class="sheet-options" id="aside-options"></div>
+            <button type="submit" class="primary">
+              {copy.cancel}
+            </button>
+          </form>
+        </dialog>
       </aside>
 
       <main class="main">
@@ -344,7 +376,21 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         type Filters,
       } from "../lib/filters";
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
-      import { answerEvent, finishedEvent } from "../lib/analytics";
+      import {
+        answerEvent,
+        finishedEvent,
+        notForMeEvent,
+        type NotForMePlace,
+      } from "../lib/analytics";
+      import {
+        leftOut,
+        restore,
+        setAside,
+        setAsideChoices,
+        setAsideNotice,
+        type SetAsideLevel,
+      } from "../lib/not-for-me";
+      import type { City } from "../lib/cities";
       import { saveAnswers } from "../lib/keep";
       import { syncJourney } from "../lib/account-dom";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
@@ -357,18 +403,19 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       const FILTER_MENU = filterMenu(locale);
       const COPY: Bilingual<{
         waiting: (count: number) => string;
-        leading: (names: string) => string;
         hidden: (removed: number) => string;
         filterNote: string;
         kept: (count: number) => string;
         all: string;
         question: (n: number) => string;
         ready: string;
+        notForMe: (name: string) => string;
+        sheetTitle: (name: string) => string;
+        putBack: (name: string) => string;
       }> = {
         fr: {
           waiting: (count) =>
             `${count} villes en lice. Chaque réponse fait grossir celles qui vous correspondent.`,
-          leading: (names) => `En tête pour l'instant : ${names}`,
           hidden: (removed) =>
             `${removed} ${removed > 1 ? "villes masquées" : "ville masquée"} par vos filtres. L'ordre ne change pas : seul votre score le décide.`,
           filterNote: "Les filtres retirent des villes ; l'ordre ne change jamais.",
@@ -377,11 +424,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           all: "Les 115 villes, triées selon vos réponses.",
           question: (n) => `question ${n}`,
           ready: "C'est prêt",
+          notForMe: (name) => `${name}, pas pour moi`,
+          sheetTitle: (name) => `${name} ne vous tente pas ?`,
+          putBack: (name) => `Remettre ${name}`,
         },
         en: {
           waiting: (count) =>
             `${count} cities in the running. Each answer makes the ones that match you grow.`,
-          leading: (names) => `Leading for now: ${names}`,
           hidden: (removed) =>
             `${removed} ${removed > 1 ? "cities hidden" : "city hidden"} by your filters. The order does not change: only your score decides it.`,
           filterNote: "Filters take cities out; the order never changes.",
@@ -389,6 +438,9 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           all: "The 115 cities, sorted by your answers.",
           question: (n) => `question ${n}`,
           ready: "It's ready",
+          notForMe: (name) => `${name}, not for me`,
+          sheetTitle: (name) => `Not tempted by ${name}?`,
+          putBack: (name) => `Put back ${name}`,
         },
       };
       const copy = COPY[locale];
@@ -396,6 +448,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       const SVG = "http://www.w3.org/2000/svg";
       const form = document.getElementById("form") as HTMLFormElement;
       const answers: Record<string, unknown> = {};
+      // « Pas pour moi »: the cities, countries and regions set aside (not-for-me.ts).
+      let placesAside: Answers = {};
 
       // What the screen says, minus what no longer fits: going back and changing an answer
       // re-routes the path and drops the answers it made irrelevant (quiz paths, 2026-11-16).
@@ -409,7 +463,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           if (Number(fieldset.dataset.max) > 1) pressed[id] = picked.length ? picked : undefined;
           else pressed[id] = picked[0];
         }
-        const kept = keepInPath(pressed as Answers);
+        // The places set aside are not a question on screen: they ride along with the answers.
+        const kept = { ...keepInPath(pressed as Answers), ...placesAside };
         syncChoices(QUESTIONS, kept, form);
         for (const key of Object.keys(answers)) delete answers[key];
         Object.assign(answers, kept);
@@ -494,7 +549,12 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const kept = applyFilters(ranked, filtersFrom(picked));
         const matches = kept.filter((m) => !m.excludedBecause).slice(0, TOP_THREE);
         onScreen = matches;
-        const scores = new Map(ranked.map((m) => [m.city.name, m.score] as [string, number]));
+        // A city set aside (« Pas pour moi ») goes dark on the map like one never scored.
+        const scores = new Map(
+          ranked
+            .filter((m) => !m.excludedBecause)
+            .map((m) => [m.city.name, m.score] as [string, number]),
+        );
         // Before the first answer nothing is ranked yet: every dot stays the same and no city
         // is named, so the quiz does not look decided before it starts.
         // The map shows nothing before the first answer, colours every city by its score while the
@@ -504,10 +564,20 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
         (document.getElementById("legend") as HTMLElement).textContent = missing
           ? copy.waiting(CITIES_COUNT)
-          : copy.leading(matches.map((m) => cityName(m.city.name, locale)).join(", "));
+          : leadersTitle;
+        renderLeaders(missing ? [] : matches);
+        renderLeftOut();
 
         showProfile(current, locale);
-        const cards = matches.map((m, i) => cardFor(m, i, ranked, locale));
+        const cards = matches.map((m, i) => {
+          const card = cardFor(m, i, ranked, locale);
+          const aside = card.querySelector<HTMLButtonElement>(".not-for-me");
+          if (aside) {
+            aside.hidden = false;
+            aside.addEventListener("click", () => openAside(m.city, "result"));
+          }
+          return card;
+        });
         (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
         if (revealed)
           void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
@@ -543,6 +613,115 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       document.getElementById("more")!.addEventListener("click", () => {
         showAll = true;
         render();
+      });
+
+      // « Pas pour moi » (beta feedback, 2026-11-18): each leading city can be set aside, alone,
+      // with its country or with its region. A filter, so the ranking and the next question follow.
+      const leadersTitle = (document.getElementById("leaders") as HTMLElement).getAttribute(
+        "aria-label",
+      ) as string;
+      const asideSheet = document.getElementById("aside-sheet") as HTMLDialogElement;
+      const notice = document.getElementById("aside-notice") as HTMLElement;
+      let undoAside: (() => void) | undefined;
+      let noticeTimer: ReturnType<typeof setTimeout> | undefined;
+
+      function changePlaces(next: Answers) {
+        placesAside = next;
+        saveAnswers(browserStore(), readAnswers());
+        syncJourney(readAnswers());
+        render();
+      }
+
+      function renderLeaders(matches: Match[]) {
+        const list = document.getElementById("leaders") as HTMLElement;
+        list.hidden = matches.length === 0;
+        list.replaceChildren(
+          ...matches.map((m) => {
+            const item = document.createElement("li");
+            const name = document.createElement("span");
+            name.textContent = cityName(m.city.name, locale);
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "aside-button";
+            button.textContent = "×";
+            button.setAttribute("aria-label", copy.notForMe(name.textContent));
+            button.addEventListener("click", () => openAside(m.city, "quiz"));
+            item.append(name, button);
+            return item;
+          }),
+        );
+      }
+
+      function renderLeftOut() {
+        const row = document.getElementById("left-out") as HTMLElement;
+        const places = leftOut(placesAside, locale);
+        row.hidden = places.length === 0;
+        row.replaceChildren(
+          row.firstElementChild as HTMLElement,
+          ...places.map((place) => {
+            const chip = document.createElement("button");
+            chip.type = "button";
+            chip.className = "left-out-chip";
+            chip.textContent = `${place.label} ×`;
+            chip.setAttribute("aria-label", copy.putBack(place.label));
+            chip.addEventListener("click", () => {
+              track(notForMeEvent("quiz", place.level, true));
+              changePlaces(restore(placesAside, place));
+            });
+            return chip;
+          }),
+        );
+      }
+
+      function openAside(city: City, place: NotForMePlace) {
+        (document.getElementById("aside-title") as HTMLElement).textContent = copy.sheetTitle(
+          cityName(city.name, locale),
+        );
+        (document.getElementById("aside-options") as HTMLElement).replaceChildren(
+          ...setAsideChoices(city, locale).map((choice) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "option";
+            const label = document.createElement("b");
+            label.textContent = choice.label;
+            const detail = document.createElement("span");
+            detail.textContent = choice.detail;
+            button.append(label, detail);
+            button.addEventListener("click", () => {
+              asideSheet.close();
+              applyAside(city, choice.level, place);
+            });
+            return button;
+          }),
+        );
+        asideSheet.showModal();
+      }
+
+      function applyAside(city: City, level: SetAsideLevel, place: NotForMePlace) {
+        const before = placesAside;
+        track(notForMeEvent(place, level));
+        changePlaces(setAside(placesAside, city, level));
+        (document.getElementById("aside-text") as HTMLElement).textContent = setAsideNotice(
+          city,
+          level,
+          locale,
+        );
+        notice.hidden = false;
+        undoAside = () => {
+          track(notForMeEvent(place, level, true));
+          changePlaces(before);
+        };
+        clearTimeout(noticeTimer);
+        noticeTimer = setTimeout(() => (notice.hidden = true), 10000);
+      }
+
+      document.getElementById("aside-undo")!.addEventListener("click", () => {
+        notice.hidden = true;
+        undoAside?.();
+        undoAside = undefined;
+      });
+      asideSheet.addEventListener("click", (event) => {
+        if (event.target === asideSheet) asideSheet.close();
       });
 
       // One question at a time, chosen by what would reshuffle the top three the most; the quiz
@@ -1039,6 +1218,117 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         margin: 0;
         color: var(--thread-dim);
         font-size: 0.85rem;
+      }
+      .map-side {
+        display: grid;
+        gap: 4px;
+        min-width: 0;
+      }
+      .leaders {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: leader;
+        font-size: 1rem;
+      }
+      /* Built by the script, so outside Astro's scoped styles. */
+      .leaders :global(li) {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        counter-increment: leader;
+        font-weight: 700;
+      }
+      .leaders :global(li)::before {
+        content: counter(leader);
+        width: 16px;
+        font-family: var(--font-display);
+        font-weight: 900;
+        color: var(--saffron);
+      }
+      .leaders :global(li span) {
+        flex-grow: 1;
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .leaders :global(.aside-button) {
+        min-width: 44px;
+        min-height: 44px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        color: var(--thread-dim);
+        font-size: 1.25rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .left-out {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        color: var(--thread-dim);
+      }
+      .left-out[hidden],
+      .aside-notice[hidden] {
+        display: none;
+      }
+      .left-out :global(.left-out-chip) {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        color: var(--thread);
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      /* Pinned above the feedback tab, so « Annuler » shows wherever the place was set aside. */
+      .aside-notice {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: max(72px, calc(env(safe-area-inset-bottom) + 56px));
+        z-index: 20;
+        max-width: 560px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 8px 8px 16px;
+        border-radius: 14px;
+        border: 2px solid var(--saffron);
+        background: var(--night-deep);
+        font-size: 0.95rem;
+      }
+      .aside-notice span {
+        flex-grow: 1;
+      }
+      .aside-notice button {
+        min-height: 44px;
+        padding: 0 14px;
+        border: 0;
+        background: transparent;
+        color: var(--saffron);
+        font-weight: 700;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .sheet-options :global(.option b),
+      .sheet-options :global(.option span) {
+        display: block;
+        font-family: var(--font-body);
+        font-size: 1rem;
+      }
+      .sheet-options :global(.option:has(span)) {
+        padding: 8px 14px;
+      }
+      .sheet-options :global(.option span) {
+        font-weight: 400;
+        font-size: 0.9rem;
       }
       .filters {
         display: grid;

@@ -40,7 +40,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   questionnaire resumes the quick quiz). What is sent: anonymous, cookieless Plausible events,
   one per quick-quiz answer (with the reader's path and the question's rank in it) plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
-  LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
+  LGBT filters are never sent. « Pas pour moi » (operator, 2026-11-18) sets a city, a country
+  or a region aside as a filter, never a score; the places are sensitive answers, and its event
+  (`notForMeEvent`) carries only the place on the page and the level, never which one. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a

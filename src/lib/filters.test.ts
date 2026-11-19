@@ -41,9 +41,11 @@ describe("filtering the result", () => {
       expect(m.city.facts.settings).toContain("ocean");
   });
 
-  it("keeps cities of the chosen regions", () => {
-    for (const m of applyFilters(ranked, { regions: ["est", "sud"] }))
-      expect(["est", "sud"]).toContain(m.city.zone);
+  // Beta feedback (2026-11-18): one region to leave out took four ticks when the filter kept.
+  it("removes the cities of the regions the reader takes out", () => {
+    const kept = applyFilters(ranked, { regions: ["nord"] });
+    expect(kept.length).toBe(ranked.length - 14);
+    for (const m of kept) expect(m.city.zone).not.toBe("nord");
   });
 
   it("keeps countries where the chosen faith is the majority", () => {
@@ -69,7 +71,7 @@ describe("filtering the result", () => {
   it("combines filters: a city must pass all of them", () => {
     for (const m of applyFilters(ranked, { sizes: [1], regions: ["ouest"] })) {
       expect(m.city.size).toBe(1);
-      expect(m.city.zone).toBe("ouest");
+      expect(m.city.zone).not.toBe("ouest");
     }
   });
 });

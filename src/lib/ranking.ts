@@ -6,6 +6,7 @@ import {
   type CriterionDefinition,
   type CriterionKey,
   type Language,
+  type Zone,
 } from "./cities";
 import type { Bilingual, Locale } from "../i18n/locale";
 import { criterionCopy } from "../i18n/city-copy";
@@ -105,6 +106,13 @@ export interface Answers extends ProfileAnswers {
   visaFreeOnly?: boolean;
   /** Leave out countries that punish homosexuality. Opt-in, never inferred, never stored. */
   excludeCriminalising?: boolean;
+  /**
+   * « Pas pour moi » (beta feedback, 2026-11-18): places the reader sets aside, by French name.
+   * A filter, not a score: a set-aside city is gone, whatever else it matches.
+   */
+  avoidCities?: string[];
+  avoidCountries?: string[];
+  avoidRegions?: Zone[];
   /** Noise and crowds: 1 give energy, 0.5 depends, 0 tire. */
   crowds?: Step;
   /** Power cuts, paperwork, the unexpected: 1 copes, 0.5 weighs on, 0 wants to avoid. */
@@ -699,6 +707,9 @@ interface LineCopy {
   care: string;
   visa: string;
   law: string;
+  avoidedCity: string;
+  avoidedCountry: string;
+  avoidedRegion: string;
 }
 
 const LINE_COPY: Bilingual<LineCopy> = {
@@ -758,6 +769,9 @@ const LINE_COPY: Bilingual<LineCopy> = {
     care: "Les soins suivis demandent d'aller ailleurs",
     visa: "Visa nécessaire avec un passeport français",
     law: "Le pays punit l'homosexualité",
+    avoidedCity: "Vous avez écarté cette ville",
+    avoidedCountry: "Vous avez écarté ce pays",
+    avoidedRegion: "Vous avez écarté cette région",
   },
   en: {
     facts: {
@@ -815,6 +829,9 @@ const LINE_COPY: Bilingual<LineCopy> = {
     care: "Ongoing care means going elsewhere",
     visa: "A visa is needed with a French passport",
     law: "The country punishes homosexuality",
+    avoidedCity: "You left out this city",
+    avoidedCountry: "You left out this country",
+    avoidedRegion: "You left out this region",
   },
 };
 
@@ -847,6 +864,10 @@ function labelOf(
 
 function exclusionFor(city: City, answers: Answers, locale: Locale): string | undefined {
   const copy = LINE_COPY[locale];
+  // The reader's own word comes first: it is the reason they will recognise.
+  if (answers.avoidCities?.includes(city.name)) return copy.avoidedCity;
+  if (answers.avoidCountries?.includes(city.country)) return copy.avoidedCountry;
+  if (answers.avoidRegions?.includes(city.zone)) return copy.avoidedRegion;
   const country = city.countryFacts;
   const languages = languagesOf(answers);
   if (answers.languageOnly && languages.length) {
