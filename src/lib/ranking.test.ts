@@ -374,6 +374,87 @@ describe("an origin that weighs without deciding alone", () => {
   });
 });
 
+// Beta feedback, 2026-11-19: a reader from the Caribbean who wanted to live near their own was
+// sent to North Africa, and the family's region counted for less with every further answer.
+describe("the divide between North Africa and the rest of the continent", () => {
+  const settled: Answers = {
+    project: "installer",
+    languages: ["fr"],
+    family: "couple",
+    size: 3,
+    pace: 0.5,
+    landscapes: ["beach"],
+    climate: "mild",
+    saturday: 0.5,
+    order: 1,
+    together: 0.5,
+    friction: 0,
+    priorities: ["safety", "health"],
+  };
+  const southward: Answers = {
+    project: "installer",
+    languages: ["fr", "en"],
+    family: "celib",
+    size: 3,
+    pace: 1,
+    landscapes: ["beach"],
+    climate: "hot",
+    saturday: 1,
+    order: 0,
+    together: 1,
+    friction: 1,
+    budget: "serre",
+    priorities: ["career", "diaspora"],
+  };
+  const zonesOfTop = (answers: Answers, count: number) =>
+    bestMatches(answers, count).map((m) => m.city.zone);
+
+  it("keeps North Africa out of the top five of a Caribbean reader who wants to stay near their own", () => {
+    for (const nearOnesOwn of [
+      { kin: "much", adventure: "familiar" },
+      { kin: "much" },
+      { adventure: "familiar" },
+    ] as Answers[]) {
+      const zones = zonesOfTop({ ...settled, origin: ["ameriques"], ...nearOnesOwn }, 5);
+      expect(zones, JSON.stringify(nearOnesOwn)).not.toContain("nord");
+    }
+  });
+
+  it("works the other way: a North African reader who wants to stay near their own stays north", () => {
+    const zones = zonesOfTop(
+      { ...southward, origin: ["nord"], kin: "much", adventure: "familiar" },
+      5,
+    );
+    expect(new Set(zones)).toEqual(new Set(["nord"]));
+  });
+
+  it("assumes nothing from the origin alone, nor once the reader says their own do not matter", () => {
+    for (const unsaid of [{}, { kin: "none" }, { adventure: "seeking" }] as Answers[]) {
+      const zones = zonesOfTop({ ...settled, origin: ["ameriques"], ...unsaid }, 5);
+      expect(zones, JSON.stringify(unsaid)).toContain("nord");
+    }
+  });
+
+  it("lowers a city across the divide without ever removing it", () => {
+    const answers: Answers = {
+      ...settled,
+      origin: ["ameriques"],
+      kin: "much",
+      adventure: "familiar",
+    };
+    expect(bestMatches(answers, 115)).toHaveLength(115);
+    expect(scoreOf("Casablanca", answers)).toBeGreaterThan(0.2);
+  });
+
+  it("leaves a mixed family at home on both sides", () => {
+    const zones = zonesOfTop(
+      { ...settled, origin: ["ameriques", "nord"], kin: "much", adventure: "familiar" },
+      5,
+    );
+    expect(zones).toContain("nord");
+  });
+});
+
 describe("the quick top used to choose the next question", () => {
   it("names the same cities as the full ranking", () => {
     const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };

@@ -457,6 +457,15 @@ const KIN_SCALE = { much: 1.5, some: 1, unsaid: 0.75, none: 0 } as const;
 // An appetite for the unknown makes the family's region nearly neutral rather than pushing to
 // its opposite: the other answers then mix the regions (operator, 2026-11-16).
 const ADVENTURE_SCALE = { familiar: 1.25, open: 1, seeking: 0.25 } as const;
+/**
+ * The share of the whole score given to the divide between North Africa and the rest of the
+ * continent, once the reader says they want to stay near their own. A share, not a weight: a
+ * weight is diluted by every further answer, which sent a Caribbean reader who had asked for
+ * familiar ground to Casablanca at the fifteenth answer (beta feedback, 2026-11-19). Both
+ * answers together take 0.3, either one 0.2: a city across the divide then keeps about half or
+ * two thirds of its score, so it steps back without leaving the list.
+ */
+const DIVIDE_SHARE = { both: 0.3, either: 0.2 } as const;
 const PRACTICAL: Axis[] = [
   "safety",
   "comfort",
@@ -491,6 +500,8 @@ interface Profile {
   facts: FactPull[];
   /** How much each answer counts as evidence, by `from`. */
   weights: Record<string, number>;
+  /** Evidence that takes a fixed share of the score instead of a weight, by `from`. */
+  shares: Record<string, number>;
 }
 
 /** Turns answers into pulls on axes and facts to match, each tied to its answer. */
@@ -499,6 +510,7 @@ export function profileOf(answers: Answers): Profile {
   const pulls: Pull[] = [];
   const facts: FactPull[] = [];
   const weights: Record<string, number> = {};
+  const shares: Record<string, number> = {};
   const add = (from: string, more: Pull[] | undefined, weight = ANSWER_WEIGHT[from] ?? 1) => {
     if (!more?.length) return;
     pulls.push(...more.map((p) => ({ ...p, from })));
@@ -623,6 +635,13 @@ export function profileOf(answers: Answers): Profile {
     const weight = Math.min(NON_NEGOTIABLE, draw + away);
     if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, weight);
     if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, weight);
+    // Only on the reader's own word: the origin alone says nothing of where they would feel at
+    // home, and an appetite for the unknown says the opposite.
+    const nearOnesOwn = [answers.kin === "much", answers.adventure === "familiar"].filter(Boolean);
+    if (draw > 0 && nearOnesOwn.length && answers.adventure !== "seeking") {
+      fact("divide", { kind: "divide", origins, weight: 1 });
+      shares.divide = nearOnesOwn.length === 2 ? DIVIDE_SHARE.both : DIVIDE_SHARE.either;
+    }
   }
   // Faith counts the same way; a reader without one is not sent towards secular countries.
   const faith = answers.faith;
@@ -657,6 +676,7 @@ export function profileOf(answers: Answers): Profile {
     pulls: pulls.filter((p) => !renounced.has(p.axis)).map(asFloor),
     facts,
     weights,
+    shares,
   };
 }
 
@@ -923,6 +943,13 @@ function evidenceOf(profile: Profile): Evidence[] {
   };
   for (const p of profile.pulls) of(p.from).pulls.push(p);
   for (const f of profile.facts) of(f.from).facts.push(f);
+  for (const [from, share] of Object.entries(profile.shares)) {
+    const others = [...byAnswer].reduce(
+      (sum, [key, e]) => (key === from ? sum : sum + e.weight),
+      0,
+    );
+    of(from).weight = (share / (1 - share)) * others;
+  }
   return [...byAnswer.values()];
 }
 

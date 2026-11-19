@@ -28,6 +28,15 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   answer still turns the list over. The daily language weighs most; the project and the origin
   weigh on their own (the family's region draws a settler, not a holidaymaker). No fact weighs
   without an answer that asks for it: nothing is inferred from an answer the reader did not give.
+  One answer is not diluted by the others (operator, 2026-11-19): a reader who names their origin
+  and says they want to stay near their own (« Beaucoup », or « terrain connu ») sees the cities
+  across the North Africa / sub-Saharan divide step back, both ways, by a fixed share of the score
+  (`DIVIDE_SHARE`); the origin alone never does this, and no city leaves the list.
+- **The first city comes fast** (operator, 2026-11-19): above the cards only « Pourquoi ces
+  villes ? » (`components/ResultWhy.astro`), folded to its question, and the link to
+  /approfondir. Right under the first city, « Ces villes vous ressemblent ? »: one tap, a review
+  or a share. The temperament and the one news sign-up come after the cities; the sign-up offered
+  during the quiz closes when the quiz ends.
 - **Test first** (Vitest, `src/**/*.test.ts`), through the public functions `rankCities` and
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
@@ -42,7 +51,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
   LGBT filters are never sent. « Pas pour moi » (operator, 2026-11-18) sets a city, a country
   or a region aside as a filter, never a score; the places are sensitive answers, and its event
-  (`notForMeEvent`) carries only the place on the page and the level, never which one. Shared or mailed results carry cities and percentages, never
+  (`notForMeEvent`) carries only the place on the page and the level, never which one. The
+  verdict on a result (`verdictEvent`) carries yes or not really and the questionnaire, never a
+  city. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a
