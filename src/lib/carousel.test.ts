@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { revealFor, twinsOf } from "./carousel";
 import { bestMatches, type Answers } from "./ranking";
-import { CITIES } from "./cities";
+import { CITIES, type CriterionKey } from "./cities";
 
 describe("revealFor", () => {
   it("reveals the cities the quiz gives, in its order and with its percentages", () => {
@@ -52,5 +52,38 @@ describe("twinsOf", () => {
 
   it("refuses a city it does not know", () => {
     expect(() => twinsOf("atlantide", ["nightlife"], 3)).toThrow(/atlantide/);
+  });
+
+  describe("from several cities", () => {
+    const criteria: CriterionKey[] = ["nightlife", "culture", "returnees"];
+    const dakar = CITIES.find((c) => c.slug === "dakar")!;
+
+    it("leaves out every source city's country", () => {
+      const twins = twinsOf(["dakar", "abidjan"], criteria, 10);
+
+      expect(twins).toHaveLength(10);
+      for (const twin of twins) {
+        expect([dakar.country, abidjan.country]).not.toContain(twin.country);
+      }
+    });
+
+    it("adds up the gap to each source city, closest first", () => {
+      const fromDakar = twinsOf("dakar", criteria, CITIES.length);
+      const fromAbidjan = twinsOf("abidjan", criteria, CITIES.length);
+
+      const twins = twinsOf(["dakar", "abidjan"], criteria, 10);
+
+      for (const twin of twins) {
+        const gapToDakar = fromDakar.find((t) => t.city === twin.city)!.gap;
+        const gapToAbidjan = fromAbidjan.find((t) => t.city === twin.city)!.gap;
+        expect(twin.gap).toBe(gapToDakar + gapToAbidjan);
+      }
+      const gaps = twins.map((t) => t.gap);
+      expect(gaps).toEqual([...gaps].sort((a, b) => a - b));
+    });
+
+    it("gives the single-city answer for a list of one", () => {
+      expect(twinsOf(["abidjan"], criteria, 5)).toEqual(twinsOf("abidjan", criteria, 5));
+    });
   });
 });
