@@ -6,6 +6,30 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.25.0] - 2026-11-20
+
+### Added
+
+- « Pourquoi ces villes ? » above your cities: one line to unfold, which says what your top
+  cities have in common and why the first one leads, in French and in English.
+- « Ces villes vous ressemblent ? » right under your first city: say yes or not really in one
+  tap, leave a review or share your cities. We count only the yes or the not really and which
+  questionnaire you were on, never the cities or your answers; the privacy pages say so.
+
+### Changed
+
+- Your first city now comes right after « Vos villes »: the link to the full questionnaire is
+  shorter on a phone, and the temperament and the sources note come after the cities.
+- One news sign-up on the result, right after your cities. The one offered during the quiz
+  closes when the quiz ends.
+
+### Fixed
+
+- A reader who names their origin and says they want to stay near their own (« Beaucoup », or
+  « Je préfère rester en terrain connu ») no longer gets cities across the divide between North
+  Africa and the rest of the continent at the top, whichever side their family is from. The
+  origin alone changes nothing, and no city is removed from the list.
+
 ## [0.24.0] - 2026-11-19
 
 ### Added
@@ -532,6 +556,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.24.0...HEAD
+[0.25.0]: https://github.com/big-emotion/labas/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/big-emotion/labas/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/big-emotion/labas/compare/v0.22.1...v0.23.0
 [0.22.1]: https://github.com/big-emotion/labas/compare/v0.22.0...v0.22.1
