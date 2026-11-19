@@ -64,6 +64,7 @@ export const GOALS = [
   "Message envoyé",
   "Pas pour moi",
   "Pas pour moi annulé",
+  "Avis sur le résultat",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -176,5 +177,26 @@ export function notForMeEvent(
   return {
     name: undone ? "Pas pour moi annulé" : "Pas pour moi",
     props: { lieu: NOT_FOR_ME_PLACES[place], niveau: LEVELS[level] },
+  };
+}
+
+/**
+ * « Ces villes vous ressemblent ? » (beta feedback, 2026-11-19): one tap under the explanation of
+ * the result, because readers interact a lot and review little. The props « lieu » and « avis »
+ * must be listed in Plausible's custom properties. Never the cities: with the answers events of
+ * the same visit they would say where a reader of a given origin was sent.
+ */
+const VERDICT_PLACES = { quick: "Questionnaire 1", deep: "Questionnaire complet" } as const;
+export type VerdictPlace = keyof typeof VERDICT_PLACES;
+
+export interface VerdictEvent {
+  name: "Avis sur le résultat";
+  props: { lieu: string; avis: "Ça me ressemble" | "Pas vraiment" };
+}
+
+export function verdictEvent(place: VerdictPlace, suits: boolean): VerdictEvent {
+  return {
+    name: "Avis sur le résultat",
+    props: { lieu: VERDICT_PLACES[place], avis: suits ? "Ça me ressemble" : "Pas vraiment" },
   };
 }

@@ -7,6 +7,7 @@ import {
   notForMeEvent,
   plausibleScriptSrc,
   reactionEvent,
+  verdictEvent,
 } from "./analytics";
 
 describe("where the audience script comes from", () => {
@@ -161,5 +162,22 @@ describe("the event sent with a message from the feedback tab", () => {
 
   it("is declared as a goal", () => {
     expect(GOALS).toContain(messageEvent("site").name);
+  });
+});
+
+describe("the event sent when a reader says whether the result suits them", () => {
+  it("says only the page and the verdict, never a city or an answer", () => {
+    expect(verdictEvent("quick", true)).toEqual({
+      name: "Avis sur le résultat",
+      props: { lieu: "Questionnaire 1", avis: "Ça me ressemble" },
+    });
+    expect(verdictEvent("deep", false)).toEqual({
+      name: "Avis sur le résultat",
+      props: { lieu: "Questionnaire complet", avis: "Pas vraiment" },
+    });
+  });
+
+  it("is declared as a goal", () => {
+    expect(GOALS).toContain(verdictEvent("quick", true).name);
   });
 });

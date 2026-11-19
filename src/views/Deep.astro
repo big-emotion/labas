@@ -6,6 +6,7 @@ import ResultCards from "../components/ResultCards.astro";
 import Page from "../layouts/Page.astro";
 import SaveLater from "../components/SaveLater.astro";
 import Reactions from "../components/Reactions.astro";
+import ResultWhy from "../components/ResultWhy.astro";
 import { DEEP_QUESTIONS } from "../lib/deep-questions";
 import { questionIn } from "../lib/questions";
 import type { Bilingual } from "../i18n/locale";
@@ -114,12 +115,13 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
   <section id="vos-villes" class="results" aria-labelledby="ranking-title" data-print>
     <h2 id="ranking-title">{copy.ranking}</h2>
     <p class="hint">{copy.rankingHint}</p>
-    <SourcesNote />
-    <TemperamentProfile />
+    <ResultWhy place="deep" />
     <ul id="removed" class="removed"></ul>
     <div id="cards" class="cards"></div>
     {/* Moved by the script right under the first city's pitch. */}
     <Reactions preview />
+    <SourcesNote />
+    <TemperamentProfile />
     <KeepResults />
   </section>
 
@@ -143,6 +145,7 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
     import { browserStore, track, wireKeep } from "../lib/keep-dom";
     import { showProfile } from "../lib/profile-dom";
     import { cardFor, rowFor } from "../lib/cards-dom";
+    import { placeVerdict, showWhy } from "../lib/why-dom";
     import { showCounts, showPreview } from "../lib/reactions-dom";
     import { resultLink } from "../lib/shared-result";
     import { pageLocale, type Bilingual } from "../i18n/locale";
@@ -284,8 +287,10 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
         }),
       );
       const proposed = ranked.filter((m) => !m.excludedBecause);
+      showWhy(proposed.slice(0, TOP), locale);
       const cards = proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked, locale));
       (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+      placeVerdict(locale);
       void showCounts(proposed.slice(1, TOP).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
       // What others say of the first city, right under its pitch (operator, 2026-11-18).
       if (proposed[0])
