@@ -28,6 +28,18 @@ services:
       - "traefik.http.routers.labas-http.middlewares=labas-https"
       - "traefik.http.middlewares.labas-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.labas-https.redirectscheme.permanent=true"
+      # overthere.africa — the English site, on its own router so a certificate problem on one
+      # domain never blocks the other.
+      - "traefik.http.routers.labas-en.rule=Host(`overthere.africa`) || Host(`www.overthere.africa`)"
+      - "traefik.http.routers.labas-en.entrypoints=websecure"
+      - "traefik.http.routers.labas-en.tls.certresolver=myresolver"
+      - "traefik.http.routers.labas-en.middlewares=labas-en-www"
+      - "traefik.http.middlewares.labas-en-www.redirectregex.regex=^https://www\\.overthere\\.africa/(.*)"
+      - "traefik.http.middlewares.labas-en-www.redirectregex.replacement=https://overthere.africa/$${1}"
+      - "traefik.http.middlewares.labas-en-www.redirectregex.permanent=true"
+      - "traefik.http.routers.labas-en-http.rule=Host(`overthere.africa`) || Host(`www.overthere.africa`)"
+      - "traefik.http.routers.labas-en-http.entrypoints=web"
+      - "traefik.http.routers.labas-en-http.middlewares=labas-https"
 
   # The mail and accounts service (src/server/subscribe.ts). Traefik sends it /api/nouveautes,
   # /api/resultats and /api/compte;
@@ -45,7 +57,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
       - "traefik.http.services.labas-subscribe.loadbalancer.server.port=8080"
-      - "traefik.http.routers.labas-subscribe.rule=Host(`labas.africa`) && (PathPrefix(`/api/nouveautes`) || Path(`/api/resultats`) || PathPrefix(`/api/compte`))"
+      - "traefik.http.routers.labas-subscribe.rule=(Host(`labas.africa`) || Host(`overthere.africa`)) && (PathPrefix(`/api/nouveautes`) || Path(`/api/resultats`) || PathPrefix(`/api/compte`))"
       - "traefik.http.routers.labas-subscribe.priority=100"
       - "traefik.http.routers.labas-subscribe.entrypoints=websecure"
       - "traefik.http.routers.labas-subscribe.tls.certresolver=myresolver"

@@ -155,7 +155,7 @@ accepts forms from that origin and writes English links (sign-in links included)
 English stays under `labas.africa/en/`.
 
 **8. First deploy.** `git tag v0.1.0 && git push origin v0.1.0`, or run the workflow by hand.
-The smoke check fails the job unless `https://labas.africa/` answers 200.
+The smoke check fails the job unless `https://labas.africa/` and `https://overthere.africa/` answer 200.
 
 ## Rollback
 
@@ -174,12 +174,11 @@ so the current registrar's MX, SPF and DMARC records need not be recreated.
 3. In the new zone, before switching name servers: `@` A `<server-ip>`, `www` A `<server-ip>`.
 4. Once the transfer completes and the new name servers answer, check with `dig` as in step 1.
 
-## Second domain: overthere.africa (prepared, not live)
+## Second domain: overthere.africa
 
 The English site, Over There, is built under `/en/` and served today at `labas.africa/en/…`
-(addresses in `src/i18n/routes.ts`). `overthere.africa` was free on 2026-11-18 and is not bought
-yet. Everything that does not depend on the domain is already in place, so the switch is a DNS,
-variable and Traefik step:
+(addresses in `src/i18n/routes.ts`). `overthere.africa` was registered on 2026-11-19 at the current registrar
+(transfer possible from about 2027-01-18). The switch is a DNS, variable and Traefik step:
 
 - `deploy/nginx.conf` has a `server` block for `overthere.africa` and `www.overthere.africa`. It
   serves the same build and looks every address up in `/en/` first (`/city/dakar/` →
@@ -189,20 +188,19 @@ variable and Traefik step:
 - The build reads `PUBLIC_EN_ORIGIN` (the `Dockerfile` argument, fed from the repository
   variable `EN_ORIGIN`). Empty, English links keep the `/en` prefix; set, they drop it, and the
   language switch links across the two domains.
-- The labas.africa block carries the `/en/…` → overthere.africa 301, commented out with « enable
-  after the switch ».
+- The labas.africa block carries the `/en/…` → overthere.africa 301.
 
 Both domains then serve the same site; each opens on its own language, and the FR/EN switch on
 every page links to the other domain.
 
-### Why Traefik is not prepared in the compose file
+### Why Traefik waited for DNS
 
 A Traefik router asks Let's Encrypt for one certificate covering every `Host()` in its rule. Adding
 `overthere.africa` to the `labas` router before the name resolves would make every order for that
 certificate fail, `labas.africa`'s renewal included, and the failed validations count against
 Let's Encrypt's rate limits. A separate router would keep labas.africa safe but would still retry
-and fail on every request. So the labels below stay here, and go into
-`deploy/docker-compose.yml` only on switch day, after DNS answers.
+and fail on every request. So these labels went into `deploy/docker-compose.yml` in the switch
+change (with the redirect of step 6 and the second smoke check), merged only once DNS answers.
 
 ```diff
        - "traefik.http.middlewares.labas-https.redirectscheme.permanent=true"
@@ -228,8 +226,7 @@ Adding `overthere.africa` to it changes its certificate the same way, which is w
 
 ### Switch day, in this order
 
-1. **Buy the domain** (operator). Note the date: registries refuse a transfer for 60 days after
-   registration, as for labas.africa above.
+1. **Buy the domain**: done 2026-11-19.
 2. **DNS**: `@` A `<server-ip>`, `www` A `<server-ip>`, delete the registrar's default AAAA. Wait
    until `dig +short overthere.africa A` and `dig +short www.overthere.africa A` both answer
    `<server-ip>`.
@@ -244,11 +241,11 @@ Adding `overthere.africa` to it changes its certificate the same way, which is w
    address. English pages show it as the contact once `EN_ORIGIN` is set (step 5), not before, so
    nobody writes to an address that bounces. The sender stays `MAIL_SENDER` (labas.africa): a
    second sender would need its own Graph access policy.
-4. **Traefik**: apply the diff above to `deploy/docker-compose.yml`.
+4. **Traefik**: merge the switch change (the diff above, already in `deploy/docker-compose.yml`).
 5. **The build variable**:
    `gh variable set EN_ORIGIN --repo big-emotion/labas --body https://overthere.africa`.
-6. **The redirect**: uncomment the two `/en` lines in the labas.africa block of
-   `deploy/nginx.conf`.
+6. **The redirect**: the two `/en` lines in the labas.africa block of `deploy/nginx.conf`, in the
+   same change.
 7. **Release** (`/labas-release`). The first request to overthere.africa gets its certificate.
 8. **Check**:
    - `curl -sI https://overthere.africa/` answers 200 and the page has `<html lang="en">`;
@@ -261,7 +258,6 @@ Adding `overthere.africa` to it changes its certificate the same way, which is w
    - "Get it by email" works from an English page (no 403 `origin`).
    - Plausible counts visits from both hostnames (no hostname allow-list leaving out
      overthere.africa in the site settings).
-   - Add `https://overthere.africa/` to the smoke check in `deploy-production.yml`.
    - Search engines: add overthere.africa to the search consoles, with its own sitemap.
 
 ### Social handles to reserve
