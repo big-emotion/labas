@@ -135,11 +135,13 @@ jobs:
       # certificate when the container starts, and curl fails with exit 60 meanwhile.
       - name: Smoke check
         run: |
-          for attempt in $(seq 1 12); do
-            status=$(curl -sS -o /dev/null -w '%{http_code}' https://labas.africa/ || true)
-            if [ "$status" = "200" ]; then exit 0; fi
-            echo "attempt $attempt: got '$status', retrying in 5 s"
-            sleep 5
+          for site in https://labas.africa/ https://overthere.africa/; do
+            for attempt in $(seq 1 12); do
+              status=$(curl -sS -o /dev/null -w '%{http_code}' "$site" || true)
+              if [ "$status" = "200" ]; then continue 2; fi
+              echo "$site attempt $attempt: got '$status', retrying in 5 s"
+              sleep 5
+            done
+            echo "$site did not answer 200 within a minute" >&2
+            exit 1
           done
-          echo "https://labas.africa/ did not answer 200 within a minute" >&2
-          exit 1

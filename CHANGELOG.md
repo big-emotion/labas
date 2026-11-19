@@ -17,6 +17,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - Reviews can be translated on request. The privacy pages say what is sent: only the review's
   public text, to DeepL SE (Germany, EU), translated once per language and kept with the review;
   never the author's name, journey, answers or address, and nothing unless someone asks.
+- Over There has its own address, overthere.africa. Old `labas.africa/en/…` links lead there, and
+  English readers write to hello@overthere.africa.
 
 ### Changed
 
