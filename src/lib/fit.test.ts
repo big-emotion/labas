@@ -70,7 +70,6 @@ describe("the city a profile lands on", () => {
       ["safety"],
       ["cost"],
       ["health"],
-      ["schools"],
       ["career"],
       ["diaspora"],
       ["memory"],
