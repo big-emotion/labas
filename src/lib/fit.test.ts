@@ -69,7 +69,7 @@ describe("the city a profile lands on", () => {
     priorities: [
       ["safety"],
       ["cost"],
-      ["healthAndSchools"],
+      ["health"],
       ["career"],
       ["diaspora"],
       ["memory"],
@@ -217,7 +217,7 @@ describe("the city a profile lands on", () => {
       adventure: "familiar",
       faith: "muslim",
       family: "parents",
-      priorities: ["safety", "healthAndSchools"],
+      priorities: ["safety", "schools"],
     },
     "Haitian-Canadian NGO worker who likes nature": {
       project: "tester",

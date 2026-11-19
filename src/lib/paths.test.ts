@@ -106,11 +106,13 @@ describe("questions and choices that fit what was said", () => {
     }
   });
 
-  it("offers schools only with children, a career only when working there, repats not on holiday", () => {
+  it("offers health to everyone, schools only with children, a career only when working there, repats not on holiday", () => {
     const priorities = (answers: Answers) =>
       visibleChoices(question("priorities"), answers).map((c) => c.value);
-    expect(priorities({ project: "installer", family: "celib" })).not.toContain("healthAndSchools");
-    expect(priorities({ project: "installer", family: "parents" })).toContain("healthAndSchools");
+    expect(priorities({ project: "installer", family: "celib" })).toContain("health");
+    expect(priorities({ project: "decouvrir", family: "couple" })).toContain("health");
+    expect(priorities({ project: "installer", family: "celib" })).not.toContain("schools");
+    expect(priorities({ project: "installer", family: "parents" })).toContain("schools");
     expect(priorities({ project: "decouvrir", family: "couple" })).not.toContain("career");
     expect(priorities({ project: "decouvrir", family: "couple" })).not.toContain("diaspora");
     expect(priorities({ project: "investir" })).not.toContain("career");
@@ -147,7 +149,7 @@ describe("going back and changing an answer", () => {
       kin: "much",
       faith: "muslim",
       family: "parents",
-      priorities: ["healthAndSchools", "safety"],
+      priorities: ["schools", "safety"],
       saturday: 1,
     };
     // The full questionnaire holds country and faith: its bank drops them too.

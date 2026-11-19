@@ -99,7 +99,8 @@ const COPY: Bilingual<PortraitCopy> = {
       safety: (c) =>
         `La sécurité compte pour vous : ${c} a la réputation d'une ville sûre au quotidien.`,
       cost: (c) => `Une vie abordable compte pour vous : à ${c}, elle le reste.`,
-      healthAndSchools: (c) => `La santé et l'école comptent pour vous : ${c} est bien équipée.`,
+      health: (c) => `La santé compte pour vous : à ${c}, de bons soins sont à portée.`,
+      schools: (c) => `L'école des enfants compte pour vous : ${c} a de bonnes écoles.`,
       career: (c) => `Vous pensez carrière : ${c} offre de vraies opportunités.`,
       diaspora: (c) =>
         `Vous voulez retrouver d'autres repats : la communauté du retour est active à ${c}.`,
@@ -159,7 +160,8 @@ const COPY: Bilingual<PortraitCopy> = {
     priority: {
       safety: (c) => `Safety matters to you: ${c} has a reputation as a safe city day to day.`,
       cost: (c) => `An affordable life matters to you: in ${c}, it stays affordable.`,
-      healthAndSchools: (c) => `Healthcare and schools matter to you: ${c} is well equipped.`,
+      health: (c) => `Healthcare matters to you: in ${c}, good care is within reach.`,
+      schools: (c) => `Your children's schooling matters to you: ${c} has good schools.`,
       career: (c) => `You are thinking of your career: ${c} offers real opportunities.`,
       diaspora: (c) =>
         `You want to meet other returnees: the returnee community is active in ${c}.`,
@@ -173,7 +175,8 @@ const COPY: Bilingual<PortraitCopy> = {
 const PRIORITY_CRITERION: Record<Priority, CriterionKey> = {
   safety: "safety",
   cost: "cost",
-  healthAndSchools: "healthcare",
+  health: "healthcare",
+  schools: "schools",
   career: "jobs",
   diaspora: "returnees",
   memory: "history",
