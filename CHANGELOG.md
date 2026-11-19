@@ -6,6 +6,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.24.0] - 2026-11-19
+
 ### Added
 
 - Là-bas in English: Over There. The quiz, the results, the cities and the reviews have English
@@ -19,11 +21,22 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   never the author's name, journey, answers or address, and nothing unless someone asks.
 - Over There has its own address, overthere.africa. Old `labas.africa/en/…` links lead there, and
   English readers write to hello@overthere.africa.
+- « Pas pour moi » on the cities leading the quiz and on each result card: set aside that city,
+  its whole country or its whole region, see how many cities go, and bring any of them back in
+  one tap. The full questionnaire also asks which regions you would rather leave out.
+- The places you set aside are kept like sensitive answers: in your browser, and in your space
+  only with the box that names them. Analytics count the gesture, never the place.
 
 ### Changed
 
 - The long city guides (neighbourhoods, daily life, holidays) stay in
   French on the English pages for now, with a note saying so.
+- The Region filter on the results now takes out the regions you pick, instead of keeping them.
+
+### Fixed
+
+- Good healthcare can be a non-negotiable for every reader, not only for families: « De bons
+  soins » and « L'école des enfants » are now two separate choices.
 
 ## [0.23.0] - 2026-11-18
 
@@ -518,7 +531,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.22.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.24.0...HEAD
+[0.24.0]: https://github.com/big-emotion/labas/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/big-emotion/labas/compare/v0.22.1...v0.23.0
 [0.22.1]: https://github.com/big-emotion/labas/compare/v0.22.0...v0.22.1
 [0.22.0]: https://github.com/big-emotion/labas/compare/v0.21.0...v0.22.0
