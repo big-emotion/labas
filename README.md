@@ -110,6 +110,17 @@ npm run test:watch
 
 `make check` is the gate before every push; CI runs the same command on pull requests.
 
+### Adding or changing text
+
+The site is bilingual: French (Là-bas, the source) and British English (Over There, under `/en/`
+until overthere.africa is live). Every change to reader-facing text ships both languages in the
+same pull request; the admin stays French only. The project skill
+[`labas-translate`](.claude/skills/labas-translate/SKILL.md) says where each kind of text lives
+(`Bilingual` copy next to the code, overlays in `src/data/en/`, one prose page per language under
+`src/pages/en/`, addresses in `src/i18n/routes.ts`), keeps the fixed terms in its
+[glossary](.claude/skills/labas-translate/glossary.md) and checks the English build for leftover
+French. A missing English text is a type error, so `make check` catches it.
+
 ### The server part
 
 The site is static, except for one small Node service, `src/server/`. It handles:

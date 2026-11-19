@@ -108,6 +108,42 @@ the search in `src/lib/review-search.ts`, the list in `Reactions.astro` (mode `e
   goes with the space. At most 120 marks an hour per space.
 - **`/villes`** lists every city by region, static, for whoever wants a city page without the quiz.
 
+## Translating a review (DeepL)
+
+Decided with the operator on 2026-11-18, with the English site. Code: `src/server/deepl.ts` and
+the `/traduction` route in `accounts.ts`, tested in `translation.test.ts`; the button is in
+`reactions-dom.ts`.
+
+- **On request, one review at a time.** Under each review and reply, « Traduire » (« Translate »)
+  shows it in the page's language, and « Voir l'original » brings the original back. Nothing is
+  translated unless a reader asks: most reviews will be read by readers of their own language.
+- **Only the text, looked up by id.** The route takes a review's id and a target (`fr` or `en`),
+  never a text: the service cannot be used as a free translation proxy, and the name, the journey
+  and the answers never reach DeepL. No source language is sent: DeepL detects it, and when it is
+  already the page's, the page says « Déjà en français » / « Already in English ».
+- **Once per review and language.** The copy is kept in `reaction_translations` (review, target,
+  text, detected language, date), deleted with the review by the foreign key, so it goes when the
+  review, its thread or the space goes. Reviews are never edited, so a copy never goes stale. A
+  connection may send 30 reviews an hour to DeepL; copies already kept do not count.
+- **Off without a key.** Without `DEEPL_API_KEY` the route answers 503 and `GET
+/api/compte/reactions` says `translate: false`, so the page shows no button.
+- **Measured, anonymously.** « Réaction traduite » with `lieu` and `ville`, like the other
+  reaction goals; never the text or the languages.
+
+## In the reader's language
+
+Decided with the operator on 2026-11-18. Every form that makes the service write an e-mail (news
+sign-up, « Recevoir par e-mail », « Reprendre plus tard », a login link, a reaction) sends the
+page's `locale` (`fr` or `en`; anything else reads as French). The e-mail is written in it, and
+its links open the pages in that language (`pageUrl` in `emails.ts`: `SITE_URL` plus the built
+path, English under `/en/`; once `EN_SITE_URL` names the English domain, English links, sign-in
+links included so the session cookie lands there, use it with the bare English paths). The links the service signs carry `lang=en` when they come
+from English, so the redirects after them (`/en/my-space/`, `/en/my-space/link-expired/`,
+`/en/news/confirmed/`, `/en/news/invalid-link/`) stay in English; `lang` only picks a page, the
+token alone authorises. `news_subscribers.locale` keeps the language of the last confirmation, so
+the news can be written in it. « Utilisateur 1234 » is stored and served in French and shown as
+« User 1234 » on English pages. The feedback tab's mail to the team and `/admin` stay French.
+
 ## The feedback tab (« Votre avis »)
 
 Decided with the operator on 2026-11-18. Code: the `/api/compte/messages` route in `accounts.ts`,
@@ -167,37 +203,39 @@ tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `s
 | News address (`news_subscribers`)                         | 3 years after its last confirmation       |
 | News unsubscribe link (`/nouveautes/desinscription/#t=`)  | Never expires; the button erases at once  |
 | Message from the feedback tab (`messages`)                | 1 year after it was sent, then erased     |
+| A review's translation (`reaction_translations`)          | As long as the review, erased with it     |
 
 `purge()` applies these at start-up and then once a day.
 
 ## Routes (`/api/compte`, the subscribe service)
 
-| Route                                     | Who            | Does                                                                                    |
-| ----------------------------------------- | -------------- | --------------------------------------------------------------------------------------- |
-| `POST /api/compte/sauvegarder`            | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link                        |
-| `POST /api/compte/resultats`              | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result          |
-| `POST /api/compte/lien`                   | anyone         | Email (and `back`) → a 15-minute link if the address has a space; same answer otherwise |
-| `GET /api/compte/connexion?t=`            | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`)          |
-| `GET /api/compte`                         | session        | Email, news choice, `keptUntil`, confirmed journeys                                     |
-| `GET /api/compte/export`                  | session        | Everything kept, as a JSON download                                                     |
-| `PATCH /api/compte`                       | session        | Turns the news on or off (also in the news list)                                        |
-| `POST /api/compte/parcours`               | session        | A new journey                                                                           |
-| `PUT` · `DELETE /api/compte/parcours/:id` | the owner only | Save answers as the quiz goes · delete one journey                                      |
-| `DELETE /api/compte`                      | session        | Erases the space, its journeys and sessions, and removes it from the list               |
-| `POST /api/compte/deconnexion`            | session        | Ends the session                                                                        |
-| `GET /api/compte/reactions?ville=`        | anyone         | Published reviews of a city (every city without `ville`), with replies and mark counts  |
-| `POST /api/compte/reactions`              | anyone         | A review, or a reply with `replyTo`. Signed in: online at once; else a 7-day link       |
-| `POST /api/compte/reactions/:id/marques`  | signed in      | Puts a mark, or takes it back; answers the counts and the reader's own marks            |
-| `POST /api/compte/messages`               | anyone         | `kind`, `text`, `page`, optional `email` → kept, mailed to the team; 202                |
-| `GET /api/compte/admin`                   | admin only     | Every review and reply (never an address), and the feedback tab's messages              |
-| `DELETE /api/compte/admin/messages/:id`   | admin only     | Deletes one message                                                                     |
-| `POST /api/compte/admin/reactions/:id`    | admin only     | `action`: `masquer`, or `retablir` (also clears the reports)                            |
-| `DELETE /api/compte/admin/reactions/:id`  | admin only     | Deletes a review and its replies                                                        |
-| `GET /api/compte/admin/stats`             | admin only     | The Plausible figures; 503 without a key, 502 when Plausible fails                      |
-| `POST /api/compte/reactions/:id/signaler` | anyone         | Counts one report per connection; three hide the reaction                               |
-| `DELETE /api/compte/reactions/:id`        | the owner only | Deletes one reaction                                                                    |
+| Route                                       | Who            | Does                                                                                            |
+| ------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| `POST /api/compte/sauvegarder`              | anyone         | Email, consent, a journey → unconfirmed save plus a 24-hour link                                |
+| `POST /api/compte/resultats`                | anyone         | Email, result link, journey → top-three e-mail plus a 7-day link to the result                  |
+| `POST /api/compte/lien`                     | anyone         | Email (and `back`) → a 15-minute link if the address has a space; same answer otherwise         |
+| `GET /api/compte/connexion?t=`              | link holder    | Confirms, opens a session, redirects to `/espace/` (or `/espace/lien-expire/`)                  |
+| `GET /api/compte`                           | session        | Email, news choice, `keptUntil`, confirmed journeys                                             |
+| `GET /api/compte/export`                    | session        | Everything kept, as a JSON download                                                             |
+| `PATCH /api/compte`                         | session        | Turns the news on or off (also in the news list)                                                |
+| `POST /api/compte/parcours`                 | session        | A new journey                                                                                   |
+| `PUT` · `DELETE /api/compte/parcours/:id`   | the owner only | Save answers as the quiz goes · delete one journey                                              |
+| `DELETE /api/compte`                        | session        | Erases the space, its journeys and sessions, and removes it from the list                       |
+| `POST /api/compte/deconnexion`              | session        | Ends the session                                                                                |
+| `GET /api/compte/reactions?ville=`          | anyone         | Published reviews of a city (every city without `ville`), with replies and mark counts          |
+| `POST /api/compte/reactions`                | anyone         | A review, or a reply with `replyTo`. Signed in: online at once; else a 7-day link               |
+| `POST /api/compte/reactions/:id/marques`    | signed in      | Puts a mark, or takes it back; answers the counts and the reader's own marks                    |
+| `POST /api/compte/reactions/:id/traduction` | anyone         | `target` → the published review in that language, `{ text, detectedSource }`; 503 without a key |
+| `POST /api/compte/messages`                 | anyone         | `kind`, `text`, `page`, optional `email` → kept, mailed to the team; 202                        |
+| `GET /api/compte/admin`                     | admin only     | Every review and reply (never an address), and the feedback tab's messages                      |
+| `DELETE /api/compte/admin/messages/:id`     | admin only     | Deletes one message                                                                             |
+| `POST /api/compte/admin/reactions/:id`      | admin only     | `action`: `masquer`, or `retablir` (also clears the reports)                                    |
+| `DELETE /api/compte/admin/reactions/:id`    | admin only     | Deletes a review and its replies                                                                |
+| `GET /api/compte/admin/stats`               | admin only     | The Plausible figures; 503 without a key, 502 when Plausible fails                              |
+| `POST /api/compte/reactions/:id/signaler`   | anyone         | Counts one report per connection; three hide the reaction                                       |
+| `DELETE /api/compte/reactions/:id`          | the owner only | Deletes one reaction                                                                            |
 
-Every change must come from `https://labas.africa` (Origin check). The cookie alone authorises
+Every change must come from `https://labas.africa`, or from `EN_SITE_URL` when it is set (Origin check). The cookie alone authorises
 nothing cross-site. Answers go through `cleanAnswers` (`src/lib/keep.ts`), so only questions and
 choices the quiz offers reach the database. Results are not stored: the page computes them from the
 answers, so a result kept without the sensitive answers may rank a little differently, and the full

@@ -1,9 +1,10 @@
 import type { Answers } from "./ranking";
 import { archetypeOf } from "./temperament";
+import type { Locale } from "../i18n/locale";
 
 /** Fills every profile block (components/TemperamentProfile.astro) on the page. */
-export function showProfile(answers: Answers): void {
-  const archetype = archetypeOf(answers);
+export function showProfile(answers: Answers, locale: Locale): void {
+  const archetype = archetypeOf(answers, locale);
   for (const block of document.querySelectorAll<HTMLElement>("[data-profile]")) {
     block.hidden = !archetype;
     if (!archetype) continue;

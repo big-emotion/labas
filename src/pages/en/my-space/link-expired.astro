@@ -1,0 +1,20 @@
+---
+import Page from "../../../layouts/Page.astro";
+import { pathFor } from "../../../i18n/routes";
+---
+
+<Page
+  title="Link expired"
+  description="This sign-in link no longer works: ask for a new one from My space."
+>
+  <h1>This link no longer works.</h1>
+  <p>
+    A sign-in link works once, and not for long: 7 days in the email with your results, 24 hours
+    after "Continue later", 15 minutes from My space. It may already have been used, or it has
+    expired.
+  </p>
+  <p>Your journeys are still there. Ask for a new link:</p>
+  <p>
+    <a href={pathFor("space", "en")}>Open My space</a>
+  </p>
+</Page>

@@ -11,6 +11,11 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 
 - **Reader-facing text is French**, plain and everyday, addressed with « vous » (decided
   2026-11-15; tests reject « tu »); docs, comments and commits are English.
+- **Languages** (operator, 2026-11-18): French is the source, English (Over There) follows in
+  British English. Every reader-facing text ships in French and English in the same change
+  (`Bilingual` copy in `src/i18n/locale.ts`, links through `pathFor` in `src/i18n/routes.ts`, one
+  prose page per language); the admin stays French only, and the long city data stays French
+  until it is translated. Run the `labas-translate` skill on every text change.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
   change something: from the third answer the map colours every city by its score and names
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
@@ -35,7 +40,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   questionnaire resumes the quick quiz). What is sent: anonymous, cookieless Plausible events,
   one per quick-quiz answer (with the reader's path and the question's rank in it) plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
-  LGBT filters are never sent. Shared or mailed results carry cities and percentages, never
+  LGBT filters are never sent. « Pas pour moi » (operator, 2026-11-18) sets a city, a country
+  or a region aside as a filter, never a score; the places are sensitive answers, and its event
+  (`notForMeEvent`) carries only the place on the page and the level, never which one. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a
@@ -51,7 +58,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   recomputed from the result link; never an answer, never the address. Their Plausible events (`reactionEvent`) carry the place
   and the city slug, plus whether a sent reaction went online at once; never its text. `/avis` (operator 2026-11-18) lists every city's reviews for anyone;
   replies are two levels, carry no journey, and hearts and the few friendly marks need a session
-  and show as counts only, never who left them. The « Votre avis » feedback tab
+  and show as counts only, never who left them. A review is translated only when a reader
+  presses the button (operator 2026-11-18): its public text alone goes to DeepL SE (EU), once per
+  language, and the translation is kept with the review and deleted with it. The « Votre avis » feedback tab
   (`components/Feedback.astro`, operator 2026-11-18) sends only its kind, text, page path and an
   optional e-mail, kept 1 year for /admin and mailed to the team; never published, never a quiz
   answer. Fonts are self-hosted;

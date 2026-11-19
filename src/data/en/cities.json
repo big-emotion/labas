@@ -1,0 +1,807 @@
+{
+  "Lagos": {
+    "tagline": "Speed, money, afrobeats",
+    "pitch": "One of the biggest cities on the continent, the engine of Nollywood, afrobeats and Nigerian tech. People come here to make it.",
+    "watch": "An intense city: gruelling traffic, frequent power cuts and care needed depending on the neighbourhood.",
+    "languageLabel": "English, Yoruba, Pidgin",
+    "currency": "Naira"
+  },
+  "Abidjan": {
+    "tagline": "Parties, food, business",
+    "pitch": "Côte d'Ivoire's economic capital lives to the rhythm of its lagoon, its maquis eateries and a nightlife famous across West Africa.",
+    "watch": "Daily traffic jams between districts, and a very humid climate for much of the year.",
+    "languageLabel": "French",
+    "currency": "CFA franc"
+  },
+  "Accra": {
+    "tagline": "Diaspora, warmth, creativity",
+    "pitch": "A welcoming English-speaking city, turned towards the diaspora since the 2019 Year of Return, between its afrobeats scene and the forts along the coast.",
+    "watch": "Rents in the sought-after neighbourhoods come as a surprise, and are often paid a year or more in advance.",
+    "languageLabel": "English, Twi, Ga",
+    "currency": "Cedi"
+  },
+  "Dakar": {
+    "tagline": "Art, ocean, elegance",
+    "pitch": "An Atlantic peninsula where surfing, mbalax and the arts scene meet, with Gorée Island twenty minutes away by ferry.",
+    "watch": "Traffic is heavy, and rents on the Plateau and in the Almadies have risen a lot.",
+    "languageLabel": "French, Wolof",
+    "currency": "CFA franc"
+  },
+  "Cotonou": {
+    "tagline": "Memory, calm, spirituality",
+    "pitch": "A city on a human scale, the gateway to Ouidah, Abomey and vodun culture, at the heart of the memory of the slave trade.",
+    "watch": "Healthcare, internet and flights are more limited than in the big neighbouring capitals.",
+    "languageLabel": "French, Fon",
+    "currency": "CFA franc"
+  },
+  "Kinshasa": {
+    "tagline": "Music, excess, getting by",
+    "pitch": "Often described as the largest French-speaking city in the world, the capital of Congolese rumba and of la sape, on the Congo River.",
+    "watch": "A tiring city: overloaded infrastructure, expensive as soon as you want international comfort, and safety to follow closely.",
+    "languageLabel": "French, Lingala",
+    "currency": "Congolese franc"
+  },
+  "Douala": {
+    "tagline": "Trade, plain speaking, cooking",
+    "pitch": "Cameroon's economic capital and main port, a trading city with a rebellious streak, known for makossa and its food.",
+    "watch": "Very humid heat, heavy rain and difficult traffic.",
+    "languageLabel": "French, English",
+    "currency": "CFA franc"
+  },
+  "Luanda": {
+    "tagline": "Oil, bay, kizomba",
+    "pitch": "A Portuguese-speaking capital on the Atlantic, driven by oil, with its bay, its peninsula and the beat of kuduro and kizomba.",
+    "watch": "Long ranked among the most expensive cities in the world for expats, and Portuguese is essential.",
+    "languageLabel": "Portuguese",
+    "currency": "Kwanza"
+  },
+  "Nairobi": {
+    "tagline": "Tech, careers, safaris",
+    "pitch": "East Africa's business and tech crossroads, home to many international organisations, with a national park at the edge of town.",
+    "watch": "Safety varies a lot from one neighbourhood to the next, especially at night.",
+    "languageLabel": "English, Swahili",
+    "currency": "Kenyan shilling"
+  },
+  "Addis-Abeba": {
+    "tagline": "Altitude, history, diplomacy",
+    "pitch": "A high-altitude capital at over 2,300 metres, seat of the African Union, birthplace of coffee and of a cuisine like no other.",
+    "watch": "The internet can be unstable, the economy is still not very open to foreign investors, and everyday life runs in Amharic.",
+    "languageLabel": "Amharic, English in business",
+    "currency": "Birr"
+  },
+  "Dar es Salaam": {
+    "tagline": "Ocean, Swahili, easy living",
+    "pitch": "A big Swahili port on the Indian Ocean, growing fast and more relaxed than its neighbours, with Zanzibar two hours away by ferry.",
+    "watch": "Swahili rules daily life, the heat is very humid and cultural life is quieter than in Nairobi.",
+    "languageLabel": "Swahili, English",
+    "currency": "Tanzanian shilling"
+  },
+  "Kampala": {
+    "tagline": "Youth, nights out, hills",
+    "pitch": "A capital of hills near Lake Victoria, known for its nightlife and its enterprising young people.",
+    "watch": "Chaotic traffic dominated by motorbike taxis, and very repressive laws for LGBT people.",
+    "languageLabel": "English, Luganda",
+    "currency": "Ugandan shilling"
+  },
+  "Kigali": {
+    "tagline": "Order, safety, greenery",
+    "pitch": "The green, orderly capital of the land of a thousand hills, known for its cleanliness, its safety and how simple the paperwork is.",
+    "watch": "Low-key nightlife and cultural scene, no access to the sea and a tightly regulated way of life.",
+    "languageLabel": "Kinyarwanda, English, French",
+    "currency": "Rwandan franc"
+  },
+  "Johannesburg": {
+    "tagline": "Finance, culture, intensity",
+    "pitch": "The economic heart of South Africa and the continent's leading stock exchange, home to Soweto and a very lively arts scene.",
+    "watch": "High crime: people get around by car and find out about each neighbourhood one by one.",
+    "languageLabel": "English, Zulu, Sotho",
+    "currency": "Rand"
+  },
+  "Le Cap": {
+    "tagline": "Beauty, comfort, nature",
+    "pitch": "Between Table Mountain and two oceans, a city of vineyards, beaches and good restaurants, popular with remote workers.",
+    "watch": "Deep inequality, and high crime in some neighbourhoods.",
+    "languageLabel": "English, Afrikaans, Xhosa",
+    "currency": "Rand"
+  },
+  "Durban": {
+    "tagline": "Beach, warmth, mixed heritage",
+    "pitch": "A big South African port with beaches warm all year round, the heart of Zulu country and home to a large community of Indian descent.",
+    "watch": "High crime in the centre, and fewer career openings than in Johannesburg or Cape Town.",
+    "languageLabel": "English, Zulu",
+    "currency": "Rand"
+  },
+  "Maputo": {
+    "tagline": "Seafood, jazz, laid-back",
+    "pitch": "A Portuguese-speaking capital on the Indian Ocean, known for its seafood, its marrabenta music and its modernist architecture.",
+    "watch": "Portuguese is close to essential, and infrastructure remains patchy.",
+    "languageLabel": "Portuguese",
+    "currency": "Metical"
+  },
+  "Port-Louis": {
+    "tagline": "Stability, lagoon, finance",
+    "pitch": "The capital of Mauritius, Creole and multicultural, a stable financial centre with lagoons, mixed cooking and very good infrastructure.",
+    "watch": "Seaside housing is expensive, the island is a long flight from anywhere and life there is quiet.",
+    "languageLabel": "Mauritian Creole, French, English",
+    "currency": "Mauritian rupee"
+  },
+  "Le Caire": {
+    "tagline": "Scale, history, the Nile",
+    "pitch": "The megacity of the Nile at the gates of the Giza pyramids, with a wealth of history like nowhere else and a major air hub.",
+    "watch": "Intense noise, pollution and traffic, and persistent touting at the tourist sites.",
+    "languageLabel": "Arabic, English in tourism",
+    "currency": "Egyptian pound"
+  },
+  "Casablanca": {
+    "tagline": "Business, hub, modern",
+    "pitch": "Morocco's economic capital, a financial centre and a major air hub for West Africa, between its seafront and its Art Deco buildings.",
+    "watch": "A business city more than a charming one, with heavy traffic.",
+    "languageLabel": "Arabic, French",
+    "currency": "Dirham"
+  },
+  "Alger": {
+    "tagline": "Bay, Casbah, low costs",
+    "pitch": "Algiers the White, a bay rising like an amphitheatre over the Mediterranean, with its UNESCO-listed Casbah and a very low cost of living.",
+    "watch": "Heavy visa and paperwork, an economy not very open to foreign investors, and limited nightlife.",
+    "languageLabel": "Arabic, French, Tamazight",
+    "currency": "Algerian dinar"
+  },
+  "Tunis": {
+    "tagline": "Mediterranean, medina, gentle prices",
+    "pitch": "A UNESCO-listed medina, the ruins of Carthage and the village of Sidi Bou Said, at gentle prices on the Mediterranean.",
+    "watch": "The climate has become tense for Black people since 2023: something to check before you go.",
+    "languageLabel": "Arabic, French",
+    "currency": "Tunisian dinar"
+  },
+  "Marrakech": {
+    "tagline": "Medina, crafts, the Atlas",
+    "pitch": "A UNESCO-listed medina, riads and gardens, with the Atlas mountains and the desert a few hours' drive away.",
+    "watch": "Very touristy: frequent touting in the medina, and fierce heat in summer.",
+    "languageLabel": "Arabic, Amazigh, French",
+    "currency": "Dirham"
+  },
+  "Lomé": {
+    "tagline": "Seaside, big market, regional hub",
+    "pitch": "A seaside capital on a human scale, known for its big market and its Nana Benz traders, and home to an airline that connects the whole region.",
+    "watch": "Politics have been locked down for a long time, and healthcare is limited.",
+    "languageLabel": "French, Ewe",
+    "currency": "CFA franc"
+  },
+  "Freetown": {
+    "tagline": "Beaches, hills, Krio history",
+    "pitch": "Founded by freed former slaves, between green hills and some of the most beautiful beaches in West Africa, near Bunce Island.",
+    "watch": "Fragile infrastructure, power cuts and a very pronounced rainy season.",
+    "languageLabel": "English, Krio",
+    "currency": "Leone"
+  },
+  "Monrovia": {
+    "tagline": "African American history, ocean, rebuilding",
+    "pitch": "A capital founded in the 19th century by freed African Americans, on the Atlantic, with well-known surf breaks further north.",
+    "watch": "A country still rebuilding: limited power and healthcare, and very heavy rain.",
+    "languageLabel": "English",
+    "currency": "Liberian dollar and US dollar"
+  },
+  "Conakry": {
+    "tagline": "Peninsula, drums, getting by",
+    "pitch": "A capital on an Atlantic peninsula, heir to great traditions of drumming and dance, facing the Îles de Los.",
+    "watch": "Water and power cuts, some of the heaviest rain in the region and chronic political tension.",
+    "languageLabel": "French, Susu, Fula, Malinke",
+    "currency": "Guinean franc"
+  },
+  "Bissau": {
+    "tagline": "Creole, slow pace, archipelago",
+    "pitch": "A small Portuguese- and Creole-speaking capital, the gateway to the Bijagós archipelago, a biosphere reserve of almost untouched islands.",
+    "watch": "Chronic political instability, very limited infrastructure and few direct flights.",
+    "languageLabel": "Portuguese, Creole",
+    "currency": "CFA franc"
+  },
+  "Banjul": {
+    "tagline": "Beaches, warmth, small scale",
+    "pitch": "A small English-speaking capital at the mouth of the Gambia River, on the coast they call the Smiling Coast, with UNESCO-listed Kunta Kinteh Island.",
+    "watch": "A tiny economy centred on tourism, limited healthcare and few job openings.",
+    "languageLabel": "English, Mandinka, Wolof",
+    "currency": "Dalasi"
+  },
+  "Praia": {
+    "tagline": "Creole culture, music, stability",
+    "pitch": "The capital of a stable, democratic archipelago, on the island of Santiago, between Creole music, beaches and UNESCO-listed Cidade Velha.",
+    "watch": "A small city with a limited offer, and island life that depends on flights.",
+    "languageLabel": "Portuguese, Cape Verdean Creole",
+    "currency": "Cape Verdean escudo"
+  },
+  "Nouakchott": {
+    "tagline": "Desert, ocean, simplicity",
+    "pitch": "A capital between the Sahara and the Atlantic, known for its fishing port full of colourful pirogues and as the gateway to the caravan towns of the Adrar.",
+    "watch": "A very conservative society with no nightlife, where the legacy of slavery is still a raw subject.",
+    "languageLabel": "Hassaniya Arabic, French",
+    "currency": "Ouguiya"
+  },
+  "Bamako": {
+    "tagline": "Music, river, hospitality",
+    "pitch": "On the Niger River, one of the continent's great music capitals, heir to the Mandinka empire.",
+    "watch": "Insecurity linked to armed groups, and military rule.",
+    "languageLabel": "Bambara, French",
+    "currency": "CFA franc"
+  },
+  "Ouagadougou": {
+    "tagline": "Cinema, crafts, simplicity",
+    "pitch": "The capital of African cinema with FESPACO, a city of craftspeople and musicians known for its simple, warm welcome.",
+    "watch": "The country faces an armed insurgency and lives under military rule.",
+    "languageLabel": "French, Mooré",
+    "currency": "CFA franc"
+  },
+  "Niamey": {
+    "tagline": "River, Sahel, slow pace",
+    "pitch": "A Sahel capital set on the Niger River, with its national museum and its markets.",
+    "watch": "Military rule since 2023, and a terrorist threat in the country.",
+    "languageLabel": "French, Hausa, Zarma",
+    "currency": "CFA franc"
+  },
+  "Brazzaville": {
+    "tagline": "Rumba, la sape, river",
+    "pitch": "Facing Kinshasa on the other bank of the Congo, calmer and greener, the other capital of rumba and la sape.",
+    "watch": "An economy very dependent on oil, few direct flights and limited services.",
+    "languageLabel": "French, Lingala, Kituba",
+    "currency": "CFA franc"
+  },
+  "Libreville": {
+    "tagline": "Ocean, forest, pricey comfort",
+    "pitch": "An Atlantic capital in a country covered by forest across most of its land, with a national park just across the water.",
+    "watch": "One of the most expensive cities on the continent, with an economy closely tied to oil.",
+    "languageLabel": "French, Fang",
+    "currency": "CFA franc"
+  },
+  "Malabo": {
+    "tagline": "Island, oil, Spanish heritage",
+    "pitch": "The only Spanish-speaking capital on the continent, on the volcanic island of Bioko.",
+    "watch": "A very expensive life, a visa that is hard to get and one of the most closed regimes on the continent.",
+    "languageLabel": "Spanish, French, Fang",
+    "currency": "CFA franc"
+  },
+  "São Tomé": {
+    "tagline": "Island, cocoa, slow pace",
+    "pitch": "The tiny capital of a peaceful equatorial archipelago, between cocoa plantations, rainforest and empty beaches.",
+    "watch": "Almost no job openings, very limited healthcare and few flights.",
+    "languageLabel": "Portuguese, Forro Creole",
+    "currency": "Dobra"
+  },
+  "N'Djamena": {
+    "tagline": "Sahel, heat, crossroads",
+    "pitch": "A Sahel capital where the Chari and Logone rivers meet, a crossroads between Central Africa, the Sahara and the Arab world.",
+    "watch": "Extreme heat, an expensive life for limited comfort and a tense security situation in the country.",
+    "languageLabel": "French, Chadian Arabic",
+    "currency": "CFA franc"
+  },
+  "Bangui": {
+    "tagline": "River, forest, fragility",
+    "pitch": "A capital on the banks of the Ubangi, at the edge of the great equatorial forest.",
+    "watch": "A country in conflict for more than ten years.",
+    "languageLabel": "French, Sango",
+    "currency": "CFA franc"
+  },
+  "Djibouti": {
+    "tagline": "Port, desert, Red Sea",
+    "pitch": "A strategic port city at the mouth of the Red Sea, with Lake Assal and the whale sharks of the Gulf of Tadjoura close at hand.",
+    "watch": "An expensive life, and some of the fiercest summer heat in the world.",
+    "languageLabel": "French, Arabic, Somali, Afar",
+    "currency": "Djiboutian franc"
+  },
+  "Bujumbura": {
+    "tagline": "Lake, drums, simplicity",
+    "pitch": "The economic capital on the shores and beaches of Lake Tanganyika, in the land of the royal drums listed by UNESCO as intangible heritage.",
+    "watch": "One of the poorest countries in the world: fuel and currency shortages, and political tension.",
+    "languageLabel": "Kirundi, French",
+    "currency": "Burundian franc"
+  },
+  "Asmara": {
+    "tagline": "Altitude, modernism, closed doors",
+    "pitch": "A high-altitude capital listed by UNESCO for its modernist architecture, peaceful and as if out of time.",
+    "watch": "One of the most closed countries in the world: scarce internet, permits needed to travel around and next to no way to settle or invest.",
+    "languageLabel": "Tigrinya, Arabic, English",
+    "currency": "Nakfa"
+  },
+  "Mogadiscio": {
+    "tagline": "Ocean, rebuilding, risk",
+    "pitch": "The former pearl of the Indian Ocean, being rebuilt with the help of its diaspora, with the long Lido beach.",
+    "watch": "Regular attacks in the city.",
+    "languageLabel": "Somali, Arabic",
+    "currency": "Somali shilling and US dollar"
+  },
+  "Juba": {
+    "tagline": "White Nile, young nation, instability",
+    "pitch": "The capital of the world's youngest country, independent since 2011, on the banks of the White Nile.",
+    "watch": "Recurring armed violence, and a very expensive life.",
+    "languageLabel": "English, Juba Arabic",
+    "currency": "South Sudanese pound"
+  },
+  "Tripoli": {
+    "tagline": "Mediterranean, medina, uncertainty",
+    "pitch": "A Mediterranean capital with an old medina, close to the Roman ruins of Leptis Magna and Sabratha.",
+    "watch": "A country split between rival authorities, clashes between militias and documented violence against Black migrants.",
+    "languageLabel": "Arabic",
+    "currency": "Libyan dinar"
+  },
+  "Khartoum": {
+    "tagline": "Two Niles, hospitality, war",
+    "pitch": "Where the White Nile and the Blue Nile meet, the capital of a country with hundreds of Nubian pyramids, known for its hospitality.",
+    "watch": "The war that broke out in April 2023 has devastated the city and displaced millions of people.",
+    "languageLabel": "Arabic, English",
+    "currency": "Sudanese pound"
+  },
+  "Antananarivo": {
+    "tagline": "Hills, crafts, a world apart",
+    "pitch": "A highland capital of sacred hills, at the heart of a unique culture between Africa and Asia, on an island whose wildlife lives nowhere else.",
+    "watch": "Deep poverty, petty crime, difficult roads and recurring political instability.",
+    "languageLabel": "Malagasy, French",
+    "currency": "Ariary"
+  },
+  "Lusaka": {
+    "tagline": "Stability, space, safaris",
+    "pitch": "A fast-growing English-speaking capital in a country known for being peaceful, within reach of Victoria Falls and big safari parks.",
+    "watch": "A sprawling city where a car is essential, with power cuts during droughts.",
+    "languageLabel": "English, Nyanja, Bemba",
+    "currency": "Zambian kwacha"
+  },
+  "Harare": {
+    "tagline": "Jacarandas, sculpture, resilience",
+    "pitch": "A high-altitude garden city with avenues of jacarandas, known for its Shona sculpture, its level of education and its music scene.",
+    "watch": "An unstable economy for twenty years: inflation, a changing currency, water and power cuts.",
+    "languageLabel": "English, Shona",
+    "currency": "US dollar and local currency"
+  },
+  "Lilongwe": {
+    "tagline": "Greenery, kindness, calm",
+    "pitch": "The green, spread-out capital of the country known as the warm heart of Africa, less than two hours from Lake Malawi.",
+    "watch": "A fragile economy, fuel and currency shortages, and not much going on.",
+    "languageLabel": "English, Chichewa",
+    "currency": "Malawian kwacha"
+  },
+  "Windhoek": {
+    "tagline": "Desert, calm, wide open spaces",
+    "pitch": "A small, calm and sunny capital, the starting point for the Namib Desert and Etosha National Park.",
+    "watch": "A very quiet city: little going on in the evening, and long distances for everything.",
+    "languageLabel": "English, Afrikaans, Oshiwambo",
+    "currency": "Namibian dollar"
+  },
+  "Gaborone": {
+    "tagline": "Stability, order, the bush",
+    "pitch": "The calm, well-kept capital of one of the most stable democracies on the continent, home to SADC, at the edge of the Kalahari.",
+    "watch": "Little nightlife or cultural life, and the big game of the Okavango Delta is a day's drive away.",
+    "languageLabel": "English, Setswana",
+    "currency": "Pula"
+  },
+  "Mbabane": {
+    "tagline": "Mountains, traditions, a kingdom",
+    "pitch": "The small mountain capital of a kingdom with living traditions, such as the Reed Dance, between nature reserves and valleys.",
+    "watch": "The continent's last absolute monarchy, a tiny economy and few flights.",
+    "languageLabel": "English, Swati",
+    "currency": "Lilangeni"
+  },
+  "Maseru": {
+    "tagline": "Altitude, mountains, Basotho country",
+    "pitch": "The capital of the kingdom in the sky, a country lying entirely at altitude, known for its mountains, its ponies and its Basotho blankets.",
+    "watch": "Cold winters, high unemployment, notable crime and heavy dependence on neighbouring South Africa.",
+    "languageLabel": "Sesotho, English",
+    "currency": "Loti"
+  },
+  "Moroni": {
+    "tagline": "Island, volcano, tradition",
+    "pitch": "A small capital at the foot of the Karthala volcano, with its Swahili medina and its Friday Mosque by the harbour.",
+    "watch": "Very few openings, limited healthcare and a very traditional society.",
+    "languageLabel": "Comorian, French, Arabic",
+    "currency": "Comorian franc"
+  },
+  "Victoria": {
+    "tagline": "Lagoon, serenity, luxury",
+    "pitch": "One of the smallest capitals in the world, on the island of Mahé, in one of the richest countries on the continent per person.",
+    "watch": "A very expensive life, a tiny job market and island isolation.",
+    "languageLabel": "Seychellois Creole, English, French",
+    "currency": "Seychellois rupee"
+  },
+  "Abuja": {
+    "tagline": "Capital, order, power",
+    "pitch": "A federal capital built in the middle of the country, airy and planned, the seat of power, of the embassies and of ECOWAS.",
+    "watch": "An expensive, administrative city, much less lively than Lagos.",
+    "languageLabel": "English, Hausa",
+    "currency": "Naira"
+  },
+  "Grand-Bassam": {
+    "tagline": "Heritage, beach, craftspeople",
+    "pitch": "A former colonial capital listed by UNESCO, a seaside resort and a town of craftspeople less than an hour from Abidjan.",
+    "watch": "A small town that mostly comes alive at weekends, with a sea that is dangerous for swimming.",
+    "languageLabel": "French",
+    "currency": "CFA franc"
+  },
+  "San-Pédro": {
+    "tagline": "Cocoa port, wild beaches",
+    "pitch": "The country's second port and one of the world's great cocoa ports, surrounded by some of the most beautiful beaches on the Ivorian coast.",
+    "watch": "Far from Abidjan, with limited culture and healthcare.",
+    "languageLabel": "French",
+    "currency": "CFA franc"
+  },
+  "Kumasi": {
+    "tagline": "Ashanti kingdom, market, tradition",
+    "pitch": "The capital of the Ashanti kingdom, with the king's palace, kente weaving and one of the biggest markets in West Africa.",
+    "watch": "No sea, heavy traffic and fewer international flights than Accra.",
+    "languageLabel": "English, Twi",
+    "currency": "Cedi"
+  },
+  "Saint-Louis": {
+    "tagline": "Island, jazz, memory",
+    "pitch": "A former capital set on an island in the Senegal River, listed by UNESCO, known for its jazz festival and its houses with balconies.",
+    "watch": "More than four hours' drive from Dakar, with few local jobs and a coastline threatened by erosion.",
+    "languageLabel": "French, Wolof",
+    "currency": "CFA franc"
+  },
+  "Saly": {
+    "tagline": "Seaside resort, sunshine, residences",
+    "pitch": "The country's main seaside resort on the Petite Côte, close to the new international airport, popular with retirees and remote workers.",
+    "watch": "A very touristy feel, far from the cultural life of Dakar.",
+    "languageLabel": "French, Wolof",
+    "currency": "CFA franc"
+  },
+  "Ouidah": {
+    "tagline": "Vodun, the slave route, memory",
+    "pitch": "The town of the Door of No Return and the spiritual capital of vodun, a major place of memory for the diasporas, less than an hour from Cotonou.",
+    "watch": "Very quiet, with few services and jobs.",
+    "languageLabel": "French, Fon",
+    "currency": "CFA franc"
+  },
+  "Kpalimé": {
+    "tagline": "Hills, waterfalls, craftspeople",
+    "pitch": "A small green town at the foot of the Togo mountains, between coffee and cocoa plantations, waterfalls and craft workshops.",
+    "watch": "Very few job openings, and limited healthcare.",
+    "languageLabel": "French, Ewe",
+    "currency": "CFA franc"
+  },
+  "Bo": {
+    "tagline": "Inland, trade, schools",
+    "pitch": "The country's second city, a trading crossroads of the interior and a town of well-regarded schools.",
+    "watch": "Very limited infrastructure and healthcare, and no scheduled flights.",
+    "languageLabel": "English, Krio, Mende",
+    "currency": "Leone"
+  },
+  "Buchanan": {
+    "tagline": "Port, beaches, peace and quiet",
+    "pitch": "A small Atlantic port with long, quiet beaches, a few hours from Monrovia.",
+    "watch": "Very few services, and difficult roads in the rainy season.",
+    "languageLabel": "English",
+    "currency": "Liberian dollar and US dollar"
+  },
+  "Labé": {
+    "tagline": "Fouta Djallon, cool air, Fula culture",
+    "pitch": "The capital of the Fouta Djallon, highlands of cool plateaus, waterfalls and villages, at the heart of Guinea's Fula culture.",
+    "watch": "A long road from Conakry, and very limited services.",
+    "languageLabel": "French, Fula",
+    "currency": "Guinean franc"
+  },
+  "Bubaque": {
+    "tagline": "Archipelago, untouched nature, remoteness",
+    "pitch": "The main island of the Bijagós archipelago, a biosphere reserve of empty beaches where Bijagó culture is very well preserved.",
+    "watch": "Reachable only by boat, with no hospital and no real job market.",
+    "languageLabel": "Portuguese, Creole, Bijagó",
+    "currency": "CFA franc"
+  },
+  "Serrekunda": {
+    "tagline": "Markets, beaches, street life",
+    "pitch": "The country's largest town, busy and bustling with trade, right next to the beaches and hotels of the Atlantic coast.",
+    "watch": "A dense, untidy town, with limited healthcare.",
+    "languageLabel": "English, Mandinka, Wolof",
+    "currency": "Dalasi"
+  },
+  "Mindelo": {
+    "tagline": "Morna, carnival, port",
+    "pitch": "Cabo Verde's cultural capital on the island of São Vicente, the town of Cesária Évora, of morna and of a famous carnival.",
+    "watch": "A small island economy, with few openings outside tourism and culture.",
+    "languageLabel": "Portuguese, Cape Verdean Creole",
+    "currency": "Cape Verdean escudo"
+  },
+  "Nouadhibou": {
+    "tagline": "Fishing, desert, the end of the world",
+    "pitch": "The economic capital, on a peninsula between desert and ocean, a fishing port and the gateway to Banc d'Arguin National Park.",
+    "watch": "A stark, windswept town with no nightlife, where people come to work.",
+    "languageLabel": "Hassaniya Arabic, French",
+    "currency": "Ouguiya"
+  },
+  "Ségou": {
+    "tagline": "Niger River, potters, Bambara kingdom",
+    "pitch": "The former capital of the Bambara kingdom on the banks of the Niger, known for its potters, its dyers and its music festival.",
+    "watch": "Insecurity linked to armed groups in the region.",
+    "languageLabel": "Bambara, French",
+    "currency": "CFA franc"
+  },
+  "Bobo-Dioulasso": {
+    "tagline": "Music, old mosque, gentle pace",
+    "pitch": "The country's cultural capital, a town of musicians with a great mud-brick mosque, greener and gentler than Ouagadougou.",
+    "watch": "The country faces an armed insurgency and lives under military rule.",
+    "languageLabel": "French, Dioula",
+    "currency": "CFA franc"
+  },
+  "Agadez": {
+    "tagline": "Sahara, mud minaret, Tuareg world",
+    "pitch": "The gateway to the Sahara and a Tuareg city with a UNESCO-listed historic centre, towered over by its mud-brick minaret.",
+    "watch": "A region exposed to armed groups and trafficking.",
+    "languageLabel": "French, Tamasheq, Hausa",
+    "currency": "CFA franc"
+  },
+  "Lubumbashi": {
+    "tagline": "Copper, altitude, business",
+    "pitch": "The mining capital of Katanga and the country's second city, with a cooler climate and a calmer feel than Kinshasa.",
+    "watch": "An economy very dependent on mining, an expensive life and patchy infrastructure.",
+    "languageLabel": "French, Swahili",
+    "currency": "Congolese franc"
+  },
+  "Yaoundé": {
+    "tagline": "Hills, institutions, greenery",
+    "pitch": "The political capital, built on green hills, cooler and more administrative than Douala.",
+    "watch": "Difficult traffic, and fewer flights than Douala.",
+    "languageLabel": "French, English",
+    "currency": "CFA franc"
+  },
+  "Kribi": {
+    "tagline": "Beaches, grilled fish, waterfalls",
+    "pitch": "The country's seaside resort, known for its forest-lined beaches, its prawns and the Lobé Falls that drop straight into the ocean.",
+    "watch": "Few openings outside tourism and the port, limited healthcare, and several hours' drive from Douala.",
+    "languageLabel": "French",
+    "currency": "CFA franc"
+  },
+  "Benguela": {
+    "tagline": "Beaches, gentle pace, architecture",
+    "pitch": "A relaxed coastal town with tree-lined avenues, known for its beaches and next door to the port of Lobito.",
+    "watch": "Portuguese is essential, and international flights go through Luanda.",
+    "languageLabel": "Portuguese",
+    "currency": "Kwanza"
+  },
+  "Pointe-Noire": {
+    "tagline": "Oil, ocean, unwinding",
+    "pitch": "The economic and oil capital of the Congo, facing the ocean, with its beaches and its wild coast.",
+    "watch": "An expensive life, and an economy closely tied to oil.",
+    "languageLabel": "French, Kituba",
+    "currency": "CFA franc"
+  },
+  "Port-Gentil": {
+    "tagline": "Oil, island, lagoons",
+    "pitch": "Gabon's oil capital, set on an island between ocean and lagoons, reachable only by plane or boat.",
+    "watch": "Very expensive and isolated, with little going on outside oil.",
+    "languageLabel": "French",
+    "currency": "CFA franc"
+  },
+  "Bata": {
+    "tagline": "Seafront, mainland, calm",
+    "pitch": "The country's largest city, on the mainland, with a long seafront and beaches nearby.",
+    "watch": "A visa that is hard to get, and one of the most closed regimes on the continent.",
+    "languageLabel": "Spanish, Fang, French",
+    "currency": "CFA franc"
+  },
+  "Santo António": {
+    "tagline": "Príncipe Island, forest, silence",
+    "pitch": "The tiny main town of Príncipe, an island biosphere reserve covered in forest and fringed with empty beaches.",
+    "watch": "Almost total isolation, with no jobs and no hospital worth the name.",
+    "languageLabel": "Portuguese, Creole",
+    "currency": "Dobra"
+  },
+  "Moundou": {
+    "tagline": "Southern Chad, cotton, river",
+    "pitch": "Chad's second city, the economic capital of the south, greener than the capital, on the banks of the Logone.",
+    "watch": "Very few services, and a tense security situation in the country.",
+    "languageLabel": "French, Ngambay",
+    "currency": "CFA franc"
+  },
+  "Berbérati": {
+    "tagline": "Forest, the south-west, remoteness",
+    "pitch": "A big town in the south-west, on the road to the Dzanga-Sangha forests and their elephants.",
+    "watch": "A country in conflict for more than ten years.",
+    "languageLabel": "French, Sango",
+    "currency": "CFA franc"
+  },
+  "Mombasa": {
+    "tagline": "Swahili, ocean, old town",
+    "pitch": "A big Swahili port on the Indian Ocean, with its old town, UNESCO-listed Fort Jesus and long beaches to the north and south.",
+    "watch": "Humid heat, fewer skilled jobs than in Nairobi, and care advised in some neighbourhoods.",
+    "languageLabel": "Swahili, English",
+    "currency": "Kenyan shilling"
+  },
+  "Bahir Dar": {
+    "tagline": "Lake Tana, monasteries, Blue Nile",
+    "pitch": "A town of palm-lined avenues on Lake Tana, between island monasteries and the Blue Nile Falls.",
+    "watch": "The Amhara region has seen armed clashes in recent years: check before making any plans.",
+    "languageLabel": "Amharic",
+    "currency": "Birr"
+  },
+  "Zanzibar": {
+    "tagline": "Stone Town, spices, lagoons",
+    "pitch": "Stone Town, a UNESCO-listed Swahili town, surrounded by white-sand beaches and spice farms.",
+    "watch": "Few openings outside tourism, and a Muslim society where people dress modestly in town.",
+    "languageLabel": "Swahili, English",
+    "currency": "Tanzanian shilling"
+  },
+  "Arusha": {
+    "tagline": "Safaris, Kilimanjaro, altitude",
+    "pitch": "The safari capital at the foot of Mount Meru, the gateway to the Serengeti, Ngorongoro and Kilimanjaro, and home to regional institutions.",
+    "watch": "An economy very dependent on tourism, and frequent hustling by touts.",
+    "languageLabel": "Swahili, English",
+    "currency": "Tanzanian shilling"
+  },
+  "Jinja": {
+    "tagline": "Source of the Nile, rafting, calm",
+    "pitch": "A quiet little town where the Nile leaves Lake Victoria, known for rafting and its old houses.",
+    "watch": "Few jobs, and very repressive laws for LGBT people in the country.",
+    "languageLabel": "English, Lusoga",
+    "currency": "Ugandan shilling"
+  },
+  "Rubavu": {
+    "tagline": "Lake Kivu, beaches, volcanoes",
+    "pitch": "A resort town on Lake Kivu, formerly Gisenyi, with its beaches, its hot springs and the volcanoes in the background.",
+    "watch": "Right on the border with Goma, in DR Congo, a conflict zone: a situation to follow.",
+    "languageLabel": "Kinyarwanda, French, English",
+    "currency": "Rwandan franc"
+  },
+  "Gitega": {
+    "tagline": "Political capital, hills, drums",
+    "pitch": "The political capital in the middle of the country, a former royal town, close to the Gishora drum sanctuary.",
+    "watch": "Very few services, in one of the poorest countries in the world.",
+    "languageLabel": "Kirundi, French",
+    "currency": "Burundian franc"
+  },
+  "Tadjourah": {
+    "tagline": "White town, gulf, diving",
+    "pitch": "The country's oldest town, white with seven mosques, on a gulf known for diving and whale sharks.",
+    "watch": "Very small, very hot, with no job openings.",
+    "languageLabel": "Afar, French, Arabic",
+    "currency": "Djiboutian franc"
+  },
+  "Massaoua": {
+    "tagline": "Red Sea, Ottoman architecture, islands",
+    "pitch": "An old Red Sea port with Ottoman and Italian architecture, facing the Dahlak archipelago.",
+    "watch": "One of the most closed countries in the world, extreme heat and a permit needed to go there.",
+    "languageLabel": "Tigrinya, Arabic",
+    "currency": "Nakfa"
+  },
+  "Hargeisa": {
+    "tagline": "Diaspora, trade, relative calm",
+    "pitch": "The capital of Somaliland, a self-declared state far calmer than the south, largely rebuilt by its diaspora.",
+    "watch": "An unrecognised state: travel advice remains cautious, and society is very conservative.",
+    "languageLabel": "Somali, Arabic, English",
+    "currency": "Somaliland shilling"
+  },
+  "Wau": {
+    "tagline": "The west of the country, the Jur River",
+    "pitch": "The country's second city, on the Jur River, known for its cathedral and its mix of communities.",
+    "watch": "Recurring armed violence in the country.",
+    "languageLabel": "English, Juba Arabic",
+    "currency": "South Sudanese pound"
+  },
+  "Alexandrie": {
+    "tagline": "Mediterranean, corniche, library",
+    "pitch": "Egypt's second city, on the Mediterranean, with its corniche, its great library and its old cafés.",
+    "watch": "A dense, noisy city where Arabic is essential.",
+    "languageLabel": "Arabic",
+    "currency": "Egyptian pound"
+  },
+  "Assouan": {
+    "tagline": "Nubia, the Nile, slow pace",
+    "pitch": "A Nile city with an African feel, the heart of Nubian culture, near the temples of Philae and Abu Simbel.",
+    "watch": "Crushing heat in summer, and an economy that runs almost entirely on tourism.",
+    "languageLabel": "Arabic, Nubian",
+    "currency": "Egyptian pound"
+  },
+  "Tanger": {
+    "tagline": "The Strait, medina, industry",
+    "pitch": "A city on the Strait of Gibraltar, an hour by ferry from Spain, between its medina, its literary past and a big industrial port.",
+    "watch": "Damp winters, and a more expensive life than in the rest of the country.",
+    "languageLabel": "Arabic, French, Spanish",
+    "currency": "Dirham"
+  },
+  "Oran": {
+    "tagline": "Raï, corniche, joie de vivre",
+    "pitch": "Algeria's second city and the birthplace of raï, known as the most festive in the country, with its seafront and Santa Cruz fort.",
+    "watch": "Heavy visa and paperwork, and an economy not very open to foreign investors.",
+    "languageLabel": "Arabic, French",
+    "currency": "Algerian dinar"
+  },
+  "Sousse": {
+    "tagline": "Medina, beaches, resorts",
+    "pitch": "A coastal city of Tunisia's Sahel, with its UNESCO-listed medina and long beaches lined with hotels.",
+    "watch": "The climate has become tense for Black people in the country since 2023.",
+    "languageLabel": "Arabic, French",
+    "currency": "Tunisian dinar"
+  },
+  "Benghazi": {
+    "tagline": "Cyrenaica, Mediterranean, rebuilding",
+    "pitch": "The big city of eastern Libya, being rebuilt, close to the Greek ruins of Cyrene.",
+    "watch": "A country split between rival authorities.",
+    "languageLabel": "Arabic",
+    "currency": "Libyan dinar"
+  },
+  "Port-Soudan": {
+    "tagline": "Red Sea, reefs, refuge",
+    "pitch": "A Red Sea port with famous reefs, which became the government's refuge during the war.",
+    "watch": "The country has been at war since April 2023.",
+    "languageLabel": "Arabic, Beja",
+    "currency": "Sudanese pound"
+  },
+  "Vilankulo": {
+    "tagline": "Bazaruto archipelago, dhows, lagoon",
+    "pitch": "A small coastal town facing the Bazaruto archipelago, its sandbanks, its dhows and its sea life.",
+    "watch": "No openings outside tourism, and very limited healthcare.",
+    "languageLabel": "Portuguese, Xitswa",
+    "currency": "Metical"
+  },
+  "Grand Baie": {
+    "tagline": "Lagoon, residences, nightlife",
+    "pitch": "The resort in the north of the island, the liveliest in Mauritius, popular with expats and remote workers.",
+    "watch": "Expensive housing, and a feel very much geared to foreign residents.",
+    "languageLabel": "Mauritian Creole, French, English",
+    "currency": "Mauritian rupee"
+  },
+  "Nosy Be": {
+    "tagline": "Island of perfumes, diving, ylang-ylang",
+    "pitch": "A tropical island in the north-west, the country's top seaside destination, between ylang-ylang plantations and the sea bed.",
+    "watch": "An economy that runs entirely on tourism, limited healthcare, and reported sex tourism, including with underage girls.",
+    "languageLabel": "Malagasy, French",
+    "currency": "Ariary"
+  },
+  "Livingstone": {
+    "tagline": "Victoria Falls, Zambezi, adventure",
+    "pitch": "A small, relaxed town ten kilometres from Victoria Falls, a base for the Zambezi and the nearby parks.",
+    "watch": "An economy that runs almost entirely on tourism.",
+    "languageLabel": "English, Tonga, Lozi",
+    "currency": "Zambian kwacha"
+  },
+  "Bulawayo": {
+    "tagline": "Arts, wide avenues, Matobo",
+    "pitch": "The country's second city, calm and cultured, with wide avenues, close to the UNESCO-listed Matobo Hills.",
+    "watch": "A struggling economy, and frequent water cuts.",
+    "languageLabel": "English, Ndebele",
+    "currency": "US dollar and local currency"
+  },
+  "Blantyre": {
+    "tagline": "Trade, hills, tea estates",
+    "pitch": "Malawi's economic capital, surrounded by hills, within reach of Mount Mulanje and the tea estates.",
+    "watch": "A fragile economy, with fuel and currency shortages.",
+    "languageLabel": "English, Chichewa",
+    "currency": "Malawian kwacha"
+  },
+  "Swakopmund": {
+    "tagline": "Dunes, Atlantic, fog",
+    "pitch": "A seaside resort squeezed between the Namib dunes and the Atlantic, with architecture inherited from German colonial rule.",
+    "watch": "A cool, foggy climate, a cold ocean and a colonial legacy that is still very present.",
+    "languageLabel": "English, Afrikaans, German",
+    "currency": "Namibian dollar"
+  },
+  "Maun": {
+    "tagline": "Okavango, the bush, small planes",
+    "pitch": "The gateway to the Okavango Delta, a bush town where small planes and dugout canoes leave for the safari camps.",
+    "watch": "Almost no openings outside safaris, and an expensive life.",
+    "languageLabel": "English, Setswana",
+    "currency": "Pula"
+  },
+  "Manzini": {
+    "tagline": "Market, trade, crossroads",
+    "pitch": "The kingdom's largest town and trading crossroads, known for its crafts market.",
+    "watch": "The continent's last absolute monarchy, and a tiny economy.",
+    "languageLabel": "Swati, English",
+    "currency": "Lilangeni"
+  },
+  "Teyateyaneng": {
+    "tagline": "Weaving, plateau, crafts",
+    "pitch": "A small town on the plateau, the country's crafts capital, known for its mohair tapestries.",
+    "watch": "No job openings, and cold winters.",
+    "languageLabel": "Sesotho, English",
+    "currency": "Loti"
+  },
+  "Mutsamudu": {
+    "tagline": "Medina, citadel, Anjouan Island",
+    "pitch": "The main town of Anjouan, with its medina of narrow alleys, its citadel and mountains covered in clove trees.",
+    "watch": "Very few services, and irregular boats and flights.",
+    "languageLabel": "Comorian, French, Arabic",
+    "currency": "Comorian franc"
+  },
+  "Praslin": {
+    "tagline": "Vallée de Mai, beaches, silence",
+    "pitch": "The second island of the Seychelles, known for the UNESCO-listed Vallée de Mai and for some of the most beautiful beaches in the world.",
+    "watch": "Very expensive, tiny and with no job market.",
+    "languageLabel": "Seychellois Creole, English, French",
+    "currency": "Seychellois rupee"
+  }
+}

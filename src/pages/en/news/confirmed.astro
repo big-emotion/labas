@@ -1,0 +1,15 @@
+---
+import Page from "../../../layouts/Page.astro";
+import { pathFor } from "../../../i18n/routes";
+---
+
+<Page title="Sign-up confirmed" description="Your sign-up to Over There news is confirmed.">
+  <h1>It's confirmed.</h1>
+  <p>
+    You will receive Over There news: new cities, a better questionnaire, one email a month at most.
+    Every email holds a link to unsubscribe.
+  </p>
+  <p>
+    <a href={pathFor("home", "en")}>Back to the quiz</a>
+  </p>
+</Page>

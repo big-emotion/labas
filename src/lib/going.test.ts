@@ -17,6 +17,14 @@ describe("the « Y aller » links of a city", () => {
     expect(decodeURIComponent(lodging.url)).toContain("Dakar, Sénégal");
   });
 
+  it("names the flights and lodging in English for an English reader", () => {
+    const [flights, lodging] = goingThere(dakar!, "en") ?? [];
+    expect(flights.title).toBe("Flights to Dakar (Google Flights)");
+    expect(flights.url).toContain("hl=en-GB");
+    expect(lodging.title).toBe("Places to stay in Dakar (Booking)");
+    expect(decodeURIComponent(lodging.url)).toContain("Dakar, Senegal");
+  });
+
   it("gives every proposable city its flights, its lodging and one to three local links", () => {
     for (const city of proposable) {
       const links = goingThere(city);
@@ -41,5 +49,15 @@ describe("the « Y aller » links of a city", () => {
   it("offers no way there to a city travel advice warns against", () => {
     expect(advisedAgainst.length).toBeGreaterThan(0);
     for (const city of advisedAgainst) expect(goingThere(city), city.name).toBeUndefined();
+  });
+});
+
+describe("the « Y aller » links in English", () => {
+  it("names flights and lodging in English and keeps the same places", () => {
+    const [flights, lodging] = goingThere(dakar!, "en") ?? [];
+    expect(flights.title).toBe("Flights to Dakar (Google Flights)");
+    expect(flights.url).toContain("hl=en");
+    expect(lodging.title).toBe("Places to stay in Dakar (Booking)");
+    expect(decodeURIComponent(lodging.url)).toContain("Dakar, Senegal");
   });
 });

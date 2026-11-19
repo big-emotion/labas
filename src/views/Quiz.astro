@@ -1,0 +1,1571 @@
+---
+import "../styles/global.css";
+import Wordmark from "../components/Wordmark.astro";
+import Analytics from "../components/Analytics.astro";
+import KeepResults from "../components/KeepResults.astro";
+import SourcesNote from "../components/SourcesNote.astro";
+import TemperamentProfile from "../components/TemperamentProfile.astro";
+import ResultCards from "../components/ResultCards.astro";
+import ShareMeta from "../components/ShareMeta.astro";
+import Newsletter from "../components/Newsletter.astro";
+import SaveLater from "../components/SaveLater.astro";
+import Reactions from "../components/Reactions.astro";
+import Feedback from "../components/Feedback.astro";
+import LanguageSwitch from "../components/LanguageSwitch.astro";
+import { SITE, siteDescription } from "../lib/share";
+import { CITIES } from "../lib/cities";
+import { QUESTIONS, questionIn } from "../lib/questions";
+import { filterMenu } from "../lib/filters";
+import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
+import borders from "../data/africa-borders.json";
+import { BRAND, LANGUAGE_TAG, type Bilingual } from "../i18n/locale";
+import { EN_SITE, localeOfPath, pathFor } from "../i18n/routes";
+import { cityName } from "../i18n/places";
+
+// The quick quiz, built once per language: src/pages/index.astro and src/pages/en/index.astro.
+const locale = localeOfPath(Astro.url.pathname);
+const COPY: Bilingual<Record<string, string>> = {
+  fr: {
+    question: "Quelle ville d'Afrique vous ressemble ?",
+    space: "Mon espace",
+    titleStart: "Quelle ville d'Afrique",
+    titleEnd: "vous ressemble ?",
+    lead: "Pour les diasporas qui regardent vers le continent. Vacances, allers-retours ou installation : dites qui vous êtes, découvrez en quoi une ville vous ressemble.",
+    map: "Carte de l'Afrique : plus une ville vous ressemble, plus son point est gros et coloré",
+    answers: "Vos réponses",
+    several: "Plusieurs réponses possibles",
+    one: "Une seule réponse",
+    back: "Question précédente",
+    next: "Continuer",
+    ready: "C'est prêt.",
+    readyText: "Trois villes vous ressemblent plus que les autres. Découvrez pourquoi.",
+    reveal: "Voir mes villes",
+    results: "Vos villes",
+    resultsHint: "Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.",
+    further: "Envie d'aller plus loin ?",
+    furtherText:
+      "Le questionnaire complet : vos contraintes (école, soins, visa), ce qui vous pèse et ce qui vous plaît, pour un classement plus fin.",
+    furtherLink: "Affiner avec le questionnaire complet",
+    others: "Toutes les autres villes",
+    othersHint: "Les 115 villes, triées selon vos réponses.",
+    filters: "Filtrer vos villes",
+    filterNote: "Les filtres retirent des villes ; l'ordre ne change jamais.",
+    more: "Voir plus de villes",
+    footer:
+      "Les résultats sont des propositions, pas des verdicts. Chaque note de ville renvoie à ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.",
+    privacyStart:
+      "Vos réponses restent dans votre navigateur, qui les garde pour le questionnaire complet : rien ne nous est envoyé",
+    privacySaved: ", sauf si vous enregistrez votre parcours",
+    pages: "Pages du site",
+    cities: "Les villes",
+    reviews: "Les avis",
+    deep: "Aller plus loin",
+    method: "Notre méthode",
+    legal: "Mentions légales",
+    privacy: "Confidentialité",
+    asideHint: "Choisissez ce que vous écartez. Vous pourrez le remettre à tout moment.",
+    cancel: "Annuler",
+    leftOut: "En moins :",
+    undo: "Annuler",
+    leaders: "En tête pour l'instant",
+  },
+  en: {
+    question: "Which African city is most like you?",
+    space: "My space",
+    titleStart: "Which African city",
+    titleEnd: "is most like you?",
+    lead: "For diasporas looking towards the continent. A holiday, trips back and forth or settling for good: tell us who you are, and discover how a city is like you.",
+    map: "Map of Africa: the more a city is like you, the bigger and brighter its dot",
+    answers: "Your answers",
+    several: "Several answers possible",
+    one: "One answer",
+    back: "Previous question",
+    next: "Continue",
+    ready: "It's ready.",
+    readyText: "Three cities are more like you than the others. Find out why.",
+    reveal: "See my cities",
+    results: "Your cities",
+    resultsHint: "Suggestions, ranked by your answers. Every percentage is explained.",
+    further: "Want to go deeper?",
+    furtherText:
+      "The full questionnaire: your constraints (school, healthcare, visa), what weighs on you and what you enjoy, for a finer ranking.",
+    furtherLink: "Refine with the full questionnaire",
+    others: "All the other cities",
+    othersHint: "The 115 cities, sorted by your answers.",
+    filters: "Filter your cities",
+    filterNote: "Filters take cities out; the order never changes.",
+    more: "See more cities",
+    footer:
+      "The results are suggestions, not verdicts. Every city rating links to its sources, on the city's page. The French foreign ministry's travel advice is shown with each city, as dated information: it never removes one.",
+    privacyStart:
+      "Your answers stay in your browser, which keeps them for the full questionnaire: nothing is sent to us",
+    privacySaved: ", unless you save your journey",
+    pages: "Site pages",
+    cities: "The cities",
+    reviews: "Reviews",
+    deep: "Go deeper",
+    method: "Our method",
+    legal: "Legal notice",
+    privacy: "Privacy",
+    asideHint: "Choose what you leave out. You can put it back at any time.",
+    cancel: "Cancel",
+    leftOut: "Left out:",
+    undo: "Undo",
+    leaders: "Leading for now",
+  },
+};
+const copy = COPY[locale];
+const to = (route: Parameters<typeof pathFor>[0]) => pathFor(route, locale);
+const questions = QUESTIONS.map((question) => questionIn(question, locale));
+const menu = filterMenu(locale);
+
+const dots = CITIES.map((city) => ({
+  name: city.name,
+  label: cityName(city.name, locale),
+  ...project(city.lat, city.lon),
+}));
+const description = siteDescription(locale);
+const title = `${BRAND[locale]} · ${copy.question}`;
+const website = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BRAND[locale],
+  url: locale === "fr" ? `${SITE}/` : `${EN_SITE}/`,
+  inLanguage: LANGUAGE_TAG[locale].html,
+  description,
+});
+const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+---
+
+<html lang={LANGUAGE_TAG[locale].html}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#161a5c" />
+    <title>{title}</title>
+    <ShareMeta title={title} description={description} />
+    <script type="application/ld+json" is:inline set:html={website} />
+    <Analytics />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="side">
+        <div class="brand">
+          <Wordmark />
+          <span class="brand-links">
+            {accounts && (
+              <a href={to("space")} class="space-link">
+                {copy.space}
+              </a>
+            )}
+            <LanguageSwitch />
+          </span>
+        </div>
+        <h1>
+          {copy.titleStart} <em>{copy.titleEnd}</em>
+        </h1>
+        <p class="lead">{copy.lead}</p>
+        <div class="maprow">
+          <div class="map">
+            <svg
+              id="map"
+              viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+              role="img"
+              aria-label={copy.map}
+            >
+              <g class="land" aria-hidden="true">
+                {borders.map((country) => (
+                  <path d={country.d} />
+                ))}
+              </g>
+              {dots.map((dot) => (
+                <circle
+                  class="dot"
+                  data-city={dot.name}
+                  cx={dot.x.toFixed(1)}
+                  cy={dot.y.toFixed(1)}
+                  r="3"
+                >
+                  <title>{dot.label}</title>
+                </circle>
+              ))}
+              <g id="highlights"></g>
+            </svg>
+          </div>
+          <div class="map-side">
+            <p class="map-legend" id="legend"></p>
+            <ol id="leaders" class="leaders" aria-label={copy.leaders} hidden></ol>
+          </div>
+        </div>
+        <div id="left-out" class="left-out" hidden>
+          <span>{copy.leftOut}</span>
+        </div>
+        <p id="aside-notice" class="aside-notice" role="status" hidden>
+          <span id="aside-text"></span>
+          <button type="button" id="aside-undo">
+            {copy.undo}
+          </button>
+        </p>
+        <dialog id="aside-sheet" class="sheet" aria-labelledby="aside-title">
+          <form method="dialog" class="sheet-body">
+            <h2 id="aside-title"></h2>
+            <p class="sheet-hint">{copy.asideHint}</p>
+            <div class="sheet-options" id="aside-options"></div>
+            <button type="submit" class="primary">
+              {copy.cancel}
+            </button>
+          </form>
+        </dialog>
+      </aside>
+
+      <main class="main">
+        <div class="progress">
+          <span id="stitches" class="stitches" aria-hidden="true"></span>
+          <p id="counter" class="counter"></p>
+        </div>
+        <SaveLater kind="quick" />
+        <form id="form" class="questions" aria-label={copy.answers}>
+          {questions.map((question, index) => (
+            <fieldset
+              class="question"
+              data-question={question.id}
+              data-max={question.max ?? 1}
+              hidden={index > 0}
+            >
+              <legend>{question.title}</legend>
+              <p class="why">{question.hint}</p>
+              <span class={question.max ? "mode multi" : "mode"}>
+                {question.max ? copy.several : copy.one}
+              </span>
+              <div class={question.choices.length > 7 ? "chips compact" : "chips"}>
+                {question.choices.map((choice) => (
+                  <button
+                    type="button"
+                    class={question.max ? "chip multi" : "chip"}
+                    aria-pressed="false"
+                    data-value={JSON.stringify(choice.value)}
+                  >
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="label">
+                      {choice.label}
+                      {choice.sub && <small>{choice.sub}</small>}
+                    </span>
+                  </button>
+                ))}
+              </div>
+              <div class="steps">
+                <button type="button" class="back" data-step="back">
+                  {copy.back}
+                </button>
+                {question.max && (
+                  <button type="button" class="next" data-step="next" disabled>
+                    {copy.next}
+                  </button>
+                )}
+              </div>
+            </fieldset>
+          ))}
+          <div id="ready" class="ready" hidden>
+            <h2>{copy.ready}</h2>
+            <p>{copy.readyText}</p>
+            <button type="button" id="reveal" class="primary">
+              {copy.reveal}
+            </button>
+            <button type="button" class="back" data-step="back">
+              {copy.back}
+            </button>
+          </div>
+        </form>
+        <Newsletter place="quiz" />
+
+        <div id="outcome" class="outcome" hidden>
+          <dialog id="filter-sheet" class="sheet" aria-labelledby="sheet-title">
+            <form method="dialog" class="sheet-body">
+              <h2 id="sheet-title"></h2>
+              <p class="sheet-hint" id="sheet-hint"></p>
+              <div class="sheet-options" id="sheet-options"></div>
+              <button type="submit" class="primary">
+                {copy.reveal}
+              </button>
+            </form>
+          </dialog>
+
+          <section class="results" aria-labelledby="results-title" data-print>
+            <h2 id="results-title">{copy.results}</h2>
+            <p class="hint">{copy.resultsHint}</p>
+            <SourcesNote />
+            <TemperamentProfile />
+            <div id="cards" class="cards"></div>
+            {/* Moved by the script right under the first city's pitch. */}
+            <Reactions preview />
+            {/* Right under the top three, where the wish to go further comes (operator, 2026-11-17). */}
+            <section class="further" aria-labelledby="further-title">
+              <h2 id="further-title">{copy.further}</h2>
+              <p>{copy.furtherText}</p>
+              <a href={to("deep")}>{copy.furtherLink}</a>
+            </section>
+            <KeepResults />
+          </section>
+
+          <section class="others" aria-labelledby="others-title">
+            <h2 id="others-title">{copy.others}</h2>
+            <p class="hint" id="others-hint">
+              {copy.othersHint}
+            </p>
+            <div class="filters" aria-label={copy.filters}>
+              <div class="filter-chips">
+                {menu.map((entry) => (
+                  <button
+                    type="button"
+                    class="filter-chip"
+                    data-filter={entry.key}
+                    aria-pressed="false"
+                  >
+                    {entry.label}
+                  </button>
+                ))}
+              </div>
+              <p class="hint" id="filter-note">
+                {copy.filterNote}
+              </p>
+            </div>
+            <ol id="rows" class="rows"></ol>
+            <button type="button" id="more" class="more">
+              {copy.more}
+            </button>
+          </section>
+
+          <Newsletter place="results" />
+        </div>
+
+        <footer class="footer">
+          <p>{copy.footer}</p>
+          <p>
+            {copy.privacyStart}
+            {accounts && copy.privacySaved}.
+          </p>
+          <nav class="links" aria-label={copy.pages}>
+            {accounts && <a href={to("space")}>{copy.space}</a>}
+            <a href={to("cities")}>{copy.cities}</a>
+            {accounts && <a href={to("reviews")}>{copy.reviews}</a>}
+            <a href={to("deep")}>{copy.deep}</a>
+            <a href={to("method")}>{copy.method}</a>
+            <a href={to("legal")}>{copy.legal}</a>
+            <a href={to("privacy")}>{copy.privacy}</a>
+          </nav>
+        </footer>
+      </main>
+    </div>
+
+    <ResultCards />
+    <Feedback />
+
+    <script>
+      import { rankCities, TOP_THREE, type Answers, type Match } from "../lib/ranking";
+      import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
+      import { showProfile } from "../lib/profile-dom";
+      import { cardFor, rowFor } from "../lib/cards-dom";
+      import { chapterName, keepInPath, QUESTIONS } from "../lib/questions";
+      import { syncChoices } from "../lib/choices-dom";
+      import {
+        applyFilters,
+        filterMenu,
+        filtersFrom,
+        type FilterOption,
+        type Filters,
+      } from "../lib/filters";
+      import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
+      import {
+        answerEvent,
+        finishedEvent,
+        notForMeEvent,
+        type NotForMePlace,
+      } from "../lib/analytics";
+      import {
+        leftOut,
+        restore,
+        setAside,
+        setAsideChoices,
+        setAsideNotice,
+        type SetAsideLevel,
+      } from "../lib/not-for-me";
+      import type { City } from "../lib/cities";
+      import { saveAnswers } from "../lib/keep";
+      import { syncJourney } from "../lib/account-dom";
+      import { browserStore, track, wireKeep } from "../lib/keep-dom";
+      import { showCounts, showPreview } from "../lib/reactions-dom";
+      import { resultLink } from "../lib/shared-result";
+      import { pageLocale, type Bilingual } from "../i18n/locale";
+      import { cityName } from "../i18n/places";
+
+      const locale = pageLocale();
+      const FILTER_MENU = filterMenu(locale);
+      const COPY: Bilingual<{
+        waiting: (count: number) => string;
+        hidden: (removed: number) => string;
+        filterNote: string;
+        kept: (count: number) => string;
+        all: string;
+        question: (n: number) => string;
+        ready: string;
+        notForMe: (name: string) => string;
+        sheetTitle: (name: string) => string;
+        putBack: (name: string) => string;
+      }> = {
+        fr: {
+          waiting: (count) =>
+            `${count} villes en lice. Chaque réponse fait grossir celles qui vous correspondent.`,
+          hidden: (removed) =>
+            `${removed} ${removed > 1 ? "villes masquées" : "ville masquée"} par vos filtres. L'ordre ne change pas : seul votre score le décide.`,
+          filterNote: "Les filtres retirent des villes ; l'ordre ne change jamais.",
+          kept: (count) =>
+            `Les ${count} villes qui passent vos filtres, triées selon vos réponses.`,
+          all: "Les 115 villes, triées selon vos réponses.",
+          question: (n) => `question ${n}`,
+          ready: "C'est prêt",
+          notForMe: (name) => `${name}, pas pour moi`,
+          sheetTitle: (name) => `${name} ne vous tente pas ?`,
+          putBack: (name) => `Remettre ${name}`,
+        },
+        en: {
+          waiting: (count) =>
+            `${count} cities in the running. Each answer makes the ones that match you grow.`,
+          hidden: (removed) =>
+            `${removed} ${removed > 1 ? "cities hidden" : "city hidden"} by your filters. The order does not change: only your score decides it.`,
+          filterNote: "Filters take cities out; the order never changes.",
+          kept: (count) => `The ${count} cities that pass your filters, sorted by your answers.`,
+          all: "The 115 cities, sorted by your answers.",
+          question: (n) => `question ${n}`,
+          ready: "It's ready",
+          notForMe: (name) => `${name}, not for me`,
+          sheetTitle: (name) => `Not tempted by ${name}?`,
+          putBack: (name) => `Put back ${name}`,
+        },
+      };
+      const copy = COPY[locale];
+
+      const SVG = "http://www.w3.org/2000/svg";
+      const form = document.getElementById("form") as HTMLFormElement;
+      const answers: Record<string, unknown> = {};
+      // « Pas pour moi »: the cities, countries and regions set aside (not-for-me.ts).
+      let placesAside: Answers = {};
+
+      // What the screen says, minus what no longer fits: going back and changing an answer
+      // re-routes the path and drops the answers it made irrelevant (quiz paths, 2026-11-16).
+      function readAnswers(): Answers {
+        const pressed: Record<string, unknown> = {};
+        for (const fieldset of form.querySelectorAll<HTMLFieldSetElement>(".question")) {
+          const id = fieldset.dataset.question as string;
+          const picked = [
+            ...fieldset.querySelectorAll<HTMLButtonElement>('[aria-pressed="true"]'),
+          ].map((chip) => JSON.parse(chip.dataset.value as string));
+          if (Number(fieldset.dataset.max) > 1) pressed[id] = picked.length ? picked : undefined;
+          else pressed[id] = picked[0];
+        }
+        // The places set aside are not a question on screen: they ride along with the answers.
+        const kept = { ...keepInPath(pressed as Answers), ...placesAside };
+        syncChoices(QUESTIONS, kept, form);
+        for (const key of Object.keys(answers)) delete answers[key];
+        Object.assign(answers, kept);
+        return kept;
+      }
+
+      function pick(chip: HTMLButtonElement) {
+        const fieldset = chip.closest<HTMLFieldSetElement>(".question");
+        if (!fieldset) return;
+        const max = Number(fieldset.dataset.max);
+        const wasOn = chip.getAttribute("aria-pressed") === "true";
+        const chips = [...fieldset.querySelectorAll<HTMLButtonElement>(".chip")];
+        if (max === 1) chips.forEach((other) => other.setAttribute("aria-pressed", "false"));
+        else if (
+          !wasOn &&
+          chips.filter((c) => c.getAttribute("aria-pressed") === "true").length >= max
+        )
+          return;
+        // « Je préfère ne pas dire » excludes the other answers, and they exclude it.
+        if (max > 1 && !wasOn) {
+          const silent = chip.dataset.value === "null";
+          for (const other of chips)
+            if ((other.dataset.value === "null") !== silent)
+              other.setAttribute("aria-pressed", "false");
+        }
+        // Tapping the pressed chip again clears the question.
+        chip.setAttribute("aria-pressed", String(!wasOn));
+      }
+
+      function renderMap(names: string[], scores: Map<string, number>) {
+        const values = scores.size ? [...scores.values()] : [0];
+        const best = Math.max(...values);
+        const worst = Math.min(...values);
+        const span = best - worst || 1;
+        for (const dot of document.querySelectorAll<SVGCircleElement>("#map .dot")) {
+          const name = dot.dataset.city as string;
+          const relative =
+            scores.size === 0 ? 0 : scores.has(name) ? (scores.get(name)! - worst) / span : 0;
+          dot.setAttribute("r", (1.5 + relative * relative * 5).toFixed(1));
+          dot.setAttribute(
+            "class",
+            `dot ${dotTier(relative)}${names.includes(name) ? " top" : ""}`,
+          );
+        }
+        const highlights = document.getElementById("highlights") as unknown as SVGGElement;
+        const points = names.map((name) => {
+          const dot = document.querySelector<SVGCircleElement>(
+            `#map .dot[data-city="${CSS.escape(name)}"]`,
+          )!;
+          return { name, x: Number(dot.getAttribute("cx")), y: Number(dot.getAttribute("cy")) };
+        });
+        highlights.replaceChildren(
+          ...placeLabels(points).flatMap((label) => {
+            const ring = document.createElementNS(SVG, "circle");
+            ring.setAttribute("class", "ring");
+            ring.setAttribute("cx", String(label.x));
+            ring.setAttribute("cy", String(label.y));
+            ring.setAttribute("r", "8");
+            const text = document.createElementNS(SVG, "text");
+            text.setAttribute("class", "label");
+            text.setAttribute("x", String(label.anchor === "end" ? label.x - 12 : label.x + 12));
+            text.setAttribute("y", String(label.labelY));
+            text.setAttribute("text-anchor", label.anchor);
+            text.textContent = cityName(label.name, locale);
+            return [ring, text];
+          }),
+        );
+      }
+
+      const CITIES_COUNT = 115;
+      const VISIBLE_ROWS = 5;
+      let showAll = false;
+
+      // The three cities on screen, for « Garder vos résultats ».
+      let onScreen: Match[] = [];
+      wireKeep(() => ({ answers: readAnswers(), matches: onScreen }), "quick");
+
+      function render() {
+        const current = readAnswers();
+        const ranked = rankCities(current, locale);
+        // Filters only remove cities; the order stays the score's.
+        const kept = applyFilters(ranked, filtersFrom(picked));
+        const matches = kept.filter((m) => !m.excludedBecause).slice(0, TOP_THREE);
+        onScreen = matches;
+        // A city set aside (« Pas pour moi ») goes dark on the map like one never scored.
+        const scores = new Map(
+          ranked
+            .filter((m) => !m.excludedBecause)
+            .map((m) => [m.city.name, m.score] as [string, number]),
+        );
+        // Before the first answer nothing is ranked yet: every dot stays the same and no city
+        // is named, so the quiz does not look decided before it starts.
+        // The map shows nothing before the first answer, colours every city by its score while the
+        // reader answers, and names the top three only with the result.
+        const count = Object.values(current).filter((value) => value !== undefined).length;
+        const missing = answersBeforeLight(count);
+        renderMap(revealed ? matches.map((m) => m.city.name) : [], missing ? new Map() : scores);
+        (document.getElementById("legend") as HTMLElement).textContent = missing
+          ? copy.waiting(CITIES_COUNT)
+          : leadersTitle;
+        renderLeaders(missing ? [] : matches);
+        renderLeftOut();
+
+        showProfile(current, locale);
+        const cards = matches.map((m, i) => {
+          const card = cardFor(m, i, ranked, locale);
+          const aside = card.querySelector<HTMLButtonElement>(".not-for-me");
+          if (aside) {
+            aside.hidden = false;
+            aside.addEventListener("click", () => openAside(m.city, "result"));
+          }
+          return card;
+        });
+        (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
+        if (revealed)
+          void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
+
+        // Every other city, in score order; conflict zones keep their place, greyed.
+        const shown = new Set(matches.map((m) => m.city.name));
+        const rest = kept.filter((m) => !shown.has(m.city.name));
+        const removed = ranked.length - kept.length;
+        (document.getElementById("filter-note") as HTMLElement).textContent = removed
+          ? copy.hidden(removed)
+          : copy.filterNote;
+        (document.getElementById("others-hint") as HTMLElement).textContent = removed
+          ? copy.kept(kept.length)
+          : copy.all;
+        const visible = showAll ? rest : rest.slice(0, VISIBLE_ROWS);
+        (document.getElementById("rows") as HTMLElement).replaceChildren(
+          ...visible.map((m, i) => rowFor(m, i + 4, locale)),
+        );
+        (document.getElementById("more") as HTMLElement).hidden = showAll;
+        placePreview();
+      }
+
+      // What others say of the first city, inside its card right under its pitch, on every
+      // screen: the map column stays as it was (operator, 2026-11-18).
+      function placePreview() {
+        const outcome = document.getElementById("outcome") as HTMLElement;
+        if (outcome.hidden || !onScreen[0]) return;
+        void showPreview(onScreen[0].city, resultLink(readAnswers(), onScreen, locale), (root) =>
+          document.querySelector("#cards .card-pitch")?.after(root),
+        );
+      }
+
+      document.getElementById("more")!.addEventListener("click", () => {
+        showAll = true;
+        render();
+      });
+
+      // « Pas pour moi » (beta feedback, 2026-11-18): each leading city can be set aside, alone,
+      // with its country or with its region. A filter, so the ranking and the next question follow.
+      const leadersTitle = (document.getElementById("leaders") as HTMLElement).getAttribute(
+        "aria-label",
+      ) as string;
+      const asideSheet = document.getElementById("aside-sheet") as HTMLDialogElement;
+      const notice = document.getElementById("aside-notice") as HTMLElement;
+      let undoAside: (() => void) | undefined;
+      let noticeTimer: ReturnType<typeof setTimeout> | undefined;
+
+      function changePlaces(next: Answers) {
+        placesAside = next;
+        saveAnswers(browserStore(), readAnswers());
+        syncJourney(readAnswers());
+        render();
+      }
+
+      function renderLeaders(matches: Match[]) {
+        const list = document.getElementById("leaders") as HTMLElement;
+        list.hidden = matches.length === 0;
+        list.replaceChildren(
+          ...matches.map((m) => {
+            const item = document.createElement("li");
+            const name = document.createElement("span");
+            name.textContent = cityName(m.city.name, locale);
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "aside-button";
+            button.textContent = "×";
+            button.setAttribute("aria-label", copy.notForMe(name.textContent));
+            button.addEventListener("click", () => openAside(m.city, "quiz"));
+            item.append(name, button);
+            return item;
+          }),
+        );
+      }
+
+      function renderLeftOut() {
+        const row = document.getElementById("left-out") as HTMLElement;
+        const places = leftOut(placesAside, locale);
+        row.hidden = places.length === 0;
+        row.replaceChildren(
+          row.firstElementChild as HTMLElement,
+          ...places.map((place) => {
+            const chip = document.createElement("button");
+            chip.type = "button";
+            chip.className = "left-out-chip";
+            chip.textContent = `${place.label} ×`;
+            chip.setAttribute("aria-label", copy.putBack(place.label));
+            chip.addEventListener("click", () => {
+              track(notForMeEvent("quiz", place.level, true));
+              changePlaces(restore(placesAside, place));
+            });
+            return chip;
+          }),
+        );
+      }
+
+      function openAside(city: City, place: NotForMePlace) {
+        (document.getElementById("aside-title") as HTMLElement).textContent = copy.sheetTitle(
+          cityName(city.name, locale),
+        );
+        (document.getElementById("aside-options") as HTMLElement).replaceChildren(
+          ...setAsideChoices(city, locale).map((choice) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "option";
+            const label = document.createElement("b");
+            label.textContent = choice.label;
+            const detail = document.createElement("span");
+            detail.textContent = choice.detail;
+            button.append(label, detail);
+            button.addEventListener("click", () => {
+              asideSheet.close();
+              applyAside(city, choice.level, place);
+            });
+            return button;
+          }),
+        );
+        asideSheet.showModal();
+      }
+
+      function applyAside(city: City, level: SetAsideLevel, place: NotForMePlace) {
+        const before = placesAside;
+        track(notForMeEvent(place, level));
+        changePlaces(setAside(placesAside, city, level));
+        (document.getElementById("aside-text") as HTMLElement).textContent = setAsideNotice(
+          city,
+          level,
+          locale,
+        );
+        notice.hidden = false;
+        undoAside = () => {
+          track(notForMeEvent(place, level, true));
+          changePlaces(before);
+        };
+        clearTimeout(noticeTimer);
+        noticeTimer = setTimeout(() => (notice.hidden = true), 10000);
+      }
+
+      document.getElementById("aside-undo")!.addEventListener("click", () => {
+        notice.hidden = true;
+        undoAside?.();
+        undoAside = undefined;
+      });
+      asideSheet.addEventListener("click", (event) => {
+        if (event.target === asideSheet) asideSheet.close();
+      });
+
+      // One question at a time, chosen by what would reshuffle the top three the most; the quiz
+      // ends once no question can change it (adaptive.ts, operator 2026-11-17).
+      const fieldsets = new Map(
+        [...form.querySelectorAll<HTMLFieldSetElement>(".question")].map((f) => [
+          f.dataset.question as string,
+          f,
+        ]),
+      );
+      const asked: string[] = [];
+      let current: string | undefined = "project";
+      let revealed = false;
+      let finished = false;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+
+      function showQuestion(id: string | undefined) {
+        clearTimeout(timer);
+        current = id;
+        revealed = id === undefined;
+        // On the phone the title gives way to the map once the reader has started.
+        document.body.classList.toggle("started", asked.length > 0);
+        fieldsets.forEach((fieldset, key) => (fieldset.hidden = key !== id));
+        // Only the choices that fit the answers so far (countries of the regions picked, schools
+        // with children…); readAnswers releases the rest.
+        readAnswers();
+        (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
+        // « Votre tempérament · question 7 »: no total, since the quiz ends once no question can
+        // change the top three (adaptive.ts). The stitches count the questions it may still ask,
+        // and all fill up when it ends.
+        const list = freeQuestions(readAnswers());
+        const question = QUESTIONS.find((q) => q.id === id);
+        (document.getElementById("counter") as HTMLElement).innerHTML = question
+          ? `<b>${chapterName(question, readAnswers(), locale)}</b> · ${copy.question(asked.length + 1)}`
+          : `<b>${copy.ready}</b>`;
+        (document.getElementById("stitches") as HTMLElement).replaceChildren(
+          ...list.map((_, i) => {
+            const stitch = document.createElement("i");
+            if (i < asked.length || !id) stitch.className = "done";
+            return stitch;
+          }),
+        );
+        const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
+        if (back) back.hidden = asked.length === 0;
+        if (id) syncContinue(fieldsets.get(id)!);
+        // The news block (components/Newsletter.astro) shows from the fourth answer.
+        document.dispatchEvent(new CustomEvent("labas:answered", { detail: asked.length }));
+        if (id)
+          fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+        // Counted once per visit, when the last question is answered.
+        if (!id && !finished) {
+          finished = true;
+          track(finishedEvent("Questionnaire 1 terminé", readAnswers().project));
+        }
+        render();
+      }
+
+      // « Continuer » stays off until something is picked.
+      function syncContinue(fieldset: HTMLFieldSetElement) {
+        const next = fieldset.querySelector<HTMLButtonElement>(".next");
+        if (next) next.disabled = !fieldset.querySelector('.chip[aria-pressed="true"]');
+      }
+
+      function advance() {
+        if (current) asked.push(current);
+        showQuestion(nextFreeQuestion(readAnswers(), asked));
+      }
+
+      function goBack() {
+        const last = asked.pop();
+        if (last) showQuestion(last);
+      }
+
+      form.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        const move = target.closest<HTMLButtonElement>("[data-step]")?.dataset.step;
+        if (move) {
+          if (move === "back") goBack();
+          else advance();
+          return;
+        }
+        const chip = target.closest<HTMLButtonElement>(".chip");
+        if (!chip) return;
+        pick(chip);
+        render();
+        // Kept in this browser only, so « Affiner » starts where the quiz stopped.
+        saveAnswers(browserStore(), readAnswers());
+        syncJourney(readAnswers());
+        const fieldset = chip.closest<HTMLFieldSetElement>(".question")!;
+        syncContinue(fieldset);
+        if (chip.getAttribute("aria-pressed") === "true") {
+          // The question on screen is the next one after those already asked.
+          const event = answerEvent(
+            fieldset.dataset.question as string,
+            JSON.parse(chip.dataset.value as string),
+            { project: readAnswers().project, step: asked.length + 1 },
+          );
+          if (event) track(event);
+        }
+        // A single answer lights up, then the next question comes half a second later.
+        if (Number(fieldset.dataset.max) === 1 && chip.getAttribute("aria-pressed") === "true") {
+          clearTimeout(timer);
+          timer = setTimeout(advance, 500);
+        }
+      });
+
+      document.getElementById("reveal")!.addEventListener("click", () => {
+        const outcome = document.getElementById("outcome") as HTMLElement;
+        outcome.hidden = false;
+        placePreview();
+        outcome.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      // Filters on the result: one sheet per filter, options toggled live.
+      const picked: Partial<Record<keyof Filters, FilterOption["value"][]>> = {};
+      const sheet = document.getElementById("filter-sheet") as HTMLDialogElement;
+
+      function syncFilterChips() {
+        for (const chip of document.querySelectorAll<HTMLButtonElement>(".filter-chip")) {
+          const key = chip.dataset.filter as keyof Filters;
+          chip.setAttribute("aria-pressed", String(Boolean(picked[key]?.length)));
+        }
+      }
+
+      function openSheet(key: keyof Filters) {
+        const entry = FILTER_MENU.find((f) => f.key === key)!;
+        (document.getElementById("sheet-title") as HTMLElement).textContent = entry.label;
+        (document.getElementById("sheet-hint") as HTMLElement).textContent = entry.hint;
+        (document.getElementById("sheet-options") as HTMLElement).replaceChildren(
+          ...entry.options.map((option) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "option";
+            button.textContent = option.label;
+            button.dataset.value = JSON.stringify(option.value);
+            const on = () => (picked[key] ?? []).includes(option.value);
+            button.setAttribute("aria-pressed", String(on()));
+            button.addEventListener("click", () => {
+              const values = picked[key] ?? [];
+              picked[key] = on()
+                ? values.filter((v) => v !== option.value)
+                : entry.single
+                  ? [option.value]
+                  : [...values, option.value];
+              for (const other of button.parentElement!.querySelectorAll<HTMLButtonElement>(
+                ".option",
+              ))
+                other.setAttribute(
+                  "aria-pressed",
+                  String((picked[key] ?? []).includes(JSON.parse(other.dataset.value!))),
+                );
+              syncFilterChips();
+              render();
+            });
+            return button;
+          }),
+        );
+        sheet.showModal();
+      }
+
+      for (const chip of document.querySelectorAll<HTMLButtonElement>(".filter-chip")) {
+        chip.addEventListener("click", () => openSheet(chip.dataset.filter as keyof Filters));
+      }
+      // A tap on the dimmed backdrop closes the sheet.
+      sheet.addEventListener("click", (event) => {
+        if (event.target === sheet) sheet.close();
+      });
+
+      showQuestion("project");
+    </script>
+
+    <style>
+      .shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 20px max(16px, env(safe-area-inset-right)) 56px
+          max(16px, env(safe-area-inset-left));
+        display: grid;
+        gap: 28px;
+        padding-bottom: 96px;
+      }
+      .side {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        font-size: 1.8rem;
+      }
+      @media (min-width: 880px) {
+        .shell {
+          grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+          gap: 48px;
+          padding-top: 36px;
+        }
+        .side {
+          position: sticky;
+          top: 24px;
+        }
+      }
+      .brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-links {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1rem;
+      }
+      .space-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--saffron);
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 8vw, 3.4rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        margin: 0;
+        text-wrap: balance;
+      }
+      h1 em {
+        font-style: italic;
+        font-weight: 400;
+        color: var(--saffron);
+      }
+      .lead,
+      .hint,
+      .footer {
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+        margin: 0;
+      }
+      .map {
+        background-color: var(--night-deep);
+        background-image: radial-gradient(
+          circle,
+          color-mix(in srgb, var(--thread) 8%, transparent) 1px,
+          transparent 1.5px
+        );
+        background-size: 12px 12px;
+        border-radius: 18px;
+      }
+      .map svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 52vh;
+      }
+      .map :global(.dot) {
+        fill: var(--thread-dim);
+        opacity: 0.4;
+        transition:
+          r 0.5s cubic-bezier(0.3, 1.4, 0.5, 1),
+          opacity 0.4s,
+          fill 0.4s;
+      }
+      .map :global(.ring) {
+        fill: none;
+        stroke: var(--saffron);
+        stroke-width: 2;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: ring 2.4s ease-out infinite;
+      }
+      .map :global(.label) {
+        font: 800 13px var(--font-body);
+        fill: var(--thread);
+        paint-order: stroke;
+        stroke: var(--night-deep);
+        stroke-width: 4px;
+      }
+      @keyframes ring {
+        from {
+          opacity: 0.9;
+          transform: scale(0.6);
+        }
+        to {
+          opacity: 0;
+          transform: scale(2.6);
+        }
+      }
+      /* On a computer the map stays beside the questions: the question sits in a saffron
+         frame (quiz mockup, 2026-11-15). */
+      @media (min-width: 880px) {
+        .question:not([hidden]) {
+          background: var(--night-deep);
+          border: 2px solid var(--saffron);
+          border-radius: 22px;
+          padding: 30px 32px;
+        }
+        .question legend {
+          float: left;
+          width: 100%;
+          font-size: 2.4rem;
+          margin-bottom: 20px;
+        }
+        .question .chips {
+          clear: both;
+        }
+        .main {
+          padding-top: 24px;
+        }
+      }
+      .main {
+        display: grid;
+        gap: 40px;
+        min-width: 0;
+      }
+      .questions {
+        display: grid;
+        gap: 22px;
+      }
+      .question {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+      }
+      legend {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.2rem;
+        line-height: 1.2;
+        padding: 0;
+        margin-bottom: 10px;
+      }
+      legend .hint {
+        display: block;
+        font-family: var(--font-body);
+        font-weight: 400;
+        font-size: 0.82rem;
+        margin-top: 2px;
+      }
+      .why {
+        margin: 0 0 10px;
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+      }
+      .mode {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 3px 11px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        background: var(--night-lift);
+        color: var(--thread-dim);
+      }
+      .mode.multi {
+        background: var(--saffron);
+        color: var(--ink);
+      }
+      /* One answer per line, a round box for one choice and a square one for several. */
+      .chips {
+        display: grid;
+        gap: 9px;
+      }
+      .chips.compact {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+      .chip {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        min-height: 48px;
+        text-align: left;
+        background: var(--night-lift);
+        border: 2px solid transparent;
+        border-radius: 14px;
+        padding: 11px 15px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      .chip[hidden] {
+        display: none;
+      }
+      .chip:hover {
+        border-color: color-mix(in srgb, var(--saffron) 50%, transparent);
+      }
+      .chip .box {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 2px solid var(--thread-dim);
+      }
+      .chip.multi .box {
+        border-radius: 7px;
+      }
+      .chip .label {
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .chip small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.85rem;
+        color: var(--thread-dim);
+      }
+      .chip[aria-pressed="true"] {
+        border-color: var(--saffron);
+        background: var(--night-pressed);
+      }
+      .chip[aria-pressed="true"] .box {
+        background: var(--saffron);
+        border-color: var(--saffron);
+        box-shadow: inset 0 0 0 4px var(--night-pressed);
+      }
+      .chips.compact .chip {
+        grid-template-columns: 18px 1fr;
+        gap: 8px;
+        padding: 9px 10px;
+        font-size: 0.92rem;
+      }
+      .chips.compact .chip .box {
+        width: 18px;
+        height: 18px;
+      }
+      .results {
+        display: grid;
+        gap: 14px;
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        line-height: 1.05;
+        margin: 0;
+      }
+      .others {
+        display: grid;
+        gap: 10px;
+        padding-top: 24px;
+        border-top: 1px solid var(--night-lift);
+      }
+      .more {
+        justify-self: stretch;
+        min-height: 48px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--night-lift);
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .more[hidden] {
+        display: none;
+      }
+      .map :global(.land) {
+        fill: var(--night-lift);
+        stroke: var(--night);
+        stroke-width: 0.7;
+        stroke-linejoin: round;
+      }
+      .map :global(.dot.faint) {
+        fill: var(--thread-dim);
+        opacity: 0.32;
+      }
+      .map :global(.dot.lilac) {
+        fill: var(--thread-dim);
+        opacity: 0.8;
+      }
+      .map :global(.dot.coral) {
+        fill: var(--coral);
+        opacity: 0.95;
+      }
+      .map :global(.dot.saffron),
+      .map :global(.dot.top) {
+        fill: var(--saffron);
+        opacity: 1;
+      }
+      @media (max-width: 879px) {
+        :global(body.started) .side h1,
+        :global(body.started) .lead {
+          display: none;
+        }
+        /* On the phone the map shrinks to a thumbnail beside « En tête pour l'instant ». */
+        .maprow {
+          display: grid;
+          grid-template-columns: 128px minmax(0, 1fr);
+          gap: 14px;
+          align-items: center;
+        }
+      }
+      .map-legend {
+        margin: 0;
+        color: var(--thread-dim);
+        font-size: 0.85rem;
+      }
+      .map-side {
+        display: grid;
+        gap: 4px;
+        min-width: 0;
+      }
+      .leaders {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: leader;
+        font-size: 1rem;
+      }
+      /* Built by the script, so outside Astro's scoped styles. */
+      .leaders :global(li) {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        counter-increment: leader;
+        font-weight: 700;
+      }
+      .leaders :global(li)::before {
+        content: counter(leader);
+        width: 16px;
+        font-family: var(--font-display);
+        font-weight: 900;
+        color: var(--saffron);
+      }
+      .leaders :global(li span) {
+        flex-grow: 1;
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .leaders :global(.aside-button) {
+        min-width: 44px;
+        min-height: 44px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        color: var(--thread-dim);
+        font-size: 1.25rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .left-out {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        color: var(--thread-dim);
+      }
+      .left-out[hidden],
+      .aside-notice[hidden] {
+        display: none;
+      }
+      .left-out :global(.left-out-chip) {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        color: var(--thread);
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      /* Pinned above the feedback tab, so « Annuler » shows wherever the place was set aside. */
+      .aside-notice {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: max(72px, calc(env(safe-area-inset-bottom) + 56px));
+        z-index: 20;
+        max-width: 560px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 8px 8px 16px;
+        border-radius: 14px;
+        border: 2px solid var(--saffron);
+        background: var(--night-deep);
+        font-size: 0.95rem;
+      }
+      .aside-notice span {
+        flex-grow: 1;
+      }
+      .aside-notice button {
+        min-height: 44px;
+        padding: 0 14px;
+        border: 0;
+        background: transparent;
+        color: var(--saffron);
+        font-weight: 700;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .sheet-options :global(.option b),
+      .sheet-options :global(.option span) {
+        display: block;
+        font-family: var(--font-body);
+        font-size: 1rem;
+      }
+      .sheet-options :global(.option:has(span)) {
+        padding: 8px 14px;
+      }
+      .sheet-options :global(.option span) {
+        font-weight: 400;
+        font-size: 0.9rem;
+      }
+      .filters {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .filter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .filter-chip {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 2px solid var(--night-pressed);
+        background: transparent;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .filter-chip[aria-pressed="true"] {
+        background: var(--saffron);
+        border-color: var(--saffron);
+        color: var(--ink);
+      }
+      .sheet {
+        margin: auto auto 0;
+        width: 100%;
+        max-width: 560px;
+        max-height: 85vh;
+        border: 0;
+        border-radius: 22px 22px 0 0;
+        padding: 0;
+        background: var(--thread);
+        color: var(--ink);
+      }
+      .sheet::backdrop {
+        background: color-mix(in srgb, var(--scrim) 55%, transparent);
+      }
+      .sheet-body {
+        display: grid;
+        gap: 12px;
+        padding: 20px 20px max(24px, env(safe-area-inset-bottom));
+      }
+      .sheet h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+      }
+      .sheet-hint {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .sheet-options {
+        display: grid;
+        gap: 8px;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+      /* Built by the script, so outside Astro's scoped styles. */
+      .sheet-options :global(.option) {
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: 14px;
+        border: 2px solid var(--thread-faint);
+        background: transparent;
+        color: var(--ink);
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+      }
+      .sheet-options :global(.option[aria-pressed="true"]) {
+        background: var(--night);
+        border-color: var(--night);
+        color: var(--thread);
+      }
+      .sheet .primary {
+        min-height: 52px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--night);
+        color: var(--thread);
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .progress {
+        display: grid;
+        gap: 10px;
+      }
+      .stitches {
+        display: flex;
+        gap: 3px;
+      }
+      .stitches :global(i) {
+        flex: 1;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--night-lift);
+      }
+      .stitches :global(i.done) {
+        background: var(--saffron);
+      }
+      .counter {
+        margin: 0;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--thread-dim);
+      }
+      .counter :global(b) {
+        color: var(--saffron);
+      }
+      .question legend {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+      }
+      .steps {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+      }
+      .back,
+      .next,
+      .primary,
+      .secondary {
+        min-height: 44px;
+        border-radius: 999px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .back {
+        border: 0;
+        background: transparent;
+        color: var(--thread-dim);
+        padding: 0 4px;
+        font-weight: 400;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .back[hidden] {
+        visibility: hidden;
+        display: inline;
+      }
+      .next:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .next,
+      .primary {
+        border: 0;
+        background: var(--saffron);
+        color: var(--ink);
+        padding: 0 22px;
+      }
+      .ready {
+        display: grid;
+        gap: 12px;
+        background: var(--night-deep);
+        border: 2px solid var(--saffron);
+        border-radius: 20px;
+        padding: 22px;
+      }
+      .ready[hidden],
+      .outcome[hidden] {
+        display: none;
+      }
+      .ready h2 {
+        margin: 0;
+      }
+      .ready p {
+        margin: 0;
+      }
+      .primary {
+        min-height: 54px;
+        font-size: 1.05rem;
+      }
+      .secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        border: 2px solid var(--thread);
+        background: transparent;
+        color: var(--thread);
+        text-decoration: none;
+      }
+      .outcome {
+        display: grid;
+        gap: 40px;
+      }
+      @media print {
+        .further {
+          display: none;
+        }
+      }
+      .further {
+        display: grid;
+        margin-top: 18px;
+        gap: 12px;
+        background: var(--saffron);
+        color: var(--ink);
+        border-radius: 20px;
+        padding: 24px;
+      }
+      .further h2 {
+        margin: 0;
+      }
+      .further p {
+        margin: 0;
+      }
+      .further a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--saffron);
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+      }
+      .links a,
+      :global(.detail-body .full) {
+        color: var(--saffron);
+        font-weight: 700;
+      }
+      .footer {
+        display: grid;
+        gap: 6px;
+        font-size: 0.82rem;
+      }
+    </style>
+  </body>
+</html>

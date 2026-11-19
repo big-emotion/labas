@@ -1,5 +1,7 @@
+import { CITIES } from "./cities";
 import { DEEP_QUESTIONS } from "./deep-questions";
 import type { Answers } from "./ranking";
+import { BRAND, type Locale } from "../i18n/locale";
 
 /**
  * The reader's answers kept in their own browser (localStorage), so the full questionnaire
@@ -57,13 +59,26 @@ export function cleanAnswers(raw: unknown): Answers {
       answers[question.id] = value;
     }
   }
+  // « Pas pour moi » is a gesture, not a question: its places are checked against the catalogue.
+  for (const [id, known] of PLACES_SET_ASIDE) {
+    const value = kept[id];
+    const valid = Array.isArray(value) ? value.filter((v) => known.has(v)) : [];
+    if (valid.length) answers[id] = valid;
+  }
   return answers as Answers;
 }
+
+const PLACES_SET_ASIDE: [string, Set<unknown>][] = [
+  ["avoidCities", new Set(CITIES.map((c) => c.name))],
+  ["avoidCountries", new Set(CITIES.map((c) => c.country))],
+  ["avoidRegions", new Set(CITIES.map((c) => c.zone))],
+];
 
 /**
  * Origin, family country, feeling at home, faith, and the fuller questionnaire's filters about
  * health and about laws against homosexuality: special-category data (GDPR art. 9). Never
- * measured, and kept in Mon espace only with their own box ticked.
+ * measured, and kept in Mon espace only with their own box ticked. The places set aside join
+ * them: leaving a region out can hint at origin or faith.
  */
 export const SENSITIVE_ANSWERS = [
   "origin",
@@ -72,6 +87,9 @@ export const SENSITIVE_ANSWERS = [
   "faith",
   "excludeCriminalising",
   "specialistCare",
+  "avoidCities",
+  "avoidCountries",
+  "avoidRegions",
 ] as const;
 
 export function withoutSensitive(answers: Answers): Answers {
@@ -81,7 +99,9 @@ export function withoutSensitive(answers: Answers): Answers {
 }
 
 /** The reader's own mail app, the result already written; they choose who receives it. */
-export function mailtoFor(text: string): string {
-  const subject = encodeURIComponent("Mes villes d'Afrique sur Là-bas");
+export function mailtoFor(text: string, locale: Locale): string {
+  const subject = encodeURIComponent(
+    locale === "fr" ? `Mes villes d'Afrique sur ${BRAND.fr}` : `My African cities on ${BRAND.en}`,
+  );
   return `mailto:?subject=${subject}&body=${encodeURIComponent(text)}`;
 }

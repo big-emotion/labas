@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
 import { neighbourhoodLine, temperamentOf, TRAITS } from "./city-temperament";
 import { rankCities, type Answers } from "./ranking";
+import { looksFrench } from "../i18n/looks-french";
 
 const entriesOf = (cityName: string, answers: Answers) =>
   rankCities(answers).find((m) => m.city.name === cityName)!.temperamentLines;
@@ -47,7 +48,7 @@ describe("why a city fits the reader's temperament, neighbourhood by neighbourho
     for (const city of CITIES)
       for (const trait of TRAITS)
         for (const reader of [0, 0.5, 1]) {
-          const line = neighbourhoodLine(city.name, trait, reader);
+          const line = neighbourhoodLine(city.name, trait, reader, "fr");
           if (!line?.weak) continue;
           expect(line.text, `${city.name} ${trait} ${reader}`).toMatch(
             temperamentOf(city.name)!.editorial
@@ -101,6 +102,23 @@ describe("the gauge of surprises to plan for", () => {
     expect(lines[at].weak).toBe(false);
     expect(lines.slice(0, at).every((line) => !line.weak && !line.gauge)).toBe(true);
     expect(lines.slice(at + 1).every((line) => line.weak)).toBe(true);
+  });
+
+  it("writes the neighbourhood lines and the gauge in English for an English reader", () => {
+    const kigali = temperamentOf("Kigali")!;
+    const english = rankCities({ saturday: 0, order: 1 }, "en").find(
+      (m) => m.city.name === "Kigali",
+    )!.temperamentLines;
+    expect(english[0].text).toBe(
+      `Quiet in the evening: ${kigali.saturday[0]} neighbourhoods out of ${kigali.areas}`,
+    );
+    expect(english[1].text).toMatch(/^Expect the unexpected: \d out of 5$/);
+    for (const city of CITIES)
+      for (const trait of TRAITS)
+        for (const reader of [0, 0.5, 1]) {
+          const line = neighbourhoodLine(city.name, trait, reader, "en");
+          if (line) expect(looksFrench(line.text), line.text).toBe(false);
+        }
   });
 
   it("never says a city works as planned", () => {

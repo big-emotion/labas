@@ -1,6 +1,8 @@
 import { CITIES } from "./cities";
 import { SEASONS } from "./holiday";
 import type { Answers } from "./ranking";
+import { INTL_LOCALE, type Bilingual, type Locale } from "../i18n/locale";
+import { countryName } from "../i18n/places";
 
 export interface Choice {
   label: string;
@@ -10,6 +12,8 @@ export interface Choice {
   sub?: string;
   /** Offered only when this holds for the answers so far (quiz paths, 2026-11-16). */
   when?: (answers: Answers) => boolean;
+  /** The English answer: written next to the French so a missing one is a type error. */
+  en: { label: string; sub?: string };
 }
 
 export interface Question {
@@ -29,6 +33,8 @@ export interface Question {
   max?: number;
   /** Asked only when this holds for the answers so far. */
   when?: (answers: Answers) => boolean;
+  /** The English title and hint (British English, « you »). */
+  en: { title: string; hint?: string };
 }
 
 /** The family regions the reader named, « Je préfère ne pas dire » left out. */
@@ -48,14 +54,29 @@ const COUNTRY_CHOICES: Choice[] = [
   .map(([country, zone]) => ({
     label: country,
     value: country,
+    en: { label: countryName(country, "en") },
     when: (answers: Answers) => africanOrigins(answers).includes(zone),
   }));
 
-const PROJECT = "Votre projet";
-const TRIP = "Votre voyage";
-const TEMPERAMENT = "Votre tempérament";
-const HISTORY = "Votre histoire avec l'Afrique";
-const LAST = "Pour finir";
+/** The chapters, by their French name: `group` keeps the French name the tests and code know. */
+const CHAPTERS = {
+  project: { fr: "Votre projet", en: "Your plans" },
+  trip: { fr: "Votre voyage", en: "Your trip" },
+  temperament: { fr: "Votre tempérament", en: "Your temperament" },
+  history: { fr: "Votre histoire avec l'Afrique", en: "Your story with Africa" },
+  last: { fr: "Pour finir", en: "To finish" },
+  profile: { fr: "VOTRE PROFIL", en: "YOUR PROFILE" },
+  refine: { fr: "POUR AFFINER", en: "TO REFINE" },
+} satisfies Record<string, Bilingual<string>>;
+export const CHAPTER = {
+  profile: CHAPTERS.profile.fr,
+  refine: CHAPTERS.refine.fr,
+};
+const PROJECT = CHAPTERS.project.fr;
+const TRIP = CHAPTERS.trip.fr;
+const TEMPERAMENT = CHAPTERS.temperament.fr;
+const HISTORY = CHAPTERS.history.fr;
+const LAST = CHAPTERS.last.fr;
 
 const holiday = (answers: Answers) => answers.project === "decouvrir";
 /** The reader will spend real time there: not for an investor who does not live there. */
@@ -75,13 +96,41 @@ export const QUESTIONS: Question[] = [
     id: "project",
     group: PROJECT,
     title: "Là-bas, vous vous y voyez comment ?",
+    en: {
+      title: "How do you picture yourself over there?",
+      hint: "Depending on your plans, we look mostly at safety, paperwork, flights or the cost of settling in.",
+    },
     hint: "Selon votre projet, on regarde surtout la sécurité, les démarches, les vols ou le coût pour s'installer.",
     choices: [
-      { label: "M'installer pour de bon", value: "installer", sub: "Y construire ma vie" },
-      { label: "Un pied ici, un pied là-bas", value: "pied", sub: "Des allers-retours réguliers" },
-      { label: "Tester quelques mois", value: "tester", sub: "Voir si la vie sur place me va" },
-      { label: "Investir sans y vivre", value: "investir" },
-      { label: "D'abord des vacances", value: "decouvrir", sub: "Et je verrai ensuite" },
+      {
+        label: "M'installer pour de bon",
+        value: "installer",
+        sub: "Y construire ma vie",
+        en: { label: "Settle for good", sub: "Build my life there" },
+      },
+      {
+        label: "Un pied ici, un pied là-bas",
+        value: "pied",
+        sub: "Des allers-retours réguliers",
+        en: { label: "One foot here, one foot there", sub: "Regular trips back and forth" },
+      },
+      {
+        label: "Tester quelques mois",
+        value: "tester",
+        sub: "Voir si la vie sur place me va",
+        en: { label: "Try it for a few months", sub: "See if life there suits me" },
+      },
+      {
+        label: "Investir sans y vivre",
+        value: "investir",
+        en: { label: "Invest without living there" },
+      },
+      {
+        label: "D'abord des vacances",
+        value: "decouvrir",
+        sub: "Et je verrai ensuite",
+        en: { label: "A holiday first", sub: "And I'll see after that" },
+      },
     ],
   },
   {
@@ -89,17 +138,29 @@ export const QUESTIONS: Question[] = [
     group: TRIP,
     when: holiday,
     title: "Ce que vous voulez vivre là-bas ?",
+    en: {
+      title: "What do you want to experience there?",
+      hint: "Up to three choices: we look for the cities where you can do it.",
+    },
     hint: "Jusqu'à trois choix : on cherche les villes où vous pourrez le faire.",
     max: 3,
     choices: [
-      { label: "La plage ou une île", value: "beach" },
-      { label: "Le désert ou la savane", value: "wild" },
-      { label: "La montagne et la nature", value: "nature" },
-      { label: "Faire la fête", value: "party" },
-      { label: "L'histoire et la mémoire", value: "history" },
-      { label: "La culture et les musées", value: "culture" },
-      { label: "Un safari", value: "safari" },
-      { label: "La plongée, le surf ou la glisse", value: "sea" },
+      { label: "La plage ou une île", value: "beach", en: { label: "The beach or an island" } },
+      {
+        label: "Le désert ou la savane",
+        value: "wild",
+        en: { label: "The desert or the savannah" },
+      },
+      { label: "La montagne et la nature", value: "nature", en: { label: "Mountains and nature" } },
+      { label: "Faire la fête", value: "party", en: { label: "Partying" } },
+      { label: "L'histoire et la mémoire", value: "history", en: { label: "History and memory" } },
+      { label: "La culture et les musées", value: "culture", en: { label: "Culture and museums" } },
+      { label: "Un safari", value: "safari", en: { label: "A safari" } },
+      {
+        label: "La plongée, le surf ou la glisse",
+        value: "sea",
+        en: { label: "Diving, surfing or board sports" },
+      },
     ],
   },
   {
@@ -107,10 +168,14 @@ export const QUESTIONS: Question[] = [
     group: TRIP,
     when: holiday,
     title: "Quand partez-vous ?",
+    en: {
+      title: "When are you going?",
+      hint: "To dodge the rainy season and catch the best weather.",
+    },
     hint: "Pour éviter la saison des pluies et viser la belle saison.",
     choices: [
-      ...SEASONS.map((s) => ({ label: s.label, value: s.value })),
-      { label: "Je ne sais pas encore", value: null },
+      ...SEASONS.map((s) => ({ label: s.label, value: s.value, en: { label: s.en } })),
+      { label: "Je ne sais pas encore", value: null, en: { label: "I don't know yet" } },
     ],
   },
   {
@@ -118,20 +183,25 @@ export const QUESTIONS: Question[] = [
     group: PROJECT,
     when: worksThere,
     title: "Votre métier ?",
+    en: { title: "Your line of work?", hint: "To favour the cities where your field is hiring." },
     hint: "Pour privilégier les villes où votre métier recrute.",
     choices: [
-      { label: "Finance", value: "finance" },
-      { label: "Droit", value: "law" },
-      { label: "Conseil, gestion de projet", value: "consulting" },
-      { label: "Numérique", value: "tech" },
-      { label: "Santé", value: "health" },
-      { label: "Enseignement", value: "teaching" },
-      { label: "ONG, international", value: "ngo" },
-      { label: "Commerce", value: "trade" },
-      { label: "Culture, médias", value: "culture" },
-      { label: "Artisanat", value: "craft" },
-      { label: "Études", value: "student" },
-      { label: "Retraite", value: "retired" },
+      { label: "Finance", value: "finance", en: { label: "Finance" } },
+      { label: "Droit", value: "law", en: { label: "Law" } },
+      {
+        label: "Conseil, gestion de projet",
+        value: "consulting",
+        en: { label: "Consulting, project management" },
+      },
+      { label: "Numérique", value: "tech", en: { label: "Digital and tech" } },
+      { label: "Santé", value: "health", en: { label: "Health" } },
+      { label: "Enseignement", value: "teaching", en: { label: "Teaching" } },
+      { label: "ONG, international", value: "ngo", en: { label: "NGOs, international work" } },
+      { label: "Commerce", value: "trade", en: { label: "Trade" } },
+      { label: "Culture, médias", value: "culture", en: { label: "Culture, media" } },
+      { label: "Artisanat", value: "craft", en: { label: "Crafts" } },
+      { label: "Études", value: "student", en: { label: "Studying" } },
+      { label: "Retraite", value: "retired", en: { label: "Retired" } },
     ],
   },
   {
@@ -139,28 +209,45 @@ export const QUESTIONS: Question[] = [
     group: PROJECT,
     when: livesThere,
     title: "Vous partez avec qui ?",
+    en: {
+      title: "Who are you going with?",
+      hint: "With children, schools, healthcare and safety weigh more.",
+    },
     hint: "Avec des enfants, les écoles, les soins et la sécurité pèsent davantage.",
     choices: [
-      { label: "Seul·e", value: "celib" },
-      { label: "En couple", value: "couple" },
-      { label: "Pour fonder une famille", value: "fonder", when: (a) => !holiday(a) },
-      { label: "Avec mes enfants", value: "parents" },
+      { label: "Seul·e", value: "celib", en: { label: "On my own" } },
+      { label: "En couple", value: "couple", en: { label: "As a couple" } },
+      {
+        label: "Pour fonder une famille",
+        value: "fonder",
+        when: (a) => !holiday(a),
+        en: { label: "To start a family" },
+      },
+      { label: "Avec mes enfants", value: "parents", en: { label: "With my children" } },
     ],
   },
   {
     id: "languages",
     group: PROJECT,
     title: "Dans quelles langues êtes-vous à l'aise au quotidien ?",
+    en: {
+      title: "Which languages are you comfortable in day to day?",
+      hint: "To suggest cities where daily life happens in one of them.",
+    },
     hint: "Pour vous proposer des villes où l'on vit dans l'une de ces langues.",
     max: 6,
     choices: [
-      { label: "Français", value: "fr" },
-      { label: "Anglais", value: "en" },
-      { label: "Portugais", value: "pt" },
-      { label: "Arabe", value: "ar" },
-      { label: "Espagnol", value: "es" },
-      { label: "Swahili", value: "sw" },
-      { label: "Peu importe, je m'adapte", value: null },
+      { label: "Français", value: "fr", en: { label: "French" } },
+      { label: "Anglais", value: "en", en: { label: "English" } },
+      { label: "Portugais", value: "pt", en: { label: "Portuguese" } },
+      { label: "Arabe", value: "ar", en: { label: "Arabic" } },
+      { label: "Espagnol", value: "es", en: { label: "Spanish" } },
+      { label: "Swahili", value: "sw", en: { label: "Swahili" } },
+      {
+        label: "Peu importe, je m'adapte",
+        value: null,
+        en: { label: "Doesn't matter, I'll adapt" },
+      },
     ],
   },
   {
@@ -169,11 +256,12 @@ export const QUESTIONS: Question[] = [
     // Size and pace go together, whichever comes first.
     after: "pace",
     title: "Quelle taille de ville ?",
+    en: { title: "What size of city?", hint: "Size only: the pace is asked separately." },
     hint: "La taille seulement : le rythme se demande à part.",
     choices: [
-      { label: "Une grande ville", value: 3 },
-      { label: "Une ville moyenne", value: 2 },
-      { label: "Une petite ville", value: 1 },
+      { label: "Une grande ville", value: 3, en: { label: "A big city" } },
+      { label: "Une ville moyenne", value: 2, en: { label: "A mid-sized city" } },
+      { label: "Une petite ville", value: 1, en: { label: "A small town" } },
     ],
   },
   {
@@ -181,11 +269,15 @@ export const QUESTIONS: Question[] = [
     group: PROJECT,
     after: "size",
     title: "Quel rythme de ville ?",
+    en: {
+      title: "What pace of city?",
+      hint: "A big city can be calm, a small one can stay up late.",
+    },
     hint: "Une grande ville peut être calme, une petite peut bouger tard.",
     choices: [
-      { label: "Ça bouge jour et nuit", value: 1 },
-      { label: "Animé, sans excès", value: 0.5 },
-      { label: "Calme et posé", value: 0 },
+      { label: "Ça bouge jour et nuit", value: 1, en: { label: "Buzzing day and night" } },
+      { label: "Animé, sans excès", value: 0.5, en: { label: "Lively, within reason" } },
+      { label: "Calme et posé", value: 0, en: { label: "Calm and settled" } },
     ],
   },
   {
@@ -194,15 +286,23 @@ export const QUESTIONS: Question[] = [
     // On holiday, « Ce que vous voulez vivre » asks it better.
     when: (answers) => livesThere(answers) && !holiday(answers),
     title: "Quel paysage autour de vous ?",
+    en: {
+      title: "What landscape around you?",
+      hint: "A preference: the landscape you would love to have close to home.",
+    },
     hint: "Une préférence : le paysage que vous aimeriez avoir tout près de chez vous.",
     max: 3,
     choices: [
-      { label: "La mer", value: "beach" },
-      { label: "Une île", value: "island" },
-      { label: "Un fleuve ou un lac", value: "water" },
-      { label: "La montagne ou la forêt", value: "nature" },
-      { label: "La savane ou le désert", value: "wildSpaces" },
-      { label: "Peu importe, la ville me suffit", value: "urban" },
+      { label: "La mer", value: "beach", en: { label: "The sea" } },
+      { label: "Une île", value: "island", en: { label: "An island" } },
+      { label: "Un fleuve ou un lac", value: "water", en: { label: "A river or a lake" } },
+      { label: "La montagne ou la forêt", value: "nature", en: { label: "Mountains or forest" } },
+      { label: "La savane ou le désert", value: "wildSpaces", en: { label: "Savannah or desert" } },
+      {
+        label: "Peu importe, la ville me suffit",
+        value: "urban",
+        en: { label: "Doesn't matter, the city is enough" },
+      },
     ],
   },
   {
@@ -210,11 +310,23 @@ export const QUESTIONS: Question[] = [
     group: TEMPERAMENT,
     when: livesThere,
     title: "Votre samedi soir idéal ?",
+    en: {
+      title: "Your ideal Saturday night?",
+      hint: "To know whether you are after a lively city or a calmer one.",
+    },
     hint: "Pour savoir si vous cherchez une ville animée ou plutôt calme.",
     choices: [
-      { label: "Du monde, de la musique, on rentre tard", value: 1 },
-      { label: "Un dîner avec quelques amis", value: 0.5 },
-      { label: "Chez moi, au calme", value: 0 },
+      {
+        label: "Du monde, de la musique, on rentre tard",
+        value: 1,
+        en: { label: "People, music, home late" },
+      },
+      {
+        label: "Un dîner avec quelques amis",
+        value: 0.5,
+        en: { label: "Dinner with a few friends" },
+      },
+      { label: "Chez moi, au calme", value: 0, en: { label: "At home, in peace" } },
     ],
   },
   {
@@ -222,11 +334,23 @@ export const QUESTIONS: Question[] = [
     group: TEMPERAMENT,
     when: livesThere,
     title: "Découvrir une région d'Afrique que vous ne connaissez pas, ça vous tente ?",
+    en: {
+      title: "Discovering a region of Africa you don't know: does it appeal to you?",
+      hint: "If so, we also suggest cities far from your family's region.",
+    },
     hint: "Si oui, on vous propose aussi des villes loin de la région de votre famille.",
     choices: [
-      { label: "Oui, c'est ce que je cherche", value: "seeking" },
-      { label: "Pourquoi pas", value: "open" },
-      { label: "Je préfère rester en terrain connu", value: "familiar" },
+      {
+        label: "Oui, c'est ce que je cherche",
+        value: "seeking",
+        en: { label: "Yes, that's what I'm looking for" },
+      },
+      { label: "Pourquoi pas", value: "open", en: { label: "Why not" } },
+      {
+        label: "Je préfère rester en terrain connu",
+        value: "familiar",
+        en: { label: "I'd rather stay on familiar ground" },
+      },
     ],
   },
   {
@@ -234,15 +358,29 @@ export const QUESTIONS: Question[] = [
     group: TEMPERAMENT,
     when: livesThere,
     title: "Au quotidien, avez-vous besoin que tout soit organisé ?",
+    en: {
+      title: "Day to day, do you need everything organised?",
+      hint: "To know whether you prefer a city where paperwork is simple and predictable.",
+    },
     hint: "Pour savoir si vous préférez une ville où les démarches sont simples et prévisibles.",
     choices: [
       {
         label: "J'ai besoin que tout soit carré",
+        en: { label: "I need everything in order", sub: "Clear paperwork, timetables kept" },
         value: 1,
         sub: "Des démarches claires, des horaires tenus",
       },
-      { label: "Un minimum de cadre me suffit", value: 0.5 },
-      { label: "J'improvise, tout se négocie", value: 0, sub: "Je m'adapte au jour le jour" },
+      {
+        label: "Un minimum de cadre me suffit",
+        value: 0.5,
+        en: { label: "A little structure is enough" },
+      },
+      {
+        label: "J'improvise, tout se négocie",
+        value: 0,
+        sub: "Je m'adapte au jour le jour",
+        en: { label: "I improvise, everything's negotiable", sub: "I adapt day by day" },
+      },
     ],
   },
   {
@@ -250,11 +388,25 @@ export const QUESTIONS: Question[] = [
     group: TEMPERAMENT,
     when: livesThere,
     title: "Pour avancer, vous comptez plutôt sur vous ou sur les autres ?",
+    en: {
+      title: "To get ahead, do you rely on yourself or on others?",
+      hint: "To know whether you want a city of business and competition, or one of mutual help.",
+    },
     hint: "Pour savoir si vous cherchez une ville d'affaires et de compétition, ou une ville solidaire.",
     choices: [
-      { label: "Sur moi", value: 0, sub: "Que le meilleur gagne" },
-      { label: "Ça dépend des situations", value: 0.5 },
-      { label: "Sur les autres", value: 1, sub: "L'entraide d'abord" },
+      {
+        label: "Sur moi",
+        value: 0,
+        sub: "Que le meilleur gagne",
+        en: { label: "On myself", sub: "May the best one win" },
+      },
+      { label: "Ça dépend des situations", value: 0.5, en: { label: "It depends" } },
+      {
+        label: "Sur les autres",
+        value: 1,
+        sub: "L'entraide d'abord",
+        en: { label: "On others", sub: "Helping each other first" },
+      },
     ],
   },
   {
@@ -262,27 +414,43 @@ export const QUESTIONS: Question[] = [
     group: TEMPERAMENT,
     when: livesThere,
     title: "Coupures de courant, démarches lentes, imprévus : comment le vivez-vous ?",
+    en: {
+      title: "Power cuts, slow paperwork, the unexpected: how do you take it?",
+      hint: "If it wears you down, we set aside the cities where these problems are common.",
+    },
     hint: "Si cela vous pèse, on écarte les villes où ces problèmes sont fréquents.",
     choices: [
-      { label: "Ça m'amuse presque, je m'adapte", value: 1 },
-      { label: "Ça m'agace, mais je gère", value: 0.5 },
-      { label: "Ça m'épuise vite", value: 0 },
+      {
+        label: "Ça m'amuse presque, je m'adapte",
+        value: 1,
+        en: { label: "It almost amuses me, I adapt" },
+      },
+      { label: "Ça m'agace, mais je gère", value: 0.5, en: { label: "It annoys me, but I cope" } },
+      { label: "Ça m'épuise vite", value: 0, en: { label: "It wears me out fast" } },
     ],
   },
   {
     id: "origin",
     group: HISTORY,
     title: "D'où vient votre famille ?",
+    en: {
+      title: "Where does your family come from?",
+      hint: "Optional. To suggest cities close to what you know.",
+    },
     hint: "Facultatif. Pour vous proposer des villes proches de vos repères.",
     max: 3,
     choices: [
-      { label: "Afrique de l'Ouest", value: "ouest" },
-      { label: "Afrique centrale", value: "centre" },
-      { label: "Afrique de l'Est", value: "est" },
-      { label: "Afrique australe", value: "sud" },
-      { label: "Afrique du Nord", value: "nord" },
-      { label: "Caraïbes, Amériques", value: "ameriques" },
-      { label: "Je préfère ne pas dire", value: null },
+      { label: "Afrique de l'Ouest", value: "ouest", en: { label: "West Africa" } },
+      { label: "Afrique centrale", value: "centre", en: { label: "Central Africa" } },
+      { label: "Afrique de l'Est", value: "est", en: { label: "East Africa" } },
+      { label: "Afrique australe", value: "sud", en: { label: "Southern Africa" } },
+      { label: "Afrique du Nord", value: "nord", en: { label: "North Africa" } },
+      {
+        label: "Caraïbes, Amériques",
+        value: "ameriques",
+        en: { label: "The Caribbean, the Americas" },
+      },
+      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
     ],
   },
   {
@@ -292,27 +460,50 @@ export const QUESTIONS: Question[] = [
     // Only with a region to be near: « Je préfère ne pas dire » skips it (operator, 2026-11-16).
     when: (answers) => namedOrigins(answers).length > 0,
     title: "Vivre près de vos origines, de votre culture, de votre religion, ça compte pour vous ?",
+    en: {
+      title: "Living close to your roots, your culture, your faith: does it matter to you?",
+      hint: "If so, we favour cities near your family's region.",
+    },
     hint: "Si oui, on privilégie les villes proches de la région de votre famille.",
     choices: [
-      { label: "Beaucoup", value: "much" },
-      { label: "Un peu", value: "some" },
-      { label: "Pas vraiment", value: "none" },
+      { label: "Beaucoup", value: "much", en: { label: "A lot" } },
+      { label: "Un peu", value: "some", en: { label: "A little" } },
+      { label: "Pas vraiment", value: "none", en: { label: "Not really" } },
     ],
   },
   {
     id: "priorities",
     group: LAST,
     title: "Sur quoi ne voulez-vous pas transiger ?",
+    en: {
+      title: "What won't you compromise on?",
+      hint: "Up to three choices. These are your non-negotiables: they count most in your ranking.",
+    },
     hint: "Jusqu'à trois choix. Ce sont vos non-négociables : ils comptent le plus dans votre classement.",
     max: 3,
     choices: [
-      { label: "Me sentir en sécurité", value: "safety" },
-      { label: "Une vie abordable", value: "cost" },
-      { label: "La santé et l'école", value: "healthAndSchools", when: withChildren },
-      { label: "Ma carrière", value: "career", when: worksThere },
-      { label: "Retrouver d'autres repats", value: "diaspora", when: (a) => !holiday(a) },
-      { label: "Les lieux de mémoire (traite, histoire des diasporas)", value: "memory" },
-      { label: "Voyager facilement", value: "flights" },
+      { label: "Me sentir en sécurité", value: "safety", en: { label: "Feeling safe" } },
+      { label: "Une vie abordable", value: "cost", en: { label: "An affordable life" } },
+      { label: "De bons soins", value: "health", en: { label: "Good healthcare" } },
+      {
+        label: "L'école des enfants",
+        value: "schools",
+        when: withChildren,
+        en: { label: "The children's schooling" },
+      },
+      { label: "Ma carrière", value: "career", when: worksThere, en: { label: "My career" } },
+      {
+        label: "Retrouver d'autres repats",
+        value: "diaspora",
+        when: (a) => !holiday(a),
+        en: { label: "Meeting other returnees" },
+      },
+      {
+        label: "Les lieux de mémoire (traite, histoire des diasporas)",
+        value: "memory",
+        en: { label: "Places of memory (the slave trade, diaspora history)" },
+      },
+      { label: "Voyager facilement", value: "flights", en: { label: "Travelling easily" } },
     ],
   },
 ];
@@ -327,12 +518,13 @@ export const LATER: Question[] = [
     group: TRIP,
     when: holiday,
     title: "Combien de temps ?",
+    en: { title: "How long for?", hint: "For a short stay, we favour cities with direct flights." },
     hint: "Pour un séjour court, on privilégie les villes desservies par des vols directs.",
     choices: [
-      { label: "Un long week-end", value: "weekend" },
-      { label: "Une semaine", value: "week" },
-      { label: "Deux à trois semaines", value: "weeks" },
-      { label: "Un mois ou plus", value: "month" },
+      { label: "Un long week-end", value: "weekend", en: { label: "A long weekend" } },
+      { label: "Une semaine", value: "week", en: { label: "A week" } },
+      { label: "Deux à trois semaines", value: "weeks", en: { label: "Two to three weeks" } },
+      { label: "Un mois ou plus", value: "month", en: { label: "A month or more" } },
     ],
   },
   {
@@ -341,11 +533,15 @@ export const LATER: Question[] = [
     // Living there, not on holiday: how often the reader flies back.
     when: (answers) => livesThere(answers) && !holiday(answers),
     title: "Combien d'allers-retours vers l'Europe par an ?",
+    en: {
+      title: "How many return trips to Europe a year?",
+      hint: "The more often you go back, the more direct flights count.",
+    },
     hint: "Plus vous rentrez souvent, plus les vols directs comptent.",
     choices: [
-      { label: "Un ou moins", value: 0 },
-      { label: "Deux ou trois", value: 0.5 },
-      { label: "Tous les mois", value: 1 },
+      { label: "Un ou moins", value: 0, en: { label: "One or fewer" } },
+      { label: "Deux ou trois", value: 0.5, en: { label: "Two or three" } },
+      { label: "Tous les mois", value: 1, en: { label: "Every month" } },
     ],
   },
   {
@@ -353,25 +549,37 @@ export const LATER: Question[] = [
     group: PROJECT,
     when: livesThere,
     title: "Votre budget sur place ?",
+    en: {
+      title: "Your budget there?",
+      hint: "To favour the cities where housing and everyday life fit your budget.",
+    },
     hint: "Pour privilégier les villes où le logement et la vie courante tiennent dans votre budget.",
     choices: [
-      { label: "Serré", value: "serre" },
-      { label: "Moyen", value: "moyen" },
-      { label: "Le prix compte peu", value: "large" },
+      { label: "Serré", value: "serre", en: { label: "Tight" } },
+      { label: "Moyen", value: "moyen", en: { label: "Medium" } },
+      { label: "Le prix compte peu", value: "large", en: { label: "Price matters little" } },
     ],
   },
   {
     id: "passports",
     group: PROJECT,
     title: "Quel passeport avez-vous ?",
+    en: {
+      title: "Which passport do you hold?",
+      hint: "To favour the countries you can enter without a visa or move around freely.",
+    },
     hint: "Pour privilégier les pays où vous entrez sans visa ou circulez librement.",
     max: 2,
     choices: [
-      { label: "Français ou européen", value: "eu" },
-      { label: "D'un pays de la CEDEAO", value: "ecowas" },
-      { label: "De la CEMAC", value: "cemac" },
-      { label: "De la Communauté d'Afrique de l'Est", value: "eac" },
-      { label: "Un autre", value: "other" },
+      { label: "Français ou européen", value: "eu", en: { label: "French or European" } },
+      { label: "D'un pays de la CEDEAO", value: "ecowas", en: { label: "From an ECOWAS country" } },
+      { label: "De la CEMAC", value: "cemac", en: { label: "From CEMAC" } },
+      {
+        label: "De la Communauté d'Afrique de l'Est",
+        value: "eac",
+        en: { label: "From the East African Community" },
+      },
+      { label: "Un autre", value: "other", en: { label: "Another one" } },
     ],
   },
   {
@@ -379,24 +587,35 @@ export const LATER: Question[] = [
     group: HISTORY,
     after: "origin",
     title: "De quel pays vient votre famille ?",
+    en: {
+      title: "Which country does your family come from?",
+      hint: "Your family's country weighs heavily if you want to feel at home.",
+    },
     hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
     max: 3,
     when: (answers) => africanOrigins(answers).length > 0,
-    choices: [...COUNTRY_CHOICES, { label: "Je préfère ne pas dire", value: null }],
+    choices: [
+      ...COUNTRY_CHOICES,
+      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
+    ],
   },
   {
     id: "faith",
     group: HISTORY,
     after: "kin",
     title: "Votre religion ?",
+    en: {
+      title: "Your religion?",
+      hint: "To favour the countries where your religion is most widely practised (Pew Research Center, 2020).",
+    },
     hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
     when: kinMatters,
     choices: [
-      { label: "Islam", value: "muslim" },
-      { label: "Christianisme", value: "christian" },
-      { label: "Une autre", value: "other" },
-      { label: "Aucune", value: "none" },
-      { label: "Je préfère ne pas dire", value: null },
+      { label: "Islam", value: "muslim", en: { label: "Islam" } },
+      { label: "Christianisme", value: "christian", en: { label: "Christianity" } },
+      { label: "Une autre", value: "other", en: { label: "Another one" } },
+      { label: "Aucune", value: "none", en: { label: "None" } },
+      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
     ],
   },
 ];
@@ -449,8 +668,31 @@ export function keepInPath(answers: Answers): Answers {
 }
 
 /** The chapter name shown above a question: the second chapter is the trip on holiday. */
-export function chapterName(question: Question, answers: Answers): string {
-  if (question.group === PROJECT && question.id !== "project")
-    return holiday(answers) ? TRIP : PROJECT;
-  return question.group;
+export function chapterName(question: Question, answers: Answers, locale: Locale): string {
+  const group =
+    question.group === PROJECT && question.id !== "project"
+      ? holiday(answers)
+        ? TRIP
+        : PROJECT
+      : question.group;
+  return Object.values(CHAPTERS).find((chapter) => chapter.fr === group)?.[locale] ?? group;
+}
+
+/**
+ * The question as a reader of this language reads it; values, conditions and order stay the
+ * French bank's, since both languages share answers. The family's countries are re-sorted, as
+ * an alphabetical list read in another language would look shuffled.
+ */
+export function questionIn(question: Question, locale: Locale): Question {
+  if (locale === "fr") return question;
+  const choices = question.choices.map((choice) => ({
+    ...choice,
+    label: choice.en.label,
+    sub: choice.en.sub,
+  }));
+  if (question.id === "countries")
+    choices.sort((a, b) =>
+      a.value === null ? 1 : b.value === null ? -1 : a.label.localeCompare(b.label, INTL_LOCALE.en),
+    );
+  return { ...question, title: question.en.title, hint: question.en.hint, choices };
 }

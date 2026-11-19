@@ -1,0 +1,162 @@
+{
+  "cost": {
+    "label": "Cost of living",
+    "means": "What a decent two-room flat costs each month in a neighbourhood where newcomers settle, plus everyday spending. The higher the score, the cheaper it is.",
+    "doesNotMean": "What locals pay, nor the cost of setting up.",
+    "rubric": {
+      "1": "A two-room flat costs over €900 a month, or everyday life costs almost as much as in Europe.",
+      "3": "A two-room flat costs between €300 and €600.",
+      "5": "A two-room flat costs under €200, on a market open to newcomers."
+    }
+  },
+  "setupCost": {
+    "label": "Cost of settling in",
+    "means": "The money you pay out before the first month: rent in advance, deposit, agency fees, and the equipment the city makes necessary (a generator, a water tank).",
+    "doesNotMean": "The monthly cost of living.",
+    "rubric": {
+      "1": "A year's rent in advance or more, or over €5,000 before you move in.",
+      "3": "Three to six months in all (deposit, advance, fees).",
+      "5": "One month's rent with a deposit of one or two months."
+    }
+  },
+  "negotiation": {
+    "label": "Room to haggle",
+    "means": "How far the asking price is only a starting point, for rent, taxis and the market.",
+    "doesNotMean": "That the city is expensive or dishonest: some people enjoy haggling, others do not.",
+    "rubric": {
+      "1": "Prices are mostly fixed: rents are kept to, taxis run on a meter or an app.",
+      "3": "Rents and markets are commonly haggled over; shops and apps have fixed prices.",
+      "5": "Almost every price is a starting point, rent and transport included."
+    }
+  },
+  "safety": {
+    "label": "Everyday safety",
+    "means": "The risk of theft, assault or harassment for a careful resident, in the neighbourhoods where newcomers settle.",
+    "doesNotMean": "War or terrorism: a city in an area travel advice warns against is never suggested.",
+    "rubric": {
+      "1": "Travel advice names the city for armed robbery or kidnapping, or there is a curfew.",
+      "3": "Theft and assault in some neighbourhoods, the usual care of any big city.",
+      "5": "No particular risk reported; you can walk in the evening in most neighbourhoods."
+    }
+  },
+  "utilities": {
+    "label": "Power and water",
+    "means": "How often the power and water go off, and what it takes to cope.",
+    "doesNotMean": "Access to the network: you can be connected and still have cuts.",
+    "rubric": {
+      "1": "Several hours of cuts almost every day; a generator and a water tank are essential.",
+      "3": "Cuts every week or in some seasons; a backup is wise.",
+      "5": "Rare, short cuts; no backup needed."
+    }
+  },
+  "internet": {
+    "label": "Internet",
+    "means": "Can you work online from home?",
+    "doesNotMean": "Mobile coverage across the whole country.",
+    "rubric": {
+      "1": "Under 5 Mbit/s, mobile data only.",
+      "3": "15 to 40 Mbit/s, fibre in some neighbourhoods.",
+      "5": "Over 80 Mbit/s, fibre sold everywhere by several providers. A recent nationwide shutdown caps the score at 3."
+    }
+  },
+  "healthcare": {
+    "label": "Healthcare",
+    "means": "The care you can get without leaving the country.",
+    "doesNotMean": "Public health across the whole country.",
+    "rubric": {
+      "1": "Serious cases are flown abroad.",
+      "3": "Private clinics for the basics; specialists or surgery in the capital.",
+      "5": "An accredited hospital in the city and most specialities."
+    }
+  },
+  "schools": {
+    "label": "Schools",
+    "means": "Places at a school following a curriculum a child can carry on elsewhere (French, English or international).",
+    "doesNotMean": "The quality of the local state school.",
+    "rubric": {
+      "1": "A small, partly recognised school, or distance learning only.",
+      "3": "One recognised French or English school.",
+      "5": "Several schools, in French and in English, up to the baccalauréat or its equivalent."
+    }
+  },
+  "jobs": {
+    "label": "Jobs",
+    "means": "Your chances of finding a skilled job locally when you arrive.",
+    "doesNotMean": "The local unemployment rate.",
+    "rubric": {
+      "1": "Almost no skilled jobs open to newcomers.",
+      "3": "One or two sectors are hiring (the port, mining, government, tourism).",
+      "5": "A regional hub hiring in every sector."
+    }
+  },
+  "business": {
+    "label": "Starting a business and investing",
+    "means": "How easy it is to start a business or invest.",
+    "doesNotMean": "That a project is sure to succeed.",
+    "rubric": {
+      "1": "No incubator, no ranking, restricted ownership.",
+      "3": "An incubator and local funding.",
+      "5": "A hub known across the continent."
+    }
+  },
+  "flights": {
+    "label": "Flights to Europe",
+    "means": "How easy it is to come and go.",
+    "doesNotMean": "The price of tickets.",
+    "rubric": {
+      "1": "No international airport within three hours.",
+      "3": "One to three European cities by direct flight, within 1 h 30 of the city.",
+      "5": "Eight or more European cities by direct flight."
+    }
+  },
+  "culture": {
+    "label": "Cultural life",
+    "means": "Venues, festivals, museums, an arts scene.",
+    "doesNotMean": "How rich the people's own culture is, which is not something to score.",
+    "rubric": {
+      "1": "Little regular cultural life.",
+      "3": "Venues and at least one festival known across the country.",
+      "5": "A scene known across the continent, all year round."
+    }
+  },
+  "nightlife": {
+    "label": "Going out",
+    "means": "What happens in the evening: bars, concerts, clubs.",
+    "doesNotMean": "A good or a bad mark: it is compared with your ideal Saturday night.",
+    "rubric": {
+      "1": "Alcohol banned, or almost nothing open after dinner.",
+      "3": "A few bars and concerts at the weekend.",
+      "5": "Every night, with a name across the region."
+    }
+  },
+  "history": {
+    "label": "History and memory",
+    "means": "The history you can visit, including places tied to the slave trade and the diaspora.",
+    "doesNotMean": "The historical importance of a people.",
+    "rubric": {
+      "1": "No notable site.",
+      "3": "One listed site or a major museum.",
+      "5": "A World Heritage site in the city and memorial places of the diaspora."
+    }
+  },
+  "returnees": {
+    "label": "Returnee network",
+    "means": "An active network of people who have come back or come to settle, which a newcomer can join.",
+    "doesNotMean": "How returnees are welcomed, which is not something to score.",
+    "rubric": {
+      "1": "No network found.",
+      "3": "One active association or group.",
+      "5": "A well-known place to return to, with regular meet-ups and a public desk for the diaspora."
+    }
+  },
+  "pace": {
+    "label": "Pace of the city",
+    "means": "Traffic, crowds, noise, the speed of everyday life.",
+    "doesNotMean": "A good or a bad mark: it is compared with the city you are looking for.",
+    "rubric": {
+      "1": "A small town, little traffic, quiet evenings.",
+      "3": "A lively centre, quiet neighbourhoods.",
+      "5": "A megacity: traffic jams, crowds and noise day and night."
+    }
+  }
+}

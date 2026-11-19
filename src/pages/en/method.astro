@@ -1,0 +1,222 @@
+---
+import { CONTACT } from "../../i18n/locale";
+import Page from "../../layouts/Page.astro";
+import { CITIES, CRITERIA, CRITERION_KEYS } from "../../lib/cities";
+import { MUSIC } from "../../lib/music";
+import { criterionCopy } from "../../i18n/city-copy";
+import { countryName } from "../../i18n/places";
+
+// Mirrors /methode: same figures, computed from the same data, so both pages always agree.
+const scores = CITIES.flatMap((city) => CRITERION_KEYS.map((key) => city.scores[key]));
+const unknown = scores.filter((score) => score.level === null).length;
+const estimates = scores.filter((s) => s.level !== null && s.confidence === "editorial").length;
+const percentOf = (n: number) => Math.round((100 * n) / scores.length);
+const advisedAgainst = CITIES.filter((city) => city.advisedAgainst).length;
+
+const criteria = CRITERIA.map((criterion) => criterionCopy(criterion, "en"));
+// The grids fall back to French until src/data/en/criteria.json holds their translation.
+const gridsInFrench = criteria.some((criterion, i) => criterion.means === CRITERIA[i].means);
+
+// Genre names stay as the dance floors say them; only the French descriptive one changes.
+const GENRES_EN: Record<string, string> = {
+  "Rumba congolaise et ndombolo": "Congolese rumba and ndombolo",
+};
+---
+
+<Page
+  title="Our method"
+  description="How Over There scores the cities, where the figures come from and what they do not say."
+>
+  <h1>Our method</h1>
+  <p class="lead">
+    Over There compares what you tell us you like with what we know about {CITIES.length} cities,
+    across the continent's 54 countries. Here is how, and where our limits are.
+  </p>
+
+  <h2>A game, not a test</h2>
+  <p>
+    The questions compare your preferences with the description of the cities. They say nothing
+    about who you are, and the site measures no personality trait. The percentage shows how closely
+    a city matches your answers, nothing more.
+  </p>
+  <p>
+    Each answer counts as a clue, and the clues multiply: an answer given at the end weighs as much
+    as one given at the start, and still changes the list. The language you speak day to day weighs
+    the most. A city far from one of your answers moves down, but it never disappears.
+  </p>
+
+  <h2>Sixteen criteria, a written grid</h2>
+  <p>
+    Each city gets a score from 0 to 5 on sixteen criteria. So that two people score a city the same
+    way, each criterion has a grid: what 1, 3 and 5 mean (2 and 4 sit in between). Each score comes
+    with a sentence that justifies it and with its sources, and their dates.
+  </p>
+  {gridsInFrench && (
+    <p class="not">The grids below are still in French; their English version is on its way.</p>
+  )}
+  <dl class="criteria">
+    {criteria.map((criterion) => (
+      <div class="criterion" id={criterion.key}>
+        <dt>{criterion.label}</dt>
+        <dd>
+          <p>{criterion.means}</p>
+          <p class="not">Does not mean: {criterion.doesNotMean}</p>
+          <ul class="rubric">
+            <li>
+              <b>1</b> {criterion.rubric["1"]}
+            </li>
+            <li>
+              <b>3</b> {criterion.rubric["3"]}
+            </li>
+            <li>
+              <b>5</b> {criterion.rubric["5"]}
+            </li>
+          </ul>
+        </dd>
+      </div>
+    ))}
+  </dl>
+
+  <h2 id="sources">Where the figures come from</h2>
+  <p>
+    For each country, a research file gathers dated sources: French and UK travel advice, local
+    press, property listings, Afrobarometer surveys, the official lists of French schools,
+    operators' websites. For each city, notes add to this file, neighbourhood by neighbourhood.
+  </p>
+  <p>Each score says where it comes from:</p>
+  <ul>
+    <li>
+      <b>Measured</b>: a figure published for the city (rent listings, a number of schools).
+    </li>
+    <li>
+      <b>Survey</b>: what residents say in a survey, often for the whole region.
+    </li>
+    <li>
+      <b>Sourced</b>: our reading of the grid, backed by named and dated sources.
+    </li>
+    <li>
+      <b>Estimate</b>: no source specific to the city; it is our judgement.
+    </li>
+  </ul>
+  <p>
+    Today, {percentOf(unknown)}% of the scores are unknown and {percentOf(estimates)}% are
+    estimates. An unknown score counts as an average score (2.5): it neither helps nor hurts a city,
+    and it is never given as a reason. When a city rests on too many unknowns for your answers, its
+    card says so.
+  </p>
+  <p>
+    Our sources do not always agree: a local voice, a specialist site and an official site can see
+    the same city differently. We pass on what they say, as of their date. On the ground, things can
+    vary from one neighbourhood to the next and from one month to the next. When a line says "no
+    neighbourhood", it means none of the neighbourhoods in our notes fits: the city may well have
+    others.
+  </p>
+
+  <h2>Travel advice</h2>
+  <p>
+    For each city, we give the advice of the French foreign ministry (France Diplomatie) and that of
+    the UK (FCDO), with their dates. This advice removes no city and does not change its score: it
+    is written for travellers who do not know the city, while people live, work and come back there.
+    Today, the authorities advise against travel to {advisedAgainst} cities out of {CITIES.length}.
+    For those, we suggest you ask people who live there which precautions to take. Everyday safety
+    remains a scored criterion, with its sources, like the others.
+  </p>
+
+  <h2>What we never score</h2>
+  <p>
+    How residents welcome returnees from the diaspora, women or LGBT people is not scored: a score
+    would rank people's dignity, and it would rest on anecdotes. We describe it, with a dated
+    source, in the "Good to know" section or on the city's page. The same goes for religion and for
+    food.
+  </p>
+
+  <h2 id="music">The music that gets you moving</h2>
+  <p>
+    In the full questionnaire, if you like going out, you can say which music makes you dance. It
+    brings the countries where it was born or fills the dance floors a little closer, never more: it
+    is one reason among others. Each link has its source.
+  </p>
+  <ul>
+    {MUSIC.map((genre) => (
+      <li>
+        <b>{GENRES_EN[genre.label] ?? genre.label}</b>:{" "}
+        {genre.countries.map((country) => countryName(country, "en")).join(", ")} (
+        {genre.sources.map((source, i) => (
+          <>
+            {i > 0 && "; "}
+            <a href={source.url} rel="noopener noreferrer">
+              {source.title}
+            </a>
+          </>
+        ))}
+        )
+      </li>
+    ))}
+  </ul>
+
+  <h2>Our limits</h2>
+  <ul>
+    <li>
+      The big capitals lead on jobs, flights, internet and healthcare. To bring a smaller city
+      forward, say so: a calm pace, a tight budget.
+    </li>
+    <li>
+      Many figures hold for a region or for the whole country. The justification says so ("at
+      country level").
+    </li>
+    <li>Rents are asking prices. They are often negotiable.</li>
+    <li>
+      The map comes from Natural Earth (public domain): the borders are those of today's states, and
+      the way they are drawn takes no side in disputes.
+    </li>
+    <li>
+      Travel advice changes quickly. Before you go, always check your government's page (in the UK,
+      the FCDO).
+    </li>
+  </ul>
+  <p>
+    A mistake, a more recent source? Write to us:
+    <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
+  </p>
+</Page>
+
+<style>
+  .criteria {
+    display: grid;
+    gap: 14px;
+    margin: 16px 0 0;
+  }
+  .criterion {
+    background: var(--night-deep);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+  dt {
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+  dd {
+    margin: 6px 0 0;
+  }
+  dd p {
+    margin: 0 0 6px;
+  }
+  .not {
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .rubric {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 4px;
+    font-size: 0.92rem;
+  }
+  .rubric b {
+    display: inline-block;
+    width: 1.4em;
+    color: var(--saffron);
+    font-family: var(--font-mono);
+  }
+</style>

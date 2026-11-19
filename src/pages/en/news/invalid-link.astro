@@ -1,0 +1,19 @@
+---
+import Page from "../../../layouts/Page.astro";
+import { pathFor } from "../../../i18n/routes";
+---
+
+<Page
+  title="Link expired"
+  description="This confirmation link no longer works: sign up again from the quiz."
+>
+  <h1>This link no longer works.</h1>
+  <p>
+    A confirmation link stays valid for a week. It may have expired, or it was cut on the way.
+    Nothing was saved.
+  </p>
+  <p>To receive the news, sign up again from the quiz: we'll send you a new link.</p>
+  <p>
+    <a href={pathFor("home", "en")}>Back to the quiz</a>
+  </p>
+</Page>

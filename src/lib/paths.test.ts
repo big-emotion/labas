@@ -9,7 +9,32 @@ import {
   visibleChoices,
   type Question,
 } from "./questions";
-import type { Answers } from "./ranking";
+import { bestMatches, type Answers } from "./ranking";
+
+// « Pas pour moi » asked outright (operator, 2026-11-18): only in the full questionnaire, where
+// the reader settles their constraints; the quick quiz keeps it as a gesture on the cities.
+describe("the regions the reader does not want to live in", () => {
+  const regions = () => DEEP_QUESTIONS.find((q) => q.id === "avoidRegions");
+
+  it("are asked in the full questionnaire only, every region offered, none required", () => {
+    expect(QUESTIONS.some((q) => q.id === "avoidRegions")).toBe(false);
+    expect(regions()?.choices.map((c) => c.value)).toEqual([
+      "ouest",
+      "centre",
+      "est",
+      "sud",
+      "nord",
+      null,
+    ]);
+    expect(regions()?.max).toBeGreaterThanOrEqual(4);
+  });
+
+  it("are the same filter as the gesture: the cities of a region picked leave the best matches", () => {
+    const answers = { project: "installer", avoidRegions: ["nord"] } as Answers;
+    expect(nextQuestion(answers, Object.keys(answers))).not.toBe("avoidRegions");
+    for (const m of bestMatches(answers, 30)) expect(m.city.zone).not.toBe("nord");
+  });
+});
 
 // Coherent paths per project (operator, 2026-11-16).
 const PROJECTS = ["installer", "pied", "tester", "investir", "decouvrir"] as const;
@@ -46,7 +71,7 @@ describe("a path per project", () => {
       return new Set(
         asked
           .filter((id) => id !== "project" && question(id).group === "Votre projet")
-          .map((id) => chapterName(question(id), answers)),
+          .map((id) => chapterName(question(id), answers, "fr")),
       );
     };
     expect(shown("decouvrir")).toEqual(new Set(["Votre voyage"]));
@@ -81,11 +106,13 @@ describe("questions and choices that fit what was said", () => {
     }
   });
 
-  it("offers schools only with children, a career only when working there, repats not on holiday", () => {
+  it("offers health to everyone, schools only with children, a career only when working there, repats not on holiday", () => {
     const priorities = (answers: Answers) =>
       visibleChoices(question("priorities"), answers).map((c) => c.value);
-    expect(priorities({ project: "installer", family: "celib" })).not.toContain("healthAndSchools");
-    expect(priorities({ project: "installer", family: "parents" })).toContain("healthAndSchools");
+    expect(priorities({ project: "installer", family: "celib" })).toContain("health");
+    expect(priorities({ project: "decouvrir", family: "couple" })).toContain("health");
+    expect(priorities({ project: "installer", family: "celib" })).not.toContain("schools");
+    expect(priorities({ project: "installer", family: "parents" })).toContain("schools");
     expect(priorities({ project: "decouvrir", family: "couple" })).not.toContain("career");
     expect(priorities({ project: "decouvrir", family: "couple" })).not.toContain("diaspora");
     expect(priorities({ project: "investir" })).not.toContain("career");
@@ -122,7 +149,7 @@ describe("going back and changing an answer", () => {
       kin: "much",
       faith: "muslim",
       family: "parents",
-      priorities: ["healthAndSchools", "safety"],
+      priorities: ["schools", "safety"],
       saturday: 1,
     };
     // The full questionnaire holds country and faith: its bank drops them too.

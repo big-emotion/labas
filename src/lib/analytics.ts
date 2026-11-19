@@ -59,8 +59,11 @@ export const GOALS = [
   "Réaction : formulaire ouvert",
   "Réaction envoyée",
   "Réactions consultées",
+  "Réaction traduite",
   "Partage",
   "Message envoyé",
+  "Pas pour moi",
+  "Pas pour moi annulé",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -108,11 +111,16 @@ const PLACES = {
   thread: "Fiche ville",
   card: "Carte 2 ou 3",
   row: "Liste des villes",
+  everywhere: "Page des avis",
 } as const;
 export type ReactionPlace = keyof typeof PLACES;
 
 export interface ReactionEvent {
-  name: "Réaction : formulaire ouvert" | "Réaction envoyée" | "Réactions consultées";
+  name:
+    | "Réaction : formulaire ouvert"
+    | "Réaction envoyée"
+    | "Réactions consultées"
+    | "Réaction traduite";
   props: { lieu: string; ville: string; statut?: string };
 }
 
@@ -139,4 +147,34 @@ export interface MessageEvent {
 
 export function messageEvent(kind: FeedbackKind): MessageEvent {
   return { name: "Message envoyé", props: { type: kind === "site" ? "Avis" : "Message" } };
+}
+
+/**
+ * « Pas pour moi » (operator, 2026-11-18): where a reader sets a place aside and at which level.
+ * The props « lieu » and « niveau » must be listed in Plausible's custom properties. Never the
+ * city, country or region: it is a sensitive answer (keep.ts).
+ */
+const NOT_FOR_ME_PLACES = {
+  quiz: "Questionnaire",
+  result: "Résultat",
+  deep: "Questionnaire complet",
+} as const;
+const LEVELS = { city: "Ville", country: "Pays", region: "Région" } as const;
+export type NotForMePlace = keyof typeof NOT_FOR_ME_PLACES;
+export type SetAsideLevel = keyof typeof LEVELS;
+
+export interface NotForMeEvent {
+  name: "Pas pour moi" | "Pas pour moi annulé";
+  props: { lieu: string; niveau: string };
+}
+
+export function notForMeEvent(
+  place: NotForMePlace,
+  level: SetAsideLevel,
+  undone = false,
+): NotForMeEvent {
+  return {
+    name: undone ? "Pas pour moi annulé" : "Pas pour moi",
+    props: { lieu: NOT_FOR_ME_PLACES[place], niveau: LEVELS[level] },
+  };
 }

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { rankCities, type Answers } from "./ranking";
-import { applyFilters, FILTER_MENU, filtersFrom, type Filters } from "./filters";
+import { applyFilters, FILTER_MENU, filterMenu, filtersFrom, type Filters } from "./filters";
+import { looksFrench } from "../i18n/looks-french";
 import { livableLanguages } from "./cities";
 
 const reader: Answers = { project: "installer", languages: ["fr"], origin: "ouest", kin: "much" };
@@ -40,9 +41,11 @@ describe("filtering the result", () => {
       expect(m.city.facts.settings).toContain("ocean");
   });
 
-  it("keeps cities of the chosen regions", () => {
-    for (const m of applyFilters(ranked, { regions: ["est", "sud"] }))
-      expect(["est", "sud"]).toContain(m.city.zone);
+  // Beta feedback (2026-11-18): one region to leave out took four ticks when the filter kept.
+  it("removes the cities of the regions the reader takes out", () => {
+    const kept = applyFilters(ranked, { regions: ["nord"] });
+    expect(kept.length).toBe(ranked.length - 14);
+    for (const m of kept) expect(m.city.zone).not.toBe("nord");
   });
 
   it("keeps countries where the chosen faith is the majority", () => {
@@ -68,7 +71,7 @@ describe("filtering the result", () => {
   it("combines filters: a city must pass all of them", () => {
     for (const m of applyFilters(ranked, { sizes: [1], regions: ["ouest"] })) {
       expect(m.city.size).toBe(1);
-      expect(m.city.zone).toBe("ouest");
+      expect(m.city.zone).not.toBe("ouest");
     }
   });
 });
@@ -92,6 +95,17 @@ describe("the filter menu", () => {
     const labels = known.options.map((o) => o.label);
     expect(labels).toHaveLength(115);
     expect(labels).toEqual([...labels].sort((a, b) => a.localeCompare(b, "fr")));
+  });
+
+  it("reads in English for an English reader, with the same keys and values", () => {
+    const english = filterMenu("en");
+    expect(english.map((f) => f.key)).toEqual(FILTER_MENU.map((f) => f.key));
+    for (const entry of english)
+      for (const text of [entry.label, entry.hint, ...entry.options.map((o) => o.label)])
+        expect(looksFrench(text), text).toBe(false);
+    const known = english.find((f) => f.key === "known")!.options.map((o) => o.label);
+    expect(known).toContain("Addis Ababa");
+    expect(known).toEqual([...known].sort((a, b) => a.localeCompare(b, "en-GB")));
   });
 
   it("builds filters the result understands from the options picked", () => {

@@ -1,5 +1,6 @@
 import catalogue from "../data/city-holiday.json";
 import type { Source } from "./lines";
+import { INTL_LOCALE, type Locale } from "../i18n/locale";
 
 /**
  * Holiday facts per city (operator, 2026-11-16), each with its source: what one can do within
@@ -66,16 +67,28 @@ const MONTHS = [
   "décembre",
 ];
 
-/** « novembre, décembre, janvier » for a list of month numbers. */
-export function monthNames(months: number[]): string {
+const MONTHS_EN = new Intl.DateTimeFormat(INTL_LOCALE.en, { month: "long", timeZone: "UTC" });
+
+/**
+ * « novembre, décembre, janvier » for a list of month numbers. French by default for the city
+ * page, which calls it without a language yet.
+ */
+export function monthNames(months: number[], locale: Locale = "fr"): string {
+  if (locale === "en")
+    return months.map((m) => MONTHS_EN.format(Date.UTC(2026, m - 1, 15))).join(", ");
   return months.map((m) => MONTHS[m - 1]).join(", ");
 }
 
 /** The answers of « Quand partez-vous ? », by three-month stretch. */
 export const SEASONS = [
-  { value: "djf", label: "De décembre à février", months: [12, 1, 2] },
-  { value: "mam", label: "De mars à mai", months: [3, 4, 5] },
-  { value: "jja", label: "De juin à août", months: [6, 7, 8] },
-  { value: "son", label: "De septembre à novembre", months: [9, 10, 11] },
+  { value: "djf", label: "De décembre à février", en: "December to February", months: [12, 1, 2] },
+  { value: "mam", label: "De mars à mai", en: "March to May", months: [3, 4, 5] },
+  { value: "jja", label: "De juin à août", en: "June to August", months: [6, 7, 8] },
+  {
+    value: "son",
+    label: "De septembre à novembre",
+    en: "September to November",
+    months: [9, 10, 11],
+  },
 ] as const;
 export type Season = (typeof SEASONS)[number]["value"];

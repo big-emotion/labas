@@ -5,6 +5,9 @@
  * block sits high and on a light background that stands out from the night-blue page.
  * Rendered by lib/reactions-dom.ts; hidden when the accounts service does not answer.
  */
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { cityName } from "../i18n/places";
+import { localeOfPath, pathFor } from "../i18n/routes";
 import { ofCity } from "../lib/reactions";
 
 interface Props {
@@ -18,6 +21,104 @@ const { city, preview = false, everywhere = false } = Astro.props;
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const titleId = preview ? "reactions-preview-title" : "reactions-title";
 const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
+const locale = localeOfPath(Astro.url.pathname);
+const name = city ? cityName(city.name, locale) : "";
+
+const COPY = {
+  fr: {
+    latest: "Les derniers avis",
+    saying: "Ce qu'on dit",
+    of: city ? ofCity(name) : "",
+    emptyEverywhere:
+      "Aucun avis ne correspond. Essayez un autre mot, une autre région, ou retirez un filtre.",
+    emptyBefore: "Personne n'a encore réagi. Vous connaissez",
+    emptyAfter: ", ou elle vous attire ? Donnez le premier avis.",
+    moreEverywhere: "Voir plus d'avis",
+    more: "Voir plus de réactions",
+    react: "Réagir",
+    all: "Voir toutes les réactions",
+    openInReviews: "Ouvrir dans l'espace avis",
+    yourReaction: "Votre réaction",
+    textHint:
+      "Ce que vous y avez vécu, ce qui vous attire ou ce qui vous retient. 1 000 caractères au plus.",
+    shownName: "Nom affiché",
+    optional: "(facultatif)",
+    nameHint:
+      "Sinon, « Utilisateur » et un numéro. Les réactions sont publiques : évitez votre nom complet.",
+    private: "Ne pas rendre public mon top 3 ni mon profil de personnalité",
+    privateHint:
+      "Sans cette case, ils s'affichent sous votre réaction : vos trois villes avec leurs pourcentages, et votre tempérament. Jamais vos réponses.",
+    email: "Votre e-mail",
+    emailPlaceholder: "vous@exemple.fr",
+    emailHint:
+      "Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réaction ; ensuite, plus besoin : vos réactions suivantes sont publiées tout de suite.",
+    website: "Site web",
+    send: "Envoyer",
+    privacy: "Confidentialité",
+    readMore: "Lire la suite",
+    translate: "Traduire",
+    journeyTitle: `Son parcours sur ${BRAND.fr}`,
+    temperament: "Tempérament",
+    bigFive: "Inspiré du Big Five, ce n'est pas un test de personnalité.",
+    reply: "Répondre",
+    report: "Signaler",
+    remove: "Supprimer",
+    yourReply: "Votre réponse",
+    replyEmailHint:
+      "Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réponse ; il vous connecte aussi.",
+    sendReply: "Envoyer la réponse",
+    login: "Pour réagir, connectez-vous : nous vous envoyons un lien par e-mail.",
+    getLink: "Recevoir le lien",
+    loginDone:
+      "Si un espace existe pour cette adresse, le lien arrive dans quelques minutes. Pas encore d'espace ? Répondez à un avis ou donnez le vôtre : le lien de publication vous connecte.",
+  },
+  en: {
+    latest: "The latest reviews",
+    saying: "What people say about",
+    of: name,
+    emptyEverywhere: "No review matches. Try another word, another region, or remove a filter.",
+    emptyBefore: "Nobody has reacted yet. Do you know",
+    emptyAfter: ", or does it draw you? Be the first to react.",
+    moreEverywhere: "See more reviews",
+    more: "See more reactions",
+    react: "React",
+    all: "See all reactions",
+    openInReviews: "Open in the reviews section",
+    yourReaction: "Your reaction",
+    textHint:
+      "What you lived there, what draws you or what holds you back. 1,000 characters at most.",
+    shownName: "Display name",
+    optional: "(optional)",
+    nameHint: "Otherwise, “User” and a number. Reactions are public: avoid your full name.",
+    private: "Do not make my top 3 or my personality profile public",
+    privateHint:
+      "Without this box, they show under your reaction: your three cities with their percentages, and your temperament. Never your answers.",
+    email: "Your email",
+    emailPlaceholder: "you@example.com",
+    emailHint:
+      "It is never shown. We send you a link to publish the reaction; after that, no need: your next reactions go online straight away.",
+    website: "Website",
+    send: "Send",
+    privacy: "Privacy",
+    readMore: "Read more",
+    translate: "Translate",
+    journeyTitle: `Their journey on ${BRAND.en}`,
+    temperament: "Temperament",
+    bigFive: "Inspired by the Big Five; it is not a personality test.",
+    reply: "Reply",
+    report: "Report",
+    remove: "Delete",
+    yourReply: "Your reply",
+    replyEmailHint:
+      "It is never shown. We send you a link to publish the reply; it signs you in as well.",
+    sendReply: "Send the reply",
+    login: "To react, sign in: we send you a link by email.",
+    getLink: "Get the link",
+    loginDone:
+      "If a space exists for this address, the link arrives within a few minutes. No space yet? Reply to a review or give your own: the publishing link signs you in.",
+  },
+} satisfies Bilingual<Record<string, string>>;
+const copy = COPY[locale];
 ---
 
 {enabled && (
@@ -26,17 +127,17 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
     id={preview ? undefined : "reactions"}
     data-reactions={mode}
     data-city={city?.slug}
-    data-city-name={city?.name}
+    data-city-name={name || undefined}
     aria-labelledby={titleId}
     hidden
   >
     <header class="head">
       <h2 id={titleId}>
         {everywhere ? (
-          "Les derniers avis"
+          copy.latest
         ) : (
           <>
-            Ce qu'on dit <span data-of>{city && ofCity(city.name)}</span>
+            {copy.saying} <span data-of>{copy.of}</span>
           </>
         )}
       </h2>
@@ -46,31 +147,31 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
     <ol class="list" data-list />
     {everywhere ? (
       <p class="empty" data-empty hidden>
-        Aucun avis ne correspond. Essayez un autre mot, une autre région, ou retirez un filtre.
+        {copy.emptyEverywhere}
       </p>
     ) : (
       <p class="empty" data-empty hidden>
-        Personne n'a encore réagi. Vous connaissez <span data-name>{city?.name}</span>, ou elle vous
-        attire ? Donnez le premier avis.
+        {copy.emptyBefore} <span data-name>{name}</span>
+        {copy.emptyAfter}
       </p>
     )}
     <button type="button" class="more" data-more hidden>
-      {everywhere ? "Voir plus d'avis" : "Voir plus de réactions"}
+      {everywhere ? copy.moreEverywhere : copy.more}
     </button>
 
     {!everywhere && (
       <div class="actions">
         <button type="button" class="react" data-open aria-expanded="false">
-          Réagir
+          {copy.react}
         </button>
         {preview && (
           <a class="all" data-all>
-            Voir toutes les réactions
+            {copy.all}
           </a>
         )}
         {!preview && city && (
-          <a class="all" href={`/avis/?ville=${city.slug}`}>
-            Ouvrir dans l'espace avis
+          <a class="all" href={`${pathFor("reviews", locale)}?ville=${city.slug}`}>
+            {copy.openInReviews}
           </a>
         )}
       </div>
@@ -78,54 +179,47 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
 
     <form class="form" data-form novalidate hidden>
       <label class="field">
-        Votre réaction
+        {copy.yourReaction}
         <textarea name="text" rows="4" maxlength="1000" required />
       </label>
-      <p class="hint">
-        Ce que vous y avez vécu, ce qui vous attire ou ce qui vous retient. 1 000 caractères au
-        plus.
-      </p>
+      <p class="hint">{copy.textHint}</p>
       <label class="field">
         <span>
-          Nom affiché <span class="dim">(facultatif)</span>
+          {copy.shownName} <span class="dim">{copy.optional}</span>
         </span>
         <input type="text" name="name" maxlength="40" autocomplete="nickname" />
       </label>
-      <p class="hint">
-        Sinon, « Utilisateur » et un numéro. Les réactions sont publiques : évitez votre nom
-        complet.
-      </p>
+      <p class="hint">{copy.nameHint}</p>
       {/* Public by default, one box to keep them back (operator, 2026-11-18). */}
       <label class="check" data-top-field hidden>
         <input type="checkbox" name="private" />
         <span>
-          Ne pas rendre public mon top 3 ni mon profil de personnalité
-          <span class="dim">
-            Sans cette case, ils s'affichent sous votre réaction : vos trois villes avec leurs
-            pourcentages, et votre tempérament. Jamais vos réponses.
-          </span>
+          {copy.private}
+          <span class="dim">{copy.privateHint}</span>
         </span>
       </label>
       <div class="email" data-email-field>
         <label class="field">
-          Votre e-mail
-          <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+          {copy.email}
+          <input
+            type="email"
+            name="email"
+            placeholder={copy.emailPlaceholder}
+            autocomplete="email"
+          />
         </label>
-        <p class="hint">
-          Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réaction ; ensuite,
-          plus besoin : vos réactions suivantes sont publiées tout de suite.
-        </p>
+        <p class="hint">{copy.emailHint}</p>
       </div>
       <label class="trap" aria-hidden="true">
-        Site web
+        {copy.website}
         <input type="text" name="website" tabindex="-1" autocomplete="off" />
       </label>
       <p class="error" data-error role="alert" hidden />
       <button type="submit" class="send">
-        Envoyer
+        {copy.send}
       </button>
       <p class="hint">
-        <a href="/confidentialite">Confidentialité</a>
+        <a href={pathFor("privacy", locale)}>{copy.privacy}</a>
       </p>
     </form>
 
@@ -144,8 +238,15 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
         <p class="mention" data-mention hidden></p>
         <p class="text"></p>
         <button type="button" class="read-more" data-read-more aria-expanded="false" hidden>
-          Lire la suite
+          {copy.readMore}
         </button>
+        {/* DeepL on request (operator, 2026-11-18); shown once the service says it can. */}
+        <p class="translation" data-translation hidden>
+          <span class="translation-note" data-translation-note></span>
+          <button type="button" class="read-more" data-translate>
+            {copy.translate}
+          </button>
+        </p>
         {/* One line at a glance, the detail one tap away (operator's pick C, 2026-11-18). */}
         <button type="button" class="summary" data-summary aria-expanded="false" hidden>
           <span class="first" data-first hidden>
@@ -156,26 +257,26 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
           <span class="others" data-others hidden></span>
         </button>
         <div class="journey" hidden>
-          <p class="journey-title">Son parcours sur Là-bas</p>
+          <p class="journey-title">{copy.journeyTitle}</p>
           <ol class="top"></ol>
           <div class="profile" hidden>
             <p class="profile-name">
-              Tempérament <b></b>
+              {copy.temperament} <b></b>
             </p>
             <ul class="traits"></ul>
-            <p class="profile-note">Inspiré du Big Five, ce n'est pas un test de personnalité.</p>
+            <p class="profile-note">{copy.bigFive}</p>
           </div>
         </div>
         <footer class="tools">
           <div class="marks" data-marks></div>
           <button type="button" class="answer" data-reply aria-expanded="false">
-            Répondre
+            {copy.reply}
           </button>
           <button type="button" data-report>
-            Signaler
+            {copy.report}
           </button>
           <button type="button" data-delete hidden>
-            Supprimer
+            {copy.remove}
           </button>
         </footer>
         <ol class="replies" data-replies hidden></ol>
@@ -187,49 +288,55 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
       <form class="reply-form" novalidate>
         <p class="replying" data-replying></p>
         <label class="field">
-          Votre réponse
+          {copy.yourReply}
           <textarea name="text" rows="3" maxlength="1000" required></textarea>
         </label>
         <label class="field">
           <span>
-            Nom affiché <span class="dim">(facultatif)</span>
+            {copy.shownName} <span class="dim">{copy.optional}</span>
           </span>
           <input type="text" name="name" maxlength="40" autocomplete="nickname" />
         </label>
         <div class="email" data-email-field hidden>
           <label class="field">
-            Votre e-mail
-            <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+            {copy.email}
+            <input
+              type="email"
+              name="email"
+              placeholder={copy.emailPlaceholder}
+              autocomplete="email"
+            />
           </label>
-          <p class="hint">
-            Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réponse ; il vous
-            connecte aussi.
-          </p>
+          <p class="hint">{copy.replyEmailHint}</p>
         </div>
         <label class="trap" aria-hidden="true">
-          Site web
+          {copy.website}
           <input type="text" name="website" tabindex="-1" autocomplete="off" />
         </label>
         <p class="error" data-error role="alert" hidden></p>
         <button type="submit" class="send">
-          Envoyer la réponse
+          {copy.sendReply}
         </button>
       </form>
     </template>
 
     <template data-login-template>
       <form class="login" novalidate>
-        <p>Pour réagir, connectez-vous : nous vous envoyons un lien par e-mail.</p>
+        <p>{copy.login}</p>
         <label class="field">
-          Votre e-mail
-          <input type="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" />
+          {copy.email}
+          <input
+            type="email"
+            name="email"
+            placeholder={copy.emailPlaceholder}
+            autocomplete="email"
+          />
         </label>
         <button type="submit" class="send">
-          Recevoir le lien
+          {copy.getLink}
         </button>
         <p class="hint" data-done role="status" hidden>
-          Si un espace existe pour cette adresse, le lien arrive dans quelques minutes. Pas encore
-          d'espace ? Répondez à un avis ou donnez le vôtre : le lien de publication vous connecte.
+          {copy.loginDone}
         </p>
       </form>
     </template>
@@ -363,7 +470,23 @@ const mode = everywhere ? "everywhere" : preview ? "preview" : "thread";
     text-underline-offset: 3px;
     cursor: pointer;
   }
-  .reactions :global(.read-more[hidden]) {
+  .reactions :global(.read-more[hidden]),
+  .reactions :global(.translation[hidden]) {
+    display: none;
+  }
+  .reactions :global(.translation) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    margin: 0;
+  }
+  .reactions :global(.translation-note) {
+    color: var(--night-lift);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .reactions :global(.translation-note:empty) {
     display: none;
   }
   /* The author's journey: a quieter panel inside the card, so the text stays the main thing. */

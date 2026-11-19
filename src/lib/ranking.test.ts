@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { livableLanguages } from "./cities";
 import { bestMatches, rankCities, topCities, type Answers } from "./ranking";
+import { looksFrench } from "../i18n/looks-french";
 
 function scoreOf(cityName: string, answers: Answers): number {
   const match = rankCities(answers).find((m) => m.city.name === cityName);
@@ -139,6 +140,41 @@ describe("ranking the cities", () => {
     for (const m of bestMatches(strict, 20)) expect(m.excludedBecause).toBeUndefined();
   });
 
+  // « Pas pour moi » (beta feedback, 2026-11-18): a place the reader sets aside is gone, it
+  // does not merely fall back.
+  describe("a place the reader sets aside", () => {
+    const base: Answers = { project: "installer", languages: ["fr"] };
+    const top = (answers: Answers) => bestMatches(answers, 10).map((m) => m.city.name);
+
+    it("takes a whole region out of the best matches, and says why", () => {
+      const answers: Answers = { ...base, avoidRegions: ["nord"] };
+      for (const m of bestMatches(answers, 30)) expect(m.city.zone).not.toBe("nord");
+      const tunis = rankCities(answers).find((m) => m.city.name === "Tunis");
+      expect(tunis?.excludedBecause).toBe("Vous avez écarté cette région");
+      expect(rankCities(answers, "en").find((m) => m.city.name === "Tunis")?.excludedBecause).toBe(
+        "You left out this region",
+      );
+    });
+
+    it("takes out a country or a single city the same way", () => {
+      const noAlgeria = rankCities({ ...base, avoidCountries: ["Algérie"] });
+      expect(
+        noAlgeria.filter((m) => m.city.country === "Algérie").map((m) => m.excludedBecause),
+      ).toEqual(["Vous avez écarté ce pays", "Vous avez écarté ce pays"]);
+      const noOran = rankCities({ ...base, avoidCities: ["Oran"] });
+      expect(noOran.find((m) => m.city.name === "Oran")?.excludedBecause).toBe(
+        "Vous avez écarté cette ville",
+      );
+      expect(noOran.find((m) => m.city.name === "Alger")?.excludedBecause).toBeUndefined();
+    });
+
+    it("leaves the order of every other city as it was", () => {
+      const before = top(base).filter((name) => name !== "Tunis" && name !== "Casablanca");
+      const after = top({ ...base, avoidCities: ["Tunis", "Casablanca"] });
+      expect(after.slice(0, before.length)).toEqual(before);
+    });
+  });
+
   it("only leaves out countries that punish homosexuality when the reader asks", () => {
     const criminalising = (answers: Answers) =>
       rankCities(answers).filter((m) => m.excludedBecause === "Le pays punit l'homosexualité");
@@ -205,6 +241,32 @@ describe("ranking on resemblance first", () => {
     const safe: Answers = { ...explorer, priorities: ["safety"] };
     expect(meanSafety(safe)).toBeGreaterThan(meanSafety(explorer));
     expect(bestMatches(safe, 1)[0].reasons.map((r) => r.label)).toContain("Sécurité au quotidien");
+  });
+
+  // Beta feedback (2026-11-18): healthcare matters without children too.
+  it("lifts well-equipped cities for a reader without children who makes health a non-negotiable", () => {
+    const meanCare = (answers: Answers) => {
+      const top = bestMatches(answers, 5);
+      return top.reduce((sum, m) => sum + (m.city.scores.healthcare.level ?? 2.5), 0) / top.length;
+    };
+    const single: Answers = { ...explorer, family: "celib" };
+    expect(meanCare({ ...single, priorities: ["health"] })).toBeGreaterThan(meanCare(single));
+  });
+
+  it("lifts cities with good schools for parents who make schooling a non-negotiable", () => {
+    const meanSchools = (answers: Answers) => {
+      const top = bestMatches(answers, 5);
+      return top.reduce((sum, m) => sum + (m.city.scores.schools.level ?? 2.5), 0) / top.length;
+    };
+    const parents: Answers = { ...explorer, family: "parents" };
+    expect(meanSchools({ ...parents, priorities: ["schools"] })).toBeGreaterThan(
+      meanSchools(parents),
+    );
+  });
+
+  it("still ranks a journey saved with the former « La santé et l'école » choice", () => {
+    const saved = { ...explorer, priorities: ["healthAndSchools"] } as unknown as Answers;
+    expect(rankCities(saved)).toHaveLength(rankCities(explorer).length);
   });
 });
 
@@ -316,5 +378,51 @@ describe("the quick top used to choose the next question", () => {
   it("names the same cities as the full ranking", () => {
     const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };
     expect(topCities(answers, 5)).toEqual(bestMatches(answers, 5).map((m) => m.city.name));
+  });
+});
+
+describe("ranking the cities for an English reader", () => {
+  // A reader who answered a bit of everything, so most kinds of line come up somewhere.
+  const answers: Answers = {
+    project: "installer",
+    languages: ["pt", "en"],
+    origin: ["ouest"],
+    kin: "much",
+    faith: "muslim",
+    saturday: 1,
+    adventure: "seeking",
+    order: 1,
+    together: 0,
+    friction: 0,
+    size: 3,
+    climate: "hot",
+    landscapes: ["beach"],
+    priorities: ["safety", "cost", "flights"],
+    languageOnly: true,
+    visaFreeOnly: true,
+    excludeCriminalising: true,
+  };
+
+  it("explains a match in English", () => {
+    const luanda = rankCities({ languages: ["pt"] }, "en").find((m) => m.city.name === "Luanda");
+    expect(luanda?.reasons.map((r) => r.label)).toContain("Daily life happens in Portuguese there");
+  });
+
+  it("writes every reason, drawback, filter and portrait line in English", () => {
+    for (const m of rankCities(answers, "en")) {
+      const texts = [
+        ...m.reasons.map((r) => r.label),
+        ...m.drawbacks.map((r) => r.label),
+        ...m.temperamentLines.map((l) => l.text),
+        ...m.portrait.flatMap((l) => [l.said, l.text]),
+        m.excludedBecause ?? "",
+      ];
+      for (const text of texts) expect(looksFrench(text), `${m.city.name}: ${text}`).toBe(false);
+    }
+  });
+
+  it("ranks the same way in both languages", () => {
+    const names = (locale: "fr" | "en") => rankCities(answers, locale).map((m) => m.city.name);
+    expect(names("en")).toEqual(names("fr"));
   });
 });

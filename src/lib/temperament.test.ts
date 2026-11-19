@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { archetypeOf } from "./temperament";
+import { looksFrench } from "../i18n/looks-french";
 import { bestMatches, type Answers } from "./ranking";
 
 const all = (
@@ -12,28 +13,28 @@ const all = (
 
 describe("the reader's temperament", () => {
   it("waits for the five temperament answers before naming anything", () => {
-    expect(archetypeOf({ saturday: 1, adventure: "seeking" })).toBeUndefined();
+    expect(archetypeOf({ saturday: 1, adventure: "seeking" }, "fr")).toBeUndefined();
   });
 
   it("names the closest of five archetypes, in « vous » and as preferences", () => {
-    const social = archetypeOf(all(1, "open", 0.5, 1, 0.5))!;
+    const social = archetypeOf(all(1, "open", 0.5, 1, 0.5), "fr")!;
     expect(social.name).toBe("Lien");
     expect(social.text).toMatch(/^Vous aimez/);
-    expect(archetypeOf(all(0, "familiar", 1, 1, 0))!.name).toBe("Refuge");
-    expect(archetypeOf(all(1, "open", 0, 0, 1))!.name).toBe("Conquête");
+    expect(archetypeOf(all(0, "familiar", 1, 1, 0), "fr")!.name).toBe("Refuge");
+    expect(archetypeOf(all(1, "open", 0, 0, 1), "fr")!.name).toBe("Conquête");
   });
 
   // Operator, 2026-11-16: no city « works as planned », not even Paris; a reader who needs order
   // likes simple, predictable procedures.
   it("never promises a city that works as planned", () => {
-    const orderly = archetypeOf(all(0.5, "open", 1, 0.5, 0.5))!;
+    const orderly = archetypeOf(all(0.5, "open", 1, 0.5, 0.5), "fr")!;
     expect(orderly.name).toBe("Fondation");
     expect(orderly.text).not.toMatch(/comme prévu/);
     expect(orderly.text).toMatch(/prévisibles/);
   });
 
   it("gives the five traits on a 0 to 1 scale", () => {
-    const traits = archetypeOf(all(1, "seeking", 0, 0.5, 1))!.traits;
+    const traits = archetypeOf(all(1, "seeking", 0, 0.5, 1), "fr")!.traits;
     expect(traits.map((t) => t.name)).toEqual([
       "Extraversion",
       "Ouverture",
@@ -42,6 +43,15 @@ describe("the reader's temperament", () => {
       "Stabilité",
     ]);
     expect(traits.map((t) => t.value)).toEqual([1, 1, 0, 0.5, 1]);
+  });
+
+  it("speaks to an English reader in « you », as preferences, inspired by the Big Five", () => {
+    const social = archetypeOf(all(1, "open", 0.5, 1, 0.5), "en")!;
+    expect(social.name).toBe("Connection");
+    expect(social.text).toMatch(/^You like/);
+    expect(social.text).not.toMatch(/you are/i);
+    expect(social.traits.map((t) => t.name)).toContain("Openness");
+    for (const t of social.traits) expect(looksFrench(`${t.name} ${t.range}`)).toBe(false);
   });
 });
 

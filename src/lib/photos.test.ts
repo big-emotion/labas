@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import catalogue from "../data/photos.json";
 import { CITIES } from "./cities";
-import { photoFor } from "./photos";
+import { photoCredit, photoFor } from "./photos";
 
 // Only licences that allow reuse on a site, with credit (no non-commercial, no "no derivatives").
 const FREE = /^(CC0|Public domain|CC BY(-SA)? \d\.\d( [a-z]{2})?)$/;
@@ -27,5 +27,13 @@ describe("the city photos", () => {
     const proposable = CITIES;
     const withPhoto = proposable.filter((city) => photoFor(city.name));
     expect(withPhoto.length / proposable.length).toBeGreaterThan(0.9);
+  });
+});
+
+describe("a photo's credit line", () => {
+  it("names the author and the licence in the reader's language", () => {
+    const photo = photoFor("Dakar")!;
+    expect(photoCredit(photo, "fr")).toBe(`Photo : ${photo.author} · ${photo.license}`);
+    expect(photoCredit(photo, "en")).toBe(`Photo: ${photo.author} · ${photo.license}`);
   });
 });

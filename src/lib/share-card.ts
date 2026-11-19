@@ -7,12 +7,31 @@ import sharp from "sharp";
 import borders from "../data/africa-borders.json";
 import { CITIES, type City } from "./cities";
 import { MAP_HEIGHT, MAP_WIDTH, project } from "./map";
-import { photoFor } from "./photos";
+import { photoCredit, photoFor } from "./photos";
+import { cityCopy } from "../i18n/city-copy";
+import type { Bilingual, Locale } from "../i18n/locale";
 
 /**
  * The pictures social networks show when a Là-bas link is shared, drawn at build time so no
  * page calls a third party. Colours repeat src/styles/global.css: satori cannot read CSS variables.
  */
+const COPY: Bilingual<{
+  question: [string, string];
+  promise: (cities: number) => string;
+  living: string;
+}> = {
+  fr: {
+    question: ["Quelle ville d’Afrique", "vous ressemble ?"],
+    promise: (cities) => `${cities} villes dans les 54 pays d’Afrique. Sans inscription.`,
+    living: "Vivre à",
+  },
+  en: {
+    question: ["Which African city", "is most like you?"],
+    promise: (cities) => `${cities} cities across Africa’s 54 countries. No sign-up.`,
+    living: "Living in",
+  },
+};
+
 const NIGHT = "#161a5c";
 const NIGHT_DEEP = "#0e1145";
 const NIGHT_LIFT = "#262c86";
@@ -86,20 +105,42 @@ function mapSvg(highlight?: City): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MAP_WIDTH} ${MAP_HEIGHT}"><g fill="${NIGHT_LIFT}" stroke="${NIGHT_DEEP}" stroke-width="0.7" stroke-linejoin="round">${land}</g><g fill="${SAFFRON}" opacity="${highlight ? 0.35 : 0.95}">${dots}</g>${mark}</svg>`;
 }
 
-/** « Là-bas » with Africa as the accent, as in the site's header. */
-function wordmark(size: number, ink: string): Node {
-  const accent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="${SAFFRON}" transform="rotate(-18 50 50)" d="${AFRICA}"/></svg>`;
+const africaSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="${SAFFRON}" transform="rotate(-18 50 50)" d="${AFRICA}"/></svg>`;
+
+/**
+ * The site's header logo (Wordmark.astro): « Là-bas » with Africa as the accent, or « over·there »
+ * landing on Africa where a full stop would be.
+ */
+function wordmark(size: number, ink: string, locale: Locale): Node {
+  const style = {
+    fontFamily: "Fraunces",
+    fontWeight: 900,
+    fontSize: size,
+    color: ink,
+    letterSpacing: "-0.03em",
+    lineHeight: 1,
+    alignItems: "flex-end",
+  };
+  if (locale === "en")
+    return h(
+      "div",
+      style,
+      "over",
+      h("span", { color: SAFFRON }, "·"),
+      "there",
+      h(
+        "div",
+        { position: "relative", width: size * 0.62, height: size },
+        h(
+          "div",
+          { position: "absolute", left: size * 0.16, bottom: size * 0.14 },
+          svgImage(africaSvg, size * 0.5, size * 0.5),
+        ),
+      ),
+    );
   return h(
     "div",
-    {
-      fontFamily: "Fraunces",
-      fontWeight: 900,
-      fontSize: size,
-      color: ink,
-      letterSpacing: "-0.03em",
-      lineHeight: 1,
-      alignItems: "flex-end",
-    },
+    style,
     "l",
     h(
       "div",
@@ -108,7 +149,7 @@ function wordmark(size: number, ink: string): Node {
       h(
         "div",
         { position: "absolute", left: size * 0.1, top: -size * 0.32 },
-        svgImage(accent, size * 0.5, size * 0.5),
+        svgImage(africaSvg, size * 0.5, size * 0.5),
       ),
     ),
     h("span", { color: SAFFRON }, "-"),
@@ -148,7 +189,8 @@ const frame = (style: Record<string, unknown>, ...children: unknown[]) =>
 const nameSize = (name: string, width: number) =>
   Math.min(120, Math.floor(width / (name.length * 0.64)));
 
-function homeCard(): Node {
+function homeCard(locale: Locale): Node {
+  const copy = COPY[locale];
   return frame(
     { justifyContent: "space-between" },
     h(
@@ -161,7 +203,7 @@ function homeCard(): Node {
       h(
         "div",
         { flexDirection: "column", justifyContent: "space-between", width: 640 },
-        wordmark(56, THREAD),
+        wordmark(56, THREAD, locale),
         h(
           "div",
           { flexDirection: "column" },
@@ -175,14 +217,10 @@ function homeCard(): Node {
               letterSpacing: "-0.02em",
               color: THREAD,
             },
-            h("span", { fontWeight: 900 }, "Quelle ville d’Afrique"),
-            h("span", { fontStyle: "italic", fontWeight: 400, color: SAFFRON }, "vous ressemble ?"),
+            h("span", { fontWeight: 900 }, copy.question[0]),
+            h("span", { fontStyle: "italic", fontWeight: 400, color: SAFFRON }, copy.question[1]),
           ),
-          h(
-            "div",
-            { marginTop: 28, fontSize: 28, color: THREAD_DIM },
-            `${CITIES.length} villes dans les 54 pays d’Afrique. Sans inscription.`,
-          ),
+          h("div", { marginTop: 28, fontSize: 28, color: THREAD_DIM }, copy.promise(CITIES.length)),
         ),
       ),
       h("div", { alignItems: "center" }, svgImage(mapSvg(), 400, 422)),
@@ -190,25 +228,26 @@ function homeCard(): Node {
   );
 }
 
-function cityCard(city: City): Node {
+function cityCard(city: City, locale: Locale): Node {
   const photo = photoFor(city.name);
+  const { name, country } = cityCopy(city, locale);
   const text = h(
     "div",
     { flexDirection: "column" },
-    h("div", { fontSize: 30, color: THREAD_DIM, fontWeight: 700 }, "Vivre à"),
+    h("div", { fontSize: 30, color: THREAD_DIM, fontWeight: 700 }, COPY[locale].living),
     h(
       "div",
       {
         fontFamily: "Fraunces",
         fontWeight: 900,
-        fontSize: nameSize(city.name, photo ? 680 : 600),
+        fontSize: nameSize(name, photo ? 680 : 600),
         lineHeight: 1,
         letterSpacing: "-0.02em",
         color: THREAD,
       },
-      city.name,
+      name,
     ),
-    h("div", { marginTop: 14, fontSize: 32, color: SAFFRON, fontWeight: 700 }, city.country),
+    h("div", { marginTop: 14, fontSize: 32, color: SAFFRON, fontWeight: 700 }, country),
   );
   if (!photo) {
     return frame(
@@ -223,7 +262,7 @@ function cityCard(city: City): Node {
         h(
           "div",
           { flexDirection: "column", justifyContent: "space-between", width: 620 },
-          wordmark(48, THREAD),
+          wordmark(48, THREAD, locale),
           text,
         ),
         h("div", { alignItems: "center" }, svgImage(mapSvg(city), 400, 422)),
@@ -261,7 +300,7 @@ function cityCard(city: City): Node {
         width: CARD_WIDTH - 2 * PAD_X,
         height: CARD_HEIGHT - 2 * PAD_Y,
       },
-      wordmark(48, THREAD),
+      wordmark(48, THREAD, locale),
       h(
         "div",
         { justifyContent: "space-between", alignItems: "flex-end" },
@@ -275,7 +314,7 @@ function cityCard(city: City): Node {
             justifyContent: "flex-end",
             textAlign: "right",
           },
-          `Photo : ${photo.author} · ${photo.license}`,
+          photoCredit(photo, locale),
         ),
       ),
     ),
@@ -292,9 +331,12 @@ async function toPng(node: Node, width: number, height: number): Promise<Uint8Ar
 export type ShareCard = { kind: "home" } | { kind: "city"; city: City };
 
 /** JPEG, not PNG: a photo card weighs about 1 MB as PNG and under 200 KB as JPEG. */
-export async function renderShareCard(card: ShareCard): Promise<Uint8Array<ArrayBuffer>> {
+export async function renderShareCard(
+  card: ShareCard,
+  locale: Locale,
+): Promise<Uint8Array<ArrayBuffer>> {
   const png = await toPng(
-    card.kind === "home" ? homeCard() : cityCard(card.city),
+    card.kind === "home" ? homeCard(locale) : cityCard(card.city, locale),
     CARD_WIDTH,
     CARD_HEIGHT,
   );

@@ -1,0 +1,23 @@
+---
+/**
+ * Said once on an English page whose long guide still comes from the French data (operator,
+ * 2026-11-18: the interface is translated first). The French parts carry lang="fr" so a screen
+ * reader switches voice; this note tells a sighted reader why the language changes. A page
+ * whose French part is not a city guide passes its own sentence as the slot.
+ */
+---
+
+<p class="french-note">
+  <slot>The city guide below is written in French for now; an English version is coming.</slot>
+</p>
+
+<style>
+  .french-note {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px dashed var(--thread-faint);
+    color: var(--thread-dim);
+    font-size: 0.9rem;
+  }
+</style>

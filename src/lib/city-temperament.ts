@@ -1,4 +1,5 @@
 import catalogue from "../data/city-temperament.json";
+import type { Bilingual, Locale } from "../i18n/locale";
 
 /**
  * The five temperament axes, named after the question that asks each one (inspired by the Big
@@ -50,53 +51,135 @@ export function temperamentFit(cityName: string, trait: Trait, reader: number): 
 type Told = "saturday" | "adventure" | "together";
 const TOLD: readonly Trait[] = ["saturday", "adventure", "together"];
 
-/** What a neighbourhood at each level is like, in the reader's words, low level first. */
-const LEVEL_NAMES: Record<Told, [string, string, string]> = {
-  saturday: ["Calme le soir", "Dîners et quelques bars", "On sort tard"],
-  adventure: ["Repères familiers", "Entre repères et dépaysement", "Dépaysant"],
-  together: ["Chacun sa route", "Vie résidentielle tranquille", "Vie de quartier et entraide"],
-};
+type Levels = Record<Told, [string, string, string]>;
 
 /**
- * The same levels when no neighbourhood has them, as a sentence: « On sort tard : aucun
- * quartier » read badly. « Aucun » is the strongest claim the site makes about a city, so it is
- * tied to our notes; a city rated as a whole says « pas une ville… » and that it is our estimate
- * (operator, 2026-11-16).
+ * The words of a neighbourhood line. `levels`: what a neighbourhood at each level is like, in the
+ * reader's words, low level first. `none` and `notTheCity`: the same levels when no
+ * neighbourhood has them, as a sentence: « On sort tard : aucun quartier » read badly. « Aucun »
+ * is the strongest claim the site makes about a city, so it is tied to our notes; a city rated as
+ * a whole says « pas une ville… » and that it is our estimate (operator, 2026-11-16).
  */
-const NO_NEIGHBOURHOOD: Record<Told, [string, string, string]> = {
-  saturday: [
-    "Aucun quartier calme le soir",
-    "Aucun quartier de dîners et de quelques bars",
-    "Aucun quartier où l'on sort tard",
-  ],
-  adventure: [
-    "Aucun quartier aux repères familiers",
-    "Aucun quartier entre repères et dépaysement",
-    "Aucun quartier dépaysant",
-  ],
-  together: [
-    "Aucun quartier où chacun suit sa route",
-    "Aucun quartier résidentiel et tranquille",
-    "Aucun quartier où l'on vit en voisins",
-  ],
+interface LineCopy {
+  levels: Levels;
+  none: Levels;
+  notTheCity: Levels;
+  estimate: string;
+  sources: string;
+  count: (n: number, areas: number) => string;
+  unexpected: string;
+  gauge: (level: number, estimate: boolean) => string;
+  /** The small word drawn after the gauge of a city rated as a whole. */
+  estimateMark: string;
+}
+
+const COPY: Bilingual<LineCopy> = {
+  fr: {
+    levels: {
+      saturday: ["Calme le soir", "Dîners et quelques bars", "On sort tard"],
+      adventure: ["Repères familiers", "Entre repères et dépaysement", "Dépaysant"],
+      together: ["Chacun sa route", "Vie résidentielle tranquille", "Vie de quartier et entraide"],
+    },
+    none: {
+      saturday: [
+        "Aucun quartier calme le soir",
+        "Aucun quartier de dîners et de quelques bars",
+        "Aucun quartier où l'on sort tard",
+      ],
+      adventure: [
+        "Aucun quartier aux repères familiers",
+        "Aucun quartier entre repères et dépaysement",
+        "Aucun quartier dépaysant",
+      ],
+      together: [
+        "Aucun quartier où chacun suit sa route",
+        "Aucun quartier résidentiel et tranquille",
+        "Aucun quartier où l'on vit en voisins",
+      ],
+    },
+    notTheCity: {
+      saturday: [
+        "Pas une ville calme le soir",
+        "Pas une ville de dîners et de quelques bars",
+        "Pas une ville où l'on sort tard",
+      ],
+      adventure: [
+        "Pas une ville aux repères familiers",
+        "Pas une ville entre repères et dépaysement",
+        "Pas une ville dépaysante",
+      ],
+      together: [
+        "Pas une ville où chacun suit sa route",
+        "Pas une ville résidentielle et tranquille",
+        "Pas une ville où l'on vit en voisins",
+      ],
+    },
+    estimate: ", selon notre estimation",
+    sources: ", selon nos sources",
+    count: (n, areas) => ` : ${n} quartier${n > 1 ? "s" : ""} sur ${areas}`,
+    unexpected: "Prévoir des imprévus",
+    gauge: (level, estimate) =>
+      `Prévoir des imprévus : ${level} sur 5${estimate ? ", estimation" : ""}`,
+    estimateMark: " estimation",
+  },
+  en: {
+    levels: {
+      saturday: ["Quiet in the evening", "Dinners and a few bars", "Out late"],
+      adventure: ["Familiar landmarks", "Between the familiar and the new", "A change of scene"],
+      together: [
+        "Everyone their own way",
+        "Quiet residential life",
+        "Neighbourhood life and mutual help",
+      ],
+    },
+    none: {
+      saturday: [
+        "No neighbourhood quiet in the evening",
+        "No neighbourhood of dinners and a few bars",
+        "No neighbourhood where people go out late",
+      ],
+      adventure: [
+        "No neighbourhood with familiar landmarks",
+        "No neighbourhood between the familiar and the new",
+        "No neighbourhood that feels like a change of scene",
+      ],
+      together: [
+        "No neighbourhood where everyone goes their own way",
+        "No quiet residential neighbourhood",
+        "No neighbourhood where people live as neighbours",
+      ],
+    },
+    notTheCity: {
+      saturday: [
+        "Not a city that is quiet in the evening",
+        "Not a city of dinners and a few bars",
+        "Not a city where people go out late",
+      ],
+      adventure: [
+        "Not a city of familiar landmarks",
+        "Not a city between the familiar and the new",
+        "Not a city that feels like a change of scene",
+      ],
+      together: [
+        "Not a city where everyone goes their own way",
+        "Not a quiet residential city",
+        "Not a city where people live as neighbours",
+      ],
+    },
+    estimate: ", by our estimate",
+    sources: ", according to our sources",
+    count: (n, areas) => `: ${n} neighbourhood${n > 1 ? "s" : ""} out of ${areas}`,
+    unexpected: "Expect the unexpected",
+    gauge: (level, estimate) =>
+      `Expect the unexpected: ${level} out of 5${estimate ? ", estimate" : ""}`,
+    estimateMark: " estimate",
+  },
 };
-const NOT_THE_CITY: Record<Told, [string, string, string]> = {
-  saturday: [
-    "Pas une ville calme le soir",
-    "Pas une ville de dîners et de quelques bars",
-    "Pas une ville où l'on sort tard",
-  ],
-  adventure: [
-    "Pas une ville aux repères familiers",
-    "Pas une ville entre repères et dépaysement",
-    "Pas une ville dépaysante",
-  ],
-  together: [
-    "Pas une ville où chacun suit sa route",
-    "Pas une ville résidentielle et tranquille",
-    "Pas une ville où l'on vit en voisins",
-  ],
-};
+
+/** The gauge's name and its « estimation » mark, for the cards that draw it. */
+export function gaugeWords(locale: Locale): { label: string; estimate: string } {
+  return { label: COPY[locale].unexpected, estimate: COPY[locale].estimateMark };
+}
 
 /**
  * Why the city fits the reader's answer on one axis: how many of its neighbourhoods sit at the
@@ -107,22 +190,21 @@ export function neighbourhoodLine(
   cityName: string,
   trait: Trait,
   reader: number,
+  locale: Locale,
 ): TemperamentLine | null {
   const profile = BY_NAME.get(cityName);
   const level = LEVELS.indexOf(reader);
   if (!profile || level < 0 || !TOLD.includes(trait)) return null;
   const told = trait as Told;
+  const copy = COPY[locale];
   const n = profile[told][level];
   if (profile.editorial)
     return n
-      ? { text: `${LEVEL_NAMES[told][level]}, selon notre estimation`, weak: false }
-      : { text: `${NOT_THE_CITY[told][level]}, selon notre estimation`, weak: true };
+      ? { text: `${copy.levels[told][level]}${copy.estimate}`, weak: false }
+      : { text: `${copy.notTheCity[told][level]}${copy.estimate}`, weak: true };
   // A line that counts nothing stays, readable and marked against the city (operator, 2026-11-16).
-  if (n === 0) return { text: `${NO_NEIGHBOURHOOD[told][level]}, selon nos sources`, weak: true };
-  return {
-    text: `${LEVEL_NAMES[told][level]} : ${n} quartier${n > 1 ? "s" : ""} sur ${profile.areas}`,
-    weak: false,
-  };
+  if (n === 0) return { text: `${copy.none[told][level]}${copy.sources}`, weak: true };
+  return { text: `${copy.levels[told][level]}${copy.count(n, profile.areas)}`, weak: false };
 }
 
 const meanLevel = (counts: [number, number, number], areas: number) =>
@@ -152,8 +234,6 @@ export interface TemperamentLine {
   gauge?: { level: number; estimate: boolean };
 }
 
-export const UNEXPECTED_LABEL = "Prévoir des imprévus";
-
 const ADVENTURE_LEVELS = { familiar: 0, open: 0.5, seeking: 1 } as const;
 
 /** The reader's temperament answers, the only ones a shared result carries. */
@@ -173,13 +253,14 @@ export type TemperamentAnswers = {
 export function temperamentLinesFor(
   cityName: string,
   answers: TemperamentAnswers,
+  locale: Locale,
 ): TemperamentLine[] {
   const lines = TRAITS.flatMap((trait) => {
     const reader =
       trait === "adventure"
         ? answers.adventure && ADVENTURE_LEVELS[answers.adventure]
         : answers[trait];
-    const line = reader === undefined ? null : neighbourhoodLine(cityName, trait, reader);
+    const line = reader === undefined ? null : neighbourhoodLine(cityName, trait, reader, locale);
     return line ? [line] : [];
   });
   const gauge =
@@ -189,7 +270,7 @@ export function temperamentLinesFor(
   const gaugeLine: TemperamentLine[] = gauge
     ? [
         {
-          text: `${UNEXPECTED_LABEL} : ${gauge.level} sur 5${gauge.estimate ? ", estimation" : ""}`,
+          text: COPY[locale].gauge(gauge.level, gauge.estimate),
           weak: false,
           gauge,
         },

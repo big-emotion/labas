@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { GOALS, finishedEvent } from "./analytics";
 import { nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS } from "./deep-questions";
-import { loadAnswers, mailtoFor, saveAnswers } from "./keep";
+import { loadAnswers, mailtoFor, saveAnswers, withoutSensitive } from "./keep";
 import { shareText } from "./shared-result";
 import { bestMatches, type Answers } from "./ranking";
 
@@ -44,12 +44,42 @@ describe("the full questionnaire picks up where the quick quiz stopped", () => {
   });
 });
 
+describe("the places the reader set aside", () => {
+  it("come back after a reload, only those the catalogue knows", () => {
+    const storage = memoryStorage();
+    storage.setItem(
+      "labas.answers",
+      JSON.stringify({
+        avoidCities: ["Oran", "Atlantis"],
+        avoidCountries: ["Algérie", "Narnia"],
+        avoidRegions: ["nord", "lune"],
+      }),
+    );
+    expect(loadAnswers(storage)).toEqual({
+      avoidCities: ["Oran"],
+      avoidCountries: ["Algérie"],
+      avoidRegions: ["nord"],
+    });
+  });
+
+  // Setting a region aside can say something about the reader: kept only with the sensitive box.
+  it("are kept in a space only with the box for sensitive answers", () => {
+    const answers: Answers = { ...QUICK, avoidCities: ["Oran"], avoidRegions: ["nord"] };
+    expect(withoutSensitive(answers)).toEqual(QUICK);
+  });
+});
+
 describe("keeping the result by mail", () => {
   it("opens the reader's own mail with the shared message, addressed to nobody", () => {
     const top = bestMatches(QUICK, 3);
-    const link = mailtoFor(shareText(QUICK, top));
+    const link = mailtoFor(shareText(QUICK, top, "fr"), "fr");
     expect(link.startsWith("mailto:?")).toBe(true);
     expect(decodeURIComponent(link)).toContain(top[0].city.name);
+  });
+
+  it("writes the subject in English for an English reader", () => {
+    const link = mailtoFor("text", "en");
+    expect(decodeURIComponent(link)).toContain("subject=My African cities on Over There");
   });
 });
 

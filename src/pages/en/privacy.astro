@@ -1,0 +1,253 @@
+---
+import { CONTACT } from "../../i18n/locale";
+import Page from "../../layouts/Page.astro";
+import { counterpart, pathFor } from "../../i18n/routes";
+
+// Mirrors /confidentialite: same build switch, same facts. The French page is the reference.
+const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+---
+
+<Page
+  title="Privacy"
+  description="Your answers stay in your browser: Over There never receives them and only counts answers anonymously, without cookies."
+>
+  <h1>Privacy</h1>
+  <p class="lead">Last updated: {newsletter ? "18" : "15"} November 2026.</p>
+
+  {newsletter ? (
+    <>
+      <h2>Without an account, your answers stay with you</h2>
+      <p>
+        The ranking of the cities is calculated in your browser. As long as you do not save your
+        journey or get your results by email, your answers are never sent to us. Your browser keeps
+        them (local storage) so that the full questionnaire picks up where you left off; the "Start
+        again" button erases them. Only an anonymous counter per answer is sent, as explained below.
+      </p>
+
+      <h2>If you save your journey or get your results by email</h2>
+      <p>
+        Two actions open a space: "Continue later" during the quiz, and "Get it by email" under your
+        results. In both cases there is no password: a link sent by email signs you in.
+      </p>
+      <p>
+        <b>What we keep:</b> your email address, your answers, your journeys and their dates. Your
+        origin, your family's country, your ties, your religion and your filters on health and on
+        laws against homosexuality, like the places you left out ("Not for me"), are kept only if
+        you tick the box that names them, separately, for each journey. Without it, those answers
+        stay on your device, even if you give them later.
+      </p>
+      <p>
+        <b>Why:</b> so that you can find your journey and your full result again, on any device.
+        Nothing else.
+      </p>
+      <p>
+        <b>On what basis:</b> for "Get it by email", your request: keeping the result is what lets
+        us show it to you in full. For "Continue later" and for the sensitive answers, your explicit
+        consent, given by ticking the box provided. You can withdraw it at any time by deleting a
+        journey or your whole space.
+      </p>
+      <p>
+        <b>Who can see it:</b> only the Over There team (Big Emotion). Your answers are never sold,
+        lent or given to a partner, nor used for advertising.
+      </p>
+      <p>
+        <b>Where:</b> on our server, hosted in Germany (European Union). Emails are sent from Big
+        Emotion's Microsoft 365 mailbox.
+      </p>
+      <p>
+        <b>For how long:</b> three years after your last visit, then everything is erased. A journey
+        saved but never confirmed through the link you received is erased after 7 days, along with
+        the address if its space was never opened. Sign-in links expire: 15 minutes from My space,
+        24 hours after "Continue later", 7 days in the results email. The session lasts 30 days.
+        Erasure is automatic, every day.
+      </p>
+      <p>
+        <b>Your rights:</b> in <a href={pathFor("space", "en")}>My space</a>, you can see, resume,
+        download or delete your journeys, or delete your whole space. For any other request:{" "}
+        <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>. You can also contact the CNIL, the French
+        data protection authority.
+      </p>
+
+      <h2>If you react to a city</h2>
+      <p>
+        <b>What is public:</b> the text of your reaction, the name you choose (otherwise "User" and
+        a number), its date and your journey: your top 3, the cities and their percentages, and your
+        temperament (a reading inspired by the Big Five; it is not a personality test). Never your
+        answers. To keep your journey to yourself, tick "Do not make my top 3 or my personality
+        profile public". Your email address is never shown.
+      </p>
+      <p>
+        <b>What we keep:</b> your address, to check once that it is yours. The link you receive
+        publishes the reaction and opens your space; after that, your reactions are published
+        straight away. A reaction never confirmed is erased after 7 days.
+      </p>
+      <p>
+        <b>Your rights:</b> "Delete" under your reaction erases it at once. Your reactions are in
+        the file you download from My space, and erased with your space. To report a reaction you
+        need to be signed in: a reaction reported by three different people is hidden until we
+        review it. We keep who reported what, to count each person only once; it is in your file and
+        erased with your space.
+      </p>
+      <p>
+        <b>Replies and hearts:</b> a reply to a review is public like a reaction, without your
+        journey. A heart or another emoji only shows as a number: nobody sees who left it. We keep
+        the link between your space and your hearts so that a second tap removes them; they are in
+        the file you download from My space and erased with your space.
+      </p>
+      <p>
+        <b>Translating a review:</b> when a reader asks for a review to be translated, only that
+        review's public text is sent to DeepL SE (Germany, European Union), which translates it. It
+        is translated once per language and the translation is kept in our database alongside the
+        review, and deleted with it. Never the author's name, journey, answers or email address.
+        Nothing is sent unless someone presses the button.
+      </p>
+
+      <h2>If you write to us with "Your feedback"</h2>
+      <p>
+        The "Your feedback" tab, at the edge of the screen, is for giving your opinion of the site
+        or writing to us. This message is private: unlike the city reviews, it is never published.
+      </p>
+      <p>
+        <b>What is sent:</b> your message, its kind (opinion of the site or message), the address of
+        the page you write it on (for example "/en/cities/") and your email only if you give it to
+        get a reply. Nothing from the quiz: not your answers, not your results, not your journey.
+      </p>
+      <p>
+        <b>Who reads it:</b> only the Over There team (Big Emotion). It is kept on our server, in
+        Germany, and sent to the team's mailbox through Big Emotion's Microsoft 365 mail. If you
+        gave your email, we can reply; otherwise nobody can know who wrote it.
+      </p>
+      <p>
+        <b>How long:</b> 1 year after it is sent, then it is erased automatically. To have it erased
+        sooner: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
+      </p>
+    </>
+  ) : (
+    <>
+      <h2>Your answers stay with you</h2>
+      <p>
+        The ranking of the cities is calculated in your browser. Your answers are never sent to us
+        and are linked to nobody. Your browser keeps them (local storage) so that the full
+        questionnaire picks up where you left off; the full questionnaire's "Start again" button
+        erases them, as does clearing the site's data in your browser. Only an anonymous counter per
+        answer is sent, as explained below.
+      </p>
+    </>
+  )}
+
+  <h2>Sharing or keeping your results</h2>
+  <p>
+    The WhatsApp, Facebook and X buttons are plain links: nothing from these networks loads on Over
+    There until you click. The click opens their sharing page with your three cities and the link to
+    your result, and that network's own rules then apply. Instagram and TikTok go through your
+    phone's share menu, with the picture of your result; on a computer, the link is copied. We only
+    count which network was chosen, never your result.
+  </p>
+  {newsletter ? (
+    <>
+      <p>
+        "Share", "Save the picture" and "Print" go through your phone or your printer: Over There
+        receives nothing. The shared link holds your temperament profile and your cities, placed
+        after the "#", a part that browsers do not send to the server.
+      </p>
+      <p>
+        "Get it by email": you give us an address, we send your three cities and their percentages
+        to it, and we keep your result in your space, as explained above. The email's button opens
+        it, with the full ranking. The email itself only holds your temperament profile and your
+        cities, never your answers: it goes through Big Emotion's Microsoft 365 mailbox, which sends
+        it without keeping a copy in its sent items.
+      </p>
+      <p>
+        The news box is separate: without it, you receive nothing but your results. If you tick it,
+        the email's button also confirms your sign-up, which follows the rules in the "News by
+        email" section. To prevent abuse, the server counts the emails sent per address over one
+        day, without writing them down anywhere.
+      </p>
+    </>
+  ) : (
+    <p>
+      "Share", "Save the picture", "Print" and "Get it by email" go through your phone, your printer
+      or your own email: Over There receives nothing. The picture is drawn in your browser. The
+      shared message and link hold your temperament profile (your five answers about Saturday night,
+      discovery, planning, helping out and the unexpected) and your cities with their percentages,
+      never your other answers: not your origin, nor your family's country, nor your religion, nor
+      your filters. This information is placed after the "#" in the link, a part that browsers do
+      not send to the server.
+    </p>
+  )}
+
+  {newsletter && (
+    <>
+      <h2>News by email</h2>
+      <p>
+        If you sign up for news, we keep your email address and nothing else. It is used for one
+        thing only: telling you what changes on Over There (new cities, a better questionnaire), one
+        email a month at most.
+      </p>
+      <p>
+        The news list is separate from your answers: it only holds addresses. We do not sell it, we
+        do not lend it, and we give it to no partner.
+      </p>
+      <p>
+        Your address is kept in a separate list, on our server hosted in Germany (European Union),
+        and the emails are sent from Big Emotion's Microsoft 365 mailbox. You confirm your sign-up
+        through a link sent by email, valid for 7 days: without that confirmation, your address does
+        not join the list and you receive nothing.
+      </p>
+      <p>
+        Every email, starting with the confirmation, holds a link to unsubscribe. It opens a page on
+        the site where a button erases your address from the list at once; if you have a space, news
+        is switched off there too. Unless you confirm again, your address is erased automatically
+        three years after your last confirmation. You can also write to us to see it or have it
+        erased: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>.
+      </p>
+      <p>Legal basis: your consent, which you can withdraw at any time.</p>
+    </>
+  )}
+
+  <h2>No trackers, audience measurement without cookies</h2>
+  <p>
+    {newsletter
+      ? 'Over There sets only one cookie, and only if you sign in to My space: it keeps your session for 30 days on this device and does nothing else. "Sign out" erases it. No advertising or social network tools. '
+      : "Over There sets no cookies and uses no advertising or social network tools. "}
+    The fonts and photos are hosted on the site itself.
+  </p>
+  <p>
+    To find out which questions matter to our readers and where the quiz loses them, we count
+    visits, quiz answers and two steps (quiz finished, full questionnaire finished) with Plausible,
+    an open-source tool hosted on our own server. Each answer sends an anonymous counter ("this
+    question, this answer"), with your project (holidays, settling, investing…) and the question's
+    place in your journey, to see where each journey loses its readers. No cookie and no identifier:
+    we cannot know who answered what. Your answers about your origin, your family's country, your
+    ties, your religion, health and laws against homosexuality are never sent. When you leave a
+    place out ("Not for me"), we count only the place on the page and whether it was a city, a
+    country or a region; never which one. For reactions, we count in the same way who opens the
+    form, who sends it and who goes to read them, with the city and the place on the page; never the
+    text, the name or the address.
+  </p>
+
+  <h2>What the host can see</h2>
+  <p>
+    As for any website, the server that sends the pages may keep a technical log (IP address, page
+    requested, date) for its security and to keep it running. This log never holds your answers.
+  </p>
+
+  <h2>Links to our sources</h2>
+  <p>
+    The scores link to their sources. When you follow a link, you leave Over There: the site you
+    visit then applies its own rules.
+  </p>
+
+  <h2>Contact us</h2>
+  <p>
+    For any question: <a href={`mailto:${CONTACT.en}`}>{CONTACT.en}</a>. You can also contact the
+    CNIL, the French data protection authority (<a href="https://www.cnil.fr">cnil.fr</a>).
+  </p>
+  <p>
+    The French version of this page is the reference:{" "}
+    <a href={counterpart(Astro.url.pathname)} hreflang="fr" lang="fr">
+      Confidentialité
+    </a>
+    .
+  </p>
+</Page>

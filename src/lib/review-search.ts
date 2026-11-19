@@ -1,3 +1,4 @@
+import type { Bilingual } from "../i18n/locale";
 import type { Zone } from "./cities";
 import type { Reaction } from "./reactions";
 import { TEMPERAMENTS } from "./temperament";
@@ -31,12 +32,12 @@ export interface ReviewFilters {
 
 /** The sorts of /avis, in the order the reader sees them; the first is the default. */
 export const SORTS = [
-  { key: "recents", label: "Plus récents" },
-  { key: "anciens", label: "Plus anciens" },
-  { key: "aimes", label: "Plus aimés" },
-  { key: "moins-aimes", label: "Moins aimés" },
-  { key: "reponses", label: "Plus de réponses" },
-] as const;
+  { key: "recents", label: { fr: "Plus récents", en: "Newest" } },
+  { key: "anciens", label: { fr: "Plus anciens", en: "Oldest" } },
+  { key: "aimes", label: { fr: "Plus aimés", en: "Most liked" } },
+  { key: "moins-aimes", label: { fr: "Moins aimés", en: "Least liked" } },
+  { key: "reponses", label: { fr: "Plus de réponses", en: "Most replies" } },
+] as const satisfies readonly { key: string; label: Bilingual<string> }[];
 export type ReviewSort = (typeof SORTS)[number]["key"];
 
 /** Every friendly mark counts the same: there is no thumbs down to subtract. */

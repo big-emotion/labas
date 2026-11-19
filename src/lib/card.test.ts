@@ -7,7 +7,7 @@ const city = (name: string) => CITIES.find((c) => c.name === name)!;
 
 describe("what a city card says about living there", () => {
   it("rates cost, trips home and comfort from the sourced scores", () => {
-    const lines = livingLines(city("Dakar"));
+    const lines = livingLines(city("Dakar"), "fr");
     expect(lines.map((l) => l.label)).toEqual([
       "Vivre avec un revenu européen",
       "Allers-retours vers l'Europe",
@@ -19,7 +19,9 @@ describe("what a city card says about living there", () => {
 
   it("leaves out a line no source rates", () => {
     const unrated = CITIES.find((c) => c.scores.cost.level === null)!;
-    expect(livingLines(unrated).map((l) => l.label)).not.toContain("Vivre avec un revenu européen");
+    expect(livingLines(unrated, "fr").map((l) => l.label)).not.toContain(
+      "Vivre avec un revenu européen",
+    );
   });
 
   it("names the other cities of the same country, with their score, best first", () => {
@@ -32,8 +34,18 @@ describe("what a city card says about living there", () => {
 
 describe("the short facts on a city card", () => {
   it("names the region and says the cost of living in words", () => {
-    expect(regionName("ouest")).toBe("Afrique de l'Ouest");
+    expect(regionName("ouest", "fr")).toBe("Afrique de l'Ouest");
     expect(costLabel(5)).toBe("Coût de vie très abordable");
     expect(costLabel(null)).toBeUndefined();
+  });
+
+  it("says them in English for an English reader", () => {
+    expect(regionName("ouest", "en")).toBe("West Africa");
+    expect(costLabel(5, "en")).toBe("Very affordable cost of living");
+    expect(livingLines(city("Dakar"), "en").map((l) => l.label)).toEqual([
+      "Living on a European income",
+      "Return trips to Europe",
+      "Comfort: safety, healthcare, internet",
+    ]);
   });
 });

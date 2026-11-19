@@ -4,12 +4,63 @@
  * once per visit, and always on the result. Built only when PUBLIC_NEWSLETTER is set, that is
  * once the subscribe service has its mail settings (docs/deploy.md).
  */
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
 interface Props {
   place: "quiz" | "results";
 }
 const { place } = Astro.props;
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const id = `news-${place}`;
+const locale = localeOfPath(Astro.url.pathname);
+const COPY = {
+  fr: {
+    quizTitle: "Recevoir les nouveautés ?",
+    resultsTitle: `Suivre ${BRAND.fr}`,
+    quizLead:
+      "Nouvelles villes, questionnaire amélioré : un e-mail par mois au plus. Vous pouvez aussi finir le quiz d'abord.",
+    resultsLead:
+      "Nouvelles villes, nouvelles questions, classement affiné : un e-mail par mois au plus pour vous dire ce qui change.",
+    email: "Votre e-mail",
+    emailPlaceholder: "vous@exemple.fr",
+    website: "Site web",
+    consent: `Je veux recevoir les nouveautés de ${BRAND.fr} par e-mail.`,
+    signUp: "M'inscrire",
+    later: "Plus tard",
+    small:
+      "Vous confirmerez par un lien reçu par e-mail. Désinscription en un clic. Nous gardons votre adresse, rien d'autre : vos réponses au quiz ne sont jamais envoyées.",
+    privacy: "Confidentialité",
+    checkInbox: "Regardez votre boîte e-mail",
+    wroteTo: "Nous venons d'écrire à",
+    clickLink: ". Cliquez sur le lien de ce message pour confirmer votre inscription.",
+    noConfirm:
+      "Sans confirmation, vous ne recevrez rien. Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.",
+  },
+  en: {
+    quizTitle: "Get the news?",
+    resultsTitle: `Follow ${BRAND.en}`,
+    quizLead:
+      "New cities, a better questionnaire: one email a month at most. You can also finish the quiz first.",
+    resultsLead:
+      "New cities, new questions, a finer ranking: one email a month at most to tell you what changes.",
+    email: "Your email",
+    emailPlaceholder: "you@example.com",
+    website: "Website",
+    consent: `I want to receive ${BRAND.en} news by email.`,
+    signUp: "Sign me up",
+    later: "Later",
+    small:
+      "You'll confirm with a link sent by email. Unsubscribe in one click. We keep your address, nothing else: your quiz answers are never sent.",
+    privacy: "Privacy",
+    checkInbox: "Check your inbox",
+    wroteTo: "We have just written to",
+    clickLink: ". Click the link in that message to confirm your sign-up.",
+    noConfirm:
+      "Without confirming, you won't receive anything. Nothing within a few minutes? Look in your spam folder.",
+  },
+} satisfies Bilingual<Record<string, string>>;
+const copy = COPY[locale];
 ---
 
 {enabled && (
@@ -20,65 +71,59 @@ const id = `news-${place}`;
     hidden={place === "quiz"}
   >
     <div data-news-form>
-      <h2 id={`${id}-title`}>{place === "quiz" ? "Recevoir les nouveautés ?" : "Suivre Là-bas"}</h2>
-      <p class="lead">
-        {place === "quiz"
-          ? "Nouvelles villes, questionnaire amélioré : un e-mail par mois au plus. Vous pouvez aussi finir le quiz d'abord."
-          : "Nouvelles villes, nouvelles questions, classement affiné : un e-mail par mois au plus pour vous dire ce qui change."}
-      </p>
+      <h2 id={`${id}-title`}>{place === "quiz" ? copy.quizTitle : copy.resultsTitle}</h2>
+      <p class="lead">{place === "quiz" ? copy.quizLead : copy.resultsLead}</p>
       <form novalidate>
         <label class="field">
-          Votre e-mail
+          {copy.email}
           <input
             type="email"
             name="email"
-            placeholder="vous@exemple.fr"
+            placeholder={copy.emailPlaceholder}
             autocomplete="email"
             required
           />
         </label>
         <label class="trap" aria-hidden="true">
-          Site web
+          {copy.website}
           <input type="text" name="website" tabindex="-1" autocomplete="off" />
         </label>
         <label class="consent">
           <input type="checkbox" name="consent" />
-          <span>Je veux recevoir les nouveautés de Là-bas par e-mail.</span>
+          <span>{copy.consent}</span>
         </label>
         <p class="error" data-news-error role="alert" hidden></p>
         <div class="actions">
           <button type="submit" class="primary">
-            M'inscrire
+            {copy.signUp}
           </button>
           {place === "quiz" && (
             <button type="button" class="later" data-news-later>
-              Plus tard
+              {copy.later}
             </button>
           )}
         </div>
       </form>
       <p class="small">
-        Vous confirmerez par un lien reçu par e-mail. Désinscription en un clic. Nous gardons votre
-        adresse, rien d'autre : vos réponses au quiz ne sont jamais envoyées.{" "}
-        <a href="/confidentialite">Confidentialité</a>
+        {copy.small} <a href={pathFor("privacy", locale)}>{copy.privacy}</a>
       </p>
     </div>
     <div class="sent" data-news-sent role="status" hidden>
-      <h2>Regardez votre boîte e-mail</h2>
+      <h2>{copy.checkInbox}</h2>
       <p>
-        Nous venons d'écrire à <b data-news-address />. Cliquez sur le lien de ce message pour
-        confirmer votre inscription.
+        {copy.wroteTo} <b data-news-address />
+        {copy.clickLink}
       </p>
-      <p class="small">
-        Sans confirmation, vous ne recevrez rien. Rien reçu d'ici quelques minutes ? Regardez dans
-        les indésirables.
-      </p>
+      <p class="small">{copy.noConfirm}</p>
     </div>
   </section>
 )}
 
 <script>
+  import { pageLocale } from "../i18n/locale";
   import { outcomeOf, shouldOfferNews, signUpBody } from "../lib/newsletter";
+
+  const locale = pageLocale();
 
   const DISMISSED = "labas.news.later";
   const dismissed = () => {
@@ -114,17 +159,20 @@ const id = `news-${place}`;
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
-      const body = signUpBody({
-        email: String(data.get("email") ?? ""),
-        consent: data.get("consent") === "on",
-        website: String(data.get("website") ?? ""),
-      });
+      const body = signUpBody(
+        {
+          email: String(data.get("email") ?? ""),
+          consent: data.get("consent") === "on",
+          website: String(data.get("website") ?? ""),
+        },
+        locale,
+      );
       const show = (message: string) => {
         error.textContent = message;
         error.hidden = false;
       };
       if (!body) {
-        const outcome = outcomeOf(400);
+        const outcome = outcomeOf(400, "news", locale);
         if (!outcome.sent) show(outcome.message);
         return;
       }
@@ -141,7 +189,7 @@ const id = `news-${place}`;
         status = 0;
       }
       submit.disabled = false;
-      const outcome = outcomeOf(status);
+      const outcome = outcomeOf(status, "news", locale);
       if (!outcome.sent) return show(outcome.message);
       block.querySelector<HTMLElement>("[data-news-address]")!.textContent = body.email;
       block.querySelector<HTMLElement>("[data-news-form]")!.hidden = true;

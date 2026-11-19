@@ -1,0 +1,158 @@
+---
+import Page from "../layouts/Page.astro";
+import { CITIES, ZONES, type Zone } from "../lib/cities";
+import { cityCopy } from "../i18n/city-copy";
+import { BRAND, INTL_LOCALE, type Bilingual } from "../i18n/locale";
+import { zoneName } from "../i18n/places";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
+const locale = localeOfPath(Astro.url.pathname);
+/** Every city straight away, without the quiz (operator, 2026-11-18), by region then name. */
+const byZone = (Object.keys(ZONES) as Zone[]).map((zone) => ({
+  zone,
+  label: zoneName(zone, locale),
+  cities: CITIES.filter((c) => c.zone === zone)
+    .map((city) => ({ slug: city.slug, ...cityCopy(city, locale) }))
+    .sort((a, b) => a.name.localeCompare(b.name, INTL_LOCALE[locale])),
+}));
+const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const count = CITIES.length;
+const COPY: Bilingual<{
+  title: string;
+  description: string;
+  lead: string;
+  readers: string;
+  sortPrefix: string;
+  quiz: string;
+  or: string;
+  reviews: string;
+  regions: string;
+}> = {
+  fr: {
+    title: "Les villes",
+    description: `Les ${count} villes d'Afrique comparées par ${BRAND.fr}, région par région, avec leur fiche.`,
+    lead: `Les ${count} villes que ${BRAND.fr} compare, région par région. Chaque fiche donne les notes, leurs sources`,
+    readers: ", et ce qu'en disent les lecteurs",
+    sortPrefix: "Pour les classer selon vos envies,",
+    quiz: "faites le quiz",
+    or: "ou parcourez",
+    reviews: "les avis",
+    regions: "Régions",
+  },
+  en: {
+    title: "The cities",
+    description: `The ${count} African cities ${BRAND.en} compares, region by region, each with its own page.`,
+    lead: `The ${count} cities ${BRAND.en} compares, region by region. Each page gives the scores with their sources`,
+    readers: ", and what readers say about the city",
+    sortPrefix: "To rank them by what you want,",
+    quiz: "take the quiz",
+    or: "or browse",
+    reviews: "the reviews",
+    regions: "Regions",
+  },
+};
+const copy = COPY[locale];
+---
+
+<Page title={copy.title} description={copy.description}>
+  <h1>{copy.title}</h1>
+  <p class="lead">
+    {copy.lead}
+    {enabled && copy.readers}.
+  </p>
+  {enabled ? (
+    <p>
+      {copy.sortPrefix} <a href={pathFor("home", locale)}>{copy.quiz}</a> {copy.or}{" "}
+      <a href={pathFor("reviews", locale)}>{copy.reviews}</a>.
+    </p>
+  ) : (
+    <p>
+      {copy.sortPrefix} <a href={pathFor("home", locale)}>{copy.quiz}</a>.
+    </p>
+  )}
+
+  <nav class="jump" aria-label={copy.regions}>
+    {byZone.map(({ zone, label }) => (
+      <a href={`#${zone}`}>{label}</a>
+    ))}
+  </nav>
+
+  {byZone.map(({ zone, label, cities }) => (
+    <section id={zone} aria-labelledby={`${zone}-title`}>
+      <h2 id={`${zone}-title`}>{label}</h2>
+      <ul class="cities">
+        {cities.map((city) => (
+          <li>
+            <a href={pathFor("city", locale, city.slug)}>
+              <b>{city.name}</b>
+              <span class="country">{city.country}</span>
+              <span class="tagline">{city.tagline}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Page>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid var(--thread-faint);
+    color: var(--thread);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  section {
+    scroll-margin-top: 16px;
+  }
+  .cities {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .cities li {
+    max-width: none;
+  }
+  .cities a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--night-lift);
+    color: var(--thread);
+    text-decoration: none;
+  }
+  .cities a:hover,
+  .cities a:focus-visible {
+    background: var(--night-pressed);
+  }
+  .country {
+    color: var(--thread-dim);
+    font-size: 0.85rem;
+    text-align: right;
+  }
+  .tagline {
+    grid-column: 1 / -1;
+    color: var(--thread-dim);
+    font-size: 0.9rem;
+  }
+  @media (min-width: 768px) {
+    .cities {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

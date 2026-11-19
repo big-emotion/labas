@@ -4,11 +4,56 @@
  * Signed in, the journey goes straight to Mon espace; otherwise an e-mail, the explicit consent
  * box naming the sensitive answers, and a link by e-mail. Shown only with the mail service on.
  */
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
 interface Props {
   kind: "quick" | "deep";
 }
 const { kind } = Astro.props;
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
+const locale = localeOfPath(Astro.url.pathname);
+const COPY = {
+  fr: {
+    toggle: "Reprendre plus tard",
+    lead: "Recevez un lien pour retrouver votre parcours là où vous en êtes, sur ce téléphone ou un autre. Pas de mot de passe.",
+    email: "Votre e-mail",
+    emailPlaceholder: "vous@exemple.fr",
+    website: "Site web",
+    consent: `J'accepte que ${BRAND.fr} garde mes réponses pour retrouver mon parcours.`,
+    required: "Obligatoire pour enregistrer.",
+    keepAlso: "Garder aussi",
+    sensitive: "mon origine, ma religion, ma santé et les lieux écartés",
+    ifGiven: "si je les ai données.",
+    staysHere: "Sans cette case, elles restent dans ce navigateur.",
+    news: `Je veux aussi recevoir les nouveautés de ${BRAND.fr} (un e-mail par mois au plus).`,
+    send: "M'envoyer le lien",
+    kept: "Vos réponses sont effacées 3 ans après votre dernière visite, ou dès que vous le demandez dans Mon espace. Elles ne sont jamais données à un partenaire.",
+    privacy: "Confidentialité",
+    memberFailed: "L'enregistrement n'a pas marché. Réessayez dans un instant.",
+    memberSave: "Enregistrer dans Mon espace",
+  },
+  en: {
+    toggle: "Continue later",
+    lead: "Get a link to find your journey where you left it, on this phone or another. No password.",
+    email: "Your email",
+    emailPlaceholder: "you@example.com",
+    website: "Website",
+    consent: `I agree that ${BRAND.en} keeps my answers so I can find my journey again.`,
+    required: "Required to save.",
+    keepAlso: "Also keep",
+    sensitive: "my origin, my faith, my health and the places I left out",
+    ifGiven: "if I gave them.",
+    staysHere: "Without this box, they stay in this browser.",
+    news: `I also want to receive ${BRAND.en} news (one email a month at most).`,
+    send: "Send me the link",
+    kept: "Your answers are erased 3 years after your last visit, or as soon as you ask in My space. They are never given to a partner.",
+    privacy: "Privacy",
+    memberFailed: "Saving didn't work. Try again in a moment.",
+    memberSave: "Save in My space",
+  },
+} satisfies Bilingual<Record<string, string>>;
+const copy = COPY[locale];
 ---
 
 {enabled && (
@@ -20,78 +65,66 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       aria-expanded="false"
       aria-controls={`save-${kind}`}
     >
-      Reprendre plus tard
+      {copy.toggle}
     </button>
-    <section
-      id={`save-${kind}`}
-      class="panel"
-      data-save-panel
-      aria-label="Reprendre plus tard"
-      hidden
-    >
+    <section id={`save-${kind}`} class="panel" data-save-panel aria-label={copy.toggle} hidden>
       <div data-save-intro>
-        <h2>Reprendre plus tard</h2>
-        <p class="lead">
-          Recevez un lien pour retrouver votre parcours là où vous en êtes, sur ce téléphone ou un
-          autre. Pas de mot de passe.
-        </p>
+        <h2>{copy.toggle}</h2>
+        <p class="lead">{copy.lead}</p>
       </div>
       <form novalidate>
         <label class="field">
-          Votre e-mail
+          {copy.email}
           <input
             type="email"
             name="email"
-            placeholder="vous@exemple.fr"
+            placeholder={copy.emailPlaceholder}
             autocomplete="email"
             required
           />
         </label>
         <label class="trap" aria-hidden="true">
-          Site web
+          {copy.website}
           <input type="text" name="website" tabindex="-1" autocomplete="off" />
         </label>
         <label class="consent">
           <input type="checkbox" name="consent" />
           <span>
-            J'accepte que Là-bas garde mes réponses pour retrouver mon parcours.{" "}
-            <span class="dim">Obligatoire pour enregistrer.</span>
+            {copy.consent} <span class="dim">{copy.required}</span>
           </span>
         </label>
         <label class="consent">
           <input type="checkbox" name="sensitive" />
           <span>
-            Garder aussi <b>mon origine, ma religion et ma santé</b> si je les ai données.{" "}
-            <span class="dim">Sans cette case, elles restent dans ce navigateur.</span>
+            {copy.keepAlso} <b>{copy.sensitive}</b> {copy.ifGiven}{" "}
+            <span class="dim">{copy.staysHere}</span>
           </span>
         </label>
         <label class="consent">
           <input type="checkbox" name="news" />
-          <span>Je veux aussi recevoir les nouveautés de Là-bas (un e-mail par mois au plus).</span>
+          <span>{copy.news}</span>
         </label>
         <p class="error" data-save-error role="alert" hidden />
         <button type="submit" class="send">
-          M'envoyer le lien
+          {copy.send}
         </button>
         <p class="small">
-          Vos réponses sont effacées 3 ans après votre dernière visite, ou dès que vous le demandez
-          dans Mon espace. Elles ne sont jamais données à un partenaire.{" "}
-          <a href="/confidentialite">Confidentialité</a>
+          {copy.kept} <a href={pathFor("privacy", locale)}>{copy.privacy}</a>
         </p>
       </form>
       <form data-save-member novalidate hidden>
         <label class="consent">
           <input type="checkbox" name="sensitive" />
           <span>
-            Garder aussi <b>mon origine, ma religion et ma santé</b> si je les ai données.{" "}
-            <span class="dim">Sans cette case, elles restent dans ce navigateur.</span>
+            {copy.keepAlso} <b>{copy.sensitive}</b> {copy.ifGiven}{" "}
+            <span class="dim">{copy.staysHere}</span>
           </span>
         </label>
         <p class="error" data-save-member-error role="alert" hidden>
-          L'enregistrement n'a pas marché. Réessayez dans un instant.
+          {copy.memberFailed}
         </p>
         <button type="submit" class="send">
-          Enregistrer dans Mon espace
+          {copy.memberSave}
         </button>
       </form>
       <p class="done-text" data-save-done role="status" hidden>

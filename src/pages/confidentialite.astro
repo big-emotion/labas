@@ -1,5 +1,6 @@
 ---
 import Page from "../layouts/Page.astro";
+import { pathFor } from "../i18n/routes";
 
 // The news section shows with the sign-up blocks (components/Newsletter.astro).
 const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
@@ -32,9 +33,10 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       <p>
         <b>Ce que nous gardons :</b> votre adresse e-mail, vos réponses, vos parcours et leurs
         dates. Votre origine, le pays de votre famille, vos attaches, votre religion et vos filtres
-        sur la santé et les lois contre l'homosexualité ne sont gardés que si vous cochez la case
-        qui les nomme, à part, pour chaque parcours. Sans elle, ces réponses restent sur votre
-        appareil, même si vous les donnez plus tard.
+        sur la santé et les lois contre l'homosexualité, comme les lieux que vous avez écartés («
+        Pas pour moi »), ne sont gardés que si vous cochez la case qui les nomme, à part, pour
+        chaque parcours. Sans elle, ces réponses restent sur votre appareil, même si vous les donnez
+        plus tard.
       </p>
       <p>
         <b>Pourquoi :</b> pour que vous retrouviez votre parcours et votre résultat complet, sur
@@ -62,10 +64,10 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         résultats. La session dure 30 jours. L'effacement est automatique, chaque jour.
       </p>
       <p>
-        <b>Vos droits :</b> dans <a href="/espace/">Mon espace</a>, vous pouvez voir, reprendre,
-        télécharger ou supprimer vos parcours, ou supprimer tout votre espace. Pour toute autre
-        demande : <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>. Vous pouvez
-        aussi saisir la CNIL.
+        <b>Vos droits :</b> dans <a href={pathFor("space", "fr")}>Mon espace</a>, vous pouvez voir,
+        reprendre, télécharger ou supprimer vos parcours, ou supprimer tout votre espace. Pour toute
+        autre demande : <a href="mailto:hello@big-emotion.com">hello@big-emotion.com</a>. Vous
+        pouvez aussi saisir la CNIL.
       </p>
 
       <h2>Si vous réagissez sur une ville</h2>
@@ -95,6 +97,13 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         ne voit qui l'a mis. Nous gardons le lien entre votre espace et vos cœurs pour qu'un
         deuxième appui les retire ; ils sont dans le fichier téléchargé depuis Mon espace et effacés
         avec votre espace.
+      </p>
+      <p>
+        <b>La traduction des avis :</b> quand un lecteur demande la traduction d'un avis, seul le
+        texte public de cet avis est envoyé à DeepL SE (Allemagne, Union européenne), qui le
+        traduit. Il est traduit une fois par langue, et la traduction est gardée dans notre base
+        avec l'avis, puis effacée avec lui. Jamais le nom de l'auteur, son parcours, ses réponses ni
+        son adresse e-mail. Rien n'est envoyé tant que personne n'appuie sur le bouton.
       </p>
 
       <h2>Si vous nous écrivez avec « Votre avis »</h2>
@@ -223,9 +232,11 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     investissement…) et le rang de la question dans votre parcours, pour savoir où chaque parcours
     perd ses lecteurs. Sans cookie et sans identifiant : nous ne pouvons pas savoir qui a répondu
     quoi. Vos réponses sur votre origine, le pays de votre famille, vos attaches, votre religion, la
-    santé et les lois contre l'homosexualité ne sont jamais envoyées. Pour les réactions, nous
-    comptons de la même façon qui ouvre le formulaire, qui envoie et qui va les lire, avec la ville
-    et l'endroit de la page ; jamais le texte, le nom ni l'adresse.
+    santé et les lois contre l'homosexualité ne sont jamais envoyées. Quand vous écartez un lieu («
+    Pas pour moi »), nous comptons seulement l'endroit de la page et s'il s'agit d'une ville, d'un
+    pays ou d'une région ; jamais lequel. Pour les réactions, nous comptons de la même façon qui
+    ouvre le formulaire, qui envoie et qui va les lire, avec la ville et l'endroit de la page ;
+    jamais le texte, le nom ni l'adresse.
     {newsletter &&
       " Pour « Votre avis », nous comptons seulement qu'un message est parti, avis sur le site ou message ; jamais son texte, sa page ni votre adresse."}
   </p>

@@ -1,0 +1,194 @@
+---
+import Page from "../layouts/Page.astro";
+import SourcesNote from "../components/SourcesNote.astro";
+import TemperamentProfile from "../components/TemperamentProfile.astro";
+import Reactions from "../components/Reactions.astro";
+import { BRAND, type Bilingual } from "../i18n/locale";
+import { localeOfPath, pathFor } from "../i18n/routes";
+
+// A shared result, built once per language: src/pages/resultat.astro and src/pages/en/result.astro.
+const locale = localeOfPath(Astro.url.pathname);
+const COPY: Bilingual<Record<string, string>> = {
+  fr: {
+    title: "Un résultat partagé",
+    description: `Le profil et les villes d'Afrique d'une personne qui a fait le quiz ${BRAND.fr}. Et vous, quelle ville vous ressemble ?`,
+    heading: "Ses villes d'Afrique",
+    lead: `Quelqu'un vous a partagé son résultat sur ${BRAND.fr}. Le lien ne contient que son tempérament et ses villes, aucune autre réponse.`,
+    broken:
+      "Ce lien de résultat ne s'ouvre pas : il a peut-être été coupé en route. Demandez-le à nouveau, ou faites le quiz vous-même.",
+    quiz: "Et vous, quelle ville vous ressemble ? Faire le quiz",
+  },
+  en: {
+    title: "A shared result",
+    description: `The profile and African cities of someone who took the ${BRAND.en} quiz. And you, which city is most like you?`,
+    heading: "Their cities in Africa",
+    lead: `Someone shared their result on ${BRAND.en} with you. The link holds only their temperament and their cities, no other answer.`,
+    broken:
+      "This result link does not open: it may have been cut off on the way. Ask for it again, or take the quiz yourself.",
+    quiz: "And you, which city is most like you? Take the quiz",
+  },
+};
+const copy = COPY[locale];
+---
+
+<Page title={copy.title} description={copy.description}>
+  <h1>{copy.heading}</h1>
+  <p class="lead">{copy.lead}</p>
+
+  <div id="shared" hidden>
+    <TemperamentProfile />
+    <ol id="shared-cities" class="shared-cities"></ol>
+    <Reactions preview />
+    <SourcesNote />
+  </div>
+
+  <p id="broken" class="broken" hidden>
+    {copy.broken}
+  </p>
+
+  <a class="primary" href={pathFor("home", locale)}>
+    {copy.quiz}
+  </a>
+
+  <template id="shared-city">
+    <li class="shared-city">
+      <div class="head">
+        <span class="rank"></span>
+        <div>
+          <a class="name"></a>
+          <p class="country"></p>
+        </div>
+        <span class="fit"></span>
+      </div>
+      <p class="tagline"></p>
+      <ul class="why"></ul>
+    </li>
+  </template>
+
+  <script>
+    import { showProfile } from "../lib/profile-dom";
+    import type { Answers } from "../lib/ranking";
+    import { readShared, sharedResult } from "../lib/shared-result";
+    import { fillLines } from "../lib/cards-dom";
+    import { showPreview } from "../lib/reactions-dom";
+    import { pageLocale } from "../i18n/locale";
+    import { pathFor } from "../i18n/routes";
+    import { cityCopy } from "../i18n/city-copy";
+
+    const locale = pageLocale();
+
+    // A link that only changes after « # » does not reload the page: read it again.
+    addEventListener("hashchange", () => location.reload());
+    const payload = readShared(location.hash);
+    const shared = payload && sharedResult(payload, locale);
+    (document.getElementById("broken") as HTMLElement).hidden = Boolean(shared);
+    if (payload && shared) {
+      (document.getElementById("shared") as HTMLElement).hidden = false;
+      showProfile(payload.temperament as Answers, locale);
+      const template = document.getElementById("shared-city") as HTMLTemplateElement;
+      (document.getElementById("shared-cities") as HTMLElement).replaceChildren(
+        ...shared.cities.map((entry, i) => {
+          const item = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+          if (i === 0) item.classList.add("first");
+          item.querySelector(".rank")!.textContent = String(i + 1);
+          const name = item.querySelector(".name") as HTMLAnchorElement;
+          const city = cityCopy(entry.city, locale);
+          name.href = pathFor("city", locale, entry.city.slug);
+          name.textContent = city.name;
+          item.querySelector(".country")!.textContent = city.country;
+          item.querySelector(".fit")!.textContent =
+            locale === "fr" ? `${entry.percent}\u202f%` : `${entry.percent}%`;
+          item.querySelector(".tagline")!.textContent = city.pitch;
+          fillLines(item.querySelector(".why") as HTMLElement, entry.lines, locale);
+          return item;
+        }),
+      );
+      // What others say of the first city, inside its card (operator, 2026-11-18). No top 3 to
+      // join: this result is someone else's.
+      const first = document.querySelector("#shared-cities .shared-city");
+      void showPreview(shared.cities[0].city, null, (root) => first?.append(root));
+    }
+  </script>
+</Page>
+
+<style>
+  #shared:not([hidden]) {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .shared-cities {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .shared-cities :global(.shared-city) {
+    background: var(--night-deep);
+    border: 1px solid var(--night-lift);
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    gap: 10px;
+  }
+  .shared-cities :global(.shared-city.first) {
+    border: 2px solid var(--saffron);
+  }
+  .shared-cities :global(.head) {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .shared-cities :global(.rank) {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--saffron);
+  }
+  .shared-cities :global(.head > div) {
+    flex-grow: 1;
+  }
+  .shared-cities :global(.name) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.45rem;
+    color: var(--thread);
+  }
+  .shared-cities :global(.country),
+  .shared-cities :global(.tagline) {
+    margin: 0;
+    color: var(--thread-dim);
+    font-size: 0.92rem;
+  }
+  .shared-cities :global(.fit) {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--saffron);
+  }
+  .shared-cities :global(.why) {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.9rem;
+  }
+  .shared-cities :global(.why .weak) {
+    color: var(--coral);
+  }
+  .broken {
+    margin: 18px 0;
+  }
+  .primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    margin-top: 24px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+  }
+</style>

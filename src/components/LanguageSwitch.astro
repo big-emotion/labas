@@ -1,0 +1,40 @@
+---
+// A plain link to the same page in the other language: no stored preference, no redirect on
+// the browser's language, so a shared link always opens in the language it was shared in.
+import { counterpart, localeOfPath } from "../i18n/routes";
+
+const locale = localeOfPath(Astro.url.pathname);
+const COPY = {
+  fr: { label: "English", hreflang: "en", title: "Read this page in English" },
+  en: { label: "Français", hreflang: "fr", title: "Lire cette page en français" },
+} as const;
+const copy = COPY[locale];
+---
+
+<a
+  class="language-switch"
+  href={counterpart(Astro.url.pathname)}
+  hreflang={copy.hreflang}
+  lang={copy.hreflang}
+  title={copy.title}
+  data-language-switch
+>
+  {copy.label}
+</a>
+
+<style>
+  .language-switch {
+    color: var(--saffron);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+</style>
+
+<script>
+  // The shared result lives in the address's #fragment: carry it over, or the other language
+  // would open an empty result.
+  for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-language-switch]"))
+    link.addEventListener("click", () => {
+      if (location.hash) link.hash = location.hash;
+    });
+</script>
