@@ -63,6 +63,8 @@ export type FactPull = { from?: string } & (
   | { kind: "activities"; tags: ActivityTag[]; weight: number }
   /** The reader's faith: the share of the country that shares it. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
+  /** North Africa seen from the rest of the continent, and the reverse (DIVIDE below). */
+  | { kind: "divide"; origins: string[]; weight: number }
   /** The reverse, for readers after the unknown. */
   | { kind: "elsewhere"; origins: string[]; weight: number }
   /** A temperament answer, 0 to 1: the share of the city's neighbourhoods that suits it. */
@@ -300,6 +302,17 @@ const AFFINITY: Record<string, Record<string, number>> = {
 };
 
 /**
+ * At or under this affinity the two regions stand on either side of the Sahara. Readers on both
+ * sides say it is where they would feel least at home (beta feedback, 2026-11-19), so a reader
+ * who asks to stay near their own gets it weighed apart from the gradual `kin` closeness.
+ */
+const DIVIDE = 0.1;
+
+const affinityOf = (origins: string[], city: City) =>
+  // A mixed family is at home wherever one of its sides is.
+  Math.max(...origins.map((origin) => AFFINITY[origin]?.[city.zone] ?? NEUTRAL));
+
+/**
  * The documented tension between a host country and the reader's family countries, if any. A
  * family that also comes from the host country is at home there, whatever the two states do.
  */
@@ -380,10 +393,7 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
       });
       continue;
     } else if (fact.kind === "kin" || fact.kind === "elsewhere") {
-      // A mixed family is at home wherever one of its sides is.
-      const affinity = Math.max(
-        ...fact.origins.map((origin) => AFFINITY[origin]?.[city.zone] ?? NEUTRAL),
-      );
+      const affinity = affinityOf(fact.origins, city);
       parts.push({
         // Adventure means leaving the family's region, not seeking its opposite: Kinshasa is as
         // much an adventure for a reader from Dakar as Tunis is. The family's region only steps
@@ -394,6 +404,8 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
         fact: fact.kind,
       });
       continue;
+    } else if (fact.kind === "divide") {
+      match = affinityOf(fact.origins, city) > DIVIDE;
     } else if (fact.kind === "season") {
       const fit = seasonFit(city.name, fact.months);
       parts.push({
