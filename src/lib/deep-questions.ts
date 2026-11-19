@@ -199,7 +199,7 @@ const FURTHER: Omit<Question, "group">[] = [
     title: "Vous voulez écarter les pays qui punissent l'homosexualité ?",
     en: { title: "Do you want to leave out the countries that punish homosexuality?" },
     choices: [
-      { label: "Oui, écarte-les", value: true, en: { label: "Yes, leave them out" } },
+      { label: "Oui, écartez-les", value: true, en: { label: "Yes, leave them out" } },
       { label: "Non", value: false, en: { label: "No" } },
     ],
   },
