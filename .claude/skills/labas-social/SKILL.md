@@ -67,6 +67,14 @@ faut la sécurité, de bons hôpitaux… »). No turn of phrase, no wordplay, no
 Reread every card, caption and alt text aloud before showing it: if it would sound odd said to a
 cousin at the table, rewrite it.
 
+## Positive only
+
+Operator, 2026-11-19: « On ne rabaisse pas les villes. On les met en avant. Elles toutes. »
+State the true fact directly; never repeat a false claim to refute it, since a screenshot of the
+myth card spreads the myth. Never name a city as « pas première » or on the losing side of a
+comparison: every city named is put forward at its best. The surprise comes from the true fact
+itself.
+
 ## Data honesty on a card
 
 From CLAUDE.md, applied to social copy: scores are editorial estimates, never « mesuré » or « les
