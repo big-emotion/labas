@@ -6,6 +6,31 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.28.0] - 2026-11-20
+
+### Added
+
+- A slideshow of photos on each city's page: swipe through the city by day and by night, its
+  streets, markets and waterfront, each photo with its author and licence. Fourteen cities have
+  one so far (Abidjan, Accra, Cairo, Cape Town, Douala, Durban, Grand-Bassam, Johannesburg,
+  Kinshasa, Lagos, Maputo, Nairobi, Victoria, Vilankulo), 102 free-licensed photos in all; the
+  others keep their one photo until theirs are chosen.
+- For the team: a « Réactions » tab in /admin lists the one-tap reactions left on a result, by
+  version of the ranking and by city, with the answers behind each « Ça ne me correspond pas ».
+
+### Changed
+
+- The three one-tap reactions carry a sign: a heart for « J'aime », a thumb up for « Ça me
+  correspond », a thumb down for « Ça ne me correspond pas ».
+- When you react to a city of your result, the version of the site is now kept with your
+  reaction, so that we know which ranking you were reacting to. Still no name, address, account,
+  IP or time of day. The privacy pages say so.
+
+### Fixed
+
+- On the second and third cities of a result, « Réagir sur… » no longer touches the « À
+  découvrir » badge.
+
 ## [0.27.0] - 2026-11-20
 
 ### Added
@@ -618,6 +643,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.24.0...HEAD
+[0.28.0]: https://github.com/big-emotion/labas/compare/v0.27.0...v0.28.0
 [0.27.0]: https://github.com/big-emotion/labas/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/big-emotion/labas/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/big-emotion/labas/compare/v0.24.0...v0.25.0
