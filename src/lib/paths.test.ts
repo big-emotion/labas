@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { nextFreeQuestion, nextQuestion } from "./adaptive";
+import { freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS } from "./deep-questions";
 import {
   chapterName,
@@ -85,7 +85,8 @@ describe("a path per project", () => {
   });
 
   it("asks both-feet readers how often they come back; investors nothing about daily life", () => {
-    expect(play("pied", 0).asked).toContain("profession");
+    // Offered, not always asked: the path asks it only when it can still change the top three.
+    expect(freeQuestions({ project: "pied" }).map((q) => q.id)).toContain("profession");
     const investor = play("investir", 0).asked;
     for (const id of ["saturday", "family", "budget", "duration", "tripsHome"])
       expect(investor).not.toContain(id);
@@ -171,21 +172,25 @@ describe("going back and changing an answer", () => {
     // Going back to the project takes the later answers off the « asked » list, the closing one too.
     const changed = keepInPath({ ...answers, project: "decouvrir", priorities: undefined });
     const asked = Object.keys(changed).filter((id) => changed[id as keyof Answers] !== undefined);
-    expect(["wants", "season"]).toContain(nextFreeQuestion(changed, asked));
+    expect(asked).not.toContain("profession");
+    const next = nextFreeQuestion(changed, asked);
+    // What the trip opens (« wants », « season ») when it can still move the top three, or the
+    // closing question once nothing can.
+    expect(["wants", "season", "priorities"]).toContain(next);
   });
 
-  // Operator, 2026-11-20: what the family says of itself is asked in one go, right after the
-  // three openers, so the paths part ways from the fourth question.
+  // Operator, 2026-11-20: what the family says of itself is asked in one go, wherever the path
+  // comes to the origin.
   it("asks for the family's country, then feeling at home, then the faith, right after the origin", () => {
+    const afterOrigin = (asked: string[]) => asked.slice(asked.indexOf("origin") + 1);
     const african = play("installer", 0, { origin: ["ouest"], kin: "much" }).asked;
-    expect(african.slice(3, 6)).toEqual(["countries", "kin", "faith"]);
+    expect(afterOrigin(african).slice(0, 3)).toEqual(["countries", "kin", "faith"]);
     const caribbean = play("installer", 0, { origin: ["ameriques"], kin: "none" }).asked;
-    expect(caribbean[3]).toBe("kin");
+    expect(afterOrigin(caribbean)[0]).toBe("kin");
     expect(caribbean).not.toContain("countries");
     expect(caribbean).not.toContain("faith");
     const unsaid = play("installer", 0, { origin: [null] } as unknown as Answers).asked;
     expect(unsaid).not.toContain("kin");
-    expect(new Set([african[3], caribbean[3], unsaid[3]]).size).toBe(3);
   }, 30_000);
 
   it("asks each question of the full questionnaire once", () => {

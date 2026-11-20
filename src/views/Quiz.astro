@@ -355,7 +355,12 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
     <script>
       import { rankCities, TOP_THREE, type Answers, type Match } from "../lib/ranking";
-      import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
+      import {
+        closenessOf,
+        freeQuestions,
+        nextFreeQuestion,
+        type Closeness,
+      } from "../lib/adaptive";
       import { showProfile } from "../lib/profile-dom";
       import { cardFor, rowFor } from "../lib/cards-dom";
       import { wireTaps } from "../lib/taps-dom";
@@ -402,6 +407,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         kept: (count: number) => string;
         all: string;
         question: (n: number) => string;
+        closeness: Record<Closeness, string>;
         ready: string;
         notForMe: (name: string) => string;
         sheetTitle: (name: string) => string;
@@ -417,6 +423,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             `Les ${count} villes qui passent vos filtres, triées selon vos réponses.`,
           all: "Les 115 villes, triées selon vos réponses.",
           question: (n) => `question ${n}`,
+          closeness: {
+            searching: "on cherche",
+            closer: "on se rapproche",
+            almost: "presque trouvé",
+          },
           ready: "C'est prêt",
           notForMe: (name) => `${name}, pas pour moi`,
           sheetTitle: (name) => `${name} ne vous tente pas ?`,
@@ -431,6 +442,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           kept: (count) => `The ${count} cities that pass your filters, sorted by your answers.`,
           all: "The 115 cities, sorted by your answers.",
           question: (n) => `question ${n}`,
+          closeness: { searching: "searching", closer: "getting closer", almost: "almost there" },
           ready: "It's ready",
           notForMe: (name) => `${name}, not for me`,
           sheetTitle: (name) => `Not tempted by ${name}?`,
@@ -752,7 +764,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const list = freeQuestions(readAnswers());
         const question = QUESTIONS.find((q) => q.id === id);
         (document.getElementById("counter") as HTMLElement).innerHTML = question
-          ? `<b>${chapterName(question, readAnswers(), locale)}</b> · ${copy.question(asked.length + 1)}`
+          ? `<b>${chapterName(question, readAnswers(), locale)}</b> · ${copy.question(asked.length + 1)} · ${copy.closeness[closenessOf(readAnswers(), asked)]}`
           : `<b>${copy.ready}</b>`;
         (document.getElementById("stitches") as HTMLElement).replaceChildren(
           ...list.map((_, i) => {
@@ -787,7 +799,15 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
       function advance() {
         if (current) asked.push(current);
-        showQuestion(nextFreeQuestion(readAnswers(), asked));
+        // Among the questions as good as each other, one at random: no two readers meet the
+        // same order, and no one can anticipate the next question.
+        showQuestion(
+          nextFreeQuestion(
+            readAnswers(),
+            asked,
+            (asGood) => asGood[Math.floor(Math.random() * asGood.length)],
+          ),
+        );
       }
 
       function goBack() {

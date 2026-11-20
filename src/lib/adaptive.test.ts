@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
+import { closenessOf, freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
 import { CHAPTER, QUESTIONS } from "./questions";
 import { topCities, type Answers } from "./ranking";
 
-const OPENING = ["project", "languages", "origin"];
+/** Answered already in the test that checks the choice of the next question. */
+const ANSWERED = ["project", "languages", "origin"];
 import { DEEP_QUESTIONS } from "./deep-questions";
 
 describe("choosing the next question", () => {
@@ -46,8 +47,32 @@ describe("the quick quiz, one question at a time", () => {
   }
 
   // Operator, 2026-11-17: three fixed openers, then the path follows the answers, themes mixed.
-  it("opens on the project, the languages and the family's origin, in that order", () => {
-    for (const pick of [0, 1, 2, 3]) expect(play(pick).asked.slice(0, 3)).toEqual(OPENING);
+  // Operator, 2026-11-20: one fixed question, then the answers decide, origin and languages too.
+  it("opens on the life project alone, and still asks the languages and the family's origin", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const { asked } = play(pick);
+      expect(asked[0]).toBe("project");
+      expect(asked).toEqual(expect.arrayContaining(["languages", "origin"]));
+    }
+  });
+
+  it("lets the page choose among the questions as good as the best one, and only among them", () => {
+    const answers = { project: "installer" } as Answers;
+    const offered: string[][] = [];
+    const last = nextFreeQuestion(answers, ["project"], (asGood) => {
+      offered.push(asGood);
+      return asGood.at(-1)!;
+    });
+    expect(offered).toHaveLength(1);
+    expect(offered[0]).toContain(last);
+    // The default takes the most decisive: the first of the same list.
+    expect(nextFreeQuestion(answers, ["project"])).toBe(offered[0][0]);
+  });
+
+  it("says how near the quiz is: searching at the start, almost there at the end", () => {
+    expect(closenessOf({ project: "installer" } as Answers, ["project"])).toBe("searching");
+    const { answers, asked } = play(1);
+    expect(closenessOf(answers, asked.slice(0, -1))).toBe("almost");
   });
 
   it("asks size and pace together, whichever comes first", () => {
@@ -70,9 +95,9 @@ describe("the quick quiz, one question at a time", () => {
     }
   });
 
-  it("after the openers, asks the open question that changes the top three the most, whatever its theme", () => {
+  it("after the first answers, asks the open question that changes the top three the most, whatever its theme", () => {
     const answers = { project: "installer", languages: ["fr"], origin: null } as unknown as Answers;
-    const asked = [...OPENING];
+    const asked = [...ANSWERED];
     const before = new Set(topCities(answers, 3));
     const moved = (id: string) => {
       const question = QUESTIONS.find((q) => q.id === id)!;

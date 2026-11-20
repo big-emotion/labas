@@ -439,7 +439,7 @@ export const QUESTIONS: Question[] = [
       hint: "Optional. To suggest cities close to what you know.",
     },
     hint: "Facultatif. Pour vous proposer des villes proches de vos repères.",
-    max: 3,
+    max: 5,
     choices: [
       { label: "Afrique de l'Ouest", value: "ouest", en: { label: "West Africa" } },
       { label: "Afrique centrale", value: "centre", en: { label: "Central Africa" } },
@@ -466,7 +466,7 @@ export const QUESTIONS: Question[] = [
       hint: "Your family's country weighs heavily if you want to feel at home.",
     },
     hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
-    max: 3,
+    max: 5,
     when: (answers) => africanOrigins(answers).length > 0,
     choices: [
       ...COUNTRY_CHOICES,
