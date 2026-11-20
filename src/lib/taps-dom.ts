@@ -43,6 +43,12 @@ const COPY: Bilingual<{
   },
 };
 
+/**
+ * One sign per answer (operator, 2026-11-20): three text-only buttons read as a form, not as a
+ * reaction. Decorative: the label beside it already says the answer to a screen reader.
+ */
+const ICONS: Record<TapKind, string> = { like: "❤️", suits: "👍", not: "👎" };
+
 let loaded: Promise<TapsByCity> | undefined;
 const counts: TapsByCity = {};
 
@@ -149,7 +155,11 @@ export function wireTaps(
         const button = document.createElement("button");
         button.type = "button";
         button.dataset.tap = kind;
-        button.append(copy.labels[kind], " ", document.createElement("b"));
+        const icon = document.createElement("span");
+        icon.className = "tap-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = ICONS[kind];
+        button.append(icon, copy.labels[kind], " ", document.createElement("b"));
         return button;
       }),
       note,

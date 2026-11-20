@@ -243,6 +243,10 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     font-weight: 700;
     text-underline-offset: 3px;
   }
+  /* Beside « À découvrir » the link touched the badge's border. */
+  .results .discover:not([hidden]) + .card-reactions {
+    margin-left: 8px;
+  }
   .results .card-reactions[hidden] {
     display: none;
   }
