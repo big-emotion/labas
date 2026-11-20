@@ -104,7 +104,7 @@ describe("what a reaction teaches the ranking", () => {
     const rows = await outcomes();
     expect(rows).toHaveLength(1);
     expect(Object.keys(rows[0]).sort()).toEqual(
-      ["answers", "city", "created_on", "id", "kind", "reaction", "top"].sort(),
+      ["answers", "city", "created_on", "id", "kind", "reaction", "top", "version"].sort(),
     );
     expect(rows[0]).toMatchObject({
       kind: "quick",
@@ -115,6 +115,21 @@ describe("what a reaction teaches the ranking", () => {
       answers: { project: "installer", origin: ["ouest"], faith: "muslim" },
     });
     expect(new Date(rows[0].created_on as string).toISOString().slice(11)).toBe("00:00:00.000Z");
+  });
+
+  // Operator, 2026-11-20: three versions of the ranking went out the same day, so the day alone
+  // cannot say which ranking a reader was reacting to.
+  it("says which version of the site produced the result", async () => {
+    await tap({ city: "dakar", kind: "suits", journey });
+    handle = createAccounts({
+      db,
+      mailer: silent,
+      siteUrl: SITE,
+      now: () => clock,
+      version: "0.28.0",
+    });
+    await tap({ city: "dakar", kind: "not", was: "suits", journey });
+    expect((await outcomes()).map((row) => row.version)).toEqual([null, "0.28.0"]);
   });
 
   it("keeps a change of mind and a withdrawal as what they are", async () => {

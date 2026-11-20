@@ -32,6 +32,7 @@ import {
   resultsEmail,
 } from "./emails";
 import { limiter } from "./limiter";
+import { version } from "../../package.json";
 import { newsList } from "./news";
 
 export type { Mail } from "./emails";
@@ -388,6 +389,7 @@ function start(port: number) {
           enSiteUrl: config.enSiteUrl,
           admins: (process.env.ADMIN_EMAILS ?? "").split(","),
           team: config.replyTo,
+          version,
           translate: DEEPL_API_KEY ? deepl(DEEPL_API_KEY) : undefined,
           stats:
             PLAUSIBLE_API_KEY && PLAUSIBLE_SITE && PLAUSIBLE_API_HOST

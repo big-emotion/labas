@@ -107,6 +107,14 @@ which answers.
   two rows. A row can therefore not be found or erased on request; every row is erased after
   three years (`purge`).
 - **Only from a result**: a tap on a city page or in the cities list sends no journey.
+- **The site's version** (operator, 2026-11-20): each row carries the version that ranked the
+  cities, set by the server from `package.json`, never by the browser. Three versions went out
+  on 2026-11-20, so the day could not tell which ranking a reader reacted to. Rows kept before
+  v0.28.0 have none.
+- **Read in /admin** (« Réactions », `GET /api/compte/admin/outcomes`, the 2 000 newest): the
+  reactions by version and by city, and each « ça ne me correspond pas » with its answers. Until
+  then the table was written and never read. Nothing feeds the ranking by itself: a change of
+  weight is still a decision, a test and a release.
 
 ## The avis space (`/avis`, `/villes`)
 

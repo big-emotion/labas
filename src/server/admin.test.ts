@@ -32,6 +32,7 @@ beforeEach(async () => {
     admins: [ADMIN],
     stats: () => stats(),
     now: () => Date.UTC(2026, 10, 18, 12),
+    version: "0.28.0",
   });
 });
 
@@ -192,5 +193,43 @@ describe("the audience figures", () => {
     expect((await bare(request("GET", "/api/compte/admin/stats", undefined, admin))).status).toBe(
       503,
     );
+  });
+});
+
+// Operator, 2026-11-20: the journeys kept with a reaction on a result were written and never
+// read. The admin lists them, newest first, with the version of the site that ranked the cities.
+describe("what the reactions on a result teach", () => {
+  const journey = {
+    kind: "quick",
+    answers: { project: "installer", origin: ["ouest"] },
+    top: ["dakar", "abidjan", "cotonou"],
+  };
+  const tap = (city: string, kind: string) =>
+    call("POST", "/api/compte/taps", { city, kind, journey });
+
+  it("is for the operator only", async () => {
+    const reader = await reviewer("awa@exemple.fr");
+    expect((await call("GET", "/api/compte/admin/outcomes")).status).toBe(401);
+    expect((await call("GET", "/api/compte/admin/outcomes", undefined, reader)).status).toBe(403);
+  });
+
+  it("lists each reaction with its day, its version, the answers and the three cities", async () => {
+    const admin = await reviewer(ADMIN);
+    await tap("dakar", "suits");
+    await tap("abidjan", "not");
+    const { status, data } = await call("GET", "/api/compte/admin/outcomes", undefined, admin);
+    expect(status).toBe(200);
+    expect(data.outcomes).toEqual([
+      {
+        day: "2026-11-18",
+        version: "0.28.0",
+        kind: "quick",
+        city: "abidjan",
+        reaction: "not",
+        answers: journey.answers,
+        top: journey.top,
+      },
+      { ...data.outcomes[1], city: "dakar", reaction: "suits" },
+    ]);
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type AdminReview, byCity, funnel, toReread } from "./admin";
+import { type AdminReview, type Outcome, byCity, funnel, outcomesRead, toReread } from "./admin";
 
 const review = (fields: Partial<AdminReview>): AdminReview => ({
   id: "r",
@@ -64,5 +64,44 @@ describe("the quiz funnel", () => {
 
   it("counts a step nobody reached as zero, and no visitors as no share", () => {
     expect(funnel(0, {}).map((s) => s.share)).toEqual(["–", "–", "–", "–"]);
+  });
+});
+
+describe("what the reactions on a result teach", () => {
+  const outcome = (over: Partial<Outcome>): Outcome => ({
+    day: "2026-11-20",
+    version: "0.28.0",
+    kind: "quick",
+    city: "dakar",
+    reaction: "suits",
+    answers: {},
+    top: ["dakar"],
+    ...over,
+  });
+  const rows = [
+    outcome({ reaction: "like" }),
+    outcome({ reaction: "not" }),
+    outcome({ city: "abidjan", reaction: "not" }),
+    outcome({ city: "abidjan", reaction: "not", version: null }),
+    outcome({ reaction: null }),
+  ];
+
+  it("counts the reactions by version of the ranking, the newest version first", () => {
+    expect(outcomesRead(rows).versions).toEqual([
+      { version: "0.28.0", like: 1, suits: 0, not: 2, misses: "67 %" },
+      { version: null, like: 0, suits: 0, not: 1, misses: "100 %" },
+    ]);
+  });
+
+  it("puts first the cities readers most often say do not suit them", () => {
+    expect(outcomesRead(rows).cities).toEqual([
+      { city: "abidjan", like: 0, suits: 0, not: 2, misses: "100 %" },
+      { city: "dakar", like: 1, suits: 0, not: 1, misses: "50 %" },
+    ]);
+  });
+
+  it("leaves a reaction taken back out of the counts", () => {
+    const { versions } = outcomesRead([outcome({ reaction: null })]);
+    expect(versions).toEqual([{ version: "0.28.0", like: 0, suits: 0, not: 0, misses: "–" }]);
   });
 });
