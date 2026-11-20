@@ -15,6 +15,8 @@
  */
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const AGENT = "labas-photo-research/1.0";
@@ -34,8 +36,35 @@ const text = (html = "") =>
     .replace(/\s+/g, " ")
     .trim();
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// One stamp shared by every run on this machine, next to the script rather than in the working
+// folder: several checkouts searching at once were refused by Commons (429) within a minute.
+const PACE_FILE = fileURLToPath(new URL("../.photo-staging/.pace", import.meta.url));
+const PACE = 1500;
+
+/** Waits for this machine's turn: at most one request every PACE ms, all runs together. */
+async function turn() {
+  await mkdir(dirname(PACE_FILE), { recursive: true });
+  const last = existsSync(PACE_FILE) ? Number(await readFile(PACE_FILE, "utf8")) || 0 : 0;
+  const mine = Math.max(Date.now(), last + PACE);
+  await writeFile(PACE_FILE, String(mine));
+  await sleep(mine - Date.now());
+}
+
+/** A paced request that waits out a refusal (429, 5xx) instead of giving up on the city. */
+async function request(url) {
+  for (let attempt = 0; ; attempt++) {
+    await turn();
+    const response = await fetch(url, { headers: { "user-agent": AGENT } });
+    if (response.ok || attempt === 5 || (response.status !== 429 && response.status < 500))
+      return response;
+    const asked = Number(response.headers.get("retry-after")) * 1000;
+    await sleep(Math.max(asked || 0, 20_000 * 2 ** attempt));
+  }
+}
+
 async function json(url) {
-  const response = await fetch(url, { headers: { "user-agent": AGENT } });
+  const response = await request(url);
   if (!response.ok) throw new Error(`${response.status} ${url}`);
   return response.json();
 }
@@ -180,7 +209,7 @@ async function find(city, country, slug, extra) {
   for (const candidate of kept.slice(0, MOST)) {
     const n = String(candidates.length + 1).padStart(2, "0");
     try {
-      const response = await fetch(candidate.image, { headers: { "user-agent": AGENT } });
+      const response = await request(candidate.image);
       if (!response.ok) continue;
       await sharp(Buffer.from(await response.arrayBuffer()))
         .rotate()
