@@ -63,7 +63,7 @@ const COUNTRY_CHOICES: Choice[] = [
 const CHAPTERS = {
   project: { fr: "Votre projet", en: "Your plans" },
   trip: { fr: "Votre voyage", en: "Your trip" },
-  temperament: { fr: "Votre tempérament", en: "Your temperament" },
+  temperament: { fr: "Votre façon de vivre", en: "Your way of living" },
   history: { fr: "Votre histoire avec l'Afrique", en: "Your story with Africa" },
   last: { fr: "Pour finir", en: "To finish" },
   profile: { fr: "VOTRE PROFIL", en: "YOUR PROFILE" },
@@ -474,6 +474,28 @@ export const QUESTIONS: Question[] = [
     choices: [
       ...COUNTRY_CHOICES,
       { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
+    ],
+  },
+  {
+    // The guard for a reader who would rather not name an origin (operator, 2026-11-20): asked,
+    // never inferred, and only when its answers can still change the top three.
+    id: "drawnTo",
+    group: HISTORY,
+    when: (answers) => answers.origin !== undefined && namedOrigins(answers).length === 0,
+    title: "Des régions vous attirent plus que d'autres ?",
+    en: {
+      title: "Do some regions draw you more than others?",
+      hint: "Optional. Their cities come closer; none is removed.",
+    },
+    hint: "Facultatif. Leurs villes se rapprochent ; aucune n'est retirée.",
+    max: 5,
+    choices: [
+      { label: "Afrique de l'Ouest", value: "ouest", en: { label: "West Africa" } },
+      { label: "Afrique centrale", value: "centre", en: { label: "Central Africa" } },
+      { label: "Afrique de l'Est", value: "est", en: { label: "East Africa" } },
+      { label: "Afrique australe", value: "sud", en: { label: "Southern Africa" } },
+      { label: "Afrique du Nord", value: "nord", en: { label: "North Africa" } },
+      { label: "Aucune en particulier", value: null, en: { label: "None in particular" } },
     ],
   },
   {

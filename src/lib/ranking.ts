@@ -55,6 +55,8 @@ export interface Answers extends ProfileAnswers {
    * mixed family; a single value is still accepted.
    */
   origin?: Origin | Origin[];
+  /** The regions that draw the reader, asked of one who named no origin. */
+  drawnTo?: Zone[];
   /** The family's countries, among those of its African regions. */
   countries?: string[];
   /** Passports held: French or EU, or one giving free movement in an African zone. */
@@ -149,6 +151,11 @@ export interface Match {
   score: number;
   /** 0 to 1: the share of the reader's weight backed by a known value (§4.2). */
   coverage: number;
+  /**
+   * Outside what the reader's family already knows: another country than those they named, or
+   * another region when they named regions only. A label, never a change to the order.
+   */
+  toDiscover: boolean;
   /** Why a filter of the fuller questionnaire keeps this city out, in the reader's language. */
   excludedBecause?: string;
   /** Up to five plain-language reasons the city fits, each rated 1 to 5. */
@@ -484,6 +491,12 @@ const NEAR: Record<
   region: { origin: 0.35, divide: 0.2, countries: 0, faith: 0.15 },
   alike: { origin: 0.08, divide: 0.2, countries: 0, faith: 0.1 },
 };
+/**
+ * The regions a reader says draw them, asked of one who named no origin (operator, 2026-11-20):
+ * the guard against a top three in a region they never had in mind. A share like the others, so
+ * it is not diluted either; it lifts those regions and removes no city.
+ */
+const ATTRACTED_SHARE = 0.2;
 /** All of them together leave a third of the score to everything else the reader answered. */
 const NEAR_ONES_OWN_MOST = 0.65;
 const PRACTICAL: Axis[] = [
@@ -663,6 +676,11 @@ export function profileOf(given: Answers): Profile {
     // A trip leans away from the family's region: no share for what the reader came to leave.
     if (draw > 0 && away === 0) shares.origin = UNSAID_SHARE;
   }
+  const drawnTo = (answers.drawnTo ?? []).filter(Boolean);
+  if (drawnTo.length) {
+    fact("drawnTo", { kind: "attracted", values: drawnTo, weight: 1 });
+    shares.drawnTo = ATTRACTED_SHARE;
+  }
   // Faith counts the same way, and only on the reader's word; a reader without one is not sent
   // towards secular countries.
   const faith = answers.faith;
@@ -755,6 +773,7 @@ const LINE_COPY: Bilingual<LineCopy> = {
       settings: ["Le paysage que vous cherchez, tout près", "Paysage différent de votre souhait"],
       climates: ["Le climat que vous cherchez", "Climat différent de votre souhait"],
       zone: ["Dans la région de votre famille"],
+      attracted: ["Dans une région qui vous attire"],
       sectors: ["Votre secteur y recrute", "Votre secteur y recrute peu"],
       professions: ["Votre métier y recrute", "Votre métier y recrute peu"],
       entry: ["Facile d'y entrer avec votre passeport", "Un visa à demander à l'ambassade"],
@@ -818,6 +837,7 @@ const LINE_COPY: Bilingual<LineCopy> = {
       ],
       climates: ["The climate you are looking for", "A climate unlike the one you want"],
       zone: ["In your family's region"],
+      attracted: ["In a region that draws you"],
       sectors: ["Your sector is hiring there", "Your sector hires little there"],
       professions: ["Your profession is hiring there", "Your profession hires little there"],
       entry: ["Easy to enter with your passport", "A visa to request from the embassy"],
@@ -1050,7 +1070,15 @@ function evaluate(
     temperamentLines: temperamentLinesFor(city.name, withAdventure(answers), locale),
     practical: scoreOf(city, evidence.practical).score ?? 0,
     portrait: portraitFor(city, answers, locale),
+    toDiscover: isDiscovery(city, answers),
   };
+}
+
+function isDiscovery(city: City, answers: Answers): boolean {
+  const countries = (answers.countries ?? []).filter(Boolean);
+  if (countries.length) return !countries.includes(city.country);
+  const regions = originsOf(answers).filter((origin) => origin !== "ameriques");
+  return regions.length > 0 && !regions.includes(city.zone);
 }
 
 /**

@@ -487,6 +487,55 @@ describe("how far the reader would go from their own", () => {
   });
 });
 
+// Operator, 2026-11-20: the site is there to show cities the reader did not think of; those
+// outside what the family knows are labelled, and the order is left alone.
+describe("the cities marked « à découvrir »", () => {
+  const marked = (answers: Answers) =>
+    bestMatches(answers, 115)
+      .filter((m) => m.toDiscover)
+      .map((m) => m.city);
+
+  it("marks the cities outside the family's countries, once a country is named", () => {
+    const cities = marked({ ...settled, origin: ["ouest"], countries: ["Sénégal"] });
+    expect(cities.map((c) => c.country)).not.toContain("Sénégal");
+    expect(cities.map((c) => c.country)).toContain("Côte d'Ivoire");
+  });
+
+  it("marks the cities outside the family's regions when no country is named", () => {
+    const zones = new Set(marked({ ...settled, origin: ["ouest", "centre"] }).map((c) => c.zone));
+    expect(zones).toEqual(new Set(["est", "sud", "nord"]));
+  });
+
+  it("marks nothing for a reader who named no African origin", () => {
+    expect(marked(settled)).toEqual([]);
+    expect(marked({ ...settled, origin: ["ameriques"] })).toEqual([]);
+  });
+
+  it("never changes the order", () => {
+    const answers: Answers = { ...settled, origin: ["ouest"], countries: ["Sénégal"] };
+    const scores = bestMatches(answers, 115).map((m) => m.score);
+    expect(scores).toEqual([...scores].sort((a, b) => b - a));
+  });
+});
+
+// The guard for a reader who would rather not name an origin (operator, 2026-11-20).
+describe("the regions a reader says draw them", () => {
+  const zones = (answers: Answers, count: number) =>
+    bestMatches(answers, count).map((m) => m.city.zone);
+
+  it("brings those regions first, and removes no city", () => {
+    const drawn: Answers = { ...settled, drawnTo: ["est", "sud"] };
+    expect(zones(settled, 3)).toContain("nord");
+    for (const zone of zones(drawn, 3)) expect(["est", "sud"]).toContain(zone);
+    expect(bestMatches(drawn, 115)).toHaveLength(115);
+  });
+
+  it("changes nothing when the reader names none", () => {
+    const names = (answers: Answers) => bestMatches(answers, 5).map((m) => m.city.name);
+    expect(names({ ...settled, drawnTo: [] })).toEqual(names(settled));
+  });
+});
+
 // Beta feedback, 2026-11-19: a reader from the Caribbean who wanted to live near their own was
 // sent to North Africa, and the family's region counted for less with every further answer.
 describe("the divide between North Africa and the rest of the continent", () => {

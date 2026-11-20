@@ -131,13 +131,13 @@ export function profileIn(profile: Profile, locale: Locale): Profile {
 const SUMMARY = {
   fr: {
     leads: (city: string) => `${city} en tête`,
-    temperament: (name: string) => `tempérament ${name}`,
+    temperament: (name: string) => `profil ${name}`,
     more: (others: number) => `+${others} ${others > 1 ? "villes" : "ville"}`,
     label: (parts: string) => `Son parcours : ${parts}. Voir le détail`,
   },
   en: {
     leads: (city: string) => `${city} first`,
-    temperament: (name: string) => `${name} temperament`,
+    temperament: (name: string) => `${name} profile`,
     more: (others: number) => `+${others} ${others === 1 ? "city" : "cities"}`,
     label: (parts: string) => `Their journey: ${parts}. See the detail`,
   },

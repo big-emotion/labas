@@ -46,6 +46,7 @@ describe("the question bank", () => {
         "origin",
         "countries",
         "reach",
+        "drawnTo",
         "faith",
         "priorities",
       ].sort(),
@@ -54,7 +55,7 @@ describe("the question bank", () => {
       new Set([
         "Votre projet",
         "Votre voyage",
-        "Votre tempérament",
+        "Votre façon de vivre",
         "Votre histoire avec l'Afrique",
         "Pour finir",
       ]),

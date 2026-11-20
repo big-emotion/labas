@@ -42,6 +42,8 @@ export type FactPull = { from?: string } & (
   | { kind: "settings"; values: string[]; weight: number }
   | { kind: "climates"; values: string[]; weight: number }
   | { kind: "zone"; values: string[]; weight: number }
+  /** The regions the reader says draw them, family or not. */
+  | { kind: "attracted"; values: string[]; weight: number }
   | { kind: "sectors"; values: string[]; weight: number }
   | { kind: "professions"; values: string[]; weight: number }
   | { kind: "upscale"; values: string[]; weight: number }
@@ -350,7 +352,7 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
     } else if (fact.kind === "climates") {
       const wanted = fact.values.flatMap((v) => CLIMATE_CLASSES[v] ?? []);
       match = city.facts.climates.some((c) => wanted.includes(c));
-    } else if (fact.kind === "zone") {
+    } else if (fact.kind === "zone" || fact.kind === "attracted") {
       match = fact.values.includes(city.zone);
     } else if (fact.kind === "tension") {
       const found = tensionFor(city, fact.values);
