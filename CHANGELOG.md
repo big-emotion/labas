@@ -6,6 +6,27 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.27.0] - 2026-11-20
+
+### Added
+
+- Where regional institutions sit now counts in « Votre métier y recrute »: the central banks in
+  Dakar, Yaoundé and Abuja, the stock exchanges in Tunis, Luanda, Addis Ababa and Maputo, the
+  regional courts in Abidjan, Abuja, Ouagadougou and N'Djamena, the arbitration centres and large
+  law firms in Johannesburg, Lagos, Nairobi, Casablanca, Port Louis, Kigali and Cairo, and the WHO
+  regional office in Brazzaville. Law was documented in one city; it is now in fourteen. Each
+  line carries its dated sources; the levels are editorial estimates.
+
+### Fixed
+
+- Your religion no longer sends you away from countries where it is commonly practised. It was
+  scored as the share of the country that holds it, so a Muslim reader saw Nouakchott ahead of
+  Abidjan, Cotonou or Lomé. A faith held by 15 % of a country or more now counts as fully present;
+  only where it is rare does it weigh. The cards say « Votre foi y est bien présente ».
+- If you settle for good, or keep one foot here and one there, your profession now weighs as much
+  as something you will not compromise on: the first cities are ones where it really hires. It
+  stays an ordinary answer when you asked for your family's country.
+
 ## [0.26.0] - 2026-11-20
 
 ### Added
@@ -597,6 +618,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.24.0...HEAD
+[0.27.0]: https://github.com/big-emotion/labas/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/big-emotion/labas/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/big-emotion/labas/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/big-emotion/labas/compare/v0.23.0...v0.24.0
