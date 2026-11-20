@@ -16,6 +16,12 @@ const OPENING = ["project"];
  * game one cannot anticipate).
  */
 const AS_GOOD = 0.85;
+/**
+ * Asked just before the closing question, never earlier (operator, 2026-11-20): how far the
+ * reader would go from their own. Until then the origin only leans on the list, so the map
+ * keeps showing cities the reader did not expect; this answer then settles it under their eyes.
+ */
+const BEFORE_CLOSING = "reach";
 /** Asked last, as « now, what will you not compromise on » (beta feedback, 2026-11-16). */
 const CLOSING = "priorities";
 
@@ -93,7 +99,7 @@ function newcomers(question: Question, answers: Answers) {
 /** Every open question that could still change the top three, the most decisive first. */
 function decisive(open: Question[], answers: Answers) {
   return open
-    .filter((question) => question.id !== CLOSING)
+    .filter((question) => question.id !== CLOSING && question.id !== BEFORE_CLOSING)
     .map((question, index) => ({ id: question.id, index, ...newcomers(question, answers) }))
     .filter((scored) => scored.top3 > 0)
     .sort((a, b) => b.top3 - a.top3 || b.top5 - a.top5 || a.index - b.index);
@@ -128,13 +134,17 @@ export function nextFreeQuestion(
   if (opener) return opener;
   const follow = followUp(open, asked);
   if (follow) return follow;
-  const ranked = decisive(open, answers);
+  // Once the reader has said how far they would go, the quiz closes: that answer is the last
+  // word on the list, and a question reopened after it would read as doubting it.
+  const ranked = asked.includes(BEFORE_CLOSING) ? [] : decisive(open, answers);
   if (ranked.length) {
     const asGood = ranked.filter((scored) => scored.top3 >= ranked[0].top3 * AS_GOOD);
     return choose(asGood.map((scored) => scored.id));
   }
-  const owed = open.find(alwaysAsked)?.id;
-  return owed ?? (open.some((q) => q.id === CLOSING) ? CLOSING : undefined);
+  const owed = asked.includes(BEFORE_CLOSING)
+    ? undefined
+    : (open.find(alwaysAsked) ?? open.find((q) => q.id === BEFORE_CLOSING));
+  return owed?.id ?? (open.some((q) => q.id === CLOSING) ? CLOSING : undefined);
 }
 
 /**

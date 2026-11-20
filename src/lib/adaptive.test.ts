@@ -20,7 +20,7 @@ describe("choosing the next question", () => {
   });
 
   it("asks the follow-ups of what was just answered before anything else", () => {
-    const answers = { project: "installer", origin: ["ouest"], kin: "much" } as Answers;
+    const answers = { project: "installer", origin: ["ouest"], reach: "region" } as Answers;
     const next = nextQuestion(answers, ["project", "origin", "kin"]);
     expect(["faith", "countries"]).toContain(next);
   });
@@ -86,12 +86,10 @@ describe("the quick quiz, one question at a time", () => {
   it("asks a follow-up right after the question it follows", () => {
     for (const pick of [0, 1, 2, 3]) {
       const { asked } = play(pick);
-      // The family's country, when an African region was named, comes between the two.
-      const between = asked.includes("countries") ? 2 : 1;
-      if (asked.includes("kin"))
-        expect(asked.indexOf("kin"), String(pick)).toBe(asked.indexOf("origin") + between);
+      if (asked.includes("countries"))
+        expect(asked.indexOf("countries"), String(pick)).toBe(asked.indexOf("origin") + 1);
       if (asked.includes("faith"))
-        expect(asked.indexOf("faith"), String(pick)).toBe(asked.indexOf("kin") + 1);
+        expect(asked.indexOf("faith"), String(pick)).toBe(asked.indexOf("reach") + 1);
     }
   });
 
@@ -146,8 +144,8 @@ describe("the quick quiz, one question at a time", () => {
     }
   });
 
-  // Operator, 2026-11-20: a reader who names the family's country and answers « Beaucoup » has
-  // a top three no further answer can change; the quiz ended after eight questions without
+  // Operator, 2026-11-20: a reader who named the family's country and said it mattered a lot had
+  // a top three no further answer could change; the quiz ended after eight questions without
   // asking how they live. The temperament still orders the cities and fills their profile.
   it("always asks the whole temperament chapter, even when the top three is already settled", () => {
     const settled = {
@@ -155,8 +153,6 @@ describe("the quick quiz, one question at a time", () => {
       languages: ["fr"],
       origin: ["ouest"],
       countries: ["Sénégal"],
-      kin: "much",
-      faith: "muslim",
     } as Answers;
     const answers: Record<string, unknown> = { ...settled };
     const asked = Object.keys(settled);
@@ -167,10 +163,36 @@ describe("the quick quiz, one question at a time", () => {
       asked.push(id);
       id = nextFreeQuestion(answers as Answers, asked);
     }
-    const temperament = QUESTIONS.filter((q) => q.group === CHAPTER.temperament).map((q) => q.id);
-    expect(temperament).toHaveLength(5);
+    // « Aller vers l'inconnu » is told by « Jusqu'où aimeriez-vous aller ? » once an origin is named.
+    const temperament = ["saturday", "order", "together", "friction"];
     expect(asked).toEqual(expect.arrayContaining(temperament));
+    expect(asked).not.toContain("adventure");
     expect(asked.at(-1)).toBe("priorities");
+  });
+
+  // Operator, 2026-11-20: the one question on distance comes at the end, so the map keeps
+  // showing unexpected cities until the reader settles it; the faith follows it.
+  it("asks how far the reader would go just before the closing question, then the faith", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const { asked, answers } = play(pick);
+      if (!asked.includes("reach")) continue;
+      const tail = asked.slice(asked.indexOf("reach"));
+      expect(tail, String(pick)).toEqual(
+        answers.reach === "anywhere" ? ["reach", "priorities"] : ["reach", "faith", "priorities"],
+      );
+    }
+  });
+
+  it("asks « aller vers l'inconnu » itself only of a reader who named no origin", () => {
+    const unnamed = { project: "installer", origin: [null] } as unknown as Answers;
+    const named = { project: "installer", origin: ["ouest"] } as Answers;
+    const offered = (answers: Answers) => freeQuestions(answers).map((q) => q.id);
+    expect(offered(unnamed)).toContain("adventure");
+    expect(offered(unnamed)).not.toContain("reach");
+    expect(offered(named)).toContain("reach");
+    expect(offered(named)).not.toContain("adventure");
+    // Not before the origin was asked: the reader would answer the same thing twice.
+    expect(offered({ project: "installer" } as Answers)).not.toContain("adventure");
   });
 
   it("stops once no open question could change the top three, short of the whole bank", () => {
@@ -253,6 +275,10 @@ describe("a path that fits the project", () => {
   it("asks everything of a reader who comes to live", () => {
     for (const project of ["installer", "pied", "tester"])
       for (const id of LIFE_THERE)
-        expect(ids({ project } as Answers), `${project} ${id}`).toContain(id);
+        // « Aller vers l'inconnu » is offered once the reader has declined to name an origin.
+        expect(
+          ids({ project, origin: [null] } as unknown as Answers),
+          `${project} ${id}`,
+        ).toContain(id);
   });
 });

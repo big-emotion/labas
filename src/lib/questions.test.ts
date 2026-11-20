@@ -9,7 +9,6 @@ const NEUTRAL = new Set([
   "mobility:car",
   "passports:other",
   "faith:none",
-  "kin:none",
   "adventure:open",
   // A month or more away asks nothing of the flights.
   "duration:month",
@@ -46,7 +45,7 @@ describe("the question bank", () => {
         "friction",
         "origin",
         "countries",
-        "kin",
+        "reach",
         "faith",
         "priorities",
       ].sort(),
@@ -92,7 +91,7 @@ describe("the question bank", () => {
         const context = {
           project: "installer",
           origin: "ouest",
-          kin: "much",
+          reach: "region",
           currentCity: "capital",
         } as Answers;
         delete (context as Record<string, unknown>)[question.id];
@@ -115,8 +114,8 @@ describe("the question bank", () => {
 
   it("asks about faith only when feeling at home among one's own matters", () => {
     const faith = QUESTIONS.find((q) => q.id === "faith")!;
-    expect(faith.when?.({ kin: "much" })).toBe(true);
-    expect(faith.when?.({ kin: "none" })).toBe(false);
+    expect(faith.when?.({ reach: "region" })).toBe(true);
+    expect(faith.when?.({ reach: "anywhere" })).toBe(false);
     expect(faith.when?.({})).toBe(false);
   });
 

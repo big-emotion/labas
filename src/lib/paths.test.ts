@@ -97,7 +97,7 @@ describe("questions and choices that fit what was said", () => {
   it("skips country, origins and faith when the reader would rather not say", () => {
     for (const project of PROJECTS) {
       const { asked } = play(project, 0, { origin: [null] as never });
-      for (const id of ["countries", "kin", "faith"]) expect(asked, project).not.toContain(id);
+      for (const id of ["countries", "reach", "faith"]) expect(asked, project).not.toContain(id);
     }
     const deep = { project: "installer", origin: [null], kin: undefined } as unknown as Answers;
     const asked = Object.keys(deep);
@@ -147,7 +147,7 @@ describe("going back and changing an answer", () => {
       project: "installer",
       origin: ["ouest"],
       countries: ["Sénégal"],
-      kin: "much",
+      reach: "region",
       faith: "muslim",
       family: "parents",
       priorities: ["schools", "safety"],
@@ -160,7 +160,7 @@ describe("going back and changing an answer", () => {
       family: "celib",
     });
     expect(after.countries).toBeUndefined();
-    expect(after.kin).toBeUndefined();
+    expect(after.reach).toBeUndefined();
     expect(after.faith).toBeUndefined();
     expect(after.priorities).toEqual(["safety"]);
     expect(after.saturday).toBe(1);
@@ -181,16 +181,16 @@ describe("going back and changing an answer", () => {
 
   // Operator, 2026-11-20: what the family says of itself is asked in one go, wherever the path
   // comes to the origin.
-  it("asks for the family's country, then feeling at home, then the faith, right after the origin", () => {
-    const afterOrigin = (asked: string[]) => asked.slice(asked.indexOf("origin") + 1);
-    const african = play("installer", 0, { origin: ["ouest"], kin: "much" }).asked;
-    expect(afterOrigin(african).slice(0, 3)).toEqual(["countries", "kin", "faith"]);
-    const caribbean = play("installer", 0, { origin: ["ameriques"], kin: "none" }).asked;
-    expect(afterOrigin(caribbean)[0]).toBe("kin");
+  it("asks for the family's country right after the origin, and the distance at the end", () => {
+    const african = play("installer", 0, { origin: ["ouest"], reach: "region" }).asked;
+    expect(african[african.indexOf("origin") + 1]).toBe("countries");
+    expect(african.slice(-3)).toEqual(["reach", "faith", "priorities"]);
+    const caribbean = play("installer", 0, { origin: ["ameriques"], reach: "anywhere" }).asked;
+    expect(caribbean.slice(-2)).toEqual(["reach", "priorities"]);
     expect(caribbean).not.toContain("countries");
     expect(caribbean).not.toContain("faith");
     const unsaid = play("installer", 0, { origin: [null] } as unknown as Answers).asked;
-    expect(unsaid).not.toContain("kin");
+    expect(unsaid).not.toContain("reach");
   }, 30_000);
 
   it("asks each question of the full questionnaire once", () => {
@@ -216,7 +216,7 @@ describe("going back and changing an answer", () => {
       }
       return seen;
     };
-    const holiday = deep({ project: "decouvrir", origin: ["ouest"], kin: "much" } as Answers);
+    const holiday = deep({ project: "decouvrir", origin: ["ouest"], reach: "region" } as Answers);
     expect(holiday).toEqual(expect.arrayContaining(["duration", "budget", "passports"]));
     expect(deep({ project: "pied", origin: [null] } as unknown as Answers)).toContain("tripsHome");
     // Plays about fifteen whole quizzes: slower than the others on CI.

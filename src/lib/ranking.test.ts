@@ -33,8 +33,7 @@ describe("ranking the cities", () => {
     const kinois: Answers = {
       languages: ["fr"],
       origin: ["centre"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       saturday: 1,
       currentCity: "capital",
       rhythm: "same",
@@ -287,7 +286,6 @@ describe("each answer orients the list", () => {
     together: 1,
     friction: 0.5,
     origin: ["ouest"],
-    kin: "some",
     priorities: ["safety"],
   };
 
@@ -369,7 +367,7 @@ describe("an origin that leads without deciding alone", () => {
     together: 0,
     friction: 0,
     origin: ["ouest"],
-    kin: "much",
+    reach: "region",
     priorities: ["safety"],
   };
   const topThree = (answers: Answers) => bestMatches(answers, 3).map((m) => m.city);
@@ -403,26 +401,23 @@ const settled: Answers = {
 };
 
 // Operator, 2026-11-20: what a reader says of their own (region, country, faith) was diluted by
-// the twelve other answers of a quick quiz; it now holds its share of the final score.
-describe("near one's own: the family's region, its country and the faith hold their share", () => {
+// the twelve other answers of a quick quiz. « Jusqu'où aimeriez-vous aller ? » now gives it a
+// share of the final score, by the reader's own word.
+describe("how far the reader would go from their own", () => {
   const top = (answers: Answers, count = 3) => bestMatches(answers, count).map((m) => m.city);
   const rankOf = (name: string, answers: Answers) =>
     bestMatches(answers, 115).findIndex((m) => m.city.name === name);
+  const REGIONS = ["ouest", "centre", "est", "sud", "nord"] as const;
 
-  it("puts the family's region first once the reader says it matters, whatever else they answered", () => {
-    for (const origin of ["ouest", "centre", "est", "sud", "nord"] as const) {
-      const much = top({ ...settled, origin: [origin], kin: "much" }).map((c) => c.zone);
-      expect(
-        much.filter((zone) => zone === origin).length,
-        `${origin} much`,
-      ).toBeGreaterThanOrEqual(2);
-      expect(much[0], `${origin} much`).toBe(origin);
-      const some = top({ ...settled, origin: [origin], kin: "some" }).map((c) => c.zone);
-      expect(some[0], `${origin} some`).toBe(origin);
+  it("« the same region »: puts the family's region first, whatever else they answered", () => {
+    for (const origin of REGIONS) {
+      const zones = top({ ...settled, origin: [origin], reach: "region" }).map((c) => c.zone);
+      expect(zones.filter((zone) => zone === origin).length, origin).toBeGreaterThanOrEqual(2);
+      expect(zones[0], origin).toBe(origin);
     }
   });
 
-  it("brings the family's own country into the top three", () => {
+  it("« my family's country »: brings that country into the top three", () => {
     for (const [origin, country] of [
       ["centre", "RD Congo"],
       ["centre", "Cameroun"],
@@ -430,7 +425,12 @@ describe("near one's own: the family's region, its country and the faith hold th
       ["ouest", "Bénin"],
       ["nord", "Maroc"],
     ] as const) {
-      const answers: Answers = { ...settled, origin: [origin], countries: [country], kin: "some" };
+      const answers: Answers = {
+        ...settled,
+        origin: [origin],
+        countries: [country],
+        reach: "country",
+      };
       expect(
         top(answers).map((c) => c.country),
         country,
@@ -438,18 +438,52 @@ describe("near one's own: the family's region, its country and the faith hold th
     }
   });
 
+  // The point of the site is to show cities the reader did not think of: naming a country does
+  // not lock the list to it unless the reader asks for that country.
+  it("« the same region »: gives the family's country no advantage, so its neighbours show", () => {
+    const family: Answers = { ...settled, origin: ["ouest"], countries: ["Sénégal"] };
+    const inCountry = (answers: Answers) =>
+      top(answers, 5).filter((city) => city.country === "Sénégal").length;
+    expect(inCountry({ ...family, reach: "region" })).toBeLessThan(
+      inCountry({ ...family, reach: "country" }),
+    );
+    expect(
+      new Set(top({ ...family, reach: "region" }, 5).map((c) => c.country)).size,
+    ).toBeGreaterThan(1);
+  });
+
+  it("« a culture alike »: mixes the regions, and keeps the other side of the Sahara back", () => {
+    for (const origin of ["ouest", "centre", "est", "sud"] as const) {
+      const zones = top({ ...settled, origin: [origin], reach: "alike" }, 5).map((c) => c.zone);
+      expect(zones, origin).not.toContain("nord");
+    }
+    const west = top({ ...settled, origin: ["ouest"], reach: "alike" }, 10).map((c) => c.zone);
+    expect(new Set(west).size).toBeGreaterThan(1);
+    const north = top({ ...settled, origin: ["nord"], reach: "alike" }, 5).map((c) => c.zone);
+    expect(new Set(north)).toEqual(new Set(["nord"]));
+  });
+
+  it("« anywhere »: the origin weighs nothing, only the taste for the unknown it tells", () => {
+    const surprised: Answers = { ...settled, origin: ["centre"], reach: "anywhere" };
+    const noOrigin: Answers = { ...settled, adventure: "seeking" };
+    expect(top(surprised, 5).map((c) => c.name)).toEqual(top(noOrigin, 5).map((c) => c.name));
+  });
+
+  // The surprise readers reported most (operator, 2026-11-20): North African cities named on the
+  // map to readers from every other region, before they had said anything about distance.
+  it("before the answer: the origin weighs without deciding", () => {
+    const unsaid = top({ ...settled, origin: ["ouest"] }, 10).map((c) => c.zone);
+    expect(unsaid.slice(0, 3)).not.toContain("nord");
+    expect(new Set(unsaid).size).toBeGreaterThan(1);
+  });
+
   it("brings the reader closer to where their faith is widely shared", () => {
-    const reader: Answers = { ...settled, origin: ["ameriques"], kin: "much" };
+    const reader: Answers = { ...settled, origin: ["ameriques"], reach: "region" };
     const muslim: Answers = { ...reader, faith: "muslim" };
     const christian: Answers = { ...reader, faith: "christian" };
     expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Lomé", muslim));
     expect(rankOf("Lomé", christian)).toBeLessThan(rankOf("Dakar", christian));
     expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Dakar", reader));
-  });
-
-  it("takes no share when the reader says living near their own does not matter", () => {
-    const indifferent: Answers = { ...settled, origin: ["centre"], kin: "none" };
-    expect(top(indifferent, 5).map((c) => c.name)).toEqual(top(settled, 5).map((c) => c.name));
   });
 });
 
@@ -476,9 +510,9 @@ describe("the divide between North Africa and the rest of the continent", () => 
 
   it("keeps North Africa out of the top five of a Caribbean reader who wants to stay near their own", () => {
     for (const nearOnesOwn of [
-      { kin: "much", adventure: "familiar" },
-      { kin: "much" },
-      { adventure: "familiar" },
+      { reach: "country" },
+      { reach: "region" },
+      { reach: "alike" },
     ] as Answers[]) {
       const zones = zonesOfTop({ ...settled, origin: ["ameriques"], ...nearOnesOwn }, 5);
       expect(zones, JSON.stringify(nearOnesOwn)).not.toContain("nord");
@@ -486,36 +520,27 @@ describe("the divide between North Africa and the rest of the continent", () => 
   });
 
   it("works the other way: a North African reader who wants to stay near their own stays north", () => {
-    const zones = zonesOfTop(
-      { ...southward, origin: ["nord"], kin: "much", adventure: "familiar" },
-      5,
-    );
+    const zones = zonesOfTop({ ...southward, origin: ["nord"], reach: "country" }, 5);
     expect(new Set(zones)).toEqual(new Set(["nord"]));
   });
 
-  it("assumes nothing from the origin alone, nor once the reader says their own do not matter", () => {
-    for (const unsaid of [{}, { kin: "none" }, { adventure: "seeking" }] as Answers[]) {
-      const zones = zonesOfTop({ ...settled, origin: ["ameriques"], ...unsaid }, 5);
-      expect(zones, JSON.stringify(unsaid)).toContain("nord");
-    }
+  it("lets North Africa back in as soon as the reader says « anywhere »", () => {
+    const zones = zonesOfTop({ ...settled, origin: ["ameriques"], reach: "anywhere" }, 5);
+    expect(zones).toContain("nord");
   });
 
   it("lowers a city across the divide without ever removing it", () => {
     const answers: Answers = {
       ...settled,
       origin: ["ameriques"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
     };
     expect(bestMatches(answers, 115)).toHaveLength(115);
     expect(scoreOf("Casablanca", answers)).toBeGreaterThan(0.2);
   });
 
   it("leaves a mixed family at home on both sides", () => {
-    const zones = zonesOfTop(
-      { ...settled, origin: ["ameriques", "nord"], kin: "much", adventure: "familiar" },
-      5,
-    );
+    const zones = zonesOfTop({ ...settled, origin: ["ameriques", "nord"], reach: "country" }, 5);
     expect(zones).toContain("nord");
   });
 });
@@ -533,7 +558,7 @@ describe("ranking the cities for an English reader", () => {
     project: "installer",
     languages: ["pt", "en"],
     origin: ["ouest"],
-    kin: "much",
+    reach: "region",
     faith: "muslim",
     saturday: 1,
     adventure: "seeking",

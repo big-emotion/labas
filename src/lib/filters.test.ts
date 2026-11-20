@@ -4,7 +4,12 @@ import { applyFilters, FILTER_MENU, filterMenu, filtersFrom, type Filters } from
 import { looksFrench } from "../i18n/looks-french";
 import { livableLanguages } from "./cities";
 
-const reader: Answers = { project: "installer", languages: ["fr"], origin: "ouest", kin: "much" };
+const reader: Answers = {
+  project: "installer",
+  languages: ["fr"],
+  origin: "ouest",
+  reach: "region",
+};
 const ranked = rankCities(reader);
 const names = (filters: Filters) => applyFilters(ranked, filters).map((m) => m.city.name);
 

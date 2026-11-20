@@ -1,3 +1,4 @@
+import { withAdventure } from "./reach";
 import {
   CHAPTER,
   LATER,
@@ -362,10 +363,9 @@ const PROFILE: Omit<Question, "group">[] = [
   },
   {
     id: "offTrack",
-    after: "adventure",
     title: "Sortir des sentiers battus, jusqu'où ?",
     en: { title: "Off the beaten track: how far?" },
-    when: (a) => holiday(a) && a.adventure === "seeking",
+    when: (a) => holiday(a) && withAdventure(a).adventure === "seeking",
     choices: [
       {
         label: "Là où peu de visiteurs vont",

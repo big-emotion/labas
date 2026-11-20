@@ -83,7 +83,7 @@ const PLACES_SET_ASIDE: [string, Set<unknown>][] = [
 export const SENSITIVE_ANSWERS = [
   "origin",
   "countries",
-  "kin",
+  "reach",
   "faith",
   "excludeCriminalising",
   "specialistCare",

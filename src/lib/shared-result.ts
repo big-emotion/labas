@@ -1,4 +1,5 @@
 import { CITIES, type City } from "./cities";
+import { withAdventure } from "./reach";
 import { SITE } from "./share";
 import {
   TRAITS,
@@ -31,7 +32,8 @@ export interface SharedResult {
 const LEVELS = [0, 0.5, 1];
 const ADVENTURES = ["familiar", "open", "seeking"];
 
-function temperamentOf(answers: Answers): TemperamentAnswers {
+function temperamentOf(given: Answers): TemperamentAnswers {
+  const answers = withAdventure(given);
   const kept: Record<string, unknown> = {};
   for (const trait of TRAITS) if (answers[trait] !== undefined) kept[trait] = answers[trait];
   return kept as TemperamentAnswers;

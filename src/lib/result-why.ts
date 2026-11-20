@@ -1,4 +1,5 @@
 import { namedOrigins } from "./questions";
+import { staysNear, type Reach } from "./reach";
 import type { Answers, Match } from "./ranking";
 import { INTL_LOCALE, type Bilingual, type Locale } from "../i18n/locale";
 import { countryName } from "../i18n/places";
@@ -28,7 +29,7 @@ const YOURS: Bilingual<{
   from: Record<string, string>;
   family: (regions: string) => string;
   countries: (names: string) => string;
-  near: string;
+  near: Record<Exclude<Reach, "anywhere">, string>;
   closer: (faith: boolean) => string;
 }> = {
   fr: {
@@ -42,7 +43,11 @@ const YOURS: Bilingual<{
     },
     family: (regions) => `Votre famille vient ${regions}`,
     countries: (names) => `Le pays de votre famille : ${names}`,
-    near: "Vivre près de vos origines compte pour vous",
+    near: {
+      country: "Vous aimeriez vivre dans le pays de votre famille",
+      region: "Vous aimeriez rester dans la région de votre famille",
+      alike: "Vous cherchez une culture proche de la vôtre",
+    },
     closer: (faith) =>
       `Nous avons mis en avant les villes qui ont un lien plus étroit avec vos origines${faith ? " et votre religion" : ""}.`,
   },
@@ -57,7 +62,11 @@ const YOURS: Bilingual<{
     },
     family: (regions) => `Your family comes from ${regions}`,
     countries: (names) => `Your family's country: ${names}`,
-    near: "Living close to your roots matters to you",
+    near: {
+      country: "You would like to live in your family's country",
+      region: "You would like to stay in your family's region",
+      alike: "You are looking for a culture close to your own",
+    },
     closer: (faith) =>
       `We have put forward the cities with a closer tie to your roots${faith ? " and your faith" : ""}.`,
   },
@@ -72,8 +81,8 @@ function yoursOf(answers: Answers, locale: Locale): ResultWhy["yours"] {
   const countries = (answers.countries ?? []).filter(Boolean);
   if (countries.length)
     said.push(copy.countries(countries.map((country) => countryName(country, locale)).join(", ")));
-  const near = answers.kin === "much" || answers.kin === "some";
-  if (near) said.push(copy.near);
+  const near = staysNear(answers);
+  if (answers.reach && near) said.push(copy.near[answers.reach as Exclude<Reach, "anywhere">]);
   const faith = near && ["muslim", "christian", "other"].includes(answers.faith ?? "");
   return near ? { said, closer: copy.closer(faith) } : { said };
 }

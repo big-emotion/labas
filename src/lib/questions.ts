@@ -1,4 +1,5 @@
 import { CITIES } from "./cities";
+import { staysNear } from "./reach";
 import { SEASONS } from "./holiday";
 import type { Answers } from "./ranking";
 import { INTL_LOCALE, type Bilingual, type Locale } from "../i18n/locale";
@@ -87,7 +88,6 @@ export const worksThere = (answers: Answers) =>
   answers.project !== "investir" && answers.project !== "decouvrir";
 const withChildren = (answers: Answers) =>
   answers.family === "parents" || answers.family === "fonder";
-const kinMatters = (answers: Answers) => answers.kin === "much" || answers.kin === "some";
 
 // The quick quiz's pool (operator, 2026-11-17): the project picks which questions apply, and
 // adaptive.ts picks the order from the answers. Worded in « vous ». The temperament questions are
@@ -333,7 +333,10 @@ export const QUESTIONS: Question[] = [
   {
     id: "adventure",
     group: TEMPERAMENT,
-    when: livesThere,
+    // Only once the reader has declined to name an origin: with one, « Jusqu'où aimeriez-vous
+    // aller ? » asks the same thing with the family in mind (lib/reach.ts).
+    when: (answers) =>
+      livesThere(answers) && answers.origin !== undefined && namedOrigins(answers).length === 0,
     title: "Découvrir une région d'Afrique que vous ne connaissez pas, ça vous tente ?",
     en: {
       title: "Discovering a region of Africa you don't know: does it appeal to you?",
@@ -474,34 +477,52 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "kin",
+    id: "reach",
     group: HISTORY,
-    after: "origin",
     // Only with a region to be near: « Je préfère ne pas dire » skips it (operator, 2026-11-16).
     when: (answers) => namedOrigins(answers).length > 0,
-    title: "Vivre près de vos origines, de votre culture, de votre religion, ça compte pour vous ?",
+    title: "Jusqu'où aimeriez-vous aller ?",
     en: {
-      title: "Living close to your roots, your culture, your faith: does it matter to you?",
-      hint: "If so, we favour cities near your family's region.",
+      title: "How far would you like to go?",
+      hint: "Nearly done. Your answer says how much your roots should count in your cities.",
     },
-    hint: "Si oui, on privilégie les villes proches de la région de votre famille.",
+    hint: "Presque fini. Votre réponse dit combien vos origines doivent compter dans vos villes.",
     choices: [
-      { label: "Beaucoup", value: "much", en: { label: "A lot" } },
-      { label: "Un peu", value: "some", en: { label: "A little" } },
-      { label: "Pas vraiment", value: "none", en: { label: "Not really" } },
+      {
+        label: "Dans le pays de ma famille",
+        value: "country",
+        when: (answers) => (answers.countries ?? []).some(Boolean),
+        en: { label: "In my family's country" },
+      },
+      {
+        label: "Dans la même région, d'autres pays aussi",
+        value: "region",
+        when: (answers) => africanOrigins(answers).length > 0,
+        en: { label: "In the same region, other countries too" },
+      },
+      {
+        label: "Ailleurs en Afrique, là où la culture ressemble",
+        value: "alike",
+        en: { label: "Elsewhere in Africa, where the culture is alike" },
+      },
+      {
+        label: "Partout, surprenez-moi",
+        value: "anywhere",
+        en: { label: "Anywhere, surprise me" },
+      },
     ],
   },
   {
     id: "faith",
     group: HISTORY,
-    after: "kin",
+    after: "reach",
     title: "Votre religion ?",
     en: {
       title: "Your religion?",
       hint: "To favour the countries where your religion is most widely practised (Pew Research Center, 2020).",
     },
     hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
-    when: kinMatters,
+    when: staysNear,
     choices: [
       { label: "Islam", value: "muslim", en: { label: "Islam" } },
       { label: "Christianisme", value: "christian", en: { label: "Christianity" } },

@@ -129,8 +129,7 @@ describe("the city a profile lands on", () => {
       project: "installer",
       languages: ["fr"],
       origin: ["ouest"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "muslim",
       passports: ["eu"],
       profession: "finance",
@@ -139,7 +138,7 @@ describe("the city a profile lands on", () => {
       project: "installer",
       languages: ["fr", "en"],
       origin: ["centre"],
-      kin: "much",
+      reach: "region",
       adventure: "open",
       faith: "christian",
       family: "parents",
@@ -150,8 +149,7 @@ describe("the city a profile lands on", () => {
       project: "pied",
       languages: ["fr", "ar"],
       origin: ["nord"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "muslim",
       profession: "tech",
       currentCity: "capital",
@@ -160,7 +158,7 @@ describe("the city a profile lands on", () => {
       project: "tester",
       languages: ["fr"],
       origin: ["ameriques"],
-      kin: "some",
+      reach: "alike",
       adventure: "seeking",
       landscapes: ["beach", "island"],
       profession: "tech",
@@ -170,8 +168,7 @@ describe("the city a profile lands on", () => {
       project: "installer",
       languages: ["fr"],
       origin: ["ouest"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "muslim",
       profession: "retired",
       budget: "serre",
@@ -182,7 +179,7 @@ describe("the city a profile lands on", () => {
       project: "investir",
       languages: ["fr"],
       origin: ["centre"],
-      kin: "some",
+      reach: "alike",
       adventure: "open",
       profession: "trade",
       saturday: 1,
@@ -192,8 +189,7 @@ describe("the city a profile lands on", () => {
       project: "pied",
       languages: ["en"],
       origin: ["ouest"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "christian",
       profession: "finance",
       priorities: ["career"],
@@ -203,7 +199,7 @@ describe("the city a profile lands on", () => {
       project: "tester",
       languages: ["fr"],
       origin: ["ouest"],
-      kin: "none",
+      reach: "anywhere",
       adventure: "seeking",
       profession: "student",
       budget: "serre",
@@ -214,8 +210,7 @@ describe("the city a profile lands on", () => {
       project: "installer",
       languages: ["fr", "ar"],
       origin: ["nord"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "muslim",
       family: "parents",
       priorities: ["safety", "schools"],
@@ -224,7 +219,7 @@ describe("the city a profile lands on", () => {
       project: "tester",
       languages: ["fr", "en"],
       origin: ["ameriques"],
-      kin: "some",
+      reach: "alike",
       adventure: "open",
       profession: "ngo",
       landscapes: ["nature"],
@@ -234,7 +229,7 @@ describe("the city a profile lands on", () => {
       project: "installer",
       languages: ["en", "sw"],
       origin: ["est"],
-      kin: "some",
+      reach: "alike",
       adventure: "open",
       profession: "tech",
       currentCity: "capital",
@@ -243,8 +238,7 @@ describe("the city a profile lands on", () => {
       project: "installer",
       languages: ["fr"],
       origin: ["sud"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "muslim",
       profession: "health",
       landscapes: ["island"],
@@ -253,7 +247,7 @@ describe("the city a profile lands on", () => {
       project: "tester",
       languages: ["fr"],
       origin: ["ameriques"],
-      kin: "none",
+      reach: "anywhere",
       adventure: "seeking",
       family: "couple",
       rhythm: "unplug",
@@ -413,8 +407,7 @@ describe("feeling at home among one's own", () => {
     project: "installer",
     languages: ["fr"],
     origin: "ouest",
-    kin: "much",
-    adventure: "familiar",
+    reach: "country",
   };
 
   it("keeps a West African reader who wants to feel at home in sub-Saharan Africa", () => {
@@ -448,25 +441,25 @@ describe("feeling at home among one's own", () => {
 
   it("lets an adventurous reader go further from the family's region", () => {
     const home = zones(westAfrican, 10).filter((z) => z === "ouest").length;
-    const away = zones({ ...westAfrican, adventure: "seeking" }, 10).filter(
+    const away = zones({ ...westAfrican, reach: "anywhere" }, 10).filter(
       (z) => z === "ouest",
     ).length;
     expect(away).toBeLessThan(home);
   });
 
   it("sends an adventurous reader out of the family's region, not only to its opposite", () => {
-    const away = zones({ ...westAfrican, adventure: "seeking" }, 10);
+    const away = zones({ ...westAfrican, reach: "anywhere" }, 10);
     expect(away.filter((z) => z !== "ouest" && z !== "nord").length).toBeGreaterThan(0);
   });
 
   it("brings a reader closer to where their faith is widely shared, when that matters", () => {
     const score = (answers: Answers, name: string) =>
       rankCities(answers).find((m) => m.city.name === name)!.score;
-    const muslim: Answers = { kin: "much", faith: "muslim" };
-    const christian: Answers = { kin: "much", faith: "christian" };
+    const muslim: Answers = { reach: "region", faith: "muslim" };
+    const christian: Answers = { reach: "region", faith: "christian" };
     expect(score(muslim, "Dakar")).toBeGreaterThan(score(muslim, "Accra"));
     expect(score(christian, "Accra")).toBeGreaterThan(score(christian, "Dakar"));
-    const indifferent: Answers = { kin: "none", faith: "muslim" };
+    const indifferent: Answers = { reach: "anywhere", faith: "muslim" };
     expect(score(indifferent, "Dakar")).toBe(score(indifferent, "Accra"));
   });
 
@@ -489,7 +482,7 @@ describe("feeling at home among one's own", () => {
       origin: ["nord"],
       countries: ["Soudan"],
       roots: "rediscover",
-      kin: "much",
+      reach: "region",
       languages: ["ar"],
     } as Answers;
     const names = bestMatches(sudanese, 3).map((m) => m.city.country);
@@ -503,8 +496,7 @@ describe("feeling at home among one's own", () => {
       languages: ["ar"],
       origin: ["nord"],
       countries: ["Soudan"],
-      kin: "much",
-      adventure: "familiar",
+      reach: "country",
       faith: "muslim",
       profession: "finance",
       rhythm: "same",
@@ -521,15 +513,20 @@ describe("feeling at home among one's own", () => {
   const reader: Answers = { project: "installer", languages: ["fr", "en"], origin: ["ouest"] };
 
   it("opens the other regions when feeling at home does not matter to the reader", () => {
-    expect(inRegion({ ...reader, kin: "none" })).toBeLessThanOrEqual(6);
-    expect(inRegion({ ...reader, kin: "none" })).toBeLessThan(inRegion({ ...reader, kin: "much" }));
+    expect(inRegion({ ...reader, reach: "anywhere" })).toBeLessThanOrEqual(6);
+    expect(inRegion({ ...reader, reach: "anywhere" })).toBeLessThan(
+      inRegion({ ...reader, reach: "region" }),
+    );
   });
 
-  it("mixes the family's region with others for an adventurous reader, without leaving it", () => {
+  it("mixes the family's region with others for a reader who looks for a culture alike", () => {
     for (const project of ["installer", "tester"] as const) {
-      const seeking = inRegion({ ...reader, project, kin: "some", adventure: "seeking" });
-      expect(seeking, project).toBeGreaterThanOrEqual(2);
-      expect(seeking, project).toBeLessThanOrEqual(7);
+      const alike = inRegion({ ...reader, project, reach: "alike" });
+      expect(alike, project).toBeGreaterThanOrEqual(2);
+      expect(alike, project).toBeLessThanOrEqual(inRegion({ ...reader, project, reach: "region" }));
+      expect(alike, project).toBeGreaterThanOrEqual(
+        inRegion({ ...reader, project, reach: "anywhere" }),
+      );
     }
   });
 });
@@ -562,8 +559,7 @@ describe("tensions between a family's country and a host country", () => {
   const family = (country: string): Answers => ({
     origin: ["centre", "est", "ouest"],
     countries: [country],
-    kin: "none",
-    adventure: "seeking",
+    reach: "anywhere",
   });
   const tensions = CITIES.flatMap((c) => c.countryFacts?.tensions ?? []);
 
