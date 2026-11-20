@@ -7,7 +7,7 @@ import Reactions from "../components/Reactions.astro";
 import { CRITERIA, type City, type Confidence, type Source } from "../lib/cities";
 import { goingThere } from "../lib/going";
 import { linesFor } from "../lib/lines";
-import { photoFor } from "../lib/photos";
+import { photosFor } from "../lib/photos";
 import { routesFor } from "../lib/routes";
 import { costLabel } from "../lib/card";
 import { criteriaPreview } from "../lib/city-sections";
@@ -26,7 +26,9 @@ const locale = localeOfPath(Astro.url.pathname);
 const dataLang = locale === "en" ? "fr" : undefined;
 const shown = cityCopy(city, locale);
 const lines = linesFor(city.name);
-const photo = photoFor(city.name);
+const photos = photosFor(city.name);
+/** « Flickr », not « flickr »: the credit names the place a reader can look the photo up. */
+const foundOn = (from = "Wikimedia Commons") => from.charAt(0).toUpperCase() + from.slice(1);
 // Unsafe cities get no route: the site never invites someone to go there.
 const routes = routesFor(city.name);
 const going = goingThere(city, locale);
@@ -39,6 +41,9 @@ const FR = {
   suits: `${shown.name}, ça vous correspond ?`,
   description: `${shown.name} (${shown.country}) : ${shown.tagline}. Ce qu'il faut savoir pour y vivre, critère par critère, avec nos sources.`,
   photo: "Photo :",
+  photos: `Photos de ${shown.name}`,
+  previousPhoto: "Photo précédente",
+  nextPhoto: "Photo suivante",
   themesLabel: "Thèmes de la fiche",
   themes: {
     essentiel: "L'essentiel",
@@ -163,6 +168,9 @@ const COPY: Bilingual<typeof FR> = {
     suits: `${shown.name}: does it suit you?`,
     description: `${shown.name} (${shown.country}): ${shown.tagline}. What to know about living there, criterion by criterion, with our sources.`,
     photo: "Photo:",
+    photos: `Photos of ${shown.name}`,
+    previousPhoto: "Previous photo",
+    nextPhoto: "Next photo",
     themesLabel: "Topics on this page",
     themes: {
       essentiel: "The essentials",
@@ -320,21 +328,49 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
       <p class="eyebrow">{shown.country}</p>
       <h1>{shown.name}</h1>
       <p class="tagline">{shown.tagline}</p>
-      {photo && (
-        <figure class="photo">
-          <img
-            src={`/photos/${photo.file}`}
-            alt={photo.alt}
-            lang={dataLang}
-            width="1280"
-            height="853"
-            loading="eager"
-          />
-          <figcaption>
-            {copy.photo} {photo.author}, <a href={photo.licenseUrl}>{photo.license}</a>, via{" "}
-            <a href={photo.source}>Wikimedia Commons</a>.
-          </figcaption>
-        </figure>
+      {photos.length > 0 && (
+        /* A strip the reader swipes (operator, 2026-11-20): plain scroll-snap, no script, so
+           it works before anything loads; the next photo peeks in to say there is more. */
+        <div
+          class:list={["slides", { one: photos.length === 1 }]}
+          role="region"
+          aria-label={copy.photos}
+          tabindex={photos.length > 1 ? 0 : undefined}
+        >
+          {photos.map((photo, index) => (
+            <figure class="photo">
+              <img
+                src={`/photos/${photo.file}`}
+                alt={photo.alt}
+                lang={dataLang}
+                width="1024"
+                height="683"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              <figcaption>
+                {photos.length > 1 && (
+                  <b>
+                    {index + 1} / {photos.length}
+                  </b>
+                )}{" "}
+                {copy.photo} {photo.author}, <a href={photo.licenseUrl}>{photo.license}</a>, via{" "}
+                <a href={photo.source}>{foundOn(photo.from)}</a>.
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+      {photos.length > 1 && (
+        /* A mouse wheel does not scroll sideways: two buttons for readers without a touch
+           screen or a trackpad. The strip itself needs no script. */
+        <p class="slide-buttons">
+          <button type="button" data-slide="-1" aria-label={copy.previousPhoto}>
+            ←
+          </button>
+          <button type="button" data-slide="1" aria-label={copy.nextPhoto}>
+            →
+          </button>
+        </p>
       )}
       {/* One tap, no account, a public count (lib/taps-dom.ts; operator, 2026-11-20). */}
       <div class="city-taps">
@@ -769,6 +805,17 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
 
   wireTaps(document, pageLocale(), "city");
 
+  const strip = document.querySelector<HTMLElement>(".slides");
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-slide]"))
+    button.addEventListener("click", () => {
+      const slide = strip?.querySelector<HTMLElement>(".photo");
+      // One photo at a time: the strip's own snapping lands it.
+      strip?.scrollBy({
+        left: Number(button.dataset.slide) * (slide?.offsetWidth ?? 0),
+        behavior: "smooth",
+      });
+    });
+
   const keys = document.getElementById("week-keys");
   if (keys) {
     const weeks = JSON.parse(keys.textContent ?? "[]");
@@ -958,8 +1005,59 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     font-family: var(--font-mono);
     color: var(--saffron);
   }
+  .slides {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+  .slides:focus-visible {
+    outline: 2px solid var(--saffron);
+    outline-offset: 4px;
+  }
   .photo {
     margin: 0;
+    /* Narrower than the strip, so the next photo shows at the edge. */
+    flex: 0 0 88%;
+    scroll-snap-align: start;
+  }
+  .slide-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+  }
+  .slide-buttons button {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 999px;
+    border: 1px solid var(--thread-dim);
+    background: transparent;
+    color: var(--thread);
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .slides.one .photo {
+    flex-basis: 100%;
+  }
+  .photo figcaption b {
+    color: var(--thread);
+    font-variant-numeric: tabular-nums;
+    margin-right: 4px;
+  }
+  @media (min-width: 768px) {
+    .photo {
+      flex-basis: 72%;
+    }
+  }
+  @media print {
+    .slides {
+      overflow: visible;
+    }
+    .photo:not(:first-child) {
+      display: none;
+    }
   }
   .photo img {
     width: 100%;
