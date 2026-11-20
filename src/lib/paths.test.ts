@@ -174,15 +174,30 @@ describe("going back and changing an answer", () => {
     expect(["wants", "season"]).toContain(nextFreeQuestion(changed, asked));
   });
 
+  // Operator, 2026-11-20: what the family says of itself is asked in one go, right after the
+  // three openers, so the paths part ways from the fourth question.
+  it("asks for the family's country, then feeling at home, then the faith, right after the origin", () => {
+    const african = play("installer", 0, { origin: ["ouest"], kin: "much" }).asked;
+    expect(african.slice(3, 6)).toEqual(["countries", "kin", "faith"]);
+    const caribbean = play("installer", 0, { origin: ["ameriques"], kin: "none" }).asked;
+    expect(caribbean[3]).toBe("kin");
+    expect(caribbean).not.toContain("countries");
+    expect(caribbean).not.toContain("faith");
+    const unsaid = play("installer", 0, { origin: [null] } as unknown as Answers).asked;
+    expect(unsaid).not.toContain("kin");
+    expect(new Set([african[3], caribbean[3], unsaid[3]]).size).toBe(3);
+  }, 30_000);
+
   it("asks each question of the full questionnaire once", () => {
     const ids = DEEP_QUESTIONS.map((q) => q.id);
     expect(ids.length).toBe(new Set(ids).size);
   });
 
-  // Operator, 2026-11-16: the six questions that move the top five least go to the full
+  // Operator, 2026-11-16: the questions that move the top five least go to the full
   // questionnaire, so the quick quiz stays quick; they are still asked there, where they fit.
+  // The family's country and the faith came back to the quick quiz on 2026-11-20.
   it("keeps the questions that move the result least for the full questionnaire", () => {
-    const moved = ["budget", "passports", "countries", "faith", "duration", "tripsHome"];
+    const moved = ["budget", "passports", "duration", "tripsHome"];
     for (const project of PROJECTS)
       for (const pick of [0, 1, 2])
         for (const id of moved)
@@ -197,9 +212,7 @@ describe("going back and changing an answer", () => {
       return seen;
     };
     const holiday = deep({ project: "decouvrir", origin: ["ouest"], kin: "much" } as Answers);
-    expect(holiday).toEqual(
-      expect.arrayContaining(["duration", "budget", "passports", "countries", "faith"]),
-    );
+    expect(holiday).toEqual(expect.arrayContaining(["duration", "budget", "passports"]));
     expect(deep({ project: "pied", origin: [null] } as unknown as Answers)).toContain("tripsHome");
     // Plays about fifteen whole quizzes: slower than the others on CI.
   }, 30_000);

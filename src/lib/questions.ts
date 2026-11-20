@@ -453,6 +453,25 @@ export const QUESTIONS: Question[] = [
       { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
     ],
   },
+  // The family's country and the faith are asked in the quick quiz (operator, 2026-11-20): left
+  // to the full questionnaire they never weighed on the first result, the one most readers stop at.
+  {
+    id: "countries",
+    group: HISTORY,
+    after: "origin",
+    title: "De quel pays vient votre famille ?",
+    en: {
+      title: "Which country does your family come from?",
+      hint: "Your family's country weighs heavily if you want to feel at home.",
+    },
+    hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
+    max: 3,
+    when: (answers) => africanOrigins(answers).length > 0,
+    choices: [
+      ...COUNTRY_CHOICES,
+      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
+    ],
+  },
   {
     id: "kin",
     group: HISTORY,
@@ -469,6 +488,25 @@ export const QUESTIONS: Question[] = [
       { label: "Beaucoup", value: "much", en: { label: "A lot" } },
       { label: "Un peu", value: "some", en: { label: "A little" } },
       { label: "Pas vraiment", value: "none", en: { label: "Not really" } },
+    ],
+  },
+  {
+    id: "faith",
+    group: HISTORY,
+    after: "kin",
+    title: "Votre religion ?",
+    en: {
+      title: "Your religion?",
+      hint: "To favour the countries where your religion is most widely practised (Pew Research Center, 2020).",
+    },
+    hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
+    when: kinMatters,
+    choices: [
+      { label: "Islam", value: "muslim", en: { label: "Islam" } },
+      { label: "Christianisme", value: "christian", en: { label: "Christianity" } },
+      { label: "Une autre", value: "other", en: { label: "Another one" } },
+      { label: "Aucune", value: "none", en: { label: "None" } },
+      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
     ],
   },
   {
@@ -510,7 +548,8 @@ export const QUESTIONS: Question[] = [
 
 /**
  * Asked in the full questionnaire, not the quick quiz: measured on 40 runs per path, they move the
- * top five least (operator, 2026-11-16). Their rules still hold there.
+ * top five least (operator, 2026-11-16). Their rules still hold there. The family's country and
+ * the faith left this list on 2026-11-20.
  */
 export const LATER: Question[] = [
   {
@@ -580,42 +619,6 @@ export const LATER: Question[] = [
         en: { label: "From the East African Community" },
       },
       { label: "Un autre", value: "other", en: { label: "Another one" } },
-    ],
-  },
-  {
-    id: "countries",
-    group: HISTORY,
-    after: "origin",
-    title: "De quel pays vient votre famille ?",
-    en: {
-      title: "Which country does your family come from?",
-      hint: "Your family's country weighs heavily if you want to feel at home.",
-    },
-    hint: "Le pays de votre famille pèse fort si vous voulez vous sentir chez vous.",
-    max: 3,
-    when: (answers) => africanOrigins(answers).length > 0,
-    choices: [
-      ...COUNTRY_CHOICES,
-      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
-    ],
-  },
-  {
-    id: "faith",
-    group: HISTORY,
-    after: "kin",
-    title: "Votre religion ?",
-    en: {
-      title: "Your religion?",
-      hint: "To favour the countries where your religion is most widely practised (Pew Research Center, 2020).",
-    },
-    hint: "Pour privilégier les pays où votre religion est la plus pratiquée (Pew Research Center, 2020).",
-    when: kinMatters,
-    choices: [
-      { label: "Islam", value: "muslim", en: { label: "Islam" } },
-      { label: "Christianisme", value: "christian", en: { label: "Christianity" } },
-      { label: "Une autre", value: "other", en: { label: "Another one" } },
-      { label: "Aucune", value: "none", en: { label: "None" } },
-      { label: "Je préfère ne pas dire", value: null, en: { label: "I'd rather not say" } },
     ],
   },
 ];

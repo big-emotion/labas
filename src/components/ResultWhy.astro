@@ -23,7 +23,8 @@ const reviews = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const COPY: Bilingual<Record<string, string>> = {
   fr: {
     title: "Pourquoi ces villes ?",
-    how: "Chaque réponse fait monter les villes qui lui ressemblent et descendre les autres. Aucune ville n'est retirée.",
+    how: "Chaque réponse rapproche les villes qui vous ressemblent. Aucune ville n'est retirée.",
+    yours: "Ce que vous nous avez dit",
     shared: "Ce que ces villes ont en commun",
     toKnow: "À savoir",
     ask: "Ces villes vous ressemblent ?",
@@ -34,7 +35,8 @@ const COPY: Bilingual<Record<string, string>> = {
   },
   en: {
     title: "Why these cities?",
-    how: "Each answer lifts the cities that match it and lowers the others. No city is removed.",
+    how: "Each answer brings the cities that are like you closer. No city is removed.",
+    yours: "What you told us",
     shared: "What these cities have in common",
     toKnow: "Worth knowing",
     ask: "Are these cities like you?",
@@ -51,6 +53,11 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
   <summary>{copy.title}</summary>
   <div class="why-body">
     <p class="why-how">{copy.how}</p>
+    <div class="why-yours" data-why-yours hidden>
+      <p class="why-label">{copy.yours}</p>
+      <ul></ul>
+      <p class="why-closer" data-why-closer hidden></p>
+    </div>
     <div class="why-reasons">
       <div data-why-shared>
         <p class="why-label">{copy.shared}</p>
@@ -150,6 +157,22 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     gap: 6px;
     align-content: start;
   }
+  .why-yours {
+    display: grid;
+    gap: 6px;
+  }
+  .why-yours ul {
+    padding-left: 1.1em;
+    display: grid;
+    gap: 2px;
+    font-size: 0.95rem;
+  }
+  .why-closer {
+    color: var(--saffron);
+    font-size: 0.95rem;
+  }
+  .why-yours[hidden],
+  .why-closer[hidden],
   .why-reasons > div[hidden],
   .why-know[hidden] {
     display: none;

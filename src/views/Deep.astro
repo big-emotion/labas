@@ -287,7 +287,7 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
         }),
       );
       const proposed = ranked.filter((m) => !m.excludedBecause);
-      showWhy(proposed.slice(0, TOP), locale);
+      showWhy(proposed.slice(0, TOP), answers as Answers, locale);
       const cards = proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked, locale));
       (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
       placeVerdict(locale);

@@ -1,6 +1,6 @@
 import { verdictEvent, type VerdictPlace } from "./analytics";
 import { track } from "./keep-dom";
-import type { Match } from "./ranking";
+import type { Answers, Match } from "./ranking";
 import { whyTheseCities } from "./result-why";
 import { cityCopy } from "../i18n/city-copy";
 import type { Bilingual, Locale } from "../i18n/locale";
@@ -74,10 +74,10 @@ function wireVerdict(box: HTMLElement, locale: Locale) {
 }
 
 /** Fills « Pourquoi ces villes ? »; called after every drawing of the result. */
-export function showWhy(matches: Match[], locale: Locale): void {
+export function showWhy(matches: Match[], answers: Answers, locale: Locale): void {
   const box = document.querySelector<HTMLElement>("[data-why]");
   if (!box) return;
-  const why = whyTheseCities(matches);
+  const why = whyTheseCities(matches, answers, locale);
   firstCity = matches[0]?.city;
   box.hidden = !firstCity || (why.shared.length === 0 && why.first.length === 0);
   if (box.hidden || !firstCity) return;
@@ -87,6 +87,10 @@ export function showWhy(matches: Match[], locale: Locale): void {
   box.querySelector("[data-why-first-title]")!.textContent = COPY[locale].first(
     cityCopy(firstCity, locale).name,
   );
+  fillReasons(box.querySelector("[data-why-yours]")!, why.yours?.said ?? []);
+  const closer = box.querySelector<HTMLElement>("[data-why-closer]")!;
+  closer.hidden = !why.yours?.closer;
+  closer.textContent = why.yours?.closer ?? "";
   const know = box.querySelector<HTMLElement>("[data-why-know]")!;
   know.hidden = !why.toKnow;
   know.querySelector("span")!.textContent = why.toKnow ?? "";

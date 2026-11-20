@@ -466,6 +466,19 @@ const ADVENTURE_SCALE = { familiar: 1.25, open: 1, seeking: 0.25 } as const;
  * two thirds of its score, so it steps back without leaving the list.
  */
 const DIVIDE_SHARE = { both: 0.3, either: 0.2 } as const;
+/**
+ * The same holds for everything a reader says of their own: the family's region, its country and
+ * their faith each take a share of the score once the reader says that living near them matters
+ * (« Beaucoup » or « Un peu »). As weights they were diluted like the divide was: a reader from
+ * Central Africa who answered « Beaucoup » got three Indian Ocean islands first, and a family
+ * from RD Congo never saw Kinshasa (operator, 2026-11-20). The region's share follows its draw
+ * (project, kin, appetite for the unknown), so a settler gets more of it than an investor.
+ */
+const ORIGIN_SHARE = { perDraw: 0.1, most: 0.35 } as const;
+const COUNTRY_SHARE = { much: 0.3, some: 0.2 } as const;
+const FAITH_SHARE = { much: 0.15, some: 0.1 } as const;
+/** All of them together leave a third of the score to everything else the reader answered. */
+const NEAR_ONES_OWN_MOST = 0.65;
 const PRACTICAL: Axis[] = [
   "safety",
   "comfort",
@@ -624,6 +637,7 @@ export function profileOf(answers: Answers): Profile {
   // The origin weighs on its own: the family's region draws the reader by project, more when
   // feeling at home matters, less with an appetite for the unknown; a trip, or that appetite,
   // leans away from it instead.
+  const kinMatters = answers.kin === "much" || answers.kin === "some";
   if (origins.length) {
     const scale = KIN_SCALE[answers.kin ?? "unsaid"] * ADVENTURE_SCALE[answers.adventure ?? "open"];
     const draw = (answers.project ? ORIGIN_DRAW[answers.project] : 1) * scale;
@@ -631,9 +645,12 @@ export function profileOf(answers: Answers): Profile {
       (answers.project === "decouvrir" ? 0.5 : 0) +
       (answers.adventure === "seeking" ? 0.6 : 0) +
       (answers.roots === "discover" ? 1 : 0);
-    // Never more than a non-negotiable, so the temperament can still decide (operator, 2026-11-17).
+    // As a plain weight, never more than a non-negotiable; once the reader says their own matter,
+    // the region takes its share instead (ORIGIN_SHARE).
     const weight = Math.min(NON_NEGOTIABLE, draw + away);
     if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, weight);
+    if (draw > 0 && kinMatters)
+      shares.origin = Math.min(ORIGIN_SHARE.most, ORIGIN_SHARE.perDraw * draw);
     if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, weight);
     // Only on the reader's own word: the origin alone says nothing of where they would feel at
     // home, and an appetite for the unknown says the opposite.
@@ -652,6 +669,7 @@ export function profileOf(answers: Answers): Profile {
   ) {
     const weight = KIN_SCALE[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
     fact("faith", { kind: "faith", value: faith, weight: 2 * weight }, weight);
+    if (kinMatters) shares.faith = FAITH_SHARE[answers.kin as "much" | "some"];
   }
   // The family's own country: what draws a diaspora back to a city no other answer reaches. A
   // documented war or ban between it and the host country counts inside the same answer, never
@@ -665,6 +683,7 @@ export function profileOf(answers: Answers): Profile {
     const weight = (1 + roots + kin) * ADVENTURE_SCALE[answers.adventure ?? "open"];
     fact("countries", { kind: "homeCountry", values: countries, weight: 2 }, weight);
     fact("countries", { kind: "tension", values: countries, weight: 2 }, weight);
+    if (kinMatters) shares.countries = COUNTRY_SHARE[answers.kin as "much" | "some"];
   }
 
   const renounced = new Set<Axis>(
@@ -943,13 +962,18 @@ function evidenceOf(profile: Profile): Evidence[] {
   };
   for (const p of profile.pulls) of(p.from).pulls.push(p);
   for (const f of profile.facts) of(f.from).facts.push(f);
-  for (const [from, share] of Object.entries(profile.shares)) {
-    const others = [...byAnswer].reduce(
-      (sum, [key, e]) => (key === from ? sum : sum + e.weight),
-      0,
-    );
-    of(from).weight = (share / (1 - share)) * others;
-  }
+  // The shares are set together, against the answers that keep a plain weight.
+  const asked = Object.entries(profile.shares).filter(([from]) => byAnswer.has(from));
+  const wanted = asked.reduce((sum, [, share]) => sum + share, 0);
+  const scale = Math.min(1, NEAR_ONES_OWN_MOST / (wanted || 1));
+  const plain = [...byAnswer].reduce(
+    (sum, [from, e]) => (from in profile.shares ? sum : sum + e.weight),
+    0,
+  );
+  // With nothing else answered there is nothing to take a share of: the weights stand.
+  if (plain === 0) return [...byAnswer.values()];
+  for (const [from, share] of asked)
+    of(from).weight = ((share * scale) / (1 - wanted * scale)) * plain;
   return [...byAnswer.values()];
 }
 

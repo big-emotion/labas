@@ -575,7 +575,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         renderLeftOut();
 
         showProfile(current, locale);
-        showWhy(matches, locale);
+        showWhy(matches, current, locale);
         const cards = matches.map((m, i) => {
           const card = cardFor(m, i, ranked, locale);
           const aside = card.querySelector<HTMLButtonElement>(".not-for-me");

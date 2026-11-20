@@ -351,46 +351,111 @@ describe("the size of the city and its pace", () => {
   });
 });
 
-// The family's region weighs like a non-negotiable at most, so the temperament can still decide.
-describe("an origin that weighs without deciding alone", () => {
-  it("leaves room for the temperament: the field test of 2026-11-17 keeps Kigali in the top three", () => {
-    const fieldTest: Answers = {
-      project: "pied",
-      profession: "consulting",
-      family: "celib",
-      languages: ["fr", "en"],
-      size: 3,
-      landscapes: ["nature", "urban"],
-      saturday: 1,
-      adventure: "familiar",
-      order: 1,
-      together: 0,
-      friction: 0,
-      origin: ["ouest"],
-      kin: "much",
-      priorities: ["safety"],
-    };
-    expect(bestMatches(fieldTest, 3).map((m) => m.city.name)).toContain("Kigali");
+// The field test of 2026-11-17 kept Kigali in the top three of a West African reader who had
+// answered « Beaucoup » and « terrain connu ». The operator reversed it on 2026-11-20: once the
+// reader says their own matter, the family's region comes first, and the temperament orders the
+// cities inside it.
+describe("an origin that leads without deciding alone", () => {
+  const fieldTest: Answers = {
+    project: "pied",
+    profession: "consulting",
+    family: "celib",
+    languages: ["fr", "en"],
+    size: 3,
+    landscapes: ["nature", "urban"],
+    saturday: 1,
+    adventure: "familiar",
+    order: 1,
+    together: 0,
+    friction: 0,
+    origin: ["ouest"],
+    kin: "much",
+    priorities: ["safety"],
+  };
+  const topThree = (answers: Answers) => bestMatches(answers, 3).map((m) => m.city);
+
+  it("keeps the top three in the family's region", () => {
+    expect(topThree(fieldTest).map((city) => city.zone)).toEqual(["ouest", "ouest", "ouest"]);
+  });
+
+  it("lets the temperament choose which cities of that region", () => {
+    const quiet: Answers = { ...fieldTest, size: 1, saturday: 0, landscapes: ["beach"] };
+    expect(topThree(quiet).map((city) => city.name)).not.toEqual(
+      topThree(fieldTest).map((city) => city.name),
+    );
+  });
+});
+
+/** A reader who has answered the whole quick quiz, bar what the family says of itself. */
+const settled: Answers = {
+  project: "installer",
+  languages: ["fr"],
+  family: "couple",
+  size: 3,
+  pace: 0.5,
+  landscapes: ["beach"],
+  climate: "mild",
+  saturday: 0.5,
+  order: 1,
+  together: 0.5,
+  friction: 0,
+  priorities: ["safety", "health"],
+};
+
+// Operator, 2026-11-20: what a reader says of their own (region, country, faith) was diluted by
+// the twelve other answers of a quick quiz; it now holds its share of the final score.
+describe("near one's own: the family's region, its country and the faith hold their share", () => {
+  const top = (answers: Answers, count = 3) => bestMatches(answers, count).map((m) => m.city);
+  const rankOf = (name: string, answers: Answers) =>
+    bestMatches(answers, 115).findIndex((m) => m.city.name === name);
+
+  it("puts the family's region first once the reader says it matters, whatever else they answered", () => {
+    for (const origin of ["ouest", "centre", "est", "sud", "nord"] as const) {
+      const much = top({ ...settled, origin: [origin], kin: "much" }).map((c) => c.zone);
+      expect(
+        much.filter((zone) => zone === origin).length,
+        `${origin} much`,
+      ).toBeGreaterThanOrEqual(2);
+      expect(much[0], `${origin} much`).toBe(origin);
+      const some = top({ ...settled, origin: [origin], kin: "some" }).map((c) => c.zone);
+      expect(some[0], `${origin} some`).toBe(origin);
+    }
+  });
+
+  it("brings the family's own country into the top three", () => {
+    for (const [origin, country] of [
+      ["centre", "RD Congo"],
+      ["centre", "Cameroun"],
+      ["ouest", "Sénégal"],
+      ["ouest", "Bénin"],
+      ["nord", "Maroc"],
+    ] as const) {
+      const answers: Answers = { ...settled, origin: [origin], countries: [country], kin: "some" };
+      expect(
+        top(answers).map((c) => c.country),
+        country,
+      ).toContain(country);
+    }
+  });
+
+  it("brings the reader closer to where their faith is widely shared", () => {
+    const reader: Answers = { ...settled, origin: ["ameriques"], kin: "much" };
+    const muslim: Answers = { ...reader, faith: "muslim" };
+    const christian: Answers = { ...reader, faith: "christian" };
+    expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Lomé", muslim));
+    expect(rankOf("Lomé", christian)).toBeLessThan(rankOf("Dakar", christian));
+    expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Dakar", reader));
+  });
+
+  it("takes no share when the reader says living near their own does not matter", () => {
+    const indifferent: Answers = { ...settled, origin: ["centre"], kin: "none" };
+    expect(top(indifferent, 5).map((c) => c.name)).toEqual(top(settled, 5).map((c) => c.name));
   });
 });
 
 // Beta feedback, 2026-11-19: a reader from the Caribbean who wanted to live near their own was
 // sent to North Africa, and the family's region counted for less with every further answer.
 describe("the divide between North Africa and the rest of the continent", () => {
-  const settled: Answers = {
-    project: "installer",
-    languages: ["fr"],
-    family: "couple",
-    size: 3,
-    pace: 0.5,
-    landscapes: ["beach"],
-    climate: "mild",
-    saturday: 0.5,
-    order: 1,
-    together: 0.5,
-    friction: 0,
-    priorities: ["safety", "health"],
-  };
   const southward: Answers = {
     project: "installer",
     languages: ["fr", "en"],

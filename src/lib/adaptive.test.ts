@@ -61,8 +61,12 @@ describe("the quick quiz, one question at a time", () => {
   it("asks a follow-up right after the question it follows", () => {
     for (const pick of [0, 1, 2, 3]) {
       const { asked } = play(pick);
+      // The family's country, when an African region was named, comes between the two.
+      const between = asked.includes("countries") ? 2 : 1;
       if (asked.includes("kin"))
-        expect(asked.indexOf("kin"), String(pick)).toBe(asked.indexOf("origin") + 1);
+        expect(asked.indexOf("kin"), String(pick)).toBe(asked.indexOf("origin") + between);
+      if (asked.includes("faith"))
+        expect(asked.indexOf("faith"), String(pick)).toBe(asked.indexOf("kin") + 1);
     }
   });
 
