@@ -28,15 +28,30 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   answer still turns the list over. The daily language weighs most; the project and the origin
   weigh on their own (the family's region draws a settler, not a holidaymaker). No fact weighs
   without an answer that asks for it: nothing is inferred from an answer the reader did not give.
-  One answer is not diluted by the others (operator, 2026-11-19): a reader who names their origin
-  and says they want to stay near their own (« Beaucoup », or « terrain connu ») sees the cities
-  across the North Africa / sub-Saharan divide step back, both ways, by a fixed share of the score
-  (`DIVIDE_SHARE`); the origin alone never does this, and no city leaves the list.
-- **The first city comes fast** (operator, 2026-11-19): above the cards only « Pourquoi ces
-  villes ? » (`components/ResultWhy.astro`), folded to its question, and the link to
-  /approfondir. Right under the first city, « Ces villes vous ressemblent ? »: one tap, a review
-  or a share. The temperament and the one news sign-up come after the cities; the sign-up offered
-  during the quiz closes when the quiz ends.
+  One answer is not diluted by the others (operator, 2026-11-19 and 2026-11-20): once a reader
+  says living near their own matters (« Beaucoup » or « Un peu »), the family's region, its
+  country and their faith each take a fixed share of the score (`ORIGIN_SHARE`, `COUNTRY_SHARE`,
+  `FAITH_SHARE`, together at most `NEAR_ONES_OWN_MOST`), so the family's region comes first and
+  the temperament orders the cities inside it; « Beaucoup » or « terrain connu » also weighs the
+  North Africa / sub-Saharan divide, both ways (`DIVIDE_SHARE`). The origin alone never does
+  this, and no city leaves the list. The family's country and the faith are asked in the quick
+  quiz, right after the origin, so the paths part ways from the fourth question.
+- **Closeness, never rejection** (operator, 2026-11-20): reader text says which cities came
+  nearer and why (« un lien plus étroit avec vos origines »), never which region or city stepped
+  back. « Pourquoi ces villes ? » recalls the family's region, its country and the wish to live
+  near one's own; the faith is a tie, never named.
+- **The first city hooks the reader** (operator, 2026-11-19 and 2026-11-20): above the cards
+  only « Pourquoi ces villes ? » (`components/ResultWhy.astro`), folded to its question. Inside
+  the first card, right under the city's name: the one-tap reaction, then the one block of
+  actions (`components/KeepResults.astro`, placed by `placeHook`): the full questionnaire, share,
+  WhatsApp, the e-mail, a review. No other box asks for anything; cards 2 and 3 keep only their
+  reaction row. The temperament and the one news sign-up come after the cities; the sign-up
+  offered during the quiz closes when the quiz ends.
+- **One-tap reactions are public counts** (operator, 2026-11-20; `lib/taps.ts`, « taps » in the
+  code since `reactions` means the written reviews): « J'aime », « Ça me correspond », « Ça ne me
+  correspond pas » on every result card, city page and the cities list, no account. The server
+  keeps a count per city and answer and nothing about who tapped; the reader's own answer stays
+  in localStorage. A count of zero is never shown. /villes and /avis sort and filter by them.
 - **Test first** (Vitest, `src/**/*.test.ts`), through the public functions `rankCities` and
   `bestMatches`, never through private helpers. KISS: no framework island, no backend.
 - **Data honesty**: scores in `src/data/cities.json` are editorial estimates. Never present them
@@ -51,9 +66,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
   LGBT filters are never sent. « Pas pour moi » (operator, 2026-11-18) sets a city, a country
   or a region aside as a filter, never a score; the places are sensitive answers, and its event
-  (`notForMeEvent`) carries only the place on the page and the level, never which one. The
-  verdict on a result (`verdictEvent`) carries yes or not really and the questionnaire, never a
-  city. Shared or mailed results carry cities and percentages, never
+  (`notForMeEvent`) carries only the place on the page and the level, never which one. A one-tap
+  reaction (`tapEvent`) carries the place on the page, the city and the answer: the city is
+  public there by the reader's own gesture; never a quiz answer. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a

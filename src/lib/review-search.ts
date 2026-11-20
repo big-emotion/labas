@@ -1,4 +1,5 @@
 import type { Bilingual } from "../i18n/locale";
+import { tapTotal, type TapsByCity } from "./taps";
 import type { Zone } from "./cities";
 import type { Reaction } from "./reactions";
 import { TEMPERAMENTS } from "./temperament";
@@ -28,6 +29,10 @@ export interface ReviewFilters {
   /** An archetype name of the temperament chapter. */
   temperament: string | null;
   sort: ReviewSort;
+  /** The public one-tap reactions by city, once loaded. */
+  taps?: TapsByCity;
+  /** Only the reviews of cities with at least one reaction. */
+  tapped?: boolean;
 }
 
 /** The sorts of /avis, in the order the reader sees them; the first is the default. */
@@ -37,6 +42,14 @@ export const SORTS = [
   { key: "aimes", label: { fr: "Plus aimés", en: "Most liked" } },
   { key: "moins-aimes", label: { fr: "Moins aimés", en: "Least liked" } },
   { key: "reponses", label: { fr: "Plus de réponses", en: "Most replies" } },
+  {
+    key: "reactions",
+    label: { fr: "Villes aux plus de réactions", en: "Cities with most reactions" },
+  },
+  {
+    key: "moins-reactions",
+    label: { fr: "Villes aux moins de réactions", en: "Cities with fewest reactions" },
+  },
 ] as const satisfies readonly { key: string; label: Bilingual<string> }[];
 export type ReviewSort = (typeof SORTS)[number]["key"];
 
@@ -46,13 +59,15 @@ const likesOf = (review: Reaction) =>
 const age = (review: Reaction) => -Date.parse(review.createdAt);
 
 /** Negative when `a` comes first; a tie always falls back to the newest first. */
-const BY: Record<ReviewSort, (a: Reaction, b: Reaction) => number> = {
+const orderBy = (taps: TapsByCity): Record<ReviewSort, (a: Reaction, b: Reaction) => number> => ({
+  reactions: (a, b) => tapTotal(taps[b.city]) - tapTotal(taps[a.city]) || age(a) - age(b),
+  "moins-reactions": (a, b) => tapTotal(taps[a.city]) - tapTotal(taps[b.city]) || age(a) - age(b),
   recents: (a, b) => age(a) - age(b),
   anciens: (a, b) => age(b) - age(a),
   aimes: (a, b) => likesOf(b) - likesOf(a) || age(a) - age(b),
   "moins-aimes": (a, b) => likesOf(a) - likesOf(b) || age(a) - age(b),
   reponses: (a, b) => (b.replies?.length ?? 0) - (a.replies?.length ?? 0) || age(a) - age(b),
-};
+});
 
 export interface Found {
   review: Reaction;
@@ -80,8 +95,10 @@ export function searchReviews(
   filters: ReviewFilters,
 ): Found[] {
   const words = plain(filters.query.trim());
+  const taps = filters.taps ?? {};
   const kept = reviews.filter((review) => {
     const place = places[review.city];
+    if (filters.tapped && tapTotal(taps[review.city]) === 0) return false;
     if (filters.city && review.city !== filters.city) return false;
     if (filters.zone && place?.zone !== filters.zone) return false;
     if (!words) return true;
@@ -93,7 +110,7 @@ export function searchReviews(
     ];
     return said.some((text) => plain(text).includes(words));
   });
-  const sorted = [...kept].sort(BY[filters.sort]);
+  const sorted = [...kept].sort(orderBy(taps)[filters.sort]);
   const { temperament } = filters;
   if (!temperament) return sorted.map((review) => ({ review, close: true }));
   // A stable sort: at equal distance the chosen sort stays. Equal is tested first because

@@ -174,3 +174,35 @@ describe("the cities of a region, for the list to pick one", () => {
     ]);
   });
 });
+
+// Operator, 2026-11-20: the one-tap reactions on a city are public, and order the reviews too.
+describe("reviews by the reactions to their city", () => {
+  const taps = {
+    dakar: { like: 4, suits: 1, not: 0 },
+    nairobi: { like: 9, suits: 0, not: 2 },
+  };
+  const reviews = [
+    review("accra", "Une ville qui bouge."),
+    review("dakar", "La mer partout."),
+    review("nairobi", "Le vert en pleine ville."),
+  ];
+  const cities = (sort: "reactions" | "moins-reactions", tapped = false) =>
+    searchReviews(reviews, PLACES, {
+      query: "",
+      city: null,
+      zone: null,
+      temperament: null,
+      sort,
+      taps,
+      tapped,
+    }).map((found) => found.review.city);
+
+  it("puts the reviews of the most reacted cities first, or of the least", () => {
+    expect(cities("reactions")).toEqual(["nairobi", "dakar", "accra"]);
+    expect(cities("moins-reactions")).toEqual(["accra", "dakar", "nairobi"]);
+  });
+
+  it("keeps only the cities with a reaction when asked", () => {
+    expect(cities("reactions", true)).toEqual(["nairobi", "dakar"]);
+  });
+});

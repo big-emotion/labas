@@ -114,3 +114,53 @@ button {
 .gauge-line small {
   color: var(--thread-faint);
 }
+
+/* The one-tap reaction row (lib/taps-dom.ts): built in the browser, so styled here. */
+.taps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.taps button {
+  min-height: 48px;
+  padding: 4px 6px;
+  border-radius: 14px;
+  border: 1px solid var(--thread-dim);
+  background: transparent;
+  color: var(--thread);
+  font-weight: 800;
+  font-size: 0.82rem;
+  line-height: 1.15;
+  cursor: pointer;
+}
+.taps button b {
+  display: block;
+  color: var(--saffron);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+.taps button[aria-pressed="true"] {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  color: var(--ink);
+}
+.taps button[aria-pressed="true"] b {
+  color: var(--ink);
+}
+.taps-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--thread-dim);
+  font-size: 0.88rem;
+}
+.taps-note:empty {
+  display: none;
+}
+@media print {
+  .taps {
+    display: none;
+  }
+}
+.taps button b[hidden] {
+  display: none;
+}

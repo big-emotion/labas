@@ -4,6 +4,7 @@ import { CITIES, ZONES, type Zone } from "../lib/cities";
 import { cityCopy } from "../i18n/city-copy";
 import { BRAND, INTL_LOCALE, type Bilingual } from "../i18n/locale";
 import { zoneName } from "../i18n/places";
+import { TAP_SORTS } from "../lib/taps";
 import { localeOfPath, pathFor } from "../i18n/routes";
 
 const locale = localeOfPath(Astro.url.pathname);
@@ -27,6 +28,9 @@ const COPY: Bilingual<{
   or: string;
   reviews: string;
   regions: string;
+  sort: string;
+  tapped: string;
+  none: string;
 }> = {
   fr: {
     title: "Les villes",
@@ -38,6 +42,9 @@ const COPY: Bilingual<{
     or: "ou parcourez",
     reviews: "les avis",
     regions: "Régions",
+    sort: "Trier",
+    tapped: "Avec réactions",
+    none: "Aucune ville n'a encore de réaction.",
   },
   en: {
     title: "The cities",
@@ -49,6 +56,9 @@ const COPY: Bilingual<{
     or: "or browse",
     reviews: "the reviews",
     regions: "Regions",
+    sort: "Sort",
+    tapped: "With reactions",
+    none: "No city has a reaction yet.",
   },
 };
 const copy = COPY[locale];
@@ -71,22 +81,43 @@ const copy = COPY[locale];
     </p>
   )}
 
-  <nav class="jump" aria-label={copy.regions}>
+  {/* The public one-tap reactions (lib/taps.ts): shown once loaded, hidden without the service. */}
+  <form class="by-taps" data-by-taps hidden>
+    <label>
+      <span>{copy.sort}</span>
+      <select name="tri">
+        {TAP_SORTS.map((sort) => (
+          <option value={sort.key}>{sort.label[locale]}</option>
+        ))}
+      </select>
+    </label>
+    <label class="check">
+      <input type="checkbox" name="avec" />
+      <span>{copy.tapped}</span>
+    </label>
+  </form>
+  <ul class="cities" data-sorted hidden></ul>
+  <p data-none hidden>
+    {copy.none}
+  </p>
+
+  <nav class="jump" data-regions aria-label={copy.regions}>
     {byZone.map(({ zone, label }) => (
       <a href={`#${zone}`}>{label}</a>
     ))}
   </nav>
 
   {byZone.map(({ zone, label, cities }) => (
-    <section id={zone} aria-labelledby={`${zone}-title`}>
+    <section id={zone} data-regions aria-labelledby={`${zone}-title`}>
       <h2 id={`${zone}-title`}>{label}</h2>
       <ul class="cities">
         {cities.map((city) => (
-          <li>
+          <li data-city={city.slug}>
             <a href={pathFor("city", locale, city.slug)}>
               <b>{city.name}</b>
               <span class="country">{city.country}</span>
               <span class="tagline">{city.tagline}</span>
+              <span class="taps-count" data-taps-count hidden />
             </a>
           </li>
         ))}
@@ -94,6 +125,51 @@ const copy = COPY[locale];
     </section>
   ))}
 </Page>
+
+<script>
+  import { pageLocale } from "../i18n/locale";
+  import { byTaps, tapsLabel, type TapSort } from "../lib/taps";
+  import { loadTaps } from "../lib/taps-dom";
+
+  const form = document.querySelector<HTMLFormElement>("[data-by-taps]");
+  if (form) {
+    const locale = pageLocale();
+    const sorted = document.querySelector<HTMLElement>("[data-sorted]")!;
+    const none = document.querySelector<HTMLElement>("[data-none]")!;
+    const regions = [...document.querySelectorAll<HTMLElement>("[data-regions]")];
+    const items = [...document.querySelectorAll<HTMLElement>("[data-city]")];
+    // Each city goes back to its region's list, in the order the page was built with.
+    const home = new Map(items.map((item) => [item, item.parentElement!]));
+    const bySlug = new Map(items.map((item) => [item.dataset.city!, item]));
+
+    void loadTaps().then((taps) => {
+      // Without a single reaction there is nothing to sort by: the form stays hidden.
+      if (Object.keys(taps).length === 0) return;
+      form.hidden = false;
+      for (const item of items) {
+        const count = item.querySelector<HTMLElement>("[data-taps-count]")!;
+        count.textContent = tapsLabel(taps[item.dataset.city!], locale);
+        count.hidden = !count.textContent;
+      }
+      form.addEventListener("change", () => {
+        const data = new FormData(form);
+        const sort = String(data.get("tri") ?? "") as TapSort;
+        const tappedOnly = data.has("avec");
+        const flat = sort !== "" || tappedOnly;
+        for (const region of regions) region.hidden = flat;
+        sorted.hidden = !flat;
+        if (!flat) {
+          for (const item of items) home.get(item)!.append(item);
+          none.hidden = true;
+          return;
+        }
+        const order = byTaps([...bySlug.keys()], taps, sort || "plus", tappedOnly);
+        sorted.replaceChildren(...order.map((slug) => bySlug.get(slug)!));
+        none.hidden = order.length > 0;
+      });
+    });
+  }
+</script>
 
 <style>
   .jump {
@@ -115,6 +191,47 @@ const copy = COPY[locale];
   }
   section {
     scroll-margin-top: 16px;
+  }
+  .by-taps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+  .by-taps[hidden],
+  .cities[hidden],
+  section[hidden],
+  .jump[hidden],
+  .taps-count[hidden] {
+    display: none;
+  }
+  .by-taps label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-weight: 700;
+  }
+  .by-taps select {
+    min-height: 44px;
+    border-radius: 12px;
+    border: 2px solid var(--thread-dim);
+    background: var(--night);
+    color: var(--thread);
+    padding: 0 12px;
+    font: inherit;
+  }
+  .by-taps input {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--saffron);
+  }
+  .taps-count {
+    grid-column: 1 / -1;
+    color: var(--saffron);
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
   .cities {
     list-style: none;

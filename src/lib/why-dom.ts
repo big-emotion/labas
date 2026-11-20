@@ -1,5 +1,3 @@
-import { verdictEvent, type VerdictPlace } from "./analytics";
-import { track } from "./keep-dom";
 import type { Answers, Match } from "./ranking";
 import { whyTheseCities } from "./result-why";
 import { cityCopy } from "../i18n/city-copy";
@@ -8,24 +6,9 @@ import { pathFor } from "../i18n/routes";
 
 /** Render code for components/ResultWhy.astro. */
 
-const COPY: Bilingual<{
-  first: (city: string) => string;
-  thanks: Record<"yes" | "no", string>;
-}> = {
-  fr: {
-    first: (city) => `Pourquoi ${city} en premier`,
-    thanks: {
-      yes: "Merci ! Dites pourquoi en une phrase : votre avis aide les prochains lecteurs.",
-      no: "Merci, c'est noté. Dites ce qui vous étonne : c'est ce qui nous aide le plus.",
-    },
-  },
-  en: {
-    first: (city) => `Why ${city} comes first`,
-    thanks: {
-      yes: "Thank you! Say why in one sentence: your review helps the next readers.",
-      no: "Thank you, noted. Tell us what surprises you: that helps us most.",
-    },
-  },
+const COPY: Bilingual<{ first: (city: string) => string }> = {
+  fr: { first: (city) => `Pourquoi ${city} en premier` },
+  en: { first: (city) => `Why ${city} comes first` },
 };
 
 function fillReasons(block: HTMLElement, labels: string[]) {
@@ -56,23 +39,6 @@ function openReview(locale: Locale) {
   }
 }
 
-function wireVerdict(box: HTMLElement, locale: Locale) {
-  const part = (name: string) => box.querySelector<HTMLElement>(`[data-verdict-${name}]`)!;
-  for (const button of box.querySelectorAll<HTMLButtonElement>("[data-verdict]")) {
-    button.addEventListener("click", () => {
-      const verdict = button.dataset.verdict as "yes" | "no";
-      track(verdictEvent(box.dataset.verdictBox as VerdictPlace, verdict === "yes"));
-      part("ask").hidden = true;
-      part("buttons").hidden = true;
-      part("thanks").textContent = COPY[locale].thanks[verdict];
-      part("thanks").hidden = false;
-    });
-  }
-  box
-    .querySelector<HTMLButtonElement>("[data-verdict-review]")
-    ?.addEventListener("click", () => openReview(locale));
-}
-
 /** Fills « Pourquoi ces villes ? »; called after every drawing of the result. */
 export function showWhy(matches: Match[], answers: Answers, locale: Locale): void {
   const box = document.querySelector<HTMLElement>("[data-why]");
@@ -96,19 +62,21 @@ export function showWhy(matches: Match[], answers: Answers, locale: Locale): voi
   know.querySelector("span")!.textContent = why.toKnow ?? "";
 }
 
-let verdictBox: HTMLElement | null = null;
+let hook: HTMLElement | null = null;
 
 /**
- * Puts the verdict right under the first city, once the cards are drawn. Redrawing the cards
- * takes it out of the document, so the block is kept here, with the verdict the reader gave.
+ * Puts the block of actions (components/KeepResults.astro) inside the first city's card, right
+ * under its reaction row, once the cards are drawn: the first result is what hooks the reader, so
+ * sharing, the e-mail, the review and the full questionnaire are offered there and nowhere else
+ * (operator, 2026-11-20).
  */
-export function placeVerdict(locale: Locale): void {
-  if (!verdictBox) {
-    verdictBox = document.querySelector<HTMLElement>("[data-verdict-box]");
-    if (verdictBox) wireVerdict(verdictBox, locale);
+export function placeHook(locale: Locale): void {
+  if (!hook) {
+    hook = document.querySelector<HTMLElement>("[data-hook]");
+    hook
+      ?.querySelector<HTMLButtonElement>("[data-hook-review]")
+      ?.addEventListener("click", () => openReview(locale));
   }
-  const first = document.querySelector("#cards > :first-child");
-  if (!verdictBox || !first) return;
-  first.after(verdictBox);
-  verdictBox.hidden = false;
+  const reaction = document.querySelector("#cards > :first-child [data-taps]");
+  if (hook && reaction) reaction.after(hook);
 }

@@ -62,6 +62,10 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     </header>
     <p class="split"></p>
     <ul class="why-temper"></ul>
+    {/* The one-tap reaction, built by lib/taps-dom.ts, right under the city's name: reacting
+        must not wait for the end of a long card. The first card asks its question aloud. */}
+    <p class="taps-ask" hidden></p>
+    <div data-taps></div>
     <figure class="photo" hidden>
       <img alt="" width="1280" height="853" loading="lazy" />
       <figcaption></figcaption>
@@ -484,6 +488,17 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     color: var(--ink);
     font-weight: 700;
     text-decoration: none;
+  }
+  .results .taps-ask {
+    margin: 0;
+    font-weight: 800;
+  }
+  .results .taps-ask[hidden] {
+    display: none;
+  }
+  .results .first :global(.taps button) {
+    border-width: 2px;
+    border-color: var(--saffron);
   }
   .results .not-for-me:not([hidden]) {
     justify-self: start;

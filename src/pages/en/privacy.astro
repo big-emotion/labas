@@ -223,8 +223,11 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     place out ("Not for me"), we count only the place on the page and whether it was a city, a
     country or a region; never which one. For reactions, we count in the same way who opens the
     form, who sends it and who goes to read them, with the city and the place on the page; never the
-    text, the name or the address. When you say whether your cities are like you, we count only
-    "yes" or "not really" and which questionnaire you were on; never the cities or your answers.
+    text, the name or the address. When you react to a city in one tap ("I like it", "It suits me",
+    "It doesn't suit me"), we count the city, your reaction and the place on the page; never your
+    answers. These reactions are public as counts: our database keeps, for each city, the number of
+    each reaction, and nothing about who reacted. Your own reaction stays in your browser (local
+    storage), so that you can change it or take it back.
   </p>
 
   <h2>What the host can see</h2>

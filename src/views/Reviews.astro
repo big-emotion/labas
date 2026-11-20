@@ -68,6 +68,7 @@ const COPY = {
     city: "Ville",
     allCities: "Toutes les villes de la région",
     sort: "Trier",
+    tapped: "Villes avec réactions",
     alike: "Des gens qui vous ressemblent",
     everyone: "Tout le monde",
     temperamentHint:
@@ -98,6 +99,7 @@ const COPY = {
     city: "City",
     allCities: "Every city in the region",
     sort: "Sort",
+    tapped: "Cities with reactions",
     alike: "People like you",
     everyone: "Everyone",
     temperamentHint:
@@ -179,6 +181,11 @@ const zones = Object.keys(ZONES) as Zone[];
           </select>
         </label>
 
+        <label class="check">
+          <input type="checkbox" name="avec" />
+          <span>{copy.tapped}</span>
+        </label>
+
         <fieldset>
           <legend>{copy.alike}</legend>
           <div class="chips">
@@ -244,6 +251,7 @@ const zones = Object.keys(ZONES) as Zone[];
     type ReviewSort,
   } from "../lib/review-search";
   import type { Zone } from "../lib/cities";
+  import { loadTaps } from "../lib/taps-dom";
 
   const locale = pageLocale();
 
@@ -290,6 +298,9 @@ const zones = Object.keys(ZONES) as Zone[];
     pick("temperament", params.get("temperament"));
     const tri = params.get("tri");
     if (SORTS.some((s) => s.key === tri)) form.tri.value = tri;
+    form.avec.checked = params.has("avec");
+    // The cities' public reactions order and filter the reviews; none without the service.
+    const taps = await loadTaps();
 
     const zoneOf = () => (String(new FormData(form).get("zone") ?? "") || null) as Zone | null;
 
@@ -315,17 +326,20 @@ const zones = Object.keys(ZONES) as Zone[];
         zone: zoneOf(),
         temperament: String(data.get("temperament") ?? "") || null,
         sort: (String(data.get("tri") ?? "") || "recents") as ReviewSort,
+        taps,
+        tapped: data.has("avec"),
       };
     };
 
     function remember(at: number) {
-      const { query, city, zone, temperament, sort } = filters();
+      const { query, city, zone, temperament, sort, tapped } = filters();
       const next = new URLSearchParams();
       if (city) next.set("ville", city);
       else if (zone) next.set("region", zone);
       if (query.trim()) next.set("q", query.trim());
       if (temperament) next.set("temperament", temperament);
       if (sort !== "recents") next.set("tri", sort);
+      if (tapped) next.set("avec", "1");
       if (at > 1) next.set("page", String(at));
       const search = next.toString();
       history.replaceState(null, "", search ? `?${search}` : location.pathname);
@@ -506,6 +520,19 @@ const zones = Object.keys(ZONES) as Zone[];
     color: var(--thread-dim);
     font-size: 0.85rem;
     margin: 0;
+  }
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    font-weight: 700;
+  }
+  .check input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--saffron);
   }
   .pick {
     display: grid;

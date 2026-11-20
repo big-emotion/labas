@@ -236,9 +236,12 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     Pas pour moi »), nous comptons seulement l'endroit de la page et s'il s'agit d'une ville, d'un
     pays ou d'une région ; jamais lequel. Pour les réactions, nous comptons de la même façon qui
     ouvre le formulaire, qui envoie et qui va les lire, avec la ville et l'endroit de la page ;
-    jamais le texte, le nom ni l'adresse. Quand vous dites si vos villes vous ressemblent, nous
-    comptons seulement « oui » ou « pas vraiment » et le questionnaire où vous étiez ; jamais les
-    villes ni vos réponses.
+    jamais le texte, le nom ni l'adresse. Quand vous réagissez à une ville en un tap (« J'aime », «
+    Ça me correspond », « Ça ne me correspond pas »), nous comptons la ville, votre réaction et
+    l'endroit de la page ; jamais vos réponses. Ces réactions sont publiques sous forme de compteurs
+    : notre base garde, pour chaque ville, le nombre de chaque réaction, et rien sur qui a réagi.
+    Votre propre réaction reste dans votre navigateur (stockage local), pour que vous puissiez la
+    changer ou la retirer.
     {newsletter &&
       " Pour « Votre avis », nous comptons seulement qu'un message est parti, avis sur le site ou message ; jamais son texte, sa page ni votre adresse."}
   </p>

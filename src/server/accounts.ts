@@ -19,6 +19,7 @@ import {
 } from "./emails";
 import type { Translator } from "./deepl";
 import { limiter } from "./limiter";
+import { isTapKind, noTaps, type TapKind, type TapsByCity } from "../lib/taps";
 import type { Mailer } from "./subscribe";
 
 /**
@@ -143,6 +144,14 @@ export async function migrate(db: Db): Promise<void> {
       reaction_id uuid not null references reactions(id) on delete cascade,
       account_id uuid not null references accounts(id) on delete cascade,
       primary key (reaction_id, account_id)
+    )`);
+  // One-tap reactions on a city: a count per city and answer, and nothing about who tapped.
+  await db.query(`
+    create table if not exists city_taps (
+      city text not null,
+      kind text not null,
+      count integer not null default 0,
+      primary key (city, kind)
     )`);
   // The feedback tab: private words to the team, apart from the public reviews and from any
   // account, so they leave nothing behind when a space is erased and need no login.
@@ -369,6 +378,9 @@ export function createAccounts({
   const perAddress = limiter(3, DAY);
   // Generous for a person, short for a script tapping every heart on the site.
   const perMark = limiter(120, HOUR);
+  // No account stands behind a tap, so the connection is all there is to count on: a reader
+  // reacting to every city they open stays far under it.
+  const perTap = limiter(60, HOUR);
   // Apart from the others: a reader who just saved a journey can still write to the team.
   const messagesPerConnection = limiter(5, HOUR);
   const messagesPerAddress = limiter(3, DAY);
@@ -700,6 +712,45 @@ export function createAccounts({
           ? `${space}?ouvrir=${link.journey_id}`
           : space;
       return redirect(landing, { "set-cookie": sessionCookie(session, SESSION_FOR / 1000) });
+    }
+
+    if (path === "/api/compte/taps" && method === "GET") {
+      const { rows } = await db.query<{ city: string; kind: TapKind; count: number }>(
+        "select city, kind, count from city_taps where count > 0",
+      );
+      const taps: TapsByCity = {};
+      for (const row of rows) (taps[row.city] ??= noTaps())[row.kind] = row.count;
+      return json(200, { taps });
+    }
+
+    // The reader's previous answer travels with the tap (`was`), kept in their browser: the
+    // server holds counts only, so it cannot know it.
+    if (path === "/api/compte/taps" && method === "POST") {
+      const city = String(form.city ?? "");
+      const kind = form.kind ?? null;
+      const was = form.was ?? null;
+      const known = (value: unknown) => value === null || isTapKind(value);
+      if (!CITIES.some((c) => c.slug === city) || !known(kind) || !known(was) || kind === was)
+        return json(400, { error: "form" });
+      if (!perTap(connection, now())) return json(429, { error: "slow-down" });
+      if (was)
+        await db.query(
+          "update city_taps set count = greatest(count - 1, 0) where city = $1 and kind = $2",
+          [city, was],
+        );
+      if (kind)
+        await db.query(
+          `insert into city_taps (city, kind, count) values ($1, $2, 1)
+           on conflict (city, kind) do update set count = city_taps.count + 1`,
+          [city, kind],
+        );
+      const { rows } = await db.query<{ kind: TapKind; count: number }>(
+        "select kind, count from city_taps where city = $1",
+        [city],
+      );
+      const taps = noTaps();
+      for (const row of rows) taps[row.kind] = row.count;
+      return json(200, { taps });
     }
 
     if (path === "/api/compte/reactions" && method === "GET") {

@@ -23,9 +23,11 @@ const COPY: Bilingual<{
   split: (temperament: string, practical: string) => string;
   photo: (author: string, license: string) => string;
   same: (others: string) => string;
+  suits: (city: string) => string;
 }> = {
   fr: {
     // French puts a narrow no-break space before « % ».
+    suits: (city) => `${city}, ça vous correspond ?`,
     percent: (value) => `${value}\u202f%`,
     portraitTitle: (city) => `Pourquoi vous et ${city}`,
     said: (answer) => `Vous avez dit · ${answer}`,
@@ -36,6 +38,7 @@ const COPY: Bilingual<{
     same: (others) => `Aussi dans le pays : ${others}`,
   },
   en: {
+    suits: (city) => `${city}: does it suit you?`,
     percent: (value) => `${value}%`,
     portraitTitle: (city) => `Why you and ${city}`,
     said: (answer) => `You said · ${answer}`,
@@ -206,6 +209,12 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
     const go = card.querySelector(".go") as HTMLAnchorElement;
     go.href = `${pathFor("city", locale, m.city.slug)}#y-aller`;
     go.hidden = false;
+  }
+  (card.querySelector("[data-taps]") as HTMLElement).dataset.taps = m.city.slug;
+  if (index === 0) {
+    const ask = card.querySelector(".taps-ask") as HTMLElement;
+    ask.textContent = COPY[locale].suits(city.name);
+    ask.hidden = false;
   }
   card.querySelector(".detail")!.append(detailFor(m, false, locale));
   return card;

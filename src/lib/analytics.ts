@@ -1,4 +1,5 @@
 import type { FeedbackKind } from "./feedback";
+import type { TapKind } from "./taps";
 import { SENSITIVE_ANSWERS } from "./keep";
 import { QUESTIONS } from "./questions";
 
@@ -64,7 +65,7 @@ export const GOALS = [
   "Message envoyé",
   "Pas pour moi",
   "Pas pour moi annulé",
-  "Avis sur le résultat",
+  "Réaction rapide",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -181,22 +182,31 @@ export function notForMeEvent(
 }
 
 /**
- * « Ces villes vous ressemblent ? » (beta feedback, 2026-11-19): one tap under the explanation of
- * the result, because readers interact a lot and review little. The props « lieu » and « avis »
- * must be listed in Plausible's custom properties. Never the cities: with the answers events of
- * the same visit they would say where a reader of a given origin was sent.
+ * A one-tap reaction on a city (operator, 2026-11-20): where it was tapped, the city and the
+ * answer, or that it was taken back. The props « lieu », « ville » and « avis » must be listed in
+ * Plausible's custom properties. The city is public here by the reader's own gesture, like a
+ * review's; never an answer of the quiz.
  */
-const VERDICT_PLACES = { quick: "Questionnaire 1", deep: "Questionnaire complet" } as const;
-export type VerdictPlace = keyof typeof VERDICT_PLACES;
+const TAP_PLACES = {
+  result: "Résultat",
+  city: "Fiche ville",
+  cities: "Liste des villes",
+} as const;
+export type TapPlace = keyof typeof TAP_PLACES;
+const TAP_ANSWERS = {
+  like: "J'aime",
+  suits: "Ça me correspond",
+  not: "Ça ne me correspond pas",
+} as const;
 
-export interface VerdictEvent {
-  name: "Avis sur le résultat";
-  props: { lieu: string; avis: "Ça me ressemble" | "Pas vraiment" };
+export interface TapEvent {
+  name: "Réaction rapide";
+  props: { lieu: string; ville: string; avis: string };
 }
 
-export function verdictEvent(place: VerdictPlace, suits: boolean): VerdictEvent {
+export function tapEvent(place: TapPlace, city: string, kind: TapKind | null): TapEvent {
   return {
-    name: "Avis sur le résultat",
-    props: { lieu: VERDICT_PLACES[place], avis: suits ? "Ça me ressemble" : "Pas vraiment" },
+    name: "Réaction rapide",
+    props: { lieu: TAP_PLACES[place], ville: city, avis: kind ? TAP_ANSWERS[kind] : "Retirée" },
   };
 }

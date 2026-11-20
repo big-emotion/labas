@@ -1,4 +1,6 @@
 import { pageLocale, type Bilingual } from "../i18n/locale";
+import { tapsLabel } from "./taps";
+import { loadedTaps } from "./taps-dom";
 import { cityName } from "../i18n/places";
 import { pathFor } from "../i18n/routes";
 import { api } from "./account-dom";
@@ -324,7 +326,8 @@ function itemFor(block: Block, reaction: Reaction, review: Reaction = reaction):
   if (place && !isReply) {
     const where = part<HTMLAnchorElement>(item, "where");
     where.href = cityPage(place.slug);
-    where.textContent = `${place.name}, ${place.country}`;
+    const taps = tapsLabel(loadedTaps(place.slug), locale);
+    where.textContent = `${place.name}, ${place.country}${taps ? ` · ${taps}` : ""}`;
     where.hidden = false;
   }
   if (reaction.mention) {
