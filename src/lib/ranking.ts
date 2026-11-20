@@ -571,8 +571,17 @@ export function profileOf(given: Answers): Profile {
   }
   if (answers.profession) {
     const { fields, pulls: more } = PROFESSION[answers.profession];
-    add("profession", more);
-    if (fields.length) fact("profession", { kind: "professions", values: fields, weight: 2.5 });
+    // Living there means working there: for a reader who settles, a city where their profession
+    // barely hires is the first thing to go wrong (operator, 2026-11-20). A trial stay or a trip
+    // leaves it an ordinary answer, and so does « dans le pays de ma famille »: that reader named
+    // the place themselves, and the profession must not take their country off the first three.
+    const livesOnIt =
+      (answers.project === "installer" || answers.project === "pied") &&
+      answers.reach !== "country";
+    const weight = livesOnIt ? NON_NEGOTIABLE : 1;
+    add("profession", more, weight);
+    if (fields.length)
+      fact("profession", { kind: "professions", values: fields, weight: 2.5 }, weight);
   }
   if (answers.currentCity) {
     // Keeping the same rhythm doubles down on today's life; a change moves the pace target.
@@ -777,7 +786,7 @@ const LINE_COPY: Bilingual<LineCopy> = {
       sectors: ["Votre secteur y recrute", "Votre secteur y recrute peu"],
       professions: ["Votre métier y recrute", "Votre métier y recrute peu"],
       entry: ["Facile d'y entrer avec votre passeport", "Un visa à demander à l'ambassade"],
-      faith: ["Votre foi y est largement partagée", "Votre foi y est minoritaire"],
+      faith: ["Votre foi y est bien présente", "Votre foi y est peu présente"],
       homeCountry: ["Le pays de votre famille"],
       music: ["Votre musique y fait danser"],
       season: ["La belle saison quand vous partez", "La saison des pluies quand vous partez"],
@@ -841,7 +850,7 @@ const LINE_COPY: Bilingual<LineCopy> = {
       sectors: ["Your sector is hiring there", "Your sector hires little there"],
       professions: ["Your profession is hiring there", "Your profession hires little there"],
       entry: ["Easy to enter with your passport", "A visa to request from the embassy"],
-      faith: ["Your faith is widely shared there", "Your faith is a minority there"],
+      faith: ["Your faith is well established there", "Your faith has little presence there"],
       homeCountry: ["Your family's country"],
       music: ["Your music fills the dance floors there"],
       season: ["The good season when you travel", "The rainy season when you travel"],

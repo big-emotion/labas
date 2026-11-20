@@ -477,13 +477,81 @@ describe("how far the reader would go from their own", () => {
     expect(new Set(unsaid).size).toBeGreaterThan(1);
   });
 
-  it("brings the reader closer to where their faith is widely shared", () => {
+  it("brings the reader closer to where their faith is practised", () => {
     const reader: Answers = { ...settled, origin: ["ameriques"], reach: "region" };
     const muslim: Answers = { ...reader, faith: "muslim" };
     const christian: Answers = { ...reader, faith: "christian" };
-    expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Lomé", muslim));
     expect(rankOf("Lomé", christian)).toBeLessThan(rankOf("Dakar", christian));
-    expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Dakar", reader));
+    expect(rankOf("Dakar", muslim)).toBeLessThan(rankOf("Kigali", muslim));
+    expect(rankOf("Kigali", muslim)).toBeGreaterThan(rankOf("Kigali", reader));
+  });
+
+  // Operator, 2026-11-20: a Beninese Muslim reader was sent to Nouakchott ahead of Cotonou, Lomé
+  // and Abidjan, because the faith was scored as the share of the country that holds it. A faith
+  // a sizeable minority practises is practised in peace there: only where it is rare does it weigh.
+  it("does not rank a country where the faith is common below one where it is nearly everyone's", () => {
+    const reader: Answers = { ...settled, origin: ["ouest"], reach: "alike" };
+    const muslim: Answers = { ...reader, faith: "muslim" };
+    const practised = ["Dakar", "Abidjan", "Cotonou", "Lomé", "Douala"];
+    const order = (answers: Answers) =>
+      [...practised].sort((a, b) => rankOf(a, answers) - rankOf(b, answers));
+    expect(order(muslim)).toEqual(order(reader));
+  });
+
+  it("keeps Nouakchott out of the first three for a party-going banker from Benin", () => {
+    const banker: Answers = {
+      project: "installer",
+      profession: "finance",
+      languages: ["fr"],
+      size: 3,
+      pace: 1,
+      landscapes: ["beach"],
+      saturday: 1,
+      order: 1,
+      together: 0,
+      friction: 1,
+      origin: ["ouest"],
+      countries: ["Bénin"],
+      reach: "alike",
+      faith: "muslim",
+      priorities: ["cost"],
+    };
+    expect(top(banker, 3).map((c) => c.name)).not.toContain("Nouakchott");
+  });
+});
+
+// Operator, 2026-11-20: settling for good in a city where one's profession barely hires is the
+// first thing that goes wrong, so for a reader who settles the profession weighs like a
+// non-negotiable; for one who tests a few months it stays an ordinary answer.
+describe("the profession of a reader who settles", () => {
+  // How much naming the profession widens the lead of a banking centre (Abidjan) over a seaside
+  // town with no bank to speak of (Saly), for the same project.
+  const lead = (project: Answers["project"]) =>
+    scoreOf("Abidjan", { project, profession: "finance" }) /
+    scoreOf("Saly", { project, profession: "finance" }) /
+    (scoreOf("Abidjan", { project }) / scoreOf("Saly", { project }));
+
+  it("weighs more than for a reader who only tests a few months", () => {
+    expect(lead("installer")).toBeGreaterThan(lead("tester") * 1.1);
+    expect(lead("pied")).toBeGreaterThan(lead("tester") * 1.1);
+  });
+
+  it("fills the first five with cities where the profession really hires", () => {
+    const banker: Answers = {
+      project: "installer",
+      profession: "finance",
+      languages: ["fr"],
+      landscapes: ["beach"],
+      saturday: 0.5,
+      priorities: ["cost"],
+    };
+    const hiring = bestMatches(banker, 5).map((m) =>
+      Math.max(
+        0,
+        ...m.city.life.professions.filter((p) => p.field === "finance").map((p) => p.strength),
+      ),
+    );
+    expect(Math.min(...hiring)).toBeGreaterThanOrEqual(2);
   });
 });
 
