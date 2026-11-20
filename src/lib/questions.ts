@@ -69,12 +69,13 @@ const CHAPTERS = {
   refine: { fr: "POUR AFFINER", en: "TO REFINE" },
 } satisfies Record<string, Bilingual<string>>;
 export const CHAPTER = {
+  temperament: CHAPTERS.temperament.fr,
   profile: CHAPTERS.profile.fr,
   refine: CHAPTERS.refine.fr,
 };
 const PROJECT = CHAPTERS.project.fr;
 const TRIP = CHAPTERS.trip.fr;
-const TEMPERAMENT = CHAPTERS.temperament.fr;
+const TEMPERAMENT = CHAPTER.temperament;
 const HISTORY = CHAPTERS.history.fr;
 const LAST = CHAPTERS.last.fr;
 

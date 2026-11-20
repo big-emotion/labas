@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
-import { QUESTIONS } from "./questions";
+import { CHAPTER, QUESTIONS } from "./questions";
 import { topCities, type Answers } from "./ranking";
 
 const OPENING = ["project", "languages", "origin"];
@@ -101,7 +101,9 @@ describe("the quick quiz, one question at a time", () => {
       ) {
         const question = QUESTIONS.find((q) => q.id === id)!;
         const offered = question.choices.filter((c) => c.value !== null);
-        if (asked.length >= 3 && !question.after && id !== "priorities") {
+        // The temperament chapter is always asked in full (see the next test).
+        const temperament = question.group === CHAPTER.temperament;
+        if (asked.length >= 3 && !question.after && id !== "priorities" && !temperament) {
           const before = topCities(answers as Answers, 3).join();
           const changes = offered.some(
             (c) =>
@@ -117,6 +119,33 @@ describe("the quick quiz, one question at a time", () => {
         asked.push(id);
       }
     }
+  });
+
+  // Operator, 2026-11-20: a reader who names the family's country and answers « Beaucoup » has
+  // a top three no further answer can change; the quiz ended after eight questions without
+  // asking how they live. The temperament still orders the cities and fills their profile.
+  it("always asks the whole temperament chapter, even when the top three is already settled", () => {
+    const settled = {
+      project: "installer",
+      languages: ["fr"],
+      origin: ["ouest"],
+      countries: ["Sénégal"],
+      kin: "much",
+      faith: "muslim",
+    } as Answers;
+    const answers: Record<string, unknown> = { ...settled };
+    const asked = Object.keys(settled);
+    for (let id = nextFreeQuestion(answers as Answers, asked); id;) {
+      const question = QUESTIONS.find((q) => q.id === id)!;
+      const choice = question.choices.filter((c) => c.value !== null)[0];
+      answers[id] = question.max ? [choice.value] : choice.value;
+      asked.push(id);
+      id = nextFreeQuestion(answers as Answers, asked);
+    }
+    const temperament = QUESTIONS.filter((q) => q.group === CHAPTER.temperament).map((q) => q.id);
+    expect(temperament).toHaveLength(5);
+    expect(asked).toEqual(expect.arrayContaining(temperament));
+    expect(asked.at(-1)).toBe("priorities");
   });
 
   it("stops once no open question could change the top three, short of the whole bank", () => {

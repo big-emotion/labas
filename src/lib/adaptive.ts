@@ -1,5 +1,5 @@
 import { DEEP_QUESTIONS, PROFILE_QUESTIONS } from "./deep-questions";
-import { QUESTIONS, visibleChoices, type Question } from "./questions";
+import { CHAPTER, QUESTIONS, visibleChoices, type Question } from "./questions";
 import { bestMatches, TOP_THREE, topCities, type Answers } from "./ranking";
 
 const TOP = TOP_THREE;
@@ -91,6 +91,11 @@ function newcomers(question: Question, answers: Answers) {
  * names (the top five breaks ties). A question none of whose answers could change the top three
  * is not asked; once none is left, the quiz ends on its closing question, and the rest waits in
  * « Aller plus loin ». Ties keep the bank's order.
+ *
+ * The temperament chapter is the exception (operator, 2026-11-20): it is always asked in full.
+ * A reader who names the family's country and says it matters a lot has a top three nothing
+ * can change, and the quiz ended without asking how they live; their answers still order the
+ * cities below and fill the temperament profile.
  */
 export function nextFreeQuestion(answers: Answers, asked: string[]): string | undefined {
   const open = openIn(QUESTIONS, answers, asked);
@@ -111,5 +116,6 @@ export function nextFreeQuestion(answers: Answers, asked: string[]): string | un
     )
       [best, bestScore] = [question.id, score];
   }
+  best ??= open.find((q) => q.group === CHAPTER.temperament)?.id;
   return best ?? (open.some((q) => q.id === CLOSING) ? CLOSING : undefined);
 }
