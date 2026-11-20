@@ -6,6 +6,47 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.26.0] - 2026-11-20
+
+### Added
+
+- One-tap reactions on every city: « J'aime », « Ça me correspond », « Ça ne me correspond pas »,
+  no account, with public counts on your result, on each city's page and in the list of cities.
+  The cities list and the reviews can be sorted and filtered by them.
+- « Jusqu'où aimeriez-vous aller ? »: one question, near the end of the quiz, on how far you would
+  go from your own: your family's country, its region, a culture alike, or anywhere. It replaces
+  « vivre près de vos origines » and, once you have named an origin, « aller vers l'inconnu ».
+- « Des régions vous attirent plus que d'autres ? » for readers who would rather not name an
+  origin.
+- « À découvrir » on the cities outside the countries or regions your family knows. It is a label:
+  the order does not change.
+- The quiz says how near it is to your cities: « on cherche », « on se rapproche », « presque
+  trouvé ».
+- « Pourquoi ces villes ? » now recalls what you said of your own, and speaks of closeness only.
+
+### Changed
+
+- Your first city holds everything you can do next, right under its name: react, go on to the full
+  questionnaire, share, WhatsApp, get the result by email, leave a review. The separate boxes are
+  gone.
+- The quiz opens on one question, your project. After that the order follows your answers and
+  changes from one reader to the next. Your family's country and your religion are asked in the
+  quick quiz, and the five questions on how you live are always asked.
+- « Votre façon de vivre » replaces « tempérament » everywhere you read it.
+- Up to five family regions and five countries.
+- When you react to a city of your result, your answers, the three cities and your reaction are
+  kept on our server to improve the ranking: by day, with no name, address, account or IP, origin
+  and religion included if you gave them, erased after three years. It is written under the
+  buttons and on the privacy pages.
+
+### Fixed
+
+- Your family's region, its country and your religion now keep their share of the score however
+  many other questions you answer: a family from Central Africa no longer gets three Indian Ocean
+  islands first, and a family from RD Congo sees Kinshasa.
+- North African cities no longer lead the map for readers from other regions before they have
+  said how far they would go, and the reverse.
+
 ## [0.25.0] - 2026-11-20
 
 ### Added
@@ -556,6 +597,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.24.0...HEAD
+[0.26.0]: https://github.com/big-emotion/labas/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/big-emotion/labas/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/big-emotion/labas/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/big-emotion/labas/compare/v0.22.1...v0.23.0
