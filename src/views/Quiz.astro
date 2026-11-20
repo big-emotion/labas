@@ -43,10 +43,6 @@ const COPY: Bilingual<Record<string, string>> = {
     reveal: "Voir mes villes",
     results: "Vos villes",
     resultsHint: "Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.",
-    further: "Envie d'aller plus loin ?",
-    furtherText:
-      "Le questionnaire complet : vos contraintes (école, soins, visa), ce qui vous pèse et ce qui vous plaît, pour un classement plus fin.",
-    furtherLink: "Affiner avec le questionnaire complet",
     others: "Toutes les autres villes",
     othersHint: "Les 115 villes, triées selon vos réponses.",
     filters: "Filtrer vos villes",
@@ -56,7 +52,8 @@ const COPY: Bilingual<Record<string, string>> = {
       "Les résultats sont des propositions, pas des verdicts. Chaque note de ville renvoie à ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.",
     privacyStart:
       "Vos réponses restent dans votre navigateur, qui les garde pour le questionnaire complet : rien ne nous est envoyé",
-    privacySaved: ", sauf si vous enregistrez votre parcours",
+    privacySaved:
+      ", sauf si vous enregistrez votre parcours ou réagissez à une ville de votre résultat",
     pages: "Pages du site",
     cities: "Les villes",
     reviews: "Les avis",
@@ -87,10 +84,6 @@ const COPY: Bilingual<Record<string, string>> = {
     reveal: "See my cities",
     results: "Your cities",
     resultsHint: "Suggestions, ranked by your answers. Every percentage is explained.",
-    further: "Want to go deeper?",
-    furtherText:
-      "The full questionnaire: your constraints (school, healthcare, visa), what weighs on you and what you enjoy, for a finer ranking.",
-    furtherLink: "Refine with the full questionnaire",
     others: "All the other cities",
     othersHint: "The 115 cities, sorted by your answers.",
     filters: "Filter your cities",
@@ -100,7 +93,7 @@ const COPY: Bilingual<Record<string, string>> = {
       "The results are suggestions, not verdicts. Every city rating links to its sources, on the city's page. The French foreign ministry's travel advice is shown with each city, as dated information: it never removes one.",
     privacyStart:
       "Your answers stay in your browser, which keeps them for the full questionnaire: nothing is sent to us",
-    privacySaved: ", unless you save your journey",
+    privacySaved: ", unless you save your journey or react to a city of your result",
     pages: "Site pages",
     cities: "The cities",
     reviews: "Reviews",
@@ -297,18 +290,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             <p class="hint">{copy.resultsHint}</p>
             {/* Little before the first city (operator, 2026-11-19): the explanation folded to
                 its question, and the way to refine cut to its title and link on a phone. */}
-            <ResultWhy place="quick" />
-            <section class="further" aria-labelledby="further-title">
-              <h2 id="further-title">{copy.further}</h2>
-              <p>{copy.furtherText}</p>
-              <a href={to("deep")}>{copy.furtherLink}</a>
-            </section>
+            <ResultWhy />
             <div id="cards" class="cards"></div>
+            <KeepResults further />
             {/* Moved by the script right under the first city's pitch. */}
             <Reactions preview />
             <SourcesNote />
             <TemperamentProfile />
-            <KeepResults />
           </section>
 
           {/* Right after the cities; the block offered during the quiz closes when the quiz
@@ -368,10 +356,16 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
     <script>
       import { rankCities, TOP_THREE, type Answers, type Match } from "../lib/ranking";
-      import { freeQuestions, nextFreeQuestion } from "../lib/adaptive";
+      import {
+        closenessOf,
+        freeQuestions,
+        nextFreeQuestion,
+        type Closeness,
+      } from "../lib/adaptive";
       import { showProfile } from "../lib/profile-dom";
       import { cardFor, rowFor } from "../lib/cards-dom";
-      import { placeVerdict, showWhy } from "../lib/why-dom";
+      import { wireTaps } from "../lib/taps-dom";
+      import { placeHook, showWhy } from "../lib/why-dom";
       import { chapterName, keepInPath, QUESTIONS } from "../lib/questions";
       import { syncChoices } from "../lib/choices-dom";
       import {
@@ -414,6 +408,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         kept: (count: number) => string;
         all: string;
         question: (n: number) => string;
+        closeness: Record<Closeness, string>;
         ready: string;
         notForMe: (name: string) => string;
         sheetTitle: (name: string) => string;
@@ -429,6 +424,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             `Les ${count} villes qui passent vos filtres, triées selon vos réponses.`,
           all: "Les 115 villes, triées selon vos réponses.",
           question: (n) => `question ${n}`,
+          closeness: {
+            searching: "on cherche",
+            closer: "on se rapproche",
+            almost: "presque trouvé",
+          },
           ready: "C'est prêt",
           notForMe: (name) => `${name}, pas pour moi`,
           sheetTitle: (name) => `${name} ne vous tente pas ?`,
@@ -443,6 +443,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           kept: (count) => `The ${count} cities that pass your filters, sorted by your answers.`,
           all: "The 115 cities, sorted by your answers.",
           question: (n) => `question ${n}`,
+          closeness: { searching: "searching", closer: "getting closer", almost: "almost there" },
           ready: "It's ready",
           notForMe: (name) => `${name}, not for me`,
           sheetTitle: (name) => `Not tempted by ${name}?`,
@@ -575,7 +576,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         renderLeftOut();
 
         showProfile(current, locale);
-        showWhy(matches, locale);
+        showWhy(matches, current, locale);
         const cards = matches.map((m, i) => {
           const card = cardFor(m, i, ranked, locale);
           const aside = card.querySelector<HTMLButtonElement>(".not-for-me");
@@ -586,7 +587,12 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           return card;
         });
         (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
-        placeVerdict(locale);
+        placeHook(locale);
+        wireTaps(document.getElementById("cards") as HTMLElement, locale, "result", () => ({
+          kind: "quick",
+          answers: current,
+          top: matches.map((m) => m.city.slug),
+        }));
         if (revealed)
           void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
 
@@ -763,7 +769,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const list = freeQuestions(readAnswers());
         const question = QUESTIONS.find((q) => q.id === id);
         (document.getElementById("counter") as HTMLElement).innerHTML = question
-          ? `<b>${chapterName(question, readAnswers(), locale)}</b> · ${copy.question(asked.length + 1)}`
+          ? `<b>${chapterName(question, readAnswers(), locale)}</b> · ${copy.question(asked.length + 1)} · ${copy.closeness[closenessOf(readAnswers(), asked)]}`
           : `<b>${copy.ready}</b>`;
         (document.getElementById("stitches") as HTMLElement).replaceChildren(
           ...list.map((_, i) => {
@@ -798,7 +804,15 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
       function advance() {
         if (current) asked.push(current);
-        showQuestion(nextFreeQuestion(readAnswers(), asked));
+        // Among the questions as good as each other, one at random: no two readers meet the
+        // same order, and no one can anticipate the next question.
+        showQuestion(
+          nextFreeQuestion(
+            readAnswers(),
+            asked,
+            (asGood) => asGood[Math.floor(Math.random() * asGood.length)],
+          ),
+        );
       }
 
       function goBack() {
@@ -1530,47 +1544,6 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       .outcome {
         display: grid;
         gap: 40px;
-      }
-      @media print {
-        .further {
-          display: none;
-        }
-      }
-      .further {
-        display: grid;
-        gap: 12px;
-        background: var(--saffron);
-        color: var(--ink);
-        border-radius: 20px;
-        padding: 24px;
-      }
-      .further h2 {
-        margin: 0;
-      }
-      .further p {
-        margin: 0;
-      }
-      @media (max-width: 767px) {
-        .further {
-          padding: 16px;
-        }
-        .further h2 {
-          font-size: 1.25rem;
-        }
-        .further p {
-          display: none;
-        }
-      }
-      .further a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 52px;
-        border-radius: 999px;
-        background: var(--ink);
-        color: var(--saffron);
-        font-weight: 800;
-        text-decoration: none;
       }
       .links {
         display: flex;

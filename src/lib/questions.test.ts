@@ -9,7 +9,6 @@ const NEUTRAL = new Set([
   "mobility:car",
   "passports:other",
   "faith:none",
-  "kin:none",
   "adventure:open",
   // A month or more away asks nothing of the flights.
   "duration:month",
@@ -45,7 +44,10 @@ describe("the question bank", () => {
         "together",
         "friction",
         "origin",
-        "kin",
+        "countries",
+        "reach",
+        "drawnTo",
+        "faith",
         "priorities",
       ].sort(),
     );
@@ -53,7 +55,7 @@ describe("the question bank", () => {
       new Set([
         "Votre projet",
         "Votre voyage",
-        "Votre tempérament",
+        "Votre façon de vivre",
         "Votre histoire avec l'Afrique",
         "Pour finir",
       ]),
@@ -90,7 +92,7 @@ describe("the question bank", () => {
         const context = {
           project: "installer",
           origin: "ouest",
-          kin: "much",
+          reach: "region",
           currentCity: "capital",
         } as Answers;
         delete (context as Record<string, unknown>)[question.id];
@@ -112,14 +114,14 @@ describe("the question bank", () => {
   });
 
   it("asks about faith only when feeling at home among one's own matters", () => {
-    const faith = LATER.find((q) => q.id === "faith")!;
-    expect(faith.when?.({ kin: "much" })).toBe(true);
-    expect(faith.when?.({ kin: "none" })).toBe(false);
+    const faith = QUESTIONS.find((q) => q.id === "faith")!;
+    expect(faith.when?.({ reach: "region" })).toBe(true);
+    expect(faith.when?.({ reach: "anywhere" })).toBe(false);
     expect(faith.when?.({})).toBe(false);
   });
 
   it("asks for the family's country only after an African region, offering every country", () => {
-    const countries = LATER.find((q) => q.id === "countries")!;
+    const countries = QUESTIONS.find((q) => q.id === "countries")!;
     expect(countries.when?.({ origin: ["ouest"] })).toBe(true);
     expect(countries.when?.({ origin: ["ameriques"] })).toBe(false);
     expect(countries.when?.({})).toBe(false);
@@ -162,7 +164,7 @@ describe("the question bank in English", () => {
 
   it("sorts the family's countries in English", () => {
     const countries = questionIn(
-      LATER.find((q) => q.id === "countries")!,
+      QUESTIONS.find((q) => q.id === "countries")!,
       "en",
     );
     const labels = countries.choices.filter((c) => c.value !== null).map((c) => c.label);

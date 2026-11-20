@@ -9,6 +9,7 @@ import {
   type Zone,
 } from "./cities";
 import type { Bilingual, Locale } from "../i18n/locale";
+import { withAdventure, type Adventure, type Reach } from "./reach";
 import { criterionCopy } from "../i18n/city-copy";
 import { TRAITS, temperamentLinesFor, type TemperamentLine } from "./city-temperament";
 import { closenessOf, type Axis, type Closeness, type FactPull, type Pull } from "./fit";
@@ -54,16 +55,18 @@ export interface Answers extends ProfileAnswers {
    * mixed family; a single value is still accepted.
    */
   origin?: Origin | Origin[];
+  /** The regions that draw the reader, asked of one who named no origin. */
+  drawnTo?: Zone[];
   /** The family's countries, among those of its African regions. */
   countries?: string[];
   /** Passports held: French or EU, or one giving free movement in an African zone. */
   passports?: ("eu" | "ecowas" | "cemac" | "eac" | "other")[];
-  /** How much feeling at home among one's own matters: origin, culture, religion. */
-  kin?: "much" | "some" | "none";
-  /** The reader's faith, only weighed when feeling at home matters. */
+  /** How far from their own the reader would go: the family's country, its region, a culture alike, anywhere. */
+  reach?: Reach;
+  /** The reader's faith, only weighed when the reader asks to stay near their own. */
   faith?: "muslim" | "christian" | "other" | "none" | "private";
-  /** Going far from what one knows: rather not, why not, or that is the point. */
-  adventure?: "familiar" | "open" | "seeking";
+  /** Going far from what one knows; asked of a reader who named no origin, else told by `reach`. */
+  adventure?: Adventure;
   /** Looking for one's roots, somewhere new, or both. */
   roots?: "rediscover" | "discover" | "both";
   profession?:
@@ -148,6 +151,11 @@ export interface Match {
   score: number;
   /** 0 to 1: the share of the reader's weight backed by a known value (§4.2). */
   coverage: number;
+  /**
+   * Outside what the reader's family already knows: another country than those they named, or
+   * another region when they named regions only. A label, never a change to the order.
+   */
+  toDiscover: boolean;
   /** Why a filter of the fuller questionnaire keeps this city out, in the reader's language. */
   excludedBecause?: string;
   /** Up to five plain-language reasons the city fits, each rated 1 to 5. */
@@ -451,21 +459,46 @@ const ORIGIN_DRAW: Record<NonNullable<Answers["project"]>, number> = {
   investir: 0.75,
   decouvrir: 0,
 };
-// Before the reader says whether feeling at home matters, the region draws a little less; once
-// they say it does not, it no longer draws at all (operator, 2026-11-16).
-const KIN_SCALE = { much: 1.5, some: 1, unsaid: 0.75, none: 0 } as const;
-// An appetite for the unknown makes the family's region nearly neutral rather than pushing to
-// its opposite: the other answers then mix the regions (operator, 2026-11-16).
-const ADVENTURE_SCALE = { familiar: 1.25, open: 1, seeking: 0.25 } as const;
+/** Before the reader says how far they would go, the family's region draws a little less. */
+const UNSAID_DRAW = 0.75;
 /**
- * The share of the whole score given to the divide between North Africa and the rest of the
- * continent, once the reader says they want to stay near their own. A share, not a weight: a
- * weight is diluted by every further answer, which sent a Caribbean reader who had asked for
- * familiar ground to Casablanca at the fifteenth answer (beta feedback, 2026-11-19). Both
- * answers together take 0.3, either one 0.2: a city across the divide then keeps about half or
- * two thirds of its score, so it steps back without leaving the list.
+ * And it holds a small share of the score meanwhile, so the origin weighs without deciding: as a
+ * plain weight it vanished behind a dozen answers and the map named North African cities to
+ * readers from every other region, the surprise most often reported (operator, 2026-11-20).
  */
-const DIVIDE_SHARE = { both: 0.3, either: 0.2 } as const;
+const UNSAID_SHARE = 0.15;
+/**
+ * What « Jusqu'où aimeriez-vous aller ? » gives the reader's own, as shares of the whole score
+ * (operator, 2026-11-20). Shares, not weights: a weight is diluted by every further answer,
+ * which sent a Caribbean reader who had asked for familiar ground to Casablanca at the fifteenth
+ * answer, gave a Central African reader three Indian Ocean islands first, and never showed
+ * Kinshasa to a family from RD Congo (beta feedback, 2026-11-19 and 2026-11-20).
+ *
+ * - `country`: the family's country first, its region behind it.
+ * - `region`: the region first, with no advantage to the country, so its neighbours show.
+ * - `alike`: the regions close in culture come nearer; nothing more.
+ * - « Partout, surprenez-moi » has no line: the origin then weighs nothing.
+ *
+ * `divide` is the North Africa / sub-Saharan divide, both ways: every reader who asks to stay
+ * near their own says it is where they would feel least at home. A city across it keeps about
+ * half or two thirds of its score, so it steps back without leaving the list.
+ */
+const NEAR: Record<
+  Exclude<Reach, "anywhere">,
+  { origin: number; divide: number; countries: number; faith: number }
+> = {
+  country: { origin: 0.3, divide: 0.3, countries: 0.3, faith: 0.15 },
+  region: { origin: 0.35, divide: 0.2, countries: 0, faith: 0.15 },
+  alike: { origin: 0.08, divide: 0.2, countries: 0, faith: 0.1 },
+};
+/**
+ * The regions a reader says draw them, asked of one who named no origin (operator, 2026-11-20):
+ * the guard against a top three in a region they never had in mind. A share like the others, so
+ * it is not diluted either; it lifts those regions and removes no city.
+ */
+const ATTRACTED_SHARE = 0.2;
+/** All of them together leave a third of the score to everything else the reader answered. */
+const NEAR_ONES_OWN_MOST = 0.65;
 const PRACTICAL: Axis[] = [
   "safety",
   "comfort",
@@ -505,7 +538,8 @@ interface Profile {
 }
 
 /** Turns answers into pulls on axes and facts to match, each tied to its answer. */
-export function profileOf(answers: Answers): Profile {
+export function profileOf(given: Answers): Profile {
+  const answers = withAdventure(given);
   // No default pull: with no answer every city is equal, and only answers rank them.
   const pulls: Pull[] = [];
   const facts: FactPull[] = [];
@@ -621,37 +655,38 @@ export function profileOf(answers: Answers): Profile {
 
   const passports = (answers.passports ?? []).filter((p) => p !== "other");
   if (passports.length) fact("passports", { kind: "entry", values: passports, weight: 1.5 });
-  // The origin weighs on its own: the family's region draws the reader by project, more when
-  // feeling at home matters, less with an appetite for the unknown; a trip, or that appetite,
-  // leans away from it instead.
-  if (origins.length) {
-    const scale = KIN_SCALE[answers.kin ?? "unsaid"] * ADVENTURE_SCALE[answers.adventure ?? "open"];
-    const draw = (answers.project ? ORIGIN_DRAW[answers.project] : 1) * scale;
+  // The origin weighs on its own. Until the reader says how far they would go, the family's
+  // region draws them by project, as a plain weight that never exceeds a non-negotiable, so the
+  // map still shows cities of other regions; a trip leans away from it instead. Their answer
+  // then replaces that guess (NEAR), and « Partout, surprenez-moi » silences the origin.
+  const near = answers.reach && answers.reach !== "anywhere" ? NEAR[answers.reach] : undefined;
+  const silenced = answers.reach === "anywhere";
+  if (origins.length && near) {
+    fact("origin", { kind: "kin", origins, weight: 1 });
+    shares.origin = near.origin;
+    fact("divide", { kind: "divide", origins, weight: 1 });
+    shares.divide = near.divide;
+  } else if (origins.length && !silenced) {
+    const draw = (answers.project ? ORIGIN_DRAW[answers.project] : 1) * UNSAID_DRAW;
     const away =
-      (answers.project === "decouvrir" ? 0.5 : 0) +
-      (answers.adventure === "seeking" ? 0.6 : 0) +
-      (answers.roots === "discover" ? 1 : 0);
-    // Never more than a non-negotiable, so the temperament can still decide (operator, 2026-11-17).
+      (answers.project === "decouvrir" ? 0.5 : 0) + (answers.roots === "discover" ? 1 : 0);
     const weight = Math.min(NON_NEGOTIABLE, draw + away);
     if (draw > 0) fact("origin", { kind: "kin", origins, weight: draw }, weight);
     if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, weight);
-    // Only on the reader's own word: the origin alone says nothing of where they would feel at
-    // home, and an appetite for the unknown says the opposite.
-    const nearOnesOwn = [answers.kin === "much", answers.adventure === "familiar"].filter(Boolean);
-    if (draw > 0 && nearOnesOwn.length && answers.adventure !== "seeking") {
-      fact("divide", { kind: "divide", origins, weight: 1 });
-      shares.divide = nearOnesOwn.length === 2 ? DIVIDE_SHARE.both : DIVIDE_SHARE.either;
-    }
+    // A trip leans away from the family's region: no share for what the reader came to leave.
+    if (draw > 0 && away === 0) shares.origin = UNSAID_SHARE;
   }
-  // Faith counts the same way; a reader without one is not sent towards secular countries.
+  const drawnTo = (answers.drawnTo ?? []).filter(Boolean);
+  if (drawnTo.length) {
+    fact("drawnTo", { kind: "attracted", values: drawnTo, weight: 1 });
+    shares.drawnTo = ATTRACTED_SHARE;
+  }
+  // Faith counts the same way, and only on the reader's word; a reader without one is not sent
+  // towards secular countries.
   const faith = answers.faith;
-  if (
-    answers.kin &&
-    answers.kin !== "none" &&
-    (faith === "muslim" || faith === "christian" || faith === "other")
-  ) {
-    const weight = KIN_SCALE[answers.kin] * ADVENTURE_SCALE[answers.adventure ?? "open"];
-    fact("faith", { kind: "faith", value: faith, weight: 2 * weight }, weight);
+  if (near && (faith === "muslim" || faith === "christian" || faith === "other")) {
+    fact("faith", { kind: "faith", value: faith, weight: 1 });
+    shares.faith = near.faith;
   }
   // The family's own country: what draws a diaspora back to a city no other answer reaches. A
   // documented war or ban between it and the host country counts inside the same answer, never
@@ -659,12 +694,12 @@ export function profileOf(answers: Answers): Profile {
   const countries = (answers.countries ?? []).filter(Boolean);
   if (countries.length) {
     const roots = answers.roots === "rediscover" ? 2 : answers.roots === "both" ? 1 : 0;
-    // Feeling at home among one's own, when it matters a lot, makes the family's country the
-    // strongest answer of all, as the region is for a settler.
-    const kin = answers.kin === "much" ? 4 : answers.kin === "some" ? 2 : 0;
-    const weight = (1 + roots + kin) * ADVENTURE_SCALE[answers.adventure ?? "open"];
-    fact("countries", { kind: "homeCountry", values: countries, weight: 2 }, weight);
-    fact("countries", { kind: "tension", values: countries, weight: 2 }, weight);
+    // « Partout, surprenez-moi » silences the pull of home, not a war: that stays a fact about
+    // where this family would be received.
+    if (!silenced)
+      fact("countries", { kind: "homeCountry", values: countries, weight: 2 }, 1 + roots);
+    fact("countries", { kind: "tension", values: countries, weight: 2 }, 1 + roots);
+    if (near?.countries) shares.countries = near.countries;
   }
 
   const renounced = new Set<Axis>(
@@ -738,6 +773,7 @@ const LINE_COPY: Bilingual<LineCopy> = {
       settings: ["Le paysage que vous cherchez, tout près", "Paysage différent de votre souhait"],
       climates: ["Le climat que vous cherchez", "Climat différent de votre souhait"],
       zone: ["Dans la région de votre famille"],
+      attracted: ["Dans une région qui vous attire"],
       sectors: ["Votre secteur y recrute", "Votre secteur y recrute peu"],
       professions: ["Votre métier y recrute", "Votre métier y recrute peu"],
       entry: ["Facile d'y entrer avec votre passeport", "Un visa à demander à l'ambassade"],
@@ -801,6 +837,7 @@ const LINE_COPY: Bilingual<LineCopy> = {
       ],
       climates: ["The climate you are looking for", "A climate unlike the one you want"],
       zone: ["In your family's region"],
+      attracted: ["In a region that draws you"],
       sectors: ["Your sector is hiring there", "Your sector hires little there"],
       professions: ["Your profession is hiring there", "Your profession hires little there"],
       entry: ["Easy to enter with your passport", "A visa to request from the embassy"],
@@ -943,13 +980,18 @@ function evidenceOf(profile: Profile): Evidence[] {
   };
   for (const p of profile.pulls) of(p.from).pulls.push(p);
   for (const f of profile.facts) of(f.from).facts.push(f);
-  for (const [from, share] of Object.entries(profile.shares)) {
-    const others = [...byAnswer].reduce(
-      (sum, [key, e]) => (key === from ? sum : sum + e.weight),
-      0,
-    );
-    of(from).weight = (share / (1 - share)) * others;
-  }
+  // The shares are set together, against the answers that keep a plain weight.
+  const asked = Object.entries(profile.shares).filter(([from]) => byAnswer.has(from));
+  const wanted = asked.reduce((sum, [, share]) => sum + share, 0);
+  const scale = Math.min(1, NEAR_ONES_OWN_MOST / (wanted || 1));
+  const plain = [...byAnswer].reduce(
+    (sum, [from, e]) => (from in profile.shares ? sum : sum + e.weight),
+    0,
+  );
+  // With nothing else answered there is nothing to take a share of: the weights stand.
+  if (plain === 0) return [...byAnswer.values()];
+  for (const [from, share] of asked)
+    of(from).weight = ((share * scale) / (1 - wanted * scale)) * plain;
   return [...byAnswer.values()];
 }
 
@@ -1025,10 +1067,18 @@ function evaluate(
     reasons,
     drawbacks,
     temperament: evidence.temperament ? scoreOf(city, evidence.temperament).score : null,
-    temperamentLines: temperamentLinesFor(city.name, answers, locale),
+    temperamentLines: temperamentLinesFor(city.name, withAdventure(answers), locale),
     practical: scoreOf(city, evidence.practical).score ?? 0,
     portrait: portraitFor(city, answers, locale),
+    toDiscover: isDiscovery(city, answers),
   };
+}
+
+function isDiscovery(city: City, answers: Answers): boolean {
+  const countries = (answers.countries ?? []).filter(Boolean);
+  if (countries.length) return !countries.includes(city.country);
+  const regions = originsOf(answers).filter((origin) => origin !== "ameriques");
+  return regions.length > 0 && !regions.includes(city.zone);
 }
 
 /**

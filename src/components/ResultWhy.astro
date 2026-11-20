@@ -1,47 +1,27 @@
 ---
 /**
- * Two blocks around the result cards (beta feedback, 2026-11-19).
- *
- * « Pourquoi ces villes ? » sits above the cards, folded: readers surprised by their top three
- * had to open a card to find a reason, but the unfolded box pushed the first city a screen down,
- * so only its question shows until it is tapped.
- *
- * The verdict is moved by the script right under the first city: readers answer a lot and review
- * little, and one tap, a review or a share is asked for once they have seen a city, not before.
- * It is a « Garder vos résultats » block (`data-keep`) so its share button shares like the other.
- * Filled by showWhy() and placed by placeVerdict() in lib/why-dom.ts.
+ * « Pourquoi ces villes ? » sits above the result cards, folded (beta feedback, 2026-11-19):
+ * readers surprised by their top three had to open a card to find a reason, but the unfolded box
+ * pushed the first city a screen down, so only its question shows until it is tapped.
+ * Filled by showWhy() in lib/why-dom.ts.
  */
 import type { Bilingual } from "../i18n/locale";
 import { localeOfPath } from "../i18n/routes";
-import type { VerdictPlace } from "../lib/analytics";
 
-interface Props {
-  place: VerdictPlace;
-}
-const { place } = Astro.props;
-const reviews = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const COPY: Bilingual<Record<string, string>> = {
   fr: {
     title: "Pourquoi ces villes ?",
-    how: "Chaque réponse fait monter les villes qui lui ressemblent et descendre les autres. Aucune ville n'est retirée.",
+    how: "Chaque réponse rapproche les villes qui vous ressemblent. Aucune ville n'est retirée.",
+    yours: "Ce que vous nous avez dit",
     shared: "Ce que ces villes ont en commun",
     toKnow: "À savoir",
-    ask: "Ces villes vous ressemblent ?",
-    yes: "Oui, ça me parle",
-    no: "Pas vraiment",
-    review: "Je laisse un avis",
-    share: "Partager mes villes",
   },
   en: {
     title: "Why these cities?",
-    how: "Each answer lifts the cities that match it and lowers the others. No city is removed.",
+    how: "Each answer brings the cities that are like you closer. No city is removed.",
+    yours: "What you told us",
     shared: "What these cities have in common",
-    toKnow: "Worth knowing",
-    ask: "Are these cities like you?",
-    yes: "Yes, they suit me",
-    no: "Not really",
-    review: "Leave a review",
-    share: "Share my cities",
+    toKnow: "Good to know",
   },
 };
 const copy = COPY[localeOfPath(Astro.url.pathname)];
@@ -51,6 +31,11 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
   <summary>{copy.title}</summary>
   <div class="why-body">
     <p class="why-how">{copy.how}</p>
+    <div class="why-yours" data-why-yours hidden>
+      <p class="why-label">{copy.yours}</p>
+      <ul></ul>
+      <p class="why-closer" data-why-closer hidden></p>
+    </div>
     <div class="why-reasons">
       <div data-why-shared>
         <p class="why-label">{copy.shared}</p>
@@ -68,44 +53,16 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
   </div>
 </details>
 
-<div class="verdict" data-verdict-box={place} data-keep hidden>
-  <p class="verdict-ask" data-verdict-ask>
-    {copy.ask}
-  </p>
-  <div class="verdict-buttons" data-verdict-buttons>
-    <button type="button" class="suits" data-verdict="yes">
-      {copy.yes}
-    </button>
-    <button type="button" data-verdict="no">
-      {copy.no}
-    </button>
-  </div>
-  <p class="verdict-thanks" data-verdict-thanks role="status" hidden></p>
-  <div class="verdict-next">
-    {reviews && (
-      <button type="button" data-verdict-review>
-        {copy.review}
-      </button>
-    )}
-    <button type="button" data-keep-way="partage">
-      {copy.share}
-    </button>
-  </div>
-  <p class="verdict-note" data-keep-note aria-live="polite"></p>
-</div>
-
 <style>
   .why-box {
     background: var(--night-lift);
     border-radius: 16px;
   }
-  .why-box[hidden],
-  .verdict[hidden] {
+  .why-box[hidden] {
     display: none;
   }
   .why-box p,
-  .why-box ul,
-  .verdict p {
+  .why-box ul {
     margin: 0;
   }
   summary {
@@ -150,6 +107,22 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     gap: 6px;
     align-content: start;
   }
+  .why-yours {
+    display: grid;
+    gap: 6px;
+  }
+  .why-yours ul {
+    padding-left: 1.1em;
+    display: grid;
+    gap: 2px;
+    font-size: 0.95rem;
+  }
+  .why-closer {
+    color: var(--saffron);
+    font-size: 0.95rem;
+  }
+  .why-yours[hidden],
+  .why-closer[hidden],
   .why-reasons > div[hidden],
   .why-know[hidden] {
     display: none;
@@ -167,68 +140,13 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     font-size: 0.9rem;
     color: var(--thread-dim);
   }
-  .verdict {
-    display: grid;
-    gap: 10px;
-    background: var(--night-lift);
-    border: 2px solid var(--saffron);
-    border-radius: 18px;
-    padding: 16px;
-  }
-  .verdict-ask {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.2rem;
-    line-height: 1.15;
-  }
-  .verdict-buttons,
-  .verdict-next {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    gap: 8px;
-  }
-  .verdict-buttons[hidden],
-  .verdict-ask[hidden],
-  .verdict-thanks[hidden] {
-    display: none;
-  }
-  .verdict button {
-    min-height: 48px;
-    padding: 0 12px;
-    border-radius: 999px;
-    border: 2px solid var(--thread);
-    background: transparent;
-    color: var(--thread);
-    font: inherit;
-    font-weight: 800;
-    cursor: pointer;
-  }
-  .verdict-buttons button {
-    border-color: var(--saffron);
-  }
-  .verdict .suits {
-    background: var(--saffron);
-    color: var(--ink);
-  }
-  .verdict-note {
-    color: var(--thread-dim);
-    font-size: 0.9rem;
-  }
-  .verdict-note:empty {
-    display: none;
+  .why-know b {
+    margin-right: 6px;
   }
   @media (min-width: 768px) {
     .why-reasons {
       grid-template-columns: 1fr 1fr;
       gap: 24px;
-    }
-    .verdict {
-      padding: 20px 24px;
-    }
-  }
-  @media print {
-    .verdict {
-      display: none;
     }
   }
 </style>

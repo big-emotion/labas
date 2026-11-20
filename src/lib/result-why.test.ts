@@ -52,3 +52,66 @@ describe("why these cities came first", () => {
       expect(looksFrench(label), label).toBe(false);
   });
 });
+// Operator, 2026-11-20: the box says what brings these cities close to the reader, in the
+// reader's own answers. It never says which region or city stepped back.
+describe("what the reader said of their own", () => {
+  const settler: Answers = { ...reader, origin: ["ameriques"], reach: "region" };
+  const why = (answers: Answers, locale: "fr" | "en" = "fr") =>
+    whyTheseCities(bestMatches(answers, TOP_THREE, locale), answers, locale);
+
+  it("recalls the family's region and the wish to live near one's own, then speaks of closeness", () => {
+    const { yours } = why(settler);
+    expect(yours?.said).toEqual([
+      "Votre famille vient des Caraïbes ou des Amériques",
+      "Vous aimeriez rester dans la région de votre famille",
+    ]);
+    expect(yours?.closer).toBe(
+      "Nous avons mis en avant les villes qui ont un lien plus étroit avec vos origines.",
+    );
+  });
+
+  it("names the family's countries, and the faith only as a tie, never which one", () => {
+    const { yours } = why({
+      ...reader,
+      origin: ["ouest", "centre"],
+      countries: ["Sénégal", "Cameroun"],
+      reach: "alike",
+      faith: "muslim",
+    });
+    expect(yours?.said).toEqual([
+      "Votre famille vient d'Afrique de l'Ouest et d'Afrique centrale",
+      "Le pays de votre famille : Sénégal, Cameroun",
+      "Vous cherchez une culture proche de la vôtre",
+    ]);
+    expect(yours?.closer).toBe(
+      "Nous avons mis en avant les villes qui ont un lien plus étroit avec vos origines et votre religion.",
+    );
+  });
+
+  it("never speaks of a region or a city that stepped back", () => {
+    const text = (["country", "region", "alike"] as const)
+      .map((reach) => JSON.stringify(why({ ...settler, reach }).yours))
+      .join(" ");
+    for (const word of ["Nord", "après", "retir", "écart", "recul", "loin"])
+      expect(text.toLowerCase()).not.toContain(word.toLowerCase());
+  });
+
+  it("says nothing of closeness when the reader did not ask for it", () => {
+    expect(why({ ...reader, origin: ["ouest"], reach: "anywhere" }).yours?.closer).toBeUndefined();
+    // The origin alone is recalled, without a word on closeness.
+    expect(why({ ...reader, origin: ["ouest"] }).yours).toEqual({
+      said: ["Votre famille vient d'Afrique de l'Ouest"],
+    });
+    expect(why(reader).yours).toBeUndefined();
+  });
+
+  it("says it in English on the English site", () => {
+    const { yours } = why({ ...settler, origin: ["ouest"], countries: ["Sénégal"] }, "en");
+    expect(yours?.said).toEqual([
+      "Your family comes from West Africa",
+      "Your family's country: Senegal",
+      "You would like to stay in your family's region",
+    ]);
+    expect(yours?.closer).toBe("We have put forward the cities with a closer tie to your roots.");
+  });
+});

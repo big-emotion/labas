@@ -1,4 +1,5 @@
 import type { Answers } from "./ranking";
+import { withAdventure } from "./reach";
 import type { Bilingual, Locale } from "../i18n/locale";
 
 export interface Trait {
@@ -106,7 +107,7 @@ export function archetypeWords(
 export const traitWords = (locale: Locale) => TRAIT_COPY[locale];
 
 export function archetypeOf(answers: Answers, locale: Locale): Archetype | undefined {
-  const { saturday, adventure, order, together, friction } = answers;
+  const { saturday, adventure, order, together, friction } = withAdventure(answers);
   if (adventure === undefined) return;
   const given = [saturday, OPENNESS[adventure], order, together, friction];
   if (given.some((v) => v === undefined)) return;

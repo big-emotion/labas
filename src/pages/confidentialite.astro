@@ -8,20 +8,39 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
 <Page
   title="Confidentialité"
-  description="Vos réponses restent dans votre navigateur : Là-bas ne les reçoit jamais et ne compte les réponses que de façon anonyme, sans cookie."
+  description="Vos réponses restent dans votre navigateur tant que vous ne réagissez pas à vos résultats et n'enregistrez pas votre parcours. Là-bas compte les réponses de façon anonyme, sans cookie."
 >
   <h1>Confidentialité</h1>
-  <p class="lead">Dernière mise à jour : {newsletter ? "18" : "15"} novembre 2026.</p>
+  <p class="lead">Dernière mise à jour : {newsletter ? "20" : "15"} novembre 2026.</p>
 
   {newsletter ? (
     <>
       <h2>Sans compte, vos réponses restent chez vous</h2>
       <p>
         Le classement des villes est calculé dans votre navigateur. Tant que vous n'enregistrez pas
-        votre parcours et ne recevez pas vos résultats par e-mail, vos réponses ne nous sont jamais
-        envoyées. Votre navigateur les garde (stockage local) pour que le questionnaire complet
-        reprenne là où vous vous êtes arrêté ; le bouton « Tout reprendre à zéro » les efface. Seul
-        un compteur anonyme par réponse est envoyé, comme expliqué plus bas.
+        votre parcours, ne recevez pas vos résultats par e-mail et ne réagissez pas à une ville de
+        votre résultat, vos réponses ne nous sont jamais envoyées. Votre navigateur les garde
+        (stockage local) pour que le questionnaire complet reprenne là où vous vous êtes arrêté ; le
+        bouton « Tout reprendre à zéro » les efface. Seul un compteur anonyme par réponse est
+        envoyé, comme expliqué plus bas.
+      </p>
+
+      <h2>Si vous réagissez à une ville de votre résultat</h2>
+      <p>
+        Sous chaque ville de votre résultat, trois boutons : « J'aime », « Ça me correspond », « Ça
+        ne me correspond pas ». Quand vous en touchez un, nous gardons votre réaction avec vos
+        réponses au questionnaire et les trois villes proposées, pour apprendre où le classement se
+        trompe et l'améliorer. Cela comprend, si vous les avez données, votre origine, le pays de
+        votre famille, votre religion et la distance que vous acceptez. C'est écrit sous les
+        boutons, avant que vous ne touchiez.
+      </p>
+      <p>
+        <b>Ce que nous ne gardons pas avec :</b> ni nom, ni adresse e-mail, ni compte, ni adresse
+        IP, ni heure, seulement le jour. Rien ne relie une réaction à vous, ni deux réactions entre
+        elles. C'est pourquoi nous ne pouvons pas retrouver ni effacer la vôtre à la demande ; elles
+        sont toutes effacées au bout de 3 ans. Si vous ne voulez pas que vos réponses soient
+        gardées, ne touchez pas ces boutons : le reste du site fonctionne pareil. Sur la page d'une
+        ville ou dans la liste des villes, les mêmes boutons ne gardent que le compteur.
       </p>
 
       <h2>Si vous enregistrez votre parcours ou recevez vos résultats par e-mail</h2>
@@ -32,11 +51,11 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       </p>
       <p>
         <b>Ce que nous gardons :</b> votre adresse e-mail, vos réponses, vos parcours et leurs
-        dates. Votre origine, le pays de votre famille, vos attaches, votre religion et vos filtres
-        sur la santé et les lois contre l'homosexualité, comme les lieux que vous avez écartés («
-        Pas pour moi »), ne sont gardés que si vous cochez la case qui les nomme, à part, pour
-        chaque parcours. Sans elle, ces réponses restent sur votre appareil, même si vous les donnez
-        plus tard.
+        dates. Votre origine, le pays de votre famille, la distance que vous acceptez, votre
+        religion et vos filtres sur la santé et les lois contre l'homosexualité, comme les lieux que
+        vous avez écartés (« Pas pour moi »), ne sont gardés que si vous cochez la case qui les
+        nomme, à part, pour chaque parcours. Sans elle, ces réponses restent sur votre appareil,
+        même si vous les donnez plus tard.
       </p>
       <p>
         <b>Pourquoi :</b> pour que vous retrouviez votre parcours et votre résultat complet, sur
@@ -74,10 +93,10 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       <p>
         <b>Ce qui est public :</b> le texte de votre réaction, le nom que vous choisissez (sinon «
         Utilisateur » et un numéro), sa date et votre parcours : votre top 3, les villes et leurs
-        pourcentages, et votre tempérament (une lecture inspirée du Big Five, ce n'est pas un test
-        de personnalité). Jamais vos réponses. Pour garder votre parcours pour vous, cochez « Ne pas
-        rendre public mon top 3 ni mon profil de personnalité ». Votre adresse e-mail n'est jamais
-        affichée.
+        pourcentages, et votre façon de vivre (une lecture inspirée du Big Five, ce n'est pas un
+        test de personnalité). Jamais vos réponses. Pour garder votre parcours pour vous, cochez «
+        Ne pas rendre public mon top 3 ni mon profil de personnalité ». Votre adresse e-mail n'est
+        jamais affichée.
       </p>
       <p>
         <b>Ce que nous gardons :</b> votre adresse, pour vérifier une seule fois qu'elle est à vous.
@@ -157,16 +176,17 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     <>
       <p>
         « Partager », « Enregistrer l'image » et « Imprimer » passent par votre téléphone ou votre
-        imprimante : Là-bas ne reçoit rien. Le lien partagé contient votre profil de tempérament et
-        vos villes, placés après le « # », une partie que les navigateurs n'envoient pas au serveur.
+        imprimante : Là-bas ne reçoit rien. Le lien partagé contient votre profil de façon de vivre
+        et vos villes, placés après le « # », une partie que les navigateurs n'envoient pas au
+        serveur.
       </p>
       <p>
         « Recevoir par e-mail » : vous nous donnez une adresse, nous y envoyons vos trois villes et
         leurs pourcentages, et nous gardons votre résultat dans votre espace, comme expliqué plus
         haut. Le bouton de l'e-mail l'ouvre, avec le classement complet. L'e-mail lui-même ne
-        contient que votre profil de tempérament et vos villes, jamais vos réponses : il passe par
-        la messagerie Microsoft 365 de Big Emotion, qui l'envoie sans en garder de copie dans ses
-        messages envoyés.
+        contient que votre profil de façon de vivre et vos villes, jamais vos réponses : il passe
+        par la messagerie Microsoft 365 de Big Emotion, qui l'envoie sans en garder de copie dans
+        ses messages envoyés.
       </p>
       <p>
         La case des nouveautés est à part : sans elle, vous ne recevez rien d'autre que vos
@@ -180,10 +200,11 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       « Partager », « Enregistrer l'image », « Imprimer » et « Recevoir par e-mail » passent par
       votre téléphone, votre imprimante ou votre propre messagerie : Là-bas ne reçoit rien. L'image
       est dessinée dans votre navigateur. Le message et le lien partagés contiennent votre profil de
-      tempérament (vos cinq réponses sur le samedi soir, la découverte, l'organisation, l'entraide
-      et les imprévus) et vos villes avec leurs pourcentages, jamais vos autres réponses : ni votre
-      origine, ni le pays de votre famille, ni votre religion, ni vos filtres. Ces informations sont
-      placées après le « # » du lien, une partie que les navigateurs n'envoient pas au serveur.
+      façon de vivre (vos cinq réponses sur le samedi soir, la découverte, l'organisation,
+      l'entraide et les imprévus) et vos villes avec leurs pourcentages, jamais vos autres réponses
+      : ni votre origine, ni le pays de votre famille, ni votre religion, ni vos filtres. Ces
+      informations sont placées après le « # » du lien, une partie que les navigateurs n'envoient
+      pas au serveur.
     </p>
   )}
 
@@ -231,14 +252,17 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     compteur anonyme (« telle question, telle réponse »), avec votre projet (vacances, installation,
     investissement…) et le rang de la question dans votre parcours, pour savoir où chaque parcours
     perd ses lecteurs. Sans cookie et sans identifiant : nous ne pouvons pas savoir qui a répondu
-    quoi. Vos réponses sur votre origine, le pays de votre famille, vos attaches, votre religion, la
-    santé et les lois contre l'homosexualité ne sont jamais envoyées. Quand vous écartez un lieu («
-    Pas pour moi »), nous comptons seulement l'endroit de la page et s'il s'agit d'une ville, d'un
-    pays ou d'une région ; jamais lequel. Pour les réactions, nous comptons de la même façon qui
-    ouvre le formulaire, qui envoie et qui va les lire, avec la ville et l'endroit de la page ;
-    jamais le texte, le nom ni l'adresse. Quand vous dites si vos villes vous ressemblent, nous
-    comptons seulement « oui » ou « pas vraiment » et le questionnaire où vous étiez ; jamais les
-    villes ni vos réponses.
+    quoi. Vos réponses sur votre origine, le pays de votre famille, la distance que vous acceptez,
+    votre religion, la santé et les lois contre l'homosexualité ne sont jamais envoyées à cet outil.
+    Quand vous écartez un lieu (« Pas pour moi »), nous comptons seulement l'endroit de la page et
+    s'il s'agit d'une ville, d'un pays ou d'une région ; jamais lequel. Pour les réactions, nous
+    comptons de la même façon qui ouvre le formulaire, qui envoie et qui va les lire, avec la ville
+    et l'endroit de la page ; jamais le texte, le nom ni l'adresse. Quand vous réagissez à une ville
+    en un tap (« J'aime », « Ça me correspond », « Ça ne me correspond pas »), nous comptons la
+    ville, votre réaction et l'endroit de la page ; cet outil ne reçoit jamais vos réponses. Ces
+    réactions sont publiques sous forme de compteurs : notre base garde, pour chaque ville, le
+    nombre de chaque réaction, et rien sur qui a réagi. Votre propre réaction reste dans votre
+    navigateur (stockage local), pour que vous puissiez la changer ou la retirer.
     {newsletter &&
       " Pour « Votre avis », nous comptons seulement qu'un message est parti, avis sur le site ou message ; jamais son texte, sa page ni votre adresse."}
   </p>

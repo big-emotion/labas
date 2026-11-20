@@ -12,6 +12,7 @@ const COPY: Bilingual<Record<string, string>> = {
     against: "Ce qui joue contre elle",
     living: "Si vous y viviez",
     go: "Y aller",
+    discover: "À découvrir",
     notForMe: "Pas pour moi",
     open: "Voir le détail",
     hide: "Masquer le détail",
@@ -30,6 +31,7 @@ const COPY: Bilingual<Record<string, string>> = {
     against: "What counts against it",
     living: "If you lived there",
     go: "Getting there",
+    discover: "To discover",
     notForMe: "Not for me",
     open: "See the details",
     hide: "Hide the details",
@@ -53,6 +55,10 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       <div>
         <h3 class="card-name"></h3>
         <p class="card-country"></p>
+        {/* Outside what the reader's family knows (Match.toDiscover): a label, not a rank. */}
+        <span class="discover" hidden>
+          {copy.discover}
+        </span>
         <a class="card-reactions" hidden></a>
       </div>
       <span class="fit">
@@ -62,6 +68,10 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     </header>
     <p class="split"></p>
     <ul class="why-temper"></ul>
+    {/* The one-tap reaction, built by lib/taps-dom.ts, right under the city's name: reacting
+        must not wait for the end of a long card. The first card asks its question aloud. */}
+    <p class="taps-ask" hidden></p>
+    <div data-taps></div>
     <figure class="photo" hidden>
       <img alt="" width="1280" height="853" loading="lazy" />
       <figcaption></figcaption>
@@ -202,6 +212,21 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     font-size: 1.45rem;
     margin: 0;
     line-height: 1.05;
+  }
+  .results .discover {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 1px 10px;
+    border: 1px solid var(--saffron);
+    border-radius: 999px;
+    color: var(--saffron);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .results .discover[hidden] {
+    display: none;
   }
   .results .card-country,
   .results .card-tagline {
@@ -484,6 +509,17 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     color: var(--ink);
     font-weight: 700;
     text-decoration: none;
+  }
+  .results .taps-ask {
+    margin: 0;
+    font-weight: 800;
+  }
+  .results .taps-ask[hidden] {
+    display: none;
+  }
+  .results .first :global(.taps button) {
+    border-width: 2px;
+    border-color: var(--saffron);
   }
   .results .not-for-me:not([hidden]) {
     justify-self: start;

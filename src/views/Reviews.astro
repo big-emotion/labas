@@ -57,7 +57,7 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const COPY = {
   fr: {
     title: "Les avis sur les villes",
-    description: `Ce que les lecteurs de ${BRAND.fr} disent des villes d'Afrique qu'ils connaissent : cherchez par ville, par région ou par tempérament.`,
+    description: `Ce que les lecteurs de ${BRAND.fr} disent des villes d'Afrique qu'ils connaissent : cherchez par ville, par région ou par façon de vivre.`,
     heading: "Les avis",
     lead: "Ce que les lecteurs disent des villes d'Afrique qu'ils connaissent ou qui les attirent. Choisissez une région puis une ville, ou cherchez un mot.",
     filters: "Filtrer les avis",
@@ -68,10 +68,11 @@ const COPY = {
     city: "Ville",
     allCities: "Toutes les villes de la région",
     sort: "Trier",
+    tapped: "Villes avec réactions",
     alike: "Des gens qui vous ressemblent",
     everyone: "Tout le monde",
     temperamentHint:
-      "Choisissez un tempérament : les avis de personnes aux préférences proches passent devant. Inspiré du Big Five, ce n'est pas un test de personnalité.",
+      "Choisissez un profil : les avis de personnes aux préférences proches passent devant. Inspiré du Big Five, ce n'est pas un test de personnalité.",
     bigFive: "Inspiré du Big Five, ce n'est pas un test de personnalité.",
     seePage: "Voir la page",
     pages: "Pages des avis",
@@ -87,7 +88,7 @@ const COPY = {
   },
   en: {
     title: "Reviews of the cities",
-    description: `What ${BRAND.en} readers say about the African cities they know: search by city, by region or by temperament.`,
+    description: `What ${BRAND.en} readers say about the African cities they know: search by city, by region or by way of living.`,
     heading: "Reviews",
     lead: "What readers say about the African cities they know or that draw them. Pick a region, then a city, or search for a word.",
     filters: "Filter the reviews",
@@ -98,10 +99,11 @@ const COPY = {
     city: "City",
     allCities: "Every city in the region",
     sort: "Sort",
+    tapped: "Cities with reactions",
     alike: "People like you",
     everyone: "Everyone",
     temperamentHint:
-      "Pick a temperament: reviews from people with similar preferences come first. Inspired by the Big Five; it is not a personality test.",
+      "Pick a profile: reviews from people with similar preferences come first. Inspired by the Big Five; it is not a personality test.",
     bigFive: "Inspired by the Big Five; it is not a personality test.",
     seePage: "See the page",
     pages: "Review pages",
@@ -179,6 +181,11 @@ const zones = Object.keys(ZONES) as Zone[];
           </select>
         </label>
 
+        <label class="check">
+          <input type="checkbox" name="avec" />
+          <span>{copy.tapped}</span>
+        </label>
+
         <fieldset>
           <legend>{copy.alike}</legend>
           <div class="chips">
@@ -244,6 +251,7 @@ const zones = Object.keys(ZONES) as Zone[];
     type ReviewSort,
   } from "../lib/review-search";
   import type { Zone } from "../lib/cities";
+  import { loadTaps } from "../lib/taps-dom";
 
   const locale = pageLocale();
 
@@ -290,6 +298,9 @@ const zones = Object.keys(ZONES) as Zone[];
     pick("temperament", params.get("temperament"));
     const tri = params.get("tri");
     if (SORTS.some((s) => s.key === tri)) form.tri.value = tri;
+    form.avec.checked = params.has("avec");
+    // The cities' public reactions order and filter the reviews; none without the service.
+    const taps = await loadTaps();
 
     const zoneOf = () => (String(new FormData(form).get("zone") ?? "") || null) as Zone | null;
 
@@ -315,17 +326,20 @@ const zones = Object.keys(ZONES) as Zone[];
         zone: zoneOf(),
         temperament: String(data.get("temperament") ?? "") || null,
         sort: (String(data.get("tri") ?? "") || "recents") as ReviewSort,
+        taps,
+        tapped: data.has("avec"),
       };
     };
 
     function remember(at: number) {
-      const { query, city, zone, temperament, sort } = filters();
+      const { query, city, zone, temperament, sort, tapped } = filters();
       const next = new URLSearchParams();
       if (city) next.set("ville", city);
       else if (zone) next.set("region", zone);
       if (query.trim()) next.set("q", query.trim());
       if (temperament) next.set("temperament", temperament);
       if (sort !== "recents") next.set("tri", sort);
+      if (tapped) next.set("avec", "1");
       if (at > 1) next.set("page", String(at));
       const search = next.toString();
       history.replaceState(null, "", search ? `?${search}` : location.pathname);
@@ -506,6 +520,19 @@ const zones = Object.keys(ZONES) as Zone[];
     color: var(--thread-dim);
     font-size: 0.85rem;
     margin: 0;
+  }
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    font-weight: 700;
+  }
+  .check input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--saffron);
   }
   .pick {
     display: grid;

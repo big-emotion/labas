@@ -93,7 +93,7 @@ describe("the one-line summary of the author's journey", () => {
       first: "Arusha 79\u202f%",
       temperament: "Fondation",
       more: "+2 villes",
-      label: "Son parcours : Arusha en tête, tempérament Fondation. Voir le détail",
+      label: "Son parcours : Arusha en tête, profil Fondation. Voir le détail",
     });
   });
 
@@ -102,7 +102,7 @@ describe("the one-line summary of the author's journey", () => {
     expect(journeySummary(top.slice(0, 2), null, "fr").more).toBe("+1 ville");
     expect(journeySummary(null, profile, "fr").first).toBeNull();
     expect(journeySummary(null, profile, "fr").label).toBe(
-      "Son parcours : tempérament Fondation. Voir le détail",
+      "Son parcours : profil Fondation. Voir le détail",
     );
   });
 });
@@ -137,7 +137,7 @@ describe("the same words on the English pages", () => {
       first: "Cape Town 80\u202f%",
       temperament: "Foundation",
       more: "+1 city",
-      label: "Their journey: Cape Town first, Foundation temperament. See the detail",
+      label: "Their journey: Cape Town first, Foundation profile. See the detail",
     });
     const traits = [{ name: "Extraversion", range: "calme ou monde", value: 1 }];
     expect(profileIn({ name: "Lien", traits }, "en")).toEqual({

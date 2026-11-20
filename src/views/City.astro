@@ -36,6 +36,7 @@ const advisory = city.facts.advisory;
 const FR = {
   separator: " ; ",
   title: `Vivre à ${shown.name}, ${shown.country}`,
+  suits: `${shown.name}, ça vous correspond ?`,
   description: `${shown.name} (${shown.country}) : ${shown.tagline}. Ce qu'il faut savoir pour y vivre, critère par critère, avec nos sources.`,
   photo: "Photo :",
   themesLabel: "Thèmes de la fiche",
@@ -159,6 +160,7 @@ const COPY: Bilingual<typeof FR> = {
   en: {
     separator: "; ",
     title: `Living in ${shown.name}, ${shown.country}`,
+    suits: `${shown.name}: does it suit you?`,
     description: `${shown.name} (${shown.country}): ${shown.tagline}. What to know about living there, criterion by criterion, with our sources.`,
     photo: "Photo:",
     themesLabel: "Topics on this page",
@@ -334,6 +336,11 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
           </figcaption>
         </figure>
       )}
+      {/* One tap, no account, a public count (lib/taps-dom.ts; operator, 2026-11-20). */}
+      <div class="city-taps">
+        <p>{copy.suits}</p>
+        <div data-taps={city.slug} />
+      </div>
       {/* High on the page, right after the photo: reactions are what the operator wants to
           learn from (operator, 2026-11-18). */}
       <Reactions city={{ slug: city.slug, name: city.name }} />
@@ -754,9 +761,13 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
 </Page>
 
 <script>
+  import { pageLocale } from "../i18n/locale";
+  import { wireTaps } from "../lib/taps-dom";
   import { browserStore } from "../lib/keep-dom";
   import { loadAnswers } from "../lib/keep";
   import { bestWeekIndex } from "../lib/week-pick";
+
+  wireTaps(document, pageLocale(), "city");
 
   const keys = document.getElementById("week-keys");
   if (keys) {
@@ -933,6 +944,14 @@ const sourceLabel = (s: Source) => `${s.title}${s.published ? `, ${s.published}`
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--saffron);
+  }
+  .city-taps {
+    display: grid;
+    gap: 8px;
+  }
+  .city-taps p {
+    margin: 0;
+    font-weight: 800;
   }
   .tagline {
     margin: 0;

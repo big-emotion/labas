@@ -23,25 +23,28 @@ const COPY: Bilingual<{
   split: (temperament: string, practical: string) => string;
   photo: (author: string, license: string) => string;
   same: (others: string) => string;
+  suits: (city: string) => string;
 }> = {
   fr: {
     // French puts a narrow no-break space before « % ».
+    suits: (city) => `${city}, ça vous correspond ?`,
     percent: (value) => `${value}\u202f%`,
     portraitTitle: (city) => `Pourquoi vous et ${city}`,
     said: (answer) => `Vous avez dit · ${answer}`,
     reactions: (city) => `Voir les réactions sur ${city}`,
     pips: (level) => `${level} sur 5`,
-    split: (t, p) => `Tempérament <b>${t}</b> · Vie pratique <b>${p}</b>`,
+    split: (t, p) => `Façon de vivre <b>${t}</b> · Vie pratique <b>${p}</b>`,
     photo: (author, license) => `Photo : ${author}, ${license}, Wikimedia Commons`,
     same: (others) => `Aussi dans le pays : ${others}`,
   },
   en: {
+    suits: (city) => `${city}: does it suit you?`,
     percent: (value) => `${value}%`,
     portraitTitle: (city) => `Why you and ${city}`,
     said: (answer) => `You said · ${answer}`,
     reactions: (city) => `See the reactions on ${city}`,
     pips: (level) => `${level} out of 5`,
-    split: (t, p) => `Temperament <b>${t}</b> · Practical life <b>${p}</b>`,
+    split: (t, p) => `Way of living <b>${t}</b> · Practical life <b>${p}</b>`,
     photo: (author, license) => `Photo: ${author}, ${license}, Wikimedia Commons`,
     same: (others) => `Also in the country: ${others}`,
   },
@@ -206,6 +209,13 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
     const go = card.querySelector(".go") as HTMLAnchorElement;
     go.href = `${pathFor("city", locale, m.city.slug)}#y-aller`;
     go.hidden = false;
+  }
+  (card.querySelector(".discover") as HTMLElement).hidden = !m.toDiscover;
+  (card.querySelector("[data-taps]") as HTMLElement).dataset.taps = m.city.slug;
+  if (index === 0) {
+    const ask = card.querySelector(".taps-ask") as HTMLElement;
+    ask.textContent = COPY[locale].suits(city.name);
+    ask.hidden = false;
   }
   card.querySelector(".detail")!.append(detailFor(m, false, locale));
   return card;
