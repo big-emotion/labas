@@ -90,3 +90,61 @@ export function funnel(visitors: number, goals: Goals) {
     }),
   ];
 }
+
+/**
+ * One reaction on a result, as the server kept it (quiz_outcomes): no reader behind it, and no
+ * link between two rows, so a reader who changes their mind counts once per gesture.
+ */
+export interface Outcome {
+  day: string;
+  /** The site's version that ranked the cities; null for rows kept before v0.28.0. */
+  version: string | null;
+  kind: string;
+  city: string;
+  /** null when the reader took their reaction back. */
+  reaction: "like" | "suits" | "not" | null;
+  answers: Record<string, unknown>;
+  top: string[];
+}
+
+interface Tally {
+  like: number;
+  suits: number;
+  not: number;
+  /** The share of « ça ne me correspond pas » among the reactions that stand. */
+  misses: string;
+}
+
+function tally(rows: Outcome[]): Tally {
+  const count = (reaction: Outcome["reaction"]) =>
+    rows.filter((row) => row.reaction === reaction).length;
+  const [like, suits, not] = [count("like"), count("suits"), count("not")];
+  const standing = like + suits + not;
+  return { like, suits, not, misses: standing ? `${Math.round((100 * not) / standing)} %` : "–" };
+}
+
+function grouped<K>(rows: Outcome[], key: (row: Outcome) => K): [K, Outcome[]][] {
+  const groups = new Map<K, Outcome[]>();
+  for (const row of rows) groups.set(key(row), [...(groups.get(key(row)) ?? []), row]);
+  return [...groups];
+}
+
+const byVersion = (a: string | null, b: string | null) =>
+  a === null || b === null
+    ? Number(a === null) - Number(b === null)
+    : b.localeCompare(a, undefined, { numeric: true });
+
+/**
+ * Where the ranking goes wrong: by version, to see whether a change helped, and by city, the
+ * ones readers most often say do not suit them first.
+ */
+export function outcomesRead(rows: Outcome[]) {
+  return {
+    versions: grouped(rows, (row) => row.version)
+      .sort(([a], [b]) => byVersion(a, b))
+      .map(([version, own]) => ({ version, ...tally(own) })),
+    cities: grouped(rows, (row) => row.city)
+      .map(([city, own]) => ({ city, ...tally(own) }))
+      .sort((a, b) => b.not - a.not || a.city.localeCompare(b.city)),
+  };
+}

@@ -95,7 +95,8 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   learn where the ranking goes wrong): the answers, sensitive ones included, the three cities
   and the reaction, with the day and no name, address, account or IP. This is the one case where
   sensitive answers leave the browser without a ticked box; the line under the buttons and the
-  privacy page must say so, and nothing else may be added to that row. Shared or mailed results carry cities and percentages, never
+  privacy page must say so, and nothing else may be added to that row but the site's version,
+  set by the server (operator, 2026-11-20). /admin lists these rows for the operator. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a

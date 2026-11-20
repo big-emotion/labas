@@ -51,6 +51,8 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 /** Three years after the last visit, as the privacy page promises. */
 export const KEEP_FOR = 3 * 365 * DAY;
+/** How many kept journeys /admin lists at once. */
+const OUTCOMES_SHOWN = 2000;
 /** A save nobody confirmed by opening its link is someone else's mistake: gone after a week. */
 const UNCONFIRMED_FOR = 7 * DAY;
 const SAVE_LINK_FOR = DAY;
@@ -165,6 +167,10 @@ export async function migrate(db: Db): Promise<void> {
       answers jsonb not null,
       top jsonb not null
     )`);
+  // The version of the site that ranked those cities (operator, 2026-11-20): several versions
+  // can go out the same day, so the day cannot tell which ranking a reader reacted to. Rows
+  // kept before it have none.
+  await db.query("alter table quiz_outcomes add column if not exists version text");
   // The feedback tab: private words to the team, apart from the public reviews and from any
   // account, so they leave nothing behind when a space is erased and need no login.
   await db.query(`
@@ -314,6 +320,8 @@ interface Options {
   team?: string;
   /** Translates a review on request (deepl.ts); absent until a DeepL key is set. */
   translate?: Translator;
+  /** The site's version, kept with what a reaction teaches (quiz_outcomes). */
+  version?: string;
 }
 
 interface ReactionRow {
@@ -384,6 +392,7 @@ export function createAccounts({
   stats,
   team,
   translate,
+  version,
 }: Options) {
   const sites = { fr: siteUrl, en: enSiteUrl };
   const adminAddresses = new Set(admins.map((a) => a.trim().toLowerCase()).filter(Boolean));
@@ -773,8 +782,8 @@ export function createAccounts({
           .filter((slug) => CITIES.some((c) => c.slug === slug))
           .slice(0, TOP_THREE);
         await db.query(
-          `insert into quiz_outcomes (created_on, kind, city, reaction, answers, top)
-           values ($1, $2, $3, $4, $5, $6)`,
+          `insert into quiz_outcomes (created_on, kind, city, reaction, answers, top, version)
+           values ($1, $2, $3, $4, $5, $6, $7)`,
           [
             at().slice(0, 10),
             journey.kind,
@@ -782,6 +791,7 @@ export function createAccounts({
             kind,
             JSON.stringify(cleanAnswers(journey.answers)),
             JSON.stringify(top),
+            version ?? null,
           ],
         );
       }
@@ -987,6 +997,36 @@ export function createAccounts({
             replyTo: r.parent_id,
             mention: r.mention,
             marks: marks.get(r.id)!.counts,
+          })),
+        });
+      }
+
+      // What the reactions on a result teach: the newest first, capped so that the page stays
+      // light; an analysis of everything reads the table itself.
+      if (method === "GET" && path === "/api/compte/admin/outcomes") {
+        const { rows } = await db.query<{
+          day: string;
+          version: string | null;
+          kind: string;
+          city: string;
+          reaction: string | null;
+          answers: unknown;
+          top: unknown;
+        }>(
+          `select to_char(created_on, 'YYYY-MM-DD') as day, version, kind, city, reaction, answers,
+                  top
+           from quiz_outcomes
+           order by id desc limit ${OUTCOMES_SHOWN}`,
+        );
+        return json(200, {
+          outcomes: rows.map((row) => ({
+            day: row.day,
+            version: row.version,
+            kind: row.kind,
+            city: row.city,
+            reaction: row.reaction,
+            answers: row.answers,
+            top: row.top,
           })),
         });
       }
