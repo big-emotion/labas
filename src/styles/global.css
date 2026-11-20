@@ -153,11 +153,21 @@ button {
   color: var(--thread-dim);
   font-size: 0.88rem;
 }
+.taps-kept {
+  margin: 0;
+  color: var(--thread-dim);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.taps-kept a {
+  color: var(--saffron);
+}
 .taps-note:empty {
   display: none;
 }
 @media print {
-  .taps {
+  .taps,
+  .taps-kept {
     display: none;
   }
 }

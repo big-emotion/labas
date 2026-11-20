@@ -292,7 +292,11 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
       const cards = proposed.slice(0, TOP).map((m, i) => cardFor(m, i, ranked, locale));
       (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
       placeHook(locale);
-      wireTaps(document.getElementById("cards") as HTMLElement, locale, "result");
+      wireTaps(document.getElementById("cards") as HTMLElement, locale, "result", () => ({
+        kind: "deep",
+        answers: answers as Answers,
+        top: proposed.slice(0, TOP).map((m) => m.city.slug),
+      }));
       void showCounts(proposed.slice(1, TOP).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
       // What others say of the first city, right under its pitch (operator, 2026-11-18).
       if (proposed[0])

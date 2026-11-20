@@ -92,6 +92,22 @@ Decided with the operator on 2026-11-20. Code: `src/lib/taps.ts`, `src/lib/taps-
   script can mint identifiers anyway. The per-connection limit is the only real guard; a
   determined reader can still count more than once.
 
+## What a reaction teaches (`quiz_outcomes`)
+
+Decided with the operator on 2026-11-20. A tap on a result page posts, with the reaction, the
+journey that led to it: `{ kind, answers, top }`. The server keeps one row per tap: the day, the
+questionnaire, the city, the reaction (null when taken back), the cleaned answers and the three
+city slugs. It is the site's learning data: where readers say « ça ne me correspond pas », for
+which answers.
+
+- **Sensitive answers are kept**, by the operator's decision, because the origin and the distance
+  a reader accepts are what the ranking most needs to learn. The reader is told under the buttons
+  before tapping, and on the privacy page.
+- **No way back to a reader**: no account, address, IP or time of day, and no key shared between
+  two rows. A row can therefore not be found or erased on request; every row is erased after
+  three years (`purge`).
+- **Only from a result**: a tap on a city page or in the cities list sends no journey.
+
 ## The avis space (`/avis`, `/villes`)
 
 Decided with the operator on 2026-11-18: another way in than the quiz. Code: `src/pages/avis.astro`,

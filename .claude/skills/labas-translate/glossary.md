@@ -81,7 +81,7 @@ already ships a different English label, align the two and fix this table.
 | Mesuré · Enquête · Sourcé · Estimation                     | Measured · Survey · Sourced · Estimate                 |
 | une estimation éditoriale                                  | an editorial estimate                                  |
 | inspirée du Big Five, ce n'est pas un test de personnalité | inspired by the Big Five; it is not a personality test |
-| le tempérament, le profil de tempérament                   | the temperament, the temperament profile               |
+| la façon de vivre, le profil (ex-« tempérament »)          | the way of living, the profile                         |
 | « vous aimez… », « vous préférez… »                        | "you like…", "you prefer…" (never "you are…")          |
 | conseils aux voyageurs                                     | travel advice                                          |
 | déconseillé                                                | advised against                                        |
@@ -108,4 +108,7 @@ already ships a different English label, align the two and fix this table.
 | {Ville}, ça vous correspond ?                       | {City}: does it suit you?                          | the one-tap reaction; « Je laisse un avis » is "Leave a review" |
 | J'aime / Ça me correspond / Ça ne me correspond pas | I like it / It suits me / It doesn't suit me       | the three one-tap answers (`lib/taps-dom.ts`)                   |
 | un lien plus étroit avec vos origines               | a closer tie to your roots                         | closeness, never which region stepped back                      |
+| Jusqu'où aimeriez-vous aller ?                      | How far would you like to go?                      | the one question on distance (`lib/questions.ts`, `reach`)      |
+| À découvrir                                         | To discover                                        | the label on a city outside what the family knows               |
+| on cherche / on se rapproche / presque trouvé       | searching / getting closer / almost there          | the quiz's gauge                                                |
 | Conquête, Lien, Fondation, Exploration, Refuge      | Drive, Connection, Foundation, Exploration, Refuge | temperament names (`TEMPERAMENTS[].en`)                         |

@@ -2,6 +2,8 @@ import { tapEvent, type TapPlace } from "./analytics";
 import { browserStore, track } from "./keep-dom";
 import { isTapKind, TAP_KINDS, tapOn, type TapCounts, type TapKind, type TapsByCity } from "./taps";
 import { INTL_LOCALE, type Bilingual, type Locale } from "../i18n/locale";
+import { pathFor } from "../i18n/routes";
+import type { Answers } from "./ranking";
 
 /**
  * The one-tap reaction row (operator, 2026-11-20). Any `[data-taps="<city slug>"]` element
@@ -10,20 +12,34 @@ import { INTL_LOCALE, type Bilingual, type Locale } from "../i18n/locale";
  */
 const STORE_KEY = "labas:taps";
 
+/** The journey a tap on a result is kept with, to learn from (server/accounts.ts). */
+export interface TapJourney {
+  kind: "quick" | "deep";
+  answers: Answers;
+  /** The slugs of the cities shown first. */
+  top: string[];
+}
+
 const COPY: Bilingual<{
   labels: Record<TapKind, string>;
   group: string;
   noted: string;
+  kept: string;
+  privacy: string;
 }> = {
   fr: {
     labels: { like: "J'aime", suits: "Ça me correspond", not: "Ça ne me correspond pas" },
     group: "Votre réaction à cette ville",
     noted: "Noté. Le bouton « Pas pour moi », plus bas, l'écarte de votre liste.",
+    kept: "Votre réaction est comptée publiquement, sans votre nom. Vos réponses au quiz sont gardées avec elle, origine et religion comprises si vous les avez données, pour améliorer le classement.",
+    privacy: "Confidentialité",
   },
   en: {
     labels: { like: "I like it", suits: "It suits me", not: "It doesn't suit me" },
     group: "Your reaction to this city",
     noted: 'Noted. The "Not for me" button, further down, leaves it out of your list.',
+    kept: "Your reaction is counted publicly, without your name. Your quiz answers are kept with it, origin and religion included if you gave them, to improve the ranking.",
+    privacy: "Privacy",
   },
 };
 
@@ -86,12 +102,18 @@ function drawAll(slug: string, locale: Locale) {
     if (row.dataset.wired) draw(row, locale);
 }
 
-async function send(slug: string, kind: TapKind | null, was: TapKind | null, locale: Locale) {
+async function send(
+  slug: string,
+  kind: TapKind | null,
+  was: TapKind | null,
+  locale: Locale,
+  journey?: TapJourney,
+) {
   try {
     const response = await fetch("/api/compte/taps", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ city: slug, kind, was }),
+      body: JSON.stringify({ city: slug, kind, was, journey }),
     });
     if (!response.ok) return;
     counts[slug] = ((await response.json()) as { taps: TapCounts }).taps;
@@ -101,8 +123,17 @@ async function send(slug: string, kind: TapKind | null, was: TapKind | null, loc
   }
 }
 
-/** Turns the `[data-taps]` elements under `root` into reaction rows; safe to call again. */
-export function wireTaps(root: ParentNode, locale: Locale, place: TapPlace): void {
+/**
+ * Turns the `[data-taps]` elements under `root` into reaction rows; safe to call again. On a
+ * result, `journey` gives what the reader answered and was shown: it is sent with each tap, and
+ * the first row says so before the reader taps.
+ */
+export function wireTaps(
+  root: ParentNode,
+  locale: Locale,
+  place: TapPlace,
+  journey?: () => TapJourney,
+): void {
   const copy = COPY[locale];
   for (const row of root.querySelectorAll<HTMLElement>("[data-taps]")) {
     if (row.dataset.wired || !row.dataset.taps) continue;
@@ -135,9 +166,19 @@ export function wireTaps(root: ParentNode, locale: Locale, place: TapPlace): voi
       const setAside = row.parentElement?.querySelector<HTMLElement>(".not-for-me:not([hidden])");
       note.textContent = tap.kind === "not" && setAside ? copy.noted : "";
       track(tapEvent(place, slug, tap.kind));
-      void send(slug, tap.kind, tap.was, locale);
+      void send(slug, tap.kind, tap.was, locale, journey?.());
     });
     draw(row, locale);
+  }
+  const first = journey && root.querySelector<HTMLElement>("[data-taps]");
+  if (first && !first.nextElementSibling?.classList.contains("taps-kept")) {
+    const kept = document.createElement("p");
+    kept.className = "taps-kept";
+    const link = document.createElement("a");
+    link.href = pathFor("privacy", locale);
+    link.textContent = copy.privacy;
+    kept.append(`${copy.kept} `, link);
+    first.after(kept);
   }
   void loadTaps().then(() => {
     for (const row of root.querySelectorAll<HTMLElement>("[data-taps][data-wired]"))

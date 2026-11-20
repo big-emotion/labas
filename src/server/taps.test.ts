@@ -2,7 +2,7 @@
 import { PGlite } from "@electric-sql/pglite";
 import { beforeEach, describe, expect, it } from "vitest";
 import { type Mailer } from "./subscribe";
-import { createAccounts, migrate, type Db } from "./accounts";
+import { createAccounts, migrate, purge, type Db } from "./accounts";
 
 const SITE = "https://labas.africa";
 const HOUR = 60 * 60 * 1000;
@@ -85,5 +85,68 @@ describe("a one-tap reaction on a city", () => {
     expect(
       (await tap({ city: "dakar", kind: "like" }, { origin: "https://ailleurs.example" })).status,
     ).toBe(403);
+  });
+});
+
+// Operator, 2026-11-20: what a reader answered, the cities they were shown and how they
+// reacted, kept to learn where the ranking goes wrong. No name, no address, no account.
+describe("what a reaction teaches the ranking", () => {
+  const journey = {
+    kind: "quick",
+    answers: { project: "installer", origin: ["ouest"], faith: "muslim", forged: "x" },
+    top: ["dakar", "abidjan", "cotonou"],
+  };
+  const outcomes = async () =>
+    (await db.query<Record<string, unknown>>("select * from quiz_outcomes order by id")).rows;
+
+  it("keeps the answers, the three cities and the reaction, with the day and nothing else", async () => {
+    await tap({ city: "dakar", kind: "suits", journey });
+    const rows = await outcomes();
+    expect(rows).toHaveLength(1);
+    expect(Object.keys(rows[0]).sort()).toEqual(
+      ["answers", "city", "created_on", "id", "kind", "reaction", "top"].sort(),
+    );
+    expect(rows[0]).toMatchObject({
+      kind: "quick",
+      city: "dakar",
+      reaction: "suits",
+      top: ["dakar", "abidjan", "cotonou"],
+      // The family's region and the faith are kept: the reader is told so beside the buttons.
+      answers: { project: "installer", origin: ["ouest"], faith: "muslim" },
+    });
+    expect(new Date(rows[0].created_on as string).toISOString().slice(11)).toBe("00:00:00.000Z");
+  });
+
+  it("keeps a change of mind and a withdrawal as what they are", async () => {
+    await tap({ city: "dakar", kind: "like", journey });
+    await tap({ city: "dakar", kind: "not", was: "like", journey });
+    await tap({ city: "dakar", kind: null, was: "not", journey });
+    expect((await outcomes()).map((row) => row.reaction)).toEqual(["like", "not", null]);
+  });
+
+  it("drops what is not an answer of the quiz or a city of the site", async () => {
+    await tap({ city: "dakar", kind: "like", journey: { ...journey, top: ["dakar", "paris", 3] } });
+    const [row] = await outcomes();
+    expect(row.answers).not.toHaveProperty("forged");
+    expect(row.top).toEqual(["dakar"]);
+  });
+
+  it("keeps nothing when a tap comes without a journey: a city page, the cities list", async () => {
+    await tap({ city: "dakar", kind: "like" });
+    await tap({
+      city: "dakar",
+      kind: "suits",
+      was: "like",
+      journey: { kind: "other", answers: {} },
+    });
+    expect(await outcomes()).toEqual([]);
+  });
+
+  it("is erased three years later", async () => {
+    await tap({ city: "dakar", kind: "like", journey });
+    await purge(db, clock + 3 * 365 * 24 * HOUR - HOUR);
+    expect(await outcomes()).toHaveLength(1);
+    await purge(db, clock + 3 * 365 * 24 * HOUR + 48 * HOUR);
+    expect(await outcomes()).toEqual([]);
   });
 });

@@ -9,19 +9,37 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
 <Page
   title="Privacy"
-  description="Your answers stay in your browser: Over There never receives them and only counts answers anonymously, without cookies."
+  description="Your answers stay in your browser as long as you do not react to your results or save your journey. Over There counts answers anonymously, without cookies."
 >
   <h1>Privacy</h1>
-  <p class="lead">Last updated: {newsletter ? "18" : "15"} November 2026.</p>
+  <p class="lead">Last updated: {newsletter ? "20" : "15"} November 2026.</p>
 
   {newsletter ? (
     <>
       <h2>Without an account, your answers stay with you</h2>
       <p>
         The ranking of the cities is calculated in your browser. As long as you do not save your
-        journey or get your results by email, your answers are never sent to us. Your browser keeps
-        them (local storage) so that the full questionnaire picks up where you left off; the "Start
-        again" button erases them. Only an anonymous counter per answer is sent, as explained below.
+        journey, get your results by email or react to a city of your result, your answers are never
+        sent to us. Your browser keeps them (local storage) so that the full questionnaire picks up
+        where you left off; the "Start again" button erases them. Only an anonymous counter per
+        answer is sent, as explained below.
+      </p>
+
+      <h2>If you react to a city of your result</h2>
+      <p>
+        Under each city of your result there are three buttons: "I like it", "It suits me", "It
+        doesn't suit me". When you press one, we keep your reaction with your answers to the
+        questionnaire and the three cities you were shown, to learn where the ranking goes wrong and
+        improve it. That includes, if you gave them, your origin, your family's country, your
+        religion and how far you would go. It is written under the buttons, before you press.
+      </p>
+      <p>
+        <b>What we do not keep with it:</b> no name, no email address, no account, no IP address, no
+        time of day, only the day. Nothing links a reaction to you, or two reactions to each other.
+        That is why we cannot find or erase yours on request; they are all erased after 3 years. If
+        you would rather your answers were not kept, do not press these buttons: the rest of the
+        site works the same. On a city's page or in the list of cities, the same buttons keep the
+        count only.
       </p>
 
       <h2>If you save your journey or get your results by email</h2>
@@ -31,10 +49,10 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       </p>
       <p>
         <b>What we keep:</b> your email address, your answers, your journeys and their dates. Your
-        origin, your family's country, your ties, your religion and your filters on health and on
-        laws against homosexuality, like the places you left out ("Not for me"), are kept only if
-        you tick the box that names them, separately, for each journey. Without it, those answers
-        stay on your device, even if you give them later.
+        origin, your family's country, how far you would go, your religion and your filters on
+        health and on laws against homosexuality, like the places you left out ("Not for me"), are
+        kept only if you tick the box that names them, separately, for each journey. Without it,
+        those answers stay on your device, even if you give them later.
       </p>
       <p>
         <b>Why:</b> so that you can find your journey and your full result again, on any device.
@@ -218,16 +236,16 @@ const newsletter = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     an open-source tool hosted on our own server. Each answer sends an anonymous counter ("this
     question, this answer"), with your project (holidays, settling, investing…) and the question's
     place in your journey, to see where each journey loses its readers. No cookie and no identifier:
-    we cannot know who answered what. Your answers about your origin, your family's country, your
-    ties, your religion, health and laws against homosexuality are never sent. When you leave a
-    place out ("Not for me"), we count only the place on the page and whether it was a city, a
-    country or a region; never which one. For reactions, we count in the same way who opens the
-    form, who sends it and who goes to read them, with the city and the place on the page; never the
-    text, the name or the address. When you react to a city in one tap ("I like it", "It suits me",
-    "It doesn't suit me"), we count the city, your reaction and the place on the page; never your
-    answers. These reactions are public as counts: our database keeps, for each city, the number of
-    each reaction, and nothing about who reacted. Your own reaction stays in your browser (local
-    storage), so that you can change it or take it back.
+    we cannot know who answered what. Your answers about your origin, your family's country, how far
+    you would go, your religion, health and laws against homosexuality are never sent to this tool.
+    When you leave a place out ("Not for me"), we count only the place on the page and whether it
+    was a city, a country or a region; never which one. For reactions, we count in the same way who
+    opens the form, who sends it and who goes to read them, with the city and the place on the page;
+    never the text, the name or the address. When you react to a city in one tap ("I like it", "It
+    suits me", "It doesn't suit me"), we count the city, your reaction and the place on the page;
+    this tool never receives your answers. These reactions are public as counts: our database keeps,
+    for each city, the number of each reaction, and nothing about who reacted. Your own reaction
+    stays in your browser (local storage), so that you can change it or take it back.
   </p>
 
   <h2>What the host can see</h2>

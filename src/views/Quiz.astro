@@ -52,7 +52,8 @@ const COPY: Bilingual<Record<string, string>> = {
       "Les résultats sont des propositions, pas des verdicts. Chaque note de ville renvoie à ses sources, sur la page de la ville. L'avis du ministère des Affaires étrangères est donné avec chaque ville, à titre d'information, avec sa date : il n'en retire aucune.",
     privacyStart:
       "Vos réponses restent dans votre navigateur, qui les garde pour le questionnaire complet : rien ne nous est envoyé",
-    privacySaved: ", sauf si vous enregistrez votre parcours",
+    privacySaved:
+      ", sauf si vous enregistrez votre parcours ou réagissez à une ville de votre résultat",
     pages: "Pages du site",
     cities: "Les villes",
     reviews: "Les avis",
@@ -92,7 +93,7 @@ const COPY: Bilingual<Record<string, string>> = {
       "The results are suggestions, not verdicts. Every city rating links to its sources, on the city's page. The French foreign ministry's travel advice is shown with each city, as dated information: it never removes one.",
     privacyStart:
       "Your answers stay in your browser, which keeps them for the full questionnaire: nothing is sent to us",
-    privacySaved: ", unless you save your journey",
+    privacySaved: ", unless you save your journey or react to a city of your result",
     pages: "Site pages",
     cities: "The cities",
     reviews: "Reviews",
@@ -587,7 +588,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         });
         (document.getElementById("cards") as HTMLElement).replaceChildren(...cards);
         placeHook(locale);
-        wireTaps(document.getElementById("cards") as HTMLElement, locale, "result");
+        wireTaps(document.getElementById("cards") as HTMLElement, locale, "result", () => ({
+          kind: "quick",
+          answers: current,
+          top: matches.map((m) => m.city.slug),
+        }));
         if (revealed)
           void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
 

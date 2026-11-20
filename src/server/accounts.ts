@@ -153,6 +153,18 @@ export async function migrate(db: Db): Promise<void> {
       count integer not null default 0,
       primary key (city, kind)
     )`);
+  // What a tap on a result teaches: the answers, the cities shown and the reaction, by day.
+  // Nothing ties a row to a reader or to another row.
+  await db.query(`
+    create table if not exists quiz_outcomes (
+      id bigint generated always as identity primary key,
+      created_on date not null,
+      kind text not null,
+      city text not null,
+      reaction text,
+      answers jsonb not null,
+      top jsonb not null
+    )`);
   // The feedback tab: private words to the team, apart from the public reviews and from any
   // account, so they leave nothing behind when a space is erased and need no login.
   await db.query(`
@@ -250,6 +262,7 @@ export async function purge(db: Db, now: number): Promise<void> {
   await db.query("delete from reactions where published_at is null and created_at < $1", [
     at(now - UNCONFIRMED_FOR),
   ]);
+  await db.query("delete from quiz_outcomes where created_on < $1", [at(now - KEEP_FOR)]);
   await db.query("delete from login_links where expires_at < $1", [at(now)]);
   await db.query("delete from sessions where expires_at < $1", [at(now)]);
   await db.query("delete from news_subscribers where confirmed_at < $1", [at(now - KEEP_FOR)]);
@@ -750,6 +763,28 @@ export function createAccounts({
       );
       const taps = noTaps();
       for (const row of rows) taps[row.kind] = row.count;
+      // A tap on a result comes with the journey that led to it (operator, 2026-11-20): kept to
+      // learn where the ranking goes wrong, sensitive answers included, and the reader is told
+      // so beside the buttons. No account, no address: only the day.
+      const journey = form.journey as
+        { kind?: unknown; answers?: unknown; top?: unknown } | undefined;
+      if (journey && (journey.kind === "quick" || journey.kind === "deep")) {
+        const top = (Array.isArray(journey.top) ? journey.top : [])
+          .filter((slug) => CITIES.some((c) => c.slug === slug))
+          .slice(0, TOP_THREE);
+        await db.query(
+          `insert into quiz_outcomes (created_on, kind, city, reaction, answers, top)
+           values ($1, $2, $3, $4, $5, $6)`,
+          [
+            at().slice(0, 10),
+            journey.kind,
+            city,
+            kind,
+            JSON.stringify(cleanAnswers(journey.answers)),
+            JSON.stringify(top),
+          ],
+        );
+      }
       return json(200, { taps });
     }
 

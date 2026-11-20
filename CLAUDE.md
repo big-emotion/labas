@@ -33,18 +33,26 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   answer still turns the list over. The daily language weighs most; the project and the origin
   weigh on their own (the family's region draws a settler, not a holidaymaker). No fact weighs
   without an answer that asks for it: nothing is inferred from an answer the reader did not give.
-  One answer is not diluted by the others (operator, 2026-11-19 and 2026-11-20): once a reader
-  says living near their own matters (« Beaucoup » or « Un peu »), the family's region, its
-  country and their faith each take a fixed share of the score (`ORIGIN_SHARE`, `COUNTRY_SHARE`,
-  `FAITH_SHARE`, together at most `NEAR_ONES_OWN_MOST`), so the family's region comes first and
-  the temperament orders the cities inside it; « Beaucoup » or « terrain connu » also weighs the
-  North Africa / sub-Saharan divide, both ways (`DIVIDE_SHARE`). The origin alone never does
-  this, and no city leaves the list. The family's country and the faith are asked in the quick
-  quiz, right after the origin, so the paths part ways from the fourth question.
+  One answer is not diluted by the others (operator, 2026-11-19 and 2026-11-20): what a reader
+  says of their own takes a fixed share of the score, never a weight the other answers dilute.
+- **One question on distance** (operator, 2026-11-20; `lib/reach.ts`, `NEAR` in `ranking.ts`):
+  « Jusqu'où aimeriez-vous aller ? » replaces « vivre près de vos origines » and, for a reader
+  who named an origin, « aller vers l'inconnu ». Asked just before the closing question, it
+  settles the list by the reader's own word: « dans le pays de ma famille » (that country
+  first), « dans la même région » (the region first, no advantage to the country, so its
+  neighbours show), « là où la culture ressemble » (the regions close in culture come nearer)
+  or « partout, surprenez-moi » (the origin weighs nothing). The first three also weigh the
+  North Africa / sub-Saharan divide, both ways. Before that answer the origin holds a small
+  share (`UNSAID_SHARE`): it weighs without deciding, so the map still shows cities the reader
+  did not expect, which is the point of the site. A reader who names no origin is asked which
+  regions draw them (`drawnTo`). No city ever leaves the list.
 - **Closeness, never rejection** (operator, 2026-11-20): reader text says which cities came
   nearer and why (« un lien plus étroit avec vos origines »), never which region or city stepped
-  back. « Pourquoi ces villes ? » recalls the family's region, its country and the wish to live
-  near one's own; the faith is a tie, never named.
+  back. « Pourquoi ces villes ? » recalls the family's region, its country and how far the
+  reader would go; the faith is a tie, never named. A city outside what the family knows carries
+  « À découvrir » (`Match.toDiscover`): a label, never a change to the order.
+- **« Façon de vivre », not « tempérament »** (operator, 2026-11-20): the reader-facing word for
+  the Big Five chapter and its profile; the code keeps `temperament`.
 - **The first city hooks the reader** (operator, 2026-11-19 and 2026-11-20): above the cards
   only « Pourquoi ces villes ? » (`components/ResultWhy.astro`), folded to its question. Inside
   the first card, right under the city's name: the one-tap reaction, then the one block of
@@ -68,12 +76,17 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
 - **Privacy**: answers are computed and kept in the browser (localStorage, so the full
   questionnaire resumes the quick quiz). What is sent: anonymous, cookieless Plausible events,
   one per quick-quiz answer (with the reader's path and the question's rank in it) plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
-  `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, feeling at home, faith, health and
-  LGBT filters are never sent. « Pas pour moi » (operator, 2026-11-18) sets a city, a country
+  `PUBLIC_PLAUSIBLE_DOMAIN` is set); origin, family country, the distance question, the regions that draw, faith, health and
+  LGBT filters are never sent to it. « Pas pour moi » (operator, 2026-11-18) sets a city, a country
   or a region aside as a filter, never a score; the places are sensitive answers, and its event
   (`notForMeEvent`) carries only the place on the page and the level, never which one. A one-tap
   reaction (`tapEvent`) carries the place on the page, the city and the answer: the city is
-  public there by the reader's own gesture; never a quiz answer. Shared or mailed results carry cities and percentages, never
+  public there by the reader's own gesture; never a quiz answer. On a result page the same tap
+  also posts the journey to the site's own server (operator, 2026-11-20: `quiz_outcomes`, to
+  learn where the ranking goes wrong): the answers, sensitive ones included, the three cities
+  and the reaction, with the day and no name, address, account or IP. This is the one case where
+  sensitive answers leave the browser without a ticked box; the line under the buttons and the
+  privacy page must say so, and nothing else may be added to that row. Shared or mailed results carry cities and percentages, never
   answers. The news sign-up (`components/Newsletter.astro` → `src/server/subscribe.ts`, the only
   server code) sends the e-mail address and the ticked box, nothing from the quiz; double opt-in,
   no partner box until partners are named (operator, 2026-11-16). « Recevoir par e-mail » opens a
