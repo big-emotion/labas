@@ -79,6 +79,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "law",
+        "strength": 2,
+        "evidence": "Sièges des grands cabinets nigérians : Aluko & Oyebode (plus de 170 avocats), Banwo & Ighodalo, Olaniwun Ajayi.",
+        "sources": [
+          {
+            "title": "Chambers — Aluko & Oyebode, Lagos office",
+            "url": "https://chambers.com/office/aluko-oyebode-lagos-global-2:2923",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Chambers — Banwo & Ighodalo, Lagos office",
+            "url": "https://chambers.com/office/banwo-ighodalo-lagos-global-2:2926",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -167,6 +186,25 @@
             "url": "https://blog.iambeezy.app/fr/salaire-moyen-cote-ivoire-par-metier-grille-2026/",
             "published": "2026-02-13",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 2,
+        "evidence": "Siège de la Cour commune de justice et d'arbitrage de l'OHADA (CCJA), cour de cassation du droit des affaires de 17 pays.",
+        "sources": [
+          {
+            "title": "OHADA — Cour commune de justice et d'arbitrage (CCJA)",
+            "url": "https://www.ohada.org/en/category/our-institutions/common-court-of-justice-and-arbitration-ccja/",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "OHADA.com — Institutions de l'OHADA",
+            "url": "https://www.ohada.com/l-ohada/institutions-de-l-ohada.html",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -307,6 +345,25 @@
             "url": "https://lesafriques.com/2026/06/salaire-moyen-senegal-2026/",
             "published": "2026-06-08",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 2,
+        "evidence": "Siège de la BCEAO, la banque centrale des huit pays de l'UEMOA.",
+        "sources": [
+          {
+            "title": "BCEAO — Contact (siège, avenue Abdoulaye Fadiga, Dakar)",
+            "url": "https://www.bceao.int/en/contact",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "IMF — Directory of Economic, Commodity and Development Organizations: BCEAO",
+            "url": "https://www.imf.org/external/np/sec/decdo/bceao.htm",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -642,6 +699,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "finance",
+        "strength": 2,
+        "evidence": "Bourse angolaise (BODIVA) et sièges des grandes banques cotées, BAI et BFA.",
+        "sources": [
+          {
+            "title": "BFA Bank Secures Largest Stock Exchange Transaction in Africa — AllAfrica",
+            "url": "https://allafrica.com/stories/202510060477.html",
+            "published": "2025-10-06",
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Wikipedia, Angola Debt and Stock Exchange",
+            "url": "https://en.wikipedia.org/wiki/Angola_Debt_and_Stock_Exchange",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -691,6 +767,25 @@
             "url": "https://restofworld.org/2026/global-ai-salons-grassroots-silicon-valley/",
             "published": "2026-08-04",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 2,
+        "evidence": "Centre d'arbitrage international de Nairobi (NCIA) et division commerciale de la Haute Cour.",
+        "sources": [
+          {
+            "title": "Chambers — International Arbitration 2026, Kenya",
+            "url": "https://practiceguides.chambers.com/practice-guides/international-arbitration-2026/kenya",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "East Africa Law Society — Nairobi Centre for International Arbitration",
+            "url": "https://ealawsociety.org/nairobi-centre-for-international-arbitration/",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -787,6 +882,25 @@
             "url": "https://en.wikipedia.org/wiki/Addis_Ababa",
             "published": null,
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 1,
+        "evidence": "Bourse éthiopienne (ESX) ouverte en janvier 2025, la première depuis cinquante ans ; une seule société cotée à l'ouverture.",
+        "sources": [
+          {
+            "title": "FSD Africa — Press release on the ESX launch",
+            "url": "https://fsdafrica.org/wp-content/uploads/2025/01/250109-Press-Release-on-ESX-Launch-F.pdf",
+            "published": "2025-01-09",
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "New securities exchange in Ethiopia aims to attract private investors — Africanews",
+            "url": "https://www.africanews.com/amp/2025/01/11/new-securities-exchange-in-ethiopia-aims-to-attract-private-investors",
+            "published": "2025-01-11",
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -963,6 +1077,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "law",
+        "strength": 1,
+        "evidence": "Centre international d'arbitrage de Kigali (KIAC), près de 200 affaires en dix ans.",
+        "sources": [
+          {
+            "title": "Rwanda: a rapidly modernising arbitration hub — Global Arbitration Review",
+            "url": "https://globalarbitrationreview.com/review/the-middle-eastern-and-african-arbitration-review/2026/article/rwanda-rapidly-modernising-arbitration-hub-driven-legal-reform-and-kiacs-expanding-influence",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Looking at 10 years of the Kigali International Arbitration Centre — Hogan Lovells",
+            "url": "https://prod.hoganlovells.com/en/publications/looking-at-10-years-of-the-kigali-international-arbitration-centre",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -1018,6 +1151,31 @@
             "url": "https://en.wikipedia.org/wiki/Johannesburg",
             "published": null,
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 3,
+        "evidence": "Sièges à Sandton des plus grands cabinets du continent : ENS (plus de 600 juristes), Webber Wentzel, Bowmans.",
+        "sources": [
+          {
+            "title": "Chambers — ENS, Johannesburg office",
+            "url": "https://chambers.com/office/ens-johannesburg-global-2:132639",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Chambers — Webber Wentzel, Johannesburg office",
+            "url": "https://chambers.com/office/webber-wentzel-johannesburg-south-africa-global-2:3753",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Chambers — Bowmans, Johannesburg office",
+            "url": "https://chambers.com/office/bowmans-johannesburg-global-2:2677",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -1262,6 +1420,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "finance",
+        "strength": 1,
+        "evidence": "Bourse du Mozambique (BVM), ouverte en 1999.",
+        "sources": [
+          {
+            "title": "Wikipedia, Bolsa de Valores de Mozambique",
+            "url": "https://en.wikipedia.org/wiki/Bolsa_de_Valores_de_Mozambique",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Bolsa de Valores de Moçambique regista lucros de 3,3 milhões de euros em 2024 — Forbes África Lusófona",
+            "url": "https://forbesafricalusofona.com/?p=160848",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -1332,6 +1509,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "law",
+        "strength": 2,
+        "evidence": "Deux centres d'arbitrage (MIAC, MARC) et des cabinets internationaux comme Appleby et ENS.",
+        "sources": [
+          {
+            "title": "Chambers — International Arbitration 2025, Mauritius",
+            "url": "https://practiceguides.chambers.com/practice-guides/international-arbitration-2025/mauritius",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Legal 500 — Appleby, Port Louis",
+            "url": "https://www.legal500.com/firms/51368/offices/33896",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -1396,6 +1592,19 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "law",
+        "strength": 1,
+        "evidence": "Centre régional du Caire pour l'arbitrage commercial international (CRCICA).",
+        "sources": [
+          {
+            "title": "CRCICA — Meeting with the African Export-Import Bank",
+            "url": "https://crcica.org/news/meeting-with-the-african-export-import-bank-on-18-february-2019/",
+            "published": "2019-02-18",
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -1458,6 +1667,25 @@
             "url": "https://www.jobsquare.ma/blog/salaires-call-center-casablanca/",
             "published": "2026-06-19",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 2,
+        "evidence": "Centre international de médiation et d'arbitrage (CIMAC), créé en 2016 par Casablanca Finance City.",
+        "sources": [
+          {
+            "title": "Casablanca Finance City — Mediation and Arbitration",
+            "url": "https://casablancafinancecity.com/doing-business/mediation-arbitration/?lang=en",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Le règlement d'arbitrage du CIMAC — DLA Piper",
+            "url": "https://www.dlapiper.com/fr-fr/insights/publications/2017/12/le-reglement-darbitrage-de-centre",
+            "published": "2017-12-14",
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -1601,6 +1829,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "finance",
+        "strength": 2,
+        "evidence": "Bourse de Tunis (80 sociétés cotées) et une trentaine de banques autour de la Banque centrale.",
+        "sources": [
+          {
+            "title": "UN Sustainable Stock Exchanges Initiative — Bourse de Tunis (BVMT)",
+            "url": "https://sseinitiative.org/stock-exchange/bvmt",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Wikipedia, Bourse de Tunis",
+            "url": "https://en.wikipedia.org/wiki/Bourse_de_Tunis",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -1687,8 +1934,8 @@
       },
       {
         "field": "finance",
-        "strength": 2,
-        "evidence": "Sièges de la BOAD, agence de la BCEAO ; Ecobank grand employeur.",
+        "strength": 3,
+        "evidence": "Sièges de la BOAD, de la BIDC et d'Ecobank (ETI) ; agence de la BCEAO.",
         "sources": [
           {
             "title": "Lomé",
@@ -1701,6 +1948,18 @@
             "url": "https://www.togofirst.com/fr",
             "published": "2026-11-13",
             "accessed": "2026-11-15"
+          },
+          {
+            "title": "Comment Lomé s'est muée en hub bancaire — Forbes Afrique",
+            "url": "https://forbesafrique.com/?p=16876",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "BOAD — Contacts, West African Development Bank (Lomé)",
+            "url": "https://boad.org/en/contacts/west-african-development-bank",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       },
@@ -2070,6 +2329,19 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "law",
+        "strength": 1,
+        "evidence": "Siège de la Commission africaine des droits de l'homme et des peuples.",
+        "sources": [
+          {
+            "title": "African Commission on Human and Peoples' Rights — About",
+            "url": "https://achpr.au.int/en/about",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -2315,6 +2587,25 @@
             "accessed": "2026-11-15"
           }
         ]
+      },
+      {
+        "field": "law",
+        "strength": 1,
+        "evidence": "Siège de la Cour de justice de l'UEMOA.",
+        "sources": [
+          {
+            "title": "BOAD — The roles of the organs of the WAEMU",
+            "url": "https://www.boad.org/en/our-publications/news/the-roles-of-the-organs-of-the-west-african-economic-and-monetary-union-waemu/",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Rentrée judiciaire de la Cour de justice de l'UEMOA — Sidwaya",
+            "url": "https://www.sidwaya.info/rentree-judiciaire-de-la-cour-de-justice-de-luemoa-faire-de-la-jurisprudence-un-levier-dintegration/",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
       }
     ],
     "places": null
@@ -2396,6 +2687,32 @@
             "url": "https://www.openshores.co/blog/ville-la-moins-chere-de-congo-brazzaville",
             "published": "2026-05-02",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 1,
+        "evidence": "Siège de la BDEAC, la banque de développement des États d'Afrique centrale.",
+        "sources": [
+          {
+            "title": "Wikipedia, Development Bank of the Central African States",
+            "url": "https://en.wikipedia.org/wiki/Development_Bank_of_the_Central_African_States",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
+      },
+      {
+        "field": "health",
+        "strength": 2,
+        "evidence": "Siège du Bureau régional de l'OMS pour l'Afrique.",
+        "sources": [
+          {
+            "title": "WHO Regional Office for Africa — Regional Director's annual report 2025-2026",
+            "url": "https://afro.who.int/sites/default/files/2026-08/RD-annual-report-2025-2026.pdf",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -2659,6 +2976,25 @@
             "url": "https://en.wikipedia.org/wiki/N%27Djamena",
             "published": null,
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 1,
+        "evidence": "Siège de la Cour de justice de la CEMAC.",
+        "sources": [
+          {
+            "title": "Tchad : rentrée judiciaire de la Cour de Justice de la CEMAC — Alwihda Info",
+            "url": "https://www.alwihdainfo.com/tchad-rentree-judiciaire-de-la-cour-de-justice-de-la-cemac-a109657/",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "UIA — Cour de justice communautaire de la CEMAC",
+            "url": "https://uia.org/s/or/en/1100050827",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -3102,6 +3438,25 @@
             "url": "https://www.dabangasudan.org/en/all-news/article/un-one-in-three-sudanese-households-have-lost-their-livelihoods",
             "published": "2026-11-11",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 1,
+        "evidence": "La Banque centrale et 17 des 37 banques du pays rouvrent à Khartoum, dans des locaux provisoires.",
+        "sources": [
+          {
+            "title": "Sudan Tribune — the central bank's return to Khartoum",
+            "url": "https://sudantribune.com/?p=309721",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Sudan Central Bank and 17 Commercial Banks Resume Operations in Khartoum — Actum Sudan",
+            "url": "https://actumsudan.substack.com/p/sudan-central-bank-and-17-commercial",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -3771,6 +4126,44 @@
             "url": "https://nairametrics.com/2026/08/15/top-10-nigerian-cities-powering-the-startup-boom-in-2026/",
             "published": "2026-08-15",
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 2,
+        "evidence": "Siège de la Banque centrale du Nigeria, plus de 4 000 agents au siège en 2024.",
+        "sources": [
+          {
+            "title": "Central Bank of Nigeria — Head Office",
+            "url": "https://cbn.gov.ng/AboutCBN/HQ.asp",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Controversy trails 'decongestion' of CBN's headquarters — Daily Trust",
+            "url": "https://www.pressreader.com/nigeria/daily-trust-sunday/20240114/281672554793425",
+            "published": "2024-01-14",
+            "accessed": "2026-11-20"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 2,
+        "evidence": "Siège de la Cour de justice de la CEDEAO.",
+        "sources": [
+          {
+            "title": "ECOWAS — Community Court of Justice",
+            "url": "https://www.ecowas.int/institutions/community-court-of-justice/?lang=fr",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "ECOWAS Commission President attends the commissioning of the new ECOWAS Court of Justice building",
+            "url": "https://www.ecowas.int/ecowas-commission-president-attends-the-commissioning-of-the-new-ecowas-court-of-justice-building/",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -4725,6 +5118,44 @@
             "url": "https://en.wikipedia.org/wiki/Yaoundé",
             "published": null,
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 2,
+        "evidence": "Siège de la BEAC, la banque centrale des six pays de la CEMAC.",
+        "sources": [
+          {
+            "title": "IMF — Directory of Economic, Commodity and Development Organizations: BEAC",
+            "url": "https://www.imf.org/external/np/sec/decdo/beac.htm",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Devex — Bank of Central African States (BEAC)",
+            "url": "https://www.devex.com/organizations/bank-of-central-african-states-beac-147712",
+            "published": null,
+            "accessed": "2026-11-20"
+          }
+        ]
+      },
+      {
+        "field": "law",
+        "strength": 1,
+        "evidence": "Siège du Secrétariat permanent de l'OHADA, qui prépare le droit des affaires commun.",
+        "sources": [
+          {
+            "title": "OHADA — Contact du Secrétariat permanent",
+            "url": "https://www.ohada.org/contact-du-secretariat-permanent/",
+            "published": null,
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "OHADA.com — Institutions de l'OHADA",
+            "url": "https://www.ohada.com/l-ohada/institutions-de-l-ohada.html",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }
@@ -6043,6 +6474,25 @@
             "url": "https://en.wikipedia.org/wiki/Port_Sudan",
             "published": null,
             "accessed": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "field": "finance",
+        "strength": 1,
+        "evidence": "La Banque centrale du Soudan a travaillé depuis sa succursale de Port-Soudan pendant la guerre ; le retour vers Khartoum est en cours.",
+        "sources": [
+          {
+            "title": "Sudan: CBoS Governor Meets Banks' GM — AllAfrica",
+            "url": "https://allafrica.com/stories/202412100187.html",
+            "published": "2024-12-10",
+            "accessed": "2026-11-20"
+          },
+          {
+            "title": "Central Bank of Sudan — Branches",
+            "url": "https://cbos.gov.sd/en/branch-locator",
+            "published": null,
+            "accessed": "2026-11-20"
           }
         ]
       }

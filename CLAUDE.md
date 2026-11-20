@@ -35,6 +35,15 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   without an answer that asks for it: nothing is inferred from an answer the reader did not give.
   One answer is not diluted by the others (operator, 2026-11-19 and 2026-11-20): what a reader
   says of their own takes a fixed share of the score, never a weight the other answers dilute.
+- **A faith that is practised counts as present** (operator, 2026-11-20; `PRACTISED_SHARE` in
+  `lib/fit.ts`): from 15 % of a country's population the faith fits fully, so a Muslim reader is
+  not sent to Nouakchott ahead of Abidjan, Cotonou or Lomé; only where it is rare does it weigh.
+  One demographic source (Pew), not a measure of religious freedom.
+- **A settler lives on their profession** (operator, 2026-11-20): for « m'installer » and « un
+  pied ici, un pied là-bas » the profession weighs like a non-negotiable, except when the reader
+  asked for their family's country. The hiring fields (`src/data/city-life.json`) are patchy: a
+  field nobody documented scores as one that does not hire, so add the field with its source
+  rather than tune the weight.
 - **One question on distance** (operator, 2026-11-20; `lib/reach.ts`, `NEAR` in `ranking.ts`):
   « Jusqu'où aimeriez-vous aller ? » replaces « vivre près de vos origines » and, for a reader
   who named an origin, « aller vers l'inconnu ». Asked just before the closing question, it

@@ -63,7 +63,7 @@ export type FactPull = { from?: string } & (
   | { kind: "season"; months: number[]; weight: number }
   /** Something the reader wants to do within two hours of the city (safari, diving…). */
   | { kind: "activities"; tags: ActivityTag[]; weight: number }
-  /** The reader's faith: the share of the country that shares it. */
+  /** The reader's faith: whether enough of the country shares it to practise it openly. */
   | { kind: "faith"; value: "muslim" | "christian" | "other"; weight: number }
   /** North Africa seen from the rest of the continent, and the reverse (DIVIDE below). */
   | { kind: "divide"; origins: string[]; weight: number }
@@ -110,6 +110,15 @@ const SOURCES: Record<
 };
 
 const NEUTRAL = 0.5;
+/**
+ * From this share of a country's population (in %), a faith counts as fully present: its places
+ * of worship are part of every city and it is practised in the open. Scoring the share itself
+ * ranked Mauritania (99 % Muslim) far above Côte d'Ivoire (46 %), Benin (31 %) or Togo (16 %)
+ * for a Muslim reader, as if Islam were hard to live in Abidjan or Lomé (operator, 2026-11-20).
+ * Under it the faith is a small minority's and the fit falls with the share. An editorial
+ * threshold on one demographic source (Pew, 2020), not a measure of religious freedom.
+ */
+const PRACTISED_SHARE = 15;
 /** A conflict between the two states weighs fully; a measure against nationals, half. */
 const TENSION_FIT = { conflict: 0, restriction: 0.5 } as const;
 /** For an adventure, the family's own region steps back by half; it is never excluded. */
@@ -380,7 +389,7 @@ export function closenessOf(city: City, pulls: Pull[], facts: FactPull[]): Close
     } else if (fact.kind === "faith") {
       const religion = city.countryFacts?.religion;
       parts.push({
-        value: religion ? religion[fact.value] / 100 : NEUTRAL,
+        value: religion ? Math.min(1, religion[fact.value] / PRACTISED_SHARE) : NEUTRAL,
         weight: fact.weight,
         known: Boolean(religion),
         fact: fact.kind,
