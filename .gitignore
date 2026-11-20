@@ -28,3 +28,4 @@ dist-server/
 
 # Social carousel work in progress: answers, sources, drafts (labas-social skill)
 .local/
+.photo-staging/
