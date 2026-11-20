@@ -85,7 +85,7 @@ async function fromCommons(query) {
         title: page.title,
         author: text(meta.Artist?.value) || "Unknown",
         license: text(meta.LicenseShortName?.value),
-        licenseUrl: meta.LicenseUrl?.value ?? "",
+        licenseUrl: (meta.LicenseUrl?.value ?? "").replace(/^http:/, "https:"),
         source: info.descriptionurl,
         image: info.thumburl,
         width: info.width,
@@ -111,7 +111,10 @@ async function fromOpenverse(query) {
         from: r.source,
         title: r.title ?? "",
         author: r.creator ?? "Unknown",
-        license: `${CC[r.license] ?? r.license} ${r.license_version ?? ""}`.trim(),
+        // A dedication has no version worth showing: « Public domain », « CC0 ».
+        license: ["cc0", "pdm"].includes(r.license)
+          ? CC[r.license]
+          : `${CC[r.license] ?? r.license} ${r.license_version ?? ""}`.trim(),
         licenseUrl: r.license_url ?? "",
         source: r.foreign_landing_url,
         image: r.url,
@@ -185,7 +188,12 @@ async function find(city, country, slug, extra) {
   const found = [];
   for (let i = 0; perQuery.some((list) => i < list.length); i++)
     for (const list of perQuery) if (list[i]) found.push(list[i]);
-  const seen = new Set();
+  // The city's first photo (src/data/photos.json) opens the slideshow: finding it again would
+  // show it twice.
+  const first = JSON.parse(await readFile("src/data/photos.json", "utf8")).find(
+    (photo) => photo.name === city,
+  );
+  const seen = new Set(first ? [decodeURI(first.source)] : []);
   const series = new Map();
   const kept = found.filter((c) => {
     const ratio = c.width / c.height;
@@ -199,10 +207,10 @@ async function find(city, country, slug, extra) {
       ratio >= 1.2 &&
       ratio <= 2.6 &&
       !NOT_A_VIEW.test(c.title) &&
-      !seen.has(c.source) &&
+      !seen.has(decodeURI(c.source)) &&
       (series.get(stem) ?? 0) < 3;
     if (fits) series.set(stem, (series.get(stem) ?? 0) + 1);
-    seen.add(c.source);
+    seen.add(decodeURI(c.source));
     return fits;
   });
   const candidates = [];
