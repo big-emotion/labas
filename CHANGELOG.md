@@ -6,6 +6,13 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.29.1] - 2026-11-23
+
+### Fixed
+
+- The admin's audience tab shows its figures again: the server reaches Plausible on its own
+  network instead of through the public address, which timed out.
+
 ## [0.29.0] - 2026-11-23
 
 ### Added
@@ -670,7 +677,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.29.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.29.1...HEAD
+[0.29.1]: https://github.com/big-emotion/labas/compare/v0.29.0...v0.29.1
 [0.29.0]: https://github.com/big-emotion/labas/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/big-emotion/labas/compare/v0.27.0...v0.28.0
 [0.27.0]: https://github.com/big-emotion/labas/compare/v0.26.0...v0.27.0
