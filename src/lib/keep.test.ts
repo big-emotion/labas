@@ -67,6 +67,12 @@ describe("the places the reader set aside", () => {
     const answers: Answers = { ...QUICK, avoidCities: ["Oran"], avoidRegions: ["nord"] };
     expect(withoutSensitive(answers)).toEqual(QUICK);
   });
+
+  // Crossing the Sahara or not says where the family is from.
+  it("treats the other side of the Sahara as a sensitive answer", () => {
+    const answers: Answers = { ...QUICK, origin: "ouest", reach: "anywhere", acrossSahara: "no" };
+    expect(withoutSensitive(answers)).toEqual(QUICK);
+  });
 });
 
 describe("keeping the result by mail", () => {

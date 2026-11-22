@@ -53,7 +53,8 @@ const COUNTRY_CHOICES: Choice[] = [
   .sort(([a], [b]) => a.localeCompare(b, "fr"))
   // Only the countries of the regions the reader picked.
   .map(([country, zone]) => ({
-    label: country,
+    // Families from RD Congo took « Congo » for theirs (operator, 2026-11-22).
+    label: country === "Congo" ? "Congo-Brazzaville" : country,
     value: country,
     en: { label: countryName(country, "en") },
     when: (answers: Answers) => africanOrigins(answers).includes(zone),
@@ -532,6 +533,33 @@ export const QUESTIONS: Question[] = [
         value: "anywhere",
         en: { label: "Anywhere, surprise me" },
       },
+    ],
+  },
+  {
+    // Operator, 2026-11-22: readers from south of the Sahara who said « anywhere » turned down
+    // the North African cities it gave them; the divide now weighs only on their own word.
+    id: "acrossSahara",
+    group: HISTORY,
+    after: "reach",
+    title: "Et de l'autre côté du Sahara, vous iriez aussi ?",
+    en: {
+      title: "And across the Sahara, would you go too?",
+      hint: "Seen from your family's side, North Africa or Africa south of the Sahara.",
+    },
+    hint: "Vu du côté de votre famille : l'Afrique du Nord, ou l'Afrique au sud du Sahara.",
+    // A mixed family is at home on both sides: there is no other side to ask about.
+    when: (answers) => {
+      const origins = namedOrigins(answers);
+      const sides = new Set(origins.map((o) => o === "nord"));
+      return answers.reach === "anywhere" && sides.size === 1;
+    },
+    choices: [
+      {
+        label: "Oui, montrez-moi aussi ces villes",
+        value: "yes",
+        en: { label: "Yes, show me those cities too" },
+      },
+      { label: "Plutôt pas", value: "no", en: { label: "Rather not" } },
     ],
   },
   {

@@ -84,6 +84,7 @@ export const SENSITIVE_ANSWERS = [
   "origin",
   "countries",
   "reach",
+  "acrossSahara",
   "drawnTo",
   "faith",
   "excludeCriminalising",

@@ -186,7 +186,8 @@ describe("going back and changing an answer", () => {
     expect(african[african.indexOf("origin") + 1]).toBe("countries");
     expect(african.slice(-3)).toEqual(["reach", "faith", "priorities"]);
     const caribbean = play("installer", 0, { origin: ["ameriques"], reach: "anywhere" }).asked;
-    expect(caribbean.slice(-2)).toEqual(["reach", "priorities"]);
+    // « Anywhere » from one side of the Sahara asks about the other side (operator, 2026-11-22).
+    expect(caribbean.slice(-3)).toEqual(["reach", "acrossSahara", "priorities"]);
     expect(caribbean).not.toContain("countries");
     expect(caribbean).not.toContain("faith");
     const unsaid = play("installer", 0, { origin: [null] } as unknown as Answers).asked;

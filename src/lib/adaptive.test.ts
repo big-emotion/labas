@@ -177,8 +177,12 @@ describe("the quick quiz, one question at a time", () => {
       const { asked, answers } = play(pick);
       if (!asked.includes("reach")) continue;
       const tail = asked.slice(asked.indexOf("reach"));
+      // After « anywhere », the other side of the Sahara takes the faith's place.
+      const across = QUESTIONS.find((q) => q.id === "acrossSahara")!;
+      const followUp =
+        answers.reach !== "anywhere" ? "faith" : across.when?.(answers) ? "acrossSahara" : null;
       expect(tail, String(pick)).toEqual(
-        answers.reach === "anywhere" ? ["reach", "priorities"] : ["reach", "faith", "priorities"],
+        followUp ? ["reach", followUp, "priorities"] : ["reach", "priorities"],
       );
     }
   });

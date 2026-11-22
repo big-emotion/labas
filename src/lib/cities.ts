@@ -86,7 +86,8 @@ export interface Facts {
  */
 export interface Tension {
   from: string[];
-  kind: "conflict" | "restriction";
+  /** `violence`: documented attacks on people of these nationalities, not a war between states. */
+  kind: "conflict" | "violence" | "restriction";
   /** Shown on cards: the source's own words, its name and year. */
   label: string;
   summary: string;
