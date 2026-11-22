@@ -79,6 +79,19 @@ describe("the audience figures from Plausible", () => {
     expect(dashboard.link).toBe("https://stats.exemple.org/labas.africa");
   });
 
+  it("asks Plausible inside the server's network, and links to its public dashboard", async () => {
+    const { fetch, seen } = fakePlausible(figures);
+    const dashboard = await plausibleStats({
+      ...PLAUSIBLE,
+      internalHost: "http://plausible:8000",
+      fetch,
+    })();
+    expect(new Set(seen.map((call) => call.url))).toEqual(
+      new Set(["http://plausible:8000/api/v2/query"]),
+    );
+    expect(dashboard.link).toBe("https://stats.exemple.org/labas.africa");
+  });
+
   it("fails loudly when Plausible refuses, rather than showing zeros", async () => {
     const fetch = (async () => new Response("no", { status: 401 })) as typeof globalThis.fetch;
     await expect(plausibleStats({ ...PLAUSIBLE, fetch })()).rejects.toThrow(/401/);

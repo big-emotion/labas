@@ -7,8 +7,14 @@ import type { Goals } from "../lib/admin";
  */
 
 interface Options {
-  /** Where Plausible answers, e.g. https://stats.ethniafrica.com. */
+  /** Where Plausible answers, e.g. https://stats.ethniafrica.com; the dashboard link uses it. */
   host: string;
+  /**
+   * Where this server reaches Plausible when both run on the same host, e.g.
+   * http://plausible:8000 on the shared Docker network: a container cannot always reach its
+   * own server's public address (a connect timeout in production, 2026-11-22).
+   */
+  internalHost?: string;
   /** The site as Plausible names it, e.g. labas.africa. */
   site: string;
   apiKey: string;
@@ -44,6 +50,7 @@ const TOP = 8;
 
 export function plausibleStats({
   host,
+  internalHost = host,
   site,
   apiKey,
   fetch = globalThis.fetch,
@@ -52,7 +59,7 @@ export function plausibleStats({
   async function query(body: Record<string, unknown>): Promise<Row[]> {
     // The error names the host and the cause: a container that cannot reach its own server's
     // public address times out silently, and the log is the only place that can say so.
-    const response = await fetch(`${host}/api/v2/query`, {
+    const response = await fetch(`${internalHost}/api/v2/query`, {
       method: "POST",
       headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({ site_id: site, ...body }),
@@ -60,7 +67,7 @@ export function plausibleStats({
     }).catch((error: unknown) => {
       const cause = error instanceof Error && error.cause ? ` (${String(error.cause)})` : "";
       throw new Error(
-        `Plausible at ${host} unreachable (timeout ${timeout} ms): ${String(error)}${cause}`,
+        `Plausible at ${internalHost} unreachable (timeout ${timeout} ms): ${String(error)}${cause}`,
       );
     });
     if (!response.ok) throw new Error(`Plausible answered ${response.status}`);
