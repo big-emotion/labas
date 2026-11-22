@@ -62,6 +62,13 @@ const LOGIN_LINK_FOR = 15 * MINUTE;
 const SESSION_FOR = 30 * DAY;
 const COOKIE = "labas_session";
 const REACTION_MAX = 1000;
+/**
+ * The least time, in ms, between opening a review form and sending it without an address: a
+ * person reads and types for longer, a script posts at once. The form reports the time itself,
+ * so this stops the scripts that do not run the page, not a determined one; the operator's
+ * reading before anything goes online stops the rest.
+ */
+const HUMAN_FILL_MS = 3000;
 const NAME_MAX = 40;
 /** Three readers, not three clicks: one reader alone cannot take a reaction down. */
 const REPORTS_TO_HIDE = 3;
@@ -131,6 +138,12 @@ export async function migrate(db: Db): Promise<void> {
   // Hidden by the operator from /admin; restoring clears this and the reports alike.
   await db.query(
     "alter table reactions add column if not exists hidden boolean not null default false",
+  );
+  // A review left without an address (operator, 2026-11-22): no account behind it, and it waits
+  // for the operator to read it before it goes online.
+  await db.query("alter table reactions alter column account_id drop not null");
+  await db.query(
+    "alter table reactions add column if not exists awaiting_review boolean not null default false",
   );
   // Who marked is kept only so that a second tap takes the mark back; only counts are shown.
   await db.query(`
@@ -265,9 +278,10 @@ export async function purge(db: Db, now: number): Promise<void> {
   await db.query("delete from journeys where confirmed_at is null and created_at < $1", [
     at(now - UNCONFIRMED_FOR),
   ]);
-  await db.query("delete from reactions where published_at is null and created_at < $1", [
-    at(now - UNCONFIRMED_FOR),
-  ]);
+  await db.query(
+    "delete from reactions where published_at is null and not awaiting_review and created_at < $1",
+    [at(now - UNCONFIRMED_FOR)],
+  );
   await db.query("delete from quiz_outcomes where created_on < $1", [at(now - KEEP_FOR)]);
   await db.query("delete from login_links where expires_at < $1", [at(now)]);
   await db.query("delete from sessions where expires_at < $1", [at(now)]);
@@ -326,7 +340,8 @@ interface Options {
 
 interface ReactionRow {
   id: string;
-  account_id: string;
+  /** null for a review left without an address, read by the operator before it went online. */
+  account_id: string | null;
   city: string;
   text: string;
   name: string | null;
@@ -450,8 +465,8 @@ export function createAccounts({
 
   const reactionColumns =
     "id, account_id, city, text, name, top, profile, parent_id, mention, created_at, published_at";
-  const displayName = (r: { name: string | null; account_id: string }) =>
-    r.name ?? anonymousName(r.account_id);
+  const displayName = (r: { id: string; name: string | null; account_id: string | null }) =>
+    r.name ?? anonymousName(r.account_id ?? r.id);
 
   type Marks = { counts: Record<string, number>; mine: string[] };
   /** Counts for everyone; the reader's own marks only so their taps show as taken. */
@@ -834,10 +849,13 @@ export function createAccounts({
         !text ||
         text.length > REACTION_MAX ||
         (name && name.length > NAME_MAX) ||
-        (!reader && !isEmail(email))
+        (!reader && email && !isEmail(email))
       )
         return json(400, { error: "form" });
+      const moderated = !reader && !email;
       if (form.website) return json(202, { published: false });
+      if (moderated && !(Number(form.elapsed) >= HUMAN_FILL_MS))
+        return json(202, { published: false, moderated });
       if (!perConnection(connection, now()) || (!reader && !perAddress(email, now())))
         return json(429, { error: "slow-down" });
       // The top three and the temperament are public unless the reader keeps them back
@@ -853,11 +871,12 @@ export function createAccounts({
       const profile = result?.archetype
         ? { name: result.archetype.name, traits: result.archetype.traits }
         : null;
-      const accountId = reader ? reader.id : await accountFor(email);
+      const accountId = reader ? reader.id : moderated ? null : await accountFor(email);
       const { rows } = await db.query<ReactionRow>(
         `insert into reactions
-           (account_id, city, text, name, top, profile, parent_id, mention, created_at, published_at)
-         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning ${reactionColumns}`,
+           (account_id, city, text, name, top, profile, parent_id, mention, created_at, published_at,
+            awaiting_review)
+         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning ${reactionColumns}`,
         [
           accountId,
           city.slug,
@@ -869,10 +888,12 @@ export function createAccounts({
           parent?.parent_id ? displayName(parent) : null,
           at(),
           reader ? at() : null,
+          moderated,
         ],
       );
       if (reader)
         return json(201, { published: true, reaction: publicReaction(rows[0], reader.id) });
+      if (!accountId) return json(202, { published: false, moderated });
       try {
         const link = await issueLink(accountId, UNCONFIRMED_FOR, {
           reactionId: rows[0].id,
@@ -969,6 +990,10 @@ export function createAccounts({
           `select ${reactionColumns}, reports, hidden from reactions
            where published_at is not null order by published_at desc, seq desc`,
         );
+        const { rows: waiting } = await db.query<ReactionRow>(
+          `select ${reactionColumns} from reactions
+           where awaiting_review order by created_at desc, seq desc`,
+        );
         const marks = await marksOf(
           rows.map((r) => r.id),
           undefined,
@@ -985,6 +1010,14 @@ export function createAccounts({
             page: m.page,
             email: m.email,
             createdAt: iso(m.created_at),
+          })),
+          pending: waiting.map((r) => ({
+            id: r.id,
+            city: r.city,
+            name: displayName(r),
+            text: r.text,
+            createdAt: iso(r.created_at),
+            replyTo: r.parent_id,
           })),
           reviews: rows.map((r) => ({
             id: r.id,
@@ -1054,6 +1087,14 @@ export function createAccounts({
         const { rows } = await db.query("delete from reactions where id = $1 returning id", [
           target,
         ]);
+        return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
+      }
+      if (target && method === "POST" && form.action === "publier") {
+        const { rows } = await db.query(
+          `update reactions set awaiting_review = false, published_at = $2
+           where id = $1 and awaiting_review returning id`,
+          [target, at()],
+        );
         return rows.length ? json(200, { ok: true }) : json(404, { error: "not-found" });
       }
       if (target && method === "POST") {

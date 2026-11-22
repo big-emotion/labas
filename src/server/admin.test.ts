@@ -161,7 +161,42 @@ describe("moderating a review", () => {
     const reader = await reviewer("binta@exemple.fr");
     const path = `/api/compte/admin/reactions/${id}`;
     expect((await call("DELETE", path, undefined, reader)).status).toBe(403);
-    expect((await call("POST", path, { action: "publier" }, admin)).status).toBe(400);
+    expect((await call("POST", path, { action: "inconnue" }, admin)).status).toBe(400);
+  });
+});
+
+describe("reviews left without an address, read before they go online", () => {
+  const anonymous = (text: string) =>
+    call("POST", "/api/compte/reactions", { city: "dakar", text, elapsed: 8000 });
+
+  it("lists them apart for the operator, then publishes one under a stable « Utilisateur » name", async () => {
+    const admin = await reviewer(ADMIN);
+    await anonymous("Le marché Sandaga le samedi matin.");
+    const { data } = await call("GET", "/api/compte/admin", undefined, admin);
+    expect(data.pending).toEqual([
+      expect.objectContaining({ city: "dakar", text: "Le marché Sandaga le samedi matin." }),
+    ]);
+    expect(data.reviews.map((r: { text: string }) => r.text)).toEqual(["La mer change tout."]);
+
+    const id = data.pending[0].id;
+    expect(
+      (await call("POST", `/api/compte/admin/reactions/${id}`, { action: "publier" }, admin))
+        .status,
+    ).toBe(200);
+    const {
+      data: { reactions },
+    } = await call("GET", "/api/compte/reactions?ville=dakar");
+    const published = reactions.find((r: { id: string }) => r.id === id);
+    expect(published.name).toMatch(/^Utilisateur \d{4}$/);
+    expect((await call("GET", "/api/compte/admin", undefined, admin)).data.pending).toEqual([]);
+  });
+
+  it("deletes one for good instead", async () => {
+    const admin = await reviewer(ADMIN);
+    await anonymous("Rien à voir avec Dakar.");
+    const { data } = await call("GET", "/api/compte/admin", undefined, admin);
+    await call("DELETE", `/api/compte/admin/reactions/${data.pending[0].id}`, undefined, admin);
+    expect((await call("GET", "/api/compte/admin", undefined, admin)).data.pending).toEqual([]);
   });
 });
 
