@@ -83,4 +83,13 @@ describe("the audience figures from Plausible", () => {
     const fetch = (async () => new Response("no", { status: 401 })) as typeof globalThis.fetch;
     await expect(plausibleStats({ ...PLAUSIBLE, fetch })()).rejects.toThrow(/401/);
   });
+
+  it("gives up on a Plausible that never answers, naming the host", async () => {
+    const silent = ((_url: string | URL | Request, init?: RequestInit) =>
+      new Promise((_resolve, reject) =>
+        init?.signal?.addEventListener("abort", () => reject(init.signal!.reason)),
+      )) as typeof globalThis.fetch;
+    const stats = plausibleStats({ ...PLAUSIBLE, fetch: silent, timeout: 20 });
+    await expect(stats()).rejects.toThrow(/stats\.exemple\.org.*20 ms/);
+  });
 });
