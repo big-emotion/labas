@@ -45,9 +45,8 @@ const COPY = {
     moreMarks: "Autres réactions",
     replyingTo: (name: string) => `En réponse à ${name}`,
     writeReply: "Écrivez votre réponse avant d'envoyer.",
-    replyPending: (email: string) =>
-      `Votre réponse est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${email}. Il vous connecte aussi.`,
-    checkForm: "Vérifiez votre adresse e-mail et la longueur du texte, puis réessayez.",
+    replyPending: "Merci ! L'équipe relit votre réponse avant de la mettre en ligne.",
+    checkForm: "Vérifiez la longueur du texte, puis réessayez.",
     tooManyReplies: "Trop de messages d'un coup. Réessayez dans une heure.",
     replyFailed: "La réponse n'est pas partie. Réessayez dans un moment.",
     reduce: "Réduire",
@@ -59,12 +58,12 @@ const COPY = {
     allReactions: (total: number) => `Voir toutes les réactions (${total})`,
     cityPage: (name: string) => `Voir la page ${ofCity(name)}`,
     of: (name: string) => ofCity(name),
-    writeReaction: "Écrivez votre réaction avant d'envoyer.",
-    reactionPending: (email: string) =>
-      `Votre réaction est en attente. Pour la publier, ouvrez le lien que nous venons d'envoyer à ${email}. Vous ne le ferez qu'une fois.`,
-    tooManyReactions: "Trop de réactions d'un coup. Réessayez dans une heure.",
-    reactionFailed: "La réaction n'est pas partie. Réessayez dans un moment.",
-    reactOn: (name: string) => `Réagir sur ${name}`,
+    writeReaction: "Écrivez votre information avant d'envoyer.",
+    reactionPending:
+      "Merci ! L'équipe relit votre information avant de la mettre en ligne : elle aidera les prochains.",
+    tooManyReactions: "Trop de messages d'un coup. Réessayez dans une heure.",
+    reactionFailed: "Le message n'est pas parti. Réessayez dans un moment.",
+    reactOn: (name: string) => `Laisser une info utile sur ${name}`,
     translate: "Traduire",
     original: "Voir l'original",
     translationFailed: "La traduction n'a pas marché. Réessayez dans un moment.",
@@ -76,9 +75,8 @@ const COPY = {
     moreMarks: "Other reactions",
     replyingTo: (name: string) => `Replying to ${name}`,
     writeReply: "Write your reply before sending.",
-    replyPending: (email: string) =>
-      `Your reply is waiting. To publish it, open the link we have just sent to ${email}. It signs you in as well.`,
-    checkForm: "Check your email address and the length of the text, then try again.",
+    replyPending: "Thank you! The team reads your reply before it goes online.",
+    checkForm: "Check the length of the text, then try again.",
     tooManyReplies: "Too many messages at once. Try again in an hour.",
     replyFailed: "The reply didn't go through. Try again in a moment.",
     reduce: "Show less",
@@ -90,12 +88,12 @@ const COPY = {
     allReactions: (total: number) => `See all reactions (${total})`,
     cityPage: (name: string) => `See the ${name} page`,
     of: (name: string) => name,
-    writeReaction: "Write your reaction before sending.",
-    reactionPending: (email: string) =>
-      `Your reaction is waiting. To publish it, open the link we have just sent to ${email}. You'll only need to do this once.`,
-    tooManyReactions: "Too many reactions at once. Try again in an hour.",
-    reactionFailed: "The reaction didn't go through. Try again in a moment.",
-    reactOn: (name: string) => `React to ${name}`,
+    writeReaction: "Write what you know before sending.",
+    reactionPending:
+      "Thank you! The team reads what you wrote before it goes online: it will help the next person.",
+    tooManyReactions: "Too many messages at once. Try again in an hour.",
+    reactionFailed: "The message didn't go through. Try again in a moment.",
+    reactOn: (name: string) => `Share something useful about ${name}`,
     translate: "Translate",
     original: "Show original",
     translationFailed: "The translation didn't work. Try again in a moment.",
@@ -143,7 +141,6 @@ interface Block {
   /** Reviews whose replies are open: a redraw after a tap must not fold them back. */
   open: Set<string>;
   everywhere?: Everywhere;
-  signedIn?: Promise<boolean>;
   /** The service says whether a DeepL key is set; without one, no « Traduire » button. */
   translatable: boolean;
 }
@@ -153,9 +150,6 @@ const part = <T extends HTMLElement>(root: HTMLElement, name: string) =>
 const fromTemplate = <T extends HTMLElement>(root: HTMLElement, name: string) =>
   part<HTMLTemplateElement>(root, name).content.firstElementChild!.cloneNode(true) as T;
 const isPreview = (block: Block) => block.root.dataset.reactions === "preview";
-/** Asked once per page: the answer only changes through a link that reloads it. */
-const signedIn = (block: Block) =>
-  (block.signedIn ??= api("GET", "/api/compte").then(({ status }) => status === 200));
 
 function topChips(top: TopCity[]): HTMLElement[] {
   return top.map((city, i) => {
@@ -265,17 +259,16 @@ function replyForm(block: Block, review: Reaction, to: Reaction, slot: HTMLEleme
   const form = fromTemplate<HTMLFormElement>(block.root, "reply-template");
   const error = part(form, "error");
   part(form, "replying").textContent = copy.replyingTo(shownName(to.name, locale));
-  signedIn(block).then((yes) => (part(form, "email-field").hidden = yes));
+  const openedAt = Date.now();
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    const isMember = await signedIn(block);
     const body = {
       replyTo: to.id,
       text: String(data.get("text") ?? "").trim(),
       name: String(data.get("name") ?? "").trim(),
-      email: isMember ? undefined : String(data.get("email") ?? "").trim(),
       website: String(data.get("website") ?? ""),
+      elapsed: Date.now() - openedAt,
       back: location.pathname + location.search,
       locale,
     };
@@ -299,7 +292,7 @@ function replyForm(block: Block, review: Reaction, to: Reaction, slot: HTMLEleme
       const pending = document.createElement("p");
       pending.className = "pending";
       pending.setAttribute("role", "status");
-      pending.textContent = copy.replyPending(body.email ?? "");
+      pending.textContent = copy.replyPending;
       slot.replaceChildren(pending);
       return;
     }
@@ -557,10 +550,19 @@ function wireForm(block: Block) {
   const form = part<HTMLFormElement>(root, "form");
   const error = part(root, "error");
   const pending = part(root, "pending");
-  const emailField = part(root, "email-field");
   const topField = part(root, "top-field");
+  const text = form.querySelector("textarea")!;
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-  let member = false;
+  // Sent with the form: a person takes seconds to write, a script posts at once (server side).
+  let openedAt = Date.now();
+
+  for (const starter of form.querySelectorAll<HTMLButtonElement>("[data-starter]"))
+    starter.addEventListener("click", () => {
+      const start = starter.dataset.starter!;
+      text.value = text.value.trim() ? `${text.value.trimEnd()}\n${start}` : start;
+      text.focus();
+      text.setSelectionRange(text.value.length, text.value.length);
+    });
 
   open.addEventListener("click", async () => {
     form.hidden = !form.hidden;
@@ -569,10 +571,8 @@ function wireForm(block: Block) {
     track(reactionEvent("Réaction : formulaire ouvert", placeOf(root), block.city));
     pending.hidden = true;
     topField.hidden = !block.link;
-    form.querySelector("textarea")!.focus();
-    // Signed in already: the address was confirmed once, the reaction goes online at once.
-    member = await signedIn(block);
-    emailField.hidden = member;
+    openedAt = Date.now();
+    text.focus();
   });
 
   form.addEventListener("submit", async (event) => {
@@ -582,10 +582,10 @@ function wireForm(block: Block) {
       city: block.city,
       text: String(data.get("text") ?? "").trim(),
       name: String(data.get("name") ?? "").trim(),
-      email: member ? undefined : String(data.get("email") ?? "").trim(),
       link: block.link ?? undefined,
       private: data.get("private") === "on",
       website: String(data.get("website") ?? ""),
+      elapsed: Date.now() - openedAt,
       // A result page cannot be redrawn from a link (the quick quiz starts over): the city page
       // shows the published reaction wherever it was written.
       back: isPreview(block)
@@ -616,7 +616,7 @@ function wireForm(block: Block) {
       form.reset();
       form.hidden = true;
       open.setAttribute("aria-expanded", "false");
-      pending.textContent = copy.reactionPending(body.email ?? "");
+      pending.textContent = copy.reactionPending;
       pending.hidden = false;
       return;
     }

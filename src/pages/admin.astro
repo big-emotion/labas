@@ -45,7 +45,7 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
           aria-controls="panel-avis"
           aria-selected="true"
         >
-          Avis
+          Avis<span data-tab-pending-count></span>
         </button>
         <button
           type="button"
@@ -78,9 +78,18 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
 
       <section id="panel-avis" role="tabpanel" aria-labelledby="tab-avis">
         <p class="summary" data-summary></p>
-        <h2>À relire</h2>
+        <h2>À publier</h2>
+        <p class="hint">
+          Laissés sans e-mail : rien n'est en ligne avant que vous ne publiiez. Supprimez ce qui
+          n'aide personne (publicité, insulte, hors sujet).
+        </p>
+        <p class="hint" data-pending-empty hidden>
+          Rien en attente.
+        </p>
+        <ol class="cards" data-pending></ol>
+        <h2>Signalés ou masqués</h2>
         <p class="hint" data-reread-empty hidden>
-          Rien à relire : aucun avis signalé ni masqué.
+          Aucun avis signalé ni masqué.
         </p>
         <ol class="cards" data-reread></ol>
         <h2>Par ville</h2>
@@ -253,7 +262,7 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     const firsts = reviews.filter((r) => !r.replyTo).length;
     const reread = toReread(reviews);
     $("summary").textContent =
-      `${firsts} avis, ${reviews.length - firsts} réponses, ${reread.length} à relire.`;
+      `${firsts} avis en ligne, ${reviews.length - firsts} réponses, ${reread.length} signalés ou masqués.`;
     $("reread").replaceChildren(...reread.map(card));
     $("reread-empty").hidden = reread.length > 0;
     $("cities").replaceChildren(
@@ -327,11 +336,59 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     );
   }
 
+  interface PendingReview {
+    id: string;
+    city: string;
+    name: string;
+    text: string;
+    createdAt: string;
+    replyTo: string | null;
+  }
+
+  function pendingCard(review: PendingReview): HTMLElement {
+    const link = el("a", "", names[review.city] ?? review.city) as HTMLAnchorElement;
+    link.href = `/ville/${review.city}/#reactions`;
+    const head = el(
+      "p",
+      "meta",
+      el("b", "", review.name),
+      ` · ${dateOf(review.createdAt)} · `,
+      link,
+      review.replyTo ? " · réponse à un avis" : "",
+    );
+    const publish = el("button", "", "Publier") as HTMLButtonElement;
+    publish.type = "button";
+    publish.addEventListener("click", async () => {
+      publish.disabled = true;
+      await api("POST", `/api/compte/admin/reactions/${review.id}`, { action: "publier" });
+      await loadReviews();
+    });
+    const remove = el("button", "danger", "Supprimer") as HTMLButtonElement;
+    remove.type = "button";
+    remove.addEventListener("click", async () => {
+      if (remove.dataset.armed !== "true") {
+        remove.dataset.armed = "true";
+        remove.textContent = "Supprimer pour de bon ?";
+        return;
+      }
+      remove.disabled = true;
+      await api("DELETE", `/api/compte/admin/reactions/${review.id}`);
+      await loadReviews();
+    });
+    const item = el("li", "card", head, el("p", "text", review.text));
+    item.append(el("div", "actions", publish, remove));
+    return item;
+  }
+
   async function loadReviews() {
     const { status, data } = await api("GET", "/api/compte/admin");
     if (status !== 200) return status;
     reviews = data.reviews;
     drawReviews();
+    const pending: PendingReview[] = data.pending ?? [];
+    $("pending").replaceChildren(...pending.map(pendingCard));
+    $("pending-empty").hidden = pending.length > 0;
+    $("tab-pending-count").textContent = pending.length ? ` (${pending.length} à publier)` : "";
     const messages: AdminMessage[] = data.messages ?? [];
     $("messages").replaceChildren(...messages.map(messageCard));
     $("messages-empty").hidden = messages.length > 0;

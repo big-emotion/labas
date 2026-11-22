@@ -30,14 +30,14 @@ const COPY: Bilingual<{
   fr: {
     labels: { like: "J'aime", suits: "Ça me correspond", not: "Ça ne me correspond pas" },
     group: "Votre réaction à cette ville",
-    noted: "Noté. Le bouton « Pas pour moi », plus bas, l'écarte de votre liste.",
+    noted: "Noté. « Pas pour moi », juste en dessous, l'écarte de votre liste.",
     kept: "Votre réaction est comptée publiquement, sans votre nom. Vos réponses au quiz sont gardées avec elle, origine et religion comprises si vous les avez données, pour améliorer le classement.",
     privacy: "Confidentialité",
   },
   en: {
     labels: { like: "I like it", suits: "It suits me", not: "It doesn't suit me" },
     group: "Your reaction to this city",
-    noted: 'Noted. The "Not for me" button, further down, leaves it out of your list.',
+    noted: 'Noted. "Not for me", just below, leaves it out of your list.',
     kept: "Your reaction is counted publicly, without your name. Your quiz answers are kept with it, origin and religion included if you gave them, to improve the ranking.",
     privacy: "Privacy",
   },
@@ -90,6 +90,10 @@ function keep(slug: string, kind: TapKind | null) {
 function draw(row: HTMLElement, locale: Locale) {
   const slug = row.dataset.taps!;
   const own = mine()[slug];
+  // The first city of a result asks for a useful word once the reader has reacted, and keeps
+  // asking when the cards are drawn again.
+  const invite = row.parentElement?.querySelector<HTMLElement>("[data-invite]");
+  if (invite?.querySelector(".invite-ask")?.textContent) invite.hidden = !own;
   const number = new Intl.NumberFormat(INTL_LOCALE[locale]);
   for (const button of row.querySelectorAll<HTMLButtonElement>("[data-tap]")) {
     const kind = button.dataset.tap as TapKind;

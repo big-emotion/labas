@@ -62,13 +62,16 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   « À découvrir » (`Match.toDiscover`): a label, never a change to the order.
 - **« Façon de vivre », not « tempérament »** (operator, 2026-11-20): the reader-facing word for
   the Big Five chapter and its profile; the code keeps `temperament`.
-- **The first city hooks the reader** (operator, 2026-11-19 and 2026-11-20): above the cards
-  only « Pourquoi ces villes ? » (`components/ResultWhy.astro`), folded to its question. Inside
-  the first card, right under the city's name: the one-tap reaction, then the one block of
-  actions (`components/KeepResults.astro`, placed by `placeHook`): the full questionnaire, share,
-  WhatsApp, the e-mail, a review. No other box asks for anything; cards 2 and 3 keep only their
-  reaction row. The temperament and the one news sign-up come after the cities; the sign-up
-  offered during the quiz closes when the quiz ends.
+- **The first city hooks the reader** (operator, 2026-11-19, 2026-11-20 and 2026-11-22): above
+  the cards only « Pourquoi ces villes ? » (`components/ResultWhy.astro`), folded to its question.
+  Inside the first card: the name, its photo, the one-tap reaction with « Pas pour moi » under it;
+  once the reader has tapped, « Vous connaissez … ? Laissez une information utile pour les
+  prochains »; then the one block of actions (`components/KeepResults.astro`, placed by
+  `placeHook`): « Laisser une info utile sur … » as the one filled button, share, the e-mail, the
+  full questionnaire as a link, WhatsApp and the rest folded. The goal is a written word on a city
+  for the next reader. No other box asks for anything; cards 2 and 3 keep only their reaction row.
+  The temperament and the one news sign-up come after the cities; the sign-up offered during the
+  quiz closes when the quiz ends.
 - **One-tap reactions are public counts** (operator, 2026-11-20; `lib/taps.ts`, « taps » in the
   code since `reactions` means the written reviews): « J'aime », « Ça me correspond », « Ça ne me
   correspond pas » on every result card, city page and the cities list, no account. The server
@@ -107,8 +110,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   Saved journeys (`src/server/accounts.ts`, Postgres, `docs/accounts.md`) store answers
   at the reader's request, and sensitive ones only with the explicit box that names them; magic-link login, no password;
   erased 3 years after the last visit. Never send them to analytics, partners or an e-mail. Reactions on a city
-  (`components/Reactions.astro`, operator 2026-11-18) are public: text, chosen name or
-  « Utilisateur N », date and, unless its box keeps them back, the top 3 and the temperament
+  (`components/Reactions.astro`, operator 2026-11-18) need no e-mail: signed out, the operator
+  reads each one in /admin before it goes online (operator, 2026-11-22). They are public: text,
+  chosen name or « Utilisateur N », date and, unless its box keeps them back, the top 3 and the temperament
   recomputed from the result link; never an answer, never the address. Their Plausible events (`reactionEvent`) carry the place
   and the city slug, plus whether a sent reaction went online at once; never its text. `/avis` (operator 2026-11-18) lists every city's reviews for anyone;
   replies are two levels, carry no journey, and hearts and the few friendly marks need a session

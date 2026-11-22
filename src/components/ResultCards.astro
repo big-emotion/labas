@@ -15,6 +15,8 @@ const COPY: Bilingual<Record<string, string>> = {
     discover: "À découvrir",
     notForMe: "Pas pour moi",
     open: "Voir le détail",
+    inviteWhy:
+      "Là-bas sert aussi à ceux qui préparent leur départ : ce que vous savez de la ville les aide.",
     hide: "Masquer le détail",
     said: "On dit",
     surprise: "Ce qui pourrait vous surprendre",
@@ -34,6 +36,8 @@ const COPY: Bilingual<Record<string, string>> = {
     discover: "To discover",
     notForMe: "Not for me",
     open: "See the details",
+    inviteWhy:
+      "Over There also helps people preparing to move: what you know about the city helps them.",
     hide: "Hide the details",
     said: "People say",
     surprise: "What might surprise you",
@@ -66,16 +70,30 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
         <small>{copy.close}</small>
       </span>
     </header>
+    {/* Right under the name (operator, 2026-11-22): the place is what the reader came for. */}
+    <figure class="photo" hidden>
+      <img alt="" width="1280" height="853" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
     <p class="split"></p>
     <ul class="why-temper"></ul>
     {/* The one-tap reaction, built by lib/taps-dom.ts, right under the city's name: reacting
         must not wait for the end of a long card. The first card asks its question aloud. */}
     <p class="taps-ask" hidden></p>
     <div data-taps></div>
-    <figure class="photo" hidden>
-      <img alt="" width="1280" height="853" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
+    {/* Shown and wired by the quick quiz only (« Pas pour moi », 2026-11-18), right under the
+        reaction it answers so it is seen (operator, 2026-11-22). */}
+    <button type="button" class="not-for-me" hidden>
+      {copy.notForMe}
+    </button>
+    {/* After a tap on the first city (operator, 2026-11-22): a reader who reacts in a second is
+        asked for a useful word; the action block placed right after holds the button. */}
+    {reactions && (
+      <div class="invite" data-invite hidden>
+        <p class="invite-ask"></p>
+        <p class="invite-why">{copy.inviteWhy}</p>
+      </div>
+    )}
     <p class="card-pitch"></p>
     <div class="rated" data-block="why">
       <h4>{copy.why}</h4>
@@ -94,10 +112,6 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     <a class="go" hidden>
       {copy.go}
     </a>
-    {/* Shown and wired by the quick quiz only (« Pas pour moi », 2026-11-18). */}
-    <button type="button" class="not-for-me" hidden>
-      {copy.notForMe}
-    </button>
     <details class="detail">
       <summary>
         <span class="when-closed">{copy.open}</span>
@@ -525,12 +539,27 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     border-width: 2px;
     border-color: var(--saffron);
   }
+  .results .invite:not([hidden]) {
+    display: grid;
+    gap: 4px;
+  }
+  .results .invite p {
+    margin: 0;
+  }
+  .results .invite-ask {
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+  .results .invite-why {
+    color: var(--thread-dim);
+    font-size: 0.9rem;
+  }
   .results .not-for-me:not([hidden]) {
     justify-self: start;
     min-height: 44px;
     padding: 0 18px;
     border-radius: 999px;
-    border: 2px solid var(--night-pressed);
+    border: 2px solid var(--thread-dim);
     background: transparent;
     color: var(--thread);
     font-weight: 700;
