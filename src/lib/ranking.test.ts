@@ -662,6 +662,110 @@ describe("the divide between North Africa and the rest of the continent", () => 
   });
 });
 
+// Operator, 2026-11-22: readers from south of the Sahara who answered « Partout, surprenez-moi »
+// were shown Casablanca, Oran and Cairo first and turned them down (« Ça ne me correspond pas »),
+// often enough that the quiz now asks them before the divide weighs.
+describe("« anywhere », then the other side of the Sahara", () => {
+  const fromMali: Answers = {
+    project: "decouvrir",
+    languages: ["fr", "en"],
+    family: "couple",
+    size: 3,
+    pace: 0.5,
+    wants: ["beach", "party", "culture"],
+    saturday: 1,
+    order: 1,
+    together: 0,
+    friction: 0.5,
+    origin: "ouest",
+    countries: ["Mali"],
+    reach: "anywhere",
+    priorities: ["safety", "cost", "health"],
+  };
+  const fromCongo: Answers = {
+    project: "decouvrir",
+    languages: ["fr", "en"],
+    size: 3,
+    pace: 0.5,
+    wants: ["party", "history", "culture"],
+    season: "djf",
+    saturday: 0.5,
+    order: 1,
+    together: 0,
+    friction: 0.5,
+    origin: "centre",
+    countries: ["Congo"],
+    reach: "anywhere",
+    priorities: ["safety", "cost", "flights"],
+  };
+  const zonesOfTop = (answers: Answers, count: number) =>
+    bestMatches(answers, count).map((m) => m.city.zone);
+
+  it("keeps North Africa out of the top three of a reader who would rather not cross it", () => {
+    for (const reader of [fromMali, fromCongo]) {
+      const zones = zonesOfTop({ ...reader, acrossSahara: "no" }, 3);
+      expect(zones, String(reader.origin)).not.toContain("nord");
+    }
+  });
+
+  it("works the other way for a North African reader", () => {
+    const fromTunisia: Answers = {
+      ...fromMali,
+      origin: "nord",
+      countries: ["Tunisie"],
+      acrossSahara: "no",
+    };
+    expect(new Set(zonesOfTop(fromTunisia, 3))).toEqual(new Set(["nord"]));
+  });
+
+  it("changes nothing for a reader who says yes", () => {
+    const names = (answers: Answers) => bestMatches(answers, 5).map((m) => m.city.name);
+    expect(names({ ...fromMali, acrossSahara: "yes" })).toEqual(names(fromMali));
+  });
+
+  it("lowers a city across the divide without ever removing it", () => {
+    const answers: Answers = { ...fromMali, acrossSahara: "no" };
+    expect(bestMatches(answers, 115)).toHaveLength(115);
+    expect(scoreOf("Casablanca", answers)).toBeGreaterThan(0.2);
+  });
+});
+
+// Operator, 2026-11-22: families from countries at war or at odds with another do not want to be
+// sent there, and South Africa's xenophobic violence targets some nationalities. Each tension is
+// sourced in countries.json; it weighs even after « Partout, surprenez-moi » and is never written.
+describe("a documented tension between the family's country and the host country", () => {
+  const zoneOf = (country: string) =>
+    rankCities({}).find((m) => m.city.country === country)!.city.zone;
+  const reader = (country: string): Answers => ({
+    ...settled,
+    origin: zoneOf(country),
+    countries: [country],
+    reach: "anywhere",
+  });
+
+  // [family country, the host city, a family from the same region with no tension there]
+  it.each([
+    ["Érythrée", "Addis-Abeba", "Kenya"],
+    ["Éthiopie", "Asmara", "Kenya"],
+    ["Soudan du Sud", "Khartoum", "Kenya"],
+    ["Soudan", "Juba", "Égypte"],
+    ["Maroc", "Alger", "Tunisie"],
+    ["Algérie", "Casablanca", "Tunisie"],
+    ["Zimbabwe", "Johannesburg", "Botswana"],
+    ["Mozambique", "Durban", "Botswana"],
+    ["Nigeria", "Le Cap", "Ghana"],
+    ["Somalie", "Johannesburg", "Kenya"],
+  ])("a family from %s sees %s lower than a family from %s does", (from, city, neighbour) => {
+    expect(scoreOf(city, reader(from))).toBeLessThan(scoreOf(city, reader(neighbour)));
+  });
+
+  it("weighs only for the nationalities the documented violence targets", () => {
+    expect(scoreOf("Johannesburg", reader("Sénégal"))).toBe(
+      scoreOf("Johannesburg", reader("Ghana")),
+    );
+  });
+});
+
 describe("the quick top used to choose the next question", () => {
   it("names the same cities as the full ranking", () => {
     const answers: Answers = { languages: ["fr"], saturday: 1, budget: "serre" };

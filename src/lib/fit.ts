@@ -120,7 +120,7 @@ const NEUTRAL = 0.5;
  */
 const PRACTISED_SHARE = 15;
 /** A conflict between the two states weighs fully; a measure against nationals, half. */
-const TENSION_FIT = { conflict: 0, restriction: 0.5 } as const;
+const TENSION_FIT = { conflict: 0, violence: 0, restriction: 0.5 } as const;
 /** For an adventure, the family's own region steps back by half; it is never excluded. */
 const ADVENTURE_AT_HOME = 0.5;
 

@@ -134,7 +134,29 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Zimbabwe", "Mozambique", "Somalie", "Nigeria"],
+        "kind": "violence",
+        "label": "Afrique du Sud : violences xénophobes contre des ressortissants africains (Human Rights Watch, 2026)",
+        "summary": "En 2008, 62 personnes ont été tuées, dont 11 Mozambicains, 5 Zimbabwéens et 3 Somaliens ; les vagues de 2015 et 2019 visaient surtout des Nigérians. En mai 2026, Human Rights Watch documente de nouvelles attaques de groupes d'autodéfense, notamment contre des Zimbabwéens, avec une réponse insuffisante de la police.",
+        "sources": [
+          {
+            "title": "Human Rights Watch, South Africa: New Waves of Xenophobic Attacks (19 May 2026)",
+            "url": "https://www.hrw.org/news/2026/05/19/south-africa-new-waves-of-xenophobic-attacks",
+            "published": "2026-05-19",
+            "accessed": "2026-11-22"
+          },
+          {
+            "title": "Human Rights Watch, « They Have Robbed Me of My Life »: Xenophobic Violence Against Non-Nationals in South Africa (17 September 2020)",
+            "url": "https://www.hrw.org/report/2020/09/17/they-have-robbed-me-my-life/xenophobic-violence-against-non-nationals-south",
+            "published": "2020-09-17",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Algérie",
@@ -259,7 +281,29 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Maroc"],
+        "kind": "restriction",
+        "label": "Algérie et Maroc : frontière fermée, visa exigé des Marocains (Africanews, 2024)",
+        "summary": "La frontière terrestre est fermée depuis 1994. L'Algérie a rompu ses relations diplomatiques avec le Maroc le 24 août 2021, sur fond de désaccord sur le Sahara occidental, et exige un visa des Marocains depuis le 26 septembre 2024.",
+        "sources": [
+          {
+            "title": "Al Jazeera, Algeria cuts diplomatic ties with Morocco over 'hostile actions' (24 August 2021)",
+            "url": "https://www.aljazeera.com/news/2021/8/24/algeria-cuts-diplomatic-ties-with-morocco",
+            "published": "2021-08-24",
+            "accessed": "2026-11-22"
+          },
+          {
+            "title": "Africanews, Algeria introduces visa for Moroccans as mistrust grows between the neighbors (27 September 2024)",
+            "url": "https://www.africanews.com/2024/09/27/algeria-introduces-visa-for-moroccans-as-mistrust-grows-between-the-neighbors/",
+            "published": "2024-09-27",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Angola",
@@ -4064,7 +4108,23 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Algérie"],
+        "kind": "restriction",
+        "label": "Maroc et Algérie : frontière fermée, relations rompues (Al Jazeera, 2021)",
+        "summary": "La frontière terrestre est fermée depuis 1994 et l'Algérie a rompu ses relations diplomatiques avec le Maroc le 24 août 2021, sur fond de désaccord sur le Sahara occidental.",
+        "sources": [
+          {
+            "title": "Al Jazeera, Algeria cuts diplomatic ties with Morocco over 'hostile actions' (24 August 2021)",
+            "url": "https://www.aljazeera.com/news/2021/8/24/algeria-cuts-diplomatic-ties-with-morocco",
+            "published": "2021-08-24",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Maurice",
@@ -5865,7 +5925,29 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Soudan du Sud"],
+        "kind": "conflict",
+        "label": "Soudan et Soudan du Sud : la frontière d'Abyei reste disputée (ONU, 2025)",
+        "summary": "Le Soudan du Sud s'est séparé du Soudan en 2011 après des décennies de guerre. Le statut d'Abyei n'est toujours pas réglé : en novembre 2025, l'ONU y signale des violences en hausse et la présence des Forces de soutien rapide, et des attaques ont visé les installations pétrolières de Heglig, à la frontière. Les deux gouvernements poursuivent pourtant un dialogue sur la frontière et le pétrole (ONU, 2026).",
+        "sources": [
+          {
+            "title": "ONU Info, Sudan war and political uncertainty block progress on Abyei peace talks (November 2025)",
+            "url": "https://news.un.org/en/story/2025/11/1166284",
+            "published": "2025-11",
+            "accessed": "2026-11-22"
+          },
+          {
+            "title": "Conseil de sécurité de l'ONU, 10149e séance (2026)",
+            "url": "https://press.un.org/en/2026/sc16356.doc.htm",
+            "published": "2026",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Soudan du Sud",
@@ -5980,7 +6062,29 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Soudan"],
+        "kind": "conflict",
+        "label": "Soudan et Soudan du Sud : la frontière d'Abyei reste disputée (ONU, 2025)",
+        "summary": "Le Soudan du Sud s'est séparé du Soudan en 2011 après des décennies de guerre. Le statut d'Abyei n'est toujours pas réglé : en novembre 2025, l'ONU y signale des violences en hausse et la présence des Forces de soutien rapide, et des attaques ont visé les installations pétrolières de Heglig, à la frontière. Les deux gouvernements poursuivent pourtant un dialogue sur la frontière et le pétrole (ONU, 2026).",
+        "sources": [
+          {
+            "title": "ONU Info, Sudan war and political uncertainty block progress on Abyei peace talks (November 2025)",
+            "url": "https://news.un.org/en/story/2025/11/1166284",
+            "published": "2025-11",
+            "accessed": "2026-11-22"
+          },
+          {
+            "title": "Conseil de sécurité de l'ONU, 10149e séance (2026)",
+            "url": "https://press.un.org/en/2026/sc16356.doc.htm",
+            "published": "2026",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "São Tomé-et-Príncipe",
@@ -7254,7 +7358,29 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Éthiopie"],
+        "kind": "conflict",
+        "label": "Éthiopie et Érythrée : armées face à face, risque de guerre (Chatham House, 2025)",
+        "summary": "Les deux pays se sont fait la guerre de 1998 à 2000. Depuis 2025, l'Éthiopie revendique un accès à la mer par le port érythréen d'Assab ; Chatham House appelle en novembre 2025 à une désescalade pour éviter une nouvelle guerre, et African Business décrit en mars 2026 des troupes massées des deux côtés de la frontière.",
+        "sources": [
+          {
+            "title": "Chatham House, De-escalation is needed to prevent Ethiopia and Eritrea from going to war (November 2025)",
+            "url": "https://www.chathamhouse.org/2025/11/de-escalation-needed-prevent-ethiopia-and-eritrea-going-war",
+            "published": "2025-11",
+            "accessed": "2026-11-22"
+          },
+          {
+            "title": "African Business, Why tensions between Ethiopia and Eritrea are rising again (March 2026)",
+            "url": "https://african.business/2026/03/politics/why-tensions-between-ethiopia-and-eritrea-are-rising-again",
+            "published": "2026-03",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Éthiopie",
@@ -7389,6 +7515,28 @@
           "accessed": "2026-11-15"
         }
       ]
-    }
+    },
+    "tensions": [
+      {
+        "from": ["Érythrée"],
+        "kind": "conflict",
+        "label": "Éthiopie et Érythrée : armées face à face, risque de guerre (Chatham House, 2025)",
+        "summary": "Les deux pays se sont fait la guerre de 1998 à 2000. Depuis 2025, l'Éthiopie revendique un accès à la mer par le port érythréen d'Assab ; Chatham House appelle en novembre 2025 à une désescalade pour éviter une nouvelle guerre, et African Business décrit en mars 2026 des troupes massées des deux côtés de la frontière.",
+        "sources": [
+          {
+            "title": "Chatham House, De-escalation is needed to prevent Ethiopia and Eritrea from going to war (November 2025)",
+            "url": "https://www.chathamhouse.org/2025/11/de-escalation-needed-prevent-ethiopia-and-eritrea-going-war",
+            "published": "2025-11",
+            "accessed": "2026-11-22"
+          },
+          {
+            "title": "African Business, Why tensions between Ethiopia and Eritrea are rising again (March 2026)",
+            "url": "https://african.business/2026/03/politics/why-tensions-between-ethiopia-and-eritrea-are-rising-again",
+            "published": "2026-03",
+            "accessed": "2026-11-22"
+          }
+        ]
+      }
+    ]
   }
 ]

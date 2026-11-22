@@ -10,6 +10,8 @@ const NEUTRAL = new Set([
   "passports:other",
   "faith:none",
   "adventure:open",
+  // Crossing the Sahara is what « anywhere » already does.
+  "acrossSahara:yes",
   // A month or more away asks nothing of the flights.
   "duration:month",
 ]);
@@ -46,6 +48,7 @@ describe("the question bank", () => {
         "origin",
         "countries",
         "reach",
+        "acrossSahara",
         "drawnTo",
         "faith",
         "priorities",
@@ -131,6 +134,25 @@ describe("the question bank", () => {
     const west = visibleChoices(countries, { origin: ["ouest"] }).map((c) => c.value);
     expect(west).toContain("Sénégal");
     expect(west).not.toContain("Kenya");
+  });
+
+  // A family from RD Congo read « Congo » as theirs and missed the documented tension with Rwanda.
+  it("names the Republic of the Congo apart from RD Congo", () => {
+    const countries = QUESTIONS.find((q) => q.id === "countries")!;
+    const congo = countries.choices.find((c) => c.value === "Congo")!;
+    expect(congo.label).toBe("Congo-Brazzaville");
+  });
+
+  it("asks about the other side of the Sahara only after « anywhere », of a family on one side", () => {
+    const across = QUESTIONS.find((q) => q.id === "acrossSahara")!;
+    expect(across.after).toBe("reach");
+    expect(across.when?.({ origin: ["ouest"], reach: "anywhere" })).toBe(true);
+    expect(across.when?.({ origin: ["nord"], reach: "anywhere" })).toBe(true);
+    expect(across.when?.({ origin: ["ameriques"], reach: "anywhere" })).toBe(true);
+    expect(across.when?.({ origin: ["ouest"], reach: "region" })).toBe(false);
+    // A mixed family is at home on both sides: there is no other side to ask about.
+    expect(across.when?.({ origin: ["ouest", "nord"], reach: "anywhere" })).toBe(false);
+    expect(across.when?.({ reach: "anywhere" })).toBe(false);
   });
 });
 

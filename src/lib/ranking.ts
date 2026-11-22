@@ -63,6 +63,8 @@ export interface Answers extends ProfileAnswers {
   passports?: ("eu" | "ecowas" | "cemac" | "eac" | "other")[];
   /** How far from their own the reader would go: the family's country, its region, a culture alike, anywhere. */
   reach?: Reach;
+  /** After « anywhere »: whether the other side of the Sahara is welcome too. */
+  acrossSahara?: "yes" | "no";
   /** The reader's faith, only weighed when the reader asks to stay near their own. */
   faith?: "muslim" | "christian" | "other" | "none" | "private";
   /** Going far from what one knows; asked of a reader who named no origin, else told by `reach`. */
@@ -497,6 +499,12 @@ const NEAR: Record<
  * it is not diluted either; it lifts those regions and removes no city.
  */
 const ATTRACTED_SHARE = 0.2;
+/**
+ * « Plutôt pas » to the other side of the Sahara, asked after « anywhere » (operator,
+ * 2026-11-22): readers from south of the Sahara turned down the North African cities « anywhere »
+ * gave them. As much as « the family's country » gives the divide: a clear step back, not a filter.
+ */
+const ACROSS_SAHARA_SHARE = 0.3;
 /** All of them together leave a third of the score to everything else the reader answered. */
 const NEAR_ONES_OWN_MOST = 0.65;
 const PRACTICAL: Axis[] = [
@@ -684,6 +692,10 @@ export function profileOf(given: Answers): Profile {
     if (away > 0) fact("origin", { kind: "elsewhere", origins, weight: away }, weight);
     // A trip leans away from the family's region: no share for what the reader came to leave.
     if (draw > 0 && away === 0) shares.origin = UNSAID_SHARE;
+  }
+  if (origins.length && answers.acrossSahara === "no") {
+    if (shares.divide === undefined) fact("divide", { kind: "divide", origins, weight: 1 });
+    shares.divide = Math.max(shares.divide ?? 0, ACROSS_SAHARA_SHARE);
   }
   const drawnTo = (answers.drawnTo ?? []).filter(Boolean);
   if (drawnTo.length) {
