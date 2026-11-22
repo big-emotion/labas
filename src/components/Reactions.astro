@@ -8,7 +8,6 @@
 import { BRAND, type Bilingual } from "../i18n/locale";
 import { cityName } from "../i18n/places";
 import { localeOfPath, pathFor } from "../i18n/routes";
-import { ofCity } from "../lib/reactions";
 
 interface Props {
   /** Known on the city page; on a result page the script fills in the first city. */
@@ -27,8 +26,9 @@ const name = city ? cityName(city.name, locale) : "";
 const COPY = {
   fr: {
     latest: "Les derniers avis",
-    saying: "Ce qu'on dit",
-    of: city ? ofCity(name) : "",
+    // Named for what the site asks of readers since 2026-11-22: useful facts for the next one.
+    saying: "Infos utiles sur",
+    of: name,
     emptyEverywhere:
       "Aucun avis ne correspond. Essayez un autre mot, une autre région, ou retirez un filtre.",
     emptyBefore: "Personne n'a encore rien partagé. Vous connaissez",
@@ -73,7 +73,7 @@ const COPY = {
   },
   en: {
     latest: "The latest reviews",
-    saying: "What people say about",
+    saying: "Useful tips on",
     of: name,
     emptyEverywhere: "No review matches. Try another word, another region, or remove a filter.",
     emptyBefore: "Nobody has shared anything yet. Do you know",

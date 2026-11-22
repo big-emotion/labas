@@ -388,7 +388,7 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     const pending: PendingReview[] = data.pending ?? [];
     $("pending").replaceChildren(...pending.map(pendingCard));
     $("pending-empty").hidden = pending.length > 0;
-    $("tab-pending-count").textContent = pending.length ? ` (${pending.length} à publier)` : "";
+    $("tab-pending-count").textContent = pending.length ? ` (${pending.length})` : "";
     const messages: AdminMessage[] = data.messages ?? [];
     $("messages").replaceChildren(...messages.map(messageCard));
     $("messages-empty").hidden = messages.length > 0;

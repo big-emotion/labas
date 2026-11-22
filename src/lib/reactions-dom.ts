@@ -57,7 +57,7 @@ const COPY = {
     farther: (name: string) => `Moins proches du profil ${name}`,
     allReactions: (total: number) => `Voir toutes les réactions (${total})`,
     cityPage: (name: string) => `Voir la page ${ofCity(name)}`,
-    of: (name: string) => ofCity(name),
+    of: (name: string) => name,
     writeReaction: "Écrivez votre information avant d'envoyer.",
     reactionPending:
       "Merci ! L'équipe relit votre information avant de la mettre en ligne : elle aidera les prochains.",

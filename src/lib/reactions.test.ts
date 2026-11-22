@@ -56,7 +56,7 @@ describe("when a reaction was written", () => {
 
 describe("how many reactions", () => {
   it("agrees the noun with the number", () => {
-    expect(reactionCount(0, "fr")).toBe("Aucune réaction pour l'instant");
+    expect(reactionCount(0, "fr")).toBe("Pas encore d'information");
     expect(reactionCount(1, "fr")).toBe("1 réaction");
     expect(reactionCount(12, "fr")).toBe("12 réactions");
   });
