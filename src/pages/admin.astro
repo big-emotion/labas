@@ -45,7 +45,7 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
           aria-controls="panel-avis"
           aria-selected="true"
         >
-          Avis
+          Avis<span data-tab-pending-count></span>
         </button>
         <button
           type="button"
@@ -78,9 +78,18 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
 
       <section id="panel-avis" role="tabpanel" aria-labelledby="tab-avis">
         <p class="summary" data-summary></p>
-        <h2>À relire</h2>
+        <h2>À publier</h2>
+        <p class="hint">
+          Laissés sans e-mail : rien n'est en ligne avant que vous ne publiiez. Supprimez ce qui
+          n'aide personne (publicité, insulte, hors sujet).
+        </p>
+        <p class="hint" data-pending-empty hidden>
+          Rien en attente.
+        </p>
+        <ol class="cards" data-pending></ol>
+        <h2>Signalés ou masqués</h2>
         <p class="hint" data-reread-empty hidden>
-          Rien à relire : aucun avis signalé ni masqué.
+          Aucun avis signalé ni masqué.
         </p>
         <ol class="cards" data-reread></ol>
         <h2>Par ville</h2>
@@ -136,20 +145,23 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
 
       <section id="panel-reactions" role="tabpanel" aria-labelledby="tab-reactions" hidden>
         <p class="hint">
-          Les réactions en un tap sur une page de résultat, avec les réponses du lecteur et ses
-          trois villes. Aucun nom, aucune adresse : une ligne par geste, donc un lecteur qui change
-          d'avis compte deux fois. Les 2 000 plus récentes.
+          Chaque tap sur une ville d'un résultat : ❤️ j'aime, 👍 ça me correspond, 👎 ça ne me
+          correspond pas, ↩︎ réaction retirée. Ouvrez une ligne pour lire les réponses du lecteur.
+          Aucun nom, aucune adresse ; un lecteur qui change d'avis compte deux fois.
         </p>
         <p class="state" data-outcomes-state role="status">
           Chargement des réactions…
         </p>
         <div data-outcomes hidden>
-          <h2>Par version du classement</h2>
-          <ol class="ranking" data-outcome-versions></ol>
-          <h2>Par ville, les moins bien reçues d'abord</h2>
-          <ol class="ranking" data-outcome-cities></ol>
-          <h2>Les « Ça ne me correspond pas », du plus récent au plus ancien</h2>
-          <ol class="cards" data-outcome-misses></ol>
+          <h2>Du plus récent au plus ancien</h2>
+          <ol class="cards" data-outcome-list></ol>
+          <details class="outcome-stats">
+            <summary>Les chiffres, par version et par ville</summary>
+            <h3>Par version du classement</h3>
+            <ol class="ranking" data-outcome-versions></ol>
+            <h3>Par ville, les moins bien reçues d'abord</h3>
+            <ol class="ranking" data-outcome-cities></ol>
+          </details>
         </div>
       </section>
     </div>
@@ -163,6 +175,8 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     type Outcome,
     byCity,
     funnel,
+    answersInWords,
+    outcomeLine,
     outcomesRead,
     toReread,
   } from "../lib/admin";
@@ -248,7 +262,7 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     const firsts = reviews.filter((r) => !r.replyTo).length;
     const reread = toReread(reviews);
     $("summary").textContent =
-      `${firsts} avis, ${reviews.length - firsts} réponses, ${reread.length} à relire.`;
+      `${firsts} avis en ligne, ${reviews.length - firsts} réponses, ${reread.length} signalés ou masqués.`;
     $("reread").replaceChildren(...reread.map(card));
     $("reread-empty").hidden = reread.length > 0;
     $("cities").replaceChildren(
@@ -322,11 +336,59 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     );
   }
 
+  interface PendingReview {
+    id: string;
+    city: string;
+    name: string;
+    text: string;
+    createdAt: string;
+    replyTo: string | null;
+  }
+
+  function pendingCard(review: PendingReview): HTMLElement {
+    const link = el("a", "", names[review.city] ?? review.city) as HTMLAnchorElement;
+    link.href = `/ville/${review.city}/#reactions`;
+    const head = el(
+      "p",
+      "meta",
+      el("b", "", review.name),
+      ` · ${dateOf(review.createdAt)} · `,
+      link,
+      review.replyTo ? " · réponse à un avis" : "",
+    );
+    const publish = el("button", "", "Publier") as HTMLButtonElement;
+    publish.type = "button";
+    publish.addEventListener("click", async () => {
+      publish.disabled = true;
+      await api("POST", `/api/compte/admin/reactions/${review.id}`, { action: "publier" });
+      await loadReviews();
+    });
+    const remove = el("button", "danger", "Supprimer") as HTMLButtonElement;
+    remove.type = "button";
+    remove.addEventListener("click", async () => {
+      if (remove.dataset.armed !== "true") {
+        remove.dataset.armed = "true";
+        remove.textContent = "Supprimer pour de bon ?";
+        return;
+      }
+      remove.disabled = true;
+      await api("DELETE", `/api/compte/admin/reactions/${review.id}`);
+      await loadReviews();
+    });
+    const item = el("li", "card", head, el("p", "text", review.text));
+    item.append(el("div", "actions", publish, remove));
+    return item;
+  }
+
   async function loadReviews() {
     const { status, data } = await api("GET", "/api/compte/admin");
     if (status !== 200) return status;
     reviews = data.reviews;
     drawReviews();
+    const pending: PendingReview[] = data.pending ?? [];
+    $("pending").replaceChildren(...pending.map(pendingCard));
+    $("pending-empty").hidden = pending.length > 0;
+    $("tab-pending-count").textContent = pending.length ? ` (${pending.length})` : "";
     const messages: AdminMessage[] = data.messages ?? [];
     $("messages").replaceChildren(...messages.map(messageCard));
     $("messages-empty").hidden = messages.length > 0;
@@ -402,14 +464,6 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
   let outcomes: Outcome[] | null = null;
   const tallyLine = (t: { like: number; suits: number; not: number; misses: string }) =>
     `❤️ ${t.like}  👍 ${t.suits}  👎 ${t.not} · ${t.misses} de 👎`;
-  /** The answers as the reader gave them, one « question : réponse » after another. */
-  const answersOf = (answers: Record<string, unknown>) =>
-    Object.entries(answers)
-      .map(
-        ([question, value]) => `${question} : ${Array.isArray(value) ? value.join(", ") : value}`,
-      )
-      .join(" · ");
-
   async function loadOutcomes() {
     if (outcomes) return;
     const state = $("outcomes-state");
@@ -434,23 +488,26 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
         el("li", "", el("span", "", names[c.city] ?? c.city), el("b", "", tallyLine(c))),
       ),
     );
-    $("outcome-misses").replaceChildren(
-      ...outcomes
-        .filter((o) => o.reaction === "not")
-        .map((o) =>
+    $("outcome-list").replaceChildren(
+      ...outcomes.map((o) => {
+        const details = el("details", "", el("summary", "", outcomeLine(o, names)));
+        details.append(
           el(
-            "li",
-            "card",
-            el(
-              "p",
-              "meta",
-              `${names[o.city] ?? o.city} · ${dateOf(o.day)} · ${o.version ?? "avant la v0.28.0"} · ` +
-                (o.kind === "deep" ? "questionnaire complet" : "quiz rapide"),
-            ),
-            el("p", "", `Villes montrées : ${o.top.map((slug) => names[slug] ?? slug).join(", ")}`),
-            el("p", "hint", answersOf(o.answers)),
+            "p",
+            "hint",
+            `${o.kind === "deep" ? "Questionnaire complet" : "Quiz rapide"} · version ${o.version ?? "antérieure à 0.28.0"}`,
           ),
-        ),
+          el(
+            "dl",
+            "answers",
+            ...answersInWords(o.answers).flatMap((a) => [
+              el("dt", "", a.question),
+              el("dd", "", a.answer),
+            ]),
+          ),
+        );
+        return el("li", "card", details);
+      }),
     );
     state.hidden = true;
     $("outcomes").hidden = false;
@@ -583,6 +640,27 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     border-radius: 14px;
     background: var(--thread);
     color: var(--ink);
+  }
+  .admin :global(.card summary) {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .admin :global(.answers) {
+    display: grid;
+    gap: 2px 0;
+    margin: 8px 0 0;
+  }
+  .admin :global(.answers dt) {
+    font-size: 0.85rem;
+  }
+  .admin :global(.answers dd) {
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  .outcome-stats summary {
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 16px;
   }
   .admin :global(.card.hidden) {
     background: var(--thread-dim);

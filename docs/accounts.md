@@ -45,10 +45,18 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
   (operator, 2026-11-18): it shrank the map for little gain.
 - **High and light.** Reactions are what the operator wants to learn from, so the block sits
   above the fold and on `--thread`, the one light surface of the site.
-- **One e-mail, once.** A signed-out reader leaves an address; the reaction waits, unpublished,
-  and the link that publishes it also confirms the address and opens a session. A signed-in
-  reader publishes at once. An address that already has a space gets the same link, which is
-  also a login.
+- **No e-mail, read before it goes online** (operator, 2026-11-22). In 30 days, 5 readers opened
+  the form and none sent it: the address, then a link to open, asked too much of someone who had
+  just tapped. A signed-out reader now sends the text alone; it is kept with no account
+  (`account_id` null, `awaiting_review`) and goes online only when the operator presses « Publier »
+  in /admin, under a stable « Utilisateur » number drawn from its id. Waiting reviews are never
+  purged. Against scripts: the hidden field, the form's own count of how long it was open (under
+  3 s it is dropped without saying so) and 5 posts an hour per connection; the operator's reading
+  stops what gets through. The road not taken: a CAPTCHA, which would be a third-party embed. A
+  signed-in reader still publishes at once. Each waiting review mails the team (`team`,
+  `reviewToReadEmail`) with its city, its text and the way to /admin; the reader is never written
+  to, and a failing mail service loses nothing since the review is kept first. The server still takes an address and mails the
+  publishing link, for pages cached before the change; no form sends one any more.
 - **Back where it was asked.** A link may carry a way back, stored with the token rather than
   written in the URL, and only a path of this site (`backOf`). « Recevoir mon lien de connexion »
   uses it too.
@@ -68,8 +76,8 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
   signed-in readers hide one (operator, 2026-11-18: connections were too cheap to count, one
   person with three addresses could hide any review). `reaction_reports` keeps who reported so
   that each counts once across restarts; it is in the export, goes with the space, and « rétablir »
-  clears it. The road not taken: a review queue before publication, too slow for a beta whose
-  point is to hear readers.
+  clears it. Signed-in reviews are not queued: a queue for everyone was too slow for a beta whose
+  point is to hear readers; it now applies to signed-out reviews only.
 - **Measured, anonymously.** Three Plausible goals (`reactionEvent` in `src/lib/analytics.ts`):
   « Réaction : formulaire ouvert », « Réaction envoyée » (statut: published at once or waiting for
   its link) and « Réactions consultées », each with `lieu` and `ville`. Publication by the e-mailed
@@ -112,7 +120,8 @@ which answers.
   on 2026-11-20, so the day could not tell which ranking a reader reacted to. Rows kept before
   v0.28.0 have none.
 - **Read in /admin** (« Réactions », `GET /api/compte/admin/outcomes`, the 2 000 newest): the
-  reactions by version and by city, and each « ça ne me correspond pas » with its answers. Until
+  newest reactions first, one plain line each (`outcomeLine`), the answers in the quiz's own words
+  folded under it (`answersInWords`, `src/lib/admin.ts`), and the counts by version and by city. Until
   then the table was written and never read. Nothing feeds the ranking by itself: a change of
   weight is still a decision, a test and a release.
 
@@ -229,20 +238,21 @@ tested in `admin.test.ts`; the figures in `src/server/plausible.ts`; the page `s
 
 ## Lifetimes
 
-| What                                                      | How long                                  |
-| --------------------------------------------------------- | ----------------------------------------- |
-| Button of the results e-mail (« Voir mes résultats »)     | 7 days, single use                        |
-| Link mailed after « Reprendre plus tard »                 | 24 hours, single use                      |
-| Login link asked from Mon espace                          | 15 minutes, single use                    |
-| Session (`labas_session`, HttpOnly, Secure, SameSite=Lax) | 30 days                                   |
-| Unconfirmed account or journey                            | 7 days, then erased                       |
-| Unpublished reaction, and its link                        | 7 days, then erased                       |
-| A space                                                   | 3 years after the last visit, then erased |
-| News confirmation link                                    | 7 days                                    |
-| News address (`news_subscribers`)                         | 3 years after its last confirmation       |
-| News unsubscribe link (`/nouveautes/desinscription/#t=`)  | Never expires; the button erases at once  |
-| Message from the feedback tab (`messages`)                | 1 year after it was sent, then erased     |
-| A review's translation (`reaction_translations`)          | As long as the review, erased with it     |
+| What                                                       | How long                                  |
+| ---------------------------------------------------------- | ----------------------------------------- |
+| Button of the results e-mail (« Voir mes résultats »)      | 7 days, single use                        |
+| Link mailed after « Reprendre plus tard »                  | 24 hours, single use                      |
+| Login link asked from Mon espace                           | 15 minutes, single use                    |
+| Session (`labas_session`, HttpOnly, Secure, SameSite=Lax)  | 30 days                                   |
+| Unconfirmed account or journey                             | 7 days, then erased                       |
+| Unpublished reaction, and its link                         | 7 days, then erased                       |
+| Reaction left without an address, waiting for the operator | Until published or deleted in /admin      |
+| A space                                                    | 3 years after the last visit, then erased |
+| News confirmation link                                     | 7 days                                    |
+| News address (`news_subscribers`)                          | 3 years after its last confirmation       |
+| News unsubscribe link (`/nouveautes/desinscription/#t=`)   | Never expires; the button erases at once  |
+| Message from the feedback tab (`messages`)                 | 1 year after it was sent, then erased     |
+| A review's translation (`reaction_translations`)           | As long as the review, erased with it     |
 
 `purge()` applies these at start-up and then once a day.
 

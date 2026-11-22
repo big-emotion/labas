@@ -56,9 +56,10 @@ describe("when a reaction was written", () => {
 
 describe("how many reactions", () => {
   it("agrees the noun with the number", () => {
-    expect(reactionCount(0, "fr")).toBe("Aucune réaction pour l'instant");
-    expect(reactionCount(1, "fr")).toBe("1 réaction");
-    expect(reactionCount(12, "fr")).toBe("12 réactions");
+    expect(reactionCount(0, "fr")).toBe("Pas encore d'information");
+    expect(reactionCount(1, "fr")).toBe("1 info utile");
+    expect(reactionCount(12, "fr")).toBe("12 infos utiles");
+    expect(reactionCount(1, "en")).toBe("1 useful tip");
   });
 });
 
@@ -116,7 +117,7 @@ describe("the same words on the English pages", () => {
     expect(replyCount(0, "en")).toBe("Reply");
     expect(replyCount(1, "en")).toBe("1 reply");
     expect(replyCount(4, "en")).toBe("4 replies");
-    expect(reactionCount(1, "en")).toBe("1 reaction");
+    expect(reactionCount(2, "en")).toBe("2 useful tips");
     expect(markLabel("coeur", 3, true, "en")).toBe("Like, 3 people, including you");
     expect(reactionDate(at(3 * 24 * HOUR), NOW, "en")).toBe("3 days ago");
     expect(reactionDate("2026-10-02T09:00:00.000Z", NOW, "en")).toBe("on 2 October 2026");

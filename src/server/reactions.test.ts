@@ -126,6 +126,41 @@ describe("reacting to a city without being signed in", () => {
   });
 });
 
+describe("reacting to a city without an address (operator, 2026-11-22)", () => {
+  // A person takes seconds to write; a script posts the instant the page loads.
+  const anonymous = (fields: Record<string, unknown> = {}) =>
+    react({ email: undefined, elapsed: 8000, ...fields });
+
+  it("keeps the reaction for the operator to read first, and mails nothing", async () => {
+    const response = await anonymous();
+    expect(response.status).toBe(202);
+    expect(JSON.parse(response.body!)).toEqual({ published: false, moderated: true });
+    expect((await thread()).reactions).toEqual([]);
+    expect(mail.sent).toHaveLength(0);
+  });
+
+  it("is not erased while it waits for the operator", async () => {
+    await anonymous();
+    clock += 30 * DAY;
+    await purge(db, clock);
+    const { rows } = await db.query("select id from reactions");
+    expect(rows).toHaveLength(1);
+  });
+
+  it("drops, without saying so, a form filled faster than a person writes or by a robot", async () => {
+    for (const fields of [{ elapsed: 400 }, { elapsed: undefined }, { website: "x" }])
+      expect((await anonymous(fields)).status).toBe(202);
+    const { rows } = await db.query("select id from reactions");
+    expect(rows).toHaveLength(0);
+  });
+
+  it("still slows down a flood from one connection", async () => {
+    const statuses = [];
+    for (let i = 0; i < 6; i++) statuses.push((await anonymous()).status);
+    expect(statuses.at(-1)).toBe(429);
+  });
+});
+
 describe("reacting from an English page", () => {
   it("mails the link in English, naming the city in English", async () => {
     await react({ city: "le-cap", locale: "en", back: "/en/city/le-cap/#reactions" });

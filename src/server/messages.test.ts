@@ -192,3 +192,27 @@ describe("the messages in /admin", () => {
     expect((await call("DELETE", path, undefined, admin)).status).toBe(404);
   });
 });
+
+describe("telling the team a review waits to be read (operator, 2026-11-22)", () => {
+  const review = (fields: object) =>
+    call("POST", "/api/compte/reactions", { city: "dakar", elapsed: 8000, ...fields });
+
+  it("mails the city, the text and the way to /admin, never to the reader", async () => {
+    await review({ text: "Coût de la vie : <b>cher</b> aux Almadies." });
+    expect(sent).toHaveLength(1);
+    expect(sent[0].to).toBe(TEAM);
+    expect(sent[0].subject).toBe("Là-bas · Un avis sur Dakar attend votre relecture");
+    expect(sent[0].text).toContain("Coût de la vie : <b>cher</b> aux Almadies.");
+    expect(sent[0].text).toContain(`${SITE}/admin/`);
+    expect(sent[0].html).toContain("&lt;b&gt;cher");
+  });
+
+  it("mails nothing for what a robot posts, and keeps the review when the mail fails", async () => {
+    await review({ text: "Spam", elapsed: 100 });
+    expect(sent).toHaveLength(0);
+    mailFails = true;
+    expect((await review({ text: "Les marchés le samedi." })).status).toBe(202);
+    const { rows } = await db.query("select id from reactions where awaiting_review");
+    expect(rows).toHaveLength(1);
+  });
+});

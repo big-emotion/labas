@@ -13,6 +13,8 @@ interface Options {
   site: string;
   apiKey: string;
   fetch?: typeof globalThis.fetch;
+  /** Milliseconds before a silent Plausible counts as down, so /admin never hangs on it. */
+  timeout?: number;
 }
 
 interface Row {
@@ -40,12 +42,26 @@ const PERIODS = [
 ];
 const TOP = 8;
 
-export function plausibleStats({ host, site, apiKey, fetch = globalThis.fetch }: Options) {
+export function plausibleStats({
+  host,
+  site,
+  apiKey,
+  fetch = globalThis.fetch,
+  timeout = 5000,
+}: Options) {
   async function query(body: Record<string, unknown>): Promise<Row[]> {
+    // The error names the host and the cause: a container that cannot reach its own server's
+    // public address times out silently, and the log is the only place that can say so.
     const response = await fetch(`${host}/api/v2/query`, {
       method: "POST",
       headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({ site_id: site, ...body }),
+      signal: AbortSignal.timeout(timeout),
+    }).catch((error: unknown) => {
+      const cause = error instanceof Error && error.cause ? ` (${String(error.cause)})` : "";
+      throw new Error(
+        `Plausible at ${host} unreachable (timeout ${timeout} ms): ${String(error)}${cause}`,
+      );
     });
     if (!response.ok) throw new Error(`Plausible answered ${response.status}`);
     return ((await response.json()) as { results: Row[] }).results;

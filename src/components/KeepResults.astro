@@ -10,15 +10,20 @@ import { localeOfPath, pathFor } from "../i18n/routes";
 
 // The one block of actions on a result (operator, 2026-11-20): the first city hooks the reader,
 // so everything they can do next sits right under it (placeHook in lib/why-dom.ts moves the block
-// there): go deeper, share, get the result by e-mail, leave a review. The rest folds away.
+// there). Since 2026-11-22 (operator) the one filled button asks for what the site lacks most, a
+// useful word on the first city; sharing and the e-mail follow, the full questionnaire is a link
+// (7 of 120 readers went there in 30 days) and the rarer ways of sharing fold away.
 interface Props {
-  /** The quick quiz also offers the full questionnaire, first. */
+  /** The quick quiz also offers the full questionnaire, as a link under the actions. */
   further?: boolean;
 }
 const { further = false } = Astro.props;
 const serverMail = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
-const quick = NETWORKS.filter((n) => n.key === "whatsapp");
-const others = NETWORKS.filter((n) => n.key !== "whatsapp");
+// WhatsApp first among the folded networks: the phone's share sheet already offers it.
+const networks = [
+  ...NETWORKS.filter((n) => n.key === "whatsapp"),
+  ...NETWORKS.filter((n) => n.key !== "whatsapp"),
+];
 const locale = localeOfPath(Astro.url.pathname);
 const COPY: Bilingual<{
   title: string;
@@ -47,8 +52,8 @@ const COPY: Bilingual<{
   fr: {
     title: "Garder vos résultats",
     further: "Affiner avec le questionnaire complet",
-    review: "Je laisse un avis",
-    more: "Image, impression, autres réseaux",
+    review: "Laisser une info utile sur cette ville",
+    more: "WhatsApp, image, impression, autres réseaux",
     share: "Partager",
     picture: "Enregistrer l'image",
     print: "Imprimer ou PDF",
@@ -73,8 +78,8 @@ const COPY: Bilingual<{
   en: {
     title: "Keep your results",
     further: "Refine with the full questionnaire",
-    review: "Leave a review",
-    more: "Picture, print, other networks",
+    review: "Share something useful about this city",
+    more: "WhatsApp, picture, print, other networks",
     share: "Share",
     picture: "Save the picture",
     print: "Print or PDF",
@@ -101,26 +106,15 @@ const copy = COPY[locale];
 ---
 
 <div class="keep" data-keep data-hook role="group" aria-label={copy.title}>
-  {further && (
-    <a class="further" href={pathFor("deep", locale)}>
-      {copy.further}
-    </a>
+  {serverMail && (
+    <button type="button" class="review" data-hook-review>
+      {copy.review}
+    </button>
   )}
-  <div class:list={["keep-actions", { lead: !further }]}>
+  <div class:list={["keep-actions", { lead: !serverMail && !further }]}>
     <button type="button" data-keep-way="partage">
       {copy.share}
     </button>
-    {quick.map((n) => (
-      <a
-        href="#"
-        data-share-network={n.key}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={copy.shareOn(n.label)}
-      >
-        {n.label}
-      </a>
-    ))}
     {serverMail ? (
       <button type="button" data-keep-way="envoi" aria-expanded="false" aria-controls="keep-mail">
         {copy.mail}
@@ -130,12 +124,12 @@ const copy = COPY[locale];
         {copy.mail}
       </a>
     )}
-    {serverMail && (
-      <button type="button" data-hook-review>
-        {copy.review}
-      </button>
-    )}
   </div>
+  {further && (
+    <a class:list={["further", { lead: !serverMail }]} href={pathFor("deep", locale)}>
+      {copy.further}
+    </a>
+  )}
   <details class="keep-more">
     <summary>{copy.more}</summary>
     <div class="keep-actions">
@@ -145,7 +139,7 @@ const copy = COPY[locale];
       <button type="button" data-keep-way="impression">
         {copy.print}
       </button>
-      {others.map((n) => (
+      {networks.map((n) => (
         <a
           href="#"
           data-share-network={n.key}
@@ -214,18 +208,31 @@ const copy = COPY[locale];
     border: 0;
     background: none;
   }
-  .further {
+  .review,
+  .further.lead {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 52px;
     padding: 0 16px;
+    border: 0;
     border-radius: 999px;
     background: var(--saffron);
     color: var(--ink);
+    font: inherit;
     font-weight: 800;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
+  }
+  .further:not(.lead) {
+    justify-self: center;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: var(--saffron);
+    font-weight: 700;
+    text-underline-offset: 3px;
   }
   .keep-actions {
     display: grid;
@@ -267,11 +274,6 @@ const copy = COPY[locale];
   }
   .keep-more summary::-webkit-details-marker {
     display: none;
-  }
-  @media (min-width: 768px) {
-    .keep-actions {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
   }
   .keep-note:empty {
     display: none;

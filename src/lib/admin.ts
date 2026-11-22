@@ -1,3 +1,4 @@
+import { LATER, QUESTIONS } from "./questions";
 /**
  * The operator's view of the reviews (/admin, operator 2026-11-18): grouped by city, the ones to
  * reread on top. Never an address: moderation does not need to know who wrote.
@@ -147,4 +148,41 @@ export function outcomesRead(rows: Outcome[]) {
       .map(([city, own]) => ({ city, ...tally(own) }))
       .sort((a, b) => b.not - a.not || a.city.localeCompare(b.city)),
   };
+}
+
+const MARK: Record<string, string> = { like: "❤️", suits: "👍", not: "👎" };
+const BANK = [...QUESTIONS, ...LATER];
+const day = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short", timeZone: "UTC" });
+
+/**
+ * The answers as the reader saw them, question and chosen label, in the quiz's own order: the
+ * stored values (`pace: 0.5`) mean nothing to the operator. A value no choice carries any more
+ * is kept as it came rather than dropped, so an old journey stays readable.
+ */
+export function answersInWords(answers: Record<string, unknown>) {
+  const known = BANK.filter((q) => q.id in answers).map((q) => [q.id as string, q] as const);
+  const unknown = Object.keys(answers).filter((id) => !BANK.some((q) => q.id === id));
+  return [...known, ...unknown.map((id) => [id, undefined] as const)].flatMap(([id, question]) => {
+    const given = answers[id];
+    const values = Array.isArray(given) ? given : [given];
+    const labelOf = (value: unknown) =>
+      question?.choices.find((c) => c.value === value)?.label ??
+      (value === null || value === undefined || value === "" ? undefined : String(value));
+    const answer = values.map(labelOf).filter(Boolean).join(", ");
+    return answer ? [{ question: question?.title ?? id, answer }] : [];
+  });
+}
+
+/** One reaction in one line: « 👎 Oran · 22 nov. · M'installer pour de bon · a vu … ». */
+export function outcomeLine(outcome: Outcome, names: Record<string, string>): string {
+  const name = (slug: string) => names[slug] ?? slug;
+  const project = answersInWords({ project: outcome.answers.project })[0]?.answer;
+  return [
+    `${outcome.reaction ? MARK[outcome.reaction] : "↩︎"} ${name(outcome.city)}`,
+    day.format(new Date(outcome.day)),
+    project,
+    `a vu ${outcome.top.map(name).join(", ")}`,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 }

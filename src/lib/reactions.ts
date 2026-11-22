@@ -82,11 +82,11 @@ export function reactionDate(iso: string, now: number, locale: Locale): string {
 
 export function reactionCount(total: number, locale: Locale): string {
   if (locale === "en") {
-    if (total === 0) return "No reactions yet";
-    return `${total} ${total === 1 ? "reaction" : "reactions"}`;
+    if (total === 0) return "Nothing shared yet";
+    return `${total} ${total === 1 ? "useful tip" : "useful tips"}`;
   }
-  if (total === 0) return "Aucune réaction pour l'instant";
-  return `${total} ${total > 1 ? "réactions" : "réaction"}`;
+  if (total === 0) return "Pas encore d'information";
+  return `${total} ${total > 1 ? "infos utiles" : "info utile"}`;
 }
 
 export function initialOf(name: string): string {

@@ -6,9 +6,15 @@ import { pathFor } from "../i18n/routes";
 
 /** Render code for components/ResultWhy.astro. */
 
-const COPY: Bilingual<{ first: (city: string) => string }> = {
-  fr: { first: (city) => `Pourquoi ${city} en premier` },
-  en: { first: (city) => `Why ${city} comes first` },
+const COPY: Bilingual<{ first: (city: string) => string; review: (city: string) => string }> = {
+  fr: {
+    first: (city) => `Pourquoi ${city} en premier`,
+    review: (city) => `Laisser une info utile sur ${city}`,
+  },
+  en: {
+    first: (city) => `Why ${city} comes first`,
+    review: (city) => `Share something useful about ${city}`,
+  },
 };
 
 function fillReasons(block: HTMLElement, labels: string[]) {
@@ -66,7 +72,7 @@ let hook: HTMLElement | null = null;
 
 /**
  * Puts the block of actions (components/KeepResults.astro) inside the first city's card, right
- * under its reaction row, once the cards are drawn: the first result is what hooks the reader, so
+ * under its reaction row, once the cards are drawn and « Pourquoi ces villes ? » filled: the first result is what hooks the reader, so
  * sharing, the e-mail, the review and the full questionnaire are offered there and nowhere else
  * (operator, 2026-11-20).
  */
@@ -77,6 +83,12 @@ export function placeHook(locale: Locale): void {
       ?.querySelector<HTMLButtonElement>("[data-hook-review]")
       ?.addEventListener("click", () => openReview(locale));
   }
-  const reaction = document.querySelector("#cards > :first-child [data-taps]");
-  if (hook && reaction) reaction.after(hook);
+  const card = document.querySelector("#cards > :first-child");
+  // Under the reaction, « Pas pour moi » and the invitation a tap reveals.
+  const anchor = card?.querySelector("[data-invite]") ?? card?.querySelector(".not-for-me");
+  if (!hook || !anchor) return;
+  anchor.after(hook);
+  const review = hook.querySelector("[data-hook-review]");
+  if (review && firstCity)
+    review.textContent = COPY[locale].review(cityCopy(firstCity, locale).name);
 }

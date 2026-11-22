@@ -8,7 +8,6 @@
 import { BRAND, type Bilingual } from "../i18n/locale";
 import { cityName } from "../i18n/places";
 import { localeOfPath, pathFor } from "../i18n/routes";
-import { ofCity } from "../lib/reactions";
 
 interface Props {
   /** Known on the city page; on a result page the script fills in the first city. */
@@ -27,20 +26,22 @@ const name = city ? cityName(city.name, locale) : "";
 const COPY = {
   fr: {
     latest: "Les derniers avis",
-    saying: "Ce qu'on dit",
-    of: city ? ofCity(name) : "",
+    // Named for what the site asks of readers since 2026-11-22: useful facts for the next one.
+    saying: "Infos utiles sur",
+    of: name,
     emptyEverywhere:
       "Aucun avis ne correspond. Essayez un autre mot, une autre région, ou retirez un filtre.",
-    emptyBefore: "Personne n'a encore réagi. Vous connaissez",
-    emptyAfter: ", ou elle vous attire ? Donnez le premier avis.",
+    emptyBefore: "Personne n'a encore rien partagé. Vous connaissez",
+    emptyAfter: " ? Laissez la première information utile pour les prochains.",
     moreEverywhere: "Voir plus d'avis",
-    more: "Voir plus de réactions",
-    react: "Réagir",
-    all: "Voir toutes les réactions",
+    more: "Voir plus d'infos",
+    react: "Laisser une info utile",
+    all: "Voir toutes les infos",
     openInReviews: "Ouvrir dans l'espace avis",
-    yourReaction: "Votre réaction",
+    yourReaction: "Votre information",
+    starters: "Pour commencer",
     textHint:
-      "Ce que vous y avez vécu, ce qui vous attire ou ce qui vous retient. 1 000 caractères au plus.",
+      "Un quartier, un prix, une démarche, ce qui vous a surpris : ce qui aidera la personne qui prépare son départ. 1 000 caractères au plus.",
     shownName: "Nom affiché",
     optional: "(facultatif)",
     nameHint:
@@ -50,8 +51,8 @@ const COPY = {
       "Sans cette case, ils s'affichent sous votre réaction : vos trois villes avec leurs pourcentages, et votre façon de vivre. Jamais vos réponses.",
     email: "Votre e-mail",
     emailPlaceholder: "vous@exemple.fr",
-    emailHint:
-      "Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réaction ; ensuite, plus besoin : vos réactions suivantes sont publiées tout de suite.",
+    review:
+      "Pas besoin d'e-mail : l'équipe relit chaque message avant de le mettre en ligne. Connecté à votre espace, il est publié tout de suite.",
     website: "Site web",
     send: "Envoyer",
     privacy: "Confidentialité",
@@ -64,29 +65,28 @@ const COPY = {
     report: "Signaler",
     remove: "Supprimer",
     yourReply: "Votre réponse",
-    replyEmailHint:
-      "Il n'est jamais affiché. Nous vous envoyons un lien pour publier la réponse ; il vous connecte aussi.",
     sendReply: "Envoyer la réponse",
     login: "Pour réagir, connectez-vous : nous vous envoyons un lien par e-mail.",
     getLink: "Recevoir le lien",
     loginDone:
-      "Si un espace existe pour cette adresse, le lien arrive dans quelques minutes. Pas encore d'espace ? Répondez à un avis ou donnez le vôtre : le lien de publication vous connecte.",
+      "Si un espace existe pour cette adresse, le lien arrive dans quelques minutes. Pas encore d'espace ? « Recevoir par e-mail », sous un résultat, en ouvre un.",
   },
   en: {
     latest: "The latest reviews",
-    saying: "What people say about",
+    saying: "Useful tips on",
     of: name,
     emptyEverywhere: "No review matches. Try another word, another region, or remove a filter.",
-    emptyBefore: "Nobody has reacted yet. Do you know",
-    emptyAfter: ", or does it draw you? Be the first to react.",
+    emptyBefore: "Nobody has shared anything yet. Do you know",
+    emptyAfter: "? Leave the first useful word for the next person.",
     moreEverywhere: "See more reviews",
-    more: "See more reactions",
-    react: "React",
-    all: "See all reactions",
+    more: "See more tips",
+    react: "Share something useful",
+    all: "See all tips",
     openInReviews: "Open in the reviews section",
-    yourReaction: "Your reaction",
+    yourReaction: "What you know",
+    starters: "To start",
     textHint:
-      "What you lived there, what draws you or what holds you back. 1,000 characters at most.",
+      "A neighbourhood, a price, a formality, what surprised you: whatever will help someone preparing to move. 1,000 characters at most.",
     shownName: "Display name",
     optional: "(optional)",
     nameHint: "Otherwise, “User” and a number. Reactions are public: avoid your full name.",
@@ -95,8 +95,8 @@ const COPY = {
       "Without this box, they show under your reaction: your three cities with their percentages, and your way of living. Never your answers.",
     email: "Your email",
     emailPlaceholder: "you@example.com",
-    emailHint:
-      "It is never shown. We send you a link to publish the reaction; after that, no need: your next reactions go online straight away.",
+    review:
+      "No email needed: the team reads every message before it goes online. Signed in to your space, it is published straight away.",
     website: "Website",
     send: "Send",
     privacy: "Privacy",
@@ -109,16 +109,24 @@ const COPY = {
     report: "Report",
     remove: "Delete",
     yourReply: "Your reply",
-    replyEmailHint:
-      "It is never shown. We send you a link to publish the reply; it signs you in as well.",
     sendReply: "Send the reply",
     login: "To react, sign in: we send you a link by email.",
     getLink: "Get the link",
     loginDone:
-      "If a space exists for this address, the link arrives within a few minutes. No space yet? Reply to a review or give your own: the publishing link signs you in.",
+      "If a space exists for this address, the link arrives within a few minutes. No space yet? “Get it by email”, under a result, opens one.",
   },
 } satisfies Bilingual<Record<string, string>>;
 const copy = COPY[locale];
+// A tap starts the text (operator, 2026-11-22): a blank box stops a reader who knows the city.
+const STARTERS: Bilingual<string[]> = {
+  fr: ["Quartier à conseiller : ", "Coût de la vie : ", "Ce qui m'a surpris : ", "J'y vis : "],
+  en: [
+    "A neighbourhood to recommend: ",
+    "Cost of living: ",
+    "What surprised me: ",
+    "I live there: ",
+  ],
+};
 ---
 
 {enabled && (
@@ -178,6 +186,13 @@ const copy = COPY[locale];
     )}
 
     <form class="form" data-form novalidate hidden>
+      <p class="starters" role="group" aria-label={copy.starters}>
+        {STARTERS[locale].map((start) => (
+          <button type="button" data-starter={start}>
+            {start.replace(/\s*:\s*$/, "")}
+          </button>
+        ))}
+      </p>
       <label class="field">
         {copy.yourReaction}
         <textarea name="text" rows="4" maxlength="1000" required />
@@ -198,18 +213,7 @@ const copy = COPY[locale];
           <span class="dim">{copy.privateHint}</span>
         </span>
       </label>
-      <div class="email" data-email-field>
-        <label class="field">
-          {copy.email}
-          <input
-            type="email"
-            name="email"
-            placeholder={copy.emailPlaceholder}
-            autocomplete="email"
-          />
-        </label>
-        <p class="hint">{copy.emailHint}</p>
-      </div>
+      <p class="hint">{copy.review}</p>
       <label class="trap" aria-hidden="true">
         {copy.website}
         <input type="text" name="website" tabindex="-1" autocomplete="off" />
@@ -297,18 +301,7 @@ const copy = COPY[locale];
           </span>
           <input type="text" name="name" maxlength="40" autocomplete="nickname" />
         </label>
-        <div class="email" data-email-field hidden>
-          <label class="field">
-            {copy.email}
-            <input
-              type="email"
-              name="email"
-              placeholder={copy.emailPlaceholder}
-              autocomplete="email"
-            />
-          </label>
-          <p class="hint">{copy.replyEmailHint}</p>
-        </div>
+        <p class="hint">{copy.review}</p>
         <label class="trap" aria-hidden="true">
           {copy.website}
           <input type="text" name="website" tabindex="-1" autocomplete="off" />
@@ -364,6 +357,36 @@ const copy = COPY[locale];
     color: var(--ink);
     border-radius: 20px;
     padding: 18px 16px;
+  }
+  /* Inside the first result card it turns dark, framed in saffron (operator, 2026-11-22): a light
+     block there read as another page and pulled the eye from the card's one filled button. The
+     light rules below stay as they are: the block keeps the night tokens of its parent under
+     `--was-*` names, and its children read the light tokens as their dark counterparts. */
+  .reactions.preview {
+    --was-thread: var(--thread);
+    --was-thread-dim: var(--thread-dim);
+    --was-night: var(--night);
+    --was-ink: var(--ink);
+    color-scheme: dark;
+    background: var(--night-deep);
+    color: var(--thread);
+    border: 2px solid var(--saffron);
+  }
+  .reactions.preview > * {
+    --thread: var(--night-deep);
+    --paper: var(--was-night);
+    --ink: var(--was-thread);
+    --night: var(--was-thread);
+    --night-lift: var(--was-thread-dim);
+    --focus: var(--saffron);
+  }
+  /* Dark text stays dark on saffron, whatever the block's surface. */
+  .reactions.preview :is(.react, .send),
+  .reactions.preview :global(:is(.tools .mark[aria-pressed="true"], .top .place, .summary .place)) {
+    color: var(--was-ink);
+  }
+  .reactions.preview :global(:is(.avatar, .summary .temperament)) {
+    background: var(--night-pressed);
   }
   .reactions[hidden] {
     display: none;
@@ -635,7 +658,8 @@ const copy = COPY[locale];
     background: var(--saffron);
     font-size: 0.7rem;
   }
-  .reactions :global(.summary .temperament) {
+  /* :not([hidden]): with no profile the chip stayed on screen, empty. */
+  .reactions :global(.summary .temperament:not([hidden])) {
     display: inline-flex;
     align-items: center;
     height: 26px;
@@ -815,13 +839,11 @@ const copy = COPY[locale];
     text-decoration: underline;
     cursor: pointer;
   }
-  .form,
-  .email {
+  .form {
     display: grid;
     gap: 10px;
   }
-  .form[hidden],
-  .email[hidden] {
+  .form[hidden] {
     display: none;
   }
   .field {
@@ -864,6 +886,24 @@ const copy = COPY[locale];
     height: 22px;
     margin: 0;
     accent-color: var(--night);
+  }
+  .starters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+  .starters button {
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid var(--night-pressed);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
   }
   .trap {
     position: absolute;
