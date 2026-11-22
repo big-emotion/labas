@@ -484,3 +484,35 @@ ${details.map(note).join("\n")}`,
     ),
   };
 }
+
+/**
+ * A review left without an address waits for the operator (operator, 2026-11-22): the team hears
+ * of it at once rather than finding it in /admin days later. The reader is never written to.
+ */
+export function reviewToReadEmail(
+  to: string,
+  review: { city: string; text: string; name: string | null; adminUrl: string },
+): Mail {
+  const subject = `Un avis sur ${review.city} attend votre relecture`;
+  const signed = `Signé : ${review.name ?? "pas de nom, « Utilisateur » et un numéro"}`;
+  return {
+    to,
+    subject: `Là-bas · ${subject}`,
+    text: [
+      `${subject} :`,
+      "",
+      review.text,
+      "",
+      signed,
+      `Publier ou supprimer : ${review.adminUrl}`,
+    ].join("\n"),
+    html: page(
+      `<p>${escape(subject)} :</p>
+<p style="white-space:pre-wrap;padding:14px 16px;border-radius:14px;background:#0e1145">${escape(review.text)}</p>
+${note(signed)}
+${button(review.adminUrl, "Publier ou supprimer")}`,
+      "Rien n'est en ligne avant que vous ne publiiez.",
+      "fr",
+    ),
+  };
+}

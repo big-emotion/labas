@@ -16,6 +16,7 @@ import {
   resultsEmail,
   saveLinkEmail,
   teamMessageEmail,
+  reviewToReadEmail,
 } from "./emails";
 import type { Translator } from "./deepl";
 import { limiter } from "./limiter";
@@ -893,7 +894,21 @@ export function createAccounts({
       );
       if (reader)
         return json(201, { published: true, reaction: publicReaction(rows[0], reader.id) });
-      if (!accountId) return json(202, { published: false, moderated });
+      if (!accountId) {
+        // Kept first, so a failing mail service loses nothing.
+        if (team)
+          await mailer
+            .send(
+              reviewToReadEmail(team, {
+                city: city.name,
+                text,
+                name,
+                adminUrl: `${siteUrl}/admin/`,
+              }),
+            )
+            .catch((error) => console.error(String(error)));
+        return json(202, { published: false, moderated });
+      }
       try {
         const link = await issueLink(accountId, UNCONFIRMED_FOR, {
           reactionId: rows[0].id,
