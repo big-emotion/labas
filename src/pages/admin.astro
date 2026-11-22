@@ -136,20 +136,23 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
 
       <section id="panel-reactions" role="tabpanel" aria-labelledby="tab-reactions" hidden>
         <p class="hint">
-          Les réactions en un tap sur une page de résultat, avec les réponses du lecteur et ses
-          trois villes. Aucun nom, aucune adresse : une ligne par geste, donc un lecteur qui change
-          d'avis compte deux fois. Les 2 000 plus récentes.
+          Chaque tap sur une ville d'un résultat : ❤️ j'aime, 👍 ça me correspond, 👎 ça ne me
+          correspond pas, ↩︎ réaction retirée. Ouvrez une ligne pour lire les réponses du lecteur.
+          Aucun nom, aucune adresse ; un lecteur qui change d'avis compte deux fois.
         </p>
         <p class="state" data-outcomes-state role="status">
           Chargement des réactions…
         </p>
         <div data-outcomes hidden>
-          <h2>Par version du classement</h2>
-          <ol class="ranking" data-outcome-versions></ol>
-          <h2>Par ville, les moins bien reçues d'abord</h2>
-          <ol class="ranking" data-outcome-cities></ol>
-          <h2>Les « Ça ne me correspond pas », du plus récent au plus ancien</h2>
-          <ol class="cards" data-outcome-misses></ol>
+          <h2>Du plus récent au plus ancien</h2>
+          <ol class="cards" data-outcome-list></ol>
+          <details class="outcome-stats">
+            <summary>Les chiffres, par version et par ville</summary>
+            <h3>Par version du classement</h3>
+            <ol class="ranking" data-outcome-versions></ol>
+            <h3>Par ville, les moins bien reçues d'abord</h3>
+            <ol class="ranking" data-outcome-cities></ol>
+          </details>
         </div>
       </section>
     </div>
@@ -163,6 +166,8 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     type Outcome,
     byCity,
     funnel,
+    answersInWords,
+    outcomeLine,
     outcomesRead,
     toReread,
   } from "../lib/admin";
@@ -402,14 +407,6 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
   let outcomes: Outcome[] | null = null;
   const tallyLine = (t: { like: number; suits: number; not: number; misses: string }) =>
     `❤️ ${t.like}  👍 ${t.suits}  👎 ${t.not} · ${t.misses} de 👎`;
-  /** The answers as the reader gave them, one « question : réponse » after another. */
-  const answersOf = (answers: Record<string, unknown>) =>
-    Object.entries(answers)
-      .map(
-        ([question, value]) => `${question} : ${Array.isArray(value) ? value.join(", ") : value}`,
-      )
-      .join(" · ");
-
   async function loadOutcomes() {
     if (outcomes) return;
     const state = $("outcomes-state");
@@ -434,23 +431,26 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
         el("li", "", el("span", "", names[c.city] ?? c.city), el("b", "", tallyLine(c))),
       ),
     );
-    $("outcome-misses").replaceChildren(
-      ...outcomes
-        .filter((o) => o.reaction === "not")
-        .map((o) =>
+    $("outcome-list").replaceChildren(
+      ...outcomes.map((o) => {
+        const details = el("details", "", el("summary", "", outcomeLine(o, names)));
+        details.append(
           el(
-            "li",
-            "card",
-            el(
-              "p",
-              "meta",
-              `${names[o.city] ?? o.city} · ${dateOf(o.day)} · ${o.version ?? "avant la v0.28.0"} · ` +
-                (o.kind === "deep" ? "questionnaire complet" : "quiz rapide"),
-            ),
-            el("p", "", `Villes montrées : ${o.top.map((slug) => names[slug] ?? slug).join(", ")}`),
-            el("p", "hint", answersOf(o.answers)),
+            "p",
+            "hint",
+            `${o.kind === "deep" ? "Questionnaire complet" : "Quiz rapide"} · version ${o.version ?? "antérieure à 0.28.0"}`,
           ),
-        ),
+          el(
+            "dl",
+            "answers",
+            ...answersInWords(o.answers).flatMap((a) => [
+              el("dt", "", a.question),
+              el("dd", "", a.answer),
+            ]),
+          ),
+        );
+        return el("li", "card", details);
+      }),
     );
     state.hidden = true;
     $("outcomes").hidden = false;
@@ -583,6 +583,27 @@ const names = Object.fromEntries(CITIES.map((c) => [c.slug, c.name]));
     border-radius: 14px;
     background: var(--thread);
     color: var(--ink);
+  }
+  .admin :global(.card summary) {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .admin :global(.answers) {
+    display: grid;
+    gap: 2px 0;
+    margin: 8px 0 0;
+  }
+  .admin :global(.answers dt) {
+    font-size: 0.85rem;
+  }
+  .admin :global(.answers dd) {
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  .outcome-stats summary {
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 16px;
   }
   .admin :global(.card.hidden) {
     background: var(--thread-dim);

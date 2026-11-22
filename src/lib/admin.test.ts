@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { type AdminReview, type Outcome, byCity, funnel, outcomesRead, toReread } from "./admin";
+import {
+  type AdminReview,
+  type Outcome,
+  answersInWords,
+  byCity,
+  funnel,
+  outcomeLine,
+  outcomesRead,
+  toReread,
+} from "./admin";
 
 const review = (fields: Partial<AdminReview>): AdminReview => ({
   id: "r",
@@ -103,5 +112,48 @@ describe("what the reactions on a result teach", () => {
   it("leaves a reaction taken back out of the counts", () => {
     const { versions } = outcomesRead([outcome({ reaction: null })]);
     expect(versions).toEqual([{ version: "0.28.0", like: 0, suits: 0, not: 0, misses: "–" }]);
+  });
+});
+
+describe("a reaction on a result, as the operator reads it", () => {
+  const names = { oran: "Oran", tanger: "Tanger", lome: "Lomé" };
+  const outcome: Outcome = {
+    day: "2026-11-22",
+    version: "0.28.0",
+    kind: "quick",
+    city: "oran",
+    reaction: "not",
+    answers: { project: "installer", pace: 0.5, languages: ["fr", "en"] },
+    top: ["oran", "tanger", "lome"],
+  };
+
+  it("says in one line who reacted how, to what, on which day", () => {
+    expect(outcomeLine(outcome, names)).toBe(
+      "👎 Oran · 22 nov. · M'installer pour de bon · a vu Oran, Tanger, Lomé",
+    );
+  });
+
+  it("names a taken-back reaction and a journey without a project", () => {
+    expect(outcomeLine({ ...outcome, reaction: null, answers: {} }, names)).toBe(
+      "↩︎ Oran · 22 nov. · a vu Oran, Tanger, Lomé",
+    );
+  });
+
+  it("gives each answer as the reader saw it, in the quiz's order", () => {
+    expect(answersInWords(outcome.answers)).toEqual([
+      { question: "Là-bas, vous vous y voyez comment ?", answer: "M'installer pour de bon" },
+      {
+        question: "Dans quelles langues êtes-vous à l'aise au quotidien ?",
+        answer: "Français, Anglais",
+      },
+      { question: "Quel rythme de ville ?", answer: "Animé, sans excès" },
+    ]);
+  });
+
+  it("leaves out what the reader did not answer, and keeps an unknown value as it came", () => {
+    expect(answersInWords({ origin: "", drawnTo: [], pace: 7, mystery: "x" })).toEqual([
+      { question: "Quel rythme de ville ?", answer: "7" },
+      { question: "mystery", answer: "x" },
+    ]);
   });
 });
