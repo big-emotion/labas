@@ -6,6 +6,34 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.29.0] - 2026-11-23
+
+### Added
+
+- After a tap on the first city of a result, the site asks « Vous connaissez … ? Laissez une
+  information utile pour les prochains », with a short animation, and the card's one filled button
+  becomes « Laisser une info utile sur … ».
+- Useful tips need no e-mail any more: the text alone is enough. Four starters (a neighbourhood,
+  the cost of living, a surprise, « J'y vis ») begin the text with one tap. The team reads each
+  one before it goes online and is mailed when one arrives.
+- In the admin, the tips waiting to be read, with « Publier » and « Supprimer ».
+
+### Changed
+
+- The first card of a result: the photo sits right under the city's name, « Pas pour moi » right
+  under the reaction, the full questionnaire becomes a link, and WhatsApp joins the other ways to
+  share. « Y aller » becomes « Comment y aller », at the end of « Voir le détail ».
+- The reviews block is now « Infos utiles sur … », dark and framed in saffron inside the result
+  card.
+- The admin's reactions read as one plain line each, newest first, with the reader's answers in
+  the quiz's own words.
+- The privacy pages say how a tip left without an address is read, kept and removed.
+
+### Fixed
+
+- An empty chip no longer shows under a review whose author gave no profile.
+- The admin's audience tab gives up after 5 seconds and logs why Plausible could not be reached.
+
 ## [0.28.0] - 2026-11-20
 
 ### Added
@@ -642,7 +670,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.24.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.29.0...HEAD
+[0.29.0]: https://github.com/big-emotion/labas/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/big-emotion/labas/compare/v0.27.0...v0.28.0
 [0.27.0]: https://github.com/big-emotion/labas/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/big-emotion/labas/compare/v0.25.0...v0.26.0
