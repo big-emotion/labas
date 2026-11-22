@@ -34,9 +34,9 @@ const COPY = {
     emptyBefore: "Personne n'a encore rien partagé. Vous connaissez",
     emptyAfter: " ? Laissez la première information utile pour les prochains.",
     moreEverywhere: "Voir plus d'avis",
-    more: "Voir plus de réactions",
+    more: "Voir plus d'infos",
     react: "Laisser une info utile",
-    all: "Voir toutes les réactions",
+    all: "Voir toutes les infos",
     openInReviews: "Ouvrir dans l'espace avis",
     yourReaction: "Votre information",
     starters: "Pour commencer",
@@ -79,9 +79,9 @@ const COPY = {
     emptyBefore: "Nobody has shared anything yet. Do you know",
     emptyAfter: "? Leave the first useful word for the next person.",
     moreEverywhere: "See more reviews",
-    more: "See more reactions",
+    more: "See more tips",
     react: "Share something useful",
-    all: "See all reactions",
+    all: "See all tips",
     openInReviews: "Open in the reviews section",
     yourReaction: "What you know",
     starters: "To start",
@@ -358,6 +358,36 @@ const STARTERS: Bilingual<string[]> = {
     border-radius: 20px;
     padding: 18px 16px;
   }
+  /* Inside the first result card it turns dark, framed in saffron (operator, 2026-11-22): a light
+     block there read as another page and pulled the eye from the card's one filled button. The
+     light rules below stay as they are: the block keeps the night tokens of its parent under
+     `--was-*` names, and its children read the light tokens as their dark counterparts. */
+  .reactions.preview {
+    --was-thread: var(--thread);
+    --was-thread-dim: var(--thread-dim);
+    --was-night: var(--night);
+    --was-ink: var(--ink);
+    color-scheme: dark;
+    background: var(--night-deep);
+    color: var(--thread);
+    border: 2px solid var(--saffron);
+  }
+  .reactions.preview > * {
+    --thread: var(--night-deep);
+    --paper: var(--was-night);
+    --ink: var(--was-thread);
+    --night: var(--was-thread);
+    --night-lift: var(--was-thread-dim);
+    --focus: var(--saffron);
+  }
+  /* Dark text stays dark on saffron, whatever the block's surface. */
+  .reactions.preview :is(.react, .send),
+  .reactions.preview :global(:is(.tools .mark[aria-pressed="true"], .top .place, .summary .place)) {
+    color: var(--was-ink);
+  }
+  .reactions.preview :global(:is(.avatar, .summary .temperament)) {
+    background: var(--night-pressed);
+  }
   .reactions[hidden] {
     display: none;
   }
@@ -628,7 +658,8 @@ const STARTERS: Bilingual<string[]> = {
     background: var(--saffron);
     font-size: 0.7rem;
   }
-  .reactions :global(.summary .temperament) {
+  /* :not([hidden]): with no profile the chip stayed on screen, empty. */
+  .reactions :global(.summary .temperament:not([hidden])) {
     display: inline-flex;
     align-items: center;
     height: 26px;

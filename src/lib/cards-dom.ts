@@ -33,7 +33,7 @@ const COPY: Bilingual<{
     percent: (value) => `${value}\u202f%`,
     portraitTitle: (city) => `Pourquoi vous et ${city}`,
     said: (answer) => `Vous avez dit · ${answer}`,
-    reactions: (city) => `Voir les réactions sur ${city}`,
+    reactions: (city) => `Voir les infos utiles sur ${city}`,
     pips: (level) => `${level} sur 5`,
     split: (t, p) => `Façon de vivre <b>${t}</b> · Vie pratique <b>${p}</b>`,
     photo: (author, license) => `Photo : ${author}, ${license}, Wikimedia Commons`,
@@ -45,7 +45,7 @@ const COPY: Bilingual<{
     percent: (value) => `${value}%`,
     portraitTitle: (city) => `Why you and ${city}`,
     said: (answer) => `You said · ${answer}`,
-    reactions: (city) => `See the reactions on ${city}`,
+    reactions: (city) => `See useful tips on ${city}`,
     pips: (level) => `${level} out of 5`,
     split: (t, p) => `Way of living <b>${t}</b> · Practical life <b>${p}</b>`,
     photo: (author, license) => `Photo: ${author}, ${license}, Wikimedia Commons`,
@@ -222,7 +222,9 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
     const invite = card.querySelector(".invite-ask");
     if (invite) invite.textContent = COPY[locale].invite(city.name);
   }
-  card.querySelector(".detail")!.append(detailFor(m, false, locale));
+  // « Y aller » closes the detail rather than standing beside it (operator, 2026-11-22): one
+  // button fewer on the card, and the way there is part of knowing the city.
+  card.querySelector(".detail")!.append(detailFor(m, false, locale), card.querySelector(".go")!);
   return card;
 }
 

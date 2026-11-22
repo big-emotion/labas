@@ -66,9 +66,11 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   the cards only « Pourquoi ces villes ? » (`components/ResultWhy.astro`), folded to its question.
   Inside the first card: the name, its photo, the one-tap reaction with « Pas pour moi » under it;
   once the reader has tapped, « Vous connaissez … ? Laissez une information utile pour les
-  prochains »; then the one block of actions (`components/KeepResults.astro`, placed by
+  prochains », which rises in with a saffron stroke and makes the filled button below pulse; then
+  the one block of actions (`components/KeepResults.astro`, placed by
   `placeHook`): « Laisser une info utile sur … » as the one filled button, share, the e-mail, the
-  full questionnaire as a link, WhatsApp and the rest folded. The goal is a written word on a city
+  full questionnaire as a link, WhatsApp and the rest folded. « Comment y aller » sits inside « Voir
+  le détail ». The reviews block in that card is dark, framed in saffron. The goal is a written word on a city
   for the next reader. No other box asks for anything; cards 2 and 3 keep only their reaction row.
   The temperament and the one news sign-up come after the cities; the sign-up offered during the
   quiz closes when the quiz ends.

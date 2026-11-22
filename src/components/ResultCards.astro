@@ -11,7 +11,7 @@ const COPY: Bilingual<Record<string, string>> = {
     why: "Pourquoi vous",
     against: "Ce qui joue contre elle",
     living: "Si vous y viviez",
-    go: "Y aller",
+    go: "Comment y aller",
     discover: "À découvrir",
     notForMe: "Pas pour moi",
     open: "Voir le détail",
@@ -32,7 +32,7 @@ const COPY: Bilingual<Record<string, string>> = {
     why: "Why you",
     against: "What counts against it",
     living: "If you lived there",
-    go: "Getting there",
+    go: "How to get there",
     discover: "To discover",
     notForMe: "Not for me",
     open: "See the details",
@@ -90,7 +90,9 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
         asked for a useful word; the action block placed right after holds the button. */}
     {reactions && (
       <div class="invite" data-invite hidden>
-        <p class="invite-ask"></p>
+        <p class="invite-line">
+          <span class="invite-ask"></span>
+        </p>
         <p class="invite-why">{copy.inviteWhy}</p>
       </div>
     )}
@@ -517,14 +519,14 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     color: var(--thread-dim);
   }
   .results .go:not([hidden]) {
-    justify-self: start;
     display: inline-flex;
     align-items: center;
     min-height: 48px;
+    margin-top: 12px;
     padding: 0 22px;
     border-radius: 999px;
-    background: var(--saffron);
-    color: var(--ink);
+    border: 2px solid var(--saffron);
+    color: var(--saffron);
     font-weight: 700;
     text-decoration: none;
   }
@@ -539,16 +541,58 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     border-width: 2px;
     border-color: var(--saffron);
   }
+  /* The invitation arrives after a tap (operator, 2026-11-22): it rises in, a saffron stroke runs
+     under the question as if underlined by hand, then the filled button below pulses twice. One
+     sequence, about 2 s, played when the invitation appears; none with reduced motion
+     (global.css). */
   .results .invite:not([hidden]) {
     display: grid;
     gap: 4px;
+    animation: invite-rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
   .results .invite p {
     margin: 0;
   }
-  .results .invite-ask {
+  .results .invite-line {
     font-weight: 800;
     font-size: 1.05rem;
+  }
+  .results .invite-ask {
+    padding-bottom: 2px;
+    background: linear-gradient(var(--saffron), var(--saffron)) left bottom / 100% 3px no-repeat;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    animation: invite-stroke 650ms 300ms cubic-bezier(0.6, 0, 0.2, 1) both;
+  }
+  .results .invite-why {
+    animation: invite-rise 420ms 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .results .card:has(.invite:not([hidden])) [data-hook-review] {
+    animation: invite-call 900ms 900ms ease-out 2;
+  }
+  @keyframes invite-rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  @keyframes invite-stroke {
+    from {
+      background-size: 0% 3px;
+    }
+  }
+  @keyframes invite-call {
+    0% {
+      box-shadow: 0 0 0 0 var(--saffron);
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.03);
+    }
+    100% {
+      box-shadow: 0 0 0 14px transparent;
+      transform: scale(1);
+    }
   }
   .results .invite-why {
     color: var(--thread-dim);

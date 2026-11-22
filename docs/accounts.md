@@ -53,7 +53,9 @@ Decided with the operator on 2026-11-18. Code: the `/api/compte/reactions` route
   purged. Against scripts: the hidden field, the form's own count of how long it was open (under
   3 s it is dropped without saying so) and 5 posts an hour per connection; the operator's reading
   stops what gets through. The road not taken: a CAPTCHA, which would be a third-party embed. A
-  signed-in reader still publishes at once. The server still takes an address and mails the
+  signed-in reader still publishes at once. Each waiting review mails the team (`team`,
+  `reviewToReadEmail`) with its city, its text and the way to /admin; the reader is never written
+  to, and a failing mail service loses nothing since the review is kept first. The server still takes an address and mails the
   publishing link, for pages cached before the change; no form sends one any more.
 - **Back where it was asked.** A link may carry a way back, stored with the token rather than
   written in the URL, and only a path of this site (`backOf`). « Recevoir mon lien de connexion »
