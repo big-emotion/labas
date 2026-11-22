@@ -92,4 +92,15 @@ describe("the audience figures from Plausible", () => {
     const stats = plausibleStats({ ...PLAUSIBLE, fetch: silent, timeout: 20 });
     await expect(stats()).rejects.toThrow(/stats\.exemple\.org.*20 ms/);
   });
+
+  it("names the network cause, which « fetch failed » alone hides", async () => {
+    const refused = (async () => {
+      throw new TypeError("fetch failed", {
+        cause: new Error("connect ECONNREFUSED stats.exemple.org:443"),
+      });
+    }) as typeof globalThis.fetch;
+    await expect(plausibleStats({ ...PLAUSIBLE, fetch: refused })()).rejects.toThrow(
+      /ECONNREFUSED/,
+    );
+  });
 });

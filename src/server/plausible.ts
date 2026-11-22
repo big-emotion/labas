@@ -58,7 +58,10 @@ export function plausibleStats({
       body: JSON.stringify({ site_id: site, ...body }),
       signal: AbortSignal.timeout(timeout),
     }).catch((error: unknown) => {
-      throw new Error(`Plausible at ${host} unreachable (timeout ${timeout} ms): ${String(error)}`);
+      const cause = error instanceof Error && error.cause ? ` (${String(error.cause)})` : "";
+      throw new Error(
+        `Plausible at ${host} unreachable (timeout ${timeout} ms): ${String(error)}${cause}`,
+      );
     });
     if (!response.ok) throw new Error(`Plausible answered ${response.status}`);
     return ((await response.json()) as { results: Row[] }).results;
