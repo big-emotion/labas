@@ -133,6 +133,14 @@ gh secret set PLAUSIBLE_API_KEY --repo big-emotion/labas
 gh variable set PLAUSIBLE_API_HOST --repo big-emotion/labas --body https://stats.ethniafrica.com
 ```
 
+When Plausible runs on the same server, the service cannot reach it through the public address
+(the connection times out, 2026-11-22): name it on the shared `proxy` network instead, and the
+admin's link to the dashboard keeps the public address.
+
+```bash
+gh variable set PLAUSIBLE_INTERNAL_HOST --repo big-emotion/labas --body http://plausible:8000
+```
+
 `PLAUSIBLE_DOMAIN`, already set for the tracking script, names the site to the API. Without
 `ADMIN_EMAILS` the page stays shut for everyone; without the key it shows the reviews and says the
 figures are waiting for it.

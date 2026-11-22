@@ -380,8 +380,13 @@ function start(port: number) {
   if (db && isConfigured(config)) {
     whenReady(() => migrate(db))
       .then(() => {
-        const { PLAUSIBLE_API_KEY, PLAUSIBLE_SITE, PLAUSIBLE_API_HOST, DEEPL_API_KEY } =
-          process.env;
+        const {
+          PLAUSIBLE_API_KEY,
+          PLAUSIBLE_SITE,
+          PLAUSIBLE_API_HOST,
+          PLAUSIBLE_INTERNAL_HOST,
+          DEEPL_API_KEY,
+        } = process.env;
         accounts = createAccounts({
           db,
           mailer,
@@ -395,6 +400,7 @@ function start(port: number) {
             PLAUSIBLE_API_KEY && PLAUSIBLE_SITE && PLAUSIBLE_API_HOST
               ? plausibleStats({
                   host: PLAUSIBLE_API_HOST,
+                  internalHost: PLAUSIBLE_INTERNAL_HOST || undefined,
                   site: PLAUSIBLE_SITE,
                   apiKey: PLAUSIBLE_API_KEY,
                 })
