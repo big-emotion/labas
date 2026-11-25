@@ -75,6 +75,12 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   full questionnaire as a link, WhatsApp and the rest folded. « Comment y aller » sits inside « Voir
   le détail ». The reviews block in that card is dark, framed in saffron. The goal is a written word on a city
   for the next reader. No other box asks for anything; cards 2 and 3 keep only their reaction row.
+  The result shows three, five or ten cities (operator, 2026-11-25; `resultLength` in
+  `lib/ranking.ts`): every city within 90 % of the first one's score, rounded up to the tier, and
+  its title says which (« Trois villes se détachent », « Cinq villes au coude-à-coude », « Dix
+  villes vous ressemblent de près »). Cards 2 and 3 sit side by side, small, until « Voir le
+  détail » opens one across the width; cities 4 to 10 follow as rows (« Tout près derrière »).
+  Mail, share, `quiz_outcomes` and a review's summary stay at three (`TOP_THREE`).
   The temperament and the one news sign-up come after the cities; the sign-up offered during the
   quiz closes when the quiz ends.
 - **One-tap reactions are public counts** (operator, 2026-11-20; `lib/taps.ts`, « taps » in the

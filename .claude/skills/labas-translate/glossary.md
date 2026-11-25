@@ -46,6 +46,7 @@ and change every use in the same commit.
 | Refaire le quiz               | Take the quiz again           |
 | Faire le quiz                 | Take the quiz                 |
 | Voir les villes d'Afrique     | See Africa's cities           |
+| Tout près derrière            | Close behind                  |
 | Raccourcis                    | Shortcuts                     |
 | Pages du site                 | Site pages                    |
 | le quiz                       | the quiz                      |

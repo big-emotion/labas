@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { livableLanguages } from "./cities";
-import { bestMatches, rankCities, topCities, type Answers } from "./ranking";
+import { bestMatches, rankCities, resultLength, topCities, type Answers } from "./ranking";
 import { looksFrench } from "../i18n/looks-french";
 
 function scoreOf(cityName: string, answers: Answers): number {
@@ -816,5 +816,78 @@ describe("ranking the cities for an English reader", () => {
   it("ranks the same way in both languages", () => {
     const names = (locale: "fr" | "en") => rankCities(answers, locale).map((m) => m.city.name);
     expect(names("en")).toEqual(names("fr"));
+  });
+});
+
+// Journeys taken as the quick quiz gave them, chosen with every score well clear of the 90 % line.
+describe("how many cities the result shows (operator, 2026-11-25)", () => {
+  it("shows three when one or two cities stand clear of the rest", () => {
+    const clear = {
+      project: "installer",
+      pace: 0,
+      size: 3,
+      languages: ["fr"],
+      origin: ["sud"],
+      countries: ["Botswana"],
+      landscapes: ["urban"],
+      profession: "student",
+      together: 1,
+      order: 1,
+      saturday: 1,
+      friction: 0.5,
+      reach: "country",
+      faith: "other",
+      priorities: ["career"],
+    } as Answers;
+    expect(resultLength(clear)).toBe(3);
+  });
+
+  it("shows five when four or five cities are neck and neck", () => {
+    const five = {
+      project: "decouvrir",
+      languages: ["sw"],
+      size: 2,
+      pace: 1,
+      season: "jja",
+      wants: ["culture"],
+      order: 0,
+      friction: 1,
+      together: 0,
+      saturday: 0.5,
+      origin: ["ameriques"],
+      reach: "alike",
+      faith: "muslim",
+      priorities: ["safety"],
+    } as Answers;
+    expect(resultLength(five)).toBe(5);
+  });
+
+  it("shows ten when six cities or more are within a tenth of the first", () => {
+    const tight = {
+      project: "installer",
+      order: 0.5,
+      profession: "teaching",
+      languages: ["sw"],
+      landscapes: ["water"],
+      size: 2,
+      pace: 0,
+      saturday: 0.5,
+      together: 0,
+      friction: 0.5,
+      origin: ["centre"],
+      countries: ["Congo"],
+      reach: "region",
+      faith: "christian",
+      priorities: ["career"],
+    } as Answers;
+    expect(resultLength(tight)).toBe(10);
+  });
+
+  it("shows three when nothing has been answered, since nothing separates the cities yet", () => {
+    expect(resultLength({})).toBe(3);
+  });
+
+  it("never shows more than ten, even when the first answers leave dozens of cities level", () => {
+    expect(resultLength({ project: "installer", languages: ["fr"] } as Answers)).toBe(10);
   });
 });

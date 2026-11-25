@@ -39,10 +39,14 @@ const COPY: Bilingual<Record<string, string>> = {
     back: "Question précédente",
     next: "Continuer",
     ready: "C'est prêt.",
-    readyText: "Trois villes vous ressemblent plus que les autres. Découvrez pourquoi.",
+    readyText: "Vos villes sont prêtes. Découvrez pourquoi.",
     reveal: "Voir mes villes",
     results: "Vos villes",
     resultsHint: "Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.",
+    closeStart:
+      "Elles sont très proches les unes des autres. Quelques questions de plus les départageraient :",
+    closeLink: "aller plus loin",
+    near: "Tout près derrière",
     others: "Toutes les autres villes",
     othersHint: "Les 115 villes, triées selon vos réponses.",
     filters: "Filtrer vos villes",
@@ -84,10 +88,13 @@ const COPY: Bilingual<Record<string, string>> = {
     back: "Previous question",
     next: "Continue",
     ready: "It's ready.",
-    readyText: "Three cities are more like you than the others. Find out why.",
+    readyText: "Your cities are ready. Find out why.",
     reveal: "See my cities",
     results: "Your cities",
     resultsHint: "Suggestions, ranked by your answers. Every percentage is explained.",
+    closeStart: "They are very close to one another. A few more questions would separate them:",
+    closeLink: "go deeper",
+    near: "Close behind",
     others: "All the other cities",
     othersHint: "The 115 cities, sorted by your answers.",
     filters: "Filter your cities",
@@ -320,10 +327,17 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           <section class="results" aria-labelledby="results-title" data-print>
             <h2 id="results-title">{copy.results}</h2>
             <p class="hint">{copy.resultsHint}</p>
+            <p class="hint" id="close-hint" hidden>
+              {copy.closeStart} <a href={to("deep")}>{copy.closeLink}</a>
+            </p>
             {/* Little before the first city (operator, 2026-11-19): the explanation folded to
                 its question, and the way to refine cut to its title and link on a phone. */}
             <ResultWhy />
             <div id="cards" class="cards"></div>
+            <section id="near" class="near" aria-labelledby="near-title" hidden>
+              <h3 id="near-title">{copy.near}</h3>
+              <ol id="near-rows" class="rows"></ol>
+            </section>
             <KeepResults further />
             {/* Moved by the script right under the first city's pitch. */}
             <Reactions preview />
@@ -387,7 +401,14 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     <Feedback />
 
     <script>
-      import { rankCities, TOP_THREE, type Answers, type Match } from "../lib/ranking";
+      import {
+        lengthFor,
+        rankCities,
+        TOP_THREE,
+        type Answers,
+        type Match,
+        type ResultLength,
+      } from "../lib/ranking";
       import {
         closenessOf,
         freeQuestions,
@@ -443,6 +464,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         question: (n: number) => string;
         closeness: Record<Closeness, string>;
         ready: string;
+        resultsTitle: Record<ResultLength, string>;
         notForMe: (name: string) => string;
         sheetTitle: (name: string) => string;
         putBack: (name: string) => string;
@@ -463,6 +485,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             almost: "presque trouvé",
           },
           ready: "C'est prêt",
+          resultsTitle: {
+            3: "Trois villes se détachent",
+            5: "Cinq villes au coude-à-coude",
+            10: "Dix villes vous ressemblent de près",
+          },
           notForMe: (name) => `${name}, pas pour moi`,
           sheetTitle: (name) => `${name} ne vous tente pas ?`,
           putBack: (name) => `Remettre ${name}`,
@@ -478,6 +505,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           question: (n) => `question ${n}`,
           closeness: { searching: "searching", closer: "getting closer", almost: "almost there" },
           ready: "It's ready",
+          resultsTitle: {
+            3: "Three cities stand out",
+            5: "Five cities neck and neck",
+            10: "Ten cities very much like you",
+          },
           notForMe: (name) => `${name}, not for me`,
           sheetTitle: (name) => `Not tempted by ${name}?`,
           putBack: (name) => `Put back ${name}`,
@@ -587,7 +619,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const ranked = rankCities(current, locale);
         // Filters only remove cities; the order stays the score's.
         const kept = applyFilters(ranked, filtersFrom(picked));
-        const matches = kept.filter((m) => !m.excludedBecause).slice(0, TOP_THREE);
+        // Three, five or ten cities, as close as the results are (operator, 2026-11-25): the
+        // first three keep their cards, the others follow as rows. Mail, share and the journey
+        // sent with a reaction stay at three.
+        const offered = kept.filter((m) => !m.excludedBecause);
+        const length = lengthFor(offered);
+        const matches = offered.slice(0, TOP_THREE);
+        const near = offered.slice(TOP_THREE, length);
         onScreen = matches;
         // A city set aside (« Pas pour moi ») goes dark on the map like one never scored.
         const scores = new Map(
@@ -605,7 +643,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         (document.getElementById("legend") as HTMLElement).textContent = missing
           ? copy.waiting(CITIES_COUNT)
           : leadersTitle;
-        renderLeaders(missing ? [] : matches);
+        // « En tête pour l'instant » names up to five, so the phone's side list stays short.
+        renderLeaders(missing ? [] : offered.slice(0, Math.min(length, 5)));
         renderLeftOut();
 
         showProfile(current, locale);
@@ -629,8 +668,16 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         if (revealed)
           void showCounts(matches.slice(1).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
 
+        (document.getElementById("results-title") as HTMLElement).textContent =
+          copy.resultsTitle[length];
+        (document.getElementById("close-hint") as HTMLElement).hidden = length === TOP_THREE;
+        (document.getElementById("near") as HTMLElement).hidden = near.length === 0;
+        (document.getElementById("near-rows") as HTMLElement).replaceChildren(
+          ...near.map((m, i) => rowFor(m, i + TOP_THREE + 1, locale)),
+        );
+
         // Every other city, in score order; conflict zones keep their place, greyed.
-        const shown = new Set(matches.map((m) => m.city.name));
+        const shown = new Set(offered.slice(0, length).map((m) => m.city.name));
         const rest = kept.filter((m) => !shown.has(m.city.name));
         const removed = ranked.length - kept.length;
         (document.getElementById("filter-note") as HTMLElement).textContent = removed
@@ -641,7 +688,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           : copy.all;
         const visible = showAll ? rest : rest.slice(0, VISIBLE_ROWS);
         (document.getElementById("rows") as HTMLElement).replaceChildren(
-          ...visible.map((m, i) => rowFor(m, i + 4, locale)),
+          ...visible.map((m, i) => rowFor(m, i + shown.size + 1, locale)),
         );
         (document.getElementById("more") as HTMLElement).hidden = showAll;
         placePreview();

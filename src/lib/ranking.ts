@@ -1150,3 +1150,29 @@ export function bestMatches(answers: Answers, count: number, locale: Locale = "f
     .filter((m) => !m.excludedBecause)
     .slice(0, count);
 }
+
+/**
+ * A city within this share of the first one's score is as near as the first (operator,
+ * 2026-11-25): close results are shown together rather than cut at three.
+ */
+const AS_NEAR = 0.9;
+/** The lengths a result can take: a short list reads as a verdict, a long one as a shortlist. */
+const LENGTHS = [3, 5, 10] as const;
+export type ResultLength = (typeof LENGTHS)[number];
+
+/**
+ * How many cities the result shows: three, five or ten, the shortest that holds every city as
+ * near as the first. On a simulation of 80 journeys (2026-11-25) about a third ended on three,
+ * a fifth on five, half on ten. With nothing answered nothing separates the cities: three.
+ */
+export function resultLength(answers: Answers): ResultLength {
+  return lengthFor(bestMatches(answers, LENGTHS[LENGTHS.length - 1]));
+}
+
+/** The same rule on cities already offered in order, once the page's filters have run. */
+export function lengthFor(offered: Match[]): ResultLength {
+  const leader = offered[0]?.score ?? 0;
+  if (leader === 0) return LENGTHS[0];
+  const near = offered.filter((m) => m.score >= leader * AS_NEAR).length;
+  return LENGTHS.find((length) => near <= length) ?? LENGTHS[LENGTHS.length - 1];
+}
