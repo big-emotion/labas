@@ -50,7 +50,7 @@
     "sharp": "^0.35.5",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.1"
   },
   "description": "Là-bas: find the African city that resembles you."
 }
