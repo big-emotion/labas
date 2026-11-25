@@ -18,8 +18,11 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   until it is translated. Run the `labas-translate` skill on every text change.
 - **Mobile first**: design and check at 430 px, then 768, then 1440. Every tap must visibly
   change something: from the third answer the map colours every city by its score and names
-  the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The free
-  quiz opens on the project alone (operator, 2026-11-20; the languages and the family's origin
+  the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The home
+  screen asks for one tap first (operator, 2026-11-26, mockup A3: 68 % of visitors used to leave
+  without answering): a big « Faire le quiz » centred under the map while cities light up, and
+  « Voir les villes d'Afrique » below; `homeEvent` counts which door is taken. The free
+  quiz then opens on the project alone (operator, 2026-11-20; the languages and the family's origin
   are asked along the way); then, themes mixed, a follow-up comes right after its question and
   each answer picks the next question, one of those most likely to change the top three, at
   random among the questions as good as each other so that no two readers meet the same order;

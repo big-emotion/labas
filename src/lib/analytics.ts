@@ -66,6 +66,8 @@ export const GOALS = [
   "Pas pour moi",
   "Pas pour moi annulé",
   "Réaction rapide",
+  "Quiz commencé",
+  "Villes depuis l'accueil",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -209,4 +211,17 @@ export function tapEvent(place: TapPlace, city: string, kind: TapKind | null): T
     name: "Réaction rapide",
     props: { lieu: TAP_PLACES[place], ville: city, avis: kind ? TAP_ANSWERS[kind] : "Retirée" },
   };
+}
+
+/**
+ * The home screen's two ways in (operator, 2026-11-26, mockup A3): 68 % of visitors left before
+ * the first answer, so the screen asks for one tap first and measures which door it opens. No
+ * props: the tap carries nothing about the reader.
+ */
+export interface HomeEvent {
+  name: "Quiz commencé" | "Villes depuis l'accueil";
+}
+
+export function homeEvent(door: "quiz" | "cities"): HomeEvent {
+  return { name: door === "quiz" ? "Quiz commencé" : "Villes depuis l'accueil" };
 }

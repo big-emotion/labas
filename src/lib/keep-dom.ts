@@ -6,6 +6,7 @@ import type {
   ShareEvent,
   SiteEvent,
   TapEvent,
+  HomeEvent,
 } from "./analytics";
 import { type Network, networkShare, networkText, shareEvent } from "./networks";
 import { type JourneyKind, resultsMailBody } from "./account";
@@ -71,7 +72,14 @@ declare global {
 
 export function track(
   event:
-    SiteEvent | AnswerEvent | ReactionEvent | ShareEvent | MessageEvent | NotForMeEvent | TapEvent,
+    | SiteEvent
+    | AnswerEvent
+    | ReactionEvent
+    | ShareEvent
+    | MessageEvent
+    | NotForMeEvent
+    | TapEvent
+    | HomeEvent,
 ): void {
   window.plausible?.(event.name, "props" in event ? { props: event.props } : undefined);
 }

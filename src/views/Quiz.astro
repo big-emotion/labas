@@ -66,6 +66,10 @@ const COPY: Bilingual<Record<string, string>> = {
     leftOut: "En moins :",
     undo: "Annuler",
     leaders: "En tête pour l'instant",
+    waitingCities: "villes attendent votre première réponse",
+    start: "Faire le quiz",
+    startNote: "Quelques minutes · sans inscription · on peut s'arrêter quand on veut",
+    seeCities: "Voir les villes d'Afrique",
   },
   en: {
     question: "Which African city is most like you?",
@@ -106,6 +110,10 @@ const COPY: Bilingual<Record<string, string>> = {
     leftOut: "Left out:",
     undo: "Undo",
     leaders: "Leading for now",
+    waitingCities: "cities are waiting for your first answer",
+    start: "Take the quiz",
+    startNote: "A few minutes · no sign-up · stop whenever you like",
+    seeCities: "See Africa's cities",
   },
 };
 const copy = COPY[locale];
@@ -142,7 +150,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
     <script type="application/ld+json" is:inline set:html={website} />
     <Analytics />
   </head>
-  <body>
+  <body class="intro">
     <div class="shell">
       <aside class="side">
         <div class="brand">
@@ -214,6 +222,30 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       </aside>
 
       <main class="main">
+        <section id="intro" class="intro-screen">
+          <p class="intro-count">
+            {CITIES.length} {copy.waitingCities}
+          </p>
+          <button type="button" id="intro-start" class="intro-start">
+            {copy.start}
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.6"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+          </button>
+          <p class="intro-note">{copy.startNote}</p>
+          <a id="intro-cities" class="intro-cities" href={to("cities")}>
+            {copy.seeCities}
+          </a>
+        </section>
         <div class="progress">
           <span id="stitches" class="stitches" aria-hidden="true"></span>
           <p id="counter" class="counter"></p>
@@ -379,6 +411,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       import {
         answerEvent,
         finishedEvent,
+        homeEvent,
         notForMeEvent,
         type NotForMePlace,
       } from "../lib/analytics";
@@ -914,6 +947,17 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       sheet.addEventListener("click", (event) => {
         if (event.target === sheet) sheet.close();
       });
+
+      // The home screen asks for one tap before the first question (operator, 2026-11-26,
+      // mockup A3): 68 % of visitors used to leave without answering anything.
+      document.getElementById("intro-start")!.addEventListener("click", () => {
+        document.body.classList.remove("intro");
+        track(homeEvent("quiz"));
+        fieldsets.get("project")?.querySelector<HTMLElement>(".chip")?.focus();
+      });
+      document
+        .getElementById("intro-cities")!
+        .addEventListener("click", () => track(homeEvent("cities")));
 
       showQuestion("project");
     </script>
@@ -1559,6 +1603,141 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         display: grid;
         gap: 6px;
         font-size: 0.82rem;
+      }
+
+      /* The home screen (operator, 2026-11-26, mockup A3): one big tap centred under the map,
+         cities lighting up while it waits. The quiz itself stays hidden until that tap. */
+      .intro-screen {
+        display: none;
+      }
+      :global(body.intro) .intro-screen {
+        display: grid;
+        gap: 14px;
+        justify-items: stretch;
+        text-align: center;
+      }
+      :global(body.intro) .progress,
+      :global(body.intro) .questions,
+      :global(body.intro) :global(.save-later) {
+        display: none;
+      }
+      .intro-count {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 800;
+      }
+      .intro-start {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        min-height: 88px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--saffron);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 1.65rem;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 10px 36px var(--night-deep);
+      }
+      .intro-start:hover {
+        filter: brightness(1.06);
+      }
+      /* A sheen crosses the button every few seconds; gone when motion is reduced. */
+      .intro-start::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 30%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          color-mix(in srgb, var(--paper) 55%, transparent),
+          transparent
+        );
+        animation: sheen 2.8s ease-in-out infinite;
+      }
+      @keyframes sheen {
+        from {
+          transform: translateX(-120%) skewX(-20deg);
+        }
+        60%,
+        to {
+          transform: translateX(380%) skewX(-20deg);
+        }
+      }
+      .intro-note {
+        margin: 0;
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+      }
+      .intro-cities {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 48px;
+        border-radius: 14px;
+        background: var(--night-deep);
+        color: var(--thread);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .intro-cities:hover {
+        background: var(--night-lift);
+      }
+      /* Every fifth city lights up in turn: transform, not r, so Safari animates it too. */
+      :global(body.intro) .map :global(.dot:nth-of-type(5n + 1)) {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: twinkle 3.5s ease-in-out infinite;
+      }
+      :global(body.intro) .map :global(.dot:nth-of-type(10n + 6)) {
+        animation-delay: 1.2s;
+      }
+      :global(body.intro) .map :global(.dot:nth-of-type(15n + 11)) {
+        animation-delay: 2.3s;
+      }
+      @keyframes twinkle {
+        0%,
+        70%,
+        100% {
+          transform: scale(1);
+        }
+        80% {
+          transform: scale(3);
+          fill: var(--saffron);
+          opacity: 1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .intro-start::after {
+          display: none;
+        }
+      }
+      /* On the phone the map grows back to full width, and the lead gives way so the button
+         sits mid-screen. */
+      @media (max-width: 879px) {
+        :global(body.intro) .maprow {
+          display: block;
+        }
+        :global(body.intro) .map-side,
+        :global(body.intro) .lead {
+          display: none;
+        }
+        :global(body.intro) .map svg {
+          max-height: 40vh;
+        }
+      }
+      /* On a computer the map stays beside it, and the button is centred in its column. */
+      @media (min-width: 880px) {
+        :global(body.intro) .intro-screen {
+          min-height: 60vh;
+          align-content: center;
+        }
       }
     </style>
   </body>
