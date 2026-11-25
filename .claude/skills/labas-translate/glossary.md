@@ -44,6 +44,8 @@ and change every use in the same commit.
 | Mentions légales              | Legal notice                  |
 | Confidentialité               | Privacy                       |
 | Refaire le quiz               | Take the quiz again           |
+| Faire le quiz                 | Take the quiz                 |
+| Voir les villes d'Afrique     | See Africa's cities           |
 | Raccourcis                    | Shortcuts                     |
 | Pages du site                 | Site pages                    |
 | le quiz                       | the quiz                      |
