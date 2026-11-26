@@ -2,7 +2,16 @@ import { describe, expect, it } from "vitest";
 import { GOALS, finishedEvent } from "./analytics";
 import { nextQuestion } from "./adaptive";
 import { DEEP_QUESTIONS } from "./deep-questions";
-import { loadAnswers, mailtoFor, saveAnswers, withoutSensitive } from "./keep";
+import {
+  canShowResultAgain,
+  forgetAnswers,
+  forgetResult,
+  loadAnswers,
+  mailtoFor,
+  rememberResult,
+  saveAnswers,
+  withoutSensitive,
+} from "./keep";
 import { shareText } from "./shared-result";
 import { bestMatches, type Answers } from "./ranking";
 
@@ -93,5 +102,41 @@ describe("the audience funnel", () => {
   it("names only goals declared in Plausible", () => {
     for (const name of ["Questionnaire 1 terminé", "Questionnaire complet terminé"] as const)
       expect(GOALS).toContain(finishedEvent(name, "installer").name);
+  });
+});
+
+describe("a reader who left the result can see it again", () => {
+  // Reader feedback, 2026-11-26: a button at the end of the quiz took them off the page.
+  it("has nothing to go back to before the result has been shown", () => {
+    const storage = memoryStorage();
+    saveAnswers(storage, QUICK);
+    expect(canShowResultAgain(storage)).toBe(false);
+  });
+
+  it("finds it again once it has been shown, from the answers kept", () => {
+    const storage = memoryStorage();
+    saveAnswers(storage, QUICK);
+    rememberResult(storage);
+    expect(canShowResultAgain(storage)).toBe(true);
+  });
+
+  it("loses it when the reader starts the quiz over", () => {
+    const storage = memoryStorage();
+    saveAnswers(storage, QUICK);
+    rememberResult(storage);
+    forgetResult(storage);
+    expect(canShowResultAgain(storage)).toBe(false);
+  });
+
+  it("loses it when the answers are erased", () => {
+    const storage = memoryStorage();
+    saveAnswers(storage, QUICK);
+    rememberResult(storage);
+    forgetAnswers(storage);
+    expect(canShowResultAgain(storage)).toBe(false);
+  });
+
+  it("offers nothing when the browser keeps nothing", () => {
+    expect(canShowResultAgain(undefined)).toBe(false);
   });
 });

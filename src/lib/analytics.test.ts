@@ -186,11 +186,13 @@ describe("the event sent from the home screen", () => {
   it("counts who starts the quiz and who goes to the cities instead, with nothing else", () => {
     expect(homeEvent("quiz")).toEqual({ name: "Quiz commencé" });
     expect(homeEvent("cities")).toEqual({ name: "Villes depuis l'accueil" });
+    expect(homeEvent("result")).toEqual({ name: "Résultat revu" });
   });
 
   it("is declared as a goal, or the dashboard would never show it", () => {
     expect(GOALS).toContain(homeEvent("quiz").name);
     expect(GOALS).toContain(homeEvent("cities").name);
+    expect(GOALS).toContain(homeEvent("result").name);
   });
 });
 

@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
-import { leftOut, restore, setAside, setAsideChoices, setAsideNotice } from "./not-for-me";
+import {
+  leftOut,
+  placesAsideIn,
+  restore,
+  setAside,
+  setAsideChoices,
+  setAsideNotice,
+} from "./not-for-me";
 import { bestMatches, type Answers } from "./ranking";
 
 const oran = CITIES.find((c) => c.name === "Oran")!;
@@ -56,5 +63,20 @@ describe("the places left out", () => {
     const back = restore(answers, { level: "region", value: "nord" });
     expect(back).toEqual({ ...base, avoidCities: ["Oran"] });
     expect(bestMatches(back, 115).some((m) => m.city.name === "Tunis")).toBe(true);
+  });
+});
+
+describe("the places left out, read back from the answers kept", () => {
+  it("keeps the cities, countries and regions set aside and nothing else", () => {
+    const dakar = CITIES.find((c) => c.name === "Dakar")!;
+    const answers = setAside(
+      setAside({ project: "installer" } as Answers, dakar, "city"),
+      dakar,
+      "region",
+    );
+    expect(placesAsideIn(answers)).toEqual({
+      avoidCities: ["Dakar"],
+      avoidRegions: [dakar.zone],
+    });
   });
 });

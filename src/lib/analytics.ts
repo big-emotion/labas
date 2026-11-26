@@ -68,6 +68,7 @@ export const GOALS = [
   "Réaction rapide",
   "Quiz commencé",
   "Villes depuis l'accueil",
+  "Résultat revu",
   "Villes vues avant la fin",
 ] as const;
 export type Goal = (typeof GOALS)[number];
@@ -215,16 +216,23 @@ export function tapEvent(place: TapPlace, city: string, kind: TapKind | null): T
 }
 
 /**
- * The home screen's two ways in (operator, 2026-11-26, mockup A3): 68 % of visitors left before
- * the first answer, so the screen asks for one tap first and measures which door it opens. No
- * props: the tap carries nothing about the reader.
+ * The home screen's ways in (operator, 2026-11-26, mockup A3): 68 % of visitors left before
+ * the first answer, so the screen asks for one tap first and measures which door it opens; a
+ * reader back from a link of the result opens a third, their result again. No props: the tap
+ * carries nothing about the reader.
  */
+const DOORS = {
+  quiz: "Quiz commencé",
+  cities: "Villes depuis l'accueil",
+  result: "Résultat revu",
+} as const;
+
 export interface HomeEvent {
-  name: "Quiz commencé" | "Villes depuis l'accueil";
+  name: (typeof DOORS)[keyof typeof DOORS];
 }
 
-export function homeEvent(door: "quiz" | "cities"): HomeEvent {
-  return { name: door === "quiz" ? "Quiz commencé" : "Villes depuis l'accueil" };
+export function homeEvent(door: keyof typeof DOORS): HomeEvent {
+  return { name: DOORS[door] };
 }
 
 /**

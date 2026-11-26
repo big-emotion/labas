@@ -94,6 +94,13 @@ export function restore(answers: Answers, place: Pick<LeftOutPlace, "level" | "v
   return next;
 }
 
+/** The places set aside among the answers kept, to put them back when a result shows again. */
+export function placesAsideIn(answers: Answers): Answers {
+  const places: Record<string, unknown> = {};
+  for (const key of Object.values(KEY)) if (answers[key]) places[key] = answers[key];
+  return places as Answers;
+}
+
 /** What the reader has set aside, cities first, so the row reads from the smallest to the widest. */
 export function leftOut(answers: Answers, locale: Locale): LeftOutPlace[] {
   return (["city", "country", "region"] as const).flatMap((level) =>
