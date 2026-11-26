@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "id": "2026-11-26-dakar-1",
+    "city": "dakar",
+    "received": "2026-11-26",
+    "experienced": "2026-11",
+    "medium": "screenshot",
+    "context": "Public post on a professional network, written the week after the trip",
+    "url": null,
+    "witness": "Visitor from Côte d'Ivoire, short stay, length not given",
+    "claims": [
+      {
+        "about": "cost",
+        "leans": "same",
+        "says": "Paid 35,000 FCFA for a ride-hailing trip from Les Almadies to the airport and found the city expensive, advising business travellers to budget generously for transport. No rent or other daily price given; the fare sits at the top of the 20,000 to 30,000 FCFA the site already documents for that run."
+      },
+      {
+        "about": "negotiation",
+        "leans": "same",
+        "says": "Prices can still go up once you are known to be a foreigner; ride-hailing apps were meant to make them clearer."
+      },
+      {
+        "about": "uncovered",
+        "topic": "mobile-money",
+        "says": "In Senegal, phone credit from one operator can be bought directly inside a competing mobile-money app, so one app is enough for a top-up."
+      },
+      {
+        "about": "uncovered",
+        "topic": "cross-border-transfer-fees",
+        "says": "Sending money from a Côte d'Ivoire wallet to a Senegal wallet of the same mobile-money app cost 1.5 % plus a 0.5 % tax on arrival: 2,000 FCFA on 100,000 FCFA sent, despite the shared currency."
+      }
+    ]
+  }
+]
