@@ -38,7 +38,7 @@ describe("the regions the reader does not want to live in", () => {
 
 // Coherent paths per project (operator, 2026-11-16).
 const PROJECTS = ["installer", "pied", "tester", "investir", "decouvrir"] as const;
-const question = (id: string): Question => QUESTIONS.find((q) => q.id === id)!;
+const question = (id: string): Question => DEEP_QUESTIONS.find((q) => q.id === id)!;
 
 /** Plays the quick quiz, taking the visible choice at `pick`, as a reader would. */
 function play(project: (typeof PROJECTS)[number], pick: number, overrides: Answers = {}) {
@@ -202,12 +202,16 @@ describe("going back and changing an answer", () => {
   // Operator, 2026-11-16: the questions that move the top five least go to the full
   // questionnaire, so the quick quiz stays quick; they are still asked there, where they fit.
   // The family's country and the faith came back to the quick quiz on 2026-11-20.
-  it("keeps the questions that move the result least for the full questionnaire", () => {
-    const moved = ["budget", "passports", "duration", "tripsHome"];
-    for (const project of PROJECTS)
-      for (const pick of [0, 1, 2])
-        for (const id of moved)
-          expect(play(project, pick).asked, `${project} ${id}`).not.toContain(id);
+  // Operator, 2026-11-26: the practical questions enter the quick quiz, their data being filled
+  // city by city; like any other, each is asked only when it can change the list.
+  it("offers the practical questions in the quick quiz to the readers they concern", () => {
+    const offered = (answers: Answers) => freeQuestions(answers).map((q) => q.id);
+    expect(offered({ project: "installer" })).toEqual(
+      expect.arrayContaining(["budget", "setupBudget", "passports", "tripsHome"]),
+    );
+    expect(offered({ project: "decouvrir" })).toEqual(
+      expect.arrayContaining(["duration", "passports", "visaFreeOnly"]),
+    );
     const deep = (answers: Answers) => {
       const asked = Object.keys(answers);
       const seen: string[] = [];

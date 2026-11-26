@@ -15,7 +15,8 @@ import Feedback from "../components/Feedback.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import { SITE, siteDescription } from "../lib/share";
 import { CITIES } from "../lib/cities";
-import { QUESTIONS, questionIn } from "../lib/questions";
+import { questionIn } from "../lib/questions";
+import { QUICK_QUESTIONS } from "../lib/deep-questions";
 import { filterMenu } from "../lib/filters";
 import { MAP_HEIGHT, MAP_WIDTH, project } from "../lib/map";
 import borders from "../data/africa-borders.json";
@@ -41,6 +42,9 @@ const COPY: Bilingual<Record<string, string>> = {
     ready: "C'est prêt.",
     readyText: "Vos villes sont prêtes. Découvrez pourquoi.",
     reveal: "Voir mes villes",
+    earlyText:
+      "Vos villes sont déjà prêtes. Encore quelques questions pour départager les plus proches.",
+    early: "Voir mes villes maintenant",
     results: "Vos villes",
     resultsHint: "Des propositions, classées selon vos réponses. Chaque pourcentage est expliqué.",
     closeStart:
@@ -90,6 +94,8 @@ const COPY: Bilingual<Record<string, string>> = {
     ready: "It's ready.",
     readyText: "Your cities are ready. Find out why.",
     reveal: "See my cities",
+    earlyText: "Your cities are ready already. A few more questions to separate the closest ones.",
+    early: "See my cities now",
     results: "Your cities",
     resultsHint: "Suggestions, ranked by your answers. Every percentage is explained.",
     closeStart: "They are very close to one another. A few more questions would separate them:",
@@ -125,7 +131,7 @@ const COPY: Bilingual<Record<string, string>> = {
 };
 const copy = COPY[locale];
 const to = (route: Parameters<typeof pathFor>[0]) => pathFor(route, locale);
-const questions = QUESTIONS.map((question) => questionIn(question, locale));
+const questions = QUICK_QUESTIONS.map((question) => questionIn(question, locale));
 const menu = filterMenu(locale);
 
 const dots = CITIES.map((city) => ({
@@ -299,6 +305,14 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
               </div>
             </fieldset>
           ))}
+          {/* Once the top three can no longer move (operator, 2026-11-25): the quiz goes on to
+              order the cities behind, and the reader may stop here. */}
+          <div id="early" class="early" hidden>
+            <p>{copy.earlyText}</p>
+            <button type="button" id="early-reveal" class="early-button">
+              {copy.early}
+            </button>
+          </div>
           <div id="ready" class="ready" hidden>
             <h2>{copy.ready}</h2>
             <p>{copy.readyText}</p>
@@ -412,14 +426,17 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       import {
         closenessOf,
         freeQuestions,
+        MAX_QUESTIONS,
         nextFreeQuestion,
+        topThreeSettled,
         type Closeness,
       } from "../lib/adaptive";
+      import { QUICK_QUESTIONS } from "../lib/deep-questions";
       import { showProfile } from "../lib/profile-dom";
       import { cardFor, rowFor } from "../lib/cards-dom";
       import { wireTaps } from "../lib/taps-dom";
       import { placeHook, showWhy } from "../lib/why-dom";
-      import { chapterName, keepInPath, QUESTIONS } from "../lib/questions";
+      import { chapterName, keepInBank } from "../lib/questions";
       import { syncChoices } from "../lib/choices-dom";
       import {
         applyFilters,
@@ -431,6 +448,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       import { answersBeforeLight, dotTier, placeLabels } from "../lib/map";
       import {
         answerEvent,
+        earlyEvent,
         finishedEvent,
         homeEvent,
         notForMeEvent,
@@ -536,8 +554,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           else pressed[id] = picked[0];
         }
         // The places set aside are not a question on screen: they ride along with the answers.
-        const kept = { ...keepInPath(pressed as Answers), ...placesAside };
-        syncChoices(QUESTIONS, kept, form);
+        const kept = { ...keepInBank(QUICK_QUESTIONS, pressed as Answers), ...placesAside };
+        syncChoices(QUICK_QUESTIONS, kept, form);
         for (const key of Object.keys(answers)) delete answers[key];
         Object.assign(answers, kept);
         return kept;
@@ -843,11 +861,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         // with children…); readAnswers releases the rest.
         readAnswers();
         (document.getElementById("ready") as HTMLElement).hidden = id !== undefined;
+        (document.getElementById("early") as HTMLElement).hidden =
+          id === undefined || !topThreeSettled(readAnswers(), asked);
         // « Votre tempérament · question 7 »: no total, since the quiz ends once no question can
         // change the top three (adaptive.ts). The stitches count the questions it may still ask,
         // and all fill up when it ends.
-        const list = freeQuestions(readAnswers());
-        const question = QUESTIONS.find((q) => q.id === id);
+        const list = freeQuestions(readAnswers()).slice(0, MAX_QUESTIONS);
+        const question = QUICK_QUESTIONS.find((q) => q.id === id);
         (document.getElementById("counter") as HTMLElement).innerHTML = question
           ? `<b>${chapterName(question, readAnswers(), locale)}</b> · ${copy.question(asked.length + 1)} · ${copy.closeness[closenessOf(readAnswers(), asked)]}`
           : `<b>${copy.ready}</b>`;
@@ -931,6 +951,12 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           clearTimeout(timer);
           timer = setTimeout(advance, 500);
         }
+      });
+
+      document.getElementById("early-reveal")!.addEventListener("click", () => {
+        track(earlyEvent(asked.length + 1));
+        showQuestion(undefined);
+        document.getElementById("reveal")!.click();
       });
 
       document.getElementById("reveal")!.addEventListener("click", () => {
@@ -1785,6 +1811,33 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           min-height: 60vh;
           align-content: center;
         }
+      }
+
+      /* « Voir mes villes maintenant »: a quiet way out, under the question (mockup, 2026-11-25). */
+      .early {
+        display: grid;
+        gap: 10px;
+        border-top: 1px solid var(--night-lift);
+        padding-top: 16px;
+      }
+      .early[hidden] {
+        display: none;
+      }
+      .early p {
+        margin: 0;
+        color: var(--thread-dim);
+        font-size: 0.92rem;
+      }
+      .early-button {
+        min-height: 52px;
+        border-radius: 14px;
+        border: 2px solid var(--saffron);
+        background: transparent;
+        color: var(--saffron);
+        font-family: var(--font-body);
+        font-size: 1.05rem;
+        font-weight: 800;
+        cursor: pointer;
       }
     </style>
   </body>

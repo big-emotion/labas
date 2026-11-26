@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { closenessOf, freeQuestions, nextFreeQuestion, nextQuestion } from "./adaptive";
+import {
+  closenessOf,
+  freeQuestions,
+  MAX_QUESTIONS,
+  nextFreeQuestion,
+  nextQuestion,
+  topThreeSettled,
+} from "./adaptive";
 import { CHAPTER, QUESTIONS } from "./questions";
-import { topCities, type Answers } from "./ranking";
+import { resultLength, topCities, type Answers } from "./ranking";
 
 /** Answered already in the test that checks the choice of the next question. */
 const ANSWERED = ["project", "languages", "origin"];
@@ -37,7 +44,7 @@ describe("the quick quiz, one question at a time", () => {
     const answers: Record<string, unknown> = {};
     const asked: string[] = [];
     for (let id = nextFreeQuestion({}, []); id; id = nextFreeQuestion(answers as Answers, asked)) {
-      const question = QUESTIONS.find((q) => q.id === id)!;
+      const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
       const offered = question.choices.filter((c) => c.value !== null);
       const choice = offered[pick % offered.length];
       answers[id] = question.max ? [choice.value] : choice.value;
@@ -98,7 +105,7 @@ describe("the quick quiz, one question at a time", () => {
     const asked = [...ANSWERED];
     const before = new Set(topCities(answers, 3));
     const moved = (id: string) => {
-      const question = QUESTIONS.find((q) => q.id === id)!;
+      const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
       const offered = question.choices.filter((c) => c.value !== null);
       const counts = offered.map((c) => {
         const tried = { ...answers, [id]: question.max ? [c.value] : c.value } as Answers;
@@ -111,37 +118,6 @@ describe("the quick quiz, one question at a time", () => {
     );
     const best = Math.max(...open.map((q) => moved(q.id)));
     expect(moved(nextFreeQuestion(answers, asked)!)).toBe(best);
-  });
-
-  it("never asks a question that could not change the top three", () => {
-    for (const pick of [0, 1, 2, 3]) {
-      const answers: Record<string, unknown> = {};
-      const asked: string[] = [];
-      for (
-        let id = nextFreeQuestion({}, []);
-        id;
-        id = nextFreeQuestion(answers as Answers, asked)
-      ) {
-        const question = QUESTIONS.find((q) => q.id === id)!;
-        const offered = question.choices.filter((c) => c.value !== null);
-        // The temperament chapter is always asked in full (see the next test).
-        const temperament = question.group === CHAPTER.temperament;
-        if (asked.length >= 3 && !question.after && id !== "priorities" && !temperament) {
-          const before = topCities(answers as Answers, 3).join();
-          const changes = offered.some(
-            (c) =>
-              topCities(
-                { ...answers, [id]: question.max ? [c.value] : c.value } as Answers,
-                3,
-              ).join() !== before,
-          );
-          expect(changes, `${pick} ${id}`).toBe(true);
-        }
-        const choice = offered[pick % offered.length];
-        answers[id] = question.max ? [choice.value] : choice.value;
-        asked.push(id);
-      }
-    }
   });
 
   // Operator, 2026-11-20: a reader who named the family's country and said it mattered a lot had
@@ -157,7 +133,7 @@ describe("the quick quiz, one question at a time", () => {
     const answers: Record<string, unknown> = { ...settled };
     const asked = Object.keys(settled);
     for (let id = nextFreeQuestion(answers as Answers, asked); id;) {
-      const question = QUESTIONS.find((q) => q.id === id)!;
+      const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
       const choice = question.choices.filter((c) => c.value !== null)[0];
       answers[id] = question.max ? [choice.value] : choice.value;
       asked.push(id);
@@ -284,5 +260,90 @@ describe("a path that fits the project", () => {
           ids({ project, origin: [null] } as unknown as Answers),
           `${project} ${id}`,
         ).toContain(id);
+  });
+});
+
+// Operator, 2026-11-25: a longer quick quiz that draws from the whole questionnaire until the
+// list it shows is settled, the full questionnaire being rarely opened (9 of 171 readers).
+describe("the longer quick quiz", () => {
+  const FILTERS = [
+    "avoidRegions",
+    "languageOnly",
+    "schoolCurriculum",
+    "specialistCare",
+    "excludeCriminalising",
+  ];
+  function play(pick: number) {
+    const answers: Record<string, unknown> = {};
+    const asked: string[] = [];
+    const settledAt: number[] = [];
+    for (let id = nextFreeQuestion({}, []); id; id = nextFreeQuestion(answers as Answers, asked)) {
+      const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
+      const offered = question.choices.filter((c) => c.value !== null);
+      const choice = offered[pick % offered.length];
+      answers[id] = question.max ? [choice.value] : choice.value;
+      asked.push(id);
+      if (topThreeSettled(answers as Answers, asked)) settledAt.push(asked.length);
+    }
+    return { answers: answers as Answers, asked, settledAt };
+  }
+  const plays = [0, 1, 2, 3].map(play);
+
+  it("draws from the full questionnaire, not only the quick one", () => {
+    const quick = new Set<string>(QUESTIONS.map((q) => q.id));
+    expect(plays.some(({ asked }) => asked.some((id) => !quick.has(id)))).toBe(true);
+  });
+
+  it("never asks a filter that takes cities off the list", () => {
+    for (const { asked } of plays) for (const id of FILTERS) expect(asked).not.toContain(id);
+  });
+
+  it("asks the visa of a reader who comes to try or for a holiday", () => {
+    const answers = { project: "tester", languages: ["fr"] } as Answers;
+    expect(freeQuestions(answers).map((q) => q.id)).toContain("visaFreeOnly");
+  });
+
+  it(`never asks more than ${MAX_QUESTIONS} questions`, () => {
+    for (const { asked } of plays) expect(asked.length).toBeLessThanOrEqual(MAX_QUESTIONS);
+  });
+
+  it("asks only questions that could change the cities the result would show", () => {
+    for (const pick of [0, 1, 2, 3]) {
+      const answers: Record<string, unknown> = {};
+      const asked: string[] = [];
+      for (
+        let id = nextFreeQuestion({}, []);
+        id;
+        id = nextFreeQuestion(answers as Answers, asked)
+      ) {
+        const question = DEEP_QUESTIONS.find((q) => q.id === id)!;
+        const offered = question.choices.filter((c) => c.value !== null);
+        const owed =
+          question.after ||
+          question.group === CHAPTER.temperament ||
+          ["origin", "reach", "priorities"].includes(id);
+        if (asked.length >= 1 && !owed) {
+          const length = resultLength(answers as Answers);
+          const before = new Set(topCities(answers as Answers, length));
+          const changes = offered.some((c) =>
+            topCities(
+              { ...answers, [id]: question.max ? [c.value] : c.value } as Answers,
+              length,
+            ).some((name) => !before.has(name)),
+          );
+          expect(changes, `${pick} ${id}`).toBe(true);
+        }
+        const choice = offered[pick % offered.length];
+        answers[id] = question.max ? [choice.value] : choice.value;
+        asked.push(id);
+      }
+    }
+  });
+
+  it("says when the top three can no longer move, so the cities can be seen before the end", () => {
+    expect(topThreeSettled({ project: "installer" } as Answers, ["project"])).toBe(false);
+    expect(
+      plays.some(({ asked, settledAt }) => settledAt.length && settledAt[0] < asked.length),
+    ).toBe(true);
   });
 });

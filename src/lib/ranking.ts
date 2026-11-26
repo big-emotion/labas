@@ -107,7 +107,7 @@ export interface Answers extends ProfileAnswers {
   schoolCurriculum?: "french" | "english" | "any";
   /** Needs regular care (treatment, pregnancy, elderly parent). */
   specialistCare?: boolean;
-  /** Only countries a French passport enters without a visa. */
+  /** A first stay without a visa: visa-free countries come nearer, none leaves the list. */
   visaFreeOnly?: boolean;
   /** Leave out countries that punish homosexuality. Opt-in, never inferred, never stored. */
   excludeCriminalising?: boolean;
@@ -449,7 +449,19 @@ const TEMPERAMENT_WEIGHT = 4;
  * listed counts 1. The daily language decides first: ticking Arabic must turn the list over at
  * the thirteenth answer too (operator, 2026-11-16).
  */
-const ANSWER_WEIGHT: Record<string, number> = { languages: 3, project: 1.5, music: 0.5 };
+/**
+ * Money and trips home weigh twice an ordinary answer (operator, 2026-11-26): the research on the
+ * five paths found them the readers' first worries, and at the plain weight they moved half a
+ * city of ten.
+ */
+const ANSWER_WEIGHT: Record<string, number> = {
+  languages: 3,
+  project: 1.5,
+  music: 0.5,
+  budget: 2,
+  setupBudget: 2,
+  tripsHome: 2,
+};
 /**
  * How strongly the family's region draws the reader, by project: settling far from one's own is
  * harder than travelling far from them, which is the point of a trip (operator, 2026-11-16).
@@ -672,6 +684,15 @@ export function profileOf(given: Answers): Profile {
 
   const passports = (answers.passports ?? []).filter((p) => p !== "other");
   if (passports.length) fact("passports", { kind: "entry", values: passports, weight: 1.5 });
+  // A first stay without a visa weighs, it never removes a city (operator, 2026-11-26): a visa
+  // can be got, and the city may still be the one. Read with a French passport unless the reader
+  // named theirs, as the question was asked.
+  if (answers.visaFreeOnly)
+    fact("visaFreeOnly", {
+      kind: "entry",
+      values: passports.length ? passports : ["eu"],
+      weight: 2,
+    });
   // The origin weighs on its own. Until the reader says how far they would go, the family's
   // region draws them by project, as a plain weight that never exceeds a non-negotiable, so the
   // map still shows cities of other regions; a trip leans away from it instead. Their answer
@@ -781,7 +802,6 @@ interface LineCopy {
   nor: string;
   noSchool: string;
   care: string;
-  visa: string;
   law: string;
   avoidedCity: string;
   avoidedCountry: string;
@@ -844,7 +864,6 @@ const LINE_COPY: Bilingual<LineCopy> = {
     nor: " ni en ",
     noSchool: "Pas d'école du programme souhaité",
     care: "Les soins suivis demandent d'aller ailleurs",
-    visa: "Visa nécessaire avec un passeport français",
     law: "Le pays punit l'homosexualité",
     avoidedCity: "Vous avez écarté cette ville",
     avoidedCountry: "Vous avez écarté ce pays",
@@ -905,7 +924,6 @@ const LINE_COPY: Bilingual<LineCopy> = {
     nor: " or ",
     noSchool: "No school with the curriculum you want",
     care: "Ongoing care means going elsewhere",
-    visa: "A visa is needed with a French passport",
     law: "The country punishes homosexuality",
     avoidedCity: "You left out this city",
     avoidedCountry: "You left out this country",
@@ -967,9 +985,6 @@ function exclusionFor(city: City, answers: Answers, locale: Locale): string | un
   if (answers.specialistCare) {
     const level = city.scores.healthcare.level;
     if (level !== null && level < 3) return copy.care;
-  }
-  if (answers.visaFreeOnly && country?.visaFreeDaysFrenchPassport === 0) {
-    return copy.visa;
   }
   if (answers.excludeCriminalising) {
     const status = country?.sameSexRelations.status;

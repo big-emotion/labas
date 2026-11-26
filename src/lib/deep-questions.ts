@@ -482,3 +482,20 @@ export const DEEP_QUESTIONS: Question[] = [
     group: CHAPTER.refine,
   })),
 ];
+
+/**
+ * The quick quiz draws from the whole questionnaire (operator, 2026-11-25: 9 readers of 171
+ * opened the full one), except the answers that take cities off the list: those stay in
+ * /approfondir, asked of a reader who chose to go further (2026-11-25). The visa is no longer one
+ * of them: it weighs (2026-11-26).
+ */
+const REMOVES_CITIES = new Set([
+  "avoidRegions",
+  "languageOnly",
+  "schoolCurriculum",
+  "specialistCare",
+  "excludeCriminalising",
+]);
+export const QUICK_QUESTIONS = DEEP_QUESTIONS.filter(
+  (question) => !REMOVES_CITIES.has(question.id),
+);

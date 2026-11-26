@@ -5148,10 +5148,22 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Caution d'un à trois mois de loyer (souvent trois dans les quartiers demandés), un mois d'avance, et des agences peu encadrées qui prennent de fortes commissions : comptez trois à quatre mois au total (guides d'expatriés).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Moving to Mozambique as an Expat: The Complete Guide — Cyril Jarnias",
+            "url": "https://www.jarniascyril.com/?p=11811",
+            "published": "2026-01-26",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Accommodation in Mozambique — Expat Arrivals",
+            "url": "https://www.expatarrivals.com/africa/mozambique/accommodation-mozambique",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 3,
@@ -8418,16 +8430,36 @@
     "name": "Bissau",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un guide de 2026 donne environ 225 à 250 $ (≈ 195 à 215 €) par mois pour un logement d'une chambre hors du centre, et environ 435 $ (≈ 375 €) au centre. Ce sont des fourchettes de guide, pas des annonces.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Finding Housing in Guinea-Bissau: Practical Tips and Price Guide — jarniascyril.com",
+            "url": "https://www.jarniascyril.com/?p=15189",
+            "published": "2026-04-23",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Un témoignage de forum (vers 2021, faute de plus récent) dit que certains bailleurs demandent plus de 3 mois d'avance ; un guide de 2026 ajoute qu'il faut souvent prévoir un groupe électrogène et une réserve d'eau.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Louer un appartement ou une maison en Guinée-Bissau — forum Expat.com",
+            "url": "https://www.expat.com/fr/forum/afrique/guinee-bissau/100145-louer-un-appartement-ou-une-maison-en-guine-bissau.html",
+            "published": "2021",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Finding Housing in Guinea-Bissau: Practical Tips and Price Guide — jarniascyril.com",
+            "url": "https://www.jarniascyril.com/?p=15189",
+            "published": "2026-04-23",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 3,
@@ -9548,10 +9580,22 @@
     "name": "Bamako",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un trois-pièces (deux chambres) s'affiche 70 000 à 175 000 F CFA par mois à Kalaban Coura, Faladié, Sébénikoro ou Torokorobougou, soit environ 105 à 265 € ; 400 000 F CFA et plus à l'ACI 2000 (prix demandés, 2026).",
+        "confidence": "measured",
+        "sources": [
+          {
+            "title": "Appartements à louer à Bamako — Expat.com",
+            "url": "https://www.expat.com/fr/immobilier/afrique/mali/bamako/appartement-a-louer.html",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Coût de la vie au Mali — Africarrières",
+            "url": "https://africarrieres.com/mali/fr/guide/decouvrir/cout-de-la-vie",
+            "published": "2026-02-22",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
         "level": null,
@@ -10049,10 +10093,23 @@
     "name": "Niamey",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un guide de 2026 donne 60 000 à 150 000 FCFA (≈ 90 à 230 €) par mois pour un deux-pièces au centre ; des habitants citent 50 000 à 75 000 FCFA pour un chambre-salon (2025). Un autre guide donne 250 à 400 € au centre, d'où une note prudente.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Niger, coût de la vie — Africarrières",
+            "url": "https://africarrieres.com/niger/fr/guide/decouvrir/cout-de-la-vie",
+            "published": "2026-08-07",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Niger. Les loyers enfin encadrés pour déloger les « bailleurs sans pitié » — Le360 Afrique",
+            "url": "https://afrique.le360.ma/societe/niger-les-loyers-enfin-encadres-pour-deloger-les-bailleurs-sans-pitie_TCOQ3J7BRFHKZNHOZ4NE56AQAQ/",
+            "published": "2025-08-26",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
         "level": null,
@@ -10174,10 +10231,26 @@
         ]
       },
       "flights": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Le seul vol direct vers l'Europe est Istanbul (Turkish Airlines) ; Air France ne dessert plus Niamey depuis août 2023 et rien n'annonce sa reprise (relevé de novembre 2026).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Flights from Niamey (NIM) — FlightConnections",
+            "url": "https://www.flightconnections.com/flights-from-niamey-nim",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Diori Hamani International Airport — Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Diori_Hamani_International_Airport",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Niger — Air Journal",
+            "url": "https://www.air-journal.fr/tag/niger",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "culture": {
         "level": 3,
@@ -13002,10 +13075,17 @@
     "name": "Mogadiscio",
     "scores": {
       "cost": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "Selon une informatrice citée par l'Agence de l'Union européenne pour l'asile (mars 2025), un appartement se loue 300 à 700 $ par mois (≈ 280 à 650 €) à Hodan, Hawl Wadaag ou Waberi, et 700 à 1 200 $ pour un une ou deux-chambres neuf dans la zone sécurisée de l'aéroport.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Somalia: Country Focus 2025, 2.1.3 Socioeconomic indicators (Mogadishu) — EUAA",
+            "url": "https://www.euaa.europa.eu/coi/somalia/2025/country-focus/21-mogadishu/213-socioeconomic-indicators",
+            "published": "2025",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
         "level": null,
@@ -13338,10 +13418,16 @@
         ]
       },
       "flights": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "L'aéroport international de Juba dessert Le Caire, Addis-Abeba, Dubaï et Nairobi ; le seul vol vers l'Europe, Istanbul avec Turkish Airlines, est suspendu depuis avril 2026.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Juba International Airport — Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Juba_International_Airport",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "culture": {
         "level": null,
@@ -13414,16 +13500,35 @@
     "name": "Tripoli",
     "scores": {
       "cost": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 4,
+        "justification": "Un guide donne en mai 2026 environ 2 100 dinars (≈ 285 €) par mois pour une chambre au centre et 930 dinars (≈ 125 €) hors du centre, au taux officiel de juin 2026 (7,34 dinars pour 1 €) ; un repas pour deux au restaurant coûte environ 100 dinars.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cost of living in Libya — Expat Arrivals",
+            "url": "https://expatarrivals.com/africa/libya/cost-living-libya",
+            "published": "2026-05",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Exchange rates — Central Bank of Libya",
+            "url": "https://cbl.gov.ly/en/",
+            "published": "2026-06-11",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "Les baux durent en général 6 mois ou plus, les bailleurs apprécient d'être payés pour toute la durée d'avance, plus une caution et un mois de commission d'agence pour un bail d'un an ; un groupe électrogène est courant. Guide non daté.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Accommodation in Libya — Expat Arrivals",
+            "url": "https://expatarrivals.com/africa/libya/accommodation-libya",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -13621,16 +13726,36 @@
     "name": "Khartoum",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "En août 2026, les loyers à Jebel Awlya, au sud de Khartoum, allaient de 300 000 à 600 000 livres soudanaises par mois, soit environ 90 à 180 € au taux de janvier 2026 (≈ 3 300 SDG pour 1 €). Mais la ville sort de la guerre : électricité et eau manquent, et les rapatriés jugent ces loyers intenables.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Returnees face severe challenges in Khartoum as Sudan's capital struggles to recover from war — Dabanga",
+            "url": "https://www.dabangasudan.org/en?p=20136636",
+            "published": "2026-08-30",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Sudan: Country Focus, 3.1.4 Housing and general living conditions — EUAA (taux de change)",
+            "url": "https://www.euaa.europa.eu/coi/31-socio-economic-situation/314-housing-and-general-living-conditions",
+            "published": "2026",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "À Karari (Omdurman, État de Khartoum), un propriétaire demandait en 2024 deux mois de caution et un mois de commission pour le courtier, en plus du premier loyer : environ quatre mois à l'entrée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Omdurman residents lament skyrocketing house rent — Radio Tamazuj",
+            "url": "https://www.radiotamazuj.org/en/news/article/omdurman-residents-lament-skyrocketing-house-rent",
+            "published": "2024-07-18",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -14804,10 +14929,16 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Une grosse caution et le premier mois sont payés à l'entrée : prévoyez jusqu'à trois mois de loyer, selon un guide d'expatriés non daté, valable pour tout le Malawi.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Expat guide to moving to and living in Malawi — William Russell",
+            "url": "https://www.william-russell.com/blog/expat-guide-moving-living-malawi/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -15689,10 +15820,17 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 5,
+        "justification": "Selon un agrégateur (février 2026), les baux durent 6 à 12 mois avec une caution d'un à deux mois de loyer ; aucune avance de plusieurs mois n'est signalée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Eswatini cost of rent & housing — 360nations",
+            "url": "https://360nations.com/africa/eswatini/cost-rent-housing.html",
+            "published": "2026-02",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 2,
@@ -18085,10 +18223,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Pratique valable pour tout le Sénégal : une caution d'un mois et trois mois de loyer d'avance, soit environ quatre mois à l'entrée ; à Dakar, certaines agences demandent davantage. Aucune source propre à Saint-Louis n'a été trouvée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Habiter au Sénégal : le logement — UFE",
+            "url": "https://ufe.org/dossier-pays/senegal/habiter-au-senegal-le-logement/",
+            "published": "2024",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Loyer à Dakar : la caution passe du double — Seneweb (Le Soleil)",
+            "url": "https://www.seneweb.com/news/Societe/loyer-a-dakar-la-caution-passe-du-double_n_359976.html",
+            "published": "2021-10-01",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 3,
@@ -18367,10 +18518,17 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Aucune source propre à Saly ; au Sénégal on demande souvent 4 mois à l'entrée (2 de loyer, 1 de caution, 1 d'agence), parfois plus, alors que la loi limite la caution à 2 mois (constat fait à Dakar).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Loyer à Dakar : la caution passe du double — Seneweb (Le Soleil)",
+            "url": "https://www.seneweb.com/news/Societe/loyer-a-dakar-la-caution-passe-du-double_n_359976.html",
+            "published": "2021-10-01",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -18623,10 +18781,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "La loi béninoise de 2018 limite la caution à 3 mois, rappelé par le gouvernement en juillet 2026, mais certains bailleurs demandent jusqu'à 6 mois d'avance plus un mois d'agence. Règle nationale : aucune donnée propre à Ouidah.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Bénin : le gouvernement rappelle la limite de 3 mois de caution face à la flambée des loyers — La Nouvelle Tribune",
+            "url": "https://lanouvelletribune.info/2026/07/benin-le-gouvernement-rappelle-la-limite-de-3-mois-de-caution-face-a-la-flambee-des-loyers/",
+            "published": "2026-07-23",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Loi n° 2018-12 portant régime juridique du bail à usage d'habitation domestique — SGG Bénin",
+            "url": "https://sgg.gouv.bj/doc/loi-2018-12/download",
+            "published": "2018-07-02",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -18892,10 +19063,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "Au Togo, la caution est en général de 2 à 3 mois et le loyer se paie souvent par trimestre ou par semestre d'avance : 5 à 9 mois à l'entrée. Le plafond de 3 mois fixé en 2022 ne s'applique qu'au Grand Lomé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Guide Togo — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/togo/",
+            "published": "2025-12-08",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Togo – Réglementation du bail d'habitation : le nouveau décret expliqué aux acteurs du secteur — Bénin Web TV",
+            "url": "https://beninwebtv.bj/togo-reglementation-du-bail-dhabitation-le-nouveau-decret-explique-aux-acteurs-du-secteur/",
+            "published": "2022-02-10",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 3,
@@ -19363,10 +19547,23 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Aucune source propre à Buchanan ; au Liberia, les propriétaires demandent souvent 6 à 12 mois d'avance, un autre guide parle d'un bail d'un an avec 1 à 2 mois de caution (guides sur le pays, surtout Monrovia).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Moving to Liberia as an Expat: The Complete Guide — Cyril Jarnias",
+            "url": "https://www.jarniascyril.com/expatriation/moving-to-liberia-as-an-expat-complete-guide/",
+            "published": "2026-01-26",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Cost of rent and housing in Liberia — 360Nations",
+            "url": "https://360nations.com/africa/liberia/cost-rent-housing.html",
+            "published": "2026-02",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -19588,10 +19785,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "En Guinée, la presse décrit des bailleurs qui demandent 4 mois à un an d'avance, plus souvent un mois pour le démarcheur. Ces articles portent sur Conakry : aucune donnée propre à Labé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Conakry : loyer prohibitif, avance extravagante — Le360 Afrique",
+            "url": "https://afrique.le360.ma/societe/conakry-loyer-prohibitif-avance-extravagante-trouver-un-logement-ce-reve-eveille-qui-dure-encore_BU6S3QOKX5DIXPCKWOZ4D5PKHE/",
+            "published": "2024-07-28",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Crise de logements à Conakry : les loyers flambent — Guinéenews",
+            "url": "https://guineenews.org/2022/04/25/crise-de-logements-a-conakry-malgre-lintention-des-nouvelles-autorites-de-revoir-les-modalites-de-logements-les-loyers-flambent/",
+            "published": "2022-04-25",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -20348,10 +20558,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Au Cap-Vert, la caution est d'un ou deux mois, parfois avec le premier et le dernier mois en plus, sans frais d'agence annoncés (guide valable pour le pays, pas propre à Mindelo).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Living in Cape Verde: the expat guide — Expat.com",
+            "url": "https://www.expat.com/en/guide/africa/cape-verde/",
+            "published": "2025-11-03",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Moving to Praia in Santiago island — forum Expat.com",
+            "url": "https://www.expat.com/en/forum/africa/cape-verde/1075844-moving-to-praia-in-santiago-island.html",
+            "published": "2024",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -20940,16 +21163,35 @@
     "name": "Bobo-Dioulasso",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 5,
+        "justification": "Un deux-pièces se loue 35 000 à 80 000 F CFA par mois, soit environ 55 à 120 € ; un autre guide donne 100 à 150 dollars pour une chambre dans un quartier intermédiaire (avril 2026).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Coût de la vie au Burkina Faso — Africarrières",
+            "url": "https://africarrieres.com/burkina-faso/fr/guide/decouvrir/cout-de-la-vie",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Coût de la vie à Bobo-Dioulasso — OpenShores",
+            "url": "https://www.openshores.co/blog/burkina-faso/bobo-dioulasso/cout-de-la-vie-a-bobo-dioulasso",
+            "published": "2026-04",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 5,
+        "justification": "Au Burkina Faso, on demande en général une caution d'un à deux mois de loyer avec un bail d'un an (guide valable pour le pays, pas propre à Bobo-Dioulasso).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Guide Burkina Faso — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/burkina-faso/",
+            "published": "2025-10",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -23369,10 +23611,17 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "À São Tomé-et-Príncipe, caution d'un à trois mois en espèces, plus un groupe électrogène de 500 à 1 500 dollars à cause des coupures (guide sur le pays, pas propre à Príncipe).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Living in São Tomé and Príncipe in 2026 — Immigrant Invest",
+            "url": "https://immigrantinvest.com/blog/living-sao-tome/",
+            "published": "2026-09-06",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -23822,10 +24071,17 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un guide en ligne sur la Centrafrique indique que la caution est en général d'un à deux mois de loyer ; il ne parle pas de Berbérati en particulier, à vérifier sur place.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Coût de la vie en Centrafrique — Africarrières",
+            "url": "https://africarrieres.com/centrafrique/fr/guide/decouvrir/cout-de-la-vie",
+            "published": "2026-02-25",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -24312,10 +24568,29 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Aucune source propre à Bahir Dar ; en Éthiopie, beaucoup de bails exigent 6 mois à 2 ans de loyer d'avance, plus une commission d'agence d'un demi à un mois (constat surtout fait à Addis-Abeba).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "The evolving rental housing market of Addis Ababa — Ethiopian Properties",
+            "url": "https://www.ethiopianproperties.com/?p=11651",
+            "published": "2026-01-23",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Coût de la vie à Addis-Abeba en 2026 — OpenShores",
+            "url": "https://www.openshores.co/blog/ethiopie/addis-abeba/cout-de-la-vie-a-addis-abeba",
+            "published": "2026-04-13",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Ethiopian Properties — How to find house for rent in Addis Ababa",
+            "url": "https://www.ethiopianproperties.com/?p=10408",
+            "published": "2022-12-24",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -24888,10 +25163,22 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "En Tanzanie, les bailleurs demandent souvent 3, 6 ou 12 mois de loyer d'avance plus une caution, et l'agent prend en général un mois de loyer ; c'est la pratique décrite pour le pays et pour Dar es Salaam.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Renting in Tanzania: How to Rent a Home in Tanzania — Expat Exchange",
+            "url": "https://expatexchange.com/article/18367/Renting-in-Tanzania-How-to-Rent-a-Home-in-Tanzania",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Dar es Salaam expat guide — Expat.com",
+            "url": "https://www.expat.com/en/guide/africa/tanzania/dar-es-salaam/",
+            "published": "2025-12-16",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 3,
@@ -25162,10 +25449,22 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "La loi ougandaise de 2022 limite l'avance à trois mois de loyer, sauf accord du locataire ; trois mois est l'usage le plus courant dans le pays, certains propriétaires en demandent plus. Aucune source propre à Jinja.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Landlord and Tenant Act, 2022 (section 24, limit on rent in advance) — ULII",
+            "url": "https://ulii.org/en/akn/ug/act/2022/9/eng@2023-12-31",
+            "published": "2022",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "What the law says on rent, eviction and tenant rights — Daily Monitor",
+            "url": "https://www.monitor.co.ug/uganda/magazines/homes-and-property/what-the-law-says-on-rent-eviction-and-tenant-rights-5575478",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -25393,10 +25692,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Au Rwanda, bail d'un an au moins, avec souvent 3 à 6 mois d'avance plus 1 à 2 mois de caution (guide sur le pays, pas propre à Rubavu).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Guide Rwanda — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/rwanda/",
+            "published": "2025-10-27",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Guide Kigali — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/rwanda/kigali/",
+            "published": "2025-11-24",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -25861,10 +26173,17 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "À Djibouti, la caution équivaut en général à un à trois mois de loyer selon un guide en ligne ; il décrit surtout la capitale, rien de propre à Tadjourah.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Coût de la vie à Djibouti — Africarrières",
+            "url": "https://africarrieres.com/djibouti/fr/guide/decouvrir/cost-of-living",
+            "published": "2026-02-25",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -26170,10 +26489,26 @@
         ]
       },
       "flights": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "L'aéroport de Massaoua n'a aucun vol régulier ; celui d'Asmara, à 115 km par une route de montagne, n'a qu'un vol direct vers l'Europe, Istanbul (novembre 2026).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Massawa International Airport — Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Massawa_International_Airport",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Massawa — Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Massawa",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Direct flights from Asmara (ASM) — FlightConnections",
+            "url": "https://www.flightconnections.com/flights-from-asmara-asm",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "culture": {
         "level": null,
@@ -28059,10 +28394,23 @@
     "name": "Benghazi",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Une chambre se loue environ 1 200 dinars par mois au centre et 750 en dehors, soit à peu près 190 et 120 € (taux officiel d'environ 6,3 dinars pour 1 € en septembre 2025 ; 9 contributeurs, novembre 2026).",
+        "confidence": "measured",
+        "sources": [
+          {
+            "title": "Cost of Living in Benghazi — Numbeo",
+            "url": "https://www.numbeo.com/cost-of-living/in/Benghazi-Libya",
+            "published": "2026-11-20",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Exchange rates — Central Bank of Libya",
+            "url": "https://cbl.gov.ly/en/",
+            "published": "2025-09-03",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
         "level": null,
@@ -28260,10 +28608,17 @@
     "name": "Port-Soudan",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Début 2024, une petite maison de deux pièces en périphérie se louait environ 650 $ (≈ 560 €) par mois, et un appartement meublé d'une pièce environ 1 500 $, après l'arrivée des déplacés. Chiffres datés, aucun relevé plus récent trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Port Sudan: displacement and dwindling services — Small Arms Survey",
+            "url": "https://www.smallarmssurvey.org/port-sudan-political-economy-potential-administrative-capital/displacement",
+            "published": "2024",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
         "level": null,
@@ -28949,10 +29304,29 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "À Madagascar, caution de 1 à 2 mois en général, un mois de frais d'agence et une petite somme par visite (guide sur le pays, pas propre à Nosy Be).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Vivre à Madagascar : le guide de l'expatrié — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/madagascar/",
+            "published": "2026-01-12",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "« MADAGASCAR.. Bon coin des expat » (groupe Facebook public)",
+            "url": "https://www.facebook.com/groups/1624291924375009",
+            "published": "2026-11-14",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Expat.com — annonces de location, Antananarivo",
+            "url": "https://www.expat.com/fr/immobilier/afrique/madagascar/antananarivo/a-louer.html",
+            "published": "2026-11",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -29171,16 +29545,40 @@
     "name": "Livingstone",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un site d'annonces indique 1 500 kwachas pour un petit logement simple à plus de 8 000 kwachas par mois, soit environ 65 à 350 € (1 € ≈ 22,7 kwachas, novembre 2026). Fourchette d'un guide, pas un relevé d'annonces.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cheap apartments for rent in Livingstone — BE FORWARD Homes",
+            "url": "https://homes.beforward.jp/search/rent/apartment/cheap-apartments-rent-livingstone",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "EUR/ZMW — fxfeed.io",
+            "url": "https://fxfeed.io/currencies/pairs/eur-zmw",
+            "published": "2026-11-03",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "La plupart des bailleurs demandent une caution d'un mois plus le premier mois payé d'avance ; comme ailleurs en Zambie, un onduleur ou un groupe est souvent à prévoir à cause des coupures.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cheap apartments for rent in Livingstone — BE FORWARD Homes",
+            "url": "https://homes.beforward.jp/search/rent/apartment/cheap-apartments-rent-livingstone",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Living in Zambia guide — Expat.com",
+            "url": "https://www.expat.com/en/guide/africa/zambia/",
+            "published": "2025-10-31",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 3,
@@ -29421,10 +29819,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un portail immobilier zimbabwéen indique une caution d'un mois plus le premier loyer (2025) ; un guide d'expatriés parle plutôt de 2 à 3 mois de caution : 2 à 5 mois à l'entrée selon le propriétaire.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "How Do Rentals Work in Zimbabwe? 2025 Guide for Tenants and Landlords — property.co.zw",
+            "url": "https://www.property.co.zw/blog/how-do-rentals-work-in-zimbabwe-2025-guide-for-tenants-and-landlords",
+            "published": "2025-10-13",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Living in Zimbabwe (expat guide) — Expat.com",
+            "url": "https://www.expat.com/en/guide/africa/zimbabwe/",
+            "published": "2025-10-28",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -29639,16 +30050,29 @@
     "name": "Blantyre",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Une chambre au centre se loue environ 227 dollars par mois (environ 195 €), 115 dollars en dehors ; échantillon très mince (2 contributeurs, novembre 2026).",
+        "confidence": "measured",
+        "sources": [
+          {
+            "title": "Cost of Living in Blantyre — Numbeo",
+            "url": "https://www.numbeo.com/cost-of-living/in/Blantyre",
+            "published": "2026-11-18",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Une grosse caution et le premier mois sont payés à l'entrée : prévoyez jusqu'à trois mois de loyer, selon un guide d'expatriés non daté, valable pour tout le Malawi.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Expat guide to moving to and living in Malawi — William Russell",
+            "url": "https://www.william-russell.com/blog/expat-guide-moving-living-malawi/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -29902,10 +30326,23 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 5,
+        "justification": "Des annonces de 2026 demandent le plus souvent une caution d'un mois de loyer, parfois 1,3 à 1,5 mois pour les biens chers ; la loi namibienne, peu appliquée, la limite même à un demi-mois.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Property to rent in Swakopmund — MyProperty Namibia",
+            "url": "https://www.myproperty.com.na/en-na/to-rent/erongo/swakopmund",
+            "published": "2026",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Archaic laws have tenants in chokehold as the rent control debate resurfaces — New Era",
+            "url": "https://neweralive.na/archaic-laws-have-tenants-in-chokehold-as-the-rent-control-debate-resurfaces/",
+            "published": "2026-02-25",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 2,
@@ -30157,10 +30594,17 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Au Botswana, on verse en général une caution d'un ou deux mois et le premier loyer à la signature d'un bail d'un an. À Maun, le marché est informel, surtout de particulier à particulier.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Guide Expat.com Gaborone (section Maun)",
+            "url": "https://www.expat.com/fr/guide/afrique/botswana/gaborone/",
+            "published": "2025-11-03",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -30614,10 +31058,17 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 5,
+        "justification": "Au Lesotho, un agrégateur (février 2026) décrit des baux de 6 à 12 mois avec une caution d'un à deux mois de loyer ; c'est une pratique nationale, sans donnée propre à Teyateyaneng.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Lesotho cost of rent & housing — 360nations",
+            "url": "https://360nations.com/africa/lesotho/cost-rent-housing.html",
+            "published": "2026-02",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -31110,10 +31561,17 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 5,
+        "justification": "Aux Seychelles, bail d'un an, avec le premier mois et une caution d'un ou deux mois à l'entrée (guide sur le pays, pas propre à Praslin).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Vivre aux Seychelles (guide) — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/seychelles/",
+            "published": "2025-11-26",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 2,

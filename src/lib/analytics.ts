@@ -1,7 +1,7 @@
 import type { FeedbackKind } from "./feedback";
 import type { TapKind } from "./taps";
 import { SENSITIVE_ANSWERS } from "./keep";
-import { QUESTIONS } from "./questions";
+import { QUICK_QUESTIONS } from "./deep-questions";
 
 /**
  * Cookieless audience measurement on the shared self-hosted Plausible that EthniAfrica and
@@ -18,7 +18,7 @@ export function plausibleScriptSrc(config: { domain?: string; host?: string }): 
 }
 
 // Only the quick-quiz questions are measured, and never the sensitive answers (keep.ts).
-const MEASURED = new Set<string>(QUESTIONS.map((question) => question.id));
+const MEASURED = new Set<string>(QUICK_QUESTIONS.map((question) => question.id));
 const NEVER_SENT = new Set<string>(SENSITIVE_ANSWERS);
 
 export interface AnswerEvent {
@@ -68,6 +68,7 @@ export const GOALS = [
   "Réaction rapide",
   "Quiz commencé",
   "Villes depuis l'accueil",
+  "Villes vues avant la fin",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -224,4 +225,18 @@ export interface HomeEvent {
 
 export function homeEvent(door: "quiz" | "cities"): HomeEvent {
   return { name: door === "quiz" ? "Quiz commencé" : "Villes depuis l'accueil" };
+}
+
+/**
+ * « Voir mes villes maintenant » (operator, 2026-11-25): the quiz runs on until the list it shows
+ * is settled, and a reader may stop once the top three is. The step says where they stopped;
+ * « etape » is already listed in Plausible's custom properties.
+ */
+export interface EarlyEvent {
+  name: "Villes vues avant la fin";
+  props: { etape: string };
+}
+
+export function earlyEvent(step: number): EarlyEvent {
+  return { name: "Villes vues avant la fin", props: { etape: String(step).padStart(2, "0") } };
 }
