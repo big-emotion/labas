@@ -123,11 +123,6 @@ export const QUESTIONS: Question[] = [
         en: { label: "Try it for a few months", sub: "See if life there suits me" },
       },
       {
-        label: "Investir sans y vivre",
-        value: "investir",
-        en: { label: "Invest without living there" },
-      },
-      {
         label: "D'abord des vacances",
         value: "decouvrir",
         sub: "Et je verrai ensuite",

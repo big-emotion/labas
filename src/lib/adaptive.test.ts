@@ -238,14 +238,6 @@ describe("a path that fits the project", () => {
     "profession",
   ];
 
-  it("asks an investor only what investing and coming often need", () => {
-    const investor = ids({ project: "investir" } as Answers);
-    for (const id of LIFE_THERE) expect(investor, id).not.toContain(id);
-    expect(investor).toEqual(
-      expect.arrayContaining(["languages", "origin", "size", "pace", "priorities"]),
-    );
-  });
-
   it("does not ask a holidaymaker about their job", () => {
     const visitor = ids({ project: "decouvrir" } as Answers);
     expect(visitor).not.toContain("profession");

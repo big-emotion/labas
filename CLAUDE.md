@@ -34,6 +34,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   (`topThreeSettled`, `earlyEvent`). The practical questions (budget, money to put down,
   passport, trips home, length of a holiday) are in it too (operator, 2026-11-26): their data is
   filled city by city in `city-scores.json`, and the visa weighs instead of removing a city.
+  The project question offers four paths (operator, 2026-11-26): « Investir sans y vivre » was
+  removed for want of city-level data on land security or rental yield; `investir` stays readable
+  so journeys saved with it still rank.
 - **Every answer orients the list** (operator, 2026-11-16, like a guessing game): each answer is
   one piece of evidence and the pieces multiply (`scoreOf` in `src/lib/ranking.ts`), so a late
   answer still turns the list over. The daily language weighs most; the project and the origin

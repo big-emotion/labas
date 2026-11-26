@@ -37,7 +37,7 @@ describe("the regions the reader does not want to live in", () => {
 });
 
 // Coherent paths per project (operator, 2026-11-16).
-const PROJECTS = ["installer", "pied", "tester", "investir", "decouvrir"] as const;
+const PROJECTS = ["installer", "pied", "tester", "decouvrir"] as const;
 const question = (id: string): Question => DEEP_QUESTIONS.find((q) => q.id === id)!;
 
 /** Plays the quick quiz, taking the visible choice at `pick`, as a reader would. */
@@ -84,12 +84,9 @@ describe("a path per project", () => {
     for (const id of ["profession", "landscapes", "tripsHome"]) expect(asked).not.toContain(id);
   });
 
-  it("asks both-feet readers how often they come back; investors nothing about daily life", () => {
+  it("asks both-feet readers how often they come back", () => {
     // Offered, not always asked: the path asks it only when it can still change the top three.
     expect(freeQuestions({ project: "pied" }).map((q) => q.id)).toContain("profession");
-    const investor = play("investir", 0).asked;
-    for (const id of ["saturday", "family", "budget", "duration", "tripsHome"])
-      expect(investor).not.toContain(id);
   });
 });
 
@@ -135,9 +132,6 @@ describe("questions and choices that fit what was said", () => {
     const solo = deepAsked({ project: "decouvrir", family: "celib", origin: [null] as never });
     for (const id of ["schoolCurriculum", "setupBudget", "tripsHome"])
       expect(solo).not.toContain(id);
-    const investor = deepAsked({ project: "investir", origin: [null] as never });
-    for (const id of ["afterWork", "mobility", "habits", "neighbourhood", "schoolCurriculum"])
-      expect(investor).not.toContain(id);
   });
 });
 
@@ -226,4 +220,27 @@ describe("going back and changing an answer", () => {
     expect(deep({ project: "pied", origin: [null] } as unknown as Answers)).toContain("tripsHome");
     // Plays about fifteen whole quizzes: slower than the others on CI.
   }, 30_000);
+});
+
+// Operator, 2026-11-26: no city-level data exists on land security or rental yield, so the site
+// cannot rank cities for an investment; the path is no longer offered. A journey saved with it
+// still ranks (accounts, shared links), but a reader cannot pick it.
+describe("the investing path", () => {
+  it("is no longer offered, in the quick quiz or the full questionnaire", () => {
+    const offered = (bank: Question[]) =>
+      bank.find((q) => q.id === "project")!.choices.map((c) => c.value);
+    expect(offered(QUESTIONS)).not.toContain("investir");
+    expect(offered(DEEP_QUESTIONS)).not.toContain("investir");
+    expect(offered(QUESTIONS)).toEqual(["installer", "pied", "tester", "decouvrir"]);
+  });
+
+  it("drops from a saved journey, so the reader picks a project again", () => {
+    expect(
+      keepInPath({ project: "investir", languages: ["fr"] } as Answers).project,
+    ).toBeUndefined();
+  });
+
+  it("still ranks a journey saved with it before, without breaking", () => {
+    expect(bestMatches({ project: "investir", languages: ["fr"] } as Answers, 3)).toHaveLength(3);
+  });
 });

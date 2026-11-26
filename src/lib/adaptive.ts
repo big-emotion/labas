@@ -165,11 +165,13 @@ export function nextFreeQuestion(
   const opener = OPENING.find((id) => open.some((q) => q.id === id));
   if (opener) return opener;
   const room = hasRoom(open, asked);
-  const follow = followUp(open, asked);
-  // The follow-ups of the distance question were kept room for; the others need it.
-  const owedFollow = follow && QUICK_BANK.find((q) => q.id === follow)?.after === BEFORE_CLOSING;
   const closing = asked.includes(BEFORE_CLOSING);
-  if (follow && ((room && !closing) || owedFollow)) return follow;
+  // The follow-ups of the distance question were kept room for and come first once it is asked;
+  // any other follow-up needs room, and none comes after the distance question.
+  const afterReach = closing ? open.find((q) => q.after === BEFORE_CLOSING)?.id : undefined;
+  if (afterReach) return afterReach;
+  const follow = followUp(open, asked);
+  if (follow && room && !closing) return follow;
   // Once the reader has said how far they would go, the quiz closes: that answer is the last
   // word on the list, and a question reopened after it would read as doubting it.
   const ranked = closing || !room ? [] : decisive(open, answers);
