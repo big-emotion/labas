@@ -21,7 +21,10 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   the current top three (« En tête pour l'instant », V3 mockup, operator 2026-11-15). The home
   screen asks for one tap first (operator, 2026-11-26, mockup A3: 68 % of visitors used to leave
   without answering): a big « Faire le quiz » centred under the map while cities light up, and
-  « Voir les villes d'Afrique » below; `homeEvent` counts which door is taken. The free
+  « Voir les villes d'Afrique » below; `homeEvent` counts which door is taken. A reader who has seen their result in this browser
+  finds « Revoir mon résultat » there too, and the result's address (`#resultat`) shows it again
+  after the back button (reader feedback, 2026-11-26: a link of the result took a reader off the
+  page and the result was lost; `canShowResultAgain`, recomputed from the answers kept). The free
   quiz then opens on the project alone (operator, 2026-11-20; the languages and the family's origin
   are asked along the way); then, themes mixed, a follow-up comes right after its question and
   each answer picks the next question from the whole questionnaire (operator, 2026-11-25:

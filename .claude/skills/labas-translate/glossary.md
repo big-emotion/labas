@@ -65,6 +65,7 @@ and change every use in the same commit.
 | M'envoyer mon parcours        | Send me my journey            |
 | Recevoir par e-mail           | Get it by email               |
 | Tout reprendre à zéro         | Start again                   |
+| Revoir mon résultat           | See my result again           |
 | Partager                      | Share                         |
 | Glissez (une bande de cartes) | Swipe                         |
 | Enregistrer l'image           | Save the picture              |

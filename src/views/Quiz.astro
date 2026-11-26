@@ -78,6 +78,7 @@ const COPY: Bilingual<Record<string, string>> = {
     start: "Faire le quiz",
     startNote: "Quelques minutes · sans inscription · on peut s'arrêter quand on veut",
     seeCities: "Voir les villes d'Afrique",
+    seeResult: "Revoir mon résultat",
   },
   en: {
     question: "Which African city is most like you?",
@@ -127,6 +128,7 @@ const COPY: Bilingual<Record<string, string>> = {
     start: "Take the quiz",
     startNote: "A few minutes · no sign-up · stop whenever you like",
     seeCities: "See Africa's cities",
+    seeResult: "See my result again",
   },
 };
 const copy = COPY[locale];
@@ -253,6 +255,11 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             >
               <path d="M5 12h14M13 6l6 6-6 6"></path>
             </svg>
+          </button>
+          {/* For a reader who saw their result in this browser and left it (reader feedback,
+              2026-11-26): shown by the script, which recomputes the result from the answers. */}
+          <button type="button" id="intro-result" class="intro-result" hidden>
+            {copy.seeResult}
           </button>
           <p class="intro-note">{copy.startNote}</p>
           <a id="intro-cities" class="intro-cities" href={to("cities")}>
@@ -466,10 +473,17 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         setAside,
         setAsideChoices,
         setAsideNotice,
+        placesAsideIn,
         type SetAsideLevel,
       } from "../lib/not-for-me";
       import type { City } from "../lib/cities";
-      import { saveAnswers } from "../lib/keep";
+      import {
+        canShowResultAgain,
+        forgetResult,
+        loadAnswers,
+        rememberResult,
+        saveAnswers,
+      } from "../lib/keep";
       import { syncJourney } from "../lib/account-dom";
       import { browserStore, track, wireKeep } from "../lib/keep-dom";
       import { showCounts, showPreview } from "../lib/reactions-dom";
@@ -926,8 +940,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             return stitch;
           }),
         );
-        const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
+        const back = id
+          ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back")
+          : document.querySelector<HTMLButtonElement>("#ready .back");
         if (back) back.hidden = asked.length === 0;
+        // Back on a question, the address no longer points at a result.
+        if (id && location.hash === RESULT_HASH)
+          history.replaceState(null, "", location.pathname + location.search);
         if (id) syncContinue(fieldsets.get(id)!);
         // « M'envoyer mon parcours » (components/SaveLater.astro) shows from the fourth answer.
         // Once the quiz is over it goes: the result has its own e-mail, right after the cities.
@@ -1023,7 +1042,30 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         document.getElementById("reveal")!.click();
       });
 
+      // The result marks the address and the browser, so that coming back to the page, by the
+      // back button or later from the home screen, shows it again (reader feedback, 2026-11-26).
+      const RESULT_HASH = "#resultat";
+      function showResultAgain() {
+        const kept = loadAnswers(browserStore()) as Record<string, unknown>;
+        for (const [id, fieldset] of fieldsets) {
+          const value = kept[id];
+          const wanted = value === undefined ? [] : Array.isArray(value) ? value : [value];
+          const values = wanted.map((v) => JSON.stringify(v));
+          for (const chip of fieldset.querySelectorAll<HTMLButtonElement>(".chip"))
+            chip.setAttribute("aria-pressed", String(values.includes(chip.dataset.value!)));
+        }
+        placesAside = placesAsideIn(kept as Answers);
+        // Counted once already, when the reader first reached it.
+        finished = true;
+        track(homeEvent("result"));
+        document.body.classList.remove("intro");
+        showQuestion(undefined);
+        document.getElementById("reveal")!.click();
+      }
+
       document.getElementById("reveal")!.addEventListener("click", () => {
+        rememberResult(browserStore());
+        history.replaceState(null, "", RESULT_HASH);
         const outcome = document.getElementById("outcome") as HTMLElement;
         outcome.hidden = false;
         placePreview();
@@ -1088,6 +1130,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       // The home screen asks for one tap before the first question (operator, 2026-11-26,
       // mockup A3): 68 % of visitors used to leave without answering anything.
       document.getElementById("intro-start")!.addEventListener("click", () => {
+        forgetResult(browserStore());
         document.body.classList.remove("intro");
         track(homeEvent("quiz"));
         fieldsets.get("project")?.querySelector<HTMLElement>(".chip")?.focus();
@@ -1096,7 +1139,14 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         .getElementById("intro-cities")!
         .addEventListener("click", () => track(homeEvent("cities")));
 
+      const cameBack = location.hash === RESULT_HASH;
       showQuestion("project");
+      if (canShowResultAgain(browserStore())) {
+        const again = document.getElementById("intro-result") as HTMLButtonElement;
+        again.hidden = false;
+        again.addEventListener("click", showResultAgain);
+        if (cameBack) showResultAgain();
+      }
     </script>
 
     <style>
@@ -1811,6 +1861,20 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         margin: 0;
         color: var(--thread-dim);
         font-size: 0.92rem;
+      }
+      .intro-result {
+        min-height: 54px;
+        border: 2px solid var(--saffron);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--thread);
+        font: inherit;
+        font-weight: 800;
+        font-size: 1.05rem;
+        cursor: pointer;
+      }
+      .intro-result[hidden] {
+        display: none;
       }
       .intro-cities {
         display: flex;

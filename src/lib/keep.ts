@@ -27,6 +27,38 @@ export function forgetAnswers(store: Store | undefined): void {
 }
 
 /**
+ * Whether this browser has shown the quick quiz's result (reader feedback, 2026-11-26: a button
+ * at the end of the quiz took a reader off the page and the result was lost). Only a mark: the
+ * result itself is recomputed from the answers kept, so nothing else is stored or sent.
+ */
+const RESULT_KEY = "labas.result";
+
+export function rememberResult(store: Store | undefined): void {
+  try {
+    store?.setItem(RESULT_KEY, "1");
+  } catch {
+    // Blocked storage: the result shows, it just cannot come back.
+  }
+}
+
+export function forgetResult(store: Store | undefined): void {
+  try {
+    store?.removeItem(RESULT_KEY);
+  } catch {
+    // Nothing kept, nothing to forget.
+  }
+}
+
+/** A result to show again needs both the mark and answers to recompute it from. */
+export function canShowResultAgain(store: Store | undefined): boolean {
+  try {
+    return store?.getItem(RESULT_KEY) === "1" && Object.keys(loadAnswers(store)).length > 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * The answers kept earlier, keeping only what a question still asks with a choice it still
  * offers: a stale or edited store never reaches the ranking.
  */
