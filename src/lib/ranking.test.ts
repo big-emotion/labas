@@ -891,3 +891,29 @@ describe("how many cities the result shows (operator, 2026-11-25)", () => {
     expect(resultLength({ project: "installer", languages: ["fr"] } as Answers)).toBe(10);
   });
 });
+
+describe("a first stay without a visa (operator, 2026-11-26: a weight, no longer a filter)", () => {
+  const base = { project: "tester", languages: ["fr"] } as Answers;
+  const scoreOf = (answers: Answers, name: string) =>
+    rankCities(answers).find((m) => m.city.name === name)!;
+
+  it("brings the cities a French passport enters freely nearer", () => {
+    const before = scoreOf(base, "Dakar").score / scoreOf(base, "Abidjan").score;
+    const noVisa = { ...base, visaFreeOnly: true } as Answers;
+    const after = scoreOf(noVisa, "Dakar").score / scoreOf(noVisa, "Abidjan").score;
+    expect(after).toBeGreaterThan(before);
+  });
+
+  it("never takes a city that needs a visa off the list", () => {
+    const noVisa = { ...base, visaFreeOnly: true } as Answers;
+    expect(scoreOf(noVisa, "Abidjan").excludedBecause).toBeUndefined();
+    expect(bestMatches(noVisa, 115).map((m) => m.city.name)).toContain("Abidjan");
+  });
+
+  it("reads the passport the reader named, when they named one", () => {
+    const ecowas = { ...base, visaFreeOnly: true, passports: ["ecowas"] } as Answers;
+    expect(scoreOf(ecowas, "Abidjan").score).toBeGreaterThan(
+      scoreOf({ ...base, visaFreeOnly: true } as Answers, "Abidjan").score,
+    );
+  });
+});
