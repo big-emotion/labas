@@ -15,6 +15,7 @@ const COPY: Bilingual<Record<string, string>> = {
     discover: "À découvrir",
     notForMe: "Pas pour moi",
     open: "Voir le détail",
+    openShort: "Détail",
     inviteWhy:
       "Là-bas sert aussi à ceux qui préparent leur départ : ce que vous savez de la ville les aide.",
     hide: "Masquer le détail",
@@ -36,6 +37,7 @@ const COPY: Bilingual<Record<string, string>> = {
     discover: "To discover",
     notForMe: "Not for me",
     open: "See the details",
+    openShort: "Details",
     inviteWhy:
       "Over There also helps people preparing to move: what you know about the city helps them.",
     hide: "Hide the details",
@@ -119,7 +121,10 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     </a>
     <details class="detail">
       <summary>
-        <span class="when-closed">{copy.open}</span>
+        <span class="when-closed">
+          <span class="open-long">{copy.open}</span>
+          <span class="open-short">{copy.openShort}</span>
+        </span>
         <span class="when-open">{copy.hide}</span>
       </summary>
     </details>
@@ -141,34 +146,6 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
         </span>
       </summary>
     </details>
-  </li>
-</template>
-
-{/* « Tout près derrière » (operator, 2026-11-26): one slide per city, 4 to 10; a tap opens its
-    detail under the strip (lib/cards-dom.ts slideFor). */}
-<template id="slide-template">
-  <li class="slide">
-    <button type="button" class="slide-open" aria-expanded="false" aria-controls="near-detail">
-      <span class="slide-photo">
-        <img alt="" width="1280" height="853" loading="lazy" hidden />
-        <span class="rank"></span>
-      </span>
-      <span class="slide-body">
-        <b class="slide-name"></b>
-        <span class="slide-line"></span>
-        <span class="slide-fit">
-          <b></b>
-          <span class="bar">
-            <span></span>
-          </span>
-        </span>
-        <span class="slide-more">
-          <span class="when-closed">{copy.open}</span>
-          <span class="when-open">{copy.hide}</span>
-          <span aria-hidden="true">›</span>
-        </span>
-      </span>
-    </button>
   </li>
 </template>
 
@@ -371,7 +348,8 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     text-transform: uppercase;
     color: var(--thread-dim);
   }
-  .results details.detail > summary {
+  /* The cards' pill; a row's summary is the whole row. */
+  .results .card > details.detail > summary {
     justify-self: start;
     display: inline-flex;
     align-items: center;
@@ -473,6 +451,15 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     cursor: pointer;
     list-style: none;
     min-height: 44px;
+  }
+  /* « Tout près derrière », 4 to 10 (operator, 2026-11-27, mockup RA): one line per city, name,
+     country, score and a chevron, the bar under it; no tagline, so each city stays one line. */
+  .near .row-tagline {
+    display: none;
+  }
+  .near .rows .fit::after {
+    content: " ›";
+    color: var(--thread-dim);
   }
   .rows .rank {
     font-family: var(--font-mono);
@@ -699,42 +686,34 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     font-size: 0.82rem;
   }
 
-  /* The score bar shows on the compact cards and the slides only. */
+  /* The score bar shows on the compact cards only. */
   .results .card .fit .bar {
     display: none;
   }
-  .results .bar,
-  .strip .bar {
+  .results .card .bar {
     display: block;
     height: 4px;
     border-radius: 2px;
     background: var(--night-lift);
     overflow: hidden;
   }
-  .results .bar > span,
-  .strip .bar > span {
+  .results .card .bar > span {
     display: block;
     height: 100%;
     background: var(--saffron);
   }
 
-  /* Cards 2 and 3 side by side, small (operator, 2026-11-25; mockup R2, 2026-11-26): photo with
-     its rank, name, score and the one-tap reaction as round icons. « Voir le détail » closes the
-     card and opens it across the width, « Pas pour moi » with it. */
-  .results .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .results .card.first,
-  .results .card:has(> .detail[open]) {
-    grid-column: 1 / -1;
-  }
+  /* Cards 2 and 3 one under the other, compact (operator, 2026-11-27, mockup RA): the city's
+     photo on the left with its rank, and beside it the name, the score, the one-tap reaction as
+     round icons and « Détail ». « Voir le détail » opens the whole card, « Pas pour moi » with
+     it. The taps and « Détail » sit beside the photo, so nothing leaves an empty space under it. */
   .results .card:not(.first):not(:has(> .detail[open])) {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    gap: 8px;
-    overflow: hidden;
+    grid-template-columns: 132px auto minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 12px;
+    row-gap: 8px;
+    padding: 10px;
     border-radius: 16px;
     :is(
       .split,
@@ -752,23 +731,48 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       display: none;
     }
     .photo {
-      order: -1;
+      grid-column: 1;
+      grid-row: 1 / -1;
+      position: relative;
+      min-height: 140px;
     }
     .photo img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
       aspect-ratio: auto;
-      height: 96px;
-      border-radius: 0;
-    }
-    .card-head,
-    [data-taps] {
-      margin: 0 12px;
-    }
-    .discover {
-      justify-self: start;
+      border-radius: 14px;
     }
     .card-head {
+      grid-column: 2 / -1;
+      grid-row: 1;
       grid-template-columns: minmax(0, 1fr);
       row-gap: 4px;
+    }
+    [data-taps] {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: end;
+    }
+    > .detail {
+      grid-column: 3;
+      grid-row: 2;
+      align-self: end;
+      justify-self: end;
+      gap: 0;
+    }
+    /* Three cities have no photo: the text takes the whole width. */
+    &:not(:has(> .photo:not([hidden]))) {
+      grid-template-columns: auto minmax(0, 1fr);
+      .card-head {
+        grid-column: 1 / -1;
+      }
+      [data-taps] {
+        grid-column: 1;
+      }
+      > .detail {
+        grid-column: 2;
+      }
     }
     .rank {
       justify-self: start;
@@ -782,18 +786,23 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 1rem;
+      line-height: 1;
     }
-    /* Over the photo when there is one. */
+    /* On the photo's corner when there is one. */
     &:has(> .photo:not([hidden])) .rank {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      z-index: 1;
+      top: 18px;
+      left: 18px;
     }
     h3 {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
     }
     .card-country {
       font-size: 0.82rem;
+    }
+    .discover {
+      justify-self: start;
     }
     .fit {
       display: flex;
@@ -802,7 +811,7 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       text-align: left;
     }
     .fit b {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
     }
     .fit small {
       display: none;
@@ -811,11 +820,10 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       display: block;
       flex: 1;
     }
-    /* Round icons, so three fit in half the width; the label stays read aloud, the count rides
-       on the corner. */
+    /* Round icons; the label stays read aloud, the count rides on the corner. */
     .taps {
       display: flex;
-      gap: 6px;
+      gap: 4px;
     }
     .taps button {
       position: relative;
@@ -846,212 +854,25 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       font-size: 0.7rem;
       line-height: 18px;
     }
-    > .detail {
-      margin-top: auto;
-    }
     > .detail > summary {
-      justify-self: stretch;
-      justify-content: space-between;
-      margin-top: 4px;
-      padding: 0 12px;
+      gap: 4px;
+      padding: 0 2px;
       border: 0;
-      border-top: 1px solid var(--night-lift);
-      border-radius: 0;
       color: var(--saffron);
       font-size: 0.88rem;
     }
     > .detail > summary::after {
       content: "›";
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
-  }
-
-  /* « Tout près derrière »: cities 4 to 10 as a strip swiped sideways on the phone, a grid on
-     a wide screen where everything fits (operator, 2026-11-26). */
-  .near {
-    display: grid;
-    gap: 12px;
-  }
-  .near[hidden] {
-    display: none;
-  }
-  .near-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .near-swipe {
-    color: var(--thread-dim);
-    font-size: 0.85rem;
-  }
-  .strip {
-    list-style: none;
-    display: flex;
-    gap: 10px;
-    margin: 0 -16px;
-    padding: 2px 16px 4px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 16px;
-    scrollbar-width: none;
-  }
-  .strip::-webkit-scrollbar {
-    display: none;
-  }
-  .slide {
-    flex: none;
-    width: 236px;
-    scroll-snap-align: start;
-  }
-  .slide-open {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    border: 1px solid var(--night-lift);
-    border-radius: 16px;
-    overflow: hidden;
-    background: var(--night-deep);
-    color: var(--thread);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-  }
-  .slide-open[aria-expanded="true"] {
-    border: 2px solid var(--saffron);
-  }
-  .slide-photo {
-    position: relative;
-    display: block;
-    height: 110px;
-    background: var(--night-lift);
-  }
-  .slide-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .slide-photo img[hidden] {
-    display: none;
-  }
-  .slide .rank {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--saffron);
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1;
-  }
-  .slide-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 10px 12px 12px;
-  }
-  .slide-name {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-  }
-  .slide-line {
-    color: var(--thread-dim);
-    font-size: 0.82rem;
-    line-height: 1.35;
-  }
-  .slide-fit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: auto;
-  }
-  .slide-fit b {
-    color: var(--saffron);
-  }
-  .slide-fit .bar {
-    flex: 1;
-  }
-  .slide-more {
-    display: flex;
-    gap: 4px;
-    color: var(--saffron);
-    font-weight: 800;
-    font-size: 0.88rem;
-  }
-  .slide-open[aria-expanded="false"] .when-open,
-  .slide-open[aria-expanded="true"] .when-closed {
-    display: none;
-  }
-  .strip-dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-  }
-  .strip-dots i {
-    width: 6px;
-    height: 6px;
-    border-radius: 3px;
-    background: var(--night-pressed);
-    transition: width 0.2s;
-  }
-  .strip-dots i.on {
-    width: 18px;
-    background: var(--saffron);
-  }
-  .near-detail {
-    display: grid;
-    gap: 12px;
-    background: var(--night-deep);
-    border: 2px solid var(--saffron);
-    border-radius: 16px;
-    padding: 14px;
-  }
-  .near-detail[hidden] {
-    display: none;
-  }
-  .near-detail .detail-body {
-    padding-top: 0;
-    border-top: 0;
-  }
-  .near-detail-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-  }
-  .near-credit {
-    margin: 0;
-    color: var(--thread-faint);
-    font-size: 0.75rem;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .strip-dots i {
-      transition: none;
-    }
-  }
-  @media (min-width: 880px) {
-    .strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      margin: 0;
-      padding: 0;
-      overflow: visible;
-    }
-    .slide {
-      width: auto;
-    }
-    .near-swipe,
-    .strip-dots {
+    .open-long {
       display: none;
     }
+    .open-short {
+      display: inline;
+    }
+  }
+  .open-short {
+    display: none;
   }
 </style>

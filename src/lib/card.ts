@@ -85,13 +85,3 @@ const COSTS: Bilingual<string[]> = {
 /** French by default for the city page, which calls it without a language yet. */
 export const costLabel = (level: number | null, locale: Locale = "fr") =>
   level === null ? undefined : COSTS[locale][level];
-
-/**
- * Which slide of « Tout près derrière » faces the reader, for the dots under the strip
- * (operator, 2026-11-26). Read from how far the strip has scrolled rather than from the slide at
- * the left edge: the last slides never reach that edge, and their dots must still light.
- */
-export function slideAt(scrollLeft: number, maxScroll: number, count: number): number {
-  if (maxScroll <= 0) return 0;
-  return Math.round((Math.min(scrollLeft, maxScroll) / maxScroll) * (count - 1));
-}

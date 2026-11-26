@@ -67,7 +67,7 @@ and change every use in the same commit.
 | Tout reprendre à zéro         | Start again                   |
 | Revoir mon résultat           | See my result again           |
 | Partager                      | Share                         |
-| Glissez (une bande de cartes) | Swipe                         |
+| Détail (bouton court)         | Details                       |
 | Enregistrer l'image           | Save the picture              |
 | Imprimer                      | Print                         |
 | Supprimer                     | Delete                        |
