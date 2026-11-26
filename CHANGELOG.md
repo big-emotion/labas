@@ -6,6 +6,38 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.30.0] - 2026-11-26
+
+### Added
+
+- A home screen before the first question: a big « Faire le quiz » button centred under the map
+  while the cities light up one after another, and « Voir les villes d'Afrique » below.
+- The result shows three, five or ten cities, as close as they are to the first one, with a title
+  that says so (« Trois villes se détachent », « Cinq villes au coude-à-coude », « Dix villes vous
+  ressemblent de près »). Cards 2 and 3 sit side by side, small, until « Voir le détail » opens
+  one; cities 4 to 10 follow under « Tout près derrière ».
+- The quick quiz draws from the whole questionnaire, up to 25 questions, asking only what can
+  still change the cities shown. The budget, the money to put down, the passport, the trips home
+  and the length of a holiday are among them.
+- « Voir mes villes maintenant » appears under the question once the first three cities can no
+  longer change.
+- 110 city scores filled with dated sources: cost of living, money to put down, flights to Europe,
+  power and water, internet, and the returnee networks. Scores with no reliable source stay empty.
+- Two carousel formats for social posts: a city's twins from several cities, and four new formats.
+
+### Changed
+
+- A first stay without a visa now brings visa-free countries nearer instead of removing the others
+  from the list.
+- The budget, the money to put down and the trips home weigh twice an ordinary answer.
+- « En tête pour l'instant » names up to five cities during the quiz.
+
+### Fixed
+
+- Four city scores: Libreville and Tunis internet (3), Lilongwe internet (3, power cuts now
+  counted under power and water only), and Maseru's money to put down, emptied for want of a
+  reliable source.
+
 ## [0.29.1] - 2026-11-23
 
 ### Fixed
@@ -677,7 +709,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.29.1...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.30.0...HEAD
+[0.30.0]: https://github.com/big-emotion/labas/compare/v0.29.1...v0.30.0
 [0.29.1]: https://github.com/big-emotion/labas/compare/v0.29.0...v0.29.1
 [0.29.0]: https://github.com/big-emotion/labas/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/big-emotion/labas/compare/v0.27.0...v0.28.0
