@@ -6,6 +6,28 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.32.0] - 2026-11-26
+
+### Added
+
+- A reader who leaves the result can find it again: the back button brings the same result back,
+  and the home screen offers « Revoir mon résultat » to a reader who has seen one in this browser.
+  It is recomputed from the answers already kept in the browser; nothing is sent.
+- A testimony ledger for operators: first-hand accounts of a city are filed anonymously, and one
+  account can move a city's score by one level once the operator approves it. The first entry,
+  on Dakar's prices and mobile money, moves no score.
+
+### Changed
+
+- During the quiz, the page comes back to the map and the new question after each answer, when
+  they have left the screen.
+- The quiz asks for an e-mail once, with one button, « M'envoyer mon parcours », from the fourth
+  answer. The « Recevoir les nouveautés ? » block leaves the quiz; its box stays in the form, and
+  the result keeps its own sign-up.
+- On the result, cities 2 and 3 lead with their photo, rank, score bar and round reaction buttons;
+  « Pas pour moi » is in their detail. Cities 4 to 10 are a strip of photo cards to swipe on the
+  phone, a grid on a wide screen; a tap opens the city's detail under the strip.
+
 ## [0.31.0] - 2026-11-26
 
 ### Removed
@@ -727,6 +749,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.31.0...HEAD
+[0.32.0]: https://github.com/big-emotion/labas/compare/v0.31.0...v0.32.0
 [0.31.0]: https://github.com/big-emotion/labas/compare/v0.30.0...v0.31.0
 [0.30.0]: https://github.com/big-emotion/labas/compare/v0.29.1...v0.30.0
 [0.29.1]: https://github.com/big-emotion/labas/compare/v0.29.0...v0.29.1
