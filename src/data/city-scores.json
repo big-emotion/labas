@@ -6783,8 +6783,8 @@
         ]
       },
       "internet": {
-        "level": 4,
-        "justification": "La fibre coûte environ 17 € par mois dans les grandes villes, vendue par trois opérateurs.",
+        "level": 3,
+        "justification": "La fibre coûte environ 17 € par mois dans les grandes villes, vendue par trois opérateurs, mais le débit fixe moyen du pays reste d'environ 22,5 Mbit/s (2026).",
         "confidence": "sourced",
         "sources": [
           {
@@ -6792,6 +6792,12 @@
             "url": "https://www.expat.com/fr/guide/afrique/tunisie/",
             "published": "2025-12-23",
             "accessed": "2026-11-15"
+          },
+          {
+            "title": "Tunisia: internet speed and telecommunication — WorldData.info",
+            "url": "https://www.worlddata.info/africa/tunisia/telecommunication.php",
+            "published": "2026",
+            "accessed": "2026-11-26"
           }
         ]
       },
@@ -10988,8 +10994,8 @@
         ]
       },
       "internet": {
-        "level": 4,
-        "justification": "La fibre donne à domicile des débits proches de ceux de la France (sept. 2026) ; 60 Mbit/s coûtent environ 40 000 FCFA (61 €) par mois.",
+        "level": 3,
+        "justification": "La fibre donne à domicile des débits proches de ceux de la France (sept. 2026) ; 60 Mbit/s coûtent environ 40 000 FCFA (61 €) par mois. Internet a été coupé dans tout le Gabon du 26 au 30 août 2023, pendant les élections, ce qui plafonne la note à 3.",
         "confidence": "sourced",
         "sources": [
           {
@@ -11003,6 +11009,12 @@
             "url": "https://www.expat.com/fr/guide/afrique/gabon/",
             "published": "2025-11-06",
             "accessed": "2026-11-15"
+          },
+          {
+            "title": "Internet shutdown in Gabon continues into third day following national elections — The Record",
+            "url": "https://therecord.media/internet-shut-off-in-gabon-after-election",
+            "published": "2023-08",
+            "accessed": "2026-11-26"
           }
         ]
       },
@@ -15253,8 +15265,8 @@
         ]
       },
       "internet": {
-        "level": 2,
-        "justification": "Box fixe vers 54 € par mois et Starlink autorisé, mais les délestages coupent la connexion sans batterie de secours.",
+        "level": 3,
+        "justification": "Une box fixe coûte vers 54 € par mois et Starlink est autorisé ; à l'échelle du pays, le débit fixe moyen est d'environ 22 Mbit/s. Les délestages comptent dans la note du courant et de l'eau.",
         "confidence": "sourced",
         "sources": [
           {
@@ -15269,10 +15281,9 @@
             "accessed": "2026-11-15"
           },
           {
-            "title": "ESCOM announces load shedding — Malawi24",
-            "url": "https://malawi24.com/2025/11/09/escom-announces-load-shedding-as-power-generation-falls-short/",
-            "published": "2025-11-09",
-            "accessed": "2026-11-15"
+            "title": "Malawi — Internet Society Pulse",
+            "url": "https://pulse.internetsociety.org/en/reports/mw",
+            "accessed": "2026-11-26"
           }
         ]
       },
@@ -16360,17 +16371,10 @@
         ]
       },
       "setupCost": {
-        "level": 5,
-        "justification": "Bail de 6 à 12 mois avec un dépôt d'un à deux mois de loyer, selon un agrégateur (2026).",
-        "confidence": "sourced",
-        "sources": [
-          {
-            "title": "Lesotho cost of rent & housing — 360nations",
-            "url": "https://360nations.com/africa/lesotho/cost-rent-housing.html",
-            "published": "2026-02",
-            "accessed": "2026-11-15"
-          }
-        ]
+        "level": null,
+        "justification": "Pas de source fiable trouvée.",
+        "confidence": "editorial",
+        "sources": []
       },
       "negotiation": {
         "level": 2,
@@ -28853,6 +28857,12 @@
           {
             "title": "Guide de la Tunisie — Expat.com",
             "url": "https://www.expat.com/fr/guide/afrique/tunisie/",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Tunisia: internet speed and telecommunication — WorldData.info",
+            "url": "https://www.worlddata.info/africa/tunisia/telecommunication.php",
+            "published": "2026",
             "accessed": "2026-11-26"
           }
         ]
