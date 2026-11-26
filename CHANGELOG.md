@@ -6,6 +6,23 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.31.0] - 2026-11-26
+
+### Removed
+
+- The « Investir sans y vivre » path: the site has no city-level data on land security or rental
+  yield to rank cities for an investment. The project question offers four paths; a journey saved
+  with this one still opens, and the quiz asks for a project again.
+
+### Fixed
+
+- After « Jusqu'où aimeriez-vous aller ? », the quick quiz again asks the faith or « de l'autre
+  côté du Sahara » before closing, instead of sometimes skipping them.
+
+### Changed
+
+- Astro 7.4.13.
+
 ## [0.30.0] - 2026-11-26
 
 ### Added
@@ -709,7 +726,8 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 - A reader who does not give their origin is no longer sent where anti-Black racism is
   documented.
 
-[Unreleased]: https://github.com/big-emotion/labas/compare/v0.30.0...HEAD
+[Unreleased]: https://github.com/big-emotion/labas/compare/v0.31.0...HEAD
+[0.31.0]: https://github.com/big-emotion/labas/compare/v0.30.0...v0.31.0
 [0.30.0]: https://github.com/big-emotion/labas/compare/v0.29.1...v0.30.0
 [0.29.1]: https://github.com/big-emotion/labas/compare/v0.29.0...v0.29.1
 [0.29.0]: https://github.com/big-emotion/labas/compare/v0.28.0...v0.29.0
