@@ -33,6 +33,10 @@ export type Landscape = "beach" | "water" | "nature" | "wildSpaces" | "urban" | 
 type Origin = City["zone"] | "ameriques";
 
 export interface Answers extends ProfileAnswers {
+  /**
+   * « investir » is no longer offered (operator, 2026-11-26: no city-level data on land security or
+   * rental yield); it stays readable so journeys saved with it still rank.
+   */
   project?: "installer" | "pied" | "tester" | "investir" | "decouvrir";
   budget?: "serre" | "moyen" | "large";
   family?: "celib" | "couple" | "fonder" | "parents";
