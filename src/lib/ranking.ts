@@ -449,7 +449,19 @@ const TEMPERAMENT_WEIGHT = 4;
  * listed counts 1. The daily language decides first: ticking Arabic must turn the list over at
  * the thirteenth answer too (operator, 2026-11-16).
  */
-const ANSWER_WEIGHT: Record<string, number> = { languages: 3, project: 1.5, music: 0.5 };
+/**
+ * Money and trips home weigh twice an ordinary answer (operator, 2026-11-26): the research on the
+ * five paths found them the readers' first worries, and at the plain weight they moved half a
+ * city of ten.
+ */
+const ANSWER_WEIGHT: Record<string, number> = {
+  languages: 3,
+  project: 1.5,
+  music: 0.5,
+  budget: 2,
+  setupBudget: 2,
+  tripsHome: 2,
+};
 /**
  * How strongly the family's region draws the reader, by project: settling far from one's own is
  * harder than travelling far from them, which is the point of a trip (operator, 2026-11-16).

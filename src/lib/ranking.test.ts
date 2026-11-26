@@ -917,3 +917,30 @@ describe("a first stay without a visa (operator, 2026-11-26: a weight, no longer
     );
   });
 });
+
+// Operator, 2026-11-26: money and trips home are the readers' first worries (agent research of
+// the five paths), so these answers weigh twice an ordinary one.
+describe("the money a reader has and the trips home they plan", () => {
+  const base = { project: "installer", languages: ["fr"], size: 3, pace: 1 } as Answers;
+  const meanLevel = (answers: Answers, key: "cost" | "setupCost") => {
+    const levels = rankCities(answers)
+      .slice(0, 10)
+      .map((m) => m.city.scores[key].level)
+      .filter((level): level is number => level !== null);
+    return levels.reduce((sum, level) => sum + level, 0) / levels.length;
+  };
+
+  it("a tight budget brings at least three cheaper cities into the ten first", () => {
+    const before = new Set(topCities(base, 10));
+    const tight = topCities({ ...base, budget: "serre" } as Answers, 10);
+    expect(tight.filter((name) => !before.has(name)).length).toBeGreaterThanOrEqual(3);
+    expect(meanLevel({ ...base, budget: "serre" } as Answers, "cost")).toBeGreaterThan(
+      meanLevel(base, "cost"),
+    );
+  });
+
+  it("little money to put down makes the ten first ask a whole level less upfront", () => {
+    const low = meanLevel({ ...base, setupBudget: "low" } as Answers, "setupCost");
+    expect(low - meanLevel(base, "setupCost")).toBeGreaterThanOrEqual(1);
+  });
+});
