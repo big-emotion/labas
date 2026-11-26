@@ -4124,10 +4124,27 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Le ministère des Affaires étrangères reçoit à Kigali les Rwandais de l'étranger (rencontre de janv. 2025, tournées de jeunes) et un « Diaspora Homecoming » s'y tient en août 2026 ; un réseau InterNations organise des soirées mensuelles.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Minister Nduhungirehe hosts members of Rwanda Community Abroad — MINAFFET",
+            "url": "https://minaffet.gov.rw/updates/news-details/minister-nduhungirehe-hosts-members-of-rwanda-community-abroad",
+            "published": "2025-01-03",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "USA Rwandan diaspora homecoming set for August 2026 — The New Times",
+            "url": "https://www.newtimes.co.rw/article/27832/news/international/usa-rwandan-diaspora-homecoming-set-for-august-2026",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "InterNations — Kigali expats",
+            "url": "https://assets.in-cdn.net/kigali-expats",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -5070,10 +5087,22 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Durban accueille chaque année la conférence reSURGEnce, tournée vers la diaspora africaine (sept. 2025, oct. 2026), mais c'est un salon d'affaires : aucun réseau de repats installé n'a été trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Durban gears up for Global reSURGEnce conference 2025 — SAnews",
+            "url": "https://www.sanews.gov.za/node/76957",
+            "published": "2025-09",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Durban to host global investors at reSURGEnce conference — SAnews",
+            "url": "https://www.sanews.gov.za/south-africa/durban-host-global-investors-resurgence-conference",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 4,
@@ -5209,10 +5238,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "EDM a programmé en août 2026 des coupures de 7 à 8 heures par quartier pour maintenance, et l'eau a été restreinte dans six quartiers de Matola fin octobre 2026 ; un onduleur est prudent.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mozambique: EDM schedules power cuts in parts of Maputo city and province from Tuesday to Friday — Club of Mozambique",
+            "url": "https://clubofmozambique.com/news/mozambique-edm-schedules-power-cuts-in-parts-of-maputo-city-and-province-from-tuesday-to-friday/",
+            "published": "2026-08-18",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Mozambique: SAAS-Maputo announces water supply restrictions in six areas from 31 October — Club of Mozambique",
+            "url": "https://clubofmozambique.com/news/mozambique-saas-maputo-announces-water-supply-restrictions-in-six-areas-from-31-october/",
+            "published": "2026-10-29",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 3,
@@ -5615,10 +5657,22 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "L'Economic Development Board gère le Mauritian Diaspora Scheme, un guichet public avec avantages fiscaux pour les Mauriciens qui reviennent ; aucune rencontre régulière de repats n'a été trouvée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mauritian Diaspora Scheme — Economic Development Board",
+            "url": "https://diaspora.edbmauritius.org/",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Ile Maurice: « Mauritian Diaspora Scheme » — AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202507250506.html",
+            "published": "2025-07-25",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -5915,10 +5969,28 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Le ministère des Affaires étrangères et de l'Émigration a réuni au Caire la 6e Conférence des Égyptiens de l'étranger (août 2025, environ 1 200 participants) ; l'association Caire Accueil reçoit aussi les nouveaux arrivants.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Egypt inaugurates 6th Expatriates Conference with strong government, diaspora turnout — Daily News Egypt",
+            "url": "https://www.dailynewsegypt.com/?p=835358",
+            "published": "2025-08",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Égypte : le gouvernement lance la 6e conférence des Égyptiens de l'étranger — APA News",
+            "url": "https://fr.apanews.net/news/egypte-le-gouvernement-lance-la-6e-conference-des-egyptiens-de-letranger/",
+            "published": "2025-08",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Caire Accueil, association d'intégration des expatriés — Le Petit Journal",
+            "url": "https://lepetitjournal.com/le-caire/communaute/caire-accueil-association-integration-expatries-368021",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 5,
@@ -6228,10 +6300,23 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "La Maison de la diaspora marocaine, association née à Casablanca en 2023, y a réuni plus de 220 Marocains du monde en nov. 2024 ; le centre régional d'investissement y tient une semaine de la diaspora (août 2025).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Aux deuxièmes rencontres de la Maison de la diaspora marocaine — Le360",
+            "url": "https://fr.le360.ma/societe/aux-deuxiemes-rencontres-de-la-maison-de-la-diaspora-marocaine-les-marocains-du-monde-explorent_AT3OVUEQR5D45HH2QX7CUJV7PM/",
+            "published": "2024-11",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Moroccan Diaspora Investment Week, August 11–15, 2025 — Casainvest",
+            "url": "https://casainvest.ma/en/actualites/moroccan-diaspora-investment-week-august-11%E2%80%9315-2025",
+            "published": "2025-08",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 4,
@@ -6531,10 +6616,23 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Un secrétariat d'État chargé de la communauté nationale à l'étranger siège à Alger, et le Conseil mondial de la diaspora algérienne y a réuni une centaine d'investisseurs en sept. 2025 ; aucun groupe de repats n'a été trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "IATF 2025 - Le CMDA réunit à Alger une centaine d'investisseurs de la diaspora — AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202509080124.html",
+            "published": "2025-09-08",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Algériens de l'étranger : un code QR pour contacter directement Sofiane Chaïb — TSA",
+            "url": "https://www.tsa-algerie.com/algeriens-de-letranger-un-code-qr-pour-contacter-directement-sofiane-chaib/",
+            "published": "2025-11",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 4,
@@ -8824,10 +8922,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Une connexion illimitée de 50 à 60 Mbit/s coûte 2 500 à 5 500 dalasis par mois, mais l'internet fixe est souvent lent et instable hors des offres haut de gamme. QCell vend la fibre de 10 à 150 Mbit/s dans le pays.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cost of living in Gambia for expats — Cyril Jarnias",
+            "url": "https://www.jarniascyril.com/expatriation/install-in-gambia-expat-guide-complete/cost-of-living-gambia-expats-budget-housing-schools-health/",
+            "published": "2026-04-28",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "QFiber — QCell",
+            "url": "https://qcell.gm/qfiber/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -9085,10 +9195,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "En septembre 2025, Praia a subi des coupures de 12 heures ou plus chaque jour pendant des semaines, sans pompage d'eau ; toute l'île de Santiago a encore été privée de courant la nuit du 17 novembre 2026.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Apagões desde início do mês comprometem dia-a-dia da capital de Cabo Verde — RTP",
+            "url": "https://www.rtp.pt/noticias/mundo/apagoes-desde-inicio-do-mes-comprometem-dia-a-dia-da-capital-de-cabo-verde_n1685719",
+            "published": "2025-09",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Santiago island blackout, Cabo Verde (EPEC) — The Rio Times",
+            "url": "https://www.riotimesonline.com/santiago-island-blackout-cabo-verde-epec/",
+            "published": "2026-11-18",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 3,
@@ -9516,10 +9639,17 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Une Direction générale des Mauritaniens de l'extérieur existe au ministère des Affaires étrangères (décret de mars 2025) ; un forum de la diaspora était annoncé pour nov. 2025, sans compte rendu trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Investir dans l'avenir de la Mauritanie : la diaspora — Financial Afrik",
+            "url": "https://www.financialafrik.com/2025/09/18/investir-dans-lavenir-de-la-mauritanie-les-entreprises-sociales-et-le-financement-innovant-portes-par-la-diaspora",
+            "published": "2025-09-18",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -9660,10 +9790,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Orange et Moov Africa vendent la fibre à Bamako ; Moov a doublé ses débits (jusqu'ici 100 Mbit/s) sans hausse de prix en juin 2026. Une box de 60 Mbit/s et plus coûte environ 57 $ par mois.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mali : Moov Africa multiplie par deux la vitesse de l'internet à domicile — Osiris",
+            "url": "https://osiris.sn/mali-moov-africa-multiplie-par-deux-la-vitesse-de-l-internet-a-domicile.html",
+            "published": "2026-06-15",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Cost of Living in Bamako — Numbeo",
+            "url": "https://www.numbeo.com/cost-of-living/in/Bamako-Mali",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -9791,10 +9933,28 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Le ministère des Maliens établis à l'extérieur a tenu à Bamako le premier Forum international de la diaspora (juil. 2025), lancé un cadre de concertation (déc. 2025) et accueille les retours avec l'OIM.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mali : L'État et la Diaspora en forum de concertation à Bamako — AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202507200027.html",
+            "published": "2025-07-20",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Le Mali lance un cadre de concertation avec sa diaspora — APA News",
+            "url": "https://fr.apanews.net/mali/le-mali-lance-un-cadre-de-concertation-avec-sa-diaspora/",
+            "published": "2025-12-16",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Mali : plus de 27 800 ressortissants accompagnés au retour — APA News",
+            "url": "https://fr.apanews.net/society/mali-plus-de-27-800-ressortissants-accompagnes-au-retour/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 4,
@@ -9915,10 +10075,28 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Le réseau de fibre d'Orange dessert les 12 arrondissements ; chez Moov Africa, 100 Mbit/s coûtent 15 000 F CFA par mois à partir du 27 novembre 2026. Les tests d'usagers donnent environ 45 Mbit/s en moyenne.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Burkina Faso : Moov Africa double le débit fibre sans surcoût — Bénin Web TV",
+            "url": "https://beninwebtv.bj/burkina-faso-moov-africa-double-debit-fibre-sans-surcout/",
+            "published": "2026-11",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Internet Speed in Ouagadougou (Burkina Faso) — SpeedGEO",
+            "url": "https://www.speedgeo.net/statistics/burkina-faso/ouagadougou",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Orange Burkina : la fibre optique déployée à Bobo — Burkina 24",
+            "url": "https://burkina24.com/?p=293387",
+            "published": "2022-08-03",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -12086,10 +12264,22 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "Le gouvernement a réuni à Bangui la diaspora, l'OIM et la SFI sur l'investissement (2026), après un projet Diaspora du PNUD (2023-2025) ; aucun groupe de repats sur place n'a été trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mobiliser la diaspora pour une croissance inclusive — Banque mondiale",
+            "url": "https://www.banquemondiale.org/fr/brief/2026/05/04/mobiliser-la-diaspora-pour-une-croissance-inclusive-une-concertation-strategique-entre-le-gouvernement-les-partenaires-i",
+            "published": "2026-05-04",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Diaspora, entrepreneuriat et innovation : impact du projet Diaspora de 2023 à 2025 — PNUD",
+            "url": "https://www.undp.org/fr/central-african-republic/actualites/diaspora-entrepreneuriat-et-innovation-impact-du-projet-diaspora-de-2023-2025",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -13119,10 +13309,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "Presque tous les foyers ont le courant, fourni par des compagnies privées et présenté comme disponible 24 h sur 24 (2025), mais il est cher ; l'eau du robinet n'est pas potable et les quartiers pauvres dépendent des camions-citernes.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Somalia: Country Focus (May 2025), 2.1.3 Mogadishu socioeconomic indicators — EUAA",
+            "url": "https://euaa.europa.eu/coi/somalia/2025/country-focus/21-mogadishu/213-socioeconomic-indicators",
+            "published": "2025-05",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Energy access, renewable transition top the agenda at Somalia Success Stories Forum — Garowe Online",
+            "url": "https://www.garoweonline.com/en/news/somalia/energy-access-renewable-transition-top-the-agenda-at-somalia-success-stories-forum",
+            "published": "2025-10",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 2,
@@ -13222,10 +13425,23 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 4,
+        "justification": "Le service de la diaspora du ministère des Affaires étrangères organise à Mogadiscio une soirée annuelle des repats et une conférence des Somaliens revenus de la diaspora (5e édition fin 2025).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mogadishu hosts 5th Somali Diaspora Returnees Conference — MFA Somalia",
+            "url": "https://web.mfa.gov.so/mogadishu-hosts-5th-somali-diaspora-returnees-conference/",
+            "published": "2025-12",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Ministry of Foreign Affairs hosts annual Diaspora Night in Mogadishu — SONNA",
+            "url": "https://sonna.so/en/ministry-of-foreign-affairs-hosts-annual-diaspora-night-in-mogadishu",
+            "published": "2025-03",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": null,
@@ -13568,10 +13784,27 @@
         ]
       },
       "internet": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "Les tests d'usagers à Tripoli donnent environ 12 Mbit/s en moyenne sur une ligne fixe (avril 2025 à mars 2026) ; les offres fibre de LTT vont de 8 à 20 Mbit/s. Internet a été coupé environ 12 heures à Tripoli en mai 2025.",
+        "confidence": "measured",
+        "sources": [
+          {
+            "title": "Internet Speed in Tripoli (Libya) — SpeedGEO",
+            "url": "https://www.speedgeo.net/statistics/libya/tripoli",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "LTT — speed.is",
+            "url": "https://speed.is/?p=3301",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Libya: Freedom on the Net 2025 — Freedom House",
+            "url": "https://freedomhouse.org/country/libya/freedom-net/2025",
+            "published": "2025",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -13904,10 +14137,22 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Le Secrétariat des Soudanais travaillant à l'étranger, service public, organise avec l'OIM des retours vers Khartoum en 2026 ; ce sont des retours d'exil de guerre, sans réseau de repats repéré.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Sudan: Government Confirms Full Return to Khartoum — AllAfrica",
+            "url": "https://allafrica.com/stories/202602110304.html",
+            "published": "2026-02-11",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Sudan launches Joint Initiative for Migrant Protection and Reintegration of Returnees — IOM",
+            "url": "https://mena.iom.int/news/sudan-launches-joint-initiative-migrant-protection-and-reintegration-returnees",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": null,
@@ -15820,17 +16065,10 @@
         ]
       },
       "setupCost": {
-        "level": 5,
-        "justification": "Selon un agrégateur (février 2026), les baux durent 6 à 12 mois avec une caution d'un à deux mois de loyer ; aucune avance de plusieurs mois n'est signalée.",
-        "confidence": "sourced",
-        "sources": [
-          {
-            "title": "Eswatini cost of rent & housing — 360nations",
-            "url": "https://360nations.com/africa/eswatini/cost-rent-housing.html",
-            "published": "2026-02",
-            "accessed": "2026-11-26"
-          }
-        ]
+        "level": null,
+        "justification": "Pas de source fiable trouvée.",
+        "confidence": "editorial",
+        "sources": []
       },
       "negotiation": {
         "level": 2,
@@ -15869,10 +16107,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "À l'échelle du pays : délestages chaque hiver de juin à août 2025, suspendus ensuite, et un programme de gestion de la charge publié en février 2026. Rien de propre à Mbabane.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Load shedding pause after 31 August 2025 — Eswatini Observer",
+            "url": "https://eswatiniobserver.com/?p=3361",
+            "published": "2025-08-16",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "EEC Load Management Schedule, February 2026 — Eswatini Electricity Company",
+            "url": "https://www.eec.co.sz/media/loadmanagement/docs/EEC_LOAD_MANAGEMENT_SCHEDULE_FEB_2026.pdf",
+            "published": "2026-02",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 2,
@@ -16032,10 +16283,16 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Le ministère des Affaires étrangères a ouvert à Mbabane une cellule de la diaspora avec l'OIM, mais aucune activité récente ni aucun groupe de repats n'a été trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Strengthening the Government of Eswatini's Capacity to Engage the Diaspora — IOM",
+            "url": "https://iom.int/project/strengthening-government-eswatinis-capacity-engage-diaspora-social-and-economic-development",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 2,
@@ -16713,10 +16970,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "L'eau est coupée la nuit, de 21 h à 5 h, dans le nord et le sud de Mahé depuis novembre 2025, et de nouvelles restrictions ont suivi la sécheresse de juillet 2026 ; le courant tient bien.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "PUC explains re-introduction of nationwide water restrictions — Seychelles Nation",
+            "url": "https://nation.sc/articles/28303/puc-explains-re-introduction-of-nationwide-water-restrictions",
+            "published": "2025-11-21",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "PUC imposes water restrictions amid prolonged dry spell — Seychelles Nation",
+            "url": "https://nation.sc/articles/31442/puc-imposes-water-restrictions-amid-prolonged-dry-spell",
+            "published": "2026-07-09",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 4,
@@ -18703,10 +18973,21 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Plus d'un millier de retraités français vivent à Saly à l'année, mais aucune association locale active d'accueil n'a été trouvée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Sénégal – Les résidents étrangers de Saly face à l'incertitude — Dakaractu",
+            "url": "https://www.dakaractu.com/Senegal-Les-residents-etrangers-de-Saly-face-a-l-incertitude-entre-insecurite-fiscalite-et-defis-sanitaires_a259189.amp.html",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Retraite au Sénégal : de Saly à la Casamance — Au Sénégal",
+            "url": "https://au-senegal.com/retraite-au-senegal-de-saly-a-la-casamance-un-autre-choix-de-vie,18539.html",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 2,
@@ -19114,16 +19395,47 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "À l'échelle du pays, Lomé et les grandes villes ont subi des coupures pendant plusieurs semaines en mars 2026 faute de courant suffisant. Rien de propre à Kpalimé, dont le réseau est en cours de modernisation.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Grid constraints and supply shortfalls behind recent outages, utility says — Togo First",
+            "url": "https://www.togofirst.com/en/energy/1203-18444-grid-constraints-and-supply-shortfalls-behind-recent-outages-utility-says",
+            "published": "2026-03-12",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Togo: Un nouveau souffle pour le réseau électrique de six villes — AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202511040301.html",
+            "published": "2025-11-04",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "Aucune offre de fibre confirmée à Kpalimé : la fibre à domicile, vendue par Canalbox et Yas, mesure 33 à 40 Mbit/s en moyenne dans le pays, surtout à Lomé. Internet a été perturbé dans tout le Togo de fin juin à septembre 2025.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Analyse QoE FTTH — ARCEP Togo",
+            "url": "https://arcep.tg/wp-content/uploads/2026/05/Analyse-QoE-FTTH-Mai2026.pdf",
+            "published": "2026-05",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Togo : la fibre optique attendue dans 7 villes de l'intérieur en 2021 — Financial Afrik",
+            "url": "https://www.financialafrik.com/2021/03/12/togo-la-fibre-optique-attendue-dans-7-villes-de-linterieur-en-2021/",
+            "published": "2021-03-12",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Togo — Amnesty International",
+            "url": "https://www.amnesty.org/en/location/africa/west-and-central-africa/togo/report-togo/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -19578,10 +19890,29 @@
         "sources": []
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 1,
+        "justification": "La ville est restée près de 36 ans sans courant public fiable ; le réseau n'est remis sous tension que par quartiers depuis juillet 2026, et le pays subit des délestages en saison sèche. Un groupe électrogène reste indispensable.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Liberia: 'We've Waited 36 Years' — AllAfrica",
+            "url": "https://allafrica.com/stories/202606230280.html",
+            "published": "2026-06-23",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Liberia: Low-Voltage Installation Begins Under EU-Funded Buchanan Power Project — AllAfrica",
+            "url": "https://allafrica.com/stories/202607150007.html",
+            "published": "2026-07-14",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Liberia: LEC Moves to End Power Crisis — AllAfrica",
+            "url": "https://allafrica.com/stories/202603310539.html",
+            "published": "2026-03-31",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 1,
@@ -19714,10 +20045,23 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Des associations de Bassa aux États-Unis (UNIBOA) financent écoles et clinique dans le comté, et l'État organise un retour annuel de la diaspora ; aucun groupe de repats à Buchanan même.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "US-based group breaks ground for 29-room clinic project in Grand Bassa County — FrontPage Africa",
+            "url": "https://frontpageafricaonline.com/us-based-group-breaks-ground-for-29-room-clinic-project-in-grand-bassa-county/",
+            "published": "2025-04",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Liberia: Govt Launches Historic Diaspora Return 2025 — AllAfrica",
+            "url": "https://allafrica.com/stories/202511130328.html",
+            "published": "2025-11-13",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 1,
@@ -20481,10 +20825,27 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "L'association Gambia Returnees from the Backway, soutenue par l'OIM, réunit des migrants revenus, et la direction de la diaspora et des migrations siège à Banjul, à 15 km.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "IOM hits milestone 5,000 Gambians supported with assisted return — IOM",
+            "url": "https://www.iom.int/news/iom-hits-milestone-5000-gambians-supported-assisted-return",
+            "published": "2025-03",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Gambia strengthens collaboration with IOM through strategic dialogue — The Point",
+            "url": "https://thepoint.gm/africa/gambia/headlines/gambia-strengthens-collaboration-with-iom-through-strategic-dialogue",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Life after Return — IOM (Medium)",
+            "url": "https://medium.com/@UNmigration/life-after-return-8bc7d765820a",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -20596,10 +20957,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "La tempête d'août 2025 a coupé la production d'eau de São Vicente, relevée à 7 800 m³ par jour une semaine après. À l'échelle du pays, 51 heures sans courant en moyenne en 2022 (chiffres Electra).",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cabo Verde floods: Electra raises São Vicente water production (Lusa) — AMAN Alliance",
+            "url": "https://www.aman-alliance.org/Home/ContentDetail/93808",
+            "published": "2025-08-21",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Blackouts in Cape Verde dropped 53% in 2022 to 51 hours without electricity — The Rio Times",
+            "url": "https://www.riotimesonline.com/blackouts-in-cape-verde-dropped-53-in-2022-to-51-hours-without-electricity/",
+            "published": "2023-06-01",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 3,
@@ -20815,10 +21189,22 @@
         "sources": []
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Aucune offre de fibre à domicile trouvée : la box 4G de Mattel (100 Go pour 800 MRU) est vendue dans le pays, sans débit annoncé. L'internet mobile est coupé pendant les examens, encore en juin et juillet 2025.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Wifina — Mattel",
+            "url": "https://www.mattel.mr/fr/particuliers/produits/wifina",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Mauritanie. Coupures d'Internet lors des examens — Le360 Afrique",
+            "url": "https://afrique.le360.ma/afrique-du-nord/mauritanie/mauritanie-coupures-dinternet-lors-des-examens-les-autorites-deconnectees-de-la-realite_5FANYEQDHNFXRLTJAIKMARIRCA/",
+            "published": "2025-07-08",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -21037,10 +21423,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Moov Africa vend la fibre jusqu'à 100 Mbit/s à Ségou et a annoncé le doublement des débits en juin 2026. À l'échelle du pays, les tests d'usagers donnent environ 30 Mbit/s en moyenne sur une ligne fixe.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Mali : Moov Africa multiplie par deux la vitesse de l'internet à domicile — Osiris",
+            "url": "https://osiris.sn/mali-moov-africa-multiplie-par-deux-la-vitesse-de-l-internet-a-domicile.html",
+            "published": "2026-06-15",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Internet Speed in Mali — SpeedGEO",
+            "url": "https://www.speedgeo.net/statistics/mali",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": null,
@@ -21206,16 +21604,42 @@
         "sources": []
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Délestages du soir connus à Bobo et Ouagadougou ; à l'échelle du pays, moins de coupures en 2025 qu'en 2024, et la centrale de Bobo est passée à 86,4 MW en août 2026. Un onduleur reste conseillé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Burkina Faso: Offense énergétique — Sidwaya via AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202602090488.html",
+            "published": "2026-02-09",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Burkina Faso: Chantier de la centrale thermique Bobo 2 — AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202602090479.html",
+            "published": "2026-02-09",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Orange vend la fibre à Bobo-Dioulasso depuis 2022, de 30 à 300 Mbit/s dès 14 900 F CFA par mois, et Moov Africa y a aussi la fibre ; aucune donnée sur les quartiers couverts.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Orange Burkina : la fibre optique déployée à Bobo — Burkina 24",
+            "url": "https://burkina24.com/?p=293387",
+            "published": "2022-08-03",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Burkina Faso : Moov Africa double le débit fibre sans surcoût — Bénin Web TV",
+            "url": "https://beninwebtv.bj/burkina-faso-moov-africa-double-debit-fibre-sans-surcout/",
+            "published": "2026-11",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -21318,10 +21742,23 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "La Journée internationale des migrants s'est tenue à Bobo-Dioulasso avec l'OIM (déc. 2025), et des séjours d'afrodescendants y passent en 2026 ; aucune association de repats sur place.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Journée internationale des migrants : l'inclusion sociale célébrée — Sidwaya",
+            "url": "https://www.sidwaya.info/journee-internationale-des-migrants-linclusion-sociale-celebree/",
+            "published": "2025-12",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Retour des Afrodescendants au pays - La présidente de ADDI déroule le programme du séjour — AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202604200757.html",
+            "published": "2026-04-20",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -22269,10 +22706,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Camtel, seul à vendre la fibre à domicile au Cameroun et encore en déploiement, compte Kribi parmi ses villes couvertes en internet fixe ; aucune offre d'Orange ou de MTN par fibre trouvée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Our network coverage — Camtel",
+            "url": "https://camtel.cm/coverage",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Camtel FiberConnect : forfaits et prix 2026 — Le Fisk",
+            "url": "https://lefisk.cm/blog/camtel-fiberconnect-fibre-optique-cameroun-forfaits-prix-2026",
+            "published": "2026",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -23132,10 +23581,23 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Deux réseaux de fibre à domicile : Moov Africa Gabon Telecom depuis 2019 et Canalbox, jusqu'à 200 Mbit/s, depuis 2022. Internet a été coupé dans tout le Gabon en août 2023, ce qui plafonne la note à 3.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Moov Africa Gabon Telecom : leader de la couverture Internet FTTH en 2025 — Gabonreview",
+            "url": "https://www.gabonreview.com/moov-africa-gabon-telecom-extension-de-la-fibre-optique-ftth-en-2025/",
+            "published": "2025-01-29",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Internet : Canalbox se pose à Port-Gentil — Gabonreview",
+            "url": "https://www.gabonreview.com/internet-canalbox-se-pose-a-port-gentil/",
+            "published": "2022-06-24",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 3,
@@ -24102,10 +24564,23 @@
         "sources": []
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 1,
+        "justification": "Orange y a lancé la 4G en mai 2025, sans débit annoncé ; aucune offre fixe trouvée. À l'échelle du pays, 15,5 % des habitants utilisaient internet en 2025.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Centrafrique : Orange déploie la 4G dans 4 premières villes — Osiris",
+            "url": "https://osiris.sn/centrafrique-orange-deploie-la-4g-dans-4-premieres-villes.html",
+            "published": "2025-05-19",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Digital 2025: Central African Republic — DataReportal",
+            "url": "https://datareportal.com/reports/digital-2025-central-african-republic",
+            "published": "2025",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -24629,10 +25104,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "L'eau n'arrive pas de façon régulière et le réseau ne couvre qu'environ 60 % des habitants (projet clos fin 2024). La ville a été épargnée par la panne nationale de mars 2024.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "EU WOP Ethiopia Bahir Dar — VEI",
+            "url": "https://vei.nl/partners/ethiopia-bahir-dar",
+            "published": "2024",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Nationwide power blackout hits Ethiopia — The Star",
+            "url": "https://www.thestar.com.my/news/world/2024/03/29/nationwide-power-blackout-hits-ethiopia",
+            "published": "2024-03-29",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 2,
@@ -25223,10 +25711,17 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "En août 2026, un quartier de Muriet est resté un mois sans eau, la compagnie accusant les coupures de courant aux stations de pompage ; elle rationne souvent l'eau.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Arusha residents march to leader's home over month-long water shortage — The Citizen",
+            "url": "https://www.thecitizen.co.tz/tanzania/news/national/arusha-residents-march-to-leader-s-home-over-month-long-water-shortage-5559296",
+            "published": "2026-08-15",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 3,
@@ -25729,10 +26224,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "En août 2025, les pluies ont arrêté l'usine d'eau de Gihira : des quartiers sont restés près d'une semaine sans eau, avec des coupures de courant.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Heavy rainfall disrupts water supply in Rubavu — The New Times",
+            "url": "https://www.newtimes.co.rw/article/28988/news/infrastructure/heavy-rainfall-disrupts-water-supply-in-rubavu",
+            "published": "2025-08-18",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Rwanda: Three Water Treatment Plants Stop Operations Due to Floods — AllAfrica",
+            "url": "https://allafrica.com/stories/202508190081.html",
+            "published": "2025-08-19",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 3,
@@ -25977,10 +26485,21 @@
         ]
       },
       "internet": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "La 4G de Lumitel couvre Gitega depuis 2016 ; l'internet fixe est presque absent des foyers burundais. Starlink est vendu dans le pays depuis 2024, à 44 $ par mois.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Burundi's Lumitel ready to roll with 4G nationally — ITWeb Africa",
+            "url": "https://itweb.africa/article/burundis-lumitel-ready-to-roll-with-4g-nationally/KPNG8v8KrxQq4mwD",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Starlink, une bouffée d'oxygène pour l'internet burundais — Iwacu",
+            "url": "https://www.iwacu-burundi.org/starlink-une-bouffee-doxygene-pour-linternet-burundais/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -26099,10 +26618,17 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "Le ministère des Affaires étrangères organise une semaine annuelle de la diaspora (juil. 2025), mais à Bujumbura ; aucun groupe de repats n'a été trouvé à Gitega.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Ouverture de la semaine de la diaspora burundaise — Le Renouveau",
+            "url": "https://lerenouveau.bi/ouverture-de-la-semaine-de-la-diaspora-burundaise-appel-a-leveil-de-conscience-et-au-travail-assidu",
+            "published": "2025-07",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 2,
@@ -26384,10 +26910,23 @@
     "name": "Massaoua",
     "scores": {
       "cost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "Un guide en ligne de 2026 donne 1 500 à 3 000 nakfas (100 à 200 $, soit environ 90 à 180 € au taux du 11 novembre 2026) par mois pour un logement d'une chambre à Massaoua, bien moins qu'à Asmara. Ce n'est pas un relevé d'annonces, et le marché érythréen est encadré par l'État, d'où 4 et non 5.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Coût de la vie et pouvoir d'achat, Érythrée — Africarrières",
+            "url": "https://africarrieres.com/erythree/fr/guide/decouvrir/cout-de-la-vie",
+            "published": "2026-08-06",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Euro foreign exchange reference rates as of 11 Nov 2026 — Banca d'Italia",
+            "url": "https://www.bancaditalia.it/compiti/operazioni-cambi/cambio/cambi_rif_20261111",
+            "published": "2026-11-11",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "setupCost": {
         "level": null,
@@ -27138,10 +27677,28 @@
         ]
       },
       "internet": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 4,
+        "justification": "Une box de 60 Mbit/s et plus coûte environ 650 E£ par mois (novembre 2026). À l'échelle du pays, le débit fixe médian atteignait environ 90 Mbit/s en 2026, le plus rapide d'Afrique selon Ookla.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cost of Living in Alexandria — Numbeo",
+            "url": "https://www.numbeo.com/cost-of-living/in/Alexandria",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Best ISPs in Egypt 2026 — TelecomLead",
+            "url": "https://www.telecomlead.com/broadband/best-isps-in-egypt-2026-fiber-expansion-faster-broadband-speeds-and-what-internet-customers-need-to-know-126223",
+            "published": "2026",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Egypt tops Africa fixed internet speeds for fifth year — Arab Finance",
+            "url": "https://arabfinance.com/en/news/newdetails/egypt-tops-africa-fixed-internet-speeds-for-fifth-year-and-wins-ookla-award",
+            "published": "2026",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 4,
@@ -27241,10 +27798,21 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 2,
+        "justification": "InterNations annonce des rencontres mensuelles d'expatriés à Alexandrie, sans activité récente vérifiée ; les rendez-vous de la diaspora se tiennent au Caire.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "InterNations — Alexandria expats",
+            "url": "https://assets.in-cdn.net/alexandria-expats",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "How do I meet people in Alexandria? — Expat Exchange",
+            "url": "https://expatexchange.com/gdcview/57/1/40/4116/Egypt/Alexandria/How-do-I-meet-people-in-Alexandria",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 4,
@@ -27668,10 +28236,29 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 4,
+        "justification": "À l'échelle du Maroc, les entreprises comptaient 0,3 coupure de courant par mois en 2019 ; l'eau de la ville est sécurisée depuis 2023 par le barrage Ibn Battouta, mais une localité voisine a été privée d'eau quatre jours en septembre 2025.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Enterprise Surveys, Morocco 2019: number of electrical outages in a typical month (IC.FRM.INFRA.IN2) — World Bank",
+            "url": "https://api.worldbank.org/v2/country/MAR/indicator/IC.FRM.INFRA.IN2?source=13",
+            "published": "2019",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "À Tanger, l'ONEE sécurise l'alimentation en eau potable à partir du barrage Ibn Battouta — Médias24",
+            "url": "https://medias24.com/2023/10/26/a-tanger-lonee-securise-lalimentation-en-eau-potable-a-partir-du-barrage-ibn-battouta/",
+            "published": "2023-10-26",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Coupures d'eau dans la région de Tanger : une situation qui alerte le wali — Hespress",
+            "url": "https://fr.hespress.com/440042-coupures-deau-dans-la-region-de-tanger-une-situation-qui-alerte-le-wali.html",
+            "published": "2025-09-05",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 4,
@@ -27965,16 +28552,46 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "En février 2026, la panne de la station de dessalement a privé d'eau des quartiers ouest, servis selon un calendrier de distribution ajusté, sans date de réparation annoncée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Station de dessalement d'Oran en panne : des ministres sur place — TSA",
+            "url": "https://www.tsa-algerie.com/station-de-dessalement-doran-en-panne-des-ministres-sur-place/",
+            "published": "2026-02-21",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "SEOR : un apport supplémentaire de 60 000 m3/jour pour l'Aïd — Horizons",
+            "url": "https://www.horizons.dz/2026/05/seor-un-apport-supplementaire-de-60-000-m3-jour-pour-laid/",
+            "published": "2026-05",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 3,
+        "justification": "Algérie Télécom, quasi seul sur le fixe, vend la fibre ; une box de 60 Mbit/s et plus coûte environ 14 € par mois. Internet a été coupé dans tout le pays pendant le bac en juin 2024, ce qui plafonne la note.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cost of Living in Oran — Numbeo",
+            "url": "https://www.numbeo.com/cost-of-living/in/Oran-Algeria",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Internet Speed in Oran (Algeria) — SpeedGEO",
+            "url": "https://www.speedgeo.net/statistics/algeria/oran",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Internet suspended in Algeria, 9 June 2024 — Internet Society Pulse",
+            "url": "https://pulse.internetsociety.org/en/shutdowns/internet-suspended-in-algeria-9-june-2024/",
+            "published": "2024-06",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 3,
@@ -28224,10 +28841,21 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Une box de 60 Mbit/s et plus coûte environ 73 dinars par mois (novembre 2026) ; la fibre est vendue dans les grandes villes tunisiennes, vers 55 dinars par mois.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Cost of Living in Sousse — Numbeo",
+            "url": "https://www.numbeo.com/cost-of-living/in/Sousse",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Guide de la Tunisie — Expat.com",
+            "url": "https://www.expat.com/fr/guide/afrique/tunisie/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 4,
@@ -28333,10 +28961,21 @@
         ]
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "L'association Tunis Accueil compte des membres à Sousse et des expatriés s'y retrouvent via un forum, sans groupe local daté trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Tunis Accueil fête la rentrée — Le Petit Journal",
+            "url": "https://lepetitjournal.com/tunis/communaute/tunis-accueil-fete-la-rentree-autour-dun-cocktail-dinatoire-convivial-349094",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Rencontres amicales (forum Sousse) — Expat.com",
+            "url": "https://www.expat.com/fr/forum/afrique/tunisie/sousse/1101707-rencontres-amicales.html",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 3,
@@ -28413,10 +29052,16 @@
         ]
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "En Libye, les baux durent en général six mois ou plus et les bailleurs apprécient d'être payés d'avance pour toute la durée, plus une caution et une commission d'agence d'un mois pour un bail d'un an ; un groupe électrogène est courant. Guide non daté qui décrit le pays, rien de propre à Benghazi.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Accommodation in Libya — Expat Arrivals",
+            "url": "https://expatarrivals.com/africa/libya/accommodation-libya",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -28455,10 +29100,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "À l'échelle du pays, les lignes fixes de LTT donnent environ 16 Mbit/s en moyenne (tests d'usagers, 2025-2026). Internet a été coupé plusieurs jours à Benghazi en octobre 2023, pendant une opération militaire.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Internet Speed in Libya — SpeedGEO",
+            "url": "https://www.speedgeo.net/statistics/libya",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Libya: escalation of internet shutdowns and erosion of digital freedom — OMCT",
+            "url": "https://omct.org/en/resources/blog/libya-escalation-of-internet-shutdowns-and-erosion-of-digital-freedom",
+            "published": "2023-11",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -28664,10 +29321,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Les câbles sous-marins arrivent à Port-Soudan, mais les réseaux de Zain et Sudani sont souvent interrompus et l'importation de Starlink est interdite (2026). Internet a été coupé dans tout le pays à plusieurs reprises depuis 2023.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Sudan Telecoms Market Report — BuddeComm",
+            "url": "https://www.budde.com.au/Research/Sudan-Telecoms-Mobile-and-Broadband-Statistics-and-Analyses",
+            "published": "2026-06",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Telecommunications in Sudan — Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Telecommunications_in_Sudan",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -28743,10 +29412,17 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "L'antenne de la mer Rouge du Secrétariat des Soudanais de l'étranger accueille les vols de retour à Port-Soudan (mai 2026) ; aucun réseau de repats n'a été trouvé.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Sudan Tribune — returnees from Libya arrive at Port Sudan",
+            "url": "https://sudantribune.com/?p=313690",
+            "published": "2026-05",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": null,
@@ -28805,10 +29481,16 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "Au Mozambique, un guide d'expatriés indique une caution d'un à trois mois de loyer et des baux d'un an, et signale que beaucoup d'habitants s'équipent d'un groupe électrogène ou de panneaux solaires. C'est une pratique décrite pour le pays, rien de propre à Vilankulo.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Accommodation in Mozambique — Expat Arrivals",
+            "url": "https://www.expatarrivals.com/africa/mozambique/accommodation-mozambique",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": null,
@@ -29111,10 +29793,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "En avril 2026, l'eau a été coupée plusieurs jours à Grand-Baie et dans le nord, et des familles de Camp-Carol sont restées près de deux semaines sans eau régulière ; une citerne est utile.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Ile Maurice: Coupures dans le Nord jusqu'au 13 avril — L'Express via AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202604100357.html",
+            "published": "2026-04-10",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Ile Maurice: Robinets à sec - Attente interminable d'une solution durable — L'Express via AllAfrica",
+            "url": "https://fr.allafrica.com/stories/202604010518.html",
+            "published": "2026-04-01",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 4,
@@ -29229,10 +29924,21 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Des expatriés du nord de l'île se retrouvent à Grand Baie via des forums (apéros, cafés), sans association active datée trouvée ; le guichet diaspora de l'EDB est à Port-Louis.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Friday Night Drinks - North-Mauritius-Social-Meetup — Expat.com",
+            "url": "https://www.expat.com/en/forum/africa/mauritius/381496-friday-night-drinks-north-mauritius-social-meetup.html",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "New to Grand Baie — Expat.com",
+            "url": "https://www.expat.com/en/forum/africa/mauritius/479232-new-to-grand-baie.html",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 2,
@@ -29483,10 +30189,16 @@
         "sources": []
       },
       "returnees": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Un club d'expatriés français de Nosy Be est cité dans un annuaire des réseaux à Madagascar, sans activité datée trouvée.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Communautés d'expatriés à Madagascar : trouver votre réseau — Cyril Jarnias",
+            "url": "https://www.cyriljarnias.com/immobilier-international/investir-immobilier-madagascar/communautes-expatries-reseau-madagascar/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "pace": {
         "level": 1,
@@ -30138,10 +30850,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "TNM vend la fibre à Blantyre, de 5 à 100 Mbit/s (20 Mbit/s pour 108 000 kwachas par mois, tarifs de 2023). À l'échelle du pays, le débit fixe moyen est d'environ 22 Mbit/s.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "TNM Fibre Bundles — Business Malawi",
+            "url": "https://businessmalawi.com/tnm-fibre-bundles",
+            "published": "2023-12-21",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Malawi — Internet Society Pulse",
+            "url": "https://pulse.internetsociety.org/en/reports/mw",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 3,
@@ -30376,10 +31100,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "confidence": "editorial",
-        "justification": "Pas de source fiable trouvée.",
-        "sources": []
+        "level": 4,
+        "justification": "Pas de délestage connu ; en mars 2026, l'usine de dessalement s'est arrêtée un jour et demi mais l'eau a été réservée aux villes. En avril 2025, un vol de câbles a fait demander d'économiser l'eau.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Namibia: Orano Desalination Plant Back Online After Sulphur Levels Halt Supply to Mines — AllAfrica",
+            "url": "https://allafrica.com/stories/202603230688.html",
+            "published": "2026-03-22",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Henties, Swakop residents urged to use water sparingly — NAMPA",
+            "url": "https://www.nampa.org/text/22614194",
+            "published": "2025-04-21",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 4,
@@ -30650,10 +31387,16 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "BTC a déployé la fibre à Maun et y vend jusqu'à 50 Mbit/s ; 20 Mbit/s coûtent environ 1 200 pulas par mois sur un an.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Frequently asked questions — BTC",
+            "url": "https://btc.bw/business/frequently-asked-questions/",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -30862,16 +31605,35 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "À l'échelle du pays : délestages chaque hiver de juin à août 2025, suspendus ensuite, et un programme de gestion de la charge publié en février 2026 ; des villages de la région achètent l'eau en citerne.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Load shedding pause after 31 August 2025 — Eswatini Observer",
+            "url": "https://eswatiniobserver.com/?p=3361",
+            "published": "2025-08-16",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Manzini water supply project nears completion, promising relief for 35,000 residents — DevelopmentAid",
+            "url": "https://www.developmentaid.org/news-stream/post/208385/manzini-water-supply-project-nears-completion-promising-relief-for-35000-residents-in-eswatini",
+            "published": "2026-05",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "L'offre internet maison de MTN passe par la 4G, « jusqu'à 10 Mbit/s » ; Eswatini Telecom comptait environ 10 000 foyers raccordables à la fibre dans tout le pays début 2025.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Home internet — MTN Eswatini",
+            "url": "https://www.mtn.co.sz/internet-landing",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 2,
@@ -31058,17 +31820,10 @@
         "sources": []
       },
       "setupCost": {
-        "level": 5,
-        "justification": "Au Lesotho, un agrégateur (février 2026) décrit des baux de 6 à 12 mois avec une caution d'un à deux mois de loyer ; c'est une pratique nationale, sans donnée propre à Teyateyaneng.",
-        "confidence": "sourced",
-        "sources": [
-          {
-            "title": "Lesotho cost of rent & housing — 360nations",
-            "url": "https://360nations.com/africa/lesotho/cost-rent-housing.html",
-            "published": "2026-02",
-            "accessed": "2026-11-26"
-          }
-        ]
+        "level": null,
+        "justification": "Pas de source fiable trouvée.",
+        "confidence": "editorial",
+        "sources": []
       },
       "negotiation": {
         "level": null,
@@ -31096,16 +31851,41 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "À l'échelle du pays : coupures tournantes d'une heure au plus en juillet 2026 pendant des travaux d'Eskom, et transformateurs abîmés par les orages en mai 2026. Rien de propre à Teyateyaneng.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "LEC explains short alternating power interruptions — Lesotho News Agency",
+            "url": "https://www.lena.gov.ls/lec-explains-short-alternating-power-interruptions/",
+            "published": "2026-07-15",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Heavy rains cause widespread electricity damage — Lesotho News Agency",
+            "url": "https://www.lena.gov.ls/heavy-rains-cause-widespread-electricity-damage/",
+            "published": "2026-05",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Econet étendait sa fibre à Teyateyaneng en 2023, sans débit ni prix publiés pour la ville. À Maseru, le débit moyen relevé reste autour de 5 Mbit/s.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Econet expands fibre coverage — Newsday Lesotho",
+            "url": "https://newsdayonline.co.ls/?p=8383",
+            "published": "2023-10-30",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Cost of living in Maseru — Nomads",
+            "url": "https://nomads.com/cost-of-living/in/maseru",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -31288,10 +32068,17 @@
         "sources": []
       },
       "setupCost": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "Aux Comores, un guide d'expatriés (octobre 2025) indique que beaucoup de propriétaires demandent plusieurs mois de caution et une avance importante, et conseille un groupe électrogène ou des panneaux solaires ; à Mutsamudu, il note surtout des maisons individuelles. C'est une pratique décrite pour le pays, sans montant propre à Mutsamudu.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Living in Comoros — Expat.com",
+            "url": "https://www.expat.com/en/guide/africa/comoros/",
+            "published": "2025-10-14",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "negotiation": {
         "level": 4,
@@ -31332,10 +32119,22 @@
         ]
       },
       "internet": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 2,
+        "justification": "La fibre ou l'ADSL ne sont possibles que dans les chefs-lieux des îles, dont Mutsamudu ; ailleurs, on passe par la 3G ou la 4G. Internet a été coupé dans tout le pays en janvier 2024, après la présidentielle.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "Comoros — Logistics Capacity Assessment",
+            "url": "https://dlca.logcluster.org/node/1353",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "Comoros must not black out the internet — Access Now",
+            "url": "https://www.accessnow.org/press-release/comoros-must-not-blackout-the-internet/",
+            "published": "2024-01",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "healthcare": {
         "level": 1,
@@ -31611,10 +32410,23 @@
         ]
       },
       "utilities": {
-        "level": null,
-        "justification": "Pas de source fiable trouvée.",
-        "confidence": "editorial",
-        "sources": []
+        "level": 3,
+        "justification": "L'eau est coupée la nuit, de 21 h à 5 h, depuis novembre 2025, et de nouvelles restrictions ont suivi la sécheresse de juillet 2026 ; une panne de deux heures a touché l'île en avril 2026.",
+        "confidence": "sourced",
+        "sources": [
+          {
+            "title": "PUC explains re-introduction of nationwide water restrictions — Seychelles Nation",
+            "url": "https://nation.sc/articles/28303/puc-explains-re-introduction-of-nationwide-water-restrictions",
+            "published": "2025-11-21",
+            "accessed": "2026-11-26"
+          },
+          {
+            "title": "PUC issues statement on power outage affecting Praslin and La Digue — Seychelles Nation",
+            "url": "https://nation.sc/articles/30346/-puc-issues-statement-on-power-outage-affecting-praslin-and-la-digue",
+            "published": "2026-04-22",
+            "accessed": "2026-11-26"
+          }
+        ]
       },
       "internet": {
         "level": 3,
