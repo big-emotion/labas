@@ -24,13 +24,16 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   « Voir les villes d'Afrique » below; `homeEvent` counts which door is taken. The free
   quiz then opens on the project alone (operator, 2026-11-20; the languages and the family's origin
   are asked along the way); then, themes mixed, a follow-up comes right after its question and
-  each answer picks the next question, one of those most likely to change the top three, at
+  each answer picks the next question from the whole questionnaire (operator, 2026-11-25:
+  `QUICK_QUESTIONS` is the /approfondir bank bar the filters that take cities off the list), one of those most likely to change the top three, then the list the result shows, at
   random among the questions as good as each other so that no two readers meet the same order;
   beside « question 7 » the quiz says how near it is (« on cherche », « on se rapproche »,
-  « presque trouvé », from the questions that could still change the top three);
-  it ends once no question can (« question 7 », no total), though never before the whole
-  temperament chapter has been asked (operator, 2026-11-20), and
-  the rest waits in /approfondir (operator 2026-11-17).
+  « presque trouvé »); it ends once no question can change that list, or near `MAX_QUESTIONS`
+  (25), though never before the whole temperament chapter has been asked (operator, 2026-11-20).
+  Once the top three can no longer move, « Voir mes villes maintenant » lets the reader stop
+  (`topThreeSettled`, `earlyEvent`). The practical questions (budget, money to put down,
+  passport, trips home, length of a holiday) are in it too (operator, 2026-11-26): their data is
+  filled city by city in `city-scores.json`, and the visa weighs instead of removing a city.
 - **Every answer orients the list** (operator, 2026-11-16, like a guessing game): each answer is
   one piece of evidence and the pieces multiply (`scoreOf` in `src/lib/ranking.ts`), so a late
   answer still turns the list over. The daily language weighs most; the project and the origin

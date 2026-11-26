@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   answerEvent,
   finishedEvent,
+  earlyEvent,
   GOALS,
   homeEvent,
   messageEvent,
@@ -77,8 +78,12 @@ describe("the one anonymous event sent per quiz answer", () => {
     expect(answerEvent("specialistCare", true, AT)).toBeNull();
   });
 
-  it("only sends answers to the quick-quiz questions", () => {
-    expect(answerEvent("visaFreeOnly", true, AT)).toBeNull();
+  it("only sends answers to the questions the quick quiz can ask", () => {
+    // Drawn from the whole questionnaire since 2026-11-25, the visa included since 2026-11-26.
+    expect(answerEvent("visaFreeOnly", true, AT)?.props.question).toBe("visaFreeOnly");
+    expect(answerEvent("climate", "hot", AT)?.props.question).toBe("climate");
+    // A filter that takes cities off the list stays in the full questionnaire, unmeasured.
+    expect(answerEvent("languageOnly", true, AT)).toBeNull();
     expect(answerEvent("anything", "x", AT)).toBeNull();
   });
 
@@ -186,5 +191,16 @@ describe("the event sent from the home screen", () => {
   it("is declared as a goal, or the dashboard would never show it", () => {
     expect(GOALS).toContain(homeEvent("quiz").name);
     expect(GOALS).toContain(homeEvent("cities").name);
+  });
+});
+
+describe("the event sent when a reader sees the cities before the quiz ends", () => {
+  it("says at which question, on two digits, and nothing else", () => {
+    expect(earlyEvent(14)).toEqual({ name: "Villes vues avant la fin", props: { etape: "14" } });
+    expect(earlyEvent(9).props.etape).toBe("09");
+  });
+
+  it("is declared as a goal", () => {
+    expect(GOALS).toContain(earlyEvent(1).name);
   });
 });
