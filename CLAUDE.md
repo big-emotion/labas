@@ -31,7 +31,8 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   « presque trouvé »); it ends once no question can change that list, or near `MAX_QUESTIONS`
   (25), though never before the whole temperament chapter has been asked (operator, 2026-11-20).
   Once the top three can no longer move, « Voir mes villes maintenant » lets the reader stop
-  (`topThreeSettled`, `earlyEvent`). The practical questions (budget, money to put down,
+  (`topThreeSettled`, `earlyEvent`). After each answer the page comes back to the map and the new question
+  when their top has left the screen (`scrollBack`, operator 2026-11-26, mockup S1). The practical questions (budget, money to put down,
   passport, trips home, length of a holiday) are in it too (operator, 2026-11-26): their data is
   filled city by city in `city-scores.json`, and the visa weighs instead of removing a city.
   The project question offers four paths (operator, 2026-11-26): « Investir sans y vivre » was

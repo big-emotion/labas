@@ -431,6 +431,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         topThreeSettled,
         type Closeness,
       } from "../lib/adaptive";
+      import { scrollBack } from "../lib/quiz-scroll";
       import { QUICK_QUESTIONS } from "../lib/deep-questions";
       import { showProfile } from "../lib/profile-dom";
       import { cardFor, rowFor } from "../lib/cards-dom";
@@ -888,12 +889,28 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         );
         if (id)
           fieldsets.get(id)?.querySelector<HTMLElement>(".chip")?.focus({ preventScroll: true });
+        if (asked.length > 0) bringQuizBack();
         // Counted once per visit, when the last question is answered.
         if (!id && !finished) {
           finished = true;
           track(finishedEvent("Questionnaire 1 terminé", readAnswers().project));
         }
         render();
+      }
+
+      // On the phone the map sits above the questions and is the top of the quiz; from 880 px it
+      // stays in view beside them, so the counter is.
+      function bringQuizBack() {
+        const top = document.querySelector<HTMLElement>(
+          matchMedia("(min-width: 880px)").matches ? ".progress" : ".maprow",
+        );
+        const move = top
+          ? scrollBack(
+              top.getBoundingClientRect().top,
+              matchMedia("(prefers-reduced-motion: reduce)").matches,
+            )
+          : undefined;
+        if (move) top!.scrollIntoView(move);
       }
 
       // « Continuer » stays off until something is picked.
