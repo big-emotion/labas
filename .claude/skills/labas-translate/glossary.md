@@ -62,6 +62,7 @@ and change every use in the same commit.
 | un lien de connexion          | a sign-in link                |
 | se connecter / Me déconnecter | sign in / Sign out            |
 | Reprendre plus tard           | Continue later                |
+| M'envoyer mon parcours        | Send me my journey            |
 | Recevoir par e-mail           | Get it by email               |
 | Tout reprendre à zéro         | Start again                   |
 | Partager                      | Share                         |

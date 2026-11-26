@@ -1,25 +1,19 @@
 ---
 /**
- * « Recevoir les nouveautés » (approved mockup, 2026-11-16): in the quiz after the fourth answer,
- * once per visit, and always on the result. Built only when PUBLIC_NEWSLETTER is set, that is
- * once the subscribe service has its mail settings (docs/deploy.md).
+ * « Suivre Là-bas » (approved mockup, 2026-11-16): the one news sign-up, on the result. The quiz
+ * no longer has its own (operator, 2026-11-26, mockup E3): its one e-mail button opens
+ * « Reprendre plus tard », which carries the news box. Built only when PUBLIC_NEWSLETTER is set,
+ * that is once the subscribe service has its mail settings (docs/deploy.md).
  */
 import { BRAND, type Bilingual } from "../i18n/locale";
 import { localeOfPath, pathFor } from "../i18n/routes";
 
-interface Props {
-  place: "quiz" | "results";
-}
-const { place } = Astro.props;
 const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
-const id = `news-${place}`;
+const id = "news-results";
 const locale = localeOfPath(Astro.url.pathname);
 const COPY = {
   fr: {
-    quizTitle: "Recevoir les nouveautés ?",
     resultsTitle: `Suivre ${BRAND.fr}`,
-    quizLead:
-      "Nouvelles villes, questionnaire amélioré : un e-mail par mois au plus. Vous pouvez aussi finir le quiz d'abord.",
     resultsLead:
       "Nouvelles villes, nouvelles questions, classement affiné : un e-mail par mois au plus pour vous dire ce qui change.",
     email: "Votre e-mail",
@@ -27,7 +21,6 @@ const COPY = {
     website: "Site web",
     consent: `Je veux recevoir les nouveautés de ${BRAND.fr} par e-mail.`,
     signUp: "M'inscrire",
-    later: "Plus tard",
     small:
       "Vous confirmerez par un lien reçu par e-mail. Désinscription en un clic. Nous gardons votre adresse, rien d'autre : vos réponses au quiz ne sont pas envoyées avec elle.",
     privacy: "Confidentialité",
@@ -38,10 +31,7 @@ const COPY = {
       "Sans confirmation, vous ne recevrez rien. Rien reçu d'ici quelques minutes ? Regardez dans les indésirables.",
   },
   en: {
-    quizTitle: "Get the news?",
     resultsTitle: `Follow ${BRAND.en}`,
-    quizLead:
-      "New cities, a better questionnaire: one email a month at most. You can also finish the quiz first.",
     resultsLead:
       "New cities, new questions, a finer ranking: one email a month at most to tell you what changes.",
     email: "Your email",
@@ -49,7 +39,6 @@ const COPY = {
     website: "Website",
     consent: `I want to receive ${BRAND.en} news by email.`,
     signUp: "Sign me up",
-    later: "Later",
     small:
       "You'll confirm with a link sent by email. Unsubscribe in one click. We keep your address, nothing else: your quiz answers are not sent with it.",
     privacy: "Privacy",
@@ -64,15 +53,10 @@ const copy = COPY[locale];
 ---
 
 {enabled && (
-  <section
-    class:list={["news", place]}
-    data-news={place}
-    aria-labelledby={`${id}-title`}
-    hidden={place === "quiz"}
-  >
+  <section class="news" data-news aria-labelledby={`${id}-title`}>
     <div data-news-form>
-      <h2 id={`${id}-title`}>{place === "quiz" ? copy.quizTitle : copy.resultsTitle}</h2>
-      <p class="lead">{place === "quiz" ? copy.quizLead : copy.resultsLead}</p>
+      <h2 id={`${id}-title`}>{copy.resultsTitle}</h2>
+      <p class="lead">{copy.resultsLead}</p>
       <form novalidate>
         <label class="field">
           {copy.email}
@@ -93,16 +77,9 @@ const copy = COPY[locale];
           <span>{copy.consent}</span>
         </label>
         <p class="error" data-news-error role="alert" hidden></p>
-        <div class="actions">
-          <button type="submit" class="primary">
-            {copy.signUp}
-          </button>
-          {place === "quiz" && (
-            <button type="button" class="later" data-news-later>
-              {copy.later}
-            </button>
-          )}
-        </div>
+        <button type="submit" class="primary">
+          {copy.signUp}
+        </button>
       </form>
       <p class="small">
         {copy.small} <a href={pathFor("privacy", locale)}>{copy.privacy}</a>
@@ -121,40 +98,14 @@ const copy = COPY[locale];
 
 <script>
   import { pageLocale } from "../i18n/locale";
-  import { outcomeOf, shouldOfferNews, signUpBody } from "../lib/newsletter";
+  import { outcomeOf, signUpBody } from "../lib/newsletter";
 
   const locale = pageLocale();
-
-  const DISMISSED = "labas.news.later";
-  const dismissed = () => {
-    try {
-      return sessionStorage.getItem(DISMISSED) === "1";
-    } catch {
-      return false;
-    }
-  };
 
   for (const block of document.querySelectorAll<HTMLElement>("[data-news]")) {
     const form = block.querySelector("form")!;
     const error = block.querySelector<HTMLElement>("[data-news-error]")!;
     const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-
-    if (block.dataset.news === "quiz") {
-      // index.astro announces how many questions are answered; the block shows from the fourth.
-      document.addEventListener("labas:answered", (event) => {
-        const answered = (event as CustomEvent<number>).detail;
-        if (!block.querySelector<HTMLElement>("[data-news-sent]")!.hidden) return;
-        block.hidden = !shouldOfferNews(answered, dismissed());
-      });
-      block.querySelector("[data-news-later]")?.addEventListener("click", () => {
-        try {
-          sessionStorage.setItem(DISMISSED, "1");
-        } catch {
-          // Blocked storage: the block still closes for now.
-        }
-        block.hidden = true;
-      });
-    }
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -204,10 +155,6 @@ const copy = COPY[locale];
     gap: 12px;
     background: var(--night-deep);
     border: 1px solid var(--night-lift);
-    border-radius: 18px;
-    padding: 18px;
-  }
-  .news.results {
     border-radius: 20px;
     padding: 22px;
   }
@@ -227,8 +174,7 @@ const copy = COPY[locale];
     font-size: 1.4rem;
     line-height: 1.15;
   }
-  .results h2,
-  .sent h2 {
+  h2 {
     font-size: 1.6rem;
   }
   p {
@@ -289,14 +235,7 @@ const copy = COPY[locale];
     font-weight: 700;
     font-size: 0.92rem;
   }
-  .actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
   .primary {
-    min-height: 48px;
     border: 0;
     border-radius: 999px;
     background: var(--saffron);
@@ -304,24 +243,11 @@ const copy = COPY[locale];
     font-weight: 800;
     padding: 0 22px;
     cursor: pointer;
-  }
-  .results .primary {
     min-height: 54px;
-    flex: 1;
     font-size: 1.05rem;
   }
   .primary:disabled {
     opacity: 0.4;
-  }
-  .later {
-    min-height: 44px;
-    border: 0;
-    background: transparent;
-    color: var(--thread-dim);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    padding: 0 4px;
-    cursor: pointer;
   }
   /* Last, and more specific than the display rules above, so hidden parts really hide. */
   .news[hidden],

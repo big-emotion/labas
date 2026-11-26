@@ -6,13 +6,6 @@ import { CONTACT, type Bilingual, type Locale } from "../i18n/locale";
  * the quiz is ever sent.
  */
 
-/** The quiz block appears after this many answers: early enough to reach readers who stop. */
-export const NEWS_AFTER = 4;
-
-export function shouldOfferNews(answered: number, dismissed: boolean): boolean {
-  return answered >= NEWS_AFTER && !dismissed;
-}
-
 interface Form {
   email: string;
   consent: boolean;

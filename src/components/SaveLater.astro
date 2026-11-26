@@ -1,8 +1,10 @@
 ---
 /**
- * « Reprendre plus tard » (approved mockup, 2026-11-16): beside the progress of either quiz.
- * Signed in, the journey goes straight to Mon espace; otherwise an e-mail, the explicit consent
- * box naming the sensitive answers, and a link by e-mail. Shown only with the mail service on.
+ * « Reprendre plus tard » (approved mockup, 2026-11-16), opened by one button, « M'envoyer mon
+ * parcours » (operator, 2026-11-26, mockup E3): the only e-mail the quick quiz asks for, under the
+ * question from the fourth answer; at the top of /approfondir. Signed in, the journey goes
+ * straight to Mon espace; otherwise an e-mail, the explicit consent box naming the sensitive
+ * answers, the news box, and a link by e-mail. Shown only with the mail service on.
  */
 import { BRAND, type Bilingual } from "../i18n/locale";
 import { localeOfPath, pathFor } from "../i18n/routes";
@@ -15,7 +17,9 @@ const enabled = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 const locale = localeOfPath(Astro.url.pathname);
 const COPY = {
   fr: {
-    toggle: "Reprendre plus tard",
+    toggle: "M'envoyer mon parcours",
+    toggleNote: "Pour le reprendre plus tard, sur ce téléphone ou un autre",
+    title: "Reprendre plus tard",
     lead: "Recevez un lien pour retrouver votre parcours là où vous en êtes, sur ce téléphone ou un autre. Pas de mot de passe.",
     email: "Votre e-mail",
     emailPlaceholder: "vous@exemple.fr",
@@ -34,7 +38,9 @@ const COPY = {
     memberSave: "Enregistrer dans Mon espace",
   },
   en: {
-    toggle: "Continue later",
+    toggle: "Send me my journey",
+    toggleNote: "To pick it up later, on this phone or another",
+    title: "Continue later",
     lead: "Get a link to find your journey where you left it, on this phone or another. No password.",
     email: "Your email",
     emailPlaceholder: "you@example.com",
@@ -57,19 +63,36 @@ const copy = COPY[locale];
 ---
 
 {enabled && (
-  <div class="save-later" data-save-later data-kind={kind}>
+  <div class="save-later" data-save-later data-kind={kind} hidden={kind === "quick"}>
     <button
       type="button"
       class="save-toggle"
       data-save-toggle
       aria-expanded="false"
       aria-controls={`save-${kind}`}
+      aria-describedby={`save-${kind}-note`}
     >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path>
+      </svg>
       {copy.toggle}
     </button>
-    <section id={`save-${kind}`} class="panel" data-save-panel aria-label={copy.toggle} hidden>
+    <p class="toggle-note" id={`save-${kind}-note`}>
+      {copy.toggleNote}
+    </p>
+    <section id={`save-${kind}`} class="panel" data-save-panel aria-label={copy.title} hidden>
       <div data-save-intro>
-        <h2>{copy.toggle}</h2>
+        <h2>{copy.title}</h2>
         <p class="lead">{copy.lead}</p>
       </div>
       <form novalidate>
@@ -136,6 +159,7 @@ const copy = COPY[locale];
 )}
 
 <script>
+  import { offersSaving } from "../lib/account";
   import { wireSaveLater } from "../lib/account-dom";
   import { loadAnswers } from "../lib/keep";
   import { browserStore } from "../lib/keep-dom";
@@ -143,6 +167,11 @@ const copy = COPY[locale];
   // Both quizzes keep every answer in the browser as it is given: that is what gets saved.
   for (const block of document.querySelectorAll<HTMLElement>("[data-save-later]")) {
     wireSaveLater(block.dataset.kind as "quick" | "deep", () => loadAnswers(browserStore()));
+    // The quick quiz announces how many questions are answered (views/Quiz.astro).
+    if (block.dataset.kind === "quick")
+      document.addEventListener("labas:answered", (event) => {
+        block.hidden = !offersSaving((event as CustomEvent<number>).detail);
+      });
   }
 </script>
 
@@ -151,19 +180,72 @@ const copy = COPY[locale];
     display: grid;
     gap: 12px;
   }
+  /* One dashed pill rather than a block: it costs about 80 px under the question instead of 260,
+     and pops in when it appears, then its paper plane stirs now and then. */
   .save-toggle {
-    justify-self: end;
-    min-height: 44px;
-    border: 0;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 54px;
+    padding: 0 24px;
+    border: 1.5px dashed var(--saffron);
+    border-radius: 999px;
     background: transparent;
-    color: var(--saffron);
+    color: var(--thread);
     font: inherit;
-    font-size: 0.92rem;
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    padding: 0 4px;
+    font-weight: 800;
     cursor: pointer;
+    animation: pop 0.5s ease-out 0.2s both;
+  }
+  .save-toggle svg {
+    color: var(--saffron);
+    flex: none;
+    animation: fly 3.5s ease-in-out 1s infinite;
+  }
+  .save-toggle[aria-expanded="true"] {
+    border-style: solid;
+  }
+  .save-toggle[aria-expanded="true"] svg {
+    animation: none;
+  }
+  .toggle-note {
+    justify-self: center;
+    text-align: center;
+    color: var(--thread-dim);
+    font-size: 0.82rem;
+  }
+  @keyframes pop {
+    0% {
+      transform: scale(0.85);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+    100% {
+      transform: none;
+    }
+  }
+  @keyframes fly {
+    0%,
+    70%,
+    100% {
+      transform: none;
+    }
+    78% {
+      transform: translate(3px, -4px) rotate(-8deg);
+    }
+    86% {
+      transform: translate(-1px, 1px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .save-toggle,
+    .save-toggle svg {
+      animation: none;
+    }
   }
   .panel {
     display: grid;
@@ -267,6 +349,7 @@ const copy = COPY[locale];
     color: var(--thread-dim);
     font-size: 0.92rem;
   }
+  .save-later[hidden],
   .save-later [hidden] {
     display: none;
   }

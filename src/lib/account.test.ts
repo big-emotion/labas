@@ -6,6 +6,7 @@ import {
   journeySummary,
   resultsHref,
   memberJourneyBody,
+  offersSaving,
   resultsMailBody,
   resumeHref,
   saveBody,
@@ -13,6 +14,18 @@ import {
 import { outcomeOf } from "./newsletter";
 
 const first = (id: string) => QUESTIONS.find((q) => q.id === id)!.choices[0].value;
+
+describe("when the quick quiz offers « M'envoyer mon parcours »", () => {
+  it("waits for the fourth answer, so the first questions come uninterrupted", () => {
+    expect(offersSaving(3)).toBe(false);
+    expect(offersSaving(4)).toBe(true);
+    expect(offersSaving(12)).toBe(true);
+  });
+
+  it("goes once the quiz is over: the result has its own e-mail", () => {
+    expect(offersSaving(0)).toBe(false);
+  });
+});
 
 describe("« Reprendre plus tard »", () => {
   const answers = { order: 1 } as Answers;
