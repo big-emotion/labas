@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CITIES } from "./cities";
-import { costLabel, livingLines, regionName, sameCountry } from "./card";
+import { costLabel, livingLines, regionName, sameCountry, slideAt } from "./card";
 import { rankCities } from "./ranking";
 
 const city = (name: string) => CITIES.find((c) => c.name === name)!;
@@ -47,5 +47,21 @@ describe("the short facts on a city card", () => {
       "Return trips to Europe",
       "Comfort: safety, healthcare, internet",
     ]);
+  });
+});
+
+describe("which dot lights under « Tout près derrière »", () => {
+  it("lights the first dot before the reader swipes and the last once the strip ends", () => {
+    expect(slideAt(0, 1200, 7)).toBe(0);
+    expect(slideAt(1200, 1200, 7)).toBe(6);
+  });
+
+  it("follows the swipe in between", () => {
+    expect(slideAt(600, 1200, 7)).toBe(3);
+    expect(slideAt(190, 1200, 7)).toBe(1);
+  });
+
+  it("stays on the first dot when every slide already fits on screen", () => {
+    expect(slideAt(0, 0, 2)).toBe(0);
   });
 });

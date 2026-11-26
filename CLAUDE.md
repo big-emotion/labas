@@ -85,8 +85,11 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   The result shows three, five or ten cities (operator, 2026-11-25; `resultLength` in
   `lib/ranking.ts`): every city within 90 % of the first one's score, rounded up to the tier, and
   its title says which (« Trois villes se détachent », « Cinq villes au coude-à-coude », « Dix
-  villes vous ressemblent de près »). Cards 2 and 3 sit side by side, small, until « Voir le
-  détail » opens one across the width; cities 4 to 10 follow as rows (« Tout près derrière »).
+  villes vous ressemblent de près »). Cards 2 and 3 sit side by side, small (operator, 2026-11-26,
+  mockup R2: photo with its rank, score bar, the reaction as round icons), until « Voir le
+  détail » opens one across the width with « Pas pour moi »; cities 4 to 10 follow as a strip of
+  slides swiped sideways, a grid from 880 px (« Tout près derrière », `slideFor`), each opening
+  its detail under the strip; no reaction on them, since a tap posts the top three only.
   Mail, share, `quiz_outcomes` and a review's summary stay at three (`TOP_THREE`).
   The temperament and the one news sign-up come after the cities. During the quick quiz the one
   e-mail ask is a single button, « M'envoyer mon parcours », under the question from the fourth

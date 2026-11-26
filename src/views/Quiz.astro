@@ -348,8 +348,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             <ResultWhy />
             <div id="cards" class="cards"></div>
             <section id="near" class="near" aria-labelledby="near-title" hidden>
-              <h3 id="near-title">{copy.near}</h3>
-              <ol id="near-rows" class="rows"></ol>
+              <div class="near-head">
+                <h3 id="near-title">{copy.near}</h3>
+                <span id="near-swipe" class="near-swipe"></span>
+              </div>
+              <ol id="near-rows" class="strip"></ol>
+              <div id="near-dots" class="strip-dots" aria-hidden="true"></div>
+              <div id="near-detail" class="near-detail" aria-live="polite" hidden></div>
             </section>
             <KeepResults further />
             {/* Moved by the script right under the first city's pitch. */}
@@ -433,7 +438,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
       import { scrollBack } from "../lib/quiz-scroll";
       import { QUICK_QUESTIONS } from "../lib/deep-questions";
       import { showProfile } from "../lib/profile-dom";
-      import { cardFor, rowFor } from "../lib/cards-dom";
+      import { cardFor, rowFor, slideDetailFor, slideFor } from "../lib/cards-dom";
+      import { slideAt } from "../lib/card";
       import { wireTaps } from "../lib/taps-dom";
       import { placeHook, showWhy } from "../lib/why-dom";
       import { chapterName, keepInBank } from "../lib/questions";
@@ -486,6 +492,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         notForMe: (name: string) => string;
         sheetTitle: (name: string) => string;
         putBack: (name: string) => string;
+        swipe: (from: number, to: number) => string;
       }> = {
         fr: {
           waiting: (count) =>
@@ -511,6 +518,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           notForMe: (name) => `${name}, pas pour moi`,
           sheetTitle: (name) => `${name} ne vous tente pas ?`,
           putBack: (name) => `Remettre ${name}`,
+          swipe: (from, to) => `Glissez · ${from} à ${to}`,
         },
         en: {
           waiting: (count) =>
@@ -531,6 +539,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           notForMe: (name) => `${name}, not for me`,
           sheetTitle: (name) => `Not tempted by ${name}?`,
           putBack: (name) => `Put back ${name}`,
+          swipe: (from, to) => `Swipe · ${from} to ${to}`,
         },
       };
       const copy = COPY[locale];
@@ -690,9 +699,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           copy.resultsTitle[length];
         (document.getElementById("close-hint") as HTMLElement).hidden = length === TOP_THREE;
         (document.getElementById("near") as HTMLElement).hidden = near.length === 0;
-        (document.getElementById("near-rows") as HTMLElement).replaceChildren(
-          ...near.map((m, i) => rowFor(m, i + TOP_THREE + 1, locale)),
-        );
+        showNear(near);
 
         // Every other city, in score order; conflict zones keep their place, greyed.
         const shown = new Set(offered.slice(0, length).map((m) => m.city.name));
@@ -711,6 +718,47 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         (document.getElementById("more") as HTMLElement).hidden = showAll;
         placePreview();
       }
+
+      // « Tout près derrière », 4 to 10 (operator, 2026-11-26): a slide per city; a tap opens its
+      // detail under the strip, a second tap or another slide closes it.
+      const strip = document.getElementById("near-rows") as HTMLElement;
+      const nearDetail = document.getElementById("near-detail") as HTMLElement;
+      const dots = document.getElementById("near-dots") as HTMLElement;
+      function showNear(near: Match[]) {
+        const first = TOP_THREE + 1;
+        (document.getElementById("near-swipe") as HTMLElement).textContent = copy.swipe(
+          first,
+          TOP_THREE + near.length,
+        );
+        nearDetail.hidden = true;
+        strip.replaceChildren(
+          ...near.map((m, i) => {
+            const slide = slideFor(m, first + i, locale);
+            const open = slide.querySelector<HTMLButtonElement>(".slide-open")!;
+            open.addEventListener("click", () => {
+              const opening = open.getAttribute("aria-expanded") !== "true";
+              for (const other of strip.querySelectorAll(".slide-open"))
+                other.setAttribute("aria-expanded", "false");
+              open.setAttribute("aria-expanded", String(opening));
+              nearDetail.hidden = !opening;
+              if (opening) nearDetail.replaceChildren(slideDetailFor(m, first + i, locale));
+            });
+            return slide;
+          }),
+        );
+        dots.replaceChildren(...near.map(() => document.createElement("i")));
+        strip.scrollLeft = 0;
+        lightDot();
+      }
+      function lightDot() {
+        const on = slideAt(
+          strip.scrollLeft,
+          strip.scrollWidth - strip.clientWidth,
+          dots.children.length,
+        );
+        [...dots.children].forEach((dot, i) => dot.classList.toggle("on", i === on));
+      }
+      strip.addEventListener("scroll", lightDot, { passive: true });
 
       // What others say of the first city, inside its card right under its pitch, on every
       // screen: the map column stays as it was (operator, 2026-11-18).

@@ -25,6 +25,7 @@ const COPY: Bilingual<{
   same: (others: string) => string;
   suits: (city: string) => string;
   invite: (city: string) => string;
+  slideLine: (country: string, tagline: string) => string;
 }> = {
   fr: {
     // French puts a narrow no-break space before « % ».
@@ -38,6 +39,7 @@ const COPY: Bilingual<{
     split: (t, p) => `Façon de vivre <b>${t}</b> · Vie pratique <b>${p}</b>`,
     photo: (author, license) => `Photo : ${author}, ${license}, Wikimedia Commons`,
     same: (others) => `Aussi dans le pays : ${others}`,
+    slideLine: (country, tagline) => `${country} · ${tagline}`,
   },
   en: {
     suits: (city) => `${city}: does it suit you?`,
@@ -50,6 +52,7 @@ const COPY: Bilingual<{
     split: (t, p) => `Way of living <b>${t}</b> · Practical life <b>${p}</b>`,
     photo: (author, license) => `Photo: ${author}, ${license}, Wikimedia Commons`,
     same: (others) => `Also in the country: ${others}`,
+    slideLine: (country, tagline) => `${country} · ${tagline}`,
   },
 };
 
@@ -165,7 +168,8 @@ function pipsOf(level: number, locale: Locale): HTMLElement {
   return pips;
 }
 
-// Every card has the same fields; only the first one shows its photo.
+// Every card has the same fields and its city's photo (cards 2 and 3 too since the operator's
+// mockup R2, 2026-11-26: a place is what the reader came for).
 export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale): HTMLElement {
   const card = clone("card-template");
   const city = cityCopy(m.city, locale);
@@ -175,6 +179,7 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
   setText(card, ".card-name", city.name);
   setText(card, ".card-country", `${city.country} · ${regionName(m.city.zone, locale)}`);
   setText(card, ".fit b", percent(m.score));
+  setBar(card, m.score);
   const split = card.querySelector(".split") as HTMLElement;
   fillLines(card.querySelector(".why-temper") as HTMLElement, m.temperamentLines, locale);
   split.hidden = m.temperament === null;
@@ -182,7 +187,7 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
     split.innerHTML = COPY[locale].split(percent(m.temperament), percent(m.practical));
   setText(card, ".card-pitch", city.pitch);
   const photo = photoFor(m.city.name);
-  if (index === 0 && photo) {
+  if (photo) {
     const figure = card.querySelector(".photo") as HTMLElement;
     const image = figure.querySelector("img") as HTMLImageElement;
     image.src = `/photos/${photo.file}`;
@@ -226,6 +231,47 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
   // button fewer on the card, and the way there is part of knowing the city.
   card.querySelector(".detail")!.append(detailFor(m, false, locale), card.querySelector(".go")!);
   return card;
+}
+
+/**
+ * A city of « Tout près derrière » (4 to 10) as a slide of the strip (operator, 2026-11-26:
+ * mockup R2 with R3's strip). No reaction row: a reaction posts the journey with the top three
+ * only (quiz_outcomes), so it stays on the three cards. Its credit, too long for the slide, is
+ * the photo's title and comes with the detail.
+ */
+export function slideFor(m: Match, position: number, locale: Locale): HTMLElement {
+  const slide = clone("slide-template");
+  const city = cityCopy(m.city, locale);
+  setText(slide, ".rank", String(position));
+  setText(slide, ".slide-name", city.name);
+  setText(slide, ".slide-line", COPY[locale].slideLine(city.country, city.tagline));
+  setText(slide, ".slide-fit b", percentIn(m.score, locale));
+  setBar(slide, m.score);
+  const photo = photoFor(m.city.name);
+  if (photo) {
+    const image = slide.querySelector("img") as HTMLImageElement;
+    image.src = `/photos/${photo.file}`;
+    image.title = COPY[locale].photo(photo.author, photo.license);
+    image.hidden = false;
+  }
+  return slide;
+}
+
+/** What a slide opens across the width, under the strip: the same detail a row had. */
+export function slideDetailFor(m: Match, position: number, locale: Locale): HTMLElement {
+  const panel = document.createElement("div");
+  const title = document.createElement("h4");
+  title.className = "near-detail-title";
+  title.textContent = `${position} · ${cityCopy(m.city, locale).name}`;
+  panel.append(title, detailFor(m, true, locale));
+  const photo = photoFor(m.city.name);
+  if (photo) {
+    const credit = document.createElement("p");
+    credit.className = "near-credit";
+    credit.textContent = COPY[locale].photo(photo.author, photo.license);
+    panel.append(credit);
+  }
+  return panel;
 }
 
 export function rowFor(m: Match, position: number, locale: Locale): HTMLElement {

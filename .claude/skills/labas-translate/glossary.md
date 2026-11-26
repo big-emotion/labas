@@ -66,6 +66,7 @@ and change every use in the same commit.
 | Recevoir par e-mail           | Get it by email               |
 | Tout reprendre à zéro         | Start again                   |
 | Partager                      | Share                         |
+| Glissez (une bande de cartes) | Swipe                         |
 | Enregistrer l'image           | Save the picture              |
 | Imprimer                      | Print                         |
 | Supprimer                     | Delete                        |
