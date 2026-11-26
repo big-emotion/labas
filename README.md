@@ -114,8 +114,9 @@ npm run test:watch
 
 A first-hand account (a screenshot, a message, a photo) goes through the project skill
 [`labas-testimony`](.claude/skills/labas-testimony/SKILL.md): it is filed anonymously in
-`src/data/city-testimonies.json` and only proposes a change to a score. One account alone never
-moves one; `npm run testimony -- <city slug>` shows where two agree, and
+`src/data/city-testimonies.json` and moves the score it bears on: by one level on one account,
+further when a second account or a public source backs it.
+`npm run testimony -- <city slug>` shows where two agree, and
 `npm run testimony -- gaps` what people tell that the site has no field for.
 
 ### Adding or changing text

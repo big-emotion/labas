@@ -1,6 +1,6 @@
 ---
 name: labas-testimony
-description: Take a first-hand account of an African city the operator shares — a screenshot, pasted text, a photo, a video or a link — and file it in the Là-bas testimony ledger, then propose, never apply on its own, what it should change in the city data behind the ranking, the scores and the quiz. Use when the user shares such a piece or says "ajoute ce témoignage", "note cet avis", "retour d'expérience sur <ville>", "ajoute ça à la base", "qu'est-ce que ça change pour <ville>", or invokes /labas-testimony.
+description: Take a first-hand account of an African city the operator shares — a screenshot, pasted text, a photo, a video or a link — and file it in the Là-bas testimony ledger, then move the city data it bears on behind the ranking, the scores and the quiz. Use when the user shares such a piece or says "ajoute ce témoignage", "note cet avis", "retour d'expérience sur <ville>", "ajoute ça à la base", "qu'est-ce que ça change pour <ville>", or invokes /labas-testimony.
 metadata:
   author: Big Emotion
   version: "0.1.0"
@@ -10,19 +10,18 @@ metadata:
 
 The operator comes across people telling what a city is really like: a WhatsApp message, a
 comment under a video, a photo of a menu, a thread. This skill turns one such piece into an
-entry of `src/data/city-testimonies.json` and into a proposal on the city data.
+entry of `src/data/city-testimonies.json` and into a change to the city data.
 
 Talk to the operator in French with « vous ». The ledger, like every internal file, is English.
 
 ## The three rules
 
-1. **One account is a lead, not evidence.** It is always filed; it moves a score only when a
-   second, independent person leans the same way (`agreedLean` in `src/lib/testimonies.ts`) or
-   when it carries a fact a public, dated source confirms. Otherwise one viral screenshot would
-   reorder 115 cities.
-2. **Nothing is written to the city data before the operator says yes.** Filing the account in
-   the ledger needs no approval; touching `city-scores.json`, `city-life.json`, `city-lines.json`,
-   `countries.json` or the questions does.
+1. **Readers' experience comes first** (operator, 2026-11-26). When the operator shares a piece
+   through this skill, the score moves: one account is enough, and no public source is waited
+   for. A second person leaning the same way (`agreedLean` in `src/lib/testimonies.ts`) or a
+   public, dated source gives the change more strength; it is not a condition.
+2. **The change is applied, then reported.** Sharing the piece is the operator's go-ahead. The
+   report shows every field with its value before and after, so one `git revert` undoes it.
 3. **The person never agreed to be here, and the repository is public.** No name, handle, face,
    phone number or verbatim quote goes into the ledger; the piece itself is never committed and
    never shown on the site. `/avis` is for readers who wrote for the site, not for these.
@@ -112,43 +111,56 @@ npm run testimony -- <slug>
 
 The test refuses a handle, an e-mail address or a phone number anywhere in the entry.
 
-## Step 4 — Say what it changes
+## Step 4 — Move the data
 
-Show the operator one table, in French: the field, its value today, the value proposed, the
-reason, and what backs it. Each claim falls in exactly one of these cases:
+Run `npm test` first, so a failure afterwards is known to come from the data. Then, for each
+claim, edit the field it is about; keep the file's indentation and field order.
 
-- **A fact someone can check** (a rent, a visa rule, a flight, a school, a company hiring). Look
-  for a public, dated source. Found: propose the change citing that source, `accessed` today;
-  the account was the lead and is not cited. Not found: it stays in the ledger, and say so.
-- **Two or more accounts agree** (the command prints « two or more accounts lean … »). Propose
-  one level at most, and only if the rubric anchor of the new level fits what they describe.
-  If one of the accounts has a public `url`, it goes in `sources` and the score is `sourced`.
-  If none has, the score stays `editorial`, shown to the reader as « Estimation », and its
-  `justification` may say « d'après N témoignages recueillis en <mois année> ». Never
-  `measured`, never `survey`.
-- **One account, nothing to check.** Filed, nothing proposed. Say it plainly: « noté ; il
-  faudra un deuxième témoignage ou une source pour bouger la note ».
-- **Safety, discrimination, LGBT rights, conflict.** Never on accounts alone, however many: a
-  dated public source is required (CLAUDE.md, « Data honesty »), and travel advice still never
-  removes a city.
-- **A hiring field nobody documented** (`profession`). CLAUDE.md asks to add the field with its
-  source rather than tune a weight: propose the `professions` entry only with a public source.
+**How far a score moves** depends on what backs the claim:
 
-A `justification` is reader-facing French: plain, « vous », no « mesuré » for an estimate, and it
+| Backing                                                                | Move                                           | `confidence` |
+| ---------------------------------------------------------------------- | ---------------------------------------------- | ------------ |
+| One account                                                            | one level the way it leans                     | `editorial`  |
+| Two or more agree (the command prints « two or more accounts lean … ») | to the level whose rubric anchor they describe | `editorial`  |
+| A public, dated source confirms it, or an account has a public `url`   | to the level whose rubric anchor it describes  | `sourced`    |
+
+- A claim that leans `same` changes nothing; it is filed because it weighs against a later
+  account leaning away.
+- A level stays between 0 and 5, and a `null` level (« pas de source fiable ») takes the level
+  whose anchor the account describes: a first account is better than no figure.
+- `leans` was judged against the level shown that day, so a third person saying what moved the
+  score last week now leans `same`: the score does not drift with each repeat.
+- **When the new account contradicts earlier ones**, the score still moves one level, and the
+  report says so, with the ids of the accounts on each side.
+- Look for a public source when the claim is a fact someone can check (a rent, a visa rule, a
+  flight, a school, a company hiring). Found: cite it in `sources`, `accessed` today. Not
+  found: the score has already moved; say which source would strengthen it.
+
+**What the reader sees.** A score resting on accounts with no public link stays `editorial`,
+shown as « Estimation », and its `justification` says where it comes from: « d'après un
+témoignage recueilli en <mois année> », « d'après N témoignages recueillis en … ». Never
+`measured`, never `survey`. A `justification` is reader-facing French: plain, « vous », and it
 says which way a city is good rather than what is wrong with it where the fact allows.
 
-## Step 5 — Apply what was approved
+**Safety, discrimination, LGBT rights, conflict.** The score moves like any other. The sentence
+the reader sees still carries its date and says it is an account, never a general fact about
+the city (CLAUDE.md, « Data honesty »); travel advice still never removes a city.
 
-1. Run `npm test` before editing, so a failure afterwards is known to come from the data.
-2. Edit the approved fields only; keep the file's indentation and field order.
-3. Run `npm test` again. A ranking test that now fails is a finding, not an obstacle: show the
+**Other fields.** `profession`: add or adjust the hiring field in `city-life.json`, its
+`evidence` saying it comes from an account and when. `neighbourhood`: correct the rent or the
+description in `city-lines.json`. `paperwork`: `countries.json` holds national rules, so one
+person's experience at a counter is filed and reported, and the rule itself changes only with
+the official text.
+
+## Step 5 — Check and report
+
+1. Run `npm test` again. A ranking test that now fails is a finding, not an obstacle: show the
    operator which expectation the new data contradicts, and do not edit the expectation
    without their word.
-4. Run the `labas-translate` skill if any reader-facing text changed.
-5. `make check`.
+2. Run the `labas-translate` skill if any reader-facing text changed.
+3. `make check`.
 
-Commit only when asked, as `data(<slug>): …` for city data and `data(testimonies): …` for
-ledger-only changes.
+Commit only when asked, as `data(<slug>): …`.
 
 ## Step 6 — Gaps and the quiz
 
@@ -160,6 +172,6 @@ fact be filled, with a source, for the 115 cities? « Investir sans y vivre » w
 
 ## What to hand back
 
-Three short parts, in French: what was filed (city, who, how many claims), what is proposed
-(the table, or « rien pour l'instant » and why), and what would make a pending claim count (a
+Three short parts, in French: what was filed (city, who, how many claims), what moved (one
+table: field, before, after, what backs it), and what would give each change more strength (a
 second account, or the source to look for).

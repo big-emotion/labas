@@ -17,7 +17,7 @@ function testimony(id: string, overrides: Partial<Testimony> = {}): Testimony {
 }
 
 describe("agreedLean", () => {
-  it("does not move a score on one person's word", () => {
+  it("does not call one person's word an agreement", () => {
     expect(agreedLean([testimony("a")], "lagos", "utilities")).toBeNull();
   });
 

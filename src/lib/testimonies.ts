@@ -47,10 +47,10 @@ const isCriterion = (subject: Subject): subject is CriterionKey =>
   (CRITERION_KEYS as readonly string[]).includes(subject);
 
 /**
- * The direction a score should be looked at again, or null. One account is a lead, not
- * evidence: a single viral screenshot must not reorder the cities. Two people leaning the same
- * way, nobody the other way, and fewer people finding the score right, is the lowest bar that
- * still lets the ledger say anything.
+ * The direction the accounts agree on, or null. One account already moves a score, by one
+ * level (operator, 2026-11-26: readers' experience comes first); agreement is what lets it go
+ * all the way to the level the rubric describes. Two people leaning the same way, nobody the
+ * other way, and fewer people finding the score right, is the lowest bar worth calling that.
  */
 export function agreedLean(
   testimonies: Testimony[],
