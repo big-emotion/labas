@@ -110,6 +110,15 @@ npm run test:watch
 
 `make check` is the gate before every push; CI runs the same command on pull requests.
 
+### Adding what people say about a city
+
+A first-hand account (a screenshot, a message, a photo) goes through the project skill
+[`labas-testimony`](.claude/skills/labas-testimony/SKILL.md): it is filed anonymously in
+`src/data/city-testimonies.json` and moves the score it bears on: by one level on one account,
+further when a second account or a public source backs it.
+`npm run testimony -- <city slug>` shows where two agree, and
+`npm run testimony -- gaps` what people tell that the site has no field for.
+
 ### Adding or changing text
 
 The site is bilingual: French (Là-bas, the source) and British English (Over There, under `/en/`
