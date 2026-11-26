@@ -102,6 +102,12 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   with any safety, discrimination, LGBT-rights or conflict remark. Travel advice (France Diplomatie,
   FCDO) is shown with each city as dated information and never removes or greys a city
   (operator, 2026-11-15: it is written for visitors who have never been there).
+- **A first-hand account is a lead, not evidence** (operator, 2026-11-26; `labas-testimony`
+  skill, `src/data/city-testimonies.json`, `lib/testimonies.ts`): a screenshot, text or photo the
+  operator shares is filed as a paraphrase with no name, handle or quote, since the repository
+  is public and the person never wrote for the site; it is never shown on it. It moves a score
+  only when a second person leans the same way (`agreedLean`) or a public dated source confirms
+  its fact, and only after the operator approves the change.
 - **Privacy**: answers are computed and kept in the browser (localStorage, so the full
   questionnaire resumes the quick quiz). What is sent: anonymous, cookieless Plausible events,
   one per quick-quiz answer (with the reader's path and the question's rank in it) plus the steps in `GOALS` (`src/lib/analytics.ts`, only when
