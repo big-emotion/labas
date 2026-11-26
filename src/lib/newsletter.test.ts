@@ -1,18 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { NEWS_AFTER, outcomeOf, resultsBody, shouldOfferNews, signUpBody } from "./newsletter";
-
-describe("when the quiz offers the news", () => {
-  it("waits for the fourth answer, so the first questions come uninterrupted", () => {
-    expect(NEWS_AFTER).toBe(4);
-    expect(shouldOfferNews(3, false)).toBe(false);
-    expect(shouldOfferNews(4, false)).toBe(true);
-    expect(shouldOfferNews(9, false)).toBe(true);
-  });
-
-  it("never comes back once the reader said « Plus tard »", () => {
-    expect(shouldOfferNews(6, true)).toBe(false);
-  });
-});
+import { outcomeOf, resultsBody, signUpBody } from "./newsletter";
 
 describe("what the form sends", () => {
   it("sends only the address, the ticked box and the robot trap", () => {

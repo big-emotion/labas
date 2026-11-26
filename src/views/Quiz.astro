@@ -263,7 +263,6 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           <span id="stitches" class="stitches" aria-hidden="true"></span>
           <p id="counter" class="counter"></p>
         </div>
-        <SaveLater kind="quick" />
         <form id="form" class="questions" aria-label={copy.answers}>
           {questions.map((question, index) => (
             <fieldset
@@ -324,7 +323,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
             </button>
           </div>
         </form>
-        <Newsletter place="quiz" />
+        <SaveLater kind="quick" />
 
         <div id="outcome" class="outcome" hidden>
           <dialog id="filter-sheet" class="sheet" aria-labelledby="sheet-title">
@@ -361,7 +360,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
 
           {/* Right after the cities; the block offered during the quiz closes when the quiz
               ends, so the two never show together (operator, 2026-11-19). */}
-          <Newsletter place="results" />
+          <Newsletter />
 
           <section class="others" aria-labelledby="others-title">
             <h2 id="others-title">{copy.others}</h2>
@@ -882,8 +881,8 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         const back = id ? fieldsets.get(id)?.querySelector<HTMLButtonElement>(".back") : null;
         if (back) back.hidden = asked.length === 0;
         if (id) syncContinue(fieldsets.get(id)!);
-        // The news block (components/Newsletter.astro) shows from the fourth answer.
-        // Once the quiz is over it closes: the result has its own, right after the cities.
+        // « M'envoyer mon parcours » (components/SaveLater.astro) shows from the fourth answer.
+        // Once the quiz is over it goes: the result has its own e-mail, right after the cities.
         document.dispatchEvent(
           new CustomEvent("labas:answered", { detail: id ? asked.length : 0 }),
         );

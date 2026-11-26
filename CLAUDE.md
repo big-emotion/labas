@@ -88,8 +88,11 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   villes vous ressemblent de près »). Cards 2 and 3 sit side by side, small, until « Voir le
   détail » opens one across the width; cities 4 to 10 follow as rows (« Tout près derrière »).
   Mail, share, `quiz_outcomes` and a review's summary stay at three (`TOP_THREE`).
-  The temperament and the one news sign-up come after the cities; the sign-up offered during the
-  quiz closes when the quiz ends.
+  The temperament and the one news sign-up come after the cities. During the quick quiz the one
+  e-mail ask is a single button, « M'envoyer mon parcours », under the question from the fourth
+  answer (`offersSaving`, operator 2026-11-26, mockup E3: few readers gave their address when two
+  blocks asked); it opens « Reprendre plus tard », whose news box replaces the quiz's own
+  sign-up, and goes when the quiz ends.
 - **One-tap reactions are public counts** (operator, 2026-11-20; `lib/taps.ts`, « taps » in the
   code since `reactions` means the written reviews): « J'aime », « Ça me correspond », « Ça ne me
   correspond pas » on every result card, city page and the cities list, no account. The server

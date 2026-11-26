@@ -19,6 +19,17 @@ export interface Journey {
   updatedAt?: string;
 }
 
+/**
+ * The quick quiz asks for an e-mail once, with one button (operator, 2026-11-26, mockup E3: few
+ * readers gave theirs when two blocks asked). It waits for the fourth answer, early enough to
+ * reach readers who stop, and goes when the quiz ends (`answered` is 0 then).
+ */
+export const SAVE_AFTER = 4;
+
+export function offersSaving(answered: number): boolean {
+  return answered >= SAVE_AFTER;
+}
+
 /** « Reprendre plus tard »: nothing leaves without the explicit consent box. */
 export function saveBody(
   form: { email: string; consent: boolean; sensitive: boolean; news: boolean; website: string },
