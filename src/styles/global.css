@@ -94,6 +94,11 @@ button {
     position: absolute;
     inset: 0 0 auto 0;
   }
+  /* The rest of the ranking sits inside the result on screen; the printout keeps to the cities
+     on cards, as it did before the list moved up. */
+  [data-print] .others {
+    display: none;
+  }
 }
 
 /* « Prévoir des imprévus » under a city, on every result page (cards-dom fillLines). */

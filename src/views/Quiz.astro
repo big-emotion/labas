@@ -48,7 +48,7 @@ const COPY: Bilingual<Record<string, string>> = {
       "Elles sont très proches les unes des autres. Quelques questions de plus les départageraient :",
     closeLink: "aller plus loin",
     near: "Tout près derrière",
-    others: "Toutes les autres villes",
+    others: "La suite du classement",
     othersHint: "Les 115 villes, triées selon vos réponses.",
     filters: "Filtrer vos villes",
     filterNote: "Les filtres retirent des villes ; l'ordre ne change jamais.",
@@ -97,7 +97,7 @@ const COPY: Bilingual<Record<string, string>> = {
     closeStart: "They are very close to one another. A few more questions would separate them:",
     closeLink: "go deeper",
     near: "Close behind",
-    others: "All the other cities",
+    others: "The rest of the ranking",
     othersHint: "The 115 cities, sorted by your answers.",
     filters: "Filter your cities",
     filterNote: "Filters take cities out; the order never changes.",
@@ -345,6 +345,35 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
               <h3 id="near-title">{copy.near}</h3>
               <ol id="near-rows" class="rows"></ol>
             </section>
+            {/* The rest of the ranking right under the top three (operator, 2026-11-27): readers
+                missed it below the temperament and the news sign-up. */}
+            <section class="others" aria-labelledby="others-title">
+              <h2 id="others-title">{copy.others}</h2>
+              <p class="hint" id="others-hint">
+                {copy.othersHint}
+              </p>
+              <div class="filters" aria-label={copy.filters}>
+                <div class="filter-chips">
+                  {menu.map((entry) => (
+                    <button
+                      type="button"
+                      class="filter-chip"
+                      data-filter={entry.key}
+                      aria-pressed="false"
+                    >
+                      {entry.label}
+                    </button>
+                  ))}
+                </div>
+                <p class="hint" id="filter-note">
+                  {copy.filterNote}
+                </p>
+              </div>
+              <ol id="rows" class="rows"></ol>
+              <button type="button" id="more" class="more">
+                {copy.more}
+              </button>
+            </section>
             <KeepResults further />
             {/* Moved by the script into the first card, right above its filled button. */}
             <Reactions preview />
@@ -355,34 +384,6 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
           {/* Right after the cities; the block offered during the quiz closes when the quiz
               ends, so the two never show together (operator, 2026-11-19). */}
           <Newsletter />
-
-          <section class="others" aria-labelledby="others-title">
-            <h2 id="others-title">{copy.others}</h2>
-            <p class="hint" id="others-hint">
-              {copy.othersHint}
-            </p>
-            <div class="filters" aria-label={copy.filters}>
-              <div class="filter-chips">
-                {menu.map((entry) => (
-                  <button
-                    type="button"
-                    class="filter-chip"
-                    data-filter={entry.key}
-                    aria-pressed="false"
-                  >
-                    {entry.label}
-                  </button>
-                ))}
-              </div>
-              <p class="hint" id="filter-note">
-                {copy.filterNote}
-              </p>
-            </div>
-            <ol id="rows" class="rows"></ol>
-            <button type="button" id="more" class="more">
-              {copy.more}
-            </button>
-          </section>
         </div>
 
         <footer class="footer">

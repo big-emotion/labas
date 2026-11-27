@@ -33,7 +33,7 @@ const COPY: Bilingual<Record<string, string>> = {
     ranking: "Vos villes",
     rankingHint:
       "Classées selon toutes vos réponses. Le pourcentage dit à quel point une ville correspond à ce que vous avez dit, rien de plus.",
-    others: "Toutes les autres villes",
+    others: "La suite du classement",
   },
   en: {
     title: "Go deeper",
@@ -52,7 +52,7 @@ const COPY: Bilingual<Record<string, string>> = {
     ranking: "Your cities",
     rankingHint:
       "Ranked by all your answers. The percentage says how closely a city matches what you said, nothing more.",
-    others: "All the other cities",
+    others: "The rest of the ranking",
   },
 };
 const copy = COPY[locale];
@@ -118,17 +118,17 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
     <ResultWhy />
     <ul id="removed" class="removed"></ul>
     <div id="cards" class="cards"></div>
+    {/* The rest of the ranking right under the top three (operator, 2026-11-27). */}
+    <section class="others" aria-labelledby="others-title">
+      <h2 id="others-title">{copy.others}</h2>
+      <ol id="rows" class="rows"></ol>
+      <button type="button" id="more" class="more" hidden></button>
+    </section>
     <KeepResults />
     {/* Moved by the script into the first card, right above its filled button. */}
     <Reactions preview />
     <SourcesNote />
     <TemperamentProfile />
-  </section>
-
-  <section class="others" aria-labelledby="others-title">
-    <h2 id="others-title">{copy.others}</h2>
-    <ol id="rows" class="rows"></ol>
-    <button type="button" id="more" class="more" hidden></button>
   </section>
 
   <ResultCards />

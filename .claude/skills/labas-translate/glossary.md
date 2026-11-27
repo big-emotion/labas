@@ -71,6 +71,7 @@ and change every use in the same commit.
 | Ajouter la vôtre (un avis)    | Add yours                     |
 | Sans compte ni e-mail         | No account or email needed    |
 | Détail (bouton court)         | Details                       |
+| La suite du classement        | The rest of the ranking       |
 | Enregistrer l'image           | Save the picture              |
 | Imprimer                      | Print                         |
 | Supprimer                     | Delete                        |
