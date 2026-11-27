@@ -6,6 +6,13 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.33.1] - 2026-11-27
+
+### Fixed
+
+- A tapped reaction no longer turns saffron: the yellow 👍 and 👎 stayed hard to see on it. It now
+  stays dark with a saffron ring.
+
 ## [0.33.0] - 2026-11-27
 
 ### Changed
@@ -765,6 +772,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.31.0...HEAD
+[0.33.1]: https://github.com/big-emotion/labas/compare/v0.33.0...v0.33.1
 [0.33.0]: https://github.com/big-emotion/labas/compare/v0.32.0...v0.33.0
 [0.32.0]: https://github.com/big-emotion/labas/compare/v0.31.0...v0.32.0
 [0.31.0]: https://github.com/big-emotion/labas/compare/v0.30.0...v0.31.0
