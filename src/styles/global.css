@@ -145,13 +145,13 @@ button {
   font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
 }
+/* A tapped answer stays dark with a thick saffron ring: on a saffron fill the yellow 👍 and 👎
+   melted into the button (operator, 2026-11-27). */
 .taps button[aria-pressed="true"] {
-  background: var(--saffron);
+  background: var(--night-pressed);
   border-color: var(--saffron);
-  color: var(--ink);
-}
-.taps button[aria-pressed="true"] b {
-  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--saffron);
+  color: var(--saffron);
 }
 .taps-note {
   grid-column: 1 / -1;
