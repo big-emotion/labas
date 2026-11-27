@@ -1523,9 +1523,22 @@
         "standing": "upscale",
         "walkable": false,
         "lively": false
+      },
+      {
+        "name": "Gizeh",
+        "text": "Une ville entière sur la rive ouest du Nil. Loin de l'entrée des pyramides, des quartiers populaires avec marchés de produits frais et cuisine de rue. Autour des pyramides, le quartier vit du tourisme et les sollicitations sont nombreuses, d'après deux témoignages recueillis en novembre 2026.",
+        "setting": "residential",
+        "standing": "popular",
+        "walkable": null,
+        "lively": true
       }
     ],
     "sources": [
+      {
+        "title": "Cairo/Giza — Wikivoyage",
+        "url": "https://en.wikivoyage.org/wiki/Cairo/Giza",
+        "accessed": "2026-11-27"
+      },
       {
         "title": "Egypt restores normal business hours — Egyptian Streets",
         "url": "https://egyptianstreets.com/2026/04/27/egypt-restores-normal-business-hours-after-ending-early-closing-rule/",

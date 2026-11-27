@@ -30,5 +30,112 @@
         "says": "Sending money from a Côte d'Ivoire wallet to a Senegal wallet of the same mobile-money app cost 1.5 % plus a 0.5 % tax on arrival: 2,000 FCFA on 100,000 FCFA sent, despite the shared currency."
       }
     ]
+  },
+  {
+    "id": "2026-11-27-le-caire-1",
+    "city": "le-caire",
+    "received": "2026-11-27",
+    "experienced": null,
+    "medium": "screenshot",
+    "context": "Caption and replies by the author of a public video on a social network about where to stay when visiting Cairo",
+    "url": null,
+    "witness": "Travel planner who sells trips to Egypt; own time in the city not stated",
+    "claims": [
+      {
+        "about": "neighbourhood",
+        "says": "Advises visitors against staying in the pyramids area of Giza: that area has become a tourist trap and gives many people a bad stay, after which they judge Cairo without having set foot in the city itself. Giza as a whole is very large, with many different neighbourhoods, and is not to be judged by that one area."
+      }
+    ]
+  },
+  {
+    "id": "2026-11-27-le-caire-2",
+    "city": "le-caire",
+    "received": "2026-11-27",
+    "experienced": null,
+    "medium": "screenshot",
+    "context": "Comment under a public video on a social network about where to stay when visiting Cairo",
+    "url": null,
+    "witness": "Visitor who stayed in Giza, away from the tourist area; length and date not given",
+    "claims": [
+      {
+        "about": "neighbourhood",
+        "says": "Stayed in Giza away from the tourist area and found it very good. Residents described it as poor compared with the central districts. A good place to see everyday life: neighbourhood markets, street vendors, fruit and vegetables delivered to the door, many friendly residents. Giza is large and should not be judged by the pyramid entrances."
+      },
+      {
+        "about": "safety",
+        "leans": "same",
+        "says": "Harassment of visitors exists at the entrances to the pyramids; none reported in the residential part of Giza where the person stayed. The site already mentions scams at tourist places."
+      },
+      {
+        "about": "uncovered",
+        "topic": "street-food-and-markets",
+        "says": "Very fresh produce at the Giza markets and good street food everywhere in the area."
+      }
+    ]
+  },
+  {
+    "id": "2026-11-27-le-caire-3",
+    "city": "le-caire",
+    "received": "2026-11-27",
+    "experienced": null,
+    "medium": "screenshot",
+    "context": "Comment under a public video on a social network about where to stay when visiting Cairo",
+    "url": null,
+    "witness": "Former resident, three years in the city; dates not given",
+    "claims": [
+      {
+        "about": "neighbourhood",
+        "says": "Lived in Cairo for three years and enjoyed it, though people around them find that hard to believe. Says the city has remarkable neighbourhoods; none named."
+      }
+    ]
+  },
+  {
+    "id": "2026-11-27-le-caire-4",
+    "city": "le-caire",
+    "received": "2026-11-27",
+    "experienced": null,
+    "medium": "screenshot",
+    "context": "Comment under a public video on a social network about where to stay when visiting Cairo",
+    "url": null,
+    "witness": "Visitor; length and date not given",
+    "claims": [
+      {
+        "about": "history",
+        "leans": "same",
+        "says": "Visited Cairo, liked it a lot and found the heritage extraordinary. Nothing said about places of memory of the diaspora, which is what the top level asks for."
+      }
+    ]
+  },
+  {
+    "id": "2026-11-27-le-caire-5",
+    "city": "le-caire",
+    "received": "2026-11-27",
+    "experienced": null,
+    "medium": "screenshot",
+    "context": "Comment with a photo under a public video on a social network about where to stay when visiting Cairo",
+    "url": null,
+    "witness": "Visitor who stayed in a hotel in Zamalek; length and date not given",
+    "claims": [
+      {
+        "about": "neighbourhood",
+        "says": "Stayed in a hotel in Zamalek and found the view from it outstanding. The attached photo is cut off in the screenshot and shows only sky."
+      }
+    ]
+  },
+  {
+    "id": "2026-11-27-le-caire-6",
+    "city": "le-caire",
+    "received": "2026-11-27",
+    "experienced": null,
+    "medium": "screenshot",
+    "context": "Comment under a public video on a social network about where to stay when visiting Cairo",
+    "url": null,
+    "witness": "Visitor who stayed in a hotel on Tahrir Square; length and date not given",
+    "claims": [
+      {
+        "about": "neighbourhood",
+        "says": "Stayed in an international hotel on Tahrir Square, downtown, found it magnificent and would go back without hesitation."
+      }
+    ]
   }
 ]
