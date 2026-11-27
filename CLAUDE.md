@@ -100,7 +100,8 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   with its rank, beside it the name, the score bar, the reaction as round icons and « Détail »,
   which opens the whole card with « Pas pour moi »; cities 4 to 10 follow as one line each (« Tout
   près derrière »: name, country, score, bar), with no reaction, since a tap posts the top three
-  only.
+  only. « La suite du classement », every other city with its filters, follows right under them,
+  before the sources and the temperament (operator, 2026-11-27: readers missed it lower down).
   Mail, share, `quiz_outcomes` and a review's summary stay at three (`TOP_THREE`).
   The temperament and the one news sign-up come after the cities. During the quick quiz the one
   e-mail ask is a single button, « M'envoyer mon parcours », under the question from the fourth

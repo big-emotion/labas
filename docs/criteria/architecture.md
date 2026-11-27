@@ -108,7 +108,7 @@ country stay three cities from the same country. On the phone, in this order:
      (already visible on the first), "On dit", "Ce qui pourrait te surprendre", "Les quartiers"
      (asking rents, "souvent négociables"), "Ses points forts pour toi", "À savoir" and "Nos
      sources". A field with nothing to show stays hidden rather than showing a placeholder.
-2. **"Toutes les autres villes"**: every other city in score order, numbered from 4, with the
+2. **"La suite du classement"**, right under the cards: every other city in score order, with the
    percentage, bar and tagline. Five rows show, then **"Voir plus de villes"** shows them all.
    Each row opens the same detail. A city the authorities advise against is ranked like any
    other; its detail carries the dated advice (§4.3).
