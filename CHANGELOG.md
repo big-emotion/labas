@@ -6,6 +6,22 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.36.0] - 2026-11-27
+
+### Added
+
+- « Tester quelques mois » has a question of its own, « Pendant ces mois, vous travaillerez ? »:
+  working online favours the cities with the better connection and steadier power, looking for
+  work on the spot favours the cities that hire, and a third answer leaves work out of the choice.
+
+### Changed
+
+- For that path the new question takes the place of the visa question, which the full
+  questionnaire still asks.
+- « Combien d'allers-retours vers l'Europe par an ? » now changes the cities shown: once a reader
+  has said how often they fly back, that answer speaks for the flights, where « Un pied ici, un
+  pied là-bas » used to ask for the best flights whatever the answer.
+
 ## [0.35.0] - 2026-11-27
 
 ### Changed
@@ -797,6 +813,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.31.0...HEAD
+[0.36.0]: https://github.com/big-emotion/labas/compare/v0.35.0...v0.36.0
 [0.35.0]: https://github.com/big-emotion/labas/compare/v0.34.0...v0.35.0
 [0.34.0]: https://github.com/big-emotion/labas/compare/v0.33.1...v0.34.0
 [0.33.1]: https://github.com/big-emotion/labas/compare/v0.33.0...v0.33.1
