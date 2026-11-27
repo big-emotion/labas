@@ -484,18 +484,48 @@ export const DEEP_QUESTIONS: Question[] = [
 ];
 
 /**
- * The quick quiz draws from the whole questionnaire (operator, 2026-11-25: 9 readers of 171
- * opened the full one), except the answers that take cities off the list: those stay in
- * /approfondir, asked of a reader who chose to go further (2026-11-25). The visa is no longer one
- * of them: it weighs (2026-11-26).
+ * The quick quiz's core (operator, 2026-11-27): a short set per path, asked theme by theme in
+ * this order whoever the reader is. Drawn from the whole questionnaire and at random among
+ * questions as good as each other (2026-11-25), the quiz read as haphazard, and the version of
+ * 12 to 14 questions per path had read as one conversation. The four places of a path went to
+ * the questions whose answers replace the most cities among the first five, except where a
+ * path's rule asks otherwise: a settler lives on their profession, and « un pied ici, un pied
+ * là-bas » is about the trips home. Everything else is asked in /approfondir, the filters that
+ * take cities off the list included.
  */
-const REMOVES_CITIES = new Set([
-  "avoidRegions",
-  "languageOnly",
-  "schoolCurriculum",
-  "specialistCare",
-  "excludeCriminalising",
-]);
-export const QUICK_QUESTIONS = DEEP_QUESTIONS.filter(
-  (question) => !REMOVES_CITIES.has(question.id),
-);
+const OWN: Record<string, string[]> = {
+  installer: ["languages", "profession", "budget", "climate"],
+  pied: ["languages", "profession", "tripsHome", "climate"],
+  tester: ["languages", "size", "climate", "visaFreeOnly"],
+  decouvrir: ["wants", "season", "languages", "passports"],
+};
+/** « Aller vers l'inconnu » is not here: it stands in for the distance question, in the story. */
+const WAY_OF_LIVING = ["saturday", "order", "together", "friction"];
+/** The distance question closes the story (operator, 2026-11-20), its follow-ups after it. */
+const STORY = ["origin", "countries", "drawnTo", "adventure", "reach", "acrossSahara", "faith"];
+
+/**
+ * The core's questions for this project, in the order asked, each under the theme it is asked
+ * in. A journey saved with « investir » or with no project gets the settler's: the conditions
+ * of the questions then drop what does not fit it.
+ */
+export function coreOf(project: string | undefined): Question[] {
+  const themes: [string, string[]][] = [
+    [CHAPTER.project, ["project", ...(OWN[project ?? ""] ?? OWN.installer)]],
+    [CHAPTER.temperament, WAY_OF_LIVING],
+    [CHAPTER.history, STORY],
+    [CHAPTER.last, ["priorities"]],
+  ];
+  return themes.flatMap(([group, ids]) =>
+    ids.map((id) => ({ ...DEEP_QUESTIONS.find((q) => q.id === id)!, group })),
+  );
+}
+
+/** Every question the quick quiz may ask, whatever the path: what the page renders. */
+export const QUICK_QUESTIONS: Question[] = [
+  ...new Map(
+    Object.keys(OWN)
+      .flatMap(coreOf)
+      .map((question) => [question.id, question]),
+  ).values(),
+];

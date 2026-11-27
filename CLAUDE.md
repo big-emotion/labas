@@ -24,20 +24,23 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   « Voir les villes d'Afrique » below; `homeEvent` counts which door is taken. A reader who has seen their result in this browser
   finds « Revoir mon résultat » there too, and the result's address (`#resultat`) shows it again
   after the back button (reader feedback, 2026-11-26: a link of the result took a reader off the
-  page and the result was lost; `canShowResultAgain`, recomputed from the answers kept). The free
-  quiz then opens on the project alone (operator, 2026-11-20; the languages and the family's origin
-  are asked along the way); then, themes mixed, a follow-up comes right after its question and
-  each answer picks the next question from the whole questionnaire (operator, 2026-11-25:
-  `QUICK_QUESTIONS` is the /approfondir bank bar the filters that take cities off the list), one of those most likely to change the top three, then the list the result shows, at
-  random among the questions as good as each other so that no two readers meet the same order;
-  beside « question 7 » the quiz says how near it is (« on cherche », « on se rapproche »,
-  « presque trouvé »); it ends once no question can change that list, or near `MAX_QUESTIONS`
-  (25), though never before the whole temperament chapter has been asked (operator, 2026-11-20).
-  Once the top three can no longer move, « Voir mes villes maintenant » lets the reader stop
-  (`topThreeSettled`, `earlyEvent`). After each answer the page comes back to the map and the new question
+  page and the result was lost; `canShowResultAgain`, recomputed from the answers kept). The quick
+  quiz asks each path a short core, 14 questions at most (operator, 2026-11-27; `coreOf` in
+  `src/lib/deep-questions.ts`): drawn from the whole questionnaire, themes mixed and at random
+  among questions as good as each other (2026-11-17, 2026-11-20, 2026-11-25), it read as
+  haphazard. It opens on the project, then asks the path's four own questions (the languages in
+  every path; job, budget and weather to settle; job, trips home and weather for « un pied ici, un
+  pied là-bas »; city size, weather and visa to try; kind of trip, season and passport for a
+  holiday), then « façon de vivre », then the family's story, and closes on the non-negotiables.
+  The order is the same for every reader and a theme is finished before the next; only a
+  question's own condition opens or closes it. Everything else, music included, is asked in
+  /approfondir; a question enters a core only with city-level data behind it. Beside
+  « question 7 » the quiz says how near its end is (« on cherche », « on se rapproche »,
+  « presque trouvé »), with no total. After each answer the page comes back to the map and the new question
   when their top has left the screen (`scrollBack`, operator 2026-11-26, mockup S1). The practical questions (budget, money to put down,
-  passport, trips home, length of a holiday) are in it too (operator, 2026-11-26): their data is
-  filled city by city in `city-scores.json`, and the visa weighs instead of removing a city.
+  passport, trips home, length of a holiday) have their data filled city by city in
+  `city-scores.json` (operator, 2026-11-26), and the visa weighs instead of removing a city; a
+  core asks the one that is its path's own.
   The project question offers four paths (operator, 2026-11-26): « Investir sans y vivre » was
   removed for want of city-level data on land security or rental yield; `investir` stays readable
   so journeys saved with it still rank.

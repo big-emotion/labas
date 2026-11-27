@@ -84,9 +84,9 @@ describe("a path per project", () => {
     for (const id of ["profession", "landscapes", "tripsHome"]) expect(asked).not.toContain(id);
   });
 
-  it("asks both-feet readers how often they come back", () => {
-    // Offered, not always asked: the path asks it only when it can still change the top three.
-    expect(freeQuestions({ project: "pied" }).map((q) => q.id)).toContain("profession");
+  it("asks both-feet readers their job and how often they come back", () => {
+    const { asked } = play("pied", 0);
+    expect(asked).toEqual(expect.arrayContaining(["profession", "tripsHome"]));
   });
 });
 
@@ -168,9 +168,8 @@ describe("going back and changing an answer", () => {
     const asked = Object.keys(changed).filter((id) => changed[id as keyof Answers] !== undefined);
     expect(asked).not.toContain("profession");
     const next = nextFreeQuestion(changed, asked);
-    // What the trip opens (« wants », « season ») when it can still move the top three, or the
-    // closing question once nothing can.
-    expect(["wants", "season", "priorities"]).toContain(next);
+    // The first question of the holiday's own that was not asked yet.
+    expect(next).toBe("wants");
   });
 
   // Operator, 2026-11-20: what the family says of itself is asked in one go, wherever the path
@@ -193,19 +192,16 @@ describe("going back and changing an answer", () => {
     expect(ids.length).toBe(new Set(ids).size);
   });
 
-  // Operator, 2026-11-16: the questions that move the top five least go to the full
-  // questionnaire, so the quick quiz stays quick; they are still asked there, where they fit.
-  // The family's country and the faith came back to the quick quiz on 2026-11-20.
-  // Operator, 2026-11-26: the practical questions enter the quick quiz, their data being filled
-  // city by city; like any other, each is asked only when it can change the list.
-  it("offers the practical questions in the quick quiz to the readers they concern", () => {
+  // Operator, 2026-11-26: the practical questions have their data filled city by city.
+  // Operator, 2026-11-27: the quick quiz asks each path the one that is its own; the full
+  // questionnaire asks the others, where they fit.
+  it("asks each path its practical question in the quick quiz, the others in the full one", () => {
     const offered = (answers: Answers) => freeQuestions(answers).map((q) => q.id);
-    expect(offered({ project: "installer" })).toEqual(
-      expect.arrayContaining(["budget", "setupBudget", "passports", "tripsHome"]),
-    );
-    expect(offered({ project: "decouvrir" })).toEqual(
-      expect.arrayContaining(["duration", "passports", "visaFreeOnly"]),
-    );
+    expect(offered({ project: "installer" })).toContain("budget");
+    expect(offered({ project: "pied" })).toContain("tripsHome");
+    expect(offered({ project: "tester" })).toContain("visaFreeOnly");
+    expect(offered({ project: "decouvrir" })).toContain("passports");
+    expect(offered({ project: "installer" })).not.toContain("setupBudget");
     const deep = (answers: Answers) => {
       const asked = Object.keys(answers);
       const seen: string[] = [];

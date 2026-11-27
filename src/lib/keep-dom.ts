@@ -7,7 +7,6 @@ import type {
   SiteEvent,
   TapEvent,
   HomeEvent,
-  EarlyEvent,
 } from "./analytics";
 import { type Network, networkShare, networkText, shareEvent } from "./networks";
 import { type JourneyKind, resultsMailBody } from "./account";
@@ -80,8 +79,7 @@ export function track(
     | MessageEvent
     | NotForMeEvent
     | TapEvent
-    | HomeEvent
-    | EarlyEvent,
+    | HomeEvent,
 ): void {
   window.plausible?.(event.name, "props" in event ? { props: event.props } : undefined);
 }
