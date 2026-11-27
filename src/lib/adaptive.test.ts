@@ -66,7 +66,7 @@ describe("the quick quiz, a short core per path", () => {
     const own: Record<Project, string[]> = {
       installer: ["languages", "profession", "budget", "climate"],
       pied: ["languages", "profession", "tripsHome", "climate"],
-      tester: ["languages", "size", "climate", "visaFreeOnly"],
+      tester: ["languages", "workThere", "size", "climate"],
       decouvrir: ["wants", "season", "languages", "passports"],
     };
     for (const project of PROJECTS)

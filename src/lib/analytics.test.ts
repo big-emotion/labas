@@ -78,9 +78,11 @@ describe("the one anonymous event sent per quiz answer", () => {
   });
 
   it("only sends answers to the questions the quick quiz can ask", () => {
-    // Drawn from the whole questionnaire since 2026-11-25, the visa included since 2026-11-26.
-    expect(answerEvent("visaFreeOnly", true, AT)?.props.question).toBe("visaFreeOnly");
+    // The questions of the four paths' cores (2026-11-27), the trial path's own included.
+    expect(answerEvent("workThere", "remote", AT)?.props.question).toBe("workThere");
     expect(answerEvent("climate", "hot", AT)?.props.question).toBe("climate");
+    // Left to the full questionnaire, like the filters that take cities off the list.
+    expect(answerEvent("visaFreeOnly", true, AT)).toBeNull();
     // A filter that takes cities off the list stays in the full questionnaire, unmeasured.
     expect(answerEvent("languageOnly", true, AT)).toBeNull();
     expect(answerEvent("anything", "x", AT)).toBeNull();

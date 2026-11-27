@@ -199,7 +199,8 @@ describe("going back and changing an answer", () => {
     const offered = (answers: Answers) => freeQuestions(answers).map((q) => q.id);
     expect(offered({ project: "installer" })).toContain("budget");
     expect(offered({ project: "pied" })).toContain("tripsHome");
-    expect(offered({ project: "tester" })).toContain("visaFreeOnly");
+    expect(offered({ project: "tester" })).toContain("workThere");
+    expect(offered({ project: "tester" })).not.toContain("visaFreeOnly");
     expect(offered({ project: "decouvrir" })).toContain("passports");
     expect(offered({ project: "installer" })).not.toContain("setupBudget");
     const deep = (answers: Answers) => {
@@ -238,5 +239,54 @@ describe("the investing path", () => {
 
   it("still ranks a journey saved with it before, without breaking", () => {
     expect(bestMatches({ project: "investir", languages: ["fr"] } as Answers, 3)).toHaveLength(3);
+  });
+});
+
+// Operator, 2026-11-27: « Tester quelques mois » had no question of its own. The research on the
+// paths found working from there the first worry of a trial stay, and the connection and the
+// power cuts are scored city by city.
+describe("the question « Tester quelques mois » alone is asked: working during the stay", () => {
+  const TRIAL = { project: "tester", languages: ["fr"] } as Answers;
+  const top = (answers: Answers, count: number) => bestMatches(answers, count);
+  const level = (answers: Answers, key: "internet" | "utilities" | "jobs") => {
+    const levels = top(answers, 10).map((m) => m.city.scores[key].level ?? 0);
+    return levels.reduce((sum, l) => sum + l, 0) / levels.length;
+  };
+
+  it("is asked in the quick quiz of that path, and of no other", () => {
+    const offered = (project: string) =>
+      freeQuestions({ project } as Answers).map((q) => q.id as string);
+    expect(offered("tester")).toContain("workThere");
+    for (const project of ["installer", "pied", "decouvrir"]) {
+      expect(offered(project), project).not.toContain("workThere");
+      expect(question("workThere").when?.({ project } as Answers), project).toBe(false);
+    }
+  });
+
+  it("keeps that path at fourteen questions or fewer", () => {
+    for (const pick of [0, 1, 2, 3])
+      expect(
+        play("tester", pick, { origin: ["ouest"] } as Answers).asked.length,
+      ).toBeLessThanOrEqual(14);
+  });
+
+  it("draws a reader who works online to the cities with the better connection and power", () => {
+    const online = { ...TRIAL, workThere: "remote" } as Answers;
+    expect(level(online, "internet")).toBeGreaterThan(level(TRIAL, "internet"));
+    expect(level(online, "utilities")).toBeGreaterThanOrEqual(level(TRIAL, "utilities"));
+  });
+
+  it("draws a reader who looks for work on the spot to the cities that hire", () => {
+    const hired = { ...TRIAL, workThere: "local" } as Answers;
+    expect(level(hired, "jobs")).toBeGreaterThan(level(TRIAL, "jobs"));
+  });
+
+  it("moves the first five cities with each answer that states a need, and none with the one that states none", () => {
+    const names = (answers: Answers) => top(answers, 5).map((m) => m.city.name);
+    for (const value of ["remote", "local"] as const)
+      expect(names({ ...TRIAL, workThere: value }), value).not.toEqual(names(TRIAL));
+    expect(names({ ...TRIAL, workThere: "none" })).toEqual(names(TRIAL));
+    const unsaid = question("workThere").choices.find((c) => c.value === "none")!;
+    expect(unsaid.label).toMatch(/ne compte pas/);
   });
 });

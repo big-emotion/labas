@@ -196,6 +196,34 @@ const FURTHER: Omit<Question, "group">[] = [
     ],
   },
   {
+    // The one question of « Tester quelques mois » alone (operator, 2026-11-27).
+    id: "workThere",
+    when: (a) => a.project === "tester",
+    title: "Pendant ces mois, vous travaillerez ?",
+    en: {
+      title: "Will you be working during those months?",
+      hint: "To favour the cities where your way of working holds up.",
+    },
+    hint: "Pour privilégier les villes où votre façon de travailler tient la route.",
+    choices: [
+      {
+        label: "Oui, en ligne, pour un travail d'ailleurs",
+        value: "remote",
+        en: { label: "Yes, online, for work based elsewhere" },
+      },
+      {
+        label: "Oui, je chercherai du travail sur place",
+        value: "local",
+        en: { label: "Yes, I'll look for work on the spot" },
+      },
+      {
+        label: "Non, le travail ne compte pas dans mon choix",
+        value: "none",
+        en: { label: "No, work doesn't count in my choice" },
+      },
+    ],
+  },
+  {
     id: "excludeCriminalising",
     title: "Vous voulez écarter les pays qui punissent l'homosexualité ?",
     en: { title: "Do you want to leave out the countries that punish homosexuality?" },
@@ -489,14 +517,15 @@ export const DEEP_QUESTIONS: Question[] = [
  * questions as good as each other (2026-11-25), the quiz read as haphazard, and the version of
  * 12 to 14 questions per path had read as one conversation. The four places of a path went to
  * the questions whose answers replace the most cities among the first five, except where a
- * path's rule asks otherwise: a settler lives on their profession, and « un pied ici, un pied
- * là-bas » is about the trips home. Everything else is asked in /approfondir, the filters that
+ * path's rule asks otherwise: a settler lives on their profession, « un pied ici, un pied
+ * là-bas » is about the trips home, and « tester quelques mois » asks about working during the
+ * stay, the one question no other path is asked. Everything else is asked in /approfondir, the filters that
  * take cities off the list included.
  */
 const OWN: Record<string, string[]> = {
   installer: ["languages", "profession", "budget", "climate"],
   pied: ["languages", "profession", "tripsHome", "climate"],
-  tester: ["languages", "size", "climate", "visaFreeOnly"],
+  tester: ["languages", "workThere", "size", "climate"],
   decouvrir: ["wants", "season", "languages", "passports"],
 };
 /** « Aller vers l'inconnu » is not here: it stands in for the distance question, in the story. */
