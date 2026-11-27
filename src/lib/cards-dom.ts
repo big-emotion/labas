@@ -20,7 +20,8 @@ const COPY: Bilingual<{
   said: (answer: string) => string;
   reactions: (city: string) => string;
   pips: (level: number) => string;
-  split: (temperament: string, practical: string) => string;
+  living: string;
+  practical: string;
   photo: (author: string, license: string) => string;
   same: (others: string) => string;
   suits: (city: string) => string;
@@ -35,7 +36,8 @@ const COPY: Bilingual<{
     said: (answer) => `Vous avez dit · ${answer}`,
     reactions: (city) => `Voir les infos utiles sur ${city}`,
     pips: (level) => `${level} sur 5`,
-    split: (t, p) => `Façon de vivre <b>${t}</b> · Vie pratique <b>${p}</b>`,
+    living: "Façon de vivre",
+    practical: "Vie pratique",
     photo: (author, license) => `Photo : ${author}, ${license}, Wikimedia Commons`,
     same: (others) => `Aussi dans le pays : ${others}`,
   },
@@ -47,7 +49,8 @@ const COPY: Bilingual<{
     said: (answer) => `You said · ${answer}`,
     reactions: (city) => `See useful tips on ${city}`,
     pips: (level) => `${level} out of 5`,
-    split: (t, p) => `Way of living <b>${t}</b> · Practical life <b>${p}</b>`,
+    living: "Way of living",
+    practical: "Practical life",
     photo: (author, license) => `Photo: ${author}, ${license}, Wikimedia Commons`,
     same: (others) => `Also in the country: ${others}`,
   },
@@ -135,6 +138,21 @@ function detailFor(m: Match, withPortrait: boolean, locale: Locale): HTMLElement
   return body;
 }
 
+function scoreLine(label: string, score: number, locale: Locale): HTMLElement {
+  const line = document.createElement("div");
+  line.className = "score-line";
+  const name = document.createElement("span");
+  name.textContent = label;
+  const bar = document.createElement("span");
+  bar.className = "bar";
+  bar.append(document.createElement("span"));
+  const value = document.createElement("b");
+  value.textContent = percentIn(score, locale);
+  line.append(name, bar, value);
+  setBar(line, score);
+  return line;
+}
+
 function setBar(root: HTMLElement, score: number) {
   (root.querySelector(".bar > span") as HTMLElement).style.width = `${Math.round(score * 100)}%`;
 }
@@ -180,8 +198,12 @@ export function cardFor(m: Match, index: number, ranked: Match[], locale: Locale
   const split = card.querySelector(".split") as HTMLElement;
   fillLines(card.querySelector(".why-temper") as HTMLElement, m.temperamentLines, locale);
   split.hidden = m.temperament === null;
+  // Two bars, like « Votre façon de vivre » under the result (operator, 2026-11-27, mockup C1).
   if (m.temperament !== null)
-    split.innerHTML = COPY[locale].split(percent(m.temperament), percent(m.practical));
+    split.replaceChildren(
+      scoreLine(COPY[locale].living, m.temperament, locale),
+      scoreLine(COPY[locale].practical, m.practical, locale),
+    );
   setText(card, ".card-pitch", city.pitch);
   const photo = photoFor(m.city.name);
   if (photo) {

@@ -77,14 +77,18 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   the Big Five chapter and its profile; the code keeps `temperament`.
 - **The first city hooks the reader** (operator, 2026-11-19, 2026-11-20 and 2026-11-22): above
   the cards only « Pourquoi ces villes ? » (`components/ResultWhy.astro`), folded to its question.
-  Inside the first card: the name, its photo, the one-tap reaction with « Pas pour moi » under it;
-  once the reader has tapped, « Vous connaissez … ? Laissez une information utile pour les
-  prochains », which rises in with a saffron stroke and makes the filled button below pulse; then
-  the one block of actions (`components/KeepResults.astro`, placed by
-  `placeHook`): « Laisser une info utile sur … » as the one filled button, share, the e-mail, the
-  full questionnaire as a link, WhatsApp and the rest folded. « Comment y aller » sits inside « Voir
-  le détail ». The reviews block in that card is dark, framed in saffron. The goal is a written word on a city
-  for the next reader. No other box asks for anything; cards 2 and 3 keep only their reaction row.
+  The first card fits in about one screen (operator, 2026-11-27, mockup C1: too much to read lost
+  readers): its photo with the rank on it, the name and score, « Façon de vivre » and « Vie
+  pratique » as two bars, the one-tap reaction; once the reader has tapped, « Vous connaissez … ?
+  Laissez une information utile pour les prochains », which rises in with a saffron stroke and
+  makes the filled button below pulse; one review of the city, dark and framed in saffron, when
+  there is one; then the one block of actions (`components/KeepResults.astro`, placed by
+  `placeHook`): « Laisser un avis sur … » as the one filled button, « Ajouter la vôtre » once the
+  city has reviews (`reviewCall`), « Sans compte ni e-mail » under it, share, the e-mail and the full
+  questionnaire as a link. Everything else (the pitch, « Pourquoi vous », what counts against it,
+  living there, « Pas pour moi », « Comment y aller », WhatsApp and the rest) waits in « Voir le
+  détail ». The goal is a written word on a city for the next reader. No other box asks for
+  anything; cards 2 and 3 keep only their reaction row.
   The result shows three, five or ten cities (operator, 2026-11-25; `resultLength` in
   `lib/ranking.ts`): every city within 90 % of the first one's score, rounded up to the tier, and
   its title says which (« Trois villes se détachent », « Cinq villes au coude-à-coude », « Dix

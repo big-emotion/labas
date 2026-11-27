@@ -67,6 +67,9 @@ and change every use in the same commit.
 | Tout reprendre à zéro         | Start again                   |
 | Revoir mon résultat           | See my result again           |
 | Partager                      | Share                         |
+| Laisser un avis sur …         | Leave a review of …           |
+| Ajouter la vôtre (un avis)    | Add yours                     |
+| Sans compte ni e-mail         | No account or email needed    |
 | Détail (bouton court)         | Details                       |
 | Enregistrer l'image           | Save the picture              |
 | Imprimer                      | Print                         |

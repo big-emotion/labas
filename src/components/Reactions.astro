@@ -391,6 +391,16 @@ const STARTERS: Bilingual<string[]> = {
   .reactions[hidden] {
     display: none;
   }
+  /* Under the first city (mockup C1, 2026-11-27): one review, and nothing at all until there is
+     one, unless the reader opens the form from the card's filled button, which this block's own
+     button would only repeat. */
+  .reactions.preview .react,
+  .reactions.preview[data-count="0"] :is(.head, .empty, .actions) {
+    display: none;
+  }
+  .reactions.preview[data-count="0"]:not(:has([data-form]:not([hidden]))) {
+    display: none;
+  }
   .reactions :focus-visible {
     outline-color: var(--focus);
   }

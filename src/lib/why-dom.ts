@@ -1,4 +1,5 @@
 import type { Answers, Match } from "./ranking";
+import { reviewCall } from "./reactions";
 import { whyTheseCities } from "./result-why";
 import { cityCopy } from "../i18n/city-copy";
 import type { Bilingual, Locale } from "../i18n/locale";
@@ -6,15 +7,9 @@ import { pathFor } from "../i18n/routes";
 
 /** Render code for components/ResultWhy.astro. */
 
-const COPY: Bilingual<{ first: (city: string) => string; review: (city: string) => string }> = {
-  fr: {
-    first: (city) => `Pourquoi ${city} en premier`,
-    review: (city) => `Laisser une info utile sur ${city}`,
-  },
-  en: {
-    first: (city) => `Why ${city} comes first`,
-    review: (city) => `Share something useful about ${city}`,
-  },
+const COPY: Bilingual<{ first: (city: string) => string }> = {
+  fr: { first: (city) => `Pourquoi ${city} en premier` },
+  en: { first: (city) => `Why ${city} comes first` },
 };
 
 function fillReasons(block: HTMLElement, labels: string[]) {
@@ -31,8 +26,8 @@ function fillReasons(block: HTMLElement, labels: string[]) {
 let firstCity: Match["city"] | undefined;
 
 /**
- * Opens the review form of the first city where it already sits on the page, under that city's
- * pitch; when the reviews did not load, the city page has the same form.
+ * Opens the review form of the first city where it already sits on the page, above its filled
+ * button; when the reviews did not load, the city page has the same form.
  */
 function openReview(locale: Locale) {
   const preview = document.getElementById("reactions-preview");
@@ -50,6 +45,8 @@ export function showWhy(matches: Match[], answers: Answers, locale: Locale): voi
   const box = document.querySelector<HTMLElement>("[data-why]");
   if (!box) return;
   const why = whyTheseCities(matches, answers, locale);
+  // Another first city: its count comes with its own preview.
+  if (matches[0]?.city !== firstCity) firstReviews = null;
   firstCity = matches[0]?.city;
   box.hidden = !firstCity || (why.shared.length === 0 && why.first.length === 0);
   if (box.hidden || !firstCity) return;
@@ -88,7 +85,21 @@ export function placeHook(locale: Locale): void {
   const anchor = card?.querySelector("[data-invite]") ?? card?.querySelector(".not-for-me");
   if (!hook || !anchor) return;
   anchor.after(hook);
-  const review = hook.querySelector("[data-hook-review]");
+  labelReview(locale);
+}
+
+// How many reviews the first city has, once its preview has loaded them (lib/reactions-dom.ts).
+let firstReviews: number | null = null;
+let listening = false;
+function labelReview(locale: Locale) {
+  if (!listening) {
+    listening = true;
+    document.addEventListener("labas:first-reviews", (event) => {
+      firstReviews = (event as CustomEvent<number>).detail;
+      labelReview(locale);
+    });
+  }
+  const review = hook?.querySelector("[data-hook-review]");
   if (review && firstCity)
-    review.textContent = COPY[locale].review(cityCopy(firstCity, locale).name);
+    review.textContent = reviewCall(firstReviews, cityCopy(firstCity, locale).name, locale);
 }

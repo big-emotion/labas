@@ -29,6 +29,7 @@ const COPY: Bilingual<{
   title: string;
   further: string;
   review: string;
+  reviewNote: string;
   more: string;
   share: string;
   picture: string;
@@ -52,7 +53,8 @@ const COPY: Bilingual<{
   fr: {
     title: "Garder vos résultats",
     further: "Affiner avec le questionnaire complet",
-    review: "Laisser une info utile sur cette ville",
+    review: "Laisser un avis sur cette ville",
+    reviewNote: "Sans compte ni e-mail",
     more: "WhatsApp, image, impression, autres réseaux",
     share: "Partager",
     picture: "Enregistrer l'image",
@@ -78,7 +80,8 @@ const COPY: Bilingual<{
   en: {
     title: "Keep your results",
     further: "Refine with the full questionnaire",
-    review: "Share something useful about this city",
+    review: "Leave a review of this city",
+    reviewNote: "No account or email needed",
     more: "WhatsApp, picture, print, other networks",
     share: "Share",
     picture: "Save the picture",
@@ -111,6 +114,7 @@ const copy = COPY[locale];
       {copy.review}
     </button>
   )}
+  {serverMail && <p class="review-note">{copy.reviewNote}</p>}
   <div class:list={["keep-actions", { lead: !serverMail && !further }]}>
     <button type="button" data-keep-way="partage">
       {copy.share}
@@ -224,6 +228,16 @@ const copy = COPY[locale];
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+  }
+  .review {
+    min-height: 56px;
+    font-size: 1.05rem;
+  }
+  .review-note {
+    margin: -4px 0 0;
+    text-align: center;
+    color: var(--thread-dim);
+    font-size: 0.82rem;
   }
   .further:not(.lead) {
     justify-self: center;

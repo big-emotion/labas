@@ -80,7 +80,7 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
       <img alt="" width="1280" height="853" loading="lazy" />
       <figcaption></figcaption>
     </figure>
-    <p class="split"></p>
+    <div class="split"></div>
     <ul class="why-temper"></ul>
     {/* The one-tap reaction, built by lib/taps-dom.ts, right under the city's name: reacting
         must not wait for the end of a long card. The first card asks its question aloud. */}
@@ -212,6 +212,53 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
   .results .card.first {
     border: 2px solid var(--saffron);
     gap: 14px;
+  }
+  /* The first city in one screen or so (operator, 2026-11-27, mockup C1): its photo first, with
+     the rank on it, the score and its two bars, the one-tap reaction, a review and the one filled
+     button. The rest waits in « Voir le détail ». */
+  .results .card.first .photo {
+    order: -1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+  }
+  .results .card.first .photo img {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .results .card.first .photo figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    margin: 0;
+    padding: 18px 10px 6px;
+    background: linear-gradient(transparent, var(--night-deep));
+    color: var(--thread);
+    font-size: 0.68rem;
+  }
+  .results .card.first:has(> .photo:not([hidden])) {
+    position: relative;
+    .card-head {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .rank {
+      position: absolute;
+      z-index: 1;
+      top: 28px;
+      left: 28px;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--saffron);
+      color: var(--ink);
+      font-size: 1.3rem;
+    }
+  }
+  .results .card.first:not(:has(> .detail[open])) {
+    :is(.why-temper, .card-pitch, .rated, .facts, .same, .not-for-me, .keep-more) {
+      display: none;
+    }
   }
   .results .card-head,
   .rows .row-head {
@@ -530,7 +577,6 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
   .results .why-temper:empty {
     display: none;
   }
-  .results .split,
   .results .same {
     margin: 0;
     font-size: 0.9rem;
@@ -627,8 +673,33 @@ const copy = COPY[localeOfPath(Astro.url.pathname)];
     font-weight: 700;
     cursor: pointer;
   }
-  .results .split b {
-    color: var(--thread);
+  /* « Façon de vivre » and « Vie pratique » as two bars (operator, 2026-11-27, mockup C1). */
+  .results .split {
+    display: grid;
+    gap: 8px;
+  }
+  .results .score-line {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr) 3rem;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+  }
+  .results .score-line .bar {
+    display: block;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--night-lift);
+    overflow: hidden;
+  }
+  .results .score-line .bar > span {
+    display: block;
+    height: 100%;
+    background: var(--saffron);
+  }
+  .results .score-line b {
+    color: var(--saffron);
+    text-align: right;
   }
   .results .rated h4 {
     margin: 0 0 6px;

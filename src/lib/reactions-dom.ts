@@ -102,7 +102,9 @@ const COPY = {
 const copy = COPY[locale];
 
 const PAGE = 10;
-const PREVIEW = 3;
+// One review under the first city (operator, 2026-11-27, mockup C1): the card shows that others
+// wrote, the city page holds the rest.
+const PREVIEW = 1;
 /** The last result link shown, so a reaction written on the city page still carries the journey. */
 const LAST_RESULT = "labas.result-link";
 
@@ -515,6 +517,12 @@ function draw(block: Block) {
   part(root, "more").hidden = preview || Boolean(selected) || visible.length >= found.length;
   everywhere?.onDraw(reactions);
   if (everywhere) return;
+  if (preview) {
+    // Read by the block's CSS (nothing shows until a review exists or the form opens) and by the
+    // first city's filled button (lib/why-dom.ts), which then asks to add one.
+    root.dataset.count = String(reactions.length);
+    document.dispatchEvent(new CustomEvent("labas:first-reviews", { detail: reactions.length }));
+  }
   for (const name of root.querySelectorAll("[data-name]")) name.textContent = block.cityName;
   part(root, "of").textContent = copy.of(block.cityName);
   const all = root.querySelector<HTMLAnchorElement>("[data-all]");
@@ -679,7 +687,7 @@ let previewBlock: Block | null = null;
 
 /**
  * The preview of the first city on a result page, called after every drawing of the result.
- * `put` places it inside the first card, under its pitch; the thread is
+ * `put` places it inside the first card, above its filled button; the thread is
  * fetched again only when the first city changed.
  */
 export async function showPreview(
