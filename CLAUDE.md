@@ -40,7 +40,9 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   when their top has left the screen (`scrollBack`, operator 2026-11-26, mockup S1). The practical questions (budget, money to put down,
   passport, trips home, length of a holiday) have their data filled city by city in
   `city-scores.json` (operator, 2026-11-26), and the visa weighs instead of removing a city; a
-  core asks the one that is its path's own.
+  core asks the one that is its path's own. Once a reader says how often they fly back, that
+  answer speaks for the flights and the project no longer assumes it (operator, 2026-11-27): « un
+  pied ici, un pied là-bas » asked for the best flights by itself and hid the answer.
   The project question offers four paths (operator, 2026-11-26): « Investir sans y vivre » was
   removed for want of city-level data on land security or rental yield; `investir` stays readable
   so journeys saved with it still rank.

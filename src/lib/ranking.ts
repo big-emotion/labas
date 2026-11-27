@@ -587,7 +587,15 @@ export function profileOf(given: Answers): Profile {
     facts.push({ ...more, from });
     weights[from] = weight;
   };
-  if (answers.project) add("project", PROJECT[answers.project]);
+  // Once the reader has said how often they fly back, that answer speaks for the flights: the
+  // project no longer assumes it (operator, 2026-11-27). Left in, the project's own demand hid
+  // the answer, and a reader who goes back once a year was ranked like one who goes every month.
+  const flownBack = answers.tripsHome !== undefined;
+  if (answers.project)
+    add(
+      "project",
+      PROJECT[answers.project].filter((p) => !(flownBack && p.axis === "flights")),
+    );
   if (answers.saturday !== undefined) add("saturday", SATURDAY[answers.saturday]);
   if (answers.budget) add("budget", BUDGET[answers.budget]);
   if (answers.family) add("family", FAMILY[answers.family]);
