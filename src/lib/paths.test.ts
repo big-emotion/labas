@@ -290,3 +290,39 @@ describe("the question « Tester quelques mois » alone is asked: working during
     expect(unsaid.label).toMatch(/ne compte pas/);
   });
 });
+
+// Operator, 2026-11-27: « un pied ici, un pied là-bas » already asked for the best flights by
+// itself, so the number of trips home changed almost nothing. The reader's own count now speaks
+// for the flights in place of the project.
+describe("the trips home of a reader with one foot here and one there", () => {
+  const READERS = [
+    { project: "pied" },
+    { project: "pied", origin: ["ouest"], languages: ["fr"] },
+    { project: "pied", origin: ["est"], languages: ["en"] },
+    { project: "pied", origin: ["nord"], languages: ["fr", "ar"] },
+  ] as Answers[];
+  const firstFive = (answers: Answers) => bestMatches(answers, 5).map((m) => m.city.name);
+
+  it("changes the first five between a reader who flies back once a year and one who does every month", () => {
+    for (const reader of READERS)
+      expect(firstFive({ ...reader, tripsHome: 0 }), JSON.stringify(reader)).not.toEqual(
+        firstFive({ ...reader, tripsHome: 1 }),
+      );
+  });
+
+  it("no longer ranks a reader who seldom flies back like one who said nothing", () => {
+    const moved = READERS.filter(
+      (reader) => firstFive({ ...reader, tripsHome: 0 }).join() !== firstFive(reader).join(),
+    );
+    expect(moved.length).toBe(READERS.length);
+  });
+
+  it("gives the reader who flies back every month better-connected cities than the one who seldom does", () => {
+    const flights = (answers: Answers) =>
+      bestMatches(answers, 10).reduce((sum, m) => sum + (m.city.scores.flights.level ?? 0), 0);
+    for (const reader of READERS)
+      expect(flights({ ...reader, tripsHome: 1 }), JSON.stringify(reader)).toBeGreaterThanOrEqual(
+        flights({ ...reader, tripsHome: 0 }),
+      );
+  });
+});
