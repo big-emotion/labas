@@ -71,15 +71,18 @@ const CHAPTERS = {
   refine: { fr: "POUR AFFINER", en: "TO REFINE" },
 } satisfies Record<string, Bilingual<string>>;
 export const CHAPTER = {
+  project: CHAPTERS.project.fr,
   temperament: CHAPTERS.temperament.fr,
+  history: CHAPTERS.history.fr,
+  last: CHAPTERS.last.fr,
   profile: CHAPTERS.profile.fr,
   refine: CHAPTERS.refine.fr,
 };
-const PROJECT = CHAPTERS.project.fr;
+const PROJECT = CHAPTER.project;
 const TRIP = CHAPTERS.trip.fr;
 const TEMPERAMENT = CHAPTER.temperament;
-const HISTORY = CHAPTERS.history.fr;
-const LAST = CHAPTERS.last.fr;
+const HISTORY = CHAPTER.history;
+const LAST = CHAPTER.last;
 
 const holiday = (answers: Answers) => answers.project === "decouvrir";
 /** The reader will spend real time there: not for an investor who does not live there. */
@@ -90,8 +93,9 @@ export const worksThere = (answers: Answers) =>
 const withChildren = (answers: Answers) =>
   answers.family === "parents" || answers.family === "fonder";
 
-// The quick quiz's pool (operator, 2026-11-17): the project picks which questions apply, and
-// adaptive.ts picks the order from the answers. Worded in « vous ». The temperament questions are
+// The first questions of the questionnaire, worded in « vous »: the project picks which apply.
+// The quick quiz asks a core of them per path (`coreOf` in deep-questions.ts, operator
+// 2026-11-27); /approfondir asks them all (adaptive.ts). The temperament questions are
 // a quick reading inspired by the Big Five, one question per trait.
 export const QUESTIONS: Question[] = [
   {
@@ -614,9 +618,9 @@ export const QUESTIONS: Question[] = [
 ];
 
 /**
- * Asked in the full questionnaire, not the quick quiz: measured on 40 runs per path, they move the
- * top five least (operator, 2026-11-16). Their rules still hold there. The family's country and
- * the faith left this list on 2026-11-20.
+ * The practical questions, asked after the first ones in the full questionnaire. The quick quiz
+ * asks a path the one that is its own (`coreOf`): the budget to settle, the trips home for « un
+ * pied ici, un pied là-bas », the passport for a holiday.
  */
 export const LATER: Question[] = [
   {

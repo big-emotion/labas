@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   answerEvent,
   finishedEvent,
-  earlyEvent,
   GOALS,
   homeEvent,
   messageEvent,
@@ -193,16 +192,5 @@ describe("the event sent from the home screen", () => {
     expect(GOALS).toContain(homeEvent("quiz").name);
     expect(GOALS).toContain(homeEvent("cities").name);
     expect(GOALS).toContain(homeEvent("result").name);
-  });
-});
-
-describe("the event sent when a reader sees the cities before the quiz ends", () => {
-  it("says at which question, on two digits, and nothing else", () => {
-    expect(earlyEvent(14)).toEqual({ name: "Villes vues avant la fin", props: { etape: "14" } });
-    expect(earlyEvent(9).props.etape).toBe("09");
-  });
-
-  it("is declared as a goal", () => {
-    expect(GOALS).toContain(earlyEvent(1).name);
   });
 });

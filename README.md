@@ -3,13 +3,15 @@
 > **Find the African city that resembles you. A one-screen quiz for the diaspora looking towards the continent.**
 
 ```
-10 questions (tap a chip)  ──▶  115 cities scored in the browser  ──▶  live map + your top three
+14 questions at most (tap a chip)  ──▶  115 cities scored in the browser  ──▶  live map + your top three
 ```
 
-Là-bas asks ten short questions — project, budget, family, work, language, city size,
-landscape, climate, Saturday night, non-negotiables — and ranks 115 cities across the 54
-African countries as the reader answers. Every tap re-lights the map. The site is in French;
-its audience is the French-speaking diaspora first.
+Là-bas asks a short set of questions chosen for the reader's plan (settle, one foot here and one
+there, try a few months, a holiday first): the plan, four questions of its own, how the reader
+lives, the family's story, the non-negotiables. It ranks 115 cities across the 54 African
+countries as the reader answers; every tap re-lights the map. A fuller questionnaire
+(`/approfondir`) asks the rest. The site is in French and English; its audience is the
+French-speaking diaspora first.
 
 ---
 

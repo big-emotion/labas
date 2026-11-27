@@ -69,7 +69,6 @@ export const GOALS = [
   "Quiz commencé",
   "Villes depuis l'accueil",
   "Résultat revu",
-  "Villes vues avant la fin",
 ] as const;
 export type Goal = (typeof GOALS)[number];
 
@@ -233,18 +232,4 @@ export interface HomeEvent {
 
 export function homeEvent(door: keyof typeof DOORS): HomeEvent {
   return { name: DOORS[door] };
-}
-
-/**
- * « Voir mes villes maintenant » (operator, 2026-11-25): the quiz runs on until the list it shows
- * is settled, and a reader may stop once the top three is. The step says where they stopped;
- * « etape » is already listed in Plausible's custom properties.
- */
-export interface EarlyEvent {
-  name: "Villes vues avant la fin";
-  props: { etape: string };
-}
-
-export function earlyEvent(step: number): EarlyEvent {
-  return { name: "Villes vues avant la fin", props: { etape: String(step).padStart(2, "0") } };
 }
