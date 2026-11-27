@@ -30,7 +30,7 @@ the browser. `README.md` covers the product, the data caveat and the roadmap.
   among questions as good as each other (2026-11-17, 2026-11-20, 2026-11-25), it read as
   haphazard. It opens on the project, then asks the path's four own questions (the languages in
   every path; job, budget and weather to settle; job, trips home and weather for « un pied ici, un
-  pied là-bas »; city size, weather and visa to try; kind of trip, season and passport for a
+  pied là-bas »; work during the stay, city size and weather to try; kind of trip, season and passport for a
   holiday), then « façon de vivre », then the family's story, and closes on the non-negotiables.
   The order is the same for every reader and a theme is finished before the next; only a
   question's own condition opens or closes it. Everything else, music included, is asked in

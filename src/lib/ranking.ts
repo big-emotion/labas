@@ -134,6 +134,8 @@ export interface Answers extends ProfileAnswers {
   bargaining?: Step;
   /** Trips back to Europe a year: 0 one or fewer, 0.5 two or three, 1 every month. */
   tripsHome?: Step;
+  /** Work during a trial stay: online for somewhere else, on the spot, or not a concern. */
+  workThere?: "remote" | "local" | "none";
   /** Cash available before moving in. */
   setupBudget?: "low" | "medium" | "high";
   /** Life over there: among other returnees, like the locals, or both. */
@@ -435,6 +437,13 @@ const STEP_PULLS = {
   bargaining: (s: Step) => [pull("bargaining", 0.1 + 0.9 * s, 1.5)],
   tripsHome: (s: Step) => [need("flights", 0.4 + 0.6 * s, 1 + 3 * s)],
 };
+// Working online leans on the connection and on power that holds (half of « comfort », with
+// healthcare); looking for work on the spot leans on the cities that hire.
+const WORK_THERE: Record<NonNullable<Answers["workThere"]>, Pull[]> = {
+  remote: [need("internet", 1, 3), need("comfort", 0.85, 1.5)],
+  local: [need("jobs", 0.9, 3)],
+  none: [],
+};
 const SETUP: Record<NonNullable<Answers["setupBudget"]>, Pull[]> = {
   low: [need("easySetup", 0.85, 3)],
   medium: [need("easySetup", 0.7, 1.5)],
@@ -660,6 +669,7 @@ export function profileOf(given: Answers): Profile {
     add("bargaining", STEP_PULLS.bargaining(answers.bargaining));
   if (answers.tripsHome !== undefined) add("tripsHome", STEP_PULLS.tripsHome(answers.tripsHome));
   if (answers.setupBudget) add("setupBudget", SETUP[answers.setupBudget]);
+  if (answers.workThere) add("workThere", WORK_THERE[answers.workThere]);
   if (answers.belonging) add("belonging", BELONGING[answers.belonging]);
   const profile = profileEffects(answers);
   for (const p of profile.pulls) add(p.from!, [p]);
