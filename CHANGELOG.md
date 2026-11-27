@@ -6,6 +6,23 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.34.0] - 2026-11-27
+
+### Changed
+
+- The quick quiz asks each path a short set of questions, 14 at most, in an order that is the same
+  for every reader: the project, four questions chosen for that path, « Façon de vivre », the
+  family's story, the non-negotiables. A theme is finished before the next one begins, and the
+  next question is no longer drawn at random.
+- The words beside « question 7 » (« on cherche », « on se rapproche », « presque trouvé ») follow
+  the theme in progress.
+
+### Removed
+
+- « Voir mes villes maintenant »: it was made for the quiz of up to 25 questions.
+- The music, the pace of the city, the neighbourhood and the other questions outside a path's set
+  leave the quick quiz; the full questionnaire still asks them.
+
 ## [0.33.1] - 2026-11-27
 
 ### Fixed
@@ -772,6 +789,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.31.0...HEAD
+[0.34.0]: https://github.com/big-emotion/labas/compare/v0.33.1...v0.34.0
 [0.33.1]: https://github.com/big-emotion/labas/compare/v0.33.0...v0.33.1
 [0.33.0]: https://github.com/big-emotion/labas/compare/v0.32.0...v0.33.0
 [0.32.0]: https://github.com/big-emotion/labas/compare/v0.31.0...v0.32.0
