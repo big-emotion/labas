@@ -119,7 +119,7 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
     <ul id="removed" class="removed"></ul>
     <div id="cards" class="cards"></div>
     <KeepResults />
-    {/* Moved by the script right under the first city's pitch. */}
+    {/* Moved by the script into the first card, right above its filled button. */}
     <Reactions preview />
     <SourcesNote />
     <TemperamentProfile />
@@ -298,12 +298,12 @@ const questions = DEEP_QUESTIONS.map((question) => questionIn(question, locale))
         top: proposed.slice(0, TOP).map((m) => m.city.slug),
       }));
       void showCounts(proposed.slice(1, TOP).map((m, i) => ({ city: m.city, card: cards[i + 1] })));
-      // What others say of the first city, right under its pitch (operator, 2026-11-18).
+      // What others say of the first city, right above its filled button (mockup C1, 2026-11-27).
       if (proposed[0])
         void showPreview(
           proposed[0].city,
           resultLink(answers as Answers, proposed.slice(0, TOP), locale),
-          (root) => document.querySelector("#cards .card-pitch")?.after(root),
+          (root) => document.querySelector("#cards [data-hook]")?.before(root),
         );
       const rest = proposed.slice(TOP);
       const visible = showAll ? rest : rest.slice(0, VISIBLE);

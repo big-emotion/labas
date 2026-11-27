@@ -359,7 +359,7 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
               <ol id="near-rows" class="rows"></ol>
             </section>
             <KeepResults further />
-            {/* Moved by the script right under the first city's pitch. */}
+            {/* Moved by the script into the first card, right above its filled button. */}
             <Reactions preview />
             <SourcesNote />
             <TemperamentProfile />
@@ -726,13 +726,13 @@ const accounts = Boolean(import.meta.env.PUBLIC_NEWSLETTER);
         placePreview();
       }
 
-      // What others say of the first city, inside its card right under its pitch, on every
-      // screen: the map column stays as it was (operator, 2026-11-18).
+      // What others say of the first city, inside its card right above its filled button, on every
+      // screen (operator, 2026-11-18; placed there by the mockup C1, 2026-11-27).
       function placePreview() {
         const outcome = document.getElementById("outcome") as HTMLElement;
         if (outcome.hidden || !onScreen[0]) return;
         void showPreview(onScreen[0].city, resultLink(readAnswers(), onScreen, locale), (root) =>
-          document.querySelector("#cards .card-pitch")?.after(root),
+          document.querySelector("#cards [data-hook]")?.before(root),
         );
       }
 

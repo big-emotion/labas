@@ -80,6 +80,16 @@ export function reactionDate(iso: string, now: number, locale: Locale): string {
   return copy.on(date);
 }
 
+/**
+ * The one filled button under the first city (operator, 2026-11-27, mockup C1). It says « avis »,
+ * the word every reader knows; once a review is there it asks to add one, so the reader sees they
+ * are not the first. A count the server could not give asks for a review.
+ */
+export function reviewCall(total: number | null, city: string, locale: Locale): string {
+  if (total) return locale === "en" ? "Add yours" : "Ajouter la vôtre";
+  return locale === "en" ? `Leave a review of ${city}` : `Laisser un avis sur ${city}`;
+}
+
 export function reactionCount(total: number, locale: Locale): string {
   if (locale === "en") {
     if (total === 0) return "Nothing shared yet";

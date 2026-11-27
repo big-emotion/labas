@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  reviewCall,
   initialOf,
   journeySummary,
   markLabel,
@@ -157,5 +158,23 @@ describe("the same words on the English pages", () => {
     expect(translationNote("fr", "fr")).toBe("Déjà en français");
     expect(translationNote("fr", "en")).toBe("Translated by DeepL");
     expect(translationNote("en", "fr")).toBe("Traduit par DeepL");
+  });
+});
+
+describe("the one filled button under the first city", () => {
+  // Operator, 2026-11-27 (mockup C1): the button asks for a review, and once others have left
+  // one it says so, so the reader is not the first.
+  it("asks for the first review while there is none", () => {
+    expect(reviewCall(0, "Bissau", "fr")).toBe("Laisser un avis sur Bissau");
+    expect(reviewCall(0, "Bissau", "en")).toBe("Leave a review of Bissau");
+  });
+
+  it("asks to add one once others have", () => {
+    expect(reviewCall(3, "Bissau", "fr")).toBe("Ajouter la vôtre");
+    expect(reviewCall(1, "Bissau", "en")).toBe("Add yours");
+  });
+
+  it("asks for a review when the count is unknown", () => {
+    expect(reviewCall(null, "Bissau", "fr")).toBe("Laisser un avis sur Bissau");
   });
 });
