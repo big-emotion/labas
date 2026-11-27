@@ -6,6 +6,22 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
 
 ## [Unreleased]
 
+## [0.33.0] - 2026-11-27
+
+### Changed
+
+- The first city of the result fits in about one screen: its photo with the rank on it, the score,
+  « Façon de vivre » and « Vie pratique » as two bars, the one-tap reaction, one review of the city
+  when there is one, and one filled button, « Laisser un avis sur … » (« Ajouter la vôtre » once
+  others have written), with « Sans compte ni e-mail » under it. The rest is in « Voir le détail ».
+- Cities 2 and 3 follow one under the other, the photo on the left and the name, score, reaction
+  and « Détail » beside it. Cities 4 to 10 are back to one line each instead of a strip to swipe,
+  and no longer look like buttons.
+
+### Added
+
+- Cairo: Giza as a neighbourhood, from first-hand accounts in the testimony ledger; no score moves.
+
 ## [0.32.0] - 2026-11-26
 
 ### Added
@@ -749,6 +765,7 @@ All notable changes to Là-bas (labas.africa) are recorded here. The format foll
   documented.
 
 [Unreleased]: https://github.com/big-emotion/labas/compare/v0.31.0...HEAD
+[0.33.0]: https://github.com/big-emotion/labas/compare/v0.32.0...v0.33.0
 [0.32.0]: https://github.com/big-emotion/labas/compare/v0.31.0...v0.32.0
 [0.31.0]: https://github.com/big-emotion/labas/compare/v0.30.0...v0.31.0
 [0.30.0]: https://github.com/big-emotion/labas/compare/v0.29.1...v0.30.0
